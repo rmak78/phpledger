@@ -20,7 +20,7 @@ define('DB_PREFIX', 'sa_');
 
 $username = "root";
 $password = "";
-$hostname = "localhost";  
+$hostname = "localhost"; 
 $dbName = "phpledger";
 
 require_once (ROOT_PATH.'meekrodb.2.2.class.php');
@@ -30,5 +30,6 @@ DB::$user = $username;
 DB::$password = $password;
 DB::$dbName = $dbName;
 DB::$host = $hostname;  
-
+$dbhandle = mysql_connect($hostname, $username, $password); 
+$selected = mysql_select_db($dbName,$dbhandle); 
 ?>
