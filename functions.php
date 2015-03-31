@@ -205,4 +205,33 @@ function attempt_login_user($user_name, $password, $company_id, $superadmin) {
 		return '<h4 style="color:red;">Invalid User Name or Password</h4>';
 	}
 }
+
+
+function get_from_account_code($id, $type) {
+$from_number = 0;
+$id = intval($id);
+if ($type == 'group'){
+$from_number = DB::queryFirstField("SELECT from_account_code FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa_groups WHERE group_id = ".$id);
+
+}  
+if ($type == 'account' ){
+
+
+}
+return $from_number;
+}
+
+function get_to_account_code($id, $type) {
+$to_number = 0;
+$id = intval($id);
+if ($type == 'group'){
+$to_number = DB::queryFirstField("SELECT to_account_code FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa_groups WHERE group_id = ".$id);
+
+}  
+if ($type == 'account' ){
+
+
+}
+return $to_number;
+}
 ?>
