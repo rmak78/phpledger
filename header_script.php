@@ -3,13 +3,14 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- Load CSS Files -->
-<link href='<?php echo SITE_ROOT; ?>/calendar/calendar.css' rel='stylesheet' type='text/css' />
-<link href='<?php echo SITE_ROOT; ?>/.css' rel='stylesheet' type='text/css' />
+<link href='<?php echo SITE_ROOT; ?>calendar/calendar.css' rel='stylesheet' type='text/css' />
+<link href='<?php echo SITE_ROOT; ?>stylesheet.css' rel='stylesheet' type='text/css' />
 <link rel="stylesheet" href="<?php echo SITE_ROOT; ?>css/bootstrap.min.css"/> 
 <link rel="stylesheet" href="<?php echo SITE_ROOT; ?>css/bootstrap-theme.min.css"/> 
 <link rel="stylesheet" href="<?php echo SITE_ROOT; ?>css/bootstrap-editable.css"/>
 <link rel="stylesheet" href="<?php echo SITE_ROOT; ?>css/dataTables.bootstrap.css" />
 <link rel="stylesheet" href="<?php echo SITE_ROOT; ?>/css/dataTables.tableTools.min.css" /> 
+<link rel="stylesheet" href="<?php echo SITE_ROOT; ?>/css/datepicker.css" /> 
 
 <!-- Loading Java Scripts -->
   

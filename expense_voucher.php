@@ -1,3 +1,9 @@
+<?php 
+
+
+?>
+
+
 <h2>Add a Voucher</h2>
 <div>
 <ul>
@@ -32,7 +38,7 @@
  	<li>       		Un Approved Vouchers</li>
  	<li>       		List all Vouchers</li>
  </ol>
-       	
+
        	
        	
        	

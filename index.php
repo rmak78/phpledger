@@ -1,53 +1,3 @@
-
-<style>
-.dropdown-submenu {
-    position: relative;
-}
-
-.dropdown-submenu>.dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-top: -6px;
-    margin-left: -1px;
-    -webkit-border-radius: 0 6px 6px 6px;
-    -moz-border-radius: 0 6px 6px;
-    border-radius: 0 6px 6px 6px;
-}
-
-.dropdown-submenu:hover>.dropdown-menu {
-    display: block;
-}
-
-.dropdown-submenu>a:after {
-    display: block;
-    content: " ";
-    float: right;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
-    border-width: 5px 0 5px 5px;
-    border-left-color: #ccc;
-    margin-top: 5px;
-    margin-right: -10px;
-}
-
-.dropdown-submenu:hover>a:after {
-    border-left-color: #fff;
-}
-
-.dropdown-submenu.pull-left {
-    float: none;
-}
-
-.dropdown-submenu.pull-left>.dropdown-menu {
-    left: -100%;
-    margin-left: 10px;
-    -webkit-border-radius: 6px 0 6px 6px;
-    -moz-border-radius: 6px 0 6px 6px;
-    border-radius: 6px 0 6px 6px;
-}
-</style>
 <?php
 session_start();
 
@@ -78,12 +28,12 @@ $path = $_GET['route'];
 
 
 if ( (isset($_SESSION['is_logged'])) AND ($_SESSION['is_logged'] == 1)) {
-	 print_r($_SESSION);
 	$role_id = $_SESSION['role_id'] ;
 	
 	// $username = $_SESSION['username'];
 	// $user_id =  $_SESSION['user_id'];
 	// $role_id = getUserRoleID($_SESSION['user_id']);
+
 ?>
 
 <nav class="navbar navbar-default" role="navigation">
@@ -156,7 +106,7 @@ if ( (isset($_SESSION['is_logged'])) AND ($_SESSION['is_logged'] == 1)) {
 <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Finance<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-			<li><a href="<?php echo $_SERVER['PHP_SELF']."?route=payment_voucher"; ?>"> &nbsp; Cash Payment Voucher</a></li>	
+			<li><a href="<?php echo $_SERVER['PHP_SELF']."?route=expense_voucher_add"; ?>"> &nbsp; Add Expense Voucher</a></li>	
 			<li class="divider"></li> 
 			<li><a href="<?php echo $_SERVER['PHP_SELF']."?route=received_voucher"; ?>"> &nbsp;Cash Received Voucher</a></li>
 		  <li class="divider"></li> 
@@ -245,4 +195,15 @@ if ( (isset($_SESSION['is_logged'])) AND ($_SESSION['is_logged'] == 1)) {
 	include_once ("login_page.php");
 }
 include_once('footer_script.php');
+echo "SESSION Variables:<pre>";
+print_r($_SESSION);
+echo "</pre>";	
+
+echo "GET Variables:<pre>";
+print_r($_GET);
+echo "</pre>";
+	
+echo "POST Variables:<pre>";
+print_r($_POST);
+echo "</pre>";
 ?>

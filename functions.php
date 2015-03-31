@@ -199,6 +199,7 @@ function attempt_login_user($user_name, $password, $company_id, $superadmin) {
 	$_SESSION['user_name'] = $is_logged['user_name'];
 	$_SESSION['role_id'] = 1;
 	$_SESSION['co_prefix'] = get_db_co_prefix($company_id);
+	$_SESSION['default_expense_account'] = 1; // get default Expense Account Company
 	return true;
 	}
 	else{
