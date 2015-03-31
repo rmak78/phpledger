@@ -13,15 +13,15 @@ if(session_id() == '') {
 // $password = "";
 // $hostname = ""; 
 // $dbName = "";
-define('FOLDER_NAME','sutlejAccounts');
+define('FOLDER_NAME','phpledger');
 define('ROOT_PATH', 'D:\server\www'.'/'.FOLDER_NAME.'/');
 define('SITE_ROOT', 'http://'.$_SERVER['HTTP_HOST'].'/'.FOLDER_NAME.'/');
 define('DB_PREFIX', 'sa_');
 
 $username = "root";
-$password = "root";
+$password = "";
 $hostname = "localhost"; 
-$dbName = "sutlejacct";
+$dbName = "phpledger";
 
 require_once (ROOT_PATH.'meekrodb.2.2.class.php');
 require_once(ROOT_PATH.'html_table.class.php');
