@@ -1,0 +1,179 @@
+The php calendar component
+written by TJ @triconsole
+
+version 3.71 (7 December 2013)
+
+add on: built the FB page of the class and embedded the Like action button
+	- thanks ciprianmp
+
+add on: automatic check for an updated version available
+
+add on: credits & version info displayed on hover the About icon
+
+add on: implemented the setToolTips() function to display infos for any date on calendar form
+	- thanks ciprianmp and TJ
+
+fixed: checkdate() function generated an error on some php servers
+	- thanks Tri
+
+adjust: most images converted to gif for smaller sizes (except the pngs that need transparency)
+	- thanks ciprianmp
+
+fixed: Incorrect next month display show on 'February 2008'
+	- thanks Neeraj Jain for bug report
+
+fixed: Incorrect month comparable on calendar_form.php line 113
+ - thanks Djenan Ganic, Ian Parsons, Jesse Davis for bug report
+
+add on: date on calendar form change upon textbox in datepicker mode
+add on: validate date enter from dropdown and textbox
+
+fixed: Calendar path not valid when select date from dropdown
+ - thanks yamba for bug report
+
+adjust: add new function setWidth and deprecate getDayNum function
+
+fixed: year combo box display not correct when extend its value
+	- thanks Luiz Augusto for bug report
+
+fixed on date and month value return that is not leading by '0'
+
+adjust: change php short open tag (<?=) to normal tag (<?php)
+  - thanks Michael Lynch
+
+add on: getMonthNames() function to make custom month names on each language
+  - thanks Jean-Francois Harrington
+
+add on: button close on datepicker on the top-right corner of calendar
+  - thanks denis
+
+fixed: hide javascript alert when default date not defined
+	- thanks jon-b
+
+fixed: incorrect layout when select part of date
+	- thanks simonzebu (I just got what you said  :) )
+
+fixed: not support date('N') for php version lower 5.0.1 so change to date('w') instead
+  - thanks simonzebu, Kamil, greensilver for bug report
+  - thanks Paul for the solution
+
+add on: setHeight() function to set the height of iframe container of calendar
+	- thanks Nolochemcial
+
+add on: startMonday() function to set calendar display first day of week on Monday - deprecated since 3.61 and replaced by startDate()
+
+fixed: don't display year when not in year interval
+
+fixed: day combobox not update when select date from calendar
+	- thanks ciprianmp
+
+add on: disabledDay() function to let the calendar disabled on specified day
+  - thanks Jim R.
+
+fixed: total number of days startup incorrect
+  - thanks Francois du Toit, ciprianmp
+
+add on: setAlignment() and setDatePair() function
+  - thanks ciprianmp and many guys guiding this :)
+
+fixed: the header of calendar looks tight when day's header more than 2 characters, this can be adjusted by increasing width on calendar.css [#calendar-body td div { width: 15px; }]
+	- thanks ciprianmp
+
+add on: setSpecificDate() to enable or disable specific date
+	- thanks ciprianmp, phillip, and Steve to suggest this
+
+utilizing and cleaning up some codes on tc_calendar.php, calendar_form.php, and calendar.js
+	- thanks Peter
+
+added: 2 functions for php version that does not support json
+	- thanks Steve
+
+fixed: javascript error on datepair function on v3.50 and 3.51
+	- thanks ciprianmp
+
+fixed: writeYear bug from $date_allow1 & 2 must be changed to $time_allow1 & 2
+	- thanks ciprianmp again :(
+
+updated: setSpecificDate can be set month, year, and no recursive simultaneously
+	- thanks ciprianmp, Steve
+
+add on: setOnChange to handling javascript onChange event
+
+fixed: dateAllow contains error on calendar_form.php
+	- thanks matthijs
+
+fixed: error on calendar.js function checkSpecifyDate
+	- thanks Todd
+
+fixed: the value of calendar is not restored when using back button on browser
+  - thanks Nicolai
+
+add on: add X as background of disabled days
+	- thanks SanSar
+
+fixed: 'Day' combobox contain no list dropdown when not call setDate() on initialization
+	- thanks Fulin
+
+fixed: Fixed display style still have the default value in case the date is disabled.
+	- thanks ciprianmp
+
+fixed: today date color disappear when date is disabled.
+	- thanks ciprianmp
+
+fixed: javascript error from IE compatible not support for JSON
+	- thanks ciprianmp
+
+adjusted: change the color of today date to green with border
+	- thanks ciprianmp
+
+adjusted: rearrange source code on calendar_form.php for future use
+
+add on: showWeeks function
+	- thanks Michael
+
+add on: support for RTL (right-to-left output)
+	- thanks ciprianmp
+
+add on: startDate function and will be used instead of startMonday
+
+changed: make the DatePair function selectable on any dates. Date-from must be before Date-to, and on the other hand, otherwise it will be reset
+	- thanks Chris, Rickard, ciprianmp
+
+fixed: incorrect parameter submited on javascript that caused an invalid date returned
+	- thanks ciprianmp
+
+fixed: date selected hilight error
+	- thanks John
+
+add on: auto hide calendar
+	- thanks Wayne, Chris
+
+add on: auto focus an overlapping calendar to the top
+
+fixed: json checking function return error when server does not support for json
+	- thanks strangeplant
+
+fixed: javascript possible error on Date.parse
+fixed: add on-change javascript in dropdown datepicker mode (missing previously)
+	- thanks Alex
+
+fixed: 1st and 31st are always disabled when running with php4
+	- thanks dl
+
+changed: use DateTime php class for php version >= 5.3.0 to support year 2038 and later
+
+fixed: valid today date checked with date allow
+	- thanks ciprianmp
+
+updated: calendar.js on Date.prototype.format
+	- thanks Haravikk
+	
+add on: Tooltips function
+	- thanks ciprianmp
+	
+add on: Timezone function
+
+updated: vulnerabilities update on REQUEST parameter
+	- thanks Arvid V.
+	
+fixed: minor bugs fixed on unset calendar value
