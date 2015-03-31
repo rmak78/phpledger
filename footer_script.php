@@ -1,7 +1,7 @@
 </div><!-- close row -->
 </div><!-- close container -->
 <footer>
-<center> Sutlej Accounting System </center>
+<center> PHP Ledger Accounting System <a href="http://phpledger.com/"> phpLedger </a> </center>
 </footer>
 
 </body>
