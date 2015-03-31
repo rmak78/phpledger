@@ -1,4 +1,8 @@
  <?php
+ 
+ //Set Default time zone Pakistan, You can change as well
+ date_default_timezone_set("Asia/Karachi"); 
+ 
 if(session_id() == '') {
     session_start();
 }
@@ -169,7 +173,8 @@ function ShowTickCross($pass_value)
 
 function get_user_name($user_id) {
 // TODO: Fix this function to get user's user_name;
-	$user_name = 'mansoor';
+$sql = "SELECT user_name FROM ".DB_PREFIX.$_SESSION['co_prefix']."users WHERE user_id='".$user_id."'";
+$user_name = DB::queryFirstField($sql);
 	return $user_name;
 }
 
@@ -186,15 +191,18 @@ function get_db_co_prefix($company_id) {
 
 function attempt_login_user($user_name, $password, $company_id, $superadmin) {
 	//TODO: build a check here to put appropriate fields in the session
-	
+	$is_logged=DB::queryFirstRow("SELECT * FROM ".DB_PREFIX."test_users u WHERE (u.`user_name`='".$user_name."' OR u.`user_email`='".$user_name."') AND u.`password`='".$password."' AND u.`company_id`='".$company_id."' AND u.`user_status`='active'");
+	if($is_logged){
 	$_SESSION['is_logged'] = 1; 
 	$_SESSION['company_id'] = $company_id;
-	$_SESSION['user_id'] = 1;
-	$_SESSION['user_name'] = $user_name;
+	$_SESSION['user_id'] = $is_logged['user_id'];
+	$_SESSION['user_name'] = $is_logged['user_name'];
 	$_SESSION['role_id'] = 1;
 	$_SESSION['co_prefix'] = get_db_co_prefix($company_id);
- 
 	return true;
-
+	}
+	else{
+		return '<h4 style="color:red;">Invalid User Name or Password</h4>';
+	}
 }
 ?>
