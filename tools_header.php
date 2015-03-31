@@ -14,7 +14,7 @@ if(session_id() == '') {
 // $hostname = ""; 
 // $dbName = "";
 define('FOLDER_NAME','phpledger');
-define('ROOT_PATH', 'D:\server\www'.'/'.FOLDER_NAME.'/');
+define('ROOT_PATH', 'D:\xampp\htdocs'.'/'.FOLDER_NAME.'/');
 define('SITE_ROOT', 'http://'.$_SERVER['HTTP_HOST'].'/'.FOLDER_NAME.'/');
 define('DB_PREFIX', 'sa_');
 
