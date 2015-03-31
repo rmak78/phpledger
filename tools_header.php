@@ -20,7 +20,7 @@ define('DB_PREFIX', 'sa_');
 
 $username = "root";
 $password = "";
-$hostname = "localhost"; 
+$hostname = "localhost";  
 $dbName = "phpledger";
 
 require_once (ROOT_PATH.'meekrodb.2.2.class.php');
