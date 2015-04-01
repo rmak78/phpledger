@@ -1,24 +1,20 @@
 ﻿<?php
 
-if ( (isset($_SESSION['is_logged'])) AND ($_SESSION['is_logged'] == 1)) {
-	$role_id = getUserRoleID($_SESSION['user_id']);
-}
+
 
 function create_new_voucher($voucher_ref, $voucher_date, $voucher_description, $voucher_paid_from_account ) {
 // get user name and datetime now
- $user_name = get_user_name($_SESSION['user_id']);
- $now=date('Y-m-d h:i:sa');
+
  // perform sql insertion
    $insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'voucher_expense', array(
    				
 			'voucher_ref_no' 			=>  $voucher_ref,	
             'voucher_date' 	 		  => $voucher_date,
             'voucher description' 	  =>   $voucher_description,
-            'petty_cash_account' 	   	 =>  $voucher_paid_from_account,
-            'created_by'   			  =>  $user_name,
-            'created_on'    		  =>  $now
+            'petty_cash_account' 	   	 =>  $voucher_paid_from_account
+			));
 	
-		));
+		
 return mysql_insert_id();
 	       
 
@@ -76,8 +72,12 @@ switch ($action) {
 <div class="container">
 				<div class="row">
 <?php
-if($voucher_id != 0) { // Show Voucher Edit Screen
+if($voucher_id != 0) {
+	//Show the header of voucher ....
+	
 ?>
+<div class="panel-heading" >
+</div>
 
 
 <?php } //end Voucher Edit Screen ?>		
