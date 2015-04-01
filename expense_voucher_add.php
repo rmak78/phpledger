@@ -1,8 +1,27 @@
 ﻿<?php
+
+if ( (isset($_SESSION['is_logged'])) AND ($_SESSION['is_logged'] == 1)) {
+	$user_name = get_user_name($_SESSION['user_id']);
+	$role_id = getUserRoleID($_SESSION['user_id']);
+}
+$now=date('Y-m-d h:i:sa');
 function create_new_voucher($voucher_ref, $voucher_date, $voucher_description, $voucher_paid_from_account ) {
 // insert voucher data and return the last insert id
 //voucher_id = DB::insert();
-return false;
+ 
+   $insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'voucher_expense', array(
+   				
+			'voucher_ref_no' 			=>  $voucher_ref,	
+            'voucher_date' 	 		  => $voucher_date,
+            'voucher description' 	  =>   $voucher_description,
+            'petty_cash_account' 	   	 =>  $voucher_paid_from_account,
+            'created_by'   			  =>  $user_name,
+            'created_on'    		  =>  $now
+	
+		));
+return mysql_insert_id();
+	       
+
 
 }
 $voucher_id = 0;
