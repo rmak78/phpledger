@@ -13,7 +13,7 @@ if( isset($_GET['pk']) ) {
 //TODO: Make this a function and move to functions.php file	 
  if($update) {
 	$time = getDateTime(0,'mySQL');
-	$log = DB::update(DB_PREFIX.'companies', array ('last_modified_by' => $_SESSION['user_name'], 'last_modified_on' => '$time' ), "company_id=%s", $pk);
+	$log = DB::update(DB_PREFIX.'companies', array ('last_modified_by' => $_SESSION['user_name'], 'last_modified_on' => $time ), 'company_id=%s', $pk);
 	
 	}
 }

@@ -20,6 +20,8 @@
 <script src="<?php echo SITE_ROOT; ?>js/bootstrap.min.js"></script>
 <!-- jQuery Select2 plugin -->
 <script src="<?php echo SITE_ROOT; ?>js/select2.js"></script>
+<!-- jQuery Time Ago plugin -->
+<script src="<?php echo SITE_ROOT; ?>js/jquery.timeago.js"></script>
 <!-- jQuery Editable Plugin -->
 <script src="<?php echo SITE_ROOT; ?>js/bootstrap-editable.min.js"></script>
 <!-- jQuery DataTables plugin -->

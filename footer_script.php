@@ -28,7 +28,12 @@ $('.date-picker').datepicker({
     autoclose: true,
     endDate: '+0d' // there's no convenient "right now" notation yet
 }); 
-} );
+
+$("abbr.timeago").timeago();
+
+
+
+});
 </script>
  
 </body>

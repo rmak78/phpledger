@@ -54,7 +54,7 @@ function getDateTime($time = 0, $form = "dtLong") {
 		default:
 		$strform = "j-M-Y g:i:a";	
 	}
-	if ($time == 0 ){	
+	if ($time === 0 ){	
 	$formated_time = date($strform);
 	} else {
 	$time = strtotime($time);	
