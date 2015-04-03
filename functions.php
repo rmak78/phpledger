@@ -199,8 +199,9 @@ function get_company_details($company_id) {
 	}
 }
 function attempt_login_user($user_name, $password, $company_id, $superadmin) {
-	//TODO: build a check here to put appropriate fields in the session
-	$is_logged=DB::queryFirstRow("SELECT * FROM ".DB_PREFIX."test_users u WHERE (u.`user_name`='".$user_name."' OR u.`user_email`='".$user_name."') AND u.`password`='".$password."' AND u.`company_id`='".$company_id."' AND u.`user_status`='active'");
+	// build a check here to put appropriate fields in the session
+	$is_logged = DB::queryFirstRow("SELECT * FROM ".DB_PREFIX."test_users u WHERE (u.`user_name`='".$user_name."' OR u.`user_email`='".$user_name."') AND u.`password`='".$password."' AND u.`company_id`='".$company_id."' AND u.`user_status`='active'");
+	
 	if($is_logged){
 	$company = get_company_details($company_id);
 	$_SESSION['is_logged'] = 1; 
@@ -213,8 +214,25 @@ function attempt_login_user($user_name, $password, $company_id, $superadmin) {
 	$_SESSION['default_expense_account'] = 1; // get default Expense Account Company
 	return true;
 	}
-	else{
+	else
+	{
+	$prefix = DB_PREFIX;
+		$is_company_admin = DB::queryFirstField("SELECT COUNT(*) FROM ".$prefix."companies WHERE super_admin_user = '".$user_name."' AND super_admin_password = '".$password."' " );
+		if ($is_company_admin) {
+		$company = get_company_details($company_id);
+		$_SESSION['is_logged'] = 1; 
+		$_SESSION['company_id'] = $company_id;
+		$_SESSION['user_id'] = 1;
+		$_SESSION['user_name'] = $user_name;
+		$_SESSION['role_id'] = 1;
+		$_SESSION['co_prefix'] = get_db_co_prefix($company_id);
+		$_SESSION['company_name'] = $company['company_name'];
+		$_SESSION['default_expense_account'] = 1; // get default Expense Account Company		
+		return true;	
+		} else {
+
 		return '<h4 style="color:red;">Invalid User Name or Password</h4>';
+		}
 	}
 }
 
