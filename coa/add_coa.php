@@ -1,5 +1,7 @@
 <?php
 $group_id = "";
+$from_account_code='';
+$to_account_code='';
 if (isset($_GET['group_id'])) {
 $group_id = $_GET['group_id']; 
 $from_account_code = get_from_account_code($group_id, 'group');
@@ -136,7 +138,7 @@ $account_status = '';
                         <td>
 						<p><?php echo $from_account_code; ?> to <?php echo $to_account_code; ?></p>
 						
-						<input type="number" required name="account_code"></td>
+						<input type="number" value="<?php echo substr($from_account_code, 0, 2);  ?>" required name="account_code"></td>
                       </tr>
 					  
                       <tr>
