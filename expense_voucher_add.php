@@ -1,24 +1,6 @@
 ﻿<?php
 // voucher heading updation
-if(isset($_POST['edit_voucher']))
-{
-	$voucher_ref = ($_POST['voucher_ref']);
-	$voucher_date = getDateTime($_POST['voucher_date'], 'mySQL');
-	$voucher_description = $_POST['voucher_description'];
-	$voucher_ids= $_POST['voucher_ids'];
-	  
-   if($voucher_ids<>"")
-	{
-	 DB::update(DB_PREFIX.$_SESSION['co_prefix'].'voucher_expense', array(
-	 	'voucher_ref_no' 			=>  $voucher_ref,	
-            'voucher_date' 	 		  => $voucher_date,
-            'voucher description' 	  =>   $voucher_description
-	 	),
-		"voucher_id=%s", $voucher_ids
-		);
-	}
 
-}
 // Add expense
 if(isset($_POST['edit_add']))
 {
@@ -121,7 +103,7 @@ switch ($action) {
 <div class='panel-heading' >
 				
                 
-   	<form method="post" action="<?php $_SERVER['PHP_SELF']; ?>" class="form-horizontal">         
+   	<form method="post" action="<?php $_SERVER['PHP_SELF']; ?>" name="voucher_edit" class="form-horizontal">         
 <?php
 
 
@@ -192,7 +174,7 @@ if($voucher_id != 0) {
                  <div class="row">
                    <div class="col-xs-12 col-sm-4 col-md-4">
                   <label>Total Voucher</label>
-				<input class="form-control" required="required" name="total_voucher" id="total_voucher" />
+				<input class="form-control" required="required" name="total_voucher" id="total_voucher" 
                 value="<?php echo  $select_voucher['voucher_total']; ?> " />
                  </div>
                <br />
@@ -238,3 +220,19 @@ echo $error_message;
 				</div>
 			
 			</div>
+            <script type="text/javascript">
+            $('#edit_voucher').click(function(){
+        $.ajax({
+				type: "POST",
+				url: "<?php echo $_SERVER['PHP_SELF']."ajax_used/ajax_add_voucher.php"; ?>",
+				data: $('voucher_edit').serialize(),
+				success: function(msg){
+					$("#qtyModal").modal('hide');
+					window.location.reload();
+					},
+				error: function(){
+					alert("failure");
+					}
+			});
+});
+            </script>
