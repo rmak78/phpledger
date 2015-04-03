@@ -2,9 +2,10 @@
 
 // Maintain a company
 /*
- [company_id] => 1
+
+    [company_id] => 1
     [company_name] => Test Company Name
-    [company_db_prefix] => test
+    [company_db_prefix] => test_
     [company_address_1] => Al-Sadeeq Akbar,
     [company_address_2] => Bahawalpur Road,
     [city] => Lodhran
@@ -15,6 +16,7 @@
     [email] => mansoor@sutlej.net
     [website] => http://sutlej.net
     [industry] => IT
+    [company_time_zone] => GMT
     [coa_code_length] => 10
     [company_logo_home] => 
     [company_logo_head] => 
@@ -24,9 +26,9 @@
     [last_modified_by] => system
     [last_modified_on] => 2015-03-10 19:12:51
     [created_by] => system
-    [created_on] => 2015-03-23 19:13:03
+    [created_on] => 2015-03-23 22:41:44
     [company_status] => active
-
+ 
 */
 echo "<pre>";
 print_r(DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company_id = '.$_SESSION['company_id']));
