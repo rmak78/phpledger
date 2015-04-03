@@ -188,17 +188,28 @@ function get_db_co_prefix($company_id) {
 	return '' ;
 	}
 }
-
+function get_company_details($company_id) {
+	//get company details from DB and outputs an array about company
+	$sql = "SELECT * FROM ".DB_PREFIX."companies WHERE company_id = ".$company_id;
+	$company = DB::queryFirstRow($sql);
+	if ($company) {
+	return $company ;
+	} else {
+	return false ;
+	}
+}
 function attempt_login_user($user_name, $password, $company_id, $superadmin) {
 	//TODO: build a check here to put appropriate fields in the session
 	$is_logged=DB::queryFirstRow("SELECT * FROM ".DB_PREFIX."test_users u WHERE (u.`user_name`='".$user_name."' OR u.`user_email`='".$user_name."') AND u.`password`='".$password."' AND u.`company_id`='".$company_id."' AND u.`user_status`='active'");
 	if($is_logged){
+	$company = get_company_details($company_id);
 	$_SESSION['is_logged'] = 1; 
 	$_SESSION['company_id'] = $company_id;
 	$_SESSION['user_id'] = $is_logged['user_id'];
 	$_SESSION['user_name'] = $is_logged['user_name'];
 	$_SESSION['role_id'] = 1;
 	$_SESSION['co_prefix'] = get_db_co_prefix($company_id);
+	$_SESSION['company_name'] = $company['company_name'];
 	$_SESSION['default_expense_account'] = 1; // get default Expense Account Company
 	return true;
 	}

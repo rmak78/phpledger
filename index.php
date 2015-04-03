@@ -41,7 +41,7 @@ if ( (isset($_SESSION['is_logged'])) AND ($_SESSION['is_logged'] == 1)) {
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
  
-      <a class="navbar-brand" href="#">Sutlej.NET Accouting System</a>
+      <a class="navbar-brand" href="#"><?php echo $_SESSION['company_name']; ?></a>
     </div>
 
     <!--  Collect the nav links, forms, and other content for toggling -->

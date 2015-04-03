@@ -11,18 +11,22 @@
 <link rel="stylesheet" href="<?php echo SITE_ROOT; ?>css/dataTables.bootstrap.css" />
 <link rel="stylesheet" href="<?php echo SITE_ROOT; ?>/css/dataTables.tableTools.min.css" /> 
 <link rel="stylesheet" href="<?php echo SITE_ROOT; ?>/css/datepicker.css" /> 
+<link rel="stylesheet" href="<?php echo SITE_ROOT; ?>/css/select2.css" /> 
 
 <!-- Loading Java Scripts -->
   
 <!-- jQuery & Bootstrap  -->
 <script src="<?php echo SITE_ROOT; ?>js/jquery.min.js"></script>
 <script src="<?php echo SITE_ROOT; ?>js/bootstrap.min.js"></script>
+<!-- jQuery Select2 plugin -->
+<script src="<?php echo SITE_ROOT; ?>js/select2.js"></script>
 <!-- jQuery Editable Plugin -->
 <script src="<?php echo SITE_ROOT; ?>js/bootstrap-editable.min.js"></script>
 <!-- jQuery DataTables plugin -->
 <script src="<?php echo SITE_ROOT; ?>js/jquery.dataTables.min.js"></script>
 <script src="<?php echo SITE_ROOT; ?>js/dataTables.bootstrap.js"></script>
 <script src="<?php echo SITE_ROOT; ?>js/dataTables.tableTools.min.js"></script>
+
 <!-- Calender Widget -->
 <script language='javascript' src='<?php echo SITE_ROOT; ?>calendar/calendar.js'></script>
 <script type="text/javascript">
