@@ -36,13 +36,8 @@ $tbl->addCell('Group Code', '', 'header');
 $tbl->addCell('Group Description', '', 'header');
 $tbl->addCell('From Account Code', '', 'header');
 $tbl->addCell('To Account Code', '', 'header');
-
 $tbl->addCell('Type', '', 'header');
-
 $tbl->addCell('Side', '', 'header');
-$tbl->addCell('Statistic Only', '', 'header');
-
-
 $tbl->addCell('Status', '', 'header');
 $tbl->addCell('Actions', '', 'header');
 ?>
@@ -56,9 +51,8 @@ $tbl->addCell($coa['group_code']);
 $tbl->addCell($coa['group_description']);
 $tbl->addCell($coa['from_account_code']);
 $tbl->addCell($coa['to_account_code']);
-$tbl->addCell($coa['pls_group']);
-$tbl->addCell($coa['pls_side']);
-$tbl->addCell($coa['statistics_only']);
+$tbl->addCell(get_coa_group_type($coa['group_id']));
+$tbl->addCell(get_coa_group_side($coa['group_id']));
 $tbl->addCell($coa['group_status']);
 $tbl->addCell("<a class='btn btn-primary btn-sm' href ='".$_SERVER['PHP_SELF']."?route=coa_groups/edit_coa_groups&group_id=".$coa['group_id']."'>Edit&nbsp;<span class='glyphicon glyphicon-new-window'></span></a>
 			   ");

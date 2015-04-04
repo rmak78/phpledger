@@ -252,16 +252,43 @@ return $from_number;
 }
 
 function get_to_account_code($id, $type) {
-$to_number = 0;
-$id = intval($id);
-if ($type == 'group'){
-$to_number = DB::queryFirstField("SELECT to_account_code FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa_groups WHERE group_id = ".$id);
+	$to_number = 0;
+	$id = intval($id);
+		if ($type == 'group'){
+			$to_number = DB::queryFirstField("SELECT to_account_code FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa_groups WHERE group_id = ".$id);
 
-}  
-if ($type == 'account' ){
+		}  
+			if ($type == 'account' ){
+		}
+	return $to_number;
+}
 
+function get_coa_group_type($coa_group_id){
+	$type = "";
+// Get Group Type from db
+$sql = "SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']." WHERE group_id=".$coa_group_id;
+
+$group = DB::queryFirstRow($sql);
+
+if ( $group['balance_sheet_group'] == 1 ) {
+	$type = "Balance Sheet";
+} else if ( $group['pls_group'] == 1 ) {
+	$type = "P/L Statement";
+} else if ( $group['statistics_only'] == 1 ) {
+	$type = "Statistics Only";
+} else {
+	$type = "UnKnown" ;
+}
+	return $type;
+}
+
+function get_coa_group_side($coa_group_id) {
+	$side = "";
+	// TODO: To be done by WS.
+	
+	
+	return $side;
 
 }
-return $to_number;
-}
+
 ?>
