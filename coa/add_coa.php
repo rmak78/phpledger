@@ -44,11 +44,12 @@ DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'coa',array(
 			'account_status' => $account_status)  );
 $message = "Successfully Added Chart Of Account";
  
-echo '<script type="text/javascript">
-<!--
-window.location = "'.$_SERVER['PHP_SELF'].'?route=maintain_coa"
-//-->
-</script>';
+echo '<div id="success-alert" class="alert alert-success">
+   <a href="#" class="close" data-dismiss="alert">
+      &times;
+   </a>
+   <strong>Updated!</strong> Data Saved Succesfully.
+</div>';
 
 } else {
 
@@ -164,7 +165,7 @@ $account_status = '';
 					  <tr>
 					  <td></td>
 					  <td><input type="submit" class='btn btn-primary btn-sm' name="add" value="Add New Account">
-					  <font color="red"><?php echo $message;?> </font>
+					 
 					  </td>
 					  </tr>
                      
@@ -191,6 +192,13 @@ $account_status = '';
 $('#account_group').change(function() {
     window.location = "index.php?route=coa/add_coa&group_id=" + $(this).val();
 });
+</script>
+<script type="text/javascript">
+$("#success-alert").fadeTo(1000, 200).slideUp(200, function(){
+    $("#success-alert").alert('close');
+	window.location = "index.php?route=maintain_coa";
+});
+
 </script>
 <?php
 include_once("./tools_footer.php");

@@ -6,6 +6,20 @@ if ( (isset($_SESSION['is_logged'])) AND ($_SESSION['is_logged'] == 1)) {
 $now=date("Y-m-d h:i:sa");
 if(isset($_GET['coa_id'])){
 	$coa_id = $_GET['coa_id'];
+	$group_id = $_GET['group_id'];
+}
+$group_id = "";
+$from_account_code='';
+$to_account_code='';
+if (isset($_GET['group_id'])) {
+$group_id = $_GET['group_id']; 
+$from_account_code = get_from_account_code($group_id, 'group');
+$to_account_code = get_to_account_code($group_id, 'group');
+}
+if (isset($_GET['parent_account_id'])) {
+$parent_account_id = $_GET['parent_account_id']; 
+//$from_account_code = get_from_account_code($parent_account_id , 'account');
+//$to_account_code = get_to_account_code($parent_account_id, 'account');
 }
 echo $coa_id;
 	$message= "";
@@ -27,13 +41,14 @@ DB::UPDATE(DB_PREFIX.$_SESSION['co_prefix'].'coa',array(
 			'last_modified_on' => $now,
 			'account_status' => $account_status), "account_id =%s", $coa_id );
 $message = "Successfully Updated";
- 
-echo '<script type="text/javascript">
-<!--
-window.location = "'.$_SERVER['PHP_SELF'].'?route=maintain_coa"
-//-->
-</script>';
-} else {
+ echo '<div id="success-alert" class="alert alert-success">
+   <a href="#" class="close" data-dismiss="alert">
+      &times;
+   </a>
+   <strong>Updated!</strong> Changes Saved Succesfully.
+</div>';
+}
+ else {
 
 /* Retrive logged in user data */
 
@@ -62,7 +77,7 @@ $account_status = $coa_info['account_status'];
           <div class="panel panel-info">
 		  <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
             <div class="panel-heading">
-              <h3 class="panel-title">Add New Chart of Account</h3>
+              <h3 class="panel-title">Edit Chart of Account <?php echo $account_code; ?></h3>
             </div>
             <div class="panel-body">
               <div class="row">
@@ -71,15 +86,65 @@ $account_status = $coa_info['account_status'];
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">
                     <tbody>
- 	  
-                      <tr>
-                        <td>Account Code:</td>
-                        <td><input type="text" required name="account_code" value="<?php echo $account_code; ?>"></td>
-                      </tr>
 					  <tr>
                         <td>Account Group:</td>
-                        <td><input type="text" required name="account_group" value="<?php echo $account_group; ?>"></td>
-                      </tr> 
+                        <td>
+						<select type="form-control" name="account_group" id="account_group" required="required">
+						<option name="account_group" value=""> -- Select -- </option>
+						<?php 
+						$groups_query = "SELECT group_id, group_code, group_description from ";
+						$groups_query .= DB_PREFIX.$_SESSION['co_prefix']."coa_groups";
+						
+						$groups = DB::query($groups_query);
+						
+						foreach ($groups as $group) {
+						?>					
+							<option <?php 
+							if ($group['group_id'] == $group_id  ) {
+							echo 'selected = "selected"';
+							}								
+							?>  value="<?php echo $group['group_id']; ?>" ><?php echo $group['group_code']." - ".$group['group_description']; ?></option>
+						<?php 
+						}
+						?>
+						</select>
+                      </tr>
+					  <tr>
+                        <td>Parent Account</td>
+                        <td>
+						<Select name="parent_account_id">
+						<option value="0"> -- None --</option>
+						<?php 
+						$accounts_query = "SELECT account_id, account_code, account_desc_short from ";
+						$accounts_query .= DB_PREFIX.$_SESSION['co_prefix']."coa WHERE 1 = 1";
+						if ($group_id <> "") {
+						$accounts_query .= " AND account_group =  ".$group_id;
+						}
+						$accounts = DB::query($accounts_query);
+						
+						foreach ($accounts as $account) {
+						?>	
+						<option <?php 
+							if($account['account_id']==$coa_id){
+								echo "SELECTED";
+							}
+							?> value= "<?php $account['account_id']; ?>"><?php echo $account['account_code']; ?></option>
+						<?php 
+						}
+						?>
+						
+						</select>
+						</td>
+                      </tr>  
+						<tr>
+                        <td>Account Code:</td>
+                        <td>
+						<p><?php echo $from_account_code; ?> to <?php echo $to_account_code; ?></p>
+						
+						<input type="number" value="<?php echo $account_code;  ?>" required name="account_code"></td>
+                      </tr>
+					  
+                      <tr>					  
                       <tr>
                         <td>Account Description Short</td>
                         <td><input type="text" required name="account_desc_short" value="<?php echo $account_desc_short; ?>"></td>
@@ -89,11 +154,7 @@ $account_status = $coa_info['account_status'];
                              <tr>
                         <td>Account Description Brief</td>
                         <td><textarea cols="24" rows="3" required name="account_desc_long"><?php echo $account_desc_long; ?></textarea></td>
-                      </tr>                       
-                      <tr>
-                        <td>Parent Account ID</td>
-                        <td><input type="number" required name="parent_account_id" value="<?php echo $parent_account_id; ?>"></td>
-                      </tr>   
+                      </tr>                        
 					  <tr>
                         <td>Account Status</td>
                         <td><Select name="account_status">
@@ -113,7 +174,7 @@ $account_status = $coa_info['account_status'];
 					  <tr>
 					  <td></td>
 					  <td><input type="submit" class='btn btn-primary btn-sm' name="update" value="Save Changes">
-					  <font color="red"><?php echo $message;?> </font>
+					 
 					  </td>
 					  </tr>
                      
@@ -135,7 +196,18 @@ $account_status = $coa_info['account_status'];
         </div>
       </div>
     </div>
+<script type="text/javascript">
+$('#account_group').change(function() {
+    window.location = "index.php?route=coa/edit_coa&coa_id=<?php echo $coa_id; ?>&group_id=" + $(this).val();
+});
+</script>
+<script type="text/javascript">
+$("#success-alert").fadeTo(1000, 200).slideUp(200, function(){
+    $("#success-alert").alert('close');
+	window.location = "index.php?route=maintain_coa";
+});
 
+</script>
 <?php
 include_once("./tools_footer.php");
 ?>

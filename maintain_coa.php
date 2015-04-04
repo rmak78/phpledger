@@ -56,7 +56,7 @@ $tbl->addCell($coa['parent_account_id']);
 $tbl->addCell($coa['last_modified_by']);
 $tbl->addCell($coa['last_modified_on']);
 $tbl->addCell($coa['account_status']);
-$tbl->addCell("<a class='btn btn-primary btn-sm' href ='".$_SERVER['PHP_SELF']."?route=coa/edit_coa&coa_id=".$coa['account_id']."'>Edit&nbsp;<span class='glyphicon glyphicon-new-window'></span></a>
+$tbl->addCell("<a class='btn btn-primary btn-sm' href ='".$_SERVER['PHP_SELF']."?route=coa/edit_coa&group_id=".$coa['account_group']."&coa_id=".$coa['account_id']."'>Edit&nbsp;<span class='glyphicon glyphicon-new-window'></span></a>
 			   ");
 }
 			   echo $tbl->display();
