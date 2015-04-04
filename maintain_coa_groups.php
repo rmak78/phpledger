@@ -27,7 +27,7 @@ echo $coa_query;
 
 <div class="panel panel-info">
   <!-- Default panel contents -->
-  <div class="panel-heading"><h3>Maintain Chart of Accounts Groups<a href="<?php echo $_SERVER['PHP_SELF']; ?>?route=coa_groups/add_coa_groups" class=" pull-right btn btn-sm btn-primary"> <span class="glyphicon glyphicon-plus"></span> &nbsp;Add New COA</a> </h3> </div>
+  <div class="panel-heading"><h3>Maintain Chart of Accounts Groups<a href="<?php echo $_SERVER['PHP_SELF']; ?>?route=coa_groups/add_coa_group" class=" pull-right btn btn-sm btn-primary"> <span class="glyphicon glyphicon-plus"></span> &nbsp;Add New COA</a> </h3> </div>
   <div class="panel-body">
 <?php
 $tbl = new HTML_Table('', 'table table-striped table-bordered');
@@ -65,7 +65,7 @@ $tbl->addCell($coa['statistics_only']);
 $tbl->addCell($coa['created_by']);
 $tbl->addCell($coa['created_on']);
 $tbl->addCell($coa['group_status']);
-$tbl->addCell("<a class='btn btn-primary btn-sm' href ='".$_SERVER['PHP_SELF']."?route=coa_groups/edit_coa_groups&group_id=".$coa['group_id']."'>Edit&nbsp;<span class='glyphicon glyphicon-new-window'></span></a>
+$tbl->addCell("<a class='btn btn-primary btn-sm' href ='".$_SERVER['PHP_SELF']."?route=coa_groups/edit_coa_group&group_id=".$coa['group_id']."'>Edit&nbsp;<span class='glyphicon glyphicon-new-window'></span></a>
 			   ");
 }
 			   echo $tbl->display();
