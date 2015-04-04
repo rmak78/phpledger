@@ -36,15 +36,9 @@ $tbl->addCell('Group Code', '', 'header');
 $tbl->addCell('Group Description', '', 'header');
 $tbl->addCell('From Account Code', '', 'header');
 $tbl->addCell('To Account Code', '', 'header');
-$tbl->addCell('Balance Sheet Group', '', 'header');
-$tbl->addCell('Balance Sheet Side', '', 'header');
-$tbl->addCell('Profit & Loss Statements Group', '', 'header');
-
-$tbl->addCell('Profit & Loss Statements Side', '', 'header');
-$tbl->addCell('Statistic Only', '', 'header');
-$tbl->addCell('Created By', '', 'header');
-$tbl->addCell('Created On', '', 'header');
-$tbl->addCell('Group Status', '', 'header');
+$tbl->addCell('Type', '', 'header');
+$tbl->addCell('Side', '', 'header');
+$tbl->addCell('Status', '', 'header');
 $tbl->addCell('Actions', '', 'header');
 ?>
 
@@ -57,13 +51,8 @@ $tbl->addCell($coa['group_code']);
 $tbl->addCell($coa['group_description']);
 $tbl->addCell($coa['from_account_code']);
 $tbl->addCell($coa['to_account_code']);
-$tbl->addCell($coa['balance_sheet_group']);
-$tbl->addCell($coa['balance_sheet_side']);
-$tbl->addCell($coa['pls_group']);
-$tbl->addCell($coa['pls_side']);
-$tbl->addCell($coa['statistics_only']);
-$tbl->addCell($coa['created_by']);
-$tbl->addCell($coa['created_on']);
+$tbl->addCell(get_coa_group_type($coa['group_id']));
+$tbl->addCell(get_coa_group_side($coa['group_id']));
 $tbl->addCell($coa['group_status']);
 $tbl->addCell("<a class='btn btn-primary btn-sm' href ='".$_SERVER['PHP_SELF']."?route=coa_groups/edit_coa_group&group_id=".$coa['group_id']."'>Edit&nbsp;<span class='glyphicon glyphicon-new-window'></span></a>
 			   ");
