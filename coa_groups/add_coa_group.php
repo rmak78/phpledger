@@ -1,4 +1,65 @@
+<?php
+if(isset($_POST['submit']))
+{
+ $group_code		= $_POST['group_code'];
+ $group_description = $_POST['group_description'];
+ $From_account_code = $_POST['From_account_code'];
+ $to_account_code   = $_POST['to_account_code'];
+ $balance_sheet_side = $_POST['balance_sheet_side'];
+ $pls_side		  = $_POST['pls_side'];
+ $group_status	  = $_POST['group_status'];
+ $account_type = $_POST['account_type'];
+  if($account_type=='balance_sheet'){
+	  $insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'coa_groups', array(		
+			'group_code' 			=> $group_code,	
+            'group_description' 	 => $group_description,
+            'from_account_code' 	 => $From_account_code,
+            'to_account_code' 	   => $to_account_code,
+            'balance_sheet_group'   => 1,
+            'balance_sheet_side'    => $balance_sheet_side,
+            'pls_group' 			 => '',	 
+            'pls_side' 			  => '',
+            'statistics_only' 	   => 0,
+            'group_status' 		  => $group_status
+		
+		)); 
+  }
+  else if($account_type=='pls_group'){
+	  $insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'coa_groups', array(		
+			'group_code' 			=> $group_code,	
+            'group_description' 	 => $group_description,
+            'from_account_code' 	 => $From_account_code,
+            'to_account_code' 	   => $to_account_code,
+            'balance_sheet_group'   => '',
+            'balance_sheet_side'    => '',
+            'pls_group' 			 => $pls_group,	 
+            'pls_side' 			  => $pls_side,
+            'statistics_only' 	   => 0,
+            'group_status' 		  => $group_status
+		
+		)); 
+  }
+  else{
+	  $insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'coa_groups', array(
+   				
+			'group_code' 			=> $group_code,	
+            'group_description' 	 => $group_description,
+            'from_account_code' 	 => $From_account_code,
+            'to_account_code' 	   => $to_account_code,
+            'balance_sheet_group'   => '',
+            'balance_sheet_side'    => '',
+            'pls_group' 			 => '',	 
+            'pls_side' 			  => '',
+            'group_status' 		  => $group_status
+		
+		)); 
+  }
+	       		 
+ }
 
+
+
+?>
 <div class="container">
       <div class="row">
 	  <div class="col-lg-8 centered">
@@ -15,8 +76,8 @@
                         <label class="col-sm-3 control-label">Group Code:</label>
                          <div class="col-sm-4">
 						 <input class="controls" type="text" required name="group_code" id="group_code"
-						   pattern="[A-Z0-9]{4}"  maxlength="4">
-							 <p class="help-block">Must be Length 4 and Capital Characters with digits</p>
+						   pattern="[A-Z]{4}"  maxlength="4">
+							 <p class="help-block">Must be length 4 and Capital characters only</p>
 							</div>
 			  </div>	
 				
@@ -80,8 +141,8 @@
                        <div class="form-group">
 							<label class="col-sm-3 control-label">Group Status</label>
                         <div class="col-sm-6"><select class="form-control" type="text" required  name="group_status" id="group_status">
-                        <option value="1">Active</option>
-                       <option value="0">In-Active</option>  
+                        <option value="active">Active</option>
+                       <option value="in-active">In-Active</option>  
                         </select>
                         
                         
