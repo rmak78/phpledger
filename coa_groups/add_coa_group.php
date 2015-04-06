@@ -1,59 +1,22 @@
-<?php
-if(isset($_POST['submit']))
-{
- $group_code		= $_POST['group_code'];
- $group_description = $_POST['group_description'];
- $From_account_code = $_POST['From_account_code'];
- $to_account_code   = $_POST['to_account_code'];
- $balance_sheet_group= $_POST['balance_sheet_group'];
- $balance_sheet_side= $_POST['balance_sheet_side'];
- $pls_group		 = $_POST['pls_group'];
- $pls_side		  = $_POST['pls_side'];
- $statistics_only   = $_POST['statistics_only'];
- $group_status	  = $_POST['group_status'];
-   
-   $insert = DB::Insert('sa_test_coa_groups', array(
-   				
-			'group_code' 			=> $group_code,	
-            'group_description' 	 => $group_description,
-            'from_account_code' 	 => $From_account_code,
-            'to_account_code' 	   => $to_account_code,
-            'balance_sheet_group'   => $balance_sheet_group,
-            'balance_sheet_side'    => $balance_sheet_side,
-            'pls_group' 			 => $pls_group,	 
-            'pls_side' 			  => $pls_side,
-            'statistics_only' 	   => $statistics_only,
-            'group_status' 		  => $group_status
-		
-		));
-	       
-		  
-
-
- }
-
-
-
-
-
-?>
 
 <div class="container">
       <div class="row">
-	  <div class="col-md-8">
+	  <div class="col-lg-8 centered">
     <br>
 <p class=" text-info"><?php echo date("Y-m-d h:i:sa"); ?> </p>
-
-		  <form class="form-horizontal" role="form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
-          
-          <div class="panel-heading">
+<div class="panel panel-primary">
+  <div class="panel-heading">
 		  <h3>Add Chart of Account Group</h3>
            </div>
+		  <form class="form-horizontal" role="form" method="post" action="">
+        
             <div class="panel-body">
               <div class="form-group">
                         <label class="col-sm-3 control-label">Group Code:</label>
                          <div class="col-sm-4">
-						 <input class="form-control" type="text" required name="group_code" id="group_code">
+						 <input class="controls" type="text" required name="group_code" id="group_code"
+						   pattern="[A-Z0-9]{4}">
+							 <p class="help-block">Must be 4 and Capital Characters</p>
 							</div>
 			  </div>	
 				
@@ -68,7 +31,6 @@ if(isset($_POST['submit']))
 							$length = DB::query(" SELECT coa_code_length FROM ".DB_PREFIX."companies WHERE company_id='".$company_id."'");
 						foreach ($length as $get_length)
 						{
-						echo $get_length['coa_code_length'];
 						$max_length = $get_length['coa_code_length'];
 						}
 						?>
@@ -126,14 +88,15 @@ if(isset($_POST['submit']))
                         </div>
                       </div>  
 
-					   <div class="form-group">
-					   <input type="submit" class='btn btn-primary' name="submit" value="SAVE">
-					 
+					  <div class="form-group">
+					   <div class="col-sm-6">
+					   <input type="submit" class='btn btn-primary pull-right' name="submit" value="SAVE">
+						</div>
 					  </div>
 
                               
                 </div>
-              </div>
+           
     </div>
                 <!--  <div class="panel-footer">
                         <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
@@ -142,9 +105,11 @@ if(isset($_POST['submit']))
                             <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                         </span>
                     </div> -->
+					</div>
+					</div>
             </form>
 </div>
-  
+
 
 <script>
 $(document).ready(function(){
@@ -168,6 +133,8 @@ $(document).ready(function(){
 });
 
 </script>
+
+
 <?php
 include_once("./tools_footer.php");
 ?>
