@@ -15,8 +15,8 @@
                         <label class="col-sm-3 control-label">Group Code:</label>
                          <div class="col-sm-4">
 						 <input class="controls" type="text" required name="group_code" id="group_code"
-						   pattern="[A-Z0-9]{4}">
-							 <p class="help-block">Must be 4 and Capital Characters</p>
+						   pattern="[A-Z0-9]{4}"  maxlength="4">
+							 <p class="help-block">Must be Length 4 and Capital Characters with digits</p>
 							</div>
 			  </div>	
 				
