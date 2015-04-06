@@ -1,4 +1,11 @@
-﻿<?php
+﻿<style>
+.table-sortable tbody tr {
+    cursor: move;
+}
+</style>
+
+
+<?php
 // voucher heading updation
 
 // Add expense
@@ -128,13 +135,16 @@ if(isset($_POST['action'])) {
 					
 				</div>		
 			</div>	
-	<!-- Add Voucher DIV END -->	
+	<!-- Add Voucher DIV END -->
+    <!-- Editable Voucher heading-->	
  <?php }
  
 else {
 	$slect_data= DB::query ("SELECT * from ".DB_PREFIX.$_SESSION['co_prefix']."voucher_expense WHERE voucher_id='".$new_voucher_id."'");
 	foreach ($slect_data as $select_voucher){
  ?>
+ <div class="container">
+ 
 <div class="well" style="width:80%; margin-left: auto; margin-right: auto ;">
  <b>Voucher ID: </b><input type="text" value="<?php echo $new_voucher_id; ?>" size="2" readonly="true">
  <BR><BR>
@@ -142,37 +152,194 @@ else {
                 <tbody> 
                     <tr>         
                         <td>Voucher Ref#</td>
-                        <td><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_name" data-name="company_name" data-type="text" data-pk="" data-title="Edit Voucher Ref#"><?php echo  $select_voucher['voucher_ref_no']; ?></a></td>
+                        <td><a href="#" class="editable" data-url="ajax_helpers/ajax_update_voucher_heading.php" id="voucher_ref_no" 
+                        data-name="voucher_ref_no" data-type="text" data-pk="<?php echo $select_voucher['voucher_id'] ; ?>" 
+                        data-title="Edit Voucher Ref#"><?php echo  $select_voucher['voucher_ref_no']; ?></a></td>
         
                         <td>Voucher Date</td>
-                        <td><a title="" data-original-title="" class="editable editable-click" href="#"  data-pk="" data-type="date" data-placement="left" data-title="Select Date"><?php echo  $select_voucher['voucher_date']; ?></a>
+                        <td><a title="" data-original-title="" class="editable editable-click" href="#" 
+                        data-url="ajax_helpers/ajax_update_voucher_heading.php" 
+                        data-pk="<?php echo $select_voucher['voucher_id'] ; ?>" data-type="date" data-placement="left" 
+                        data-title="Select Date" data-name="voucher_date"><?php echo  $select_voucher['voucher_date']; ?></a>
 						
 						</td>
                     </tr>
 					<tr>         
                         <td>Paid From Account</td>
-                        <td><a title="" data-original-title="" class="editable editable-click" href="#" id="group" data-type="select" data-pk="1" data-placement="right" data-value="5" data-title="Select group">Default Expense Account</a>
+                        <td><a title="" data-original-title="" class="editable editable-click" href="#" id="group" data-type="select" 
+                        data-pk="<?php echo $select_voucher['voucher_id'] ; ?>" data-placement="right" data-value="5" 
+                        data-url="ajax_helpers/ajax_update_voucher_heading.php" data-title="Select group">Default Expense Account</a>
 						</td>
                              
                         <td>Voucher Description</td>
-                        <td><a title="" data-original-title="" data-placement="left" class="editable editable-pre-wrapped editable-click" href="#" id="comments" data-type="textarea" data-pk="1" data-placeholder="Your comments here..." data-title="Enter comments"><?php echo  $select_voucher['voucher description']; ?></a>
+                        <td><a title="" data-original-title="" data-placement="left" class="editable editable-pre-wrapped editable-click" 
+                        href="#" id="voucher description" data-name="voucher description" data-type="textarea" data-pk="<?php echo 				       					$select_voucher['voucher_id'] ;?>" data-url="ajax_helpers/ajax_update_voucher_heading.php"
+                         data-title="Enter Description">
+						<?php echo  $select_voucher['voucher description']; ?></a>
 						</td>
                     </tr>
 				</tbody>
-			</table>	
- </div>
-<?php
+			</table>
+</div>
+            <?php
 	}
- } ?>
+?>	
+
+ 
+ <!--  Voucher Body -->
+ 
+ <div class="panel-body"  style=" width:80%; margin-left: auto; margin-right: auto ;">
+
+    <div class="row clearfix">
+    	<div class="col-md-12 table-responsive">
+			<table class="table table-bordered table-hover table-sortable" id="tab_logic">
+				<thead>
+               
+					<tr >
+                    <th class="text-center">
+							Expense Type
+						</th>
+						<th class="text-center">
+						Description
+						</th>
+						<th class="text-center">
+							Amount
+						</th>
+						<th class="text-center">
+							Action
+						</th>
+    					
+        				<th class="text-center" style="border-top: 1px solid #ffffff; border-right: 1px solid #ffffff;">
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+    				<tr id='addr0' data-id="0">
+                    <td data-name="sel">
+						    <select name="sel0">
+        				        <option value"">Select Option</option>
+    					        <option value"1">Option 1</option>
+        				        <option value"2">Option 2</option>
+        				        <option value"3">Option 3</option>
+						    </select>
+						</td>
+                        <td data-name="desc">
+						    <textarea name="desc0" placeholder="Description" class="form-control"></textarea>
+						</td>
+						<td data-name="Amount">
+						    <input type="number" name='amount'  placeholder='amount' class="form-control"/>
+						</td>
+					
+    					
+                        <td data-name="del">
+                            <button nam"del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'></button>
+                        </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<a id="add_row" class="btn btn-default pull-right">Add Row</a>
+
+</div>
+ </div>
+<?php } ?>
+ 
+
  
  
  
  
  
  
+
+
 <script type="text/javascript">
+
+$(document).ready(function() {
+    $("#add_row").on("click", function() {
+        // Dynamic Rows Code
+        
+        // Get max row id and set new id
+        var newid = 0;
+        $.each($("#tab_logic tr"), function() {
+            if (parseInt($(this).data("id")) > newid) {
+                newid = parseInt($(this).data("id"));
+            }
+        });
+        newid++;
+        
+        var tr = $("<tr></tr>", {
+            id: "addr"+newid,
+            "data-id": newid
+        });
+        
+        // loop through each td and create new elements with name of newid
+        $.each($("#tab_logic tbody tr:nth(0) td"), function() {
+            var cur_td = $(this);
+            
+            var children = cur_td.children();
+            
+            // add new td and element if it has a nane
+            if ($(this).data("name") != undefined) {
+                var td = $("<td></td>", {
+                    "data-name": $(cur_td).data("name")
+                });
+                
+                var c = $(cur_td).find($(children[0]).prop('tagName')).clone().val("");
+                c.attr("name", $(cur_td).data("name") + newid);
+                c.appendTo($(td));
+                td.appendTo($(tr));
+            } else {
+                var td = $("<td></td>", {
+                    'text': $('#tab_logic tr').length
+                }).appendTo($(tr));
+            }
+        });
+        
+        // add delete button and td
+        /*
+        $("<td></td>").append(
+            $("<button class='btn btn-danger glyphicon glyphicon-remove row-remove'></button>")
+                .click(function() {
+                    $(this).closest("tr").remove();
+                })
+        ).appendTo($(tr));
+        */
+        
+        // add the new row
+        $(tr).appendTo($('#tab_logic'));
+        
+        $(tr).find("td button.row-remove").on("click", function() {
+             $(this).closest("tr").remove();
+        });
+});
+
+
+
+
+    // Sortable Code
+    var fixHelperModified = function(e, tr) {
+        var $originals = tr.children();
+        var $helper = tr.clone();
+    
+        $helper.children().each(function(index) {
+            $(this).width($originals.eq(index).width())
+        });
+        
+        return $helper;
+    };
+  
+ 
+});
+
+
+    $("#add_row").trigger("click");
+
+	</script>
+    <script type="text/javascript">
 				$("#success-alert").fadeTo(1000, 200).slideUp(200, function(){
 				$("#success-alert").alert('close');
 				window.location = "index.php?route=expense_voucher_add&new_voucher_id=<?php echo $new_voucher_id; ?>";
 				});
-</script>
+				</script>
