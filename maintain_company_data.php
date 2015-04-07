@@ -130,21 +130,7 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
      
 </div>		
 
-<div class="row">
- 
-		<table  class="table table-bordered table-striped" >
-                <tbody> 
-					<tr>         
-                        <td width="35%">History
-						<abbr class="timeago" title="<?php echo  $company['last_modified_on'] ;?>"><?php echo  $company['last_modified_on'];?></abbr></td>
-                        <td width="65%"><p><strong>Last modified</strong> by User :<b>[ <?php echo $company['last_modified_by'] ;?> ]</b> at <b>[ <?php echo getDateTime($company['last_modified_on'],'dtLong');?> ]</b>. Record was <b>first created</b> by User : <b>[  <?php echo $company['created_by'] ;?> ]</b> at <b>[ <?php echo   getDateTime($company['created_on'] , 'dtShort')  ;?> ]</b>. Company <b>Status</b> is<b> [ <?php echo $company['company_status'] ;?> ] </b>. Click here to view history of changes to company ID: <strong><?php echo $company['company_id'] ;?></strong> .
-						</p>		
-						</td>
-                    </tr>
-				</tbody>
-			</table>
-     
-</div>	
+
 <div class="row">
  
 		<table  class="table table-bordered table-striped" >
@@ -166,17 +152,55 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
                         <!-- <td width="65%"><?php //echo $company['coa_code_length'] ;?> digits -->
 						
 					 	<td width="65%">
-						<?php if($company['coa_levels']<>''){?>							 	
-						Chart of Account can't be edit here, You have defined <strong><?php echo $company['coa_levels']; ?> </strong>levels	
+						<?php 
+						$accounts = DB::queryFirstField("SELECT COUNT(*) FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa");
+						
+						
+						
+						if($accounts > 0){ ?><p>							 	
+						Chart of Account can't be edited as some accounts have already been defined. </p>
 						<?php }else{ ?>
-						<a data-toggle="modal" data-target="#myModal">Define Chart of Account</a>
+						<a data-toggle="modal" data-target="#myModal">Modify Chart of Account Definitions</a>
 						<?php } ?>
+						<p>You have defined <strong>
+						<?php echo $company['coa_levels']; ?> </strong> levels</p>
+						
+						<? 
+							$code_sample = '';
+							$i = 1 ;
+							while ($i <> ($company['coa_levels'] + 1) ) {
+							$code_sample .= " ";
+							
+							echo "Level ".$i." : ".$company['coa_level_'.$i.'_length']."<br>";
+							$x=$company['coa_level_'.$i.'_length'];
+							while ($x <> 0) {
+							$code_sample .= "X";
+							$x = $x-1;
+							}
+							$i++;
+							} ?>
+							Sample Code = <?php echo $code_sample; ?>
 						</td>
                     </tr>
 				</tbody>
 			</table>
      
-</div>					
+</div>
+<div class="row">
+ 
+		<table  class="table table-bordered table-striped" >
+                <tbody> 
+					<tr>         
+                        <td width="35%">Last Change: 
+						<abbr class="timeago" title="<?php echo  $company['last_modified_on'] ;?>"><?php echo  $company['last_modified_on'];?></abbr></td>
+                        <td width="65%"><p><strong>Last modified</strong> by User :<b>[ <?php echo $company['last_modified_by'] ;?> ]</b> at <b>[ <?php echo getDateTime($company['last_modified_on'],'dtLong');?> ]</b>. Record was <b>first created</b> by User : <b>[  <?php echo $company['created_by'] ;?> ]</b> at <b>[ <?php echo   getDateTime($company['created_on'] , 'dtShort')  ;?> ]</b>. Company <b>Status</b> is<b> [ <?php echo $company['company_status'] ;?> ] </b>. Click here to view history of changes to company ID: <strong><?php echo $company['company_id'] ;?></strong> .
+						</p>		
+						</td>
+                    </tr>
+				</tbody>
+			</table>
+     
+</div>						
 </div>
 
 <script type="text/javascript">
@@ -215,22 +239,59 @@ $(document).ready(function(){
          <div class="modal-body">
 		 <div class="row">
             <div class="control-group">
-				<div class="col-sm-8">		
+				<div  >		
 				<label>Enter Chart of Account Levels (1-9)</label>
-				<input value="4" type="number" class="form-control" name="coa_levels_length" id="coa_levels_length" required="required">
+				<select value="4" type="number" class="form-control" name="coa_levels_length" id="coa_levels_length" required="required">
+				<option value="1" <?php if ($company['coa_levels'] == 1) { echo 'selected="selected"';} ?> >1</option>
+				<option value="2" <?php if ($company['coa_levels'] == 2) { echo 'selected="selected"';} ?> >2</option>
+				<option value="3" <?php if ($company['coa_levels'] == 3) { echo 'selected="selected"';} ?> >3</option>
+				<option value="4" <?php if ($company['coa_levels'] == 4) { echo 'selected="selected"';} ?> >4</option>
+				<option value="5" <?php if ($company['coa_levels'] == 5) { echo 'selected="selected"';} ?> >5</option>
+				<option value="6" <?php if ($company['coa_levels'] == 6) { echo 'selected="selected"';} ?> >6</option>
+				<option value="7" <?php if ($company['coa_levels'] == 7) { echo 'selected="selected"';} ?> >7</option>
+				<option value="8" <?php if ($company['coa_levels'] == 8) { echo 'selected="selected"';} ?> >8</option>
+				<option value="9" <?php if ($company['coa_levels'] == 9) { echo 'selected="selected"';} ?> >9</option>
+				</select>
 				</div>
 			</div>
-			
+		</div>
+		<div class="row">	
 			<!-- COA Code length DIVs -->
-			<div class="page-header col-sm-8">
+			<div class="page-header">
 			   <h1>
 				  <small>COA Code Length</small>
 			   </h1>
 			</div>
-
-			<div class="col-sm-8" id="coa_code_length1">				
+			<div class="control-group">
+			<!-- TODO: Complete this for all 9 Levels
+				Level 1 = 2 max
+				Level 2 = 4 max
+				Level 3 = 4 max
+				Level 4 = 5 max
+				Level 5 = 9 max
+				Level 6 = 9 max
+				Level 7 = 9 max
+				Level 8 = 9 max
+				Level 9 = 9 max
+				
+			-->
+			<div  id="coa_level_1_length">				
+			<label class="form-label" for="coa_level_1_length">Level 1:
+			<select class="form-control" name="coa_level_1_length" >
+				<option value="1" <?php if ($company['coa_level_1_length'] == 1) { echo 'selected="selected"';} ?> >1</option>
+				<option value="2" <?php if ($company['coa_level_1_length'] == 2) { echo 'selected="selected"';} ?> >2</option>
+			</select>
+				</label>
 			</div>
-			<div class="col-sm-8" id="coa_code_length2">				
+			<div  id="coa_level_2_length">				
+			<label class="form-label" for="coa_level_2_length">Level 2:
+			<select class="form-control" name="coa_level_2_length" >
+				<option value="1" <?php if ($company['coa_level_2_length'] == 1) { echo 'selected="selected"';} ?> >1</option>
+				<option value="2" <?php if ($company['coa_level_2_length'] == 2) { echo 'selected="selected"';} ?> >2</option>
+				<option value="3" <?php if ($company['coa_level_2_length'] == 3) { echo 'selected="selected"';} ?> >3</option>
+				<option value="4" <?php if ($company['coa_level_2_length'] == 4) { echo 'selected="selected"';} ?> >4</option>
+			</select>
+				</label>
 			</div>	
 			<div class="col-sm-8" id="coa_code_length3">				
 			</div>	
@@ -247,6 +308,7 @@ $(document).ready(function(){
 			<div class="col-sm-8" id="coa_code_length9">				
 			</div>			
 			<!-- End COA Code length DIV-->
+			</div>
 		 </div>	
          </div>
          <div class="modal-footer">
