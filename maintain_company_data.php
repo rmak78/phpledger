@@ -68,24 +68,7 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 						</p>		
 						</td>
                     </tr>
- 					<tr>         
-                        <td width="35%">Time Zone</td>
-                        <td width="65%"><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_time_zone" data-name="company_time_zone" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Time Zone"><?php echo $company['company_time_zone'] ;?></a>
-						</p>		
-						</td>
-                    </tr>
- 					<tr>         
-                        <td width="35%">Currency</td>
-                        <td width="65%"><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="currency" data-name="currency" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Currency"><?php echo $company['currency'] ;?></a>
-						</p>		
-						</td>
-                    </tr>
- 					<tr>         
-                        <td width="35%">Chart of Account Code Length</td>
-                        <td width="65%"><?php echo $company['coa_code_length'] ;?> digits
-					 	
-						</td>
-                    </tr>
+ 					
  					<tr>         
                         <td width="35%">Database Tables Prefix</td>
                         <td width="65%"><?php echo DB_PREFIX.$company['company_db_prefix'] ;?>
@@ -158,9 +141,123 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 						</p>		
 						</td>
                     </tr>
- 				 
 				</tbody>
 			</table>
      
-</div>						
+</div>	
+<div class="row">
+ 
+		<table  class="table table-bordered table-striped" >
+                <tbody> 
+					<tr>         
+                        <td width="35%">Time Zone</td>
+                        <td width="65%"><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_time_zone" data-name="company_time_zone" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Time Zone"><?php echo $company['company_time_zone'] ;?></a>
+						</p>		
+						</td>
+                    </tr>
+ 					<tr>         
+                        <td width="35%">Currency</td>
+                        <td width="65%"><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="currency" data-name="currency" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Currency"><?php echo $company['currency'] ;?></a>
+						</p>		
+						</td>
+                    </tr>
+ 					<tr>         
+                        <td width="35%">Chart of Account</td>
+                        <!-- <td width="65%"><?php //echo $company['coa_code_length'] ;?> digits -->
+						
+					 	<td width="65%">
+						<?php if($company['coa_levels']<>''){?>							 	
+						Chart of Account can't be edit here, You have defined <strong><?php echo $company['coa_levels']; ?> </strong>levels	
+						<?php }else{ ?>
+						<a data-toggle="modal" data-target="#myModal">Define Chart of Account</a>
+						<?php } ?>
+						</td>
+                    </tr>
+				</tbody>
+			</table>
+     
+</div>					
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#btnSaveCOAlevels').click(function(){
+	if ($('#coa_levels_length').val() != '') {
+		var divcoalevel='';
+		//var a=$('#frm_coa_levels').serialize();
+		var a=$('#coa_levels_length').val();
+		for(var i=1;i<=a;i++){
+		divcoalevel='<label>Enter Code Length for Level '+i+'</label><input value="'+i+'" type="number" class="form-control" name="coa_code_length'+i+'" id="code_length'+i+'" required="required">';
+		$('div#coa_code_length'+i).html(divcoalevel);		
+		}
+		divcoalevel='';
+	} else {
+		alert('Comment cannot be blank');
+	
+	}
+	});
+});	
+</script>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+	  <form class="form-horizontal" id="frm_coa_levels" name="frm_coa_levels" role="form" method="POST">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" 
+               aria-hidden="true">×
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               Define Chart of Account Levels
+            </h4>
+         </div>
+         <div class="modal-body">
+		 <div class="row">
+            <div class="control-group">
+				<div class="col-sm-8">		
+				<label>Enter Chart of Account Levels (1-9)</label>
+				<input value="4" type="number" class="form-control" name="coa_levels_length" id="coa_levels_length" required="required">
+				</div>
+			</div>
+			
+			<!-- COA Code length DIVs -->
+			<div class="page-header col-sm-8">
+			   <h1>
+				  <small>COA Code Length</small>
+			   </h1>
+			</div>
+
+			<div class="col-sm-8" id="coa_code_length1">				
+			</div>
+			<div class="col-sm-8" id="coa_code_length2">				
+			</div>	
+			<div class="col-sm-8" id="coa_code_length3">				
+			</div>	
+			<div class="col-sm-8" id="coa_code_length4">				
+			</div>	
+			<div class="col-sm-8" id="coa_code_length5">				
+			</div>	
+			<div class="col-sm-8" id="coa_code_length6">				
+			</div>
+			<div class="col-sm-8" id="coa_code_length7">				
+			</div>
+			<div class="col-sm-8" id="coa_code_length8">				
+			</div>
+			<div class="col-sm-8" id="coa_code_length9">				
+			</div>			
+			<!-- End COA Code length DIV-->
+		 </div>	
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">Close
+            </button>
+            <button name="btnSaveCOAlevels" id="btnSaveCOAlevels" type="button" class="btn btn-primary">
+               Save
+            </button>
+         </div>
+		 </form>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
