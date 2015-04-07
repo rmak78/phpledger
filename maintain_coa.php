@@ -29,7 +29,29 @@ echo $coa_query;
   <!-- Default panel contents -->
   <div class="panel-heading"><h3>Chart of Accounts<a href="<?php echo $_SERVER['PHP_SELF']; ?>?route=coa/add_coa" class=" pull-right btn btn-sm btn-primary"> <span class="glyphicon glyphicon-plus"></span> &nbsp;Add New Account</a> </h3> </div>
   <div class="panel-body">
+<?php
 
+function showMenu($level = 0) {
+
+$result = mysql_query("SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE `parent_account_id` = ".$level); 
+echo "<ul>";
+    while ($node = mysql_fetch_array($result)) { 
+        echo "<li>".$node['account_code']." - ".$node['account_desc_short'];
+        $hasChild = mysql_fetch_array(mysql_query("SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE `parent_account_id` = ".$node['parent_account_id']));
+        IF ($hasChild) {
+            showMenu($node['parent_account_id']);
+        }
+        echo "</li>";
+    }
+echo "</ul>";
+}
+
+showMenu();
+
+?>  
+  
+  
+  
 <ul>
 <?php
 $sql = 'SELECT * FROM '.DB_PREFIX.$_SESSION['co_prefix'].'coa ORDER BY account_code' ;
