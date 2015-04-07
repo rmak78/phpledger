@@ -89,6 +89,9 @@ CREATE TABLE `sa_test_coa` (
   `account_group` int(11) DEFAULT NULL,
   `account_desc_short` varchar(255) DEFAULT NULL,
   `account_desc_long` varchar(255) DEFAULT NULL,
+  `activity_account` tinyint(1) DEFAULT '0',
+  `consolidate_only` tinyint(1) DEFAULT '1',
+  `has_parent` tinyint(1) DEFAULT '1',
   `parent_account_id` int(11) DEFAULT '0',
   `last_modified_by` varchar(255) DEFAULT NULL,
   `last_modified_on` datetime DEFAULT NULL,
@@ -99,8 +102,6 @@ CREATE TABLE `sa_test_coa` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `sa_test_coa` */
-
-insert  into `sa_test_coa`(`account_id`,`account_code`,`account_group`,`account_desc_short`,`account_desc_long`,`parent_account_id`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`account_status`) values (1,'4510000',1,'Cash','Cash in Hand',0,'test','2015-04-03 04:36:09','mansoor',NULL,'active'),(2,'4520000',1,'Petty Cash','Petty Cash',NULL,'test','2015-04-03 04:37:21','test','2015-04-03 04:37:21','active');
 
 /*Table structure for table `sa_test_coa_groups` */
 
@@ -126,8 +127,6 @@ CREATE TABLE `sa_test_coa_groups` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `sa_test_coa_groups` */
-
-insert  into `sa_test_coa_groups`(`group_id`,`group_code`,`group_description`,`from_account_code`,`to_account_code`,`balance_sheet_group`,`balance_sheet_side`,`pls_group`,`pls_side`,`statistics_only`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`group_status`) values (1,'ASST','Assets','4500000','4599999',1,'Debit',0,'Expenses',0,'mansoor','2015-03-22 22:33:07','mansoor',NULL,'active'),(2,'EQTY','Equity','5000000','5999999',1,'credit',0,'income',0,NULL,NULL,NULL,NULL,'1'),(3,'LIAB','dsfsdf','5000000','5999999',0,'',NULL,'expense',0,NULL,NULL,NULL,NULL,'active');
 
 /*Table structure for table `sa_test_general_journal` */
 
