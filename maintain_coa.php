@@ -33,11 +33,11 @@ echo $coa_query;
 
 function showMenu($level = 0) {
 
-$result = mysql_query("SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE `parent_account_id` = ".$level); 
+$result = DB::query("SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE `parent_account_id` = ".$level); 
 echo "<ul>";
-    while ($node = mysql_fetch_array($result)) { 
+    foreach ( $result as $node ) { 
         echo "<li>".$node['account_code']." - ".$node['account_desc_short'];
-        $hasChild = mysql_fetch_array(mysql_query("SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE `parent_account_id` = ".$node['parent_account_id']));
+        $hasChild = DB::queryFirstRow("SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE `parent_account_id` = ".$node['parent_account_id']);
         IF ($hasChild) {
             showMenu($node['parent_account_id']);
         }

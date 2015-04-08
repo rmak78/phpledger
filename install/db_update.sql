@@ -91,6 +91,8 @@ CREATE TABLE `sa_test_coa` (
   `account_desc_long` varchar(255) DEFAULT NULL,
   `activity_account` tinyint(1) DEFAULT '0',
   `consolidate_only` tinyint(1) DEFAULT '1',
+  `has_parent` tinyint(1) DEFAULT '0',
+  `coa_level` tinyint(1) DEFAULT '1',
   `has_children` tinyint(1) DEFAULT '0',
   `parent_account_id` int(11) DEFAULT '0',
   `last_modified_by` varchar(255) DEFAULT NULL,
@@ -102,8 +104,6 @@ CREATE TABLE `sa_test_coa` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `sa_test_coa` */
-
-insert  into `sa_test_coa`(`account_id`,`account_code`,`account_group`,`account_desc_short`,`account_desc_long`,`activity_account`,`consolidate_only`,`has_children`,`parent_account_id`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`account_status`) values (3,'1',1,'Assets','Assets',0,1,1,0,NULL,NULL,NULL,NULL,'active'),(4,'101',1,'Current Assets','Current Assets',0,1,1,1,NULL,NULL,NULL,NULL,'active');
 
 /*Table structure for table `sa_test_coa_groups` */
 
