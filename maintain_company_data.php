@@ -168,7 +168,7 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 						if($accounts > 0){ ?><p>							 	
 						Chart of Account can't be edited as some accounts have already been defined. </p>
 						<?php }else{ ?>
-						<a data-toggle="modal" data-target="#myModal">Modify Chart of Account Definitions</a>
+						<a data-toggle="modal" data-target="#coaLevelsModal">Modify Chart of Account Definitions</a>
 						<?php } ?>
 						<p>You have defined <strong>
 						<?php echo $company['coa_levels']; ?> </strong> levels</p>
@@ -213,25 +213,28 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 
 <script type="text/javascript">
 $(document).ready(function(){
-  $('#btnSaveCOAlevels').click(function(){
-	if ($('#coa_levels_length').val() != '') {
-		var divcoalevel='';
-		//var a=$('#frm_coa_levels').serialize();
-		var a=$('#coa_levels_length').val();
-		for(var i=1;i<=a;i++){
-		divcoalevel='<label>Enter Code Length for Level '+i+'</label><input value="'+i+'" type="number" class="form-control" name="coa_code_length'+i+'" id="code_length'+i+'" required="required">';
-		$('div#coa_code_length'+i).html(divcoalevel);		
-		}
-		divcoalevel='';
-	} else {
-		alert('Comment cannot be blank');
-	
+	var n=$('#coa_levels_length').val();
+	for(i=1;i<=n;i++){
+		$('div#coa_level_'+i+'_length').show();
 	}
+	n++;
+	for(;n<=9;n++){
+		$('div#coa_level_'+n+'_length').hide();
+	}
+  $('#coa_levels_length').change(function(){
+		var n=$(this).val();
+		for(i=1;i<=n;i++){
+			$('div#coa_level_'+i+'_length').show();
+		}
+		n++;
+		for(;n<=9;n++){
+			$('div#coa_level_'+n+'_length').hide();
+		}
 	});
 });	
 </script>
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+<div class="modal fade" id="coaLevelsModal" tabindex="-1" role="dialog" 
    aria-labelledby="myModalLabel" aria-hidden="true">
    <div class="modal-dialog">
       <div class="modal-content">
@@ -245,11 +248,10 @@ $(document).ready(function(){
             </h4>
          </div>
          <div class="modal-body">
-		 <div class="row">
-            <div class="control-group">
-				<div  >		
-				<label>Enter Chart of Account Levels (1-9)</label>
-				<select value="4" type="number" class="form-control" name="coa_levels_length" id="coa_levels_length" required="required">
+		 
+            <div class="control-group">	
+				<label>Chart of Account Levels (1-9)</label>
+				<select class="form-control" name="coa_levels_length" id="coa_levels_length">
 				<option value="1" <?php if ($company['coa_levels'] == 1) { echo 'selected="selected"';} ?> >1</option>
 				<option value="2" <?php if ($company['coa_levels'] == 2) { echo 'selected="selected"';} ?> >2</option>
 				<option value="3" <?php if ($company['coa_levels'] == 3) { echo 'selected="selected"';} ?> >3</option>
@@ -261,17 +263,16 @@ $(document).ready(function(){
 				<option value="9" <?php if ($company['coa_levels'] == 9) { echo 'selected="selected"';} ?> >9</option>
 				</select>
 				</div>
-			</div>
-		</div>
-		<div class="row">	
+			
 			<!-- COA Code length DIVs -->
 			<div class="page-header">
 			   <h1>
 				  <small>COA Code Length</small>
 			   </h1>
 			</div>
-			<div class="control-group">
-			<!-- TODO: Complete this for all 9 Levels
+			
+			<div class="form-inline">
+			<!-- Completed this for all 9 Levels
 				Level 1 = 2 max
 				Level 2 = 4 max
 				Level 3 = 4 max
@@ -283,7 +284,7 @@ $(document).ready(function(){
 				Level 9 = 9 max
 				
 			-->
-			<div  id="coa_level_1_length">				
+			<div class="form-group col-sm-4"  id="coa_level_1_length">				
 			<label class="form-label" for="coa_level_1_length">Level 1:
 			<select class="form-control" name="coa_level_1_length" >
 				<option value="1" <?php if ($company['coa_level_1_length'] == 1) { echo 'selected="selected"';} ?> >1</option>
@@ -291,7 +292,7 @@ $(document).ready(function(){
 			</select>
 				</label>
 			</div>
-			<div  id="coa_level_2_length">				
+			<div class="form-group col-sm-4"  id="coa_level_2_length">				
 			<label class="form-label" for="coa_level_2_length">Level 2:
 			<select class="form-control" name="coa_level_2_length" >
 				<option value="1" <?php if ($company['coa_level_2_length'] == 1) { echo 'selected="selected"';} ?> >1</option>
@@ -301,24 +302,107 @@ $(document).ready(function(){
 			</select>
 				</label>
 			</div>	
-			<div class="col-sm-8" id="coa_code_length3">				
-			</div>	
-			<div class="col-sm-8" id="coa_code_length4">				
-			</div>	
-			<div class="col-sm-8" id="coa_code_length5">				
-			</div>	
-			<div class="col-sm-8" id="coa_code_length6">				
+			
+			<div class="form-group col-sm-4"  id="coa_level_3_length">				
+			<label class="form-label" for="coa_level_3_length">Level 3:
+			<select class="form-control" name="coa_level_3_length" >
+				<option value="1" <?php if ($company['coa_level_3_length'] == 1) { echo 'selected="selected"';} ?> >1</option>
+				<option value="2" <?php if ($company['coa_level_3_length'] == 2) { echo 'selected="selected"';} ?> >2</option>
+				<option value="3" <?php if ($company['coa_level_3_length'] == 3) { echo 'selected="selected"';} ?> >3</option>
+				<option value="4" <?php if ($company['coa_level_3_length'] == 4) { echo 'selected="selected"';} ?> >4</option>
+			</select>
+				</label>
 			</div>
-			<div class="col-sm-8" id="coa_code_length7">				
+			<div class="form-group col-sm-4"  id="coa_level_4_length">				
+			<label class="form-label" for="coa_level_4_length">Level 4:
+			<select class="form-control" name="coa_level_4_length" >
+				<option value="1" <?php if ($company['coa_level_4_length'] == 1) { echo 'selected="selected"';} ?> >1</option>
+				<option value="2" <?php if ($company['coa_level_4_length'] == 2) { echo 'selected="selected"';} ?> >2</option>
+				<option value="3" <?php if ($company['coa_level_4_length'] == 3) { echo 'selected="selected"';} ?> >3</option>
+				<option value="4" <?php if ($company['coa_level_4_length'] == 4) { echo 'selected="selected"';} ?> >4</option>
+				<option value="5" <?php if ($company['coa_level_4_length'] == 5) { echo 'selected="selected"';} ?> >5</option>			
+			</select>
+				</label>
 			</div>
-			<div class="col-sm-8" id="coa_code_length8">				
+			<div class="form-group col-sm-4"  id="coa_level_5_length">				
+			<label class="form-label" for="coa_level_5_length">Level 5:
+			<select class="form-control" name="coa_level_5_length" >
+				<option value="1" <?php if ($company['coa_level_5_length'] == 1) { echo 'selected="selected"';} ?> >1</option>
+				<option value="2" <?php if ($company['coa_level_5_length'] == 2) { echo 'selected="selected"';} ?> >2</option>
+				<option value="3" <?php if ($company['coa_level_5_length'] == 3) { echo 'selected="selected"';} ?> >3</option>
+				<option value="4" <?php if ($company['coa_level_5_length'] == 4) { echo 'selected="selected"';} ?> >4</option>
+				<option value="5" <?php if ($company['coa_level_5_length'] == 5) { echo 'selected="selected"';} ?> >5</option>			
+				<option value="6" <?php if ($company['coa_level_5_length'] == 6) { echo 'selected="selected"';} ?> >6</option>
+				<option value="7" <?php if ($company['coa_level_5_length'] == 7) { echo 'selected="selected"';} ?> >7</option>
+				<option value="8" <?php if ($company['coa_level_5_length'] == 8) { echo 'selected="selected"';} ?> >8</option>
+				<option value="9" <?php if ($company['coa_level_5_length'] == 9) { echo 'selected="selected"';} ?> >9</option>
+			</select>
+				</label>
 			</div>
-			<div class="col-sm-8" id="coa_code_length9">				
-			</div>			
+			<div class="form-group col-sm-4"  id="coa_level_6_length">				
+			<label class="form-label" for="coa_level_6_length">Level 6:
+			<select class="form-control" name="coa_level_6_length" >
+				<option value="1" <?php if ($company['coa_level_6_length'] == 1) { echo 'selected="selected"';} ?> >1</option>
+				<option value="2" <?php if ($company['coa_level_6_length'] == 2) { echo 'selected="selected"';} ?> >2</option>
+				<option value="3" <?php if ($company['coa_level_6_length'] == 3) { echo 'selected="selected"';} ?> >3</option>
+				<option value="4" <?php if ($company['coa_level_6_length'] == 4) { echo 'selected="selected"';} ?> >4</option>
+				<option value="5" <?php if ($company['coa_level_6_length'] == 5) { echo 'selected="selected"';} ?> >5</option>			
+				<option value="6" <?php if ($company['coa_level_6_length'] == 6) { echo 'selected="selected"';} ?> >6</option>
+				<option value="7" <?php if ($company['coa_level_6_length'] == 7) { echo 'selected="selected"';} ?> >7</option>
+				<option value="8" <?php if ($company['coa_level_6_length'] == 8) { echo 'selected="selected"';} ?> >8</option>
+				<option value="9" <?php if ($company['coa_level_6_length'] == 9) { echo 'selected="selected"';} ?> >9</option>
+			</select>
+				</label>
+			</div>
+			<div class="form-group col-sm-4"  id="coa_level_7_length">				
+			<label class="form-label" for="coa_level_7_length">Level 7:
+			<select class="form-control" name="coa_level_7_length" >
+				<option value="1" <?php if ($company['coa_level_7_length'] == 1) { echo 'selected="selected"';} ?> >1</option>
+				<option value="2" <?php if ($company['coa_level_7_length'] == 2) { echo 'selected="selected"';} ?> >2</option>
+				<option value="3" <?php if ($company['coa_level_7_length'] == 3) { echo 'selected="selected"';} ?> >3</option>
+				<option value="4" <?php if ($company['coa_level_7_length'] == 4) { echo 'selected="selected"';} ?> >4</option>
+				<option value="5" <?php if ($company['coa_level_7_length'] == 5) { echo 'selected="selected"';} ?> >5</option>			
+				<option value="6" <?php if ($company['coa_level_7_length'] == 6) { echo 'selected="selected"';} ?> >6</option>
+				<option value="7" <?php if ($company['coa_level_7_length'] == 7) { echo 'selected="selected"';} ?> >7</option>
+				<option value="8" <?php if ($company['coa_level_7_length'] == 8) { echo 'selected="selected"';} ?> >8</option>
+				<option value="9" <?php if ($company['coa_level_7_length'] == 9) { echo 'selected="selected"';} ?> >9</option>
+			</select>
+				</label>
+			</div>
+			<div class="form-group col-sm-4"  id="coa_level_8_length">				
+			<label class="form-label" for="coa_level_8_length">Level 8:
+			<select class="form-control" name="coa_level_8_length" >
+				<option value="1" <?php if ($company['coa_level_8_length'] == 1) { echo 'selected="selected"';} ?> >1</option>
+				<option value="2" <?php if ($company['coa_level_8_length'] == 2) { echo 'selected="selected"';} ?> >2</option>
+				<option value="3" <?php if ($company['coa_level_8_length'] == 3) { echo 'selected="selected"';} ?> >3</option>
+				<option value="4" <?php if ($company['coa_level_8_length'] == 4) { echo 'selected="selected"';} ?> >4</option>
+				<option value="5" <?php if ($company['coa_level_8_length'] == 5) { echo 'selected="selected"';} ?> >5</option>			
+				<option value="6" <?php if ($company['coa_level_8_length'] == 6) { echo 'selected="selected"';} ?> >6</option>
+				<option value="7" <?php if ($company['coa_level_8_length'] == 7) { echo 'selected="selected"';} ?> >7</option>
+				<option value="8" <?php if ($company['coa_level_8_length'] == 8) { echo 'selected="selected"';} ?> >8</option>
+				<option value="9" <?php if ($company['coa_level_8_length'] == 9) { echo 'selected="selected"';} ?> >9</option>
+			</select>
+				</label>
+			</div>
+			<div class="form-group col-sm-4"  id="coa_level_9_length">				
+			<label class="form-label" for="coa_level_9_length">Level 9:
+			<select class="form-control" name="coa_level_9_length" >
+				<option value="1" <?php if ($company['coa_level_9_length'] == 1) { echo 'selected="selected"';} ?> >1</option>
+				<option value="2" <?php if ($company['coa_level_9_length'] == 2) { echo 'selected="selected"';} ?> >2</option>
+				<option value="3" <?php if ($company['coa_level_9_length'] == 3) { echo 'selected="selected"';} ?> >3</option>
+				<option value="4" <?php if ($company['coa_level_9_length'] == 4) { echo 'selected="selected"';} ?> >4</option>
+				<option value="5" <?php if ($company['coa_level_9_length'] == 5) { echo 'selected="selected"';} ?> >5</option>			
+				<option value="6" <?php if ($company['coa_level_9_length'] == 6) { echo 'selected="selected"';} ?> >6</option>
+				<option value="7" <?php if ($company['coa_level_9_length'] == 7) { echo 'selected="selected"';} ?> >7</option>
+				<option value="8" <?php if ($company['coa_level_9_length'] == 8) { echo 'selected="selected"';} ?> >8</option>
+				<option value="9" <?php if ($company['coa_level_9_length'] == 9) { echo 'selected="selected"';} ?> >9</option>
+			</select>
+				</label>
+			</div>
+					
 			<!-- End COA Code length DIV-->
 			</div>
-		 </div>	
-         </div>
+         <BR><BR><BR><BR><BR><BR><BR>
          <div class="modal-footer">
             <button type="button" class="btn btn-default" 
                data-dismiss="modal">Close
@@ -328,6 +412,7 @@ $(document).ready(function(){
             </button>
          </div>
 		 </form>
+		 </div><!-- /.modal-body -->
       </div><!-- /.modal-content -->
    </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
