@@ -4,6 +4,14 @@
 /*
    To Do  KA
    1- Name of cities for selected country
+   2-List of Industries 
+   3-List of different Time zones
+   4- List of all currencies
+   5-To upload the logo "choose the file" option
+   6- chart of account code length
+   7- Authentication for changing the password for company admin
+   8- Country code for selected country 
+   9- 
    
    
    
