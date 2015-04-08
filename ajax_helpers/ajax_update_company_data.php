@@ -17,3 +17,46 @@ if( isset($_GET['pk']) ) {
 	
 	}
 }
+
+// Update the coa_levels_length
+ 
+if( isset($_POST['company_id']) ) {
+	$company_id = $_POST['company_id'];
+	$coa_levels_length = $_POST['coa_levels_length'];
+	$coa_level_1_length = $_POST['coa_level_1_length'];
+	$coa_level_2_length = $_POST['coa_level_2_length'];
+	$coa_level_3_length = $_POST['coa_level_3_length'];
+	$coa_level_4_length = $_POST['coa_level_4_length'];
+	$coa_level_5_length = $_POST['coa_level_5_length'];
+	$coa_level_6_length = $_POST['coa_level_6_length'];
+	$coa_level_7_length = $_POST['coa_level_7_length'];
+	$coa_level_8_length = $_POST['coa_level_8_length'];
+	$coa_level_9_length = $_POST['coa_level_9_length'];
+	// Truncate the variables that are out of defined coa_levels_length 
+	if($coa_levels_length > 0){
+		$i=$coa_levels_length+1;
+		for(;$i<10;$i++){
+			${"coa_level_{$i}_length"}='';
+			
+		}
+	}
+	 //Update Data
+	 $update = DB::update(DB_PREFIX.'companies', array (
+	'coa_levels' => $coa_levels_length,
+	'coa_level_1_length' => $coa_level_1_length,
+	'coa_level_2_length' => $coa_level_2_length,
+	'coa_level_3_length' => $coa_level_3_length,
+	'coa_level_4_length' => $coa_level_4_length,
+	'coa_level_5_length' => $coa_level_5_length,
+	'coa_level_6_length' => $coa_level_6_length,
+	'coa_level_7_length' => $coa_level_7_length,
+	'coa_level_8_length' => $coa_level_8_length,
+	'coa_level_9_length' => $coa_level_9_length
+	 ), "company_id=%s", $company_id);
+	 if($update){
+		 echo "Updated Successfully";
+	 }
+	 else{
+		 echo "Whoops! Fail to update";
+	 }
+}

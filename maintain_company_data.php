@@ -210,7 +210,28 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
      
 </div>						
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#btnSaveCOAlevels').click(function(){
+        $.ajax({
+				type: "POST",
+				url: "ajax_helpers/ajax_update_company_data.php",
+			data: $('#frm_coa_levels').serialize()	,
+				success: function(data){
+					$("#coaLevelsModal").modal('hide');
+					alert("COA Levels Saved: \n"+data);
+					window.location.reload();
+					},
+				error: function(data){
+					alert("Unable to save: \n"+data);					
+					$("#coaLevelsModal").modal('hide');
+					}
+			});
+	});
+});	
 
+		
+</script>
 <script type="text/javascript">
 $(document).ready(function(){
 	var n=$('#coa_levels_length').val();
@@ -233,6 +254,7 @@ $(document).ready(function(){
 	});
 });	
 </script>
+
 <!-- Modal -->
 <div class="modal fade" id="coaLevelsModal" tabindex="-1" role="dialog" 
    aria-labelledby="myModalLabel" aria-hidden="true">
@@ -398,13 +420,14 @@ $(document).ready(function(){
 				<option value="9" <?php if ($company['coa_level_9_length'] == 9) { echo 'selected="selected"';} ?> >9</option>
 			</select>
 				</label>
+			<input type="hidden" name="company_id" id="company_id" value="<?php echo $company['company_id']; ?>" >	
 			</div>
 					
 			<!-- End COA Code length DIV-->
 			</div>
          <BR><BR><BR><BR><BR><BR><BR>
          <div class="modal-footer">
-            <button type="button" class="btn btn-default" 
+            <button onclick="javascript:window.location.reload();" type="button" class="btn btn-default" 
                data-dismiss="modal">Close
             </button>
             <button name="btnSaveCOAlevels" id="btnSaveCOAlevels" type="button" class="btn btn-primary">
@@ -412,6 +435,7 @@ $(document).ready(function(){
             </button>
          </div>
 		 </form>
+		 <h6 style="color:grey;">*If you don't understand the Chart of Account, Please don't fill this</h6>
 		 </div><!-- /.modal-body -->
       </div><!-- /.modal-content -->
    </div><!-- /.modal-dialog -->
