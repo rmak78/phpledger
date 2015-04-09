@@ -60,3 +60,22 @@ if( isset($_POST['company_id']) ) {
 		 echo "Whoops! Fail to update";
 	 }
 }
+ // check authentication of admin
+
+		if( (isset($_POST['admin_name'])) AND (isset($_POST['admin_password'])) )
+{ 
+	$Admin_name=$_POST['admin_name'];
+	$admin_pass=$_POST['admin_password'];
+	$company_id=$_SESSION['company_id'];
+	echo $Admin_name;
+//	$is_logged = DB::queryFirstRow("SELECT * FROM ".DB_PREFIX."companies u WHERE u.`super_admin_user`='".$Admin_name."' AND u.`super_admin_password`='".$admin_pass."' AND u.`company_id`='".$company_id."' AND u.`company_status`='active'");
+	
+	if($is_logged)
+	{	 
+	echo "Successfully ";
+	}
+	 else {
+
+		echo "Fail";
+		  }
+}

@@ -1,4 +1,16 @@
-﻿<?php
+﻿ 
+
+
+
+
+		
+		
+	
+
+
+
+
+<?php
 
 // Maintain a company
 /*
@@ -145,7 +157,7 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
                 <tbody> 
 					<tr>         
                         <td width="35%">Time Zone</td>
-                        <td width="65%"><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_time_zone" data-name="company_time_zone" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Time Zone"><?php echo $company['company_time_zone'] ;?></a>
+                        <td width="65%"><p><a href="#" class="editable bfh-timezones" data-url="ajax_helpers/ajax_update_company_data.php" id="company_time_zone" data-name="company_time_zone" data-type="select" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Time Zone"><?php echo $company['company_time_zone'] ;?></a>
 						</p>		
 						</td>
                     </tr>
@@ -440,3 +452,4 @@ $(document).ready(function(){
       </div><!-- /.modal-content -->
    </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+

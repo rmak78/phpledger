@@ -50,7 +50,7 @@ if ( (isset($_SESSION['is_logged'])) AND ($_SESSION['is_logged'] == 1)) {
 <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master Files Setup<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-			<li><a href="<?php echo $_SERVER['PHP_SELF']."?route=maintain_company_data"; ?>"><span class='glyphicon glyphicon-home'></span> &nbsp; Company Basics</a></li>
+			<li><a  data-toggle="modal" href="#myModal"><span class='glyphicon glyphicon-home'></span> &nbsp; Company Basics</a></li>
 			
 			<li class="divider"></li> 
  
@@ -175,6 +175,61 @@ if ( (isset($_SESSION['is_logged'])) AND ($_SESSION['is_logged'] == 1)) {
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+
+ <script>
+$(function(){
+  $("#submit_button").click(function(){
+	 
+  $.ajax({
+				type: "POST",
+				url: "ajax_helpers/ajax_update_company_data.php",
+				data: $('#admin_login_form').serialize(),
+				success: function(data){
+				//	$("#myModal").modal('hide');
+					alert(data);
+					window.location.href="<?php echo $_SERVER['PHP_SELF']."?route=maintain_company_data"; ?>";
+					},
+				error: function(data){
+					alert("Unable to save: \n"+data);					
+					
+					}
+		});
+									});
+	});
+</script>
+
+     <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+         <div class="modal-content">
+          <div class="modal-header">
+           
+            <h3>Super Admin Name & Password</h3>
+          </div>
+          <div class="modal-body">
+            <form method="post" action='<?php  $_SERVER['PHP_SELF'] ?>' name="admin_login_form" id="admin_login_form" >
+            
+              <p><input type="text" class="span3" name="admin_name" id="admin_name" required="required" placeholder="admin_email"></p>
+              <p><input type="password" class="span3" name="admin_password" id="admin_password" required="required" placeholder="admin_password"></p>
+           <button type="submit" class="btn btn-primary" name="submit_button" id="submit_button">Sign in</button>
+               
+           
+            </form>
+          </div>
+          <div class="modal-footer">
+            Php Ladger.com
+           
+       
+      </div>
+        </div>
+        </div> 
+
+</div>
+
+
+
 <?php
 
 		if ( (( $role_id == 1 ) || ( pageAllowed($_SESSION['user_id'], $path) == 1 )) && $path<> "" ) {
@@ -207,3 +262,12 @@ echo "POST Variables:<pre>";
 print_r($_POST);
 echo "</pre>";
 ?>
+
+
+
+
+
+
+
+  
+        
