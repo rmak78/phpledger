@@ -2,8 +2,15 @@
 $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company_id = '.$_SESSION['company_id']);
 // Get Company Chart of Account Levels
 $levels = $company['coa_levels'];
-// Get Each Level's  code length
 
+// Get Each Level's  code length
+function create_new_account() {
+
+
+
+
+
+}
 ?>
 <div class="container">
       <div class="row">
@@ -17,6 +24,29 @@ $levels = $company['coa_levels'];
 		  <form class="form-horizontal" role="form" method="post" action="">
         
             <div class="panel-body">
+			<div class="form-group">
+                        <label class="col-md-3 col-sm-3 control-label">Account Group:</label>
+                         <div class="col-md-9 col-sm-9">
+						  
+						<select class="form-control" name="account_group" id="account_group" required="required">
+						<option value=""> -- Select -- </option>
+						<?php 
+						$groups_query = "SELECT group_id, group_code, group_description from ";
+						$groups_query .= DB_PREFIX.$_SESSION['co_prefix']."coa_groups";
+						
+						$groups = DB::query($groups_query);
+						
+						foreach ($groups as $group) {
+						?>					
+							<option   value="<?php echo $group['group_id']; ?>" ><?php echo $group['group_code']." - ".$group['group_description']; ?></option>
+						<?php 
+						}
+						?>
+						</select>
+						  
+							 <p class="  help-block"> </p>
+				</div>
+			  </div>	             
               <div class="form-group">
                         <label class="col-md-3 col-sm-3 control-label">Sub Account:</label>
                          <div class="col-md-9 col-sm-9">
@@ -51,14 +81,25 @@ $levels = $company['coa_levels'];
                <div class="form-group">
                         <label class="col-md-3 col-sm-3 control-label">Account Code:</label>
                          <div class="col-md-9 col-sm-9">
-						 <input class="form-control" type="text" required="required" name="account_code" id="account_code">
+						  
+						 <input class=" form-control" type="text"  required="required" name="account_code" id="account_code">
+						  
+							 <p class="  help-block"> </p>
+							</div>
+			  </div>
+			  
+              <div class="form-group">
+                        <label class="col-md-3 col-sm-3 control-label">Account Description (Short):</label>
+                         <div class="col-md-9 col-sm-9">
+						 <input class="form-control" type="text" required="required" name="account_desc_short" id="account_desc_short">
 							 <p class="help-block"> </p>
 							</div>
-			  </div>	             
-              <div class="form-group">
-                        <label class="col-md-3 col-sm-3 control-label">Account Description:</label>
+	 
+				</div>	
+				<div class="form-group">
+                        <label class="col-md-3 col-sm-3 control-label">Account Description (Long):</label>
                          <div class="col-md-9 col-sm-9">
-						 <input class="form-control" type="text" required="required" name="account_description" id="account_description">
+						 <textarea class="form-control" required="required" name="account_desc_long" id="account_desc_long"></textarea>
 							 <p class="help-block"> </p>
 							</div>
 	 
@@ -68,8 +109,8 @@ $levels = $company['coa_levels'];
                <div class="form-group">
                          <label class="col-sm-3 control-label">Account Type</label>
                         <div class="col-sm-6">
-						<input type="radio" name="account_type" value="balance_sheet" checked> Consolidate Only&nbsp;
-                        <input type="radio" name="account_type" value="pls_group">Activity Only
+						<input type="radio" name="account_type" value="consolidate_only" checked="checked" > Consolidate Only&nbsp;
+                        <input type="radio"  name="account_type" value="activity_only">Activity Only
 						 
 						</div>
 						</div>	
