@@ -67,15 +67,7 @@ if( isset($_POST['company_id']) ) {
 	$Admin_name=$_POST['admin_name'];
 	$admin_pass=$_POST['admin_password'];
 	$company_id=$_SESSION['company_id'];
-	echo $Admin_name;
-//	$is_logged = DB::queryFirstRow("SELECT * FROM ".DB_PREFIX."companies u WHERE u.`super_admin_user`='".$Admin_name."' AND u.`super_admin_password`='".$admin_pass."' AND u.`company_id`='".$company_id."' AND u.`company_status`='active'");
+$is_logged = DB::queryfirstfield("SELECT count(*) FROM ".DB_PREFIX."companies u WHERE u.`super_admin_user`='".$Admin_name."' AND u.`super_admin_password`='".$admin_pass."' AND u.`company_id`='".$company_id."' AND u.`company_status`='active'");
 	
-	if($is_logged)
-	{	 
-	echo "Successfully ";
-	}
-	 else {
-
-		echo "Fail";
-		  }
+echo $is_logged;
 }

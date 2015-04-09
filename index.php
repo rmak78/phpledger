@@ -186,12 +186,16 @@ $(function(){
 				url: "ajax_helpers/ajax_update_company_data.php",
 				data: $('#admin_login_form').serialize(),
 				success: function(data){
-				//	$("#myModal").modal('hide');
-					alert(data);
+					$("#myModal").modal('hide');
+					if(data==1){
 					window.location.href="<?php echo $_SERVER['PHP_SELF']."?route=maintain_company_data"; ?>";
+					}
+					else{
+						alert("invalid user name or password: \n"+data);
+						}
 					},
 				error: function(data){
-					alert("Unable to save: \n"+data);					
+					alert("Something wrong: \n"+data);					
 					
 					}
 		});
@@ -209,20 +213,23 @@ $(function(){
             <h3>Super Admin Name & Password</h3>
           </div>
           <div class="modal-body">
-            <form method="post" action='<?php  $_SERVER['PHP_SELF'] ?>' name="admin_login_form" id="admin_login_form" >
+            <form method="post" name="admin_login_form" id="admin_login_form" >
             
               <p><input type="text" class="span3" name="admin_name" id="admin_name" required="required" placeholder="admin_email"></p>
               <p><input type="password" class="span3" name="admin_password" id="admin_password" required="required" placeholder="admin_password"></p>
-           <button type="submit" class="btn btn-primary" name="submit_button" id="submit_button">Sign in</button>
+           
                
            
             </form>
           </div>
           <div class="modal-footer">
-            Php Ladger.com
+           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary" type="button" name="submit_button" id="submit_button">Sign in</button>
+          
            
        
       </div>
+        Php Ladger.com
         </div>
         </div> 
 
