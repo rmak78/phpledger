@@ -91,11 +91,14 @@ if(isset($_POST['submit']))
 						</div>
 				</div>		
     
-                  
+                  <?php 
+				  $to_account=DB::queryfirstfield('SELECT to_account_code FROM '.DB_PREFIX.$_SESSION['co_prefix'].'coa_groups ORDER BY group_id DESC LIMIT 1');
+				  
+				  ?>
                      <div class="form-group">
                          <label class="col-sm-3 control-label">From Account Code</label>
                         <div class="col-sm-6">
-						<input class="form-control" type="text" required name="From_account_code" id="From_account_code">
+						<input value="<?php echo $to_account; ?>" class="form-control" type="text" required name="From_account_code" id="From_account_code">
 						</div>
 					</div>	
                    
@@ -196,7 +199,7 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('#group_code').keyup(function(){ // Keyup function for check the user action in input
         var group_code = $(this).val(); // Get the username textbox using $(this) or you can use directly $('#username')
-            
+            if(group_code.length > 3){
 			$('#check_group_code').html('Checking..'); // Preloader, use can use loading animation here
             var dataToPass = 'group_code='+group_code;
 			$.ajax({ // Send the username val to another checker.php using Ajax in POST menthod
@@ -217,7 +220,10 @@ $(document).ready(function(){
             }
 
             });
-			
+			}
+			else{
+				 $('#check_group_code').html('<span style="color:red;">Enter 4 char</span>');
+			}
 			
 			
     });
