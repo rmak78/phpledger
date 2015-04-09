@@ -50,6 +50,7 @@ if(isset($_POST['submit']))
             'balance_sheet_side'    => '',
             'pls_group' 			 => '',	 
             'pls_side' 			  => '',
+			'statistics_only' 	   => 1,
             'group_status' 		  => $group_status
 		
 		)); 
@@ -72,13 +73,15 @@ if(isset($_POST['submit']))
 		  <form class="form-horizontal" role="form" method="post" action="">
         
             <div class="panel-body">
-              <div class="form-group">
+              <div class="form-group form-inline">
+				
                         <label class="col-sm-3 control-label">Group Code:</label>
                          <div class="col-sm-4">
 						 <input class="controls" type="text" required name="group_code" id="group_code"
 						   pattern="[A-Z]{4}"  maxlength="4">
-							 <p class="help-block">Must be length 4 and Capital characters only</p>
+							 <p id="check_group_code"></p>
 							</div>
+							<p class="help-block">Must be length 4 and Capital characters only</p>
 			  </div>	
 				
               <div class="form-group">
@@ -87,14 +90,7 @@ if(isset($_POST['submit']))
 						<input class="form-control" type="text" required name="group_description" id="group_description">
 						</div>
 				</div>		
-                       <?php 
-					   $company_id =$_SESSION['company_id']; 
-							$length = DB::query(" SELECT coa_code_length FROM ".DB_PREFIX."companies WHERE company_id='".$company_id."'");
-						foreach ($length as $get_length)
-						{
-						$max_length = $get_length['coa_code_length'];
-						}
-						?>
+    
                   
                      <div class="form-group">
                          <label class="col-sm-3 control-label">From Account Code</label>
@@ -106,7 +102,7 @@ if(isset($_POST['submit']))
                         <div class="form-group">
                          <label class="col-sm-3 control-label">To Account Code</label>
                         <div class="col-sm-6">
-						<input class="form-control" type="text" required name="to_account_code" id="to_account_code"  maxlength="<?php echo $max_length; ?>" >
+						<input class="form-control" type="text" required name="to_account_code" id="to_account_code">
                       </div>
 					</div>	
                    
@@ -195,6 +191,38 @@ $(document).ready(function(){
 
 </script>
 
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#group_code').keyup(function(){ // Keyup function for check the user action in input
+        var group_code = $(this).val(); // Get the username textbox using $(this) or you can use directly $('#username')
+            
+			$('#check_group_code').html('Checking..'); // Preloader, use can use loading animation here
+            var dataToPass = 'group_code='+group_code;
+			$.ajax({ // Send the username val to another checker.php using Ajax in POST menthod
+            type : 'POST',
+			url  : 'ajax_helpers/ajax_check_group_code.php',
+            data : dataToPass,
+			success: function(data){ // Get the result and asign to each cases
+                if(data == 0){
+                    $('#check_group_code').html('<span style="color:green;">Group code available</span>');
+                }
+                else if(data > 0){
+                    $('#check_group_code').html('<span style="color:red;">Group code already taken</span>');
+                }
+                else{
+                    alert('Problem with sql query');
+                }
+				
+            }
+
+            });
+			
+			
+			
+    });
+});	
+</script>
 
 <?php
 include_once("./tools_footer.php");

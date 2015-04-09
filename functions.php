@@ -301,4 +301,12 @@ function get_coa_group_side($coa_group_id) {
 
 }
 
+
+function check_coa_group_code_exist($group_code){
+		$sql = "SELECT count(*) FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa_groups WHERE group_code='".$group_code."'" ;	
+		$group_exist = DB::queryfirstfield($sql);
+			return $group_exist;
+		
+}
+
 ?>
