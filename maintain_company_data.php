@@ -48,9 +48,13 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
                     </tr>
                     <tr>         
                         <td width="35%">Address</td>
-                        <td width="65%"><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_address_1" data-name="company_address_1" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Address Line 1"><?php echo $company['company_address_1'] ;?></a></p>
+                        <td width="65%"><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" 
+                        id="company_address_1" data-name="company_address_1" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Address Line 1"><?php echo $company['company_address_1'] ;?></a></p>
 						<p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_address_2" data-name="company_address_2" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Address Line 2"><?php echo $company['company_address_2'] ;?></a></p>
-						<p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_city" data-name="city" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit City"><?php echo $company['city'] ;?></a> &nbsp;, &nbsp; <a href="#" class="editable-country" data-url="ajax_helpers/ajax_update_company_data.php" id="company_country" data-name="country" data-type="select" data-pk="<?php echo $company['company_id'] ;?>"   data-title="Edit Country"><?php echo $company['country'] ;?></a></p>
+						<p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_city" 
+                        data-name="city" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit City"><?php echo $company['city'] ;?></a>
+                         &nbsp;, &nbsp; <a href="#" class="editable-country" data-url="ajax_helpers/ajax_update_company_data.php" id="company_country" data-name="country" data-type="select" data-pk="<?php echo $company['company_id'] ;?>"   data-title="Edit Country">
+						 <?php echo $company['country'] ;?></a></p>
 						
 						</td>
                     </tr>
@@ -158,7 +162,8 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 					<tr>         
                         <td width="35%">Time Zone</td>
                         <td width="65%"><p><a href="#" class="editable bfh-timezones" data-url="ajax_helpers/ajax_update_company_data.php"
-                         id="company_time_zone" data-name="company_time_zone" data-type="select" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Time Zone"><?php echo $company['company_time_zone'] ;?></a>
+                         id="company_time_zone" data-name="company_time_zone" data-type="select" data-pk="<?php echo $company['company_id'] ?>" data-title="Edit Time Zone">
+						 <?php echo $company['company_time_zone'] ;?></a>
 						</p>		
 						</td>
                     </tr>
@@ -450,6 +455,32 @@ $(document).ready(function(){
             </button>
          </div>
 		 </form>
+         
+         <script>
+		 $(document).ready(function() {
+$.fn.editable.defaults.ajaxOptions = {type: "GET"};
+		 $("#company_time_zone").editable({
+  value: "bar", // The option with this value should be selected
+  source: [
+    {value: "GMT+1", text: "GMT+1"},
+    {value: "GMT+2", text: "GMT+2"},
+    {value: "GMT+3", text: "GMT+3"},
+	{value: "GMT+4", text: "GMT+4"},
+	{value: "GMT+5", text: "GMT+5"},
+	{value: "GMT+6", text: "GMT+6"},
+	{value: "GMT+7", text: "GMT+7"},
+	{value: "GMT+8", text: "GMT+8"},
+	{value: "GMT+9", text: "GMT+9"},
+    {value: "GMT+10", text: "GMT+10"},
+	{value: "GMT+11", text: "GMT+11"},
+	{value: "GMT+12", text: "GMT+12"},
+			 
+  ]
+});
+		 });
+         </script>
+         
+         
 		 <h6 style="color:grey;">*If you don't understand the Chart of Account, Please don't fill this</h6>
 		 </div><!-- /.modal-body -->
       </div><!-- /.modal-content -->

@@ -8,8 +8,8 @@ if( isset($_GET['pk']) ) {
 	$name = $_GET['name'];
 	$value = $_GET['value'];
     $update = DB::update(DB_PREFIX.'companies', array ($name => $value ), "company_id=%s", $pk); 
+	 	 echo $update; 
 	
-	 echo $update;
 //TODO: Make this a function and move to functions.php file	 
  if($update) {
 	$time = getDateTime(0,'mySQL');
