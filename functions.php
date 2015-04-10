@@ -309,4 +309,10 @@ function check_coa_group_code_exist($group_code){
 		
 }
 
+
+function get_account_level($account_id)	{
+	$sql = "SELECT coa_level FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_id='".$account_id."'";
+	$level = DB::queryFirstField($sql);
+		return $level;
+	}
 ?>

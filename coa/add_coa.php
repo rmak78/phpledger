@@ -66,32 +66,35 @@ $account_status = '';
 
 <div class="container">
       <div class="row">
-      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
-         
+		<div class="col-lg-8 col-lg-offset-2 centre-block">         
+
        <br>
 <p class=" text-info"><?php echo date("Y-m-d h:i:sa"); ?> </p>
-      </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-   
-   
-          <div class="panel panel-info">
-		
-            <div class="panel-heading">
-              <h3 class="panel-title">Add A New Account</h3>
-            </div>
+
+
+
+
+<div class="panel panel-primary">
+
+  <div class="panel-heading">
+		  <h3>Add A New Account</h3>
+           </div>
+		   <form class="form-horizontal" role="form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
             <div class="panel-body">
-            <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
-			<div class="row">
-               
-         
-                <div class=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-information">
-                    <tbody>
- 	  					  <tr>
-                        <td>Account Group:</td>
-                        <td>
-						<select type="form-control" name="account_group" id="account_group" required="required">
-						<option value=""> -- Select -- </option>
+
+			<div class="form-group">
+				<label class="col-md-3 col-sm-3 control-label">Account Group:</label>
+                         <div class="col-md-9 col-sm-9">
+
+
+
+
+
+
+
+
+						 <select class="form-control" name="account_group" id="account_group" >
+						<option value=""> -- Select --</option>
 						<?php 
 						$groups_query = "SELECT group_id, group_code, group_description from ";
 						$groups_query .= DB_PREFIX.$_SESSION['co_prefix']."coa_groups";
@@ -109,11 +112,18 @@ $account_status = '';
 						}
 						?>
 						</select>
-                      </tr>
-					<tr>
-                        <td>Parent Account</td>
-                        <td>
-						<Select name="parent_account">
+					</select>
+							 <p class="help-block"> </p>
+							</div>
+			  </div>	
+			 <div class="form-group">
+                        <label class="col-md-3 col-sm-3 control-label">Parent Account:</label>
+                         <div class="col-md-9 col-sm-9">
+
+
+
+
+						 <select class="form-control" name="parent_account">
 						<option value="0"> -- None --</option>
 						<?php 
 						$accounts_query = "SELECT account_id, account_code, account_desc_short from ";
@@ -130,48 +140,83 @@ $account_status = '';
 						<?php 
 						}
 						?>
-						
+
 						</select>
-						</td>
-                      </tr>   
-                      <tr>
-                        <td>Account Code:</td>
-                        <td>
-						<p><?php echo $from_account_code; ?> to <?php echo $to_account_code; ?></p>
+					 <p class="help-block"> </p>
+							</div>
+			  </div>
+			  <div class="form-group">
+                        <label class="col-md-3 col-sm-3 control-label">Account Code:</label>
+						<div class="col-md-9 col-sm-9">
+
+
+
+
+
+						From<?php echo $from_account_code; ?> to <?php echo $to_account_code; ?>
 						
-						<input type="number" value="<?php echo substr($from_account_code, 0, 2);  ?>" required name="account_code"></td>
-                      </tr>
-					  
-                      <tr>
-                        <td>Account Description Short Version</td>
-                        <td><input type="text" required name="account_desc_short"></td>
-                      </tr>
-                   
-                         <tr>
-                             <tr>
-                        <td>Account Description Long Version</td>
-                        <td><textarea cols="24" rows="3" required name="account_desc_long"></textarea></td>
-                      </tr>                       
-                     
-					  <tr>
-                        <td>Account Status</td>
-                        <td><Select name="account_status">
+						 <input class="form-control" name="account_code" type="number"  value="<?php echo substr($from_account_code, 0, 2);  ?>" required name="account_code" id="account_code">
+					 <p class="help-block"> </p>
+							</div>
+			  </div>						 
+               <div class="form-group">
+                        <label class="col-md-3 col-sm-3 control-label">Account Description Short Version:</label>
+                         <div class="col-md-9 col-sm-9">
+						 <input class="form-control" type="text" required name="account_desc_short">
+							 <p class="help-block"> </p>
+							</div>
+			  </div>	    
+
+              						 
+               <div class="form-group">
+                        <label class="col-md-3 col-sm-3 control-label">Account Description Long Version:</label>
+                         <div class="col-md-9 col-sm-9">
+
+
+
+
+
+
+
+
+						 <textarea class="form-control" cols="24" rows="3" required name="account_desc_long"></textarea>
+							 <p class="help-block"> </p>
+							</div>
+			  </div>	  
+			<div class="form-group">
+				<label class="col-md-3 col-sm-3 control-label">Account Status:</label>
+                         <div class="col-md-9 col-sm-9">
+
+
+
+
+						 <select class="form-control" name="account_status">
 						<option value="active">Active</option>
 						<option value="in-active">In-Active</option>
-						</select></td>
-                      </tr>                      
-                           
-                      </tr>
-					  <tr>
-					  <td></td>
-					  <td><input type="submit" class='btn btn-primary btn-sm' name="add" value="Add New Account">
-					 
-					  </td>
-					  </tr>
-                     
-                    </tbody>
-                  </table>
-                              
+						</select>
+							 <p class="help-block"> </p>
+							</div>
+			  </div>	
+				  <div class="form-group">
+					   <div class="col-sm-12">
+					   <input type="submit" class='btn btn-primary pull-right' name="add" value="Add New Account">
+						</div>
+					  </div>
+
+
+
+
+
+
+				              
+                </div>
+                </div>
+
+
+
+
+
+
                 </div>
               </div>
 			</form>
@@ -200,6 +245,7 @@ $("#success-alert").fadeTo(1000, 200).slideUp(200, function(){
 });
 
 </script>
+
 <?php
 include_once("./tools_footer.php");
 ?>

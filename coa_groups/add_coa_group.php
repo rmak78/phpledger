@@ -63,7 +63,7 @@ if(isset($_POST['submit']))
 ?>
 <div class="container">
       <div class="row">
-	  <div class="col-lg-8 centered">
+	 <div class="col-lg-8 col-lg-offset-2 centre-block">
     <br>
 <p class=" text-info"><?php echo date("Y-m-d h:i:sa"); ?> </p>
 <div class="panel panel-primary">
