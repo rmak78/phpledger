@@ -169,7 +169,7 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
                     </tr>
  					<tr>         
                         <td width="35%">Currency</td>
-                        <td width="65%"><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="currency" data-name="currency" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Currency"><?php echo $company['currency'] ;?></a>
+                        <td width="65%"><p><a href="#" class="" data-url="ajax_helpers/ajax_update_company_data.php" id="currency" data-name="currency" data-type="select" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Currency"><?php echo $company['currency'] ;?></a>
 						</p>		
 						</td>
                     </tr>
