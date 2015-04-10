@@ -17,6 +17,8 @@ $.fn.editable.defaults.ajaxOptions = {type: "GET"};
         source: countries 
     }); 
 	
+	// List of All Currency
+	
 	var currency = [];
   $.each({ "Andorran Peseta": "ADP", "United Arab Emirates Dirham" : "AED",
   'Afghanistan Afghani': 'AFA',
@@ -162,7 +164,6 @@ $.fn.editable.defaults.ajaxOptions = {type: "GET"};
 'Vietnamese Dong': 'VND',
  'Vanuatu Vatu': 'VUV',
 'Samoan Tala': 'WST',
-
 'Silver Ounces': 'XAG',
 'Gold Ounces': 'XAU',
 'East Caribbean Dollar': 'XCD',
@@ -178,7 +179,35 @@ $.fn.editable.defaults.ajaxOptions = {type: "GET"};
     }); 
     $('#currency').editable({
         source: currency 
-    });     
+    });  
+	
+	//select industry 
+				var industories = [];
+  				$.each({ "Agriculture" : "Agriculture",
+						 "Accounting" : "Accounting", "Advertising " : "Advertising ", "Aerospace " : "Aerospace ", "Aircraft " : "Aircraft",
+						  "Airline" : "Airline", "Automotive " : "Automotive ",
+						  "Banking " : "Banking ", "Broadcasting" : "Broadcasting", "Biotechnology" : "Biotechnology", 
+						  "Call Centers " : "Call Centers ", "Cargo Handling " : "Cargo Handling ", "Chemical " : "Chemical ",
+						   "Computer" : "Computer", "Consulting" : "Consulting", "Cosmetics" : "Cosmetics", "Defense" : "Defense",
+						    "Department Stores " : "Department Stores ", "Education " : "Education ", "Electronics" : "Electronics", 
+							"Entertainment & Leisure" : "Entertainment & Leisure", "Financial Services " : "Financial Services ",
+							 "Food, Beverage & Tobacco " : "Food, Beverage & Tobacco ", "Transportation" : "Transportation",
+							  "Telecommunications " : "Telecommunications ", "Sports" : "Sports", "Software " : "Software ",
+							   "Soap & Detergent" : "Soap & Detergent", "Service" : "Service", 
+							   " 	Securities & Commodity Exchanges " : " 	Securities & Commodity Exchanges ",
+							    "Retail & Wholesale" : "Retail & Wholesale", "Private Equity" : "Private Equity",
+								 "Online Auctions" : "Online Auctions",  "Newspaper Publishers" : "Newspaper Publishers",
+								   " 	Music" : " 	Music",  " 	Motion Picture & Video" : " 	Motion Picture & Video", 
+								    " 	Legal " : " 	Legal ",  " 	Investment Banking" : " 	Investment Banking", 
+									 "Internet Publishing" : "Internet Publishing",   "Health Care " : "Health Care ",  
+									 "Grocery " : "Grocery ",  "Other" : "Other",
+				 }, function(k, v) {
+        industories .push({id: v, text: k});
+    }); 
+    $('#industry').editable({
+        source: industories  
+    });  
+	   
  
 $('.editable').editable(); 
 $('#data-table').DataTable( {

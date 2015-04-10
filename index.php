@@ -191,7 +191,7 @@ $(function(){
 					window.location.href="<?php echo $_SERVER['PHP_SELF']."?route=maintain_company_data"; ?>";
 					}
 					else{
-						alert("invalid user name or password: \n"+data);
+						alert("invalid user name or password: \n");
 						}
 					},
 				error: function(data){
@@ -229,7 +229,7 @@ $(function(){
            
        
       </div>
-        Php Ladger.com
+       <p align="center"> Php Ladger.com </p>
         </div>
         </div> 
 
