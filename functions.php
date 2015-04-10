@@ -153,18 +153,6 @@ function GetFXRate($from_ccy, $to_ccy)
 }
 
 
-function get_code_length_at_level($level);
-$sql="SELECT account_code FROM ".DB_PREFIX.$_SESSION['co_prefix']." WHERE LEVEL=$LEVEL";
-{
-$result=$mysql_query($sql);
-if($result)
-return $level;
-}
-else
-echo"company does not support this level";
-
-
-
 function ShowYesNo($pass_value) 
 {
 
@@ -320,6 +308,5 @@ function check_coa_group_code_exist($group_code){
 			return $group_exist;
 		
 }
-
 
 ?>
