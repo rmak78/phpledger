@@ -157,7 +157,8 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
                 <tbody> 
 					<tr>         
                         <td width="35%">Time Zone</td>
-                        <td width="65%"><p><a href="#" class="editable bfh-timezones" data-url="ajax_helpers/ajax_update_company_data.php" id="company_time_zone" data-name="company_time_zone" data-type="select" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Time Zone"><?php echo $company['company_time_zone'] ;?></a>
+                        <td width="65%"><p><a href="#" class="editable bfh-timezones" data-url="ajax_helpers/ajax_update_company_data.php"
+                         id="company_time_zone" data-name="company_time_zone" data-type="select" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Time Zone"><?php echo $company['company_time_zone'] ;?></a>
 						</p>		
 						</td>
                     </tr>
@@ -185,16 +186,17 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 						<p>You have defined <strong>
 						<?php echo $company['coa_levels']; ?> </strong> levels</p>
 						
-						<? 
+						   
+                            <?php
 							$code_sample = '';
 							$i = 1 ;
 							while ($i <> ($company['coa_levels'] + 1) ) {
-							$code_sample .= " ";
+							$code_sample = " ";
 							
 							echo "Level ".$i." : ".$company['coa_level_'.$i.'_length']."<br>";
 							$x=$company['coa_level_'.$i.'_length'];
 							while ($x <> 0) {
-							$code_sample .= "X";
+							$code_sample = "X";
 							$x = $x-1;
 							}
 							$i++;
@@ -212,7 +214,8 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
                 <tbody> 
 					<tr>         
                         <td width="35%">Last Change: 
-						<abbr class="timeago" title="<?php echo  $company['last_modified_on'] ;?>"><?php echo  $company['last_modified_on'];?></abbr></td>
+						<abbr class="timeago" title="<?php echo  $company['last_modified_on'] ;?>">
+						</abbr></td>
                         <td width="65%"><p><strong>Last modified</strong> by User :<b>[ <?php echo $company['last_modified_by'] ;?> ]</b> at <b>[ <?php echo getDateTime($company['last_modified_on'],'dtLong');?> ]</b>. Record was <b>first created</b> by User : <b>[  <?php echo $company['created_by'] ;?> ]</b> at <b>[ <?php echo   getDateTime($company['created_on'] , 'dtShort')  ;?> ]</b>. Company <b>Status</b> is<b> [ <?php echo $company['company_status'] ;?> ] </b>. Click here to view history of changes to company ID: <strong><?php echo $company['company_id'] ;?></strong> .
 						</p>		
 						</td>
