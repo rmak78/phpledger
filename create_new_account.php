@@ -38,7 +38,7 @@ function create_new_account() {
 						
 						foreach ($groups as $group) {
 						?>					
-							<option   value="<?php echo $group['group_id']; ?>" ><?php echo $group['group_code']." - ".$group['group_description']; ?></option>
+							<option value="<?php echo $group['group_id']; ?>" ><?php echo $group['group_code']." - ".$group['group_description']; ?></option>
 						<?php 
 						}
 						?>
