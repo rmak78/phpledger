@@ -47,13 +47,7 @@ function create_new_account() {
 							 <p class="  help-block"> </p>
 				</div>
 			  </div>	             
-              <div class="form-group">
-                        <label class="col-md-3 col-sm-3 control-label">Sub Account:</label>
-                         <div class="col-md-9 col-sm-9">
-						  <input class="controls" type="checkbox" name="has_parent" id="has_parent" value="has_parent" checked="checked" />
-							 <p class="help-block">Only Un-Check it to Define Level 1 Accounts</p><!-- TODO:On click Parent Account Select box should Hide -->
-							</div>
-			  </div>	
+             
               <div class="form-group">
                         <label class="col-md-3 col-sm-3 control-label">Parent Account:</label>
                          <div class="col-md-9 col-sm-9">
