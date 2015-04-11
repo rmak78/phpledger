@@ -1,16 +1,4 @@
-﻿ 
-
-
-
-
-		
-		
-	
-
-
-
-
-<?php
+﻿<?php
 
 // Maintain a company
 /*
@@ -33,11 +21,21 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 ?>
 <div class="container">
 
-<div class="row">
-<div class="page-header">
-        <h2>Company Profile & Configrations</h2>
+
+<div class="panel panel-primary">
+ <div class="panel-heading">
+        <h3>Company Profile & Configrations</h3>
 </div>
 </div>
+<div class="panel-body">
+<ul class="nav nav-tabs" id="myTab">
+  <li role="presentation" class="active"><a href="#home">Company Information</a></li>
+  <li role="presentation"><a href="#profile">DB Prefix</a></li>
+  <li role="presentation"><a href="#messages">Company Logo</a></li>
+  <li role="presentation"><a href="#settings">Gernal Information</a></li>
+</ul>
+<div class="tab-content">
+ <div role="tabpanel" class="tab-pane active" id="home">
 <div class="row">
  
 		<table  class="table table-bordered table-striped" >
@@ -81,7 +79,10 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 				</tbody>
 			</table>
      
-</div>					
+</div>
+</div> <!-- close first tab contant -->
+
+ <div role="tabpanel" class="tab-pane" id="profile">					
 <div class="row">
  
 		<table  class="table table-bordered table-striped" >
@@ -104,7 +105,8 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 			</table>
      
 </div>
-
+</div> <!-- close 2nd tab contant -->
+ <div role="tabpanel" class="tab-pane" id="messages">
 <div class="row">
  
 		<table  class="table table-bordered table-striped" >
@@ -132,7 +134,9 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 				</tbody>
 			</table>
      
-</div>				
+</div>
+</div>  <!-- close 3rd tab contant -->
+<div role="tabpanel" class="tab-pane" id="settings">				
 <div class="row">
  
 		<table  class="table table-bordered table-striped" >
@@ -227,9 +231,23 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
                     </tr>
 				</tbody>
 			</table>
+            
      
-</div>						
 </div>
+		</div>  <!-- close 4th tab contant -->
+</div>	
+</div>					
+</div>
+
+<script>
+// jquery for tabs...
+ $('#myTab a').click(function (e) {
+  e.preventDefault();
+  $(this).tab('show');
+});
+</script>
+
+
 <script type="text/javascript">
 $(document).ready(function(){
   $('#btnSaveCOAlevels').click(function(){
@@ -479,6 +497,7 @@ $.fn.editable.defaults.ajaxOptions = {type: "GET"};
 });
 		 });
          </script>
+        
          
          
 		 <h6 style="color:grey;">*If you don't understand the Chart of Account, Please don't fill this</h6>
