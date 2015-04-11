@@ -7,9 +7,6 @@ $levels = $company['coa_levels'];
 function create_new_account() {
 
 
-
-
-
 }
 ?>
 <div class="container">
@@ -48,29 +45,8 @@ function create_new_account() {
 				</div>
 			  </div>	             
              
-              <div class="form-group">
-                        <label class="col-md-3 col-sm-3 control-label">Parent Account:</label>
-                         <div class="col-md-9 col-sm-9">
-						 <select class="form-control" name="parent_account_id" id="parent_account_id">
-						<option value="0"> -- None --</option>
-						<?php 
-						$accounts_query = "SELECT account_id, account_code, account_desc_short FROM ";
-						$accounts_query .= DB_PREFIX.$_SESSION['co_prefix']."coa WHERE( (consolidate_only =  1 ) AND (account_status =  'active') ) ORDER BY account_code " ;
-						
-						
-						$accounts = DB::query($accounts_query);
-						if($accounts) {
-						foreach ($accounts as $account) {
-						?>					
-							<option value="<?php echo $account['account_id']; ?>" ><?php echo $account['account_code']; ?> - <?php echo $account['account_desc_short']; ?></option>
-						<?php 
-						}
-						}
-						?>
-						
-						</select>
-							 <p class="help-block"> </p>
-							</div>
+              <div class="form-group" id="div_parent_account">
+                      
 			  </div>					
                <div class="form-group">
                         <label class="col-md-3 col-sm-3 control-label">Account Code:</label>
@@ -129,3 +105,24 @@ function create_new_account() {
 <?php
 include_once("./tools_footer.php");
 ?>
+
+<script>
+$(document).ready(function(){
+	$('#div_parent_account').hide();
+	$('#account_group').change(function(){
+		var account_group=$(this).val();
+		var dataToPass = 'account_group='+account_group;
+			$.ajax({ // Send the username val to another checker.php using Ajax in POST menthod
+            type : 'POST',
+			url  : 'ajax_helpers/ajax_show_coa_parent.php',
+            data : dataToPass,
+			success: function(data){ // Get the result and asign to each cases
+                    $('#div_parent_account').show();
+					$('#div_parent_account').html(data);
+					
+					
+			}
+         });
+	});
+});
+</script>
