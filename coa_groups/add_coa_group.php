@@ -3,8 +3,6 @@ if(isset($_POST['submit']))
 {
  $group_code		= $_POST['group_code'];
  $group_description = $_POST['group_description'];
- $From_account_code = $_POST['From_account_code'];
- $to_account_code   = $_POST['to_account_code'];
  $balance_sheet_side = $_POST['balance_sheet_side'];
  $pls_side		  = $_POST['pls_side'];
  $group_status	  = $_POST['group_status'];
@@ -13,8 +11,6 @@ if(isset($_POST['submit']))
 	  $insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'coa_groups', array(		
 			'group_code' 			=> $group_code,	
             'group_description' 	 => $group_description,
-            'from_account_code' 	 => $From_account_code,
-            'to_account_code' 	   => $to_account_code,
             'balance_sheet_group'   => 1,
             'balance_sheet_side'    => $balance_sheet_side,
             'pls_group' 			 => '',	 
@@ -28,9 +24,7 @@ if(isset($_POST['submit']))
 	  $insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'coa_groups', array(		
 			'group_code' 			=> $group_code,	
             'group_description' 	 => $group_description,
-            'from_account_code' 	 => $From_account_code,
-            'to_account_code' 	   => $to_account_code,
-            'balance_sheet_group'   => '',
+           'balance_sheet_group'   => '',
             'balance_sheet_side'    => '',
             'pls_group' 			 => $pls_group,	 
             'pls_side' 			  => $pls_side,
@@ -44,9 +38,7 @@ if(isset($_POST['submit']))
    				
 			'group_code' 			=> $group_code,	
             'group_description' 	 => $group_description,
-            'from_account_code' 	 => $From_account_code,
-            'to_account_code' 	   => $to_account_code,
-            'balance_sheet_group'   => '',
+           'balance_sheet_group'   => '',
             'balance_sheet_side'    => '',
             'pls_group' 			 => '',	 
             'pls_side' 			  => '',
@@ -78,7 +70,7 @@ if(isset($_POST['submit']))
                         <label class="col-sm-3 control-label">Group Code:</label>
                          <div class="col-sm-4">
 						 <input class="controls" type="text" required name="group_code" id="group_code"
-						   pattern="[A-Z]{4}"  maxlength="4">
+						   pattern="[A-Z0-9]{4}"  maxlength="4">
 							 <p id="check_group_code"></p>
 							</div>
 							<p class="help-block">Must be length 4 and Capital characters only</p>
@@ -95,22 +87,10 @@ if(isset($_POST['submit']))
 				  $to_account=DB::queryfirstfield('SELECT to_account_code FROM '.DB_PREFIX.$_SESSION['co_prefix'].'coa_groups ORDER BY group_id DESC LIMIT 1');
 				  
 				  ?>
-                     <div class="form-group">
-                         <label class="col-sm-3 control-label">From Account Code</label>
-                        <div class="col-sm-6">
-						<input value="<?php echo $to_account; ?>" class="form-control" type="text" required name="From_account_code" id="From_account_code">
-						</div>
-					</div>	
+                   
                    
                         <div class="form-group">
-                         <label class="col-sm-3 control-label">To Account Code</label>
-                        <div class="col-sm-6">
-						<input class="form-control" type="text" required name="to_account_code" id="to_account_code">
-                      </div>
-					</div>	
-                   
-                        <div class="form-group">
-                         <label class="col-sm-3 control-label">Account Type</label>
+                         <label class="col-sm-3 control-label">Group Type</label>
                         <div class="col-sm-6">
 						<input type="radio" name="account_type" value="balance_sheet" checked> Balance Sheet&nbsp;
                         <input type="radio" name="account_type" value="pls_group"> Profit &Loss Statements Group&nbsp;
