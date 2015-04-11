@@ -1,3 +1,31 @@
+<style>
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+</style>
+
+
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -18,9 +46,17 @@
  
 <li class="dropdown-header"  >&nbsp;Chart of Accounts </li>
  
-			<li><a href="<?php echo $_SERVER['PHP_SELF']."?route=maintain_coa_groups"; ?>"><span class='glyphicon glyphicon-book'></span> &nbsp;Account Groups</a></li>
+			<li><a href="<?php echo $_SERVER['PHP_SELF']."?route=maintain_coa_groups"; ?>"><span class='glyphicon glyphicon-book'>
+            </span> &nbsp;Account Groups</a></li>
 		  
-			<li><a href="<?php echo $_SERVER['PHP_SELF']."?route=maintain_coa"; ?>"><span class='glyphicon glyphicon-list'></span> &nbsp;Chart of Account </a></li>
+			<li class="dropdown-submenu"><a href="<?php echo $_SERVER['PHP_SELF']."?route=maintain_coa"; ?>">
+            <span class='glyphicon glyphicon-list'>
+            </span> &nbsp;Chart of Account </a>
+            <ul class="dropdown-menu">
+            <li><a href="<?php echo $_SERVER['PHP_SELF']."?route=create_new_account"; ?>"><span class='glyphicon glyphicon-plus'>
+            </span>&nbsp;Create New Account</a></li>
+            </ul>
+            </li>
 			<li class="divider"></li> 
  		
  
