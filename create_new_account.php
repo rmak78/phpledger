@@ -1,4 +1,50 @@
 ﻿<?php 
+if(isset($_POST['submit']))
+{
+	
+	$active_only ='';
+	$consolidate_only='';
+	$has_parent=0;
+	$account_group=$_POST['account_group'];
+	$account_code=$_POST['account_code'];
+	$account_des_short=$_POST['account_desc_short'];
+	$account_des_long=$_POST['account_desc_long'];
+	$account_type=$_POST['account_type'];
+	$parent_account=$_POST['parent_account_id'];
+	echo $parent_account;
+	if($parent_account<>0)
+	{
+		$has_parent=1;
+		}
+	 if($account_type=='activity_only')
+	 {
+	 
+	 $active_only    =1;
+	 }
+	 else
+	 {
+	  $consolidate_only  =1;
+	 }
+	 $insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'coa', array(
+	 
+	 'account_group'	=>		$account_group,
+	 'account_code'		=>	 $account_code,
+	 'account_desc_short' =>	  $account_des_short,
+	 'account_desc_long'  =>	  $account_des_long,
+	 'activity_account' =>		$active_only ,
+	 'consolidate_only' =>		$consolidate_only,
+	 'parent_account_id'  =>	  $parent_account,
+	 'has_parent'		=>	   $has_parent
+	
+ 	 ));
+	
+	
+	}
+
+?>
+
+
+<?php 
 $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company_id = '.$_SESSION['company_id']);
 // Get Company Chart of Account Levels
 $levels = $company['coa_levels'];
@@ -18,7 +64,7 @@ function create_new_account() {
   <div class="panel-heading">
 		  <h3>Create New Account</h3>
            </div>
-		  <form class="form-horizontal" role="form" method="post" action="">
+		  <form class="form-horizontal" role="form" method="post" action="" name="create_new_account">
         
             <div class="panel-body">
 			<div class="form-group">
