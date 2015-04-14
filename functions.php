@@ -315,4 +315,9 @@ function get_account_level($account_id)	{
 	$level = DB::queryFirstField($sql);
 		return $level;
 	}
+	function get_code_length_at_level($level){
+		$sql = "select code length FROM" .DB_PREFIX.$_SESSION['co_prefix']."code WHERE Account_length='".$account_length."'";
+		$length = DB::queryFirstField($sql);
+		return $length;
+	}
 ?>
