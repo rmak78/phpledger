@@ -1,8 +1,19 @@
+<script>
+$(function(){
+	$('#parent_account_id').change(function(){
+		var ac_code = $( '#parent_account_id option:selected').text();
+		var acc_int = parseInt(ac_code);
+		$('#account_code').val(acc_int+'-');
+		$('#account_code').focus();
+	});
+});
+</script>
 <?php 
 require_once ( '../tools_header.php');
 require_once ("../functions.php");
 $account_group=$_POST['account_group'];
 ?> 
+<div class="form-group">
  <label class="col-md-3 col-sm-3 control-label">Parent Account:</label>
                          <div class="col-md-9 col-sm-9">
 						 <select class="form-control" name="parent_account_id" id="parent_account_id">
@@ -24,4 +35,14 @@ $account_group=$_POST['account_group'];
 						
 						</select>
 							 <p class="help-block"> </p>
+					</div>
+				</div>			
+						<div class="form-group">
+                        <label class="col-md-3 col-sm-3 control-label">Account Code:</label>
+                         <div class="col-md-9 col-sm-9">
+						  
+						 <input class=" form-control" type="text"  required="required" name="account_code" id="account_code">
+						  
+							 <p class="  help-block"> </p>
 							</div>
+			  </div>
