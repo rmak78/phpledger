@@ -44,8 +44,15 @@ if(isset($_POST['submit']))
 	 'coa_level'		=>		$account_level
 	
  	 ));
-	
-	
+	 $acc_id_last=DB::insertId();
+	if($insert){
+	echo '<div id="success-alert" class="alert alert-success">
+   <a href="#" class="close" data-dismiss="alert">
+      &times;
+   </a>
+   <strong>Saved! </strong>New account '.$account_code.' has been created Succesfully with ID:'.$acc_id_last.'
+</div>';
+	}
 	}
 
 ?>
@@ -171,4 +178,13 @@ $(document).ready(function(){
 	});
 	
 });
+</script>
+
+
+<script type="text/javascript">
+$("#success-alert").fadeTo(3000, 2000).slideUp(2000, function(){
+    $("#success-alert").alert('close');
+	
+});
+
 </script>
