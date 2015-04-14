@@ -327,4 +327,15 @@ function get_account_level($account_id)	{
 		$length=$length+1;
 		return $length;
 	}
+function get_code_length_at_level($level, $company_id){
+		
+		$sql = "select coa_level_".$level."_length FROM ".DB_PREFIX."companies WHERE company_id='".$company_id."'";
+		$length = DB::queryFirstField($sql);
+		return $length;
+
+	}
+	
+	
+	
+	
 ?>
