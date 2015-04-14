@@ -26,6 +26,10 @@ if(isset($_POST['submit']))
 	  $consolidate_only  =1;
 	 }
 	 $account_level=get_chiled_account_level($parent_account);
+	 if(!$account_level)
+	 {
+		 $account_level=1;
+		 }
 	
 	 $insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'coa', array(
 	 
