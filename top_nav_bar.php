@@ -49,7 +49,7 @@
 			<li><a href="<?php echo $_SERVER['PHP_SELF']."?route=maintain_coa_groups"; ?>"><span class='glyphicon glyphicon-book'>
             </span> &nbsp;Account Groups</a></li>
 		  
-			<li class="dropdown-submenu"><a href="<?php echo $_SERVER['PHP_SELF']."?route=maintain_coa"; ?>">
+			<li class="dropdown-submenu"><a href="#">
             <span class='glyphicon glyphicon-list'>
             </span> &nbsp;Chart of Account </a>
             <ul class="dropdown-menu">
