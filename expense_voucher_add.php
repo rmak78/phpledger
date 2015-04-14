@@ -21,7 +21,7 @@ function create_new_voucher($voucher_ref, $voucher_date, $voucher_paid_from_acco
  // perform sql insertion
    $insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'voucher_expense', array(			
 			'voucher_ref_no' 			=>  $voucher_ref,	
-            'voucher_date' 	 		  => $voucher_date,
+            'voucher_date' 	 		  => $now,
             'voucher description' 	  =>   $voucher_description,
             'petty_cash_account' 	   	 =>  $voucher_paid_from_account,
 			'created_on'				=>  $now,
@@ -187,7 +187,6 @@ else {
 
  
  <!--  Voucher Body -->
- 
  <div class="panel-body"  style=" width:80%; margin-left: auto; margin-right: auto ;">
 
     <div class="row clearfix">
@@ -232,27 +231,19 @@ else {
 					
     					
                         <td data-name="del">
-                            <button nam"del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'></button>
+                            <button name="del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'></button>
+                            <button id="save" class='btn btn-success row-save'>Save</button>
                         </td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<a id="add_row" class="btn btn-default pull-right">Add Row</a>
+	<a id="add_row" class="btn btn-primary pull-right">Add Row</a>
 
 </div>
  </div>
 <?php } ?>
- 
-
- 
- 
- 
- 
- 
- 
-
 
 <script type="text/javascript">
 
