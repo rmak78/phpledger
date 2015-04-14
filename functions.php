@@ -315,9 +315,10 @@ function get_account_level($account_id)	{
 	$level = DB::queryFirstField($sql);
 		return $level;
 	}
-	function get_code_length_at_level($level){
-		$sql = "select code length FROM" .DB_PREFIX.$_SESSION['co_prefix']."code WHERE Account_length='".$account_length."'";
+	function get_chiled_account_level($parent_account){
+		$sql = "select coa_level FROM " .DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_id='".$parent_account."'";
 		$length = DB::queryFirstField($sql);
+		$length=$length+1;
 		return $length;
 	}
 ?>

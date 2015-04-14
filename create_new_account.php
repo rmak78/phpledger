@@ -25,6 +25,8 @@ if(isset($_POST['submit']))
 	 {
 	  $consolidate_only  =1;
 	 }
+	 $account_level=get_chiled_account_level($parent_account);
+	
 	 $insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'coa', array(
 	 
 	 'account_group'	=>		$account_group,
@@ -34,7 +36,8 @@ if(isset($_POST['submit']))
 	 'activity_account' =>		$active_only ,
 	 'consolidate_only' =>		$consolidate_only,
 	 'parent_account_id'  =>	  $parent_account,
-	 'has_parent'		=>	   $has_parent
+	 'has_parent'		=>	   $has_parent,
+	 'coa_level'		=>		$account_level
 	
  	 ));
 	
