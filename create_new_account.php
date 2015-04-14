@@ -94,19 +94,10 @@ function create_new_account() {
 				</div>
 			  </div>	             
              
-              <div class="form-group" id="div_parent_account">
+              <div id="div_parent_account">
                       
 			  </div>					
-               <div class="form-group">
-                        <label class="col-md-3 col-sm-3 control-label">Account Code:</label>
-                         <div class="col-md-9 col-sm-9">
-						  
-						 <input class=" form-control" type="text"  required="required" name="account_code" id="account_code">
-						  
-							 <p class="  help-block"> </p>
-							</div>
-			  </div>
-			  
+              
               <div class="form-group">
                         <label class="col-md-3 col-sm-3 control-label">Account Description (Short):</label>
                          <div class="col-md-9 col-sm-9">
@@ -150,6 +141,7 @@ function create_new_account() {
 					</div>
             </form>
 </div>
+
  
 <?php
 include_once("./tools_footer.php");
@@ -173,5 +165,6 @@ $(document).ready(function(){
 			}
          });
 	});
+	
 });
 </script>
