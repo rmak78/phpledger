@@ -2,8 +2,8 @@
 $(function(){
 	$('#parent_account_id').change(function(){
 		var ac_code = $( '#parent_account_id option:selected').text();
-		var acc_int = parseInt(ac_code);
-		$('#account_code').val(acc_int+'-');
+		ac_code = ac_code.replace(/[^0-9-]+/g, '');
+		$('#account_code').val(ac_code);
 		$('#account_code').focus();
 	});
 });
@@ -19,15 +19,27 @@ $account_group=$_POST['account_group'];
 						 <select class="form-control" name="parent_account_id" id="parent_account_id">
 						<option value="0"> -- None --</option>
 						<?php 
-						$accounts_query = "SELECT account_id, account_code, account_desc_short FROM ";
-						$accounts_query .= DB_PREFIX.$_SESSION['co_prefix']."coa WHERE( (account_group='".$account_group."') AND(consolidate_only =  1 ) AND (account_status =  'active') ) ORDER BY account_code " ;
+						$accounts_query = "SELECT account_id, coa_level, account_code, account_desc_short FROM ";
+						$accounts_query .= DB_PREFIX.$_SESSION['co_prefix']."coa WHERE( (account_group='".$account_group."') AND(consolidate_only =  1 ) AND (account_status =  'active') ) ORDER BY coa_level " ;
 						
 						
 						$accounts = DB::query($accounts_query);
 						if($accounts) {
 							$options="";
-						foreach ($accounts as $account) {					
-							$options .="<option value='".$account['account_id']."' >".$account['account_code']."-".$account['account_desc_short']."</option>";
+							$temp_coa = DB::queryfirstfield($accounts_query);
+							$temp_coa_level = $temp_coa['coa_level'];
+							$options .=" <optgroup label='Level: ".$temp_coa_level."'>";
+						foreach ($accounts as $account) {	
+							if($temp_coa_level == $account['coa_level']){
+								$options .="<option value='".$account['account_id']."'>".$account['account_code']."-".$account['account_desc_short']."</option>";
+							}
+							else{
+								$options .="</optgroup>";
+								$options .=" <optgroup label='Level: ".$account['coa_level']."'>";
+								$options .="<option value='".$account['account_id']."'>".$account['account_code']."-".$account['account_desc_short']."</option>";
+								$temp_coa_level = $account['coa_level'];
+							}
+							
 						}
 						}
 						echo $options;

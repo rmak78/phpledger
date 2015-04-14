@@ -94,7 +94,7 @@ function create_new_account() {
 						?>
 						</select>
 						  
-							 <p class="  help-block"> </p>
+							 <p class="help-block"> </p>
 				</div>
 			  </div>	             
              
