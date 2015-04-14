@@ -17,6 +17,7 @@ GetFXRate($from_ccy, $to_ccy)
 ShowYesNo($pass_value)
 ShowTickCross($pass_value)
 get_user_name($user_id) 
+check_coa_account_code_exist($account_code)
 */
 //Returns Date given in Selected Format
 function getDateTime($time = 0, $form = "dtLong") {
@@ -308,7 +309,12 @@ function check_coa_group_code_exist($group_code){
 			return $group_exist;
 		
 }
-
+function check_coa_account_code_exist($account_code){
+		$sql = "SELECT count(*) FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_code='".$account_code."'" ;	
+		$account_exist = DB::queryfirstfield($sql);
+			return $account_exist;
+		
+}
 
 function get_account_level($account_id)	{
 	$sql = "SELECT coa_level FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_id='".$account_id."'";

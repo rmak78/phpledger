@@ -67,7 +67,7 @@ if(isset($_POST['submit']))
             <div class="panel-body">
               <div class="form-group form-inline">
 				
-                        <label class="col-sm-3 control-label">Group Code:</label>
+                        <label class="col-sm-3 control-label">Group Name:</label>
                          <div class="col-sm-4">
 						 <input class="controls" type="text" required name="group_code" id="group_code"
 						   pattern="[A-Z0-9]{4}"  maxlength="4">

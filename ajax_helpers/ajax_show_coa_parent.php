@@ -54,7 +54,40 @@ $account_group=$_POST['account_group'];
                          <div class="col-md-9 col-sm-9">
 						  
 						 <input class=" form-control" type="text"  required="required" name="account_code" id="account_code">
-						  
-							 <p class="  help-block"> </p>
+						  <p id="check_account_code"></p>
+							 <p class="help-block">Code length should not be less than, You've defined </p>
 							</div>
 			  </div>
+			  
+			  <script type="text/javascript">
+$(document).ready(function(){
+    $('#account_code').keyup(function(){ // Keyup function for check the user action in input
+        var account_code = $(this).val(); // Get the username textbox using $(this) or you can use directly $('#username')
+            
+			$('#check_account_code').html('Checking..'); // Preloader, use can use loading animation here
+            var dataToPass = 'account_code='+account_code;
+			$.ajax({ // Send the username val to another checker.php using Ajax in POST menthod
+            type : 'POST',
+			url  : 'ajax_helpers/ajax_check_account_code.php',
+            data : dataToPass,
+			success: function(data){ // Get the result and asign to each cases
+				if(data == 0){
+                    $('#check_account_code').html('<span style="color:green;">Account code available</span>');
+                }
+                else if(data > 0){
+                    $('#check_account_code').html('<span style="color:red;">Account code already taken</span>');
+                }
+                else{
+                    $('#check_account_code').html('<span style="color:red;">Problem in checking..</span>');
+                }
+				
+            }
+
+            });
+			
+			
+			
+			
+    });
+});	
+</script>
