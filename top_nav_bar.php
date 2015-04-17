@@ -48,7 +48,7 @@
  
 			<li><a href="<?php echo $_SERVER['PHP_SELF']."?route=maintain_coa_groups"; ?>"><span class='glyphicon glyphicon-book'>
             </span> &nbsp;Account Groups</a></li>
-		  
+		  <li class="divider"></li> 
 			<li class="dropdown-submenu"><a href="#">
             <span class='glyphicon glyphicon-list'>
             </span> &nbsp;Chart of Account </a>
@@ -57,7 +57,7 @@
             </span>&nbsp;Create New Account</a></li>
             </ul>
             </li>
-			<li class="divider"></li> 
+			
  		
  
 			<li class="divider"></li> 

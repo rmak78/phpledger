@@ -1,4 +1,75 @@
 ﻿<?php
+$message=''; 
+ $session_id= $_SESSION['company_id'];
+  // Logo Home
+		 if(isset($_POST['logo_home']))
+		 {   
+			
+			  $filename = basename( $_FILES['pic_upload']['name'] );	   
+	  		 $uploadlocation ="upload/".uniqid().$filename;
+ $update = DB::update(DB_PREFIX.'companies', array (
+	 'company_logo_home' =>$uploadlocation
+	 ),
+	  "company_id=%s", $session_id
+	  );
+	 if (move_uploaded_file($_FILES['pic_upload']['tmp_name'],$uploadlocation))
+		  {
+		     $message="REcord Insertion Succeeded";
+		  }
+		  else
+		  {
+		  $message="Data Saved But File Uploading Failed ";
+		  }
+			 }
+	//Logo Head
+	 if(isset($_POST['logo_head']))
+		 {   
+			
+			  $filename = basename( $_FILES['pic_upload']['name'] );	   
+	  		 $uploadlocation ="upload/".uniqid().$filename;
+ $update = DB::update(DB_PREFIX.'companies', array (
+	 'company_logo_head' =>$uploadlocation
+	 ),
+	  "company_id=%s", $session_id
+	  );
+	 if (move_uploaded_file($_FILES['pic_upload']['tmp_name'],$uploadlocation))
+		  {
+		     $message="REcord Insertion Succeeded";
+		  }
+		  else
+		  {
+		  	$message="Data Saved But File Uploading Failed ";
+		  }
+			 }
+	// Logo Icon
+	
+	 if(isset($_POST['logo_icon']))
+		 {   
+			
+			  $filename = basename( $_FILES['pic_upload']['name'] );	   
+	  		 $uploadlocation ="upload/".uniqid().$filename;
+ $update = DB::update(DB_PREFIX.'companies', array (
+	 'company_logo_icon' =>$uploadlocation
+	 ),
+	  "company_id=%s", $session_id
+	  );
+	 if (move_uploaded_file($_FILES['pic_upload']['tmp_name'],$uploadlocation))
+		  {
+		     $message="REcord Insertion Succeeded";
+		  }
+		  else
+		  {
+		  	$message="Data Saved But File Uploading Failed ";
+		  }
+			 }
+			 
+
+
+?>
+
+  
+
+<?php
 
 // Maintain a company
 /*
@@ -51,14 +122,20 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 						<p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_address_2" data-name="company_address_2" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Address Line 2"><?php echo $company['company_address_2'] ;?></a></p>
 						<p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_city" 
                         data-name="city" data-type="text" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit City"><?php echo $company['city'] ;?></a>
+                       
                          &nbsp;, &nbsp; <a href="#" class="editable-country" data-url="ajax_helpers/ajax_update_company_data.php" id="company_country" data-name="country" data-type="select" data-pk="<?php echo $company['company_id'] ;?>"   data-title="Edit Country">
 						 <?php echo $company['country'] ;?></a></p>
 						
 						</td>
                     </tr>
-					<tr>         
+                    
+					<tr>  
+						      
                         <td width="35%">Phone No</td>
-                        <td width="65%"><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="phone_1" data-name="phone_1" data-type="tel" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Phone No 1"><?php echo $company['phone_1'] ;?></a>
+                        <td width="65%"><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" 
+                        id="phone_1" data-name="phone_1" data-type="tel" data-pk="<?php echo $company['company_id'] ;?>" 
+                        data-title="Edit Phone No 1">
+						<?php echo $company['phone_1'] ;?></a>
 						</p>
 						<p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="phone_2" data-name="phone_2" data-type="tel" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Phone 2"><?php echo $company['phone_2'] ;?></a></p>
 						
@@ -113,20 +190,56 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
                 <tbody> 
   					<tr>         
                         <td width="35%">Logo URL(large 400px X 100px))</td>
-                        <td width="65%"><img src="<?php echo $company['company_logo_home'] ;?>" alt="Large Logo" border="0"  width="400" height="100" /><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_logo_home" data-name="company_logo_home" data-type="url" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Large Logo URL"><?php echo $company['company_logo_home'] ;?></a>
-						</p>		
+                        <td width="65%"><img src="<?php echo $company['company_logo_home'] ;?>" alt="Large Logo" border="0"  width="400" height="100" /><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_logo_home" data-name="company_logo_home" data-type="url" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Large Logo URL"><?php echo $company['company_logo_home'] ;?></a> </p>
+            
+             <form method="post" action="<?php echo $_SERVER['PHP_SELF']."?route=maintain_company_data"; ?>" name="file_upload_form" id="file_upload_form" role="form"  enctype="multipart/form-data">
+                        <table class="table">
+                         <tbody>
+                         <tr> 
+            <td>     <input type="file" name="pic_upload" id="pic_upload" /> </td>
+             <td>    <input type="submit" value="Upload" id="submit" name="logo_home" class="btn btn-primary"  /> </td>
+             <td>			 <?php echo $message;  ?> </td>
+             			</tr>
+        </form>			
+						</tbody>
+						</table>
 						</td>
-                    </tr>
+       			 </tr>
  					<tr>         
                         <td width="35%">Logo URL(medium 250px X 150px) </td>
-                        <td width="65%"><img src="<?php echo $company['company_logo_head'] ;?>" alt="Medium Logo" border="0"  width="250" height="150" /><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_logo_head" data-name="company_logo_head" data-type="url" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Medium Logo URL"><?php echo $company['company_logo_head'] ;?></a>
-						
-						</p>		
-						</td>
+                        <td width="65%"><img src="<?php echo $company['company_logo_head'] ;?>" alt="Medium Logo" border="0"  width="250" height="150" /><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_logo_head" data-name="company_logo_head" data-type="url" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Medium Logo URL"><?php echo $company['company_logo_head'] ;?></a></p>
+                       
+                       <form method="post" action="<?php echo $_SERVER['PHP_SELF']."?route=maintain_company_data"; ?>" 
+                       name="file_upload_form" id="file_upload_form" role="form"  enctype="multipart/form-data">
+                       
+                         <table class="table">
+                         <tbody>
+				<tr>
+        <td> <input type="file" name="pic_upload" id="pic_upload" /> </td>
+        <td> <input type="submit" value="Upload" id="submit" name="logo_head" class="btn btn-primary"  /> </td>
+        <td> <?php echo $message;  ?></td>
+				</tr>
+						</tbody>
+						</table>
+                           </form>
+                        </td>
                     </tr>
  					<tr>         
                         <td width="35%">Logo URL (small 100px x 100px)</td>
                         <td width="65%"><img   src="<?php echo $company['company_logo_icon'] ;?>" alt="Small Logo" border="0"  width="100" height="100" /><p><a href="#" class="editable" data-url="ajax_helpers/ajax_update_company_data.php" id="company_logo_icon" data-name="company_logo_icon" data-type="url" data-pk="<?php echo $company['company_id'] ;?>" data-title="Edit Small Logo URL"><?php echo $company['company_logo_icon'] ;?></a>
+                          <form method="post" action="<?php echo $_SERVER['PHP_SELF']."?route=maintain_company_data"; ?>" name="file_upload_form" id="file_upload_form" role="form" 
+                        enctype="multipart/form-data">
+                       <table class="table">
+                         <tbody>
+                         <tr>  
+                 <td><input type="file" name="pic_upload" id="pic_upload" /> </td>
+                 <td><input type="submit" value="Upload" id="submit" name="logo_icon" class="btn btn-primary"  /></td> 
+                 <td><?php echo $message;  ?></td>
+       					</tr>
+                        </tbody>
+                        </table>
+       
+        </form>
 						
 						</p>				
 						</td>
@@ -474,7 +587,16 @@ $(document).ready(function(){
          </div>
 		 </form>
          
-         <script>
+         
+         
+     
+
+</div>
+
+      
+
+         
+      <script>
 		 $(document).ready(function() {
 $.fn.editable.defaults.ajaxOptions = {type: "GET"};
 		 $("#company_time_zone").editable({
@@ -498,6 +620,8 @@ $.fn.editable.defaults.ajaxOptions = {type: "GET"};
 		 });
          </script>
         
+
+        
          
          
 		 <h6 style="color:grey;">*If you don't understand the Chart of Account, Please don't fill this</h6>
@@ -505,4 +629,6 @@ $.fn.editable.defaults.ajaxOptions = {type: "GET"};
       </div><!-- /.modal-content -->
    </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+
 
