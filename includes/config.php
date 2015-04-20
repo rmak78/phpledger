@@ -12,7 +12,7 @@ define('BR','</br>');
 
 
  
-define('FOLDER_NAME','phpledger');
+define('FOLDER_NAME','phpledger2');
 define('ROOT_PATH', 'D:\server\www'.'/'.FOLDER_NAME.'/');
 define('SITE_ROOT', 'http://'.$_SERVER['HTTP_HOST'].'/'.FOLDER_NAME.'/');
 define('DB_PREFIX', 'sa_');
