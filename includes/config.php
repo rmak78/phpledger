@@ -14,7 +14,7 @@ include_once('db_config.php');
 	
 
  
-<<<<<<< HEAD
+
 define('FOLDER_NAME','phpledger');
 define('ROOT_PATH', 'E:\xampp\htdocs'.'/'.FOLDER_NAME.'/');
 =======
