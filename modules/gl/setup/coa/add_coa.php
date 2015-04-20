@@ -1,4 +1,5 @@
 <?php
+/* This code is total bullshit!!!!!
 $group_id = "";
 $from_account_code='';
 $to_account_code='';
@@ -43,7 +44,7 @@ if(isset($_POST['add'])){
 						}
 						else {
 
-								/* Retrive logged in user data */
+							 
 								$account_code= '';
 								$account_group = '';
 								$account_desc_short = '';
@@ -51,6 +52,7 @@ if(isset($_POST['add'])){
 								$parent_account_id = '';
 								$account_status = '';
 							}
+*/
 ?>
 
 <div class="container">
