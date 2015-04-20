@@ -48,6 +48,6 @@ $('#data-table').DataTable( {
 
 $("abbr.timeago").timeago();
 
-
+$(".masked").inputmask();
 
 });

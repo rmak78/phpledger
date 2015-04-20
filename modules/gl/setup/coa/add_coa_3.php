@@ -120,6 +120,21 @@ if(isset($_POST['account_type'])){
 </div> <!-- /form-group -->
 
 <div class="form-group">
+	<label class="col-md-3 col-sm-3 control-label">Account Code:</label>
+		<div class="col-md-9 col-sm-9">
+		<div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-book"></i>
+          </div>
+          <input type="text"  class="masked form-control" data-inputmask="'mask': '10110\\99999'" placeholder="101109" />
+                    </div><!-- /.input group -->
+        </div>         
+		<p class="help-block"> </p>
+	</div><!-- /.col -->
+</div> <!-- /form-group --> 
+
+        
+<div class="form-group">
 	<div class="col-sm-12">
 		<a class='btn btn-danger btn-lg pull-left' href="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/add_coa" ?>">Cancel & Restart &nbsp; <i class="fa fa-chevron-circle-left"></i></a>
 		<button type="submit" class='btn btn-success btn-lg pull-right' name="add" value="Next">Next &nbsp; <i class="fa fa-chevron-circle-right"></i></button>
