@@ -9,3 +9,11 @@
                       <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask/>
                     </div><!-- /.input group -->
                   </div><!-- /.form group -->
+				  
+<!-- Script -->
+<script type="text/javascript">
+$(function () {
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+}
+</script>
