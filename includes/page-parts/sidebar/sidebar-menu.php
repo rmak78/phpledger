@@ -14,7 +14,7 @@
 						<a href="#"><span>Account Groups</span><i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
 							<li>
-								<a href="#">List of Account Groups</a>
+								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/coa_groups/list_coa_groups">List of Account Groups</a>
 							</li>
 							<li>
 								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/coa_groups/add_coa_group">Add New Account Group</a>
