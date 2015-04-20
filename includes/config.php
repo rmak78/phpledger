@@ -12,13 +12,12 @@ define('BR','</br>');
 
 include_once('db_config.php');
 	
-
- 
-
 define('FOLDER_NAME','phpledger');
-define('ROOT_PATH', 'E:\xampp\htdocs'.'/'.FOLDER_NAME.'/');
+define('ROOT_PATH', realpath(dirname(__FILE__)."/../").'/');
 define('SITE_ROOT', 'http://'.$_SERVER['HTTP_HOST'].'/'.FOLDER_NAME.'/');
 define('DB_PREFIX', 'sa_');
+
+// These are defined here to simulate logged in user behaviour. untill we have completed the security module, we will define all session variables here..
 
 
 	$_SESSION['is_logged'] = 1; 
