@@ -1,3 +1,38 @@
+// icheck line blue and green functions
+$('input[type="checkbox"].line-blue, input[type="radio"].line-blue').each(function(){
+	
+	 var self = $(this),
+      label = self.next(),
+      label_text = label.text();
+
+    label.remove();
+	  
+	self.iCheck({
+      checkboxClass: 'icheckbox_line-blue',
+      radioClass: 'iradio_line-blue',
+      insert: '<div class="icheck_line-icon"></div>' + label_text
+    });
+	
+});
+$('input[type="checkbox"].line-green, input[type="radio"].line-green').each(function(){
+	
+	 var self = $(this),
+      label = self.next(),
+      label_text = label.text();
+
+    label.remove();
+	  
+	self.iCheck({
+      checkboxClass: 'icheckbox_line-green',
+      radioClass: 'iradio_line-green',
+      insert: '<div class="icheck_line-icon"></div>' + label_text
+    });
+	
+});      
+  
+
+
+
 $(document).ready(function() {
 $.fn.editable.defaults.ajaxOptions = {type: "GET"};
 

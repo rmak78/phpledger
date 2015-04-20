@@ -131,5 +131,42 @@ if(isset($_POST['update'])){
 		
 
 */
-	
+function get_coa_group_type($coa_group_id){
+	$type = "";
+ 
+$sql = "SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa_groups WHERE group_code='".$coa_group_id."'" ;
+
+$group = DB::queryFirstRow($sql);
+
+if ( $group['balance_sheet_group'] == 1 ) {
+	$type = "Balance Sheet";
+} else if ( $group['pls_group'] == 1 ) {
+	$type = "P/L Statement";
+} else if ( $group['statistics_only'] == 1 ) {
+	$type = "Statistics Only";
+} else {
+	$type = "UnKnown" ;
+}
+	return $type;
+
+}
+
+function get_coa_group_side($coa_group_id) {
+	$side = "";
+
+	$sql = "SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa_groups WHERE group_code='".$coa_group_id."'" ;	
+		$group = DB::queryFirstRow($sql);
+		if ( $group['balance_sheet_group'] == 1 ) {
+				$side = $group['balance_sheet_side'];
+} 			else if ( $group['pls_group'] == 1 ) {
+				$side = $group['pls_side'];
+}			 else if ( $group['statistics_only'] == 1 ) {
+				$side = "-";
+}			 else {
+				$type = "UnKnown" ;
+}
+		
+	return $side;
+
+}	
 ?>
