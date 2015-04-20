@@ -11,7 +11,7 @@
 				
 		<?php include(ROOT_PATH.'includes/page-parts/sidebar/sidebar-menu.php'); ?>
 
-		<?php include(ROOT_PATH.'includes/widgets/info-box.php'); ?>
+	 
  
         </section>
         <!-- /.sidebar -->
