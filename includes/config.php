@@ -17,5 +17,5 @@ define('ROOT_PATH', 'D:\server\www'.'/'.FOLDER_NAME.'/');
 define('SITE_ROOT', 'http://'.$_SERVER['HTTP_HOST'].'/'.FOLDER_NAME.'/');
 define('DB_PREFIX', 'sa_');
  
-include_once('db.php');
+include_once('db_config.php');
  
