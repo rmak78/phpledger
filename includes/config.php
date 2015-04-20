@@ -12,8 +12,8 @@ define('BR','</br>');
 
 
  
-define('FOLDER_NAME','phpledger2');
-define('ROOT_PATH', 'D:\server\www'.'/'.FOLDER_NAME.'/');
+define('FOLDER_NAME','phpledger'); 
+define('ROOT_PATH', realpath(dirname(__FILE__)."/../").'/');
 define('SITE_ROOT', 'http://'.$_SERVER['HTTP_HOST'].'/'.FOLDER_NAME.'/');
 define('DB_PREFIX', 'sa_');
  
