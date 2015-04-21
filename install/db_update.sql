@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v10.00 Beta1
-MySQL - 5.5.27-log : Database - sutlejacct
+MySQL - 5.5.27-log : Database - phpledger2
 *********************************************************************
 */
 
@@ -110,11 +110,11 @@ CREATE TABLE `sa_test_coa` (
   `created_on` timestamp NULL DEFAULT NULL,
   `account_status` varchar(255) DEFAULT 'active',
   PRIMARY KEY (`account_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `sa_test_coa` */
 
-insert  into `sa_test_coa`(`account_id`,`account_code`,`account_group`,`account_desc_short`,`account_desc_long`,`activity_account`,`consolidate_only`,`has_parent`,`coa_level`,`has_children`,`parent_account_id`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`account_status`) values (1,'1',1,'Assets','Assets Group',0,1,0,1,1,0,NULL,NULL,NULL,NULL,'active'),(2,'1000',1,'Cash','Cash at Hand',0,1,1,1,1,1,NULL,NULL,NULL,NULL,'active'),(3,'1000-255',1,'Petty Cash','Petty Cash',0,1,1,2,1,2,NULL,NULL,NULL,NULL,'active'),(4,'1000-255-755',1,'Cash Account','Petty Cash at Bank',1,0,1,3,0,3,NULL,NULL,NULL,NULL,'active');
+insert  into `sa_test_coa`(`account_id`,`account_code`,`account_group`,`account_desc_short`,`account_desc_long`,`activity_account`,`consolidate_only`,`has_parent`,`coa_level`,`has_children`,`parent_account_id`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`account_status`) values (1,'1',1,'Assets','Assets Group',0,1,0,1,1,0,NULL,NULL,NULL,NULL,'active'),(2,'109',1,'Current Assets','Current Assets',0,1,1,1,1,1,NULL,NULL,NULL,NULL,'active'),(3,'102',1,'Fixed Assets','Fixed Assets',0,1,1,2,0,2,NULL,NULL,NULL,NULL,'active'),(5,'10101',1,'Cash','Available Cash ',0,1,1,3,0,2,NULL,NULL,NULL,NULL,'active');
 
 /*Table structure for table `sa_test_coa_groups` */
 
