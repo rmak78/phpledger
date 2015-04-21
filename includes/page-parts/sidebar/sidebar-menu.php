@@ -6,11 +6,21 @@
               <a href="#"><span><i class="fa fa-book fa-lg"></i>&nbsp;General Ledger</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
                 <li><a href="#"><span>Setup</span><i class="fa fa-angle-left pull-right"></i></a>
-                 <ul class="treeview-menu">
+                <ul class="treeview-menu">
                 <li><a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/company/company_info">Company</a></li>
-                <li><a href="#">Account Groups</a></li>
-                <li><a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/coa/add_coa">Chart of Account</a></li>
-              </ul>
+                <li><a href="#"><span>Account Groups</span><i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+					<li><a href="#">List of Account Groups</a></li>
+					<li><a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/coa/add_coa">Add New Account Group</a></li>
+					
+				</ul>
+              </li>
+				<li><a href="#"><span>Chart of Account</span><i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+					<li><a href="#">List Chart of Account</a></li>
+					<li><a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/coa/add_coa">Add New Account</a></li>
+					
+				</ul>
               </li>
                 <li><a href="#"><span>Transactions</span><i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
