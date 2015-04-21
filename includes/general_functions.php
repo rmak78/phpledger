@@ -129,4 +129,33 @@ function col_index($string , $line){
 		else return $i;
 		
 	}
+	// get user name
+	function get_user_name($user_id) {
+// TODO: Fix this function to get user's user_name;
+$sql = "SELECT user_name FROM ".DB_PREFIX.$_SESSION['co_prefix']."users WHERE user_id='".$user_id."'";
+$user_name = DB::queryFirstField($sql);
+	return $user_name;
+}
+//get db prefix
+function get_db_co_prefix($company_id) {
+	//TODO: get company ID from DB and set the appropriate DB PREFIX
+	$sql = "SELECT company_db_prefix FROM ".DB_PREFIX."companies WHERE company_id = ".$company_id;
+	$db_co_prefix = DB::queryFirstField($sql);
+	if ($db_co_prefix) {
+	return $db_co_prefix ;
+	} else {
+	return '' ;
+	}
+}
+function get_company_details($company_id) {
+	//get company details from DB and outputs an array about company
+	$sql = "SELECT * FROM ".DB_PREFIX."companies WHERE company_id = ".$company_id;
+	$company = DB::queryFirstRow($sql);
+	if ($company) {
+	return $company ;
+	} else {
+	return false ;
+	}
+}
+	?>
 	 
