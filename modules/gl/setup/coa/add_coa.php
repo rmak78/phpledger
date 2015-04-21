@@ -1,6 +1,56 @@
 <?php
-include "coa_function.php";
+$group_id = "";
+$from_account_code='';
+$to_account_code='';
+if (isset($_GET['group_id'])) {
+$group_id = $_GET['group_id']; 
+$from_account_code = get_from_account_code($group_id, 'group');
+$to_account_code = get_to_account_code($group_id, 'group');
+}
+if (isset($_GET['parent_account_id'])) {
+$parent_account_id = $_GET['parent_account_id']; 
+//$from_account_code = get_from_account_code($parent_account_id , 'account');
+//$to_account_code = get_to_account_code($parent_account_id, 'account');
+}
 
+if ( (isset($_SESSION['is_logged'])) AND ($_SESSION['is_logged'] == 1)) {
+	$username = get_user_name($_SESSION['user_id']);
+	$role_id = getUserRoleID($_SESSION['user_id']);
+}
+$now=date("Y-m-d h:i:sa");
+	$message= "";
+///////Add New  			
+if(isset($_POST['add'])){
+							$account_code= $_POST['account_code'];
+							$account_group = $_POST['account_group'];
+							$account_desc_short = $_POST['account_desc_short'];
+							$account_desc_long = $_POST['account_desc_long'];
+							$parent_account_id = $_POST['parent_account_id'];
+							$account_status = $_POST['account_status'];
+							$new_coa_id	=add_coa($account_code,$account_group,$account_desc_short, $account_desc_long, $parent_account_id,$account_status);
+							if ($new_coa_id) {
+							$message = "Successfully Added Chart Of Account";
+ 							echo '<div id="success-alert" class="alert alert-success">
+   							<a href="#" class="close" data-dismiss="alert">
+      							&times;
+   							</a>
+   							<strong>Updated!</strong> Data Saved Succesfully.
+						 	</div>';
+											}
+										else {
+												$erro_message = "Unable to create , Check your Input!";
+											}
+						}
+						else {
+
+								/* Retrive logged in user data */
+								$account_code= '';
+								$account_group = '';
+								$account_desc_short = '';
+								$account_desc_long = '';
+								$parent_account_id = '';
+								$account_status = '';
+							}
 ?>
 
 <div class="container">
