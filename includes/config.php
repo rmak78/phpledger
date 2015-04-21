@@ -17,10 +17,6 @@ include_once('db_config.php');
 
 define('FOLDER_NAME','phpledger');
 define('ROOT_PATH', 'E:\xampp\htdocs'.'/'.FOLDER_NAME.'/');
-=======
-define('FOLDER_NAME','phpledger'); 
-define('ROOT_PATH', realpath(dirname(__FILE__)."/../").'/');
->>>>>>> origin/master
 define('SITE_ROOT', 'http://'.$_SERVER['HTTP_HOST'].'/'.FOLDER_NAME.'/');
 define('DB_PREFIX', 'sa_');
 
