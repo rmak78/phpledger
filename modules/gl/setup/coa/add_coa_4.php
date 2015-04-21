@@ -114,7 +114,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
  <!-- Default box -->
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Add New Account Wizard (Step 3)</h3>
+              <h3 class="box-title">Add New Account Wizard (Review Information)</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
                 <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
@@ -122,11 +122,15 @@ $placeholder =  str_replace("\\\9", "9", $mask);
             </div>
 <div class="box-body">
      <div class="progress">
-		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-        <span class="sr-only">50% Complete  </span>
+		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
+        <span class="sr-only">90% Complete  </span>
         </div>
       </div>
-<form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/add_coa_4" ?>">
+ <div class="callout callout-success">
+                    <h4>Almost Done!</h4>
+                    <p>Please review following information & press save to create new GL Account. Some information can not be edited after you press save and this account cannot be deleted once any transaction happens. so caution is neccesary.</p>
+</div>     
+<form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/add_coa_5" ?>">
 	<div class="form-group">
 		<label class="col-md-3 col-sm-3 control-label">Account Group:
 		</label>
@@ -238,7 +242,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 <div class="form-group">
 	<div class="col-sm-12">
 		<a class='btn btn-danger btn-lg pull-left' href="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/add_coa" ?>">Cancel & Restart &nbsp; <i class="fa fa-chevron-circle-left"></i></a>
-		<button type="submit" class='btn btn-success btn-lg pull-right' name="add" value="Next">Next &nbsp; <i class="fa fa-chevron-circle-right"></i></button>
+		<button type="submit" class='btn btn-success btn-lg pull-right' name="end" value="Next">Save & Finish &nbsp; <i class="fa fa-chevron-circle-right"></i></button>
 	</div>	<!-- /.col -->
 </div>		<!-- /form-group -->	   
 </form>
