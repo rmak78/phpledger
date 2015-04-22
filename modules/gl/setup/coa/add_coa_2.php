@@ -38,8 +38,8 @@ if(isset($_POST['account_group'])){
         </div>
       </div>
 <form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/add_coa_3" ?>">
-	<div class="form-group">
-		<label class="col-md-3 col-sm-3 control-label">Account Group:
+	<div class="form-group has-success">
+		<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Account Group:
 		</label>
         <div class="col-md-9 col-sm-9">
 <input type="hidden" name="account_group" value="<?php echo $group_id; ?>" />

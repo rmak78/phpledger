@@ -1,5 +1,30 @@
 <?php
-
+function account_code_exists($account_code){
+		$sql = "SELECT count(*) FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_code='".$account_code."'" ;	
+		$account_exist = DB::queryFirstField($sql);
+			if ($account_exist > 0){
+				return true;
+			} else {
+				return false;
+			}
+	 	
+}
+function account_desc_exists($account_desc_short){
+	
+	 	$sql = "SELECT count(*) FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_desc_short='".$account_desc_short."'" ;	
+		$account_exist = DB::queryFirstField($sql);
+			if ($account_exist > 0){
+				return true;
+			} else {
+				return false;
+			}
+	 	
+}
+function get_account_level($parent_account_id) {
+	$level = DB::queryFirstField("SELECT coa_level FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_id =".$parent_account_id);
+	
+	return $level;
+}
 // Function to add a new coa Record
 
 function add_coa( 	  $account_code
