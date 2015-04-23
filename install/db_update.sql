@@ -141,6 +141,27 @@ CREATE TABLE `sa_test_coa_groups` (
 
 insert  into `sa_test_coa_groups`(`group_id`,`group_code`,`group_description`,`balance_sheet_group`,`balance_sheet_side`,`pls_group`,`pls_side`,`statistics_only`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`group_status`) values (1,'1','Asset Accounts',1,'Debit',0,'Expenses',0,NULL,NULL,NULL,NULL,'active'),(2,'2','Liability Accounts',1,'Credit',0,'Expenses',0,NULL,NULL,NULL,NULL,'active'),(3,'3','Equity Accounts',1,'Credit',0,'Expenses',0,NULL,NULL,NULL,NULL,'active'),(4,'4','Revenue Accounts',0,'Credit',1,'Income',0,NULL,NULL,NULL,NULL,'active'),(5,'5','Expense Accounts',0,'Debit',1,'Expense',0,NULL,NULL,NULL,NULL,'active'),(6,'6','Contra Accounts',1,'Credit',0,'Expenses',0,NULL,NULL,NULL,NULL,'active'),(7,'7','Retained Earnings',1,'Credit',0,'Expenses',0,NULL,NULL,NULL,NULL,'active');
 
+/*Table structure for table `sa_test_fiscal_years` */
+
+DROP TABLE IF EXISTS `sa_test_fiscal_years`;
+
+CREATE TABLE `sa_test_fiscal_years` (
+  `fiscal_year_id` int(11) NOT NULL AUTO_INCREMENT,
+  `fiscal_year_desc` varchar(200) DEFAULT NULL,
+  `fiscal_year_start_date` date DEFAULT NULL,
+  `fiscal_year_end_date` date DEFAULT NULL,
+  `last_modified_by` varchar(255) DEFAULT NULL,
+  `last_modified_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_on` datetime DEFAULT NULL,
+  `fy_status` varchar(255) DEFAULT 'active',
+  PRIMARY KEY (`fiscal_year_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `sa_test_fiscal_years` */
+
+insert  into `sa_test_fiscal_years`(`fiscal_year_id`,`fiscal_year_desc`,`fiscal_year_start_date`,`fiscal_year_end_date`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`fy_status`) values (1,'FY2014','2014-06-01','2015-05-31',NULL,'2015-04-23 14:13:42',NULL,NULL,'active'),(2,'FY2015','2015-06-01','2016-05-31',NULL,'2015-04-23 14:14:07',NULL,NULL,'active');
+
 /*Table structure for table `sa_test_general_journal` */
 
 DROP TABLE IF EXISTS `sa_test_general_journal`;
