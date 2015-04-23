@@ -100,7 +100,6 @@ if (($code_exists <> 1) AND ($desc_exists <> 1)) {
 } else {
 		return "0";
 }
- 
 } // Add new COA Function ends
 
 
@@ -113,7 +112,7 @@ function update_coa( 	  $account_code
 						, $account_status
 					)
 {
-	//Define $now ??? where is it comming from
+	
 	$edit	= DB::UPDATE(DB_PREFIX.$_SESSION['co_prefix'].'coa'
 			,array(
 					  'account_code' => $account_code
@@ -122,7 +121,7 @@ function update_coa( 	  $account_code
 					, 'account_desc_long' => $account_desc_long
 					, 'parent_account_id' => $parent_account_id
 					, 'last_modified_by' => $user_name 
-					, 'last_modified_on' => $now 
+					, 'last_modified_on' => getDateTime( date('now'),"mySQL" ), 
 					, 'account_status' => $account_status
 					
 				)
@@ -133,6 +132,10 @@ function update_coa( 	  $account_code
 	return $coa_id;
 
 }	
+<<<<<<< HEAD
+
+=======
+>>>>>>> 2925b211dbd929b6d179f3148b24f6fcec24ff9d
 function get_coa_group_type($coa_group_id){
 	$type = "";
  
