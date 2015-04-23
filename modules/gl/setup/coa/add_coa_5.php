@@ -1,6 +1,5 @@
 <?php
  
- 
 $account_group ="";
 $parent_account_id = "";
 $account_type = "";
@@ -59,5 +58,18 @@ $new_account =	add_coa(
 }
  
 
+/*
 
+if(isset($_POST['end']))
+{
+$account_code = $_POST['account_code'];
+$account_desc_short = $_POST['account_desc_short'];
+$account_desc_long  = $_POST['account_desc_long'];
+$add = add_coa($account_code,$group_id,$account_desc_short,$account_desc_long, $parent_account_id ,$username,$now,$username,$account_type);
+if ($add="True")
+	{
+	echo"<br> We create new account at this page and ask user to create another account or go to List  of accounts. Or we can redirect them to list of accounts.";
+		}
+}
+*/
 ?>
