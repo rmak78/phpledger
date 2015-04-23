@@ -147,7 +147,7 @@ DROP TABLE IF EXISTS `sa_test_fiscal_years`;
 
 CREATE TABLE `sa_test_fiscal_years` (
   `fiscal_year_id` int(11) NOT NULL AUTO_INCREMENT,
-  `fiscal_year_desc` varchar(200) DEFAULT NULL,
+  `fiscal_year_desc` varchar(255) DEFAULT NULL,
   `fiscal_year_start_date` date DEFAULT NULL,
   `fiscal_year_end_date` date DEFAULT NULL,
   `last_modified_by` varchar(255) DEFAULT NULL,
@@ -184,6 +184,28 @@ CREATE TABLE `sa_test_general_journal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `sa_test_general_journal` */
+
+/*Table structure for table `sa_test_reporting_periods` */
+
+DROP TABLE IF EXISTS `sa_test_reporting_periods`;
+
+CREATE TABLE `sa_test_reporting_periods` (
+  `reporting_period_id` int(11) NOT NULL AUTO_INCREMENT,
+  `fiscal_year_id` int(11) DEFAULT NULL,
+  `reporting_period_description` varchar(255) DEFAULT NULL,
+  `reporting_period_start_date` date DEFAULT NULL,
+  `reporting_period_end_date` date DEFAULT NULL,
+  `last_modified_by` varchar(255) DEFAULT NULL,
+  `last_modified_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_on` datetime DEFAULT NULL,
+  `rp_status` varchar(255) DEFAULT 'active',
+  PRIMARY KEY (`reporting_period_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+/*Data for the table `sa_test_reporting_periods` */
+
+insert  into `sa_test_reporting_periods`(`reporting_period_id`,`fiscal_year_id`,`reporting_period_description`,`reporting_period_start_date`,`reporting_period_end_date`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`rp_status`) values (1,1,NULL,NULL,'2015-08-31',NULL,'2015-04-23 16:34:29',NULL,NULL,'active'),(2,1,'Q2-2014','2014-09-01','2014-10-31',NULL,'2015-04-23 16:36:24',NULL,NULL,'active'),(3,1,'Q3-2014','2014-11-01','2015-01-31',NULL,'2015-04-23 16:37:19',NULL,NULL,'active');
 
 /*Table structure for table `sa_test_users` */
 
