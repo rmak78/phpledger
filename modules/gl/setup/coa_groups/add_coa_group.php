@@ -111,7 +111,7 @@ if(isset($_POST['submit']))
 						<input type="radio" name="account_type" value="statistics_only"> Statistics Only&nbsp;
 						</div>
 				</div>
-                <div class="form-group">
+                <div class="form-group" id="balance_sheet">
                         <label class="col-md-3 col-sm-3 control-label">Balance Sheet Side:</label>
 						 <div class="col-md-9 col-sm-9">
 						 <select class="form-control" required  name="balance_sheet_side" id="balance_sheet_side">
@@ -120,7 +120,7 @@ if(isset($_POST['submit']))
 						</select>
 						</div>
 				</div>
-				 <div class="form-group">
+				 <div class="form-group" id="pls">
                         <label class="col-md-3 col-sm-3 control-label">Profit &Loss Statements Side:</label>                         
 						<div class="col-md-9 col-sm-9">
 						<select class="form-control" required  name="pls_side" id="pls_side">
@@ -145,8 +145,8 @@ if(isset($_POST['submit']))
 					<div class="col-sm-3">
 					</div>
 					<div class="col-sm-9">
-                    <input type="submit" class='btn btn-primary' name="submit" value="SAVE">
-						<a class='btn btn-danger btn-lg pull-right' href="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa_groups/add_coa_group" ?>">Cancel & Restart &nbsp;<i class="fa fa-chevron-circle-right"></i></a>
+                    <input type="submit" class='btn btn-primary btn-lg ' name="submit" value="SAVE">
+					
 					</div>
 					</div>
 				 </div>
@@ -154,4 +154,26 @@ if(isset($_POST['submit']))
     </div><!-- /.box -->
 
 
-</section>		
+</section>
+<script>
+$(document).ready(function(){
+	$('div#pls').hide();
+	$("input:radio[name=account_type]").click(function() {
+    var value = $(this).val();
+	if(value=='pls_group'){
+		$('div#balance_sheet').hide();
+		$('div#pls').show();
+	}
+	else if(value=='balance_sheet'){
+		$('div#balance_sheet').show();
+		$('div#pls').hide();
+	}
+	else{
+		$('div#balance_sheet').hide();
+		$('div#pls').hide();
+	}
+	
+});
+});
+
+</script>		
