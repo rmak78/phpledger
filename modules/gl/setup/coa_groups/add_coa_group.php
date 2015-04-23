@@ -57,7 +57,7 @@ if(isset($_POST['submit']))
 
 ?>
     
-<div class="content-wrapper">	
+	
 	<section class="content-header">
           <h1>
            Add Chart of Account Group
@@ -71,66 +71,87 @@ if(isset($_POST['submit']))
         </section>
 		 <!-- Main content -->
  <section class="content">
-    <div class="row">
-<div class="col-md-10">
+    
         <!-- general form elements -->
-    <div class="box box-primary">
-                <div class="box-header">
+    <div class="box">
+                <div class="box-header with-border">
                   <h3 class="box-title">Provide the required fields</h3>
+				   <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+                <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+              </div>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form">
+                <form role="form"class="form-horizontal" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                   <div class="box-body">
                     <div class="form-group">
-								<label>Group Name:</label>
-									 <input class="controls" type="text" required name="group_code" id="group_code"
+								<label class="col-md-3 col-sm-3 control-label">Group Name:</label>
+								<div class="col-md-9 col-sm-9">
+									 <input class="form-control" type="text" required name="group_code" id="group_code"
 						   pattern="[A-Z0-9]{4}"  maxlength="4">
+								
 							 <p class="help-block">Must be length 4 and Capital characters only</p>
 							</div>
-							
+								</div>
 			    	
 					
                     <div class="form-group">
-						<label>Group Description:</label>
+						<label class="col-md-3 col-sm-3 control-label">Group Description:</label>
+						<div class="col-md-9 col-sm-9">
 						 <input class="form-control" type="text" required name="group_description" id="group_description">
+						</div>
 					</div>		
 					
 					
 				<div class="form-group">
-                        <label>Group Type:</label>
+                        <label class="col-md-3 col-sm-3 control-label">Group Type:</label>
+						<div class="col-md-9 col-sm-9">
 						<input type="radio" name="account_type" value="balance_sheet" checked> Balance Sheet&nbsp;
                         <input type="radio" name="account_type" value="pls_group"> Profit &Loss Statements Group&nbsp;
 						<input type="radio" name="account_type" value="statistics_only"> Statistics Only&nbsp;
+						</div>
 				</div>
                 <div class="form-group">
-                        <label>Balance Sheet Side:</label>
+                        <label class="col-md-3 col-sm-3 control-label">Balance Sheet Side:</label>
+						 <div class="col-md-9 col-sm-9">
 						 <select class="form-control" required  name="balance_sheet_side" id="balance_sheet_side">
 							<option value="debit">Debit</option>
 							<option value="credit">Credit</option>
 						</select>
+						</div>
 				</div>
 				 <div class="form-group">
-                        <label>Profit &Loss Statements Side:</label>                         
+                        <label class="col-md-3 col-sm-3 control-label">Profit &Loss Statements Side:</label>                         
+						<div class="col-md-9 col-sm-9">
 						<select class="form-control" required  name="pls_side" id="pls_side">
 							 <option value="income">Income</option>
 							<option value="expense">Expense</option>
 						</select>
+						</div>
 				</div>
 				<div class="form-group">
-					<label>Group Status:</label>
+					<label class="col-md-3 col-sm-3 control-label">Group Status:</label>
+					<div class="col-md-9 col-sm-9">
 					<select class="form-control"  required  name="group_status" id="group_status">
                         <option value="active">Active</option>
-                       <option value="in-active">In-Active</option>  
-                        </select>
+                        <option value="in-active">In-Active</option>  
+                    </select>
+					</div>
 				</div>
 					
 				</div><!-- /.box-body -->
                   <div class="box-footer">
+					<div class="form-group">
+					<div class="col-sm-3">
+					</div>
+					<div class="col-sm-9">
                     <input type="submit" class='btn btn-primary' name="submit" value="SAVE">
-                  </div>
+						<a class='btn btn-danger btn-lg pull-right' href="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa_groups/add_coa_group" ?>">Cancel & Restart &nbsp;<i class="fa fa-chevron-circle-right"></i></a>
+					</div>
+					</div>
+				 </div>
                 </form>
     </div><!-- /.box -->
-</div> 	
-</div>	
-</div>
+
+
 </section>		
