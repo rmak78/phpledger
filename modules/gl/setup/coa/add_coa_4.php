@@ -41,8 +41,8 @@ if (account_desc_exists($account_desc_short)){
 $current_level = get_account_level($parent_account_id) + 1 ;
 
 
-$company_max_account_levels = DB::queryFirstField("SELECT coa_levels FROM ".DB_PREFIX."companies where company_id = ".$_SESSION['company_id']);
-
+ 
+$company_max_account_levels = get_max_coa_levels();
 
 
 $field = "coa_level_".$current_level."_length";
@@ -225,8 +225,8 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 		<p class="help-block"> </p>
 	</div><!-- /.col -->
 </div> <!-- /form-group -->
-<div class="form-group  has-success">
-	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Account Code:</label>
+<div class="form-group  <?php if ($code_exists <> 1) { echo "has-success"; } else {echo "has-error";} ?>">
+	<label class="col-md-3 col-sm-3 control-label"><i class="fa <?php if ($code_exists <> 1) { echo "fa-check"; } else {echo "fa-times";} ?>"></i>&nbsp;Account Code:</label>
 		<div class="col-md-9 col-sm-9">
 		<div class="input-group">
           <div class="input-group-addon">
@@ -238,8 +238,8 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 		<p class="help-block"> </p>
 	</div><!-- /.col -->
 </div> <!-- /form-group --> 
-<div class="form-group  has-success">
-	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Short Description:</label>
+<div class="form-group  <?php if ($desc_exists <> 1) { echo "has-success"; } else {echo "has-error";} ?>">
+	<label class="col-md-3 col-sm-3 control-label"><i class="fa <?php if ($desc_exists <> 1) { echo "fa-check"; } else {echo "fa-times";} ?>"></i>&nbsp;Short Description:</label>
 		<div class="col-md-9 col-sm-9">
 		<div class="input-group">
           <div class="input-group-addon">
