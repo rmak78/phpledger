@@ -14,7 +14,7 @@ $tbl->addCell('Actions', '', 'header');
 $sql = 'SELECT * FROM '.DB_PREFIX.$_SESSION['co_prefix'].'reporting_periods ORDER by reporting_period_start_date';
 $get_rp = DB::query($sql);
 foreach($get_rp as $rp) {
-	$fiscal_year = DB::getFirstField("SELECT fiscal_year_desc FROM ".DB_PREFIX.$_SESSION['co_prefix']."fiscal_years WHERE fiscal_year_id =".$rp['fiscal_year_id']);
+	$fiscal_year = DB::queryFirstField("SELECT fiscal_year_desc FROM ".DB_PREFIX.$_SESSION['co_prefix']."fiscal_years WHERE fiscal_year_id =".$rp['fiscal_year_id']);
 	 
 $tbl->addRow();
 $tbl->addCell($fiscal_year);
