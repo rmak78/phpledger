@@ -1,4 +1,26 @@
 <?php
+//from function.php
+
+function get_coa_group_type($coa_group_id){
+	$type = "";
+// Get Group Type from db
+$sql = "SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa_groups WHERE group_code='".$coa_group_id."'" ;
+
+$group = DB::queryFirstRow($sql);
+
+if ( $group['balance_sheet_group'] == 1 ) {
+	$type = "Balance Sheet";
+} else if ( $group['pls_group'] == 1 ) {
+	$type = "P/L Statement";
+} else if ( $group['statistics_only'] == 1 ) {
+	$type = "Statistics Only";
+} else {
+	$type = "UnKnown" ;
+}
+	return $type;
+
+}
+
 function account_code_exists($account_code){
 		$sql = "SELECT count(*) FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_code='".$account_code."'" ;	
 		$account_exist = DB::queryFirstField($sql);
@@ -131,76 +153,6 @@ function update_coa( 	  $account_code
 	return $coa_id;
 
 }	
-/*	ZAHID: you need to explain this code to me!!!! 
-///////Add New  			
-if(isset($_POST['add'])){
-	$account_code= $_POST['account_code'];
-	$account_group = $_POST['account_group'];
-	$account_desc_short = $_POST['account_desc_short'];
-	$account_desc_long = $_POST['account_desc_long'];
-	$parent_account_id = $_POST['parent_account_id'];
-	$account_status = $_POST['account_status'];
-	$new_coa_id	= add_coa($account_code,$account_group,$account_desc_short, $account_desc_long, $parent_account_id,$account_status);
-							if ($new_coa_id) {
-							$message = "Successfully Added Chart Of Account";
- 							echo '<div id="success-alert" class="alert alert-success">
-   							<a href="#" class="close" data-dismiss="alert">
-      							&times;
-   							</a>
-   							<strong>Updated!</strong> Data Saved Succesfully.
-						 	</div>';
-											}
-										else {
-												$erro_message = "Unable to create , Check your Input!";
-											}
-						}
-						else {
-
-		// Retrive logged in user data ?????
-								$account_code= '';
-								$account_group = '';
-								$account_desc_short = '';
-								$account_desc_long = '';
-								$parent_account_id = '';
-								$account_status = '';
-							}
-if(isset($_POST['update'])){	
-								$coa_id	=$_GET['id'];
-								$account_code	= 	$_POST['account_code'];
-								$account_group 	= 	$_POST['account_group'];
-								$account_desc_short = $_POST['account_desc_short'];
-								$account_desc_long 	= $_POST['account_desc_long'];
-								$parent_account_id 	= $_POST['parent_account_id'];
-								$account_status 	= 	$_POST['account_status'];
-								$update = update_coa($account_code,$account_group,$account_desc_short, $account_desc_long, $parent_account_id,$account_status);
-								if ($update) {
-								echo '<div id="success-alert" class="alert alert-success">
-										<a href="#" class="close" data-dismiss="alert">
-										&times;
-										</a>
-									  Created Successfully.
-									</div>';
-											} 
-								else {
-								$erro_message = "Unable to create , Check your Input!";
-									}		
-		
-							}
-							 else {
-
-						// Retrive COA data 
-								$sql_coa = "SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_id ='".$coa_id."'";
-								$coa_info = DB::queryFirstRow($sql_coa);
-								$account_code= $coa_info['account_code'];
-								$account_group = $coa_info['account_group'];
-								$account_desc_short = $coa_info['account_desc_short'];
-								$account_desc_long = $coa_info['account_desc_long'];
-								$parent_account_id = $coa_info['parent_account_id'];
-								$account_status = $coa_info['account_status'];
-							}							
-		
-
-*/
 function get_coa_group_type($coa_group_id){
 	$type = "";
  
