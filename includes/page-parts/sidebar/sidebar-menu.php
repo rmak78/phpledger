@@ -35,13 +35,30 @@
 						</ul>
               		</li>
 					<li>
-							<a href="#">Financial Period</span><i class="fa fa-angle-left pull-right"></i></a>
+							<a href="#">Financial Periods</span><i class="fa fa-angle-left pull-right"></i></a>
 							<ul class="treeview-menu">
 							<li>
-								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/financial_period/fiscal_year">Fiscal Year</a>
+								<a href="#">Fiscal Years</span><i class="fa fa-angle-left pull-right"></i></a>
+							
+									<ul class="treeview-menu">
+									<li>
+									<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/financial_period/fiscal_year">Add Fiscal Year</a>
+									</li>
+									<li>
+									<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/financial_period/list_fiscal_year">List Fiscal Year</a>
+									</li>
+									</ul>
 							</li>
 							<li>
-								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/financial_period/reporting_periods">Reporting periods</a>
+								<a href="#">Reporting periods</span><i class="fa fa-angle-left pull-right"></i></a>
+									<ul class="treeview-menu">
+									<li>
+									<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/financial_period/reporting_periods">Add Reporting periods</a>
+									</li>
+									<li>
+									<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/financial_period/list_reporting_periods">List Fiscal Year</a>
+									</li>
+									</ul>
 							</li>
 							</ul>
 					</li>
