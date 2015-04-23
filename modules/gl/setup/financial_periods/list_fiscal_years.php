@@ -17,8 +17,8 @@ foreach($get_fy as $fy) {
 $tbl->addRow();
 $tbl->addCell($fy['fiscal_year_id']);
 $tbl->addCell($fy['fiscal_year_desc']);
-$tbl->addCell($fy['fiscal_year_start_date']);
-$tbl->addCell($fy['fiscal_year_end_date']);
+$tbl->addCell(getDateTime($fy['fiscal_year_start_date'],"dtShort"));
+$tbl->addCell(getDateTime($fy['fiscal_year_end_date'],"dtShort"));
 $tbl->addCell($fy['fy_status']);
 $tbl->addCell("<a class='pull btn btn-danger btn-xs' href ='".$_SERVER['PHP_SELF']."?route=modules/gl/setup/financial_periods/edit_fiscal_year&fisca_year_id=".$fy['fiscal_year_id']."'>Edit Fiscal Year&nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a>
 			   ");
