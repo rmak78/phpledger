@@ -31,8 +31,17 @@
 							<li>
 								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/coa/add_coa">Add New Account</a>
 							</li>
+							
 						</ul>
               		</li>
+					<li>
+							<a href="#">Financial Year</span><i class="fa fa-angle-left pull-right"></i></a>
+							<ul class="treeview-menu">
+							<li>
+								<a href="#">Reporting periods</a>
+							</li>
+							</ul>
+					</li>
 			</ul>
 		</li>	 	
     		<li>
