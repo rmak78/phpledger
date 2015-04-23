@@ -8,11 +8,11 @@ $account_desc_long = "";
 $code_exists = 0;
 $desc_exists = 0;
 if(isset($_POST['account_group'])){
-	$group_id = $_POST['account_group'];
-}
-if(isset($_POST['parent_account'])){
-	$parent_account_id = $_POST['parent_account'];
-}
+									$group_id = $_POST['account_group'];
+									}
+	if(isset($_POST['parent_account'])){
+											$parent_account_id = $_POST['parent_account'];
+										}
 if(isset($_POST['account_type'])){
 	$account_type = $_POST['account_type'];
 }
@@ -232,6 +232,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
           <div class="input-group-addon">
             <i class="fa fa-book"></i>
           </div>
+
           <input required="reqired" type="text" name="account_code" class="masked form-control" data-inputmask="'mask': '<?php echo $mask;?>'" data-autoclear="true" placeholder="<?php echo $placeholder;?>" value="<?php echo $account_code;?>" / >
           </div><!-- /.input group -->
                 
@@ -254,6 +255,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 <div class="form-group has-success">
 	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Longer Description:</label>
 		<div class="col-md-9 col-sm-9">
+
 <textarea  name="account_desc_long" class="form-control textarea"  ><?php echo $account_desc_long;?></textarea>
                 
 		<p class="help-block"> </p>
