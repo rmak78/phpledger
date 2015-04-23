@@ -35,6 +35,7 @@ function get_db_co_prefix($company_id) {
 	} else {
 	return '' ;
 	}
+}
 function get_company_details($company_id) {
 	//get company details from DB and outputs an array about company
 	$sql = "SELECT * FROM ".DB_PREFIX."companies WHERE company_id = ".$company_id;

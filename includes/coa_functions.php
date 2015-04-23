@@ -1,25 +1,5 @@
 <?php
-//from function.php
 
-function get_coa_group_type($coa_group_id){
-	$type = "";
-// Get Group Type from db
-$sql = "SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa_groups WHERE group_code='".$coa_group_id."'" ;
-
-$group = DB::queryFirstRow($sql);
-
-if ( $group['balance_sheet_group'] == 1 ) {
-	$type = "Balance Sheet";
-} else if ( $group['pls_group'] == 1 ) {
-	$type = "P/L Statement";
-} else if ( $group['statistics_only'] == 1 ) {
-	$type = "Statistics Only";
-} else {
-	$type = "UnKnown" ;
-}
-	return $type;
-
-}
 
 function account_code_exists($account_code){
 		$sql = "SELECT count(*) FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_code='".$account_code."'" ;	
