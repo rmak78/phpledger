@@ -229,7 +229,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 <div class="form-group">
 	<label class="col-md-3 col-sm-3 control-label">Longer Description:</label>
 		<div class="col-md-9 col-sm-9">
-<textarea  name="account_desc_short" class="form-control textarea"  ></textarea>
+<textarea  name="account_desc_long" class="form-control textarea"  ></textarea>
                 
 		<p class="help-block"> </p>
 	</div><!-- /.col -->

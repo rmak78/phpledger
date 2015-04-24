@@ -3,19 +3,19 @@ $group_id="";
 $parent_account_id = "";
 
 if(isset($_POST['account_group'])){
-	$group_id = $_POST['account_group'];
-}
-if(isset($_POST['parent_account'])){
-	$parent_account_id = $_POST['parent_account'];
-}
+									$group_id = $_POST['account_group'];
+									}
+	if(isset($_POST['parent_account'])){
+											$parent_account_id = $_POST['parent_account'];
+										}
 if(isset($_POST['account_type'])){
-	$account_type = $_POST['account_type'];
-}
+									$account_type = $_POST['account_type'];
+									}
 function get_account_level($parent_account_id) {
 	$level = DB::queryFirstField("SELECT coa_level FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_id =".$parent_account_id);
 	
 	return $level;
-}
+	}
 
 $current_level = get_account_level($parent_account_id) + 1 ;
 
@@ -211,7 +211,9 @@ $placeholder =  str_replace("\\\9", "9", $mask);
           <div class="input-group-addon">
             <i class="fa fa-book"></i>
           </div>
-          <input required="reqired" type="text" name="account_code" class="masked form-control" data-inputmask="'mask': '<?php echo $mask;?>'" data-autoclear="true" placeholder="<?php echo $placeholder;?>" / >
+		  <input type="hidden" name="account_code" value="<?php echo $_POST['account_code'];?>" />
+          <input disabled="disabled" type="text" name="account_code" Value="<?php echo $_POST['account_code'];?>" class="masked form-control" data-inputmask="'mask': '<?php echo $mask;?>'"		  
+		  data-autoclear="true" placeholder="<?php echo $placeholder;?>" / >
           </div><!-- /.input group -->
                 
 		<p class="help-block"> </p>
@@ -224,7 +226,8 @@ $placeholder =  str_replace("\\\9", "9", $mask);
           <div class="input-group-addon">
             <i class="fa fa-tag"></i>
           </div>
-          <input type="text" name="account_desc_short" class="form-control" required="required" />
+		  <input type="hidden" name="account_desc_short" value="<?php echo $_POST['account_desc_short'];?>" />
+          <input disabled="disabled" type="text" name="account_desc_short" value="<?php echo $_POST['account_desc_short'];?>" class="form-control"/>
           </div><!-- /.input group -->
                 
 		<p class="help-block"> </p>
@@ -233,7 +236,8 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 <div class="form-group">
 	<label class="col-md-3 col-sm-3 control-label">Longer Description:</label>
 		<div class="col-md-9 col-sm-9">
-<textarea  name="account_desc_short" class="form-control textarea"  ></textarea>
+	<input type="hidden" name="account_desc_long" value="<?php echo $_POST['account_desc_long'];?>" />
+<textarea disabled="disabled"  name="account_desc_long" class="form-control textarea"><?php echo $_POST['account_desc_long']; ?></textarea>
                 
 		<p class="help-block"> </p>
 	</div><!-- /.col -->

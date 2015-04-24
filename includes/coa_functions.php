@@ -7,7 +7,11 @@ function add_coa( 	  $account_code
 					, $account_desc_short
 					, $account_desc_long
 					, $parent_account_id
-					, $account_status
+					, $username
+					, $now
+					, $username
+					, $account_type
+					
 					) 
 {
 
@@ -22,13 +26,13 @@ function add_coa( 	  $account_code
 			'last_modified_on' => $now,
 			'created_by' => $username,
 			'created_on' => $now,
-			'account_status' => $account_status
+			'account_status' => $account_type
 			)  
 	);
 			
 		$new_coa_id =DB::insertId();
 		
-		return $new_coa_id;
+		return True;
 } // Add new COA Function ends
 
 
