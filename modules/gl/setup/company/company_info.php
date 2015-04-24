@@ -305,7 +305,7 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 								$code_sample = " ";
 									$x1=$company['coa_level_'.$i.'_length'];
 										while ($x1 <> 0) {
-												$code_sample .= "X";
+												$code_sample= "X";
 												$x1 = $x1-1;
 												}
 								echo "Level ".$i." : ".$code_sample."<br>";
