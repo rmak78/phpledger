@@ -14,15 +14,6 @@ if(isset($_POST['account_group'])){
 											$parent_account_id = $_POST['parent_account'];
 										}
 if(isset($_POST['account_type'])){
-<<<<<<< HEAD
-									$account_type = $_POST['account_type'];
-									}
-function get_account_level($parent_account_id) {
-	$level = DB::queryFirstField("SELECT coa_level FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_id =".$parent_account_id);
-	
-	return $level;
-	}
-=======
 	$account_type = $_POST['account_type'];
 }
 if(isset($_POST['account_code'])){
@@ -45,7 +36,6 @@ if (account_desc_exists($account_desc_short)){
 	$desc_exists = 1;
 	
 } 
->>>>>>> 86d31fc1dae380cdde33e1270066770f5113eecc
 
 
 $current_level = get_account_level($parent_account_id) + 1 ;
@@ -242,13 +232,8 @@ $placeholder =  str_replace("\\\9", "9", $mask);
           <div class="input-group-addon">
             <i class="fa fa-book"></i>
           </div>
-<<<<<<< HEAD
-		  <input type="hidden" name="account_code" value="<?php echo $_POST['account_code'];?>" />
-          <input disabled="disabled" type="text" name="account_code" Value="<?php echo $_POST['account_code'];?>" class="masked form-control" data-inputmask="'mask': '<?php echo $mask;?>'"		  
-		  data-autoclear="true" placeholder="<?php echo $placeholder;?>" / >
-=======
+
           <input required="reqired" type="text" name="account_code" class="masked form-control" data-inputmask="'mask': '<?php echo $mask;?>'" data-autoclear="true" placeholder="<?php echo $placeholder;?>" value="<?php echo $account_code;?>" / >
->>>>>>> 86d31fc1dae380cdde33e1270066770f5113eecc
           </div><!-- /.input group -->
                 
 		<p class="help-block"> </p>
@@ -261,12 +246,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
           <div class="input-group-addon">
             <i class="fa fa-tag"></i>
           </div>
-<<<<<<< HEAD
-		  <input type="hidden" name="account_desc_short" value="<?php echo $_POST['account_desc_short'];?>" />
-          <input disabled="disabled" type="text" name="account_desc_short" value="<?php echo $_POST['account_desc_short'];?>" class="form-control"/>
-=======
           <input type="text" value="<?php echo $account_desc_short;?>" name="account_desc_short" class="form-control" required="required" />
->>>>>>> 86d31fc1dae380cdde33e1270066770f5113eecc
           </div><!-- /.input group -->
                 
 		<p class="help-block"> </p>
@@ -275,12 +255,8 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 <div class="form-group has-success">
 	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Longer Description:</label>
 		<div class="col-md-9 col-sm-9">
-<<<<<<< HEAD
-	<input type="hidden" name="account_desc_long" value="<?php echo $_POST['account_desc_long'];?>" />
-<textarea disabled="disabled"  name="account_desc_long" class="form-control textarea"><?php echo $_POST['account_desc_long']; ?></textarea>
-=======
+
 <textarea  name="account_desc_long" class="form-control textarea"  ><?php echo $account_desc_long;?></textarea>
->>>>>>> 86d31fc1dae380cdde33e1270066770f5113eecc
                 
 		<p class="help-block"> </p>
 	</div><!-- /.col -->
