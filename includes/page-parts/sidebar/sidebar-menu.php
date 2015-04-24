@@ -31,8 +31,20 @@
 							<li>
 								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/coa/add_coa">Add New Account</a>
 							</li>
+							
 						</ul>
               		</li>
+					<li>
+							<a href="#">Financial Period</span><i class="fa fa-angle-left pull-right"></i></a>
+							<ul class="treeview-menu">
+							<li>
+								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/financial_period/fiscal_year">Fiscal Year</a>
+							</li>
+							<li>
+								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/financial_period/reporting_periods">Reporting periods</a>
+							</li>
+							</ul>
+					</li>
 			</ul>
 		</li>	 	
     		<li>
