@@ -1,4 +1,6 @@
 <?php
+
+
 function account_code_exists($account_code){
 		$sql = "SELECT count(*) FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_code='".$account_code."'" ;	
 		$account_exist = DB::queryFirstField($sql);
@@ -130,7 +132,10 @@ function update_coa( 	  $account_code
 	return $coa_id;
 
 }	
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2925b211dbd929b6d179f3148b24f6fcec24ff9d
 function get_coa_group_type($coa_group_id){
 	$type = "";
  
