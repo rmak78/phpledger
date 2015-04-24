@@ -11,11 +11,7 @@ if(isset($_POST['parent_account'])){
 if(isset($_POST['account_type'])){
 	$account_type = $_POST['account_type'];
 }
-function get_account_level($parent_account_id) {
-	$level = DB::queryFirstField("SELECT coa_level FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_id =".$parent_account_id);
-	
-	return $level;
-}
+
 
 $current_level = get_account_level($parent_account_id) + 1 ;
 
@@ -127,8 +123,8 @@ $placeholder =  str_replace("\\\9", "9", $mask);
         </div>
       </div>
 <form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/add_coa_4" ?>">
-	<div class="form-group">
-		<label class="col-md-3 col-sm-3 control-label">Account Group:
+	<div class="form-group has-success">
+		<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Account Group:
 		</label>
         <div class="col-md-9 col-sm-9">
 <input type="hidden" name="account_group" value="<?php echo $group_id; ?>" />
@@ -153,8 +149,8 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 			<p class="help-block"> </p>
 		</div>
 	</div>
-<div class="form-group">
-	<label class="col-md-3 col-sm-3 control-label">Parent Account:</label>
+<div class="form-group has-success">
+	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Parent Account:</label>
 		<div class="col-md-9 col-sm-9">
 <input type="hidden" name="parent_account" value="<?php echo $parent_account_id; ?>" />
 						 <select disabled="disabled" class="form-control" name="parent_account">
@@ -186,8 +182,8 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 	</div><!-- /.col -->
 </div> <!-- /form-group -->
 <input type="hidden" name="account_type" value="<?php echo $account_type; ?>" /> 
-<div class="form-group">
-	<label class="col-md-3 col-sm-3 control-label">Account Type:</label>
+<div class="form-group  has-success">
+	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Account Type:</label>
 		<div class="col-md-9 col-sm-9">
 			<div class="col-md-4 col-sm-4">
  		   		<input disabled="disabled" type="radio" <?php if($account_type == "consolidate_only") { echo 'checked="checked"';} ?> value="consolidate_only"   name="account_type" class="col-sm-2 line-blue"  />

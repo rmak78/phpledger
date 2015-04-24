@@ -129,4 +129,35 @@ function col_index($string , $line){
 		else return $i;
 		
 	}
-	 
+
+function parseTree($root, $arr) {
+        $return = array();
+        # Traverse the tree and search for direct children of the root
+        foreach($arr as $child => $parent) {
+            # A direct child is found
+            if($parent == $root) {
+                # Remove item from tree (we don't need to traverse this again)
+                unset($arr[$child]);
+                # Append the child into result array and parse it's children
+                $return[] = array(
+                    'name' => $child,
+                    'children' => parseTree($child, $arr)
+                );
+            }
+        }
+        return empty($return) ? null : $return;    
+    }
+    
+function printTree($arr) {
+        if(!is_null($arr) && count($arr) > 0) {
+            echo '<ul>';
+            foreach($arr as $node) {
+                echo "<li>".  $node['sect_name'] . "";
+                if (array_key_exists('children', $node)) {
+                    printTree($node['children']);
+                }
+                echo '</li>';
+            }
+            echo '</ul>';
+        }
+    } 

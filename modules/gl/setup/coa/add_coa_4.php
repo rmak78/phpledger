@@ -1,7 +1,12 @@
 <?php
 $group_id="";
 $parent_account_id = "";
-
+$account_type = "";
+$account_code = "";
+$account_desc_short = "";
+$account_desc_long = "";
+$code_exists = 0;
+$desc_exists = 0;
 if(isset($_POST['account_group'])){
 									$group_id = $_POST['account_group'];
 									}
@@ -9,6 +14,7 @@ if(isset($_POST['account_group'])){
 											$parent_account_id = $_POST['parent_account'];
 										}
 if(isset($_POST['account_type'])){
+<<<<<<< HEAD
 									$account_type = $_POST['account_type'];
 									}
 function get_account_level($parent_account_id) {
@@ -16,12 +22,37 @@ function get_account_level($parent_account_id) {
 	
 	return $level;
 	}
+=======
+	$account_type = $_POST['account_type'];
+}
+if(isset($_POST['account_code'])){
+	$account_code = $_POST['account_code'];
+}
+if(isset($_POST['account_desc_short'])){
+	$account_desc_short = $_POST['account_desc_short'];
+}
+if(isset($_POST['account_desc_long'])){
+	$account_desc_long = $_POST['account_desc_long'];
+}
+
+//check if account code already exists
+if (account_code_exists($account_code)){
+	$code_exists  = 1;
+	
+}
+	//check if account desc already exists
+if (account_desc_exists($account_desc_short)){
+	$desc_exists = 1;
+	
+} 
+>>>>>>> 86d31fc1dae380cdde33e1270066770f5113eecc
+
 
 $current_level = get_account_level($parent_account_id) + 1 ;
 
 
-$company_max_account_levels = DB::queryFirstField("SELECT coa_levels FROM ".DB_PREFIX."companies where company_id = ".$_SESSION['company_id']);
-
+ 
+$company_max_account_levels = get_max_coa_levels();
 
 
 $field = "coa_level_".$current_level."_length";
@@ -131,8 +162,8 @@ $placeholder =  str_replace("\\\9", "9", $mask);
                     <p>Please review following information & press save to create new GL Account. Some information can not be edited after you press save and this account cannot be deleted once any transaction happens. so caution is neccesary.</p>
 </div>     
 <form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/add_coa_5" ?>">
-	<div class="form-group">
-		<label class="col-md-3 col-sm-3 control-label">Account Group:
+	<div class="form-group  has-success">
+		<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Account Group:
 		</label>
         <div class="col-md-9 col-sm-9">
 <input type="hidden" name="account_group" value="<?php echo $group_id; ?>" />
@@ -157,8 +188,8 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 			<p class="help-block"> </p>
 		</div>
 	</div>
-<div class="form-group">
-	<label class="col-md-3 col-sm-3 control-label">Parent Account:</label>
+<div class="form-group has-success">
+	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Parent Account:</label>
 		<div class="col-md-9 col-sm-9">
 <input type="hidden" name="parent_account" value="<?php echo $parent_account_id; ?>" />
 						 <select disabled="disabled" class="form-control" name="parent_account">
@@ -190,8 +221,8 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 	</div><!-- /.col -->
 </div> <!-- /form-group -->
 <input type="hidden" name="account_type" value="<?php echo $account_type; ?>" /> 
-<div class="form-group">
-	<label class="col-md-3 col-sm-3 control-label">Account Type:</label>
+<div class="form-group  has-success">
+	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Account Type:</label>
 		<div class="col-md-9 col-sm-9">
 			<div class="col-md-4 col-sm-4">
  		   		<input disabled="disabled" type="radio" <?php if($account_type == "consolidate_only") { echo 'checked="checked"';} ?> value="consolidate_only"   name="account_type" class="col-sm-2 line-blue"  />
@@ -204,40 +235,52 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 		<p class="help-block"> </p>
 	</div><!-- /.col -->
 </div> <!-- /form-group -->
-<div class="form-group">
-	<label class="col-md-3 col-sm-3 control-label">Account Code:</label>
+<div class="form-group  <?php if ($code_exists <> 1) { echo "has-success"; } else {echo "has-error";} ?>">
+	<label class="col-md-3 col-sm-3 control-label"><i class="fa <?php if ($code_exists <> 1) { echo "fa-check"; } else {echo "fa-times";} ?>"></i>&nbsp;Account Code:</label>
 		<div class="col-md-9 col-sm-9">
 		<div class="input-group">
           <div class="input-group-addon">
             <i class="fa fa-book"></i>
           </div>
+<<<<<<< HEAD
 		  <input type="hidden" name="account_code" value="<?php echo $_POST['account_code'];?>" />
           <input disabled="disabled" type="text" name="account_code" Value="<?php echo $_POST['account_code'];?>" class="masked form-control" data-inputmask="'mask': '<?php echo $mask;?>'"		  
 		  data-autoclear="true" placeholder="<?php echo $placeholder;?>" / >
+=======
+          <input required="reqired" type="text" name="account_code" class="masked form-control" data-inputmask="'mask': '<?php echo $mask;?>'" data-autoclear="true" placeholder="<?php echo $placeholder;?>" value="<?php echo $account_code;?>" / >
+>>>>>>> 86d31fc1dae380cdde33e1270066770f5113eecc
           </div><!-- /.input group -->
                 
 		<p class="help-block"> </p>
 	</div><!-- /.col -->
 </div> <!-- /form-group --> 
-<div class="form-group">
-	<label class="col-md-3 col-sm-3 control-label">Short Description:</label>
+<div class="form-group  <?php if ($desc_exists <> 1) { echo "has-success"; } else {echo "has-error";} ?>">
+	<label class="col-md-3 col-sm-3 control-label"><i class="fa <?php if ($desc_exists <> 1) { echo "fa-check"; } else {echo "fa-times";} ?>"></i>&nbsp;Short Description:</label>
 		<div class="col-md-9 col-sm-9">
 		<div class="input-group">
           <div class="input-group-addon">
             <i class="fa fa-tag"></i>
           </div>
+<<<<<<< HEAD
 		  <input type="hidden" name="account_desc_short" value="<?php echo $_POST['account_desc_short'];?>" />
           <input disabled="disabled" type="text" name="account_desc_short" value="<?php echo $_POST['account_desc_short'];?>" class="form-control"/>
+=======
+          <input type="text" value="<?php echo $account_desc_short;?>" name="account_desc_short" class="form-control" required="required" />
+>>>>>>> 86d31fc1dae380cdde33e1270066770f5113eecc
           </div><!-- /.input group -->
                 
 		<p class="help-block"> </p>
 	</div><!-- /.col -->
 </div> <!-- /form-group --> 
-<div class="form-group">
-	<label class="col-md-3 col-sm-3 control-label">Longer Description:</label>
+<div class="form-group has-success">
+	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Longer Description:</label>
 		<div class="col-md-9 col-sm-9">
+<<<<<<< HEAD
 	<input type="hidden" name="account_desc_long" value="<?php echo $_POST['account_desc_long'];?>" />
 <textarea disabled="disabled"  name="account_desc_long" class="form-control textarea"><?php echo $_POST['account_desc_long']; ?></textarea>
+=======
+<textarea  name="account_desc_long" class="form-control textarea"  ><?php echo $account_desc_long;?></textarea>
+>>>>>>> 86d31fc1dae380cdde33e1270066770f5113eecc
                 
 		<p class="help-block"> </p>
 	</div><!-- /.col -->
@@ -250,7 +293,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 	</div>	<!-- /.col -->
 </div>		<!-- /form-group -->	   
 </form>
-            <!-- Add Account Form Goes here -->
+            <!-- /Add Account Form  -->
              </div><!-- /.box-body -->
             <div class="box-footer">
              <small> Please do not make changes to these unless you are really sure what you are doing. making changes here have system wide impact</small>
