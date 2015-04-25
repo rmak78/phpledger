@@ -176,4 +176,23 @@ function get_max_coa_levels( ) {
 	return $company_max_account_levels;
 
 }
+// to check Fiscal year
+function get_fiscal_year_id($check_date){
+$selected_fy= DB::queryFirstField("SELECT fiscal_year_id FROM ".DB_PREFIX.$_SESSION['co_prefix']."fiscal_years WHERE '".$check_date."'>= fiscal_year_start_date AND '".$check_date."'<= fiscal_year_end_date");
+		$fiscal_year_id=$selected_fy['fiscal_year_id'];
+			if($fiscal_year_id)
+			{
+			return $fiscal_year_id;
+			}
+}
+function get_reporting_period_id($check_rp){
+$selected_rp= DB::queryFirstField("SELECT reporting_period_id FROM ".DB_PREFIX.$_SESSION['co_prefix']."reporting_periods WHERE '".$check_rp."'>= reporting_period_start_date AND '".$check_rp."'<= reporting_period_end_date");
+		$reporting_period_id=$selected_rp['reporting_period_id'];
+			if($reporting_period_id)
+			{
+			return $reporting_period_id;
+			}
+}
+
+
 ?>
