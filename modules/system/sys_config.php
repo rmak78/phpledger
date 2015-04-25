@@ -20,7 +20,7 @@ $tbl->addCell($config['key']);
 $tbl->addCell($config['key_label']);
 $tbl->addCell($config['key_help_text']);
 $tbl->addCell($config['value']);
-$tbl->addCell("<a class='pull btn btn-danger btn-xs' href ='".$_SERVER['PHP_SELF']."?route=modules/system/edit_sys_config&config_id=".$config['config_id']."'>Edit System Configrations &nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a>
+$tbl->addCell("<a data-toggle = 'modal' href ='#edit_system_configuration' class='pull btn btn-danger btn-xs' >Edit System Configrations &nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a>
 			   ");
 			   }
 $tbl->addRow();
@@ -29,7 +29,7 @@ $tbl->addCell('<input type="text" name="key" value=""/>');
 $tbl->addCell('<input type="text" name="key_label" value=""/>');
 $tbl->addCell('<input type="text" name="key_help_text" value=""/>');
 $tbl->addCell('<input type="text" name="value" value=""/>');
-$tbl->addCell("<a class='btn btn-primary' href ='#'>Save &nbsp;&nbsp;<span class='glyphicon glyphicons-disk-saved'></span></a>");
+$tbl->addCell("<a   class='btn btn-primary'  href ='#'>Save &nbsp;&nbsp;<span class='glyphicon glyphicons-disk-saved'></span></a>");
 
 
 			  
@@ -65,3 +65,30 @@ $tbl->addCell("<a class='btn btn-primary' href ='#'>Save &nbsp;&nbsp;<span class
             </div><!-- /.box-footer-->
           </div><!-- /.box -->
      	 </section><!-- /.content -->
+		
+
+		 
+		      <!-- Modal -->
+<div class="modal fade" id="edit_system_configuration" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+         <div class="modal-content">
+          <div class="modal-header">
+           
+            <h3>Edit System Configrations</h3>
+          </div>
+          <div class="modal-body">
+           <h1>Edit system configration</h1>
+          </div>
+          <div class="modal-footer">
+           <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary" type="button" name="submit_button" id="submit_button">Sign in</button>
+          
+           
+       
+      </div>
+       <p align="center"> Php Ladger.com </p>
+        </div>
+        </div> 
+
+</div>
