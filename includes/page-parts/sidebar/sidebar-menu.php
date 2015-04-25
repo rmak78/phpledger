@@ -77,7 +77,7 @@
 								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/transactions/expense/add_expense_voucher">Add Expense Voucher</a>
 							</li>
 							<li>
-								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/transactions/expense/view_expense_voucher">View Expense Vouchers</a>
+								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/transactions/expense/view_expense_vouchers">View Expense Vouchers</a>
 							</li>
 							
 						</ul>
