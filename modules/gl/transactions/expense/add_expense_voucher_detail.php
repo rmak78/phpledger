@@ -65,8 +65,8 @@
                         <td>
 						<img src="" height="50" width="50"/> 
 						</td>
-                        <td><a href="#" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;Delete</a>
-						<a href="#" class="btn btn-success"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+                        <td><a href="#delExpenseDetailModal" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash"></i>&nbsp;Delete</a>
+						<a href="#editExpenseDetailModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
 						</td>
                       </tr>
 					</tbody>
@@ -79,21 +79,8 @@
               <p class="lead">Amount Due 2/22/2014</p>
               <div class="table-responsive">
                 <table class="table">
-                  <tr>
-                    <th style="width:50%">Subtotal:</th>
-                    <td>$250.30</td>
-                  </tr>
-                  <tr>
-                    <th>Tax (9.3%)</th>
-                    <td>$10.34</td>
-                  </tr>
-                  <tr>
-                    <th>Shipping:</th>
-                    <td>$5.80</td>
-                  </tr>
-                  <tr>
                     <th>Total:</th>
-                    <td>$265.24</td>
+                    <td>500</td>
                   </tr>
                 </table>
               </div>
@@ -104,7 +91,6 @@
           <div class="row no-print">
             <div class="col-xs-12">
               <a href="invoice-print.php" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-              <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
               <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
             </div>
           </div>
@@ -118,14 +104,115 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Add Detail</h4>
+                <h4 class="modal-title">Add Expense Detail</h4>
             </div>
             <div class="modal-body">
+				 <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label class="control-label col-sm-4" for="expense_type">Expense Type:</label>
+      <div class="col-sm-8">
+        <select class="form-control" id="expense_type" name="expense_type">
+			<option>Option1</option>
+			<option>Option2</option>
+		</select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4" for="expense_detail">Expense Detail:</label>
+      <div class="col-sm-8">          
+        <input type="text" class="form-control" id="expense_detail" name="expense_detail" placeholder="Expense Detail">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4" for="expense_ammount">Expense Ammount:</label>
+      <div class="col-sm-8">          
+        <input type="text" class="form-control" id="expense_ammount" name="expense_ammount" placeholder="Expense Ammount">
+      </div>
+    </div>
+	<div class="form-group">
+      <label class="control-label col-sm-4" for="expense_ammount">Expense Attachment:</label>
+      <div class="col-sm-8">          
+        <input type="file" id="expense_attachment" name="expense_attachment">
+      </div>
+    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary">Save</button>
             </div>
+			</form>
         </div>
     </div>
-</div>		
+</div>	
+
+<!-- Modal Edit Detail -->
+
+<div id="editExpenseDetailModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Edit Expense Detail</h4>
+            </div>
+            <div class="modal-body">
+				 <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label class="control-label col-sm-4" for="expense_type">Expense Type:</label>
+      <div class="col-sm-8">
+        <select class="form-control" id="expense_type" name="expense_type">
+			<option>Option1</option>
+			<option>Option2</option>
+		</select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4" for="expense_detail">Expense Detail:</label>
+      <div class="col-sm-8">          
+        <input type="text" class="form-control" id="expense_detail" name="expense_detail" placeholder="Expense Detail">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4" for="expense_ammount">Expense Ammount:</label>
+      <div class="col-sm-8">          
+        <input type="text" class="form-control" id="expense_ammount" name="expense_ammount" placeholder="Expense Ammount">
+      </div>
+    </div>
+	<div class="form-group">
+      <label class="control-label col-sm-4" for="expense_ammount">Expense Attachment:</label>
+      <div class="col-sm-8">          
+        <input type="file" id="expense_attachment" name="expense_attachment">
+      </div>
+    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+			</form>
+        </div>
+    </div>
+</div>	
+
+<!-- Delete Modal Expense Detail -->
+<div class="modal fade" id="delExpenseDetailModal" tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="delModalLabel">Confirm Delete</h4>
+      </div>
+<form role="form" method="POST"  id="frmdel2" name="delete" action="" class="form-inline" >
+ 
+      <div class="modal-body bg-warning">
+       Are you sure you want to delete this Expense Detail..
+				<input type="hidden" name="voucher_detail_id" id="voucher_detail_id" value="0" />
+		<input type="hidden" name="operation" id="delVoucherDetail" value="delVoucherDetail" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="submitdeladj btn btn-danger">Delete</button>
+      </div>
+	  </form>
+    </div>
+  </div>
+</div>
