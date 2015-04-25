@@ -1,80 +1,76 @@
-  <!-- Main content -->
-<section class="content">
+<!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+          	Expense Voucher
+            <small>Create Expense Voucher (Draft)</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="<?php echo SITE_ROOT; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Expense Vouchers</a></li>
+            <li class="active">Add New Expense Voucher</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
  <!-- Default box -->
-        <div class="box">
+          <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Create Expense Voucher (Draft)</h3>
+              <h3 class="box-title">Create Expense Voucher (Header)</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
                 <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
-			<div class="box-body">
-				<form class="form-inline">
-					<div class="form-group">
-						<label class="control-label col-sm-6">Voucher Ref#&nbsp;</label>
-						<input class="form-control" required="required" name="voucher_ref" id="voucher_ref" value="" />
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-6">Voucher Tags&nbsp;</label>
-						<input required="required" class="form-control" name="voucher_tags" type="text" ></textarea>	
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-6">Voucher Date&nbsp;</label>
-						<input name="voucher_date" required="required" id="voucher_date"   class="date-picker form-control" size="16" type="text" value="">
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-6">Voucher Status&nbsp;</label>
-						<input required="required" class="form-control" name="voucher_status" type="text" disabled="" value="Draft"></textarea>	
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-6">Paid From Account&nbsp;</label>	
+<div class="box-body">
+     <div class="progress">
+		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+        <span class="sr-only">50% Complete  </span>
+        </div>
+      </div>
+<form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/transactions/expense/add_expense_voucher_detail" ?>">
+				<div class="form-group">
+					<label class="col-md-3 col-sm-3 control-label">Voucher Ref#&nbsp;</label>
+						<div class="col-md-2 col-sm-2">
+						<input class="form-control" required="required" name="voucher_ref" id="voucher_ref" value="" />				
+						<p class="help-block"> </p>
+					</div><!-- /.col -->
+				</div> <!-- /form-group --> 
+				<div class="form-group">
+					<label class="col-md-3 col-sm-3 control-label">Voucher Date&nbsp;</label>
+						<div class="col-md-9 col-sm-9">
+						<input name="voucher_date" required="required" id="voucher_date"   class="date-picker form-control" size="16" type="text" value="" />				
+						<p class="help-block"> </p>
+					</div><!-- /.col -->
+				</div> <!-- /form-group --> 
+				<div class="form-group">
+					<label class="col-md-3 col-sm-3 control-label">Paid From Account&nbsp;</label>
+						<div class="col-md-9 col-sm-9">
 						<select required="required" class="form-control" name="voucher_paid_from_account" id="voucher_paid_from_account">
 						<option value="<?php echo $_SESSION['default_expense_account']; ?>" selected="selected">Default Expense Account</option>	 
-					</select>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-6">Voucher Description&nbsp;</label>
-						<textarea cols="70" rows="1" required="required" class="form-control" name="voucher_description" type="text" ></textarea>	
-					</div>
-				</form>
-			</div>
-		</div>
-		<div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">Expense Details</h3>
-              <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-                <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-			<div class="box-body">
-					<table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-						<th>Expense Type</th>
-                        <th>Expense Description</th>
-                        <th>Ammount</th>
-                        <th>Attachment</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><select>
-							<option>Option1</option>
-							<option>Option2</option>
-						</select></td>
-                        <td>Nestle bottle</td>
-                        <td>500</td>
-                        <td>
-						<img src="" height="50" width="50"/> 
-						</td>
-                        <td><a href="#">Edit</a></td>
-                      </tr>
-					</tbody>
-				</table>	
-			</div>
-		</div>
-		
-</section>
+					</select>				
+						<p class="help-block"> </p>
+					</div><!-- /.col -->
+				</div> <!-- /form-group --> 
+				<div class="form-group">
+					<label class="col-md-3 col-sm-3 control-label">Voucher Description: &nbsp;</label>
+						<div class="col-md-9 col-sm-9">
+				<textarea  name="account_desc_long" class="form-control textarea"  ></textarea>				
+						<p class="help-block"> </p>
+					</div><!-- /.col -->
+				</div> <!-- /form-group --> 
+        
+<div class="form-group">
+	<div class="col-sm-12">
+		<button type="submit" class='btn btn-success btn-lg pull-right' name="add" value="Next">Next &nbsp; <i class="fa fa-chevron-circle-right"></i></button>
+	</div>	<!-- /.col -->
+</div>		<!-- /form-group -->	   
+</form>
+            <!-- Add Account Form Goes here -->
+             </div><!-- /.box-body -->
+            <div class="box-footer">
+             <small> Please provide the expense header</small>
+            </div><!-- /.box-footer-->
+          </div><!-- /.box -->
+     	 </section><!-- /.content -->
