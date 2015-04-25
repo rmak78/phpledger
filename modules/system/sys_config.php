@@ -20,9 +20,18 @@ $tbl->addCell($config['key']);
 $tbl->addCell($config['key_label']);
 $tbl->addCell($config['key_help_text']);
 $tbl->addCell($config['value']);
-$tbl->addCell("<a class='pull btn btn-danger btn-xs' href ='".$_SERVER['PHP_SELF']."?route=modules/system/edit_sys_config=".$config['config_id']."'>Edit System Configrations &nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a>
+$tbl->addCell("<a class='pull btn btn-danger btn-xs' href ='".$_SERVER['PHP_SELF']."?route=modules/system/edit_sys_config&config_id=".$config['config_id']."'>Edit System Configrations &nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a>
 			   ");
-}
+			   }
+$tbl->addRow();
+$tbl->addCell('');
+$tbl->addCell('<input type="text" name="key" value=""/>');
+$tbl->addCell('<input type="text" name="key_label" value=""/>');
+$tbl->addCell('<input type="text" name="key_help_text" value=""/>');
+$tbl->addCell('<input type="text" name="value" value=""/>');
+$tbl->addCell("<a class='btn btn-primary' href ='#'>Save &nbsp;&nbsp;<span class='glyphicon glyphicons-disk-saved'></span></a>");
+
+
 			  
 
 ?>
