@@ -3,7 +3,27 @@
  //Section list
 $refs = array();
 $list = array();
+if(isset($_GET['group_id'])){
+$group_id=$_GET['group_id'];
+$sql = "SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_group=".$group_id. ' ORDER BY account_code' ;
+$result = DB::query($sql);
+$num_rows = DB::count();
+ foreach ($result as $data) {
+        $thisref = &$refs[ $data['account_id'] ];
+        $thisref['sect_parent'] = $data['parent_account_id'];
+		 $thisref['sect_name'] = $data['account_code']." - ".$data['account_desc_short']."&nbsp;&nbsp;<a class='pull btn btn-xs' href ='".$_SERVER['PHP_SELF']."?route=modules/gl/setup/coa/edit_coa&coa_id=".$data['account_id']."'>Edit &nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a>";
+        $thisref['sect_id'] = $data['account_id'];
+    
+        if ($data['parent_account_id'] == 0) {
+            $list[ $data['account_id'] ] = &$thisref;
+        } else {
+            $refs[ $data['parent_account_id'] ]['children'][ $data['account_id'] ] = &$thisref;
+        }
+    } 
 
+
+}
+else{
 $sql = 'SELECT * FROM '.DB_PREFIX.$_SESSION['co_prefix'].'coa ORDER BY account_code';
 $result = DB::query($sql);
 $num_rows = DB::count();
@@ -11,7 +31,7 @@ $num_rows = DB::count();
     foreach ($result as $data) {
         $thisref = &$refs[ $data['account_id'] ];
         $thisref['sect_parent'] = $data['parent_account_id'];
-		 $thisref['sect_name'] = $data['account_code']." - ".$data['account_desc_short']."&nbsp;&nbsp;<a class='pull btn btn-danger btn-xs' href ='".$_SERVER['PHP_SELF']."?route=modules/gl/setup/coa/edit_coa&coa_id=".$data['account_code']."'>Edit Coa&nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a>";
+		 $thisref['sect_name'] = $data['account_code']." - ".$data['account_desc_short']."&nbsp;&nbsp;<a class=' btn btn-xs' href ='".$_SERVER['PHP_SELF']."?route=modules/gl/setup/coa/edit_coa&coa_id=".$data['account_id']."'>Edit &nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a>";
         $thisref['sect_id'] = $data['account_id'];
     
         if ($data['parent_account_id'] == 0) {
@@ -21,7 +41,7 @@ $num_rows = DB::count();
         }
     } 
  
- 
+ }
  
  
   
