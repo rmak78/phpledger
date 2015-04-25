@@ -111,23 +111,27 @@ if(isset($_POST['submit']))
 						<input type="radio" name="account_type" value="statistics_only"> Statistics Only&nbsp;
 						</div>
 				</div>
-                <div class="form-group">
-                        <label class="col-md-3 col-sm-3 control-label">Balance Sheet Side:</label>
-						 <div class="col-md-9 col-sm-9">
-						 <select class="form-control" required  name="balance_sheet_side" id="balance_sheet_side">
-							<option value="debit">Debit</option>
-							<option value="credit">Credit</option>
-						</select>
-						</div>
+				<div id="balance_sheet">
+					<div class="form-group">
+							<label class="col-md-3 col-sm-3 control-label">Balance Sheet Side:</label>
+							 <div class="col-md-9 col-sm-9">
+							 <select class="form-control" required  name="balance_sheet_side" id="balance_sheet_side">
+								<option value="debit">Debit</option>
+								<option value="credit">Credit</option>
+							</select>
+							</div>
+					</div>
 				</div>
-				 <div class="form-group">
-                        <label class="col-md-3 col-sm-3 control-label">Profit &Loss Statements Side:</label>                         
-						<div class="col-md-9 col-sm-9">
-						<select class="form-control" required  name="pls_side" id="pls_side">
-							 <option value="income">Income</option>
-							<option value="expense">Expense</option>
-						</select>
-						</div>
+				<div id="pls">
+					 <div class="form-group">
+							<label class="col-md-3 col-sm-3 control-label">Profit &Loss Statements Side:</label>                         
+							<div class="col-md-9 col-sm-9">
+							<select class="form-control" required  name="pls_side" id="pls_side">
+								 <option value="income">Income</option>
+								<option value="expense">Expense</option>
+							</select>
+							</div>
+					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-3 col-sm-3 control-label">Group Status:</label>
@@ -155,3 +159,26 @@ if(isset($_POST['submit']))
 
 
 </section>		
+
+<script>
+$(document).ready(function(){
+	$('div#pls').hide();
+	$("input:radio[name=account_type]").click(function() {
+    var value = $(this).val();
+	if(value=='pls_group'){
+		$('div#balance_sheet').hide();
+		$('div#pls').show();
+	}
+	else if(value=='balance_sheet'){
+		$('div#balance_sheet').show();
+		$('div#pls').hide();
+	}
+	else{
+		$('div#balance_sheet').hide();
+		$('div#pls').hide();
+	}
+	
+});
+});
+
+</script>
