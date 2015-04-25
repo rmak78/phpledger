@@ -8,7 +8,7 @@
 			<li><a href="#"><span>Setup</span><i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
 					<li>
-						<a href="<?php echo SITE_ROOT; ?>?route=modules/sys_config">System Configurations</a>
+						<a href="<?php echo SITE_ROOT; ?>?route=modules/system/sys_config">System Configurations</a>
 					</li>
 					<li>
 						<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/company/company_info">Company</a>
