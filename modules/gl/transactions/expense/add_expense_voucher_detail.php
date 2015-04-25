@@ -11,8 +11,8 @@
             </div>
 <div class="box-body">
      <div class="progress">
-		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-        <span class="sr-only">100% Complete  </span>
+		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+        <span class="sr-only">100% </span>
         </div>
       </div>		  
           <div class="row">
@@ -29,11 +29,14 @@
                 <strong>Voucher Description</strong>
 				<BR/>
             </div><!-- /.col -->
-            <div class="col-sm-4 invoice-col">
+			<div class="col-sm-4 invoice-col">
               <b>Invoice #007612</b><br/>
               <b>Voucher Ref#:</b> 4F3S8J<br/>
               <b>Voucher Date:</b> 2/22/2014<br/>
               <b>Paid from Account:</b> 968-34567
+            </div><!-- /.col -->
+			 <div class="col-sm-4 invoice-col">
+              <a href="#addExpenseDetailModal" role="button" class="btn btn-large btn-primary pull-right" data-toggle="modal"><i class="fa fa-credit-card"></i> Add Detail</a>
             </div><!-- /.col -->
           </div><!-- /.row -->
 		</div>
@@ -41,47 +44,33 @@
           <!-- Table row -->
           <div class="row">
             <div class="col-xs-12 table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Qty</th>
-                    <th>Product</th>
-                    <th>Serial #</th>
-                    <th>Description</th>
-                    <th>Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Call of Duty</td>
-                    <td>455-981-221</td>
-                    <td>El snort testosterone trophy driving gloves handsome</td>
-                    <td>$64.50</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Need for Speed IV</td>
-                    <td>247-925-726</td>
-                    <td>Wes Anderson umami biodiesel</td>
-                    <td>$50.00</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Monsters DVD</td>
-                    <td>735-845-642</td>
-                    <td>Terry Richardson helvetica tousled street art master</td>
-                    <td>$10.70</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Grown Ups Blue Ray</td>
-                    <td>422-568-642</td>
-                    <td>Tousled lomo letterpress</td>
-                    <td>$25.99</td>
-                  </tr>
-                </tbody>
-              </table>
+              <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+						<th>Expense Type</th>
+                        <th>Expense Description</th>
+                        <th>Ammount</th>
+                        <th>Attachment</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><select>
+							<option>Option1</option>
+							<option>Option2</option>
+						</select></td>
+                        <td>Nestle bottle</td>
+                        <td>500</td>
+                        <td>
+						<img src="" height="50" width="50"/> 
+						</td>
+                        <td><a href="#" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;Delete</a>
+						<a href="#" class="btn btn-success"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+						</td>
+                      </tr>
+					</tbody>
+				</table>
             </div><!-- /.col -->
           </div><!-- /.row -->
 
@@ -120,3 +109,23 @@
             </div>
           </div>
         </section>
+		
+		
+<!-- Modal Add Detail -->
+
+<div id="addExpenseDetailModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add Detail</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>		
