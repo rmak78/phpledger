@@ -1,1 +1,0 @@
-<h1>Journal Voucher</h1>
