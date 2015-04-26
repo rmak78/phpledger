@@ -1,28 +1,57 @@
 <?php
-
-$tbl = new HTML_Table('', 'table table-striped table-bordered');
-$tbl->addRow();
-$tbl->addCell('Voucher ID', '', 'header');
-$tbl->addCell('Voucher Refrance #', '', 'header');
-$tbl->addCell('Voucher Description', '', 'header');
-$tbl->addCell('Total Amount', '', 'header');
-$tbl->addCell('Voucher Approved By', '', 'header');
-$tbl->addCell('Voucher Status', '', 'header');
-$tbl->addCell('Actions', '', 'header');
+//Draft Expense Voucher
+$tbl_draft = new HTML_Table('', 'table table-striped table-bordered');
+$tbl_draft->addRow();
+$tbl_draft->addCell('Voucher ID', '', 'header');
+$tbl_draft->addCell('Voucher Refrance #', '', 'header');
+$tbl_draft->addCell('Voucher Description', '', 'header');
+$tbl_draft->addCell('Total Amount', '', 'header');
+$tbl_draft->addCell('Voucher Approved By', '', 'header');
+$tbl_draft->addCell('Voucher Status', '', 'header');
+$tbl_draft->addCell('Actions', '', 'header');
 ?>
 
 <?php
 $sql = 'SELECT * FROM '.DB_PREFIX.$_SESSION['co_prefix'].'voucher_expense ORDER by voucher_id';
 $voucher_expense = DB::query($sql);
 foreach($voucher_expense as $list_voucher_expense) { 
-$tbl->addRow();
-$tbl->addCell($list_voucher_expense['voucher_id']);
-$tbl->addCell($list_voucher_expense['voucher_ref_no']);
-$tbl->addCell($list_voucher_expense['voucher description']);
-$tbl->addCell($list_voucher_expense['voucher_total']);
-$tbl->addCell($list_voucher_expense['voucher_approved_by']);
-$tbl->addCell($list_voucher_expense['voucher_status']);
-$tbl->addCell("<a class='pull btn btn-danger btn-xs' href ='#'>Edit Voucher&nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a> ");
+$tbl_draft->addRow();
+$tbl_draft->addCell($list_voucher_expense['voucher_id']);
+$tbl_draft->addCell($list_voucher_expense['voucher_ref_no']);
+$tbl_draft->addCell($list_voucher_expense['voucher description']);
+$tbl_draft->addCell($list_voucher_expense['voucher_total']);
+$tbl_draft->addCell($list_voucher_expense['voucher_approved_by']);
+$tbl_draft->addCell($list_voucher_expense['voucher_status']);
+$tbl_draft->addCell("<a class='pull btn btn-danger btn-xs' href ='#'>Edit Voucher&nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a> ");
+}
+			  
+
+?>
+<?php
+//Expense Voucher Pending Approvel
+$tbl_pending = new HTML_Table('', 'table table-striped table-bordered');
+$tbl_pending->addRow();
+$tbl_pending->addCell('Voucher ID', '', 'header');
+$tbl_pending->addCell('Voucher Refrance #', '', 'header');
+$tbl_pending->addCell('Voucher Description', '', 'header');
+$tbl_pending->addCell('Total Amount', '', 'header');
+$tbl_pending->addCell('Voucher Approved By', '', 'header');
+$tbl_pending->addCell('Voucher Status', '', 'header');
+$tbl_pending->addCell('Actions', '', 'header');
+?>
+
+<?php
+$sql = 'SELECT * FROM '.DB_PREFIX.$_SESSION['co_prefix'].'voucher_expense ORDER by voucher_id';
+$voucher_expense = DB::query($sql);
+foreach($voucher_expense as $list_voucher_expense) { 
+$tbl_pending->addRow();
+$tbl_pending->addCell($list_voucher_expense['voucher_id']);
+$tbl_pending->addCell($list_voucher_expense['voucher_ref_no']);
+$tbl_pending->addCell($list_voucher_expense['voucher description']);
+$tbl_pending->addCell($list_voucher_expense['voucher_total']);
+$tbl_pending->addCell($list_voucher_expense['voucher_approved_by']);
+$tbl_pending->addCell($list_voucher_expense['voucher_status']);
+$tbl_pending->addCell("<a class='pull btn btn-danger btn-xs' href ='#'>Edit Voucher&nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a> ");
 }
 			  
 
@@ -53,13 +82,15 @@ $tbl->addCell("<a class='pull btn btn-danger btn-xs' href ='#'>Edit Voucher&nbsp
               </div>
             </div>
             <div class="box-body">
-				<?php  echo $tbl->display(); ?>
+				<?php  echo $tbl_draft->display(); ?>
             </div><!-- /.box-body -->
-           
+            <div class="box-footer">
+             
+            </div>
           </div><!-- /.box -->
 		</section> 
-		<section class="content">  
-		   <div class="box">
+		<section class="content">  <!-- Expense Voucher Pending Approvel Section -->
+		   <div class="box">   <!-- Expense Voucher Pending Approvel Boox -->
             <div class="box-header with-border">
               <h3 class="box-title">Expense Voucher Pending Approvel</h3>
               <div class="box-tools pull-right">
@@ -68,10 +99,10 @@ $tbl->addCell("<a class='pull btn btn-danger btn-xs' href ='#'>Edit Voucher&nbsp
               </div>
             </div>
             <div class="box-body">
-				<?php  echo $tbl->display(); ?>
+				<?php  echo $tbl_pending->display(); ?>
             </div><!-- /.box-body -->
             <div class="box-footer">
-             <small> Please do not make changes to these unless you are really sure what you are doing. making changes here have system wide impact</small>
+             
             </div><!-- /.box-footer-->
-          </div><!-- /.box -->
+          </div><!-- /.2nd box -->
      	 </section><!-- /.content -->
