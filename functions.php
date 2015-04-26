@@ -8,7 +8,9 @@ DB::$password = DB_PASS_WORD;
 DB::$dbName = DB_DATABASE ;
 DB::$encoding = SYSTEM_ENCODING;
 include_once('includes/general_functions.php');
-include_once('includes/coa_functions.php');
 include_once('includes/security.php');
 include_once('includes/login_functions.php');
+include_once('includes/coa_functions.php');
+include_once('includes/gl_functions.php');
+
  
