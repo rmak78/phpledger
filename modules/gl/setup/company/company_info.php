@@ -304,30 +304,29 @@ $company = DB::queryFirstRow('SELECT * FROM '.DB_PREFIX.'companies WHERE company
 							
 								while ($i <> ($company['coa_levels'] + 1) ) {
 									$code_sample = " ";
-									$x1=$company['coa_level_'.$i.'_length'];
-											while ($x1 <> 0) {
+									$level=$company['coa_level_'.$i.'_length'];
+											while ($level <> 0) {
 												$code_sample .= "X";
 												
-												$x1 = $x1-1;												
+												$level--;												
 												}
 									 echo "Level ".$i." : ".$code_sample."<br>";																										
 									 $i++;
 									} ?>
 							Sample Code = <?php  
 													$code_sample = '';
-													$i = 1 ;	
-													
-								while ($i <> ($company['coa_levels'] + 1) ) {
-									$code_sample = " ";
-									$x1=$company['coa_level_'.$i.'_length'];
-											while ($x1 <> 0) {
-												$code_sample .= "X";
-												$x1 = $x1-1;												
+													$i = 1 ;														
+													while ($i <> ($company['coa_levels'] + 1) ) {
+													$code_sample = " ";
+													$level=$company['coa_level_'.$i.'_length'];
+													while ($level <> 0) {
+															$code_sample .= "X";
+															$level--;												
+															}
+													echo $code_sample;																										
+													$i++;
 												}
-									  $code_sample;																										
-									 $i++;
-									}
-							?>
+												?>
 						</td>
                     </tr>
 				</tbody>
