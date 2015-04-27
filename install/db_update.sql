@@ -110,11 +110,11 @@ CREATE TABLE `sa_test_coa` (
   `created_on` timestamp NULL DEFAULT NULL,
   `account_status` varchar(255) DEFAULT 'active',
   PRIMARY KEY (`account_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 /*Data for the table `sa_test_coa` */
 
-insert  into `sa_test_coa`(`account_id`,`account_code`,`account_group`,`account_desc_short`,`account_desc_long`,`activity_account`,`consolidate_only`,`has_parent`,`coa_level`,`has_children`,`parent_account_id`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`account_status`) values (1,'1',1,'Assets','Assets Group',0,1,0,1,1,0,NULL,NULL,NULL,NULL,'active'),(2,'101',1,'Current Assets','Current Assets',0,1,1,2,1,1,NULL,NULL,NULL,NULL,'active'),(3,'102',1,'Fixed Assets','Fixed Assets',0,1,1,2,1,1,NULL,NULL,NULL,NULL,'active'),(5,'10101',1,'Cash','Available Cash ',0,1,1,3,1,2,NULL,NULL,NULL,NULL,'active'),(10,'2',2,'Liabilities','Liabilities ',0,1,0,1,0,0,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(11,'3',3,'Equity','Owner\'s Equity',0,1,0,1,0,0,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(12,'4',4,'Income','Income',0,1,0,1,0,0,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(13,'5',5,'Expenses','Expenses',0,1,0,1,0,0,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(14,'6',6,'Adjustments','Adjustments',0,1,0,1,0,0,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(15,'7',7,'Retained Earnings','Retained Earnings',0,1,0,1,0,0,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(17,'101010001',1,'Petty Cash','Petty Cash Accounts',0,1,1,4,1,5,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(18,'10101000100001',1,'Petty Cash - Mansoor','Petty Cash with Mansoor',1,0,1,5,0,17,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(19,'10101000100002',1,'Petty Cash - Kafia','Petty Cash with Kafia',1,0,1,5,0,17,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(20,'101010002',1,'Bank Accounts','Cash in Bank Accounts',0,1,1,4,1,5,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(21,'10101000200001',1,'Meezan Bank (PKR)','PKR Bank Account in Meezan Bank',1,0,1,5,0,20,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(22,'10101000200002',1,'Meezan Bank (USD)','USD Forex Account in Meezan Bank',1,0,1,5,0,20,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(23,'10103',1,'Accounts Recieveable','Accounts Recieveables from Third Parties',0,1,1,3,0,2,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(24,'10102',1,'Investments','Investments ',0,1,1,3,0,2,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(25,'10104',1,'Inventory','Product inventory/ Supplies',0,1,1,3,0,2,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(26,'10105',1,'Pre-Paid Expenses','Pre-Paid Expenses that have yet to be consumed',0,1,1,3,0,2,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(27,'10201',1,'Land','Land ownership',0,1,1,3,0,3,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(28,'10202',1,'Buildings','Buildings Owned',0,1,1,3,0,3,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active');
+insert  into `sa_test_coa`(`account_id`,`account_code`,`account_group`,`account_desc_short`,`account_desc_long`,`activity_account`,`consolidate_only`,`has_parent`,`coa_level`,`has_children`,`parent_account_id`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`account_status`) values (1,'1',1,'Assets','Assets Group',0,1,0,1,1,0,NULL,NULL,NULL,NULL,'active'),(2,'101',1,'Current Assets','Current Assets',0,1,1,2,1,1,NULL,NULL,NULL,NULL,'active'),(3,'102',1,'Fixed Assets','Fixed Assets',0,1,1,2,1,1,NULL,NULL,NULL,NULL,'active'),(5,'10101',1,'Cash','Available Cash ',0,1,1,3,1,2,NULL,NULL,NULL,NULL,'active'),(10,'2',2,'Liabilities','Liabilities ',0,1,0,1,0,0,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(11,'3',3,'Equity','Owner\'s Equity',0,1,0,1,1,0,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(12,'4',4,'Income','Income',0,1,0,1,1,0,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(13,'5',5,'Expenses','Expenses',0,1,0,1,0,0,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(14,'6',6,'Adjustments','Adjustments',0,1,0,1,0,0,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(15,'7',7,'Retained Earnings','Retained Earnings',0,1,0,1,0,0,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(17,'101010001',1,'Petty Cash','Petty Cash Accounts',0,1,1,4,1,5,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(18,'10101000100001',1,'Petty Cash - Mansoor','Petty Cash with Mansoor',1,0,1,5,0,17,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(19,'10101000100002',1,'Petty Cash - Kafia','Petty Cash with Kafia',1,0,1,5,0,17,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(20,'101010002',1,'Bank Accounts','Cash in Bank Accounts',0,1,1,4,1,5,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(21,'10101000200001',1,'Meezan Bank (PKR)','PKR Bank Account in Meezan Bank',1,0,1,5,0,20,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(22,'10101000200002',1,'Meezan Bank (USD)','USD Forex Account in Meezan Bank',1,0,1,5,0,20,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(23,'10103',1,'Accounts Recieveable','Accounts Recieveables from Third Parties',0,1,1,3,0,2,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(24,'10102',1,'Investments','Investments ',0,1,1,3,0,2,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(25,'10104',1,'Inventory','Product inventory/ Supplies',0,1,1,3,0,2,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(26,'10105',1,'Pre-Paid Expenses','Pre-Paid Expenses that have yet to be consumed',0,1,1,3,0,2,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(27,'10201',1,'Land','Land ownership',0,1,1,3,0,3,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(28,'10202',1,'Buildings','Buildings Owned',0,1,1,3,0,3,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(29,'401',4,'Freelancing Sites','Income from Freelancing Site',0,1,1,2,0,12,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active'),(30,'301',3,'Owners Equity','Owner\'s Equity Accounts',0,1,1,2,0,11,'test','1970-01-01 05:00:00','test','0000-00-00 00:00:00','Active');
 
 /*Table structure for table `sa_test_coa_groups` */
 
@@ -160,7 +160,7 @@ CREATE TABLE `sa_test_fiscal_years` (
 
 /*Data for the table `sa_test_fiscal_years` */
 
-insert  into `sa_test_fiscal_years`(`fiscal_year_id`,`fiscal_year_desc`,`fiscal_year_start_date`,`fiscal_year_end_date`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`fy_status`) values (1,'FY2014','2014-06-01','2015-05-31',NULL,'2015-04-23 14:13:42',NULL,NULL,'active'),(2,'FY2015','2015-06-01','2016-05-31',NULL,'2015-04-23 14:14:07',NULL,NULL,'active');
+insert  into `sa_test_fiscal_years`(`fiscal_year_id`,`fiscal_year_desc`,`fiscal_year_start_date`,`fiscal_year_end_date`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`fy_status`) values (1,'FY2014-15','2014-06-01','2015-05-31',NULL,'2015-04-23 14:13:42',NULL,NULL,'active'),(2,'FY2015','2015-06-01','2016-05-31',NULL,'2015-04-23 14:14:07',NULL,NULL,'active');
 
 /*Table structure for table `sa_test_general_journal` */
 
@@ -185,6 +185,57 @@ CREATE TABLE `sa_test_general_journal` (
 
 /*Data for the table `sa_test_general_journal` */
 
+/*Table structure for table `sa_test_journal_voucher_details` */
+
+DROP TABLE IF EXISTS `sa_test_journal_voucher_details`;
+
+CREATE TABLE `sa_test_journal_voucher_details` (
+  `voucher_detail_id` int(11) NOT NULL AUTO_INCREMENT,
+  `voucher_id` int(11) NOT NULL,
+  `voucher_date` datetime DEFAULT NULL,
+  `account_id` int(11) NOT NULL,
+  `entry_description` varchar(255) DEFAULT NULL,
+  `debit_amount` decimal(11,2) NOT NULL DEFAULT '0.00',
+  `credit_amount` decimal(11,2) DEFAULT '0.00',
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_on` datetime NOT NULL,
+  `last_modified_by` varchar(255) DEFAULT NULL,
+  `last_modified_on` timestamp NULL DEFAULT NULL,
+  `voucher_detail_status` varchar(255) DEFAULT 'draft',
+  PRIMARY KEY (`voucher_detail_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `sa_test_journal_voucher_details` */
+
+/*Table structure for table `sa_test_journal_vouchers` */
+
+DROP TABLE IF EXISTS `sa_test_journal_vouchers`;
+
+CREATE TABLE `sa_test_journal_vouchers` (
+  `voucher_id` int(11) NOT NULL AUTO_INCREMENT,
+  `voucher_ref_no` varchar(255) NOT NULL,
+  `voucher_date` datetime DEFAULT NULL,
+  `voucher description` varchar(255) DEFAULT NULL,
+  `debits_total` decimal(11,2) NOT NULL DEFAULT '0.00',
+  `credits_total` decimal(11,2) NOT NULL DEFAULT '0.00',
+  `voucher_tags` varchar(255) DEFAULT NULL,
+  `has_attachment` tinyint(1) DEFAULT '0',
+  `attachment_url` varchar(255) DEFAULT NULL,
+  `voucher_approved_by` varchar(255) DEFAULT NULL,
+  `voucher_approved_on` datetime DEFAULT NULL,
+  `voucher_approval_comments` varchar(255) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_on` datetime DEFAULT NULL,
+  `last_modified_by` varchar(255) DEFAULT NULL,
+  `last_modified_on` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `voucher_status` varchar(255) DEFAULT 'draft',
+  PRIMARY KEY (`voucher_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `sa_test_journal_vouchers` */
+
+insert  into `sa_test_journal_vouchers`(`voucher_id`,`voucher_ref_no`,`voucher_date`,`voucher description`,`debits_total`,`credits_total`,`voucher_tags`,`has_attachment`,`attachment_url`,`voucher_approved_by`,`voucher_approved_on`,`voucher_approval_comments`,`created_by`,`created_on`,`last_modified_by`,`last_modified_on`,`voucher_status`) values (1,'JV','2015-04-23 00:00:00','dsfsada','0.00','0.00',NULL,0,NULL,NULL,NULL,NULL,'test','2015-04-26 05:10:48','test','2015-04-26 05:10:48','draft');
+
 /*Table structure for table `sa_test_reporting_periods` */
 
 DROP TABLE IF EXISTS `sa_test_reporting_periods`;
@@ -201,11 +252,37 @@ CREATE TABLE `sa_test_reporting_periods` (
   `created_on` datetime DEFAULT NULL,
   `rp_status` varchar(255) DEFAULT 'active',
   PRIMARY KEY (`reporting_period_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `sa_test_reporting_periods` */
 
-insert  into `sa_test_reporting_periods`(`reporting_period_id`,`fiscal_year_id`,`reporting_period_desc`,`reporting_period_start_date`,`reporting_period_end_date`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`rp_status`) values (1,1,'Q1-2014','2014-06-01','2015-08-31',NULL,'2015-04-23 16:34:29',NULL,NULL,'active'),(2,1,'Q2-2014','2014-09-01','2014-10-31',NULL,'2015-04-23 16:36:24',NULL,NULL,'active'),(3,1,'Q3-2014','2014-11-01','2015-01-31',NULL,'2015-04-23 16:37:19',NULL,NULL,'active');
+insert  into `sa_test_reporting_periods`(`reporting_period_id`,`fiscal_year_id`,`reporting_period_desc`,`reporting_period_start_date`,`reporting_period_end_date`,`last_modified_by`,`last_modified_on`,`created_by`,`created_on`,`rp_status`) values (1,1,'Q1-2014-15','2014-06-01','2014-08-31',NULL,'2015-04-23 16:34:29',NULL,NULL,'active'),(2,1,'Q2-2014-15','2014-09-01','2014-12-31',NULL,'2015-04-23 16:36:24',NULL,NULL,'active'),(3,1,'Q3-2014-15','2015-01-01','2015-03-31',NULL,'2015-04-23 16:37:19',NULL,NULL,'active'),(4,1,'Q4-2014-15','2015-04-01','2015-06-30',NULL,'2015-04-25 04:59:34',NULL,NULL,'active'),(5,2,NULL,NULL,'2015-08-31',NULL,'2015-04-25 05:02:14',NULL,NULL,'active');
+
+/*Table structure for table `sa_test_transactions` */
+
+DROP TABLE IF EXISTS `sa_test_transactions`;
+
+CREATE TABLE `sa_test_transactions` (
+  `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `account_code` varchar(255) NOT NULL,
+  `currency` varchar(3) NOT NULL,
+  `debit` double(11,2) NOT NULL DEFAULT '0.00',
+  `credit` double(11,2) NOT NULL DEFAULT '0.00',
+  `reference` varchar(255) DEFAULT NULL,
+  `comments` varchar(255) DEFAULT NULL,
+  `appproved_by` varchar(255) DEFAULT NULL,
+  `approved_on` datetime DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT 'CURRENT_TIMESTAMP',
+  `created_on` datetime DEFAULT NULL,
+  `last_modified_by` varchar(255) DEFAULT NULL,
+  `last_modified_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`transaction_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `sa_test_transactions` */
 
 /*Table structure for table `sa_test_users` */
 
@@ -245,9 +322,11 @@ CREATE TABLE `sa_test_voucher_expense` (
   `voucher_ref_no` varchar(255) DEFAULT NULL,
   `voucher_date` datetime DEFAULT NULL,
   `voucher description` varchar(255) DEFAULT NULL,
-  `petty_cash_account` int(11) DEFAULT NULL,
+  `paid_from_account` int(11) DEFAULT NULL,
   `voucher_total` decimal(11,2) DEFAULT '0.00',
   `voucher_tags` varchar(255) DEFAULT NULL,
+  `has_attachment` tinyint(1) DEFAULT '0',
+  `voucher_attachment_url` varchar(255) DEFAULT NULL,
   `voucher_approved_by` varchar(255) DEFAULT NULL,
   `voucher_approved_on` datetime DEFAULT NULL,
   `voucher_approval_comments` varchar(255) DEFAULT NULL,
@@ -257,11 +336,11 @@ CREATE TABLE `sa_test_voucher_expense` (
   `last_modified_on` datetime DEFAULT NULL,
   `voucher_status` varchar(255) DEFAULT 'draft',
   PRIMARY KEY (`voucher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `sa_test_voucher_expense` */
 
-insert  into `sa_test_voucher_expense`(`voucher_id`,`voucher_ref_no`,`voucher_date`,`voucher description`,`petty_cash_account`,`voucher_total`,`voucher_tags`,`voucher_approved_by`,`voucher_approved_on`,`voucher_approval_comments`,`created_by`,`created_on`,`last_modified_by`,`last_modified_on`,`voucher_status`) values (1,'ACD345','1970-01-01 05:00:00',' Testing Voucher',1,'2500.00',NULL,NULL,NULL,NULL,NULL,'0000-00-00 00:00:00',NULL,NULL,'draft'),(2,'ACD345','1970-01-01 05:00:00',' Testing Voucher',1,'0.00',NULL,NULL,NULL,NULL,NULL,'0000-00-00 00:00:00',NULL,NULL,'draft'),(3,'ACD345','1970-01-01 05:00:00',' Testing Voucher',1,'0.00',NULL,NULL,NULL,NULL,NULL,'0000-00-00 00:00:00',NULL,NULL,'draft'),(4,'ACD345','2015-02-04 00:00:00','45567',1,'0.00',NULL,NULL,NULL,NULL,'admin','2015-04-07 12:30:37',NULL,NULL,'draft'),(5,'ACD345','2015-04-18 00:41:51','cvx',1,'0.00',NULL,NULL,NULL,NULL,'admin','2015-04-18 00:41:51',NULL,NULL,'draft');
+insert  into `sa_test_voucher_expense`(`voucher_id`,`voucher_ref_no`,`voucher_date`,`voucher description`,`paid_from_account`,`voucher_total`,`voucher_tags`,`has_attachment`,`voucher_attachment_url`,`voucher_approved_by`,`voucher_approved_on`,`voucher_approval_comments`,`created_by`,`created_on`,`last_modified_by`,`last_modified_on`,`voucher_status`) values (1,'ACD345','1970-01-01 05:00:00',' Testing Voucher',1,'2500.00',NULL,0,NULL,NULL,NULL,NULL,NULL,'0000-00-00 00:00:00',NULL,NULL,'draft'),(2,'ACD345','1970-01-01 05:00:00',' Testing Voucher',1,'0.00',NULL,0,NULL,NULL,NULL,NULL,NULL,'0000-00-00 00:00:00',NULL,NULL,'draft'),(3,'ACD345','1970-01-01 05:00:00',' Testing Voucher',1,'0.00',NULL,0,NULL,NULL,NULL,NULL,NULL,'0000-00-00 00:00:00',NULL,NULL,'draft'),(4,'ACD345','2015-02-04 00:00:00','45567',1,'0.00',NULL,0,NULL,NULL,NULL,NULL,'admin','2015-04-07 12:30:37',NULL,NULL,'draft'),(5,'ACD345','2015-04-18 00:41:51','cvx',1,'0.00',NULL,0,NULL,NULL,NULL,NULL,'admin','2015-04-18 00:41:51',NULL,NULL,'draft'),(6,'BDD$','2015-04-22 00:00:00','fdsf',NULL,'0.00',NULL,0,NULL,NULL,NULL,NULL,'test','2015-04-26 05:03:28','test',NULL,'draft'),(7,'BDD4','2015-04-22 00:00:00','fdsf',NULL,'0.00',NULL,0,NULL,NULL,NULL,NULL,'test','2015-04-26 05:04:01','test',NULL,'draft'),(8,'BDD6','2015-04-22 00:00:00','fdsf',NULL,'0.00',NULL,0,NULL,NULL,NULL,NULL,'test','2015-04-26 05:05:51','test',NULL,'draft'),(9,'BDdfsd','2015-04-22 00:00:00','fdsf',NULL,'0.00',NULL,0,NULL,NULL,NULL,NULL,'test','2015-04-26 05:06:49','test',NULL,'draft'),(10,'first voucher','2015-04-22 00:00:00','fdsf',NULL,'0.00',NULL,0,NULL,NULL,NULL,NULL,'test','2015-04-26 05:08:04','test',NULL,'draft');
 
 /*Table structure for table `sa_test_voucher_expense_detail` */
 
@@ -270,23 +349,21 @@ DROP TABLE IF EXISTS `sa_test_voucher_expense_detail`;
 CREATE TABLE `sa_test_voucher_expense_detail` (
   `voucher_detail_id` int(11) NOT NULL AUTO_INCREMENT,
   `voucher_id` int(11) NOT NULL,
+  `expense_date` datetime DEFAULT NULL,
   `expense_account_id` int(11) NOT NULL,
   `expense_description` varchar(255) DEFAULT NULL,
   `expense_amount` decimal(11,2) NOT NULL DEFAULT '0.00',
-  `has_attachment` tinyint(1) NOT NULL DEFAULT '0',
-  `expense_attachment` longblob,
-  `expense_attachment_description` varchar(255) DEFAULT NULL,
   `created_by` varchar(255) DEFAULT NULL,
-  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_on` datetime NOT NULL,
   `last_modified_by` varchar(255) DEFAULT NULL,
-  `last_modified_on` date DEFAULT NULL,
+  `last_modified_on` timestamp NULL DEFAULT NULL,
   `voucher_detail_status` varchar(255) DEFAULT 'draft',
   PRIMARY KEY (`voucher_detail_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `sa_test_voucher_expense_detail` */
 
-insert  into `sa_test_voucher_expense_detail`(`voucher_detail_id`,`voucher_id`,`expense_account_id`,`expense_description`,`expense_amount`,`has_attachment`,`expense_attachment`,`expense_attachment_description`,`created_by`,`created_on`,`last_modified_by`,`last_modified_on`,`voucher_detail_status`) values (1,1,0,'Test Expenst Type','2500.00',0,NULL,NULL,NULL,'2015-04-03 16:20:23',NULL,NULL,'draft');
+insert  into `sa_test_voucher_expense_detail`(`voucher_detail_id`,`voucher_id`,`expense_date`,`expense_account_id`,`expense_description`,`expense_amount`,`created_by`,`created_on`,`last_modified_by`,`last_modified_on`,`voucher_detail_status`) values (1,1,NULL,0,'Test Expenst Type','2500.00',NULL,'2015-04-03 16:20:23',NULL,NULL,'draft');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
