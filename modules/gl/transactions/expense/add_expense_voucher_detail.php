@@ -1,4 +1,18 @@
-        <!-- Main content -->
+<?php
+if(isset($_POST['voucher_ref'])){
+	$voucher_ref = $_POST['voucher_ref'];
+}
+if(isset($_POST['voucher_date'])){
+	$voucher_date = $_POST['voucher_date'];
+}
+if(isset($_POST['voucher_paid_from_account'])){
+	$voucher_paid_from_account = $_POST['voucher_paid_from_account'];
+}
+if(isset($_POST['account_desc_long'])){
+	$account_desc_long = $_POST['account_desc_long'];
+}
+?>        
+		<!-- Main content -->
         <section class="invoice">
           <!-- title row -->
           <div class="box">
@@ -11,14 +25,15 @@
             </div>
 <div class="box-body">
      <div class="progress">
-		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-        <span class="sr-only">100% </span>
+		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="90" style="width: 90%">
+        <span class="sr-only">90% </span>
         </div>
       </div>		  
           <div class="row">
             <div class="col-xs-12">
               <h2 class="page-header">
-                <i class="fa fa-globe"></i> Sutlej Solutions.
+				<?php $logo_path = DB::queryfirstfield('SELECT company_logo_icon FROM sa_companies'); ?>
+                <i><img src="<?php echo $logo_path; ?>" height="50px" width="50px" /></i> <?php echo $_SESSION['company_name']; ?>
                 <small class="pull-right"><?php echo date("j / n / Y"); ?></small>
               </h2>
             </div><!-- /.col -->
@@ -26,14 +41,17 @@
           <!-- info row -->
           <div class="row invoice-info">
             <div class="col-sm-4 invoice-col">
-                <strong>Voucher Description</strong>
+                <strong>Voucher Description</strong><BR/>
+				<?php echo $account_desc_long; ?>
 				<BR/>
+				 <?php $account_desc = DB::queryfirstfield("SELECT c.`account_desc_long` FROM sa_test_coa c WHERE c.`account_id`='".$voucher_paid_from_account."'"); ?>
+              <b>Paid from Account:</b> <?php echo $account_desc; ?>
             </div><!-- /.col -->
 			<div class="col-sm-4 invoice-col">
-              <b>Invoice #007612</b><br/>
-              <b>Voucher Ref#:</b> 4F3S8J<br/>
-              <b>Voucher Date:</b> 2/22/2014<br/>
-              <b>Paid from Account:</b> 968-34567
+			<?php $invoice_no = DB::queryfirstfield("SELECT COUNT(*) FROM ".DB_PREFIX.$_SESSION['co_prefix']."voucher_expense"); ?>
+              <b>Invoice# </b><?php echo $invoice_no+1; ?><br/>
+              <b>Voucher Ref#:</b> <?php echo $voucher_ref; ?><br/>
+              <b>Voucher Date:</b> <?php echo $voucher_date; ?><br/>
             </div><!-- /.col -->
 			 <div class="col-sm-4 invoice-col">
               <a href="#addExpenseDetailModal" role="button" class="btn btn-large btn-primary pull-right" data-toggle="modal"><i class="fa fa-credit-card"></i> Add Detail</a>
@@ -56,10 +74,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><select>
-							<option>Option1</option>
-							<option>Option2</option>
-						</select></td>
+                        <td>Cash</td>
                         <td>Nestle bottle</td>
                         <td>500</td>
                         <td>
@@ -112,8 +127,8 @@
       <label class="control-label col-sm-4" for="expense_type">Expense Type:</label>
       <div class="col-sm-8">
         <select class="form-control" id="expense_type" name="expense_type">
-			<option>Option1</option>
-			<option>Option2</option>
+			<option>Cheque</option>
+			<option>Cash</option>
 		</select>
       </div>
     </div>
@@ -160,8 +175,8 @@
       <label class="control-label col-sm-4" for="expense_type">Expense Type:</label>
       <div class="col-sm-8">
         <select class="form-control" id="expense_type" name="expense_type">
-			<option>Option1</option>
-			<option>Option2</option>
+			<option>Cheque</option>
+			<option>Cash</option>
 		</select>
       </div>
     </div>
@@ -216,3 +231,4 @@
     </div>
   </div>
 </div>
+
