@@ -79,7 +79,7 @@
 							<li>
 								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/transactions/expense/view_expense_vouchers">View Expense Vouchers</a>
 							</li>
-							
+
 						</ul>
 	    			</li>
 	    			<li>
@@ -89,7 +89,16 @@
 	    				<a href="#">Bank Transactions</a>
 	    			</li>
 					<li>
-						<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/transactions/jv/view_vouchers">Journal Vouchers</a>
+						<a href="#"><span>Journal Vouchers</span><i class="fa fa-angle-left pull-right"></i></a>						
+                		<ul class="treeview-menu">
+							<li>
+								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/transactions/journal_vouchers/add_journal_voucher">Add Journal Voucher</a>
+							</li>
+							<li>
+								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/transactions/journal_vouchers/view_journal_vouchers">View Journal Vouchers</a>
+							</li>
+							
+						</ul>						
 					</li>
   				</ul>
     		</li>

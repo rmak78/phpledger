@@ -44,7 +44,11 @@ $('#data-table').DataTable( {
 
 	} );
 	
-
+$('.input-group.date').datepicker({
+    format: "yyyy-mm-dd",
+    autoclose:true,
+    todayHighlight: true
+});
 
 $("abbr.timeago").timeago();
 
