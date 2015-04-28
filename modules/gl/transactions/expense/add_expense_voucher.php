@@ -68,7 +68,7 @@
         
 <div class="form-group">
 	<div class="col-sm-12">
-		<button type="submit" class='btn btn-success btn-lg pull-right' name="add" value="Next">Next &nbsp; <i class="fa fa-chevron-circle-right"></i></button>
+		<button type="submit" class='btn btn-success btn-lg pull-right' name="addExpenseVoucer" id="addExpenseVoucer" value="Next">Next &nbsp; <i class="fa fa-chevron-circle-right"></i></button>
 	</div>	<!-- /.col -->
 </div>		<!-- /form-group -->	   
 </form>
