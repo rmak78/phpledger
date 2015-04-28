@@ -56,7 +56,7 @@
 								<a href="#">Reporting Periods</span><i class="fa fa-angle-left pull-right"></i></a>
 									<ul class="treeview-menu">
 									<li>
-									<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/financial_periods/reporting_period">Add Reporting Period</a>
+									<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/financial_periods/add_reporting_period">Add Reporting Period</a>
 									</li>
 									<li>
 									<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/setup/financial_periods/list_reporting_periods">List Reporting Periods</a>
@@ -125,4 +125,4 @@
 		</ul>
 	</li>
 		 
-</ul><!-- /.sidebar-menu -->
+</ul><!-- /.sidebar-menu  -->
