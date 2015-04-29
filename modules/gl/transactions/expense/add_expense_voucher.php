@@ -48,7 +48,12 @@
 					<label class="col-md-3 col-sm-3 control-label">Paid From Account&nbsp;</label>
 						<div class="col-md-9 col-sm-9">
 						<select required="required" class="form-control" name="voucher_paid_from_account" id="voucher_paid_from_account">
-						<option value="<?php echo $_SESSION['default_expense_account']; ?>" selected="selected">Default Expense Account</option>	 
+						<?php 
+							$accounts = DB::query("SELECT c.`account_id`, c.`account_desc_short` FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa c WHERE c.`activity_account`=1 AND c.`account_status`='active'");
+							foreach($accounts as $account){
+						?>
+						<option value="<?php echo $account['account_id']; ?>"><?php echo $account['account_desc_short']; ?></option>	 
+						<?php } ?>
 					</select>				
 						<p class="help-block"> </p>
 					</div><!-- /.col -->
@@ -56,14 +61,14 @@
 				<div class="form-group">
 					<label class="col-md-3 col-sm-3 control-label">Voucher Description: &nbsp;</label>
 						<div class="col-md-9 col-sm-9">
-				<textarea  name="account_desc_long" class="form-control textarea"  ></textarea>				
+				<textarea  name="account_desc_long" id="account_desc_long" class="form-control textarea"  ></textarea>				
 						<p class="help-block"> </p>
 					</div><!-- /.col -->
 				</div> <!-- /form-group --> 
         
 <div class="form-group">
 	<div class="col-sm-12">
-		<button type="submit" class='btn btn-success btn-lg pull-right' name="add" value="Next">Next &nbsp; <i class="fa fa-chevron-circle-right"></i></button>
+		<button type="submit" class='btn btn-success btn-lg pull-right' name="addExpenseVoucer" id="addExpenseVoucer" value="Next">Next &nbsp; <i class="fa fa-chevron-circle-right"></i></button>
 	</div>	<!-- /.col -->
 </div>		<!-- /form-group -->	   
 </form>

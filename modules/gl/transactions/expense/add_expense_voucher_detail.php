@@ -1,4 +1,31 @@
-        <!-- Main content -->
+<?php
+$voucher_id = '';
+if(isset($_POST['voucher_id'])){
+	$voucher_id = $_POST['voucher_id'];
+}
+if(isset($_GET['voucher_id'])){
+	$voucher_id = $_GET['voucher_id'];
+}
+if(isset($_POST['voucher_ref'])){
+	$voucher_ref = $_POST['voucher_ref'];
+}
+if(isset($_POST['voucher_date'])){
+	$voucher_date = $_POST['voucher_date'];
+}
+if(isset($_POST['voucher_paid_from_account'])){
+	$voucher_paid_from_account = $_POST['voucher_paid_from_account'];
+}
+if(isset($_POST['account_desc_long'])){
+	$account_desc_long = $_POST['account_desc_long'];
+}
+if(isset($_POST['addExpenseVoucer'])){
+	$voucher_id=1;
+	//$voucher_id = add_expense_voucher($voucher_ref, $voucher_date, $voucher_paid_from_account, $account_desc_long);
+}
+?> 
+<!-- check voucher id, if no voucher id then nothing to show -->
+<?php if($voucher_id <> ''): ?>       
+		<!-- Main content -->
         <section class="invoice">
           <!-- title row -->
           <div class="box">
@@ -9,16 +36,25 @@
                 <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
-<div class="box-body">
+   <div class="box-body">
+	<?php if($voucher_id <> ''): ?>
      <div class="progress">
 		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
         <span class="sr-only">100% </span>
         </div>
-      </div>		  
+      </div>	
+		<?php else: ?>
+		<div class="progress">
+		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="90" style="width: 90%">
+        <span class="sr-only">90% </span>
+        </div>
+      </div>
+	  <?php endif; ?>
           <div class="row">
             <div class="col-xs-12">
               <h2 class="page-header">
-                <i class="fa fa-globe"></i> Sutlej Solutions.
+				<?php $logo_path = DB::queryfirstfield('SELECT company_logo_icon FROM sa_companies'); ?>
+                <i><img src="<?php echo $logo_path; ?>" height="50px" width="50px" /></i> <?php echo $_SESSION['company_name']; ?>
                 <small class="pull-right"><?php echo date("j / n / Y"); ?></small>
               </h2>
             </div><!-- /.col -->
@@ -26,14 +62,17 @@
           <!-- info row -->
           <div class="row invoice-info">
             <div class="col-sm-4 invoice-col">
-                <strong>Voucher Description</strong>
+                <strong>Voucher Description</strong><BR/>
+				<?php echo $account_desc_long; ?>
 				<BR/>
+				 <?php $account_desc = DB::queryfirstfield("SELECT c.`account_desc_long` FROM sa_test_coa c WHERE c.`account_id`='".$voucher_paid_from_account."'"); ?>
+              <b>Paid from Account:</b> <?php echo $account_desc; ?>
             </div><!-- /.col -->
 			<div class="col-sm-4 invoice-col">
-              <b>Invoice #007612</b><br/>
-              <b>Voucher Ref#:</b> 4F3S8J<br/>
-              <b>Voucher Date:</b> 2/22/2014<br/>
-              <b>Paid from Account:</b> 968-34567
+			<?php $invoice_no = DB::queryfirstfield("SELECT COUNT(*) FROM ".DB_PREFIX.$_SESSION['co_prefix']."voucher_expense"); ?>
+              <b>Invoice# </b><?php echo $invoice_no+1; ?><br/>
+              <b>Voucher Ref#:</b> <?php echo $voucher_ref; ?><br/>
+              <b>Voucher Date:</b> <?php echo $voucher_date; ?><br/>
             </div><!-- /.col -->
 			 <div class="col-sm-4 invoice-col">
               <a href="#addExpenseDetailModal" role="button" class="btn btn-large btn-primary pull-right" data-toggle="modal"><i class="fa fa-credit-card"></i> Add Detail</a>
@@ -55,20 +94,27 @@
                       </tr>
                     </thead>
                     <tbody>
+						<?php
+						$expense_sql = DB::query("SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."voucher_expense_detail ex WHERE ex.`voucher_id`='".$voucher_id."'");
+						foreach($expense_sql as $expense){
+						?>
                       <tr>
-                        <td><select>
-							<option>Option1</option>
-							<option>Option2</option>
-						</select></td>
-                        <td>Nestle bottle</td>
-                        <td>500</td>
+                        <td><?php echo $expense['expense_account_id']; ?></td>
+                        <td><?php echo $expense['expense_description']; ?></td>
+                        <td><?php echo $expense['expense_amount']; ?></td>
                         <td>
-						<img src="" height="50" width="50"/> 
+							<?php if($expense['has_attachment']==0): ?>
+								<p style="color:red">NO ATTACHMENT</p>
+							<?php else: ?>
+								<img src="<?php echo $expense['expense_attachment']; ?>" height="50" width="50"/> 
+								<?php endif; ?>
 						</td>
+						
                         <td><a href="#delExpenseDetailModal" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash"></i>&nbsp;Delete</a>
 						<a href="#editExpenseDetailModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
 						</td>
                       </tr>
+					  <?php } ?>
 					</tbody>
 				</table>
             </div><!-- /.col -->
@@ -76,11 +122,16 @@
 
           <div class="row">
             <div class="col-xs-6">
-              <p class="lead">Amount Due 2/22/2014</p>
+              <p class="lead">Amount Due <?php echo $voucher_date; ?></p>
               <div class="table-responsive">
                 <table class="table">
                     <th>Total:</th>
-                    <td>500</td>
+                    <td>
+					<?php
+						$voucher_total = DB::queryfirstfield("SELECT e.`voucher_total` FROM sa_test_voucher_expense e WHERE e.`voucher_id`='".$voucher_id."'");
+						echo $voucher_total;
+					?>
+					</td>
                   </tr>
                 </table>
               </div>
@@ -95,8 +146,10 @@
             </div>
           </div>
         </section>
-		
-		
+<?php else: ?>
+	<p style="color:red"> &nbsp;&nbsp;&nbsp;&nbsp;Sorry..! Please provide the voucher header details </p>
+	<a href="<?php echo SITE_ROOT."index.php?route=modules/gl/transactions/expense/add_expense_voucher" ?>"> &nbsp;&nbsp;&nbsp;&nbsp;Click here to add expense voucher </a>
+<?php endif; ?>		
 <!-- Modal Add Detail -->
 
 <div id="addExpenseDetailModal" class="modal fade">
@@ -112,8 +165,8 @@
       <label class="control-label col-sm-4" for="expense_type">Expense Type:</label>
       <div class="col-sm-8">
         <select class="form-control" id="expense_type" name="expense_type">
-			<option>Option1</option>
-			<option>Option2</option>
+			<option>Cheque</option>
+			<option>Cash</option>
 		</select>
       </div>
     </div>
@@ -160,8 +213,8 @@
       <label class="control-label col-sm-4" for="expense_type">Expense Type:</label>
       <div class="col-sm-8">
         <select class="form-control" id="expense_type" name="expense_type">
-			<option>Option1</option>
-			<option>Option2</option>
+			<option>Cheque</option>
+			<option>Cash</option>
 		</select>
       </div>
     </div>
@@ -216,3 +269,4 @@
     </div>
   </div>
 </div>
+
