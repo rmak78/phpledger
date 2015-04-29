@@ -2,7 +2,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-           PHP Ledger Dashboard ( Master Branch & Test Merged)
+           PHP Ledger Dashboard ( Test Branch)
             <small>it all starts here</small>
           </h1>
           <ol class="breadcrumb">
