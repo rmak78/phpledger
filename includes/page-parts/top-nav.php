@@ -1,5 +1,5 @@
       <header class="main-header">
-        <a href="index.php" class="logo"><img src="<?php echo SITE_ROOT;  ?>assets/images/phpledger-logo.png" alt="phpLedger" border="0" align="left"   /></a>
+        <a href="http://www.phpledger.com/" class="logo"><img src="<?php echo SITE_ROOT;  ?>assets/images/phpledger-logo.png" alt="phpLedger" border="0" align="left"   /></a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
