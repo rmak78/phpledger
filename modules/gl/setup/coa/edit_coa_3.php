@@ -21,15 +21,11 @@ $acc_query = "SELECT * FROM ";
 	$group_id 			= $code['account_group'];
 	$account_desc_short	= $code['account_desc_short'];
 	$account_desc_long	= $code['account_desc_long'];
-	$consolidate_only	= $code['consolidate_only'];
 	$activity_account	= $code['activity_account'];
+	$consolidate_only	= $code['consolidate_only'];
+	
+//	print_r($acc);
 	}
-if($consolidate_only==1){
-	$account_type == "consolidate_only";
-}
-else{
-	$account_type == "activity_account";
-}
 /*
 if(isset($_POST['account_group'])){
 	$group_id = $_POST['account_group'];
@@ -76,7 +72,7 @@ echo $remaining_length;
 print_r($_POST);
 // we need to get company's Level data here 
 
-if ( $account_type == "consolidate_only" ) {
+if ( $consolidate_only == 1 ) {
 	
  	// TODO:if current_level >= company_max_levels then you cannot create consolidate only account. user has to go back and select activity_account type
 		if($parent_account_id == 0) {
@@ -97,7 +93,7 @@ if ( $account_type == "consolidate_only" ) {
 		
 			}
 		}
-} elseif ( $account_type == "activity_account" ) {
+} elseif ( $activity_account == 1) {
 	
 	$mask = str_replace("9", "\\\9", $parent_code);							
 			$i = 0;	
@@ -123,13 +119,13 @@ $placeholder =  str_replace("\\\9", "9", $mask);
  <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-          	Add New Account
-            <small>Add New Account to Chart of Accounts</small>
+          	Edit Account
+            <small>Edit Account to Chart of Accounts</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="<?php echo SITE_ROOT; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">General Ledger</a></li>
-            <li class="active">Add New Account Wizard</li>
+            <li class="active">Edit Account Wizard</li>
           </ol>
         </section>
 
@@ -139,7 +135,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
  <!-- Default box -->
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Add New Account Wizard (Step 3)</h3>
+              <h3 class="box-title">Edit Account Wizard (Step 1)</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
                 <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
@@ -151,13 +147,13 @@ $placeholder =  str_replace("\\\9", "9", $mask);
         <span class="sr-only">50% Complete  </span>
         </div>
       </div>
-<form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/edit_coa_4" ?>">
-	<div class="form-group has-success">
-		<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Account Group:
+<form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/edit_coa_4&coa_id=".$parent_account_id ?>">
+	<div class="form-group">
+		<label class="col-md-3 col-sm-3 control-label">&nbsp;Account Group:
 		</label>
         <div class="col-md-9 col-sm-9">
 <input type="hidden" name="account_group" value="<?php echo $group_id; ?>" />
-			 <select disabled="disabled" class="form-control" name="account_group" id="account_group" >
+			 <select  class="form-control" name="account_group" id="account_group" >
 				<option value=""> -- Select --</option>
 <?php 
 	$groups_query = "SELECT group_id, group_code, group_description from ";
@@ -178,11 +174,11 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 			<p class="help-block"> </p>
 		</div>
 	</div>
-<div class="form-group has-success">
-	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Parent Account:</label>
+<div class="form-group">
+	<label class="col-md-3 col-sm-3 control-label">&nbsp;Parent Account:</label>
 		<div class="col-md-9 col-sm-9">
 <input type="hidden" name="parent_account" value="<?php echo $parent_account_id; ?>" />
-						 <select disabled="disabled" class="form-control" name="parent_account">
+						 <select  class="form-control" name="parent_account">
 						<option value="0"> -- None --</option>
 						<?php 
 						$accounts_query = "SELECT account_id, account_code, account_desc_short from ";
@@ -211,15 +207,15 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 	</div><!-- /.col -->
 </div> <!-- /form-group -->
 <input type="hidden" name="account_type" value="<?php echo $account_type; ?>" /> 
-<div class="form-group  has-success">
-	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Account Type:</label>
+<div class="form-group">
+	<label class="col-md-3 col-sm-3 control-label">&nbsp;Account Type:</label>
 		<div class="col-md-9 col-sm-9">
 			<div class="col-md-4 col-sm-4">
- 		   		<input  type="radio" <?php if($account_type == "consolidate_only") { echo 'checked="checked"';} ?> value="consolidate_only"   name="account_type" class="col-sm-2 line-blue"  />
+ 		   		<input  type="radio" <?php if($consolidate_only == 1) { echo 'checked="checked"';} ?> value="consolidate_only"   name="account_type" class="col-sm-2 line-blue"  />
             	<label>Consolidate Only</label>
            </div>
   			<div class="col-md-4 col-sm-4">
- 		   		<input  type="radio" <?php if($account_type == "activity_account") { echo 'checked="checked"';} ?> value="activity_account" name="account_type" class="col-sm-2 line-blue"  />
+ 		   		<input  type="radio" <?php if($activity_account == 1) { echo 'checked="checked"';} ?> value="activity_account" name="account_type" class="col-sm-2 line-blue"  />
             	<label>Activity Account</label>
            </div>         
 		<p class="help-block"> </p>
@@ -263,7 +259,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
         
 <div class="form-group">
 	<div class="col-sm-12">
-		<a class='btn btn-danger btn-lg pull-left' href="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/add_coa" ?>">Cancel & Restart &nbsp; <i class="fa fa-chevron-circle-left"></i></a>
+		<a class='btn btn-danger btn-lg pull-left' href="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/add_coa" ?>">Cancel & Add New &nbsp; <i class="fa fa-chevron-circle-left"></i></a>
 		<button type="submit" class='btn btn-success btn-lg pull-right' name="add" value="Next">Next &nbsp; <i class="fa fa-chevron-circle-right"></i></button>
 	</div>	<!-- /.col -->
 </div>		<!-- /form-group -->	   

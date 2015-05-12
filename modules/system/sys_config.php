@@ -24,7 +24,7 @@ $tbl->addCell("<a data-toggle = 'modal' href ='#edit_system_configuration' class
 			   ");
 			   }
 $tbl->addRow();
-$tbl->addCell('Auto');
+$tbl->addCell($config['config_id']+1);
 $tbl->addCell('<input type="text" class="form-control" name="key" value=""/>');
 $tbl->addCell('<input type="text" class="form-control" name="key_label" value=""/>');
 $tbl->addCell('<input type="text" class="form-control"name="key_help_text" value=""/>');
@@ -79,9 +79,10 @@ $tbl->addCell("<a   class='btn btn-success btn-xs'  href ='#'>Save &nbsp;&nbsp;<
           <div class="modal-body">
            <form role="form"class="form-horizontal" method="post" action="">
 		   <div class="box-body">
+		   
                     <div class="form-group">
 					<label class="control-label">Key:</label>
-					<input class="form-control" type="text" required name="key" id="key" value=""/>
+					<input class="form-control" type="text" required name="key" id="key" value="<?php ?>"/>
 					<label class="control-label">Key Label:</label>
 					<input class="form-control" type="text" required name="key_label" id="key_label" value=""/>
 					<label class="control-label">Key Help Text:</label>

@@ -39,16 +39,17 @@ if (account_desc_exists($account_desc_short)){
 
 if (($code_exists <> 1) AND ($desc_exists <> 1) ) {
 	// add record to database
-$new_account =	add_coa(  		
+$update_account =	update_coa(  		
 					$account_code
 					, $account_group
 					, $account_desc_short
 					, $account_desc_long
 					, $parent_account_id
-					, $account_type 
+					, $account_type
+					, $parent_account_id
 					); 
-	echo $new_account;
-	if ($new_account > 0) {
+	echo $update_account;
+	if ($update_account > 0) {
 		echo '<script>window.location.replace("'.SITE_ROOT.'?route=modules/gl/setup/coa/list_coa");</script>';
 	} else {
 		echo '<script>window.location.replace("'.SITE_ROOT.'?route=modules/gl/setup/coa/add_coa");</script>';

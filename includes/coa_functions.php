@@ -110,7 +110,7 @@ function update_coa( 	  $account_code
 						, $account_desc_short
 						, $account_desc_long
 						, $parent_account_id
-						, $account_status
+						
 					)
 {
 	//Define $now ??? where is it comming from
@@ -122,8 +122,8 @@ function update_coa( 	  $account_code
 					, 'account_desc_long' => $account_desc_long
 					, 'parent_account_id' => $parent_account_id
 					, 'last_modified_by' => $user_name 
-					, 'last_modified_on' => $now 
-					, 'account_status' => $account_status
+					, 'last_modified_on' => getDateTime(date('now') ,"mySQL" )
+					, 'account_status' => 'Active'
 					
 				)
 					, "account_id =%s", $coa_id 

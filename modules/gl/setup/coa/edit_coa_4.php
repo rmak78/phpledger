@@ -7,27 +7,12 @@ $account_desc_short = "";
 $account_desc_long = "";
 $code_exists = 0;
 $desc_exists = 0;
-
-
-if(isset($_GET['coa_id'])){
-	$parent_account_id = $_GET['coa_id'];
+if(isset($_POST['account_group'])){
+	$group_id = $_POST['account_group'];
 }
-$acc_query = "SELECT * FROM ";
-	$acc_query .= DB_PREFIX.$_SESSION['co_prefix']."coa WHERE account_id =".$parent_account_id;
-	$acc = DB::query($acc_query);
-	
-	foreach($acc as $code){
-	$account_code 		= $code['account_code'];
-	$group_id 			= $code['account_group'];
-	$account_desc_short	= $code['account_desc_short'];
-	$account_desc_long	= $code['account_desc_long'];
-	$consolidate_only	= $code['consolidate_only'];
-	$activity_account	= $code['activity_account'];
-	}
-	
-	
-	
-/*
+if(isset($_POST['parent_account'])){
+	$parent_account_id = $_POST['parent_account'];
+}
 if(isset($_POST['account_type'])){
 	$account_type = $_POST['account_type'];
 }
@@ -40,7 +25,7 @@ if(isset($_POST['account_desc_short'])){
 if(isset($_POST['account_desc_long'])){
 	$account_desc_long = $_POST['account_desc_long'];
 }
-*/
+
 //check if account code already exists
 if (account_code_exists($account_code)){
 	$code_exists  = 1;
@@ -134,13 +119,13 @@ $placeholder =  str_replace("\\\9", "9", $mask);
  <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-          	Add New Account
-            <small>Add New Account to Chart of Accounts</small>
+          	Edit Account
+            <small>Edit Account to Chart of Accounts</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="<?php echo SITE_ROOT; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">General Ledger</a></li>
-            <li class="active">Add New Account Wizard</li>
+            <li class="active">Edit Account Wizard</li>
           </ol>
         </section>
 
@@ -150,7 +135,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
  <!-- Default box -->
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Add New Account Wizard (Review Information)</h3>
+              <h3 class="box-title">Edit Account Wizard (Review Information)</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
                 <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
@@ -166,13 +151,13 @@ $placeholder =  str_replace("\\\9", "9", $mask);
                     <h4>Almost Done!</h4>
                     <p>Please review following information & press save to create new GL Account. Some information can not be edited after you press save and this account cannot be deleted once any transaction happens. so caution is neccesary.</p>
 </div>     
-<form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/add_coa_5" ?>">
+<form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/setup/coa/edit_coa_5" ?>">
 	<div class="form-group  has-success">
 		<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Account Group:
 		</label>
         <div class="col-md-9 col-sm-9">
 <input type="hidden" name="account_group" value="<?php echo $group_id; ?>" />
-			 <select class="form-control" name="account_group" id="account_group" >
+			 <select disabled="disabled" class="form-control" name="account_group" id="account_group" >
 				<option value=""> -- Select --</option>
 <?php 
 	$groups_query = "SELECT group_id, group_code, group_description from ";
@@ -196,32 +181,32 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 <div class="form-group has-success">
 	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Parent Account:</label>
 		<div class="col-md-9 col-sm-9">
-<input type="hidden" name="parent_account" disabled="disabled" value="<?php echo $parent_account_id; ?>" />
-				<select  class="form-control" name="parent_account">
-				<option value="0"> -- None --</option>
-				<?php 
-				$accounts_query = "SELECT account_id, account_code, account_desc_short FROM ";
-				$accounts_query .= DB_PREFIX.$_SESSION['co_prefix']."coa WHERE 1 = 1";
-				if ($group_id <> "") {
-				$accounts_query .= " AND account_group =  ".$group_id;
-				$accounts_query .= " AND consolidate_only =  1";
-				}
-				
-				$accounts = DB::query($accounts_query);
-				
-				foreach ($accounts as $account) {
-				?>					
-				<option <?php 
-				if ($parent_account_id == $account['account_id'] ) {
-					echo 'selected="selected"';
-				}
-				 ?>
-				 value="<?php echo $account['account_id']; ?>" ><?php echo $account['account_code'];?>-<?php echo $account['account_desc_short']; ?></option>
-				<?php 
-				}
-				?>
+<input type="hidden" name="parent_account" value="<?php echo $parent_account_id; ?>" />
+						 <select disabled="disabled" class="form-control" name="parent_account">
+						<option value="0"> -- None --</option>
+						<?php 
+						$accounts_query = "SELECT account_id, account_code, account_desc_short from ";
+						$accounts_query .= DB_PREFIX.$_SESSION['co_prefix']."coa WHERE 1 = 1";
+						if ($group_id <> "") {
+						$accounts_query .= " AND account_group =  ".$group_id;
+						$accounts_query .= " AND consolidate_only =  1";
+						}
+						
+						$accounts = DB::query($accounts_query);
+						
+						foreach ($accounts as $account) {
+						?>					
+						<option <?php 
+						if ($parent_account_id == $account['account_id'] ) {
+							echo 'selected="selected"';
+						}
+						?>
+						 value="<?php echo $account['account_id']; ?>" ><?php echo $account['account_code']; ?> - <?php echo $account['account_desc_short']; ?>						</option>
+						<?php 
+						}
+						?>
 
-				</select>
+						</select>
 		<p class="help-block"> </p>
 	</div><!-- /.col -->
 </div> <!-- /form-group -->
@@ -230,11 +215,11 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Account Type:</label>
 		<div class="col-md-9 col-sm-9">
 			<div class="col-md-4 col-sm-4">
- 		   		<input  type="radio" <?php if($consolidate_only == 1) { echo 'checked="checked"';} ?> value="consolidate_only"   name="account_type" class="col-sm-2 line-blue"  />
+ 		   		<input disabled="disabled" type="radio" <?php if($account_type == "consolidate_only") { echo 'checked="checked"';} ?> value="consolidate_only"   name="account_type" class="col-sm-2 line-blue"  />
             	<label>Consolidate Only</label>
            </div>
   			<div class="col-md-4 col-sm-4">
- 		   		<input type="radio" <?php if($activity_account == 1) { echo 'checked="checked"';} ?> value="activity_account" name="account_type" class="col-sm-2 line-blue"  />
+ 		   		<input disabled="disabled" type="radio" <?php if($account_type == "activity_account") { echo 'checked="checked"';} ?> value="activity_account" name="account_type" class="col-sm-2 line-blue"  />
             	<label>Activity Account</label>
            </div>         
 		<p class="help-block"> </p>
@@ -247,7 +232,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
           <div class="input-group-addon">
             <i class="fa fa-book"></i>
           </div>
-          <input required="reqired" type="text" name="account_code" class="masked form-control" data-inputmask="'mask': '<?php echo $mask;?>'" data-autoclear="true" placeholder="<?php echo $placeholder;?>" value="<?php echo $account_code;?>" / >
+          <input required="reqired" disabled="disabled" type="text" name="account_code" class="masked form-control" data-inputmask="'mask': '<?php echo $mask;?>'" data-autoclear="true" placeholder="<?php echo $placeholder;?>" value="<?php echo $account_code;?>" / >
           </div><!-- /.input group -->
                 
 		<p class="help-block"> </p>
@@ -260,7 +245,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
           <div class="input-group-addon">
             <i class="fa fa-tag"></i>
           </div>
-          <input type="text" value="<?php echo $account_desc_short;?>" name="account_desc_short" class="form-control" required="required" />
+          <input type="text" disabled="disabled" value="<?php echo $account_desc_short;?>" name="account_desc_short" class="form-control" required="required" />
           </div><!-- /.input group -->
                 
 		<p class="help-block"> </p>
@@ -269,7 +254,7 @@ $placeholder =  str_replace("\\\9", "9", $mask);
 <div class="form-group has-success">
 	<label class="col-md-3 col-sm-3 control-label"><i class="fa fa-check"></i>&nbsp;Longer Description:</label>
 		<div class="col-md-9 col-sm-9">
-<textarea name="account_desc_long" class="form-control textarea"  ><?php echo $account_desc_long;?></textarea>
+<textarea  name="account_desc_long" disabled="disabled" class="form-control textarea"  ><?php echo $account_desc_long;?></textarea>
                 
 		<p class="help-block"> </p>
 	</div><!-- /.col -->
