@@ -24,12 +24,12 @@ $tbl->addCell("<a data-toggle = 'modal' href ='#edit_system_configuration' class
 			   ");
 			   }
 $tbl->addRow();
-$tbl->addCell('');
-$tbl->addCell('<input type="text" name="key" value=""/>');
-$tbl->addCell('<input type="text" name="key_label" value=""/>');
-$tbl->addCell('<input type="text" name="key_help_text" value=""/>');
-$tbl->addCell('<input type="text" name="value" value=""/>');
-$tbl->addCell("<a   class='btn btn-primary'  href ='#'>Save &nbsp;&nbsp;<span class='glyphicon glyphicons-disk-saved'></span></a>");
+$tbl->addCell($config['config_id']+1);
+$tbl->addCell('<input type="text" class="form-control" name="key" value=""/>');
+$tbl->addCell('<input type="text" class="form-control" name="key_label" value=""/>');
+$tbl->addCell('<input type="text" class="form-control"name="key_help_text" value=""/>');
+$tbl->addCell('<input type="text" class="form-control" name="value" value=""/>');
+$tbl->addCell("<a   class='btn btn-success btn-xs'  href ='#'>Save &nbsp;&nbsp;<span class='fa fa-save'></span></a>");
 
 
 			  
@@ -72,17 +72,30 @@ $tbl->addCell("<a   class='btn btn-primary'  href ='#'>Save &nbsp;&nbsp;<span cl
 <div class="modal fade" id="edit_system_configuration" tabindex="-1" role="dialog" 
    aria-labelledby="myModalLabel" aria-hidden="true">
    <div class="modal-dialog">
-         <div class="modal-content">
-          <div class="modal-header">
-           
-            <h3>Edit System Configrations</h3>
-          </div>
+        <div class="modal-content">
+			<div class="modal-header">
+           <h3 class="box-title"> Edit System Configuration </h3>
+		  </div>
           <div class="modal-body">
-           <h1>Edit system configration</h1>
+           <form role="form"class="form-horizontal" method="post" action="">
+		   <div class="box-body">
+		   
+                    <div class="form-group">
+					<label class="control-label">Key:</label>
+					<input class="form-control" type="text" required name="key" id="key" value="<?php ?>"/>
+					<label class="control-label">Key Label:</label>
+					<input class="form-control" type="text" required name="key_label" id="key_label" value=""/>
+					<label class="control-label">Key Help Text:</label>
+					<input class="form-control" type="text" required name="key_help_text" id="key_help_text" value=""/>
+					<label class="control-label">Value:</label>
+					<input class="form-control" type="text" required name="value" id="value" value=""/>
+					</div>
+			</div>
+		   </form>
           </div>
           <div class="modal-footer">
            <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-          <button class="btn btn-primary" type="button" name="submit_button" id="submit_button">Sign in</button>
+          <button class="btn btn-success" type="button" name="submit_button" id="submit_button">Save</button>
           
            
        
