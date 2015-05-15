@@ -81,6 +81,35 @@ function create_new_expense_voucher(
 					}
 	       }
 }		
-	
+/********************** JOURNAL VOUCHER DETAIL FUNCTIONS ******************/	
+function journal_voucher_detail(
+							  $voucher_id
+							, $voucher_date
+							, $account_id	
+							, $entry_desc
+							, $debit_amount
+							, $credit_amount
+							 ) 
+{				
+					$now= getDateTime(0,'mySQL');
+					$insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'journal_voucher_details', 
+								array(			
+										'voucher_id' 			=>  $voucher_id,	
+										'voucher_date' 	 		=>  $voucher_date,
+										'account_id' 			=>  $account_id,
+										'entry_description' 	=>  $entry_desc,
+										'debit_amount' 			=>  $debit_amount,	
+										'credit_amount' 		=>  $credit_amount,										
+										'created_on'			=>  $now,
+										'created_by'			=>  $_SESSION['user_name'],
+										'voucher_detail_status'	=>	'Draft'
+									));
+					$voucher_detail_id =DB::insertId();
+					if($voucher_detail_id) { 
+					return $voucher_detail_id;
+					} else {
+					return 0;	
+					}
+	       }	
 
 ?>
