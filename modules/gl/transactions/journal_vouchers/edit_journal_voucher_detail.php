@@ -5,8 +5,21 @@ print_r($_POST);
 $voucher_desc = "";
 $voucher_ref = "";
 $voucher_date = "";
+if(isset($_GET['voucher_detail_id'])) {
+	$voucher_detail_id = $_GET['voucher_detail_id'];
+}
 if(isset($_GET['voucher_id'])) {
 	$voucher_id = $_GET['voucher_id'];
+}
+else{
+$sqlquery = "SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."journal_voucher_details WHERE voucher_detail_id=".$voucher_detail_id ;
+	$voucher_detail = DB::queryFirstRow($sqlquery);
+	$voucher_id		= $voucher_detail['voucher_id'];
+	$account_id 	= $voucher_detail['account_id'];
+	$debit_amount 	= $voucher_detail['debit_amount'];
+	$credit_amount 	= $voucher_detail['credit_amount'];
+	$entry_desc 	= $voucher_detail['entry_description'];
+	
 }
 if($voucher_id > 0) {
 	$sql = "SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."journal_vouchers WHERE voucher_id=".$voucher_id;
@@ -32,34 +45,33 @@ if(isset($_POST['entry_desc'])){
 }
 
 if (isset($_POST['save'])){
-	 
 	
-	$voucher_detail_id = journal_voucher_detail(
+	$update_voucher_detail_id= update_journal_voucher_detail(
 							  $voucher_id
 							, $voucher_date
 							, $account_id	
 							, $entry_desc
 							, $debit_amount
 							, $credit_amount
+							, $voucher_detail_id 
 							); 
-	if($voucher_detail_id <> 0) {
+	if($update_voucher_detail_id <> 0) {
 		echo '<script>window.location.replace("'.SITE_ROOT.'?route=modules/gl/transactions/journal_vouchers/view_journal_vouchers_detail&voucher_id='.$voucher_id.'");</script>';
-		///echo "i was here";
+		//echo "i was here";
 	}
-}	
-
+}
 
 ?><!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
           	Journal Voucher (J.V.)
-            <small>Create Journal Voucher (Draft)</small>
+            <small>Edit Journal Voucher (Draft)</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="<?php echo SITE_ROOT; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">General Ledger</a></li>
             <li>Journal Vouchers</li>
-            <li class="active">Add New Voucher</li>
+            <li class="active">Edit Voucher</li>
           </ol>
         </section>
         <!-- Main content -->
@@ -67,7 +79,7 @@ if (isset($_POST['save'])){
           <!-- title row -->
           <div class="box">
              <div class="box-header with-border">
-              <h3 class="box-title">Create Journal Voucher (Step 2)</h3>
+              <h3 class="box-title">Edit Journal Voucher (Step 1)</h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
                 <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
@@ -122,7 +134,7 @@ if (isset($_POST['save'])){
               </div>
             </div>
 <div class="box-body">
-   <form role="form"class="form-horizontal" method="post" action="<?php echo SITE_ROOT."index.php?route=modules/gl/transactions/journal_vouchers/add_journal_voucher_detail&voucher_id=".$voucher_id ?>">
+   <form role="form"class="form-horizontal" method="post" action="<?php echo SITE_ROOT."index.php?route=modules/gl/transactions/journal_vouchers/edit_journal_voucher_detail&voucher_id=".$voucher_id."&voucher_detail_id=".$voucher_detail_id?>">
 					<div class="form-group">
 						<label class="col-md-3 col-sm-3 control-label"> Account &nbsp;</label>
 							<div class="col-md-9 col-sm-9">
@@ -136,7 +148,12 @@ if (isset($_POST['save'])){
 										
 										foreach ($accounts as $account) {
 										?>					
-											<option value="<?php echo $account['account_id']; ?>" ><?php echo $account['account_code']; ?> - <?php echo $account['account_desc_short']; ?></option>
+											<option <?php 
+														if ($account_id == $account['account_id'] ) {
+															echo 'selected="selected"';
+														}
+														?>
+											value="<?php echo $account['account_id']; ?>" ><?php echo $account['account_code']; ?> - <?php echo $account['account_desc_short']; ?></option>
 										<?php 
 										}
 										?>
@@ -147,19 +164,19 @@ if (isset($_POST['save'])){
 					<div class="form-group">
 						<label class="col-md-3 col-sm-3 control-label">Debit Ammount&nbsp;</label>
 							<div class="col-md-9 col-sm-9">
-								 <input class="form-control" placeholder="00.00" type="text" required name="debit_amount" id="debit_amount"  >
+								 <input class="form-control" placeholder="00.00" type="text" required name="debit_amount" id="debit_amount" value="<?php echo $debit_amount ; ?>" >
 							</div>
 					</div> <!-- /form-group -->
 					<div class="form-group">
 						<label class="col-md-3 col-sm-3 control-label">Credit Ammount&nbsp; </label>
 							<div class="col-md-9 col-sm-9">
-								 <input class="form-control" placeholder="00.00" type="text" required name="credit_amount" id="credit_amount" >
+								 <input class="form-control" placeholder="00.00" type="text" required name="credit_amount" id="credit_amount" value="<?php echo $credit_amount;?>" >
 							</div>
 					</div> <!-- /form-group -->
 					<div class="form-group">
 					<label class="col-md-3 col-sm-3 control-label">Entry Description &nbsp;</label>
 						<div class="col-md-9 col-sm-9">
-						<textarea required="required" name="entry_desc" class="form-control textarea" > </textarea>				
+						<textarea required="required" name="entry_desc" class="form-control textarea" ><?php echo $entry_desc;?> </textarea>				
 						<p class="help-block"> </p>
 					</div><!-- /.col -->
 				</div> <!-- /form-group --> 
