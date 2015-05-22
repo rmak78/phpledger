@@ -47,7 +47,15 @@ $tbl_draft->addCell($jv_detail['debit_amount']);
 $tbl_draft->addCell($jv_detail['credit_amount']);
 $tbl_draft->addCell("<a href ='".SITE_ROOT."?route=modules/gl/transactions/journal_vouchers/edit_journal_voucher_detail&voucher_detail_id=".$jv_detail['voucher_detail_id']."'><button type='button' class='btn btn-primary btn-xs' name='edit' value='Edit'>Edit&nbsp;<i class='glyphicon glyphicon-edit'></i></button></a>&nbsp;&nbsp;<a href ='".SITE_ROOT."?route=modules/gl/transactions/journal_vouchers/edit_journal_voucher_detail&voucher_detail_id=".$jv_detail['voucher_detail_id']."'><button type='submit' name='delete' value='delete' class='btn btn-danger btn-xs'>Delete&nbsp;&nbsp;<i class='glyphicon glyphicon-trash'></i></button</a>");
 }
-			  
+$tbl_draft->addRow();
+$tbl_draft->addCell('');			  
+$tbl_draft->addCell('');			  
+$options = '<option value="" > - Select Account - </option>';
+$tbl_draft->addCell('<select id="inputAcctID" name="accountid">'.$options.'</select>');			  
+$tbl_draft->addCell('<input id="inputDesc" type="text" name="description" />');			  
+$tbl_draft->addCell('<input id="inputDebit" type="text" name="debit" />');			  
+$tbl_draft->addCell('<input id="inputCredit" type="text" name="credit" />');			  
+$tbl_draft->addCell(' ');			  
 
 ?>
 

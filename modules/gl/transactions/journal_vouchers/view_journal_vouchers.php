@@ -24,7 +24,7 @@ $tbl_draft->addCell($draft_jv['voucher description']);
 $tbl_draft->addCell($draft_jv['debits_total']);
 $tbl_draft->addCell($draft_jv['credits_total']);
 $tbl_draft->addCell("More info here like created on, last modify etc");
-$tbl_draft->addCell("<a class='pull btn btn-primary btn-xs' href ='".SITE_ROOT."?route=modules/gl/transactions/journal_vouchers/add_journal_voucher_detail&voucher_id=".$draft_jv['voucher_id']."'>Edit&nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a> <a class='pull btn btn-danger btn-xs' href ='#'>Delete&nbsp;&nbsp;<span class='glyphicon glyphicon-trash'></span></a>");
+$tbl_draft->addCell("<a class='pull btn btn-primary btn-xs' href ='".SITE_ROOT."?route=modules/gl/transactions/journal_vouchers/view_journal_voucher_detail&voucher_id=".$draft_jv['voucher_id']."'>Edit&nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a> <a class='pull btn btn-danger btn-xs' href ='#'>Delete&nbsp;&nbsp;<span class='glyphicon glyphicon-trash'></span></a>");
 }
 			  
 

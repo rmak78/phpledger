@@ -45,6 +45,7 @@ if(isset($_POST['entry_desc'])){
 }
 
 if (isset($_POST['save'])){
+	//TODO: verify if all variables exist before updating database
 	
 	$update_voucher_detail_id= update_journal_voucher_detail(
 							  $voucher_id
@@ -79,7 +80,7 @@ if (isset($_POST['save'])){
           <!-- title row -->
           <div class="box">
              <div class="box-header with-border">
-              <h3 class="box-title">Edit Journal Voucher (Step 1)</h3>
+              <h3 class="box-title">Edit Journal Voucher </h3>
               <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
                 <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
