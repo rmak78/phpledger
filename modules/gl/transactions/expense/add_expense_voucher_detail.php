@@ -103,6 +103,11 @@ if(isset($_POST['addExpenseVoucer'])){
                         <td><?php echo $expense['expense_description']; ?></td>
                         <td><?php echo $expense['expense_amount']; ?></td>
                         <td>
+						<?php } ?>
+							<?php
+						$attachment_sql = DB::query("SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."voucher_expense ex WHERE ex.`voucher_id`='".$voucher_id."'");
+						foreach($attachment_sql as $expense){
+						?>
 							<?php if($expense['has_attachment']==0): ?>
 								<p style="color:red">NO ATTACHMENT</p>
 							<?php else: ?>
