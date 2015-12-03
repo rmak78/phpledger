@@ -1,28 +1,54 @@
 <?php
-$voucher_id = '';
-if(isset($_POST['voucher_id'])){
-	$voucher_id = $_POST['voucher_id'];
-}
-if(isset($_GET['voucher_id'])){
+$account_desc_long='';
+$account_desc='';
+$expense_type='';
+$expense_detail='';
+$expense_ammount='';
+$expense_ammount='';
+$expense_attachment='';
+if(isset($_GET['voucher_id'])) {
 	$voucher_id = $_GET['voucher_id'];
 }
-if(isset($_POST['voucher_ref'])){
-	$voucher_ref = $_POST['voucher_ref'];
+
+if($voucher_id > 0) {
+	$sql = "SELECT * FROM ".DB_PREFIX.$_SESSION['co_prefix']."voucher_expense WHERE voucher_id=".$voucher_id;
+	$voucher = DB::queryFirstRow($sql);
+
+	$voucher_ref = $voucher['voucher_ref_no'];
+	$voucher_date = $voucher['voucher_date'];
+	$account_desc_long = $voucher['voucher description'];
+	$account_desc = $voucher['paid_from_account'];
 }
-if(isset($_POST['voucher_date'])){
-	$voucher_date = $_POST['voucher_date'];
+
+
+?>
+<!-- Add expense voucher detail Using model -->
+<?php
+if(isset($_POST['save_expense_voucher_detail'])) {
+ $expense_type		=		$_POST['expense_type'];
+ $expense_detail	=		$_POST['expense_detail'];
+ $expense_ammount	=		$_POST['expense_ammount'];
+ $expense_attachment =	 	$_POST['expense_attachment'];
+    
+	$voucher_detail_id = expense_voucher_detail(
+						$voucher_id
+					,	$account_desc
+					,	$expense_type
+					,	$expense_detail
+					,	$expense_ammount
+					,	$expense_attachment
+ 
+ );
+		if($voucher_detail_id <> 0) {
+		echo '<script>window.location.replace("'.SITE_ROOT.'?route=modules/gl/transactions/expense/add_expense_voucher_detail&voucher_id='.$voucher_id.'");</script>';
+		///echo "i was here";
+	}
+
 }
-if(isset($_POST['voucher_paid_from_account'])){
-	$voucher_paid_from_account = $_POST['voucher_paid_from_account'];
-}
-if(isset($_POST['account_desc_long'])){
-	$account_desc_long = $_POST['account_desc_long'];
-}
-if(isset($_POST['addExpenseVoucer'])){
-	
-	$voucher_id = create_new_expense_voucher($voucher_ref, $voucher_date, $account_desc_long, $voucher_paid_from_account);
-}
-?> 
+
+
+
+ ?>
 <!-- check voucher id, if no voucher id then nothing to show -->
 <?php if($voucher_id <> ''): ?>       
 		<!-- Main content -->
@@ -65,7 +91,7 @@ if(isset($_POST['addExpenseVoucer'])){
                 <strong>Voucher Description</strong><BR/>
 				<?php echo $account_desc_long; ?>
 				<BR/>
-				 <?php $account_desc = DB::queryfirstfield("SELECT c.`account_desc_long` FROM sa_test_coa c WHERE c.`account_id`='".$voucher_paid_from_account."'"); ?>
+				 <?php // $account_desc = DB::queryfirstfield("SELECT c.`account_desc_long` FROM sa_test_coa c WHERE c.`account_id`='".$voucher_paid_from_account."'"); ?>
               <b>Paid from Account:</b> <?php echo $account_desc; ?>
             </div><!-- /.col -->
 			<div class="col-sm-4 invoice-col">
@@ -165,7 +191,7 @@ if(isset($_POST['addExpenseVoucer'])){
                 <h4 class="modal-title">Add Expense Detail</h4>
             </div>
             <div class="modal-body">
-				 <form class="form-horizontal" role="form" >
+				 <form class="form-horizontal" role="form" method="post" action="<?php echo SITE_ROOT."index.php?route=modules/gl/transactions/expense/add_expense_voucher_detail&voucher_id=".$voucher_id ?>" >
     <div class="form-group">
       <label class="control-label col-sm-4" for="expense_type">Expense Type:</label>
       <div class="col-sm-8">
@@ -196,7 +222,7 @@ if(isset($_POST['addExpenseVoucer'])){
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary" name="save_expense_voucher_detail">Save</button>
             </div>
 			</form>
         </div>
@@ -244,7 +270,7 @@ if(isset($_POST['addExpenseVoucer'])){
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
 			</form>
         </div>

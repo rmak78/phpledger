@@ -1,3 +1,42 @@
+
+<?php
+$voucher_id = '';
+if(isset($_POST['voucher_id'])){
+	$voucher_id = $_POST['voucher_id'];
+}
+if(isset($_GET['voucher_id'])){
+	$voucher_id = $_GET['voucher_id'];
+}
+if(isset($_POST['voucher_ref'])){
+	$voucher_ref = $_POST['voucher_ref'];
+}
+if(isset($_POST['voucher_date'])){
+	$voucher_date = $_POST['voucher_date'];
+}
+if(isset($_POST['voucher_paid_from_account'])){
+	$voucher_paid_from_account = $_POST['voucher_paid_from_account'];
+}
+if(isset($_POST['account_desc_long'])){
+	$account_desc_long = $_POST['account_desc_long'];
+}
+if(isset($_POST['addExpenseVoucer'])){
+	
+	$voucher_id = create_new_expense_voucher($voucher_ref, $voucher_date, $account_desc_long, $voucher_paid_from_account);
+	
+	if($voucher_id <> 0) {
+		echo '<script>window.location.replace("'.SITE_ROOT.'?route=modules/gl/transactions/expense/add_expense_voucher_detail&voucher_id='.$voucher_id.'");</script>';
+		echo "i was here";
+	} else {
+		if (voucher_ref_exists($voucher_ref)){
+			$error_ref = 1;
+		} else {
+			$error_db = 1;
+		}
+	}
+}
+?>
+
+
 <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -29,7 +68,7 @@
         <span class="sr-only">50% Complete  </span>
         </div>
       </div>
-<form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/transactions/expense/add_expense_voucher_detail" ?>">
+<form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/transactions/expense/add_expense_voucher" ?>">
 				<div class="form-group">
 					<label class="col-md-3 col-sm-3 control-label">Voucher Ref#&nbsp;</label>
 						<div class="col-md-2 col-sm-2">
@@ -40,7 +79,7 @@
 				<div class="form-group">
 					<label class="col-md-3 col-sm-3 control-label">Voucher Date&nbsp;</label>
 						<div class="col-md-9 col-sm-9">
-						<input name="voucher_date" required="required" id="voucher_date"   class="date-picker form-control" size="16" type="text" value="" />				
+						<input name="voucher_date" required="required" id="voucher_date"   class="date-picker form-control" size="16" type="text" />				
 						<p class="help-block"> </p>
 					</div><!-- /.col -->
 				</div> <!-- /form-group --> 

@@ -148,4 +148,38 @@ function update_journal_voucher_detail(
 					return 0;	
 					}
 	       }
+		   
+		   /********************** Expense VOUCHER DETAIL FUNCTIONS ******************/	
+function expense_voucher_detail(
+						$voucher_id
+					,	$voucher_paid_from_account
+					,	$expense_type
+					,	$expense_detail
+					,	$expense_ammount
+					,	$expense_attachment
+							 ) 
+{				
+					$now= getDateTime(0,'mySQL');
+					$insert = DB::Insert(DB_PREFIX.$_SESSION['co_prefix'].'voucher_expense_detail', 
+								array(			
+										'voucher_id' 			=>  $voucher_id,	
+										'expense_account_id' 	=>  $voucher_paid_from_account,
+										'expense_type' 			=>  $expense_type,
+										'expense_description' 	=>  $expense_detail,	
+										'expense_amount' 		=>  $expense_ammount,
+										'has_attachment'		=>  $expense_attachment,
+										'created_by'			=>  $_SESSION['user_name'],
+										'created_on'			=>  $now,
+										'voucher_detail_status'	=>	'Draft'
+									));
+					$voucher_detail_id =DB::insertId();
+					if($voucher_detail_id) { 
+					return $voucher_detail_id;
+					return $voucher_id;
+					} else {
+					return 0;	
+					}
+	       }
+		   
+		   
 ?>
