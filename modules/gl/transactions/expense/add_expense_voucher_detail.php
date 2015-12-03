@@ -19,8 +19,8 @@ if(isset($_POST['account_desc_long'])){
 	$account_desc_long = $_POST['account_desc_long'];
 }
 if(isset($_POST['addExpenseVoucer'])){
-	$voucher_id=1;
-	//$voucher_id = add_expense_voucher($voucher_ref, $voucher_date, $voucher_paid_from_account, $account_desc_long);
+	
+	$voucher_id = create_new_expense_voucher($voucher_ref, $voucher_date, $account_desc_long, $voucher_paid_from_account);
 }
 ?> 
 <!-- check voucher id, if no voucher id then nothing to show -->
@@ -165,7 +165,7 @@ if(isset($_POST['addExpenseVoucer'])){
                 <h4 class="modal-title">Add Expense Detail</h4>
             </div>
             <div class="modal-body">
-				 <form class="form-horizontal" role="form">
+				 <form class="form-horizontal" role="form" >
     <div class="form-group">
       <label class="control-label col-sm-4" for="expense_type">Expense Type:</label>
       <div class="col-sm-8">

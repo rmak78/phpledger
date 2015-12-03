@@ -57,7 +57,8 @@ function create_new_expense_voucher(
 							, $voucher_paid_from_account
 							 ) 
 {
-	if (expense_voucher_ref_exists($voucher_ref)){
+	$voucher_exist = 0;
+	if (voucher_ref_exists($voucher_ref)){
 		$voucher_exist = 1;
 		
 	}					
@@ -68,7 +69,7 @@ function create_new_expense_voucher(
 										'voucher_ref_no' 		=>  $voucher_ref,	
 										'voucher_date' 	 		=>  $voucher_date,
 										'voucher description' 	=>  $voucher_description,
-										'petty_cash_account' 	=>  $voucher_paid_from_account,
+										'paid_from_account' 	=>  $voucher_paid_from_account,
 										'created_on'			=>  $now,
 										'created_by'			=>  $_SESSION['user_name'],
 										'voucher_status'		=>	'Draft'
