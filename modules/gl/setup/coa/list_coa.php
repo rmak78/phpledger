@@ -31,7 +31,9 @@ $num_rows = DB::count();
     foreach ($result as $data) {
         $thisref = &$refs[ $data['account_id'] ];
         $thisref['sect_parent'] = $data['parent_account_id'];
-		 $thisref['sect_name'] = $data['account_code']." - ".$data['account_desc_short']."&nbsp;&nbsp;<a class=' btn btn-xs' href ='".$_SERVER['PHP_SELF']."?route=modules/gl/setup/coa/edit_coa&coa_id=".$data['account_id']."'>Edit &nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a>";
+
+		 $thisref['sect_name'] = $data['account_code']." - ".$data['account_desc_short']."&nbsp;&nbsp;<a class='pull btn btn-danger btn-xs' href ='".$_SERVER['PHP_SELF']."?route=modules/gl/setup/coa/edit_coa_3&coa_id=".$data['account_id']."'>Edit Coa&nbsp;&nbsp;<span class='glyphicon glyphicon-edit'></span></a>";
+
         $thisref['sect_id'] = $data['account_id'];
     
         if ($data['parent_account_id'] == 0) {
