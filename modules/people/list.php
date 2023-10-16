@@ -1,5 +1,3 @@
-<?php require_once('config.php'); ?>
-
 <!-- Content Wrapper. Contains page content -->
 <style>
     .container {
@@ -29,6 +27,7 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Image</th>
                 <th scope="col">Name</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Email</th>
@@ -37,7 +36,9 @@
             </tr>
         </thead>
         <?php
-        $results = DB::query("SELECT * FROM people");
+        // $results = DB::query("SELECT * FROM people");
+        $results = DB::query("SELECT * FROM people ORDER BY id DESC");
+
         // $results = DB::query("SELECT * FROM people Where id='2'"); just for practice
         // var_dump($results);
         foreach ($results as $index => $row) {
@@ -45,12 +46,28 @@
             <tbody>
                 <tr>
                     <td><?php echo $index + 1; ?></td>
+                    <td>
+                        <?php
+                        if ($row['image']) {
+                        ?>
+                            <img src="modules/people/assets_people/<?php echo $row['image'] ?>" width="70px" height="70px" style="border-radius: 48px;" alt="">
+                        <?php
+                        } else {
+                        ?>
+                            <img src="modules/people/assets_people/download.png" width="70px" height="70px" style="border-radius: 48px;" alt="">
+                        <?php
+                        }
+                        ?>
+
+
+                    </td>
                     <td><?php echo $row['name']; ?></td>
                     <td><?php echo $row['phone']; ?></td>
                     <td><?php echo $row['email']; ?></td>
                     <td><?php echo $row['address']; ?></td>
                     <td>
-                        <!-- <a href="<?php echo SITE_ROOT; ?>?route=modules/people/add_people?recored_id=<?php //echo $row['id']; ?>" class="btn btn-primary btn-sm">Edit</a> -->
+                        <!-- <a href="<?php echo SITE_ROOT; ?>?route=modules/people/add_people?recored_id=<?php //echo $row['id']; 
+                                                                                                            ?>" class="btn btn-primary btn-sm">Edit</a> -->
                         <!-- Use & not ? -->
                         <a href="<?php echo SITE_ROOT; ?>?route=modules/people/add_people&record_id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm">Edit</a>
 
@@ -75,6 +92,19 @@
 if (isset($_GET["record_id"])) {
     // Get the record ID to delete
     $record_id = $_GET["record_id"];
+
+    // First, select the image file associated with the record
+    $imageResult = DB::queryFirstRow("SELECT image FROM people WHERE id=%i", $record_id);
+    
+    if ($imageResult) {
+        $imageToDelete = $imageResult['image'];
+
+        $imagePath = 'modules/people/assets_people/' . $imageToDelete;
+
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+    }
 
     DB::delete('people', 'id=%i', $record_id);
     if (DB::affectedRows() > 0) {

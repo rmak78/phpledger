@@ -1,5 +1,3 @@
-<?php require_once('config.php'); ?>
-
 <?php
 if (isset($_GET["record_id"])) {
     $record_id = $_GET["record_id"];
@@ -23,7 +21,7 @@ if (isset($_GET["record_id"])) {
     </style>
     <div class="well well-sm" style="margin-top: 15px;">
         <!-- Add Member -->
-        
+
         <?php echo isset($record_id) ? "Update Member" : "Add Member"; ?>
 
         <!-- <a href="<?php //echo SITE_ROOT; 
@@ -31,7 +29,7 @@ if (isset($_GET["record_id"])) {
 
     </div>
 
-    <form action="#" method="POST">
+    <form action="#" method="POST" enctype="multipart/form-data">
 
         <input type="hidden" id="operation" name="operation" value="<?php echo isset($record_id) ? $record_id : 'create'; ?>">
 
@@ -52,10 +50,12 @@ if (isset($_GET["record_id"])) {
             <label for="address">Address:</label>
             <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" value="<?php echo isset($row) ? $row[0]['address'] : ''; ?>" required>
         </div>
-        <!-- <div class="form-group">
+        <div class="form-group">
             <label for="image">Image:</label>
+            <input type="hidden" class="form-control" id="image" name="oldimage" value="<?php echo isset($row) ? $row[0]['image'] : ''; ?>">
             <input type="file" class="form-control-file mt-3 mb-3" id="image" name="image" accept="image/*">
-        </div> -->
+        </div>
+
         <button type="submit" name="submit" class="btn btn-success">Submit</button>
         <a href="<?php echo SITE_ROOT; ?>?route=modules/people/list" class=" btn btn-primary">Cancel</a>
 
@@ -72,6 +72,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
     $phone = $_POST["phone"];
     $address = $_POST["address"];
+    $oldimage = $_POST["oldimage"];
+
+    // Handle image upload (if needed)
+    // $image = ""; // Initialize to an empty string
+
+    if (isset($_FILES["image"])) {
+        $imageFile = $_FILES["image"];
+        $imageFileName = $imageFile["name"];
+        $image = time() . $imageFileName;
+        // var_dump($image);
+        // die();
+        // $uploadDirectory = "people/assets_people/"; 
+        $uploadDirectory = 'modules/people/assets_people/';
+
+        // Move the uploaded image to the specified directory
+        if (move_uploaded_file($imageFile["tmp_name"], $uploadDirectory . $image)) {
+            if (!empty($oldimage)) {
+                $oldImagePath = 'modules/people/assets_people/' . $oldimage;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+            // echo "Image uploaded successfully.";
+        } else {
+            // echo "Image upload failed.";
+            $image = $oldimage;
+        }
+    }
 
     // Check the operation type (create or update)
     $operation = $_POST["operation"];
@@ -82,7 +110,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'name' => $name,
             'email' => $email,
             'phone' => $phone,
-            'address' => $address
+            'address' => $address,
+            'image' => $image
         ]);
 
         // Check if the insertion was successful
@@ -102,7 +131,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </script>
         <?php
         } else {
-            echo "Error: " . DB::error();
+            // echo "Error: " . DB::error();
+        ?>
+            <script>
+                Swal.fire({
+                    title: "Data is Required",
+                    text: "Nothing to Insert.",
+                    icon: "question"
+                }).then(function() {
+                    // window.location.href = "<?php //echo SITE_ROOT; 
+                                                ?>?route=modules/people/list";
+                });
+            </script>
+        <?php
         }
     } elseif ($operation !== "create") {
 
@@ -110,7 +151,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'name' => $name,
             'email' => $email,
             'phone' => $phone,
-            'address' => $address
+            'address' => $address,
+            'image' => $image
         ], "id=%i", $record_id);
 
         if (DB::affectedRows() > 0) {
@@ -124,9 +166,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     window.location.href = "<?php echo SITE_ROOT; ?>?route=modules/people/list";
                 });
             </script>
-<?php
+        <?php
         } else {
-            echo "Error: " . DB::error();
+            // echo "Error: " . DB::error();
+            // echo "Nothing is Updated";
+        ?>
+            <script>
+                Swal.fire({
+                    title: "Changes Are Not Detected",
+                    text: "Nothing to Update.",
+                    icon: "error"
+                }).then(function() {
+                    // window.location.href = "<?php //echo SITE_ROOT; 
+                                                ?>?route=modules/people/list";
+                });
+            </script>
+<?php
         }
     }
 }
