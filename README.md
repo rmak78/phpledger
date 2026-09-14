@@ -91,7 +91,7 @@ Pakistan is first for accounting-framework research, followed by the UK and UAE.
 
 Restaurant, pharmacy, club, trader, distributor, shop and workshop scenarios inform the longer-term product. **Scan document** and AI extraction come later, with human review before saving or posting.
 
-[**Full roadmap**](https://github.com/rmak78/phpledger/wiki/Roadmap) · [**First-package scope**](https://github.com/rmak78/phpledger/wiki/First-Package)
+[**Full roadmap**](https://github.com/rmak78/phpledger/wiki/Roadmap) · [**First-package scope**](https://github.com/rmak78/phpledger/wiki/First-Package) · [**Sprint 03 progress**](https://github.com/rmak78/phpledger/milestone/4)
 
 ## Help shape PHP Ledger
 
@@ -99,7 +99,7 @@ We welcome thoughtful feedback from business owners, bookkeepers, accountants, d
 
 - **Explore and report:** [open an issue](https://github.com/rmak78/phpledger/issues).
 - **Review accounting or contribute:** start with the [contributor guide](https://github.com/rmak78/phpledger/wiki/Contributing-and-Support).
-- **Discuss a pilot or setup support:** [rmak78@gmail.com](mailto:rmak78@gmail.com) · **+92 313 335 9999**.
+- **Discuss a pilot or setup support:** [rmak78@gmail.com](mailto:rmak78@gmail.com).
 
 **Supporting the initiative:** BixiTech · BixiSoft · Agency75.
 

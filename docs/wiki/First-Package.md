@@ -1,6 +1,6 @@
 # The first installable package
 
-The next sprint is aimed at a focused, reviewable first package. **`0.1.0-preview` is a proposed candidate name, not a created tag or available download.** Package contents and release timing follow the gates below; no date is promised.
+The next sprint is aimed at a focused, reviewable first package. Track the work in [Sprint 03: First installable preview](https://github.com/rmak78/phpledger/milestone/4). **`0.1.0-preview` is a proposed candidate name, not a created tag or available download.** Package contents and release timing follow the gates below; no date is promised.
 
 ## 1. Reviewable accounting and reports
 

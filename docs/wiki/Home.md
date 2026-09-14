@@ -1,10 +1,12 @@
+<p><img src="https://raw.githubusercontent.com/rmak78/phpledger/master/docs/repository/assets/phpledger-logo.webp" alt="PHP Ledger" width="320"></p>
+
 # PHP Ledger
 
 **Everyday transactions. Clear reports. Books you can trace.**
 
 PHP Ledger is being rebuilt for small-business owners, accountants and bookkeepers who want a useful workspace on hosting they control. Accounting comes first, with a cash POS showcase and a staged path toward a broader business system.
 
-**Hosted preview: awaiting final launch verification.** The new website and demonstration are being prepared at [phpledger.com](https://phpledger.com/) and [phpledger.com/demo/](https://phpledger.com/demo/). These are the intended public starting points once their release checks are complete.
+**The hosted preview is live.** Explore [phpledger.com](https://phpledger.com/) and [your sample company](https://phpledger.com/demo/). The website and isolated demonstration were published on 14 September 2026; both remain development previews.
 
 The new foundation is currently a development preview. The public repository's default branch still contains the legacy application; the first installable new package has not been released. See [[Getting started|Getting-Started]] before downloading or installing anything.
 

@@ -1,12 +1,12 @@
 # Start with the preview
 
-**The new hosted preview is awaiting its final launch check.** The intended entry points are [the PHP Ledger website](https://phpledger.com/) and [the demonstration](https://phpledger.com/demo/). Their availability must be confirmed before this becomes a published launch announcement.
+**The hosted preview is live.** Start at [the PHP Ledger website](https://phpledger.com/) or [open the demonstration](https://phpledger.com/demo/). The updated website and demo were published on 14 September 2026.
 
 The first installable package for the new application is still being prepared. The public repository's default branch currently contains the legacy application. Cloning it is not a quickstart for the new preview, and this page deliberately provides no installation command that would imply otherwise.
 
-## When the demonstration is available
+## Try the demonstration
 
-The prepared demo gives each visitor a separate fictional business, uses synthetic records and resets hourly. Treat entries as temporary: an hourly refresh ends the old sample session. Destructive administrative operations are restricted on the server. Do not enter real customer records, credentials or business documents.
+The demo gives each visitor a separate fictional business, uses synthetic records and resets hourly. Treat entries as temporary: an hourly refresh ends the old sample session. Destructive administrative operations are restricted on the server. Do not enter real customer records, credentials or business documents.
 
 Start by recording a small expense, following its journal into a report, and trying the [[sample shop sale|POS-Showcase]]. Opening balances, posted totals and report limitations should remain visible. The preview is for evaluation rather than live bookkeeping.
 

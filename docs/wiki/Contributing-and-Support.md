@@ -23,8 +23,7 @@ The intended model is open-source software and modules, with paid installation a
 For project, pilot or support enquiries:
 
 - **Email:** [rmak78@gmail.com](mailto:rmak78@gmail.com)
-- **Phone:** [+92 313 3359999](tel:+923133359999)
-- **Office:** BixiSoft, Office M5, First Floor, Innovista Chenab Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan
+- **Location:** Innovista Chenab
 
 **Supporting partners:** BixiTech, BixiSoft and Agency75. These are project-support identities, not customer testimonials or accounting certifications.
 
