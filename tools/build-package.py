@@ -99,6 +99,10 @@ def gather(source: Path, vendor: Path, specification: dict, version: str) -> tup
             raise PackageError("Vendor contains a symlink or junction")
         if path.is_file():
             relative = path.relative_to(vendor).as_posix()
+            # Upstream ships development fixtures, including an SQL dump. The
+            # runtime classmap uses only db.class.php and orm.class.php.
+            if relative.startswith("sergeytsalkov/meekrodb/simpletest/"):
+                continue
             payload["vendor/" + safe_path(relative)] = read_file(vendor, relative)
     if "vendor/autoload.php" not in payload:
         raise PackageError("Production autoload is missing")

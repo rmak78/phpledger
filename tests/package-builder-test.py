@@ -67,6 +67,16 @@ class PackageTests(unittest.TestCase):
             self.build()
         self.assertFalse((self.root / "one").exists())
 
+    def test_upstream_test_dump_is_excluded_but_runtime_remains(self):
+        library = self.vendor / "sergeytsalkov/meekrodb"
+        (library / "simpletest").mkdir(parents=True)
+        (library / "simpletest/statements.sql").write_text("Synthetic upstream fixture")
+        (library / "db.class.php").write_text("<?php // synthetic library")
+        with zipfile.ZipFile(self.build()) as archive:
+            names = archive.namelist()
+            self.assertFalse(any(name.endswith("statements.sql") for name in names))
+            self.assertTrue(any(name.endswith("db.class.php") for name in names))
+
     def test_unapproved_licence_and_development_vendor_are_rejected(self):
         self.policy["project_license"] = None
         with self.assertRaisesRegex(builder.PackageError, "licence"):
