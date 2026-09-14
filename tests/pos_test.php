@@ -8,6 +8,66 @@ function pos_input(): array
         'cash_received' => '20.00'];
 }
 
+test('POS review prices the cart exactly without posting and matches the confirmed receipt', function (): void {
+    $f = ledger_fixture();
+    $input = pos_input();
+    unset($input['cash_received']);
+    $input['items'] = array_reverse($input['items']);
+    $quote = pl_pos_quote($input);
+    assert_same('12.7500', $quote['total']);
+    assert_same(5, $quote['units']);
+    assert_same($input['checkout_key'], $quote['request']['checkout_key']);
+    assert_same($input['catalog_digest'], $quote['catalog_digest']);
+    assert_same($input['date'], $quote['request']['date']);
+    assert_same([['sku' => 'NOTE-A5', 'quantity' => 2], ['sku' => 'PEN-BLUE', 'quantity' => 3]], $quote['request']['items']);
+    assert_true(!array_key_exists('cash_received', $quote['request']));
+    assert_same('4.5000', $quote['items'][0]['unit_price']);
+    assert_same('9.0000', $quote['items'][0]['line_total']);
+    foreach (['pl_documents', 'pl_journals', 'pl_journal_lines', 'pl_pos_sales'] as $table) {
+        assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM %b WHERE book_id = %i', $table, $f['book_id']));
+    }
+    $sale = pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], $quote['request'] + ['cash_received' => '20.00']);
+    foreach ($quote['items'] as $index => $expectedItem) {
+        foreach ($expectedItem as $field => $value) { assert_same($value, $sale['items'][$index][$field]); }
+    }
+    assert_same($quote['total'], $sale['total']);
+    assert_same($quote['catalog_id'], $sale['catalog_id']);
+    assert_same($quote['catalog_version'], $sale['catalog_version']);
+});
+
+test('POS review rejects stale catalog forged financial fields and invalid cart without writes', function (): void {
+    $f = ledger_fixture(); $input = pos_input(); unset($input['cash_received']);
+    $badInputs = [];
+    $bad = $input; $bad['total'] = '0.01'; $badInputs[] = $bad;
+    $bad = $input; $bad['cash_received'] = '20'; $badInputs[] = $bad;
+    $bad = $input; $bad['items'][0]['unit_price'] = '0.01'; $badInputs[] = $bad;
+    $bad = $input; $bad['catalog_digest'] = str_repeat('0', 64); $badInputs[] = $bad;
+    $bad = $input; $bad['items'][0]['sku'] = 'UNKNOWN'; $badInputs[] = $bad;
+    $bad = $input; $bad['items'][0]['quantity'] = '1.5'; $badInputs[] = $bad;
+    $bad = $input; $bad['items'] = []; $badInputs[] = $bad;
+    foreach ($badInputs as $bad) { assert_throws(fn () => pl_pos_quote($bad), DomainException::class); }
+    foreach (['pl_documents', 'pl_journals', 'pl_journal_lines', 'pl_pos_sales'] as $table) {
+        assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM %b WHERE book_id = %i', $table, $f['book_id']));
+    }
+});
+
+test('POS correction after insufficient cash and closed period reuses its key for one sale', function (): void {
+    $f = ledger_fixture(); $input = pos_input();
+    assert_throws(fn () => pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], array_replace($input, ['cash_received' => '12.74'])), DomainException::class, 'Cash received must cover');
+    DB::update('pl_periods', ['status' => 'closed'], 'id = %i', $f['period_id']);
+    assert_throws(fn () => pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], $input), DomainException::class, 'open accounting period');
+    DB::update('pl_periods', ['status' => 'open'], 'id = %i', $f['period_id']);
+    $sale = pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], $input);
+    assert_same($sale['document_id'], pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], $input)['document_id']);
+    foreach (['pl_documents', 'pl_journals', 'pl_pos_sales'] as $table) {
+        assert_same(1, (int) DB::queryFirstField('SELECT COUNT(*) FROM %b WHERE book_id = %i', $table, $f['book_id']));
+    }
+    $trial = pl_trial_balance($f['actor_id'], $f['company_id'], $f['book_id']);
+    assert_same('12.7500', $trial['total_debit']);
+    assert_same('12.7500', $trial['total_credit']);
+    assert_same('7.2500', $sale['change_due']);
+});
+
 test('all added base currencies survive sample setup POS posting and reconciled owner reports', function (): void {
     $f = ledger_fixture();
     foreach (['MYR', 'BDT', 'LKR', 'NPR', 'SGD'] as $currency) {
@@ -137,4 +197,34 @@ test('POS linked reversal preserves price snapshots while reversing the report e
     assert_same('reversed', $preserved['document']['status']);
     assert_same($sale['items'], $preserved['items']);
     assert_same('0.0000', pl_trial_balance($f['actor_id'], $f['company_id'], $f['book_id'])['total_debit']);
+});
+
+
+test('POS unresolved recovery preserves exact request and only its matching reviewed snapshot', function (): void {
+    $input = pos_input(); $quoteInput = $input; unset($quoteInput['cash_received']);
+    $quote = pl_pos_quote($quoteInput);
+    $recovery = pl_pos_recovery(123, 456, $input, $quote);
+    assert_same(123, $recovery['company_id']); assert_same(456, $recovery['book_id']);
+    assert_same(pl_pos_normalize_checkout($input), $recovery['request']);
+    assert_same($quote, $recovery['quote']);
+    $input['cash_received'] = '999'; $input['items'][0]['quantity'] = '9';
+    assert_same('20.0000', $recovery['request']['cash_received']);
+    assert_same(2, $recovery['request']['items'][0]['quantity']);
+    assert_same(null, pl_pos_recovery(123, 456, $input, $quote)['quote']);
+});
+
+test('POS committed identical recovery works when the current catalog is unavailable', function (): void {
+    $f = ledger_fixture(); $input = pos_input();
+    $sale = pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], $input);
+    $pipes = [];
+    $process = proc_open([PHP_BINARY, __DIR__ . '/pos-catalog-retry-worker.php'], [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes);
+    assert_true(is_resource($process), 'Recovery worker starts.');
+    fwrite($pipes[0], json_encode(['fixture' => $f, 'input' => $input], JSON_THROW_ON_ERROR)); fclose($pipes[0]);
+    $output = stream_get_contents($pipes[1]); $error = stream_get_contents($pipes[2]);
+    fclose($pipes[1]); fclose($pipes[2]);
+    assert_same(0, proc_close($process), $error);
+    $retry = json_decode($output, true, 512, JSON_THROW_ON_ERROR);
+    assert_same($sale['document_id'], $retry['id']); assert_same('12.7500', $retry['total']);
+    assert_same(1, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_pos_sales WHERE book_id = %i', $f['book_id']));
+    assert_same(1, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id = %i', $f['book_id']));
 });

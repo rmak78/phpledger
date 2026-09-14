@@ -69,12 +69,17 @@ if '--currencies' in sys.argv:
         home=request(start.action,start.fields|{'currency':currency})
         check(home.status==200 and currency in home.body and '875.00' in home.body,currency+' sample starts with its own base currency')
         shop=request('/demo/pos')
-        check(shop.status==200 and f'Cash received ({currency})' in shop.body,currency+' POS uses the selected base currency')
-        checkout=shop.markup.form_for('/demo/pos/checkout')
-        values=checkout.fields|{'cash_received':'20.00','checkout_intent':'record_cash_sale'}
-        for key,value in list(values.items()):
+        check(shop.status==200 and 'Review sale' in shop.body,currency+' POS opens the cart before cash confirmation')
+        review_form=shop.markup.form_for('/demo/pos/review')
+        cart_values=review_form.fields|{'review_intent':'review_cart'}
+        for key,value in list(cart_values.items()):
             if key.endswith('[sku]'):
-                values[key[:-5]+'[quantity]']='2' if value=='NOTE-A5' else '3' if value=='PEN-BLUE' else '0'
+                cart_values[key[:-5]+'[quantity]']='2' if value=='NOTE-A5' else '3' if value=='PEN-BLUE' else '0'
+        review=request(review_form.action,cart_values)
+        check(review.status==200 and urlparse(review.url).path=='/demo/pos/review' and f'Cash received ({currency})' in review.body,currency+' sale review uses the selected base currency')
+        checkout=review.markup.form_for('/demo/pos/checkout')
+        check('12.75' in review.body and checkout.fields['checkout_key']==cart_values['checkout_key'],currency+' review retains the exact total and checkout identity')
+        values=checkout.fields|{'cash_received':'20.00','checkout_intent':'record_cash_sale'}
         sale=request(checkout.action,values)
         check(sale.status==200 and f'Recorded sale in {currency}' in sale.body and '12.75' in sale.body and '7.25' in sale.body,currency+' checkout preserves exact receipt total and change')
         repeated=request(checkout.action,values)

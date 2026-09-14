@@ -50,12 +50,29 @@ def run(company_id: int) -> dict:
     date = datetime.now(timezone.utc).date().isoformat()
     before = http.totals(session.request("/reports/trial-balance?as_of=" + date))
     shop = session.request("/pos")
-    checkout = shop.markup.form_for("/pos/checkout")
+    review_form = shop.markup.form_for("/pos/review")
     check(shop.status == 200 and shop.body.count("data-pos-product data-sku=") == 6 and "Sample catalog" in shop.body, "Shop renders six products and an explicit sample boundary")
-    values = checkout.fields | {"date": date, "cash_received": "20.00", "checkout_intent": "record_cash_sale"}
-    for key, value in list(values.items()):
+    cart_values = review_form.fields | {"date": date, "review_intent": "review_cart"}
+    for key, value in list(cart_values.items()):
         if key.endswith("[sku]"):
-            values[key[:-5] + "[quantity]"] = "2" if value == "NOTE-A5" else "3" if value == "PEN-BLUE" else "0"
+            cart_values[key[:-5] + "[quantity]"] = "2" if value == "NOTE-A5" else "3" if value == "PEN-BLUE" else "0"
+    denied_review = session.request(review_form.action, cart_values | {"csrf": "invalid-local-token"})
+    check(denied_review.status == 403, "Sale review rejects invalid CSRF")
+    forged_review = session.request(review_form.action, cart_values | {"total": "0.01"})
+    check(forged_review.status == 422, "Sale review rejects a browser-supplied total")
+    review = session.request(review_form.action, cart_values)
+    check(review.status == 200 and urlparse(review.url).path == "/pos/review", "Cart opens a server-rendered review before cash confirmation")
+    checkout = review.markup.form_for("/pos/checkout")
+    check("12.75" in review.body and checkout.fields["checkout_key"] == cart_values["checkout_key"], "Sale review displays the exact total and retains the checkout identity")
+    check(http.totals(session.request("/reports/trial-balance?as_of=" + date)) == before, "Review and rejected review have no accounting effect")
+    edited = session.request("/pos/edit", checkout.fields | {"review_intent": "edit_cart", "cash_received": "invalid tender"})
+    edited_form = edited.markup.form_for("/pos/review")
+    edited_items = {value: edited_form.fields[key[:-5] + "[quantity]"] for key, value in edited_form.fields.items() if key.endswith("[sku]") and edited_form.fields.get(key[:-5] + "[quantity]") != "0"}
+    check(edited.status == 200 and urlparse(edited.url).path == "/pos" and edited_form.fields["checkout_key"] == cart_values["checkout_key"] and edited_form.fields["date"] == date and edited_items == {"NOTE-A5": "2", "PEN-BLUE": "3"}, "Back to cart preserves items, date and identity even with invalid tender")
+    check(http.totals(session.request("/reports/trial-balance?as_of=" + date)) == before, "Editing the reviewed cart has no accounting effect")
+    review = session.submit(edited_form, {"review_intent": "review_cart"})
+    checkout = review.markup.form_for("/pos/checkout")
+    values = checkout.fields | {"cash_received": "20.00", "checkout_intent": "record_cash_sale"}
     denied = session.request(checkout.action, values | {"csrf": "invalid-local-token"})
     check(denied.status == 403, "Checkout rejects invalid CSRF")
     missing_intent = session.request(checkout.action, {key: value for key, value in values.items() if key != "checkout_intent"})
@@ -89,6 +106,7 @@ def run(company_id: int) -> dict:
     conflict = session.request(checkout.action, values | {"cash_received": "30.00"})
     check(conflict.status == 422 and "different sale" in conflict.body and http.totals(session.request("/reports/trial-balance?as_of=" + date)) == after, "Changed content with an existing key is rejected without a new sale")
     check(session.request("/pos/checkout").status == 405, "Checkout rejects GET requests")
+    check(session.request("/pos/edit").status == 405, "Cart editing rejects GET requests")
     session.submit(session.request("/companies").markup.form_for("/logout"))
     check(urlparse(session.request(f"/pos/receipt?id={document_id}").url).path == "/login", "Logged-out sessions cannot read the receipt")
     return {"passed": len(checks), "failed": 0, "target": http.ORIGIN, "company_id": company_id, "book_id": int(values["book_id"]), "document_id": document_id, "data": "One synthetic posted POS sale retained; no other company's books changed."}

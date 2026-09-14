@@ -2,6 +2,8 @@
 
 The [0.1.0-preview foundation evaluation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) is available. It is an installable checkpoint, not completion of [Sprint 03](https://github.com/rmak78/phpledger/milestone/4). The reporting, POS, accounting-review and usability gates below remain open for a supported pilot package; no date is promised.
 
+The **0.1.1-preview POS update is being prepared**. It adds click-to-add products, quick cart controls and a separate review/cash-confirmation screen. Its [candidate notes](https://github.com/rmak78/phpledger/blob/master/docs/repository/sprint-03/PREVIEW-0.1.1-RELEASE-NOTES.md) distinguish completed local checks from final package and publication checks. Keep using the published download above until a verified replacement is linked.
+
 Modern source is in `www/phpledger`; the historical application remains under `legacy/`. The owner selected [MIT](https://github.com/rmak78/phpledger/blob/master/LICENSE) for new project-owned code and documentation on 14 September 2026. [Separate dependency, asset and historical terms](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) remain in force. Source development follows the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md).
 
 ## 1. Reviewable accounting and reports
@@ -13,6 +15,8 @@ Start with a narrowly defined Pakistan entity/profile, selected with a qualified
 ## 2. A deliberate, compact POS journey
 
 Refine catalog navigation, cart editing, sale review and a separate cash-confirmation step. Preserve clear pending/posted states and fast keyboard/touch operation. Keep the package's sale scope explicit; this is not an automatic expansion into payment processing, inventory or tax.
+
+The local candidate now implements this flow: product clicks add one, repeated clicks increment quantity, cart controls adjust or remove items, and a server quote precedes cash confirmation. Editing and recoverable errors retain the cart and checkout identity. Integration and HTTP checks cover exact totals, duplicate prevention and posting protections. Representative cashier review and final candidate package validation remain separate gates.
 
 **Acceptance:** representative users can complete and correct a sample sale without accidental checkout; keyboard edits cannot post it; errors retain the cart; repeated confirmation produces one receipt/journal; receipt totals and cash/change reconcile; desktop, tablet and mobile checks pass.
 

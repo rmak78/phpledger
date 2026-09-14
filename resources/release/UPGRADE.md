@@ -2,7 +2,7 @@
 
 Source revision: `{{SOURCE_COMMIT}}`.
 
-This is the first customer preview package. There is no established package-to-package upgrade range and no automatic upgrade from the historical PHP Ledger application. The new migration runner understands the complete `001`–`005` chain. Source-side baseline-001 upgrade tests do not establish compatibility with an arbitrary old installation, customized schema or historical database.
+This update follows 0.1.0-preview and retains its database schema, migration checksums and production dependencies. It supports a controlled code replacement of the unmodified 0.1.0-preview foundation after backup and preflight; it provides no automatic upgrade from the historical PHP Ledger application. The new migration runner understands the complete `001`–`005` chain. Source-side baseline-001 upgrade tests do not establish compatibility with an arbitrary old installation, customized schema or historical database.
 
 ## Before changing an installation
 

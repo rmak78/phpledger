@@ -45,7 +45,7 @@ PHP Ledger is being rebuilt around that connected journey: useful daily tasks fo
 | **Record the day** | Receipt and expense drafts, clear posting, balanced journals and linked reversals. |
 | **Understand the numbers** | Profit and loss, balance sheet, cash balance, account activity and trial balance, with source drill-down. |
 | **Look ahead** | A cash scenario using the inflows and outflows you enter; assumptions remain visible. |
-| **Try the counter** | A small illustrative catalog, cash tender and change, a printable receipt and the linked journal. |
+| **Try the counter** | Click-to-add sample products, quick cart controls, separate review/cash confirmation, a printable receipt and linked journal. |
 
 <details>
 <summary><strong>See the transaction and its accounting entry</strong></summary>
@@ -59,9 +59,9 @@ A saved draft has no effect on the books. Posting creates the balanced entry; a 
 <details>
 <summary><strong>See the cash POS preview</strong></summary>
 
-[![Early PHP Ledger cash POS with illustrative products, basket, amount due, tender and change.](docs/repository/assets/cash-pos-preview.webp)](docs/repository/assets/cash-pos-preview.webp)
+[![PHP Ledger click-to-add POS with selected products, cart quantity controls and a separate review action.](docs/repository/assets/cash-pos-click-preview.png)](docs/repository/assets/cash-pos-click-preview.png)
 
-An early working cash-sale flow, with an illustrative unposted basket. A more compact register and clearer payment journey are planned. Stock deduction, COGS, tax, card processing and credit sales are not implemented by this showcase.
+The owner-approved cash-sale layout: click a product to add one, adjust quantities in the cart, then review the sale before confirming cash. This actual capture contains an unposted synthetic cart. Stock deduction, COGS, tax, card processing and credit sales are not implemented by this showcase.
 
 </details>
 
