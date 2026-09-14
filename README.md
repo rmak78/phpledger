@@ -35,7 +35,7 @@ PHP Ledger is being rebuilt around that connected journey: useful daily tasks fo
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS are being refined for the first package.*
 
 > [!NOTE]
-> **A revival in progress.** The modern application source is in `www/phpledger`; the earlier application is preserved under `legacy/`. The hosted demo remains a development preview, and the first installable package is still being prepared. Read [Getting started](https://github.com/rmak78/phpledger/wiki/Getting-Started) before choosing an installation path.
+> **The first foundation preview is available.** [Download 0.1.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) for evaluation with synthetic data. It includes production dependencies and installation instructions. Modern source lives in `www/phpledger`; historical code is preserved in `legacy/`. Regional accounting review, POS refinement and pilot usability gates remain open.
 
 ## Explore the working preview
 
@@ -87,7 +87,7 @@ Pakistan is first for accounting-framework research, followed by the UK and UAE.
 
 | Next | Outcome |
 |---|---|
-| **First installable package** | Refined reports and POS, clear installation, a tested upgrade/recovery path and explicit release limits. |
+| **First supported pilot package** | Refined reports and POS, qualified accounting review, observed usability and explicit supported scope. The foundation preview is available now. |
 | **Accounting MVP and pilots** | Receivables, payables, opening balances, historical imports, reconciliation and reviewed period-end reporting. |
 | **Regional accounting and ERP** | Explainable multi-book differences, reviewed country adapters, inventory/purchasing, production POS and distribution. |
 

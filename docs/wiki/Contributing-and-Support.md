@@ -14,7 +14,7 @@ The most valuable early contributions connect a real business task to a clear, t
 
 Use synthetic records in public issues and examples. Do not include private customer data or credentials. Preserve third-party notices and contribute original material or material whose reuse terms permit it.
 
-The [public repository](https://github.com/rmak78/phpledger) contains modern source under `www/phpledger`, with the historical application preserved under `legacy/`. Follow the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md), and use [Issues](https://github.com/rmak78/phpledger/issues) to discuss a bounded proposal. The first installable package remains in preparation.
+The [public repository](https://github.com/rmak78/phpledger) contains modern source under `www/phpledger`, with the historical application preserved under `legacy/`. Follow the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md), and use [Issues](https://github.com/rmak78/phpledger/issues) to discuss a bounded proposal. The [foundation evaluation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) is available; supported-pilot review remains open.
 
 New project-owned code and documentation use the [MIT License](https://github.com/rmak78/phpledger/blob/master/LICENSE). Preserve the [separate scope and notices](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) for historical code, dependencies and assets. The MIT grant does not relicense legacy contributions or company marks.
 
@@ -34,4 +34,4 @@ For project, pilot or support enquiries:
 
 Funding will focus on one achievable milestone at a time, including design/usability work, development tools, infrastructure, accounting review, security and documentation. Receiving jurisdiction, platform eligibility and the costed campaign must be verified before money is collected. No donation campaign or payment commitment is active through this Wiki.
 
-[[First package|First-Package]] · [[Roadmap]] · [[Architecture]]
+[[First package|First-Package]] Â· [[Roadmap]] Â· [[Architecture]]
