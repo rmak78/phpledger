@@ -8,7 +8,7 @@ PHP Ledger is being rebuilt for small-business owners, accountants and bookkeepe
 
 **The hosted preview is live.** Explore [phpledger.com](https://phpledger.com/) and [your sample company](https://phpledger.com/demo/). The website and isolated demonstration were published on 14 September 2026; both remain development previews.
 
-The new foundation is currently a development preview. The public repository's default branch still contains the legacy application; the first installable new package has not been released. See [[Getting started|Getting-Started]] before downloading or installing anything.
+The modern application source is in `www/phpledger`, with the historical application preserved under `legacy/`. The first installable new package has not been released. See [[Getting started|Getting-Started]] for the source-development path and package status.
 
 ## Find your starting point
 
@@ -33,6 +33,6 @@ The shop showcase adds a searchable six-product sample catalog, a cart, explicit
 
 Fast onboarding and a readable interface are release requirements. Historical imports, customer/vendor accounts, bank reconciliation and proper financial statements come before broad ERP expansion. Country accounting starts with **Pakistan, then the UK and UAE**. Currency choice alone does not establish country compliance.
 
-The intention is open-source software and modules, supported by clearly defined paid services. The project licence and legacy provenance review remain unresolved. No stable release, professional-body endorsement or regulatory certification is claimed.
+The new project-owned code and documentation use the [MIT License](https://github.com/rmak78/phpledger/blob/master/LICENSE), supported by clearly defined paid services. [Licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) preserves the separate terms of historical code, dependencies and assets; legacy provenance remains distinct. No stable release, professional-body endorsement or regulatory certification is claimed.
 
 Continue with [[the first package plan|First-Package]] or the [[full eight-stage roadmap|Roadmap]].

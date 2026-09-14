@@ -1,0 +1,890 @@
+{
+  "schema_version": "1.0.0",
+  "pack_id": "pharmacy",
+  "pack_version": "1.0.0",
+  "demo_only": true,
+  "synthetic": true,
+  "status": "authored_candidate_not_runtime_seed",
+  "created_on": "2026-09-14",
+  "business": {
+    "display_name": "Meadow Training Pharmacy (Sample)",
+    "business_type": "pharmacy",
+    "description": "Fictional pharmacy workflow using non-medicinal training products only.",
+    "country_code": null,
+    "base_currency": "USD",
+    "currency_configurable_before_creation": true,
+    "currency_note": "Numerical teaching values in a configurable demo currency; changing the demo label is not foreign-exchange conversion.",
+    "accounting_start_date": "2026-09-01",
+    "as_of_date": "2026-09-30",
+    "fiscal_year_end": "12-31"
+  },
+  "isolation": {
+    "target": "new_empty_isolated_demo_company_only",
+    "may_merge_into_real_company": false,
+    "reset_scope": "the_explicitly_selected_demo_company_only",
+    "automatic_posting_authorized": false
+  },
+  "accounting_assumptions": {
+    "tax_treatment": "omitted_for_country_neutral_demo_not_zero_rated_or_exempt",
+    "inventory_costing": "constant_unit_cost_per_item_for_fixture_only_no_production_costing_policy",
+    "depreciation": "excluded_from_this_small_training_month",
+    "opening_equity": "residual_of_supplied_opening_position_not_current_month_income",
+    "opening_documents": "subledger_detail_already_in_opening_control_balances_do_not_post_again",
+    "review_status": "accountant_review_pending"
+  },
+  "country_variations": {
+    "reviewed_variants": [],
+    "automatic_tax_activation": false,
+    "note": "A country selection requires a separately reviewed template and tax adapter; no country compliance is implied."
+  },
+  "accounts": [
+    {
+      "key": "core.cash.on_hand",
+      "type": "asset",
+      "label": "Cash On Hand",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "cash_on_hand"
+    },
+    {
+      "key": "core.bank.operating",
+      "type": "asset",
+      "label": "Bank Current",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "bank_current"
+    },
+    {
+      "key": "core.receivables.trade",
+      "type": "asset",
+      "label": "Accounts Receivable",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "accounts_receivable"
+    },
+    {
+      "key": "pharmacy.inventory.medicines",
+      "type": "asset",
+      "label": "Inventory",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "inventory"
+    },
+    {
+      "key": "core.assets.equipment",
+      "type": "asset",
+      "label": "Equipment",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "equipment"
+    },
+    {
+      "key": "core.payables.trade",
+      "type": "liability",
+      "label": "Accounts Payable",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "accounts_payable"
+    },
+    {
+      "key": "core.equity.capital",
+      "type": "equity",
+      "label": "Owner Equity",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "owner_equity"
+    },
+    {
+      "key": "pharmacy.income.medicines",
+      "type": "income",
+      "label": "Sales Revenue",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "sales_revenue"
+    },
+    {
+      "key": "pharmacy.cost.goods",
+      "type": "expense",
+      "label": "Cost Of Goods Sold",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "cost_of_goods_sold"
+    },
+    {
+      "key": "core.expense.rent",
+      "type": "expense",
+      "label": "Rent Expense",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "rent_expense"
+    },
+    {
+      "key": "core.expense.utilities",
+      "type": "expense",
+      "label": "Utilities Expense",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "utilities_expense"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "customer-01",
+      "name": "Demo Business Buyer (Sample)",
+      "role": "customer",
+      "email": "pharmacy.customer-01@example.invalid",
+      "synthetic": true
+    },
+    {
+      "id": "customer-02",
+      "name": "Demo Counter Customer (Sample)",
+      "role": "customer",
+      "email": "pharmacy.customer-02@example.invalid",
+      "synthetic": true
+    },
+    {
+      "id": "vendor-01",
+      "name": "Demo Supply Partner (Sample)",
+      "role": "vendor",
+      "email": "pharmacy.vendor-01@example.invalid",
+      "synthetic": true
+    },
+    {
+      "id": "vendor-02",
+      "name": "Demo Premises Provider (Sample)",
+      "role": "vendor",
+      "email": "pharmacy.vendor-02@example.invalid",
+      "synthetic": true
+    }
+  ],
+  "items": [
+    {
+      "id": "training-pack",
+      "name": "DEMO empty training carton A - not medicine (Sample)",
+      "kind": "stock",
+      "unit": "carton",
+      "sale_price": "10.0000",
+      "fixture_unit_cost": "4.0000",
+      "income_account_key": "pharmacy.income.medicines",
+      "inventory_account_key": "pharmacy.inventory.medicines",
+      "cost_account_key": "pharmacy.cost.goods",
+      "lot_tracking": true,
+      "medical_use": false
+    },
+    {
+      "id": "storage-pouch",
+      "name": "DEMO storage pouch B - not medicine (Sample)",
+      "kind": "stock",
+      "unit": "pouch",
+      "sale_price": "6.0000",
+      "fixture_unit_cost": "2.0000",
+      "income_account_key": "pharmacy.income.medicines",
+      "inventory_account_key": "pharmacy.inventory.medicines",
+      "cost_account_key": "pharmacy.cost.goods",
+      "lot_tracking": true,
+      "medical_use": false
+    }
+  ],
+  "locations": [
+    {
+      "id": "main",
+      "name": "Main premises (Sample)"
+    }
+  ],
+  "opening": {
+    "date": "2026-09-01",
+    "journal": [
+      {
+        "account_key": "core.cash.on_hand",
+        "debit": "500.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.bank.operating",
+        "debit": "3000.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.receivables.trade",
+        "debit": "300.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "pharmacy.inventory.medicines",
+        "debit": "1000.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.assets.equipment",
+        "debit": "2000.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.payables.trade",
+        "debit": "0.0000",
+        "credit": "400.0000"
+      },
+      {
+        "account_key": "core.equity.capital",
+        "debit": "0.0000",
+        "credit": "6400.0000"
+      }
+    ],
+    "documents": [
+      {
+        "id": "opening-invoice",
+        "kind": "invoice",
+        "contact_id": "customer-01",
+        "issued_on": "2026-08-20",
+        "due_on": "2026-09-10",
+        "description": "Unpaid portion of August invoice; already included in opening receivables.",
+        "original_amount": "500.0000",
+        "paid_before_cutover": "200.0000",
+        "outstanding_at_cutover": "300.0000",
+        "posting_mode": "opening_control_detail_only"
+      },
+      {
+        "id": "opening-bill",
+        "kind": "bill",
+        "contact_id": "vendor-01",
+        "issued_on": "2026-08-20",
+        "due_on": "2026-09-10",
+        "description": "Unpaid portion of August supplier bill; already included in opening payables.",
+        "original_amount": "500.0000",
+        "paid_before_cutover": "100.0000",
+        "outstanding_at_cutover": "400.0000",
+        "posting_mode": "opening_control_detail_only"
+      }
+    ],
+    "stock": [
+      {
+        "item_id": "training-pack",
+        "location_id": "main",
+        "lot_id": "training-pack-lot-a",
+        "expires_on": "2026-10-15",
+        "quantity": "150.0000",
+        "unit_cost": "4.0000",
+        "value": "600.0000"
+      },
+      {
+        "item_id": "storage-pouch",
+        "location_id": "main",
+        "lot_id": "storage-pouch-lot-a",
+        "expires_on": "2026-10-15",
+        "quantity": "200.0000",
+        "unit_cost": "2.0000",
+        "value": "400.0000"
+      }
+    ],
+    "deferred_contracts": []
+  },
+  "documents": [
+    {
+      "id": "purchase-001",
+      "kind": "bill",
+      "contact_id": "vendor-01",
+      "issued_on": "2026-09-02",
+      "due_on": "2026-09-16",
+      "lines": [
+        {
+          "item_id": "training-pack",
+          "quantity": "50.0000",
+          "unit_price": "4.0000",
+          "amount": "200.0000"
+        },
+        {
+          "item_id": "storage-pouch",
+          "quantity": "100.0000",
+          "unit_price": "2.0000",
+          "amount": "200.0000"
+        }
+      ],
+      "total": "400.0000",
+      "tax_amount": "0.0000",
+      "tax_status": "not_modelled",
+      "related_document_id": null,
+      "runtime_status": "future_document_module_fixture"
+    },
+    {
+      "id": "sale-001",
+      "kind": "cash_sale",
+      "contact_id": "customer-02",
+      "issued_on": "2026-09-04",
+      "due_on": "2026-09-18",
+      "lines": [
+        {
+          "item_id": "training-pack",
+          "quantity": "10.0000",
+          "unit_price": "10.0000",
+          "amount": "100.0000"
+        },
+        {
+          "item_id": "storage-pouch",
+          "quantity": "5.0000",
+          "unit_price": "6.0000",
+          "amount": "30.0000"
+        }
+      ],
+      "total": "130.0000",
+      "tax_amount": "0.0000",
+      "tax_status": "not_modelled",
+      "related_document_id": null,
+      "runtime_status": "future_document_module_fixture"
+    },
+    {
+      "id": "invoice-001",
+      "kind": "invoice",
+      "contact_id": "customer-01",
+      "issued_on": "2026-09-06",
+      "due_on": "2026-09-20",
+      "lines": [
+        {
+          "item_id": "training-pack",
+          "quantity": "20.0000",
+          "unit_price": "10.0000",
+          "amount": "200.0000"
+        },
+        {
+          "item_id": "storage-pouch",
+          "quantity": "10.0000",
+          "unit_price": "6.0000",
+          "amount": "60.0000"
+        }
+      ],
+      "total": "260.0000",
+      "tax_amount": "0.0000",
+      "tax_status": "not_modelled",
+      "related_document_id": null,
+      "runtime_status": "future_document_module_fixture"
+    },
+    {
+      "id": "credit-001",
+      "kind": "credit_note",
+      "contact_id": "customer-01",
+      "issued_on": "2026-09-16",
+      "due_on": "2026-09-30",
+      "lines": [
+        {
+          "item_id": "training-pack",
+          "quantity": "2.0000",
+          "unit_price": "10.0000",
+          "amount": "20.0000"
+        }
+      ],
+      "total": "20.0000",
+      "tax_amount": "0.0000",
+      "tax_status": "not_modelled",
+      "related_document_id": "invoice-001",
+      "runtime_status": "future_document_module_fixture"
+    }
+  ],
+  "events": [
+    {
+      "id": "pharmacy-event-01",
+      "date": "2026-09-02",
+      "kind": "purchase",
+      "description": "Receive stock against purchase-001",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:pharmacy:v1:event-01",
+      "expected_journal": [
+        {
+          "account_key": "pharmacy.inventory.medicines",
+          "debit": "400.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.payables.trade",
+          "debit": "0.0000",
+          "credit": "400.0000"
+        }
+      ],
+      "document_id": "purchase-001",
+      "stock_movements": [
+        {
+          "item_id": "training-pack",
+          "location_id": "main",
+          "lot_id": "training-pack-lot-b",
+          "expires_on": "2027-06-30",
+          "quantity_delta": "50.0000",
+          "unit_cost": "4.0000"
+        },
+        {
+          "item_id": "storage-pouch",
+          "location_id": "main",
+          "lot_id": "storage-pouch-lot-b",
+          "expires_on": "2027-06-30",
+          "quantity_delta": "100.0000",
+          "unit_cost": "2.0000"
+        }
+      ]
+    },
+    {
+      "id": "pharmacy-event-02",
+      "date": "2026-09-04",
+      "kind": "cash_sale",
+      "description": "Record sale-001",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:pharmacy:v1:event-02",
+      "expected_journal": [
+        {
+          "account_key": "core.cash.on_hand",
+          "debit": "130.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "pharmacy.income.medicines",
+          "debit": "0.0000",
+          "credit": "100.0000"
+        },
+        {
+          "account_key": "pharmacy.income.medicines",
+          "debit": "0.0000",
+          "credit": "30.0000"
+        },
+        {
+          "account_key": "pharmacy.cost.goods",
+          "debit": "50.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "pharmacy.inventory.medicines",
+          "debit": "0.0000",
+          "credit": "50.0000"
+        }
+      ],
+      "document_id": "sale-001",
+      "stock_movements": [
+        {
+          "item_id": "training-pack",
+          "location_id": "main",
+          "lot_id": "training-pack-lot-a",
+          "expires_on": null,
+          "quantity_delta": "-10.0000",
+          "unit_cost": "4.0000"
+        },
+        {
+          "item_id": "storage-pouch",
+          "location_id": "main",
+          "lot_id": "storage-pouch-lot-a",
+          "expires_on": null,
+          "quantity_delta": "-5.0000",
+          "unit_cost": "2.0000"
+        }
+      ]
+    },
+    {
+      "id": "pharmacy-event-03",
+      "date": "2026-09-06",
+      "kind": "credit_sale",
+      "description": "Record invoice-001",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:pharmacy:v1:event-03",
+      "expected_journal": [
+        {
+          "account_key": "core.receivables.trade",
+          "debit": "260.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "pharmacy.income.medicines",
+          "debit": "0.0000",
+          "credit": "200.0000"
+        },
+        {
+          "account_key": "pharmacy.income.medicines",
+          "debit": "0.0000",
+          "credit": "60.0000"
+        },
+        {
+          "account_key": "pharmacy.cost.goods",
+          "debit": "100.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "pharmacy.inventory.medicines",
+          "debit": "0.0000",
+          "credit": "100.0000"
+        }
+      ],
+      "document_id": "invoice-001",
+      "stock_movements": [
+        {
+          "item_id": "training-pack",
+          "location_id": "main",
+          "lot_id": "training-pack-lot-a",
+          "expires_on": null,
+          "quantity_delta": "-20.0000",
+          "unit_cost": "4.0000"
+        },
+        {
+          "item_id": "storage-pouch",
+          "location_id": "main",
+          "lot_id": "storage-pouch-lot-a",
+          "expires_on": null,
+          "quantity_delta": "-10.0000",
+          "unit_cost": "2.0000"
+        }
+      ]
+    },
+    {
+      "id": "pharmacy-event-04",
+      "date": "2026-09-10",
+      "kind": "receipt",
+      "description": "Allocate customer receipt to named documents",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:pharmacy:v1:event-04",
+      "expected_journal": [
+        {
+          "account_key": "core.bank.operating",
+          "debit": "200.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.receivables.trade",
+          "debit": "0.0000",
+          "credit": "200.0000"
+        }
+      ],
+      "allocations": [
+        {
+          "document_id": "opening-invoice",
+          "amount": "120.0000"
+        },
+        {
+          "document_id": "invoice-001",
+          "amount": "80.0000"
+        }
+      ],
+      "total": "200.0000"
+    },
+    {
+      "id": "pharmacy-event-05",
+      "date": "2026-09-12",
+      "kind": "supplier_payment",
+      "description": "Pay supplier bills",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:pharmacy:v1:event-05",
+      "expected_journal": [
+        {
+          "account_key": "core.payables.trade",
+          "debit": "400.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.bank.operating",
+          "debit": "0.0000",
+          "credit": "400.0000"
+        }
+      ],
+      "allocations": [
+        {
+          "document_id": "opening-bill",
+          "amount": "200.0000"
+        },
+        {
+          "document_id": "purchase-001",
+          "amount": "200.0000"
+        }
+      ],
+      "total": "400.0000"
+    },
+    {
+      "id": "pharmacy-event-06",
+      "date": "2026-09-14",
+      "kind": "expense",
+      "description": "Pay September premises expense",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:pharmacy:v1:event-06",
+      "expected_journal": [
+        {
+          "account_key": "core.expense.rent",
+          "debit": "100.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.bank.operating",
+          "debit": "0.0000",
+          "credit": "100.0000"
+        }
+      ],
+      "expense_account_key": "core.expense.rent",
+      "total": "100.0000"
+    },
+    {
+      "id": "pharmacy-event-07",
+      "date": "2026-09-16",
+      "kind": "sales_return",
+      "description": "Return stock and credit invoice-001",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:pharmacy:v1:event-07",
+      "expected_journal": [
+        {
+          "account_key": "pharmacy.income.medicines",
+          "debit": "20.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.receivables.trade",
+          "debit": "0.0000",
+          "credit": "20.0000"
+        },
+        {
+          "account_key": "pharmacy.inventory.medicines",
+          "debit": "8.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "pharmacy.cost.goods",
+          "debit": "0.0000",
+          "credit": "8.0000"
+        }
+      ],
+      "document_id": "credit-001",
+      "allocations": [
+        {
+          "document_id": "invoice-001",
+          "amount": "20.0000"
+        }
+      ],
+      "stock_movements": [
+        {
+          "item_id": "training-pack",
+          "location_id": "main",
+          "lot_id": "training-pack-lot-a",
+          "expires_on": null,
+          "quantity_delta": "2.0000",
+          "unit_cost": "4.0000"
+        }
+      ]
+    },
+    {
+      "id": "pharmacy-event-08",
+      "date": "2026-09-20",
+      "kind": "cash_transfer",
+      "description": "Deposit counted till cash into bank",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:pharmacy:v1:event-08",
+      "expected_journal": [
+        {
+          "account_key": "core.bank.operating",
+          "debit": "200.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.cash.on_hand",
+          "debit": "0.0000",
+          "credit": "200.0000"
+        }
+      ],
+      "total": "200.0000"
+    },
+    {
+      "id": "pharmacy-event-09",
+      "date": "2026-09-22",
+      "kind": "expense",
+      "description": "Utility charge entered against the wrong source amount",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:pharmacy:v1:event-09",
+      "expected_journal": [
+        {
+          "account_key": "core.expense.utilities",
+          "debit": "60.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.bank.operating",
+          "debit": "0.0000",
+          "credit": "60.0000"
+        }
+      ],
+      "expense_account_key": "core.expense.utilities",
+      "total": "60.0000"
+    },
+    {
+      "id": "pharmacy-event-10",
+      "date": "2026-09-23",
+      "kind": "reversal",
+      "description": "Reverse the incorrect utility entry",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:pharmacy:v1:event-10",
+      "expected_journal": [
+        {
+          "account_key": "core.expense.utilities",
+          "debit": "0.0000",
+          "credit": "60.0000"
+        },
+        {
+          "account_key": "core.bank.operating",
+          "debit": "60.0000",
+          "credit": "0.0000"
+        }
+      ],
+      "reverses_event_id": "pharmacy-event-09",
+      "reason": "Source receipt confirms 45.00, not 60.00"
+    },
+    {
+      "id": "pharmacy-event-11",
+      "date": "2026-09-23",
+      "kind": "expense",
+      "description": "Post corrected utility charge from the source receipt",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:pharmacy:v1:event-11",
+      "expected_journal": [
+        {
+          "account_key": "core.expense.utilities",
+          "debit": "45.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.bank.operating",
+          "debit": "0.0000",
+          "credit": "45.0000"
+        }
+      ],
+      "expense_account_key": "core.expense.utilities",
+      "total": "45.0000"
+    }
+  ],
+  "industry_scenarios": [
+    {
+      "id": "lot-expiry",
+      "title": "Find a near-expiry lot before sale",
+      "status": "future_module_scenario_not_implemented",
+      "fixture_entity": {
+        "item_id": "training-pack",
+        "lot_id": "training-pack-lot-a",
+        "expires_on": "2026-10-15",
+        "reference_date": "2026-09-30",
+        "alert_within_days": 30,
+        "simulated_quarantine_lot_id": "training-pack-lot-b"
+      },
+      "steps": [
+        "Show which synthetic lot supplied each receipt and return.",
+        "Preview expiry filtering using the fixed reference date.",
+        "In a future UI, place a hold on the nominated later lot and verify it cannot be sold."
+      ],
+      "acceptance_checks": [
+        "All products are non-medicinal training placeholders.",
+        "FEFO picking is a stock-selection rule; it is not the financial costing method.",
+        "No real medicines, patients, prescriptions, doses or regulatory claims are included."
+      ]
+    }
+  ],
+  "source_ids": [
+    "cc-medicine-care",
+    "cc-pharmacy-pims"
+  ],
+  "expected_reports": {
+    "as_of_date": "2026-09-30",
+    "trial_balance": [
+      {
+        "account_key": "core.cash.on_hand",
+        "debit": "430.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.bank.operating",
+        "debit": "2855.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.receivables.trade",
+        "debit": "340.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "pharmacy.inventory.medicines",
+        "debit": "1258.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.assets.equipment",
+        "debit": "2000.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.payables.trade",
+        "debit": "0.0000",
+        "credit": "400.0000"
+      },
+      {
+        "account_key": "core.equity.capital",
+        "debit": "0.0000",
+        "credit": "6400.0000"
+      },
+      {
+        "account_key": "pharmacy.income.medicines",
+        "debit": "0.0000",
+        "credit": "370.0000"
+      },
+      {
+        "account_key": "pharmacy.cost.goods",
+        "debit": "142.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.expense.rent",
+        "debit": "100.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.expense.utilities",
+        "debit": "45.0000",
+        "credit": "0.0000"
+      }
+    ],
+    "trial_balance_debit": "7170.0000",
+    "trial_balance_credit": "7170.0000",
+    "journal_turnover_debit_including_opening": "8833.0000",
+    "journal_turnover_credit_including_opening": "8833.0000",
+    "income": "370.0000",
+    "expenses": "287.0000",
+    "net_result": "83.0000",
+    "assets": "6883.0000",
+    "liabilities": "400.0000",
+    "opening_equity": "6400.0000",
+    "equity_including_current_result": "6483.0000",
+    "accounts_receivable": "340.0000",
+    "accounts_payable": "400.0000",
+    "inventory_value": "1258.0000",
+    "cash_on_hand": "430.0000",
+    "bank_current": "2855.0000",
+    "document_balances": [
+      {
+        "document_id": "opening-invoice",
+        "kind": "invoice",
+        "outstanding": "180.0000"
+      },
+      {
+        "document_id": "opening-bill",
+        "kind": "bill",
+        "outstanding": "200.0000"
+      },
+      {
+        "document_id": "purchase-001",
+        "kind": "bill",
+        "outstanding": "200.0000"
+      },
+      {
+        "document_id": "invoice-001",
+        "kind": "invoice",
+        "outstanding": "160.0000"
+      }
+    ],
+    "stock_on_hand": [
+      {
+        "item_id": "storage-pouch",
+        "location_id": "main",
+        "lot_id": "storage-pouch-lot-a",
+        "quantity": "185.0000"
+      },
+      {
+        "item_id": "storage-pouch",
+        "location_id": "main",
+        "lot_id": "storage-pouch-lot-b",
+        "quantity": "100.0000"
+      },
+      {
+        "item_id": "training-pack",
+        "location_id": "main",
+        "lot_id": "training-pack-lot-a",
+        "quantity": "122.0000"
+      },
+      {
+        "item_id": "training-pack",
+        "location_id": "main",
+        "lot_id": "training-pack-lot-b",
+        "quantity": "50.0000"
+      }
+    ]
+  }
+}

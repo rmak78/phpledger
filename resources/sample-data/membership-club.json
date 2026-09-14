@@ -1,0 +1,717 @@
+{
+  "schema_version": "1.0.0",
+  "pack_id": "membership-club",
+  "pack_version": "1.0.0",
+  "demo_only": true,
+  "synthetic": true,
+  "status": "authored_candidate_not_runtime_seed",
+  "created_on": "2026-09-14",
+  "business": {
+    "display_name": "Riverside Community Club (Sample)",
+    "business_type": "membership-club",
+    "description": "Member-funded recreation club; no charity or nonprofit status is assumed.",
+    "country_code": null,
+    "base_currency": "USD",
+    "currency_configurable_before_creation": true,
+    "currency_note": "Numerical teaching values in a configurable demo currency; changing the demo label is not foreign-exchange conversion.",
+    "accounting_start_date": "2026-09-01",
+    "as_of_date": "2026-09-30",
+    "fiscal_year_end": "12-31"
+  },
+  "isolation": {
+    "target": "new_empty_isolated_demo_company_only",
+    "may_merge_into_real_company": false,
+    "reset_scope": "the_explicitly_selected_demo_company_only",
+    "automatic_posting_authorized": false
+  },
+  "accounting_assumptions": {
+    "tax_treatment": "omitted_for_country_neutral_demo_not_zero_rated_or_exempt",
+    "inventory_costing": "constant_unit_cost_per_item_for_fixture_only_no_production_costing_policy",
+    "depreciation": "excluded_from_this_small_training_month",
+    "opening_equity": "residual_of_supplied_opening_position_not_current_month_income",
+    "opening_documents": "subledger_detail_already_in_opening_control_balances_do_not_post_again",
+    "review_status": "accountant_review_pending"
+  },
+  "country_variations": {
+    "reviewed_variants": [],
+    "automatic_tax_activation": false,
+    "note": "A country selection requires a separately reviewed template and tax adapter; no country compliance is implied."
+  },
+  "accounts": [
+    {
+      "key": "core.cash.on_hand",
+      "type": "asset",
+      "label": "Cash On Hand",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "cash_on_hand"
+    },
+    {
+      "key": "core.bank.operating",
+      "type": "asset",
+      "label": "Bank Current",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "bank_current"
+    },
+    {
+      "key": "core.receivables.trade",
+      "type": "asset",
+      "label": "Accounts Receivable",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "accounts_receivable"
+    },
+    {
+      "key": "core.assets.equipment",
+      "type": "asset",
+      "label": "Equipment",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "equipment"
+    },
+    {
+      "key": "core.payables.trade",
+      "type": "liability",
+      "label": "Accounts Payable",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "accounts_payable"
+    },
+    {
+      "key": "club.liability.prepaid_dues",
+      "type": "liability",
+      "label": "Deferred Revenue",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "deferred_revenue"
+    },
+    {
+      "key": "core.equity.capital",
+      "type": "equity",
+      "label": "Owner Equity",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "owner_equity"
+    },
+    {
+      "key": "club.income.events",
+      "type": "income",
+      "label": "Service Revenue",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "service_revenue"
+    },
+    {
+      "key": "club.income.membership",
+      "type": "income",
+      "label": "Membership Revenue",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "membership_revenue"
+    },
+    {
+      "key": "core.expense.rent",
+      "type": "expense",
+      "label": "Rent Expense",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "rent_expense"
+    },
+    {
+      "key": "core.expense.utilities",
+      "type": "expense",
+      "label": "Utilities Expense",
+      "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+      "fixture_role": "utilities_expense"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "member-01",
+      "name": "Demo Member Group One (Sample)",
+      "role": "customer",
+      "email": "membership-club.member-01@example.invalid",
+      "synthetic": true
+    },
+    {
+      "id": "member-02",
+      "name": "Demo Member Group Two (Sample)",
+      "role": "customer",
+      "email": "membership-club.member-02@example.invalid",
+      "synthetic": true
+    },
+    {
+      "id": "vendor-01",
+      "name": "Demo Hall Provider (Sample)",
+      "role": "vendor",
+      "email": "membership-club.vendor-01@example.invalid",
+      "synthetic": true
+    },
+    {
+      "id": "vendor-02",
+      "name": "Demo Event Supplier (Sample)",
+      "role": "vendor",
+      "email": "membership-club.vendor-02@example.invalid",
+      "synthetic": true
+    }
+  ],
+  "items": [
+    {
+      "id": "annual-plan",
+      "name": "Annual group membership (Sample)",
+      "kind": "service",
+      "unit": "membership",
+      "sale_price": "120.0000",
+      "fixture_unit_cost": "0.0000",
+      "income_account_key": "club.income.membership",
+      "inventory_account_key": null,
+      "cost_account_key": null,
+      "lot_tracking": false,
+      "medical_use": false
+    },
+    {
+      "id": "monthly-plan",
+      "name": "September membership dues (Sample)",
+      "kind": "service",
+      "unit": "membership",
+      "sale_price": "20.0000",
+      "fixture_unit_cost": "0.0000",
+      "income_account_key": "club.income.membership",
+      "inventory_account_key": null,
+      "cost_account_key": null,
+      "lot_tracking": false,
+      "medical_use": false
+    },
+    {
+      "id": "event-ticket",
+      "name": "September community event ticket (Sample)",
+      "kind": "service",
+      "unit": "ticket",
+      "sale_price": "15.0000",
+      "fixture_unit_cost": "0.0000",
+      "income_account_key": "club.income.events",
+      "inventory_account_key": null,
+      "cost_account_key": null,
+      "lot_tracking": false,
+      "medical_use": false
+    }
+  ],
+  "locations": [
+    {
+      "id": "main",
+      "name": "Main premises (Sample)"
+    }
+  ],
+  "opening": {
+    "date": "2026-09-01",
+    "journal": [
+      {
+        "account_key": "core.cash.on_hand",
+        "debit": "200.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.bank.operating",
+        "debit": "5000.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.receivables.trade",
+        "debit": "120.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.assets.equipment",
+        "debit": "1500.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.payables.trade",
+        "debit": "0.0000",
+        "credit": "300.0000"
+      },
+      {
+        "account_key": "club.liability.prepaid_dues",
+        "debit": "0.0000",
+        "credit": "1100.0000"
+      },
+      {
+        "account_key": "core.equity.capital",
+        "debit": "0.0000",
+        "credit": "5420.0000"
+      }
+    ],
+    "documents": [
+      {
+        "id": "opening-invoice",
+        "kind": "invoice",
+        "contact_id": "member-01",
+        "issued_on": "2026-08-20",
+        "due_on": "2026-09-10",
+        "description": "August dues remain unpaid at the cutover date.",
+        "original_amount": "120.0000",
+        "paid_before_cutover": "0.0000",
+        "outstanding_at_cutover": "120.0000",
+        "posting_mode": "opening_control_detail_only"
+      },
+      {
+        "id": "opening-bill",
+        "kind": "bill",
+        "contact_id": "vendor-01",
+        "issued_on": "2026-08-20",
+        "due_on": "2026-09-10",
+        "description": "Unpaid August hall bill.",
+        "original_amount": "300.0000",
+        "paid_before_cutover": "0.0000",
+        "outstanding_at_cutover": "300.0000",
+        "posting_mode": "opening_control_detail_only"
+      }
+    ],
+    "stock": [],
+    "deferred_contracts": [
+      {
+        "id": "contract-opening",
+        "contact_id": "member-01",
+        "coverage_start": "2026-08-01",
+        "coverage_end": "2027-07-31",
+        "original_prepayment": "1200.0000",
+        "recognized_before_cutover": "100.0000",
+        "deferred_at_cutover": "1100.0000",
+        "monthly_recognition": "100.0000"
+      }
+    ]
+  },
+  "documents": [
+    {
+      "id": "annual-prepayment",
+      "kind": "prepayment",
+      "contact_id": "member-02",
+      "issued_on": "2026-09-02",
+      "due_on": "2026-09-16",
+      "lines": [
+        {
+          "item_id": "annual-plan",
+          "quantity": "2.0000",
+          "unit_price": "120.0000",
+          "amount": "240.0000"
+        }
+      ],
+      "total": "240.0000",
+      "tax_amount": "0.0000",
+      "tax_status": "not_modelled",
+      "related_document_id": null,
+      "runtime_status": "future_document_module_fixture"
+    },
+    {
+      "id": "dues-001",
+      "kind": "invoice",
+      "contact_id": "member-01",
+      "issued_on": "2026-09-04",
+      "due_on": "2026-09-18",
+      "lines": [
+        {
+          "item_id": "monthly-plan",
+          "quantity": "3.0000",
+          "unit_price": "20.0000",
+          "amount": "60.0000"
+        }
+      ],
+      "total": "60.0000",
+      "tax_amount": "0.0000",
+      "tax_status": "not_modelled",
+      "related_document_id": null,
+      "runtime_status": "future_document_module_fixture"
+    },
+    {
+      "id": "event-sale-001",
+      "kind": "cash_sale",
+      "contact_id": "member-02",
+      "issued_on": "2026-09-07",
+      "due_on": "2026-09-21",
+      "lines": [
+        {
+          "item_id": "event-ticket",
+          "quantity": "10.0000",
+          "unit_price": "15.0000",
+          "amount": "150.0000"
+        }
+      ],
+      "total": "150.0000",
+      "tax_amount": "0.0000",
+      "tax_status": "not_modelled",
+      "related_document_id": null,
+      "runtime_status": "future_document_module_fixture"
+    },
+    {
+      "id": "hall-bill-001",
+      "kind": "bill",
+      "contact_id": "vendor-01",
+      "issued_on": "2026-09-15",
+      "due_on": "2026-09-30",
+      "lines": [
+        {
+          "description": "September hall hire",
+          "account_key": "core.expense.rent",
+          "quantity": "1.0000",
+          "unit_price": "300.0000",
+          "amount": "300.0000"
+        }
+      ],
+      "total": "300.0000",
+      "tax_amount": "0.0000",
+      "tax_status": "not_modelled",
+      "related_document_id": null,
+      "runtime_status": "future_document_module_fixture"
+    }
+  ],
+  "events": [
+    {
+      "id": "membership-club-event-01",
+      "date": "2026-09-02",
+      "kind": "prepayment",
+      "description": "Receive two prepaid annual memberships",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:membership-club:v1:event-01",
+      "expected_journal": [
+        {
+          "account_key": "core.bank.operating",
+          "debit": "240.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "club.liability.prepaid_dues",
+          "debit": "0.0000",
+          "credit": "240.0000"
+        }
+      ],
+      "document_id": "annual-prepayment",
+      "contract": {
+        "id": "contract-new",
+        "coverage_start": "2026-09-01",
+        "coverage_end": "2027-08-31",
+        "monthly_recognition": "20.0000"
+      }
+    },
+    {
+      "id": "membership-club-event-02",
+      "date": "2026-09-04",
+      "kind": "credit_sale",
+      "description": "Record dues-001",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:membership-club:v1:event-02",
+      "expected_journal": [
+        {
+          "account_key": "core.receivables.trade",
+          "debit": "60.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "club.income.membership",
+          "debit": "0.0000",
+          "credit": "60.0000"
+        }
+      ],
+      "document_id": "dues-001",
+      "stock_movements": []
+    },
+    {
+      "id": "membership-club-event-03",
+      "date": "2026-09-07",
+      "kind": "cash_sale",
+      "description": "Record event-sale-001",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:membership-club:v1:event-03",
+      "expected_journal": [
+        {
+          "account_key": "core.cash.on_hand",
+          "debit": "150.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "club.income.events",
+          "debit": "0.0000",
+          "credit": "150.0000"
+        }
+      ],
+      "document_id": "event-sale-001",
+      "stock_movements": []
+    },
+    {
+      "id": "membership-club-event-04",
+      "date": "2026-09-10",
+      "kind": "receipt",
+      "description": "Allocate customer receipt to named documents",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:membership-club:v1:event-04",
+      "expected_journal": [
+        {
+          "account_key": "core.bank.operating",
+          "debit": "100.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.receivables.trade",
+          "debit": "0.0000",
+          "credit": "100.0000"
+        }
+      ],
+      "allocations": [
+        {
+          "document_id": "opening-invoice",
+          "amount": "80.0000"
+        },
+        {
+          "document_id": "dues-001",
+          "amount": "20.0000"
+        }
+      ],
+      "total": "100.0000"
+    },
+    {
+      "id": "membership-club-event-05",
+      "date": "2026-09-12",
+      "kind": "supplier_payment",
+      "description": "Pay supplier bills",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:membership-club:v1:event-05",
+      "expected_journal": [
+        {
+          "account_key": "core.payables.trade",
+          "debit": "200.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.bank.operating",
+          "debit": "0.0000",
+          "credit": "200.0000"
+        }
+      ],
+      "allocations": [
+        {
+          "document_id": "opening-bill",
+          "amount": "200.0000"
+        }
+      ],
+      "total": "200.0000"
+    },
+    {
+      "id": "membership-club-event-06",
+      "date": "2026-09-15",
+      "kind": "expense_bill",
+      "description": "Record September hall hire as unpaid",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:membership-club:v1:event-06",
+      "expected_journal": [
+        {
+          "account_key": "core.expense.rent",
+          "debit": "300.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.payables.trade",
+          "debit": "0.0000",
+          "credit": "300.0000"
+        }
+      ],
+      "document_id": "hall-bill-001"
+    },
+    {
+      "id": "membership-club-event-07",
+      "date": "2026-09-18",
+      "kind": "expense",
+      "description": "Pay event lighting and utility charge",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:membership-club:v1:event-07",
+      "expected_journal": [
+        {
+          "account_key": "core.expense.utilities",
+          "debit": "40.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.bank.operating",
+          "debit": "0.0000",
+          "credit": "40.0000"
+        }
+      ],
+      "expense_account_key": "core.expense.utilities",
+      "total": "40.0000"
+    },
+    {
+      "id": "membership-club-event-08",
+      "date": "2026-09-20",
+      "kind": "cash_transfer",
+      "description": "Deposit counted till cash into bank",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:membership-club:v1:event-08",
+      "expected_journal": [
+        {
+          "account_key": "core.bank.operating",
+          "debit": "100.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "core.cash.on_hand",
+          "debit": "0.0000",
+          "credit": "100.0000"
+        }
+      ],
+      "total": "100.0000"
+    },
+    {
+      "id": "membership-club-event-09",
+      "date": "2026-09-30",
+      "kind": "revenue_recognition",
+      "description": "Recognize one month of prepaid memberships",
+      "runtime_status": "expected_accounting_fixture_only",
+      "idempotency_key": "demo:membership-club:v1:event-09",
+      "expected_journal": [
+        {
+          "account_key": "club.liability.prepaid_dues",
+          "debit": "120.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account_key": "club.income.membership",
+          "debit": "0.0000",
+          "credit": "120.0000"
+        }
+      ],
+      "contract_recognition": [
+        {
+          "contract_id": "contract-opening",
+          "amount": "100.0000"
+        },
+        {
+          "contract_id": "contract-new",
+          "amount": "20.0000"
+        }
+      ],
+      "recognition_period": "2026-09"
+    }
+  ],
+  "industry_scenarios": [
+    {
+      "id": "membership-dues",
+      "title": "Separate renewals, overdue dues and earned income",
+      "status": "future_module_scenario_not_implemented",
+      "fixture_entity": {
+        "membership_cycle": "monthly_and_annual",
+        "group_contacts": [
+          "member-01",
+          "member-02"
+        ],
+        "contract_ids": [
+          "contract-opening",
+          "contract-new"
+        ],
+        "dues_document_id": "dues-001",
+        "renewal_preview_date": "2027-08-01"
+      },
+      "steps": [
+        "Compare open dues with prepaid membership contracts.",
+        "Recognize September service before showing monthly income.",
+        "Preview a renewal without issuing or sending a message."
+      ],
+      "acceptance_checks": [
+        "Prepaid cash is deferred until the modelled service month.",
+        "Member groups represent synthetic aggregate households, not real individuals.",
+        "Recurring invoicing, attendance, access control and renewal messages remain future modules."
+      ]
+    }
+  ],
+  "source_ids": [
+    "cc-tribu",
+    "vendor-stocky"
+  ],
+  "expected_reports": {
+    "as_of_date": "2026-09-30",
+    "trial_balance": [
+      {
+        "account_key": "core.cash.on_hand",
+        "debit": "250.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.bank.operating",
+        "debit": "5200.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.receivables.trade",
+        "debit": "80.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.assets.equipment",
+        "debit": "1500.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.payables.trade",
+        "debit": "0.0000",
+        "credit": "400.0000"
+      },
+      {
+        "account_key": "club.liability.prepaid_dues",
+        "debit": "0.0000",
+        "credit": "1220.0000"
+      },
+      {
+        "account_key": "core.equity.capital",
+        "debit": "0.0000",
+        "credit": "5420.0000"
+      },
+      {
+        "account_key": "club.income.events",
+        "debit": "0.0000",
+        "credit": "150.0000"
+      },
+      {
+        "account_key": "club.income.membership",
+        "debit": "0.0000",
+        "credit": "180.0000"
+      },
+      {
+        "account_key": "core.expense.rent",
+        "debit": "300.0000",
+        "credit": "0.0000"
+      },
+      {
+        "account_key": "core.expense.utilities",
+        "debit": "40.0000",
+        "credit": "0.0000"
+      }
+    ],
+    "trial_balance_debit": "7370.0000",
+    "trial_balance_credit": "7370.0000",
+    "journal_turnover_debit_including_opening": "8130.0000",
+    "journal_turnover_credit_including_opening": "8130.0000",
+    "income": "330.0000",
+    "expenses": "340.0000",
+    "net_result": "-10.0000",
+    "assets": "7030.0000",
+    "liabilities": "1620.0000",
+    "opening_equity": "5420.0000",
+    "equity_including_current_result": "5410.0000",
+    "accounts_receivable": "80.0000",
+    "accounts_payable": "400.0000",
+    "inventory_value": "0.0000",
+    "cash_on_hand": "250.0000",
+    "bank_current": "5200.0000",
+    "document_balances": [
+      {
+        "document_id": "opening-invoice",
+        "kind": "invoice",
+        "outstanding": "40.0000"
+      },
+      {
+        "document_id": "opening-bill",
+        "kind": "bill",
+        "outstanding": "100.0000"
+      },
+      {
+        "document_id": "dues-001",
+        "kind": "invoice",
+        "outstanding": "40.0000"
+      },
+      {
+        "document_id": "hall-bill-001",
+        "kind": "bill",
+        "outstanding": "300.0000"
+      }
+    ],
+    "stock_on_hand": []
+  }
+}

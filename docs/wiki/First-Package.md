@@ -2,6 +2,8 @@
 
 The next sprint is aimed at a focused, reviewable first package. Track the work in [Sprint 03: First installable preview](https://github.com/rmak78/phpledger/milestone/4). **`0.1.0-preview` is a proposed candidate name, not a created tag or available download.** Package contents and release timing follow the gates below; no date is promised.
 
+Modern source is in `www/phpledger`; the historical application remains under `legacy/`. The owner selected [MIT](https://github.com/rmak78/phpledger/blob/master/LICENSE) for new project-owned code and documentation on 14 September 2026. [Separate dependency, asset and historical terms](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) remain in force. Source development follows the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md).
+
 ## 1. Reviewable accounting and reports
 
 Start with a narrowly defined Pakistan entity/profile, selected with a qualified accounting reviewer. Turn applicable guidance into a traceable rule register, account classifications and versioned report mappings. Recognition, measurement and period-end behavior must support the statements being shown.
@@ -16,7 +18,7 @@ Refine catalog navigation, cart editing, sale review and a separate cash-confirm
 
 ## 3. A package people can actually install and recover
 
-Prepare a versioned archive and exact supported-environment guide, a first-admin installation journey, migration/upgrade instructions and backup restoration. Resolve the project licence and retained-asset/dependency provenance before distributing the package under an open-source licence claim.
+Prepare a versioned archive and exact supported-environment guide, a first-admin installation journey, migration/upgrade instructions and backup restoration. Assemble and verify the approved MIT grant and all required third-party notices in the actual package; the licence decision does not replace artifact validation.
 
 **Acceptance:** clean installation from the published artifact in a fresh supported environment; verified initial sign-in/business setup; upgrade of the supported prior schema without lost records; restored backup reconciliation; dependency/security checks; documented limits and known issues; and an actual download linked from [[Getting started|Getting-Started]].
 
@@ -28,7 +30,7 @@ Assess whether a bounded starter import fits this package after the accounting a
 
 ## Release boundary
 
-Complete the agreed scope, record its validation and accounting/usability review, resolve release licensing, then publish the candidate and verified quickstart. The hosted working preview and the installable package are separate deliverables. Any omitted gate must narrow the candidate's stated scope rather than disappear from its release notes.
+Complete the agreed scope, record its validation and accounting/usability review, verify licence/notice inclusion, then publish the candidate and verified quickstart. The hosted working preview and the installable package are separate deliverables. Any omitted gate must narrow the candidate's stated scope rather than disappear from its release notes.
 
 Full ERP, broad country compliance and AI **Scan document** are not commitments for this sprint. Scanning remains a later roadmap item with no next-sprint promise.
 

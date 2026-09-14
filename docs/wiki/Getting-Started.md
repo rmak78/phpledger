@@ -2,7 +2,9 @@
 
 **The hosted preview is live.** Start at [the PHP Ledger website](https://phpledger.com/) or [open the demonstration](https://phpledger.com/demo/). The updated website and demo were published on 14 September 2026.
 
-The first installable package for the new application is still being prepared. The public repository's default branch currently contains the legacy application. Cloning it is not a quickstart for the new preview, and this page deliberately provides no installation command that would imply otherwise.
+The first installable package for the new application is still being prepared. Modern source is available under `www/phpledger`; historical code is preserved under `legacy/`. Developers can follow the [local development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md). A source checkout is not yet a tested customer-installation package.
+
+The new project-owned code and documentation are [MIT licensed](https://github.com/rmak78/phpledger/blob/master/LICENSE). Read [licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) for the separate historical, dependency and asset terms.
 
 ## Try the demonstration
 
@@ -23,7 +25,7 @@ The new foundation has been exercised locally with:
 | Reproducible development | Docker Compose |
 | Web root | Only the new application's `www/phpledger/public` directory |
 
-Hosting support will be documented against tested configurations. The repository root and historical SQL dumps are not the new application's deployment or migration path. A customer installation also needs HTTPS, private configuration, reliable backups and a tested restoration procedure.
+Hosting support will be documented against tested configurations. Never serve the repository root or `legacy/`, and never use historical `legacy/install/` SQL dumps as the new application's migration path. A customer installation also needs HTTPS, private configuration, reliable backups and a tested restoration procedure.
 
 ## Installation and business setup are separate
 

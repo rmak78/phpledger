@@ -1,0 +1,315 @@
+<?php
+declare(strict_types=1);
+
+/** Normalize unsigned financial input without ever converting through a float. */
+function pl_amount(string $amount): string
+{
+    if (!preg_match('/^(?:0|[1-9][0-9]{0,15})(?:\.[0-9]{1,4})?$/D', $amount)) {
+        throw new DomainException('Enter an amount with up to 16 whole digits and four decimal places, without commas or a sign.');
+    }
+    return bcadd($amount, '0', 4);
+}
+
+function pl_ledger_date(string $date): string
+{
+    $parsed = DateTimeImmutable::createFromFormat('!Y-m-d', $date, new DateTimeZone('UTC'));
+    if (!$parsed || $parsed->format('Y-m-d') !== $date || $date < '1000-01-01' || $date > '9998-12-31') {
+        throw new DomainException('Choose a valid date in YYYY-MM-DD format.');
+    }
+    return $date;
+}
+
+function pl_ledger_text(mixed $value, string $label, int $limit, bool $required = true): string
+{
+    if (!is_string($value)) {
+        throw new DomainException($label . ' must be text.');
+    }
+    $value = trim($value);
+    if (($required && $value === '') || !mb_check_encoding($value, 'UTF-8') || mb_strlen($value, 'UTF-8') > $limit) {
+        throw new DomainException($label . ' is missing or too long.');
+    }
+    return $value;
+}
+
+function pl_ledger_transaction(callable $work): mixed
+{
+    $ownsTransaction = DB::transactionDepth() === 0;
+    // Only database work belongs in this callback: a deadlock can replay an owned transaction.
+    for ($attempt = 0; ; $attempt++) {
+        DB::startTransaction();
+        try {
+            $result = $work();
+            DB::commit();
+            return $result;
+        } catch (Throwable $error) {
+            $rolledBack = false;
+            try {
+                if (DB::get()->inTransaction()) {
+                    DB::rollback();
+                } else {
+                    // InnoDB deadlocks roll back every savepoint; reset MeekroDB's depth too.
+                    DB::getMDB()->rollback(true);
+                }
+                $rolledBack = true;
+            } catch (Throwable) {
+                // Preserve the original failure rather than mask it with cleanup errors.
+            }
+            $deadlock = false;
+            for ($cause = $error; $cause !== null; $cause = $cause->getPrevious()) {
+                if ($cause instanceof PDOException && (int) ($cause->errorInfo[1] ?? 0) === 1213) {
+                    $deadlock = true;
+                    break;
+                }
+            }
+            if (!$ownsTransaction || !$rolledBack || !$deadlock || $attempt >= 3) {
+                throw $error;
+            }
+            usleep(random_int(5000, 20000) * ($attempt + 1));
+        }
+    }
+}
+
+/** @return array{company_id:int, book_id:int, period_id:int, accounts:array<string,int>} */
+function pl_create_company(int $actorId, string $name, string $currency, string $startDate, string $fiscalYearEnd = '12-31'): array
+{
+    pl_demo_require_setup_action();
+    $name = pl_ledger_text($name, 'Business name', 160);
+    if (!isset(pl_base_currency_options()[$currency])) {
+        throw new DomainException('Choose one of the supported base currencies.');
+    }
+    pl_ledger_date($startDate);
+    if (!preg_match('/^[0-9]{2}-[0-9]{2}$/D', $fiscalYearEnd)) {
+        throw new DomainException('Choose a fiscal year end in MM-DD format.');
+    }
+    // February 29 is not a stable annual closing date; use February 28 instead.
+    pl_ledger_date('2001-' . $fiscalYearEnd);
+    $year = (int) substr($startDate, 0, 4);
+    $endDate = $year . '-' . $fiscalYearEnd;
+    if ($endDate < $startDate) {
+        $endDate = ($year + 1) . '-' . $fiscalYearEnd;
+    }
+    return pl_ledger_transaction(function () use ($actorId, $name, $currency, $startDate, $fiscalYearEnd, $endDate): array {
+        if (!DB::queryFirstRow('SELECT id FROM pl_users WHERE id = %i AND is_active = 1 FOR SHARE', $actorId)) {
+            throw new DomainException('Sign in with an active account to create a company.');
+        }
+        DB::insert('pl_companies', ['name' => $name, 'currency' => $currency, 'start_date' => $startDate, 'fiscal_year_end' => $fiscalYearEnd, 'created_by' => $actorId, 'setup_status' => 'ready']);
+        $companyId = (int) DB::insertId();
+        DB::insert('pl_company_members', ['company_id' => $companyId, 'user_id' => $actorId, 'role' => 'owner']);
+        DB::insert('pl_books', ['company_id' => $companyId, 'name' => 'Primary book']);
+        $bookId = (int) DB::insertId();
+        DB::insert('pl_periods', ['company_id' => $companyId, 'book_id' => $bookId, 'start_date' => $startDate, 'end_date' => $endDate, 'status' => 'open']);
+        $periodId = (int) DB::insertId();
+        $accounts = [];
+        $template = pl_starter_template();
+        $mapping = [];
+        foreach ($template['accounts'] as $definition) {
+            DB::insert('pl_accounts', ['company_id' => $companyId, 'book_id' => $bookId] + $definition);
+            $accounts[$definition['code']] = (int) DB::insertId();
+            $mapping[$definition['semantic_key']] = (int) DB::insertId();
+        }
+        pl_install_template_snapshot($actorId, $companyId, $bookId, $template, $mapping);
+        return ['company_id' => $companyId, 'book_id' => $bookId, 'period_id' => $periodId, 'accounts' => $accounts];
+    });
+}
+
+/** Validated, canonical payload is also the durable idempotency comparison input. */
+function pl_normalize_journal(array $payload): array
+{
+    $date = pl_ledger_date(pl_ledger_text($payload['date'] ?? null, 'Posting date', 10));
+    $currency = pl_ledger_text($payload['currency'] ?? null, 'Currency', 3);
+    $sourceType = pl_ledger_text($payload['source_type'] ?? null, 'Source type', 40);
+    $key = pl_ledger_text($payload['idempotency_key'] ?? null, 'Request key', 128);
+    if (!preg_match('/^[a-z][a-z0-9_]{0,39}$/D', $sourceType) || !preg_match('/^[A-Za-z0-9._:-]{1,128}$/D', $key)) {
+        throw new DomainException('Use a valid source type and request key.');
+    }
+    $normalized = [
+        'date' => $date,
+        'currency' => $currency,
+        'source_type' => $sourceType,
+        'source_reference' => pl_ledger_text($payload['source_reference'] ?? null, 'Source reference', 120),
+        'idempotency_key' => $key,
+        'description' => pl_ledger_text($payload['description'] ?? null, 'Description', 500),
+        'lines' => [],
+    ];
+    $lines = $payload['lines'] ?? null;
+    if (!is_array($lines) || !array_is_list($lines) || count($lines) < 2 || count($lines) > 1000) {
+        throw new DomainException('A journal needs between two and 1,000 lines.');
+    }
+    $debits = '0.0000';
+    $credits = '0.0000';
+    foreach ($lines as $line) {
+        if (!is_array($line) || !is_int($line['account_id'] ?? null) || $line['account_id'] < 1 || !is_string($line['debit'] ?? null) || !is_string($line['credit'] ?? null)) {
+            throw new DomainException('Every line needs an account ID and decimal-string debit and credit amounts.');
+        }
+        $debit = pl_amount($line['debit']);
+        $credit = pl_amount($line['credit']);
+        if ((bccomp($debit, '0', 4) > 0) === (bccomp($credit, '0', 4) > 0)) {
+            throw new DomainException('Each line must contain either a positive debit or a positive credit.');
+        }
+        $normalized['lines'][] = ['account_id' => $line['account_id'], 'debit' => $debit, 'credit' => $credit, 'description' => pl_ledger_text($line['description'] ?? '', 'Line description', 500, false)];
+        $debits = bcadd($debits, $debit, 4);
+        $credits = bcadd($credits, $credit, 4);
+    }
+    if (bccomp($debits, $credits, 4) !== 0) {
+        throw new DomainException('Debits and credits must balance before posting.');
+    }
+    return $normalized;
+}
+
+/** @return array<string,mixed> */
+function pl_ledger_book(int $companyId, int $bookId, bool $lock = false): array
+{
+    $book = DB::queryFirstRow('SELECT b.id, b.company_id, c.currency FROM pl_books b JOIN pl_companies c ON c.id = b.company_id WHERE b.id = %i AND b.company_id = %i' . ($lock ? ' FOR UPDATE' : ' FOR SHARE'), $bookId, $companyId);
+    if (!$book) {
+        throw new DomainException('This book is not available in the selected company.');
+    }
+    return $book;
+}
+
+/** Internal posting primitive; nested calls retain the outer transaction's book lock. */
+function pl_post_journal_locked(int $actorId, int $companyId, int $bookId, array $payload, ?int $reversalOf = null): array
+{
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $payload, $reversalOf): array {
+        $payload = pl_normalize_journal($payload);
+        // This helper also checks permissions so future direct callers cannot bypass membership.
+        pl_require_company_access($actorId, $companyId, true);
+        $book = pl_ledger_book($companyId, $bookId, true);
+        pl_require_book_ready($companyId);
+        if ($book['currency'] !== $payload['currency']) {
+            throw new DomainException('Post in the company base currency. Foreign exchange is not supported by this foundation.');
+        }
+        if ($reversalOf === null && $payload['source_type'] === 'reversal') {
+            throw new DomainException('A reversal must reference its original journal.');
+        }
+        if ($reversalOf !== null) {
+            $original = pl_get_journal($actorId, $companyId, $bookId, $reversalOf);
+            $expectedLines = [];
+            foreach ($original['lines'] as $line) {
+                $expectedLines[] = ['account_id' => (int) $line['account_id'], 'debit' => (string) $line['credit'], 'credit' => (string) $line['debit'], 'description' => (string) $line['description']];
+            }
+            if ($original['reversal_of_id'] !== null || $payload['date'] < $original['journal_date']
+                || $payload['source_type'] !== 'reversal' || $payload['source_reference'] !== (string) $reversalOf
+                || $payload['lines'] !== $expectedLines) {
+                throw new DomainException('A linked reversal must exactly undo its original journal on or after the original date.');
+            }
+        }
+        $hash = hash('sha256', json_encode(['company_id' => $companyId, 'book_id' => $bookId, 'reversal_of_id' => $reversalOf, 'payload' => $payload], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
+        // A waiting caller may already own an older REPEATABLE READ snapshot.
+        $existing = DB::queryFirstRow('SELECT id, payload_hash FROM pl_journals WHERE book_id = %i AND idempotency_key = %s FOR UPDATE', $bookId, $payload['idempotency_key']);
+        if ($existing) {
+            if (!hash_equals((string) $existing['payload_hash'], $hash)) {
+                throw new DomainException('This request key already belongs to a different journal. Use a new key for a new request.');
+            }
+            return pl_get_journal($actorId, $companyId, $bookId, (int) $existing['id']);
+        }
+        $periods = DB::query('SELECT id, status FROM pl_periods WHERE company_id = %i AND book_id = %i AND start_date <= %s AND end_date >= %s FOR UPDATE', $companyId, $bookId, $payload['date'], $payload['date']);
+        if (count($periods) !== 1 || $periods[0]['status'] !== 'open') {
+            throw new DomainException('The posting date must fall within exactly one open accounting period.');
+        }
+        foreach ($payload['lines'] as $line) {
+            if (!DB::queryFirstRow('SELECT id FROM pl_accounts WHERE id = %i AND company_id = %i AND book_id = %i AND is_active = 1 FOR SHARE', $line['account_id'], $companyId, $bookId)) {
+                throw new DomainException('Every account must be active and belong to the selected company and book.');
+            }
+        }
+        DB::insert('pl_journals', [
+            'company_id' => $companyId, 'book_id' => $bookId, 'period_id' => (int) $periods[0]['id'],
+            'journal_date' => $payload['date'], 'currency' => $payload['currency'], 'description' => $payload['description'],
+            'source_type' => $payload['source_type'], 'source_reference' => $payload['source_reference'],
+            'idempotency_key' => $payload['idempotency_key'], 'payload_hash' => $hash,
+            'reversal_of_id' => $reversalOf, 'posted_by' => $actorId,
+        ]);
+        $journalId = (int) DB::insertId();
+        foreach ($payload['lines'] as $index => $line) {
+            DB::insert('pl_journal_lines', [
+                'journal_id' => $journalId, 'company_id' => $companyId, 'book_id' => $bookId, 'line_number' => $index + 1,
+                'account_id' => $line['account_id'], 'description' => $line['description'], 'debit' => $line['debit'], 'credit' => $line['credit'],
+            ]);
+        }
+        return pl_get_journal($actorId, $companyId, $bookId, $journalId);
+    });
+}
+
+function pl_post_journal(int $actorId, int $companyId, int $bookId, array $payload): array
+{
+    $payload = pl_normalize_journal($payload);
+    if ($payload['source_type'] === 'reversal') {
+        throw new DomainException('Use the linked reversal action to reverse a posted journal.');
+    }
+    return pl_ledger_transaction(fn(): array => pl_post_journal_locked($actorId, $companyId, $bookId, $payload));
+}
+
+function pl_get_journal(int $actorId, int $companyId, int $bookId, int $journalId): array
+{
+    pl_require_company_access($actorId, $companyId);
+    pl_ledger_book($companyId, $bookId);
+    $journal = DB::queryFirstRow('SELECT * FROM pl_journals WHERE id = %i AND company_id = %i AND book_id = %i FOR SHARE', $journalId, $companyId, $bookId);
+    if (!$journal) {
+        throw new DomainException('This journal is not available in the selected company and book.');
+    }
+    $journal['id'] = (int) $journal['id'];
+    $journal['reference'] = 'PL-' . str_pad((string) $journal['id'], 8, '0', STR_PAD_LEFT);
+    unset($journal['payload_hash'], $journal['idempotency_key']);
+    $journal['lines'] = DB::query('SELECT l.account_id, a.code, a.name, l.description, l.debit, l.credit FROM pl_journal_lines l JOIN pl_accounts a ON a.id = l.account_id WHERE l.journal_id = %i AND l.company_id = %i AND l.book_id = %i ORDER BY l.line_number FOR SHARE', $journalId, $companyId, $bookId);
+    return $journal;
+}
+
+function pl_reverse_journal(int $actorId, int $companyId, int $bookId, int $journalId, string $date, string $idempotencyKey, string $reason): array
+{
+    pl_ledger_date($date);
+    $reason = pl_ledger_text($reason, 'Reversal reason', 400);
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $journalId, $date, $idempotencyKey, $reason): array {
+        pl_require_company_access($actorId, $companyId, true);
+        $book = pl_ledger_book($companyId, $bookId, true);
+        $original = pl_get_journal($actorId, $companyId, $bookId, $journalId);
+        if ($original['reversal_of_id'] !== null) {
+            throw new DomainException('A reversal cannot itself be reversed in this foundation. Record a new correcting journal.');
+        }
+        if ($date < $original['journal_date']) {
+            throw new DomainException('A reversal cannot be dated before the original journal.');
+        }
+        $existing = DB::queryFirstRow('SELECT idempotency_key FROM pl_journals WHERE reversal_of_id = %i FOR UPDATE', $journalId);
+        if ($existing && $existing['idempotency_key'] !== $idempotencyKey) {
+            throw new DomainException('This journal has already been reversed.');
+        }
+        $lines = [];
+        foreach ($original['lines'] as $line) {
+            $lines[] = ['account_id' => (int) $line['account_id'], 'debit' => (string) $line['credit'], 'credit' => (string) $line['debit'], 'description' => (string) $line['description']];
+        }
+        $payload = pl_normalize_journal([
+            'date' => $date, 'currency' => (string) $book['currency'], 'source_type' => 'reversal', 'source_reference' => (string) $journalId,
+            'idempotency_key' => $idempotencyKey, 'description' => 'Reversal of ' . $original['reference'] . ': ' . $reason, 'lines' => $lines,
+        ]);
+        return pl_post_journal_locked($actorId, $companyId, $bookId, $payload, $journalId);
+    });
+}
+
+function pl_trial_balance(int $actorId, int $companyId, int $bookId, ?string $asOf = null): array
+{
+    pl_require_company_access($actorId, $companyId);
+    pl_ledger_book($companyId, $bookId);
+    if ($asOf !== null) {
+        pl_ledger_date($asOf);
+    }
+    $accounts = DB::query('SELECT a.id, a.code, a.name, a.type,
+        COALESCE(SUM(CASE WHEN j.id IS NOT NULL THEN l.debit ELSE 0 END), 0) AS debit_movement,
+        COALESCE(SUM(CASE WHEN j.id IS NOT NULL THEN l.credit ELSE 0 END), 0) AS credit_movement
+        FROM pl_accounts a
+        LEFT JOIN pl_journal_lines l ON l.account_id = a.id AND l.company_id = a.company_id AND l.book_id = a.book_id
+        LEFT JOIN pl_journals j ON j.id = l.journal_id AND j.company_id = a.company_id AND j.book_id = a.book_id AND j.journal_date <= %s
+        WHERE a.company_id = %i AND a.book_id = %i
+        GROUP BY a.id, a.code, a.name, a.type ORDER BY a.code', $asOf ?? '9999-12-31', $companyId, $bookId);
+    $debits = '0.0000';
+    $credits = '0.0000';
+    foreach ($accounts as &$account) {
+        $account['id'] = (int) $account['id'];
+        $account['debit_movement'] = bcadd((string) $account['debit_movement'], '0', 4);
+        $account['credit_movement'] = bcadd((string) $account['credit_movement'], '0', 4);
+        $account['balance'] = bcsub($account['debit_movement'], $account['credit_movement'], 4);
+        $account['debit'] = bccomp($account['balance'], '0', 4) > 0 ? $account['balance'] : '0.0000';
+        $account['credit'] = bccomp($account['balance'], '0', 4) < 0 ? bcsub('0', $account['balance'], 4) : '0.0000';
+        $debits = bcadd($debits, $account['debit'], 4);
+        $credits = bcadd($credits, $account['credit'], 4);
+    }
+    unset($account);
+    return ['accounts' => $accounts, 'total_debit' => $debits, 'total_credit' => $credits, 'balanced' => bccomp($debits, $credits, 4) === 0];
+}

@@ -1,0 +1,596 @@
+{
+  "format": "phpledger.coa.research-index",
+  "format_version": 1,
+  "research_date": "2026-09-14",
+  "status": "unreviewed",
+  "runtime_importable": false,
+  "accountant_reviewed": false,
+  "purpose": "Research metadata and source inventory for future installation templates. Not an account seed, migration, tax engine, or approved country package.",
+  "documents": [
+    "docs/coa/README.md",
+    "docs/coa/ACCOUNT_CANDIDATES.md",
+    "docs/coa/TEMPLATE_MODEL.md",
+    "docs/coa/SOURCES.md",
+    "docs/coa/DISCOVERY_GAPS.md"
+  ],
+  "account_type_values": [
+    "asset",
+    "liability",
+    "equity",
+    "income",
+    "expense"
+  ],
+  "composition_proposal": {
+    "core_packages": 1,
+    "primary_industry_profiles": 1,
+    "country_packages": "zero_or_one",
+    "reviewed_optional_capabilities": true,
+    "tax_rates_included": false,
+    "auto_apply_to_existing_companies": false,
+    "semantic_keys_separate_from_labels_and_numbers": true
+  },
+  "coverage": [
+    {
+      "id": "neutral",
+      "layer": "core",
+      "status": "unreviewed",
+      "priority": "first",
+      "source_ids": [
+        "SRC-ERP-DOC",
+        "SRC-IAS2",
+        "SRC-IFRS-SME"
+      ],
+      "review_gate": "Neutral starter accounts and synthetic accounting scenarios approved"
+    },
+    {
+      "id": "professional-services-agency",
+      "layer": "industry",
+      "status": "unreviewed",
+      "authorship": "original_proposal",
+      "source_ids": [
+        "SRC-ERP-DOC"
+      ],
+      "illustrative_semantic_keys": [
+        "service.income.projects",
+        "service.income.recurring",
+        "service.cost.contractors"
+      ],
+      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+    },
+    {
+      "id": "retail",
+      "layer": "industry",
+      "status": "unreviewed",
+      "authorship": "original_proposal",
+      "source_ids": [
+        "SRC-ERP-DOC",
+        "SRC-IAS2"
+      ],
+      "illustrative_semantic_keys": [
+        "retail.inventory.goods",
+        "retail.income.goods",
+        "retail.cost.goods"
+      ],
+      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+    },
+    {
+      "id": "wholesale-distribution",
+      "layer": "industry",
+      "status": "unreviewed",
+      "authorship": "original_proposal",
+      "source_ids": [
+        "SRC-ERP-DOC",
+        "SRC-IAS2"
+      ],
+      "illustrative_semantic_keys": [
+        "wholesale.inventory.goods",
+        "wholesale.asset.route_cash",
+        "wholesale.cost.goods"
+      ],
+      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+    },
+    {
+      "id": "restaurant-cafe",
+      "layer": "industry",
+      "status": "unreviewed",
+      "authorship": "original_proposal",
+      "source_ids": [
+        "SRC-ERP-DOC",
+        "SRC-IAS2"
+      ],
+      "illustrative_semantic_keys": [
+        "restaurant.inventory.ingredients",
+        "restaurant.income.food",
+        "restaurant.cost.consumption"
+      ],
+      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+    },
+    {
+      "id": "pharmacy",
+      "layer": "industry",
+      "status": "unreviewed",
+      "authorship": "original_proposal",
+      "source_ids": [
+        "SRC-ERP-DOC",
+        "SRC-IAS2"
+      ],
+      "illustrative_semantic_keys": [
+        "pharmacy.inventory.medicines",
+        "pharmacy.income.medicines",
+        "pharmacy.cost.goods"
+      ],
+      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+    },
+    {
+      "id": "jewelry",
+      "layer": "industry",
+      "status": "unreviewed",
+      "authorship": "original_proposal",
+      "source_ids": [
+        "SRC-ERP-DOC",
+        "SRC-IAS2"
+      ],
+      "illustrative_semantic_keys": [
+        "jewelry.inventory.metal",
+        "jewelry.inventory.finished",
+        "jewelry.cost.goods"
+      ],
+      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+    },
+    {
+      "id": "light-manufacturing",
+      "layer": "industry",
+      "status": "unreviewed",
+      "authorship": "original_proposal",
+      "source_ids": [
+        "SRC-ERP-DOC",
+        "SRC-IAS2"
+      ],
+      "illustrative_semantic_keys": [
+        "manufacturing.inventory.raw",
+        "manufacturing.inventory.work",
+        "manufacturing.inventory.finished"
+      ],
+      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+    },
+    {
+      "id": "PK",
+      "layer": "country",
+      "status": "unreviewed",
+      "priority": "launch_research_priority",
+      "source_ids": [
+        "SRC-ODOO-PK",
+        "SRC-FBR-BASICS",
+        "SRC-PRA-ACT",
+        "SRC-SRB-ACTS",
+        "SRC-SECP-ACTS"
+      ],
+      "tax_rules_included": false,
+      "review_gate": "Country accountant, legal-form/registration requirements, provenance and accounting scenarios verified before release"
+    },
+    {
+      "id": "IN",
+      "layer": "country",
+      "status": "unreviewed",
+      "priority": "launch_research_priority",
+      "source_ids": [
+        "SRC-ODOO-IN",
+        "SRC-ERP-IN",
+        "SRC-GST-LEDGER",
+        "SRC-ICAI-GUIDANCE",
+        "SRC-ICAI-UPDATES"
+      ],
+      "tax_rules_included": false,
+      "review_gate": "Country accountant, legal-form/registration requirements, provenance and accounting scenarios verified before release"
+    },
+    {
+      "id": "AE",
+      "layer": "country",
+      "status": "unreviewed",
+      "priority": "later_extension",
+      "source_ids": [
+        "SRC-ODOO-AE",
+        "SRC-ERP-AE",
+        "SRC-FTA-RECORDS"
+      ],
+      "tax_rules_included": false,
+      "review_gate": "Country accountant, legal-form/registration requirements, provenance and accounting scenarios verified before release"
+    },
+    {
+      "id": "GB",
+      "layer": "country",
+      "status": "unreviewed",
+      "priority": "later_extension",
+      "source_ids": [
+        "SRC-ODOO-GB",
+        "SRC-HMRC-VAT"
+      ],
+      "tax_rules_included": false,
+      "review_gate": "Country accountant, legal-form/registration requirements, provenance and accounting scenarios verified before release"
+    },
+    {
+      "id": "US",
+      "layer": "country",
+      "status": "unreviewed",
+      "priority": "later_extension",
+      "source_ids": [
+        "SRC-ODOO-US",
+        "SRC-IRS-RECORDS"
+      ],
+      "tax_rules_included": false,
+      "review_gate": "Country accountant, legal-form/registration requirements, provenance and accounting scenarios verified before release"
+    },
+    {
+      "id": "membership-club",
+      "layer": "optional_industry_extension",
+      "status": "unreviewed",
+      "authorship": "original_proposal",
+      "source_ids": [
+        "SRC-ERP-DOC"
+      ],
+      "illustrative_semantic_keys": [
+        "club.income.membership",
+        "club.income.events",
+        "club.liability.prepaid_dues"
+      ],
+      "review_gate": "Accrual of membership dues, refundable deposits, nonprofit/tax status reviewed"
+    },
+    {
+      "id": "service-workshop",
+      "layer": "optional_industry_extension",
+      "status": "unreviewed",
+      "authorship": "original_proposal",
+      "source_ids": [
+        "SRC-ERP-DOC",
+        "SRC-IAS2"
+      ],
+      "illustrative_semantic_keys": [
+        "workshop.income.labor",
+        "workshop.income.parts",
+        "workshop.inventory.parts",
+        "workshop.cost.parts"
+      ],
+      "review_gate": "Service recognition, owned versus customer-owned parts, stock costing and work-in-progress policy reviewed"
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC-ODOO-LICENSE",
+      "title": "Odoo repository license",
+      "url": "https://github.com/odoo/odoo/blob/f84eeb3ed1421e0cc07c906ff6444734dc01d35f/LICENSE",
+      "version": "19.0 @ f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+      "source_date": "2026-09-14",
+      "license": "Repository LGPLv3; module manifests declare LGPL-3; file-specific exceptions must be checked before reuse",
+      "access": "retrieved",
+      "relevance": "Reuse/provenance gate for inspected country charts",
+      "caveat": "No code/chart data redistributed in runtime; PHP Ledger license is still pending",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-ODOO-PK",
+      "title": "Odoo PK account template",
+      "url": "https://github.com/odoo/odoo/blob/f84eeb3ed1421e0cc07c906ff6444734dc01d35f/addons/l10n_pk/data/template/account.account-pk.csv",
+      "manifest_url": "https://github.com/odoo/odoo/blob/f84eeb3ed1421e0cc07c906ff6444734dc01d35f/addons/l10n_pk/__manifest__.py",
+      "version": "19.0 @ f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+      "module_version": "1.1",
+      "source_date": "2026-09-14",
+      "license": "LGPL-3 in inspected module manifest; see SRC-ODOO-LICENSE",
+      "access": "retrieved_and_parsed",
+      "source_row_count": 123,
+      "sha256_of_retrieved_utf8_text": "709ce5122c69af482c861be1c8b0bde11895f8a63d6bd5352c6b3e07265f4aae",
+      "country": "PK",
+      "relevance": "Contains input/output and withholding accounts plus industrial/general ledgers",
+      "caveat": "No explicit full provincial model; some imported descriptions reference EU imports",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-ODOO-IN",
+      "title": "Odoo IN account template",
+      "url": "https://github.com/odoo/odoo/blob/f84eeb3ed1421e0cc07c906ff6444734dc01d35f/addons/l10n_in/data/template/account.account-in.csv",
+      "manifest_url": "https://github.com/odoo/odoo/blob/f84eeb3ed1421e0cc07c906ff6444734dc01d35f/addons/l10n_in/__manifest__.py",
+      "version": "19.0 @ f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+      "module_version": "2.2",
+      "source_date": "2026-09-14",
+      "license": "LGPL-3 in inspected module manifest; see SRC-ODOO-LICENSE",
+      "access": "retrieved_and_parsed",
+      "source_row_count": 102,
+      "sha256_of_retrieved_utf8_text": "6302104ab2fa2dbbf0ef98eba7a353d3207134af9a93bb402e352a8885d4db8c",
+      "country": "IN",
+      "relevance": "Separate GST components and TDS/TCS-related account references",
+      "caveat": "Some classifications and section references require independent review; rates/thresholds not adopted",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-ODOO-AE",
+      "title": "Odoo AE account template",
+      "url": "https://github.com/odoo/odoo/blob/f84eeb3ed1421e0cc07c906ff6444734dc01d35f/addons/l10n_ae/data/template/account.account-ae.csv",
+      "manifest_url": "https://github.com/odoo/odoo/blob/f84eeb3ed1421e0cc07c906ff6444734dc01d35f/addons/l10n_ae/__manifest__.py",
+      "version": "19.0 @ f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+      "module_version": null,
+      "source_date": "2026-09-14",
+      "license": "LGPL-3 in inspected module manifest; see SRC-ODOO-LICENSE",
+      "access": "retrieved_and_parsed",
+      "source_row_count": 170,
+      "sha256_of_retrieved_utf8_text": "cbfe4f19f411fbd60b7d3555d0c9ec6c51af10563d67292e618c056aa39fac1c",
+      "country": "AE",
+      "relevance": "VAT input/output, reverse-charge and settlement-account distinctions",
+      "caveat": "Chart does not prove complete VAT/corporate-tax compliance",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-ODOO-GB",
+      "title": "Odoo GB account template",
+      "url": "https://github.com/odoo/odoo/blob/f84eeb3ed1421e0cc07c906ff6444734dc01d35f/addons/l10n_uk/data/template/account.account-uk.csv",
+      "manifest_url": "https://github.com/odoo/odoo/blob/f84eeb3ed1421e0cc07c906ff6444734dc01d35f/addons/l10n_uk/__manifest__.py",
+      "version": "19.0 @ f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+      "module_version": "1.1",
+      "source_date": "2026-09-14",
+      "license": "LGPL-3 in inspected module manifest; see SRC-ODOO-LICENSE",
+      "access": "retrieved_and_parsed",
+      "source_row_count": 118,
+      "sha256_of_retrieved_utf8_text": "0c925e4558c988eeb39744eb6fc2c7ff9a3a8d5c00c5d7450fdf27a77bf8863f",
+      "country": "GB",
+      "relevance": "VAT control and UK-oriented account numbering example",
+      "caveat": "Odoo-owned numbers are not treated as required national numbers; MTD is separate",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-ODOO-US",
+      "title": "Odoo US account template",
+      "url": "https://github.com/odoo/odoo/blob/f84eeb3ed1421e0cc07c906ff6444734dc01d35f/addons/l10n_us_account/data/template/account.account-us.csv",
+      "manifest_url": "https://github.com/odoo/odoo/blob/f84eeb3ed1421e0cc07c906ff6444734dc01d35f/addons/l10n_us_account/__manifest__.py",
+      "version": "19.0 @ f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+      "module_version": "1.0",
+      "source_date": "2026-09-14",
+      "license": "LGPL-3 in inspected module manifest; see SRC-ODOO-LICENSE",
+      "access": "retrieved_and_parsed",
+      "source_row_count": 101,
+      "sha256_of_retrieved_utf8_text": "a3a20d731f3024ce2ad9d154bec141848c5adc217e2ebef46b30e96f1af0495c",
+      "country": "US",
+      "relevance": "General US chart and tax/stock-account comparison",
+      "caveat": "Actual module is l10n_us_account, not l10n_us; no state/local tax coverage claim",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-ERP-LICENSE",
+      "title": "ERPNext repository license",
+      "url": "https://github.com/frappe/erpnext/blob/4048fb70e14d1843956fcdabb7c3cca75a1cbcdd/license.txt",
+      "version": "version-16 @ 4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+      "source_date": "2026-09-08",
+      "license": "GPLv3",
+      "access": "retrieved",
+      "relevance": "Second-source chart reuse/provenance gate",
+      "caveat": "No upstream tree redistributed; release provenance review still required",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-ERP-IN",
+      "title": "ERPNext IN verified-directory account tree",
+      "url": "https://github.com/frappe/erpnext/blob/4048fb70e14d1843956fcdabb7c3cca75a1cbcdd/erpnext/accounts/doctype/account/chart_of_accounts/verified/in_standard_chart_of_accounts.json",
+      "version": "version-16 @ 4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+      "source_date": "2026-09-08",
+      "license": "Repository GPLv3; see SRC-ERP-LICENSE",
+      "access": "retrieved_and_parsed",
+      "sha256_of_retrieved_utf8_text": "f9a12f465101c348ef24561149015d568e647192801cdbbc69372ca2aadc66f8",
+      "country": "IN",
+      "relevance": "Four top-level groups; equity is nested in the source-of-funds side",
+      "caveat": "Upstream verified directory name is not PHP Ledger accountant approval; regional taxes may live in other packages",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-ERP-AE",
+      "title": "ERPNext AE verified-directory account tree",
+      "url": "https://github.com/frappe/erpnext/blob/4048fb70e14d1843956fcdabb7c3cca75a1cbcdd/erpnext/accounts/doctype/account/chart_of_accounts/verified/ae_uae_chart_template_standard.json",
+      "version": "version-16 @ 4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+      "source_date": "2026-09-08",
+      "license": "Repository GPLv3; see SRC-ERP-LICENSE",
+      "access": "retrieved_and_parsed",
+      "sha256_of_retrieved_utf8_text": "84e4a19711fbcb42402e6d172aa0e5aa5f197f8fd2df1b9180fbf946217b896e",
+      "country": "AE",
+      "relevance": "Six top-level groups including shareholder equity and closing/temporary accounts",
+      "caveat": "Upstream verified directory name is not PHP Ledger accountant approval; regional taxes may live in other packages",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-ERP-DOC",
+      "title": "ERPNext chart of accounts guide",
+      "url": "https://docs.frappe.io/erpnext/chart-of-accounts",
+      "version": "Live documentation",
+      "source_date": null,
+      "license": "Reference only; redistribution license not assessed",
+      "access": "retrieved",
+      "relevance": "Root categories, functional roles, groups, dimensions and party subledgers",
+      "caveat": "Comparison guidance, not a PHP Ledger schema or approval",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-ODOO-FISCAL",
+      "title": "Odoo fiscal localization guide",
+      "url": "https://www.odoo.com/documentation/saas-19.3/applications/finance/fiscal_localizations.html",
+      "version": "saas-19.3 documentation",
+      "source_date": null,
+      "license": "Reference only; redistribution license not assessed",
+      "access": "retrieved",
+      "relevance": "Country packages require configuration; posted history limits package switching",
+      "caveat": "Individual 19.0 country pages returned browser errors; pinned raw charts were accessible",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-FBR-BASICS",
+      "title": "FBR sales tax basics",
+      "url": "https://www.fbr.gov.pk/sales-tax/51148/101149",
+      "version": "Live official guidance",
+      "source_date": null,
+      "license": "Official reference; no redistribution permission assumed",
+      "access": "retrieved",
+      "country": "PK",
+      "relevance": "Federal goods/ICT-services scope and input/output concepts",
+      "caveat": "Not a provincial services-tax model or current tax-rate schedule",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-PRA-ACT",
+      "title": "Punjab Revenue Authority services act index",
+      "url": "https://reg.pra.punjab.gov.pk/ptms/SalesTaxAct2012.aspx",
+      "version": "Punjab Sales Tax on Services Act 2012 index",
+      "source_date": null,
+      "license": "Official reference; no redistribution permission assumed",
+      "access": "retrieved",
+      "country": "PK",
+      "relevance": "Separate Punjab services-tax authority and bookkeeping context",
+      "caveat": "Full current consolidated act and amendments not comprehensively reviewed",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-SRB-ACTS",
+      "title": "Sindh Revenue Board acts and rules",
+      "url": "https://www.srb.gos.pk/srb/acts-rules-amendments/",
+      "version": "Index lists updates through 2026-07-01 for principal services-tax materials",
+      "source_date": "2026-07-01",
+      "license": "Official reference; site copyright retained",
+      "access": "retrieved",
+      "country": "PK",
+      "relevance": "Separate Sindh services-tax and withholding references",
+      "caveat": "Index inspected; no rates, exemptions, or filing rules imported",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-SECP-ACTS",
+      "title": "SECP acts index",
+      "url": "https://www.secp.gov.pk/laws/acts/",
+      "version": "Search index lists third schedule updated 2025-12-29",
+      "source_date": "2025-12-29",
+      "license": "Official reference; no redistribution permission assumed",
+      "access": "search_index_only_direct_browser_failed",
+      "country": "PK",
+      "relevance": "Current financial-reporting applicability source to inspect before PK approval",
+      "caveat": "Full current schedule not read; no entity thresholds/applicability conclusions claimed",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-GST-LEDGER",
+      "title": "GST portal electronic credit ledger guide",
+      "url": "https://tutorial.gst.gov.in/userguide/ledgers/Electronic_Credit_Ledger.htm",
+      "version": "Live official portal guide",
+      "source_date": null,
+      "license": "Official reference; no redistribution permission assumed",
+      "access": "retrieved",
+      "country": "IN",
+      "relevance": "IGST/CGST/SGST/UTGST credit distinctions and offset restrictions",
+      "caveat": "Account roles only; no tax computations, effective-date rules or rates implemented",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-ICAI-GUIDANCE",
+      "title": "ICAI guidance note index",
+      "url": "https://www.icai.org/post/guidance-notes",
+      "version": "Live guidance index",
+      "source_date": null,
+      "license": "Professional-body reference; no redistribution permission assumed",
+      "access": "retrieved",
+      "country": "IN",
+      "relevance": "Separate non-corporate and LLP financial statement guidance",
+      "caveat": "Full illustrative formats are not copied or approved here",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-ICAI-UPDATES",
+      "title": "ICAI Accounting Standards Board updates",
+      "url": "https://asb.icai.org/index.php/web/home/whats_new",
+      "version": "Live updates including September 2026 entries",
+      "source_date": null,
+      "license": "Professional-body reference; no redistribution permission assumed",
+      "access": "retrieved",
+      "country": "IN",
+      "relevance": "Applicability/relaxation announcements must be checked before releasing an IN reporting profile",
+      "caveat": "Index only; underlying announcement thresholds and effective dates not interpreted",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-IAS2",
+      "title": "IFRS Foundation IAS 2 overview",
+      "url": "https://www.ifrs.org/issued-standards/list-of-standards/ias-2-inventories/",
+      "version": "Official standard overview",
+      "source_date": null,
+      "license": "IFRS Foundation reference; full standard reproduction not authorized",
+      "access": "retrieved",
+      "relevance": "Purchase/conversion cost, cost formulas and losses inform inventory questions",
+      "caveat": "Not proof that a particular SME applies full IFRS or a completed costing policy",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-IFRS-SME",
+      "title": "IFRS for SMEs Accounting Standard overview",
+      "url": "https://www.ifrs.org/issued-standards/ifrs-for-smes/",
+      "version": "2025 edition overview; effective 2027-01-01 with early adoption described",
+      "source_date": "2025-02",
+      "license": "IFRS Foundation reference; full standard reproduction not authorized",
+      "access": "retrieved",
+      "relevance": "Reporting-framework edition and local adoption require explicit selection/review",
+      "caveat": "Local adoption and company eligibility cannot be inferred from international issue date",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-FTA-RECORDS",
+      "title": "FTA Get to know your tax obligations",
+      "url": "https://tax.gov.ae/DataFolder/Files/Pdf/2022/Get%20to%20know%20your%20Tax%20Obligations.pdf",
+      "version": "2022 guide; 12-page PDF",
+      "source_date": "2022",
+      "license": "Official reference; no redistribution permission assumed",
+      "access": "retrieved_pdf_text",
+      "country": "AE",
+      "relevance": "Financial/source records and VAT record categories",
+      "caveat": "Older guide; not verification of all 2026 tax rules or corporate-tax coverage",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-HMRC-VAT",
+      "title": "HMRC keeping VAT records",
+      "url": "https://www.gov.uk/charge-reclaim-record-vat/keeping-vat-records",
+      "version": "Live official guidance",
+      "source_date": null,
+      "license": "GOV.UK page indicates Open Government Licence v3.0 except stated exceptions",
+      "access": "retrieved",
+      "country": "GB",
+      "relevance": "VAT records, invoices and digital recordkeeping obligations",
+      "caveat": "No MTD implementation/certification or scheme selection provided",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-IRS-RECORDS",
+      "title": "IRS small-business records guidance",
+      "url": "https://www.irs.gov/businesses/small-businesses-self-employed/what-kind-of-records-should-i-keep",
+      "version": "Live official guidance",
+      "source_date": null,
+      "license": "Official reference; redistribution status not assessed",
+      "access": "retrieved",
+      "country": "US",
+      "relevance": "Records should identify income, expenses and supporting documents",
+      "caveat": "Not a complete US chart, state/local sales-tax guide, or compliance guarantee",
+      "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    }
+  ]
+}

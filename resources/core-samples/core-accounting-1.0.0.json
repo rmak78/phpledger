@@ -1,0 +1,18 @@
+{
+  "id": "core-accounting",
+  "version": "1.0.0",
+  "demo_only": true,
+  "name": "Cedar Trading — Core accounting sample",
+  "notice": "Synthetic cash-accounting examples only. Industry packs, stock, unpaid invoices and tax are not loaded.",
+  "posted": [
+    {"key":"service-receipt","kind":"receipt","amount":"1000.0000","counterparty":"Maple Studio","reference":"SAMPLE-RECEIPT-001","memo":"Synthetic service receipt"},
+    {"key":"office-expense","kind":"expense","amount":"125.0000","counterparty":"Harbor Office Supply","reference":"SAMPLE-EXPENSE-001","memo":"Synthetic paper and printer ink"}
+  ],
+  "drafts": [
+    {"key":"office-draft","kind":"expense","amount":"125.0000","counterparty":"Harbor Office Supply","reference":"SAMPLE-DRAFT-000","memo":"Synthetic paper and printer ink awaiting review"},
+    {"key":"internet-draft","kind":"expense","amount":"68.0000","counterparty":"Beacon Internet","reference":"SAMPLE-DRAFT-001","memo":"Synthetic internet expense awaiting review"},
+    {"key":"delivery-draft","kind":"expense","amount":"240.0000","counterparty":"Northline Delivery","reference":"SAMPLE-DRAFT-002","memo":"Synthetic delivery expense awaiting review"},
+    {"key":"supplies-draft","kind":"expense","amount":"32.0000","counterparty":"City Supplies","reference":"SAMPLE-DRAFT-003","memo":"Synthetic supplies awaiting review"}
+  ],
+  "expected": {"bank":"875.0000","income_credit":"1000.0000","expense_debit":"125.0000","draft_total":"465.0000"}
+}

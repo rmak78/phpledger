@@ -35,7 +35,7 @@ PHP Ledger is being rebuilt around that connected journey: useful daily tasks fo
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS are being refined for the first package.*
 
 > [!NOTE]
-> **A revival in progress.** The demo is a development preview. This repository's default branch still preserves the earlier application; the modern installable source package is being prepared. Read [Getting started](https://github.com/rmak78/phpledger/wiki/Getting-Started) before choosing an installation path.
+> **A revival in progress.** The modern application source is in `www/phpledger`; the earlier application is preserved under `legacy/`. The hosted demo remains a development preview, and the first installable package is still being prepared. Read [Getting started](https://github.com/rmak78/phpledger/wiki/Getting-Started) before choosing an installation path.
 
 ## Explore the working preview
 
@@ -75,6 +75,8 @@ The modern foundation uses **PHP 8.5, MySQL 8.4/InnoDB and MeekroDB** in BixiSof
 
 Every financial write follows the same posting path: exact decimal amounts, company/book permissions, atomic transactions, duplicate protection, period controls and immutable posted history. Local checks cover these behaviors; they do not replace independent security, accounting or usability review. [Explore the architecture →](https://github.com/rmak78/phpledger/wiki/Architecture)
 
+Developers can work with the modern source using the [local development guide](docs/DEVELOPMENT.md). Serve only `www/phpledger/public`; the repository root and `legacy/` are not web document roots. Source availability is separate from a tested installable release.
+
 ### A regional product, one clear foundation
 
 The current preview is English and uses one base currency per book. Choose **USD, EUR, GBP, PKR, INR, MYR, BDT, LKR, NPR or SGD**. Event times are stored in UTC and shown in the terminal's timezone; accounting dates keep their meaning.
@@ -100,10 +102,13 @@ We welcome thoughtful feedback from business owners, bookkeepers, accountants, d
 - **Explore and report:** [open an issue](https://github.com/rmak78/phpledger/issues).
 - **Review accounting or contribute:** start with the [contributor guide](https://github.com/rmak78/phpledger/wiki/Contributing-and-Support).
 - **Discuss a pilot or setup support:** [rmak78@gmail.com](mailto:rmak78@gmail.com).
+- **Connect on LinkedIn:** [Rana Mansoor Akbar Khan](https://pk.linkedin.com/in/rmak78).
+
+**Location:** Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan.
 
 **Supporting the initiative:** BixiTech · BixiSoft · Agency75.
 
-The product direction is open-source software and modules, supported by paid setup, training and support on customer-owned hosting. **Project-license selection and legacy provenance review remain open.** No stable-release, jurisdiction-compliance or support-response guarantee is implied by the preview.
+The new project-owned code and documentation use the [MIT License](LICENSE), with paid setup, training and support on customer-owned hosting. [Licence scope](LICENSE-SCOPE.md) preserves separate terms for historical code, dependencies, fonts, datasets and company marks; the legacy application's provenance is not resolved by this grant. No stable-release, jurisdiction-compliance or support-response guarantee is implied by the preview.
 
 ---
 

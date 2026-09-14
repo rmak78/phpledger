@@ -1,0 +1,73 @@
+name: phpledger-demo
+services:
+  demo-web:
+    image: phpledger-demo-app:${PL_DEMO_RELEASE:-local}
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${PL_DEMO_PORT:-18202}:80"
+    environment:
+      PL_ENV: demo
+      PL_BASE_PATH: /demo
+      PL_DB_HOST: demo-db
+      PL_DB_NAME: phpledger_demo
+      PL_DB_USER: ledger_demo_web
+      PL_DB_PASSWORD: ${PL_DEMO_WEB_PASSWORD:?Set a dedicated demo runtime password}
+      PL_TRUSTED_PROXY_IPS: ${PL_DEMO_TRUSTED_PROXY_IPS:-10.204.82.1}
+      PL_DEMO_LOCAL_HTTP: ${PL_DEMO_LOCAL_HTTP:-0}
+    volumes:
+      - ./www/phpledger:/var/www/phpledger/www/phpledger:ro
+      - ./resources:/var/www/phpledger/resources:ro
+      - ./docker/demo-apache.conf:/etc/apache2/sites-available/000-default.conf:ro
+    depends_on:
+      demo-db:
+        condition: service_healthy
+    init: true
+  demo-db:
+    image: mysql:8.4
+    restart: unless-stopped
+    command: ["--log-bin-trust-function-creators=1"]
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PL_DEMO_ROOT_PASSWORD:?Set a dedicated demo database root password}
+      PL_DEMO_WEB_PASSWORD: ${PL_DEMO_WEB_PASSWORD:?Set a dedicated demo runtime password}
+      PL_DEMO_RESET_PASSWORD: ${PL_DEMO_RESET_PASSWORD:?Set a dedicated scheduler password}
+    volumes:
+      - demo_data:/var/lib/mysql
+      - ./docker/demo-db-init.sh:/docker-entrypoint-initdb.d/01-demo-users.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=\"$$MYSQL_ROOT_PASSWORD\" mysqladmin ping -h 127.0.0.1 -u root --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+  demo-reset:
+    image: phpledger-demo-app:${PL_DEMO_RELEASE:-local}
+    build: .
+    profiles: ["maintenance"]
+    environment:
+      PL_ENV: demo
+      PL_DB_HOST: demo-db
+      PL_DB_NAME: phpledger_demo
+      PL_DB_USER: ledger_demo_reset
+      PL_DB_PASSWORD: ${PL_DEMO_RESET_PASSWORD:?Set a dedicated scheduler password}
+      PL_DEMO_RESET_MODE: "1"
+    volumes:
+      - ./www/phpledger:/var/www/phpledger/www/phpledger:ro
+      - ./resources:/var/www/phpledger/resources:ro
+      - ./tools:/var/www/phpledger/tools:ro
+    depends_on:
+      demo-db:
+        condition: service_healthy
+    entrypoint: ["php", "tools/demo-reset.php"]
+  demo-scheduler:
+    extends:
+      service: demo-reset
+    profiles: []
+    restart: unless-stopped
+    entrypoint: ["sh", "tools/demo-scheduler.sh"]
+volumes:
+  demo_data:
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: ${PL_DEMO_DOCKER_SUBNET:-10.204.82.0/24}
