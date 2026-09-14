@@ -2,7 +2,7 @@
 
 ## Current delivery
 
-[v0.1.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) is published; see the [package validation receipt](PREVIEW-0.1.0-VALIDATION.md). The next local POS candidate implements product click-to-add and separate cash confirmation, with [its own validation receipt](POS-CHECKOUT-VALIDATION.md). User sessions and the candidate release remain pending.
+[v0.1.1-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.1-preview) is published; see the [package validation receipt](PREVIEW-0.1.1-VALIDATION.md). The published POS update implements product click-to-add and separate cash confirmation, with [its own validation receipt](POS-CHECKOUT-VALIDATION.md). Representative cashier sessions remain pending; package and hosted-demo publication are verified.
 
 ## Historical milestone creation receipt
 

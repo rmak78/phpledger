@@ -51,3 +51,7 @@ Changed: `.gitignore`; `www/phpledger/public/index.php`; `www/phpledger/includes
 Routes checked: `GET /pos`, `POST /pos/review`, `GET /pos/review`, `POST /pos/edit`, `POST /pos/checkout`, `POST /pos/retry`, `GET /pos/receipt`; core authentication, company setup and transaction routes through HTTP acceptance. Commands: PHP integration runner, local-only HTTP smoke scripts, PHP lint, PHPStan, `node --check`, Python compilation, Playwright CLI and `git diff --check`.
 
 References: local AGENTS, README, architecture, roadmap, design, POS and Sprint 03 scope/validation documentation; Playwright skill. No Google Drive documents read for this candidate. New migrations: **no**. Schema changes: **no**. Raw secrets exposed: **no**. External calls: **yes**, read-only GitHub inspection and tooling retrieval; test requests used localhost. Live/production changes: **no**. No commit, push or deployment performed for this candidate.
+
+## Subsequent release
+
+The approved flow and recovery fix were packaged and deployed as 0.1.1-preview. See the [artifact/publication receipt](PREVIEW-0.1.1-VALIDATION.md) for final checks and source identity; the preceding sections preserve the local candidate checkpoint.

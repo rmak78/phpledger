@@ -1,13 +1,13 @@
 # A shop sale with a visible accounting trail
 
-The current POS is a working local cash-sale showcase using six fictional products. It demonstrates how a simple shop transaction reaches the same accounting records as other receipts. Its screen and checkout presentation are being refined for the next package.
+The current POS is a working cash-sale showcase in the hosted demo and 0.1.1-preview package using six fictional products. It demonstrates how a simple shop transaction reaches the same accounting records as other receipts. Click-to-add product tiles and a separate review/cash screen are included.
 
 ## Try the complete journey
 
 1. Check the business whose books will receive the sale.
-2. Search or filter the sample catalog and add items to the cart.
-3. Adjust quantities and review the sale total.
-4. Enter cash received and deliberately choose **Record cash sale**.
+2. Search or filter the sample catalog. Click a product to add one; repeat to increase its quantity.
+3. Use cart plus/minus or Remove, then choose **Review sale**.
+4. Enter cash received or choose **Exact amount**, check the change, then deliberately choose **Record cash sale**.
 5. Read the receipt, cash/change and linked journal.
 
 Editing or searching should not silently complete checkout. Invalid input keeps the cart available for correction. Prices and totals are validated on the server; an identical retry returns the same saved sale rather than posting again.
@@ -22,4 +22,4 @@ Search/categories, a small sample cart, exact cash/change calculation, explicit 
 
 Inventory and COGS, purchasing, returns, discounts, taxes, customer credit, payment-provider reconciliation, tills/hardware and end-of-day controls remain future work. The showcase does not collect payments or provide restaurant, pharmacy or fiscal-device compliance.
 
-The next POS pass will make the catalog, cart, review and cash confirmation more deliberate and readable. Production retail follows the dependable inventory/accounting foundation, with realistic checkout load and usability checks. See [[First package|First-Package]] and [[Roadmap]].
+Uncertain checkout outcomes keep the original cart and cash immutable; **Retry original sale** retrieves its receipt or safely completes the same request. If the session expires, check posted transactions before starting a replacement sale. Production retail follows the dependable inventory/accounting foundation, with realistic checkout load and usability checks. See [[First package|First-Package]] and [[Roadmap]].

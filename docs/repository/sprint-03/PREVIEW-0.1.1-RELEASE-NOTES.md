@@ -1,6 +1,6 @@
 # 0.1.1-preview: click-to-add POS
 
-**Status: release candidate under validation.** The published download remains [v0.1.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) until this candidate's archive, checksum and publication are verified. This is a foundation evaluation preview, not a stable release or completion of the supported-pilot gates.
+**Status: published.** [Download v0.1.1-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.1-preview); the hosted demo runs the same runtime source. This is a foundation evaluation preview, not a stable release or completion of the supported-pilot gates.
 
 ## What changes
 
@@ -12,13 +12,13 @@ Reviewing a cart does not write accounting records. Final confirmation resolves 
 
 ## Install and upgrade
 
-The candidate targets PHP 8.5.x and MySQL 8.4. Its intended release assets are `phpledger-0.1.1-preview.zip` and the accompanying SHA-256 file. Use the packaged `INSTALL.md` and `UPGRADE.md`; automatic GitHub source archives do not contain installed dependencies.
+The package targets PHP 8.5.x and MySQL 8.4. Its verified release assets are `phpledger-0.1.1-preview.zip` and the accompanying SHA-256 file. Use the packaged `INSTALL.md` and `UPGRADE.md`; automatic GitHub source archives do not contain installed dependencies.
 
-This change adds **no migration and no schema changes**. Existing migrations 001–005 remain unchanged. Back up the application and database before replacing application files, preserve private configuration, and follow the upgrade checks. Validation of the final archive and recovery is a separate release gate; the prior package's receipt alone does not establish this candidate's upgrade result.
+This change adds **no migration and no schema changes**. Existing migrations 001–005 remain unchanged. Back up the application and database before replacing application files, preserve private configuration, and follow the upgrade checks. The actual archive passed fresh installation, the unmodified 0.1.0 upgrade and isolated backup restoration; see the receipt.
 
 ## Evidence and limits
 
-The [local checkout validation](POS-CHECKOUT-VALIDATION.md) records 65 integration tests, 29 POS and 23 core HTTP checks, lint/static checks, and desktop/tablet/mobile browser checks. It covers exact totals, input recovery, deliberate confirmation and retained accounting protections. Final archive installation, upgrade, restoration, asset checksums, release source revision and public availability must be recorded by the release owner before this status changes to published.
+The [artifact and publication receipt](PREVIEW-0.1.1-VALIDATION.md) records 67 integration tests, 69 artifact HTTP checks, installation, upgrade, restoration, reproducible archive checks, CI and 78 public-demo checks. The [earlier local receipt](POS-CHECKOUT-VALIDATION.md) remains available.
 
 This remains the six-product synthetic cash-sale showcase. It does not add inventory, stock deductions, cost of goods sold, tax, discounts, credit sales, card processing, hardware integration or offline operation. Recording a cash sale does not collect a payment. The existing single-base-currency accounting model is unchanged.
 

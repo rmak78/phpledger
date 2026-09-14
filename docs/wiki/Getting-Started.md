@@ -1,10 +1,10 @@
 # Start with the preview
 
-**The hosted preview is live.** Start at [the PHP Ledger website](https://phpledger.com/) or [open the demonstration](https://phpledger.com/demo/). The updated website and demo were published on 14 September 2026.
+**The hosted preview is live.** Start at [the PHP Ledger website](https://phpledger.com/) or [open the demonstration](https://phpledger.com/demo/). The click-to-add POS update reached the hosted demo on 15 September 2026 (Pakistan time).
 
-**[Download the 0.1.0-preview foundation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview).** Choose `phpledger-0.1.0-preview.zip` and its SHA-256 file from the release assets; the automatic source archives do not include installed dependencies. Read `INSTALL.md` inside the ZIP. The package requires PHP 8.5.x, MySQL 8.4, HTTPS and terminal access. Evaluate it with synthetic data; it is not a stable or country-certified release. Modern source is in `www/phpledger`, with historical code in `legacy/`. Developers can use the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md).
+**[Download the 0.1.1-preview foundation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.1-preview).** Choose `phpledger-0.1.1-preview.zip` and its SHA-256 file from the release assets; the automatic source archives do not include installed dependencies. Read `INSTALL.md` inside the ZIP. The package requires PHP 8.5.x, MySQL 8.4, HTTPS and terminal access. Evaluate it with synthetic data; it is not a stable or country-certified release. Modern source is in `www/phpledger`, with historical code in `legacy/`. Developers can use the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md).
 
-**Next package:** 0.1.1-preview is being prepared with click-to-add products, cart controls and a separate sale-review/cash-confirmation screen. It is not yet the published download. Package publication and deployment of the hosted demo are checked separately.
+**Included in 0.1.1-preview:** click-to-add products, cart controls, separate sale review/cash confirmation and safe recovery of an uncertain checkout. Both the package download and hosted demo have been verified.
 
 The new project-owned code and documentation are [MIT licensed](https://github.com/rmak78/phpledger/blob/master/LICENSE). Read [licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) for the separate historical, dependency and asset terms.
 

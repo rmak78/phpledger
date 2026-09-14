@@ -8,7 +8,7 @@ PHP Ledger is being rebuilt for small-business owners, accountants and bookkeepe
 
 **The hosted preview is live.** Explore [phpledger.com](https://phpledger.com/) and [your sample company](https://phpledger.com/demo/). The website and isolated demonstration were published on 14 September 2026; both remain development previews.
 
-The modern application source is in `www/phpledger`, with the historical application preserved under `legacy/`. The [0.1.0-preview foundation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) is available for evaluation with synthetic data, including production dependencies and installation guides. See [[Getting started|Getting-Started]] for the source-development path and package status.
+The modern application source is in `www/phpledger`, with the historical application preserved under `legacy/`. The [0.1.1-preview foundation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.1-preview) is available for evaluation with synthetic data, including production dependencies and installation guides. See [[Getting started|Getting-Started]] for the source-development path and package status.
 
 ## Find your starting point
 

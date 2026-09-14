@@ -35,7 +35,7 @@ PHP Ledger is being rebuilt around that connected journey: useful daily tasks fo
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS are being refined for the first package.*
 
 > [!NOTE]
-> **The first foundation preview is available.** [Download 0.1.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) for evaluation with synthetic data. It includes production dependencies and installation instructions. Modern source lives in `www/phpledger`; historical code is preserved in `legacy/`. Regional accounting review, POS refinement and pilot usability gates remain open.
+> **The first foundation preview is available.** [Download 0.1.1-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.1-preview) for evaluation with synthetic data. It includes production dependencies and installation instructions. Modern source lives in `www/phpledger`; historical code is preserved in `legacy/`. The click-to-add POS update is included; regional accounting review and pilot usability gates remain open.
 
 ## Explore the working preview
 
