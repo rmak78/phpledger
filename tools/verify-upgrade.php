@@ -10,8 +10,8 @@ if (PHP_SAPI !== 'cli' || getenv('PL_ENV') !== 'test' || getenv('PL_DB_HOST') !=
 require dirname(__DIR__) . '/www/phpledger/includes/bootstrap.php';
 require dirname(__DIR__) . '/www/phpledger/install/migrate.php';
 $baseline = $argv[1] ?? 'foundation';
-if (!in_array($baseline, ['foundation', 'core-0.1.2', 'opening-local', 'fresh'], true)) {
-    throw new DomainException('Choose foundation, core-0.1.2, opening-local or fresh.');
+if (!in_array($baseline, ['foundation', 'core-0.1.2', 'opening-local', 'preview-0.2.1', 'fresh'], true)) {
+    throw new DomainException('Choose foundation, core-0.1.2, opening-local, preview-0.2.1 or fresh.');
 }
 $allFiles = glob(PL_APP . '/install/migrations/*.php') ?: [];
 sort($allFiles, SORT_STRING);
@@ -20,6 +20,7 @@ $baseVersions = match ($baseline) {
     'foundation' => ['001_foundation'],
     'core-0.1.2' => array_values(array_filter($allVersions, static fn(string $v): bool => $v <= '006_core_accounts_journals')),
     'opening-local' => array_values(array_filter($allVersions, static fn(string $v): bool => $v <= '009_bank_draft_cancellation' && $v !== '006_core_accounts_journals')),
+    'preview-0.2.1' => array_values(array_filter($allVersions, static fn(string $v): bool => $v <= '012_demo_history_periods')),
     'fresh' => [],
 };
 $upgradeDatabase = 'phpledger_upgrade_verify_' . bin2hex(random_bytes(12));
@@ -82,10 +83,21 @@ try {
     if ($migration['applied'] !== array_values(array_diff($allVersions, $baseVersions)) || $migration['skipped'] !== $baseVersions) {
         throw new RuntimeException('Unexpected upgrade migration receipt.');
     }
-    if ($beforeHeader !== DB::queryFirstRow('SELECT * FROM pl_journals WHERE id = %i', $journal)
-        || $beforeLines !== DB::query('SELECT * FROM pl_journal_lines WHERE journal_id = %i ORDER BY line_number', $journal)
+    $afterHeader = DB::queryFirstRow('SELECT * FROM pl_journals WHERE id = %i', $journal);
+    $afterLines = DB::query('SELECT * FROM pl_journal_lines WHERE journal_id = %i ORDER BY line_number', $journal);
+    $originalLineFields = array_fill_keys(array_keys($beforeLines[0]), true);
+    if ($beforeHeader !== array_intersect_key($afterHeader, $beforeHeader)
+        || $beforeLines !== array_map(static fn(array $line): array => array_intersect_key($line, $originalLineFields), $afterLines)
         || $beforeAccounts !== DB::query('SELECT id, company_id, book_id, code, name, type, is_active FROM pl_accounts ORDER BY id')) {
         throw new RuntimeException('The additive upgrade changed prior accounting records.');
+    }
+    foreach ($afterLines as $line) {
+        if ($line['currency'] !== 'USD' || $line['amount_fc'] !== bcadd($line['debit'], $line['credit'], 4)
+            || $line['amount_base'] !== $line['amount_fc'] || $line['rate'] !== '1.000000000000'
+            || $line['rate_type'] !== 'spot' || (int) $line['rate_is_stale'] !== 0
+            || $line['rate_source_id'] !== null || $line['ic_counterparty_entity_id'] !== null) {
+            throw new RuntimeException('Historical domestic currency augmentation is invalid.');
+        }
     }
     $context = pl_company_context($actor, $company);
     if (pl_module_state($company, 'pos-showcase')['enabled'] || (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_module_actions') !== 0) {

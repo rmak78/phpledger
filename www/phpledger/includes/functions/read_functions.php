@@ -107,7 +107,7 @@ function pl_read_fields(array $row, array $fields): array
 function pl_read_journal(array $row, int $page, int $size): array
 {
     return pl_read_fields($row, ['id','company_id','book_id','reference','journal_date','description','currency','source_type','source_reference','reversal_of_id','posted_at'])
-        + ['lines' => pl_read_page(array_map(static fn (array $line): array => pl_read_fields($line, ['account_id','code','name','description','debit','credit']), $row['lines']), $page, $size)];
+        + ['lines' => pl_read_page(array_map(static fn (array $line): array => pl_read_fields($line, ['account_id','code','name','description','debit','credit','currency','amount_fc','rate','rate_type','rate_source_id','amount_base','rate_is_stale','ic_counterparty_entity_id']), $row['lines']), $page, $size)];
 }
 
 function pl_read_source(array $row, string $type, int $page, int $size): array

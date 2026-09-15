@@ -22,11 +22,13 @@ function pl_get_account(int $actorId, int $companyId, int $bookId, int $id): arr
 {
     pl_require_company_access($actorId, $companyId);
     pl_ledger_book($companyId, $bookId);
-    $row = DB::queryFirstRow('SELECT id, code, name, type, role, semantic_key, is_active, revision FROM pl_accounts WHERE id = %i AND company_id = %i AND book_id = %i FOR SHARE', $id, $companyId, $bookId);
+    $row = DB::queryFirstRow('SELECT id, code, name, type, role, semantic_key, is_active, revision, currency, is_monetary, revaluation_account_id, group_account_id FROM pl_accounts WHERE id = %i AND company_id = %i AND book_id = %i FOR SHARE', $id, $companyId, $bookId);
     if (!$row) { throw new DomainException('This account is not available in the selected company and book.'); }
     $row['id'] = (int) $row['id'];
     $row['revision'] = (int) $row['revision'];
     $row['is_active'] = (bool) $row['is_active'];
+    $row['is_monetary'] = $row['is_monetary'] === null ? null : (bool) $row['is_monetary'];
+    foreach (['revaluation_account_id', 'group_account_id'] as $field) { $row[$field] = $row[$field] === null ? null : (int) $row[$field]; }
     return $row;
 }
 
@@ -48,15 +50,19 @@ function pl_save_account(int $actorId, int $companyId, int $bookId, array $input
         throw new DomainException('The account purpose must match its classification.');
     }
     $data = ['code' => $code, 'name' => $name, 'type' => $type, 'role' => $role, 'is_active' => $active];
+    $legacyHash = hash('sha256', json_encode($data, JSON_THROW_ON_ERROR));
+    $currencyInput = $input;
+    if ($id === null) { $data += pl_currency_account_properties($input); }
     $hash = hash('sha256', json_encode($data, JSON_THROW_ON_ERROR));
     $key = $id === null ? pl_request_key(pl_ledger_text($input['creation_key'] ?? null, 'Request identity', 128)) : null;
-    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $id, $revision, $reason, $data, $key, $hash): array {
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $id, $revision, $reason, $data, $key, $hash, $currencyInput, $legacyHash): array {
         pl_require_company_access($actorId, $companyId, true);
         pl_ledger_book($companyId, $bookId, true);
         if ($id === null) {
+            pl_currency_validate_account_links($companyId, $bookId, $data);
             $prior = DB::queryFirstRow('SELECT id, creation_hash FROM pl_accounts WHERE book_id = %i AND company_id = %i AND creation_key = %s FOR UPDATE', $bookId, $companyId, $key);
             if ($prior) {
-                if (!hash_equals((string) $prior['creation_hash'], $hash)) { throw new DomainException('This request already created a different account. Open the existing account.'); }
+                if (!hash_equals((string) $prior['creation_hash'], $hash) && !(array_intersect_key($currencyInput, array_flip(['currency','is_monetary','revaluation_account_id','group_account_id'])) === [] && hash_equals((string) $prior['creation_hash'], $legacyHash))) { throw new DomainException('This request already created a different account. Open the existing account.'); }
                 return pl_get_account($actorId, $companyId, $bookId, (int) $prior['id']);
             }
             if (DB::queryFirstField('SELECT id FROM pl_accounts WHERE book_id = %i AND code = %s FOR SHARE', $bookId, $data['code'])) {
@@ -71,7 +77,13 @@ function pl_save_account(int $actorId, int $companyId, int $bookId, array $input
             foreach (['code', 'type', 'role'] as $field) {
                 if ($data[$field] !== $before[$field]) { throw new DomainException('Account code, classification and purpose are fixed. Create a new account and use a reviewed journal to correct classification.'); }
             }
-            DB::update('pl_accounts', ['name' => $data['name'], 'is_active' => $data['is_active'], 'revision' => $before['revision'] + 1], 'id = %i AND company_id = %i AND book_id = %i', $id, $companyId, $bookId);
+            $properties = pl_currency_account_properties($currencyInput, $before);
+            pl_currency_validate_account_links($companyId, $bookId, $properties);
+            if (($properties['currency'] !== $before['currency'] || $properties['is_monetary'] !== $before['is_monetary'])
+                && DB::queryFirstField('SELECT journal_id FROM pl_journal_lines WHERE account_id=%i AND company_id=%i AND book_id=%i LIMIT 1 FOR SHARE', $id, $companyId, $bookId)) {
+                throw new DomainException('Currency and monetary classification are fixed once this account has postings.');
+            }
+            DB::update('pl_accounts', $properties + ['name' => $data['name'], 'is_active' => $data['is_active'], 'revision' => $before['revision'] + 1], 'id = %i AND company_id = %i AND book_id = %i', $id, $companyId, $bookId);
         }
         $account = pl_get_account($actorId, $companyId, $bookId, $id);
         pl_core_audit($actorId, $companyId, $bookId, 'account', $id, $before === null ? 'created' : 'updated', $reason, $before, $account);
@@ -95,7 +107,26 @@ function pl_normalize_general_draft(array $input): array
         $debit = pl_amount($line['debit']);
         $credit = pl_amount($line['credit']);
         if ((bccomp($debit, '0', 4) > 0) === (bccomp($credit, '0', 4) > 0)) { throw new DomainException('Each line needs a positive debit or credit, but not both.'); }
-        $data['lines'][] = ['account_id' => $line['account_id'], 'debit' => $debit, 'credit' => $credit, 'description' => pl_ledger_text($line['description'] ?? '', 'Line description', 500, false)];
+        $normalizedLine = ['account_id' => $line['account_id'], 'debit' => $debit, 'credit' => $credit, 'description' => pl_ledger_text($line['description'] ?? '', 'Line description', 500, false)];
+        // Backend drafts preserve explicit FX inputs; the central funnel validates their book/rate relationships on posting.
+        foreach (['currency','amount_fc','rate','rate_type','rate_source_id','amount_base','rate_is_stale','ic_counterparty_entity_id'] as $field) {
+            if (!array_key_exists($field, $line)) { continue; }
+            $value = $line[$field];
+            if (in_array($field, ['amount_fc','amount_base','rate'], true)) {
+                if (!is_string($value)) { throw new DomainException('Currency amounts and rates must be exact decimal strings.'); }
+                $value = $field === 'rate' ? pl_fx_rate($value) : pl_amount($value);
+            } elseif ($field === 'currency') {
+                $value = pl_currency_code(pl_ledger_text($value, 'Line currency', 3));
+            } elseif ($field === 'rate_type' && !in_array($value, ['spot','actual'], true)) {
+                throw new DomainException('Choose a supported rate type.');
+            } elseif ($field === 'rate_is_stale' && !is_bool($value)) {
+                throw new DomainException('The stale-rate flag must be boolean.');
+            } elseif (str_ends_with($field, '_id') && $value !== null && (!is_int($value) || $value < 1)) {
+                throw new DomainException('Choose a valid currency reference.');
+            }
+            $normalizedLine[$field] = $value;
+        }
+        $data['lines'][] = $normalizedLine;
     }
     if ($data['lines'] === []) { throw new DomainException('Add at least one journal line before saving a draft.'); }
     return $data;
