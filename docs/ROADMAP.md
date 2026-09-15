@@ -1,5 +1,14 @@
 # Revival roadmap
 
+## Current next release: usable accounting starter
+
+The owner's 16 September scope supersedes the separate AR, AP and later inventory sequencing below. AR and AP are required parts of the base accounting core, implemented as separate services. Purchasing and Inventory are separate bundled optional modules in the same next release. Keep Inventory basic: products, one stock location, immutable movements and weighted-average valuation. Quotes, advanced stock features, landed cost and LC workflows belong to separate plugins.
+
+The same release adds a configurable core tax engine: manually entered codes and dated rates, owner-selectable inclusive/exclusive input, and frozen document tax snapshots. Country packs supply later rules; forms and e-filing remain future scope. No country-specific tax values are guessed.
+
+The local implementation completes invoice/bill entry, partial payments, credit notes, ageing, opening conversion, purchasing receipts/bill matching and reconciliation. [Starter evidence](repository/sprint-06/ACCOUNTING-STARTER.md) distinguishes implemented behavior, technical validation and open release/accounting gates. Published package/demo state remains 0.3.0-preview until a new publication receipt exists.
+
+
 ## Published prerequisite work — AR/AP foundations, 0.3.0-preview
 
 The owner-approved foundation task adds currency snapshots/manual rate revisions, country-neutral parties/contacts, internal open-item recognition and realised settlement, same-identity source corrections, and an inactive outbound dispatch foundation. [Foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) retain resolved decisions and validation. The owner subsequently authorized 0.3.0 publication of the package, hosted demo and completed website. The Wiki was not changed by this release; [the current publication record](repository/sprint-05/PREVIEW-0.3.0-PUBLICATION.json) separates live and local evidence.

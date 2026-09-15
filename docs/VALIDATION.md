@@ -1,5 +1,13 @@
 # Foundation validation
 
+## Accounting starter - local, 16 September 2026
+
+The current `codex/accounting-starter` implementation adds required core AR/AP, optional shared Inventory and Purchasing, configurable manual core tax, and the related browser flows. The published release remains 0.3.0-preview. Read the [starter implementation and validation record](repository/sprint-06/ACCOUNTING-STARTER.md) and its [machine-readable receipt](repository/sprint-06/ACCOUNTING-STARTER-VALIDATION.json) for the current nine migrations, test evidence, browser journeys and remaining limits. Earlier sections below are historical checkpoints.
+
+Validation used synthetic data and separate disposable Compose projects. The complete suite passed 222 tests on PHP 8.2.33, with clean PHP lint/static analysis, fresh and populated-upgrade rehearsals, and a tested backup/restore. The browser journey connected invoice/credit/payment and order/receipt/bill/return/stock-sale flows to the existing bank reconciliation; five bank rows reconciled to USD 884.25 with no difference. Exact final counts, canonical migration-byte checks and responsive evidence are in the linked receipt.
+
+Migrations and schema changes: yes, local disposable databases only. Production deployment, publication and real customer/provider operations: none. Technical checks do not represent professional accounting or tax approval. Local references include the approved product/module direction, multi-currency, party/vetting and correction model documents; no Google Drive document was required or read.
+
 ## AR/AP prerequisites — local, 16 September 2026
 
 This checkpoint implements the owner-approved schema and posting-service prerequisite task on `codex/ar-ap-foundations`, based on `531541c`. It adds migrations 013–016, exact currency snapshots/manual rates, country-neutral parties and contacts, an internal authoritative open-item ledger, realised FX settlement, stable source corrections, and an inactive outbound queue/dispatcher. It adds no invoice/bill documents or workflows. [Foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) record the selected design decisions; [development guidance](DEVELOPMENT.md#arap-foundations--local-service-and-upgrade-contract) describes the service inputs and maintenance boundary.

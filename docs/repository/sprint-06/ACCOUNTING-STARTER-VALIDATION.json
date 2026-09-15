@@ -1,0 +1,537 @@
+{
+  "status": "local-validation; final demo and archive verification pending",
+  "recorded_at_utc": "2026-09-15T23:09:10.116776+00:00",
+  "source_branch": "codex/accounting-starter",
+  "migrations": 26,
+  "prior_migration_checksums_preserved": 17,
+  "checks": {
+    "fresh_migration": {
+      "applied": 26,
+      "already_current": 0,
+      "canonical_receipt_hashes_match": 26
+    },
+    "composer_check": {
+      "status": "passed",
+      "php": "8.2.33",
+      "tests": 222,
+      "failures": 0,
+      "lint_files": 166,
+      "lint_failures": 0,
+      "phpstan": "passed",
+      "sample_packs": 7,
+      "sample_events": 77,
+      "sample_documents": 42,
+      "sample_items": 16,
+      "invalid_sample_packs_rejected": 8
+    },
+    "starter_upgrade": {
+      "status": "passed",
+      "baseline": "published-0.3.0-through-016",
+      "baseline_receipts_preserved": 17,
+      "baseline_tables_preserved": 55,
+      "baseline_rows_preserved": 51,
+      "new_migrations": [
+        "017_ar_ap_documents",
+        "018_inventory",
+        "019_purchasing",
+        "020_opening_conversion",
+        "021_module_visibility",
+        "022_tax_engine",
+        "023_inventory_product_audit",
+        "024_opening_allocation_guard",
+        "025_tax_price_mode"
+      ],
+      "total_migrations": 26,
+      "checks": [
+        "original-column values and rows unchanged",
+        "published checksums/status/timestamps unchanged",
+        "cash source and posting replay",
+        "party/profile and manual FX rate preserved",
+        "opening journal and unpaid evidence preserved",
+        "015 open-item basis preserved and settled",
+        "new AR invoice and partial/final settlement",
+        "settlement retry",
+        "AR-to-GL reconciliation",
+        "exact trial balance",
+        "optional modules remain disabled",
+        "empty migration replay"
+      ],
+      "fixture_boundary": "015 recognition is a canonical persisted synthetic fixture; current readers require 020 columns.",
+      "final_trial_debit": "475.5002"
+    },
+    "fresh_install_verifier": {
+      "status": "passed",
+      "migrations": 26
+    },
+    "backup_restore": {
+      "status": "passed",
+      "tables": 79,
+      "rows": 10048,
+      "views": 2,
+      "effective_row_digests": 379,
+      "guard_triggers": 104,
+      "migration_receipts": 26,
+      "balanced_journals": true,
+      "scoped_source_links": "passed",
+      "temporary_restore_schema_removed": true,
+      "all_verifier_schemas_removed": true,
+      "source_reset": false
+    }
+  },
+  "browser": {
+    "responsive_matrix": {
+      "results": [
+        {
+          "name": "ar",
+          "route": "/ar",
+          "status": 200,
+          "width": 1440,
+          "scroll": 1440,
+          "title": "Accounts receivable \u00b7 PHP Ledger",
+          "headings": [
+            "Accounts receivable"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "ap",
+          "route": "/ap",
+          "status": 200,
+          "width": 1440,
+          "scroll": 1440,
+          "title": "Accounts payable \u00b7 PHP Ledger",
+          "headings": [
+            "Accounts payable"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "ar-new",
+          "route": "/ar?new=1",
+          "status": 200,
+          "width": 1440,
+          "scroll": 1440,
+          "title": "Accounts receivable \u00b7 PHP Ledger",
+          "headings": [
+            "Accounts receivable"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "parties",
+          "route": "/parties?id=50",
+          "status": 200,
+          "width": 1440,
+          "scroll": 1440,
+          "title": "Customers and vendors \u00b7 PHP Ledger",
+          "headings": [
+            "Customers and vendors"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "inventory",
+          "route": "/inventory?id=24",
+          "status": 200,
+          "width": 1440,
+          "scroll": 1440,
+          "title": "Inventory \u00b7 PHP Ledger",
+          "headings": [
+            "Inventory"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "purchasing",
+          "route": "/purchasing?new=1",
+          "status": 200,
+          "width": 1440,
+          "scroll": 1440,
+          "title": "Purchasing \u00b7 PHP Ledger",
+          "headings": [
+            "Purchasing"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "opening",
+          "route": "/opening-conversion",
+          "status": 200,
+          "width": 1440,
+          "scroll": 1440,
+          "title": "Opening debts \u00b7 PHP Ledger",
+          "headings": [
+            "Opening debts"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "tax",
+          "route": "/tax",
+          "status": 200,
+          "width": 1440,
+          "scroll": 1440,
+          "title": "Tax codes and rates \u00b7 PHP Ledger",
+          "headings": [
+            "Tax codes and rates"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "modules",
+          "route": "/modules",
+          "status": 200,
+          "width": 1440,
+          "scroll": 1440,
+          "title": "Modules \u00b7 PHP Ledger",
+          "headings": [
+            "Modules"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "bank",
+          "route": "/bank-reconciliation",
+          "status": 200,
+          "width": 1440,
+          "scroll": 1440,
+          "title": "Bank reconciliation \u00b7 PHP Ledger",
+          "headings": [
+            "Bank reconciliation"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "ar",
+          "route": "/ar",
+          "status": 200,
+          "width": 768,
+          "scroll": 768,
+          "title": "Accounts receivable \u00b7 PHP Ledger",
+          "headings": [
+            "Accounts receivable"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "ap",
+          "route": "/ap",
+          "status": 200,
+          "width": 768,
+          "scroll": 768,
+          "title": "Accounts payable \u00b7 PHP Ledger",
+          "headings": [
+            "Accounts payable"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "ar-new",
+          "route": "/ar?new=1",
+          "status": 200,
+          "width": 768,
+          "scroll": 768,
+          "title": "Accounts receivable \u00b7 PHP Ledger",
+          "headings": [
+            "Accounts receivable"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "parties",
+          "route": "/parties?id=50",
+          "status": 200,
+          "width": 768,
+          "scroll": 768,
+          "title": "Customers and vendors \u00b7 PHP Ledger",
+          "headings": [
+            "Customers and vendors"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "inventory",
+          "route": "/inventory?id=24",
+          "status": 200,
+          "width": 768,
+          "scroll": 768,
+          "title": "Inventory \u00b7 PHP Ledger",
+          "headings": [
+            "Inventory"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "purchasing",
+          "route": "/purchasing?new=1",
+          "status": 200,
+          "width": 768,
+          "scroll": 768,
+          "title": "Purchasing \u00b7 PHP Ledger",
+          "headings": [
+            "Purchasing"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "opening",
+          "route": "/opening-conversion",
+          "status": 200,
+          "width": 768,
+          "scroll": 768,
+          "title": "Opening debts \u00b7 PHP Ledger",
+          "headings": [
+            "Opening debts"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "tax",
+          "route": "/tax",
+          "status": 200,
+          "width": 768,
+          "scroll": 768,
+          "title": "Tax codes and rates \u00b7 PHP Ledger",
+          "headings": [
+            "Tax codes and rates"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "modules",
+          "route": "/modules",
+          "status": 200,
+          "width": 768,
+          "scroll": 768,
+          "title": "Modules \u00b7 PHP Ledger",
+          "headings": [
+            "Modules"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "bank",
+          "route": "/bank-reconciliation",
+          "status": 200,
+          "width": 768,
+          "scroll": 768,
+          "title": "Bank reconciliation \u00b7 PHP Ledger",
+          "headings": [
+            "Bank reconciliation"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "ar",
+          "route": "/ar",
+          "status": 200,
+          "width": 390,
+          "scroll": 390,
+          "title": "Accounts receivable \u00b7 PHP Ledger",
+          "headings": [
+            "Accounts receivable"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "ap",
+          "route": "/ap",
+          "status": 200,
+          "width": 390,
+          "scroll": 390,
+          "title": "Accounts payable \u00b7 PHP Ledger",
+          "headings": [
+            "Accounts payable"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "ar-new",
+          "route": "/ar?new=1",
+          "status": 200,
+          "width": 390,
+          "scroll": 390,
+          "title": "Accounts receivable \u00b7 PHP Ledger",
+          "headings": [
+            "Accounts receivable"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "parties",
+          "route": "/parties?id=50",
+          "status": 200,
+          "width": 390,
+          "scroll": 390,
+          "title": "Customers and vendors \u00b7 PHP Ledger",
+          "headings": [
+            "Customers and vendors"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "inventory",
+          "route": "/inventory?id=24",
+          "status": 200,
+          "width": 390,
+          "scroll": 390,
+          "title": "Inventory \u00b7 PHP Ledger",
+          "headings": [
+            "Inventory"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "purchasing",
+          "route": "/purchasing?new=1",
+          "status": 200,
+          "width": 390,
+          "scroll": 390,
+          "title": "Purchasing \u00b7 PHP Ledger",
+          "headings": [
+            "Purchasing"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "opening",
+          "route": "/opening-conversion",
+          "status": 200,
+          "width": 390,
+          "scroll": 390,
+          "title": "Opening debts \u00b7 PHP Ledger",
+          "headings": [
+            "Opening debts"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "tax",
+          "route": "/tax",
+          "status": 200,
+          "width": 390,
+          "scroll": 390,
+          "title": "Tax codes and rates \u00b7 PHP Ledger",
+          "headings": [
+            "Tax codes and rates"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "modules",
+          "route": "/modules",
+          "status": 200,
+          "width": 390,
+          "scroll": 390,
+          "title": "Modules \u00b7 PHP Ledger",
+          "headings": [
+            "Modules"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        },
+        {
+          "name": "bank",
+          "route": "/bank-reconciliation",
+          "status": 200,
+          "width": 390,
+          "scroll": 390,
+          "title": "Bank reconciliation \u00b7 PHP Ledger",
+          "headings": [
+            "Bank reconciliation"
+          ],
+          "navigationClipped": false,
+          "badText": 0
+        }
+      ],
+      "errors": []
+    },
+    "financial_workflows": {
+      "invoice": "1000.0000",
+      "partial_receipt": "400.0000",
+      "credit": "100.0000",
+      "final_receipt": "500.0000",
+      "ar_remaining": "0.0000",
+      "purchase_quantity": "10.0000",
+      "received_batches": [
+        "6.0000",
+        "4.0000"
+      ],
+      "supplier_bill": {
+        "net": "100.0000",
+        "tax": "5.0000",
+        "gross": "105.0000"
+      },
+      "supplier_payments": [
+        "42.0000",
+        "52.5000"
+      ],
+      "supplier_return_credit": "10.5000",
+      "stock_sale_gross": "78.7500",
+      "stock_sale_cost": "30.0000",
+      "final_stock_quantity": "6.0000",
+      "final_stock_value": "60.0000",
+      "ar_ap_stock_grni_differences": "0.0000",
+      "bank": {
+        "matched_rows": 5,
+        "closing_balance": "884.2500",
+        "difference": "0.0000",
+        "state": "completed"
+      }
+    },
+    "additional_checks": [
+      "owner inclusive default retains document snapshot after setting restored",
+      "AR/AP hidden navigation preserves direct historical reads",
+      "party/contact entry",
+      "manual tax code and dated rate entry",
+      "document print hides internal ledger and unrelated panels"
+    ],
+    "visual_inspection": [
+      "current 390px invoice entry",
+      "current 1440px purchase order entry",
+      "earlier completed financial documents and bank reconciliation"
+    ],
+    "limitations": [
+      "full route audit and broad redesign deferred by owner until after release",
+      "long forms and stacked navigation remain known UX debt",
+      "screenshots and technical checks are not WCAG or accounting certification"
+    ]
+  },
+  "boundaries": {
+    "synthetic_only": true,
+    "production_changed_by_these_checks": false,
+    "provider_messages_or_payments_sent": false,
+    "migration_receipts_rewritten": false,
+    "professional_accounting_review": "pending",
+    "observed_owner_usability": "pending",
+    "wcag_22_aa_review": "pending"
+  }
+}

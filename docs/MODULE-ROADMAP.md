@@ -1,12 +1,28 @@
-# Core accounting and optional modules
+# Core accounting and modules
 
-## Expedited combined 0.2.1 release — owner-approved
+## Current delivery: one usable accounting starter (16 September 2026)
+
+The next release combines **AR, AP, Purchasing and Inventory**, with generic tax calculation in core. Their code remains separated by responsibility. The local implementation is awaiting final release validation and publication; **0.3.0-preview remains the published package/demo**. Local code and passing technical scenarios are not accounting sign-off or proof that the new workflows are live.
+
+- **Required AR/AP:** invoice and bill entry/posting, partial receipts/payments, linked customer/supplier credits, dated ageing, opening-debt adoption and reconciliation to the general ledger. Owners can hide unused navigation without disabling services or excluding balances from reports.
+- **Optional shared Inventory:** one product identity, one location per company, one base unit per product, exact moving weighted-average costing, receipts/issues/returns, reasoned counts and reviewed value adjustments. Inventory and general-ledger balances reconcile from immutable movements.
+- **Optional Purchasing:** confirmed purchase orders, partial receipts separate from supplier bills, explicit receipt matching, received-but-unbilled balances and coordinated supplier returns. Supplier liabilities and credits belong to AP; stock belongs to Inventory.
+- **Core tax service:** manually configured codes and dated rates, inclusive/exclusive document prices and immutable exact calculation snapshots. Country tax rules, official forms, e-filing and provider integrations remain later plugins/adapters.
+- **Separate plugins:** quotes are excluded from this build. Batches, expiry, serials, multiple locations/van stock, landed costs and letter-of-credit workflows are also excluded. Future verticals compose the shared services instead of duplicating receivables, payables or stock engines.
+
+Finish and verify these thin end-to-end flows together before starting another infrastructure-only milestone. A service business can use AR/AP with Purchasing/Inventory off; a stock business can order, receive, bill, sell, collect, credit/return and reconcile through shared services. The existing POS showcase keeps its synthetic catalogue and does not yet issue real inventory or post COGS.
+
+Current limits remain explicit: one-document payment allocation per action; no advances/unapplied credits/cash refunds; no separate sales dispatch/reservation workflow; exact one-bank-row/one-journal-line matching; functional-currency inventory valuation. Original-cost purchase returns can require a reviewed value adjustment after intervening stock activity. Opening conversion links existing balances without reposting them. Outgoing foreign-bank carrying-value allocation, rate providers, revaluation/consolidation and statutory reporting remain deferred.
+
+The current release gate is the combined service/access/concurrency suite, complete browser journeys, fresh installation and upgrade from published 0.3.0, and synchronized README/release notes. Package/demo/website publication needs its own recorded evidence. Historical priorities below do not reclassify AR/AP as optional or move Purchasing/Inventory out of this combined release.
+
+## Historical combined 0.2.1 release decision
 
 The current release effort combines the complete existing accounting core, read API/MCP, Connections/OAuth, server-side tables, four multi-year sample companies and three illustrated walkthroughs into **0.2.1-preview**. A separate public 0.2.0 release is unnecessary. Verified clients are named individually; unavailable or untested clients remain pending without holding this preview. Financial correctness, authorization, installation/restore and actual hourly demo reset remain release gates. Earlier staged entries below retain their historical context. No later AR/AP, tax, native-client or write-command module is added.
 
 Owner decisions adopted on 15 September 2026 from the supplied local `docs/strategy/DECISION-REGISTER.md`, section D, as corrected by the [country-neutral direction clarification](strategy/PRODUCT-DIRECTION-CLARIFICATION-2026-09-15.md). The accounting core stays open source; optional modules and commercial licensing follow [Licensing policy](LICENSING-POLICY.md). These decisions supersede the earlier order that put controlled commands and the installer before AR/AP. These are delivery priorities and gates, not new implemented features or dates.
 
-## Current status
+## Historical status before the combined 0.2.1 publication
 
 The maintenance release is **0.1.6-preview**. The bounded [core completion](repository/sprint-05/CORE-COMPLETION.md) and [module foundation](repository/sprint-05/MODULE-FOUNDATION.md) have recorded evidence. Read API/MCP, OAuth/Connections and server-side tables are implemented in local commit `1541e27`; [the named-client matrix](INTEGRATIONS.md) remains open. Bridge/protocol checks do not establish application compatibility. Multi-year demo work is local and paused for this decision task. Independent accounting/security review and observed user acceptance remain separate gates.
 
@@ -22,17 +38,17 @@ The 0.1.2-preview core slice implements opening, period, running and closing acc
 
 | Layer | Responsibility |
 |---|---|
-| Required accounting core | Companies/books, identities and permissions, chart of accounts and mappings, exact money/dates, general journals, source/audit references, periods, reviewed opening/cutover, cash/bank recording and reconciliation, trial balance, general ledger/account statements and reconciled core reports/exports. |
-| Shared master data | One company-scoped contact identity with customer/vendor roles; one product/service identity with units and catalog attributes. Introduce these capabilities when the first consuming module is built; core-only books need no product catalog. Inventory owns quantity/valuation and modules add their own attributes. |
-| Optional business modules | AR invoices/receipts/allocations; AP bills/payments/allocations; jurisdiction tax adapters; purchasing/inventory; shop POS; e-commerce/storefront; later restaurant, distribution and specialist workflows. Each owns its documents and subledger reports and submits to the core posting service. |
+| Required accounting core | Companies/books, identities and permissions, chart and mappings, exact money/dates, journals/posting/audit, periods, opening/cutover, cash/bank reconciliation and reports. AR and AP are separately implemented required modules; generic manually configured tax calculation is shared core. |
+| Shared master data | One party identity with customer/vendor roles and contacts, and one product/service catalogue. Inventory owns quantity/valuation. Service-only AR/AP documents need no product catalogue. Modules extend these identities rather than duplicate them. |
+| Optional business modules | Bundled Purchasing and shared Inventory; future quotes, advanced stock/import features, country adapters, shop POS, storefront and industry workflows. Each owns its operations while using shared AR/AP, tax, inventory and core posting services. |
 | Access adapters | The browser, versioned business API and MCP tools expose the same services and permissions. A transport never implements a second ledger, independent user store or bypass around readiness/period rules. |
 | Industry interfaces | Shop and restaurant screens compose enabled capabilities and shared checkout. Their different user journeys do not require duplicate accounting engines or product/customer databases. |
 
-With every optional module disabled, an authorized user must still manage accounts, record and reverse general journals and simple cash/bank receipts/expenses, reconcile balances and complete the supported accounting period. A core account statement is available for every account; aging, open-item customer/vendor statements and stock valuation require their owning modules. Optional software does not make applicable tax or reporting obligations optional.
+With every optional module disabled, an authorized user must still manage accounts, record and reverse general journals and simple cash/bank receipts/expenses, reconcile balances and complete the supported accounting period. Account statements and AR/AP ageing/open-item reports remain available with optional modules disabled. Inventory valuation requires inventory history and stays readable after disablement. Hiding AR/AP navigation never changes reported balances; optional software does not make applicable tax or reporting obligations optional.
 
-## Ordered delivery milestones
+## Historical delivery sequence: superseded by the combined starter
 
-The already implemented core/account/module foundations continue to require their documented accounting and usability gates. The next implementation order is:
+The table below preserves the 15 September sequence. Its separate AR, AP and Purchasing/Inventory milestones are superseded by the combined local starter above; it is not the current build order.
 
 | Order | Deliverable | Completion gate |
 |---|---|---|
@@ -53,7 +69,7 @@ First-layer cross-cutting work: Urdu first, Arabic second, RTL and English fallb
 
 Native desktop and Android clients are **planned paid add-ons**, not parked. They consume the API/MCP contracts; their disconnected work is queued entry with periodic low-bandwidth sync, never offline posting. Commercial terms must be declared before release under the licensing policy.
 
-### Tax contract before AR/AP schemas
+### Historical regional tax contract direction
 
 Define shared tax capability, line inputs, exact rounding, policy versions and immutable document/calculation/provider snapshots before AR/AP schemas are finalised. The contract must accommodate **FBR JSON/REST**, **ZATCA XML/UBL with cryptographic stamping**, **UAE Peppol PINT** and **Oman's regime**. These are distinct adapters; no single payload or credential model should be assumed for all four. Regional research also covers Pakistan, the UK, UAE, Saudi Arabia, Oman, Singapore, Malaysia, Sri Lanka and Bangladesh. Pakistan is one intended direction; the core has no mandatory Pakistan-first deployment gate. Research current rules and dates per jurisdiction before implementation.
 
@@ -65,7 +81,7 @@ Pakistan FBR is one connector candidate within the regional milestone above. Con
 
 
 
-Core opening imports must not mark an existing business ready with unexplained AR/AP controls. Before those modules exist, accept only a supported core-only cutover whose reviewer has reconciled any retained control totals to external unpaid-document schedules, with that limitation visible. Later module activation must match those balances and schedules without reposting them. If this cannot be established, keep opening readiness unresolved.
+Core opening imports must not mark an existing business ready with unexplained AR/AP controls. The local starter adds reviewed party mapping and adoption of existing unpaid opening evidence; open-item allocations reference the original journal basis and do not repost it. Inventory opening quantities similarly match existing opening asset values. Unexplained differences block conversion.
 
 ## Versioned module contract
 
@@ -105,12 +121,12 @@ No API or MCP command sends messages, collects payments or calls providers merel
 
 Accounting-profile research, core report review and early module/API contract design can run alongside core implementation. Shipping dependent modules waits for their prerequisite gates. Reviewed jurisdiction-specific financial statements, multicurrency, multilingual formatting, alternative-book definitions and document scanning retain the requirements in the main roadmap; this sequence does not silently implement or remove them.
 
-The core and bundled module lifecycle have the recorded evidence above. Complete in-flight API/MCP reads, then AR and AP, following the ordered table. Controlled commands follow e-commerce/storefront. Existing POS receipts remain readable after company disablement. Each milestone stays local until authorized publication, and passing technical tests remains distinct from accounting review and observed usability. Eight disabled [country tax catalogs](tax/README.md) prepare later modules without enabling tax calculations.
+The published core/read foundations have their recorded evidence; the combined accounting starter is now implemented locally and proceeds through validation and release preparation. Controlled commands retain their later gate. Existing POS receipts remain readable after company disablement. Each milestone stays local until authorised publication, and passing technical tests remains distinct from accounting review and observed usability. Eight disabled [country tax catalogs](tax/README.md) remain research; the generic local tax engine uses operator-configured codes/rates and does not activate those country adapters.
 
 Every release updates the repository docs, GitHub Wiki, README, website and demo together. Record the package version and source commit, publish truthful capability/limitation changes, migrate the isolated demo safely, and verify each public surface. The release receipt must identify any surface still pending; a local edit is not a publication.
 
 
-## Large-table interface and MeekroDB follow-up (15 September 2026)
+## Historical large-table and MeekroDB follow-up (15 September 2026)
 
 The owner requested DataTables with server-side pagination for large lists. It is implemented in the local read-access candidate, with financial/access checks recorded in the integration receipt. The next order is reads, AR and AP; controlled commands follow e-commerce/storefront. Keep the compact P&L/Balance Sheet sections as readable financial statements; prioritize Transactions, Journals, account movements and larger bank lists for the table interface.
 
@@ -120,6 +136,6 @@ MeekroDB audit: the current package pins v3.1.5 and uses a single configured con
 
 Acceptance: browser/API/MCP count and amount parity, no cross-company count/data leaks, bounded invalid requests, exact amounts, stable pagination under defined ordering, statement opening/running/closing reconciliation, responsive layouts and representative query timing. The local integration receipt records the implemented table adapter and measured synthetic queries. This document adds no endpoint or capacity claim.
 
-## Installer placement — decision superseding the earlier plan
+## Historical installer placement decision
 
 The [browser installer](INSTALLER.md) remains a planned adoption workflow using the existing migration/auth/onboarding services. Packaging distribution and the in-app updater now form the named milestone immediately after AP; this supersedes the former commands → installer → AR/AP order. Design may continue earlier, but the installation wizard does not need to create a customer's marketing website. That website-builder idea is parked. Current CLI installation and reviewed upgrade procedures remain available; no new installer/updater capability is implemented by this decision.

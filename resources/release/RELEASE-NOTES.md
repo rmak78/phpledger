@@ -4,7 +4,23 @@ Source revision: `{{SOURCE_COMMIT}}`.
 
 This package is a development preview of the restarted PHP Ledger application. It preserves the lightweight BixiSoft PHP/MeekroDB structure while separating accounting functions, server permissions, templates and the public front controller. It is intended for evaluation and supported pilot preparation.
 
-## 0.3.0-preview: accounting foundations before AR/AP
+## 0.4.0-preview: accounting starter
+
+AR and AP are now included in the base accounting core, with separate internal module ownership. Purchasing and shared Inventory are bundled optional modules. Core tax configuration is country-neutral and owner-managed.
+
+- Browser routes: `/ar`, `/ap`, `/parties`, `/purchasing`, `/inventory`, `/opening-conversion`, `/tax`, plus existing `/modules` display and activation settings.
+- Invoice/bill drafts, explicit posting review, exact partial/final payments, linked customer/supplier credits, immutable same-identity corrections and historical ageing use the shared open-item ledger and posting service.
+- Purchasing links orders, partial receipts and later AP bills. Receipt matching and reviewed price/rate variance preserve the received stock basis. Physical returns and financial credits remain separately linked records.
+- Inventory provides one location, products, immutable movements, moving weighted-average cost, counts, reviewed valuation adjustments and stock-to-ledger reconciliation. Stock invoices and customer credits share these services.
+- Tax codes and dated rate revisions are manually configured. Entry may include or exclude tax; documents show net/tax/total and retain their saved mode. Tax changes require draft re-review and never rewrite posted snapshots. Credits use their original document's tax basis. No country defaults or filing capability is asserted.
+- Opening debt and stock conversions require explicit mapping and exact reconciliation to existing opening GL amounts. Conversion does not create another opening journal. Converted opening bases cannot be reversed independently.
+- AR/AP navigation may be hidden. Required services, permissions and financial totals are unaffected. Optional module disabling preserves historical access.
+- The hosted demo adds a separate Accounting starter playground with synthetic parties, a stock product and illustrative tax configuration. Its four historical examples remain available. Demo administration remains restricted; removing lines from an existing demo invoice/order draft requires starting a new draft.
+- Quotes are excluded and preserved on a separate plugin branch. Advanced stock features, LC flows, tax country packs, forms and e-filing remain outside this build.
+
+New migrations are additive to 0.3.0. Review the [starter record](https://github.com/rmak78/phpledger/blob/{{SOURCE_COMMIT}}/docs/repository/sprint-06/ACCOUNTING-STARTER.md) for exact migration and test evidence. Use a matched database/code backup and stop application/worker traffic for an upgrade. Package and hosted publication are recorded separately from professional accounting acceptance.
+
+## Historical 0.3.0-preview: accounting foundations before AR/AP
 
 - Keeps the existing accounting screens and read API/MCP while adding currency, party and correction service foundations. No invoice/bill documents or AR/AP screens are introduced.
 - Every journal line stores transaction currency, exact foreign/base amounts, its frozen rate/type/source, stale-rate flag and optional intercompany reference. Domestic history receives equivalent currency snapshots without changing original monetary fields or request hashes. BCMath uses four-place amounts and twelve-place rates with explicit half-up conversion; unbalanced journals are rejected rather than silently adjusted.
@@ -14,7 +30,7 @@ This package is a development preview of the restarted PHP Ledger application. I
 - The internal open-item ledger references actual immutable journal lines as its sole balance source. Unused, currency-neutral controls can be explicitly activated. Partial settlements allocate the remaining carrying value, the final allocation closes it exactly, and realised gain/loss posts with the settlement. Outgoing foreign-currency-bank settlement and out-of-order open-item events are rejected; legacy aggregate balances are not automatically adopted.
 - Receipt/expense and general-journal corrections preserve document identity, reverse and repost atomically, and retain original source snapshots. Effective-source views keep lists, reports and read integrations consistent. The default reversal date is the current UTC cancellation date; an owner with a reason may use the original posting date while the period remains open. POS and opening sources retain their specialized correction paths.
 - The outbound queue provides scoped idempotency, leases, retries and a dispatch contract. No A75 connector, external receiver, automatic message sending or cron installation is included.
-- The complete schema has 17 receipts, 56 tables, two effective-source views and 62 guard triggers. Migrations 013?016 require stopped application/worker traffic and a recoverable matched backup; follow [UPGRADE.md](UPGRADE.md), including stable view-definer requirements.
+- The complete schema has 17 receipts, 56 tables, two effective-source views and 62 guard triggers. Migrations 013-016 require stopped application/worker traffic and a recoverable matched backup; follow [UPGRADE.md](UPGRADE.md), including stable view-definer requirements.
 
 These are backend foundations. Public API/MCP financial mutations, invoice/bill workflows, aging, FX providers, period-end revaluation, group consolidation, commodities and regional tax adapters remain future work. Existing screens do not expose the new internal commands. Release/package/host acceptance is recorded separately; these notes do not establish that a customer installation has passed validation.
 
@@ -66,7 +82,7 @@ These are backend foundations. Public API/MCP financial mutations, invoice/bill 
 
 The 0.1.1-preview cash POS interactions remain included: click-to-add products, retained validation inputs and separate cart review/cash confirmation.
 
-## Working scope
+## Retained core workflows
 
 - PHP 8.2+ (8.3 recommended), MySQL 8.4, pinned production dependencies and a versioned migration runner.
 - Command-line prerequisite checks, schema installation and initial-user creation; private database configuration and HTTPS sessions.
@@ -79,19 +95,19 @@ The 0.1.1-preview cash POS interactions remain included: click-to-add products, 
 - Period creation, reasoned close/reopen actions and immutable audit receipts; bank CSV import, explicit matching, outstanding entries and protected completed reconciliations.
 - English screens, supported base-currency choices, regional date/number formatting and local terminal timezone display with UTC event storage.
 
-## Known limits
+## Current starter limits
 
 The reports are country-neutral management views. Accounting/reporting research does not amount to ICAP, ICMAP or ACCA approval, statutory presentation compliance, tax certification or filing support. Obtain appropriate accounting review before relying on this preview for a business period.
 
-The POS is a cash-sale demonstration of the posting foundation. Stock quantities, cost of goods sold, tax calculations, credit accounts, payment-provider capture, hardware integrations and complete retail/restaurant workflows are not implemented. The sample catalog is illustrative.
+The existing cash POS is a demonstration with its own illustrative sample catalogue. It does not deduct stock from shared Inventory or apply the new document tax engine. Stock quantities, valuation and cost of goods sold are available through the starter's Inventory and stock-invoice flows; extending the POS to use them, payment-provider capture, hardware integrations and complete retail/restaurant workflows remain deferred.
 
 Each book has one immutable functional currency. The posting foundation now supports transaction-currency snapshots and internal realised settlement FX; presentation-currency reporting, period-end revaluation, bank carrying-value realization, consolidation and a completed multi-book model remain deferred. English remains the application language; country metadata does not provide translated screens or localized accounting rules.
 
-Detailed historical journal imports, XLSX, customer invoicing and invoice collection, bill settlement, aging, inventory/stock reports, country tax adapters, offline operation and receipt/document scanning remain future work. Opening AR/AP is a reconciled cutover snapshot, not an operational subledger. Credit notes, advance balances and unresolved prior bank outstanding items require a separately reviewed workflow. Existing-business setup remains blocked until opening balances are explicitly confirmed; new transactions must be dated after cutover.
+Detailed historical journal imports, XLSX, country tax adapters, offline operation and receipt/document scanning remain future work. The local starter now supplies invoice collection, bill settlement, linked credit notes, ageing and inventory reports described above; those capabilities were absent from the historical published 0.3.0 package. Existing opening AR/AP rows remain immutable source evidence until the explicit reviewed conversion maps them into operational open items. Opening credits, advances, unapplied credits and refunds remain deferred. Existing-business setup requires confirmed opening balances; ordinary new transactions must be dated after cutover, and unresolved earlier bank items require explicit review before a reconciliation baseline.
 
-The `resources/tax/` catalogs cover Pakistan, the UK, UAE, Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore, with classification questions for restaurants, membership clubs, pharmacies, traders, distributors, retail shops and workshops. Every candidate remains `research_only`, `enabled: false` and `unreviewed`. Product/service, registration, jurisdiction, effective-period and recovery conditions require qualified review; an industry name never selects a universal rate. Null rates mean unresolved or non-flat treatment, not zero tax. No catalog is imported into company settings or used by POS, and no tax activation, filing or tax-specific API/MCP interface is included. The separate bundled core/POS module lifecycle is included.
+The `resources/tax/` catalogs cover Pakistan, the UK, UAE, Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore, with classification questions for restaurants, membership clubs, pharmacies, traders, distributors, retail shops and workshops. Every candidate remains `research_only`, `enabled: false` and `unreviewed`. Product/service, registration, jurisdiction, effective-period and recovery conditions require qualified review; an industry name never selects a universal rate. Null rates mean unresolved or non-flat treatment, not zero tax. No catalog is imported into company settings or used by POS. The starter's manually configured core tax codes, dated rates and account mappings are separate from these packaged references; no country-pack activation, statutory filing or tax-specific API/MCP interface is included.
 
-Optional `php tools/validate-tax-catalog.php --self-test` validates local schema, disabled states and references without database access. It neither checks legal accuracy nor approves the sources, rates or dates. Approved tax profiles, effective-period snapshots and their separate accounting mappings remain future module work.
+Optional `php tools/validate-tax-catalog.php --self-test` validates local catalog schema, disabled states and references without database access. It neither checks legal accuracy nor approves sources, rates or dates. Core document tax snapshots and input/output account mappings are implemented for manually configured rates; country-specific tax profiles, withholding, nonrecoverable/partial-recovery policies, compound taxes and filing rules remain future work.
 
 The selected UI is a working preview. The click-to-add POS direction is owner-approved; representative cashier sessions and country-specific report review remain pending. Passing technical checks does not establish observed usability success, independent accounting acceptance or a completed security review.
 

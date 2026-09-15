@@ -12,6 +12,7 @@
     <?php if ($view === 'general-editor'): ?><script src="<?= pl_e(pl_url('/assets/core-journal.js', ['v' => '0.1.2'])) ?>" defer></script><?php endif; ?>
     <?php if ($view === 'pos'): ?><link rel="stylesheet" href="<?= pl_e(pl_url('/assets/pos.css')) ?>"><script src="<?= pl_e(pl_url('/assets/pos.js')) ?>" defer></script><?php endif; ?>
     <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/sample-guide.css')) ?>">
+    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/starter.css', ['v' => '20260916-starter-3'])) ?>">
     <script src="<?= pl_e(pl_url('/assets/app.js', ['v' => '20260915-accounting'])) ?>" defer></script>
     <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/ledger-tables.css')) ?>">
     <?php if (in_array($view, ['transactions','general-journals','account','bank-reconciliation'], true)): ?>
@@ -28,6 +29,12 @@
     <nav class="primary-nav" aria-label="Main navigation">
         <?php if ($company): ?>
         <a href="<?= pl_e(pl_url('/transactions')) ?>" <?= in_array($view, ['transactions', 'editor'], true) ? 'aria-current="page"' : '' ?>><?= pl_icon('list') ?><span>Transactions</span></a>
+        <?php $visibility = pl_company_visibility((int)$user['id'],(int)$company['id']); ?>
+        <?php if ($visibility['show_ar']): ?><a href="<?= pl_e(pl_url('/ar')) ?>" <?= $view === 'ar' ? 'aria-current="page"' : '' ?>>Receivables</a><?php endif; ?>
+        <?php if ($visibility['show_ap']): ?><a href="<?= pl_e(pl_url('/ap')) ?>" <?= $view === 'ap' ? 'aria-current="page"' : '' ?>>Payables</a><?php endif; ?>
+        <?php foreach (['purchasing'=>'Purchasing','inventory'=>'Inventory'] as $moduleId=>$moduleLabel): ?>
+        <?php if (pl_module_available((int)$user['id'],(int)$company['id'],(int)$company['book_id'],$moduleId)): ?><a href="<?= pl_e(pl_url('/'.$moduleId)) ?>" <?= $view === $moduleId ? 'aria-current="page"' : '' ?>><?= pl_e($moduleLabel) ?></a><?php endif; ?>
+        <?php endforeach; ?>
         <a href="<?= pl_e(pl_url('/general-journals')) ?>" <?= in_array($view, ['general-journals', 'general-editor', 'general-detail'], true) ? 'aria-current="page"' : '' ?>><?= pl_icon('book') ?><span>Journals</span></a>
         <a href="<?= pl_e(pl_url('/accounts')) ?>" <?= $view === 'accounts' ? 'aria-current="page"' : '' ?>><?= pl_icon('list') ?><span>Accounts</span></a>
         <?php if (pl_module_available((int) $user['id'], (int) $company['id'], (int) $company['book_id'], 'pos-showcase')): ?>
@@ -65,6 +72,6 @@
 <div class="signin-layout"><aside class="signin-story"><p class="eyebrow">Your business, clearly accounted for</p><h2>A day's work.<br>A clearer picture.</h2><p>Keep the everyday details connected to the bigger picture.</p><div class="signin-journey"><div><?= pl_icon('receipt') ?><span><strong>Capture the details</strong>Receipts and expenses, in one place.</span></div><div><?= pl_icon('book') ?><span><strong>Follow every entry</strong>From source document to balanced books.</span></div><div><?= pl_icon('file-text') ?><span><strong>Understand your business</strong>Readable reports with a path to the numbers.</span></div></div><p class="signin-footnote">PHP Ledger · Built for owners and bookkeepers</p></aside><div class="signin-form"><?php require __DIR__ . '/views/login.php'; ?></div></div>
 <?php else: require __DIR__ . '/views/' . $view . '.php'; endif; ?>
 </main>
-<footer class="app-footer"><span>PHP Ledger · Development preview · <a href="https://github.com/rmak78/phpledger/tree/v0.2.1-preview">Source code · AGPL-3.0+</a></span><span>English · <span data-timezone>UTC</span> <span class="muted">event times</span></span></footer>
+<footer class="app-footer"><span>PHP Ledger · Development preview · <a href="https://github.com/rmak78/phpledger">Source code · AGPL-3.0+</a></span><span>English · <span data-timezone>UTC</span> <span class="muted">event times</span></span></footer>
 </body>
 </html>

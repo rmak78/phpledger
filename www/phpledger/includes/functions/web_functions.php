@@ -180,7 +180,7 @@ function pl_web_general_input(array $input): array
 
 function pl_render(string $view, array $data = []): never
 {
-    $allowed = ['login', 'companies', 'onboarding', 'setup-review', 'transactions', 'editor',
+    $allowed = ['ar','ap','parties','inventory','purchasing','tax','opening-conversion','login', 'companies', 'onboarding', 'setup-review', 'transactions', 'editor',
         'trial-balance', 'account', 'journal', 'help', 'error', 'demo', 'reports', 'balance-sheet', 'profit-loss', 'cash-forecast', 'pos',
         'accounts', 'general-journals', 'general-editor', 'general-detail', 'modules', 'opening-balances', 'periods', 'bank-reconciliation', 'connections', 'oauth-consent', 'sample-guide'];
     if (!in_array($view, $allowed, true)) {

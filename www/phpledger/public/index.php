@@ -39,6 +39,7 @@ if ($path === '/health') {
 header('Content-Type: text/html; charset=utf-8');
 header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'");
 $routes = [
+    '/tax' => ['GET','POST'], '/ar' => ['GET','POST'], '/ap' => ['GET','POST'], '/parties' => ['GET','POST'], '/inventory' => ['GET','POST'], '/purchasing' => ['GET','POST'], '/opening-conversion' => ['GET','POST'],
     '/' => ['GET'], '/login' => ['GET', 'POST'], '/logout' => ['POST'], '/start' => ['POST'],
     '/companies' => ['GET'], '/company/select' => ['POST'], '/onboarding' => ['GET', 'POST'],
     '/setup/review' => ['GET', 'POST'], '/transactions' => ['GET'], '/transactions/detail' => ['GET'],
@@ -203,9 +204,9 @@ try {
     $bookId = (int) $company['book_id'];
     if ($path === '/sample-guide') {
         $pack = pl_company_demo_pack($actorId, $companyId, $bookId);
-        if ($pack === null) { throw new DomainException('This guide belongs to a new historical sample. Your existing company has not been changed.'); }
+        if ($pack === null) { throw new DomainException('This guide belongs to a selected sample. Your existing company has not been changed.'); }
         $sourceIds = [];
-        foreach (['receipt' => ['pl_documents', 'receipts-2026-01'], 'operations' => ['pl_general_drafts', 'operations-2025-12'], 'correction' => ['pl_general_drafts', 'wrong-cost']] as $key => [$table, $reference]) {
+        foreach (($pack['kind'] ?? '') === 'starter_playground' ? [] : ['receipt' => ['pl_documents', 'receipts-2026-01'], 'operations' => ['pl_general_drafts', 'operations-2025-12'], 'correction' => ['pl_general_drafts', 'wrong-cost']] as $key => [$table, $reference]) {
             $sourceIds[$key] = (int) DB::queryFirstField('SELECT id FROM %b WHERE company_id = %i AND book_id = %i AND reference = %s', $table, $companyId, $bookId, $pack['id'] . '/' . $reference);
         }
         pl_render('sample-guide', ['title' => 'Explore ' . $pack['name'], 'user' => $user, 'company' => $company,
@@ -227,6 +228,10 @@ try {
         header('Content-Disposition: attachment; filename="' . $export['filename'] . '"');
         echo $export['csv'];
         exit;
+    }
+    if (in_array($path, ['/ar','/ap','/parties','/inventory','/purchasing','/opening-conversion','/tax'], true)) {
+        require_once dirname(__DIR__) . '/includes/functions/starter_web_functions.php';
+        pl_web_starter($actorId,$companyId,$bookId,$user,$company,$path,$method);
     }
     if ($path === '/modules') {
         require_once dirname(__DIR__) . '/includes/functions/module_web_functions.php';

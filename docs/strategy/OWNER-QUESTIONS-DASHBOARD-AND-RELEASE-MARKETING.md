@@ -1,5 +1,10 @@
 # Owner questions dashboard and release marketing plan
 
+## Superseding owner scope: 16 September 2026
+
+The next release bundles AR and AP in the required accounting core, with separate Purchasing and Inventory modules in the same delivery. Inventory remains a basic shared stock service. Quotes move to a separate optional plugin and are excluded. A manually configured core tax engine supplies codes, dated rates and inclusive/exclusive entry; country rules, forms and e-filing follow separately. See [the current starter implementation record](../repository/sprint-06/ACCOUNTING-STARTER.md). Earlier phased quote/stock sequencing below is historical and does not override this scope. Published 0.3.0 capability claims remain unchanged until the next release is published.
+
+
 **Status:** Planned; implementation queued
 **Date:** 16 September 2026
 **Product:** PHP Ledger

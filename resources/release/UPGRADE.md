@@ -2,7 +2,7 @@
 
 Source revision: `{{SOURCE_COMMIT}}`.
 
-This release adds currency, party/contact, outbound queue, internal open-item and same-identity correction foundations to the modern 0.2.1 preview. Preserve the complete supplied migration chain and all existing checksums. Recognized older modern schemas apply their missing migrations in order; source-level rehearsals cover foundation, core 0.1.2, opening-local and populated 0.2.1 baselines. Your exact package and backup still require a restoration rehearsal. No automatic upgrade from the historical application or customized schema is supported.
+This package adds the accounting starter to the modern foundation: required AR/AP workflows and manual core tax, optional Purchasing/Inventory, and reviewed opening conversions. Preserve the complete supplied migration chain and all existing checksums. Recognized older modern schemas apply their missing migrations in order. The repository includes disposable verification for the published 0.3.0 baseline through migration 016; your exact package and backup still require a restoration rehearsal. No automatic upgrade from the historical application, an unpublished quote worktree or a customized schema is supported.
 
 ## Before changing an installation
 
@@ -36,7 +36,21 @@ Do not aim that command at the live database. Confirm definitions/data, all incl
 
 ## Apply a reviewed update
 
-The four new migrations are:
+For an installation already through `016_correction_identity`, the starter adds these nine migrations:
+
+| Migration | Operator implications |
+|---|---|
+| `017_ar_ap_documents` | Adds invoices, bills and linked credits with immutable source revisions and action history. No existing customer or supplier balances are automatically adopted. |
+| `018_inventory` | Adds shared products, stock movements, command receipts and opening review records. Installation does not enable Inventory for a company or guess opening stock quantities. |
+| `019_purchasing` | Adds purchase orders, goods receipts, supplier-bill matches and returns. Purchasing activation requires Inventory; supplier debt remains in AP. |
+| `020_opening_conversion` | Adds explicit allocation of existing opening journal amounts to reviewed unpaid documents, plus immutable conversion receipts. Conversion is a later owner action, not an automatic migration side effect. |
+| `021_module_visibility` | Adds audited navigation preferences. Hiding AR/AP does not disable accounting services or change balances. |
+| `022_tax_engine` | Adds manually configured tax codes/rate history and frozen document tax snapshots. No country rate catalog is activated. |
+| `023_inventory_product_audit` | Extends the existing shared audit classification for product changes. |
+| `024_opening_allocation_guard` | Requires exact non-null amount allocations whenever opening evidence shares an existing journal line. |
+| `025_tax_price_mode` | Adds audited default price-entry settings and each document's frozen exclusive/inclusive mode. |
+
+Earlier installations also require these retained foundation migrations, in their original order:
 
 | Migration | Operator implications |
 |---|---|
@@ -63,9 +77,13 @@ php www/phpledger/install/preflight.php
 
 Stop on any nonzero exit status. Preflight must distinguish a recognized pending migration from an unknown/interrupted/altered schema; only a recognized upgrade path may proceed. An unknown migration receipt or checksum mismatch stops the upgrade. Switch the web root to the new `www/phpledger/public` after successful migration. Recheck sign-in, company selection, existing totals and account statement balances. In an isolated sample company, check account creation/rename/status and a general-journal draft, review, post and dated reversal before reopening access. Do not recreate the initial user during an upgrade.
 
-The supplied migrations preserve existing account IDs, posted journals and source records; they do not replace the chart, calculate opening balances or clear existing-business readiness restrictions. Compare your saved totals and confirm 17 applied receipts, 56 tables, two effective-source views and 62 guard triggers. Compare each receipt checksum to the deployed migration file, including its exact bytes; do not change line endings after packaging. Confirm every historical line has its domestic currency snapshot, and the temporary currency-upgrade guards are absent after successful completion. Both `006_core_accounts_journals` and `006_opening_cutover` are distinct retained identities. Never renumber them. The bundled tax research stays disabled and unreviewed; installing it does not enable tax calculations or country adapters. Existing configured read integrations remain separate from these foundations; no write transport is enabled.
+The supplied migrations preserve existing account IDs, posted journals and source records; they do not replace the chart, calculate opening balances or clear existing-business readiness restrictions. Compare saved totals, verify the 26 supplied migration identities through `025_tax_price_mode`, and check that the installed tables/views/guards match the reviewed package. Compare each receipt checksum to the deployed migration file, including its exact bytes; do not change line endings after packaging. Confirm every historical line has its domestic currency snapshot, and the temporary currency-upgrade guards are absent after successful completion. Both `006_core_accounts_journals` and `006_opening_cutover` are distinct retained identities. Never renumber them. The bundled country tax research stays disabled and unreviewed; manual core tax configuration is separate and no country adapter is activated. Existing read integrations retain their scope; no new financial write transport is enabled.
 
-Migration `010_module_lifecycle` adds per-company state and immutable owner-decision receipts. Existing ordinary companies start with POS disabled even if an earlier package exposed checkout. After compatible installation, a company owner can open **Modules**, review the showcase and enable it with a reason. Existing receipts, source documents and reports remain readable while disabled. A changed manifest requires a reviewed upgrade decision; a missing migration/checksum mismatch requires package repair. The screen never installs SQL or drops historical data. New explicit sample companies enable their synthetic showcase during provisioning.
+Migration `010_module_lifecycle` retains per-company state and immutable owner decisions. Existing optional-module decisions remain subject to their supplied manifests; newly introduced Inventory and Purchasing start disabled. After compatible installation, the owner can review and enable Inventory, then Purchasing, in **Modules**. Required AR/AP stays available; its navigation can be hidden separately. Existing receipts, source documents and reports remain readable while optional operations are disabled. A changed optional manifest requires a reviewed upgrade decision; a missing migration/checksum mismatch requires package repair. The screen never installs SQL or drops historical data. New explicit sample companies enable their synthetic POS showcase during provisioning.
+
+Before reopening access, use an isolated synthetic company to check invoice/bill review and posting, a partial payment, a linked credit, ageing and control reconciliation. If Purchasing/Inventory will be activated, check an order, partial goods receipt, later matched supplier bill, stock valuation and received-but-unbilled reconciliation. Test inclusive/exclusive tax with explicitly reviewed manual codes and verify that credits retain their original snapshots. New receipt/payment journal lines use the existing bank CSV reconciliation; do not create a duplicate bank ledger.
+
+Existing aggregate opening debts and inventory values need separate reviewed conversions after upgrade. Map parties/products explicitly and reconcile to the original opening journal basis; do not recreate those balances as newly posted documents. Conversion may reject a control or product basis with ambiguous or later activity. Preserve that evidence for review instead of bypassing the restriction. No opening conversion or optional module activation is performed by the migration command itself.
 
 ## Interrupted migration or rollback
 

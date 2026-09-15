@@ -32,15 +32,31 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 
 **Requirements:** PHP 8.2+ (8.3 recommended) with BCMath, PDO, PDO MySQL, mbstring, sessions, cURL, OpenSSL and fileinfo, MySQL 8.4 with InnoDB, HTTPS and terminal access. Serve only `www/phpledger/public`.
 
-**Not included in the 0.3.0-preview workflows:** customer/vendor invoices and bills, operator allocations and ageing, inventory and cost of sales, tax, detailed historical imports, multi-book, foreign-currency entry screens, revaluation/consolidation, translations, offline use, card payments and document scanning.
+The accounting starter adds customer invoices, supplier bills, partial payments, credits and ageing to the base accounting core. Purchasing and shared Inventory are bundled optional modules. A manually configurable core tax engine supports inclusive or exclusive entered prices. All financial activity uses the same posting and reporting services.
 
-**0.3.0-preview foundations are published:** [AR/AP foundation notes](docs/strategy/AR-AP-FOUNDATIONS-NOTES.md) describe currency snapshots/manual rates, party/contact storage, authoritative open items, internal realised settlement, same-identity corrections and an unconfigured outbox. These are prerequisites without invoice/bill operator workflows. See the [publication record](docs/repository/sprint-05/PREVIEW-0.3.0-PUBLICATION.json).
+**Release status:** 0.4.0-preview is undergoing final package and hosted-demo verification. The download above remains the published 0.3.0-preview until the publication receipt is recorded.
 
-**Existing cash and reporting scope retained in 0.3.0:** opening trial-balance/CSV cutover, a reconciled unpaid-document register, reasoned periods, bank CSV matching/reconciliation, core CSV exports and owner-controlled POS modules. Open **Reports → Account ledger** for opening, debit, credit, running and closing balances; mobile entries display the balance beside each movement. Ordinary companies start with optional POS disabled. Scoped read API/MCP, existing-user OAuth/Connections and four multi-year synthetic businesses are included; AR and AP follow, with controlled commands sequenced after e-commerce/storefront. Customer/vendor documents and operator workflows, reviewed financial-statement packages, XLSX and detailed historical journals remain unfinished. See [core completion evidence](docs/repository/sprint-05/CORE-COMPLETION.md), [module contracts and validation](docs/repository/sprint-05/MODULE-FOUNDATION.md), and [local workflow guidance](docs/DEVELOPMENT.md#opening-cutover-periods-and-bank-reconciliation).
+## Next preview: accounting starter (local implementation)
+
+The current branch adds the usable accounting starter. **The published download and hosted demo remain 0.3.0-preview** until a separately recorded release is completed.
+
+| Area | Implemented in this branch |
+|---|---|
+| Base accounting: AR and AP | Customer invoices, supplier bills, partial/final payments, linked credit notes, historical ageing and control-account reconciliation. Separate service modules are included in the required accounting core. |
+| Purchasing | Optional module for purchase orders, partial goods receipts, later supplier bills, receipt matching, returns and received-but-unbilled reconciliation. Supplier balances always belong to AP. |
+| Shared Inventory | Optional activation of products, one stock location, immutable movements, moving weighted-average valuation, counts and reviewed adjustments. Stock invoices issue goods and record their cost through the shared posting service. |
+| Core tax engine | Manually configured tax codes, dated rate revisions, output/input tax accounts and owner-selectable tax-exclusive or tax-inclusive entry. Saved documents freeze their mode and tax snapshot; display separates net, tax and total. |
+| Existing opening balances | Explicitly reviewed party/product mapping into the shared ledgers, reconciled to existing opening journal amounts without posting them twice. |
+
+Owners can hide AR/AP navigation without disabling accounting services or changing reports. Purchasing and Inventory use the existing module activation controls; historical records remain readable after disabling new operations. Quotes are preserved separately on `codex/quotes-plugin` and are excluded from this starter.
+
+**Boundaries:** no country tax rules or automatic rates, statutory forms/e-filing, batches/serials/expiry, landed cost, LC flows, multiple warehouses, advances/unapplied credits/refunds, automatic sends, bank feeds or public financial write API. Those remain later plugins or explicitly reviewed extensions. The existing cash POS showcase does not deduct stock from Inventory.
+
+See [starter implementation and validation](docs/repository/sprint-06/ACCOUNTING-STARTER.md) and [release notes](resources/release/RELEASE-NOTES.md). Technical checks do not constitute professional accounting or tax review.
 
 ## Who it is for
 
-The 0.3.0 foundations release and four multi-year sample businesses are live. Earlier 0.2.1 evidence remains available below. See [release validation](docs/repository/sprint-05/PREVIEW-0.2.1-VALIDATION.md), the [publication receipt](docs/repository/sprint-05/PREVIEW-0.2.1-PUBLICATION.json) and the [illustrated reporting guides](https://phpledger.com/guides/).
+The existing public demo has four multi-year synthetic businesses. The starter release adds a separate, empty Accounting starter playground with prepared accounts, parties, a product and illustrative tax configuration. This small practice book is distinct from the later eleven-company sample program.
 
 PHP Ledger is country-neutral accounting software for small businesses, owners, bookkeepers, accountants and organisations managing multiple client companies. Pakistan is one intended regional direction, not the main market or the product's defining scope. Owner-equity reporting is a shared priority; partner capital, profit-sharing and drawings are planned examples that require the appropriate entity and accounting profile. Daily entry should work well on phones, with clear reporting and review on larger screens.
 
@@ -59,8 +75,8 @@ The application requires **PHP 8.2 or newer**; **PHP 8.3 is the recommended depl
 
 | Your task | What you can explore |
 |---|---|
-| **Start a business** | Company setup, a preliminary account template and an isolated sample company. |
-| **Record the day** | Receipt and expense drafts, clear posting, balanced journals and linked reversals. |
+| **Start a business** | Company setup, a preliminary neutral account template and separately isolated sample companies. Reviewed regional template selection remains future work. |
+| **Record the day** | Receipt/expense drafts, customer invoices, supplier bills, allocated payments, credits, clear posting and linked reversals. |
 | **Work on the books** | Account creation, audited name/status changes and general-journal drafts with a separate posting review. Account administration is available in an installation; the public demo keeps it read-only. |
 | **Understand the numbers** | Profit and loss, balance sheet, cash balance, trial balance and account statements with opening, running and closing balances, linked to their sources. |
 | **Look ahead** | A cash scenario using the inflows and outflows you enter; assumptions remain visible. |

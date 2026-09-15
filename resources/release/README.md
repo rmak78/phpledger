@@ -2,16 +2,17 @@
 
 Country-neutral, open-source bookkeeping for small businesses, built with PHP and MySQL. Project-owned code uses AGPL-3.0-or-later; a commercial licence is available. Self-hosting is free without licence keys or licensing-server calls. Published pre-adoption 0.1.0 through 0.1.5 previews retain MIT. See [Licensing policy](docs/LICENSING-POLICY.md).
 
-**Development preview.** Evaluate this package with synthetic data before arranging an accountant-reviewed pilot. It is an early foundation, with known workflow and reporting gaps; it is not a completed ERP or a country-certified accounting product.
+**Development preview.** Evaluate this accounting starter with synthetic data before arranging an accountant-reviewed pilot. Known workflow and reporting limits remain; it is not a completed ERP or a country-certified accounting product.
 
 Source revision: `{{SOURCE_COMMIT}}`
 
 ## Start here
 
 1. Read [INSTALL.md](INSTALL.md) for hosting requirements, private configuration and the three setup commands.
-2. Sign in, create an isolated sample company or a new business, then record a receipt or expense.
-3. Follow the posted transaction into its journal and reports. Browser reversals remain available; same-identity correction is an internal service capability, with no new correction screen.
-4. Review the chart and an account statement. Use a general-journal draft for a balanced adjustment, review it, then post it in the sample company.
+2. Sign in and create an isolated sample company or a new business. Review the chart and create a customer/vendor party before recording an invoice or bill.
+3. Review and post the document, record a partial payment, and follow the remaining balance into ageing, its journal and the account statement. Corrections retain the same document identity and preserve linked reversal history.
+4. For stock businesses, enable Inventory and then Purchasing in **Modules**. Create a stock product, confirm a purchase order, receive goods and match the later supplier bill. Review stock valuation and received-but-unbilled reconciliation.
+5. Configure any required tax codes, accounts and dated rates manually in **Tax**. Choose exclusive or inclusive price entry; documents show the separate net, tax and total. For existing businesses, review opening debt/stock conversion before using their imported balances operationally.
 
 The package needs PHP **8.2+ (8.3 recommended)**, MySQL **8.4**, HTTPS and command-line access. Production Composer dependencies are included. Keep the supplied directory layout: only `www/phpledger/public` is the web document root. Do not serve the package root.
 
@@ -29,15 +30,19 @@ The package needs PHP **8.2+ (8.3 recommended)**, MySQL **8.4**, HTTPS and comma
 - An illustrative cash-sale POS with click-to-add products, cart controls, separate review/cash confirmation, receipt and accounting entry.
 - Opening trial-balance/CSV cutover with reconciled unpaid-document evidence, period administration, and bank statement CSV import/matching/reconciliation.
 - Core CSV exports with exact amounts and scoped report metadata; account exports include all movements up to the documented 10,000-row limit.
-- Bundled core/POS module manifests and owner-controlled enable/disable/upgrade decisions in **Modules**, with immutable history. Ordinary companies start with POS disabled; explicitly created samples enable the showcase. Existing receipts remain readable after disablement.
+- Bundled required AR/AP and optional Inventory, Purchasing and POS manifests. **Modules** records owner-controlled activation/upgrade decisions and AR/AP navigation visibility. Ordinary companies start with optional modules disabled; explicitly created samples enable the POS showcase. Disabling optional operations preserves authorised historical access.
 - English screens, a choice of supported functional currencies, regional formatting and terminal timezone display. Each book has one immutable functional currency; the internal posting service also stores exact transaction-currency amounts and frozen manual rates on every journal line.
 - Country-neutral party/contact storage with customer/vendor roles, scoped identity duplicate checks and acknowledged shared-phone duplicates. Vetting status and history are schema foundations; no vetting workflow is enabled.
-- Internal open-item recognition and settlement with realised FX and actual-rate override, initially available only on explicitly activated, unused control accounts. No invoice/bill or settlement screens are added.
+- Customer invoices, supplier bills, partial/final payments, linked credits, historical ageing and control reconciliation. Browser workflows and internal module calls share the authoritative open-item ledger, exact carrying amounts and realised FX with actual-rate override.
+- Purchase orders, separate partial receipts, later AP bills, receipt/bill matching, explicit price/rate variance review and coordinated supplier returns. Purchasing never maintains a separate supplier balance.
+- Shared stock/non-stock products, one inventory location, immutable stock movements, moving weighted-average valuation, counts and reviewed value adjustments. Stock invoices issue goods and post cost of goods sold through the same services.
+- Reviewed conversion of existing unpaid opening evidence and opening stock quantities/value into operational ledgers. Explicit party/product mappings must reconcile to the original journal basis; confirmation does not post opening balances again.
+- Country-neutral manual tax codes, dated rate revisions, input/output accounts and owner-controlled default exclusive/inclusive price entry. Posted documents retain their reviewed mode and tax snapshot; credits inherit their original source basis.
 - Receipt/expense and general-journal correction services retain document identity, append source revisions, reverse the old posting and post the replacement atomically. Existing lists, reports and read integrations resolve the current source while preserving original history.
 - A retryable, idempotent outbound queue and manual rate-entry CLI. No external delivery adapter or automatic cron installation is supplied.
 - Disabled, unreviewed tax research JSON for eight countries and seven industries, with a read-only CLI structural validator. These files do not enable tax calculations or set company tax profiles.
 
-Detailed historical journals, XLSX, invoice/bill settlement workflows, receivables/payables aging, stock control, country tax adapters, rate providers, period-end FX revaluation, group consolidation, additional accounting books and document scanning are future work. POS currently has no stock/COGS, tax, credit-sale or payment-provider integration. See [RELEASE-NOTES.md](RELEASE-NOTES.md) for the boundaries.
+Quotes are excluded from this starter and preserved separately for a future plugin. Detailed historical journals, XLSX, multiple stock locations, serials/batches/expiry, landed cost, manufacturing, advances/unapplied credits/refunds, country tax adapters, rate providers, period-end FX revaluation, group consolidation, additional accounting books and document scanning remain future work. The illustrative POS does not use shared stock/COGS or document tax and has no credit-sale or payment-provider integration. See [RELEASE-NOTES.md](RELEASE-NOTES.md) for the boundaries.
 
 ## Package and operations
 
@@ -45,7 +50,7 @@ Detailed historical journals, XLSX, invoice/bill settlement workflows, receivabl
 
 `PACKAGE-MANIFEST.json` identifies the packaged files and source. Preserve the package, its published checksum, configuration backup and database backup together. Project terms are in [LICENSE](LICENSE); dependency and asset notices are in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
-The complete installation has 17 migration receipts, 56 tables, two effective-source views and 62 guard triggers. Both distinct `006_*` identities remain; migrations `013_currency_foundation` through `016_correction_identity` add the new foundations without rewriting earlier migrations. Follow the upgrade guide before changing an existing database. Account IDs and posted history are retained, and existing-business opening reconciliation remains required. Module installation alone never enables existing companies. API/MCP financial mutations remain future work.
+The supplied chain extends through `025_tax_price_mode`, with 26 migration receipts including both distinct `006_*` identities. Earlier migration names and checksums remain unchanged. Follow the upgrade guide before changing an existing database, and compare the installed receipts against every migration in the package manifest. Account IDs and posted history are retained, and existing-business opening reconciliation remains required. Installing optional modules does not activate them for existing companies; AR/AP and the manual tax engine belong to the required core. API/MCP financial mutations remain future work.
 
 The archive excludes the old application, marketing website, development Docker setup, development/test suite, private configuration and customer data. The standalone `tools/validate-tax-catalog.php` is an optional structural check; it does not activate or approve tax research. There is no requirement to run Composer development scripts on the customer server.
 
