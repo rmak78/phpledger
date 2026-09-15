@@ -7,6 +7,7 @@
     <form action="<?= pl_e(pl_url('/reports/trial-balance')) ?>" method="get" class="panel actions">
         <div class="field"><label for="trial-date">Through date</label><input id="trial-date" name="as_of" type="date" required value="<?= pl_e($asOf) ?>"></div>
         <button class="button secondary" type="submit">Update report</button>
+        <a class="button secondary" href="<?= pl_e(pl_url('/reports/export', ['report' => 'trial-balance', 'to' => $asOf])) ?>">Export CSV</a>
     </form>
     <p>Only posted entries are included. Select an account to see its activity and return to the source transaction. Drafts do not change these balances.</p>
     <?php if ($company['setup_status'] !== 'ready'): ?>

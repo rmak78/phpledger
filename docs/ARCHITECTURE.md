@@ -112,6 +112,8 @@ Select and record supported API/MCP protocol versions and authentication transpo
 
 ## Extension path and quality gates
 
+Core reports now have scoped CSV exports through `pl_export_report()` and the explicit `/reports/export` route. The export calls the same report/account-statement services inside one transaction, includes all bounded statement pages and preserves exact amounts. It completes the basic export path without introducing a separate reporting engine or issued-report store. Technical two-period fixtures reconcile cutover, general journals, consecutive bank reconciliations, carried earnings, trial balance and date closure; qualified accounting review and jurisdiction-specific year-end policy remain separate gates.
+
 Receipt/expense screens, future AR/AP, and later operational modules must use the same posting interface. If asynchronous operational delivery is later needed, introduce a durable outbox, duplicate protection, bounded retries, visible failure status, and reconciliation. An operational save must never silently lose its financial entry.
 
 Keep accounting rules typed and independent of HTML, sessions, and request globals so automated tests can exercise them directly. Cover precision, balance, reversal, period locks, transaction rollback, permissions, duplicates/concurrency, and report reconciliation. Run syntax checks, static analysis, dependency review, and installation tests on the target runtime.

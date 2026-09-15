@@ -13,7 +13,12 @@ function Invoke-TestDatabaseSql([string] $Sql) {
 Push-Location (Split-Path $PSScriptRoot -Parent)
 $restoreName = 'phpledger_restore_verify_' + [guid]::NewGuid().ToString('N')
 $created = $false
+$priorOutputEncoding = $OutputEncoding
+$priorConsoleEncoding = [Console]::OutputEncoding
 try {
+    # Windows PowerShell otherwise encodes native pipeline input as ASCII, corrupting UTF-8 data.
+    $OutputEncoding = [Text.UTF8Encoding]::new($false)
+    [Console]::OutputEncoding = [Text.UTF8Encoding]::new($false)
     $configuredDatabase = (& docker compose exec -T db_test printenv MYSQL_DATABASE).Trim()
     if ($LASTEXITCODE -ne 0 -or $configuredDatabase -ne 'phpledger_test') {
         throw 'Refusing to run: db_test must be the disposable phpledger_test environment.'
@@ -62,6 +67,8 @@ try {
     if ([int] $receipt -ne $expectedMigrations) { throw 'The restored migration receipts are missing.' }
     $unlinked = Invoke-TestDatabaseSql "SELECT COUNT(*) FROM $restoreName.pl_documents d LEFT JOIN $restoreName.pl_journals j ON j.id = d.journal_id AND j.company_id = d.company_id AND j.book_id = d.book_id WHERE d.journal_id IS NOT NULL AND j.id IS NULL;"
     if ([int] $unlinked -ne 0) { throw 'A restored posted source is missing its scoped journal.' }
+    $unlinkedGeneral = Invoke-TestDatabaseSql "SELECT COUNT(*) FROM $restoreName.pl_general_drafts d LEFT JOIN $restoreName.pl_journals j ON j.id = d.journal_id AND j.company_id = d.company_id AND j.book_id = d.book_id WHERE d.journal_id IS NOT NULL AND j.id IS NULL;"
+    if ([int] $unlinkedGeneral -ne 0) { throw 'A restored general journal source is missing its scoped journal.' }
     Write-Output "Backup/restore passed: $($tables.Count) table definitions and data checksums, $rows rows, $($sourceTriggers.Count) guard triggers, $receipt migration receipts, scoped source links, and balanced journals."
 } finally {
     # The target was randomly generated, verified absent, and created by this run in db_test.
@@ -70,4 +77,6 @@ try {
         Write-Output 'Removed only this run''s isolated restore database; phpledger_test and the main database remain intact.'
     }
     Pop-Location
+    $OutputEncoding = $priorOutputEncoding
+    [Console]::OutputEncoding = $priorConsoleEncoding
 }

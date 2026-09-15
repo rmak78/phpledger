@@ -41,7 +41,7 @@ $routes = [
     '/opening-balances' => ['GET', 'POST'], '/periods' => ['GET', 'POST'], '/bank-reconciliation' => ['GET', 'POST'],
     '/transactions/new' => ['GET'], '/transactions/edit' => ['GET'], '/transactions/save' => ['POST'],
     '/transactions/post' => ['POST'], '/transactions/reverse' => ['POST'],
-    '/reports/trial-balance' => ['GET'], '/reports/account' => ['GET'], '/journals/detail' => ['GET'],
+    '/reports/trial-balance' => ['GET'], '/reports/account' => ['GET'], '/journals/detail' => ['GET'], '/reports/export' => ['GET'],
     '/reports' => ['GET'], '/reports/balance-sheet' => ['GET'], '/reports/profit-loss' => ['GET'], '/reports/cash-forecast' => ['GET', 'POST'],
     '/pos' => ['GET'], '/pos/review' => ['GET', 'POST'], '/pos/edit' => ['POST'], '/pos/checkout' => ['POST'], '/pos/retry' => ['POST'], '/pos/receipt' => ['GET'],
     '/help' => ['GET'],
@@ -189,6 +189,15 @@ try {
     $company = pl_web_context($actorId);
     $companyId = (int) $company['id'];
     $bookId = (int) $company['book_id'];
+    if ($path === '/reports/export') {
+        $export = pl_export_report($actorId, $companyId, $bookId, pl_web_text($_GET, 'report'),
+            pl_web_text($_GET, 'to', gmdate('Y-m-d')), pl_web_text($_GET, 'from') ?: null,
+            pl_web_id($_GET, 'account_id') ?: null);
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="' . $export['filename'] . '"');
+        echo $export['csv'];
+        exit;
+    }
     if ($path === '/opening-balances') {
         require_once dirname(__DIR__) . '/includes/functions/opening_web_functions.php';
         pl_web_opening($actorId, $companyId, $bookId, $user, $company, $method);

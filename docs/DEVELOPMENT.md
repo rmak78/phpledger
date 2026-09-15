@@ -87,6 +87,16 @@ node www/website/check.mjs
 
 ## Repository working boundaries
 
+### Core CSV exports
+
+`GET /reports/export?report=trial-balance|account|profit-loss|balance-sheet&to=YYYY-MM-DD` downloads a CSV through the existing signed-in company/book scope. Account statements accept `account_id` and optional `from`; profit and loss requires `from`. Each report screen links the current date selection to its export. Viewers may export their authorized books. All statement pages are included, with a 10,000-movement limit that rejects oversized exports before sending any CSV. A shared book transaction keeps pages and totals coherent. CSV preserves four-place decimal strings, business dates, scope, readiness and source references; potentially executable spreadsheet text receives an apostrophe prefix. The CSV is a management preview, not an issued statutory statement.
+
+### Consolidated installation checks
+
+`tools/verify-upgrade.php` accepts `fresh`, `foundation`, `core-0.1.2` or `opening-local`. Run it with the existing disposable-test root invocation above. Each mode creates/removes its own random database and preserves all existing test/development data. The two `006_*` files have distinct full migration identities from separate branches; preserve both names and original checksums. The migration runner uses full filenames, not just numeric prefixes. Future migrations continue from `010`.
+
+The PowerShell restoration check explicitly uses UTF-8 for native process input/output so non-ASCII descriptions survive dump/import. Run restore checks after the test suite completes, without concurrent database writes.
+
 Read [architecture](ARCHITECTURE.md), [contribution guidance](../CONTRIBUTING.md) and [repository instructions](../AGENTS.md). Reuse the bootstrap, MeekroDB helpers, explicit routes and central posting service. Preserve historical files and migration receipts. Configuration, dependencies and storage remain outside the public document root.
 
 The [demo runbook](DEMO.md) covers separate synthetic storage, restricted runtime permissions, hourly UTC reset and deployment. The [roadmap](ROADMAP.md) preserves future language/formatting/FX, imports, regional accounting, inventory, production POS and industry modules. Development checks are not accounting sign-off, observed usability evidence or a stable-release claim.

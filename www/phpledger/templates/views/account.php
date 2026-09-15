@@ -31,6 +31,7 @@ $lastPage = $activity['page'] === $activity['pages'];
         <div class="field"><label for="activity-from">From date <span class="optional">optional</span></label><input id="activity-from" name="from" type="date" value="<?= pl_e($statementFrom ?? '') ?>"></div>
         <div class="field"><label for="activity-date">Through date</label><input id="activity-date" name="as_of" type="date" required value="<?= pl_e($asOf) ?>"></div>
         <button class="button secondary" type="submit">Update statement</button>
+        <a class="button secondary" href="<?= pl_e(pl_url('/reports/export', ['report' => 'account', 'account_id' => $activity['account']['id'], 'from' => $statementFrom ?? '', 'to' => $asOf])) ?>">Export all pages CSV</a>
     </form>
 
     <dl class="statement-summary" aria-label="Statement balances across all pages">

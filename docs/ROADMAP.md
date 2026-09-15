@@ -1,5 +1,11 @@
 # Revival roadmap
 
+## Current local execution, 15 September 2026
+
+The owner requested completion and cleanup of all worktrees, removal of legacy source, completion of the accounting core, then the next roadmap sprint. The released account/chart/general-journal work and local opening/period/bank workflows are now consolidated; the historical application is removed from the current tree and retained in Git history. Basic CSV exports and a complete synthetic two-period core reconciliation have been added. This closes the bounded core implementation checklist; qualified accounting/security review, observed core-only use, jurisdiction-specific closing/statements and supported pilot acceptance remain open.
+
+The next sprint follows [module roadmap milestone 3](MODULE-ROADMAP.md): versioned manifests, company enablement/dependencies, migration compatibility, retained history and the POS showcase behind the capability boundary. API/MCP reads follow in milestone 4, controlled commands in milestone 5, then AR/AP as optional modules. Website SEO/campaign follow-up remains separate from these accounting implementation gates.
+
 ## Website publication: 15 September 2026
 
 The owner selected **A, Workbench, with B's photo treatment** and the headline **Double-entry accounting that runs on your own PHP and MySQL hosting**, then explicitly authorized live publication. The multi-page marketing site was published as `website-redesign-20260915-080700` at **08:08 UTC (13:08 PKT)**. Current download copy follows the verified public **0.1.2-preview** package. Earlier statements below about unavailable downloads or the Field Notes website are historical snapshots.
