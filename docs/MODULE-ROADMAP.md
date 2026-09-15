@@ -2,7 +2,7 @@
 
 ## Current delivery: one usable accounting starter (16 September 2026)
 
-The next release combines **AR, AP, Purchasing and Inventory**, with generic tax calculation in core. Their code remains separated by responsibility. The local implementation is awaiting final release validation and publication; **0.3.0-preview remains the published package/demo**. Local code and passing technical scenarios are not accounting sign-off or proof that the new workflows are live.
+**0.4.0-preview is published** with **AR, AP, Purchasing and Inventory**, and generic tax calculation in core. Their code remains separated by responsibility. The [publication receipt](repository/sprint-06/PREVIEW-0.4.0-PUBLICATION.json) records the package, hosted playground and website separately. Passing technical scenarios are not professional accounting sign-off.
 
 - **Required AR/AP:** invoice and bill entry/posting, partial receipts/payments, linked customer/supplier credits, dated ageing, opening-debt adoption and reconciliation to the general ledger. Owners can hide unused navigation without disabling services or excluding balances from reports.
 - **Optional shared Inventory:** one product identity, one location per company, one base unit per product, exact moving weighted-average costing, receipts/issues/returns, reasoned counts and reviewed value adjustments. Inventory and general-ledger balances reconcile from immutable movements.
@@ -14,7 +14,7 @@ Finish and verify these thin end-to-end flows together before starting another i
 
 Current limits remain explicit: one-document payment allocation per action; no advances/unapplied credits/cash refunds; no separate sales dispatch/reservation workflow; exact one-bank-row/one-journal-line matching; functional-currency inventory valuation. Original-cost purchase returns can require a reviewed value adjustment after intervening stock activity. Opening conversion links existing balances without reposting them. Outgoing foreign-bank carrying-value allocation, rate providers, revaluation/consolidation and statutory reporting remain deferred.
 
-The current release gate is the combined service/access/concurrency suite, complete browser journeys, fresh installation and upgrade from published 0.3.0, and synchronized README/release notes. Package/demo/website publication needs its own recorded evidence. Historical priorities below do not reclassify AR/AP as optional or move Purchasing/Inventory out of this combined release.
+The combined service/access/concurrency suite, browser journeys, fresh installation and upgrade from published 0.3.0 passed for this preview; the publication receipt preserves exact evidence and remaining review gates. Historical priorities below do not reclassify AR/AP as optional or move Purchasing/Inventory out of this combined release.
 
 ## Historical combined 0.2.1 release decision
 

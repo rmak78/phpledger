@@ -1,6 +1,6 @@
 # Architecture
 
-## Accounting starter: local implementation, release pending (16 September 2026)
+## Accounting starter: published 0.4.0-preview (16 September 2026)
 
 The next starter is implemented locally in separate service modules. The published package and hosted demo remain **0.3.0-preview** until a release receipt records an authorised upgrade. The published foundation description below is a historical release boundary, not a description of missing features in the current checkout.
 
@@ -62,7 +62,7 @@ Use modern CSS and small JavaScript modules for progressive enhancement. Financi
 
 ### Bundled module lifecycle
 
-The [module foundation contract and compatibility matrix](repository/sprint-05/MODULE-FOUNDATION.md) record the published core/POS foundation. The local starter extends that same registry with required AR/AP and optional Purchasing/Inventory manifests. Project-owned JSON manifests under `resources/modules` declare contract/version/dependencies/capabilities and the existing routes/services. Migration `010_module_lifecycle` stores company state and immutable lifecycle receipts. Optional modules default off for ordinary companies; an owner decision enables them after migration/checksum/version validation. The required accounting core remains available.
+The [module foundation contract and compatibility matrix](repository/sprint-05/MODULE-FOUNDATION.md) record the published core/POS foundation. The 0.4.0 starter extends that same registry with required AR/AP and optional Purchasing/Inventory manifests. Project-owned JSON manifests under `resources/modules` declare contract/version/dependencies/capabilities and the existing routes/services. Migration `010_module_lifecycle` stores company state and immutable lifecycle receipts. Optional modules default off for ordinary companies; an owner decision enables them after migration/checksum/version validation. The required accounting core remains available.
 
 `pl_require_module()` reuses company/book authorization, current locking reads, manifest action roles and installation checks; `pl_review_pos()` and `pl_checkout_pos()` enforce it in their transaction. Existing POS receipts and accounting sources stay readable after disablement. `pl_set_company_module()` serializes decisions with a company lock and durable content-bound retry receipts. Package installation is a CLI operation, distinct from company enablement. This adds no dynamic code loader, parallel router/auth/database layer, API or MCP transport. Parties, product identity and core tax calculation now serve the starter modules through shared services; consumers must not create competing master-data or accounting stores.
 

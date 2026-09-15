@@ -2,6 +2,14 @@
 
 The deployable static document root is `www/website/public`. It is separate from the accounting application and never loads its bootstrap or serves the repository root.
 
+## Accounting starter 0.4.0 publication
+
+The current website presents core AR/AP, optional Purchasing/Inventory, manual inclusive/exclusive tax, and five demo choices (one focused playground plus four existing multi-year histories). The live release article is `/news/0-4-0-preview/`. The approved design and long-form library are preserved. Current product limitations are synchronized throughout the source; earlier release articles retain dated scope and earlier screenshots are labelled explicitly.
+
+Published as `website-redesign-20260915-233156` at **04:32 PKT on 16 September 2026** (23:32 UTC on 15 September). All 165 static files matched archive, host and public hashes. Demo identity, entry/health, noindex and existing headers were preserved. See [the static publication receipt](../../docs/design/website/qa/release040-live-publication.json). The separate application and media archives are published on [GitHub](https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview), with verified public downloads. The site builds 64 source pages into 65 HTML outputs and 63 sitemap URLs.
+
+The [marketing handoff](../../docs/design/website/ACCOUNTING-STARTER-LAUNCH-KIT.md) contains final copy, evidence, actual synthetic screenshots and a downloadable media ZIP. No email or social post is sent by the static site or this publication.
+
 ## Source and build
 
 The completed website-redesign work uses a dependency-free Node.js 18+ build:
@@ -23,16 +31,17 @@ The existing website Compose service serves `public` at [http://127.0.0.1:18201/
 | Path | Content |
 |---|---|
 | `/` | Product introduction, real screen captures, reports and start paths |
-| `/product/` | Company setup, receipt/expense posting, corrections and reports |
+| `/product/` | Core invoices/bills/payments, optional purchasing/stock, manual tax and retained bookkeeping |
 | `/point-of-sale/` | Preview cash-sale journey and supported boundaries |
-| `/download/` | Verified 0.3.0-preview assets, checksum, installation requirements and FAQ |
+| `/download/` | Verified 0.4.0-preview assets, checksum, installation requirements and FAQ |
 | `/about/` | Project, maintainer and current scope |
 | `/privacy/` | Sessions, country hints, sample reset and operational logs |
 | `/terms/` | Synthetic demo use and preview/license boundaries |
 | `/support/` | Setup/training/troubleshooting information and local email-draft form |
 | `/roadmap/` | Opening balances/cutover → period administration → bank reconciliation, then later gates |
 | `/news/` | Release index and RSS link |
-| `/news/0-1-0-preview/` | Versioned release announcement |
+| `/news/0-4-0-preview/` | Current starter release article and exact fictional experiments |
+| `/news/0-1-0-preview/` | Historical versioned release announcement |
 | `/credits/` | Photography, fonts, icons and company-mark provenance |
 | `/404.html` | Internal custom error page used for missing URLs |
 
@@ -56,7 +65,7 @@ Reproducible local browser checks are in `tools/browser-smoke.cjs` and `tools/br
 
 The content guard is `node www/website/tools/aeo-geo-audit.mjs`. It reports page word counts, heading depth, figure/caption parity and brand mentions; it is a lightweight editorial regression check, not a search-ranking guarantee. The content inventory is [CONTENT-REGISTER.md](../../docs/design/website/CONTENT-REGISTER.md).
 
-The approved **A, Workbench, with B's photo treatment** redesign was published to **https://phpledger.com/** on **15 September 2026 at 08:08 UTC (13:08 PKT)** as `website-redesign-20260915-080700`. The homepage uses the exact approved headline: “Double-entry accounting that runs on your own PHP and MySQL hosting”. Current download copy uses the independently verified 0.1.2-preview package; existing 0.1.0 screenshots and news remain explicitly historical.
+The approved **A, Workbench, with B's photo treatment** redesign was published to **https://phpledger.com/** on **15 September 2026 at 08:08 UTC (13:08 PKT)** as `website-redesign-20260915-080700`. The homepage uses the exact approved headline: “Double-entry accounting that runs on your own PHP and MySQL hosting”. At that publication, download copy used the independently verified 0.1.2-preview package; existing 0.1.0 screenshots and news remain explicitly historical.
 
 Publication used the existing static-release hosting lane, with a private backup of the prior website/configuration and an atomic Nginx configuration switch. All 101 public files were verified; canonical redirects, custom 404/private-path rejection, security/cache headers and demo entry/health passed. The demo gained its planned `X-Robots-Tag: noindex, nofollow` header; its containers, proxy target, application and database were preserved. No Git push, application deployment or migration was needed. See [current publication QA](design-qa.md#live-publication-15-september-2026) and the [machine-readable receipt](../../docs/design/website/qa/live-20260915-publication.json).
 
@@ -66,7 +75,7 @@ The 0.1.5 work adds six product FAQs and permits large image previews on indexab
 
 ## Content library and publication — 16 September 2026
 
-The owner authorized takeover, review and publication of the other website thread. The completed collection has 63 source pages, 62 sitemap URLs and 64 HTML outputs including the redirect. It adds the glossary, ten lessons, six comparisons, six hosting guides, four research articles, audience pages and five additional walkthroughs. The [content register](../../docs/design/website/CONTENT-REGISTER.md) records page-level review and remaining professional gates.
+The owner authorized takeover, review and publication of the other website thread. The earlier completed collection had 63 source pages, 62 sitemap URLs and 64 HTML outputs including the redirect. It adds the glossary, ten lessons, six comparisons, six hosting guides, four research articles, audience pages and five additional walkthroughs. The [content register](../../docs/design/website/CONTENT-REGISTER.md) records page-level review and remaining professional gates.
 
 Run `node www/website/build.mjs --check` and `node www/website/tools/aeo-geo-audit.mjs`. The latter reports main-content metrics, excluding shared footer/navigation. Browser QA must use a fresh context or cache-busting URL because local HTML uses short caching; verify content-hashed CSS URLs after rebuilding. Check desktop, tablet and mobile layouts, including grid children, long tables and code blocks.
 

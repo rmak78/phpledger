@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/rmak78/phpledger/releases/tag/v0.3.0-preview"><strong>Download 0.3.0-preview</strong></a> &nbsp; · &nbsp;
+  <a href="https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview"><strong>Download 0.4.0-preview</strong></a> &nbsp; · &nbsp;
   <a href="https://phpledger.com/demo/">Try the demo</a> &nbsp; · &nbsp;
   <a href="https://github.com/rmak78/phpledger/wiki">Read the Wiki</a> &nbsp; · &nbsp;
   <a href="https://github.com/rmak78/phpledger/wiki/Roadmap">Roadmap</a> &nbsp; · &nbsp;
@@ -34,13 +34,13 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 
 The accounting starter adds customer invoices, supplier bills, partial payments, credits and ageing to the base accounting core. Purchasing and shared Inventory are bundled optional modules. A manually configurable core tax engine supports inclusive or exclusive entered prices. All financial activity uses the same posting and reporting services.
 
-**Release status:** 0.4.0-preview is undergoing final package and hosted-demo verification. The download above remains the published 0.3.0-preview until the publication receipt is recorded.
+**Release status:** **0.4.0-preview is published**, including the downloadable package, hosted starter playground and [press/media kit](https://github.com/rmak78/phpledger/releases/download/v0.4.0-preview/phpledger-0.4.0-preview-media-kit.zip). The [publication receipt](docs/repository/sprint-06/PREVIEW-0.4.0-PUBLICATION.json) separates local checks, archive verification and live evidence.
 
-## Next preview: accounting starter (local implementation)
+## Current release: 0.4.0-preview accounting starter
 
-The current branch adds the usable accounting starter. **The published download and hosted demo remain 0.3.0-preview** until a separately recorded release is completed.
+The accounting starter is available in the download and hosted demo. Choose **Accounting starter playground** in the demo for the new workflows, or select one of the four existing historical examples.
 
-| Area | Implemented in this branch |
+| Area | Included in 0.4.0-preview |
 |---|---|
 | Base accounting: AR and AP | Customer invoices, supplier bills, partial/final payments, linked credit notes, historical ageing and control-account reconciliation. Separate service modules are included in the required accounting core. |
 | Purchasing | Optional module for purchase orders, partial goods receipts, later supplier bills, receipt matching, returns and received-but-unbilled reconciliation. Supplier balances always belong to AP. |
@@ -56,7 +56,7 @@ See [starter implementation and validation](docs/repository/sprint-06/ACCOUNTING
 
 ## Who it is for
 
-The existing public demo has four multi-year synthetic businesses. The starter release adds a separate, empty Accounting starter playground with prepared accounts, parties, a product and illustrative tax configuration. This small practice book is distinct from the later eleven-company sample program.
+The public demo has four multi-year synthetic businesses and a separate, empty Accounting starter playground with prepared accounts, parties, a product and illustrative tax configuration. This small practice book is distinct from the later eleven-company sample program.
 
 PHP Ledger is country-neutral accounting software for small businesses, owners, bookkeepers, accountants and organisations managing multiple client companies. Pakistan is one intended regional direction, not the main market or the product's defining scope. Owner-equity reporting is a shared priority; partner capital, profit-sharing and drawings are planned examples that require the appropriate entity and accounting profile. Daily entry should work well on phones, with clear reporting and review on larger screens.
 
@@ -69,7 +69,7 @@ The application requires **PHP 8.2 or newer**; **PHP 8.3 is the recommended depl
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS remain development previews.*
 
 > [!NOTE]
-> **Evaluate the accounting core.** [Download 0.3.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.3.0-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional accounting review and pilot usability gates remain open.
+> **Evaluate the accounting core.** [Download 0.4.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional accounting review and pilot usability gates remain open.
 
 ## Explore the working preview
 

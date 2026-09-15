@@ -2,7 +2,7 @@
   "name": "PHP Ledger",
   "alternateName": "phpledger",
   "baseUrl": "https://phpledger.com",
-  "entity": "PHP Ledger is open-source, self-hosted double-entry accounting software with a simple cash point of sale for small businesses, built on PHP 8.2+ and MySQL 8.4 and currently in development preview.",
+  "entity": "PHP Ledger is open-source, self-hosted double-entry accounting software with core invoices, bills and payments, optional purchasing and inventory, and a manually configured tax engine. Built on PHP 8.2+ and MySQL 8.4, it is a development preview for synthetic evaluation.",
   "locale": "en_GB",
   "email": "rmak78@gmail.com",
   "founder": {
@@ -33,17 +33,17 @@
   },
   "indexNowKey": "240b73d781977f499ab7c75318b9a14f",
   "release": {
-    "version": "0.3.0-preview",
-    "tag": "v0.3.0-preview",
+    "version": "0.4.0-preview",
+    "tag": "v0.4.0-preview",
     "date": "2026-09-16",
     "dateLabel": "16 September 2026",
-    "url": "https://github.com/rmak78/phpledger/releases/tag/v0.3.0-preview",
-    "zipUrl": "https://github.com/rmak78/phpledger/releases/download/v0.3.0-preview/phpledger-0.3.0-preview.zip",
-    "shaUrl": "https://github.com/rmak78/phpledger/releases/download/v0.3.0-preview/phpledger-0.3.0-preview.zip.sha256",
-    "sha256": "6b335fa3e6a9699cb775b081570749981e7491068a2ef5221996b48fa27b76e4",
-    "bytes": 3091799,
-    "bytesLabel": "3,091,799",
-    "sizeLabel": "3.09 MB",
+    "url": "https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview",
+    "zipUrl": "https://github.com/rmak78/phpledger/releases/download/v0.4.0-preview/phpledger-0.4.0-preview.zip",
+    "shaUrl": "https://github.com/rmak78/phpledger/releases/download/v0.4.0-preview/phpledger-0.4.0-preview.zip.sha256",
+    "sha256": "b777f9b831db7a6e774e53f510c17ea001514f278ef9a585245ac013dc3aecf6",
+    "bytes": 3179444,
+    "bytesLabel": "3,179,444",
+    "sizeLabel": "3.18 MB",
     "license": "https://github.com/rmak78/phpledger/blob/master/LICENSE"
   },
   "requirements": "PHP 8.2+ (8.3 recommended), MySQL 8.4 (InnoDB), HTTPS, terminal access",
@@ -90,15 +90,21 @@
     "Company setup in ten functional currencies, one immutable functional currency per book; account management and audit history.",
     "Receipt, expense and general-journal drafts, balanced posting, linked dated reversals and correction mechanics preserving document identity.",
     "Account ledgers, trial balance, profit and loss, balance sheet, core CSV exports, bank CSV reconciliation, period controls and reviewed opening-cutover workflow.",
-    "Cash POS with a synthetic catalogue and printable receipt; four synthetic business packs and reporting walkthroughs.",
+    "Core AR/AP: shared customer/vendor parties, invoices, bills, partial/final allocated payments, linked credits, historical ageing and control-account reconciliation. Owners can hide navigation without disabling services.",
+    "Optional Purchasing: purchase orders, partial goods receipts, later matched AP bills, reviewed variances, returns and received-but-unbilled reconciliation.",
+    "Optional Inventory: shared products, one stock location, moving weighted-average cost, stock invoice issues, source-linked returns, counts and reviewed value adjustments.",
+    "Core manual tax codes and dated rates, input/output account mappings, inclusive/exclusive price entry and frozen document snapshots; no automatic country rules.",
+    "Reviewed opening party/product conversion ties supported existing balances to shared ledgers without reposting the opening journal.",
+    "Cash POS with a synthetic catalogue and printable receipt; five demo choices: an Accounting starter playground plus four existing multi-year teaching histories. Cash POS does not issue shared stock.",
     "Scoped, revocable read API and MCP connections, with the published client compatibility matrix defining tested clients.",
-    "Developer foundations: exact multi-currency line snapshots, manual rates, party/contact schema, authoritative open items, realised FX settlement mechanics and an unconfigured retryable event outbox."
+    "Exact currency snapshots with manual document and settlement rates, realised FX settlement mechanics, same-identity corrections and an unconfigured retryable event outbox."
   ],
   "limitations": [
-    "Customer/vendor invoice and bill documents, operator settlement workflows, credit notes and ageing screens.",
-    "Inventory, cost of sales, tax engines, statutory filing and professionally accepted reporting packages.",
-    "Foreign-currency entry screens, rate providers, period-end revaluation and group consolidation.",
+    "Advances, unapplied credits, overpayments and cash refunds; Quotes remains a separate future plugin.",
+    "Multiple stock locations, batches, serials, expiry, landed cost, letters of credit, manufacturing and integration of cash POS with shared stock.",
+    "Country tax rules, withholding, compound or nonrecoverable tax policies, statutory filing and professionally accepted reporting packages.",
+    "Automated rate providers, outgoing payments from foreign-currency bank accounts, period-end revaluation and group consolidation.",
     "Vetting enforcement, vendor bank change control and outbound connectors.",
-    "Financial write API/MCP, card processing, offline use, document scanning and detailed historical imports."
+    "Financial write API/MCP, card processing, bank feeds, offline use, document scanning and detailed historical imports. New country account catalogues, expanded sample companies and UX changes remain research/review work."
   ]
 }

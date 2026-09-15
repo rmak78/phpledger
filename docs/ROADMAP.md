@@ -1,12 +1,12 @@
 # Revival roadmap
 
-## Current next release: usable accounting starter
+## Current release: 0.4.0-preview accounting starter
 
 The owner's 16 September scope supersedes the separate AR, AP and later inventory sequencing below. AR and AP are required parts of the base accounting core, implemented as separate services. Purchasing and Inventory are separate bundled optional modules in the same next release. Keep Inventory basic: products, one stock location, immutable movements and weighted-average valuation. Quotes, advanced stock features, landed cost and LC workflows belong to separate plugins.
 
 The same release adds a configurable core tax engine: manually entered codes and dated rates, owner-selectable inclusive/exclusive input, and frozen document tax snapshots. Country packs supply later rules; forms and e-filing remain future scope. No country-specific tax values are guessed.
 
-The local implementation completes invoice/bill entry, partial payments, credit notes, ageing, opening conversion, purchasing receipts/bill matching and reconciliation. [Starter evidence](repository/sprint-06/ACCOUNTING-STARTER.md) distinguishes implemented behavior, technical validation and open release/accounting gates. Published package/demo state remains 0.3.0-preview until a new publication receipt exists.
+The local implementation completes invoice/bill entry, partial payments, credit notes, ageing, opening conversion, purchasing receipts/bill matching and reconciliation. [Starter evidence](repository/sprint-06/ACCOUNTING-STARTER.md) distinguishes implemented behavior, technical validation and open release/accounting gates. The package and hosted demo are published as **0.4.0-preview**; the [publication receipt](repository/sprint-06/PREVIEW-0.4.0-PUBLICATION.json) records archive and live verification. The country catalog, eleven deep samples and complete UX audit/design program follows this release, with no catalog migration before its contract and flow are accepted.
 
 
 ## Published prerequisite work — AR/AP foundations, 0.3.0-preview

@@ -1,7 +1,16 @@
 # Website design decisions
 
-Current live release: **0.1.4-preview**, including the financial-report/tablet layout correction. [Publication and validation](../../repository/sprint-05/PREVIEW-0.1.3-VALIDATION.md) records the exact package and hosted checks. Earlier dated publication sections below preserve their original scope.
+## Published accounting starter website - 16 September 2026
 
+The current website presents **0.4.0-preview**, with core AR/AP, optional Purchasing/Inventory and manually configured inclusive/exclusive tax. The [release article](https://phpledger.com/news/0-4-0-preview/) is live. Current capability assertions are synchronized throughout the existing long-form library; the seven earlier release articles retain historical scope. The approved homepage headline, typography, six-item navigation and visual style are unchanged.
+
+The static release `website-redesign-20260915-233156` was published at **04:32 PKT on 16 September** (23:32 UTC on 15 September). All 165 files matched archive, host and public hashes; demo identity and headers were preserved. [The live receipt](qa/release040-live-publication.json) records these checks. The application and media ZIP were published separately on [GitHub](https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview), and their public downloads matched the release artifacts.
+
+Five demo choices means one focused Accounting starter playground plus four existing multi-year teaching histories. No eleven-company expansion or new country account catalogues are claimed. The [content register](CONTENT-REGISTER.md) covers 64 source pages and 65 HTML outputs. The [launch kit](ACCOUNTING-STARTER-LAUNCH-KIT.md), [facts/FAQ/experiments](ACCOUNTING-STARTER-FACTS-AND-DEMO.md) and [actual screenshot assets](accounting-starter-media/README.md) provide the completed marketing handoff. No social post, email or press submission was sent.
+
+## Historical design selection and publication context
+
+The dated records below preserve earlier release facts. They establish the selected visual direction, not the current package version or starter capability boundary.
 
 ## Current selected direction — 15 September 2026
 
