@@ -1,6 +1,6 @@
 # The complete future path
 
-The owner requested the completed 0.1.4-preview changes live first for review and retained **API/MCP read access → controlled commands → optional AR/AP** as the next implementation order. Subledgers and reviewed reporting are still unfinished. SEO discovery and marketing preparation run in parallel at high priority; their external account and execution status remains distinct from published product capabilities.
+The current maintenance release is 0.1.6-preview: PHP 8.2 minimum, PHP 8.3 recommended, AGPL core licensing and corrected country-neutral positioning. The next sequence is read API/MCP acceptance, AR, AP, distribution/updater tooling, regional connectors, inventory, shop POS, e-commerce, controlled commands, then later restaurant/distribution/specialists. See [[Module roadmap|Module-Roadmap]] for current gates; older milestone snapshots below retain their historical scope.
 
 The direction confirmed on 15 September 2026 is **complete accounting core first, optional business modules next**, with a business API and MCP access over the same services. The current preview supplies working slices; it does not complete the accounting, user or release gates below.
 
@@ -26,7 +26,7 @@ Account statements, chart management and general journals are the current core s
 
 AR/AP open-item records and stock valuation belong to their future modules. An account statement alone cannot provide aging, outstanding invoices/bills or stock reports. Unexplained opening controls must keep readiness unresolved.
 
-Financial-reporting work proceeds **Pakistan → UK → UAE**, with explicit entity/period profiles. Tax research runs alongside it, covers eight countries and seven industries, and remains disabled and unreviewed. [[Tax research|Tax-Research]] explains that separate boundary.
+Financial reporting uses explicit, reviewed regional entity/period profiles over a country-neutral core. Pakistan FBR is one planned connector; the product is not defined by one country. Tax research runs alongside it, covers eight countries and seven industries, and remains disabled and unreviewed. [[Tax research|Tax-Research]] explains that separate boundary.
 
 ## Optional business expansion
 
@@ -36,7 +36,7 @@ Financial-reporting work proceeds **Pakistan → UK → UAE**, with explicit ent
 - **Shop and restaurant POS:** shared checkout, shop entry or table/order/kitchen operations, returns and settlement controls.
 - **Distribution and specialists:** route/van stock and collections; pharmacy batch/expiry; jewelry pricing; membership dues; workshop jobs/parts/labour.
 
-A supported module lifecycle and API/MCP access are planned, not current interfaces. The sample POS remains part of the application until its module boundary is implemented. Optional software does not make legal obligations optional.
+The bundled core/POS lifecycle is implemented. API/MCP access remains the next implementation milestone. Optional software does not make legal obligations optional.
 
 ## Later investigations
 
@@ -49,3 +49,9 @@ Offline synchronization, durable background events and native wrappers follow de
 Each release is scoped separately. Roadmap entries are not delivery dates, funding commitments or regulatory support claims.
 
 [[Module roadmap|Module-Roadmap]] · [[First package|First-Package]] · [[Contributing and support|Contributing-and-Support]]
+
+## Staged releases
+
+A, 0.1.6-preview, delivers contributor POS accessibility and website information/SEO. B, 0.2.0-preview, targets read API/MCP, OAuth and scoped connections, and server-side tables. C, 0.2.1-preview, targets four reconciled companies with 2024?2025 histories and an open 2026 practice period.
+
+Native compatibility must be tested separately in Codex, Claude, ChatGPT, n8n, OpenClaw, Nous Research Hermes Agent, Open WebUI and the actual llm.bixisoft.com interface. Protocol support or an OpenAPI fallback does not close a client gate. Subdomain migration stays deferred. API/MCP reads precede controlled commands, the installer and optional AR/AP.

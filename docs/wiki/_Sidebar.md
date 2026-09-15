@@ -18,3 +18,6 @@
 - [[Module roadmap|Module-Roadmap]]
 - [[Roadmap]]
 - [[Contributing and support|Contributing-and-Support]]
+
+- [[PHP and hosting|PHP-Hosting]]
+- [[Licensing and contributions|Licensing]]

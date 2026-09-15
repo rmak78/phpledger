@@ -25,7 +25,7 @@ The public demo keeps accounts read-only. Visitors can save/edit general drafts,
 
 ## A complete statement needs more than a layout
 
-Applicable accounting guidance governs recognition, measurement, classification, adjustments, closing and disclosures as well as presentation. Work starts with **Pakistan, then the UK and UAE**, using the relevant statutory framework and professional guidance. ICAP, ICMAP and ACCA references inform the research; they are not a product certification.
+Applicable accounting guidance governs recognition, measurement, classification, adjustments, closing and disclosures as well as presentation. Each regional profile uses its relevant statutory framework and professional guidance. Pakistan is one intended direction within a country-neutral core; it does not define the entire audience or a mandatory global rollout sequence. ICAP, ICMAP and ACCA references inform the research; they are not a product certification.
 
 The next reporting work needs reviewed classifications, current/non-current distinctions, appropriate COGS/subledger data, comparatives, equity movements and the notes or cash-flow components required by the selected profile. Issued results must retain their profile/version. Missing mappings or records must stay visible.
 

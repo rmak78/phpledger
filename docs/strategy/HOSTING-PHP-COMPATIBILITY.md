@@ -32,6 +32,6 @@ PHP availability alone does not prove PHP Ledger hosting compatibility. The curr
 - PHP **8.4.25**: the same full suite passed — **109 PHP files linted, PHPStan zero errors, sample validation passed, 142 tests and zero failures**. This is additional compatibility coverage; deployment remains on 8.3.
 - Actual installed platform requirements passed on both runtimes. Composer manifest validation passed with the expected warnings for deliberate exact dependency pins.
 - These runs include the preserved local multi-year demo work and integration candidate; they do not mark either release or the named-client matrix complete.
-- Exact maintenance-package installation/upgrade, restoration, browser and hosted results will be recorded after execution in the publication receipt. No live result is implied by the checks above.
+- The exact 0.1.6 maintenance package passed installation and upgrades from 0.1.4/0.1.5 on PHP 8.2/8.3. Its smaller published scope passed 121 tests on each of the three CI runtimes. The public demo now runs PHP 8.3.33. See the [maintenance publication record](../repository/sprint-05/PREVIEW-0.1.6-VALIDATION.md) for package, restoration, browser and hosted proof; the integration and multi-year fixtures above remain separately gated.
 
 The earlier [PHP 8.2 audit](PHP-8.2-AUDIT.md) remains unchanged as historical evidence of the blocker. This document records its authorized resolution.

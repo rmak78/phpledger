@@ -16,7 +16,7 @@ Use synthetic records in public issues and examples. Do not include private cust
 
 The [public repository](https://github.com/rmak78/phpledger) contains modern source under `www/phpledger`, with the historical application retained only in Git history. Follow the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md), and use [Issues](https://github.com/rmak78/phpledger/issues) to discuss a bounded proposal. See the [0.1.4-preview evaluation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.4-preview); supported-pilot review remains open.
 
-New project-owned code and documentation use the [MIT License](https://github.com/rmak78/phpledger/blob/master/LICENSE). Preserve the [separate scope and notices](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) for historical code, dependencies and assets. The MIT grant does not relicense legacy contributions or company marks.
+New project-owned code and documentation use the [AGPL-3.0-or-later](https://github.com/rmak78/phpledger/blob/master/LICENSE). Preserve the [separate scope and notices](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) for historical code, dependencies and assets. Pre-adoption releases retain their original grants; this release does not relicense legacy contributions or company marks. New contributions require the [individual/entity CLA](https://github.com/rmak78/phpledger/blob/master/CLA.md).
 
 ## Support direction
 

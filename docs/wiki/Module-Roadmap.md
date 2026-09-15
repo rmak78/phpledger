@@ -1,52 +1,22 @@
-# Core first, optional modules next
+# Core accounting and optional modules
 
-**0.1.4-preview publication:** the owner authorized the completed foundation/module/running-balance changes to go live first. Current release status is recorded in the repository's `docs/repository/sprint-05/PREVIEW-0.1.3-VALIDATION.md`; earlier local wording below is historical. The next implementation order remains API/MCP reads, controlled commands, then optional AR/AP. Subledgers and reviewed statement packages are unfinished. SEO discovery and campaign preparation are high priority in parallel.
+The 0.1.6-preview maintenance package preserves the published accounting core and eleven migrations. API/MCP read access remains a separate [development candidate](https://github.com/rmak78/phpledger/blob/codex/integration-delivery/docs/INTEGRATIONS.md); actual named-client acceptance is still open.
 
-PHP Ledger's required core lets an authorized user manage accounts, record and reverse journals, reconcile balances and complete the supported accounting period with every optional module disabled. The 0.1.4-preview release consolidates opening/cutover, reasoned periods, bank reconciliation, core CSV exports and the bundled module lifecycle. Its account ledger shows running balances on desktop, tablet and mobile.
-
-AR, AP, purchasing/inventory, tax and industry POS will be optional modules. They reuse the same identities, permissions, money rules and central posting service. The local bundled core/POS lifecycle now has versioned manifests, reviewed migration compatibility, owner-only enable/disable decisions and immutable history. Ordinary companies default off; existing receipts survive disablement. It is a two-manifest foundation, not a third-party installer. The repository receipt `docs/repository/sprint-05/MODULE-FOUNDATION.md` records its scope; that source is not yet pushed. API/MCP reads are next, then controlled commands and optional AR/AP. Accounting/security and observed-user acceptance remain open.
+The core is country-neutral and useful with optional modules disabled. Regional connectors, product workflows and client interfaces reuse the same identities, company/book permissions, fixed-precision money and posting service.
 
 ## Delivery order
 
-| Order | Deliverable | Key gate |
-|---|---|---|
-| 1 | Core account statements, chart management and general journals | Scoped, reconciling balances; audited account edits; saved drafts; exact posting, retries and linked reversals. |
-| 2 | Opening/cutover, period completion, bank reconciliation and core reports/exports | Reviewed two-period core-only example, recovery and observed user acceptance. |
-| 3 | Module contracts, lifecycle and shared master data | Compatibility/dependencies, company enablement, retained historical access and core-only operation. |
-| 4 | Business API and MCP reads | Same authorized companies, accounts, journals and report totals as the browser. |
-| 5 | Business API and MCP commands | Scoped draft/validate/post/reverse operations with execution-time checks and durable receipts. |
-| 6 | AR | Customer invoices, receipts, allocations, aging and reconciled control balances. |
-| 7 | AP | Vendor bills, payment recording, allocations, aging and reconciled control balances. |
-| 8 | Purchasing and inventory costing | Quantities, valuation, receiving/returns and COGS reconcile. |
-| 9 | First reviewed Pakistan tax adapter | Defined entity/transaction scope, effective rules, adjustments and tax-to-ledger reconciliation. |
-| 10 | Shop POS | Shared checkout, sale/return/settlement, supported tender and hardware behavior. |
-| 11 | Restaurant POS | Tables/orders, modifiers, kitchen routing and split/merge settlement. |
-| 12 | Distribution | Route/van stock, deliveries, collections and evening settlement. |
-| 13 | Specialist modules | Reviewed pharmacy, jewelry, workshop, membership and other bounded workflows. |
+1. Complete scoped API/MCP reads and the real-client compatibility gates.
+2. AR, then AP, with reconciled customer/vendor open items and cutover adoption.
+3. Distribution packaging and updater: Softaculous, Installatron, Docker Hub, Packagist and the planned browser installer.
+4. Regional tax/e-invoicing connector framework. Pakistan FBR is one planned connector alongside ZATCA, UAE Peppol PINT and Oman. Define contracts before AR/AP schemas; enable applicable reviewed rules before affected production use.
+5. Purchasing/inventory and costing.
+6. Shop POS, then e-commerce/storefront.
+7. Controlled API/MCP commands with explicit authority and durable retry receipts.
+8. Restaurant, distribution operations and specialist modules.
 
-This order is a delivery plan with acceptance gates, not a list of completed features. The [detailed module plan](https://github.com/rmak78/phpledger/blob/master/docs/MODULE-ROADMAP.md) records the contracts and dependencies.
+Urdu then Arabic/RTL with English fallback, owner/partner equity reporting and phone-friendly entry remain planned cross-cutting work. Native desktop/Android clients remain planned paid add-ons over the API/MCP contracts. Offline means queued drafts; only the server posts, controls periods and reverses.
 
-## Contracts before dependent documents
+The installer-created customer website is parked. Khata is a reserved, optional unposted-subledger concept; formalisation uses normal accounting services. No module may hide posted entries or create a second ledger. [[Licensing]] requires advance declaration of future commercial modules; none is declared by this maintenance release.
 
-Tax contracts must reserve document-line inputs, exact rounding, effective policy versions and immutable calculation snapshots before AR/AP document schemas are finalized. The first complete adapter is later in the illustrative sequence; any required adapter must move ahead of affected production transactions. Missing tax rules must never become an assumed zero.
-
-Core cutover must reconcile any retained AR/AP controls to external unpaid-document schedules while the modules are unavailable. Later activation must match them without reposting opening balances.
-
-Shared contacts will carry customer/vendor roles, and one shared product/service identity will support module attributes. Inventory owns quantity and valuation; restaurant operations own order/table/kitchen state. A core-only company should not require a product catalog.
-
-## Enablement, history and access
-
-Installing a module must not silently activate it for every company. Compatibility, dependencies and company capabilities will be checked on the server for browser, API and MCP operations.
-
-Disabling a module must preserve posted journals, source snapshots, audit, exports and authorized historical reads. A correction involving module documents must use its supported correction workflow and reconcile its subledger.
-
-API/MCP reads precede commands. Commands need explicit permissions, company scope, configured review policy, current-state checks and idempotent receipts. These adapters must not introduce a second ledger or authentication system. Recording a payment does not send money.
-
-No supported module lifecycle, public business API or MCP server is available in the preview. [[Tax research|Tax-Research]] contains research candidates only.
-
-[[Architecture]] · [[Accounting and reports|Accounting-and-Reports]] · [[Roadmap]]
-
-
-The planned read milestone also covers DataTables server-side pagination for large lists, reusing the same scoped MeekroDB query services and exact balances. See the [implementation plan](https://github.com/rmak78/phpledger/blob/master/docs/MODULE-ROADMAP.md#large-table-interface-and-meekrodb-follow-up-15-september-2026). Four compact multi-year company histories, including salaries/assets/cash/banks and closing examples, are [planned](https://github.com/rmak78/phpledger/blob/master/docs/DEMO.md#planned-multi-year-teaching-histories-owner-direction-15-september-2026); they are not in the current demo.
-
-The [WordPress-style installer plan](https://github.com/rmak78/phpledger/blob/master/docs/INSTALLER.md) fits after controlled commands and before optional AR/AP. Design proceeds in parallel now; the first version covers fresh installation using the existing migration, auth and onboarding services. Moving the demo to `demo.phpledger.com` is an optional later hosting decision, not an authorized move.
+See the [detailed module roadmap](https://github.com/rmak78/phpledger/blob/master/docs/MODULE-ROADMAP.md), [installer plan](https://github.com/rmak78/phpledger/blob/master/docs/INSTALLER.md) and [[Roadmap]]. Accounting review, access isolation, exact reconciliation, installation/recovery and observed use remain acceptance gates.

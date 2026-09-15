@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/rmak78/phpledger/releases/tag/v0.1.6-preview"><strong>Download 0.1.5-preview</strong></a> &nbsp; · &nbsp;
+  <a href="https://github.com/rmak78/phpledger/releases/tag/v0.1.6-preview"><strong>Download 0.1.6-preview</strong></a> &nbsp; · &nbsp;
   <a href="https://phpledger.com/demo/">Try the demo</a> &nbsp; · &nbsp;
   <a href="https://github.com/rmak78/phpledger/wiki">Read the Wiki</a> &nbsp; · &nbsp;
   <a href="https://github.com/rmak78/phpledger/wiki/Roadmap">Roadmap</a> &nbsp; · &nbsp;
@@ -49,7 +49,7 @@ The application requires **PHP 8.2 or newer**; **PHP 8.3 is the recommended depl
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS remain development previews.*
 
 > [!NOTE]
-> **Evaluate the accounting core.** [Download 0.1.5-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.6-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional accounting review and pilot usability gates remain open.
+> **Evaluate the accounting core.** [Download 0.1.6-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.6-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional accounting review and pilot usability gates remain open.
 
 ## Explore the working preview
 
