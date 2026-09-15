@@ -1,3 +1,17 @@
+# Current licence decision - 15 September 2026
+
+The owner selected **AGPL-3.0-or-later** for the project-owned development line from the adoption commit forward. The accounting core remains open source; a separate commercial licence is available. Published 0.1.x previews retain their MIT grant, archives and receipts. [Licensing policy](LICENSING-POLICY.md), [scope](../LICENSE-SCOPE.md) and [CLA](../CLA.md) record the current terms. Earlier statements below are historical evidence and are superseded where they discuss the choice for new modern code.
+
+The owner considers an enduring open-source core non-negotiable. The strategy review identifies competitors' BSL/source-available direction as an opportunity for clear open-source terms; that is positioning rationale, not a new feature or an independently verified market-size claim. AGPL source-sharing and commercial sublicensing were selected together. The CLA supplies explicit individual/entity rights for AGPL distribution, dual-licensing customers and future declared commercial modules while contributors retain copyright.
+
+The copyright holder can offer new terms for its own work. Existing MIT permissions remain available to their recipients; adding an AGPL grant does not revoke them. The current branch includes the explicit contributor-change revert `a157e52` and owner-authored accessible-label replacement `916aebb`, with public history preserved. This is the owner's recorded basis for the modern transition. It does not replace the separate rights-chain review for Sutlej-era material, independent legal review of the CLA/commercial agreement, or third-party licence obligations. No outside contribution is asserted to have signed a retroactive CLA.
+
+The AGPL text was obtained without modification from [SPDX's AGPL-3.0-or-later text](https://github.com/spdx/license-list-data/blob/main/text/AGPL-3.0-or-later.txt) after the GNU site timed out. SHA-256: `d8a6cc31abc16b6748c7a21f21611f5a1ec33f67d22ca23d7da1c19b95496bee`. [GNU AGPL](https://www.gnu.org/licenses/agpl-3.0.html) remains the canonical licence reference.
+
+The requested [CLA Assistant action](https://github.com/contributor-assistant/github-action) is pinned to v2.6.1 commit `ca4a40a7d1004f18d9960b404b97e5f30a505a08`. Its repository was archived on 23 March 2026. Workflow configuration is local; no signature, GitHub enforcement, unprotected signature branch or live run has been established by this change. No PR code is checked out by the privileged workflow. The next authorised publication must create the branch, verify the document URL and a real signature/recheck, then enforce the check before accepting contributions.
+
+---
+
 > **Current decision, 14 September 2026:** MIT is approved for new project-owned code and documentation; see [LICENSE](../LICENSE), [scope](../LICENSE-SCOPE.md) and [the recorded decision](repository/sprint-03/LICENSE-DECISION.md). The historical audit below is retained as evidence and its pending-choice language is superseded for the modern code. Historical paths are retained only in Git history; their provenance remains separate.
 
 # License and provenance review

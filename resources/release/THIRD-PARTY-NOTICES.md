@@ -1,6 +1,6 @@
 # Third-party notices
 
-PHP Ledger's new project-owned code is distributed under the MIT licence in LICENSE. Components below retain their own terms. This package contains their source/assets and preserves their existing copyright headers and notices.
+PHP Ledger's current project-owned code is distributed under AGPL-3.0-or-later in LICENSE, with a separate commercial licensing offer. Published 0.1.x previews retain their MIT grant. See docs/LICENSING-POLICY.md. Components below retain their own terms. This package contains their source/assets and preserves their existing copyright headers and notices.
 
 | Component | Version / source | Licence and included notice |
 |---|---|---|

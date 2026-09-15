@@ -7,7 +7,7 @@
 <h1 align="center">Open-source, self-hosted accounting and cash POS for small businesses</h1>
 
 <p align="center">
-  Built on PHP 8.5 and MySQL 8.4. New code is MIT licensed. Development preview.
+  Built on PHP 8.5 and MySQL 8.4. New code is AGPL-3.0-or-later licensed; a commercial licence is available. Development preview.
 </p>
 
 <p align="center">
@@ -127,7 +127,7 @@ We welcome thoughtful feedback from business owners, bookkeepers, accountants, d
 
 **Companies that support our open-source initiative:** [BixiTech](https://www.bixitech.com/) · [BixiSoft](https://bixisoft.com/) · [BrownBag](https://brownbag.pk/) · [Agency75](https://agency75.com/).
 
-The new project-owned code and documentation use the [MIT License](LICENSE), with paid setup, training and support on customer-owned hosting. [Licence scope](LICENSE-SCOPE.md) preserves separate terms for historical code, dependencies, fonts, datasets and company marks; the legacy application's provenance is not resolved by this grant, and MeekroDB keeps its LGPLv3 terms. No stable-release, jurisdiction-compliance or support-response guarantee is implied by the preview.
+New project-owned code and documentation use [AGPL-3.0-or-later](LICENSE), with a [commercial licence available](docs/LICENSING-POLICY.md) and optional paid setup, training and support. Published 0.1.x previews retain their MIT grant. The accounting core remains open source; self-hosting for your own business stays free, with no licence keys or licensing-server calls. [Licence scope](LICENSE-SCOPE.md) preserves separate terms for historical code, dependencies, fonts, datasets and company marks; the legacy application's provenance is not resolved by this grant, and MeekroDB keeps its LGPLv3 terms. No stable-release, jurisdiction-compliance or support-response guarantee is implied by the preview.
 
 ---
 
