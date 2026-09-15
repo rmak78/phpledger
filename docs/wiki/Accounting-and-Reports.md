@@ -4,7 +4,7 @@ Every posting uses one service that checks access, company/book scope, dates, cu
 
 Open **Reports → Open account ledger** to choose any account, or follow the ledger links from Transactions and Journals. Mobile statements show debit, credit and running balance together for each movement.
 
-## What 0.1.3-preview does
+## What 0.1.4-preview does
 
 | Workflow | Present scope |
 |---|---|

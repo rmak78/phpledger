@@ -6,7 +6,7 @@
 
 PHP Ledger is being rebuilt for small-business owners, accountants and bookkeepers who want a useful workspace on hosting they control. The direction is a complete accounting core, followed by optional business modules.
 
-Explore [phpledger.com](https://phpledger.com/) and [your temporary sample company](https://phpledger.com/demo/). The [0.1.3-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.3-preview) adds universal account statements, chart management and saved general journals. It remains a development preview for evaluation with synthetic data.
+Explore [phpledger.com](https://phpledger.com/) and [your temporary sample company](https://phpledger.com/demo/). The [0.1.4-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.4-preview) adds universal account statements, chart management and saved general journals. It remains a development preview for evaluation with synthetic data.
 
 Modern application source is in `www/phpledger`; the historical application remains only in Git history. See [[Getting started|Getting-Started]] for the package, installation requirements and demonstration limits.
 

@@ -1,6 +1,6 @@
 # The foundation preview package
 
-The [0.1.3-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.3-preview) develops the accounting core. It is an installable evaluation checkpoint with synthetic data; supported-pilot acceptance remains open.
+The [0.1.4-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.4-preview) develops the accounting core. It is an installable evaluation checkpoint with synthetic data; supported-pilot acceptance remains open.
 
 Modern source is under `www/phpledger`, with historical code retained only in Git history. New project-owned code and documentation use [MIT](https://github.com/rmak78/phpledger/blob/master/LICENSE); [dependency, asset and historical terms](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) remain separate.
 

@@ -51,7 +51,7 @@ $lastPage = ($activity['page'] ?? 1) === ($activity['pages'] ?? 1);
     <?php endif; ?>
 
     <div class="panel table-wrap statement-table-wrap" tabindex="0" role="region" aria-label="Account statement entries; scroll horizontally on smaller screens">
-        <table class="data-table statement-table">
+        <table class="data-table account-ledger-table">
             <caption>Posted entries in <?= pl_e((string) $company['currency']) ?> &middot; Date, journal and line order</caption>
             <thead><tr><th scope="col">Date</th><th scope="col">Journal</th><th scope="col">Description</th><th scope="col">Source</th><th scope="col" class="amount">Debit</th><th scope="col" class="amount">Credit</th><th scope="col" class="amount">Running balance</th></tr></thead>
             <tbody>
