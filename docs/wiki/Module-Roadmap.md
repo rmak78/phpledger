@@ -48,3 +48,5 @@ No supported module lifecycle, public business API or MCP server is available in
 
 
 The planned read milestone also covers DataTables server-side pagination for large lists, reusing the same scoped MeekroDB query services and exact balances. See the [implementation plan](https://github.com/rmak78/phpledger/blob/master/docs/MODULE-ROADMAP.md#large-table-interface-and-meekrodb-follow-up-15-september-2026). Four compact multi-year company histories, including salaries/assets/cash/banks and closing examples, are [planned](https://github.com/rmak78/phpledger/blob/master/docs/DEMO.md#planned-multi-year-teaching-histories-owner-direction-15-september-2026); they are not in the current demo.
+
+The [WordPress-style installer plan](https://github.com/rmak78/phpledger/blob/master/docs/INSTALLER.md) fits after controlled commands and before optional AR/AP. Design proceeds in parallel now; the first version covers fresh installation using the existing migration, auth and onboarding services. Moving the demo to `demo.phpledger.com` is an optional later hosting decision, not an authorized move.
