@@ -32,7 +32,7 @@ PHP Ledger is being rebuilt around that connected journey: useful daily tasks fo
 
 [![PHP Ledger owner overview: synthetic cash, income, expenses and profit with linked reports.](docs/repository/assets/owner-overview-preview.webp)](docs/repository/assets/owner-overview-preview.webp)
 
-*Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS are being refined for the first package.*
+*Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS remain development previews.*
 
 > [!NOTE]
 > **Evaluate the accounting core.** [Download 0.1.2-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is preserved in `legacy/`. Regional accounting review and pilot usability gates remain open.
