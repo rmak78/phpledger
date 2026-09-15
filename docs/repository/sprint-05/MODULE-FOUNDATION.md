@@ -58,6 +58,14 @@ No real provider, payment, message or remote account is involved in these steps.
 
 The full run initially exposed an isolated POS retry fixture missing the newly required module metadata and a test comparing MySQL JSON field order. The fixture now supplies only the module/install metadata while still omitting the catalog; retry recovery passes. Durable result comparison checks values independent of JSON key order. The browser table heading says Recorded because existing terminal formatting localizes its UTC-stored time.
 
+### Final package verification
+
+Built an unpublished `0.1.3-local` evaluation ZIP from clean source commit `22b5725`, using the unchanged production dependency set from the prior package. The archive is retained locally under `.cache/sprint05-package/`; it is not a GitHub release or replacement for the public download. Its SHA-256 is `a37bf7ec564c904c9d348b99cb4132d240bb7f80c2dff73e7fe057fb9493565f`. An independent rebuild from the same source produced identical bytes.
+
+The actual unpacked archive, mounted read-only with its own production vendor and resources, passed fresh installation and all three upgrade baselines. External acceptance scripts were mounted separately, outside the package. A second fresh disposable database proved default-off state, owner enablement, server review, one 12.7500 sample cash sale, exact CSV export, disablement denial, retained receipt, balanced linked reversal and re-enable with three audit receipts. Every temporary package database was removed after its check; development and existing test data remained intact. The first attempt to nest a new helper mount inside the read-only package was rejected by Docker before PHP execution; mounting the harness outside the package resolved it without altering the extracted files.
+
+Final targeted PHP lint/PHPStan checks and upgrade checks also passed after adding explicit assertions that installation never activates ordinary companies or invents owner decisions. The only source changes after the packaged commit are documentation of these results and current roadmap wording.
+
 ## Scope and next milestone
 
 The technical scope of this bundled lifecycle is complete. Independent accounting/security review, observed core-user acceptance, production hosting/load validation and jurisdiction-qualified reports remain open gates. Schema installation failure recovery follows the existing migration runbook; no transactional DDL rollback is promised.
