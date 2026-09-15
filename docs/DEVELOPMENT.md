@@ -4,7 +4,7 @@ These instructions apply to the modern source containing `compose.yaml`, `compos
 
 ## Start the verified environment
 
-Use Docker Compose for PHP 8.5 and MySQL 8.4. Preserve any existing `.env`. For a fresh checkout, copy `.env.example` to `.env` and privately set independent random development database passwords.
+Use Docker Compose for PHP 8.2+ and MySQL 8.4. Preserve any existing `.env`. For a fresh checkout, copy `.env.example` to `.env` and privately set independent random development database passwords.
 
 ```powershell
 docker compose up -d --build

@@ -1,6 +1,6 @@
 # Third-party notices
 
-PHP Ledger's current project-owned code is distributed under AGPL-3.0-or-later in LICENSE, with a separate commercial licensing offer. Published 0.1.x previews retain their MIT grant. See docs/LICENSING-POLICY.md. Components below retain their own terms. This package contains their source/assets and preserves their existing copyright headers and notices.
+PHP Ledger's current project-owned code is distributed under AGPL-3.0-or-later in LICENSE, with a separate commercial licensing offer. Published 0.1.0 through 0.1.5 previews retain their MIT grant. See docs/LICENSING-POLICY.md. Components below retain their own terms. This package contains their source/assets and preserves their existing copyright headers and notices.
 
 | Component | Version / source | Licence and included notice |
 |---|---|---|
@@ -51,7 +51,7 @@ The 0.2.0 candidate retains every production dependency license file in `vendor`
 | psr/log | 3.0.2 | MIT |
 | symfony/deprecation-contracts | v3.7.1 | MIT |
 | symfony/polyfill-uuid | v1.37.0 | MIT |
-| symfony/uid | v8.1.5 | MIT |
+| symfony/uid | v7.4.17 | MIT |
 | webmozart/assert | 2.4.1 | MIT |
 
 DataTables 3.0.4 is MIT licensed by SpryMedia Ltd. Its MIT notice and pinned source/hash record are bundled under `www/phpledger/public/assets/vendor/datatables-3.0.4`. It is served locally, without a CDN request during application use.

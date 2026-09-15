@@ -4,7 +4,7 @@ Owner decision: 15 September 2026. Applies to the current development line from 
 
 ## The accounting core remains open source
 
-PHP Ledger's project-owned accounting core and documentation use **AGPL-3.0-or-later**. The core remains open source. The current module line, including the POS showcase, uses the same AGPL terms. Published **0.1.x previews remain under the MIT grant they shipped with**, including their bundled project-owned modules. Their archives, checksums, release receipts and existing recipient rights are unchanged.
+PHP Ledger's project-owned accounting core and documentation use **AGPL-3.0-or-later**. The core remains open source. The current module line, including the POS showcase, uses the same AGPL terms. Published **0.1.0 through 0.1.5 previews remain under the MIT grant they shipped with**, including their bundled project-owned modules. Their archives, checksums, release receipts and existing recipient rights are unchanged.
 
 The [full AGPL text](../LICENSE) governs the open-source grant. It allows commercial use and requires its applicable source-sharing and notice obligations to be met. For a modified version used interactively over a network, section 13 requires an offer of corresponding source to those users. The code licence grants no trademark rights. [Licence scope](../LICENSE-SCOPE.md) preserves third-party and historical terms.
 

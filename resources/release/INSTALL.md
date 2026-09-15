@@ -1,6 +1,6 @@
 # Install PHP Ledger {{VERSION}}
 
-> PHP 8.2 is the approved future floor. The current dependency audit is blocked, so this candidate still requires PHP 8.5.x. Do not bypass the runtime or Composer platform checks; the 8.2/8.3/8.4 support matrix has not passed.
+> Minimum PHP 8.2; PHP 8.3 is recommended for deployment. Use a current security patch and run preflight with the same PHP version/extensions as web requests. The package includes compatible production dependencies; do not bypass Composer platform checks.
 
 Source revision: `{{SOURCE_COMMIT}}`. This guide installs the new preview into an **empty, dedicated database**. For any existing database, first read [UPGRADE.md](UPGRADE.md). Never run SQL dumps from the historical application against this database.
 
@@ -10,7 +10,7 @@ Arrange the following with your hosting administrator:
 
 | Requirement | Supported package profile |
 |---|---|
-| PHP | 8.5.x for both command-line and web requests. PHP 8.6 and other branches are outside this profile. |
+| PHP | 8.2 or newer for command-line and web requests; 8.3 recommended. The tested matrix is 8.2/8.3/8.4; other branches require validation. |
 | Extensions | BCMath, PDO, PDO MySQL, mbstring, curl, OpenSSL, fileinfo and working PHP sessions; standard JSON support must be available. |
 | Database | MySQL 8.4, InnoDB and `utf8mb4_0900_ai_ci`. MariaDB is not validated for this package. |
 | Web server | HTTPS with a valid certificate; document root and front-controller fallback configured as below. |
@@ -77,7 +77,7 @@ The PHP handler must execute `index.php`. Redirect HTTP to HTTPS. Other servers 
 
 ## 4. Check and initialize
 
-Run these commands from the unpacked package root, using the same PHP 8.5 configuration and private database settings as the web process:
+Run these commands from the unpacked package root, using the same PHP 8.2+ configuration and private database settings as the web process:
 
 ```sh
 php www/phpledger/install/preflight.php

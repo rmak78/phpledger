@@ -4,7 +4,7 @@ Recipe revision **1, 15 September 2026**. This is the local Release B candidate.
 
 ## Configure an installation
 
-Keep the existing PHP 8.5 / MySQL 8.4 / MeekroDB installation, identity system and public document root. Production dependencies are pinned in `composer.lock`, including `mcp/sdk` **0.8.1** and `league/oauth2-server` **9.4.1**. PHP needs BCMath, PDO MySQL, mbstring, curl, OpenSSL, fileinfo and sessions. There is no second database connection or external authentication provider.
+Keep the existing PHP 8.2+ / MySQL 8.4 / MeekroDB installation, identity system and public document root. Production dependencies are pinned in `composer.lock`, including `mcp/sdk` **0.8.1** and `league/oauth2-server` **9.4.1**. PHP needs BCMath, PDO MySQL, mbstring, curl, OpenSSL, fileinfo and sessions. There is no second database connection or external authentication provider.
 
 1. Back up the source, database, private configuration and existing private keys. Apply the versioned migration through `php www/phpledger/install/migrate.php`. `011_read_connections` adds seven integration tables; the complete chain has twelve receipts and retains 35 accounting guards. It changes no posted accounting rows.
 2. Set `PL_PUBLIC_URL` to the exact HTTPS application URL, without a trailing slash: for example `https://ledger.example.com` or `https://phpledger.com/demo`. The resource/audience is that URL plus `/mcp`. Do not derive it from incoming headers.

@@ -1,7 +1,10 @@
 name: phpledger
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        PHP_VERSION: ${PL_PHP_VERSION:-8.3.33}
     ports:
       - "127.0.0.1:${PL_WEB_PORT:-18200}:80"
     environment:
@@ -65,7 +68,10 @@ services:
       timeout: 5s
       retries: 30
   test:
-    build: .
+    build:
+      context: .
+      args:
+        PHP_VERSION: ${PL_PHP_VERSION:-8.3.33}
     profiles: ["test"]
     environment:
       PL_ENV: test

@@ -1,6 +1,6 @@
 # PHP Ledger {{VERSION}}
 
-Open-source bookkeeping for small businesses, built with PHP and MySQL. New project-owned code uses AGPL-3.0-or-later; a commercial licence is available. Published 0.1.x previews retain their MIT grant. See [Licensing policy](docs/LICENSING-POLICY.md).
+Open-source bookkeeping for small businesses, built with PHP and MySQL. New project-owned code uses AGPL-3.0-or-later; a commercial licence is available. Published 0.1.0 through 0.1.5 previews retain their MIT grant. See [Licensing policy](docs/LICENSING-POLICY.md).
 
 **Development preview.** Evaluate this package with synthetic data before arranging an accountant-reviewed pilot. It is an early foundation, with known workflow and reporting gaps; it is not a completed ERP or a country-certified accounting product.
 
@@ -13,7 +13,7 @@ Source revision: `{{SOURCE_COMMIT}}`
 3. Follow the posted transaction into its journal and reports. Corrections use a linked reversal.
 4. Review the chart and an account statement. Use a general-journal draft for a balanced adjustment, review it, then post it in the sample company.
 
-The package needs PHP **8.5.x**, MySQL **8.4**, HTTPS and command-line access. Production Composer dependencies are included. Keep the supplied directory layout: only `www/phpledger/public` is the web document root. Do not serve the package root.
+The package needs PHP **8.2+ (8.3 recommended)**, MySQL **8.4**, HTTPS and command-line access. Production Composer dependencies are included. Keep the supplied directory layout: only `www/phpledger/public` is the web document root. Do not serve the package root.
 
 ## Included in this preview
 

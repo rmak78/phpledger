@@ -28,7 +28,7 @@ An operator downloads the complete release ZIP, unpacks it and points the HTTPS 
 
 ## Supported profile and acceptance
 
-Start with the current package profile: PHP 8.5.x; BCMath, PDO/PDO MySQL, mbstring, JSON and sessions; MySQL 8.4/InnoDB with the required collation; HTTPS and the exact public document root. PHP 8.2 is the approved future floor, subject to the [dependency and runtime audit gate](strategy/PHP-8.2-AUDIT.md). MariaDB and arbitrary shared-hosting configurations are not implicitly supported.
+Start with the current package profile: PHP 8.2+ (8.3 recommended); BCMath, PDO/PDO MySQL, mbstring, JSON and sessions; MySQL 8.4/InnoDB with the required collation; HTTPS and the exact public document root. The [hosting/runtime record](strategy/HOSTING-PHP-COMPATIBILITY.md) records the compatible lock and tested environments. MariaDB and arbitrary shared-hosting configurations are not implicitly supported.
 
 Verify fresh installation on Apache/PHP-FPM and Nginx/PHP-FPM hosting profiles where available, including a representative hosting-panel setup. Test missing extensions, wrong credentials, insufficient grants, wrong/nonempty database, unwritable configuration, interrupted migration, concurrent installation, CSRF, ownership failure, duplicate submission and access after completion. Confirm no private files can be downloaded. Compare CLI and browser-installed schemas/receipts and run existing scoped posting, report, permission and recovery checks against synthetic data.
 

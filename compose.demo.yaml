@@ -2,7 +2,10 @@ name: phpledger-demo
 services:
   demo-web:
     image: phpledger-demo-app:${PL_DEMO_RELEASE:-local}
-    build: .
+    build:
+      context: .
+      args:
+        PHP_VERSION: ${PL_PHP_VERSION:-8.3.33}
     restart: unless-stopped
     ports:
       - "127.0.0.1:${PL_DEMO_PORT:-18202}:80"
@@ -45,7 +48,10 @@ services:
       retries: 40
   demo-reset:
     image: phpledger-demo-app:${PL_DEMO_RELEASE:-local}
-    build: .
+    build:
+      context: .
+      args:
+        PHP_VERSION: ${PL_PHP_VERSION:-8.3.33}
     profiles: ["maintenance"]
     environment:
       PL_ENV: demo

@@ -12,17 +12,24 @@ jobs:
   php-mysql:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.2.33', '8.3.33', '8.4.25']
     env:
+      PL_PHP_VERSION: ${{ matrix.php }}
       PL_DB_PASSWORD: ci-local-only
       PL_DB_ROOT_PASSWORD: ci-local-root-only
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
-      - name: Build the PHP 8.5 foundation
+      - name: Build the PHP ${{ matrix.php }} foundation
         run: docker compose --profile test build test
       - name: Validate the dependency manifest
         run: docker compose --profile test run --rm test composer validate --no-interaction
       - name: Audit locked public dependencies
         run: docker compose --profile test run --rm test composer audit --no-interaction
+      - name: Verify actual runtime requirements
+        run: docker compose --profile test run --rm test composer check-platform-reqs
       - name: Lint, static analysis, sample data, and isolated MySQL tests
         run: docker compose --profile test run --rm test
       - name: Verify a backup in an isolated restore database

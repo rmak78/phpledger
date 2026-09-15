@@ -4,7 +4,7 @@ PHP Ledger is being rebuilt as a self-hosted accounting application for SME owne
 
 ## Get the development environment running
 
-Follow the canonical [local development instructions](README.md#local-development). Use Docker Compose for the PHP 8.5/MySQL 8.4 environment, apply the new versioned migrations, and use the controlled command-line account installer when an account is needed. The account installer accepts a password through standard input or a private shell environment variable; never put a password in a command argument or report.
+Follow the canonical [local development instructions](README.md#local-development). Use Docker Compose for the PHP 8.3/MySQL 8.4 environment; PHP 8.2 is the minimum. Apply the versioned migrations and use the controlled command-line account installer when an account is needed. The account installer accepts a password through standard input or a private shell environment variable; never put a password in a command argument or report.
 
 Preserve an existing `.env`. Use distinct random local database passwords and synthetic records. Serve only `www/phpledger/public`; the repository root and its legacy SQL dumps are historical reference material. Never point the new runtime at a customer's or production database.
 
@@ -35,7 +35,7 @@ Use the pull request template to record implementation, validation, documentatio
 
 ## Licensing and release status
 
-New project-owned code and documentation use [AGPL-3.0-or-later](LICENSE), selected by the owner on 15 September 2026, with a separate commercial licensing offer. Published 0.1.x previews retain their MIT grant. Submit original material that you have the right to contribute; identify third-party material and preserve its separate notices. Read [licence scope](LICENSE-SCOPE.md), [licensing policy](docs/LICENSING-POLICY.md) and the [current provenance review](docs/LICENSE_REVIEW.md).
+New project-owned code and documentation use [AGPL-3.0-or-later](LICENSE), selected by the owner on 15 September 2026, with a separate commercial licensing offer. Published 0.1.0 through 0.1.5 previews retain their MIT grant. Submit original material that you have the right to contribute; identify third-party material and preserve its separate notices. Read [licence scope](LICENSE-SCOPE.md), [licensing policy](docs/LICENSING-POLICY.md) and the [current provenance review](docs/LICENSE_REVIEW.md).
 
 The [Contributor Licence Agreement](CLA.md) is required on your first pull request and again for a new substantive CLA version. It covers individual and authorised entity contributions, permits AGPL and commercial sublicensing, and leaves copyright with you. Sign using the exact comment in the CLA. For entity-owned work, identify the entity and your authority in the pull request; maintainer review is required as well as the automated signature check.
 
