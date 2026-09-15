@@ -87,4 +87,3 @@ Before implementing an adapter, a qualified local reviewer must approve a define
 The later adapter must retain registration/classification evidence and immutable calculation snapshots, enforce exact money and rounding, and test taxable/exempt/zero-rated mixed baskets, purchases, imports, returns, credit notes and period changes through the central posting service. No input-credit, filing, fiscal-device or provider-submission functionality is delivered by this catalog.
 
 Validation for this research slice: parse all five JSON files; check required keys, decimal/date types, unique IDs, source references, industry mappings and disabled/unreviewed state. No PHP/JavaScript, route, database, migration or production behavior is changed. Official public pages were read; no Drive documents or authenticated tax accounts were used. Current legal completeness and independent accounting/tax review remain open.
-

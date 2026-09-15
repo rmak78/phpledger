@@ -77,4 +77,3 @@ Proposed posting examples use synthetic reviewed facts: a GBP 100 taxable sale p
 ICAP/ICMAP guidance informs the Pakistan-first accounting work documented [there](../accounting/PAKISTAN_REPORTING_RESEARCH.md); no UK/UAE tax authority or endorsement is attributed to those bodies. Qualified country review must approve entity scope, effective versions, tax bases, rounding, recoverability, corrections and reconciled synthetic fixtures before an adapter is enabled.
 
 This slice changes three local research files only. Validation checks JSON parsing, required fields, unique/source/regime IDs, reciprocal industry coverage, decimal/date formats and disabled/unreviewed state. No application route or financial test is changed; no migration or database schema change occurs. No Google Drive reference was supplied/read. External activity consists of read-only official web research; no secrets, provider submissions, account writes or production changes occur.
-

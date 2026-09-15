@@ -8,4 +8,3 @@
 <div class="list-footer"><span><?= (int) $list['total'] ?> journals · <?= pl_e($company['currency']) ?></span><nav class="pagination" aria-label="Journal pages"><?php if ($list['page'] > 1): ?><a class="icon-button" aria-label="Previous page" href="<?= pl_e(pl_url('/general-journals', ['page' => $list['page'] - 1])) ?>"><?= pl_icon('chevron-left') ?></a><?php endif; ?><span>Page <?= (int) $list['page'] ?> of <?= (int) $list['pages'] ?></span><?php if ($list['page'] < $list['pages']): ?><a class="icon-button" aria-label="Next page" href="<?= pl_e(pl_url('/general-journals', ['page' => $list['page'] + 1])) ?>"><?= pl_icon('chevron-right') ?></a><?php endif; ?></nav></div></div>
 <p class="muted small core-footnote">These are general journals. Receipt, expense and POS source records remain in their own workflows.</p>
 </section>
-

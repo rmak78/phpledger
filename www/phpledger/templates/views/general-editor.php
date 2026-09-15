@@ -36,4 +36,3 @@ $accountIds = array_map(static fn (array $row): int => (int) $row['id'], $compan
 </form>
 <p class="muted small core-footnote">An opening-balance import is a separate reviewed workflow and is not available here.</p>
 </section>
-
