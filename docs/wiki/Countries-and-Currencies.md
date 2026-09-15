@@ -21,7 +21,7 @@ Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore are the five latest country
 
 ## Accounting framework priority
 
-**Pakistan → UK → UAE** is the reporting implementation priority. Framework selection must consider the actual entity, legal form, reporting period, applicable rules and reviewed accounting policies. IP location, interface language and currency cannot make that decision automatically.
+The core is country-neutral. Pakistan, the UK, UAE and other researched jurisdictions are regional directions; Pakistan FBR is one planned connector, not a mandatory global launch gate. Framework selection must consider the actual entity, legal form, reporting period, applicable rules and reviewed accounting policies. IP location, interface language and currency cannot make that decision automatically.
 
 Country and industry Chart of Accounts research is intended to improve the setup wizard. Those researched candidates are not yet installed, reviewed jurisdiction-specific templates. The current foundation does not claim compliance in any country.
 

@@ -2,11 +2,11 @@
 
 # PHP Ledger
 
-**PHP Ledger is open-source, self-hosted double-entry accounting software with a simple cash point of sale for small businesses, built on PHP 8.5 and MySQL 8.4 and currently in development preview.**
+**PHP Ledger is open-source, self-hosted double-entry accounting software with a simple cash point of sale for small businesses, built on PHP 8.2+ (8.3 recommended) and MySQL 8.4 and currently in development preview.**
 
 PHP Ledger is being rebuilt for small-business owners, accountants and bookkeepers who want a useful workspace on hosting they control. The direction is a complete accounting core, followed by optional business modules.
 
-Explore [phpledger.com](https://phpledger.com/) and [your temporary sample company](https://phpledger.com/demo/). The [0.1.4-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.4-preview) adds universal account statements, chart management and saved general journals. It remains a development preview for evaluation with synthetic data.
+Explore [phpledger.com](https://phpledger.com/) and [your temporary sample company](https://phpledger.com/demo/). The [0.1.6-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.6-preview) adds universal account statements, chart management and saved general journals. It remains a development preview for evaluation with synthetic data.
 
 Modern application source is in `www/phpledger`; the historical application remains only in Git history. See [[Getting started|Getting-Started]] for the package, installation requirements and demonstration limits.
 
@@ -35,10 +35,22 @@ The public demo provides temporary visitor books: accounts are read-only, while 
 
 ## The direction
 
-Reviewed opening entries and cutover, period completion and bank reconciliation come next in the core. Module lifecycle, a business API and MCP access follow before optional AR, AP, inventory, tax and industry POS. These are planned capabilities; the current POS is still part of the application rather than an installable add-on.
+Opening cutover, period administration, bank CSV reconciliation and the bundled core/POS lifecycle are included. Scoped API/MCP reads come next, followed by controlled commands, the browser installer and optional AR/AP. Richer multi-year demo packs have separate reconciliation and reset gates.
 
-Accounting framework work starts with **Pakistan, then the UK and UAE**. The separate tax candidate catalog covers eight countries and seven industries, remains disabled and unreviewed, and supplies no active tax calculations.
+Accounting framework work uses explicit regional entity/period profiles over a country-neutral core. Pakistan is one intended direction; connector readiness and validated demand determine delivery. The separate tax candidate catalog covers eight countries and seven industries, remains disabled and unreviewed, and supplies no active tax calculations.
 
-New project-owned code and documentation use the [MIT License](https://github.com/rmak78/phpledger/blob/master/LICENSE). [Licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) preserves separate historical, dependency and asset terms. No stable release, professional-body endorsement or regulatory certification is claimed.
+New project-owned code and documentation use the [AGPL-3.0-or-later](https://github.com/rmak78/phpledger/blob/master/LICENSE). [Licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) preserves separate historical, dependency and asset terms. No stable release, professional-body endorsement or regulatory certification is claimed.
 
 [[Package scope|First-Package]] · [[Module roadmap|Module-Roadmap]] · [[Full roadmap|Roadmap]]
+
+## 0.1.6 hosting, licensing and direction update
+
+PHP 8.2 is the minimum and PHP 8.3 is recommended for deployment. [[Hosting compatibility|PHP-Hosting]] explains the tested runtime and the remaining shared-hosting requirements.
+
+The core is country-neutral and serves businesses, owners, bookkeepers and accountants across countries. Pakistan is one intended regional direction; FBR is one planned connector. Regional accounting/tax capabilities remain separate reviewed integrations.
+
+The current release uses AGPL-3.0-or-later with a commercial licence available. Previously published 0.1.0 through 0.1.5 previews retain MIT. Self-hosting stays free without licence keys or licensing-server calls. See [[Licensing and contributions|Licensing]].
+
+## 0.1.5 accessibility update
+
+[Nagulanvelu contributed PR #65](https://github.com/rmak78/phpledger/pull/65), giving each fallback POS quantity its product name. A maintainer correction keeps the fields visible with JavaScript disabled. The package passed fresh installation, upgrade from 0.1.4, 29 synthetic checkout checks and desktop/tablet/mobile browser checks. See the [release](https://github.com/rmak78/phpledger/releases/tag/v0.1.5-preview), [privacy notice](https://phpledger.com/privacy/) and [demo-use terms](https://phpledger.com/terms/).

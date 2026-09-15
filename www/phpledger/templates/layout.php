@@ -63,6 +63,6 @@
 <div class="signin-layout"><aside class="signin-story"><p class="eyebrow">Your business, clearly accounted for</p><h2>A day's work.<br>A clearer picture.</h2><p>Keep the everyday details connected to the bigger picture.</p><div class="signin-journey"><div><?= pl_icon('receipt') ?><span><strong>Capture the details</strong>Receipts and expenses, in one place.</span></div><div><?= pl_icon('book') ?><span><strong>Follow every entry</strong>From source document to balanced books.</span></div><div><?= pl_icon('file-text') ?><span><strong>Understand your business</strong>Readable reports with a path to the numbers.</span></div></div><p class="signin-footnote">PHP Ledger · Built for owners and bookkeepers</p></aside><div class="signin-form"><?php require __DIR__ . '/views/login.php'; ?></div></div>
 <?php else: require __DIR__ . '/views/' . $view . '.php'; endif; ?>
 </main>
-<footer class="app-footer"><span>PHP Ledger · Development preview</span><span>English · <span data-timezone>UTC</span> <span class="muted">event times</span></span></footer>
+<footer class="app-footer"><span>PHP Ledger · Development preview · <a href="https://github.com/rmak78/phpledger/tree/v0.1.6-preview">Source code · AGPL-3.0+</a></span><span>English · <span data-timezone>UTC</span> <span class="muted">event times</span></span></footer>
 </body>
 </html>

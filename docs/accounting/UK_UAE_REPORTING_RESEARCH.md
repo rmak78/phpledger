@@ -1,5 +1,7 @@
 # UK and UAE reporting research
 
+> Historical planning/research context. Current product direction is country-neutral, with Pakistan FBR one planned connector; minimum PHP is 8.2 and deployment defaults to 8.3. The [15 September clarification](../strategy/PRODUCT-DIRECTION-CLARIFICATION-2026-09-15.md) and current roadmap/licensing policy supersede earlier runtime, regional sequencing and licence assumptions below.
+
 Research date: 14 September 2026. User priority: **Pakistan first, then UK and UAE**. This is an implementation reference, not an activated country package or an accounting compliance opinion. The user requires the accounting system to follow the applicable rules, with ICMA Pakistan, ICAP and ACCA guidance informing the work. [Pakistan research](PAKISTAN_REPORTING_RESEARCH.md) owns the first-country detail.
 
 ## The selection is an accounting decision

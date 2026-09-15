@@ -2,11 +2,11 @@
 
 Start at [the PHP Ledger website](https://phpledger.com/) or [open the demonstration](https://phpledger.com/demo/).
 
-**[Download the 0.1.4-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.4-preview).** Choose `phpledger-0.1.4-preview.zip` and its SHA-256 file from the release assets; automatic source archives do not include installed dependencies. Follow the package's `INSTALL.md`, or `UPGRADE.md` when upgrading an existing installation. Use synthetic data for evaluation.
+**[Download the 0.1.6-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.6-preview).** Choose `phpledger-0.1.6-preview.zip` and its SHA-256 file from the release assets; automatic source archives do not include installed dependencies. Follow the package's `INSTALL.md`, or `UPGRADE.md` when upgrading an existing installation. Use synthetic data for evaluation.
 
 This release adds universal account statements, chart management and saved general-journal draft/review/post/reverse workflows. It retains receipts, expenses, owner reports and the sample cash POS. It is a development preview, with the remaining gates described in [[First package|First-Package]].
 
-Modern source is in `www/phpledger`; historical code remains only in Git history. Developers can use the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md). New project-owned code and documentation are [MIT licensed](https://github.com/rmak78/phpledger/blob/master/LICENSE); [licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) preserves separate historical, dependency and asset terms.
+Modern source is in `www/phpledger`; historical code remains only in Git history. Developers can use the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md). New project-owned code and documentation are [AGPL-3.0-or-later licensed](https://github.com/rmak78/phpledger/blob/master/LICENSE); [licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) preserves separate historical, dependency and asset terms.
 
 ## Try the demonstration
 
@@ -24,7 +24,7 @@ Accounts are read-only in the public demo; account creation and changes are rese
 
 | Requirement | Preview environment |
 |---|---|
-| PHP | PHP 8.5.x |
+| PHP | PHP 8.2+ (8.3 recommended) |
 | PHP extensions | BCMath, PDO, PDO MySQL and mbstring |
 | Database | MySQL 8.4 LTS with InnoDB |
 | Dependencies | Composer with a pinned lockfile; production dependencies included in the package |

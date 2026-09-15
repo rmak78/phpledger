@@ -1,8 +1,8 @@
 # The foundation preview package
 
-The [0.1.4-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.4-preview) develops the accounting core. It is an installable evaluation checkpoint with synthetic data; supported-pilot acceptance remains open.
+The [0.1.6-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.6-preview) develops the accounting core. It is an installable evaluation checkpoint with synthetic data; supported-pilot acceptance remains open.
 
-Modern source is under `www/phpledger`, with historical code retained only in Git history. New project-owned code and documentation use [MIT](https://github.com/rmak78/phpledger/blob/master/LICENSE); [dependency, asset and historical terms](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) remain separate.
+Modern source is under `www/phpledger`, with historical code retained only in Git history. New project-owned code and documentation use [AGPL-3.0-or-later](https://github.com/rmak78/phpledger/blob/master/LICENSE); [dependency, asset and historical terms](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) remain separate.
 
 ## Package scope
 
@@ -35,7 +35,7 @@ The sample POS remains useful for testing the shared ledger. Production checkout
 
 ## Later capabilities
 
-The bundled core/POS lifecycle is implemented. The next [[module roadmap|Module-Roadmap]] milestone is API/MCP reads, followed by controlled commands and optional AR/AP. Customer/vendor subledgers and reviewed statement packages remain unfinished. SEO discovery and campaign preparation run in parallel at high priority. Applicable tax rules must be reviewed before affected production transactions. The catalog's research status does not satisfy that gate.
+The bundled core/POS lifecycle is implemented. The next [[module roadmap|Module-Roadmap]] milestone is API/MCP reads, followed by AR, AP, distribution/updater tooling, regional connectors, inventory, shop POS, e-commerce and then controlled commands. Customer/vendor subledgers and reviewed statement packages remain unfinished. SEO discovery and campaign preparation run in parallel at high priority. Applicable tax rules must be reviewed before affected production transactions. The catalog's research status does not satisfy that gate.
 
 Broad country compliance, alternative books, offline operation and AI document scanning remain future work. There is no promised release date for these capabilities.
 

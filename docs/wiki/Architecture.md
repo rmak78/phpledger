@@ -4,7 +4,7 @@ PHP Ledger retains BixiSoft's lightweight modular PHP approach: one shared boots
 
 | Layer | Direction |
 |---|---|
-| Runtime | PHP 8.5 |
+| Runtime | PHP 8.2+ (8.3 recommended) |
 | Database | MySQL 8.4 LTS / InnoDB |
 | Database access | Maintained MeekroDB dependency, pinned through Composer |
 | Interface | Server-rendered pages, modern CSS and progressive enhancement |

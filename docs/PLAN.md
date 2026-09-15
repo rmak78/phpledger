@@ -1,5 +1,7 @@
 # PHP Ledger: Modern BixiSoft Foundation, Exceptional SME Experience
 
+> Historical planning/research context. Current product direction is country-neutral, with Pakistan FBR one planned connector; minimum PHP is 8.2 and deployment defaults to 8.3. The [15 September clarification](strategy/PRODUCT-DIRECTION-CLARIFICATION-2026-09-15.md) and current roadmap/licensing policy supersede earlier runtime, regional sequencing and licence assumptions below.
+
 ## 1. Product and stack direction
 
 Build a fresh PHP Ledger application using BixiSoft’s lightweight architecture, preserving the repository history and selectively reusing verified accounting concepts.

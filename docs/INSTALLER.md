@@ -40,7 +40,7 @@ Check the six-step experience on desktop, tablet and mobile. Have a person unfam
 2. Complete read access, AR and AP in that order.
 3. Deliver the distribution/updater adoption milestone, including the shared installer service and browser journey; test failure/recovery boundaries and validate supported hosts.
 4. Under release authorization, publish an evaluation package with updated INSTALL/UPGRADE instructions, README, Wiki, website and installation evidence.
-5. Continue Pakistan tax/FBR DI, inventory, shop POS and e-commerce/storefront; controlled API/MCP commands follow e-commerce.
+5. Continue regional tax/e-invoicing connectors (Pakistan FBR is one planned connector), inventory, shop POS and e-commerce/storefront; controlled API/MCP commands follow e-commerce.
 
 Expected implementation areas: shared bootstrap/config handling, existing install/preflight/migrate/create-admin services, a guarded installer controller/view, configuration persistence and release docs. No new accounting schema or migration content is proposed for the wizard itself; installation executes the existing migration chain. An additional installation-state schema is not assumed.
 

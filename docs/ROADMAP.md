@@ -5,7 +5,7 @@
 The 15 September implementation plan delivers A (0.1.5-preview: contributor POS accessibility and website/SEO), B (0.2.0-preview: read API/MCP, scoped connections and server-side tables), then C (0.2.1-preview: four multi-year demo packs and reporting walkthroughs). See the [delivery receipt](repository/sprint-05/DELIVERY-0.1.5-0.2.1.md) for current evidence and open gates. The evening strategy decisions below supersede the subsequent feature order. API/MCP reads finish first, then AR/AP; controlled commands follow e-commerce/storefront. Demo/SEO preparation remains local with its own release gates. The demo hostname move stays deferred.
 
 
-Current live release: **0.1.5-preview**, including contributor POS accessibility and website information/SEO. [The staged receipt](repository/sprint-05/DELIVERY-0.1.5-0.2.1.md) records its package and hosted proof. Release B API/MCP/OAuth/tables are implemented locally with [client acceptance gates still open](INTEGRATIONS.md). Earlier dated publication sections below preserve their original scope.
+Current maintenance release: **0.1.6-preview**, including contributor POS accessibility and website information/SEO. [The maintenance publication record](repository/sprint-05/PREVIEW-0.1.6-VALIDATION.md) records its package and hosted proof. Release B API/MCP/OAuth/tables are implemented locally with [client acceptance gates still open](INTEGRATIONS.md). Earlier dated publication sections below preserve their original scope.
 
 
 ## Current clarification — country-neutral product and supported PHP

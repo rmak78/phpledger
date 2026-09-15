@@ -1,6 +1,6 @@
 # PHP Ledger {{VERSION}}
 
-Open-source bookkeeping for small businesses, built with PHP and MySQL. New project-owned code uses AGPL-3.0-or-later; a commercial licence is available. Published 0.1.0 through 0.1.5 previews retain their MIT grant. See [Licensing policy](docs/LICENSING-POLICY.md).
+Country-neutral, open-source bookkeeping for small businesses, built with PHP and MySQL. Project-owned code uses AGPL-3.0-or-later; a commercial licence is available. Self-hosting is free without licence keys or licensing-server calls. Published pre-adoption 0.1.0 through 0.1.5 previews retain MIT. See [Licensing policy](docs/LICENSING-POLICY.md).
 
 **Development preview.** Evaluate this package with synthetic data before arranging an accountant-reviewed pilot. It is an early foundation, with known workflow and reporting gaps; it is not a completed ERP or a country-certified accounting product.
 

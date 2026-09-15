@@ -193,7 +193,7 @@ Reports and linked reversals retain the same company/book permission boundaries.
 
 ### Browser implementation checkpoint
 
-The current router implements the following server-rendered interfaces. These are internal browser routes, not a promised public JSON API. HTML GET screens and POST actions share the existing bootstrap, authentication, CSRF, company/book permissions, and posting services. `/health` remains a separate JSON endpoint.
+The published browser router implements the following server-rendered interfaces. These are internal browser routes, not a promised public JSON API. HTML GET screens and POST actions share the existing bootstrap, authentication, CSRF, company/book permissions, and posting services. `/health` remains a separate JSON endpoint.
 
 | Browser interface | Routes and behavior |
 |---|---|

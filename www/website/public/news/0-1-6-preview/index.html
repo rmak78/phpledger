@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0c2052">
-<title>PHP Ledger 0.1.3-preview: account ledgers and optional modules</title>
-<meta name="description" content="Evaluate visible running balances, reviewed opening cutover, bank reconciliation, CSV exports and owner-controlled POS modules in PHP Ledger 0.1.3-preview.">
-<link rel="canonical" href="https://phpledger.com/news/0-1-3-preview/">
+<title>PHP Ledger 0.1.6-preview: PHP 8.2 support and country-neutral direction</title>
+<meta name="description" content="A maintenance release with PHP 8.2 minimum, PHP 8.3 recommended, AGPL core licensing and clear country-neutral positioning.">
+<link rel="canonical" href="https://phpledger.com/news/0-1-6-preview/">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/icon-192.png">
@@ -16,9 +16,9 @@
 <meta property="og:site_name" content="PHP Ledger">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_GB">
-<meta property="og:title" content="PHP Ledger 0.1.3-preview: account ledgers and optional modules">
-<meta property="og:description" content="Evaluate visible running balances, reviewed opening cutover, bank reconciliation, CSV exports and owner-controlled POS modules in PHP Ledger 0.1.3-preview.">
-<meta property="og:url" content="https://phpledger.com/news/0-1-3-preview/">
+<meta property="og:title" content="PHP Ledger 0.1.6-preview: PHP 8.2 support and country-neutral direction">
+<meta property="og:description" content="A maintenance release with PHP 8.2 minimum, PHP 8.3 recommended, AGPL core licensing and clear country-neutral positioning.">
+<meta property="og:url" content="https://phpledger.com/news/0-1-6-preview/">
 <meta property="og:image" content="https://phpledger.com/assets/og/home.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
@@ -27,8 +27,8 @@
 <meta property="article:modified_time" content="2026-09-15">
 <meta property="article:section" content="Releases">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PHP Ledger 0.1.3-preview: account ledgers and optional modules">
-<meta name="twitter:description" content="Evaluate visible running balances, reviewed opening cutover, bank reconciliation, CSV exports and owner-controlled POS modules in PHP Ledger 0.1.3-preview.">
+<meta name="twitter:title" content="PHP Ledger 0.1.6-preview: PHP 8.2 support and country-neutral direction">
+<meta name="twitter:description" content="A maintenance release with PHP 8.2 minimum, PHP 8.3 recommended, AGPL core licensing and clear country-neutral positioning.">
 <meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
 <meta name="twitter:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
@@ -71,7 +71,7 @@
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://phpledger.com/news/0-1-3-preview/#breadcrumb",
+      "@id": "https://phpledger.com/news/0-1-6-preview/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -88,16 +88,16 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "0.1.3-preview",
-          "item": "https://phpledger.com/news/0-1-3-preview/"
+          "name": "0.1.6-preview",
+          "item": "https://phpledger.com/news/0-1-6-preview/"
         }
       ]
     },
     {
       "@type": "BlogPosting",
-      "@id": "https://phpledger.com/news/0-1-3-preview/#article",
-      "headline": "PHP Ledger 0.1.3-preview: account ledgers and optional modules",
-      "description": "Evaluate visible running balances, reviewed opening cutover, bank reconciliation, CSV exports and owner-controlled POS modules in PHP Ledger 0.1.3-preview.",
+      "@id": "https://phpledger.com/news/0-1-6-preview/#article",
+      "headline": "PHP Ledger 0.1.6-preview: PHP 8.2 support and country-neutral direction",
+      "description": "A maintenance release with PHP 8.2 minimum, PHP 8.3 recommended, AGPL core licensing and clear country-neutral positioning.",
       "datePublished": "2026-09-15",
       "dateModified": "2026-09-15",
       "author": {
@@ -109,8 +109,8 @@
         "@id": "https://phpledger.com/#organization"
       },
       "image": "https://phpledger.com/assets/og/home.png",
-      "mainEntityOfPage": "https://phpledger.com/news/0-1-3-preview/",
-      "url": "https://phpledger.com/news/0-1-3-preview/",
+      "mainEntityOfPage": "https://phpledger.com/news/0-1-6-preview/",
+      "url": "https://phpledger.com/news/0-1-6-preview/",
       "articleSection": "Releases",
       "inLanguage": "en"
     }
@@ -118,7 +118,7 @@
 }
 </script>
 </head>
-<body class="page-news-0-1-3-preview">
+<body class="page-news">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger"></span></a>
@@ -129,8 +129,7 @@
   </nav>
 </header>
 <main id="main">
-
-<article class="container article section"><p><a href="/news/">All project updates</a></p><h1>Account ledgers and optional modules in 0.1.3-preview</h1><p><time datetime="2026-09-15">15 September 2026</time> · Release announcement</p><p class="lead">Follow the balance after each posted entry, review opening cutover, reconcile bank statements and choose whether a company uses the cash POS showcase.</p><h2>Find the running balance</h2><p>Open Reports, choose Open account ledger and select an account. Transactions and Journals also link to the ledger. Opening balance, debits, credits, running balance and closing balance retain the same exact accounting calculation; mobile entries show the balance without horizontal scrolling.</p><h2>Complete the supported period workflow</h2><p>The preview adds opening trial-balance/CSV review and explicit confirmation, a reconciled unpaid-document register, reasoned period close/reopen, bank CSV matching/reconciliation and core CSV exports. A synthetic two-period business is covered by the accounting checks.</p><h2>Enable a company module deliberately</h2><p>The required core remains available with add-ons disabled. Company owners can enable or disable the optional POS showcase after compatibility checks; old receipts and accounting sources remain readable. Ordinary companies default off, while explicitly created sample companies enable their showcase.</p><h2>What remains unfinished</h2><p>Customer/vendor subledgers, reviewed financial-statement packages, production tax/POS, inventory, foreign-exchange accounting and detailed historical imports remain future work. Next come API/MCP reads, then controlled commands and optional AR/AP. Technical checks do not replace qualified accounting/security review or observed pilot use.</p><p>The package includes production dependencies, eleven migration files, installation/upgrade guides and a SHA-256 checksum. Evaluate with synthetic records.</p><div class="actions"><a class="button" href="/download/">Download the current preview</a><a class="button button--secondary" href="/demo/">Try the temporary demo</a></div></article>
+<article class="container article section"><p><a href="/news/">All project updates</a></p><h1>PHP Ledger 0.1.6-preview</h1><p><time datetime="2026-09-15">15 September 2026</time> · Maintenance release</p><p class="lead">PHP 8.2 is now the minimum, with PHP 8.3 recommended for deployment. PHP Ledger remains a country-neutral accounting core, with regional tax integrations delivered as connectors.</p><h2>Hosting compatibility</h2><p>The package includes dependencies compatible with PHP 8.2. Use the same supported PHP configuration for web requests and installation commands. MySQL 8.4, required PHP extensions, HTTPS and the public document root remain part of the installation profile. PHP availability in a hosting panel alone does not verify the whole hosting plan.</p><h2>Open-source core and contributor agreement</h2><p>This release uses AGPL-3.0-or-later for project-owned code. The core remains open source, and a separate commercial licence is available. Self-hosting remains free, with no licence keys or licensing-server calls. Published 0.1.0 through 0.1.5 previews retain their original MIT grants. New contributions use the published CLA; third-party notices remain intact.</p><h2>A country-neutral product</h2><p>PHP Ledger serves small businesses, owners, bookkeepers, accountants and multi-company operators across countries. Pakistan is one intended direction. FBR digital invoicing is one planned connector, with its own supported scope and review gates.</p><h2>Upgrade scope</h2><p>This maintenance release preserves the existing eleven migrations and accounting data model. It retains the current accounting and sample POS workflows. API/MCP access and richer multi-year samples remain separate development work with open release gates.</p><div class="actions"><a class="button" href="/download/">Download the current preview</a><a class="button button--secondary" href="/demo/">Try the isolated sample</a></div></article>
 </main>
 <footer class="site-footer">
   <div class="container">
