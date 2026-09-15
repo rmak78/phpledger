@@ -1,8 +1,12 @@
 <?php
 declare(strict_types=1);
 $documentSource = null;
+$generalSource = null;
 if (preg_match('/^document:([1-9][0-9]*)$/D', (string) $journal['source_reference'], $sourceMatch)) {
     $documentSource = $sourceMatch[1];
+}
+if ($journal['source_type'] === 'general_journal' && preg_match('/^general:([1-9][0-9]*)$/D', (string) $journal['source_reference'], $sourceMatch)) {
+    $generalSource = $sourceMatch[1];
 }
 ?>
 <section class="page-wrap" aria-labelledby="journal-title">
@@ -20,6 +24,7 @@ if (preg_match('/^document:([1-9][0-9]*)$/D', (string) $journal['source_referenc
         </dl>
         <div class="actions">
             <?php if ($documentSource !== null): ?><a class="button secondary" href="<?= pl_e(pl_url('/transactions/detail', ['id' => $documentSource])) ?>">View source transaction</a><?php endif; ?>
+            <?php if ($generalSource !== null): ?><a class="button secondary" href="<?= pl_e(pl_url('/general-journals/detail', ['id' => $generalSource])) ?>">View source general journal</a><?php endif; ?>
             <?php if ($journal['reversal_of_id'] !== null): ?><a class="button secondary" href="<?= pl_e(pl_url('/journals/detail', ['id' => $journal['reversal_of_id']])) ?>">View original journal</a><?php endif; ?>
         </div>
         <?php if ($journal['reversal_of_id'] !== null): ?><p class="badge">Linked reversal</p><?php endif; ?>

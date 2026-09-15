@@ -1,0 +1,121 @@
+/* Core account management and general journals share the Review Console system. */
+.core-page{max-width:1400px;min-width:0}
+.core-console{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);min-height:calc(100vh - 230px)}
+.core-account-list,.core-account-detail{padding:28px;min-width:0}
+.core-account-list{border-right:1px solid var(--line);background:#fbfcfe}
+.core-account-list .page-heading{align-items:flex-start;gap:16px;flex-wrap:wrap}
+.core-account-list .page-heading h1{font-size:27px}
+.core-account-table{border:1px solid var(--line);border-radius:var(--radius);background:white}
+.core-account-table table{min-width:510px}
+.core-account-table td:first-child{width:40%}
+.core-account-table .record-link{font-size:13px;overflow-wrap:anywhere}
+.core-account-table .record-link>span{font-size:12px;margin-top:5px;color:var(--muted)}
+.core-account-detail .back-link{margin-bottom:20px}
+.core-account-detail .section-heading{align-items:flex-start}
+.core-account-detail h2{overflow-wrap:anywhere}
+.core-account-detail .empty-detail{min-height:260px}
+.core-account-form>.field{margin-bottom:18px}
+.core-account-form>.form-grid{margin-bottom:18px}
+.core-account-form .record-details{margin-bottom:12px}
+.core-account-form>.muted{margin-bottom:22px}
+.core-checkbox{display:flex;align-items:flex-start;gap:10px;margin:18px 0;font-size:13px;cursor:pointer}
+.core-checkbox input{width:18px;height:18px;flex-shrink:0;margin:1px 0;accent-color:var(--blue)}
+.core-account-form .form-actions{justify-content:flex-start;flex-wrap:wrap}
+.core-footnote{margin-top:18px}
+.core-history{margin-top:24px}
+.core-history summary{cursor:pointer;font-weight:600}
+.core-history ol{list-style:none;margin:18px 0 0;padding:0}
+.core-history li{padding:14px 0;border-top:1px solid var(--line);font-size:13px}
+.core-history li>p{margin:6px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.core-history time{font-size:12px;color:var(--muted)}
+.core-table-panel{padding:0;overflow:hidden}
+.core-journal-list{min-width:760px}
+.core-journal-list td:nth-child(2){min-width:200px;max-width:400px;overflow-wrap:anywhere}
+.core-journal-list .record-link{font-size:13px;white-space:nowrap}
+.core-journal-list .record-link>span{font-size:12px}
+.core-table-panel .list-footer{border:0}
+.core-journal-form{padding:24px}
+.core-journal-meta{max-width:820px;margin-bottom:30px}
+.core-journal-form>.section-heading h2{font-size:20px;margin:0}
+.core-lines-wrap{border:1px solid var(--line);border-radius:var(--radius);margin-top:16px}
+.core-line-editor{min-width:930px;table-layout:fixed}
+.core-line-editor th,.core-line-editor td{padding:10px 8px}
+.core-line-editor th:first-child{width:45px}
+.core-line-editor th:nth-child(2){width:30%}
+.core-line-editor th:nth-child(3),.core-line-editor th:nth-child(4){width:15%}
+.core-line-editor th:last-child{width:76px}
+.core-line-editor label{display:block;min-width:0}
+.core-line-editor input,.core-line-editor select{width:100%;min-width:0;min-height:42px;padding:9px 10px;font-size:13px}
+.core-line-editor input[data-journal-amount]{text-align:right;font-variant-numeric:tabular-nums}
+.core-line-number{color:var(--muted);font-variant-numeric:tabular-nums;text-align:center}
+.core-line-action .text-button{font-size:12px;min-height:42px;padding:6px 2px}
+.core-line-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:14px;min-height:10px}
+.core-line-toolbar p{margin:0}
+.core-draft-totals{display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:14px 28px;padding:18px;background:var(--soft);margin-top:20px;border:1px solid var(--line);border-radius:var(--radius);font-size:13px}
+.core-draft-totals strong{display:inline-block;min-width:90px;margin-left:12px}
+.core-draft-totals>[data-journal-balance]{width:100%;text-align:right;font-weight:600}
+.core-unbalanced{color:#805400;font-size:13px;font-weight:600}
+.core-journal-detail{max-width:1180px}
+.core-journal-detail .page-heading .inline-heading{margin-bottom:10px}
+.core-journal-detail .page-heading h1{margin-bottom:0}
+.core-journal-detail>.panel{margin-bottom:20px}
+.core-journal-detail .record-details{max-width:880px}
+.core-journal-detail .detail-actions{flex-wrap:wrap}
+.core-review-lines{min-width:640px}
+.core-review-lines td:first-child{width:36%;min-width:220px;overflow-wrap:anywhere}
+.core-review-lines td:nth-child(2){overflow-wrap:anywhere;max-width:340px}
+.core-journal-detail .reversal-form{padding:22px}
+.core-journal-detail .reversal-form>p{margin-top:14px}
+.core-journal-detail .reversal-form form{max-width:700px}
+.core-journal-detail .history-section{padding:22px}
+@media(max-width:1100px){
+.core-console{grid-template-columns:minmax(0,1fr) minmax(330px,.9fr)}
+.core-account-list,.core-account-detail{padding:22px 18px}
+.core-account-list .page-heading h1{font-size:25px}
+.core-journal-form{padding:20px}
+}
+@media(max-width:800px){
+.core-console{grid-template-columns:1fr}
+.core-account-list{border-right:0}
+.core-account-detail{border-top:1px solid var(--line)}
+.core-console.core-has-selection .core-account-list{display:none}
+.core-console:not(.core-has-selection) .core-account-detail{display:none}
+.core-account-detail .back-link{display:inline-flex}
+.core-journal-form{padding:18px}
+.core-journal-meta{margin-bottom:24px}
+.core-line-editor{min-width:0;display:block}
+.core-line-editor thead{display:none}
+.core-line-editor tbody{display:grid;grid-template-columns:1fr}
+.core-line-editor tr{display:grid;grid-template-columns:1fr 1fr;gap:12px;border-bottom:1px solid var(--line);padding:16px}
+.core-line-editor tr:last-child{border-bottom:0}
+.core-line-editor td{display:block;padding:0;border:0}
+.core-line-editor .core-line-number{grid-column:1;font-size:12px;font-weight:600;text-align:left;align-self:center}
+.core-line-number [data-line-number]::before{content:'Line '}
+.core-line-editor td[data-line-field="account_id"],.core-line-editor td[data-line-field="description"]{grid-column:1 / -1}
+.core-line-editor .core-line-action{grid-column:2;grid-row:1;text-align:right}
+.core-line-editor [data-line-label]{position:static;display:block;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal;margin-bottom:5px;font-size:12px;font-weight:600}
+.core-line-editor input,.core-line-editor select{font-size:16px;min-height:44px}
+.core-line-editor .core-line-action .text-button{min-height:32px;padding:4px 0}
+.core-draft-totals{gap:14px;justify-content:space-between}
+.core-draft-totals>span:not([data-journal-balance]){display:flex;justify-content:space-between;flex:1 0 100%}
+.core-draft-totals>[data-journal-balance]{text-align:left}
+}
+@media(max-width:500px){
+.core-account-list,.core-account-detail{padding:22px 16px}
+.core-account-list .page-heading>.button{width:100%;justify-content:center}
+.core-journal-form{padding:16px 12px}
+.core-line-editor tr{padding:14px 10px}
+.core-journal-form>.form-actions{display:flex;flex-direction:column-reverse;gap:10px}
+.core-journal-form>.form-actions>*{width:100%;justify-content:center}
+.core-account-form .form-actions>.button{width:100%;justify-content:center}
+.core-journal-detail .detail-actions{align-items:stretch;flex-direction:column}
+.core-journal-detail .detail-actions .button{width:100%;justify-content:center}
+.core-table-panel .list-footer{align-items:flex-start;flex-direction:column}
+}
+@media print{
+.core-account-detail .back-link,.core-line-toolbar,.core-journal-detail .reversal-form,.core-journal-detail .detail-actions{display:none}
+.core-journal-detail .table-wrap{overflow:visible}
+.core-review-lines{min-width:0}
+.core-journal-detail .core-history{break-inside:avoid}
+}
+

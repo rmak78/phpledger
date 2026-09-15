@@ -46,6 +46,7 @@ require_once __DIR__ . '/functions/auth_functions.php';
 require_once __DIR__ . '/functions/ledger_functions.php';
 require_once __DIR__ . '/functions/setup_functions.php';
 require_once __DIR__ . '/functions/document_functions.php';
+require_once __DIR__ . '/functions/core_functions.php';
 require_once __DIR__ . '/functions/regional_functions.php';
 require_once __DIR__ . '/functions/report_functions.php';
 require_once __DIR__ . '/functions/pos_functions.php';

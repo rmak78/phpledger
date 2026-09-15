@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "country": {
+    "code": "MY",
+    "name": "Malaysia",
+    "currency": "MYR"
+  },
+  "status": "research_only",
+  "enabled": false,
+  "research_date": "2026-09-15",
+  "review_required": true,
+  "sources": [
+    {
+      "id": "my-sst-background",
+      "title": "SST background and service-tax rates",
+      "url": "https://mysst.customs.gov.my/background/",
+      "publisher": "Royal Malaysian Customs Department (RMCD)",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "my-sst-2025",
+      "title": "Targeted revision of sales-tax rates and service-tax scope effective 1 July 2025",
+      "url": "https://www.mof.gov.my/portal/en/news/press-release/targeted-revision-of-sales-tax-rate-and-expansion-of-service-tax-scope-effective-1-july-2025",
+      "publisher": "Ministry of Finance Malaysia",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "my-sst-exemptions",
+      "title": "Sales-tax exemption applications and schedules",
+      "url": "https://mysst.customs.gov.my/about-exemption/",
+      "publisher": "Royal Malaysian Customs Department (RMCD)",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "my-sst-accounting",
+      "title": "Accounting for SST",
+      "url": "https://mysst.customs.gov.my/accounting-sst/",
+      "publisher": "Royal Malaysian Customs Department (RMCD)",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "my-company-income",
+      "title": "Company tax rates; displayed years of assessment 2023-2024",
+      "url": "https://www.hasil.gov.my/syarikat/kadar-cukai-syarikat/",
+      "publisher": "Inland Revenue Board of Malaysia (IRBM/HASiL)",
+      "checked_on": "2026-09-15"
+    }
+  ],
+  "regimes": [
+    {
+      "id": "my-sales-tax-classification",
+      "name": "Sales tax on manufacture or import",
+      "authority": "Royal Malaysian Customs Department (RMCD)",
+      "tax_family": "sales_tax",
+      "jurisdiction": "MY",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Taxable goods at the manufacturer/import stage; this is not a general retail VAT.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Determine manufacturer/importer status, tariff code and applicable order.",
+        "The 2025 revision describes 5% and 10% categories; a product-level rate is unresolved.",
+        "No automatic VAT-style input recovery; assess specific relief separately."
+      ],
+      "source_ids": [
+        "my-sst-background",
+        "my-sst-2025",
+        "my-sst-exemptions"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "my-service-tax-standard",
+      "name": "Service tax: standard candidate",
+      "authority": "Royal Malaysian Customs Department (RMCD)",
+      "tax_family": "service_tax",
+      "jurisdiction": "MY",
+      "rate_percent": "8",
+      "effective_from": "2024-03-01",
+      "effective_to": null,
+      "applicability": "Prescribed taxable services supplied by a registered person; verify the service group.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "A service business is not automatically a prescribed taxable service.",
+        "Check group-specific registration thresholds and exclusions.",
+        "Food/beverage and other specified exceptions require their own classification."
+      ],
+      "source_ids": [
+        "my-sst-background"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "my-service-tax-food-beverage",
+      "name": "Service tax: food and beverage candidate",
+      "authority": "Royal Malaysian Customs Department (RMCD)",
+      "tax_family": "service_tax",
+      "jurisdiction": "MY",
+      "rate_percent": "6",
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Qualifying prescribed food/beverage services.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club"
+      ],
+      "conditions": [
+        "Verify establishment/service classification, registration and current threshold.",
+        "Separate club subscriptions and other services from qualifying food/beverage supplies."
+      ],
+      "source_ids": [
+        "my-sst-background"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "my-sst-relief",
+      "name": "SST exemption or relief classification",
+      "authority": "Royal Malaysian Customs Department (RMCD)",
+      "tax_family": "sales_tax",
+      "jurisdiction": "MY",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Only goods/persons/transactions meeting the relevant exemption or relief instrument.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Record the schedule, approval and end-use conditions where required.",
+        "SST exemption is not a VAT/GST zero-rate with automatic input credit."
+      ],
+      "source_ids": [
+        "my-sst-exemptions"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "my-income-tax-review",
+      "name": "Business or company income-tax review",
+      "authority": "Inland Revenue Board of Malaysia (IRBM/HASiL)",
+      "tax_family": "income_tax",
+      "jurisdiction": "MY",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Entity/year-specific income-tax computation; never a checkout tax.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Confirm legal form, residence, year of assessment and applicable concessions.",
+        "The reviewed company-rate table covers 2023-2024; do not extrapolate its tiers to 2026."
+      ],
+      "source_ids": [
+        "my-company-income"
+      ],
+      "review_status": "unreviewed"
+    }
+  ],
+  "industry_profiles": [
+    {
+      "industry_code": "restaurant",
+      "classification_questions": [
+        "Which charges are meals, takeaway goods, catering, delivery, alcohol, tips or service charges?",
+        "How are discounts, deposits, vouchers and refunds treated at the relevant tax point?",
+        "Which current F&B service-tax registration rule covers this establishment?"
+      ],
+      "regime_ids": [
+        "my-sales-tax-classification",
+        "my-service-tax-standard",
+        "my-service-tax-food-beverage",
+        "my-sst-relief",
+        "my-income-tax-review"
+      ]
+    },
+    {
+      "industry_code": "membership_club",
+      "classification_questions": [
+        "Which receipts are subscriptions, joining fees, donations, facility hire, food or admissions?",
+        "What is the club's legal form and which activities are commercial supplies?",
+        "Do dining, membership and facility charges fall into different prescribed service groups?"
+      ],
+      "regime_ids": [
+        "my-sales-tax-classification",
+        "my-service-tax-standard",
+        "my-service-tax-food-beverage",
+        "my-sst-relief",
+        "my-income-tax-review"
+      ]
+    },
+    {
+      "industry_code": "pharmacy",
+      "classification_questions": [
+        "Which individual products are medicines, medical devices, supplements or cosmetics?",
+        "Does the business also provide clinical services, manufacture goods or import them?",
+        "Does any SST liability arise at import/manufacture, and which medicine/product exemptions are evidenced?"
+      ],
+      "regime_ids": [
+        "my-sales-tax-classification",
+        "my-service-tax-standard",
+        "my-sst-relief",
+        "my-income-tax-review"
+      ]
+    },
+    {
+      "industry_code": "trader",
+      "classification_questions": [
+        "Does the business act as principal, agent, importer, exporter or manufacturer?",
+        "Which tariff/product codes and documentary evidence support each treatment?",
+        "Is this ordinary resale, or a separately taxable import/manufacturing/service activity?"
+      ],
+      "regime_ids": [
+        "my-sales-tax-classification",
+        "my-service-tax-standard",
+        "my-sst-relief",
+        "my-income-tax-review"
+      ]
+    },
+    {
+      "industry_code": "distributor",
+      "classification_questions": [
+        "Are sales on own account, consignment or commission, and is there a manufacturer appointment?",
+        "How are rebates, returns, free stock and cross-border transactions documented?",
+        "Does an exemption schedule require approval for goods bought for a registered manufacturer?"
+      ],
+      "regime_ids": [
+        "my-sales-tax-classification",
+        "my-service-tax-standard",
+        "my-sst-relief",
+        "my-income-tax-review"
+      ]
+    },
+    {
+      "industry_code": "retail_shop",
+      "classification_questions": [
+        "Which SKU classifications apply to the actual product mix?",
+        "Are there bundled goods/services, gift vouchers, used goods or imports?",
+        "Is tax embedded in supplier cost rather than separately chargeable on this retail sale?"
+      ],
+      "regime_ids": [
+        "my-sales-tax-classification",
+        "my-service-tax-standard",
+        "my-sst-relief",
+        "my-income-tax-review"
+      ]
+    },
+    {
+      "industry_code": "workshop",
+      "classification_questions": [
+        "Are parts, labor, consumables, subcontract work and warranties separately supplied or bundled?",
+        "Does the workshop repair, manufacture, import or export goods?",
+        "Which current prescribed service group, if any, covers the repair/maintenance work?"
+      ],
+      "regime_ids": [
+        "my-sales-tax-classification",
+        "my-service-tax-standard",
+        "my-sst-relief",
+        "my-income-tax-review"
+      ]
+    }
+  ],
+  "open_questions": [
+    "Review the latest gazetted SST schedules and post-2025 amendments for each selected business; the broad overview is not a tariff database.",
+    "Approve F&B, club and workshop service classifications, registration thresholds, tax bases and tax-point exceptions.",
+    "Confirm any specific SST deduction, exemption, refund or drawback; do not create a general recoverable-input SST account by analogy to VAT.",
+    "Review current IRBM income-tax rules, e-invoice scope and entity framework independently; no income-tax or filing automation is provided."
+  ]
+}

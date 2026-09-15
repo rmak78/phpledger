@@ -1,0 +1,291 @@
+{
+  "schema_version": 1,
+  "country": {
+    "code": "SG",
+    "name": "Singapore",
+    "currency": "SGD"
+  },
+  "status": "research_only",
+  "enabled": false,
+  "research_date": "2026-09-15",
+  "review_required": true,
+  "sources": [
+    {
+      "id": "sg-gst-charge",
+      "title": "When to charge GST",
+      "url": "https://www.iras.gov.sg/taxes/goods-services-tax-%28gst%29/charging-gst-%28output-tax%29/when-to-charge-goods-and-services-tax-%28gst%29",
+      "publisher": "Inland Revenue Authority of Singapore (IRAS)",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "sg-gst-rate-change",
+      "title": "Transitional rules for the 2024 GST rate change",
+      "url": "https://www.iras.gov.sg/taxes/goods-services-tax-%28gst%29/gst-rate-change/gst-rate-change-for-business/transitional-rules-for-gst-rate-change",
+      "publisher": "Inland Revenue Authority of Singapore (IRAS)",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "sg-gst-register",
+      "title": "Do I need to register for GST?",
+      "url": "https://www.iras.gov.sg/taxes/goods-services-tax-%28gst%29/gst-registration-deregistration/do-i-need-to-register-for-gst",
+      "publisher": "Inland Revenue Authority of Singapore (IRAS)",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "sg-gst-exempt-source",
+      "title": "Supplies exempt from GST",
+      "url": "https://www.iras.gov.sg/taxes/goods-services-tax-%28gst%29/charging-gst-%28output-tax%29/when-is-gst-not-charged/supplies-exempt-from-gst",
+      "publisher": "Inland Revenue Authority of Singapore (IRAS)",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "sg-gst-input",
+      "title": "Conditions for claiming input tax",
+      "url": "https://www.iras.gov.sg/taxes/goods-services-tax-%28gst%29/claiming-gst-%28input-tax%29/conditions-for-claiming-input-tax",
+      "publisher": "Inland Revenue Authority of Singapore (IRAS)",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "sg-gst-exports",
+      "title": "Exporting of goods: zero-rating evidence",
+      "url": "https://www.iras.gov.sg/taxes/goods-services-tax-%28gst%29/charging-gst-%28output-tax%29/when-to-charge-0-gst-%28zero-rate%29/exporting-of-goods",
+      "publisher": "Inland Revenue Authority of Singapore (IRAS)",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "sg-income-company",
+      "title": "Basic guide to corporate income tax for companies",
+      "url": "https://www.iras.gov.sg/taxes/corporate-income-tax/basics-of-corporate-income-tax/basic-guide-to-corporate-income-tax-for-companies",
+      "publisher": "Inland Revenue Authority of Singapore (IRAS)",
+      "checked_on": "2026-09-15"
+    }
+  ],
+  "regimes": [
+    {
+      "id": "sg-gst-standard",
+      "name": "Standard GST candidate",
+      "authority": "Inland Revenue Authority of Singapore (IRAS)",
+      "tax_family": "gst",
+      "jurisdiction": "SG",
+      "rate_percent": "9",
+      "effective_from": "2024-01-01",
+      "effective_to": null,
+      "applicability": "Ordinary taxable local supplies by a GST-registered business.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Apply current time-of-supply and rate-transition rules.",
+        "Compulsory registration considers calendar-year turnover or expected next-12-month taxable turnover above SGD 1 million.",
+        "Verify the effective registration date; prospective-registration timing changed for liabilities arising from 1 July 2025.",
+        "Input tax requires eligible business purpose, invoices/import evidence and no blocked category."
+      ],
+      "source_ids": [
+        "sg-gst-charge",
+        "sg-gst-rate-change",
+        "sg-gst-register",
+        "sg-gst-input"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "sg-gst-zero",
+      "name": "Zero-rated exports/international services candidate",
+      "authority": "Inland Revenue Authority of Singapore (IRAS)",
+      "tax_family": "gst",
+      "jurisdiction": "SG",
+      "rate_percent": "0",
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Qualifying goods exports or prescribed international services.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Zero-rated supplies remain taxable; input recovery remains conditional.",
+        "Retain required export evidence; foreign payment or customer address alone is not proof."
+      ],
+      "source_ids": [
+        "sg-gst-charge",
+        "sg-gst-exempt-source",
+        "sg-gst-exports"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "sg-gst-exempt",
+      "name": "GST exemption classification",
+      "authority": "Inland Revenue Authority of Singapore (IRAS)",
+      "tax_family": "gst",
+      "jurisdiction": "SG",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Specified exempt supplies, including defined financial/residential-property/IPM/digital-token categories.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "An industry label does not establish exemption.",
+        "Related input tax is generally not claimable; partial-exemption and de minimis rules need review."
+      ],
+      "source_ids": [
+        "sg-gst-exempt-source"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "sg-income-tax-review",
+      "name": "Company/business income-tax review",
+      "authority": "Inland Revenue Authority of Singapore (IRAS)",
+      "tax_family": "income_tax",
+      "jurisdiction": "SG",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Income-tax computation by entity and year of assessment; never a checkout tax.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "IRAS states a 17% company headline rate; deductions, exemptions and rebates need entity/year review.",
+        "Sole proprietorships and partnerships are not companies for this purpose."
+      ],
+      "source_ids": [
+        "sg-income-company"
+      ],
+      "review_status": "unreviewed"
+    }
+  ],
+  "industry_profiles": [
+    {
+      "industry_code": "restaurant",
+      "regime_ids": [
+        "sg-gst-standard",
+        "sg-gst-zero",
+        "sg-gst-exempt",
+        "sg-income-tax-review"
+      ],
+      "classification_questions": [
+        "Which charges are meals, takeaway goods, catering, delivery, alcohol, tips or service charges?",
+        "How are discounts, deposits, vouchers and refunds treated at the relevant tax point?",
+        "How do service charges, tips, delivery fees, vouchers and GST-inclusive price displays affect the tax base?"
+      ]
+    },
+    {
+      "industry_code": "membership_club",
+      "regime_ids": [
+        "sg-gst-standard",
+        "sg-gst-zero",
+        "sg-gst-exempt",
+        "sg-income-tax-review"
+      ],
+      "classification_questions": [
+        "Which receipts are subscriptions, joining fees, donations, facility hire, food or admissions?",
+        "What is the club's legal form and which activities are commercial supplies?",
+        "Does a customer's blocked input claim on sports/recreation subscriptions differ from the club's output-tax liability?"
+      ]
+    },
+    {
+      "industry_code": "pharmacy",
+      "regime_ids": [
+        "sg-gst-standard",
+        "sg-gst-zero",
+        "sg-gst-exempt",
+        "sg-income-tax-review"
+      ],
+      "classification_questions": [
+        "Which individual products are medicines, medical devices, supplements or cosmetics?",
+        "Does the business also provide clinical services, manufacture goods or import them?",
+        "Is there an evidenced statutory exception, rather than an assumed general medicine exemption?"
+      ]
+    },
+    {
+      "industry_code": "trader",
+      "regime_ids": [
+        "sg-gst-standard",
+        "sg-gst-zero",
+        "sg-gst-exempt",
+        "sg-income-tax-review"
+      ],
+      "classification_questions": [
+        "Does the business act as principal, agent, importer, exporter or manufacturer?",
+        "Which tariff/product codes and documentary evidence support each treatment?",
+        "Do customer-accounting, gross-margin or import schemes apply to the actual goods?"
+      ]
+    },
+    {
+      "industry_code": "distributor",
+      "regime_ids": [
+        "sg-gst-standard",
+        "sg-gst-zero",
+        "sg-gst-exempt",
+        "sg-income-tax-review"
+      ],
+      "classification_questions": [
+        "Are sales on own account, consignment or commission, and is there a manufacturer appointment?",
+        "How are rebates, returns, free stock and cross-border transactions documented?",
+        "Are export records sufficient and who is the importer of record?"
+      ]
+    },
+    {
+      "industry_code": "retail_shop",
+      "regime_ids": [
+        "sg-gst-standard",
+        "sg-gst-zero",
+        "sg-gst-exempt",
+        "sg-income-tax-review"
+      ],
+      "classification_questions": [
+        "Which SKU classifications apply to the actual product mix?",
+        "Are there bundled goods/services, gift vouchers, used goods or imports?",
+        "Are prices GST-inclusive and is any used-goods/customer-accounting scheme applicable?"
+      ]
+    },
+    {
+      "industry_code": "workshop",
+      "regime_ids": [
+        "sg-gst-standard",
+        "sg-gst-zero",
+        "sg-gst-exempt",
+        "sg-income-tax-review"
+      ],
+      "classification_questions": [
+        "Are parts, labor, consumables, subcontract work and warranties separately supplied or bundled?",
+        "Does the workshop repair, manufacture, import or export goods?",
+        "Are parts/labor local supplies, and is any international-service claim legally supported?"
+      ]
+    }
+  ],
+  "open_questions": [
+    "Confirm GST registration dates, voluntary-registration conditions, invoice/price-display rules and current InvoiceNow requirements for the business.",
+    "Review club output supplies separately from the customer's input restriction; sports/recreation subscription input claims are specifically blocked under IRAS guidance.",
+    "Assess mixed exempt/taxable input allocation, imported-service reverse charge and any product-specific or margin/customer-accounting scheme.",
+    "Do not infer GST exemption for pharmacy/health products from another country's law; confirm each exception.",
+    "Confirm the applicable accounting framework, entity income-tax basis and current rebates independently."
+  ]
+}

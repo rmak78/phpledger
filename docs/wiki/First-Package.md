@@ -1,41 +1,42 @@
-# The first installable package
+# The foundation preview package
 
-The [0.1.1-preview foundation evaluation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.1-preview) is available. It is an installable checkpoint, not completion of [Sprint 03](https://github.com/rmak78/phpledger/milestone/4). The reporting, POS, accounting-review and usability gates below remain open for a supported pilot package; no date is promised.
+The [0.1.2-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview) develops the accounting core. It is an installable evaluation checkpoint with synthetic data; supported-pilot acceptance remains open.
 
-The **0.1.1-preview POS update is published and running in the hosted demo**. It adds click-to-add products, quick cart controls and a separate review/cash-confirmation screen. Its [release notes](https://github.com/rmak78/phpledger/blob/master/docs/repository/sprint-03/PREVIEW-0.1.1-RELEASE-NOTES.md) describe the checked package and its remaining evaluation limits.
+Modern source is under `www/phpledger`, with historical code preserved under `legacy/`. New project-owned code and documentation use [MIT](https://github.com/rmak78/phpledger/blob/master/LICENSE); [dependency, asset and historical terms](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) remain separate.
 
-Modern source is in `www/phpledger`; the historical application remains under `legacy/`. The owner selected [MIT](https://github.com/rmak78/phpledger/blob/master/LICENSE) for new project-owned code and documentation on 14 September 2026. [Separate dependency, asset and historical terms](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) remain in force. Source development follows the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md).
+## Package scope
 
-## 1. Reviewable accounting and reports
+| Area | Included scope |
+|---|---|
+| Account statements | Opening, period debits/credits, running and closing balances for any authorized account, with source drilldown. |
+| Chart management | Create accounts; audit name and active-status changes; keep account code, type and purpose fixed. |
+| General journals | Save/edit drafts, review, post balanced entries and make linked reversals. Stale changes and duplicate submissions are checked. |
+| Existing workflows | Company setup, receipt/expense drafts, exact posting, trial balance, basic owner reports, cash scenario and sample cash POS. |
+| Public demo | Temporary visitor books; read-only accounts; general-journal draft/save/post and linked reversal within capacity limits; hourly reset. |
+| Tax research | Disabled, unreviewed candidate catalog for eight countries and seven industries, with sources and unresolved questions. |
 
-Start with a narrowly defined Pakistan entity/profile, selected with a qualified accounting reviewer. Turn applicable guidance into a traceable rule register, account classifications and versioned report mappings. Recognition, measurement and period-end behavior must support the statements being shown.
+See [[Getting started|Getting-Started]] for installation and upgrade instructions. Use the release's own validation record and checksums for its exact artifact; older preview test totals are not evidence for a new package.
 
-**Acceptance:** a documented profile and its exclusions; reviewed mappings; an original two-period fixture reconciled through the actual services; source drilldowns; explicit missing-data states; and accounting review of the supported scope. A template alone does not establish compliance. Reports needing unimplemented subledger or inventory data must remain clearly unavailable or preliminary.
+## Next: complete a useful core
 
-## 2. A deliberate, compact POS journey
+The next core milestone covers reviewed opening entries and cutover, period-close/reopen administration, bank matching/reconciliation, supported core statements and exports. A core-only business must be able to reconcile and finish a period with optional modules disabled.
 
-Refine catalog navigation, cart editing, sale review and a separate cash-confirmation step. Preserve clear pending/posted states and fast keyboard/touch operation. Keep the package's sale scope explicit; this is not an automatic expansion into payment processing, inventory or tax.
+Opening import needs mapping, preview, row errors, duplicate protection, reconciliation and explicit confirmation. Until AR/AP modules exist, any retained control balances need reconciled external unpaid-document schedules. Later module activation must not double count them.
 
-The published preview implements this flow: product clicks add one, repeated clicks increment quantity, cart controls adjust or remove items, and a server quote precedes cash confirmation. Editing and recoverable errors retain the cart and checkout identity. Integration and HTTP checks cover exact totals, duplicate prevention and posting protections. The actual archive passed 67 integration and 69 HTTP checks, fresh installation, the 0.1.0 upgrade and backup restoration. Representative cashier review remains open.
+**Acceptance:** a documented entity/framework scope; reviewed account mappings and accounting policies; a reconciled two-period fixture; source drilldowns and explicit missing-data states; qualified accounting review; and observed completion by representative users.
 
-**Acceptance:** representative users can complete and correct a sample sale without accidental checkout; keyboard edits cannot post it; errors retain the cart; repeated confirmation produces one receipt/journal; receipt totals and cash/change reconcile; desktop, tablet and mobile checks pass.
+## Installation and release gates
 
-## 3. A package people can actually install and recover
+Each package needs its own exact source revision, checksums, dependency notices and validation receipt. A supported release needs fresh installation, upgrade from supported prior versions, backup restoration and reconciled records from the actual archive.
 
-Prepare a versioned archive and exact supported-environment guide, a first-admin installation journey, migration/upgrade instructions and backup restoration. Assemble and verify the approved MIT grant and all required third-party notices in the actual package; the licence decision does not replace artifact validation.
+Security and accounting review, representative owner/bookkeeper use and supported hosting remain distinct gates. A technical pass, preview deployment or screenshot does not establish those outcomes.
 
-**Acceptance:** clean installation from the published artifact in a fresh supported environment; verified initial sign-in/business setup; upgrade of the supported prior schema without lost records; restored backup reconciliation; dependency/security checks; documented limits and known issues; and an actual download linked from [[Getting started|Getting-Started]].
+The sample POS remains useful for testing the shared ledger. Production checkout still needs its declared operational capabilities and cashier review; it does not determine the next core milestone.
 
-## 4. Make the import cutover decision concrete
+## Later capabilities
 
-Assess whether a bounded starter import fits this package after the accounting and packaging gates. Its first deliverable is a reviewed field/template contract, cutover example and reconciliation rules. Implementation scope depends on the required AR/AP and opening-document services being ready.
+The [[module roadmap|Module-Roadmap]] puts module lifecycle and shared contracts before API/MCP access and optional AR, AP, inventory, tax and industry POS. Applicable tax rules must be reviewed before affected production transactions. The catalog's research status does not satisfy that gate.
 
-**Acceptance if included:** preview and mapping before confirmation; row errors and duplicate checks; exact totals; explicit authorized confirmation; repeat-safe application; opening balances and unpaid documents reconcile without double counting. If those dependencies are incomplete, publish the decision and keep the importer unavailable rather than ship a misleading upload button.
+Broad country compliance, alternative books, offline operation and AI document scanning remain future work. There is no promised release date for these capabilities.
 
-## Release boundary
-
-The foundation evaluation archive does not satisfy the supported-pilot gates above. Complete the agreed reporting and POS scope, record qualified accounting and observed usability review, then assess a supported pilot release. Each package has its own exact source revision, checksums, validation receipt and explicit limits.
-
-Full ERP, broad country compliance and AI **Scan document** are not commitments for this sprint. Scanning remains a later roadmap item with no next-sprint promise.
-
-[[Current status|Home]] · [[Full roadmap|Roadmap]] · [[Contribute|Contributing-and-Support]]
+[[Current status|Home]] · [[Accounting and reports|Accounting-and-Reports]] · [[Full roadmap|Roadmap]]

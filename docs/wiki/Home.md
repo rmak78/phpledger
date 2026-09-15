@@ -4,35 +4,41 @@
 
 **Everyday transactions. Clear reports. Books you can trace.**
 
-PHP Ledger is being rebuilt for small-business owners, accountants and bookkeepers who want a useful workspace on hosting they control. Accounting comes first, with a cash POS showcase and a staged path toward a broader business system.
+PHP Ledger is being rebuilt for small-business owners, accountants and bookkeepers who want a useful workspace on hosting they control. The direction is a complete accounting core, followed by optional business modules.
 
-**The hosted preview is live.** Explore [phpledger.com](https://phpledger.com/) and [your sample company](https://phpledger.com/demo/). The website and isolated demonstration were published on 14 September 2026; both remain development previews.
+Explore [phpledger.com](https://phpledger.com/) and [your temporary sample company](https://phpledger.com/demo/). The [0.1.2-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview) adds universal account statements, chart management and saved general journals. It remains a development preview for evaluation with synthetic data.
 
-The modern application source is in `www/phpledger`, with the historical application preserved under `legacy/`. The [0.1.1-preview foundation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.1-preview) is available for evaluation with synthetic data, including production dependencies and installation guides. See [[Getting started|Getting-Started]] for the source-development path and package status.
+Modern application source is in `www/phpledger`; the historical application stays under `legacy/`. See [[Getting started|Getting-Started]] for the package, installation requirements and demonstration limits.
 
 ## Find your starting point
 
 | I want to… | Start here |
 |---|---|
-| Understand the product and who it serves | [Product overview](https://github.com/rmak78/phpledger/wiki/Product-Overview) |
-| Try the preview or plan an installation | [Getting started](https://github.com/rmak78/phpledger/wiki/Getting-Started) |
-| Understand the accounting and report boundaries | [Accounting and reports](https://github.com/rmak78/phpledger/wiki/Accounting-and-Reports) |
-| See how a shop sale reaches the ledger | [POS showcase](https://github.com/rmak78/phpledger/wiki/POS-Showcase) |
-| Check currencies and regional plans | [Countries and currencies](https://github.com/rmak78/phpledger/wiki/Countries-and-Currencies) |
-| Follow the next deliverable | [First package](https://github.com/rmak78/phpledger/wiki/First-Package) |
-| Explore the complete future path | [Roadmap](https://github.com/rmak78/phpledger/wiki/Roadmap) |
-| Help build or review PHP Ledger | [Contributing and support](https://github.com/rmak78/phpledger/wiki/Contributing-and-Support) |
+| Understand the product and who it serves | [[Product overview|Product-Overview]] |
+| Try the preview or plan an installation | [[Getting started|Getting-Started]] |
+| Follow accounts, journals and report balances | [[Accounting and reports|Accounting-and-Reports]] |
+| See how a shop sale reaches the ledger | [[POS showcase|POS-Showcase]] |
+| Understand core and optional module delivery | [[Module roadmap|Module-Roadmap]] |
+| Review country and industry tax research | [[Tax research|Tax-Research]] |
+| Check currencies and regional plans | [[Countries and currencies|Countries-and-Currencies]] |
+| Check the package scope and remaining gates | [[First package|First-Package]] |
+| Explore the broader future path | [[Roadmap]] |
+| Help build or review PHP Ledger | [[Contributing and support|Contributing-and-Support]] |
 
-## What the working preview demonstrates
+## What the preview demonstrates
 
-Create a business, review its starter accounts, save an expense or receipt, and post it to a balanced journal. Follow the result into account activity or a trial balance, then correct it through a linked reversal. The reports area adds basic income/expense and position summaries, plus a cash scenario based on figures you enter.
+Follow any authorized account from its opening balance through period debits, credits and running balances to its closing balance. Return from a statement line to the journal and source behind it. Authorized owners and accountants can create accounts and audit changes to names or active status; account code, type and purpose stay fixed.
 
-The shop showcase adds a searchable six-product sample catalog, a cart, explicit cash-sale confirmation, a printable receipt and the same accounting trail. Reports and POS are being refined; this preview does not establish a complete accounting framework or a production retail release.
+Save a general-journal draft, return to edit it, review its lines and post when debits equal credits. Corrections use linked reversals that preserve the original entry. Receipts, expenses, owner reports and the sample cash POS use the same accounting services.
+
+The public demo provides temporary visitor books: accounts are read-only, while general-journal drafts, posting and linked reversals are available within capacity limits. Its synthetic data resets hourly. The shop showcase remains a six-product cash example, without stock, tax or payment processing.
 
 ## The direction
 
-Fast onboarding and a readable interface are release requirements. Historical imports, customer/vendor accounts, bank reconciliation and proper financial statements come before broad ERP expansion. Country accounting starts with **Pakistan, then the UK and UAE**. Currency choice alone does not establish country compliance.
+Reviewed opening entries and cutover, period completion and bank reconciliation come next in the core. Module lifecycle, a business API and MCP access follow before optional AR, AP, inventory, tax and industry POS. These are planned capabilities; the current POS is still part of the application rather than an installable add-on.
 
-The new project-owned code and documentation use the [MIT License](https://github.com/rmak78/phpledger/blob/master/LICENSE), supported by clearly defined paid services. [Licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) preserves the separate terms of historical code, dependencies and assets; legacy provenance remains distinct. No stable release, professional-body endorsement or regulatory certification is claimed.
+Accounting framework work starts with **Pakistan, then the UK and UAE**. The separate tax candidate catalog covers eight countries and seven industries, remains disabled and unreviewed, and supplies no active tax calculations.
 
-Continue with [[the first package plan|First-Package]] or the [[full eight-stage roadmap|Roadmap]].
+New project-owned code and documentation use the [MIT License](https://github.com/rmak78/phpledger/blob/master/LICENSE). [Licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) preserves separate historical, dependency and asset terms. No stable release, professional-body endorsement or regulatory certification is claimed.
+
+[[Package scope|First-Package]] · [[Module roadmap|Module-Roadmap]] · [[Full roadmap|Roadmap]]

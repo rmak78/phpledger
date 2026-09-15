@@ -52,16 +52,18 @@ try {
     }
     $sourceTriggers = @(Invoke-TestDatabaseSql "SELECT TRIGGER_NAME, ACTION_TIMING, EVENT_MANIPULATION, ACTION_STATEMENT FROM information_schema.TRIGGERS WHERE TRIGGER_SCHEMA = 'phpledger_test' ORDER BY TRIGGER_NAME;")
     $restoreTriggers = @(Invoke-TestDatabaseSql "SELECT TRIGGER_NAME, ACTION_TIMING, EVENT_MANIPULATION, ACTION_STATEMENT FROM information_schema.TRIGGERS WHERE TRIGGER_SCHEMA = '$restoreName' ORDER BY TRIGGER_NAME;")
-    if ($sourceTriggers.Count -ne 9 -or ($sourceTriggers -join "`n") -ne ($restoreTriggers -join "`n")) {
+    if ($sourceTriggers.Count -ne 13 -or ($sourceTriggers -join "`n") -ne ($restoreTriggers -join "`n")) {
         throw 'Restored immutable journal triggers differ; run after other test processes finish.'
     }
     $imbalanced = Invoke-TestDatabaseSql "SELECT COUNT(*) FROM (SELECT journal_id FROM $restoreName.pl_journal_lines GROUP BY journal_id HAVING SUM(debit) <> SUM(credit)) AS broken;"
     if ([int] $imbalanced -ne 0) { throw 'The restored ledger contains unbalanced journals.' }
-    $receipt = Invoke-TestDatabaseSql "SELECT COUNT(*) FROM $restoreName.pl_schema_migrations WHERE version IN ('001_foundation','002_product_slice','003_demo_isolation','004_pos_showcase','005_demo_period_guard') AND status = 'applied';"
-    if ([int] $receipt -ne 5) { throw 'The restored migration receipts are missing.' }
+    $receipt = Invoke-TestDatabaseSql "SELECT COUNT(*) FROM $restoreName.pl_schema_migrations WHERE version IN ('001_foundation','002_product_slice','003_demo_isolation','004_pos_showcase','005_demo_period_guard','006_core_accounts_journals') AND status = 'applied';"
+    if ([int] $receipt -ne 6) { throw 'The restored migration receipts are missing.' }
     $unlinked = Invoke-TestDatabaseSql "SELECT COUNT(*) FROM $restoreName.pl_documents d LEFT JOIN $restoreName.pl_journals j ON j.id = d.journal_id AND j.company_id = d.company_id AND j.book_id = d.book_id WHERE d.journal_id IS NOT NULL AND j.id IS NULL;"
     if ([int] $unlinked -ne 0) { throw 'A restored posted source is missing its scoped journal.' }
-    Write-Output "Backup/restore passed: $($tables.Count) table definitions and data checksums, $rows rows, 9 accounting/demo/POS guard triggers, all five migration receipts, scoped source links, and balanced journals."
+    $unlinkedGeneral = Invoke-TestDatabaseSql "SELECT COUNT(*) FROM $restoreName.pl_general_drafts d LEFT JOIN $restoreName.pl_journals j ON j.id = d.journal_id AND j.company_id = d.company_id AND j.book_id = d.book_id WHERE d.journal_id IS NOT NULL AND j.id IS NULL;"
+    if ([int] $unlinkedGeneral -ne 0) { throw 'A restored general journal source is missing its scoped journal.' }
+    Write-Output "Backup/restore passed: $($tables.Count) table definitions and data checksums, $rows rows, 13 accounting/demo/POS/core guard triggers, all six migration receipts, scoped source links, and balanced journals."
 } finally {
     # The target was randomly generated, verified absent, and created by this run in db_test.
     if ($created -and $restoreName -match '^phpledger_restore_verify_[0-9a-f]{32}$') {

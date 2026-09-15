@@ -27,6 +27,7 @@ Verify the downloaded archive against its published checksum, then unpack it in 
 phpledger-{{VERSION}}/
   vendor/
   resources/
+  tools/         <-- optional read-only tax research validator
   www/phpledger/
     includes/
     install/
@@ -54,7 +55,7 @@ A nonempty password is required. Restrict this file to the operator and PHP proc
 
 ## 3. Configure HTTPS and routing
 
-Use a dedicated hostname with the application mounted at `/`. Set its document root to the absolute path ending in `www/phpledger/public`. The package root, `includes`, `install`, `templates`, `resources` and `vendor` must not be exposed by aliases or static-file rules.
+Use a dedicated hostname with the application mounted at `/`. Set its document root to the absolute path ending in `www/phpledger/public`. The package root, `includes`, `install`, `templates`, `resources`, `tools` and `vendor` must not be exposed by aliases or static-file rules.
 
 For Apache 2.4, the following fragment belongs inside your hosting administrator's HTTPS virtual host. Replace the example absolute path with your unpacked directory; this fragment does not configure certificates or the PHP handler:
 
@@ -82,7 +83,7 @@ php www/phpledger/install/preflight.php
 
 Run each command only after the previous command succeeds. Preflight checks prerequisites and database/migration state; it does not create tables or accounts. An empty database should be ready for migrations. After migration, preflight should report the schema as current. Retain the command results privately, without credentials.
 
-Keep **all five** migrations `001` through `005`. The runner tracks checksums and safely skips matching applied versions on a repeated run. If it reports an interrupted migration, missing version or checksum mismatch, stop and follow [UPGRADE.md](UPGRADE.md); never erase a receipt to force a retry.
+Keep **all six** migrations `001` through `006`. Migration `006` adds general-journal sources and audit records, account revision/creation metadata and four database guards; the complete schema contains thirteen triggers. The runner tracks checksums and skips matching applied versions on a repeated run. If it reports an interrupted migration, unknown/missing version or checksum mismatch, stop and follow [UPGRADE.md](UPGRADE.md); never erase a receipt to force a retry.
 
 ## 5. Create the initial user
 
@@ -100,11 +101,13 @@ Replace the example email and name. On another shell, use its secure input mecha
 
 ## 6. Verify the first journey
 
-Open the HTTPS hostname and sign in. Confirm that refresh and navigation retain the session. Create a clearly isolated sample company, record a small synthetic receipt or expense, open its journal, and locate its effect in the reports. Verify a linked reversal in that sample. Check that private file paths cannot be downloaded and that HTTPS/session cookies are configured correctly.
+Open the HTTPS hostname and sign in. Confirm that refresh and navigation retain the session. In a clearly isolated sample company, record a small synthetic receipt or expense and follow its journal into the reports. Open an account statement and check its opening, period and closing balances. Add an account, review a balanced general-journal draft, post it and verify a linked reversal with its own date and reason. Confirm that the chart and journals retain their history. Check that private file paths cannot be downloaded and that HTTPS/session cookies are configured correctly.
 
 `/health` checks database connectivity only; it does not prove that migrations, users or accounting workflows are ready. Run the journey above as well as the CLI checks. Delete no real records to perform acceptance checks.
 
 For a real business, choose the appropriate start date, fiscal year and base currency deliberately. Existing-business onboarding remains blocked pending opening-balance and unpaid-document reconciliation; historical cutover/import tools are not included. Do not bypass that gate by misclassifying an existing business as new.
+
+The files in `resources/tax/` are disabled, unreviewed research candidates. They are not loaded into company settings or POS calculations. Optional `php tools/validate-tax-catalog.php --self-test` checks their structure without database access or activation; it does not verify tax law or approve a tax profile. See [RELEASE-NOTES.md](RELEASE-NOTES.md).
 
 ## Country suggestion and operation
 

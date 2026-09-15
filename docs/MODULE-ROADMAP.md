@@ -1,0 +1,85 @@
+# Core accounting and optional modules
+
+Direction confirmed on 15 September 2026: complete a useful accounting core first; make AR, AP, tax and industry POS optional add-ons; provide a business API and MCP access. This supersedes the earlier next-AR priority. The ordered milestones and contracts below are the proposed delivery plan for that direction, not completed features or release dates. [Roadmap](ROADMAP.md) retains the broader product history and [Architecture](ARCHITECTURE.md) defines the existing technical boundaries.
+
+## Starting point
+
+The v0.1.1-preview baseline has shared PHP/MeekroDB services, authentication and company/book access, setup/readiness checks, a preliminary six-account template, exact atomic posting, duplicate prevention, linked reversals, receipt/expense drafts, reports and a synthetic cash POS showcase. Its browser routes and `/health` are not a public business API. There is no MCP server, supported module lifecycle, full chart-management journey or reviewed opening-import/period-close workflow. The shop catalog and POS code are currently wired into the application; a separate screen is not yet a plug-in contract.
+
+The 0.1.2-preview core slice implements opening, period, running and closing account balances; account creation and audited name/status edits; and saved general journals with explicit review/post/reverse. Existing account codes, classifications and purposes remain fixed. See its [validation receipt](repository/sprint-04/CORE-0.1.2-VALIDATION.md) for technical and publication evidence. It does not complete bank reconciliation, reviewed opening imports, customer/vendor subledgers or a jurisdiction's financial-statement package.
+
+## What belongs where
+
+| Layer | Responsibility |
+|---|---|
+| Required accounting core | Companies/books, identities and permissions, chart of accounts and mappings, exact money/dates, general journals, source/audit references, periods, reviewed opening/cutover, cash/bank recording and reconciliation, trial balance, general ledger/account statements and reconciled core reports/exports. |
+| Shared master data | One company-scoped contact identity with customer/vendor roles; one product/service identity with units and catalog attributes. Introduce these capabilities when the first consuming module is built; core-only books need no product catalog. Inventory owns quantity/valuation and modules add their own attributes. |
+| Optional business modules | AR invoices/receipts/allocations; AP bills/payments/allocations; purchasing/inventory; jurisdiction tax adapters; POS checkout; restaurant operations; distribution and specialist workflows. Each owns its documents and subledger reports and submits to the core posting service. |
+| Access adapters | The browser, versioned business API and MCP tools expose the same services and permissions. A transport never implements a second ledger, independent user store or bypass around readiness/period rules. |
+| Industry interfaces | Shop and restaurant screens compose enabled capabilities and shared checkout. Their different user journeys do not require duplicate accounting engines or product/customer databases. |
+
+With every optional module disabled, an authorized user must still manage accounts, record and reverse general journals and simple cash/bank receipts/expenses, reconcile balances and complete the supported accounting period. A core account statement is available for every account; aging, open-item customer/vendor statements and stock valuation require their owning modules. Optional software does not make applicable tax or reporting obligations optional.
+
+## Ordered delivery milestones
+
+| Order | Deliverable | Completion gate |
+|---|---|---|
+| 1. Core accounts and journals | Universal account statements; chart create/edit/deactivate with stable identities and reviewed account classification; usable general-journal draft/review/post/reverse journey. Preserve existing account references and posted history. | Opening + period movement = closing on every account; closing balances reconcile to the trial balance; denied/cross-company access, duplicate submissions, changed-content conflicts and closed periods tested. |
+| 2. Core opening and period completion | Reviewed opening trial balance with explicit cutover, mapping/preview/confirmation and durable import receipts; fiscal-period administration and close/reopen policy; bank-statement matching/reconciliation; supported core statements and exports. | A complete synthetic two-period business reconciles opening, activity, closing and bank balances; prior earnings/close do not double count. Qualified accounting review, restore/upgrade checks and observed core-only use pass for a stated supported scope. |
+| 3. Module contracts and lifecycle | Versioned manifests, company capability gates, dependencies, migration/upgrade checks, retained-history access and shared master-data contracts. Extract the existing POS showcase behind this boundary without changing its receipts. | Core runs with all add-ons disabled; direct browser/API/tool calls cannot use disabled capabilities; dependency conflicts and failed upgrades are recoverable; historical source/journal reports survive disablement. |
+| 4. Core API and MCP reads | Describe a versioned HTTP API; expose authorized companies, capabilities, accounts, journal/source detail, trial balance and account statements; add MCP read tools over the same service contracts. | Browser/API/MCP yield the same scoped totals and dates; pagination, invalid input, revoked identity and cross-company tests pass; a real local client completes the documented read journey. |
+| 5. Core API and MCP commands | Add draft/validate/post/reverse commands with explicit permission, configured review policy, durable idempotency and command receipts. Extend identity/token access without creating a parallel authentication system. | Lost responses/retries cause one effect; stale previews and changed content conflict; revocation and disabled capability checks apply at execution; audit records identify actor, client, source and resulting journal. |
+| 6. AR | Customer roles, invoices, credit notes, receipts, allocation, customer statements and aging; reconciled unpaid-document import for businesses adopting AR. | Unpaid documents = AR control balance at cutover and after partial payment, credit/reversal and concurrent allocation. No duplicated cash-sale recognition or opening balance. |
+| 7. AP | Vendor roles, bills, credit notes, payment recording, allocation, supplier statements and aging; reconciled unpaid-bill import. | Open bills = AP control balance through partial payment, credits, reversals and cutover; recording a payment does not send money. |
+| 8. Purchasing and inventory costing | Purchase orders/receiving/returns, stock movements and warehouses; reviewed FIFO or weighted-average costing; valuation and COGS journal integration. | Quantity, valuation, AP/receipt controls and COGS reconcile; negative-stock, backdating, returns and concurrent consumption follow reviewed policy. |
+| 9. Pakistan tax adapter | Reviewed effective-date rules for one defined entity/transaction scope, tax calculation snapshots, adjustment/credit treatment and relevant outputs. UK/UAE adapters follow their own review. | Representative taxable, exempt and correction fixtures reconcile documents, tax controls and ledger; qualified local review establishes supported scope. Provider submission is a separate authorized integration. |
+| 10. Shop POS | Shared checkout plus fast product/barcode entry, returns, tender recording and shift/day reconciliation; reuse contacts/catalog, accounting and applicable tax. | Shop users complete sale/return/settlement journeys; stock/COGS where enabled and all tenders reconcile; retry, permissions, load, printer and supported-hosting checks pass. |
+| 11. Restaurant POS | Add table/order lifecycle, modifiers, kitchen routing/tickets and bill split/merge policy over the shared checkout. Recipe/ingredient costing is a separately declared inventory capability. | Orders, kitchen changes, split bills, voids and final settlement stay traceable and post once; restaurant-user and accounting review pass. |
+| 12. Distribution | Route/van orders, warehouse transfers, delivery, collections and evening settlement using the earlier operational modules. | Van stock, delivered documents, cash/credit collections and ledger reconcile across handoffs and retry/failure cases. |
+| 13. Specialist modules | Pharmacy batch/expiry, jewelry weight/stone/labor, workshop jobs/parts/labor, membership dues and other validated demand. | Each has its own supported scope, required capabilities, accounting examples and observed user acceptance. |
+
+Tax contracts belong in milestone 3: reserve explicit tax capability, document-line inputs, exact amount/rounding boundaries, effective policy versions and immutable calculation/source snapshots before AR/AP schemas are finalized. Milestone 9 is the first complete adapter, not permission to issue applicable taxable documents without supported rules in milestones 6–8. Those modules may be developed with synthetic/no-tax scenarios; move the required adapter ahead of their production acceptance when the chosen business needs it. Never silently turn missing tax capability into zero tax.
+
+Core opening imports must not mark an existing business ready with unexplained AR/AP controls. Before those modules exist, accept only a supported core-only cutover whose reviewer has reconciled any retained control totals to external unpaid-document schedules, with that limitation visible. Later module activation must match those balances and schedules without reposting them. If this cannot be established, keep opening readiness unresolved.
+
+## Versioned module contract
+
+“Plug and play” means a compatible, reviewed package can be installed and enabled with declared dependencies and configuration; it does not mean arbitrary uploaded PHP can execute. Keep the existing application, bootstrap, router, MeekroDB connection and central posting interface. Start with project-owned modules in the same repository/package and a small explicit registry; a marketplace or remote installer is not required.
+
+- A manifest declares stable module ID/version, supported core-contract versions, dependencies/capabilities, owned migrations/data, routes/navigation, permissions, settings, reports and API/MCP operations. Validate compatibility before enabling it for a company.
+- Separate package installation/upgrades from per-company enablement. Installing a package never grants permission or activates it for every company. Use reviewed additive migrations; never rewrite applied migration checksums or automatically drop posted data.
+- Enforce capability, actor/action permission, company/book scope, readiness and period checks on the server for every operation. Navigation and MCP tool discovery reflect those checks but do not replace execution-time authorization.
+- A module owns its operational documents and immutable posting snapshots. Cross-module access uses typed service contracts; only the core service writes posted journals. Atomic source/ledger work and durable duplicate identities remain mandatory.
+- Disabling blocks new module operations and explains blocked dependants. Refuse incompatible dependency removal. Preserve posted journals, source snapshots, audit, exports and authorized read access; re-enabling a compatible version restores operations. Corrections still use core linked reversals, but a module-backed document requires its supported correction service and subledger reconciliation; disablement must not allow an isolated ledger reversal to bypass them.
+- Verify core-only install, each module alone with its required dependencies, selected combinations, upgrades, disable/re-enable, failure rollback and historical reads. Publish a compatibility matrix before claiming interchangeable modules.
+
+Project-owned core and modules follow the chosen MIT license; dependency and legacy licenses retain their own terms. Modules are not a paid feature tier. [License scope](../LICENSE-SCOPE.md) remains authoritative.
+
+## Shop and restaurant dependencies
+
+| Interface/capability | Required | Conditional |
+|---|---|---|
+| Basic non-stock/service checkout | Core + shared catalog + POS checkout | Tax adapter when applicable; contacts/AR for customer credit rather than anonymous immediate settlement. |
+| Stocked shop | Basic checkout + inventory quantity/costing | Purchasing/AP for procure-to-pay; hardware and payment-provider adapters require separately tested support. |
+| Restaurant | Core + catalog + checkout + restaurant order/table/modifier/kitchen module | Inventory/recipes for ingredient quantity and costing; AR for credit accounts; applicable tax/payment adapters. |
+| Distribution | Core + catalog + inventory + distribution | AR for credit sales/collections, AP/purchasing for procurement, applicable tax and any later offline capability. |
+
+Changing industry interface must not rewrite accounts, old documents or posted amounts. Snapshot the originating interface/module version on new operational documents where needed; keep historic documents readable with their original meaning. Offline checkout, live payments and fiscal-device integration remain independent capabilities with their existing review gates.
+
+## API and MCP contract decisions
+
+The API is for integrations; MCP gives compatible assistants discoverable, typed access to the same business capabilities. Use an explicit versioned route namespace and OpenAPI description, with exact decimal strings, stable IDs, business DATE values, UTC event timestamps, bounded pagination, structured errors and correlation/command IDs. Final route/tool names and supported protocol versions are implementation decisions to record and test. OpenAPI describes an HTTP interface; it does not supply accounting validation or access controls. See the [official OpenAPI specification](https://spec.openapis.org/oas/v3.2.1.html).
+
+Deliver reads before mutations. Scope machine/client identities to allowed companies/books and actions; support expiration/revocation and audit without shared global administrator credentials. Keep authentication transport separate from business authorization while reusing existing identities and service checks. For an HTTP MCP transport, implement the selected version's authorization/discovery requirements, token audience validation and secure token handling; do not treat a browser session cookie as a complete MCP authentication design. See [MCP authorization](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization).
+
+Start write access with draft and validation operations. Posting, reversal and period controls are distinct commands: require their specific scopes, show or return a reviewable financial effect and revalidate at execution. Configure review/approval policy per company, role and command; do not assume either unconditional AI acceptance or an unavoidable per-record queue. Retries return the durable result only for matching content. Tool annotations and model intent are not permission checks; the server must reject unauthorized or stale commands. See [MCP tools and their security considerations](https://modelcontextprotocol.io/specification/2025-11-25/server/tools).
+
+No API or MCP command sends messages, collects payments or calls providers merely because it posts an accounting record. Those actions require an explicit separately enabled integration and authorization. Documentation alone does not implement routes, scopes, credentials, migrations or a protocol server.
+
+## Parallel work and release boundary
+
+Accounting-profile research, core report review and early module/API contract design can run alongside core implementation. Shipping dependent modules waits for their prerequisite gates. Reviewed jurisdiction-specific financial statements, multicurrency, multilingual formatting, alternative-book definitions and document scanning retain the requirements in the main roadmap; this sequence does not silently implement or remove them.
+
+After the accounts/journals preview, the next build is reviewed opening/cutover, fiscal-period administration and bank reconciliation. AR follows the core and extension/access foundations. Preserve the working POS showcase and historical receipts while its future extraction is designed. Each milestone stays local until authorized publication, and passing technical tests remains distinct from accounting review and observed usability. Eight disabled [country tax catalogs](tax/README.md) prepare later modules without enabling tax calculations.
+
+Every release updates the repository docs, GitHub Wiki, README, website and demo together. Record the package version and source commit, publish truthful capability/limitation changes, migrate the isolated demo safely, and verify each public surface. The release receipt must identify any surface still pending; a local edit is not a publication.

@@ -52,7 +52,7 @@ test('preflight and migration replay preserve receipts and existing data', funct
     foreach (['preflight.php', 'migrate.php'] as $name) {
         $result = installer_process(dirname(__DIR__) . '/www/phpledger/install/' . $name);
         assert_same(0, $result['status'], $result['output']);
-        assert_true(str_contains($result['output'], $name === 'preflight.php' ? 'schema is current' : 'Migrations applied: 0; already current: 5'));
+        assert_true(str_contains($result['output'], $name === 'preflight.php' ? 'schema is current' : 'Migrations applied: 0; already current: ' . count($before)));
     }
     assert_same($before, DB::query('SELECT * FROM pl_schema_migrations ORDER BY version'));
     assert_same($users, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_users'));

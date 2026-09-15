@@ -14,7 +14,19 @@ while (!is_file($input['barrier'])) {
 }
 $fixture = $input['fixture'];
 try {
-    if ($input['mode'] === 'pos_checkout') {
+    if ($input['mode'] === 'general_save') {
+        $draft = pl_save_general_draft($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['general_input'], $input['draft_id'], $input['revision']);
+        $journal = ['id' => $draft['id']];
+    } elseif ($input['mode'] === 'account_update') {
+        $account = pl_save_account($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['account_input'], $input['account_id'], $input['revision']);
+        $journal = ['id' => $account['id']];
+    } elseif ($input['mode'] === 'general_post') {
+        $draft = pl_post_general_draft($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['draft_id'], $input['revision']);
+        $journal = ['id' => $draft['journal_id']];
+    } elseif ($input['mode'] === 'account_create') {
+        $account = pl_save_account($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['account_input']);
+        $journal = ['id' => $account['id']];
+    } elseif ($input['mode'] === 'pos_checkout') {
         $sale = pl_checkout_pos($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['pos_input']);
         $journal = ['id' => $sale['document_id']];
     } elseif ($input['mode'] === 'setup') {

@@ -7,7 +7,9 @@
     <meta name="color-scheme" content="light">
     <title><?= pl_e($title) ?> · PHP Ledger</title>
     <link rel="preload" href="<?= pl_e(pl_url('/assets/fonts/InterVariable.woff2')) ?>" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/app.css', ['v' => '20260914-logo'])) ?>">
+    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/app.css', ['v' => '0.1.2'])) ?>">
+    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/core.css', ['v' => '0.1.2'])) ?>">
+    <?php if ($view === 'general-editor'): ?><script src="<?= pl_e(pl_url('/assets/core-journal.js', ['v' => '0.1.2'])) ?>" defer></script><?php endif; ?>
     <?php if ($view === 'pos'): ?><link rel="stylesheet" href="<?= pl_e(pl_url('/assets/pos.css')) ?>"><script src="<?= pl_e(pl_url('/assets/pos.js')) ?>" defer></script><?php endif; ?>
     <script src="<?= pl_e(pl_url('/assets/app.js')) ?>" defer></script>
 </head>
@@ -19,6 +21,8 @@
     <nav class="primary-nav" aria-label="Main navigation">
         <?php if ($company): ?>
         <a href="<?= pl_e(pl_url('/transactions')) ?>" <?= in_array($view, ['transactions', 'editor'], true) ? 'aria-current="page"' : '' ?>><?= pl_icon('list') ?><span>Transactions</span></a>
+        <a href="<?= pl_e(pl_url('/general-journals')) ?>" <?= in_array($view, ['general-journals', 'general-editor', 'general-detail'], true) ? 'aria-current="page"' : '' ?>><?= pl_icon('book') ?><span>Journals</span></a>
+        <a href="<?= pl_e(pl_url('/accounts')) ?>" <?= $view === 'accounts' ? 'aria-current="page"' : '' ?>><?= pl_icon('list') ?><span>Accounts</span></a>
         <a href="<?= pl_e(pl_url('/pos')) ?>" <?= $view === 'pos' ? 'aria-current="page"' : '' ?>><?= pl_icon('receipt') ?><span>Point of sale</span></a>
         <a href="<?= pl_e(pl_url('/reports')) ?>" <?= in_array($view, ['reports', 'balance-sheet', 'profit-loss', 'cash-forecast', 'trial-balance', 'account', 'journal'], true) ? 'aria-current="page"' : '' ?>><?= pl_icon('book') ?><span>Reports</span></a>
         <?php else: ?><a href="<?= pl_e(pl_url('/companies')) ?>" <?= $view === 'companies' ? 'aria-current="page"' : '' ?>>Your businesses</a><?php endif; ?>

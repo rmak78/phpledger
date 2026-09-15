@@ -35,7 +35,7 @@ PHP Ledger is being rebuilt around that connected journey: useful daily tasks fo
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS are being refined for the first package.*
 
 > [!NOTE]
-> **The first foundation preview is available.** [Download 0.1.1-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.1-preview) for evaluation with synthetic data. It includes production dependencies and installation instructions. Modern source lives in `www/phpledger`; historical code is preserved in `legacy/`. The click-to-add POS update is included; regional accounting review and pilot usability gates remain open.
+> **Evaluate the accounting core.** [Download 0.1.2-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is preserved in `legacy/`. Regional accounting review and pilot usability gates remain open.
 
 ## Explore the working preview
 
@@ -43,7 +43,8 @@ PHP Ledger is being rebuilt around that connected journey: useful daily tasks fo
 |---|---|
 | **Start a business** | Company setup, a preliminary account template and an isolated sample company. |
 | **Record the day** | Receipt and expense drafts, clear posting, balanced journals and linked reversals. |
-| **Understand the numbers** | Profit and loss, balance sheet, cash balance, account activity and trial balance, with source drill-down. |
+| **Work on the books** | Account creation, audited name/status changes and general-journal drafts with a separate posting review. Account administration is available in an installation; the public demo keeps it read-only. |
+| **Understand the numbers** | Profit and loss, balance sheet, cash balance, trial balance and account statements with opening, running and closing balances, linked to their sources. |
 | **Look ahead** | A cash scenario using the inflows and outflows you enter; assumptions remain visible. |
 | **Try the counter** | Click-to-add sample products, quick cart controls, separate review/cash confirmation, a printable receipt and linked journal. |
 
@@ -83,17 +84,21 @@ The current preview is English and uses one base currency per book. Choose **USD
 
 Pakistan is first for accounting-framework research, followed by the UK and UAE. Currency selection does not activate country accounting or tax rules. Reviewed translations, flexible date/number formats and fixed, fetched or manually overridden exchange rates are part of the future path. [Countries and currencies →](https://github.com/rmak78/phpledger/wiki/Countries-and-Currencies)
 
+Early [tax research](docs/tax/README.md) covers eight countries and seven business types. Its 81 candidate regimes are **disabled and unreviewed**; they do not calculate taxes or establish eligibility. The [accounting rule register](docs/accounting/CORE_RULE_REGISTER.md) connects the core's controls with ICAP, ICMAP and ACCA guidance and records the remaining review gates.
+
 ## Where we go from here
 
 | Next | Outcome |
 |---|---|
-| **First supported pilot package** | Refined reports and POS, qualified accounting review, observed usability and explicit supported scope. The foundation preview is available now. |
-| **Accounting MVP and pilots** | Receivables, payables, opening balances, historical imports, reconciliation and reviewed period-end reporting. |
-| **Regional accounting and ERP** | Explainable multi-book differences, reviewed country adapters, inventory/purchasing, production POS and distribution. |
+| **Complete the accounting core** | Statements, chart management and general journals are in this preview. Next: reviewed opening balances/imports, fiscal-period administration, bank reconciliation and supported reports. |
+| **Extension and integration foundation** | Optional-module contracts and lifecycle, then a versioned business API and MCP access using the same accounting services and permissions. These interfaces are planned. |
+| **Optional business modules** | AR → AP → purchasing/inventory → reviewed Pakistan tax → shop POS → restaurant POS → distribution and specialist modules. Required tax support precedes affected production use. |
+
+The core must work independently of add-ons. Shop and restaurant interfaces will share checkout and accounting services while providing their own operational workflows. Qualified accounting review, observed usability and an explicit supported scope remain release gates. [Module build order and completion gates →](docs/MODULE-ROADMAP.md)
 
 Restaurant, pharmacy, club, trader, distributor, shop and workshop scenarios inform the longer-term product. **Scan document** and AI extraction come later, with human review before saving or posting.
 
-[**Full roadmap**](https://github.com/rmak78/phpledger/wiki/Roadmap) · [**First-package scope**](https://github.com/rmak78/phpledger/wiki/First-Package) · [**Sprint 03 progress**](https://github.com/rmak78/phpledger/milestone/4)
+[**Full roadmap**](https://github.com/rmak78/phpledger/wiki/Roadmap) · [**Package scope**](https://github.com/rmak78/phpledger/wiki/First-Package) · [**Core release validation**](docs/repository/sprint-04/CORE-0.1.2-VALIDATION.md)
 
 ## Help shape PHP Ledger
 
@@ -106,7 +111,7 @@ We welcome thoughtful feedback from business owners, bookkeepers, accountants, d
 
 **Location:** Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan.
 
-**Supporting the initiative:** BixiTech · BixiSoft · Agency75.
+**Companies that support our open-source initiative:** [BixiTech](https://www.bixitech.com/) · [BixiSoft](https://bixisoft.com/) · [BrownBag](https://brownbag.pk/) · [Agency75](https://agency75.com/).
 
 The new project-owned code and documentation use the [MIT License](LICENSE), with paid setup, training and support on customer-owned hosting. [Licence scope](LICENSE-SCOPE.md) preserves separate terms for historical code, dependencies, fonts, datasets and company marks; the legacy application's provenance is not resolved by this grant. No stable-release, jurisdiction-compliance or support-response guarantee is implied by the preview.
 

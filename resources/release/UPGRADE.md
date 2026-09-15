@@ -2,7 +2,7 @@
 
 Source revision: `{{SOURCE_COMMIT}}`.
 
-This update follows 0.1.0-preview and retains its database schema, migration checksums and production dependencies. It supports a controlled code replacement of the unmodified 0.1.0-preview foundation after backup and preflight; it provides no automatic upgrade from the historical PHP Ledger application. The new migration runner understands the complete `001`–`005` chain. Source-side baseline-001 upgrade tests do not establish compatibility with an arbitrary old installation, customized schema or historical database.
+This guide covers the controlled upgrade from unmodified **0.1.1-preview to 0.1.2-preview**, after backup and preflight. Migration `006` adds two tables for general-journal sources and audit records, account revision/creation metadata and four triggers. Existing `001`–`005` migration files and production dependencies are retained. The runner uses the complete `001`–`006` chain; matching applied migrations are skipped. This is not an automatic upgrade from the historical PHP Ledger application or evidence of compatibility with a customized schema.
 
 ## Before changing an installation
 
@@ -32,7 +32,7 @@ Before relying on the backup, create a separate empty restoration database and u
 mysql --login-path=phpledger-restore phpledger_restore < /private/backups/phpledger-before-upgrade.sql
 ```
 
-Do not aim that command at the live database. Confirm definitions/data, all five current migration receipts and their checksums, nine current triggers, company scope, source/journal links and balanced totals. Run preflight and sign in on the isolated restoration. Compare a known transaction and its reports with the recorded pre-backup values. A completed SQL import alone is insufficient proof of recovery.
+Do not aim that command at the live database. For a 0.1.1-preview backup, confirm definitions/data, five migration receipts and their checksums, nine triggers, company scope, source/journal links and balanced totals. After a successful 0.1.2-preview upgrade, the expected counts are six applied receipts and thirteen triggers. Run preflight and sign in on the isolated restoration using matching code. Compare a known transaction and its reports with the recorded pre-backup values. A completed SQL import alone is insufficient proof of recovery.
 
 ## Apply a reviewed update
 
@@ -46,7 +46,9 @@ php www/phpledger/install/migrate.php
 php www/phpledger/install/preflight.php
 ```
 
-Stop on any nonzero exit status. Preflight must distinguish a recognized incomplete chain from an unknown/interrupted/altered schema; only a recognized upgrade path may proceed. Switch the web root to the new `www/phpledger/public` after successful migration. Recheck sign-in, company selection, a synthetic draft/post/report/reversal journey and existing totals before reopening access. Do not recreate the initial user during an upgrade.
+Stop on any nonzero exit status. Preflight must distinguish a recognized pending migration from an unknown/interrupted/altered schema; only a recognized upgrade path may proceed. An unknown migration receipt or checksum mismatch stops the upgrade. Switch the web root to the new `www/phpledger/public` after successful migration. Recheck sign-in, company selection, existing totals and account statement balances. In an isolated sample company, check account creation/rename/status and a general-journal draft, review, post and dated reversal before reopening access. Do not recreate the initial user during an upgrade.
+
+Migration `006` preserves existing account IDs, posted journals and source records; it does not replace the chart, calculate opening balances or clear existing-business readiness restrictions. Compare your saved totals and confirm six applied receipts and thirteen triggers. The bundled tax research stays disabled and unreviewed; installing it does not enable tax calculations, country adapters or MCP access.
 
 ## Interrupted migration or rollback
 

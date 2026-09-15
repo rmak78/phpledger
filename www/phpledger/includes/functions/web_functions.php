@@ -158,10 +158,30 @@ function pl_can_write(array $company): bool
     return in_array($company['role'] ?? '', ['owner', 'accountant'], true);
 }
 
+/** Convert browser rows to service input; blank spare rows are not accounting entries. */
+function pl_web_general_input(array $input): array
+{
+    $rows = $input['lines'] ?? [];
+    if (!is_array($rows) || count($rows) > 100) { throw new DomainException('Use up to 100 journal lines.'); }
+    $lines = [];
+    foreach ($rows as $row) {
+        if (!is_array($row)) { throw new DomainException('A journal line is invalid.'); }
+        foreach (['account_id', 'debit', 'credit', 'description'] as $field) {
+            if (isset($row[$field]) && !is_string($row[$field])) { throw new DomainException('Journal fields must contain text or decimal amounts.'); }
+        }
+        $id = pl_web_id($row, 'account_id');
+        $debit = pl_web_text($row, 'debit'); $credit = pl_web_text($row, 'credit');
+        $description = pl_web_text($row, 'description');
+        if (!$id && $debit === '' && $credit === '' && $description === '') { continue; }
+        $lines[] = ['account_id' => $id, 'debit' => $debit === '' ? '0' : $debit, 'credit' => $credit === '' ? '0' : $credit, 'description' => $description];
+    }
+    return ['date' => pl_web_text($input, 'date'), 'reference' => pl_web_text($input, 'reference'), 'description' => pl_web_text($input, 'description'), 'creation_key' => pl_web_text($input, 'creation_key'), 'lines' => $lines];
+}
+
 function pl_render(string $view, array $data = []): never
 {
     $allowed = ['login', 'companies', 'onboarding', 'setup-review', 'transactions', 'editor',
-        'trial-balance', 'account', 'journal', 'help', 'error', 'demo', 'reports', 'balance-sheet', 'profit-loss', 'cash-forecast', 'pos'];
+        'trial-balance', 'account', 'journal', 'help', 'error', 'demo', 'reports', 'balance-sheet', 'profit-loss', 'cash-forecast', 'pos', 'accounts', 'general-journals', 'general-editor', 'general-detail'];
     if (!in_array($view, $allowed, true)) {
         throw new LogicException('Unknown template.');
     }

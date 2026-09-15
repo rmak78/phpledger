@@ -46,7 +46,7 @@ try {
     $beforeLines = DB::query('SELECT * FROM pl_journal_lines WHERE journal_id = %i ORDER BY line_number', $journal);
     $beforeAccounts = DB::query('SELECT id, company_id, book_id, code, name, type, is_active FROM pl_accounts ORDER BY id');
     $migration = pl_migrate();
-    if ($migration['applied'] !== ['002_product_slice', '003_demo_isolation', '004_pos_showcase', '005_demo_period_guard'] || $migration['skipped'] !== ['001_foundation']) {
+    if ($migration['applied'] !== ['002_product_slice', '003_demo_isolation', '004_pos_showcase', '005_demo_period_guard', '006_core_accounts_journals'] || $migration['skipped'] !== ['001_foundation']) {
         throw new RuntimeException('Unexpected upgrade migration receipt.');
     }
     if ($beforeHeader !== DB::queryFirstRow('SELECT * FROM pl_journals WHERE id = %i', $journal)
@@ -64,7 +64,7 @@ try {
         || pl_migrate()['applied'] !== [] || DB::queryFirstField('SELECT @@session.time_zone') !== '+00:00') {
         throw new RuntimeException('Review/replay/UTC validation failed.');
     }
-    echo "Upgrade passed: original 001 -> 002/003/004/005, preserved six accounts and posted journal/lines, required review, explicit role mapping, reconciled report, replay and UTC session.\n";
+    echo "Upgrade passed: original 001 -> 002/003/004/005/006, preserved six accounts and posted journal/lines, required review, explicit role mapping, reconciled report, replay and UTC session.\n";
 } finally {
     DB::useDB('phpledger_test');
     if ($created && preg_match('/^phpledger_upgrade_verify_[a-f0-9]{24}$/D', $upgradeDatabase)) {

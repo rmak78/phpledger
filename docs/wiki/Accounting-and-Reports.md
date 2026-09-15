@@ -1,32 +1,40 @@
 # From a transaction to an explainable balance
 
-Every financial write in the new foundation goes through one posting service. It checks access, company/book scope, dates, currency, account ownership and balanced debit/credit totals before committing the result. Financial decisions use exact decimals.
+Every posting uses one service that checks access, company/book scope, dates, currency, account ownership and balanced debit/credit totals. Financial decisions use exact decimals.
 
-## What the local preview does
+## What 0.1.2-preview does
 
 | Workflow | Present scope |
 |---|---|
-| Receipt and expense entry | Save recoverable drafts, then explicitly post them. |
-| Journal | Keep a durable source reference and balanced lines. |
-| Corrections | Preserve posted entries and create linked reversals. |
-| Trial balance and account activity | Read posted records within the selected business/book and link back to sources. |
-| Profit and loss / balance sheet | Basic posted income/expense and position summaries; professional statement structure is under refinement. |
-| Cash scenario | Project entered weekly cash in/out from the posted opening cash balance; no forecast entries are posted. |
+| Account statements | Any authorized account: opening balance, period debits/credits, running balances and closing balance, with journal/source links and pagination. |
+| Chart management | Authorized owners/accountants create accounts and edit names or active status with an audit trail and stale-edit protection. Code, type and purpose remain fixed. |
+| General journals | Save and reopen drafts, edit lines, review totals and explicitly post. Drafts may be unbalanced; posting must balance. |
+| Receipts and expenses | Save recoverable drafts and explicitly post them through the same accounting services. |
+| Corrections | Preserve the posted entry and create a linked reversal with a reason. |
+| Trial balance | Read posted balances within the selected business/book and investigate the underlying accounts. |
+| Profit and loss / balance sheet | Basic posted income/expense and position summaries; complete professional statement structure remains under review. |
+| Cash scenario | Project entered weekly cash in/out from posted opening cash; no forecast entries are posted. |
 
-An identical retry is protected against duplicate posting. Closed periods reject new postings. Automated checks cover these boundaries, including concurrency and rollback, but technical passes do not substitute for qualified accounting review.
+A statement's **opening balance** is the balance before its selected date range. This calculation does not provide an opening-entry importer or establish that a business's cutover was reconciled.
+
+Posting checks the current saved draft; a changed draft must be reviewed again. Identical retries do not create duplicate journals, and closed periods reject new posting. Linked reversals preserve both sides of the correction. Technical checks support these controls but do not replace qualified accounting review.
+
+The public demo keeps accounts read-only. Visitors can save/edit general drafts, post balanced entries and use linked reversals within their own temporary books and capacity limits.
 
 ## A complete statement needs more than a layout
 
-Applicable accounting guidance must govern recognition, measurement, classification, adjustments, closing and disclosures as well as presentation. The regional work starts with **Pakistan, then the UK and UAE**, informed by the relevant statutory framework and professional guidance. No professional-body endorsement is implied.
+Applicable accounting guidance governs recognition, measurement, classification, adjustments, closing and disclosures as well as presentation. Work starts with **Pakistan, then the UK and UAE**, using the relevant statutory framework and professional guidance. ICAP, ICMAP and ACCA references inform the research; they are not a product certification.
 
-The next reporting model needs reviewed classifications, current/non-current distinctions, appropriate COGS and subledger data, genuine comparatives, equity movements and the notes or cash-flow components required by the selected profile. It must preserve the profile/version behind an issued result. Missing mappings or incomplete records must be explicit; a blank or zero must not conceal missing data.
+The next reporting work needs reviewed classifications, current/non-current distinctions, appropriate COGS/subledger data, comparatives, equity movements and the notes or cash-flow components required by the selected profile. Issued results must retain their profile/version. Missing mappings or records must stay visible.
 
-The current starter accounts and summaries do not implement a complete Pakistan, UK or UAE framework. [[The first package|First-Package]] defines the next acceptance gates.
+Current starter accounts and summaries do not implement a complete country framework. Tax regimes are separately researched and remain disabled; see [[Tax research|Tax-Research]].
 
-## Past data and reconciliation
+## Next core work: opening, periods and reconciliation
 
-Historical import is planned as **upload → match columns → preview → correct → reconcile totals → confirm**. The first accounting release is intended to cover account/contact lists, opening balances and unpaid documents through CSV/XLSX templates. Detailed historical journals and document/payment relationships follow as a separate migration milestone.
+Reviewed opening/cutover, period-close/reopen administration, bank-statement matching and reconciliation are planned. Imports must preview mappings, errors and totals before explicit confirmation.
 
-A chosen cutover date must keep opening AR/AP balances consistent with unpaid invoices and bills without counting them twice. Bank matching and reconciliation will have their own review and confirmation workflow. These import, AR/AP and bank-reconciliation capabilities are not available in the current preview.
+Core-only cutover must explain retained AR/AP controls using reconciled external unpaid-document schedules until the optional AR/AP modules exist. Their later activation must match those balances without reposting them. Customer/vendor open-item statements and aging require those modules; an ordinary account statement does not supply them.
 
-[[Countries and currencies|Countries-and-Currencies]] · [[Architecture]] · [[Roadmap]]
+The complete core must let a supported business reconcile and complete its accounting period with optional modules disabled. [[Module roadmap|Module-Roadmap]] sets out the sequence and acceptance gates.
+
+[[Countries and currencies|Countries-and-Currencies]] · [[Architecture]] · [[First package|First-Package]]
