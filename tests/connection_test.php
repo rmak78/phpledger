@@ -405,6 +405,10 @@ test('standalone STDIO bridge discovers tools reads both protocols and reports r
             fwrite($pipes[0], json_encode($message, JSON_THROW_ON_ERROR) . "\n");
             $line = fgets($pipes[1]);
             assert_true(is_string($line), 'Bridge did not produce a JSON-RPC response.');
+            if ($message['method'] === 'initialize') {
+                $wire = json_decode($line, false, 64, JSON_THROW_ON_ERROR);
+                assert_true(($wire->result->capabilities->tools ?? null) instanceof stdClass, 'Bridge changed the tools capability object into a JSON array.');
+            }
             $response = json_decode($line, true, 64, JSON_THROW_ON_ERROR);
             assert_same($message['id'], $response['id']);
             return $response;

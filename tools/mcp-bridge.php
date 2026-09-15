@@ -71,15 +71,16 @@ while (($line = fgets(STDIN, 65538)) !== false) {
             foreach (preg_split('/\r?\n\r?\n/', $body) ?: [] as $event) {
                 $data = [];
                 foreach (preg_split('/\r?\n/', $event) ?: [] as $entry) { if (str_starts_with($entry, 'data:')) { $data[] = ltrim(substr($entry, 5), ' '); } }
-                if ($data !== []) { $responses[] = json_decode(implode("\n", $data), true, 64, JSON_THROW_ON_ERROR); }
+                if ($data !== []) { $responses[] = json_decode(implode("\n", $data), false, 64, JSON_THROW_ON_ERROR); }
             }
-        } else { $responses[] = json_decode($body, true, 64, JSON_THROW_ON_ERROR); }
+        } else { $responses[] = json_decode($body, false, 64, JSON_THROW_ON_ERROR); }
         $matched = false;
         foreach ($responses as $response) {
-            if (!is_array($response) || ($response['jsonrpc'] ?? '') !== '2.0') { throw new RuntimeException('Endpoint returned an invalid MCP response.'); }
-            if (array_key_exists('id', $response) && $response['id'] === $id) {
+            // Keep JSON objects as objects: capabilities.tools = {} must never become [].
+            if (!$response instanceof stdClass || ($response->jsonrpc ?? '') !== '2.0') { throw new RuntimeException('Endpoint returned an invalid MCP response.'); }
+            if (property_exists($response, 'id') && $response->id === $id) {
                 $matched = true;
-                if ($message['method'] === 'initialize' && isset($response['result']['protocolVersion'])) { $protocol = $response['result']['protocolVersion']; }
+                if ($message['method'] === 'initialize' && isset($response->result->protocolVersion)) { $protocol = $response->result->protocolVersion; }
                 fwrite(STDOUT, json_encode($response, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES) . "\n");
             }
         }

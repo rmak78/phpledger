@@ -41,7 +41,8 @@ function pl_demo_acquire_maintenance_lock(): void
     if (!pl_demo_enabled()) {
         return;
     }
-    $wait = pl_demo_reset_process() ? 30 : 0;
+    // Concurrent MCP startup requests queue briefly without bypassing reset isolation.
+    $wait = pl_demo_reset_process() ? 30 : 2;
     if ((int) DB::queryFirstField('SELECT GET_LOCK(%s, %i)', 'phpledger:demo:maintenance', $wait) !== 1) {
         throw new PlDemoUnavailable('The sample is being refreshed or is busy. Please try again in a moment.');
     }

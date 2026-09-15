@@ -90,3 +90,7 @@ The package has no automatic upgrade from the historical PHP Ledger database. A 
 ## Feedback and next steps
 
 Use the [issue tracker](https://github.com/rmak78/phpledger/issues) for reproducible synthetic examples and the [public documentation](https://github.com/rmak78/phpledger/wiki) for current scope and roadmap. The [hosted demo](https://phpledger.com/demo/) is temporary and resets hourly. Do not submit real business data, credentials or private database exports with feedback.
+
+### Client transport corrections
+
+The STDIO bridge preserves JSON capability objects exactly. Concurrent demo admissions wait up to two seconds, with origin-approved CORS and retry headers on busy responses. API/OpenAPI and MCP server metadata identify 0.2.1-preview.

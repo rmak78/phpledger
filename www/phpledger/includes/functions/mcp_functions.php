@@ -59,7 +59,7 @@ final class PlMcpReadTool implements Mcp\Server\Handler\ToolHandlerInterface
 
 function pl_mcp_response(ServerRequestInterface $request, array $connection): ResponseInterface
 {
-    $builder = Mcp\Server::builder()->setServerInfo('PHP Ledger', '0.2.0-preview')
+    $builder = Mcp\Server::builder()->setServerInfo('PHP Ledger', '0.2.1-preview')
         ->setCapabilities(new Mcp\Schema\ServerCapabilities(tools: true, resources: false, prompts: false))
         ->setInstructions('Read-only accounting preview. Select an explicitly authorized company and book. Amounts are exact decimal strings. Business dates are inclusive; event times are UTC. Follow pagination and source links. Drafts do not affect reports. Reconnect after expiry or demo reset.')
         ->setPaginationLimit(25)->setProtocolVersion(Mcp\Schema\Enum\ProtocolVersion::V2025_11_25)

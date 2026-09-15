@@ -68,7 +68,7 @@ Current defaults allow **100 visitors per generation** and **100 source document
 
 A visitor's session stores the current generation. The next reset invalidates all previous visitors, even if numeric IDs are reused later. An expired generation rejects new work until the reset completes; it does not keep accepting writes into expired data. The UI must show that records are synthetic, temporary, and refreshed hourly. Never enter real financial/customer information or treat a printed sample receipt as a production transaction.
 
-Every demo request and reset uses the same database advisory maintenance lock. Requests fail with a recoverable busy/refresh response when it is held, while reset waits up to 30 seconds. This deliberately serializes the bounded showcase; it is not evidence of a production concurrency design or a multi-node demo deployment.
+Every demo request and reset uses the same database advisory maintenance lock. Ordinary requests queue for at most two seconds before a recoverable busy/refresh response; reset waits up to 30 seconds. Approved browser origins retain CORS and retry headers even when bootstrap cannot acquire that lock. This deliberately serializes the bounded showcase; it is not evidence of a production concurrency design or a multi-node demo deployment.
 
 ## Hourly UTC reset
 

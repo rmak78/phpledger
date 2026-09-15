@@ -125,3 +125,7 @@ For **each** client, record endpoint, explicit transport, authentication, build,
 Transactions, general journals, account movements and bank rows progressively enhance with locally bundled **DataTables 3.0.4**, with 25/50/100-row pages. `/tables` is a session-authenticated, company/book-scoped GET route. Search/sort are bounded and allowlisted; total/filtered counts are scoped. Ledger window balances precede filtering/paging. Existing CSV exports retain complete scoped results and their established limits. Without JavaScript or after an enhancement error, the original server-rendered view remains usable. Connection navigation scrolls within the header at narrow widths.
 
 Local browser evidence covers desktop 1440, tablet 768 and mobile 390, including OAuth consent, token display/revocation and bank drill-down. Technical checks do not establish independent accounting review, WCAG certification or observed participant usability. See the [staged receipt](repository/sprint-05/DELIVERY-0.1.5-0.2.1.md).
+
+## Native-client corrections found during release verification
+
+The STDIO bridge preserves empty JSON objects in capabilities and schemas; decoding them as associative PHP arrays changed `{}` into `[]` and caused Codex to reject initialization. The demo now queues concurrent admissions for at most two seconds while preserving the same maintenance lock. Busy bootstrap responses retain CORS and Retry-After headers for approved origins. These corrections have targeted regression coverage; the actual client matrix is updated from execution receipts.

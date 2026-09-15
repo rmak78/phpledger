@@ -94,6 +94,8 @@ function pl_integration_response(string $path, ServerRequestInterface $request):
 function pl_integration_http(string $path, string $method): never
 {
     try {
+        // Origin validation must remain available if bootstrap rejects a busy demo.
+        require_once __DIR__ . '/connection_functions.php';
         require_once dirname(__DIR__) . '/bootstrap.php';
         require_once __DIR__ . '/oauth_functions.php';
         require_once __DIR__ . '/client_functions.php';
@@ -132,7 +134,7 @@ function pl_read_openapi(): array
         foreach ($definition['schema']['properties'] as $name => $schema) { $parameters[] = ['name' => $name, 'in' => 'query', 'required' => in_array($name, $definition['schema']['required'], true), 'schema' => $schema]; }
         $paths['/api/v1/' . str_replace('_', '-', $operation)] = ['get' => ['operationId' => 'ledger_' . $operation, 'description' => $definition['description'], 'parameters' => $parameters, 'security' => [['bearerAuth' => []]], 'responses' => ['200' => ['description' => 'Authorized read with decimal-string money, UTC event timestamps and bounded collections.', 'content' => ['application/json' => ['schema' => ['$ref' => '#/components/schemas/ReadResult']]]], '400' => ['description' => 'Invalid arguments or denied company/book scope.'], '401' => ['description' => 'Reconnect after credential expiry or revocation.'], '429' => ['description' => 'Retry after one minute.']]]];
     }
-    return ['openapi' => '3.1.0', 'info' => ['title' => 'PHP Ledger read API', 'version' => '0.2.0-preview'], 'servers' => [['url' => pl_connection_issuer()]], 'paths' => $paths, 'components' => [
+    return ['openapi' => '3.1.0', 'info' => ['title' => 'PHP Ledger read API', 'version' => '0.2.1-preview'], 'servers' => [['url' => pl_connection_issuer()]], 'paths' => $paths, 'components' => [
         'securitySchemes' => ['bearerAuth' => ['type' => 'http', 'scheme' => 'bearer']],
         'schemas' => [
             'Money' => ['type' => 'string', 'pattern' => '^-?[0-9]+\\.[0-9]{4}$', 'description' => 'Exact decimal amount; do not convert to binary floating point.', 'examples' => ['123.4567']],

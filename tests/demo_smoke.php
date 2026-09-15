@@ -32,6 +32,27 @@ $probeError = stream_get_contents($pipes[2]);
 fclose($pipes[1]);
 fclose($pipes[2]);
 demo_check(proc_close($probe) === 0 && trim($probeOutput) === 'busy' && $probeError === '', 'Concurrent demo admission bypassed the maintenance lock.');
+// A busy bootstrap must still expose the retry response to an approved browser client.
+$serverEnvironment = array_replace(getenv(), ['PL_PUBLIC_URL' => 'http://127.0.0.1:18203', 'PL_DEMO_LOCAL_HTTP' => '1', 'PL_ALLOWED_ORIGINS' => 'https://llm.bixisoft.com']);
+$httpServer = proc_open([PHP_BINARY, '-S', '127.0.0.1:18203', '-t', PL_APP . '/public', PL_APP . '/public/index.php'], [['file','/dev/null','r'],['file','/dev/null','w'],['file','/dev/null','w']], $unused, null, $serverEnvironment);
+demo_check(is_resource($httpServer), 'Could not start isolated busy-response HTTP probe.');
+try {
+    $ready = false;
+    for ($attempt = 0; $attempt < 30; ++$attempt) {
+        $socket = @fsockopen('127.0.0.1', 18203, $errno, $reason, 0.1);
+        if ($socket) { fclose($socket); $ready = true; break; }
+        usleep(100000);
+    }
+    demo_check($ready, 'Busy-response HTTP probe did not start.');
+    $context = stream_context_create(['http' => ['ignore_errors' => true, 'timeout' => 8, 'header' => "Origin: https://llm.bixisoft.com\r\n"]]);
+    $busy = file_get_contents('http://127.0.0.1:18203/mcp', false, $context);
+    $headers = implode("\n", $http_response_header ?? []);
+    demo_check(is_string($busy) && str_contains($busy, 'demo_refresh') && str_contains($headers, '503'), 'Busy probe did not receive the expected bounded denial.');
+    demo_check(str_contains(strtolower($headers), 'access-control-allow-origin: https://llm.bixisoft.com') && str_contains(strtolower($headers), 'retry-after:'), 'Busy response lost approved CORS or retry headers.');
+} finally {
+    proc_terminate($httpServer);
+    proc_close($httpServer);
+}
 $_SERVER['REQUEST_METHOD'] = 'POST';
 demo_denied(static fn () => pl_demo_begin_visit(str_repeat('0', 64)));
 $first = pl_demo_begin_visit(pl_csrf_token());
