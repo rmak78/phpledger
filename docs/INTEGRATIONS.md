@@ -1,6 +1,6 @@
 # Authorized accounting reads (0.2.0-preview candidate)
 
-Recipe revision **1, 15 September 2026**. This is the local Release B candidate. The public download/demo remain **0.1.5-preview** until the [client acceptance matrix](#client-acceptance-matrix) and installation/recovery gates close. A protocol harness is not an application compatibility result.
+Recipe revision **1, 15 September 2026**. This is the local Release B candidate. The public download/demo are the **0.1.6-preview maintenance release**, with [PHP 8.2/8.3 and publication evidence](repository/sprint-05/PREVIEW-0.1.6-VALIDATION.md). Release B remains unpublished until the [client acceptance matrix](#client-acceptance-matrix) and installation/recovery gates close. A protocol harness is not an application compatibility result.
 
 ## Configure an installation
 
