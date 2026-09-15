@@ -4,7 +4,21 @@ Source revision: `{{SOURCE_COMMIT}}`.
 
 This package is a development preview of the restarted PHP Ledger application. It preserves the lightweight BixiSoft PHP/MeekroDB structure while separating accounting functions, server permissions, templates and the public front controller. It is intended for evaluation and supported pilot preparation.
 
-## 0.2.1-preview combined release
+## 0.3.0-preview: accounting foundations before AR/AP
+
+- Keeps the existing accounting screens and read API/MCP while adding currency, party and correction service foundations. No invoice/bill documents or AR/AP screens are introduced.
+- Every journal line stores transaction currency, exact foreign/base amounts, its frozen rate/type/source, stale-rate flag and optional intercompany reference. Domestic history receives equivalent currency snapshots without changing original monetary fields or request hashes. BCMath uses four-place amounts and twelve-place rates with explicit half-up conversion; unbalanced journals are rejected rather than silently adjusted.
+- Each company/book has an immutable functional currency and reserved presentation/group metadata. Accounts carry currency designation, monetary classification and nullable revaluation/group references. Unknown legacy monetary classification remains unknown; no revaluation or consolidation runs are included.
+- Manual rates have append-only revisions and correction links. Lookups select a specified source on or before the posting date; no provider, interpolation or future-rate selection is enabled. Actual settlement input overrides the selected rate.
+- Country-neutral party/contact storage supports customer/vendor roles on one party, scoped tax/national-identity duplicates and explicit shared-phone acknowledgement. Vetting states and immutable transition-log storage are reserved; enforcement, transition workflow, bank-change approval, uploads and tag assignment are deferred.
+- The internal open-item ledger references actual immutable journal lines as its sole balance source. Unused, currency-neutral controls can be explicitly activated. Partial settlements allocate the remaining carrying value, the final allocation closes it exactly, and realised gain/loss posts with the settlement. Outgoing foreign-currency-bank settlement and out-of-order open-item events are rejected; legacy aggregate balances are not automatically adopted.
+- Receipt/expense and general-journal corrections preserve document identity, reverse and repost atomically, and retain original source snapshots. Effective-source views keep lists, reports and read integrations consistent. The default reversal date is the current UTC cancellation date; an owner with a reason may use the original posting date while the period remains open. POS and opening sources retain their specialized correction paths.
+- The outbound queue provides scoped idempotency, leases, retries and a dispatch contract. No A75 connector, external receiver, automatic message sending or cron installation is included.
+- The complete schema has 17 receipts, 56 tables, two effective-source views and 62 guard triggers. Migrations 013?016 require stopped application/worker traffic and a recoverable matched backup; follow [UPGRADE.md](UPGRADE.md), including stable view-definer requirements.
+
+These are backend foundations. Public API/MCP financial mutations, invoice/bill workflows, aging, FX providers, period-end revaluation, group consolidation, commodities and regional tax adapters remain future work. Existing screens do not expose the new internal commands. Release/package/host acceptance is recorded separately; these notes do not establish that a customer installation has passed validation.
+
+## Earlier 0.2.1-preview combined release
 
 - Retains company/book permissions, chart of accounts, receipt/expense and general-journal drafts, balanced posting, linked reversals, opening balances with an unpaid-document register, period controls, bank CSV reconciliation, financial reports, running account balances and CSV exports.
 - Adds four original synthetic companies: service agency, retail shop, seasonal business and distributor. Each has 74 source records, three editable drafts, closed 2024–2025 history, open 2026 practice and 36 reconciled month-end checkpoints. Private guides explain daily, monthly and quarterly/yearly reporting, with separate public illustrated walkthroughs.
@@ -71,11 +85,11 @@ The reports are country-neutral management views. Accounting/reporting research 
 
 The POS is a cash-sale demonstration of the posting foundation. Stock quantities, cost of goods sold, tax calculations, credit accounts, payment-provider capture, hardware integrations and complete retail/restaurant workflows are not implemented. The sample catalog is illustrative.
 
-Each book has one base currency. Currency choices and formatting do not implement foreign exchange, multi-currency transactions, consolidation or a completed multi-book model. English remains the application language; country metadata does not provide translated screens or localized accounting rules.
+Each book has one immutable functional currency. The posting foundation now supports transaction-currency snapshots and internal realised settlement FX; presentation-currency reporting, period-end revaluation, bank carrying-value realization, consolidation and a completed multi-book model remain deferred. English remains the application language; country metadata does not provide translated screens or localized accounting rules.
 
 Detailed historical journal imports, XLSX, customer invoicing and invoice collection, bill settlement, aging, inventory/stock reports, country tax adapters, offline operation and receipt/document scanning remain future work. Opening AR/AP is a reconciled cutover snapshot, not an operational subledger. Credit notes, advance balances and unresolved prior bank outstanding items require a separately reviewed workflow. Existing-business setup remains blocked until opening balances are explicitly confirmed; new transactions must be dated after cutover.
 
-The `resources/tax/` catalogs cover Pakistan, the UK, UAE, Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore, with classification questions for restaurants, membership clubs, pharmacies, traders, distributors, retail shops and workshops. Every candidate remains `research_only`, `enabled: false` and `unreviewed`. Product/service, registration, jurisdiction, effective-period and recovery conditions require qualified review; an industry name never selects a universal rate. Null rates mean unresolved or non-flat treatment, not zero tax. No catalog is imported into company settings or used by POS, and no tax activation, filing, public business API or MCP interface is included. The separate bundled core/POS module lifecycle is included.
+The `resources/tax/` catalogs cover Pakistan, the UK, UAE, Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore, with classification questions for restaurants, membership clubs, pharmacies, traders, distributors, retail shops and workshops. Every candidate remains `research_only`, `enabled: false` and `unreviewed`. Product/service, registration, jurisdiction, effective-period and recovery conditions require qualified review; an industry name never selects a universal rate. Null rates mean unresolved or non-flat treatment, not zero tax. No catalog is imported into company settings or used by POS, and no tax activation, filing or tax-specific API/MCP interface is included. The separate bundled core/POS module lifecycle is included.
 
 Optional `php tools/validate-tax-catalog.php --self-test` validates local schema, disabled states and references without database access. It neither checks legal accuracy nor approves the sources, rates or dates. Approved tax profiles, effective-period snapshots and their separate accounting mappings remain future module work.
 
@@ -91,6 +105,6 @@ The package has no automatic upgrade from the historical PHP Ledger database. A 
 
 Use the [issue tracker](https://github.com/rmak78/phpledger/issues) for reproducible synthetic examples and the [public documentation](https://github.com/rmak78/phpledger/wiki) for current scope and roadmap. The [hosted demo](https://phpledger.com/demo/) is temporary and resets hourly. Do not submit real business data, credentials or private database exports with feedback.
 
-### Client transport corrections
+### Earlier 0.2.1 client transport corrections
 
-The STDIO bridge preserves JSON capability objects exactly. Concurrent demo admissions wait up to two seconds, with origin-approved CORS and retry headers on busy responses. API/OpenAPI and MCP server metadata identify 0.2.1-preview.
+The STDIO bridge preserves JSON capability objects exactly. Concurrent demo admissions wait up to two seconds, with origin-approved CORS and retry headers on busy responses. That release identified itself as 0.2.1-preview in API/OpenAPI and MCP metadata. The current package version and source are recorded in its manifest; protocol compatibility and application version are separate.

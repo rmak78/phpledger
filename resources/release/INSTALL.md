@@ -17,11 +17,11 @@ Arrange the following with your hosting administrator:
 | Operator access | A terminal for preflight, migrations and initial-user creation. |
 | Session storage | A private writable PHP session directory, usable by the web PHP process. Match CLI and web configuration when checking it. |
 
-Use a dedicated database account, never MySQL root in application configuration. Installation requires permission to create/alter the package's tables, indexes and triggers and to write migration receipts. Have the database administrator provision these privileges, then restrict the normal runtime account after validating the required workflows. This preview does not prescribe an independently verified minimal grant set for every customer host.
+Use a dedicated database account, never MySQL root in application configuration. Installation requires permission to create/alter the package's tables, indexes, triggers and views and to write migration receipts. Have the database administrator provision these privileges, then restrict the normal runtime account after validating the required workflows. This preview does not prescribe an independently verified minimal grant set for every customer host. The two effective-source views use SQL SECURITY DEFINER with the account that runs migration 016. Use a stable dedicated migration account, preserve its access to the underlying tables, and verify the normal runtime account can select the views. Do not delete the view-definer account after setup; review view and trigger definers when rehearsing a restore.
 
 Set `PL_ENV=production` in the server's PHP environment for web and CLI processes. Leave the hosted-demo mode disabled. The public demo's reset scheduler and credentials are not part of this installation. Do not copy a development environment into customer hosting.
 
-For the 0.2.1 read integrations, follow [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md) to set the exact HTTPS `PL_PUBLIC_URL`, initialize private OAuth keys with `php tools/setup-oauth.php`, preserve those keys in backups and configure proxy/discovery/origin headers. Connections remain unavailable until the URL is configured; OAuth also requires its private keys. The browser application continues to use its existing users and company permissions. Serve only the public directory; keys, configuration and CLI tools must remain private.
+For the included read integrations, follow [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md) to set the exact HTTPS `PL_PUBLIC_URL`, initialize private OAuth keys with `php tools/setup-oauth.php`, preserve those keys in backups and configure proxy/discovery/origin headers. Connections remain unavailable until the URL is configured; OAuth also requires its private keys. The browser application continues to use its existing users and company permissions. Serve only the public directory; keys, configuration and CLI tools must remain private.
 
 ## 2. Unpack and configure privately
 
@@ -31,7 +31,7 @@ Verify the downloaded archive against its published checksum, then unpack it in 
 phpledger-{{VERSION}}/
   vendor/
   resources/
-  tools/         <-- optional read-only tax research validator
+  tools/          <-- private operator tools; never web-accessible
   www/phpledger/
     includes/
     install/
@@ -109,11 +109,25 @@ Open the HTTPS hostname and sign in. Confirm that refresh and navigation retain 
 
 `/health` checks database connectivity only; it does not prove that migrations, users or accounting workflows are ready. Run the journey above as well as the CLI checks. Delete no real records to perform acceptance checks.
 
-For a real business, choose the appropriate start date, fiscal year and base currency deliberately. Existing-business onboarding remains blocked until an owner/accountant previews and confirms its opening trial balance and reconciled unpaid-document register at `/opening-balances`. Cutover is the close of the accounting start date; ordinary transactions start afterward. Use the exact CSV columns shown on screen, or enter account balances manually. Do not bypass that gate by misclassifying an existing business as new. Invoice collection/bill settlement and detailed historical journals remain outside this cutover workflow.
+For a real business, choose the appropriate start date, fiscal year and functional currency deliberately. Functional currency is immutable after creation; a future change requires a separately reviewed new-book migration, not a settings edit. Existing-business onboarding remains blocked until an owner/accountant previews and confirms its opening trial balance and reconciled unpaid-document register at `/opening-balances`. Cutover is the close of the accounting start date; ordinary transactions start afterward. Use the exact CSV columns shown on screen, or enter account balances manually. Do not bypass that gate by misclassifying an existing business as new. Invoice collection/bill settlement and detailed historical journals remain outside this cutover workflow.
 
 Use `/periods` to create nonoverlapping date ranges and close them with a recorded reason; only the owner can reopen. Use `/bank-reconciliation` for strict statement CSV preview/import, explicit journal-line matching and confirmed reconciliation. The first bank baseline requires all earlier entries cleared and a matching ledger opening. These local workflows do not connect to a bank or make payments.
 
 The files in `resources/tax/` are disabled, unreviewed research candidates. They are not loaded into company settings or POS calculations. Optional `php tools/validate-tax-catalog.php --self-test` checks their structure without database access or activation; it does not verify tax law or approve a tax profile. See [RELEASE-NOTES.md](RELEASE-NOTES.md).
+
+## Foundation operator tools
+
+The rate CLI accepts a private JSON input file with `from_currency`, `to_currency`, `rate_date`, a decimal-string `rate`, `source`, `note` and `idempotency_key`. `rate_type` defaults to `spot`; `actual` is also supported. A correction supplies the latest row's integer `supersedes_id` and a new request key. Rates are appended, never overwritten. The operator must identify an active actor with write access to the selected company/book:
+
+```sh
+php tools/currency-rates.php ACTOR_ID COMPANY_ID BOOK_ID /private/rate-input.json
+```
+
+Keep the input outside the web root. This records a supplied rate without contacting a provider. Reusing a key with identical content returns its prior result; changed content is rejected.
+
+Party/contact, open-item and correction functions are internal services in this package. They have no new browser or public write API. Activate open-item accounting only on unused, currency-neutral receivable/payable controls; existing aggregate balances and opening evidence need a later reviewed AR/AP cutover. Outgoing settlement from a foreign-currency bank remains blocked until bank carrying-value realization is implemented. Accounting entries record payments; they do not send money.
+
+The outbound dispatcher has no installed delivery adapter. Do not schedule `tools/dispatch-outbound-events.php` expecting email, webhooks or CRM synchronization. Configure and validate a separately authorized adapter before enabling external delivery; the package neither installs cron nor enables a connector.
 
 ## Country suggestion and operation
 
