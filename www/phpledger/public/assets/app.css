@@ -55,3 +55,30 @@ body{min-height:100vh;display:flex;flex-direction:column;font-optical-sizing:aut
 @media(max-width:1100px){.statement-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.statement-summary>div:nth-child(2){border-right:0}.statement-summary>div:nth-child(-n+2){border-bottom:1px solid var(--line)}.statement-summary dd{font-size:24px}}
 @media(max-width:600px){.statement-summary{grid-template-columns:1fr}.statement-summary>div{border-right:0;border-bottom:1px solid var(--line);padding:16px}.statement-summary>div:last-child{border-bottom:0}.statement-summary dd{font-size:24px}.statement-filters{display:grid;grid-template-columns:1fr;gap:14px}.statement-filters .field{min-width:0;width:100%}.statement-filters input{width:100%;min-width:0}.statement-filters .button{width:100%}.statement-pagination{gap:12px}.statement-pagination p{width:100%;order:-1}.statement-key{line-height:1.65}}
 @media print{.account-statement .statement-filters,.account-statement .statement-pagination{display:none}.account-statement .statement-summary{grid-template-columns:repeat(4,minmax(0,1fr))}.account-statement .statement-summary>div{padding:12px;border-bottom:0}.account-statement .statement-summary>div:not(:last-child){border-right:1px solid #aaa}.account-statement .statement-summary dd{font-size:16px}.account-statement .statement-table-wrap{overflow:visible}.account-statement .statement-table{min-width:0;width:100%}.account-statement .statement-table th,.account-statement .statement-table td{padding:7px 5px}.account-statement .statement-table tbody td:nth-child(3){min-width:0;max-width:none}.account-statement .statement-table caption{padding:10px 0}}
+/* Account balances remain readable without horizontal scrolling on a phone. */
+.statement-account-field{flex:1 1 260px;max-width:100%}
+.statement-account-field select{width:100%;min-width:0}
+.ledger-entry-link{font-size:13px;margin:12px 0 18px}
+.transaction-list>.ledger-entry-link{padding-inline:24px}
+.accountant-report{flex-wrap:wrap}
+.accountant-report>div{flex:1 1 300px;min-width:0}
+@media screen and (max-width:600px){
+ .account-statement .statement-table{display:block;min-width:0;width:100%}
+ .account-statement .statement-table caption{display:block}
+ .account-statement .statement-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .account-statement .statement-table tbody{display:block}
+ .account-statement .statement-table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;border-bottom:1px solid var(--line)}
+ .account-statement .statement-table tbody td,.account-statement .statement-table tbody th{min-width:0;max-width:none;white-space:normal;padding:8px;border:0;overflow-wrap:anywhere}
+ .account-statement .statement-table tbody td:nth-child(2){text-align:right}
+ .account-statement .statement-table tbody td:nth-child(3),.account-statement .statement-table tbody td:nth-child(4),.account-statement .statement-table tbody td.statement-running{grid-column:1/-1}
+ .account-statement .statement-table [data-label]::before{content:attr(data-label);display:block;font-size:11px;color:var(--muted);font-weight:400;margin-bottom:4px}
+ .account-statement .statement-table tbody td.statement-running{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--soft);font-size:16px;border-radius:5px;margin-top:4px}
+ .account-statement .statement-table td.statement-running::before{margin:0}
+ .account-statement .statement-table .statement-forward-row{background:var(--soft)}
+ .account-statement .statement-table .statement-forward-row>*{grid-column:1/-1}
+ .account-statement .statement-table .statement-forward-row>td{font-size:18px}
+ .performance-numbers{grid-template-columns:minmax(0,1fr);gap:0}
+ .performance-numbers>div{display:flex;justify-content:space-between;align-items:center;gap:12px;border-left:0;border-top:1px solid var(--line);padding:12px 0}
+ .performance-numbers>div:first-child{border-top:0}
+ .performance-numbers strong{font-size:25px;margin:0;overflow-wrap:anywhere;min-width:0}
+}

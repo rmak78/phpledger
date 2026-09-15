@@ -97,6 +97,8 @@ Run `python tests/module-http-smoke.py` for 26 local-only HTTP assertions with s
 
 ### Core CSV exports
 
+**Account ledger entry point:** `/reports/account` without an account ID now opens the company-scoped account chooser. Reports, Transactions and Journals link directly to it. Choose an account and optional date range; the existing statement service supplies opening, debit/credit movement, running and closing balances across all pages. On phones, each table row lays out its date/source, debit, credit and running balance without horizontal scrolling. Draft document totals are not account balances; statement calculations continue to include only posted journal lines. Existing `id`, `as_of`, `from` and `page` links remain supported and authorized on the server.
+
 `GET /reports/export?report=trial-balance|account|profit-loss|balance-sheet&to=YYYY-MM-DD` downloads a CSV through the existing signed-in company/book scope. Account statements accept `account_id` and optional `from`; profit and loss requires `from`. Each report screen links the current date selection to its export. Viewers may export their authorized books. All statement pages are included, with a 10,000-movement limit that rejects oversized exports before sending any CSV. A shared book transaction keeps pages and totals coherent. CSV preserves four-place decimal strings, business dates, scope, readiness and source references; potentially executable spreadsheet text receives an apostrophe prefix. The CSV is a management preview, not an issued statutory statement.
 
 ### Consolidated installation checks

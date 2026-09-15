@@ -7,17 +7,19 @@ $statementBalance = static function (string $amount): string {
     return pl_money($comparison === 0 ? '0.0000' : ($comparison < 0 ? substr($amount, 1) : $amount))
         . ($comparison > 0 ? ' Dr' : ($comparison < 0 ? ' Cr' : ''));
 };
-$statementFrom = $activity['from'] ?? null;
-$firstPage = $activity['page'] === 1;
-$lastPage = $activity['page'] === $activity['pages'];
+$statementFrom = $activity['from'] ?? $from ?? null;
+$firstPage = ($activity['page'] ?? 1) === 1;
+$lastPage = ($activity['page'] ?? 1) === ($activity['pages'] ?? 1);
 ?>
 <section class="page-wrap account-statement" aria-labelledby="account-title">
     <div class="page-heading">
         <div>
             <p class="eyebrow"><?= pl_e((string) $company['name']) ?> &middot; <?= pl_e((string) $company['currency']) ?></p>
-            <h1 id="account-title">Account statement</h1>
+            <h1 id="account-title"><?= $activity ? 'Account statement' : 'Account ledger' ?></h1>
+            <?php if ($activity): ?>
             <p class="statement-account-name"><strong><?= pl_e((string) $activity['account']['code']) ?> &middot; <?= pl_e((string) $activity['account']['name']) ?></strong><?php if (!$activity['account']['is_active']): ?> <span class="badge">Inactive account</span><?php endif; ?></p>
             <p class="muted"><?= $statementFrom !== null ? pl_e(pl_date_label($statementFrom)) . ' &ndash; ' : 'All posted history through ' ?><?= pl_e(pl_date_label($asOf)) ?></p>
+            <?php else: ?><p class="muted">Choose an account to see every posted movement and its running balance.</p><?php endif; ?>
         </div>
         <a class="button secondary" href="<?= pl_e(pl_url('/reports')) ?>">Back to reports</a>
     </div>
@@ -27,12 +29,14 @@ $lastPage = $activity['page'] === $activity['pages'];
     <?php endif; ?>
 
     <form action="<?= pl_e(pl_url('/reports/account')) ?>" method="get" class="panel actions statement-filters">
-        <input type="hidden" name="id" value="<?= pl_e((string) $activity['account']['id']) ?>">
+        <div class="field statement-account-field"><label for="statement-account">Account</label><select id="statement-account" name="id" required><option value="">Choose an account</option><?php foreach ($company['accounts'] as $choice): ?><option value="<?= pl_e((string) $choice['id']) ?>" <?= (int) $choice['id'] === (int) ($activity['account']['id'] ?? 0) ? 'selected' : '' ?>><?= pl_e($choice['code'] . ' - ' . $choice['name'] . (!$choice['is_active'] ? ' (inactive)' : '')) ?></option><?php endforeach; ?></select></div>
         <div class="field"><label for="activity-from">From date <span class="optional">optional</span></label><input id="activity-from" name="from" type="date" value="<?= pl_e($statementFrom ?? '') ?>"></div>
         <div class="field"><label for="activity-date">Through date</label><input id="activity-date" name="as_of" type="date" required value="<?= pl_e($asOf) ?>"></div>
-        <button class="button secondary" type="submit">Update statement</button>
-        <a class="button secondary" href="<?= pl_e(pl_url('/reports/export', ['report' => 'account', 'account_id' => $activity['account']['id'], 'from' => $statementFrom ?? '', 'to' => $asOf])) ?>">Export all pages CSV</a>
+        <button class="button secondary" type="submit"><?= $activity ? 'Update statement' : 'Open statement' ?></button>
+        <?php if ($activity): ?><a class="button secondary" href="<?= pl_e(pl_url('/reports/export', ['report' => 'account', 'account_id' => $activity['account']['id'], 'from' => $statementFrom ?? '', 'to' => $asOf])) ?>">Export all pages CSV</a><?php endif; ?>
     </form>
+
+    <?php if (!$activity): ?><div class="statement-empty"><h2>Opening balance, movement and closing balance</h2><p>View cash, bank, income, expenses or any other ledger account. Each posted debit and credit updates that account's running balance. Drafts are excluded; earlier balances carry forward when you choose a date range.</p></div></section><?php return; endif; ?>
 
     <dl class="statement-summary" aria-label="Statement balances across all pages">
         <div><dt>Opening balance</dt><dd class="amount"><?= pl_e($statementBalance((string) $activity['opening_balance'])) ?></dd><dd class="statement-summary-note"><?= $statementFrom !== null ? 'Before ' . pl_e(pl_date_label($statementFrom)) : 'Before recorded history' ?></dd></div>
@@ -61,9 +65,9 @@ $lastPage = $activity['page'] === $activity['pages'];
                         <td><a href="<?= pl_e(pl_url('/journals/detail', ['id' => $row['journal_id']])) ?>"><?= pl_e((string) $row['journal_reference']) ?></a><?php if ($row['reversal_of_id'] !== null): ?> <span class="badge">Reversal</span><?php endif; ?></td>
                         <td><?= pl_e((string) $row['description']) ?></td>
                         <td><?php if ($row['document_id'] !== null): ?><a href="<?= pl_e(pl_url('/transactions/detail', ['id' => $row['document_id']])) ?>">View transaction</a><?php elseif ($row['general_id'] !== null): ?><a href="<?= pl_e(pl_url('/general-journals/detail', ['id' => $row['general_id']])) ?>">View general journal</a><?php else: ?><?= pl_e(ucfirst((string) $row['source_type'])) ?><?php endif; ?></td>
-                        <td class="amount"><?= pl_e(pl_money((string) $row['debit'])) ?></td>
-                        <td class="amount"><?= pl_e(pl_money((string) $row['credit'])) ?></td>
-                        <td class="amount statement-running"><?= pl_e($statementBalance((string) $row['running_balance'])) ?></td>
+                        <td class="amount" data-label="Debit"><?= pl_e(pl_money((string) $row['debit'])) ?></td>
+                        <td class="amount" data-label="Credit"><?= pl_e(pl_money((string) $row['credit'])) ?></td>
+                        <td class="amount statement-running" data-label="Running balance"><?= pl_e($statementBalance((string) $row['running_balance'])) ?></td>
                     </tr>
                 <?php endforeach; ?>
                 <tr class="statement-forward-row statement-ending-row">

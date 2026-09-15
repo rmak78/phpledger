@@ -2,7 +2,7 @@
 
 Start at [the PHP Ledger website](https://phpledger.com/) or [open the demonstration](https://phpledger.com/demo/).
 
-**[Download the 0.1.2-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview).** Choose `phpledger-0.1.2-preview.zip` and its SHA-256 file from the release assets; automatic source archives do not include installed dependencies. Follow the package's `INSTALL.md`, or `UPGRADE.md` when upgrading an existing installation. Use synthetic data for evaluation.
+**[Download the 0.1.3-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.3-preview).** Choose `phpledger-0.1.3-preview.zip` and its SHA-256 file from the release assets; automatic source archives do not include installed dependencies. Follow the package's `INSTALL.md`, or `UPGRADE.md` when upgrading an existing installation. Use synthetic data for evaluation.
 
 This release adds universal account statements, chart management and saved general-journal draft/review/post/reverse workflows. It retains receipts, expenses, owner reports and the sample cash POS. It is a development preview, with the remaining gates described in [[First package|First-Package]].
 
@@ -12,7 +12,7 @@ Modern source is in `www/phpledger`; historical code remains only in Git history
 
 Each visitor receives a separate fictional business. Synthetic records reset hourly, ending the old sample session. Capacity limits apply to temporary writes. Do not enter real customer records, credentials or business documents.
 
-1. Open an account and inspect its statement: opening balance, period activity and closing balance.
+1. Open **Reports → Open account ledger**, choose an account and inspect opening, debit, credit, running and closing balances. Transactions and Journals also link directly to the ledger; mobile entries keep the running balance visible.
 2. Create a general-journal draft with synthetic amounts and save it.
 3. Reopen it, review the lines and balance debits against credits before posting.
 4. Follow its source and journal into the account statement and trial balance.
@@ -38,6 +38,6 @@ Never serve the repository root, and never use historical installation SQL dumps
 
 An administrator prepares the server and initial administrator account. An owner or accountant then creates a business and reviews its accounts and opening-position requirements.
 
-Guided opening imports, period completion and bank reconciliation remain future core work. Existing-business setup must not be treated as complete merely because a name and currency were entered. AR/AP, tax, inventory and production POS are planned optional modules; the eight-country tax research catalog does not activate tax rules.
+Reviewed opening trial-balance/CSV cutover, period administration, bank CSV reconciliation and core CSV exports are included. Company owners can review and enable the optional POS showcase in Modules; ordinary companies default off and explicit new samples enable it. Existing-business setup must not be treated as complete merely because a name and currency were entered. AR/AP, tax, inventory and production POS are planned optional modules; the eight-country tax research catalog does not activate tax rules.
 
 [[Package scope and remaining gates|First-Package]] · [[Module roadmap|Module-Roadmap]] · [[Support enquiries|Contributing-and-Support]]

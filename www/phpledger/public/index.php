@@ -511,8 +511,12 @@ try {
     }
     if ($path === '/reports/account') {
         $asOf = pl_web_text($_GET, 'as_of', gmdate('Y-m-d'));
-        $activity = pl_account_activity($actorId, $companyId, $bookId, pl_web_id($_GET, 'id'), $asOf, max(1, pl_web_id($_GET, 'page', 1)), pl_web_text($_GET, 'from') ?: null);
-        pl_render('account', ['title' => 'Account statement', 'user' => $user, 'company' => $company, 'activity' => $activity, 'asOf' => $asOf]);
+        $from = pl_web_text($_GET, 'from') ?: null;
+        pl_ledger_date($asOf);
+        if ($from !== null && (pl_ledger_date($from) > $asOf)) { throw new DomainException('The activity start date must be on or before its end date.'); }
+        $accountId = pl_web_id($_GET, 'id');
+        $activity = $accountId ? pl_account_activity($actorId, $companyId, $bookId, $accountId, $asOf, max(1, pl_web_id($_GET, 'page', 1)), $from) : null;
+        pl_render('account', ['title' => $activity ? 'Account statement' : 'Account ledger', 'user' => $user, 'company' => $company, 'activity' => $activity, 'asOf' => $asOf, 'from' => $from]);
     }
     // The remaining method-checked route is /journals/detail.
     $journal = pl_get_journal($actorId, $companyId, $bookId, pl_web_id($_GET, 'id'));

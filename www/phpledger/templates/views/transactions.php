@@ -8,6 +8,7 @@ $scopeQuery = $filters;
 <section class="transaction-list" aria-label="Transaction list">
     <div class="list-heading"><div><p class="eyebrow">Your day-to-day books</p><h1><?= pl_e($statusLabels[$selectedStatus] ?? 'Transactions') ?></h1><p class="muted"><?= (int) $list['total'] ?> <?= $list['total'] === 1 ? 'record' : 'records' ?> · <?= pl_e($company['currency']) ?></p></div>
         <?php if (pl_can_write($company)): ?><a class="button primary" href="<?= pl_e(pl_url('/transactions/new')) ?>"><?= pl_icon('plus') ?> New transaction</a><?php endif; ?></div>
+    <p class="ledger-entry-link"><a href="<?= pl_e(pl_url('/reports/account')) ?>">Account ledger &amp; running balances <?= pl_icon('arrow-right') ?></a></p>
     <nav class="status-tabs" aria-label="Transaction status"><?php foreach ($statusLabels as $key => $label): ?><a href="<?= pl_e(pl_url('/transactions', array_replace($scopeQuery, ['status' => $key, 'page' => 1]))) ?>" <?= $selectedStatus === $key ? 'aria-current="page"' : '' ?>><?= pl_e($label) ?></a><?php endforeach; ?></nav>
     <form class="list-filters" action="<?= pl_e(pl_url('/transactions')) ?>" method="get">
         <input type="hidden" name="status" value="<?= pl_e($selectedStatus) ?>">

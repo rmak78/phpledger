@@ -4,6 +4,8 @@ Direction confirmed on 15 September 2026: complete a useful accounting core firs
 
 ## Current local status: 15 September 2026
 
+The owner subsequently authorized publication of all completed changes first, followed by live review, and explicitly retained **API/MCP reads → controlled commands → optional AR/AP**. Subledgers and reviewed reporting remain unfinished acceptance work. SEO discovery and campaign preparation run in parallel at high priority. The [0.1.3 release receipt](repository/sprint-05/PREVIEW-0.1.3-VALIDATION.md) supersedes the unpublished status of the earlier local checkpoints below.
+
 The consolidated [core completion](repository/sprint-05/CORE-COMPLETION.md) covers the bounded technical checklist through opening/period/bank reconciliation and CSV exports, with a reconciled two-period fixture. [Module foundation](repository/sprint-05/MODULE-FOUNDATION.md) now implements milestone 3 for core 1.0.0 and the bundled POS showcase 1.0.0: manifests, compatibility, owner-controlled enablement, service-level capability gates, audit and retained history. Its compatibility matrix and reserved shared-master/tax contracts define the supported scope. These changes are local and unpublished. Independent accounting/security review and observed core-user acceptance remain open. Next implementation: milestone 4 API/MCP reads; there is no business API or MCP server yet.
 
 ## Historical starting point

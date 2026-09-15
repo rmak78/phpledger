@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview"><strong>Download 0.1.2-preview</strong></a> &nbsp; · &nbsp;
+  <a href="https://github.com/rmak78/phpledger/releases/tag/v0.1.3-preview"><strong>Download 0.1.3-preview</strong></a> &nbsp; · &nbsp;
   <a href="https://phpledger.com/demo/">Try the demo</a> &nbsp; · &nbsp;
   <a href="https://github.com/rmak78/phpledger/wiki">Read the Wiki</a> &nbsp; · &nbsp;
   <a href="https://github.com/rmak78/phpledger/wiki/Roadmap">Roadmap</a> &nbsp; · &nbsp;
@@ -32,9 +32,9 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 
 **Requirements:** PHP 8.5.x with the BCMath, PDO, PDO MySQL, mbstring and session extensions, MySQL 8.4 with InnoDB, HTTPS and terminal access. Serve only `www/phpledger/public`.
 
-**Not included in the 0.1.2-preview download:** receivables and payables, inventory and cost of sales, tax, historical imports, bank reconciliation, multi-book, foreign-currency posting, translations, offline use, card payments, document scanning.
+**Not included in the 0.1.3-preview download:** receivables and payables, inventory and cost of sales, tax, detailed historical imports, multi-book, foreign-currency posting, translations, offline use, card payments, document scanning.
 
-**Current local development:** `sprint05/module-foundation` consolidates the released core with opening trial-balance/CSV cutover, a reconciled unpaid-document register, reasoned periods, bank CSV matching/reconciliation and core CSV exports. The bundled module lifecycle adds owner-controlled POS enablement and retained receipt history; ordinary companies start with optional POS disabled. These changes are separate from the download above and have not been deployed by this work. API/MCP reads are next; invoice collection/bill settlement, XLSX and detailed historical journals remain future work. See [core completion evidence](docs/repository/sprint-05/CORE-COMPLETION.md), [module contracts and validation](docs/repository/sprint-05/MODULE-FOUNDATION.md), and [local workflow guidance](docs/DEVELOPMENT.md#opening-cutover-periods-and-bank-reconciliation).
+**0.1.3-preview scope:** opening trial-balance/CSV cutover, a reconciled unpaid-document register, reasoned periods, bank CSV matching/reconciliation, core CSV exports and owner-controlled POS modules. Open **Reports → Account ledger** for opening, debit, credit, running and closing balances; mobile entries display the balance beside each movement. Ordinary companies start with optional POS disabled. API/MCP reads are next, followed by controlled commands and optional AR/AP. Customer/vendor subledgers, reviewed financial-statement packages, XLSX and detailed historical journals remain unfinished. See [core completion evidence](docs/repository/sprint-05/CORE-COMPLETION.md), [module contracts and validation](docs/repository/sprint-05/MODULE-FOUNDATION.md), and [local workflow guidance](docs/DEVELOPMENT.md#opening-cutover-periods-and-bank-reconciliation).
 
 ## What the working preview shows
 
@@ -43,7 +43,7 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS remain development previews.*
 
 > [!NOTE]
-> **Evaluate the accounting core.** [Download 0.1.2-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional accounting review and pilot usability gates remain open.
+> **Evaluate the accounting core.** [Download 0.1.3-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.3-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional accounting review and pilot usability gates remain open.
 
 ## Explore the working preview
 

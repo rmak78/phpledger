@@ -370,9 +370,17 @@ def run(options: argparse.Namespace) -> dict:
     check(changed_reversal.status == 422 and http.totals(report(client, reverse_date)) == before_reversal_date,
           "Changed reversal retry is rejected without another accounting effect")
 
+    chooser = ok(client.request('/reports/account'), 'Account ledger chooser')
+    check('id="statement-account"' in chooser.body and f'value="{account_id}"' in chooser.body,
+          'Ledger chooser lists an authorized account without requiring a trial-balance detour')
+    check(client.request('/reports/account?as_of=invalid').status == 403,
+          'Ledger chooser rejects malformed dates before opening an account')
+
     if options.viewer_email:
         viewer = login(options.viewer_email, options.viewer_password)
         select_company(viewer, company_id)
+        check(viewer.request('/reports/account').status == 200,
+              'Viewer can open the account ledger chooser')
         viewer_accounts = ok(viewer.request(f"/accounts?id={account_id}"), "Viewer account")
         check(not has_form(viewer_accounts, "/accounts/save"), "Viewer account page has no mutation form")
         viewer_detail = ok(viewer.request(f"/general-journals/detail?id={draft_id}"), "Viewer general journal")

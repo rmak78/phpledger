@@ -29,7 +29,7 @@ if ($journal['source_type'] === 'general_journal' && preg_match('/^general:([1-9
             <?php if ($journal['reversal_of_id'] !== null): ?><a class="button secondary" href="<?= pl_e(pl_url('/journals/detail', ['id' => $journal['reversal_of_id']])) ?>">View original journal</a><?php endif; ?>
         </div>
         <?php if ($journal['reversal_of_id'] !== null): ?><p class="badge">Linked reversal</p><?php endif; ?>
-        <p class="muted">Posted entries are preserved. Corrections use a linked reversal, so the original and the correction remain traceable.</p>
+        <p class="muted">Select an account name below to see its running balance. Posted entries are preserved; corrections use a linked reversal.</p>
     </div>
     <div class="panel table-wrap" tabindex="0" role="region" aria-label="Posted journal lines">
         <table class="data-table">

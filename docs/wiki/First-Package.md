@@ -1,6 +1,6 @@
 # The foundation preview package
 
-The [0.1.2-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview) develops the accounting core. It is an installable evaluation checkpoint with synthetic data; supported-pilot acceptance remains open.
+The [0.1.3-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.3-preview) develops the accounting core. It is an installable evaluation checkpoint with synthetic data; supported-pilot acceptance remains open.
 
 Modern source is under `www/phpledger`, with historical code retained only in Git history. New project-owned code and documentation use [MIT](https://github.com/rmak78/phpledger/blob/master/LICENSE); [dependency, asset and historical terms](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) remain separate.
 
@@ -17,9 +17,9 @@ Modern source is under `www/phpledger`, with historical code retained only in Gi
 
 See [[Getting started|Getting-Started]] for installation and upgrade instructions. Use the release's own validation record and checksums for its exact artifact; older preview test totals are not evidence for a new package.
 
-## Next: complete a useful core
+## Current scope and remaining acceptance
 
-The next core milestone covers reviewed opening entries and cutover, period-close/reopen administration, bank matching/reconciliation, supported core statements and exports. A core-only business must be able to reconcile and finish a period with optional modules disabled.
+This preview includes opening entry/CSV review and cutover, reasoned period close/reopen, bank CSV matching/reconciliation, core CSV exports and audited module enablement. Core-only tests reconcile a complete two-period business. The account ledger is directly reachable from Reports, Transactions and Journals, with debit, credit and running balances visible on mobile. These technical checks do not complete qualified accounting review or observed pilot acceptance.
 
 Opening import needs mapping, preview, row errors, duplicate protection, reconciliation and explicit confirmation. Until AR/AP modules exist, any retained control balances need reconciled external unpaid-document schedules. Later module activation must not double count them.
 
@@ -35,7 +35,7 @@ The sample POS remains useful for testing the shared ledger. Production checkout
 
 ## Later capabilities
 
-The [[module roadmap|Module-Roadmap]] puts module lifecycle and shared contracts before API/MCP access and optional AR, AP, inventory, tax and industry POS. Applicable tax rules must be reviewed before affected production transactions. The catalog's research status does not satisfy that gate.
+The bundled core/POS lifecycle is implemented. The next [[module roadmap|Module-Roadmap]] milestone is API/MCP reads, followed by controlled commands and optional AR/AP. Customer/vendor subledgers and reviewed statement packages remain unfinished. SEO discovery and campaign preparation run in parallel at high priority. Applicable tax rules must be reviewed before affected production transactions. The catalog's research status does not satisfy that gate.
 
 Broad country compliance, alternative books, offline operation and AI document scanning remain future work. There is no promised release date for these capabilities.
 

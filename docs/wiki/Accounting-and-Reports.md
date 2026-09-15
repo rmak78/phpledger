@@ -2,7 +2,9 @@
 
 Every posting uses one service that checks access, company/book scope, dates, currency, account ownership and balanced debit/credit totals. Financial decisions use exact decimals.
 
-## What 0.1.2-preview does
+Open **Reports → Open account ledger** to choose any account, or follow the ledger links from Transactions and Journals. Mobile statements show debit, credit and running balance together for each movement.
+
+## What 0.1.3-preview does
 
 | Workflow | Present scope |
 |---|---|
@@ -15,7 +17,7 @@ Every posting uses one service that checks access, company/book scope, dates, cu
 | Profit and loss / balance sheet | Basic posted income/expense and position summaries; complete professional statement structure remains under review. |
 | Cash scenario | Project entered weekly cash in/out from posted opening cash; no forecast entries are posted. |
 
-A statement's **opening balance** is the balance before its selected date range. This calculation does not provide an opening-entry importer or establish that a business's cutover was reconciled.
+A statement's **opening balance** is the balance before its selected date range. This calculation alone does not establish a reconciled cutover. Use the separate opening trial-balance/CSV preview and confirmation workflow, including unpaid-document reconciliation where needed.
 
 Posting checks the current saved draft; a changed draft must be reviewed again. Identical retries do not create duplicate journals, and closed periods reject new posting. Linked reversals preserve both sides of the correction. Technical checks support these controls but do not replace qualified accounting review.
 

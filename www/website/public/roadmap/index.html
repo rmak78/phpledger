@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0c2052">
 <title>Accounting development roadmap | PHP Ledger</title>
-<meta name="description" content="See the published preview, the next opening-balance, period administration and bank reconciliation work, and later regional accounting and ERP gates.">
+<meta name="description" content="See the published preview, the next API/MCP reads and controlled commands, optional subledgers, and later regional accounting and ERP gates.">
 <link rel="canonical" href="https://phpledger.com/roadmap/">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/icon-192.png">
@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
 <meta property="og:title" content="Accounting development roadmap | PHP Ledger">
-<meta property="og:description" content="See the published preview, the next opening-balance, period administration and bank reconciliation work, and later regional accounting and ERP gates.">
+<meta property="og:description" content="See the published preview, the next API/MCP reads and controlled commands, optional subledgers, and later regional accounting and ERP gates.">
 <meta property="og:url" content="https://phpledger.com/roadmap/">
 <meta property="og:image" content="https://phpledger.com/assets/og/home.png">
 <meta property="og:image:width" content="1280">
@@ -24,7 +24,7 @@
 <meta property="og:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Accounting development roadmap | PHP Ledger">
-<meta name="twitter:description" content="See the published preview, the next opening-balance, period administration and bank reconciliation work, and later regional accounting and ERP gates.">
+<meta name="twitter:description" content="See the published preview, the next API/MCP reads and controlled commands, optional subledgers, and later regional accounting and ERP gates.">
 <meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
 <meta name="twitter:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
@@ -131,14 +131,12 @@
 
 <section class="container page-intro page-intro--simple"><h1>The path from a working preview to supported books</h1><p class="lead">The published package has a bounded accounting and cash-sale journey. Each next step needs reconciled examples, access checks and review before it becomes a supported capability.</p><p class="small">This roadmap describes development scope, not a delivery-date or regulatory-compliance promise.</p></section>
 <section class="container section"><h2 class="sr-only">Development sequence</h2><ol class="timeline">
-<li><span class="phase">Available</span><div><h3>0.1.2-preview</h3><p>Company setup, audited account management, account statements, receipt and expense drafts, general journals, linked reversals, owner reports and a sample cash POS. One base currency per book, English interface.</p><p><a href="/download/">Download the evaluation package</a></p></div><span class="state">Published preview</span></li>
-<li><span class="phase">Next accounting work</span><div><h3>Opening balances and cutover</h3><p>Preview and validate opening positions at an explicit cutover date. Reconcile receivable and payable controls against unpaid documents before confirming. Keep source references and prevent duplicate opening entries.</p></div><span class="state">Development sequence 1</span></li>
-<li><span class="phase">Then</span><div><h3>Period administration</h3><p>Review fiscal periods, close and reopen with permission and a traceable reason. Keep period changes consistent with the central posting service and protect closed history.</p></div><span class="state">Development sequence 2</span></li>
-<li><span class="phase">Then</span><div><h3>Bank reconciliation</h3><p>Review statement rows, duplicates and ambiguous matches. Confirm reconciliation explicitly and retain a statement-to-journal audit trail. Regional bank import formats need actual sample exports and separate testing.</p></div><span class="state">Development sequence 3</span></li>
-<li><span class="phase">Accounting MVP</span><div><h3>Subledgers and reviewed reporting</h3><p>Customer and vendor balances, receivables, payables, historical imports and reviewed period-end statements. Recognition, measurement, classifications and disclosures need a qualified reviewer for the supported entity profile.</p></div><span class="state">Pending gates</span></li>
-<li><span class="phase">Regional work</span><div><h3>Pakistan, then the UK and UAE</h3><p>Versioned entity and accounting-framework profiles, documented policies and reviewed country adapters. A selected currency does not establish accounting or tax compliance.</p></div><span class="state">Research and review</span></li>
-<li><span class="phase">Later</span><div><h3>Inventory, retail and distribution</h3><p>Purchasing, stock valuation and cost of sales before a production retail expansion. Returns, settlement, hardware, distribution and specialist industries each need scoped pilots.</p></div><span class="state">Future milestones</span></li>
-<li><span class="phase">Later</span><div><h3>Languages, exchange rates and additional books</h3><p>Reviewed translations, flexible formats, traceable exchange-rate posting and clearly defined alternative accounting books. Offline operation and document scanning require separate design and acceptance work.</p></div><span class="state">Future milestones</span></li>
+<li><span class="phase">Available</span><div><h3>0.1.2-preview</h3><p>Accounts, journals and linked reversals; account ledgers with visible running balances; reviewed opening trial-balance/CSV cutover; period administration; bank CSV reconciliation; management reports and CSV exports; bundled core/POS modules with owner enablement and retained history.</p><p><a href="/download/">Download the evaluation package</a></p></div><span class="state">Development preview</span></li>
+<li><span class="phase">Next implementation</span><div><h3>API and MCP read access</h3><p>Read authorized companies, capabilities, accounts, journal sources, trial balances and account statements through the same scoped accounting services. Validate revocation, pagination, exact amounts and real-client parity.</p></div><span class="state">Next milestone</span></li>
+<li><span class="phase">Following</span><div><h3>Controlled commands</h3><p>Draft, validate, post and reverse with explicit permissions, configured review policy, durable retry protection and traceable command receipts.</p></div><span class="state">Planned</span></li>
+<li><span class="phase">Optional AR/AP</span><div><h3>Customer and vendor subledgers</h3><p>Invoices, bills, receipts/payments, allocations, credit notes, running party balances and aging that reconcile to ledger control accounts.</p></div><span class="state">Unfinished</span></li>
+<li><span class="phase">Accounting acceptance</span><div><h3>Reviewed reporting</h3><p>Versioned account mappings, true comparatives, completeness checks, reproducible report snapshots and qualified review for the chosen entity and framework. The current reports are management previews, not issued statutory statements.</p></div><span class="state">Unfinished</span></li>
+<li><span class="phase">Parallel priority</span><div><h3>SEO discovery and launch preparation</h3><p>Maintain crawlable public documentation and release news, verify search ownership and indexing, and prepare evidence-based campaign material. Account setup and campaign execution are tracked separately from product capability.</p></div><span class="state">High priority</span></li>
 </ol></section>
 <section class="container section--tight stack stack--loose"><h2>Help test a real task</h2><p>Useful contributions include synthetic worked accounting examples, installation results, reproducible bugs and feedback from owners and bookkeepers. Independent security, accounting and observed usability review remain open gates.</p><div class="actions"><a class="button" href="/support/#enquiry-pilot">Discuss a pilot</a><a class="button button--secondary" href="https://github.com/rmak78/phpledger/discussions">Join the discussion</a></div></section>
 

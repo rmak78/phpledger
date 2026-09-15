@@ -2,6 +2,12 @@
 
 ## Current local execution, 15 September 2026
 
+### Publication and priority confirmed
+
+The owner has explicitly requested publication of all completed changes before reviewing the live result. Release 0.1.3-preview combines the consolidated accounting foundation, bundled module lifecycle and visible running balances. [Its release receipt](repository/sprint-05/PREVIEW-0.1.3-VALIDATION.md) records preparation and actual publication separately. Customer/vendor subledgers and professionally reviewed financial-statement packages remain unfinished; technical test completion does not close these accounting-product gates.
+
+The owner reconfirmed this order: **API/MCP read access → controlled commands → optional AR/AP**. SEO discovery and marketing-campaign preparation are **high priority in parallel**, with progress and account prerequisites in the [campaign execution kit](design/website/SEO-CAMPAIGN-EXECUTION.md). Running balances must be discoverable from all ledger entry points and readable on mobile.
+
 The owner requested completion and cleanup of all worktrees, removal of legacy source, completion of the accounting core, then the next roadmap sprint. The released account/chart/general-journal work and local opening/period/bank workflows are now consolidated; the historical application is removed from the current tree and retained in Git history. Basic CSV exports and a complete synthetic two-period core reconciliation have been added. This closes the bounded core implementation checklist; qualified accounting/security review, observed core-only use, jurisdiction-specific closing/statements and supported pilot acceptance remain open.
 
 The next requested sprint is also implemented locally: [module roadmap milestone 3](repository/sprint-05/MODULE-FOUNDATION.md), with versioned manifests, company enablement/dependencies, migration compatibility, immutable decisions, retained history and the POS showcase behind server capability checks. New and upgraded ordinary companies start with optional POS disabled; explicit sample provisioning enables it. API/MCP reads are the next implementation milestone (4), controlled commands follow (5), then optional AR/AP. The bounded lifecycle is implemented; no public business API/MCP server or production tax/POS module is claimed. Website SEO/campaign follow-up remains separate from these accounting implementation gates.
