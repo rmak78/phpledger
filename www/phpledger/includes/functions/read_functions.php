@@ -112,7 +112,9 @@ function pl_read_journal(array $row, int $page, int $size): array
 
 function pl_read_source(array $row, string $type, int $page, int $size): array
 {
-    $result = pl_read_fields($row, ['id','company_id','book_id','number','date','document_date','kind','status','reference','counterparty','memo','description','amount','money_account_id','category_account_id','journal_id','reversal_journal_id','created_at','updated_at']);
+    $result = pl_read_fields($row, ['id','company_id','book_id','number','date','document_date','kind','status','reference','counterparty','memo','description','amount','money_account_id','category_account_id','journal_id','original_journal_id','reversal_journal_id','revision','created_at','updated_at']);
+    $history = array_map(static fn (array $revision): array => pl_read_fields($revision, ['revision','journal_id','reversal_journal_id','actor_id','recorded_at']) + ['source_snapshot' => $revision['source_snapshot']], $row['posting_history'] ?? []);
+    $result['posting_history'] = pl_read_page($history, $page, $size);
     if ($type === 'general_journal') {
         $result['totals'] = $row['totals'];
         $result['lines'] = pl_read_page($row['lines'], $page, $size);

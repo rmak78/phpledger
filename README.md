@@ -34,6 +34,8 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 
 **Not included in the 0.2.1-preview download:** receivables and payables, inventory and cost of sales, tax, detailed historical imports, multi-book, foreign-currency posting, translations, offline use, card payments, document scanning.
 
+**Local, unreleased foundation work:** [AR/AP foundation notes](docs/strategy/AR-AP-FOUNDATIONS-NOTES.md) describe currency snapshots/manual rates, party/contact storage, internal settlement and same-identity corrections. This is prerequisite code, without AR/AP invoice/bill workflows or a new published package.
+
 **0.2.1-preview scope:** opening trial-balance/CSV cutover, a reconciled unpaid-document register, reasoned periods, bank CSV matching/reconciliation, core CSV exports and owner-controlled POS modules. Open **Reports → Account ledger** for opening, debit, credit, running and closing balances; mobile entries display the balance beside each movement. Ordinary companies start with optional POS disabled. Scoped read API/MCP, existing-user OAuth/Connections and four multi-year synthetic businesses are included; AR and AP follow, with controlled commands sequenced after e-commerce/storefront. Customer/vendor subledgers, reviewed financial-statement packages, XLSX and detailed historical journals remain unfinished. See [core completion evidence](docs/repository/sprint-05/CORE-COMPLETION.md), [module contracts and validation](docs/repository/sprint-05/MODULE-FOUNDATION.md), and [local workflow guidance](docs/DEVELOPMENT.md#opening-cutover-periods-and-bank-reconciliation).
 
 ## Who it is for

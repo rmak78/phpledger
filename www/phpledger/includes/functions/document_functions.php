@@ -65,11 +65,12 @@ function pl_get_document(int $actorId, int $companyId, int $bookId, int $documen
 {
     pl_require_company_access($actorId, $companyId);
     $book = pl_ledger_book($companyId, $bookId);
-    $row = DB::queryFirstRow('SELECT d.*, m.code AS money_account_code, m.name AS money_account_name, c.code AS category_account_code, c.name AS category_account_name, r.id AS reversal_journal_id FROM pl_documents d JOIN pl_accounts m ON m.id = d.money_account_id JOIN pl_accounts c ON c.id = d.category_account_id LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.id = %i AND d.company_id = %i AND d.book_id = %i FOR SHARE', $documentId, $companyId, $bookId);
+    $row = DB::queryFirstRow('SELECT d.*, m.code AS money_account_code, m.name AS money_account_name, c.code AS category_account_code, c.name AS category_account_name, r.id AS reversal_journal_id FROM pl_effective_documents d JOIN pl_accounts m ON m.id = d.money_account_id JOIN pl_accounts c ON c.id = d.category_account_id LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.id = %i AND d.company_id = %i AND d.book_id = %i FOR SHARE', $documentId, $companyId, $bookId);
     if (!$row) {
         throw new DomainException('This transaction is not available in the selected company and book.');
     }
     $document = pl_document_row($row);
+    $document['posting_history'] = pl_source_posting_history($actorId, $companyId, $bookId, $document['kind'], $documentId);
     $document['journal'] = $document['journal_id'] === null ? null : pl_get_journal($actorId, $companyId, $bookId, $document['journal_id']);
     $payload = pl_document_posting_payload($document, $book['currency']);
     foreach ($payload['lines'] as &$line) {
@@ -176,7 +177,7 @@ function pl_reverse_document(int $actorId, int $companyId, int $bookId, int $doc
         if ($document['journal_id'] === null) {
             throw new DomainException('Only a posted transaction can be reversed.');
         }
-        pl_reverse_journal($actorId, $companyId, $bookId, $document['journal_id'], $date, 'document:' . $documentId . ':reverse', $reason);
+        pl_reverse_journal($actorId, $companyId, $bookId, $document['journal_id'], $date, 'document:' . $documentId . ':reverse' . ($document['journal_id'] === (int) ($document['original_journal_id'] ?? $document['journal_id']) ? '' : ':' . $document['journal_id']), $reason);
         return pl_get_document($actorId, $companyId, $bookId, $documentId);
     });
 }
@@ -223,7 +224,7 @@ function pl_list_documents(int $actorId, int $companyId, int $bookId, array $fil
         array_push($args, $search, $search, $search, strtoupper($search));
     }
     $condition = implode(' AND ', $where);
-    $join = ' FROM pl_documents d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE ' . $condition;
+    $join = ' FROM pl_effective_documents d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE ' . $condition;
     $totals = DB::queryFirstRow('SELECT COUNT(*) AS total, COALESCE(SUM(d.amount), 0) AS total_amount' . $join, ...$args);
     $total = (int) $totals['total'];
     $size = pl_table_size($filters['page_size'] ?? 50);
@@ -281,6 +282,13 @@ function pl_account_activity(int $actorId, int $companyId, int $bookId, int $acc
         // Fetch scoped source links once per page, including links for reversal rows.
         $documents = $sourceIds === [] ? [] : array_column(DB::query('SELECT id, journal_id FROM pl_documents WHERE company_id = %i AND book_id = %i AND journal_id IN %li', $companyId, $bookId, $sourceIds), 'id', 'journal_id');
         $generals = $sourceIds === [] ? [] : array_column(DB::query('SELECT id, journal_id FROM pl_general_drafts WHERE company_id = %i AND book_id = %i AND journal_id IN %li', $companyId, $bookId, $sourceIds), 'id', 'journal_id');
+        if ($sourceIds !== []) {
+            $revisionLinks = DB::query('SELECT i.source_type,i.source_id,v.journal_id FROM pl_posting_revisions v JOIN pl_posting_identities i ON i.id=v.identity_id WHERE i.company_id=%i AND i.book_id=%i AND v.journal_id IN %li', $companyId, $bookId, $sourceIds);
+            foreach ($revisionLinks as $link) {
+                if ($link['source_type'] === 'general_journal') { $generals[$link['journal_id']] = $link['source_id']; }
+                else { $documents[$link['journal_id']] = $link['source_id']; }
+            }
+        }
         foreach ($rows as &$row) {
             $row['journal_id'] = (int) $row['journal_id'];
             $row['journal_reference'] = 'PL-' . str_pad((string) $row['journal_id'], 8, '0', STR_PAD_LEFT);

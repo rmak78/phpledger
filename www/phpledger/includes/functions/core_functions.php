@@ -143,9 +143,11 @@ function pl_get_general_draft(int $actorId, int $companyId, int $bookId, int $id
 {
     pl_require_company_access($actorId, $companyId);
     pl_ledger_book($companyId, $bookId);
-    $row = DB::queryFirstRow('SELECT d.*, r.id AS reversal_journal_id FROM pl_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.id = %i AND d.company_id = %i AND d.book_id = %i FOR SHARE', $id, $companyId, $bookId);
+    $row = DB::queryFirstRow('SELECT d.*, r.id AS reversal_journal_id FROM pl_effective_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.id = %i AND d.company_id = %i AND d.book_id = %i FOR SHARE', $id, $companyId, $bookId);
     if (!$row) { throw new DomainException('This general journal is not available in the selected company and book.'); }
-    return pl_general_draft_view($row);
+    $view = pl_general_draft_view($row);
+    $view['posting_history'] = pl_source_posting_history($actorId, $companyId, $bookId, 'general_journal', $id);
+    return $view;
 }
 
 /** Format an already authorized row; shared by single-source and bounded-list reads. */
@@ -227,7 +229,7 @@ function pl_reverse_general_draft(int $actorId, int $companyId, int $bookId, int
         pl_require_book_ready($companyId);
         $draft = pl_get_general_draft($actorId, $companyId, $bookId, $id);
         if ($draft['journal_id'] === null) { throw new DomainException('Only a posted general journal can be reversed.'); }
-        pl_reverse_journal($actorId, $companyId, $bookId, $draft['journal_id'], $date, 'general:' . $id . ':reverse', $reason);
+        pl_reverse_journal($actorId, $companyId, $bookId, $draft['journal_id'], $date, 'general:' . $id . ':reverse' . ($draft['journal_id'] === (int) ($draft['original_journal_id'] ?? $draft['journal_id']) ? '' : ':' . $draft['journal_id']), $reason);
         $reversed = pl_get_general_draft($actorId, $companyId, $bookId, $id);
         if ($draft['reversal_journal_id'] === null) { pl_core_audit($actorId, $companyId, $bookId, 'general_journal', $id, 'reversed', $reason, $draft, $reversed); }
         return $reversed;
@@ -241,7 +243,7 @@ function pl_list_general_drafts(int $actorId, int $companyId, int $bookId, int $
     $total = (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_general_drafts WHERE company_id = %i AND book_id = %i', $companyId, $bookId);
     $size = pl_table_size($options['page_size'] ?? 50);
     $search = pl_ledger_text($options['search'] ?? '', 'Search', 160, false);
-    $where = ' FROM pl_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = %i AND d.book_id = %i';
+    $where = ' FROM pl_effective_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = %i AND d.book_id = %i';
     $args = [$companyId, $bookId];
     if ($search !== '') {
         $where .= ' AND (LOCATE(%s, d.description) > 0 OR LOCATE(%s, d.reference) > 0 OR LOCATE(%s, CONCAT(\'GJ-\', LPAD(d.id, 6, \'0\'))) > 0)';

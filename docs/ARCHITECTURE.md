@@ -1,5 +1,19 @@
 # Architecture
 
+## Local AR/AP foundations — unreleased
+
+Migrations `013_currency_foundation` through `016_correction_identity` extend the existing services; the published 0.2.1 package is unchanged. [Foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) record owner decisions, scope and validation.
+
+Every journal line stores exact transaction/base amounts and a frozen twelve-place rate snapshot, including domestic rate-one entries. Books own immutable functional currency with compatible company metadata. Accounts may designate a currency and record known/unknown monetary classification. Manual rate revisions are append-only; lookup selects an explicit source and a date no later than posting. Prior-date selection remains visible as stale. Existing request hashes retain a bounded domestic compatibility path.
+
+Parties are company-scoped legal entities with customer/vendor roles and separate contacts; financial profiles remain book-scoped. Identity schemes, registrations, names and addresses are country-neutral. Tax identity collisions block; duplicate phone use requires acknowledgement and reason. Vetting history, banks, attachments and tags have reserved storage without later workflows. There is no independently editable party opening balance.
+
+Open-item activation is owner-only for unused, currency-neutral AR/AP controls. The sole outstanding calculation sums immutable entries referencing actual journal-line FC/base values; the central posting service writes those references atomically. Settlement reads historical basis from those records, uses the actual bank rate when supplied, and posts bank value, control relief and realised gain/loss together. Final allocation consumes the exact carrying residual. Activity cannot precede the latest item event. Outgoing settlements require a functional-currency bank until foreign-bank carrying-value allocation is implemented. Existing aggregate AR/AP openings are preserved for a later reviewed cutover.
+
+Business source identity is independent of posting IDs. Receipt, expense and general-journal corrections append exact reversals and replacements under the same source/reference. Immutable source revisions drive current reads, filters, sorting and drilldown; original rows remain intact. Cancellation defaults to UTC today; owner original-date exceptions still require an open period. Exact retries return the original action receipt. Bank reconciliation and active-allocation guards remain enforced; openings and POS retain specialized behavior.
+
+Party events contain only source identity/revision. A CLI dispatcher uses scoped consumer leases, bounded retries and immutable attempts, with handlers outside transactions. No consumers, network transport or cron jobs are installed. Delivery is at-least-once with stable receiver idempotency keys. No AR/AP documents, HTTP/MCP write endpoints, provider, regional tax, revaluation or consolidation capability is added.
+
 ## Runtime and application structure
 
 ### Read integration and richer-demo release (0.2.1-preview)

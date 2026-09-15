@@ -1,5 +1,23 @@
 # Local revival development
 
+## AR/AP foundations — local service and upgrade contract
+
+Read [foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) before using migrations 013–016. These are local, unreleased prerequisites, without invoice/bill UI or public write endpoints. Keep the existing MeekroDB bootstrap and use the central posting functions.
+
+- `pl_currency_rate_enter(actor, company, book, input)` accepts decimal-string manual spot/actual rates, dated provenance, reason, request key and an optional superseded row. `pl_currency_rate_lookup(..., type, source)` selects the newest applicable date/revision from that exact source. Six rate types are reserved in schema; later types have no active calculation workflow.
+- `php tools/currency-rates.php ACTOR_ID COMPANY_ID BOOK_ID INPUT.json` records a manual rate and prints only its ID/revision. Keep private input outside the web root; use synthetic data during development.
+- `pl_save_party` and `pl_save_contact` use company/book scope, request receipts and optimistic revisions. Party tax identifiers use jurisdiction/scheme/value, and phone duplicates require acknowledgement with a reason. Bank/tag/attachment/status-transition fields cannot be mutated through generic party entry.
+- `pl_activate_open_item_account(actor, company, book, account, reason)` is owner-only and rejects used or currency-designated controls. `pl_open_item_recognize(..., input)` accepts party/control/offset account IDs, currency, amount_fc, date, source_reference, description, optional rate/rate_source_id and idempotency_key.
+- `pl_settle_open_item(..., input)` accepts item/bank/gain/loss account IDs, amount_fc, date, description, actual_rate or rate_source_id and idempotency_key. Exact historical basis is read from the ledger; the command receipt retains the actual settlement rate even when bank lines are in functional currency. Partial settlement, final residual and allocation reversal remain atomic with journal posting. Outgoing foreign-bank payments and activity dated before the latest item event are rejected.
+- `pl_correct_source(actor, company, book, type, sourceId, expectedRevision, sourceInput, reversalDate, key, reason)` supports receipts, expenses and general journals. Pass null for UTC-today reversal; an owner may select the original date while open. Preserve source reference. `pl_source_posting_history` returns scoped immutable revisions. No correction UI is added.
+- `php tools/dispatch-outbound-events.php` runs the bounded queue. The default registry is empty and makes no delivery. Tests pass explicit fake handlers; no endpoint, connector, secret or scheduled task is installed.
+
+For a populated upgrade, back up the database and stop application/cron writers before running the existing migration command. Migration 013 temporarily exchanges blanket line-update protection for a restrictive migration-lock-owned initial metadata backfill guard; original amounts and identities cannot change. It restores blanket protection before completion. An interrupted `applying` receipt must remain blocked: restore the verified backup, or review the exact completed statements and finish under the existing migration lock. Never modify migration checksums or mark an incomplete upgrade applied.
+
+When restoring to a different database or database account, verify that the effective source views reference the restored tables and that their retained SQL definers have the required read permission. The disposable backup verifier checks definitions, dependency schemas, effective row digests and current/original source links as well as base tables and triggers.
+
+Focused validation: `docker compose --profile test run --rm test php tests/run.php --suite=foundations`. The complete `composer check` includes these suites. Upgrade verification accepts `fresh`, `foundation`, `core-0.1.2`, `opening-local` and `preview-0.2.1`. Run `tools/verify-currency-upgrade.php` with the same disposable-test root invocation as the existing upgrade verifier to exercise interrupted backfill, second-connection guards, recovery and legacy request replay. Only randomly created databases in `db_test` are touched by those upgrade verifiers.
+
 These instructions apply to the modern source containing `compose.yaml`, `composer.json` and `www/phpledger`. The current source tree contains the modern application; historical code remains only in Git history. Use the public [Wiki](https://github.com/rmak78/phpledger/wiki) for visitor documentation and package availability. The [foundation evaluation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) includes production dependencies; this page covers development from source.
 
 ## Start the verified environment

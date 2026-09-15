@@ -14,7 +14,23 @@ while (!is_file($input['barrier'])) {
 }
 $fixture = $input['fixture'];
 try {
-    if ($input['mode'] === 'module_set') {
+    if ($input['mode'] === 'open_item_settle') {
+        try {
+            $result = pl_settle_open_item($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['settlement_input']);
+            $journal = ['id' => $result['journal_id']];
+        } catch (DomainException $error) {
+            if (!($input['allow_domain_failure'] ?? false)) { throw $error; }
+            $journal = ['id' => 0];
+        }
+    } elseif ($input['mode'] === 'source_correct') {
+        try {
+            $result = pl_correct_source($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], 'general_journal', $input['source_id'], $input['revision'], $input['correction_input'], null, $input['key'], 'Concurrent correction');
+            $journal = ['id' => $result['journal_id']];
+        } catch (DomainException $error) {
+            if (!($input['allow_domain_failure'] ?? false)) { throw $error; }
+            $journal = ['id' => 0];
+        }
+    } elseif ($input['mode'] === 'module_set') {
         $module = pl_set_company_module($fixture['actor_id'], $fixture['company_id'], 'pos-showcase', $input['enabled'], $input['revision'], pl_module_registry()['pos-showcase']['digest'], 'Synthetic concurrent decision', $input['key']);
         $journal = ['id' => $module['revision']];
     } elseif ($input['mode'] === 'general_save') {

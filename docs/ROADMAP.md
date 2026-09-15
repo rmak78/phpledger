@@ -1,5 +1,11 @@
 # Revival roadmap
 
+## Local prerequisite work — AR/AP foundations, unreleased
+
+The owner-approved foundation task adds currency snapshots/manual rate revisions, country-neutral parties/contacts, internal open-item recognition and realised settlement, same-identity source corrections, and an inactive outbound dispatch foundation. [Foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) retain resolved decisions and validation. This work does not update the published 0.2.1 download, website, Wiki or demo.
+
+AR/AP invoice/bill documents and workflows follow this foundation. Existing aggregate balances require a reviewed cutover; internal open-item activation accepts unused controls only. Outgoing foreign-bank payments require a later carrying-value design. Vetting enforcement, bank approval, tag assignment, external connectors, rate providers, revaluation, consolidation and regional tax remain deferred.
+
 ## Expedited combined 0.2.1 release — owner-approved
 
 **0.2.1-preview is published.** It combines the complete existing accounting core, read API/MCP, Connections/OAuth, server-side tables, four multi-year sample companies and three illustrated walkthroughs. The [publication receipt](repository/sprint-05/PREVIEW-0.2.1-PUBLICATION.json) and [validation](repository/sprint-05/PREVIEW-0.2.1-VALIDATION.md) record financial/access checks, exact-package installation/upgrade, restoration, actual native Codex HTTP/STDIO journeys and the scheduled hourly reset. Other clients remain individually partial or pending without holding this owner-approved preview. A separate public 0.2.0 release is unnecessary. Earlier staged entries below retain their historical context. No later AR/AP, tax, native-client or write-command module is added.

@@ -47,7 +47,10 @@ function assert_throws(callable $action, string $class = Throwable::class, ?stri
 }
 
 $suites = ['auth_test.php', 'ledger_test.php', 'concurrency_test.php', 'document_test.php', 'regional_test.php', 'report_test.php', 'pos_test.php', 'core_test.php', 'opening_test.php', 'period_test.php', 'reconciliation_test.php', 'core_completion_test.php', 'module_test.php', 'installer_test.php', 'connection_test.php', 'demo_pack_test.php'];
-$suites = array_merge($suites, ['currency_test.php', 'party_test.php', 'outbound_test.php']);
+$suites = array_merge($suites, ['currency_test.php', 'party_test.php', 'outbound_test.php', 'open_item_test.php', 'correction_test.php']);
+if (($argv[1] ?? '') === '--suite=foundations') {
+    $suites = ['ledger_test.php', 'concurrency_test.php', 'document_test.php', 'core_test.php', 'currency_test.php', 'party_test.php', 'outbound_test.php', 'open_item_test.php', 'correction_test.php'];
+}
 if (($argv[1] ?? '') === '--suite=installer') {
     $suites = ['installer_test.php'];
 }

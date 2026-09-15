@@ -167,9 +167,9 @@ function pl_ledger_book(int $companyId, int $bookId, bool $lock = false): array
 }
 
 /** Internal posting primitive; nested calls retain the outer transaction's book lock. */
-function pl_post_journal_locked(int $actorId, int $companyId, int $bookId, array $payload, ?int $reversalOf = null): array
+function pl_post_journal_locked(int $actorId, int $companyId, int $bookId, array $payload, ?int $reversalOf = null, ?int $settlementItemId = null): array
 {
-    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $payload, $reversalOf): array {
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $payload, $reversalOf, $settlementItemId): array {
         $payload = pl_normalize_journal($payload);
         // This helper also checks permissions so future direct callers cannot bypass membership.
         pl_require_company_access($actorId, $companyId, true);
@@ -204,6 +204,15 @@ function pl_post_journal_locked(int $actorId, int $companyId, int $bookId, array
             }
             return pl_get_journal($actorId, $companyId, $bookId, (int) $existing['id']);
         }
+        pl_correction_assert_posting_allowed($companyId, $bookId, $payload, $reversalOf);
+        if ($reversalOf !== null && $original['source_type'] !== 'opening_balance' && $payload['date'] < gmdate('Y-m-d')) {
+            $member = pl_require_company_access($actorId, $companyId, true);
+            if ($member['role'] !== 'owner' || $payload['date'] !== $original['journal_date']) {
+                throw new DomainException('Backdated reversals require an owner, the original posting date and an open period.');
+            }
+        }
+        $carryingAccount = $settlementItemId === null ? null : pl_open_item_validate_settlement_basis($companyId, $bookId, $payload, $settlementItemId);
+        pl_open_item_validate_posting($companyId, $bookId, $payload, $reversalOf, $settlementItemId);
         pl_opening_assert_posting_allowed($companyId, $bookId, $payload);
         pl_reconciliation_assert_posting_allowed($companyId, $bookId, $payload);
         $periods = DB::query('SELECT id, status FROM pl_periods WHERE company_id = %i AND book_id = %i AND start_date <= %s AND end_date >= %s FOR UPDATE', $companyId, $bookId, $payload['date'], $payload['date']);
@@ -215,7 +224,7 @@ function pl_post_journal_locked(int $actorId, int $companyId, int $bookId, array
             if (!$account) {
                 throw new DomainException('Every account must be active and belong to the selected company and book.');
             }
-            pl_currency_validate_posting_line($actorId, $companyId, $bookId, $payload, $line, $account, $reversalOf !== null);
+            pl_currency_validate_posting_line($actorId, $companyId, $bookId, $payload, $line, $account, $reversalOf !== null || $carryingAccount === $line['account_id']);
         }
         DB::insert('pl_journals', [
             'company_id' => $companyId, 'book_id' => $bookId, 'period_id' => (int) $periods[0]['id'],
@@ -231,6 +240,8 @@ function pl_post_journal_locked(int $actorId, int $companyId, int $bookId, array
                 'account_id' => $line['account_id'], 'description' => $line['description'], 'debit' => $line['debit'], 'credit' => $line['credit'],
             ] + array_intersect_key($line, array_flip(['currency','amount_fc','rate','rate_type','rate_source_id','amount_base','rate_is_stale','ic_counterparty_entity_id'])));
         }
+        pl_correction_track_posting($actorId, $companyId, $bookId, $journalId, $payload, $reversalOf);
+        pl_open_item_track_posting($companyId, $bookId, $journalId, $payload, $reversalOf);
         return pl_get_journal($actorId, $companyId, $bookId, $journalId);
     });
 }
@@ -241,6 +252,7 @@ function pl_post_journal(int $actorId, int $companyId, int $bookId, array $paylo
     if ($payload['source_type'] === 'reversal') {
         throw new DomainException('Use the linked reversal action to reverse a posted journal.');
     }
+    if (in_array($payload['source_type'], ['open_item_recognition','open_item_settlement'], true)) { throw new DomainException('Use the authoritative open-item posting service.'); }
     if ($payload['source_type'] === 'opening_balance') {
         throw new DomainException('Use the opening preview and confirmation service for opening balances.');
     }
@@ -267,8 +279,9 @@ function pl_get_journal(int $actorId, int $companyId, int $bookId, int $journalI
     return $journal;
 }
 
-function pl_reverse_journal(int $actorId, int $companyId, int $bookId, int $journalId, string $date, string $idempotencyKey, string $reason): array
+function pl_reverse_journal(int $actorId, int $companyId, int $bookId, int $journalId, ?string $date, string $idempotencyKey, string $reason): array
 {
+    $date ??= gmdate('Y-m-d');
     pl_ledger_date($date);
     $reason = pl_ledger_text($reason, 'Reversal reason', 400);
     return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $journalId, $date, $idempotencyKey, $reason): array {
