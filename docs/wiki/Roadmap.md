@@ -4,9 +4,9 @@ The owner requested the completed 0.1.3-preview changes live first for review an
 
 The direction confirmed on 15 September 2026 is **complete accounting core first, optional business modules next**, with a business API and MCP access over the same services. The current preview supplies working slices; it does not complete the accounting, user or release gates below.
 
-Local continuation now completes the bounded core implementation and bundled module lifecycle technical checks: 121 tests pass, with a two-period reconciliation, exports and owner-controlled POS enablement. This Wiki source is unpublished; public 0.1.2-preview remains its recorded scope. API/MCP reads are the next implementation milestone, followed by commands and optional AR/AP. Qualified reviews and observed pilot use remain separate gates.
+The 0.1.3-preview release completes the bounded core implementation and bundled module lifecycle technical checks: 121 tests pass, with a two-period reconciliation, exports and owner-controlled POS enablement. API/MCP reads are the next implementation milestone, followed by commands and optional AR/AP. Qualified reviews and observed pilot use remain separate gates.
 
-The [[module roadmap|Module-Roadmap]] gives the detailed delivery order. [[First package|First-Package]] describes the 0.1.2-preview scope and the next core work.
+The [[module roadmap|Module-Roadmap]] gives the detailed delivery order. [[First package|First-Package]] describes the 0.1.3-preview scope and remaining acceptance work.
 
 | Stage | What it delivers | Completion gate |
 |---|---|---|

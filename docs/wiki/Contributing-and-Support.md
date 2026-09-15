@@ -14,7 +14,7 @@ The most valuable early contributions connect a real business task to a clear, t
 
 Use synthetic records in public issues and examples. Do not include private customer data or credentials. Preserve third-party notices and contribute original material or material whose reuse terms permit it.
 
-The [public repository](https://github.com/rmak78/phpledger) contains modern source under `www/phpledger`, with the historical application retained only in Git history. Follow the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md), and use [Issues](https://github.com/rmak78/phpledger/issues) to discuss a bounded proposal. See the [0.1.2-preview evaluation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview); supported-pilot review remains open.
+The [public repository](https://github.com/rmak78/phpledger) contains modern source under `www/phpledger`, with the historical application retained only in Git history. Follow the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md), and use [Issues](https://github.com/rmak78/phpledger/issues) to discuss a bounded proposal. See the [0.1.3-preview evaluation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.3-preview); supported-pilot review remains open.
 
 New project-owned code and documentation use the [MIT License](https://github.com/rmak78/phpledger/blob/master/LICENSE). Preserve the [separate scope and notices](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) for historical code, dependencies and assets. The MIT grant does not relicense legacy contributions or company marks.
 

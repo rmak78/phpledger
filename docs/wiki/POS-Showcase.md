@@ -1,6 +1,6 @@
 # A shop sale with a visible accounting trail
 
-The current POS is a cash-sale showcase retained in the 0.1.2-preview package and hosted demo, using six fictional products. It demonstrates how a simple shop transaction reaches the same accounting records as other receipts. Click-to-add product tiles and a separate review/cash screen are included.
+The current POS is a cash-sale showcase retained in the 0.1.3-preview package and hosted demo, using six fictional products. It demonstrates how a simple shop transaction reaches the same accounting records as other receipts. Click-to-add product tiles and a separate review/cash screen are included.
 
 ## Try the complete journey
 
