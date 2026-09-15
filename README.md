@@ -112,7 +112,7 @@ The core must work independently of add-ons. Shop and restaurant interfaces will
 
 Restaurant, pharmacy, club, trader, distributor, shop and workshop scenarios inform the longer-term product. **Scan document** and AI extraction come later, with human review before saving or posting.
 
-[**Full roadmap**](https://github.com/rmak78/phpledger/wiki/Roadmap) · [**Package scope**](https://github.com/rmak78/phpledger/wiki/First-Package) · [**Release validation**](docs/repository/sprint-05/PREVIEW-0.1.3-VALIDATION.md)
+[**Full roadmap**](https://github.com/rmak78/phpledger/wiki/Roadmap) · [**Package scope**](https://github.com/rmak78/phpledger/wiki/First-Package) · [**Release validation**](docs/repository/sprint-05/PREVIEW-0.1.6-VALIDATION.md)
 
 ## How to get involved
 
