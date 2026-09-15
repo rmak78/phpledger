@@ -32,3 +32,16 @@ Native MCP acceptance must cover Codex, Claude, ChatGPT, n8n, OpenClaw, Nous Res
 ## Publication ledger
 
 No live change is established by this document's initial local entry. Record the exact release/package hash, source commit, migration receipts, live routes and reset/client results after execution.
+
+### Release A publication verified
+
+- GitHub release: [v0.1.5-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.5-preview). PR #65 is merged; contributor authorship is preserved in Git history.
+- Package and live app source: `ad6d618c5c9c9b64afc8315515f1a994a6e9a1f0`. Downloaded ZIP: 1,326,966 bytes; SHA-256 `2d8e60816f5c03a1d1e540beb48b4139b4e231c75c57b13acb3011e5eb23bd5b`, matching its downloaded checksum.
+- Exact package fresh installation and actual 0.1.4-to-0.1.5 upgrade passed. Backup restoration passed: 27 table definitions/data checksums, 17,409 synthetic rows, 35 guards and 11 receipts.
+- Live demo `core-0.1.5-preview-ad6d618c5c9c` changed only `pos.css` and `pos.php`; source-switch guards verified preserved schema, receipts, generation, session files, DB container/volume and app image. The first attempt encountered the scheduled reset before any cutover action and safely stopped; the post-reset retry passed.
+- Website `website-redesign-20260915-140159` published at 14:02:57 UTC. All 108 files matched local/archive/host hashes. CSP, canonical redirects, private-path rejection and demo noindex passed. Host-only HSTS (`max-age=31536000`, no includeSubDomains/preload) and Permissions Policy verified over public HTTPS.
+- README/master and Wiki commit `c381423` published with release information. RSS has four entries; sitemap has 15 public URLs. IndexNow returned HTTP 200 for nine priority URLs at 14:04 UTC. Acceptance by IndexNow is not proof of indexing.
+- Live synthetic no-JavaScript POS checked at 1440/768/390; all six named quantity fields fit their cards. A 9.00 sample sale with 10.00 illustrative cash produced 1.00 change, a linked journal and account closing 884.00 (875.00 sample + 9.00 sale). No real payment was collected.
+- Google/Bing property access, sitemap submission through owned consoles and observed indexing remain open. Computer Use inventory failed with a missing app-server executable, so no authenticated console was accessible. No owned project social handles are configured and none were invented or posted to.
+
+Release A required no new migration or schema change. The authorized live application/website/GitHub/Wiki changes above were made; no raw secret was exposed and no Google Drive document was read. Professional accounting/security review and observed participant usability remain wider preview gates.
