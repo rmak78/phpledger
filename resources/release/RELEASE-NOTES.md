@@ -4,7 +4,14 @@ Source revision: `{{SOURCE_COMMIT}}`.
 
 This package is a development preview of the restarted PHP Ledger application. It preserves the lightweight BixiSoft PHP/MeekroDB structure while separating accounting functions, server permissions, templates and the public front controller. It is intended for evaluation and supported pilot preparation.
 
-## 0.1.5-preview changes
+## 0.1.6-preview changes
+
+- PHP 8.2 minimum, PHP 8.3 recommended/default deployment; compatible dependency resolution, accurate runtime/preflight checks and an 8.2/8.3/8.4 CI matrix.
+- AGPL-3.0-or-later core licensing, commercial licence available, individual/entity CLA and a pinned CLA Assistant workflow. The pre-adoption 0.1.0 through 0.1.5 releases retain MIT; third-party terms remain unchanged.
+- Country-neutral product positioning: Pakistan is one intended regional direction and FBR is one planned connector, not the definition of the core or a global launch requirement.
+- Owner-authored accessible POS labels preserve the contributor/revert history. The eleven migrations and accounting schema are unchanged. No API/MCP transport, new connector or richer demo pack is included in this maintenance package.
+
+## Earlier 0.1.5-preview changes
 
 - Product-specific accessible names for the no-JavaScript POS quantity inputs, contributed by [Nagulanvelu in PR #65](https://github.com/rmak78/phpledger/pull/65).
 - A maintainer follow-up preserves the final newline and prevents product cards from clipping the fallback quantity fields at desktop, tablet and mobile widths.
@@ -31,7 +38,7 @@ The 0.1.1-preview cash POS interactions remain included: click-to-add products, 
 
 ## Working scope
 
-- PHP 8.5.x, MySQL 8.4, pinned production dependencies and a versioned migration runner.
+- PHP 8.2+ (8.3 recommended), MySQL 8.4, pinned production dependencies and a versioned migration runner.
 - Command-line prerequisite checks, schema installation and initial-user creation; private database configuration and HTTPS sessions.
 - Company setup with an account template, new-business readiness rules and opt-in synthetic sample data.
 - Company/book-scoped receipts and expenses, drafts, atomic balanced posting, fixed-precision amounts, duplicate protection, linked sources, period locking and reversals.

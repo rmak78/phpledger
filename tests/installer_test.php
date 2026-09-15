@@ -21,12 +21,12 @@ function installer_process(string $script, array $arguments = [], string $input 
 }
 
 test('installer prerequisites identify missing runtime, extensions and dependencies', function (): void {
-    assert_same([], pl_install_runtime_issues(80510, ['bcmath', 'mbstring', 'PDO', 'pdo_mysql', 'session'], true));
-    $issues = pl_install_runtime_issues(80400, [], false);
+    assert_same([], pl_install_runtime_issues(80200, ['bcmath', 'mbstring', 'PDO', 'pdo_mysql', 'session'], true));
+    $issues = pl_install_runtime_issues(80199, [], false);
     assert_same(7, count($issues));
-    assert_true(str_contains(implode(' ', $issues), 'PHP 8.5'));
+    assert_true(str_contains(implode(' ', $issues), 'PHP 8.2'));
     assert_true(str_contains(implode(' ', $issues), 'Composer dependencies'));
-    assert_throws(fn () => pl_require_runtime(80600), RuntimeException::class, 'PHP 8.5');
+    assert_throws(fn () => pl_require_runtime(80199), RuntimeException::class, 'PHP 8.2');
     assert_same('error', pl_install_session_check('files', sys_get_temp_dir() . '/missing-session-' . bin2hex(random_bytes(4)))['status']);
     assert_same('warning', pl_install_session_check('redis', 'unverified-custom-handler')['status']);
     assert_same('ok', pl_install_session_check('files', sys_get_temp_dir())['status']);

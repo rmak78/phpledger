@@ -1,4 +1,5 @@
-FROM php:8.5.10-apache-bookworm
+ARG PHP_VERSION=8.3.33
+FROM php:${PHP_VERSION}-apache-bookworm
 RUN docker-php-ext-install pdo_mysql bcmath \
     && a2enmod rewrite headers \
     && printf 'ServerName localhost\n' > /etc/apache2/conf-available/servername.conf \

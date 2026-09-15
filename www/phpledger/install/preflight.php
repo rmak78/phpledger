@@ -105,7 +105,7 @@ function pl_install_database_check(): array
 if (realpath($_SERVER['SCRIPT_FILENAME'] ?? '') === __FILE__) {
     try {
         pl_install_require_runtime();
-        fwrite(STDOUT, "Runtime: PHP 8.5, required extensions and Composer dependencies are available.\n");
+        fwrite(STDOUT, 'Runtime: PHP ' . PHP_VERSION . " (minimum 8.2), required extensions and Composer dependencies are available.\n");
         $session = pl_install_session_check((string) ini_get('session.save_handler'), (string) ini_get('session.save_path'));
         fwrite(STDOUT, 'Session ' . $session['status'] . ': ' . $session['message'] . "\n");
         if ($session['status'] === 'error') {

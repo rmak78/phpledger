@@ -4,7 +4,7 @@ PHP Ledger is being rebuilt as a self-hosted accounting application for SME owne
 
 ## Get the development environment running
 
-Follow the canonical [local development instructions](README.md#local-development). Use Docker Compose for the PHP 8.5/MySQL 8.4 environment, apply the new versioned migrations, and use the controlled command-line account installer when an account is needed. The account installer accepts a password through standard input or a private shell environment variable; never put a password in a command argument or report.
+Follow the canonical [local development instructions](README.md#local-development). Use Docker Compose for the PHP 8.3/MySQL 8.4 environment; PHP 8.2 is the minimum. Apply the versioned migrations and use the controlled command-line account installer when an account is needed. The account installer accepts a password through standard input or a private shell environment variable; never put a password in a command argument or report.
 
 Preserve an existing `.env`. Use distinct random local database passwords and synthetic records. Serve only `www/phpledger/public`; the repository root and its legacy SQL dumps are historical reference material. Never point the new runtime at a customer's or production database.
 
@@ -35,6 +35,10 @@ Use the pull request template to record implementation, validation, documentatio
 
 ## Licensing and release status
 
-New project-owned code and documentation use the [MIT License](LICENSE), selected by the owner on 14 September 2026. Submit original contributions that you have the right to provide under MIT; clearly identify separately licensed dependencies and assets and preserve their notices. Read [licence scope](LICENSE-SCOPE.md) and the [provenance review](docs/repository/sprint-03/LICENSE-DECISION.md) before proposing reuse.
+New project-owned code and documentation use [AGPL-3.0-or-later](LICENSE), selected by the owner on 15 September 2026, with a separate commercial licensing offer. Published 0.1.0 through 0.1.5 previews retain their MIT grant. Submit original material that you have the right to contribute; identify third-party material and preserve its separate notices. Read [licence scope](LICENSE-SCOPE.md), [licensing policy](docs/LICENSING-POLICY.md) and the [current provenance review](docs/LICENSE_REVIEW.md).
 
-Historical code retained in Git history retains its existing notices and unresolved provenance; the modern MIT grant does not relicense it. No separate CLA or DCO process has been adopted. Technical checks do not establish accounting certification, production readiness or a support-response guarantee. Funding and supported-pilot commitments require their own reviewed scope.
+The [Contributor Licence Agreement](CLA.md) is required on your first pull request and again for a new substantive CLA version. It covers individual and authorised entity contributions, permits AGPL and commercial sublicensing, and leaves copyright with you. Sign using the exact comment in the CLA. For entity-owned work, identify the entity and your authority in the pull request; maintainer review is required as well as the automated signature check.
+
+The CLA Assistant workflow records signatures in the same repository's `cla-signatures` branch at `signatures/v1/cla.json`. The branch must exist and allow the workflow's signature commits; do not pre-create a fabricated signature JSON. The source/CLA version and contributor-facing URL must be published together before activating the check. Configure the status as required before accepting new outside contributions. Local workflow validation is not evidence that GitHub enforcement is active. The requested action is pinned to a reviewed release; upstream archived it on 23 March 2026, so hosted operation and future maintenance need explicit verification.
+
+Historical code in Git history retains its notices and unresolved provenance; the modern licence does not relicense it. Technical checks do not establish accounting certification, production readiness or a support-response guarantee. Funding and supported-pilot commitments require their own reviewed scope.

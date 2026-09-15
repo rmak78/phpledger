@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0c2052">
 <title>Accounting development roadmap | PHP Ledger</title>
-<meta name="description" content="See the published preview, the next API/MCP reads and controlled commands, optional subledgers, and later regional accounting and ERP gates.">
+<meta name="description" content="See the published preview, the read-access candidate, AR/AP, optional regional connectors and later business modules.">
 <link rel="canonical" href="https://phpledger.com/roadmap/">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
 <meta property="og:title" content="Accounting development roadmap | PHP Ledger">
-<meta property="og:description" content="See the published preview, the next API/MCP reads and controlled commands, optional subledgers, and later regional accounting and ERP gates.">
+<meta property="og:description" content="See the published preview, the read-access candidate, AR/AP, optional regional connectors and later business modules.">
 <meta property="og:url" content="https://phpledger.com/roadmap/">
 <meta property="og:image" content="https://phpledger.com/assets/og/home.png">
 <meta property="og:image:width" content="1280">
@@ -25,7 +25,7 @@
 <meta property="og:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Accounting development roadmap | PHP Ledger">
-<meta name="twitter:description" content="See the published preview, the next API/MCP reads and controlled commands, optional subledgers, and later regional accounting and ERP gates.">
+<meta name="twitter:description" content="See the published preview, the read-access candidate, AR/AP, optional regional connectors and later business modules.">
 <meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
 <meta name="twitter:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
@@ -101,7 +101,7 @@
           "name": "Does choosing a country or currency activate local accounting rules?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Each book uses one base currency. Country and currency choices do not activate tax calculations, statutory reporting, foreign-currency posting or additional accounting books. Regional accounting work follows the Pakistan, UK and UAE research and review sequence."
+            "text": "No. Each book uses one base currency. Country and currency choices do not activate tax calculations, statutory reporting, foreign-currency posting or additional accounting books. The core is country-neutral. Pakistan FBR is one planned connector; each regional accounting or tax integration needs separate research, implementation and review."
           }
         },
         {
@@ -133,9 +133,11 @@
 <section class="container page-intro page-intro--simple"><h1>The path from a working preview to supported books</h1><p class="lead">The published package has a bounded accounting and cash-sale journey. Each next step needs reconciled examples, access checks and review before it becomes a supported capability.</p><p class="small">This roadmap describes development scope, not a delivery-date or regulatory-compliance promise.</p></section>
 <section class="container section"><h2 class="sr-only">Development sequence</h2><ol class="timeline">
 <li><span class="phase">Available</span><div><h3>0.1.5-preview</h3><p>Accounts, journals and linked reversals; account ledgers with visible running balances; reviewed opening trial-balance/CSV cutover; period administration; bank CSV reconciliation; management reports and CSV exports; bundled core/POS modules with owner enablement and retained history.</p><p><a href="/download/">Download the evaluation package</a></p></div><span class="state">Development preview</span></li>
-<li><span class="phase">Next implementation</span><div><h3>API and MCP read access</h3><p>Read authorized companies, capabilities, accounts, journal sources, trial balances and account statements through the same scoped accounting services. Validate revocation, pagination, exact amounts and real-client parity.</p></div><span class="state">Next milestone</span></li>
-<li><span class="phase">Following</span><div><h3>Controlled commands</h3><p>Draft, validate, post and reverse with explicit permissions, configured review policy, durable retry protection and traceable command receipts.</p></div><span class="state">Planned</span></li>
-<li><span class="phase">Optional AR/AP</span><div><h3>Customer and vendor subledgers</h3><p>Invoices, bills, receipts/payments, allocations, credit notes, running party balances and aging that reconcile to ledger control accounts.</p></div><span class="state">Unfinished</span></li>
+<li><span class="phase">Candidate</span><div><h3>API and MCP read access</h3><p>The separate development branch has scoped read access and connection management. Actual client compatibility remains under verification; it is not included in this maintenance download.</p></div><span class="state">Client gates open</span></li>
+<li><span class="phase">Next</span><div><h3>AR, then AP</h3><p>Customer and vendor documents, allocations, credit notes, statements and aging that reconcile to ledger control accounts. Distribution packaging and an in-app updater follow AP.</p></div><span class="state">Planned</span></li>
+<li><span class="phase">Regional integrations</span><div><h3>Tax and e-invoicing connectors</h3><p>The core stays country-neutral. Pakistan FBR is one planned connector, alongside other regional tax/e-invoicing integrations. Countries and currencies do not activate these capabilities automatically.</p></div><span class="state">Planned</span></li>
+<li><span class="phase">Business modules</span><div><h3>Inventory, shop POS and e-commerce</h3><p>Shared catalog, accounting and supported tax services, followed by controlled API/MCP commands. Restaurant, distribution operations and specialist modules come later.</p></div><span class="state">Planned</span></li>
+<li><span class="phase">Across the product</span><div><h3>Languages, owner equity and queued entry</h3><p>Urdu, then Arabic and RTL with English fallback; reviewed owner/partner equity reports; browser draft queues and planned desktop/Android clients. Posting, period control and reversal always execute on the server.</p></div><span class="state">Planned</span></li>
 <li><span class="phase">Accounting acceptance</span><div><h3>Reviewed reporting</h3><p>Versioned account mappings, true comparatives, completeness checks, reproducible report snapshots and qualified review for the chosen entity and framework. The current reports are management previews, not issued statutory statements.</p></div><span class="state">Unfinished</span></li>
 <li><span class="phase">Parallel priority</span><div><h3>SEO discovery and launch preparation</h3><p>Maintain crawlable public documentation and release news, verify search ownership and indexing, and prepare evidence-based campaign material. Account setup and campaign execution are tracked separately from product capability.</p></div><span class="state">High priority</span></li>
 </ol></section>
@@ -145,7 +147,7 @@
 <section class="container section faq" id="faq" aria-labelledby="faq-heading">
 <h2 id="faq-heading">Frequently asked questions</h2>
 <details><summary>When will a stable release be available?</summary><p>There is no committed stable-release date. A supported release needs reconciled accounting examples, qualified accounting review, observed usability, installation and recovery checks, and clear support scope.</p></details>
-<details><summary>Does choosing a country or currency activate local accounting rules?</summary><p>No. Each book uses one base currency. Country and currency choices do not activate tax calculations, statutory reporting, foreign-currency posting or additional accounting books. Regional accounting work follows the Pakistan, UK and UAE research and review sequence.</p></details>
+<details><summary>Does choosing a country or currency activate local accounting rules?</summary><p>No. Each book uses one base currency. Country and currency choices do not activate tax calculations, statutory reporting, foreign-currency posting or additional accounting books. The core is country-neutral. Pakistan FBR is one planned connector; each regional accounting or tax integration needs separate research, implementation and review.</p></details>
 <details><summary>How can I help shape the next release?</summary><p>Share a synthetic workflow example, installation report or reproducible issue through the project repository. Accountants, business owners and contributors can also use the Support page to prepare an email about review or pilot participation.</p></details>
 </section>
 </main>
@@ -154,7 +156,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger" loading="lazy"></span></a>
-        <p>Open-source, self-hosted accounting and cash POS for small businesses. PHP 8.5 and MySQL 8.4. Development preview.</p>
+        <p>Open-source, self-hosted accounting and cash POS for small businesses. PHP 8.2+ and MySQL 8.4. Development preview.</p>
       </div>
       <div class="footer-col"><h2>Product</h2><a href="/product/">Accounting features</a><a href="/point-of-sale/">Point of sale</a><a href="/roadmap/">Roadmap</a><a href="/news/">News</a></div>
       <div class="footer-col" id="docs"><h2>Get started</h2><a href="/demo/">Try the demo</a><a href="/download/">Download</a><a href="https://github.com/rmak78/phpledger/wiki/Getting-Started">Getting started guide</a><a href="https://github.com/rmak78/phpledger/wiki">Wiki</a></div>

@@ -2,22 +2,35 @@
   "name": "rmak78/phpledger",
   "description": "PHP Ledger revival: a country-neutral, self-hosted accounting foundation.",
   "type": "project",
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "require": {
-    "php": "~8.5.0",
+    "php": ">=8.2",
     "ext-bcmath": "*",
     "ext-pdo": "*",
     "ext-pdo_mysql": "*",
     "ext-mbstring": "*",
     "sergeytsalkov/meekrodb": "3.1.5"
   },
-  "require-dev": { "phpstan/phpstan": "2.2.14" },
-  "config": { "sort-packages": true, "allow-plugins": false },
+  "require-dev": {
+    "phpstan/phpstan": "2.2.14"
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": false,
+    "platform": {
+      "php": "8.2.0"
+    }
+  },
   "scripts": {
     "lint": "php tools/lint.php",
     "analyse": "phpstan analyse --no-progress --memory-limit=512M",
     "validate-samples": "php tools/validate-sample-data.php --self-test",
     "test": "php tests/run.php",
-    "check": ["@lint", "@analyse", "@validate-samples", "@test"]
+    "check": [
+      "@lint",
+      "@analyse",
+      "@validate-samples",
+      "@test"
+    ]
   }
 }
