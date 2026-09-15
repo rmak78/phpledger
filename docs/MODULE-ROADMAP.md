@@ -4,7 +4,7 @@ Owner decisions adopted on 15 September 2026 from the supplied local `docs/strat
 
 ## Current status
 
-The public release is **0.1.5-preview**. The bounded [core completion](repository/sprint-05/CORE-COMPLETION.md) and [module foundation](repository/sprint-05/MODULE-FOUNDATION.md) have recorded evidence. Read API/MCP, OAuth/Connections and server-side tables are implemented in local commit `1541e27`; [the named-client matrix](https://github.com/rmak78/phpledger/blob/codex/integration-delivery/docs/INTEGRATIONS.md) remains open. Bridge/protocol checks do not establish application compatibility. Multi-year demo work is local and paused for this decision task. Independent accounting/security review and observed user acceptance remain separate gates.
+The maintenance release is **0.1.6-preview**. The bounded [core completion](repository/sprint-05/CORE-COMPLETION.md) and [module foundation](repository/sprint-05/MODULE-FOUNDATION.md) have recorded evidence. Read API/MCP, OAuth/Connections and server-side tables are implemented in local commit `1541e27`; [the named-client matrix](https://github.com/rmak78/phpledger/blob/codex/integration-delivery/docs/INTEGRATIONS.md) remains open. Bridge/protocol checks do not establish application compatibility. Multi-year demo work is local and paused for this decision task. Independent accounting/security review and observed user acceptance remain separate gates.
 
 API/MCP reads complete first. AR and AP follow immediately. Packaging distribution and the updater form a named milestone immediately after AP. Urdu, then Arabic, RTL and owner-equity/AOP reporting design belong in the first delivery layer, with no claim that translations or partner-allocation logic already exist.
 
