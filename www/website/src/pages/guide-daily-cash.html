@@ -1,0 +1,20 @@
+<!-- {"path":"/guides/daily-cash-check/","nav":"guides","title":"Follow a day's bank movement to its source | PHP Ledger","description":"A worked synthetic account-statement example: opening balance, one posted receipt, closing balance and the source behind the figure.","ogImage":"/assets/og/home.png","ogType":"website","bodyClass":"page-guide","jsonld":["organization","breadcrumb"],"breadcrumb":"Daily cash check","noindex":false,"lastmod":"2026-09-15","budgetEager":700000,"budgetTotal":1100000} -->
+<article class="container article section">
+<p><a href="/guides/">Reporting walkthroughs</a> · Local 0.2.1 candidate</p>
+<h1>Follow a day's bank movement to its source</h1>
+<p class="lead">Start with the balance, check the movement, then open the receipt that created it.</p>
+<p>This walkthrough uses Cedar Studio, the fictional service-agency pack prepared for 0.2.1-preview. The public download and demo remain 0.1.5-preview while the next release is being verified. These figures are synthetic USD examples from the local candidate.</p>
+<h2>1. Open the right company and day</h2>
+<p>In the candidate demo, choose <strong>Service agency — Cedar Studio</strong> and USD. Open the sample guide, then <strong>Check that day's bank movements</strong>. The account is <strong>1000 · Cash and bank</strong>, used as the primary bank in this pack. Both the From and Through dates are <strong>15 January 2026</strong>.</p>
+<figure class="capture"><a href="/assets/screens/guides/daily-bank.png"><img src="/assets/screens/guides/daily-bank.png" alt="Cedar Studio account statement for 15 January 2026: opening 40,825, debit receipt 2,700 and closing 43,525, with a View transaction source link." width="1280" height="1245" loading="lazy" decoding="async"></a><figcaption>Actual local candidate capture. Open the image to inspect the full statement; record numbers vary between private samples.</figcaption></figure>
+<h2>2. Reconcile the movement</h2>
+<p>The opening bank balance is <strong>40,825.00</strong>. The receipt adds a <strong>2,700.00 debit</strong>, and there are no credits that day. The closing bank balance is therefore <strong>43,525.00</strong>.</p>
+<p><strong>40,825.00 + 2,700.00 − 0.00 = 43,525.00.</strong> For this asset account a debit increases the balance. Opening and closing balances use the complete posted ledger, even when the table is searched or paginated.</p>
+<h2>3. Open the source</h2>
+<p>Choose <strong>View transaction</strong> beside the movement. Its reference is <code>service-agency/receipts-2026-01</code>. The source is an illustrative monthly bank-receipt summary dated on the 15th. A separate month-end operating journal records cash sales. Neither source is an imported bank statement.</p>
+<p>The linked journal debits the primary bank and credits income by the same 2,700.00. A saved draft has no effect on this statement until it is explicitly posted.</p>
+<h2>4. Try a small change</h2>
+<p>Return to the sample guide and open the practice drafts. The petty-cash expense is dated in February 2026. Review it before posting, then use the guide's petty-cash statement to compare the balance. A February entry must not change the January 15 statement.</p>
+<p>Keep this exercise synthetic. Each visitor has separate books and all demo access expires at the hourly reset. Start a fresh sample and reconnect any client after expiry.</p>
+<p>Next: <a href="/guides/monthly-closing/">check monthly adjustments</a> or <a href="/guides/quarterly-yearly-review/">compare quarters and years</a>.</p>
+</article>

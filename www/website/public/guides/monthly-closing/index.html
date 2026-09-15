@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0c2052">
-<title>Page not found | PHP Ledger</title>
-<meta name="description" content="The address you followed does not match a page on phpledger.com. Start again from the home page, the download page or the support page.">
-<link rel="canonical" href="https://phpledger.com/404.html">
-<meta name="robots" content="noindex">
+<title>Read a month-end close with traceable adjustments | PHP Ledger</title>
+<meta name="description" content="A synthetic December close with salaries, prepaid insurance, depreciation, loan interest and an unpaid bill that settles in January.">
+<link rel="canonical" href="https://phpledger.com/guides/monthly-closing/">
+<meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/icon-192.png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
@@ -16,16 +16,16 @@
 <meta property="og:site_name" content="PHP Ledger">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
-<meta property="og:title" content="Page not found | PHP Ledger">
-<meta property="og:description" content="The address you followed does not match a page on phpledger.com. Start again from the home page, the download page or the support page.">
-<meta property="og:url" content="https://phpledger.com/404.html">
+<meta property="og:title" content="Read a month-end close with traceable adjustments | PHP Ledger">
+<meta property="og:description" content="A synthetic December close with salaries, prepaid insurance, depreciation, loan interest and an unpaid bill that settles in January.">
+<meta property="og:url" content="https://phpledger.com/guides/monthly-closing/">
 <meta property="og:image" content="https://phpledger.com/assets/og/home.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
 <meta property="og:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Page not found | PHP Ledger">
-<meta name="twitter:description" content="The address you followed does not match a page on phpledger.com. Start again from the home page, the download page or the support page.">
+<meta name="twitter:title" content="Read a month-end close with traceable adjustments | PHP Ledger">
+<meta name="twitter:description" content="A synthetic December close with salaries, prepaid insurance, depreciation, loan interest and an unpaid bill that settles in January.">
 <meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
 <meta name="twitter:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
@@ -65,12 +65,36 @@
       "sameAs": [
         "https://github.com/rmak78/phpledger"
       ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://phpledger.com/guides/monthly-closing/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://phpledger.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Reporting walkthroughs",
+          "item": "https://phpledger.com/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Monthly closing",
+          "item": "https://phpledger.com/guides/monthly-closing/"
+        }
+      ]
     }
   ]
 }
 </script>
 </head>
-<body class="page-404">
+<body class="page-guide">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger"></span></a>
@@ -81,11 +105,25 @@
   </nav>
 </header>
 <main id="main">
-<section class="container section" aria-labelledby="notfound-heading">
-  <h1 id="notfound-heading">This page does not exist</h1>
-  <p>The address may have changed or been mistyped. These pages are a good place to start again.</p>
-  <div class="actions"><a class="button" href="/">Home</a><a class="button button--secondary" href="/download/">Download</a><a class="button button--secondary" href="/support/">Support</a></div>
-</section>
+<article class="container article section">
+<p><a href="/guides/">Reporting walkthroughs</a> · Local 0.2.1 candidate</p>
+<h1>Read a month-end close with traceable adjustments</h1>
+<p class="lead">A monthly result includes the costs belonging to that month, including costs paid earlier or settled later.</p>
+<p>This is an original synthetic Cedar Studio example prepared for the local 0.2.1 candidate. The public release remains 0.1.5-preview. Manual support schedules explain the accounting entries; they do not implement payroll, AR/AP, inventory or tax modules.</p>
+<h2>1. Select December on its own</h2>
+<p>From Cedar Studio's sample guide, open <strong>December profit and loss</strong>. The inclusive dates are <strong>1–31 December 2025</strong>. Income is <strong>3,000.00</strong>, expenses are <strong>2,990.00</strong>, and net profit is <strong>10.00 USD</strong>.</p>
+<figure class="capture"><a href="/assets/screens/guides/monthly-profit.png"><img src="/assets/screens/guides/monthly-profit.png" alt="Cedar Studio December 2025 profit and loss: income 3,000, expenses 2,990 and profit 10, with the seven expense categories shown." width="1280" height="1486" loading="lazy" decoding="async"></a><figcaption>Actual synthetic report from the local candidate. The expense lines reconcile to the sources described below.</figcaption></figure>
+<h2>2. Check the recurring support</h2>
+<ul><li><strong>Salaries: 1,500.00.</strong> The fictional staff schedule has Mira Vale at 600.00 and Noel Reed at 900.00. No payroll deductions or tax are calculated.</li><li><strong>Rent: 400.00; utilities: 100.00.</strong> Rent uses the reserve bank. Utilities use 90.00 from the primary bank and 10.00 from petty cash.</li><li><strong>Insurance: 100.00.</strong> January's 1,200.00 prepayment is released over twelve months. December's expense reduces the remaining prepayment to zero.</li><li><strong>Depreciation: 40.00.</strong> The illustrative equipment schedule uses a 2,400.00 cost, zero residual and a 60-month life starting February 2024. Accumulated depreciation is 920.00 at December 2025.</li></ul>
+<p>Open <strong>December's support journal</strong> in the guide to inspect these entries. Its durable reference is <code>service-agency/operations-2025-12</code>.</p>
+<h2>3. Separate settlement from expense</h2>
+<p>The December loan payment contains <strong>1,200.00 principal</strong> and an illustrative <strong>300.00 interest</strong> component. Only the interest enters this P&amp;L. The principal reduces the loan liability.</p>
+<p>A fictional Harbor maintenance bill adds <strong>550.00</strong> to December expenses and accounts payable. It is paid on <strong>10 January 2026</strong>. Use the payable statement from December through January to follow the outstanding amount to settlement. January's payment reduces the bank and payable; it does not record the expense a second time.</p>
+<h2>4. Understand what “closed” means</h2>
+<p>The sample's historical periods are closed after its monthly checkpoints reconcile. The server refuses new postings into those periods. Visitors practise in the open 2026 year.</p>
+<p>Period closure does not certify financial statements, implement regional reporting rules or transfer earnings to retained earnings. The Balance Sheet presents accumulated unclosed earnings once alongside recorded equity. Independent accounting review remains a separate preview gate.</p>
+<p>Next: <a href="/guides/quarterly-yearly-review/">compare quarters and years</a>. For the source-reading basics, see <a href="/guides/daily-cash-check/">the daily bank check</a>.</p>
+</article>
 </main>
 <footer class="site-footer">
   <div class="container">

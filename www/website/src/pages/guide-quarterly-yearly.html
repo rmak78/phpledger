@@ -1,0 +1,22 @@
+<!-- {"path":"/guides/quarterly-yearly-review/","nav":"guides","title":"Compare quarters and reconcile the year-end balance sheet | PHP Ledger","description":"Four nonoverlapping quarters reconcile to the annual result; year-end assets reconcile to liabilities and equity in an original synthetic company.","ogImage":"/assets/og/home.png","ogType":"website","bodyClass":"page-guide","jsonld":["organization","breadcrumb"],"breadcrumb":"Quarterly and yearly review","noindex":false,"lastmod":"2026-09-15","budgetEager":700000,"budgetTotal":1100000} -->
+<article class="container article section">
+<p><a href="/guides/">Reporting walkthroughs</a> · Local 0.2.1 candidate</p>
+<h1>Compare quarters and reconcile the year end</h1>
+<p class="lead">Use separate date ranges for performance, then reconcile the closing position to the Trial Balance.</p>
+<p>This walkthrough uses the original Cedar Studio fixture in the local 0.2.1 candidate. It is not yet the public 0.1.5 demo. All amounts below are illustrative USD; choosing another base currency labels the same sample amounts without an exchange-rate conversion.</p>
+<h2>1. Add the four separate quarters</h2>
+<p>Use the Q1–Q4 links in the sample guide. Each uses inclusive business dates without overlapping another quarter.</p>
+<ul><li><strong>Q1:</strong> 1 January–31 March 2025 — profit 2,580.00.</li><li><strong>Q2:</strong> 1 April–30 June 2025 — profit 2,580.00.</li><li><strong>Q3:</strong> 1 July–30 September 2025 — profit 2,535.00, including the corrected 45.00 cost.</li><li><strong>Q4:</strong> 1 October–31 December 2025 — profit 1,730.00, including December interest and the unpaid maintenance bill.</li></ul>
+<p>The four quarters total <strong>9,425.00</strong>, exactly matching the P&amp;L for <strong>1 January–31 December 2025</strong>. The separate 2024 result is <strong>10,440.00</strong>. Comparing these two full years gives like-for-like periods, without treating cumulative earnings as the current year's profit.</p>
+<h2>2. Reconcile the closing position</h2>
+<p>Open <strong>2025 Balance Sheet</strong> and <strong>2025 Trial Balance</strong>. Both are as of <strong>31 December 2025</strong>.</p>
+<figure class="capture"><a href="/assets/screens/guides/yearly-balance.png"><img src="/assets/screens/guides/yearly-balance.png" alt="Cedar Studio at 31 December 2025: assets 49,015, liabilities 4,150 and equity 44,865. Earned profit to date is 19,865 beside owner capital of 25,000." width="1280" height="1514" loading="lazy" decoding="async"></a><figcaption>Actual synthetic report from the local candidate. Each account links to its movements; original record numbers differ between visitors.</figcaption></figure>
+<p><strong>Assets 49,015.00 = liabilities 4,150.00 + equity 44,865.00.</strong> Liabilities comprise the unpaid 550.00 maintenance bill and 3,600.00 loan principal. Equity comprises 25,000.00 owner capital and 19,865.00 accumulated earnings: 10,440.00 from 2024 plus 9,425.00 from 2025.</p>
+<h2>3. Follow what crosses the year</h2>
+<p>Alder Customer's 800.00 receivable and the 420.00 staff-bonus accrual were outstanding at the end of 2024. Their 2025 settlements cleared the balances without recording the income or salary expense again. The 550.00 payable crosses from 2025 into January 2026 in the same way.</p>
+<p>At December 2025, equipment at cost is 2,400.00 and accumulated depreciation is 920.00. The report shows both accounts, yielding a net carrying amount of 1,480.00. The fixture uses an illustrative manual support schedule, without claiming a completed fixed-asset module or an approved regional statement package.</p>
+<h2>4. Try another business pattern</h2>
+<p>The retail and distributor samples include explicitly manual stock/cost-of-sales schedules; the seasonal business varies monthly receipts. Leave the demo and start a new private sample to compare them. Do not combine reports from different companies as if they were one ledger.</p>
+<p>The current guide does not implement AOP profit-sharing ratios, partner drawings or a statutory statement package. Those require their own implementation and review. Mathematical reconciliation is evidence that these fixtures agree with the ledger, not professional accounting approval.</p>
+<p>Return to <a href="/guides/monthly-closing/">monthly closing</a> or <a href="/guides/daily-cash-check/">the daily bank check</a>.</p>
+</article>

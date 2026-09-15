@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0c2052">
-<title>Page not found | PHP Ledger</title>
-<meta name="description" content="The address you followed does not match a page on phpledger.com. Start again from the home page, the download page or the support page.">
-<link rel="canonical" href="https://phpledger.com/404.html">
-<meta name="robots" content="noindex">
+<title>Follow a day's bank movement to its source | PHP Ledger</title>
+<meta name="description" content="A worked synthetic account-statement example: opening balance, one posted receipt, closing balance and the source behind the figure.">
+<link rel="canonical" href="https://phpledger.com/guides/daily-cash-check/">
+<meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/icon-192.png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
@@ -16,16 +16,16 @@
 <meta property="og:site_name" content="PHP Ledger">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
-<meta property="og:title" content="Page not found | PHP Ledger">
-<meta property="og:description" content="The address you followed does not match a page on phpledger.com. Start again from the home page, the download page or the support page.">
-<meta property="og:url" content="https://phpledger.com/404.html">
+<meta property="og:title" content="Follow a day's bank movement to its source | PHP Ledger">
+<meta property="og:description" content="A worked synthetic account-statement example: opening balance, one posted receipt, closing balance and the source behind the figure.">
+<meta property="og:url" content="https://phpledger.com/guides/daily-cash-check/">
 <meta property="og:image" content="https://phpledger.com/assets/og/home.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
 <meta property="og:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Page not found | PHP Ledger">
-<meta name="twitter:description" content="The address you followed does not match a page on phpledger.com. Start again from the home page, the download page or the support page.">
+<meta name="twitter:title" content="Follow a day's bank movement to its source | PHP Ledger">
+<meta name="twitter:description" content="A worked synthetic account-statement example: opening balance, one posted receipt, closing balance and the source behind the figure.">
 <meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
 <meta name="twitter:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
@@ -65,12 +65,36 @@
       "sameAs": [
         "https://github.com/rmak78/phpledger"
       ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://phpledger.com/guides/daily-cash-check/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://phpledger.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Reporting walkthroughs",
+          "item": "https://phpledger.com/guides/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Daily cash check",
+          "item": "https://phpledger.com/guides/daily-cash-check/"
+        }
+      ]
     }
   ]
 }
 </script>
 </head>
-<body class="page-404">
+<body class="page-guide">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger"></span></a>
@@ -81,11 +105,25 @@
   </nav>
 </header>
 <main id="main">
-<section class="container section" aria-labelledby="notfound-heading">
-  <h1 id="notfound-heading">This page does not exist</h1>
-  <p>The address may have changed or been mistyped. These pages are a good place to start again.</p>
-  <div class="actions"><a class="button" href="/">Home</a><a class="button button--secondary" href="/download/">Download</a><a class="button button--secondary" href="/support/">Support</a></div>
-</section>
+<article class="container article section">
+<p><a href="/guides/">Reporting walkthroughs</a> · Local 0.2.1 candidate</p>
+<h1>Follow a day's bank movement to its source</h1>
+<p class="lead">Start with the balance, check the movement, then open the receipt that created it.</p>
+<p>This walkthrough uses Cedar Studio, the fictional service-agency pack prepared for 0.2.1-preview. The public download and demo remain 0.1.5-preview while the next release is being verified. These figures are synthetic USD examples from the local candidate.</p>
+<h2>1. Open the right company and day</h2>
+<p>In the candidate demo, choose <strong>Service agency — Cedar Studio</strong> and USD. Open the sample guide, then <strong>Check that day's bank movements</strong>. The account is <strong>1000 · Cash and bank</strong>, used as the primary bank in this pack. Both the From and Through dates are <strong>15 January 2026</strong>.</p>
+<figure class="capture"><a href="/assets/screens/guides/daily-bank.png"><img src="/assets/screens/guides/daily-bank.png" alt="Cedar Studio account statement for 15 January 2026: opening 40,825, debit receipt 2,700 and closing 43,525, with a View transaction source link." width="1280" height="1245" loading="lazy" decoding="async"></a><figcaption>Actual local candidate capture. Open the image to inspect the full statement; record numbers vary between private samples.</figcaption></figure>
+<h2>2. Reconcile the movement</h2>
+<p>The opening bank balance is <strong>40,825.00</strong>. The receipt adds a <strong>2,700.00 debit</strong>, and there are no credits that day. The closing bank balance is therefore <strong>43,525.00</strong>.</p>
+<p><strong>40,825.00 + 2,700.00 − 0.00 = 43,525.00.</strong> For this asset account a debit increases the balance. Opening and closing balances use the complete posted ledger, even when the table is searched or paginated.</p>
+<h2>3. Open the source</h2>
+<p>Choose <strong>View transaction</strong> beside the movement. Its reference is <code>service-agency/receipts-2026-01</code>. The source is an illustrative monthly bank-receipt summary dated on the 15th. A separate month-end operating journal records cash sales. Neither source is an imported bank statement.</p>
+<p>The linked journal debits the primary bank and credits income by the same 2,700.00. A saved draft has no effect on this statement until it is explicitly posted.</p>
+<h2>4. Try a small change</h2>
+<p>Return to the sample guide and open the practice drafts. The petty-cash expense is dated in February 2026. Review it before posting, then use the guide's petty-cash statement to compare the balance. A February entry must not change the January 15 statement.</p>
+<p>Keep this exercise synthetic. Each visitor has separate books and all demo access expires at the hourly reset. Start a fresh sample and reconnect any client after expiry.</p>
+<p>Next: <a href="/guides/monthly-closing/">check monthly adjustments</a> or <a href="/guides/quarterly-yearly-review/">compare quarters and years</a>.</p>
+</article>
 </main>
 <footer class="site-footer">
   <div class="container">
