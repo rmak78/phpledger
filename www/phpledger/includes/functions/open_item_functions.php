@@ -38,7 +38,7 @@ function pl_open_item_state(int $companyId, int $bookId, int $itemId): array
 {
     $item = DB::queryFirstRow('SELECT * FROM pl_open_items WHERE id = %i AND company_id = %i AND book_id = %i FOR UPDATE', $itemId, $companyId, $bookId);
     if (!$item) { throw new DomainException('This open item is not available in the selected book.'); }
-    $entries = DB::query('SELECT e.id AS entry_id, e.kind, e.reversal_of_id AS entry_reversal_of_id, l.*, j.journal_date FROM pl_open_item_entries e JOIN pl_journal_lines l ON l.id = e.journal_line_id AND l.company_id = e.company_id AND l.book_id = e.book_id JOIN pl_journals j ON j.id = l.journal_id WHERE e.item_id = %i AND e.company_id = %i AND e.book_id = %i ORDER BY e.id FOR SHARE', $itemId, $companyId, $bookId);
+    $entries = DB::query('SELECT e.id AS entry_id, e.kind, e.reversal_of_id AS entry_reversal_of_id, l.*, COALESCE(e.allocated_amount_fc, l.amount_fc) AS amount_fc, COALESCE(e.allocated_amount_base, l.amount_base) AS amount_base, e.opening_document_id, od.document_date AS opening_document_date, od.due_date AS opening_due_date, od.reference AS opening_reference, j.journal_date FROM pl_open_item_entries e LEFT JOIN pl_opening_documents od ON od.id = e.opening_document_id JOIN pl_journal_lines l ON l.id = e.journal_line_id AND l.company_id = e.company_id AND l.book_id = e.book_id JOIN pl_journals j ON j.id = l.journal_id WHERE e.item_id = %i AND e.company_id = %i AND e.book_id = %i ORDER BY e.id FOR SHARE', $itemId, $companyId, $bookId);
     $fc = '0.0000'; $base = '0.0000'; $recognized = null; $reversed = false; $latestDate = null;
     foreach ($entries as $entry) {
         $positive = in_array($entry['kind'], ['recognition', 'allocation_reversal'], true);
@@ -229,6 +229,9 @@ function pl_open_item_validate_settlement_basis(int $companyId, int $bookId, arr
 
 function pl_open_item_assert_correction_allowed(int $companyId, int $bookId, int $journalId): void
 {
+    if (DB::queryFirstField('SELECT e.id FROM pl_open_item_entries e JOIN pl_journal_lines l ON l.id = e.journal_line_id WHERE l.journal_id = %i AND e.company_id = %i AND e.book_id = %i AND e.opening_document_id IS NOT NULL LIMIT 1 FOR SHARE', $journalId, $companyId, $bookId)) {
+        throw new DomainException('Converted opening debt retains its journal basis; use reviewed correcting transactions rather than reversing the cutover.');
+    }
     $entries = DB::query("SELECT e.* FROM pl_open_item_entries e JOIN pl_journal_lines l ON l.id = e.journal_line_id WHERE l.journal_id = %i AND e.company_id = %i AND e.book_id = %i AND e.kind = 'recognition'", $journalId, $companyId, $bookId);
     foreach ($entries as $entry) {
         $item = pl_open_item_state($companyId, $bookId, (int) $entry['item_id']);

@@ -204,6 +204,10 @@ function pl_post_journal_locked(int $actorId, int $companyId, int $bookId, array
             }
             return pl_get_journal($actorId, $companyId, $bookId, (int) $existing['id']);
         }
+        if ($reversalOf !== null) {
+            if (function_exists('pl_inventory_assert_reversal_allowed')) { pl_inventory_assert_reversal_allowed($companyId, $bookId, $reversalOf); }
+            if (function_exists('pl_purchasing_assert_reversal_allowed')) { pl_purchasing_assert_reversal_allowed($companyId, $bookId, $reversalOf); }
+        }
         pl_correction_assert_posting_allowed($companyId, $bookId, $payload, $reversalOf);
         if ($reversalOf !== null && $original['source_type'] !== 'opening_balance' && $payload['date'] < gmdate('Y-m-d')) {
             $member = pl_require_company_access($actorId, $companyId, true);

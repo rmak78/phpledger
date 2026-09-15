@@ -5,12 +5,45 @@
   "contract": 1,
   "optional": false,
   "requires": {},
-  "capabilities": ["core.accounting", "core.reports", "core.exports"],
-  "migrations": ["001_foundation", "002_product_slice", "006_core_accounts_journals", "006_opening_cutover", "007_period_administration", "008_bank_reconciliation", "009_bank_draft_cancellation", "010_module_lifecycle"],
-  "routes": ["/accounts", "/general-journals", "/opening-balances", "/periods", "/bank-reconciliation", "/reports"],
-  "permissions": ["owner", "accountant", "viewer"],
+  "capabilities": [
+    "core.accounting",
+    "core.reports",
+    "core.exports",
+    "core.tax"
+  ],
+  "migrations": [
+    "001_foundation",
+    "002_product_slice",
+    "006_core_accounts_journals",
+    "006_opening_cutover",
+    "007_period_administration",
+    "008_bank_reconciliation",
+    "009_bank_draft_cancellation",
+    "010_module_lifecycle",
+    "022_tax_engine",
+    "025_tax_price_mode"
+  ],
+  "routes": [
+    "/accounts",
+    "/general-journals",
+    "/opening-balances",
+    "/periods",
+    "/bank-reconciliation",
+    "/reports",
+    "/tax"
+  ],
+  "permissions": [
+    "owner",
+    "accountant",
+    "viewer"
+  ],
   "settings": [],
-  "reports": ["trial-balance", "account", "profit-loss", "balance-sheet"],
+  "reports": [
+    "trial-balance",
+    "account",
+    "profit-loss",
+    "balance-sheet"
+  ],
   "api_operations": [],
   "mcp_operations": [],
   "history": "Core journal and source history is always available to authorized readers."

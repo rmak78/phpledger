@@ -14,7 +14,37 @@ while (!is_file($input['barrier'])) {
 }
 $fixture = $input['fixture'];
 try {
-    if ($input['mode'] === 'open_item_settle') {
+    if (in_array($input['mode'], ['purchase_receive','purchase_bill','opening_convert'], true)) {
+        try {
+            $result=match ($input['mode']) {
+                'purchase_receive'=>pl_receive_purchase_order($fixture['actor_id'],$fixture['company_id'],$fixture['book_id'],$input['order_id'],$input['receipt_input']),
+                'purchase_bill'=>pl_bill_purchase_receipts($fixture['actor_id'],$fixture['company_id'],$fixture['book_id'],$input['bill_input']),
+                'opening_convert'=>pl_confirm_opening_conversion($fixture['actor_id'],$fixture['company_id'],$fixture['book_id'],$input['cutover_id'],$input['mappings'],$input['expected_hash'],true,$input['key'],$input['reason']),
+            };
+            $journal=['id'=>$result['receipt_id']??$result['journal_id']??$result['bill_id']??$result['cutover_id']??1];
+        } catch (DomainException $error) {
+            if (!($input['allow_domain_failure']??false)) { throw $error; }
+            $journal=['id'=>0];
+        }
+    } elseif (in_array($input['mode'], ['ar_post','ar_settle','ar_credit_post'], true)) {
+        try {
+            $result = $input['mode'] === 'ar_settle'
+                ? pl_settle_ar_document($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['document_id'], $input['settlement_input'])
+                : pl_post_ar_document($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['document_id'], $input['revision']);
+            $journal = ['id' => $result['journal_id']];
+        } catch (DomainException $error) {
+            if (!($input['allow_domain_failure'] ?? false)) { throw $error; }
+            $journal = ['id' => 0];
+        }
+    } elseif ($input['mode'] === 'inventory_issue') {
+        try {
+            $result = pl_inventory_issue($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['inventory_input']);
+            $journal = ['id' => $result['movement_id']];
+        } catch (DomainException $error) {
+            if (!($input['allow_domain_failure'] ?? false)) { throw $error; }
+            $journal = ['id' => 0];
+        }
+    } elseif ($input['mode'] === 'open_item_settle') {
         try {
             $result = pl_settle_open_item($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['settlement_input']);
             $journal = ['id' => $result['journal_id']];
