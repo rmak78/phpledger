@@ -26,6 +26,9 @@ The existing website Compose service serves `public` at [http://127.0.0.1:18201/
 | `/product/` | Company setup, receipt/expense posting, corrections and reports |
 | `/point-of-sale/` | Preview cash-sale journey and supported boundaries |
 | `/download/` | Verified 0.1.4-preview assets, checksum, installation requirements and FAQ |
+| `/about/` | Project, maintainer and current scope |
+| `/privacy/` | Sessions, country hints, sample reset and operational logs |
+| `/terms/` | Synthetic demo use and preview/license boundaries |
 | `/support/` | Setup/training/troubleshooting information and local email-draft form |
 | `/roadmap/` | Opening balances/cutover → period administration → bank reconciliation, then later gates |
 | `/news/` | Release index and RSS link |
@@ -56,3 +59,5 @@ The approved **A, Workbench, with B's photo treatment** redesign was published t
 Publication used the existing static-release hosting lane, with a private backup of the prior website/configuration and an atomic Nginx configuration switch. All 101 public files were verified; canonical redirects, custom 404/private-path rejection, security/cache headers and demo entry/health passed. The demo gained its planned `X-Robots-Tag: noindex, nofollow` header; its containers, proxy target, application and database were preserved. No Git push, application deployment or migration was needed. See [current publication QA](design-qa.md#live-publication-15-september-2026) and the [machine-readable receipt](../../docs/design/website/qa/live-20260915-publication.json).
 
 Future website releases still require explicit publication authorization. The current source tree contains unrelated local accounting work: deploy only the reviewed static document root. Google/Bing verification/submissions, IndexNow, social handles and the wider campaign remain separate pending work. Shared social-preview artwork is present; additional per-page variants remain an editorial follow-up.
+
+The 0.1.5 work adds six product FAQs and permits large image previews on indexable pages. The local Nginx example emits host-only HSTS on HTTPS and denies unused browser permissions; live configuration has a separate verified publication receipt. See [staged delivery](../../docs/repository/sprint-05/DELIVERY-0.1.5-0.2.1.md).

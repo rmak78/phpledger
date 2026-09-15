@@ -378,7 +378,7 @@ function buildPage(page, byPath, assets) {
     canonical,
     cssHref: assets.cssHref,
     jsHref: assets.jsHref,
-    robotsMeta: page.noindex ? '<meta name="robots" content="noindex">' : '',
+    robotsMeta: page.noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots" content="max-image-preview:large">',
     seoMeta: seoMeta(page, canonical, ogImage, dims, assets.hasFeed),
     jsonld: jsonLd(page, byPath),
   };

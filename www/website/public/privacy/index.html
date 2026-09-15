@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0c2052">
-<title>Accounting development roadmap | PHP Ledger</title>
-<meta name="description" content="See the published preview, the next API/MCP reads and controlled commands, optional subledgers, and later regional accounting and ERP gates.">
-<link rel="canonical" href="https://phpledger.com/roadmap/">
+<title>Website and demo privacy | PHP Ledger</title>
+<meta name="description" content="How PHP Ledger's website and temporary demo use sessions, sample records, country hints and operational logs, and how to contact the maintainer.">
+<link rel="canonical" href="https://phpledger.com/privacy/">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/icon-192.png">
@@ -16,16 +16,16 @@
 <meta property="og:site_name" content="PHP Ledger">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
-<meta property="og:title" content="Accounting development roadmap | PHP Ledger">
-<meta property="og:description" content="See the published preview, the next API/MCP reads and controlled commands, optional subledgers, and later regional accounting and ERP gates.">
-<meta property="og:url" content="https://phpledger.com/roadmap/">
+<meta property="og:title" content="Website and demo privacy | PHP Ledger">
+<meta property="og:description" content="How PHP Ledger's website and temporary demo use sessions, sample records, country hints and operational logs, and how to contact the maintainer.">
+<meta property="og:url" content="https://phpledger.com/privacy/">
 <meta property="og:image" content="https://phpledger.com/assets/og/home.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
 <meta property="og:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Accounting development roadmap | PHP Ledger">
-<meta name="twitter:description" content="See the published preview, the next API/MCP reads and controlled commands, optional subledgers, and later regional accounting and ERP gates.">
+<meta name="twitter:title" content="Website and demo privacy | PHP Ledger">
+<meta name="twitter:description" content="How PHP Ledger's website and temporary demo use sessions, sample records, country hints and operational logs, and how to contact the maintainer.">
 <meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
 <meta name="twitter:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
@@ -68,7 +68,7 @@
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://phpledger.com/roadmap/#breadcrumb",
+      "@id": "https://phpledger.com/privacy/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -79,38 +79,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Roadmap",
-          "item": "https://phpledger.com/roadmap/"
-        }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://phpledger.com/roadmap/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "When will a stable release be available?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "There is no committed stable-release date. A supported release needs reconciled accounting examples, qualified accounting review, observed usability, installation and recovery checks, and clear support scope."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does choosing a country or currency activate local accounting rules?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Each book uses one base currency. Country and currency choices do not activate tax calculations, statutory reporting, foreign-currency posting or additional accounting books. Regional accounting work follows the Pakistan, UK and UAE research and review sequence."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How can I help shape the next release?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Share a synthetic workflow example, installation report or reproducible issue through the project repository. Accountants, business owners and contributors can also use the Support page to prepare an email about review or pilot participation."
-          }
+          "name": "Privacy",
+          "item": "https://phpledger.com/privacy/"
         }
       ]
     }
@@ -118,36 +88,19 @@
 }
 </script>
 </head>
-<body class="page-roadmap">
+<body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger"></span></a>
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0"/><path d="M4 12l16 0"/><path d="M4 18l16 0"/></svg>Menu</button>
   <nav id="navigation" aria-label="Main navigation">
-    <a href="/product/">Product</a><a href="/point-of-sale/">Point of sale</a><a href="/download/">Download</a><a href="/support/">Support</a><a href="/roadmap/" aria-current="page">Roadmap</a>
+    <a href="/product/">Product</a><a href="/point-of-sale/">Point of sale</a><a href="/download/">Download</a><a href="/support/">Support</a><a href="/roadmap/">Roadmap</a>
     <a class="button button--small" href="/demo/">Try the demo</a>
   </nav>
 </header>
 <main id="main">
-
-<section class="container page-intro page-intro--simple"><h1>The path from a working preview to supported books</h1><p class="lead">The published package has a bounded accounting and cash-sale journey. Each next step needs reconciled examples, access checks and review before it becomes a supported capability.</p><p class="small">This roadmap describes development scope, not a delivery-date or regulatory-compliance promise.</p></section>
-<section class="container section"><h2 class="sr-only">Development sequence</h2><ol class="timeline">
-<li><span class="phase">Available</span><div><h3>0.1.4-preview</h3><p>Accounts, journals and linked reversals; account ledgers with visible running balances; reviewed opening trial-balance/CSV cutover; period administration; bank CSV reconciliation; management reports and CSV exports; bundled core/POS modules with owner enablement and retained history.</p><p><a href="/download/">Download the evaluation package</a></p></div><span class="state">Development preview</span></li>
-<li><span class="phase">Next implementation</span><div><h3>API and MCP read access</h3><p>Read authorized companies, capabilities, accounts, journal sources, trial balances and account statements through the same scoped accounting services. Validate revocation, pagination, exact amounts and real-client parity.</p></div><span class="state">Next milestone</span></li>
-<li><span class="phase">Following</span><div><h3>Controlled commands</h3><p>Draft, validate, post and reverse with explicit permissions, configured review policy, durable retry protection and traceable command receipts.</p></div><span class="state">Planned</span></li>
-<li><span class="phase">Optional AR/AP</span><div><h3>Customer and vendor subledgers</h3><p>Invoices, bills, receipts/payments, allocations, credit notes, running party balances and aging that reconcile to ledger control accounts.</p></div><span class="state">Unfinished</span></li>
-<li><span class="phase">Accounting acceptance</span><div><h3>Reviewed reporting</h3><p>Versioned account mappings, true comparatives, completeness checks, reproducible report snapshots and qualified review for the chosen entity and framework. The current reports are management previews, not issued statutory statements.</p></div><span class="state">Unfinished</span></li>
-<li><span class="phase">Parallel priority</span><div><h3>SEO discovery and launch preparation</h3><p>Maintain crawlable public documentation and release news, verify search ownership and indexing, and prepare evidence-based campaign material. Account setup and campaign execution are tracked separately from product capability.</p></div><span class="state">High priority</span></li>
-</ol></section>
-<section class="container section--tight stack stack--loose"><h2>Help test a real task</h2><p>Useful contributions include synthetic worked accounting examples, installation results, reproducible bugs and feedback from owners and bookkeepers. Independent security, accounting and observed usability review remain open gates.</p><div class="actions"><a class="button" href="/support/#enquiry-pilot">Discuss a pilot</a><a class="button button--secondary" href="https://github.com/rmak78/phpledger/discussions">Join the discussion</a></div></section>
-
-
-<section class="container section faq" id="faq" aria-labelledby="faq-heading">
-<h2 id="faq-heading">Frequently asked questions</h2>
-<details><summary>When will a stable release be available?</summary><p>There is no committed stable-release date. A supported release needs reconciled accounting examples, qualified accounting review, observed usability, installation and recovery checks, and clear support scope.</p></details>
-<details><summary>Does choosing a country or currency activate local accounting rules?</summary><p>No. Each book uses one base currency. Country and currency choices do not activate tax calculations, statutory reporting, foreign-currency posting or additional accounting books. Regional accounting work follows the Pakistan, UK and UAE research and review sequence.</p></details>
-<details><summary>How can I help shape the next release?</summary><p>Share a synthetic workflow example, installation report or reproducible issue through the project repository. Accountants, business owners and contributors can also use the Support page to prepare an email about review or pilot participation.</p></details>
-</section>
+<section class="container page-intro page-intro--simple"><h1>Website and demo privacy</h1><p class="lead">This notice covers phpledger.com and its temporary public demo. Last updated 15 September 2026.</p></section>
+<section class="container section stack stack--loose"><h2>The public website</h2><p>The marketing pages serve their fonts, images and scripts locally. They contain no analytics or advertising trackers. The support form prepares an email draft in your email application or copies a message for you to review; the website does not submit or store that form.</p><p>Following links to GitHub, LinkedIn, supporting companies or an email service takes you to services with their own privacy practices. If you send an email, the maintainer and email providers receive the information you choose to send.</p><h2>Temporary demo records and sessions</h2><p>The demo creates a separate fictional company for each visitor and uses a necessary session cookie to keep that visitor's access separate. The cookie is restricted to the demo path, is unavailable to page scripts and is sent securely over HTTPS. It is a browser-session cookie; server session cleanup is configured with a 30-minute lifetime, which is not an exact deletion guarantee.</p><p>Demo records reset at the next scheduled UTC hour. Old visitor access stops after the generation expires or changes. A reset may briefly make the demo unavailable. Do not enter customer details, credentials, real financial records or other sensitive information.</p><h2>Country and currency suggestion</h2><p>On demo entry, the server may send your public IP address to <a href="https://country.is/">country.is</a> over HTTPS to suggest a country and base currency. It attempts this once per session, caches failures and skips local/private addresses. You can change the suggestion. The session cache retains the country result, not the raw address or provider response. This lookup does not establish your accounting jurisdiction.</p><h2>Operational logs and retention</h2><p>Web-server and hosting logs can include IP addresses, requested paths, timestamps, browser information and error details. Login throttling uses hashes of account/client identifiers. The hourly demo reset clears its database records; it does not promise deletion from web-server logs, session files, email or operational backups.</p><p>A fixed retention period for hosting logs and backups has not been established in the application configuration. Access and retention are operator-managed. Avoid putting personal or secret information in URLs or demo fields.</p><h2>Your own installation</h2><p>Self-hosted installations store their records on the operator's infrastructure. Their operator controls users, backups, hosting logs and retention. This website notice does not replace that operator's notice or responsibilities.</p><h2>Contact</h2><p>For a privacy question or a request concerning information you sent to the project, contact <a href="mailto:rmak78@gmail.com">rmak78@gmail.com</a>. Include enough context to identify the request without sending passwords or financial records.</p></section>
 </main>
 <footer class="site-footer">
   <div class="container">

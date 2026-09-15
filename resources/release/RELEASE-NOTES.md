@@ -4,13 +4,20 @@ Source revision: `{{SOURCE_COMMIT}}`.
 
 This package is a development preview of the restarted PHP Ledger application. It preserves the lightweight BixiSoft PHP/MeekroDB structure while separating accounting functions, server permissions, templates and the public front controller. It is intended for evaluation and supported pilot preparation.
 
-## Current local candidate changes
+## 0.1.5-preview changes
+
+- Product-specific accessible names for the no-JavaScript POS quantity inputs, contributed by [Nagulanvelu in PR #65](https://github.com/rmak78/phpledger/pull/65).
+- A maintainer follow-up preserves the final newline and prevents product cards from clipping the fallback quantity fields at desktop, tablet and mobile widths.
+- The accounting services, migration chain and stored amounts retain the 0.1.4-preview behavior. The website adds About, Privacy, demo-use terms and product FAQs; website content is deployed separately and is not part of this ZIP.
+- API/MCP read access and richer multi-year samples are subsequent releases with separate acceptance gates.
+
+## Earlier 0.1.3-preview changes
 
 - Consolidates the released accounts/general-journals slice with reviewed opening/CSV cutover, reasoned period administration and bank reconciliation/cancellation.
 - Adds CSV exports for trial balance, account statements, profit and loss and balance sheet. Amounts remain exact, scope/dates/readiness are explicit, spreadsheet-formula text is escaped, and account exports reject more than 10,000 movements.
 - Adds the bundled core/POS manifest contract and owner-only **Modules** screen. Optional POS defaults off for ordinary new/upgraded companies. Explicit synthetic sample provisioning enables it. Service checks block new review/checkout/retry after disablement; old sources and receipts remain available.
 - `010_module_lifecycle` adds two tables and two immutable-audit triggers. The complete supplied chain has eleven migration identities and 35 guard triggers. Both original `006_*` files retain their original checksums; numeric prefixes alone are not migration identities.
-- Repairs UTF-8 handling in the repository's Windows restore verifier. Core completion and module acceptance are local; this candidate is not a published release or accounting/pilot certification.
+- Repairs UTF-8 handling in the repository's Windows restore verifier. Technical completion does not establish accounting/pilot certification.
 
 ## Earlier 0.1.2-preview changes
 
@@ -45,7 +52,7 @@ Each book has one base currency. Currency choices and formatting do not implemen
 
 Detailed historical journal imports, XLSX, customer invoicing and invoice collection, bill settlement, aging, inventory/stock reports, country tax adapters, offline operation and receipt/document scanning remain future work. Opening AR/AP is a reconciled cutover snapshot, not an operational subledger. Credit notes, advance balances and unresolved prior bank outstanding items require a separately reviewed workflow. Existing-business setup remains blocked until opening balances are explicitly confirmed; new transactions must be dated after cutover.
 
-The `resources/tax/` catalogs cover Pakistan, the UK, UAE, Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore, with classification questions for restaurants, membership clubs, pharmacies, traders, distributors, retail shops and workshops. Every candidate remains `research_only`, `enabled: false` and `unreviewed`. Product/service, registration, jurisdiction, effective-period and recovery conditions require qualified review; an industry name never selects a universal rate. Null rates mean unresolved or non-flat treatment, not zero tax. No catalog is imported into company settings or used by POS, and no tax activation, filing, public business API, MCP or module lifecycle interface is included.
+The `resources/tax/` catalogs cover Pakistan, the UK, UAE, Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore, with classification questions for restaurants, membership clubs, pharmacies, traders, distributors, retail shops and workshops. Every candidate remains `research_only`, `enabled: false` and `unreviewed`. Product/service, registration, jurisdiction, effective-period and recovery conditions require qualified review; an industry name never selects a universal rate. Null rates mean unresolved or non-flat treatment, not zero tax. No catalog is imported into company settings or used by POS, and no tax activation, filing, public business API or MCP interface is included. The separate bundled core/POS module lifecycle is included.
 
 Optional `php tools/validate-tax-catalog.php --self-test` validates local schema, disabled states and references without database access. It neither checks legal accuracy nor approves the sources, rates or dates. Approved tax profiles, effective-period snapshots and their separate accounting mappings remain future module work.
 

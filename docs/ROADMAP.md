@@ -1,5 +1,15 @@
 # Revival roadmap
 
+## Current staged delivery
+
+The 15 September implementation plan delivers A (0.1.5-preview: contributor POS accessibility and website/SEO), B (0.2.0-preview: read API/MCP, scoped connections and server-side tables), then C (0.2.1-preview: four multi-year demo packs and reporting walkthroughs). See the [delivery receipt](repository/sprint-05/DELIVERY-0.1.5-0.2.1.md) for current evidence and open gates. API/MCP reads precede controlled commands, the browser installer and optional AR/AP. The demo hostname move stays deferred.
+
+
+## Current staged delivery
+
+The 15 September implementation plan delivers A (0.1.5-preview: contributor POS accessibility and website/SEO), B (0.2.0-preview: read API/MCP, scoped connections and server-side tables), then C (0.2.1-preview: four multi-year demo packs and reporting walkthroughs). See the [delivery receipt](repository/sprint-05/DELIVERY-0.1.5-0.2.1.md) for current evidence and open gates. API/MCP reads precede controlled commands, the browser installer and optional AR/AP. The demo hostname move stays deferred.
+
+
 Current live release: **0.1.4-preview**, including the financial-report/tablet layout correction. [Publication and validation](repository/sprint-05/PREVIEW-0.1.3-VALIDATION.md) records the exact package and hosted checks. Earlier dated publication sections below preserve their original scope.
 
 
