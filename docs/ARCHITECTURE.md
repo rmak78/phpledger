@@ -2,7 +2,7 @@
 
 ## Accounting starter: published 0.4.0-preview (16 September 2026)
 
-The next starter is implemented locally in separate service modules. The published package and hosted demo remain **0.3.0-preview** until a release receipt records an authorised upgrade. The published foundation description below is a historical release boundary, not a description of missing features in the current checkout.
+The starter is published as **0.4.0-preview**, with separate service modules and a verified hosted playground. The [publication receipt](repository/sprint-06/PREVIEW-0.4.0-PUBLICATION.json) records the package, upgrade and live checks. Foundation descriptions below retain their historical release boundaries.
 
 | Capability | Package and service boundary |
 |---|---|
