@@ -61,6 +61,15 @@ class PackageTests(unittest.TestCase):
         with self.assertRaises(builder.PackageError):
             self.build()
 
+    def test_current_runtime_services_views_and_migrations_are_in_the_allowlist(self):
+        policy = json.loads((ROOT / "tools/package-files.json").read_text(encoding="utf-8"))
+        sources = {entry["source"] for entry in policy["files"]}
+        for folder in ("www/phpledger/includes/functions", "www/phpledger/templates/views", "www/phpledger/install/migrations"):
+            for path in (ROOT / folder).glob("*.php"):
+                self.assertIn(path.relative_to(ROOT).as_posix(), sources, "Runtime dependency omitted from package")
+        for source in sources:
+            self.assertTrue((ROOT / source).is_file(), "Missing allowlisted source: " + source)
+
     def test_dirty_source_is_rejected_before_output(self):
         (self.source / "README.md").write_text("changed", encoding="utf-8")
         with self.assertRaisesRegex(builder.PackageError, "clean"):

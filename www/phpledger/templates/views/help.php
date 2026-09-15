@@ -6,7 +6,7 @@
         <ul>
             <li><strong>New business:</strong> confirm there are no prior balances or unpaid documents, review the neutral account template, and create empty books.</li>
             <li><strong>Sample company:</strong> explore fictional posted entries and editable drafts in a separate, clearly marked company.</li>
-            <li><strong>Existing business:</strong> save setup with opening review outstanding. Historical imports are not available yet, so posting stays unavailable until balances and unpaid documents can be reconciled.</li>
+            <li><strong>Existing business:</strong> save setup, then open <strong>Opening balances</strong>. Enter balances or upload/paste the documented CSV, include remaining unpaid invoices/bills, and review the balanced preview. Confirmation brings forward balances at the close of your accounting start date; new transactions start the next day.</li>
         </ul>
         <?php if (!pl_demo_enabled()): ?><a class="button primary" href="<?= pl_e(pl_url('/onboarding')) ?>">Set up or explore a business</a><?php else: ?><p class="alert">In this public demo your sample is created for you and resets hourly. Business administration, imports, deletion and period changes are disabled.</p><?php endif; ?>
     </div>
@@ -34,8 +34,9 @@
     </div>
     <div class="panel">
         <h2>What this preview includes</h2>
-        <p>Essential setup, a preliminary country-neutral account template, one base currency per company, receipts and expenses, a general-shop cash-sale showcase, a trial balance, account activity, and linked reversals.</p>
-        <p>Historical imports, unpaid customer/vendor document workflows, currency conversion, country tax rules, inventory, and production retail features remain future work. The broader industry sample packs are research scenarios, not installed operational modules.</p>
+        <p>Essential setup, a preliminary country-neutral account template, one base currency per company, receipts and expenses, cash POS, reports, linked reversals, opening cutover, period administration, and bank CSV reconciliation.</p>
+        <p>Detailed historical journal imports, invoice collection and bill settlement, XLSX import, currency conversion, country tax rules, inventory, and production retail features remain future work. The broader industry sample packs are research scenarios, not installed operational modules.</p>
         <p class="muted">If an installation already contains foundation records, an owner or accountant can review the existing account mappings and balances. That review preserves the old records and cannot be used to skip missing opening data.</p>
     </div>
+    <div class="panel"><h2>Close periods and reconcile a bank account</h2><p>Use <strong>Periods</strong> to create a date range or close it with a reason. Closing stops new postings in that range and preserves existing entries. Only the owner can reopen it, with a recorded reason. Closing does not create year-end profit-transfer entries or accounting statements.</p><p>Use <strong>Bank reconciliation</strong> to preview a statement CSV and confirm its import. Check opening and closing balances, then explicitly match each bank row to a posted line. Amounts must agree; multiple suggestions need your choice. Complete reconciliation only when all bank rows are matched and the adjusted bank balance equals the ledger. Unmatched ledger payments/deposits carry forward as outstanding.</p><p>The first statement requires you to confirm that all earlier bank entries have cleared and its opening balance equals the ledger before its start. Later statements must be consecutive. Completed reconciliations preserve their totals and prevent backdated changes to that bank account; later correcting entries remain traceable.</p></div>
 </section>

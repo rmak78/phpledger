@@ -161,7 +161,8 @@ function pl_can_write(array $company): bool
 function pl_render(string $view, array $data = []): never
 {
     $allowed = ['login', 'companies', 'onboarding', 'setup-review', 'transactions', 'editor',
-        'trial-balance', 'account', 'journal', 'help', 'error', 'demo', 'reports', 'balance-sheet', 'profit-loss', 'cash-forecast', 'pos'];
+        'trial-balance', 'account', 'journal', 'help', 'error', 'demo', 'reports', 'balance-sheet', 'profit-loss', 'cash-forecast', 'pos',
+        'opening-balances', 'periods', 'bank-reconciliation'];
     if (!in_array($view, $allowed, true)) {
         throw new LogicException('Unknown template.');
     }

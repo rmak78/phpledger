@@ -20,6 +20,15 @@ try {
     } elseif ($input['mode'] === 'setup') {
         $company = pl_setup_company($fixture['actor_id'], $input['setup_input'], $input['key']);
         $journal = ['id' => $company['id']];
+    } elseif ($input['mode'] === 'opening_confirm') {
+        $cutover = pl_confirm_opening($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['preview_id'], $input['hash'], true);
+        $journal = ['id' => $cutover['id']];
+    } elseif ($input['mode'] === 'bank_import') {
+        $statement = pl_bank_import_statement($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['bank_input'], $input['key'], $input['digest']);
+        $journal = ['id' => $statement['id']];
+    } elseif ($input['mode'] === 'bank_complete') {
+        $statement = pl_bank_complete_statement($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['statement_id'], $input['revision'], $input['key']);
+        $journal = ['id' => $statement['id']];
     } elseif ($input['mode'] === 'document_create') {
         $document = pl_save_document($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['document_input']);
         $journal = ['id' => $document['id']];

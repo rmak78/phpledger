@@ -38,6 +38,7 @@ $routes = [
     '/' => ['GET'], '/login' => ['GET', 'POST'], '/logout' => ['POST'], '/start' => ['POST'],
     '/companies' => ['GET'], '/company/select' => ['POST'], '/onboarding' => ['GET', 'POST'],
     '/setup/review' => ['GET', 'POST'], '/transactions' => ['GET'], '/transactions/detail' => ['GET'],
+    '/opening-balances' => ['GET', 'POST'], '/periods' => ['GET', 'POST'], '/bank-reconciliation' => ['GET', 'POST'],
     '/transactions/new' => ['GET'], '/transactions/edit' => ['GET'], '/transactions/save' => ['POST'],
     '/transactions/post' => ['POST'], '/transactions/reverse' => ['POST'],
     '/reports/trial-balance' => ['GET'], '/reports/account' => ['GET'], '/journals/detail' => ['GET'],
@@ -167,7 +168,7 @@ try {
                     $_SESSION['company_id'] = (int) $created['id'];
                     unset($_SESSION['onboarding']);
                     pl_notice($created['is_sample'] ? 'Your separate sample company is ready to explore.' : 'Your business and account template have been saved.');
-                    pl_redirect('/transactions');
+                    pl_redirect($created['setup_status'] === 'opening_required' ? '/opening-balances' : '/transactions');
                 } catch (DomainException $error) {
                     pl_form_failure('/onboarding?step=preview', [], $error->getMessage());
                 }
@@ -185,6 +186,18 @@ try {
     $company = pl_web_context($actorId);
     $companyId = (int) $company['id'];
     $bookId = (int) $company['book_id'];
+    if ($path === '/opening-balances') {
+        require_once dirname(__DIR__) . '/includes/functions/opening_web_functions.php';
+        pl_web_opening($actorId, $companyId, $bookId, $user, $company, $method);
+    }
+    if ($path === '/periods') {
+        require_once dirname(__DIR__) . '/includes/functions/period_web_functions.php';
+        pl_web_periods($actorId, $companyId, $bookId, $user, $company, $method);
+    }
+    if ($path === '/bank-reconciliation') {
+        require_once dirname(__DIR__) . '/includes/functions/reconciliation_web_functions.php';
+        pl_web_reconciliation($actorId, $companyId, $bookId, $user, $company, $method);
+    }
     if ($path === '/pos' || $path === '/pos/checkout' || $path === '/pos/receipt') {
         require_once dirname(__DIR__) . '/includes/functions/pos_functions.php';
         if ($path === '/pos/checkout') {

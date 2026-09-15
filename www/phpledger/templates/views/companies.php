@@ -29,7 +29,7 @@
                     <h2 id="company-<?= pl_e((string) $business['id']) ?>"><?= pl_e((string) $business['name']) ?></h2>
                     <p class="muted"><?= pl_e((string) $business['book_name']) ?> · <?= pl_e((string) $business['currency']) ?></p>
                     <?php if ($business['setup_status'] === 'opening_required'): ?>
-                        <p class="alert">Opening balances need reconciliation. Posting is unavailable until that work is complete; historical imports are coming in a later milestone.</p>
+                        <p class="alert">Opening balances need reconciliation. Open this business and use Opening balances to preview and confirm its cutover before posting.</p>
                     <?php elseif ($business['setup_status'] === 'review_required'): ?>
                         <p class="alert">Review your existing accounts and opening balances before recording more transactions.</p>
                     <?php elseif ($business['is_sample']): ?>

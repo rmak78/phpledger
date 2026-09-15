@@ -2,7 +2,7 @@
 
 Source revision: `{{SOURCE_COMMIT}}`.
 
-This is the first customer preview package. There is no established package-to-package upgrade range and no automatic upgrade from the historical PHP Ledger application. The new migration runner understands the complete `001`–`005` chain. Source-side baseline-001 upgrade tests do not establish compatibility with an arbitrary old installation, customized schema or historical database.
+There is no established package-to-package upgrade range and no automatic upgrade from the historical PHP Ledger application. The new migration runner requires the complete supplied chain, preserving all earlier migration files and checksums. Source-side baseline-001 upgrade tests do not establish compatibility with an arbitrary old installation, customized schema or historical database. Source changes and local validation do not by themselves publish a new package or upgrade a deployed one.
 
 ## Before changing an installation
 
@@ -32,7 +32,7 @@ Before relying on the backup, create a separate empty restoration database and u
 mysql --login-path=phpledger-restore phpledger_restore < /private/backups/phpledger-before-upgrade.sql
 ```
 
-Do not aim that command at the live database. Confirm definitions/data, all five current migration receipts and their checksums, nine current triggers, company scope, source/journal links and balanced totals. Run preflight and sign in on the isolated restoration. Compare a known transaction and its reports with the recorded pre-backup values. A completed SQL import alone is insufficient proof of recovery.
+Do not aim that command at the live database. Confirm definitions/data, all included migration receipts and their checksums, every installed accounting guard trigger, company scope, source/journal links and balanced totals. Run preflight and sign in on the isolated restoration. Compare a known transaction and its reports with the recorded pre-backup values. A completed SQL import alone is insufficient proof of recovery.
 
 ## Apply a reviewed update
 

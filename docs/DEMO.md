@@ -1,5 +1,13 @@
 # Restricted public demo operations
 
+## Website-only publication: 15 September 2026
+
+The approved multi-page website was published at **08:08 UTC (13:08 PKT)** as `website-redesign-20260915-080700`. Its static root was switched independently of the demo. Existing **core-0.1.2-preview-da5ff133e645** demo containers, upstream proxy target, application files and database were preserved. No demo reset or migration was run.
+
+The website SEO plan required `X-Robots-Tag: noindex, nofollow` on `/demo/`; this header was absent in the fresh preflight and was added to the existing proxy location. Existing inherited Alt-Svc/nosniff headers were repeated to preserve Nginx behavior, and upstream CSP/referrer headers remained unchanged. Fresh `/demo/` and `/demo/health` checks returned 200 with the new noindex header; the container identities matched before/after publication. Public sample creation/posting/reset journeys were not rerun by this static release.
+
+The marketing site now uses directory routes, canonical flat-page redirects, a custom 404 and reviewed security/cache headers. Previous website/configuration are backed up under `/var/www/phpledger/data/backups/website-redesign-20260915-080700`. See [current website QA](../www/website/design-qa.md#live-publication-15-september-2026) and [publication receipt](design/website/qa/live-20260915-publication.json). The earlier operational receipts below retain their historical scope.
+
 The user authorized and reconfirmed publication on **14 September 2026**. The [marketing website](https://phpledger.com/) and [restricted public demo](https://phpledger.com/demo/) are now live over HTTPS. The actual **18:00 UTC automatic reset** was observed: old sample data cleared, prior sessions expired, and a clean sample could be started. This remains an accounting/POS preview; the requested reporting/POS improvements and first installable package are separate work. See [validation](VALIDATION.md#hosted-website-and-restricted-demo-publication), [sprint scope](SPRINT-02.md), [architecture](ARCHITECTURE.md), and the [POS limits](POS.md).
 
 ## Release layout and exposure

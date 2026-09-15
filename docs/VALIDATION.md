@@ -1,5 +1,57 @@
 # Foundation validation
 
+## Consolidation checkpoint, 15 September 2026
+
+The owner requested completion and local commits of outstanding work, consolidation of all worktrees, then the module/API/MCP roadmap. The initial inventory found the dirty `website-redesign` branch at `8000e31` and a clean `codex/account-statements` worktree at `2972e57`. The latter contains the newer released core work and module roadmap and must be merged before extension implementation. A fresh pre-merge `composer check` passed 94 tests, 74 PHP lint checks, PHPStan and the sample validator. The website build/check passed 11 HTML documents with zero errors/warnings; all six package-builder tests passed.
+
+The 1,063 untracked root application files matched their archived `legacy/` counterparts byte for byte and were moved out of the active root. Playwright runtime artifacts are ignored. The owner subsequently explicitly requested removal of the legacy application from the repository; history remains the research reference. This checkpoint is local only; no remote publication is authorized by cleanup.
+
+## Website redesign and accounting continuation
+
+**15 September 2026 — local `website-redesign` work, based on `8000e31`.** Completed the unfinished multi-page marketing website and the requested opening balances/cutover → period administration → bank reconciliation sequence. The source remains uncommitted; the earlier dirty website work and unrelated historical/root copies were preserved. No push, public deployment, Wiki edit, release publication, provider call, message sending or real payment occurred.
+
+### Current implementation and changed files
+
+| Group | Added/changed files |
+|---|---|
+| Opening cutover | `www/phpledger/includes/functions/opening_functions.php`, `opening_web_functions.php`; `www/phpledger/templates/views/opening-balances.php`; `www/phpledger/install/migrations/006_opening_cutover.php` |
+| Period administration | `www/phpledger/includes/functions/period_functions.php`, `period_web_functions.php`; `www/phpledger/templates/views/periods.php`; migration `007_period_administration.php` |
+| Bank reconciliation | `www/phpledger/includes/functions/reconciliation_functions.php`, `reconciliation_web_functions.php`; `www/phpledger/templates/views/bank-reconciliation.php`; migrations `008_bank_reconciliation.php`, `009_bank_draft_cancellation.php` |
+| Shared app integration | `www/phpledger/includes/bootstrap.php`; `includes/functions/{ledger,setup,web}_functions.php`; `public/index.php`; `public/assets/app.css`, `app.js`; `templates/layout.php`; views `companies.php`, `help.php`, `journal.php`, `onboarding.php`, `setup-review.php` |
+| Tests and packaging | `tests/opening_test.php`, `period_test.php`, `reconciliation_test.php`, `accounting-http-smoke.py`, `concurrency_worker.php`, `installer_test.php`, `package-builder-test.py`, `run.php`; `tools/package-files.json`, `verify-upgrade.php`, `verify-backup-restore.ps1`; operator templates `resources/release/{README,INSTALL,UPGRADE,RELEASE-NOTES}.md` |
+| Current documentation | `README.md`, `docs/ARCHITECTURE.md`, `docs/DEVELOPMENT.md`, `docs/ROADMAP.md`, this receipt |
+| Website | `www/website/src/**`, `build.mjs`, `check.mjs`, `tools/{prepare-images.py,browser-smoke.cjs,browser-interactions.cjs}`, `README.md`, `design-qa.md`, generated `public/**` pages/assets; `docker/website.conf`; `docs/design/website/{CONTENT,SOURCES}.md` and QA data. Full website inventory/evidence is in [website QA](../www/website/design-qa.md). |
+
+The app uses the existing shared bootstrap, explicit front controller, PHP/MeekroDB services, scoped permissions, CSRF, exact-money helpers and central posting transaction. Opening source/register data posts once; periods serialize with posting; bank reconciliation posts no journals. Preview/confirmation and stale-state checks are server-enforced. The new admin navigation is absent in the public demo and its service mutation guards remain active.
+
+### Executed checks
+
+| Check | Result |
+|---|---|
+| `docker compose --profile test run --rm test composer check` | **94 tests passed, 0 failures**; PHP lint **74 files, 0 failures**; PHPStan passed; seven sample packs/77 events/42 documents/16 items validated and eight invalid sample fixtures rejected. Includes opening/period/bank rollback, current-read and concurrent-retry cases. |
+| `python tests/accounting-http-smoke.py` | **71 HTTP checks passed**: auth/CSRF/scope/viewer denial; opening preview/confirmation and cutover-date rejection; period create/close/reopen and closed-posting rejection; bank import/manual match/unmatch/cancel/corrected reimport/complete and reconciled-date rejection. Final synthetic company/book 13, cancelled statement 5, completed statement 6; bank difference zero and exactly three journals. |
+| Application browser QA | **27 functional assertions + 51 state/viewport checks** at **1440, 768 and 390px**, with no horizontal page overflow, broken images, page JavaScript errors or external requests. Verified retained-input error focus, nonzero AR/AP cutover, journal/source round trip, period create/close/reopen, bank cancellation/reimport/manual matching/completion. [Receipt](../output/playwright/accounting-next/receipt.json) and screenshots are local ignored artifacts. |
+| Website build and static QA | **11 HTML documents, 0 errors/warnings**. All navigation destinations exist. Repeated build produced identical output across 101 public files. |
+| Website browser QA | Nine content routes at **1440, 768 and 320px**, plus 14 interaction checks. Redirects, custom 404, robots/sitemap/llms/RSS, mobile navigation, keyboard dialogs, reduced motion, no-JavaScript links and email draft validation passed. No external page-load requests or sends. Clipboard success was mocked and fallback tested. |
+| JavaScript/Python/package syntax | Applicable website JavaScript and `public/assets/app.js` passed `node --check`; Python image-preparation/HTTP/package scripts compiled. `python tests/package-builder-test.py`: **6 tests passed**, including the explicit runtime service/view/migration allowlist. `git diff --check` passed. |
+| Fresh database installation | All **9 migrations** applied from empty storage in a new randomly named `db_test` database; synthetic user/company creation, central posting, balanced trial balance and migration replay passed. Only that temporary database was removed. |
+| Baseline upgrade | `tools/verify-upgrade.php` passed **001 → 009**, preserving six account identities, posted journal/lines, review-required setup, mapping, report totals and UTC/replay behavior; only its temporary test database was removed. |
+| Backup/restore | `tools/verify-backup-restore.ps1` passed: **23 table definitions/data checksums, 6,088 rows, 29 guard triggers and all 9 migration receipts**, scoped source links and balanced journals. Only its randomly named restoration database was removed. |
+| Local application migration | Preserved a private development backup in ignored `.cache/accounting-backups/`; applied **006–009** successfully to local `phpledger`. Earlier migration checksums and posted records were preserved. |
+
+The first integrated run exposed a test that hardcoded five migration receipts; it now checks the installed chain length. Review also found and fixed old-snapshot cutover/bank decision reads, an inherited website redirect loop, bank CSV instruction overflow at mobile width and absent error-summary focus. The final counts above reflect those fixes, not the initial failures.
+
+### Boundaries and remaining checks
+
+- Migrations: **yes (006–009)**. Schema changed: **yes, local/test only**. Raw secrets exposed: **no**. External/live calls: **no**. Live/production changed: **no**.
+- Read references: repository `AGENTS.md`, `README.md`, `ARCHITECTURE`, `ROADMAP`, historical approved `PLAN`, `DESIGN`, relevant `PRODUCT_BRIEF`/accounting context, `DEVELOPMENT`, website content/design/QA and existing release templates. Google Drive documents: **none listed as required or read**. Browser verification used the Playwright skill.
+- Opening unpaid documents are a reconciled cutover register, not invoice collection, bill settlement or a current operational AR/AP subledger. Credit-note/advance imports, XLSX, detailed historical journals and country/bank-specific adapters remain outside this implementation.
+- Bank matching supports one exact-amount ledger line per bank row. The first baseline requires all earlier cash entries already cleared; unresolved older outstanding items need earlier reconciliation. Completed statements are terminal; corrections use later-dated accounting entries. Draft cancellation retains original data and audit history.
+- Period closing controls posting dates; year-end profit-transfer entries, issued statements and jurisdiction compliance are not provided by that control.
+- Independent accounting/security review, observed participant usability, full screen-reader/zoom/performance/load testing, supported host acceptance and production deployment remain unperformed. Public website/demo and the 0.1.0-preview download were not changed. No new release ZIP was built from the dirty working tree; the existing builder deliberately requires a clean committed source revision.
+
+The remaining sections below preserve earlier validation checkpoints and publication history.
+
 Evidence recorded on **14 September 2026**. Earlier sections are chronological local checkpoints; the [hosted publication receipt](#hosted-website-and-restricted-demo-publication) records the subsequently authorized website/demo launch. These checks do not establish a complete accounting product, approved reporting framework, or stable installable release.
 
 ## Changed-file inventory

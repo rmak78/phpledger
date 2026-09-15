@@ -27,7 +27,7 @@ function pl_require_book_ready(int $companyId): void
     $state = DB::queryFirstField('SELECT setup_status FROM pl_companies WHERE id = %i FOR SHARE', $companyId);
     if ($state !== 'ready') {
         throw new DomainException($state === 'opening_required'
-            ? 'Opening balances and any unpaid invoices or bills must be reconciled before posting. Historical imports are not available in this preview.'
+            ? 'Opening balances and any unpaid invoices or bills must be reconciled through the opening cutover preview before posting.'
             : 'Review the existing chart and opening balances before posting.');
     }
 }

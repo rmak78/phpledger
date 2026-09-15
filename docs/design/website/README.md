@@ -1,6 +1,26 @@
-# Website composition comparison
+# Website design decisions
 
-Three homepage directions prepared on 2026-09-14 for the phpledger.com replacement. The website's goal is to help visitors explore PHP Ledger and begin a pilot conversation. These are generated visual proposals, not working pages or release evidence. The user selected **1, Field Notes**, and its implementation is in progress under `www/website/public`. Final live publication is separately authorized and remains the lead's responsibility after verification.
+## Current selected direction — 15 September 2026
+
+The owner's current selection is **A, Workbench, with B's photo treatment** from the [A/B design canvas](https://claude.ai/artifact/9KEqRSg3TL14tZSZVscuaF). The canvas contains home-page views at 1440 and 390 pixels and a download-page view for each direction. This decision supersedes the earlier Field Notes website selection preserved below.
+
+The approved homepage headline is, verbatim:
+
+> Double-entry accounting that runs on your own PHP and MySQL hosting
+
+Use A's light, centred introduction, primary demo/download actions, large framed product capture and paper footer. Use B's full-width photographic story sections to connect the product to everyday business scenes. Website typography is locally served **Manrope for headings, Poppins for body copy and Inter for figures**. This website decision does not change the application's approved Review Console/Inter design.
+
+The current [homepage source](../../../www/website/src/pages/home.html) already contains the exact headline and selected layout treatment. Use original licensed photographs and actual synthetic application captures; subjects are illustrative and are not presented as customers or endorsers. The task's fresh public check identifies [**v0.1.2-preview**](https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview), published 15 September 2026, as the latest release and **0.1.2-preview** on the live demo. Its downloaded ZIP was checked against its published checksum and GitHub digest; included installation, upgrade and release documents were read to ground current package copy. Existing screenshots retain their actual **0.1.0 development-preview** provenance and synthetic-data labels. The original 0.1.0 news post remains historical. Opening cutover, historical imports, bank reconciliation, AR/AP and tax are outside the verified package; local accounting additions are not presented as shipped capabilities.
+
+Basic on-site SEO is implemented: page metadata and canonical links, social-preview metadata, structured data, robots, sitemap, llms and RSS. Google/Bing verification and indexing submissions, IndexNow setup, social handles/tokens and additional page-specific OG artwork remain pending. The campaign is separately tracked.
+
+The owner explicitly requested that the updated plan and website be **published live** on 15 September 2026. That request supersedes the plan's earlier owner-only publication restriction for this website. Publish the reviewed static site and required website routing/header configuration while preserving the separately hosted `/demo/`. Advertising, social posts, messages, external account setup and the later launch campaign remain separate pending work.
+
+**Publication status:** published at [phpledger.com](https://phpledger.com/) on **15 September 2026, 08:08 UTC (13:08 PKT)** as `website-redesign-20260915-080700`. All 101 static files passed publication verification; all nine pages passed fresh browser checks at 1440, 768, 390 and 320 CSS pixels. Download and roadmap FAQs are complete. Demo entry/health stayed available with the same containers; the planned noindex header was added. See the [website QA report](../../../www/website/design-qa.md#live-publication-15-september-2026) and [publication receipt](qa/live-20260915-publication.json). The reference canvas was read through the browser; local `.dc.html`/PNG exports have not been verified.
+
+## Historical composition comparison — 14 September 2026
+
+Three homepage directions were prepared on 2026-09-14 for the phpledger.com replacement. The website's goal was to help visitors explore PHP Ledger and begin a pilot conversation. These were generated visual proposals, not working pages or release evidence. The user selected **1, Field Notes** at that time. The candidates, original recommendation and refinements below are retained as historical design context; the current A/B selection above is authoritative.
 
 ## Final candidates
 

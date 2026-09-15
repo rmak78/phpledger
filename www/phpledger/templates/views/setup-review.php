@@ -12,7 +12,7 @@ $roleInput = is_array($reviewInput['roles'] ?? null) ? $reviewInput['roles'] : [
         <div class="alert" role="alert" tabindex="-1" data-form-error><h2>Review needs attention</h2><p><?= pl_e((string) $form['message']) ?></p><p>Your selections are preserved below.</p></div>
     <?php endif; ?>
     <?php if ($company['setup_status'] === 'opening_required'): ?>
-        <div class="panel"><h2>Opening balances still need reconciliation</h2><p>This existing business needs its opening balances and unpaid invoices/bills reconciled before transactions can be recorded or posted. Historical imports are not available in this preview.</p><p>This review screen cannot bypass that requirement.</p><a class="button secondary" href="<?= pl_e(pl_url('/help')) ?>">Read about bringing past records</a></div>
+        <div class="panel"><h2>Opening balances still need reconciliation</h2><p>Preview and reconcile this business's opening trial balance and unpaid invoices/bills before recording or posting transactions.</p><a class="button secondary" href="<?= pl_e(pl_url('/opening-balances')) ?>">Review opening cutover</a></div>
     <?php elseif ($company['setup_status'] !== 'review_required'): ?>
         <div class="panel"><h2>Setup review is complete</h2><p>Your current setup does not need the prior-foundation account review.</p><a class="button primary" href="<?= pl_e(pl_url('/transactions')) ?>">Open transactions</a></div>
     <?php elseif (!pl_can_write($company)): ?>

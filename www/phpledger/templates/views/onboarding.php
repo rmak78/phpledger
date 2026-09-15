@@ -35,7 +35,7 @@ $startLabels = ['fresh' => 'Start a new business', 'existing' => 'Bring past rec
                 <label class="checkbox"><input type="radio" name="start_mode" value="fresh"<?= $startMode === 'fresh' ? ' checked' : '' ?>> Start a new business with no prior balances</label>
                 <label class="checkbox"><input type="radio" name="start_mode" value="existing"<?= $startMode === 'existing' ? ' checked' : '' ?>> Bring past records from an existing business</label>
                 <label class="checkbox"><input type="radio" name="start_mode" value="sample"<?= $startMode === 'sample' ? ' checked' : '' ?>> Explore a separate sample company</label>
-                <p class="muted">Past-record imports are not available yet. You can save an existing business setup, but posting stays unavailable until opening balances and unpaid documents are reconciled. Sample setup uses its own fictional business name and records.</p>
+                <p class="muted">For an existing business, save setup and then preview its opening trial balance and unpaid documents. Posting starts after the confirmed cutover day. Sample setup uses its own fictional business name and records.</p>
             </fieldset>
             <div class="field full-width">
                 <label for="business-name">Business name</label>
@@ -80,7 +80,7 @@ $startLabels = ['fresh' => 'Start a new business', 'existing' => 'Bring past rec
                 <div><dt>Fiscal year end</dt><dd><?= pl_e($fiscalYearEnd) ?> <span class="muted">(month-day)</span></dd></div>
             </dl>
             <?php if ($startMode === 'existing'): ?>
-                <div class="alert"><h3>Opening review will remain outstanding</h3><p>This saves your business setup only. Historical imports are not available yet, so receipt/expense entry and posting will stay unavailable until your opening balances and any unpaid documents are reconciled.</p></div>
+                <div class="alert"><h3>Next, review your opening balances</h3><p>This saves your business setup. Then enter or import a balanced trial balance and unpaid invoices/bills, review the preview, and confirm cutover. Receipt/expense entry stays unavailable until that review is complete.</p></div>
             <?php elseif ($startMode === 'sample'): ?>
                 <p class="alert">This creates a clearly marked, separate sample company with fictional receipts, expenses, and saved drafts. Your real companies are not changed.</p>
             <?php else: ?>

@@ -82,7 +82,7 @@ php www/phpledger/install/preflight.php
 
 Run each command only after the previous command succeeds. Preflight checks prerequisites and database/migration state; it does not create tables or accounts. An empty database should be ready for migrations. After migration, preflight should report the schema as current. Retain the command results privately, without credentials.
 
-Keep **all five** migrations `001` through `005`. The runner tracks checksums and safely skips matching applied versions on a repeated run. If it reports an interrupted migration, missing version or checksum mismatch, stop and follow [UPGRADE.md](UPGRADE.md); never erase a receipt to force a retry.
+Keep **every supplied migration**, including earlier applied versions. The runner tracks checksums and safely skips matching applied versions on a repeated run. If it reports an interrupted migration, missing version or checksum mismatch, stop and follow [UPGRADE.md](UPGRADE.md); never erase a receipt to force a retry.
 
 ## 5. Create the initial user
 
@@ -104,7 +104,9 @@ Open the HTTPS hostname and sign in. Confirm that refresh and navigation retain 
 
 `/health` checks database connectivity only; it does not prove that migrations, users or accounting workflows are ready. Run the journey above as well as the CLI checks. Delete no real records to perform acceptance checks.
 
-For a real business, choose the appropriate start date, fiscal year and base currency deliberately. Existing-business onboarding remains blocked pending opening-balance and unpaid-document reconciliation; historical cutover/import tools are not included. Do not bypass that gate by misclassifying an existing business as new.
+For a real business, choose the appropriate start date, fiscal year and base currency deliberately. Existing-business onboarding remains blocked until an owner/accountant previews and confirms its opening trial balance and reconciled unpaid-document register at `/opening-balances`. Cutover is the close of the accounting start date; ordinary transactions start afterward. Use the exact CSV columns shown on screen, or enter account balances manually. Do not bypass that gate by misclassifying an existing business as new. Invoice collection/bill settlement and detailed historical journals remain outside this cutover workflow.
+
+Use `/periods` to create nonoverlapping date ranges and close them with a recorded reason; only the owner can reopen. Use `/bank-reconciliation` for strict statement CSV preview/import, explicit journal-line matching and confirmed reconciliation. The first bank baseline requires all earlier entries cleared and a matching ledger opening. These local workflows do not connect to a bank or make payments.
 
 ## Country suggestion and operation
 

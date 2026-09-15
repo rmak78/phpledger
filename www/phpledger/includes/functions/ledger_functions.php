@@ -202,6 +202,8 @@ function pl_post_journal_locked(int $actorId, int $companyId, int $bookId, array
             }
             return pl_get_journal($actorId, $companyId, $bookId, (int) $existing['id']);
         }
+        pl_opening_assert_posting_allowed($companyId, $bookId, $payload);
+        pl_reconciliation_assert_posting_allowed($companyId, $bookId, $payload);
         $periods = DB::query('SELECT id, status FROM pl_periods WHERE company_id = %i AND book_id = %i AND start_date <= %s AND end_date >= %s FOR UPDATE', $companyId, $bookId, $payload['date'], $payload['date']);
         if (count($periods) !== 1 || $periods[0]['status'] !== 'open') {
             throw new DomainException('The posting date must fall within exactly one open accounting period.');
@@ -235,6 +237,9 @@ function pl_post_journal(int $actorId, int $companyId, int $bookId, array $paylo
     if ($payload['source_type'] === 'reversal') {
         throw new DomainException('Use the linked reversal action to reverse a posted journal.');
     }
+    if ($payload['source_type'] === 'opening_balance') {
+        throw new DomainException('Use the opening preview and confirmation service for opening balances.');
+    }
     return pl_ledger_transaction(fn(): array => pl_post_journal_locked($actorId, $companyId, $bookId, $payload));
 }
 
@@ -261,6 +266,9 @@ function pl_reverse_journal(int $actorId, int $companyId, int $bookId, int $jour
         pl_require_company_access($actorId, $companyId, true);
         $book = pl_ledger_book($companyId, $bookId, true);
         $original = pl_get_journal($actorId, $companyId, $bookId, $journalId);
+        if ($original['source_type'] === 'opening_balance') {
+            throw new DomainException('Use the opening cutover correction action to retain its source and readiness history.');
+        }
         if ($original['reversal_of_id'] !== null) {
             throw new DomainException('A reversal cannot itself be reversed in this foundation. Record a new correcting journal.');
         }

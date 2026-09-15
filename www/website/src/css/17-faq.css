@@ -1,0 +1,11 @@
+.faq details{border-top:1px solid var(--line);padding:18px 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;color:var(--navy);font-family:var(--font-heading);font-weight:700;font-size:18px;min-height:30px;padding-right:32px;position:relative;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:6px;top:10px;width:10px;height:10px;border-right:2px solid var(--navy);border-bottom:2px solid var(--navy);transform:rotate(45deg);transition:transform .15s}
+.faq details[open] summary::after{transform:rotate(-135deg);top:14px}
+.faq details p{font-size:16px;max-width:80ch;margin-top:12px}
+.faq details p+p{margin-top:8px}
+@media(max-width:760px){
+  .faq summary{font-size:16px;line-height:1.45}
+}

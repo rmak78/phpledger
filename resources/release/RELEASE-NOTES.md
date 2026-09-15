@@ -12,6 +12,8 @@ This package is a development preview of the restarted PHP Ledger application. I
 - Company/book-scoped receipts and expenses, drafts, atomic balanced posting, fixed-precision amounts, duplicate protection, linked sources, period locking and reversals.
 - Owner overview, trial balance, balance sheet, profit and loss, and an editable cash scenario. A scenario reflects entered assumptions; it is not a prediction or a statement of cash flows.
 - An illustrative cash POS with catalog search, quantity entry, exact cash/change, an explicit checkout action, receipt and linked accounting entry.
+- Opening balance entry/CSV preview and confirmation, an unpaid-document register reconciled to AR/AP control balances, and owner correction before business activity.
+- Period creation, reasoned close/reopen actions and immutable audit receipts; bank CSV import, explicit matching, outstanding entries and protected completed reconciliations.
 - English screens, supported base-currency choices, regional date/number formatting and local terminal timezone display with UTC event storage.
 
 ## Known limits
@@ -22,13 +24,13 @@ The POS is a cash-sale demonstration of the posting foundation. Stock quantities
 
 Each book has one base currency. Currency choices and formatting do not implement foreign exchange, multi-currency transactions, consolidation or a completed multi-book model. English remains the application language; country metadata does not provide translated screens or localized accounting rules.
 
-Historical CSV imports and cutover tools, opening AR/AP reconciliation, customer invoices, vendor bills, aging reports, bank reconciliation, inventory/stock reports, country tax adapters, offline operation and receipt/document scanning remain future work. Existing-business setup must not be treated as ready for posting until its opening obligations are resolved.
+Detailed historical journal imports, XLSX, customer invoicing and invoice collection, bill settlement, aging, inventory/stock reports, country tax adapters, offline operation and receipt/document scanning remain future work. Opening AR/AP is a reconciled cutover snapshot, not an operational subledger. Credit notes, advance balances and unresolved prior bank outstanding items require a separately reviewed workflow. Existing-business setup remains blocked until opening balances are explicitly confirmed; new transactions must be dated after cutover.
 
 The selected UI is a working preview. Country-specific report layouts and the next POS design are still under review. Passing technical checks does not establish observed usability success, independent accounting acceptance or a completed security review.
 
 ## Installation and compatibility
 
-Use [INSTALL.md](INSTALL.md) for the current CLI installation. Only `www/phpledger/public` may be served. Dependencies and all five migration files are included; the historical root application, development tools, marketing website and hosted-demo scheduler are excluded.
+Use [INSTALL.md](INSTALL.md) for the current CLI installation. Only `www/phpledger/public` may be served. Dependencies and the complete versioned migration chain are included; the historical root application, development tools, marketing website and hosted-demo scheduler are excluded.
 
 The package has no automatic upgrade from the old PHP Ledger database and no established earlier customer-package compatibility range. See [UPGRADE.md](UPGRADE.md) for maintenance and restoration requirements. Keep deployment-specific validation records separate from these feature notes; this document does not claim that your host or data has passed acceptance.
 

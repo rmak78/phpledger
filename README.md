@@ -32,7 +32,9 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 
 **Requirements:** PHP 8.5.x with the BCMath, PDO, PDO MySQL, mbstring and session extensions, MySQL 8.4 with InnoDB, HTTPS and terminal access. Serve only `www/phpledger/public`.
 
-**Not included yet:** receivables and payables, inventory and cost of sales, tax, historical imports, bank reconciliation, multi-book, foreign-currency posting, translations, offline use, card payments, document scanning.
+**Not included in the 0.1.0-preview download:** receivables and payables, inventory and cost of sales, tax, historical imports, bank reconciliation, multi-book, foreign-currency posting, translations, offline use, card payments, document scanning.
+
+**Current local development:** `website-redesign` adds opening trial-balance/CSV cutover with a reconciled unpaid-document register, reasoned period administration, and bank CSV import/matching/reconciliation. These changes are separate from the download above and have not been deployed by this work. Invoice collection/bill settlement, XLSX and detailed historical journals remain future work. See [local setup and workflow contracts](docs/DEVELOPMENT.md#opening-cutover-periods-and-bank-reconciliation) and [current validation](docs/VALIDATION.md#website-redesign-and-accounting-continuation).
 
 ## What the working preview shows
 

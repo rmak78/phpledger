@@ -7,9 +7,9 @@
     <meta name="color-scheme" content="light">
     <title><?= pl_e($title) ?> · PHP Ledger</title>
     <link rel="preload" href="<?= pl_e(pl_url('/assets/fonts/InterVariable.woff2')) ?>" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/app.css', ['v' => '20260914-logo'])) ?>">
+    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/app.css', ['v' => '20260915-accounting'])) ?>">
     <?php if ($view === 'pos'): ?><link rel="stylesheet" href="<?= pl_e(pl_url('/assets/pos.css')) ?>"><script src="<?= pl_e(pl_url('/assets/pos.js')) ?>" defer></script><?php endif; ?>
-    <script src="<?= pl_e(pl_url('/assets/app.js')) ?>" defer></script>
+    <script src="<?= pl_e(pl_url('/assets/app.js', ['v' => '20260915-accounting'])) ?>" defer></script>
 </head>
 <body class="view-<?= pl_e($view) ?>">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -38,8 +38,11 @@
     <span class="context-item"><?= pl_e($company['book_name']) ?></span><span class="context-item"><?= pl_e($company['currency']) ?></span>
     <span class="company-role"><?= pl_e(ucfirst($company['role'])) ?></span>
 </div>
+<?php if (!pl_demo_enabled()): ?>
+<nav class="accounting-nav" aria-label="Book administration"><a href="<?= pl_e(pl_url('/opening-balances')) ?>" <?= $view === 'opening-balances' ? 'aria-current="page"' : '' ?>>Opening balances</a><a href="<?= pl_e(pl_url('/periods')) ?>" <?= $view === 'periods' ? 'aria-current="page"' : '' ?>>Periods</a><a href="<?= pl_e(pl_url('/bank-reconciliation')) ?>" <?= $view === 'bank-reconciliation' ? 'aria-current="page"' : '' ?>>Bank reconciliation</a></nav>
+<?php endif; ?>
 <?php if ($company['setup_status'] !== 'ready'): ?>
-<div class="readiness-banner"><?= pl_icon('info-circle') ?><div><strong><?= $company['setup_status'] === 'opening_required' ? 'Opening balances required.' : 'Review your existing setup.' ?></strong> <?= $company['setup_status'] === 'opening_required' ? 'Opening balances and unpaid documents must be reconciled before recording or posting transactions. Historical cutover follows in a later release.' : 'Confirm account mappings and opening balances before posting new documents.' ?> <?php if ($company['setup_status'] === 'review_required' && pl_can_write($company)): ?><a href="<?= pl_e(pl_url('/setup/review')) ?>">Review setup</a><?php endif; ?></div></div>
+<div class="readiness-banner"><?= pl_icon('info-circle') ?><div><strong><?= $company['setup_status'] === 'opening_required' ? 'Opening balances required.' : 'Review your existing setup.' ?></strong> <?= $company['setup_status'] === 'opening_required' ? 'Reconcile opening balances and unpaid documents before recording or posting transactions.' : 'Confirm account mappings and opening balances before posting new documents.' ?> <?php if (pl_can_write($company)): ?><a href="<?= pl_e(pl_url($company['setup_status'] === 'opening_required' ? '/opening-balances' : '/setup/review')) ?>">Review setup</a><?php endif; ?></div></div>
 <?php endif; ?>
 <?php endif; ?>
 <?php if ($notice): ?><div class="notice" role="status"><?= pl_icon('check') ?><span><?= pl_e($notice) ?></span><button type="button" class="icon-button" data-dismiss aria-label="Dismiss notification"><?= pl_icon('x') ?></button></div><?php endif; ?>

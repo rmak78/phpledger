@@ -1,3 +1,97 @@
+# Website design and publication QA
+
+## Live publication: 15 September 2026
+
+**Published successfully at 08:08 UTC (13:08 PKT)** to [phpledger.com](https://phpledger.com/), static release `website-redesign-20260915-080700`. This current receipt supersedes the local-only publication status in the historical sections below.
+
+The owner's selected **A, Workbench, with B's photo treatment** is live, with the exact homepage H1 **Double-entry accounting that runs on your own PHP and MySQL hosting**. Existing source/layout and licensed images were retained. Before publishing, current package copy was reconciled to verified public **0.1.2-preview**, five download and three roadmap FAQs were added, and a malformed support-select option was repaired so Installation assistance is selectable. Historical 0.1.0 captures and news retain their provenance.
+
+### Fresh evidence
+
+| Check | Executed result |
+|---|---|
+| Website build and static checker | 10 generated pages plus historical credits redirect stub; **zero errors and warnings**. Metadata, internal links/assets, structured data and byte budgets passed. |
+| Source syntax | Node syntax passed for build/check tools and source/generated site JavaScript. Publication helper Python syntax passed. No PHP file changed. |
+| Candidate server configuration | Nginx syntax passed; **16 local route/hash/header/redirect checks passed**, zero failures. |
+| Publication integrity | All **101 static files** passed archive and extracted-host hash verification. Public file bytes/status matched; credits.html correctly served its 301 instead of stub bytes. |
+| Live routes and responsive layout | `/`, `/product/`, `/point-of-sale/`, `/download/`, `/support/`, `/roadmap/`, `/news/`, `/news/0-1-0-preview/`, `/credits/`: **36 checks** at actual **1440, 768, 390 and 320 CSS pixels**, no horizontal overflow or broken loaded images. |
+| Browser console | No errors or warnings in the live route checks. |
+| Visual inspection | Fresh live desktop/mobile homepage, mobile download and desktop photo/product-story views inspected. A light product opening and full-width photographs are present. |
+| Interactions, local browser | Menu open/Escape/focus, enlarged image open/Escape/opener focus, pilot preselection, required-field errors/focus, invalid email/retained values, installation topic selection and FAQ expansion passed. No enquiry was sent. |
+| HTTP behavior | HTTP/www canonical redirects, `/download` directory redirect, `/index.html`, `/credits.html`, crawler files, RSS, custom 404 and private-path rejection passed. Static HTML has CSP and short cache policy; versioned resources have their reviewed cache policy. |
+| Existing demo | `/demo/` and `/demo/health` remained HTTP 200. Container identities and prior response headers were preserved. Added the planned `X-Robots-Tag: noindex, nofollow`; no demo runtime/database/reset action. |
+| Published download | Independently downloaded 0.1.2 ZIP: **1,276,132 bytes**; SHA-256 **8bce5df6be15ad261e13719be2bc199b49011748ec073843d76b087b47b2e495** matches SHA file and GitHub digest. Read its INSTALL, UPGRADE and RELEASE-NOTES. |
+
+Machine-readable evidence: [publication and browser receipt](../../docs/design/website/qa/live-20260915-publication.json). Private preparation and local candidate checks are retained in `.cache/website-redesign-publication/website-redesign-20260915-080700/`. The earlier website/configuration backup is `/var/www/phpledger/data/backups/website-redesign-20260915-080700`; previous static release `website-20260915-001433` remains available. The ignored existing-hosting helper supports `python .cache/publish-website-redesign.py --rollback website-redesign-20260915-080700`, with a current-configuration hash guard.
+
+### Files and boundaries
+
+Current source edits: `src/site.json`; home, product, download, support, roadmap, news and historical-news page sources; `src/static/llms.txt`; corresponding generated HTML/llms and static-check receipt. Published output includes the complete existing redesign's 101 files. Documentation updates: supplied Claude plan, website design/content records, website README/QA, repository roadmap, demo operations and publication receipt. The ignored publication helper is local operator tooling. No commit or push was made; unrelated dirty accounting files were preserved.
+
+References read: supplied Claude plan and A/B canvas through the browser; repository AGENTS/README/architecture/roadmap; design, content, photo provenance and deployment records; current GitHub release and packaged guides. **Google Drive documents: none.**
+
+**Migrations: no. Schema changed: no. Raw secrets exposed: no. External/live calls: yes (reference/release reads, authorized static publication and verification). Live/production changed: yes (static website and its Nginx configuration, including the demo noindex header). Application/database changed: no.**
+
+The OS mail application/send path, real clipboard write, exact 200% browser zoom, screen-reader sessions, performance/Core Web Vitals, participant usability and independent accounting/accessibility review were not tested. Accounting/fresh-install regressions were not rerun because this release contains only the static website and routing/header changes. Search-console verification/submissions, IndexNow, social channels/campaign and further page-specific social artwork remain pending; publication does not establish search indexing or marketing results.
+
+## Historical local redesign completion: 15 September 2026
+
+This section supersedes the older website baseline below. The existing Claude changes were preserved and completed on `website-redesign`; all work was local.
+
+## Completed scope
+
+- Added product, POS, download, support, roadmap, news and versioned 0.1.0-preview release pages to the existing generator.
+- Connected the shared navigation/footer and generated nine sitemap URLs and a one-item RSS feed. Missing navigation destinations now fail the static checker.
+- Repaired credits styling and completed photograph/font provenance. Preserved all supplied original images and branding.
+- Corrected the Nginx homepage redirect loop, narrow-screen grid overflow, screenshot frame sizing and actual image dimensions.
+- Completed the email-draft support flow: required/email validation, retained input, pilot deep-link selection including same-page hash changes, selected-copy fallback and a no-JavaScript email path.
+- Preserved legacy homepage fragments and native image-dialog keyboard behavior.
+
+## Executed validation
+
+| Check | Result |
+|---|---|
+| `node www/website/build.mjs --check` | 10 generated pages + one old credits redirect stub; 0 errors and 0 warnings. |
+| Browser routes at 1440, 768 and 320 CSS pixels | All nine content pages returned 200; 27 width/route checks found no horizontal overflow or missing images. |
+| Page requests and scripts | No page JavaScript errors or external page-load requests during the route checks. The deliberate missing-page request produced the expected browser 404 network entry. |
+| Redirects and metadata files | `/index.html` and `/credits.html` returned 301 to the correct local destinations. Robots, sitemap, llms and RSS returned 200 with security headers. |
+| Missing URL | HTTP 404 with the custom “This page does not exist” heading. |
+| Keyboard and form interactions | 14 checks passed: mobile menu/Escape/focus, required errors/focus, email correction, draft copy, fallback selection, image dialog/viewport/focus return, reduced motion, no-JS navigation/email/mobile fit. |
+| Clipboard scope | Success path used a browser-local mock to verify exact draft text; unavailable API exercised the real selected-preview fallback. No user's clipboard was overwritten. |
+| Nginx | `docker compose exec -T website nginx -t` passed; local-only reload applied the reviewed static config. |
+| Asset and source checks | Local references, metadata, structured-data parsing, CSS resource rules and page budgets passed the build checker. |
+| Source syntax | Node syntax checks passed for build/check tools, source and generated website JavaScript and both browser QA scripts. Python AST parsing passed for the inherited image-preparation tool. |
+| Repeatability | A repeated build produced identical SHA-256 values for all 101 public files. |
+
+Results: [route/HTTP receipt](../../docs/design/website/qa/redesign-browser-checks.json), [interaction receipt](../../docs/design/website/qa/redesign-interaction-checks.json), [static report](../../docs/design/website/qa/static-checks.json).
+
+Inspected screenshots: [desktop home](../../docs/design/website/qa/redesign-home-1440.png), [tablet product](../../docs/design/website/qa/redesign-product-768.png), [320px support](../../docs/design/website/qa/redesign-support-320.png), [320px credits](../../docs/design/website/qa/redesign-credits-320.png), [support form/fallback](../../docs/design/website/qa/redesign-support-form-320.png).
+
+Repeat browser checks with a dedicated session:
+
+```sh
+npx --no-install --package @playwright/cli playwright-cli -s=phpledger-website open http://127.0.0.1:18201/
+npx --no-install --package @playwright/cli playwright-cli -s=phpledger-website run-code --filename www/website/tools/browser-smoke.cjs
+npx --no-install --package @playwright/cli playwright-cli -s=phpledger-website run-code --filename www/website/tools/browser-interactions.cjs
+```
+
+On Windows use `npx.cmd`. The Chromium route check disables browser caching so existing short-lived HTML caching cannot mix earlier and current builds. Inspect the returned `errors` and `failed` arrays as well as the CLI exit code.
+
+## Limits and boundaries
+
+The OS email-client launch/send path, a real OS clipboard write, exact 200% zoom, screen-reader sessions, timed performance/Core Web Vitals, independent accessibility/accounting review and observed user sessions were not run. Desktop/tablet/mobile screenshots and automated checks do not establish those outcomes.
+
+External URLs and the published ZIP digest match the local release validation receipt and supplied configuration; they were not re-downloaded or independently live-verified in this completion work. Public `/demo/` is a separate routing/application contract, not served or revalidated by this static service.
+
+References read: repository AGENTS.md, README.md, ARCHITECTURE.md, ROADMAP.md, DESIGN.md, website composition/content/source records, package INSTALL.md template and the local PREVIEW-0.1.0-VALIDATION.md release receipt. Google Drive documents: none.
+
+Changed files: website source pages/CSS/JavaScript, checker, browser QA tools and generated public HTML/CSS/JavaScript/sitemap/RSS; website README/QA, source/content records and QA receipts/screenshots; `docker/website.conf`. Existing Claude image assets/source originals were retained.
+
+Migrations: no. Schema changed: no. Raw secrets exposed: no. External/live calls made by this completion work: no. Live/production changed: no. Only the loopback static website service was reloaded.
+
+---
+
+## Historical website and application presentation QA
 # Website and application presentation QA
 
 Date: 2026-09-14. Local development baseline; publication is held while the user's report/POS critique is researched. Earlier composition selection does not establish acceptance of the current product screens.

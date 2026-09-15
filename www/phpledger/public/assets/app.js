@@ -1,6 +1,9 @@
 'use strict';
 
 // Server-rendered routes and forms remain usable without JavaScript.
+// After a rejected submission, move keyboard focus to the preserved error summary.
+document.querySelector('[data-form-error]')?.focus();
+
 document.querySelectorAll('[data-dismiss]').forEach(button => {
     button.addEventListener('click', () => button.closest('.notice')?.remove());
 });

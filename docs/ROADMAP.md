@@ -1,5 +1,23 @@
 # Revival roadmap
 
+## Website publication: 15 September 2026
+
+The owner selected **A, Workbench, with B's photo treatment** and the headline **Double-entry accounting that runs on your own PHP and MySQL hosting**, then explicitly authorized live publication. The multi-page marketing site was published as `website-redesign-20260915-080700` at **08:08 UTC (13:08 PKT)**. Current download copy follows the verified public **0.1.2-preview** package. Earlier statements below about unavailable downloads or the Field Notes website are historical snapshots.
+
+All 101 static files passed publication verification, and the nine content pages passed 36 fresh live browser route/width checks. Existing demo containers, application and database were preserved; the planned noindex response header was added. The local accounting continuation below remains separate from this website release. See [website QA](../www/website/design-qa.md#live-publication-15-september-2026). Search-console setup/submissions, social channels, advertising and the wider launch campaign remain pending.
+
+## Local continuation: opening cutover → periods → bank reconciliation
+
+On 15 September 2026, the user requested completion of the unfinished `website-redesign` branch and the next accounting sequence. The local implementation now includes:
+
+1. **Opening balances/cutover:** manual account balances or strict CSV, a saved immutable preview, source-reference and unpaid-document validation, explicit confirmation, one balanced journal through the central posting service, and a retained AR/AP opening-document register. Cutover is the close of the company's accounting start date; ordinary posting starts afterward. Owner correction can reverse and restart before business activity begins.
+2. **Period administration:** create nonoverlapping ranges, close with a reason, and owner-only reopening. Book locking serializes changes with posting; revisions, durable retry receipts and immutable action history preserve the decision.
+3. **Bank reconciliation:** strict CSV preview/import, an explicitly confirmed first cleared baseline, explicit exact-amount matching, outstanding ledger entries, consecutive statements, completion totals, protection against backdated changes to a reconciled account, and audited cancellation/reimport of mistaken unfinished statements.
+
+The website's missing destinations, navigation and local server configuration are complete in the preview. These source changes are **local and uncommitted**; this task does not update the public website/demo, downloadable preview or Wiki. [Development](DEVELOPMENT.md#opening-cutover-periods-and-bank-reconciliation) documents workflow contracts; [Validation](VALIDATION.md#website-redesign-and-accounting-continuation) records executed checks and remaining gates. The earlier sprint snapshots below retain their historical scope.
+
+Remaining accounting scope includes full customer/vendor lifecycle and settlements, credit-note/advance imports, XLSX and detailed historical journals, bank-specific export adapters, inventory/COGS/tax, reviewed year-end closing entries and jurisdiction-qualified reports. This implementation does not assert accounting compliance or pilot readiness.
+
 This is the approved staged direction and its evidence gates. The foundation and [Sprint 02](SPRINT-02.md) have technical evidence for the browser accounting journey, reports, cash scenario, sample POS, and restricted demo backend. The replacement website and isolated public demo went live on 14 September 2026, alongside the GitHub README, branding and Wiki. [Sprint 03](https://github.com/rmak78/phpledger/milestone/4) tracks the first installable preview; no new-foundation package has been released yet. Later stages are not complete or funded merely because they appear here. Dates follow validated scope, team capacity, and funding.
 
 The user's attached [approved plan](PLAN.md) is retained unchanged as the historical planning snapshot. Its "Review status" predates implementation. This roadmap records the future path and current milestone boundaries; new validation evidence belongs with the current implementation report. The original seed brief supplies later regional/industry ambitions, and the subsequent import request adds the historical-data migration path.

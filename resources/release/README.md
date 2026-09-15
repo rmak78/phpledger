@@ -20,9 +20,10 @@ The package needs PHP **8.5.x**, MySQL **8.4**, HTTPS and command-line access. P
 - Receipt/expense drafts, balanced posting, durable source references, duplicate protection, period controls and linked reversals.
 - An owner overview, trial balance, balance sheet, profit and loss, and a cash scenario using editable assumptions.
 - An illustrative cash-sale POS with a sample catalog, receipt and accounting entry.
+- Opening trial-balance/CSV cutover with reconciled unpaid-document evidence, period administration, and bank statement CSV import/matching/reconciliation.
 - English screens, a choice of supported base currencies, regional formatting and terminal timezone display. Each book uses one currency.
 
-Historical imports, invoice/bill workflows, receivables/payables aging, stock control, country tax adapters, foreign-exchange accounting, additional accounting books and document scanning are future work. POS currently has no stock/COGS, tax, credit-sale or payment-provider integration. See [RELEASE-NOTES.md](RELEASE-NOTES.md) for the boundaries.
+Detailed historical journals, XLSX, invoice/bill settlement workflows, receivables/payables aging, stock control, country tax adapters, foreign-exchange accounting, additional accounting books and document scanning are future work. POS currently has no stock/COGS, tax, credit-sale or payment-provider integration. See [RELEASE-NOTES.md](RELEASE-NOTES.md) for the boundaries.
 
 ## Package and operations
 

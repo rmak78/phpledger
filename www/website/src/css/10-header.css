@@ -1,0 +1,31 @@
+.site-header{min-height:84px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 max(32px,calc((100vw - var(--wide))/2));border-bottom:1px solid var(--line);background:var(--white);position:relative;z-index:5}
+.brand{display:block;width:214px;flex:none}
+.brand img{width:100%;height:auto}
+/* Same artwork as the application; crop only its surrounding white space. */
+.brand-frame{display:block;position:relative;width:100%;aspect-ratio:1620/475;overflow:hidden}
+.brand-frame>img{position:absolute;max-width:none;min-width:0;width:134.075%;height:auto;left:-17.593%;top:-26.316%}
+.site-header nav{display:flex;align-items:center;gap:30px}
+.site-header nav>a:not(.button){font-family:var(--font-heading);font-weight:600;font-size:15px;color:var(--navy);padding:6px 0;border-bottom:2px solid transparent}
+.site-header nav>a:not(.button):hover{color:var(--blue);text-decoration:none}
+.site-header nav>a[aria-current=page]{border-bottom-color:var(--blue)}
+.menu-toggle{display:none;align-items:center;gap:8px;border:1px solid var(--line);border-radius:var(--radius-s);background:var(--white);padding:9px 12px;color:var(--navy);font-family:var(--font-heading);font-weight:600;font-size:14px;min-height:44px}
+.menu-toggle svg{width:20px;height:20px}
+@media(max-width:1000px){
+  .site-header{min-height:72px;padding-inline:20px}
+  .brand{width:180px}
+  .menu-toggle{display:flex}
+  .site-header nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--white);box-shadow:0 10px 15px rgba(12,32,82,.08);padding:12px 20px 24px;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}
+  .site-header nav.is-open{display:flex}
+  .site-header nav>a:not(.button){font-size:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .site-header nav>a[aria-current=page]{border-bottom-color:var(--line);color:var(--blue)}
+  .site-header nav .button{margin-top:14px;justify-content:center}
+}
+@media(max-width:400px){
+  .brand{width:160px}
+  .menu-toggle{padding:8px 10px}
+}
+@media(max-width:1000px){
+  html:not(.js-ready) .site-header{flex-wrap:wrap;padding-block:12px}
+  html:not(.js-ready) .menu-toggle{display:none}
+  html:not(.js-ready) .site-header nav{display:flex;position:static;width:100%;box-shadow:none;border:0;padding:0}
+}

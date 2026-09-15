@@ -16,10 +16,11 @@ if (preg_match('/^document:([1-9][0-9]*)$/D', (string) $journal['source_referenc
         <dl class="form-grid">
             <div><dt>Source type</dt><dd><?= pl_e(ucfirst((string) $journal['source_type'])) ?></dd></div>
             <div><dt>Source reference</dt><dd><?= pl_e((string) $journal['source_reference']) ?></dd></div>
-            <?php if (isset($journal['created_at'])): ?><div><dt>Recorded at</dt><dd><time datetime="<?= pl_e(str_replace(' ', 'T', (string) $journal['created_at']) . 'Z') ?>" data-local-time><?= pl_e((string) $journal['created_at']) ?> UTC</time></dd></div><?php endif; ?>
+            <div><dt>Posted at</dt><dd><time datetime="<?= pl_e(str_replace(' ', 'T', (string) $journal['posted_at']) . 'Z') ?>" data-local-time><?= pl_e((string) $journal['posted_at']) ?> UTC</time></dd></div>
         </dl>
         <div class="actions">
             <?php if ($documentSource !== null): ?><a class="button secondary" href="<?= pl_e(pl_url('/transactions/detail', ['id' => $documentSource])) ?>">View source transaction</a><?php endif; ?>
+            <?php if ($journal['source_type'] === 'opening_balance'): ?><a class="button secondary" href="<?= pl_e(pl_url('/opening-balances')) ?>">View opening cutover</a><?php endif; ?>
             <?php if ($journal['reversal_of_id'] !== null): ?><a class="button secondary" href="<?= pl_e(pl_url('/journals/detail', ['id' => $journal['reversal_of_id']])) ?>">View original journal</a><?php endif; ?>
         </div>
         <?php if ($journal['reversal_of_id'] !== null): ?><p class="badge">Linked reversal</p><?php endif; ?>
