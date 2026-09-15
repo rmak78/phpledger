@@ -26,6 +26,6 @@ The extracted 0.2.0 candidate's generated `vendor/composer/platform_check.php:7`
 
 ## Stop rule and remaining gate
 
-The [decision task](CODEX-PROMPT-2026-09-15.md) says: “If the PHP 8.2 audit finds code that cannot run on 8.2, list each occurrence with file and line in `docs/strategy/PHP-8.2-AUDIT.md` and stop; do not refactor in this task.” The locked dependency prevents a supported 8.2 installation, so the PHP-floor configuration group stops here. Licence/CLA and product documentation are independent changes.
+The owner-supplied local decision task, `docs/strategy/CODEX-PROMPT-2026-09-15.md`, says: “If the PHP 8.2 audit finds code that cannot run on 8.2, list each occurrence with file and line in `docs/strategy/PHP-8.2-AUDIT.md` and stop; do not refactor in this task.” The locked dependency prevents a supported 8.2 installation, so the PHP-floor configuration group stops here. Licence/CLA and product documentation are independent changes. The supplied strategy files are preserved separately from this implementation's commits.
 
 No unsupported project syntax was found; the concrete obstacle is the installed dependency contract plus existing runtime enforcement. Fresh installation, upgrade, financial/access/connection suites and browser checks on PHP 8.2/8.3/8.4 remain unrun. README and INSTALL continue to state the actual PHP 8.5 requirement and identify 8.2 as the target until those checks pass.

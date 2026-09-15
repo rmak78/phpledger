@@ -1,6 +1,6 @@
 # Browser installer plan
 
-Status: planned, not implemented. Owner requested a WordPress-style installer on 15 September 2026. Design can proceed alongside the current read-access work; implement it immediately after controlled commands and before optional AR/AP. The installer is an adoption milestone, not a technical dependency of those commands. Existing CLI installation remains available.
+Status: planned, not implemented. Owner requested a WordPress-style installer on 15 September 2026. The evening strategy decision supersedes its former placement: design may proceed alongside read access, while packaging distribution and the updater form the named adoption milestone immediately after AP. Coordinate the browser wizard there. The installer-creates-a-customer-website idea is parked. Existing CLI installation remains available.
 
 ## Intended experience
 
@@ -28,7 +28,7 @@ An operator downloads the complete release ZIP, unpacks it and points the HTTPS 
 
 ## Supported profile and acceptance
 
-Start with the current package profile: PHP 8.5.x; BCMath, PDO/PDO MySQL, mbstring, JSON and sessions; MySQL 8.4/InnoDB with the required collation; HTTPS and the exact public document root. MariaDB and arbitrary shared-hosting configurations are not implicitly supported.
+Start with the current package profile: PHP 8.5.x; BCMath, PDO/PDO MySQL, mbstring, JSON and sessions; MySQL 8.4/InnoDB with the required collation; HTTPS and the exact public document root. PHP 8.2 is the approved future floor, subject to the [dependency and runtime audit gate](strategy/PHP-8.2-AUDIT.md). MariaDB and arbitrary shared-hosting configurations are not implicitly supported.
 
 Verify fresh installation on Apache/PHP-FPM and Nginx/PHP-FPM hosting profiles where available, including a representative hosting-panel setup. Test missing extensions, wrong credentials, insufficient grants, wrong/nonempty database, unwritable configuration, interrupted migration, concurrent installation, CSRF, ownership failure, duplicate submission and access after completion. Confirm no private files can be downloaded. Compare CLI and browser-installed schemas/receipts and run existing scoped posting, report, permission and recovery checks against synthetic data.
 
@@ -37,10 +37,10 @@ Check the six-step experience on desktop, tablet and mobile. Have a person unfam
 ## Delivery sequence and changes
 
 1. Record the host/grant/ownership contract and screen flow while API/MCP reads are in progress.
-2. Complete the existing read-access and controlled-command milestones.
-3. Implement the shared installer service and browser journey, test failure/recovery boundaries and validate supported hosts.
-4. Publish an evaluation package with updated INSTALL/UPGRADE instructions, README, Wiki, website and installation evidence.
-5. Continue optional AR/AP in the existing order.
+2. Complete read access, AR and AP in that order.
+3. Deliver the distribution/updater adoption milestone, including the shared installer service and browser journey; test failure/recovery boundaries and validate supported hosts.
+4. Under release authorization, publish an evaluation package with updated INSTALL/UPGRADE instructions, README, Wiki, website and installation evidence.
+5. Continue Pakistan tax/FBR DI, inventory, shop POS and e-commerce/storefront; controlled API/MCP commands follow e-commerce.
 
 Expected implementation areas: shared bootstrap/config handling, existing install/preflight/migrate/create-admin services, a guarded installer controller/view, configuration persistence and release docs. No new accounting schema or migration content is proposed for the wizard itself; installation executes the existing migration chain. An additional installation-state schema is not assumed.
 

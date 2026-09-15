@@ -1,6 +1,6 @@
 # Licensing policy
 
-Owner decision: 15 September 2026. Applies to the current development line from the AGPL adoption commit forward. See [the authoritative decision register, section D](strategy/DECISION-REGISTER.md#d-decisions-taken-by-the-owner-15-september-2026-evening).
+Owner decision: 15 September 2026. Applies to the current development line from the AGPL adoption commit forward. The owner-supplied local reference is `docs/strategy/DECISION-REGISTER.md`, section D; those supplied strategy files are preserved separately from this implementation's commits.
 
 ## The accounting core remains open source
 

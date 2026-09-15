@@ -2,7 +2,7 @@
 
 ## Offer and public website
 
-PHP Ledger's proposed offer is open-source accounting software with optional defined installation assistance, training, and support on customer-owned hosting. All product modules remain open source. Confirm the project license before presenting that policy as a completed legal release.
+PHP Ledger offers an enduring AGPL-3.0-or-later accounting core, a separate commercial licence for use outside AGPL terms, and optional defined installation, hosting/relay, training and support services. [Licensing policy](LICENSING-POLICY.md) governs the current open-source core/POS line, existing MIT releases and advance declaration of future commercial modules. Native desktop/Android clients and a consultant edition are commercial candidates, not shipped paid features. Self-hosted core use for one's own business stays free, without licence keys or licensing-server calls.
 
 Prepare phpledger.com locally around three paths: try/install, get support, and contribute/support development. Include the product story, actual demonstration, current capabilities/limitations, roadmap, documentation, contributor guidance, and pilot/funding-interest registration. Confirm website source, hosting ownership, current routes, and HTTPS behavior before planning the live replacement. Preserve useful URLs where practical.
 
@@ -28,7 +28,9 @@ Cost one measurable next release. Leave amounts unpriced until vendor quotes, ac
 | Project website/demo infrastructure | Hosting, domain, storage, backups, monitoring | TBD | TBD | TBD |
 | UI/UX and user testing | Design scope, prototype rounds, research sessions | TBD | TBD | TBD |
 | Development capacity | Bounded deliverables, availability, rate | TBD | TBD | TBD |
-| Accounting review | Worked cases, report/sign-off scope, review rounds | TBD | TBD | TBD |
+| Qualified accounting reviewer | Worked cases, equity/AOP classification, jurisdiction scope, review/sign-off rounds | TBD | TBD | TBD |
+| Trademark registration | Pakistan IPO first; professional advice, searches/filings and any later jurisdictions | TBD | TBD | TBD |
+| Future FBR licensed-integrator application | BixiSoft company eligibility, legal/accounting preparation and application costs after the client is proven; no product dependency | TBD | TBD | TBD |
 | Security and quality review | Threat/access review, tests, remediation allowance | TBD | TBD | TBD |
 | Documentation and support preparation | Install/upgrade guides, support intake/training | TBD | TBD | TBD |
 | Funding and reward fulfillment | Verified platform/payment fees, reward costs | TBD | TBD | TBD |
@@ -46,6 +48,6 @@ State the measurable funded outcome, expected limitations, delivery checkpoints,
 
 ## Support model and ownership
 
-Define support packages by setup tasks, supported environments, training, troubleshooting, response expectations, and exclusions. Price only after estimating support effort and capacity. Do not promise lifetime support, unlimited customization, guaranteed regulatory coverage, or exclusive product modules.
+Define support packages by setup tasks, supported environments, training, troubleshooting, response expectations, and exclusions. Price only after estimating support effort and capacity. Do not promise lifetime support, unlimited customisation or guaranteed regulatory coverage. Any future commercial module must be declared by name and terms before release under the licensing policy; no proprietary module is declared by this budget.
 
 The product owner approves priorities, expenditure, recipient arrangements, and launch commitments. Technical leadership owns installation reliability, designers own the experience system, and accounting reviewers own financial validation. Roles can be part-time, but their effort must be budgeted.

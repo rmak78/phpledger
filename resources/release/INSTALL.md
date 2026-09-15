@@ -1,5 +1,7 @@
 # Install PHP Ledger {{VERSION}}
 
+> PHP 8.2 is the approved future floor. The current dependency audit is blocked, so this candidate still requires PHP 8.5.x. Do not bypass the runtime or Composer platform checks; the 8.2/8.3/8.4 support matrix has not passed.
+
 Source revision: `{{SOURCE_COMMIT}}`. This guide installs the new preview into an **empty, dedicated database**. For any existing database, first read [UPGRADE.md](UPGRADE.md). Never run SQL dumps from the historical application against this database.
 
 ## 1. Prepare the host

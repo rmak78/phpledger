@@ -34,7 +34,13 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 
 **Not included in the 0.1.5-preview download:** receivables and payables, inventory and cost of sales, tax, detailed historical imports, multi-book, foreign-currency posting, translations, offline use, card payments, document scanning.
 
-**0.1.5-preview scope:** opening trial-balance/CSV cutover, a reconciled unpaid-document register, reasoned periods, bank CSV matching/reconciliation, core CSV exports and owner-controlled POS modules. Open **Reports → Account ledger** for opening, debit, credit, running and closing balances; mobile entries display the balance beside each movement. Ordinary companies start with optional POS disabled. API/MCP reads are next, followed by controlled commands and optional AR/AP. Customer/vendor subledgers, reviewed financial-statement packages, XLSX and detailed historical journals remain unfinished. See [core completion evidence](docs/repository/sprint-05/CORE-COMPLETION.md), [module contracts and validation](docs/repository/sprint-05/MODULE-FOUNDATION.md), and [local workflow guidance](docs/DEVELOPMENT.md#opening-cutover-periods-and-bank-reconciliation).
+**0.1.5-preview scope:** opening trial-balance/CSV cutover, a reconciled unpaid-document register, reasoned periods, bank CSV matching/reconciliation, core CSV exports and owner-controlled POS modules. Open **Reports → Account ledger** for opening, debit, credit, running and closing balances; mobile entries display the balance beside each movement. Ordinary companies start with optional POS disabled. API/MCP reads are in local verification; AR and AP follow. Controlled commands are sequenced after e-commerce/storefront. Customer/vendor subledgers, reviewed financial-statement packages, XLSX and detailed historical journals remain unfinished. See [core completion evidence](docs/repository/sprint-05/CORE-COMPLETION.md), [module contracts and validation](docs/repository/sprint-05/MODULE-FOUNDATION.md), and [local workflow guidance](docs/DEVELOPMENT.md#opening-cutover-periods-and-bank-reconciliation).
+
+## Who it is for
+
+The primary audience is sales-tax-registered SMEs, sole traders, AOPs and Pvt Ltd companies in Pakistan. Accountants, tax consultants and software houses often operate books for several clients; the owner at the counter is phone-first. The informal kiryana tier is not the target. Real-time owner's equity and AOP partners' capital, profit-sharing ratios and drawings are the headline reporting direction, with partner-specific implementation and accounting review still pending.
+
+The approved future PHP floor is **8.2**. The [audit found an incompatible locked dependency](docs/strategy/PHP-8.2-AUDIT.md), so the current verified requirement remains **PHP 8.5.x** until dependency resolution and the 8.2/8.3/8.4 matrix pass. Urdu, then Arabic and RTL, queued offline drafts, FBR DI, native clients and the resequenced modules are planned; this decision update ships none of them.
 
 ## What the working preview shows
 
@@ -90,7 +96,7 @@ Developers can work with the modern source using the [local development guide](d
 
 The current preview is English and uses one base currency per book. Choose **USD, EUR, GBP, PKR, INR, MYR, BDT, LKR, NPR or SGD**. Event times are stored in UTC and shown in the terminal's timezone; accounting dates keep their meaning.
 
-Pakistan is first for accounting-framework research, followed by the UK and UAE. Currency selection does not activate country accounting or tax rules. Reviewed translations, flexible date/number formats and fixed, fetched or manually overridden exchange rates are part of the future path. [Countries and currencies →](https://github.com/rmak78/phpledger/wiki/Countries-and-Currencies)
+Pakistan is first for accounting-framework research, followed by UAE, Saudi Arabia and Oman, then Singapore, Malaysia, Sri Lanka and Bangladesh. Currency selection does not activate country accounting or tax rules. Reviewed translations, flexible date/number formats and fixed, fetched or manually overridden exchange rates are part of the future path. [Countries and currencies →](https://github.com/rmak78/phpledger/wiki/Countries-and-Currencies)
 
 Early [tax research](docs/tax/README.md) covers eight countries and seven business types. Its 81 candidate regimes are **disabled and unreviewed**; they do not calculate taxes or establish eligibility. The [accounting rule register](docs/accounting/CORE_RULE_REGISTER.md) connects the core's controls with ICAP, ICMAP and ACCA guidance and records the remaining review gates.
 
@@ -103,8 +109,8 @@ Release **0.2.0-preview** is being verified locally: scoped read API/MCP, existi
 | Next | Outcome |
 |---|---|
 | **Complete the accounting core** | Statements, chart management and general journals are in this preview. Next: reviewed opening balances/imports, fiscal-period administration, bank reconciliation and supported reports. |
-| **Extension and integration foundation** | Optional-module contracts and lifecycle, then a versioned business API and MCP access using the same accounting services and permissions. These interfaces are planned. |
-| **Optional business modules** | AR → AP → purchasing/inventory → reviewed Pakistan tax → shop POS → restaurant POS → distribution and specialist modules. Required tax support precedes affected production use. |
+| **Extension and integration foundation** | Optional-module contracts and lifecycle are implemented. The local 0.2.0 candidate adds read API/MCP using the same accounting services and permissions; named-client and hosted release gates remain open. |
+| **Optional business modules** | AR → AP → distribution/updater tooling → reviewed Pakistan tax/FBR DI → purchasing/inventory → shop POS → e-commerce/storefront → controlled API/MCP commands → restaurant → distribution and specialists. Required tax support precedes affected production use. |
 
 The core must work independently of add-ons. Shop and restaurant interfaces will share checkout and accounting services while providing their own operational workflows. Qualified accounting review, observed usability and an explicit supported scope remain release gates. [Module build order and completion gates →](docs/MODULE-ROADMAP.md)
 
