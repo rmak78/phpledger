@@ -14,7 +14,7 @@ The most valuable early contributions connect a real business task to a clear, t
 
 Use synthetic records in public issues and examples. Do not include private customer data or credentials. Preserve third-party notices and contribute original material or material whose reuse terms permit it.
 
-The [public repository](https://github.com/rmak78/phpledger) contains modern source under `www/phpledger`, with the historical application preserved under `legacy/`. Follow the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md), and use [Issues](https://github.com/rmak78/phpledger/issues) to discuss a bounded proposal. The first installable package remains in preparation.
+The [public repository](https://github.com/rmak78/phpledger) contains modern source under `www/phpledger`, with the historical application preserved under `legacy/`. Follow the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md), and use [Issues](https://github.com/rmak78/phpledger/issues) to discuss a bounded proposal. The [foundation evaluation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) is available; supported-pilot review remains open.
 
 New project-owned code and documentation use the [MIT License](https://github.com/rmak78/phpledger/blob/master/LICENSE). Preserve the [separate scope and notices](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) for historical code, dependencies and assets. The MIT grant does not relicense legacy contributions or company marks.
 
@@ -28,7 +28,7 @@ For project, pilot or support enquiries:
 - **LinkedIn:** [Rana Mansoor Akbar Khan](https://pk.linkedin.com/in/rmak78)
 - **Location:** Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan
 
-**Supporting partners:** BixiTech, BixiSoft and Agency75. These are project-support identities, not customer testimonials or accounting certifications.
+**Supporting partners:** BixiTech, BixiSoft, BrownBag and Agency75. These are project-support identities, not customer testimonials or accounting certifications.
 
 ## Supporting development
 

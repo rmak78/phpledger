@@ -1,6 +1,6 @@
 # Local revival development
 
-These instructions apply to the modern source containing `compose.yaml`, `composer.json` and `www/phpledger`. The published repository preserves the historical application under `legacy/`; it is not this runtime. Use the public [Wiki](https://github.com/rmak78/phpledger/wiki) for visitor documentation and package availability. The first installable package remains pending.
+These instructions apply to the modern source containing `compose.yaml`, `composer.json` and `www/phpledger`. The published repository preserves the historical application under `legacy/`; it is not this runtime. Use the public [Wiki](https://github.com/rmak78/phpledger/wiki) for visitor documentation and package availability. The [foundation evaluation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) includes production dependencies; this page covers development from source.
 
 ## Start the verified environment
 

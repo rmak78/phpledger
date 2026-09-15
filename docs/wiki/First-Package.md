@@ -1,6 +1,6 @@
 # The first installable package
 
-The next sprint is aimed at a focused, reviewable first package. Track the work in [Sprint 03: First installable preview](https://github.com/rmak78/phpledger/milestone/4). **`0.1.0-preview` is a proposed candidate name, not a created tag or available download.** Package contents and release timing follow the gates below; no date is promised.
+The [0.1.0-preview foundation evaluation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) is available. It is an installable checkpoint, not completion of [Sprint 03](https://github.com/rmak78/phpledger/milestone/4). The reporting, POS, accounting-review and usability gates below remain open for a supported pilot package; no date is promised.
 
 Modern source is in `www/phpledger`; the historical application remains under `legacy/`. The owner selected [MIT](https://github.com/rmak78/phpledger/blob/master/LICENSE) for new project-owned code and documentation on 14 September 2026. [Separate dependency, asset and historical terms](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) remain in force. Source development follows the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md).
 
@@ -30,7 +30,7 @@ Assess whether a bounded starter import fits this package after the accounting a
 
 ## Release boundary
 
-Complete the agreed scope, record its validation and accounting/usability review, verify licence/notice inclusion, then publish the candidate and verified quickstart. The hosted working preview and the installable package are separate deliverables. Any omitted gate must narrow the candidate's stated scope rather than disappear from its release notes.
+The foundation evaluation archive does not satisfy the supported-pilot gates above. Complete the agreed reporting and POS scope, record qualified accounting and observed usability review, then assess a supported pilot release. Each package has its own exact source revision, checksums, validation receipt and explicit limits.
 
 Full ERP, broad country compliance and AI **Scan document** are not commitments for this sprint. Scanning remains a later roadmap item with no next-sprint promise.
 

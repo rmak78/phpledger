@@ -2,7 +2,7 @@
 
 **The hosted preview is live.** Start at [the PHP Ledger website](https://phpledger.com/) or [open the demonstration](https://phpledger.com/demo/). The updated website and demo were published on 14 September 2026.
 
-The first installable package for the new application is still being prepared. Modern source is available under `www/phpledger`; historical code is preserved under `legacy/`. Developers can follow the [local development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md). A source checkout is not yet a tested customer-installation package.
+**[Download the 0.1.0-preview foundation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview).** Choose `phpledger-0.1.0-preview.zip` and its SHA-256 file from the release assets; the automatic source archives do not include installed dependencies. Read `INSTALL.md` inside the ZIP. The package requires PHP 8.5.x, MySQL 8.4, HTTPS and terminal access. Evaluate it with synthetic data; it is not a stable or country-certified release. Modern source is in `www/phpledger`, with historical code in `legacy/`. Developers can use the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md).
 
 The new project-owned code and documentation are [MIT licensed](https://github.com/rmak78/phpledger/blob/master/LICENSE). Read [licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) for the separate historical, dependency and asset terms.
 
@@ -31,6 +31,6 @@ Hosting support will be documented against tested configurations. Never serve th
 
 An administrator prepares the server and creates the initial administrator account. An owner or accountant then creates a business, reviews its accounts and resolves any opening-position requirements. Importing past records is a separate guided accounting process, not a shortcut around opening reconciliation.
 
-The [[first package plan|First-Package]] includes a versioned archive, verified installation instructions, an upgrade path and recovery checks. A tested quickstart will be linked here when that package exists; no release tag or download is available yet for the new foundation.
+The [[first package plan|First-Package]] includes a versioned archive, verified installation instructions, an upgrade path and recovery checks. The [v0.1.0-preview release](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) is available for download: `phpledger-0.1.0-preview.zip` with its SHA-256 file, for PHP 8.5.x (BCMath, PDO, PDO MySQL, mbstring and sessions), MySQL 8.4 with InnoDB, HTTPS and terminal access; `INSTALL.md` and `UPGRADE.md` are inside the ZIP. It is not a stable release, and the remaining first-package gates stay open; evaluate it with synthetic data.
 
 [[Current status|Home]] · [[Countries and currencies|Countries-and-Currencies]] · [[Support enquiries|Contributing-and-Support]]
