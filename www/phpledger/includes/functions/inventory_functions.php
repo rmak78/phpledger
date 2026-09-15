@@ -28,9 +28,11 @@ function pl_inventory_command(int $actorId, int $companyId, int $bookId, string 
             if (!hash_equals($prior['payload_hash'], $hash)) { throw new DomainException('This inventory request already recorded different content.'); }
             return json_decode($prior['result_json'], true, 64, JSON_THROW_ON_ERROR);
         }
-        $result = $work($key);
-        DB::insert('pl_inventory_commands', ['company_id' => $companyId, 'book_id' => $bookId, 'request_key' => $key, 'payload_hash' => $hash, 'result_json' => json_encode($result, JSON_THROW_ON_ERROR), 'actor_id' => $actorId]);
-        return $result;
+        return pl_demo_with_document_capacity($companyId, $bookId, function () use ($companyId, $bookId, $actorId, $key, $hash, $work): array {
+            $result = $work($key);
+            DB::insert('pl_inventory_commands', ['company_id' => $companyId, 'book_id' => $bookId, 'request_key' => $key, 'payload_hash' => $hash, 'result_json' => json_encode($result, JSON_THROW_ON_ERROR), 'actor_id' => $actorId]);
+            return $result;
+        });
     });
 }
 

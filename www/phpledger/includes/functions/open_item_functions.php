@@ -62,7 +62,6 @@ function pl_get_open_item(int $actorId, int $companyId, int $bookId, int $itemId
 
 function pl_oi_command(int $actorId, int $companyId, int $bookId, string $key, array $payload, callable $work): array
 {
-    pl_demo_require_setup_action();
     $key = pl_request_key($key);
     $hash = hash('sha256', json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
     return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $key, $hash, $work): array {
@@ -75,10 +74,12 @@ function pl_oi_command(int $actorId, int $companyId, int $bookId, string $key, a
             ksort($result);
             return $result;
         }
-        $result = $work('open-item:' . hash('sha256', $key));
-        ksort($result);
-        DB::insert('pl_open_item_commands', ['company_id' => $companyId, 'book_id' => $bookId, 'actor_id' => $actorId, 'request_key' => $key, 'payload_hash' => $hash, 'result_json' => json_encode($result, JSON_THROW_ON_ERROR)]);
-        return $result;
+        return pl_demo_with_document_capacity($companyId, $bookId, function () use ($companyId, $bookId, $actorId, $key, $hash, $work): array {
+            $result = $work('open-item:' . hash('sha256', $key));
+            ksort($result);
+            DB::insert('pl_open_item_commands', ['company_id' => $companyId, 'book_id' => $bookId, 'actor_id' => $actorId, 'request_key' => $key, 'payload_hash' => $hash, 'result_json' => json_encode($result, JSON_THROW_ON_ERROR)]);
+            return $result;
+        });
     });
 }
 

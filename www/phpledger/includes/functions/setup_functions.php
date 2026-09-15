@@ -95,9 +95,11 @@ function pl_setup_company(int $actorId, array $input, string $requestKey): array
     ];
     if (isset($input['sample_pack'])) {
         if ($mode !== 'sample' || !is_string($input['sample_pack'])) { throw new DomainException('Choose a sample pack only for a new isolated sample.'); }
-        $pack = pl_demo_pack($input['sample_pack']);
+        $pack = pl_demo_sample($input['sample_pack']);
         if ($canonical['start_date'] !== $pack['start_date'] || $canonical['fiscal_year_end'] !== '12-31') {
-            throw new DomainException('Historical samples use the pinned 2024 start and December year end.');
+            throw new DomainException($pack['id'] === 'accounting-starter'
+                ? 'The starter playground uses the current January practice-year start and December year end.'
+                : 'Historical samples use the pinned 2024 start and December year end.');
         }
         $canonical['sample_pack'] = $pack['id'];
         $canonical['sample_digest'] = $pack['digest'];
@@ -122,7 +124,8 @@ function pl_setup_company(int $actorId, array $input, string $requestKey): array
             'setup_request_key' => $requestKey, 'setup_payload_hash' => $hash,
         ], 'id = %i', $created['company_id']);
         if ($canonical['start_mode'] === 'sample') {
-            if (isset($canonical['sample_pack'])) { pl_seed_demo_pack($actorId, $created['company_id'], $created['book_id'], $canonical['sample_pack']); }
+            if (($canonical['sample_pack'] ?? '') === 'accounting-starter') { pl_seed_demo_starter_playground($actorId, $created['company_id'], $created['book_id']); }
+            elseif (isset($canonical['sample_pack'])) { pl_seed_demo_pack($actorId, $created['company_id'], $created['book_id'], $canonical['sample_pack']); }
             else { pl_seed_core_sample($actorId, $created['company_id'], $created['book_id']); }
         }
         return pl_company_context($actorId, $created['company_id']);

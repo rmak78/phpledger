@@ -84,7 +84,6 @@ function pl_get_ar_document(int $actorId, int $companyId, int $bookId, int $docu
 
 function pl_save_ar_document(int $actorId, int $companyId, int $bookId, array $input, ?int $documentId = null, ?int $expectedRevision = null): array
 {
-    pl_demo_require_setup_action();
     $data = pl_normalize_ar_document($input);
     $key = $documentId === null ? pl_request_key(pl_ledger_text($input['creation_key'] ?? null, 'Request identity', 128)) : null;
     $hash = hash('sha256', json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
@@ -109,8 +108,15 @@ function pl_save_ar_document(int $actorId, int $companyId, int $bookId, array $i
             if ($expectedRevision !== (int) $existing['revision']) { throw new DomainException('Someone changed this document. Reload the latest draft before saving again.'); }
             if ($data['kind'] !== $existing['kind']) { throw new DomainException('A saved document cannot change kind. Start a new document.'); }
             $data = pl_ar_price_document($actorId, $companyId, $bookId, $data);
-            DB::delete('pl_ar_document_lines', 'document_id = %i', $documentId);
-            foreach ($data['lines'] as $index => $line) { DB::insert('pl_ar_document_lines', $line + ['document_id' => $documentId, 'company_id' => $companyId, 'book_id' => $bookId, 'line_number' => $index + 1]); }
+            $existingLines = [];
+            if (pl_demo_enabled()) {
+                $existingLines = DB::query('SELECT id FROM pl_ar_document_lines WHERE document_id=%i AND company_id=%i AND book_id=%i ORDER BY line_number FOR UPDATE', $documentId, $companyId, $bookId);
+                if (count($data['lines']) < count($existingLines)) { throw new DomainException('The public sample cannot remove draft lines. Start a new draft with the required lines.'); }
+            } else { DB::delete('pl_ar_document_lines', 'document_id = %i', $documentId); }
+            foreach ($data['lines'] as $index => $line) {
+                if (isset($existingLines[$index])) { DB::update('pl_ar_document_lines', $line, 'id=%i AND document_id=%i AND company_id=%i AND book_id=%i', $existingLines[$index]['id'], $documentId, $companyId, $bookId); }
+                else { DB::insert('pl_ar_document_lines', $line + ['document_id' => $documentId, 'company_id' => $companyId, 'book_id' => $bookId, 'line_number' => $index + 1]); }
+            }
             DB::update('pl_ar_documents', array_diff_key($data, ['lines' => true]) + ['revision' => $expectedRevision + 1, 'updated_by' => $actorId, 'updated_at' => gmdate('Y-m-d H:i:s')], 'id = %i', $documentId);
             pl_ar_event($actorId,$companyId,$bookId,$documentId,'draft','draft','Draft revised to ' . ($expectedRevision + 1));
         }
@@ -120,15 +126,16 @@ function pl_save_ar_document(int $actorId, int $companyId, int $bookId, array $i
 
 function pl_ar_action(int $actorId, int $companyId, int $bookId, ?int $documentId, string $action, string $key, array $payload, callable $work): array
 {
-    pl_demo_require_setup_action();
     $key = pl_request_key($key); $hash = hash('sha256', json_encode([$documentId, $action, $payload], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
     return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $documentId, $action, $key, $hash, $work): array {
         pl_require_company_access($actorId, $companyId, true); pl_ledger_book($companyId, $bookId, true);
         $prior = DB::queryFirstRow('SELECT payload_hash, result_json FROM pl_ar_document_actions WHERE book_id = %i AND request_key = %s FOR UPDATE', $bookId, $key);
         if ($prior) { if (!hash_equals($prior['payload_hash'], $hash)) { throw new DomainException('This document request key belongs to a different action.'); } return pl_ar_canonical_result(json_decode($prior['result_json'], true, 512, JSON_THROW_ON_ERROR)); }
-        $result = pl_ar_canonical_result($work());
-        DB::insert('pl_ar_document_actions', ['company_id' => $companyId, 'book_id' => $bookId, 'document_id' => $documentId, 'actor_id' => $actorId, 'action' => $action, 'request_key' => $key, 'payload_hash' => $hash, 'result_json' => json_encode($result, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)]);
-        return $result;
+        return pl_demo_with_document_capacity($companyId, $bookId, function () use ($companyId, $bookId, $documentId, $actorId, $action, $key, $hash, $work): array {
+            $result = pl_ar_canonical_result($work());
+            DB::insert('pl_ar_document_actions', ['company_id' => $companyId, 'book_id' => $bookId, 'document_id' => $documentId, 'actor_id' => $actorId, 'action' => $action, 'request_key' => $key, 'payload_hash' => $hash, 'result_json' => json_encode($result, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)]);
+            return $result;
+        });
     });
 }
 
@@ -475,4 +482,3 @@ function pl_ar_ap_open_items(int $actorId, int $companyId, int $bookId, string $
         return ['direction'=>$direction,'as_of'=>$asOf,'items'=>$items,'count'=>count($items),'total_base'=>$total,'overdue_base'=>$overdue,'oldest_date'=>$oldest,'buckets'=>$buckets,'currency_totals'=>$currencyTotals,'controls'=>$controls,'difference_base'=>$difference,'reconciled'=>count(array_filter($controls,static fn(array $c): bool => bccomp($c['difference_base'],'0',4)!==0))===0];
     });
 }
-

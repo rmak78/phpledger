@@ -104,12 +104,50 @@ function pl_demo_require_company(int $actorId, int $companyId): void
 
 function pl_demo_require_document_capacity(int $companyId, int $bookId): void
 {
-    if (!pl_demo_enabled()) {
+    if (!pl_demo_enabled() || pl_demo_provisioning() || pl_demo_with_document_capacity($companyId, $bookId)) {
         return;
     }
-    $limit = min(500, max(10, (int) (getenv('PL_DEMO_MAX_DOCUMENTS') ?: 100)));
-    if ((int) DB::queryFirstField('SELECT (SELECT COUNT(*) FROM pl_documents WHERE company_id = %i AND book_id = %i) + (SELECT COUNT(*) FROM pl_general_drafts WHERE company_id = %i AND book_id = %i)', $companyId, $bookId, $companyId, $bookId) >= $limit) {
+    if (pl_demo_document_count($companyId, $bookId) >= pl_demo_document_limit()) {
         throw new DomainException('This sample has reached its transaction limit. Existing records remain available until the hourly refresh.');
+    }
+}
+
+function pl_demo_document_limit(): int
+{
+    return min(500, max(10, (int) (getenv('PL_DEMO_MAX_DOCUMENTS') ?: 100)));
+}
+
+/** Count durable sources and operation receipts; compound actions can consume several records. */
+function pl_demo_document_count(int $companyId, int $bookId): int
+{
+    $count = 0;
+    foreach (['pl_documents', 'pl_general_drafts', 'pl_ar_documents', 'pl_ar_document_actions',
+        'pl_purchase_orders', 'pl_purchase_commands', 'pl_inventory_commands', 'pl_open_item_commands'] as $table) {
+        $count += (int) DB::queryFirstField('SELECT COUNT(*) FROM %b WHERE company_id=%i AND book_id=%i', $table, $companyId, $bookId);
+    }
+    return $count;
+}
+
+/**
+ * Called after retry lookup, inside the caller's transaction and book lock.
+ * Null work only reads the private admission state for the legacy single-source guard.
+ */
+function pl_demo_with_document_capacity(int $companyId, int $bookId, ?callable $work = null): mixed
+{
+    static $active = [];
+    $scope = $companyId . ':' . $bookId;
+    if ($work === null) { return isset($active[$scope]); }
+    if (!pl_demo_enabled() || pl_demo_provisioning() || isset($active[$scope])) { return $work(); }
+    pl_demo_require_document_capacity($companyId, $bookId);
+    $active[$scope] = true;
+    try {
+        $result = $work();
+        if (pl_demo_document_count($companyId, $bookId) > pl_demo_document_limit()) {
+            throw new DomainException('This action would exceed the sample transaction limit. Use fewer lines or start a fresh sample after the hourly refresh.');
+        }
+        return $result;
+    } finally {
+        unset($active[$scope]);
     }
 }
 
@@ -136,9 +174,9 @@ function pl_demo_begin_visit(string $csrfToken, string $currency = 'USD', ?strin
     pl_require_post();
     pl_require_csrf($csrfToken);
     if (!isset(pl_base_currency_options()[$currency])) {
-        throw new DomainException('Choose one of the supported sample currencies. Foreign exchange is not enabled.');
+        throw new DomainException('Choose one of the supported sample currencies.');
     }
-    $pack = $samplePack === null ? null : pl_demo_pack($samplePack);
+    $pack = $samplePack === null ? null : pl_demo_sample($samplePack);
     $current = pl_current_user_id();
     if ($current !== null) {
         $existing = DB::queryFirstRow('SELECT v.company_id, b.id AS book_id, v.generation, u.id, u.email, u.display_name FROM pl_demo_visitors v JOIN pl_books b ON b.company_id = v.company_id JOIN pl_users u ON u.id = v.user_id WHERE v.user_id = %i', $current);

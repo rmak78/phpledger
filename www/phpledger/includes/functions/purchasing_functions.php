@@ -4,7 +4,7 @@ declare(strict_types=1);
 /** Purchasing owns commitments and matching, while Inventory and AP own their ledgers. */
 function pl_purchase_command(int $actorId, int $companyId, int $bookId, string $action, string $key, array $payload, callable $work): array
 {
-    pl_demo_require_setup_action(); $key = pl_request_key($key);
+    $key = pl_request_key($key);
     $hash = hash('sha256', json_encode([$action, $payload], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
     return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $action, $key, $hash, $work): array {
         pl_ledger_book($companyId, $bookId, true);
@@ -14,9 +14,11 @@ function pl_purchase_command(int $actorId, int $companyId, int $bookId, string $
             if (!hash_equals($prior['payload_hash'], $hash)) { throw new DomainException('This purchasing request key has different content.'); }
             return json_decode($prior['result_json'], true, 512, JSON_THROW_ON_ERROR);
         }
-        $result = $work('purchasing:' . hash('sha256', $key));
-        DB::insert('pl_purchase_commands', ['company_id' => $companyId, 'book_id' => $bookId, 'request_key' => $key, 'payload_hash' => $hash, 'action' => $action, 'result_json' => json_encode($result, JSON_THROW_ON_ERROR), 'actor_id' => $actorId]);
-        return $result;
+        return pl_demo_with_document_capacity($companyId, $bookId, function () use ($companyId, $bookId, $actorId, $action, $key, $hash, $work): array {
+            $result = $work('purchasing:' . hash('sha256', $key));
+            DB::insert('pl_purchase_commands', ['company_id' => $companyId, 'book_id' => $bookId, 'request_key' => $key, 'payload_hash' => $hash, 'action' => $action, 'result_json' => json_encode($result, JSON_THROW_ON_ERROR), 'actor_id' => $actorId]);
+            return $result;
+        });
     });
 }
 
@@ -98,16 +100,23 @@ function pl_save_purchase_order(int $actorId, int $companyId, int $bookId, array
             $product = pl_get_inventory_product($actorId, $companyId, $bookId, $line['product_id']);
             if ($product['kind'] !== 'stock' || !(bool) ($product['is_active'] ?? true)) { throw new DomainException('Purchase receipts require active stock products; enter service bills directly in AP.'); }
         }
+        $existingLines = [];
         if ($id === null) {
             DB::insert('pl_purchase_orders', $data + ['company_id' => $companyId, 'book_id' => $bookId, 'created_by' => $actorId, 'creation_key' => $key, 'creation_hash' => hash('sha256', json_encode([$data, $lines], JSON_THROW_ON_ERROR))]);
             $id = (int) DB::insertId();
         } else {
             $order = pl_get_purchase_order($actorId, $companyId, $bookId, $id);
             if ($order['status'] !== 'draft' || $expectedRevision !== $order['revision']) { throw new DomainException('Only the current purchase order draft can be edited.'); }
+            if (pl_demo_enabled()) {
+                $existingLines = $order['lines'];
+                if (count($lines) < count($existingLines)) { throw new DomainException('The public sample cannot remove draft lines. Start a new order with the required lines.'); }
+            } else { DB::delete('pl_purchase_order_lines', 'order_id = %i', $id); }
             DB::update('pl_purchase_orders', $data + ['revision' => $order['revision'] + 1], 'id = %i', $id);
-            DB::delete('pl_purchase_order_lines', 'order_id = %i', $id);
         }
-        foreach ($lines as $line) { DB::insert('pl_purchase_order_lines', $line + ['company_id' => $companyId, 'book_id' => $bookId, 'order_id' => $id]); }
+        foreach ($lines as $index => $line) {
+            if (isset($existingLines[$index])) { DB::update('pl_purchase_order_lines', $line, 'id=%i AND order_id=%i AND company_id=%i AND book_id=%i', $existingLines[$index]['id'], $id, $companyId, $bookId); }
+            else { DB::insert('pl_purchase_order_lines', $line + ['company_id' => $companyId, 'book_id' => $bookId, 'order_id' => $id]); }
+        }
         return pl_get_purchase_order($actorId, $companyId, $bookId, $id);
     });
 }

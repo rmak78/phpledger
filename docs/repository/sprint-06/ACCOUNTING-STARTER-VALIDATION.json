@@ -533,5 +533,94 @@
     "professional_accounting_review": "pending",
     "observed_owner_usability": "pending",
     "wcag_22_aa_review": "pending"
+  },
+  "final_php82_check": {
+    "php": "8.2.33",
+    "tests": 225,
+    "failures": 0,
+    "lint_files": 168,
+    "lint_failures": 0,
+    "static_analysis": "passed",
+    "sample_validation": "7 packs and 8 negative cases passed"
+  },
+  "restricted_demo_http": {
+    "status": "passed",
+    "observed_at_utc": "2026-09-15T23:17:04.630880+00:00",
+    "base_url": "http://127.0.0.1:18212/demo",
+    "company_id": 2,
+    "actions": [
+      {
+        "action": "save",
+        "http": 200,
+        "path": "/demo/purchasing"
+      },
+      {
+        "action": "confirm",
+        "http": 200,
+        "path": "/demo/purchasing"
+      },
+      {
+        "action": "receive",
+        "http": 200,
+        "path": "/demo/purchasing"
+      },
+      {
+        "action": "receive",
+        "http": 200,
+        "path": "/demo/purchasing"
+      },
+      {
+        "action": "bill_preview",
+        "http": 200,
+        "path": "/demo/purchasing"
+      },
+      {
+        "action": "bill_confirm",
+        "http": 200,
+        "path": "/demo/purchasing"
+      },
+      {
+        "action": "save",
+        "http": 200,
+        "path": "/demo/ar"
+      },
+      {
+        "action": "post",
+        "http": 200,
+        "path": "/demo/ar"
+      },
+      {
+        "action": "settle",
+        "http": 200,
+        "path": "/demo/ar"
+      },
+      {
+        "action": "settle",
+        "http": 200,
+        "path": "/demo/ap"
+      }
+    ],
+    "paths": {
+      "ar": "http://127.0.0.1:18212/demo/ar?id=4",
+      "ap": "http://127.0.0.1:18212/demo/ap?id=3",
+      "purchasing": "http://127.0.0.1:18212/demo/purchasing?id=2",
+      "inventory": "http://127.0.0.1:18212/demo/inventory",
+      "guide": "http://127.0.0.1:18212/demo/sample-guide"
+    },
+    "expectations": {
+      "received_quantity": "5.0000",
+      "receipt_value": "50.0000",
+      "invoice_total": "52.5000",
+      "invoice_receipt": "25.0000",
+      "receivable_remaining": "27.5000",
+      "bill_total": "52.5000",
+      "supplier_payment": "20.0000",
+      "payable_remaining": "32.5000",
+      "stock_quantity": "3.0000",
+      "stock_value": "30.0000"
+    },
+    "restricted_database_user": true,
+    "grant_expansion": false,
+    "live_changed": false
   }
 }
