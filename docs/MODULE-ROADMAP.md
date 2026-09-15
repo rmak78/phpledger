@@ -2,7 +2,11 @@
 
 Direction confirmed on 15 September 2026: complete a useful accounting core first; make AR, AP, tax and industry POS optional add-ons; provide a business API and MCP access. This supersedes the earlier next-AR priority. The ordered milestones and contracts below are the proposed delivery plan for that direction, not completed features or release dates. [Roadmap](ROADMAP.md) retains the broader product history and [Architecture](ARCHITECTURE.md) defines the existing technical boundaries.
 
-## Starting point
+## Current local status: 15 September 2026
+
+The consolidated [core completion](repository/sprint-05/CORE-COMPLETION.md) covers the bounded technical checklist through opening/period/bank reconciliation and CSV exports, with a reconciled two-period fixture. [Module foundation](repository/sprint-05/MODULE-FOUNDATION.md) now implements milestone 3 for core 1.0.0 and the bundled POS showcase 1.0.0: manifests, compatibility, owner-controlled enablement, service-level capability gates, audit and retained history. Its compatibility matrix and reserved shared-master/tax contracts define the supported scope. These changes are local and unpublished. Independent accounting/security review and observed core-user acceptance remain open. Next implementation: milestone 4 API/MCP reads; there is no business API or MCP server yet.
+
+## Historical starting point
 
 The v0.1.1-preview baseline has shared PHP/MeekroDB services, authentication and company/book access, setup/readiness checks, a preliminary six-account template, exact atomic posting, duplicate prevention, linked reversals, receipt/expense drafts, reports and a synthetic cash POS showcase. Its browser routes and `/health` are not a public business API. There is no MCP server, supported module lifecycle, full chart-management journey or reviewed opening-import/period-close workflow. The shop catalog and POS code are currently wired into the application; a separate screen is not yet a plug-in contract.
 
@@ -80,6 +84,6 @@ No API or MCP command sends messages, collects payments or calls providers merel
 
 Accounting-profile research, core report review and early module/API contract design can run alongside core implementation. Shipping dependent modules waits for their prerequisite gates. Reviewed jurisdiction-specific financial statements, multicurrency, multilingual formatting, alternative-book definitions and document scanning retain the requirements in the main roadmap; this sequence does not silently implement or remove them.
 
-After the accounts/journals preview, the next build is reviewed opening/cutover, fiscal-period administration and bank reconciliation. AR follows the core and extension/access foundations. Preserve the working POS showcase and historical receipts while its future extraction is designed. Each milestone stays local until authorized publication, and passing technical tests remains distinct from accounting review and observed usability. Eight disabled [country tax catalogs](tax/README.md) prepare later modules without enabling tax calculations.
+The local consolidated core and bundled module lifecycle are implemented as recorded above. Next is API/MCP reads, then controlled commands; AR follows the core and extension/access foundations. Existing POS receipts remain readable after company disablement. Each milestone stays local until authorized publication, and passing technical tests remains distinct from accounting review and observed usability. Eight disabled [country tax catalogs](tax/README.md) prepare later modules without enabling tax calculations.
 
 Every release updates the repository docs, GitHub Wiki, README, website and demo together. Record the package version and source commit, publish truthful capability/limitation changes, migrate the isolated demo safely, and verify each public surface. The release receipt must identify any surface still pending; a local edit is not a publication.

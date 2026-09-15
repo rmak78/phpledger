@@ -1,6 +1,14 @@
 <?php
 declare(strict_types=1);
 
+function pos_fixture(): array
+{
+    $f = ledger_fixture();
+    $manifest = pl_module_registry()['pos-showcase'];
+    pl_set_company_module($f['actor_id'], $f['company_id'], 'pos-showcase', true, 0, $manifest['digest'], 'Synthetic POS test', 'enable-pos');
+    return $f;
+}
+
 function pos_input(): array
 {
     return ['checkout_key' => bin2hex(random_bytes(24)), 'catalog_digest' => pl_pos_catalog()['digest'],
@@ -9,7 +17,7 @@ function pos_input(): array
 }
 
 test('POS review prices the cart exactly without posting and matches the confirmed receipt', function (): void {
-    $f = ledger_fixture();
+    $f = pos_fixture();
     $input = pos_input();
     unset($input['cash_received']);
     $input['items'] = array_reverse($input['items']);
@@ -36,7 +44,7 @@ test('POS review prices the cart exactly without posting and matches the confirm
 });
 
 test('POS review rejects stale catalog forged financial fields and invalid cart without writes', function (): void {
-    $f = ledger_fixture(); $input = pos_input(); unset($input['cash_received']);
+    $f = pos_fixture(); $input = pos_input(); unset($input['cash_received']);
     $badInputs = [];
     $bad = $input; $bad['total'] = '0.01'; $badInputs[] = $bad;
     $bad = $input; $bad['cash_received'] = '20'; $badInputs[] = $bad;
@@ -52,7 +60,7 @@ test('POS review rejects stale catalog forged financial fields and invalid cart 
 });
 
 test('POS correction after insufficient cash and closed period reuses its key for one sale', function (): void {
-    $f = ledger_fixture(); $input = pos_input();
+    $f = pos_fixture(); $input = pos_input();
     assert_throws(fn () => pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], array_replace($input, ['cash_received' => '12.74'])), DomainException::class, 'Cash received must cover');
     DB::update('pl_periods', ['status' => 'closed'], 'id = %i', $f['period_id']);
     assert_throws(fn () => pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], $input), DomainException::class, 'open accounting period');
@@ -69,7 +77,7 @@ test('POS correction after insufficient cash and closed period reuses its key fo
 });
 
 test('all added base currencies survive sample setup POS posting and reconciled owner reports', function (): void {
-    $f = ledger_fixture();
+    $f = pos_fixture();
     foreach (['MYR', 'BDT', 'LKR', 'NPR', 'SGD'] as $currency) {
         $setup = setup_input('sample');
         $setup['currency'] = $currency;
@@ -102,7 +110,7 @@ test('all added base currencies survive sample setup POS posting and reconciled 
 });
 
 test('POS uses exact server prices and atomically links cash receipt journal and immutable lines', function (): void {
-    $f = ledger_fixture();
+    $f = pos_fixture();
     $input = pos_input();
     $sale = pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], $input);
     assert_same('12.7500', $sale['total']);
@@ -122,7 +130,7 @@ test('POS uses exact server prices and atomically links cash receipt journal and
 });
 
 test('POS canonical retries return one receipt and changed checkout content conflicts', function (): void {
-    $f = ledger_fixture(); $input = pos_input();
+    $f = pos_fixture(); $input = pos_input();
     $sale = pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], $input);
     $retry = $input; $retry['items'] = array_reverse($retry['items']); $retry['cash_received'] = '20.0000';
     assert_same($sale['document_id'], pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], $retry)['document_id']);
@@ -133,7 +141,7 @@ test('POS canonical retries return one receipt and changed checkout content conf
 });
 
 test('POS rejects forged prices quantities stale catalog and insufficient cash without writes', function (): void {
-    $f = ledger_fixture(); $input = pos_input();
+    $f = pos_fixture(); $input = pos_input();
     $badInputs = [];
     $bad = $input; $bad['total'] = '0.01'; $badInputs[] = $bad;
     $bad = $input; $bad['items'][0]['unit_price'] = '0.01'; $badInputs[] = $bad;
@@ -150,7 +158,7 @@ test('POS rejects forged prices quantities stale catalog and insufficient cash w
 });
 
 test('POS enforces reader writer company book and opening-readiness boundaries', function (): void {
-    $f = ledger_fixture(); $other = ledger_fixture(); $input = pos_input();
+    $f = pos_fixture(); $other = pos_fixture(); $input = pos_input();
     $sale = pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], $input);
     assert_throws(fn () => pl_get_pos_receipt($other['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id']), DomainException::class);
     assert_throws(fn () => pl_checkout_pos($f['actor_id'], $f['company_id'], $other['book_id'], pos_input()), DomainException::class);
@@ -162,7 +170,7 @@ test('POS enforces reader writer company book and opening-readiness boundaries',
 });
 
 test('POS closed-period failure rolls back its newly created source', function (): void {
-    $f = ledger_fixture();
+    $f = pos_fixture();
     DB::update('pl_periods', ['status' => 'closed'], 'id = %i', $f['period_id']);
     assert_throws(fn () => pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], pos_input()), DomainException::class, 'open accounting period');
     assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_documents WHERE book_id = %i', $f['book_id']));
@@ -170,7 +178,7 @@ test('POS closed-period failure rolls back its newly created source', function (
 });
 
 test('POS snapshot failure rolls back receipt journal and lines together', function (): void {
-    $f = ledger_fixture();
+    $f = pos_fixture();
     DB::query("CREATE TRIGGER pl_test_pos_failure BEFORE INSERT ON pl_pos_sales FOR EACH ROW BEGIN IF NEW.book_id = " . $f['book_id'] . " THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Synthetic POS snapshot failure'; END IF; END");
     try {
         assert_throws(fn () => pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], pos_input()), MeekroDBException::class, 'Synthetic POS snapshot failure');
@@ -181,7 +189,7 @@ test('POS snapshot failure rolls back receipt journal and lines together', funct
 });
 
 test('POS concurrent duplicate checkouts create one receipt and journal', function (): void {
-    $f = ledger_fixture();
+    $f = pos_fixture();
     $job = ['mode' => 'pos_checkout', 'fixture' => $f, 'pos_input' => pos_input()];
     $results = ledger_race([$job, $job]);
     assert_same($results[0]['id'], $results[1]['id']);
@@ -191,7 +199,7 @@ test('POS concurrent duplicate checkouts create one receipt and journal', functi
 });
 
 test('POS linked reversal preserves price snapshots while reversing the report effect', function (): void {
-    $f = ledger_fixture(); $sale = pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], pos_input());
+    $f = pos_fixture(); $sale = pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], pos_input());
     pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id'], '2026-09-14', 'Synthetic shop correction');
     $preserved = pl_get_pos_receipt($f['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id']);
     assert_same('reversed', $preserved['document']['status']);
@@ -214,7 +222,7 @@ test('POS unresolved recovery preserves exact request and only its matching revi
 });
 
 test('POS committed identical recovery works when the current catalog is unavailable', function (): void {
-    $f = ledger_fixture(); $input = pos_input();
+    $f = pos_fixture(); $input = pos_input();
     $sale = pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], $input);
     $pipes = [];
     $process = proc_open([PHP_BINARY, __DIR__ . '/pos-catalog-retry-worker.php'], [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes);

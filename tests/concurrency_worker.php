@@ -14,7 +14,10 @@ while (!is_file($input['barrier'])) {
 }
 $fixture = $input['fixture'];
 try {
-    if ($input['mode'] === 'general_save') {
+    if ($input['mode'] === 'module_set') {
+        $module = pl_set_company_module($fixture['actor_id'], $fixture['company_id'], 'pos-showcase', $input['enabled'], $input['revision'], pl_module_registry()['pos-showcase']['digest'], 'Synthetic concurrent decision', $input['key']);
+        $journal = ['id' => $module['revision']];
+    } elseif ($input['mode'] === 'general_save') {
         $draft = pl_save_general_draft($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['general_input'], $input['draft_id'], $input['revision']);
         $journal = ['id' => $draft['id']];
     } elseif ($input['mode'] === 'account_update') {

@@ -44,7 +44,7 @@ $routes = [
     '/reports/trial-balance' => ['GET'], '/reports/account' => ['GET'], '/journals/detail' => ['GET'], '/reports/export' => ['GET'],
     '/reports' => ['GET'], '/reports/balance-sheet' => ['GET'], '/reports/profit-loss' => ['GET'], '/reports/cash-forecast' => ['GET', 'POST'],
     '/pos' => ['GET'], '/pos/review' => ['GET', 'POST'], '/pos/edit' => ['POST'], '/pos/checkout' => ['POST'], '/pos/retry' => ['POST'], '/pos/receipt' => ['GET'],
-    '/help' => ['GET'],
+    '/help' => ['GET'], '/modules' => ['GET', 'POST'],
     '/accounts' => ['GET'], '/accounts/save' => ['POST'],
     '/general-journals' => ['GET'], '/general-journals/new' => ['GET'], '/general-journals/edit' => ['GET'],
     '/general-journals/detail' => ['GET'], '/general-journals/save' => ['POST'], '/general-journals/post' => ['POST'], '/general-journals/reverse' => ['POST'],
@@ -198,6 +198,10 @@ try {
         echo $export['csv'];
         exit;
     }
+    if ($path === '/modules') {
+        require_once dirname(__DIR__) . '/includes/functions/module_web_functions.php';
+        pl_web_modules($actorId, $companyId, $bookId, $user, $company, $method);
+    }
     if ($path === '/opening-balances') {
         require_once dirname(__DIR__) . '/includes/functions/opening_web_functions.php';
         pl_web_opening($actorId, $companyId, $bookId, $user, $company, $method);
@@ -303,6 +307,7 @@ try {
             http_response_code(503);
             pl_render('pos', ['title' => 'Check sale outcome', 'user' => $user, 'company' => $company, 'recovery' => $recovery]);
         }
+        if ($path !== '/pos/receipt') { pl_require_module($actorId, $companyId, $bookId, 'pos-showcase', $method === 'POST'); }
         $catalog = in_array($path, ['/pos/receipt', '/pos/checkout'], true) ? [] : pl_pos_catalog();
         if ($method === 'POST' && $path !== '/pos/checkout') {
             try {
@@ -321,7 +326,7 @@ try {
                 }
                 $quoteInput = $cartInput;
                 unset($quoteInput['company_id'], $quoteInput['book_id'], $quoteInput['cash_received']);
-                pl_pos_quote($quoteInput);
+                pl_review_pos($actorId, $companyId, $bookId, $quoteInput);
                 $_SESSION['pos_review'] = $cartInput;
                 pl_redirect('/pos/review');
             } catch (DomainException $error) {
@@ -365,7 +370,7 @@ try {
                 pl_require_book_ready($companyId);
                 $quoteInput = $input;
                 unset($quoteInput['csrf'], $quoteInput['company_id'], $quoteInput['book_id'], $quoteInput['checkout_intent'], $quoteInput['review_intent'], $quoteInput['cash_received']);
-                $quote = pl_pos_quote($quoteInput);
+                $quote = pl_review_pos($actorId, $companyId, $bookId, $quoteInput);
                 $_SESSION['pos_review'] = $input;
                 $_SESSION['pos_review_quote'] = $quote;
             } catch (DomainException $error) {

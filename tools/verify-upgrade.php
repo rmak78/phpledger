@@ -44,7 +44,8 @@ try {
                 ['account_id' => $company['accounts']['4000'], 'debit' => '0', 'credit' => '125'],
             ],
         ]);
-        if (pl_trial_balance($owner, $company['company_id'], $company['book_id'])['total_debit'] !== '125.0000' || pl_migrate()['applied'] !== []) {
+        if (pl_trial_balance($owner, $company['company_id'], $company['book_id'])['total_debit'] !== '125.0000' || pl_migrate()['applied'] !== []
+            || pl_module_state($company['company_id'], 'pos-showcase')['enabled']) {
             throw new RuntimeException('Fresh setup/posting/replay failed.');
         }
         echo 'Fresh installation passed: ' . count($allVersions) . " migrations, user/company, central posting, balanced report and replay.\n";
@@ -87,6 +88,9 @@ try {
         throw new RuntimeException('The additive upgrade changed prior accounting records.');
     }
     $context = pl_company_context($actor, $company);
+    if (pl_module_state($company, 'pos-showcase')['enabled'] || (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_module_actions') !== 0) {
+        throw new RuntimeException('Installing modules must not enable an existing company or invent an owner decision.');
+    }
     if ($context['setup_status'] !== 'review_required' || $context['template'] !== null
         || count(array_filter($context['accounts'], static fn (array $account): bool => $account['role'] !== null)) !== 0) {
         throw new RuntimeException('Prior companies were not safely held for chart/opening review.');

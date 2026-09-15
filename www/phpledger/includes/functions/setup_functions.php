@@ -205,5 +205,7 @@ function pl_seed_core_sample(int $actorId, int $companyId, int $bookId): void
         $snapshot = json_decode((string) DB::queryFirstField('SELECT snapshot FROM pl_template_installations WHERE company_id = %i FOR UPDATE', $companyId), true, 512, JSON_THROW_ON_ERROR);
         $snapshot['sample_pack'] = ['id' => $sample['id'], 'version' => $sample['version'], 'digest' => hash('sha256', $contents), 'date' => $company['start_date'], 'currency' => $company['currency']];
         DB::update('pl_template_installations', ['snapshot' => json_encode($snapshot, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)], 'company_id = %i', $companyId);
+        $manifest = pl_module_registry()['pos-showcase'];
+        pl_set_company_module($actorId, $companyId, 'pos-showcase', true, 0, $manifest['digest'], 'Explicit isolated sample includes the cash POS showcase.', 'sample-pos');
     });
 }

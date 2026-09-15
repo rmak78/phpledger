@@ -1,5 +1,9 @@
 # Foundation validation
 
+## Current local core and module checkpoint
+
+The earlier snapshots below retain their original dates and scope. Outstanding work has since been committed and merged, legacy source removed from the current tree, and the bounded core checklist completed with exports and a two-period reconciliation. The next requested sprint implements the bundled module lifecycle. See [core completion](repository/sprint-05/CORE-COMPLETION.md) and [module foundation](repository/sprint-05/MODULE-FOUNDATION.md) for current files, commands, 121 passing tests, HTTP/browser checks, installation/recovery evidence and remaining accounting/security/pilot gates. The source is local; the public download/demo still reflect their separately recorded release.
+
 ## Consolidation checkpoint, 15 September 2026
 
 The owner requested completion and local commits of outstanding work, consolidation of all worktrees, then the module/API/MCP roadmap. The initial inventory found the dirty `website-redesign` branch at `8000e31` and a clean `codex/account-statements` worktree at `2972e57`. The latter contains the newer released core work and module roadmap and must be merged before extension implementation. A fresh pre-merge `composer check` passed 94 tests, 74 PHP lint checks, PHPStan and the sample validator. The website build/check passed 11 HTML documents with zero errors/warnings; all six package-builder tests passed.

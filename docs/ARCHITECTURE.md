@@ -14,6 +14,12 @@ Use modern CSS and small JavaScript modules for progressive enhancement. Financi
 
 ## Data and posting boundaries
 
+### Bundled module lifecycle
+
+The [module foundation contract and compatibility matrix](repository/sprint-05/MODULE-FOUNDATION.md) define the implemented core/POS boundary. Project-owned JSON manifests under `resources/modules` declare contract/version/dependencies/capabilities and the existing routes/services. Migration `010_module_lifecycle` stores company state and immutable lifecycle receipts. Optional modules default off for ordinary companies; an owner decision enables them after migration/checksum/version validation. The required accounting core remains available.
+
+`pl_require_module()` reuses company/book authorization, current locking reads, manifest action roles and installation checks; `pl_review_pos()` and `pl_checkout_pos()` enforce it in their transaction. Existing POS receipts and accounting sources stay readable after disablement. `pl_set_company_module()` serializes decisions with a company lock and durable content-bound retry receipts. Package installation is a CLI operation, distinct from company enablement. This adds no dynamic code loader, parallel router/auth/database layer, API or MCP transport. Shared contacts/catalog and tax calculation are reserved service contracts for their consuming modules, not duplicate unused tables.
+
 ### Opening, period and bank services added on 15 September 2026
 
 `opening_functions.php`, `period_functions.php` and `reconciliation_functions.php` extend the shared bootstrap and explicit front controller. Their `/opening-balances`, `/periods` and `/bank-reconciliation` GET/POST screens use the existing session, CSRF, company/book scope, escaping, forms and server-rendered design. They add no router, framework, connection layer, provider or authentication system. Owners/accountants can write; viewers can read. Opening restart and period reopening require the owner. Public-demo mutations are denied in services; normal navigation omits administration in that demo.
@@ -90,7 +96,7 @@ The user subsequently authorized a public `/demo` at the marketing website, with
 
 ## Core, optional modules and integration direction
 
-The user confirmed on 15 September 2026 that core accounting comes first and AR, AP, taxes and industry POS are optional modules. The [core and module roadmap](MODULE-ROADMAP.md) provides the proposed order and acceptance criteria. The current code has explicit service files and a wired-in POS showcase, not a supported install/enable/upgrade/disable lifecycle. Public business API and MCP access are approved future work, not implemented interfaces.
+The user confirmed on 15 September 2026 that core accounting comes first and AR, AP, taxes and industry POS are optional modules. The [core and module roadmap](MODULE-ROADMAP.md) provides the order and acceptance criteria. The local bundled core/POS lifecycle now provides reviewed compatibility, owner enable/disable/upgrade decisions and retained history as specified above. Public business API and MCP access are the next approved implementation milestones, not current interfaces.
 
 Keep companies/books, authentication/permissions, chart of accounts, journals/posting, periods, opening/cutover, cash/bank reconciliation and general-ledger reporting in the required core. A supported core-only installation must complete its accounting work with every add-on disabled. Universal account statements belong to the core; AR/AP aging and open-item statements, inventory valuation and operational reports belong to their modules and must reconcile to the core ledger.
 

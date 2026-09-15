@@ -164,6 +164,7 @@ function pl_checkout_pos(int $actorId, int $companyId, int $bookId, array $input
     return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $request, $requestHash): array {
         pl_require_company_access($actorId, $companyId, true);
         $book = pl_ledger_book($companyId, $bookId, true);
+        pl_require_module($actorId, $companyId, $bookId, 'pos-showcase');
         pl_require_book_ready($companyId);
         $existing = DB::queryFirstRow('SELECT document_id, request_hash FROM pl_pos_sales WHERE book_id = %i AND company_id = %i AND checkout_key = %s FOR UPDATE', $bookId, $companyId, $request['checkout_key']);
         if ($existing) {
@@ -202,5 +203,15 @@ function pl_checkout_pos(int $actorId, int $companyId, int $bookId, array $input
             'cart_snapshot' => json_encode($lines, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE), 'created_by' => $actorId,
         ]);
         return pl_get_pos_receipt($actorId, $companyId, $bookId, $posted['id']);
+    });
+}
+
+/** Scoped business review; pl_pos_quote remains a pure, non-authorizing pricing helper. */
+function pl_review_pos(int $actorId, int $companyId, int $bookId, array $input): array
+{
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $input): array {
+        pl_require_module($actorId, $companyId, $bookId, 'pos-showcase');
+        pl_require_book_ready($companyId);
+        return pl_pos_quote($input);
     });
 }

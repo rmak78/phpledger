@@ -5,11 +5,11 @@ $recovery = $recovery ?? null;
 $quote = $quote ?? null;
 $form = $form ?? ['input' => [], 'message' => ''];
 $input = $input ?? $form['input'];
-$canCheckout = pl_can_write($company) && $company['setup_status'] === 'ready';
+$canCheckout = pl_can_write($company) && $company['setup_status'] === 'ready' && pl_module_available((int) $user['id'], (int) $company['id'], (int) $company['book_id'], 'pos-showcase');
 ?>
 <section class="page-wrap pos-workspace" data-pos-root data-currency="<?= pl_e((string) $company['currency']) ?>">
 <?php if ($receipt !== null): ?>
-    <div class="page-heading pos-noprint"><div><p class="eyebrow">Cash sale recorded</p><h1>Receipt ready</h1><p class="muted">The receipt and its balanced journal have been saved together.</p></div><a class="button primary" href="<?= pl_e(pl_url('/pos')) ?>">Start another sale</a></div>
+    <div class="page-heading pos-noprint"><div><p class="eyebrow">Cash sale recorded</p><h1>Receipt ready</h1><p class="muted">The receipt and its balanced journal have been saved together.</p></div><?php if ($canCheckout): ?><a class="button primary" href="<?= pl_e(pl_url('/pos')) ?>">Start another sale</a><?php endif; ?></div>
     <article class="panel pos-receipt" aria-labelledby="pos-receipt-title">
         <p class="eyebrow">Sample shop &middot; Cash receipt</p><h2 id="pos-receipt-title"><?= pl_e((string) $company['name']) ?></h2>
         <p><?= pl_e((string) $receipt['number']) ?> &middot; <?= pl_e(pl_date_label((string) $receipt['document']['date'])) ?></p>

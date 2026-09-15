@@ -69,7 +69,7 @@ function pl_ledger_transaction(callable $work): mixed
     }
 }
 
-/** @return array{company_id:int, book_id:int, period_id:int, accounts:array<string,int>} */
+/** @return array{company_id:int, book_id:int, period_id:int, accounts:array<int|string,int>} */
 function pl_create_company(int $actorId, string $name, string $currency, string $startDate, string $fiscalYearEnd = '12-31'): array
 {
     pl_demo_require_setup_action();

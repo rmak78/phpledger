@@ -4,7 +4,15 @@ Source revision: `{{SOURCE_COMMIT}}`.
 
 This package is a development preview of the restarted PHP Ledger application. It preserves the lightweight BixiSoft PHP/MeekroDB structure while separating accounting functions, server permissions, templates and the public front controller. It is intended for evaluation and supported pilot preparation.
 
-## Changes in 0.1.2-preview
+## Current local candidate changes
+
+- Consolidates the released accounts/general-journals slice with reviewed opening/CSV cutover, reasoned period administration and bank reconciliation/cancellation.
+- Adds CSV exports for trial balance, account statements, profit and loss and balance sheet. Amounts remain exact, scope/dates/readiness are explicit, spreadsheet-formula text is escaped, and account exports reject more than 10,000 movements.
+- Adds the bundled core/POS manifest contract and owner-only **Modules** screen. Optional POS defaults off for ordinary new/upgraded companies. Explicit synthetic sample provisioning enables it. Service checks block new review/checkout/retry after disablement; old sources and receipts remain available.
+- `010_module_lifecycle` adds two tables and two immutable-audit triggers. The complete supplied chain has eleven migration identities and 35 guard triggers. Both original `006_*` files retain their original checksums; numeric prefixes alone are not migration identities.
+- Repairs UTF-8 handling in the repository's Windows restore verifier. Core completion and module acceptance are local; this candidate is not a published release or accounting/pilot certification.
+
+## Earlier 0.1.2-preview changes
 
 - Account statements show opening balance, period debits/credits, running balance and closing balance for all five account classes.
 - The chart supports new accounts and audited name/status changes with stable account IDs. Existing account code, type and role remain fixed; changing classification needs a reviewed mapping/correction process that this preview does not supply.
@@ -47,7 +55,7 @@ The selected UI is a working preview. The click-to-add POS direction is owner-ap
 
 Use [INSTALL.md](INSTALL.md) for the current CLI installation. Only `www/phpledger/public` may be served. Dependencies and the complete versioned migration chain are included; the historical root application, development tools, marketing website and hosted-demo scheduler are excluded.
 
-The package has no automatic upgrade from the historical PHP Ledger database. Upgrading from unmodified 0.1.1-preview preserves migrations `001`–`005` and applies additive migration `006`; use the documented backup, preflight and controlled replacement procedure. MySQL schema changes are not rolled back as one application transaction. See [UPGRADE.md](UPGRADE.md) for maintenance and restoration requirements. Keep release test results and deployment-specific validation records separate from these feature notes; this document does not claim that your host or data has passed acceptance.
+The package has no automatic upgrade from the historical PHP Ledger database. A recognized prior modern installation retains its applied migration identities/checksums and applies only the remaining supplied chain, including both distinct `006_*` files as needed. Use the documented backup, preflight and controlled replacement procedure. MySQL schema changes are not rolled back as one application transaction. See [UPGRADE.md](UPGRADE.md) for maintenance and restoration requirements. Keep release test results and deployment-specific validation records separate from these feature notes; this document does not claim that your host or data has passed acceptance.
 
 ## Feedback and next steps
 

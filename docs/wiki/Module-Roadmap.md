@@ -1,8 +1,8 @@
 # Core first, optional modules next
 
-PHP Ledger's required core should let an authorized user manage accounts, record and reverse journals, reconcile balances and complete a supported accounting period with every optional module disabled. The present preview implements part of that core; opening/cutover, usable period-close administration and bank reconciliation remain planned.
+PHP Ledger's required core lets an authorized user manage accounts, record and reverse journals, reconcile balances and complete the supported accounting period with every optional module disabled. Current local source now consolidates opening/cutover, reasoned periods, bank reconciliation and core CSV exports. The public 0.1.2-preview remains its previously released scope; this Wiki source update has not been published.
 
-AR, AP, purchasing/inventory, tax and industry POS will be optional modules. They will reuse the same identities, permissions, money rules and central posting service. The current sample POS is a preserved showcase, not an installable plug-in.
+AR, AP, purchasing/inventory, tax and industry POS will be optional modules. They reuse the same identities, permissions, money rules and central posting service. The local bundled core/POS lifecycle now has versioned manifests, reviewed migration compatibility, owner-only enable/disable decisions and immutable history. Ordinary companies default off; existing receipts survive disablement. It is a two-manifest foundation, not a third-party installer. The repository receipt `docs/repository/sprint-05/MODULE-FOUNDATION.md` records its scope; that source is not yet pushed. API/MCP reads are next, then controlled commands and optional AR/AP. Accounting/security and observed-user acceptance remain open.
 
 ## Delivery order
 

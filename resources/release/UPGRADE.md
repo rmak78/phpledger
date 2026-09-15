@@ -2,7 +2,7 @@
 
 Source revision: `{{SOURCE_COMMIT}}`.
 
-The current development source adds reviewed opening/cutover, period administration and bank reconciliation to the unmodified 0.1.2-preview core. Preserve the complete supplied migration chain and all existing checksums. The released 0.1.1-to-0.1.2 upgrade receipt remains historical evidence; this combined development source needs its own package acceptance before publication. No automatic upgrade from the historical application or customized schema is supported.
+The current development source adds reviewed opening/cutover, period administration, bank reconciliation, core CSV exports and bundled module lifecycle to the unmodified 0.1.2-preview core. Preserve the complete supplied migration chain and all existing checksums. The released 0.1.1-to-0.1.2 upgrade receipt remains historical evidence; current local acceptance is separate from publication. No automatic upgrade from the historical application or customized schema is supported.
 
 ## Before changing an installation
 
@@ -48,7 +48,9 @@ php www/phpledger/install/preflight.php
 
 Stop on any nonzero exit status. Preflight must distinguish a recognized pending migration from an unknown/interrupted/altered schema; only a recognized upgrade path may proceed. An unknown migration receipt or checksum mismatch stops the upgrade. Switch the web root to the new `www/phpledger/public` after successful migration. Recheck sign-in, company selection, existing totals and account statement balances. In an isolated sample company, check account creation/rename/status and a general-journal draft, review, post and dated reversal before reopening access. Do not recreate the initial user during an upgrade.
 
-Migration `006` preserves existing account IDs, posted journals and source records; it does not replace the chart, calculate opening balances or clear existing-business readiness restrictions. Compare your saved totals and confirm six applied receipts and thirteen triggers. The bundled tax research stays disabled and unreviewed; installing it does not enable tax calculations, country adapters or MCP access.
+The supplied migrations preserve existing account IDs, posted journals and source records; they do not replace the chart, calculate opening balances or clear existing-business readiness restrictions. Compare your saved totals and confirm eleven applied receipts and 35 guard triggers. Both `006_core_accounts_journals` and `006_opening_cutover` are distinct retained identities. Never renumber them. The bundled tax research stays disabled and unreviewed; installing it does not enable tax calculations, country adapters or MCP access.
+
+Migration `010_module_lifecycle` adds per-company state and immutable owner-decision receipts. Existing ordinary companies start with POS disabled even if an earlier package exposed checkout. After compatible installation, a company owner can open **Modules**, review the showcase and enable it with a reason. Existing receipts, source documents and reports remain readable while disabled. A changed manifest requires a reviewed upgrade decision; a missing migration/checksum mismatch requires package repair. The screen never installs SQL or drops historical data. New explicit sample companies enable their synthetic showcase during provisioning.
 
 ## Interrupted migration or rollback
 

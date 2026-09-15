@@ -1,0 +1,17 @@
+{
+  "id": "pos-showcase",
+  "name": "Cash POS showcase",
+  "version": "1.0.0",
+  "contract": 1,
+  "optional": true,
+  "requires": {"core": "1.0.0"},
+  "capabilities": ["pos.checkout"],
+  "migrations": ["004_pos_showcase", "010_module_lifecycle"],
+  "routes": ["/pos", "/pos/review", "/pos/edit", "/pos/checkout", "/pos/retry", "/pos/receipt"],
+  "permissions": ["owner", "accountant"],
+  "settings": [],
+  "reports": ["receipt"],
+  "api_operations": [],
+  "mcp_operations": [],
+  "history": "Disabling stops new checkout and review. Existing receipts, source documents and linked reversals remain available through accounting."
+}

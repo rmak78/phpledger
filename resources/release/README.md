@@ -24,6 +24,8 @@ The package needs PHP **8.5.x**, MySQL **8.4**, HTTPS and command-line access. P
 - An owner overview, trial balance, balance sheet, profit and loss, and a cash scenario using editable assumptions.
 - An illustrative cash-sale POS with click-to-add products, cart controls, separate review/cash confirmation, receipt and accounting entry.
 - Opening trial-balance/CSV cutover with reconciled unpaid-document evidence, period administration, and bank statement CSV import/matching/reconciliation.
+- Core CSV exports with exact amounts and scoped report metadata; account exports include all movements up to the documented 10,000-row limit.
+- Bundled core/POS module manifests and owner-controlled enable/disable/upgrade decisions in **Modules**, with immutable history. Ordinary companies start with POS disabled; explicitly created samples enable the showcase. Existing receipts remain readable after disablement.
 - English screens, a choice of supported base currencies, regional formatting and terminal timezone display. Each book uses one currency.
 - Disabled, unreviewed tax research JSON for eight countries and seven industries, with a read-only CLI structural validator. These files do not enable tax calculations or set company tax profiles.
 
@@ -35,7 +37,7 @@ Detailed historical journals, XLSX, invoice/bill settlement workflows, receivabl
 
 `PACKAGE-MANIFEST.json` identifies the packaged files and source. Preserve the package, its published checksum, configuration backup and database backup together. Project terms are in [LICENSE](LICENSE); dependency and asset notices are in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
-The archive includes all six migrations; 0.1.2-preview adds migration `006` to the 0.1.1-preview schema. Follow the upgrade guide before changing an existing database. Account IDs and posted history are retained, and existing-business opening reconciliation remains required.
+The archive includes eleven migrations and 35 guard triggers, including both distinct `006_*` identities and `010_module_lifecycle`. Follow the upgrade guide before changing an existing database. Account IDs and posted history are retained, and existing-business opening reconciliation remains required. Module installation alone never enables existing companies. Public API/MCP access remains future work.
 
 The archive excludes the old application, marketing website, development Docker setup, development/test suite, private configuration and customer data. The standalone `tools/validate-tax-catalog.php` is an optional structural check; it does not activate or approve tax research. There is no requirement to run Composer development scripts on the customer server.
 

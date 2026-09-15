@@ -23,7 +23,8 @@
         <a href="<?= pl_e(pl_url('/transactions')) ?>" <?= in_array($view, ['transactions', 'editor'], true) ? 'aria-current="page"' : '' ?>><?= pl_icon('list') ?><span>Transactions</span></a>
         <a href="<?= pl_e(pl_url('/general-journals')) ?>" <?= in_array($view, ['general-journals', 'general-editor', 'general-detail'], true) ? 'aria-current="page"' : '' ?>><?= pl_icon('book') ?><span>Journals</span></a>
         <a href="<?= pl_e(pl_url('/accounts')) ?>" <?= $view === 'accounts' ? 'aria-current="page"' : '' ?>><?= pl_icon('list') ?><span>Accounts</span></a>
-        <a href="<?= pl_e(pl_url('/pos')) ?>" <?= $view === 'pos' ? 'aria-current="page"' : '' ?>><?= pl_icon('receipt') ?><span>Point of sale</span></a>
+        <?php if (pl_module_available((int) $user['id'], (int) $company['id'], (int) $company['book_id'], 'pos-showcase')): ?>
+        <a href="<?= pl_e(pl_url('/pos')) ?>" <?= $view === 'pos' ? 'aria-current="page"' : '' ?>><?= pl_icon('receipt') ?><span>Point of sale</span></a><?php endif; ?>
         <a href="<?= pl_e(pl_url('/reports')) ?>" <?= in_array($view, ['reports', 'balance-sheet', 'profit-loss', 'cash-forecast', 'trial-balance', 'account', 'journal'], true) ? 'aria-current="page"' : '' ?>><?= pl_icon('book') ?><span>Reports</span></a>
         <?php else: ?><a href="<?= pl_e(pl_url('/companies')) ?>" <?= $view === 'companies' ? 'aria-current="page"' : '' ?>>Your businesses</a><?php endif; ?>
         <a href="<?= pl_e(pl_url('/help')) ?>" <?= $view === 'help' ? 'aria-current="page"' : '' ?>>Help</a>
@@ -43,7 +44,7 @@
     <span class="company-role"><?= pl_e(ucfirst($company['role'])) ?></span>
 </div>
 <?php if (!pl_demo_enabled()): ?>
-<nav class="accounting-nav" aria-label="Book administration"><a href="<?= pl_e(pl_url('/opening-balances')) ?>" <?= $view === 'opening-balances' ? 'aria-current="page"' : '' ?>>Opening balances</a><a href="<?= pl_e(pl_url('/periods')) ?>" <?= $view === 'periods' ? 'aria-current="page"' : '' ?>>Periods</a><a href="<?= pl_e(pl_url('/bank-reconciliation')) ?>" <?= $view === 'bank-reconciliation' ? 'aria-current="page"' : '' ?>>Bank reconciliation</a></nav>
+<nav class="accounting-nav" aria-label="Book administration"><a href="<?= pl_e(pl_url('/opening-balances')) ?>" <?= $view === 'opening-balances' ? 'aria-current="page"' : '' ?>>Opening balances</a><a href="<?= pl_e(pl_url('/periods')) ?>" <?= $view === 'periods' ? 'aria-current="page"' : '' ?>>Periods</a><a href="<?= pl_e(pl_url('/bank-reconciliation')) ?>" <?= $view === 'bank-reconciliation' ? 'aria-current="page"' : '' ?>>Bank reconciliation</a><a href="<?= pl_e(pl_url('/modules')) ?>" <?= $view === 'modules' ? 'aria-current="page"' : '' ?>>Modules</a></nav>
 <?php endif; ?>
 <?php if ($company['setup_status'] !== 'ready'): ?>
 <div class="readiness-banner"><?= pl_icon('info-circle') ?><div><strong><?= $company['setup_status'] === 'opening_required' ? 'Opening balances required.' : 'Review your existing setup.' ?></strong> <?= $company['setup_status'] === 'opening_required' ? 'Reconcile opening balances and unpaid documents before recording or posting transactions.' : 'Confirm account mappings and opening balances before posting new documents.' ?> <?php if (pl_can_write($company)): ?><a href="<?= pl_e(pl_url($company['setup_status'] === 'opening_required' ? '/opening-balances' : '/setup/review')) ?>">Review setup</a><?php endif; ?></div></div>

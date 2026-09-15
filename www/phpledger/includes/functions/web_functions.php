@@ -182,7 +182,7 @@ function pl_render(string $view, array $data = []): never
 {
     $allowed = ['login', 'companies', 'onboarding', 'setup-review', 'transactions', 'editor',
         'trial-balance', 'account', 'journal', 'help', 'error', 'demo', 'reports', 'balance-sheet', 'profit-loss', 'cash-forecast', 'pos',
-        'accounts', 'general-journals', 'general-editor', 'general-detail', 'opening-balances', 'periods', 'bank-reconciliation'];
+        'accounts', 'general-journals', 'general-editor', 'general-detail', 'modules', 'opening-balances', 'periods', 'bank-reconciliation'];
     if (!in_array($view, $allowed, true)) {
         throw new LogicException('Unknown template.');
     }

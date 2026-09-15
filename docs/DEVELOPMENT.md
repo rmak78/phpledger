@@ -85,6 +85,14 @@ node www/website/check.mjs
 
 `accounting-http-smoke.py` is hard-limited to `http://127.0.0.1:18200`, creates isolated synthetic owner/viewer companies and keeps random credentials in memory/stdin. It retains its synthetic data for inspection. Unit/financial tests use only `db_test`; upgrade/restore scripts create, validate and remove their own randomly named databases in that disposable test service. The literal root password shown is solely the documented disposable test credential.
 
+## Company modules
+
+Open `/modules` in an installation to inspect the optional cash POS showcase and recent changes. An owner enters a reason to enable, disable or apply a reviewed version. Accountants/viewers may inspect status/history; the public demo cannot administer modules. Ordinary companies default to POS disabled, including after upgrade. Explicit new sample-company provisioning enables its showcase through the same audited service. Core accounts/journals/reports remain available with every add-on off.
+
+Run the existing preflight/migrations before using the new source: `010_module_lifecycle` adds state/audit tables and never activates existing companies. Retain both `006_*` migrations unchanged; the next migration number is `011`. A changed manifest requires owner review, and missing or mismatched migration receipts block POS operation. Disabling preserves receipt/source/journal history; new POS review/checkout/retry requests fail on the server. See [contracts, compatibility and recovery](repository/sprint-05/MODULE-FOUNDATION.md).
+
+Run `python tests/module-http-smoke.py` for 26 local-only HTTP assertions with synthetic owner/viewer books. Run `composer check` through the existing test container for service, concurrency and rollback tests; `./tools/verify-demo.ps1` verifies isolated sample provisioning/reset in `db_test`. No actual API/MCP endpoint or machine credential is added by this sprint.
+
 ## Repository working boundaries
 
 ### Core CSV exports
@@ -93,7 +101,7 @@ node www/website/check.mjs
 
 ### Consolidated installation checks
 
-`tools/verify-upgrade.php` accepts `fresh`, `foundation`, `core-0.1.2` or `opening-local`. Run it with the existing disposable-test root invocation above. Each mode creates/removes its own random database and preserves all existing test/development data. The two `006_*` files have distinct full migration identities from separate branches; preserve both names and original checksums. The migration runner uses full filenames, not just numeric prefixes. Future migrations continue from `010`.
+`tools/verify-upgrade.php` accepts `fresh`, `foundation`, `core-0.1.2` or `opening-local`. Run it with the existing disposable-test root invocation above. Each mode creates/removes its own random database and preserves all existing test/development data. The two `006_*` files have distinct full migration identities from separate branches; preserve both names and original checksums. The migration runner uses full filenames, not just numeric prefixes. Module lifecycle occupies `010`; future migrations continue from `011`.
 
 The PowerShell restoration check explicitly uses UTF-8 for native process input/output so non-ASCII descriptions survive dump/import. Run restore checks after the test suite completes, without concurrent database writes.
 
