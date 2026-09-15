@@ -55,3 +55,5 @@ require_once __DIR__ . '/functions/opening_functions.php';
 require_once __DIR__ . '/functions/period_functions.php';
 require_once __DIR__ . '/functions/reconciliation_functions.php';
 require_once __DIR__ . '/functions/module_functions.php';
+require_once __DIR__ . '/functions/connection_functions.php';
+require_once __DIR__ . '/functions/read_functions.php';

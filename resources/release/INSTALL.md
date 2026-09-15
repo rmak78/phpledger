@@ -9,7 +9,7 @@ Arrange the following with your hosting administrator:
 | Requirement | Supported package profile |
 |---|---|
 | PHP | 8.5.x for both command-line and web requests. PHP 8.6 and other branches are outside this profile. |
-| Extensions | BCMath, PDO, PDO MySQL, mbstring and working PHP sessions; standard JSON support must be available. |
+| Extensions | BCMath, PDO, PDO MySQL, mbstring, curl, OpenSSL, fileinfo and working PHP sessions; standard JSON support must be available. |
 | Database | MySQL 8.4, InnoDB and `utf8mb4_0900_ai_ci`. MariaDB is not validated for this package. |
 | Web server | HTTPS with a valid certificate; document root and front-controller fallback configured as below. |
 | Operator access | A terminal for preflight, migrations and initial-user creation. |
@@ -18,6 +18,8 @@ Arrange the following with your hosting administrator:
 Use a dedicated database account, never MySQL root in application configuration. Installation requires permission to create/alter the package's tables, indexes and triggers and to write migration receipts. Have the database administrator provision these privileges, then restrict the normal runtime account after validating the required workflows. This preview does not prescribe an independently verified minimal grant set for every customer host.
 
 Set `PL_ENV=production` in the server's PHP environment for web and CLI processes. Leave the hosted-demo mode disabled. The public demo's reset scheduler and credentials are not part of this installation. Do not copy a development environment into customer hosting.
+
+For the 0.2.0 integration candidate, follow [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md) to set the exact HTTPS `PL_PUBLIC_URL`, initialize private OAuth keys with `php tools/setup-oauth.php`, preserve those keys in backups and configure proxy/discovery/origin headers. Connections remain unavailable until the URL is configured; OAuth also requires its private keys. The browser application continues to use its existing users and company permissions. Serve only the public directory; keys, configuration and CLI tools must remain private.
 
 ## 2. Unpack and configure privately
 

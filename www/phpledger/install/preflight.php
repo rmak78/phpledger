@@ -17,7 +17,7 @@ function pl_install_runtime_issues(int $version, array $extensions, bool $autolo
         $issues[] = $error->getMessage();
     }
     $extensions = array_map('strtolower', $extensions);
-    foreach (['bcmath', 'mbstring', 'pdo', 'pdo_mysql', 'session'] as $extension) {
+    foreach (['bcmath', 'mbstring', 'pdo', 'pdo_mysql', 'session', 'curl', 'openssl', 'fileinfo'] as $extension) {
         if (!in_array($extension, $extensions, true)) {
             $issues[] = 'Enable the PHP ' . $extension . ' extension.';
         }

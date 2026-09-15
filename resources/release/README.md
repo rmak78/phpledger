@@ -21,6 +21,8 @@ The package needs PHP **8.5.x**, MySQL **8.4**, HTTPS and command-line access. P
 - Receipt/expense drafts, balanced posting, durable source references, duplicate protection, period controls and linked reversals.
 - Chart management with stable account IDs and audited name/status changes; general-journal drafts, review, posting and dated reversals.
 - Account statements for all five account classes, with opening, period, running and closing balances.
+- Candidate authorized read API/MCP, existing-user Connections/OAuth and a standalone STDIO bridge. See [Integrations](docs/INTEGRATIONS.md) for configuration and open client acceptance gates.
+- Progressive server-side tables with 25/50/100-row pages, bounded search/sorting and canonical account running balances.
 - An owner overview, trial balance, balance sheet, profit and loss, and a cash scenario using editable assumptions.
 - An illustrative cash-sale POS with click-to-add products, cart controls, separate review/cash confirmation, receipt and accounting entry.
 - Opening trial-balance/CSV cutover with reconciled unpaid-document evidence, period administration, and bank statement CSV import/matching/reconciliation.
@@ -37,7 +39,7 @@ Detailed historical journals, XLSX, invoice/bill settlement workflows, receivabl
 
 `PACKAGE-MANIFEST.json` identifies the packaged files and source. Preserve the package, its published checksum, configuration backup and database backup together. Project terms are in [LICENSE](LICENSE); dependency and asset notices are in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
-The archive includes eleven migrations and 35 guard triggers, including both distinct `006_*` identities and `010_module_lifecycle`. Follow the upgrade guide before changing an existing database. Account IDs and posted history are retained, and existing-business opening reconciliation remains required. Module installation alone never enables existing companies. Public API/MCP access remains future work.
+The candidate archive includes twelve migrations and 35 guard triggers, including both distinct `006_*` identities and the additive `011_read_connections`. Follow the upgrade guide before changing an existing database. Account IDs and posted history are retained, and existing-business opening reconciliation remains required. Module installation alone never enables existing companies. API/MCP financial mutations remain future work.
 
 The archive excludes the old application, marketing website, development Docker setup, development/test suite, private configuration and customer data. The standalone `tools/validate-tax-catalog.php` is an optional structural check; it does not activate or approve tax research. There is no requirement to run Composer development scripts on the customer server.
 

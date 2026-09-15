@@ -36,6 +36,8 @@ Do not aim that command at the live database. Confirm definitions/data, all incl
 
 ## Apply a reviewed update
 
+The 0.2.0 candidate adds `011_read_connections` and pinned MCP/OAuth dependencies. Install the complete new vendor payload before running the new code. Preserve existing signing/encryption keys and private settings; initialize keys once only if this installation has never enabled OAuth. Set the configured public URL and proxy/discovery rules before client testing. Never copy keys into the package. This is an additive schema change, but older preflight binaries reject unknown migration receipts: rollback requires restoring the matched pre-upgrade database/source/configuration snapshot, not deleting the new receipt or claiming an older package has validated the newer schema.
+
 Only continue when the new release explicitly supports your starting version/schema and the restoration rehearsal succeeds. Unpack the new package beside the existing directory. Verify its manifest/checksum, retain the previous version, and transfer private configuration deliberately. Do not overlay unknown old files into the new package.
 
 Under maintenance, run from the new package root:

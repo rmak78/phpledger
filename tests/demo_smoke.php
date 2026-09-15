@@ -38,6 +38,22 @@ $first = pl_demo_begin_visit(pl_csrf_token());
 $f = $first['user']['id'];
 $company = pl_company_context($f, $first['company_id']);
 demo_check($company['is_sample'] && pl_current_user_id() === $f, 'Visitor did not get its own active sample context.');
+putenv('PL_PUBLIC_URL=https://demo.example/demo');
+require_once PL_APP . '/includes/functions/oauth_functions.php';
+require_once PL_APP . '/includes/functions/client_functions.php';
+require_once PL_APP . '/includes/functions/mcp_functions.php';
+require_once PL_APP . '/includes/functions/integration_http_functions.php';
+$machine = pl_create_personal_token($f, 'Restricted demo smoke', [['company_id' => $first['company_id'], 'book_id' => $first['book_id']]]);
+$machineRequest = new Nyholm\Psr7\ServerRequest('GET', pl_connection_issuer() . '/api/v1/companies', ['Authorization' => 'Bearer ' . $machine['token']]);
+demo_check(pl_integration_response('/api/v1/companies', $machineRequest)->getStatusCode() === 200, 'Restricted demo runtime cannot read through the machine boundary.');
+$store = new PlMcpSessions($machine['connection']['id']);
+$sessionId = Symfony\Component\Uid\Uuid::v4();
+demo_check($store->write($sessionId, '{}') && $store->exists($sessionId), 'Restricted demo cannot create MCP sessions.');
+demo_check($store->destroy($sessionId) && !$store->exists($sessionId), 'Restricted demo session expiry needs forbidden delete privileges.');
+$store->gc();
+pl_revoke_connection($f, $machine['connection']['id']);
+try { pl_connection_authenticate($machineRequest); throw new RuntimeException('Revoked demo machine access remained valid.'); }
+catch (UnexpectedValueException) {}
 demo_check(pl_demo_begin_visit(pl_csrf_token())['company_id'] === $first['company_id'], 'Repeated start duplicated a visitor.');
 demo_denied(static fn () => pl_demo_begin_visit(pl_csrf_token(), 'CAD'));
 demo_check(pl_demo_begin_visit(pl_csrf_token(), 'PKR')['company_id'] === $first['company_id'] && pl_company_context($f, $first['company_id'])['currency'] === 'USD', 'An existing sample currency was silently changed.');

@@ -187,6 +187,7 @@ function pl_list_documents(int $actorId, int $companyId, int $bookId, array $fil
     pl_ledger_book($companyId, $bookId);
     $where = ['d.company_id = %i', 'd.book_id = %i'];
     $args = [$companyId, $bookId];
+    $recordsTotal = (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_documents WHERE company_id = %i AND book_id = %i', $companyId, $bookId);
     $status = $filters['status'] ?? 'all';
     if (!in_array($status, ['all', 'draft', 'posted', 'reversed'], true)) {
         throw new DomainException('Choose a valid transaction status.');
@@ -225,13 +226,15 @@ function pl_list_documents(int $actorId, int $companyId, int $bookId, array $fil
     $join = ' FROM pl_documents d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE ' . $condition;
     $totals = DB::queryFirstRow('SELECT COUNT(*) AS total, COALESCE(SUM(d.amount), 0) AS total_amount' . $join, ...$args);
     $total = (int) $totals['total'];
-    $pages = max(1, (int) ceil($total / 50));
+    $size = pl_table_size($filters['page_size'] ?? 50);
+    $pages = max(1, (int) ceil($total / $size));
     $page = min($pages, max(1, (int) ($filters['page'] ?? 1)));
-    $rows = DB::query('SELECT d.*, r.id AS reversal_journal_id' . $join . ' ORDER BY d.document_date DESC, d.id ASC LIMIT 50 OFFSET %i', ...array_merge($args, [($page - 1) * 50]));
-    return ['documents' => array_map('pl_document_row', $rows), 'total' => $total, 'total_amount' => bcadd((string) $totals['total_amount'], '0', 4), 'page' => $page, 'pages' => $pages];
+    $order = pl_table_order($filters, ['date' => 'd.document_date', 'name' => 'd.counterparty', 'amount' => 'd.amount', 'status' => "CASE WHEN d.journal_id IS NULL THEN 'draft' WHEN r.id IS NOT NULL THEN 'reversed' ELSE 'posted' END"], 'd.document_date DESC, d.id ASC', 'd.id ASC');
+    $rows = DB::query('SELECT d.*, r.id AS reversal_journal_id' . $join . ' ORDER BY ' . $order . ' LIMIT %i OFFSET %i', ...array_merge($args, [$size, ($page - 1) * $size]));
+    return ['documents' => array_map('pl_document_row', $rows), 'total' => $total, 'records_total' => $recordsTotal, 'total_amount' => bcadd((string) $totals['total_amount'], '0', 4), 'page' => $page, 'pages' => $pages];
 }
 
-function pl_account_activity(int $actorId, int $companyId, int $bookId, int $accountId, ?string $asOf = null, int $page = 1, ?string $from = null): array
+function pl_account_activity(int $actorId, int $companyId, int $bookId, int $accountId, ?string $asOf = null, int $page = 1, ?string $from = null, array $options = []): array
 {
     $date = $asOf === null ? '9999-12-31' : pl_ledger_date($asOf);
     if ($from !== null) {
@@ -240,7 +243,10 @@ function pl_account_activity(int $actorId, int $companyId, int $bookId, int $acc
             throw new DomainException('The activity start date must be on or before its end date.');
         }
     }
-    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $accountId, $date, $asOf, $from, $page): array {
+    $size = pl_table_size($options['page_size'] ?? 50);
+    $search = pl_ledger_text($options['search'] ?? '', 'Search', 160, false);
+    $order = pl_table_order($options, ['date' => 'q.date', 'journal' => 'q.journal_id', 'description' => 'q.description', 'source' => 'q.source_reference', 'debit' => 'q.debit', 'credit' => 'q.credit', 'balance' => 'q.running_movement'], 'q.date, q.journal_id, q.line_number', 'q.date, q.journal_id, q.line_number');
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $accountId, $date, $asOf, $from, $page, $size, $search, $order): array {
         pl_require_company_access($actorId, $companyId);
         // Hold the shared book lock for all statement reads; posting takes its exclusive lock.
         pl_ledger_book($companyId, $bookId);
@@ -259,21 +265,34 @@ function pl_account_activity(int $actorId, int $companyId, int $bookId, int $acc
             $args[] = $from;
         }
         $totals = DB::queryFirstRow('SELECT COUNT(*) AS total, COALESCE(SUM(l.debit), 0) AS debit_movement, COALESCE(SUM(l.credit), 0) AS credit_movement' . $queryFrom, ...$args);
-        $pages = max(1, (int) ceil((int) $totals['total'] / 50));
+        $window = 'SELECT j.id AS journal_id, j.journal_date AS date, j.description, j.source_type, j.source_reference, j.reversal_of_id, l.line_number, l.debit, l.credit, SUM(l.debit - l.credit) OVER (ORDER BY j.journal_date, j.id, l.line_number ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_movement' . $queryFrom;
+        // Search and display ordering are outside the window; neither can redefine a ledger balance.
+        $filtered = ' FROM (' . $window . ') q';
+        $displayArgs = $args;
+        if ($search !== '') {
+            $filtered .= ' WHERE LOCATE(%s, q.description) > 0 OR LOCATE(%s, q.source_reference) > 0 OR LOCATE(%s, CONCAT(\'PL-\', LPAD(q.journal_id, 8, \'0\'))) > 0';
+            array_push($displayArgs, $search, $search, strtoupper($search));
+        }
+        $filteredTotal = $search === '' ? (int) $totals['total'] : (int) DB::queryFirstField('SELECT COUNT(*)' . $filtered, ...$displayArgs);
+        $pages = max(1, (int) ceil($filteredTotal / $size));
         $page = min($pages, max(1, $page));
-        // The window covers the entire filtered period before LIMIT, so page two continues page one.
-        $rows = DB::query('SELECT j.id AS journal_id, j.journal_date AS date, j.description, j.source_type, j.source_reference, j.reversal_of_id, l.debit, l.credit, SUM(l.debit - l.credit) OVER (ORDER BY j.journal_date, j.id, l.line_number ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_movement' . $queryFrom . ' ORDER BY j.journal_date, j.id, l.line_number LIMIT 50 OFFSET %i', ...array_merge($args, [($page - 1) * 50]));
+        $rows = DB::query('SELECT q.*' . $filtered . ' ORDER BY ' . $order . ' LIMIT %i OFFSET %i', ...array_merge($displayArgs, [$size, ($page - 1) * $size]));
+        $sourceIds = array_values(array_unique(array_map(static fn (array $row): int => (int) ($row['reversal_of_id'] ?? $row['journal_id']), $rows)));
+        // Fetch scoped source links once per page, including links for reversal rows.
+        $documents = $sourceIds === [] ? [] : array_column(DB::query('SELECT id, journal_id FROM pl_documents WHERE company_id = %i AND book_id = %i AND journal_id IN %li', $companyId, $bookId, $sourceIds), 'id', 'journal_id');
+        $generals = $sourceIds === [] ? [] : array_column(DB::query('SELECT id, journal_id FROM pl_general_drafts WHERE company_id = %i AND book_id = %i AND journal_id IN %li', $companyId, $bookId, $sourceIds), 'id', 'journal_id');
         foreach ($rows as &$row) {
             $row['journal_id'] = (int) $row['journal_id'];
             $row['journal_reference'] = 'PL-' . str_pad((string) $row['journal_id'], 8, '0', STR_PAD_LEFT);
-            $source = DB::queryFirstField('SELECT id FROM pl_documents WHERE company_id = %i AND book_id = %i AND journal_id = %i', $companyId, $bookId, $row['reversal_of_id'] === null ? $row['journal_id'] : (int) $row['reversal_of_id']);
+            $sourceId = (int) ($row['reversal_of_id'] ?? $row['journal_id']);
+            $source = $documents[$sourceId] ?? null;
             $row['document_id'] = $source === null ? null : (int) $source;
-            $general = DB::queryFirstField('SELECT id FROM pl_general_drafts WHERE company_id = %i AND book_id = %i AND journal_id = %i', $companyId, $bookId, $row['reversal_of_id'] === null ? $row['journal_id'] : (int) $row['reversal_of_id']);
+            $general = $generals[$sourceId] ?? null;
             $row['general_id'] = $general === null ? null : (int) $general;
             $row['debit'] = bcadd((string) $row['debit'], '0', 4);
             $row['credit'] = bcadd((string) $row['credit'], '0', 4);
             $row['running_balance'] = bcadd($opening, (string) $row['running_movement'], 4);
-            unset($row['running_movement']);
+            unset($row['running_movement'], $row['line_number']);
         }
         unset($row);
         $debit = bcadd((string) $totals['debit_movement'], '0', 4);
@@ -288,7 +307,7 @@ function pl_account_activity(int $actorId, int $companyId, int $bookId, int $acc
             'balance' => $movement, 'opening_balance' => $opening, 'closing_balance' => bcadd($opening, $movement, 4),
             'page_opening_balance' => $first === null ? $opening : bcadd(bcsub($first['running_balance'], $first['debit'], 4), $first['credit'], 4),
             'page_closing_balance' => $last === null ? $opening : $last['running_balance'],
-            'total' => (int) $totals['total'], 'page' => $page, 'pages' => $pages, 'from' => $from, 'as_of' => $asOf,
+            'total' => (int) $totals['total'], 'filtered_total' => $filteredTotal, 'page' => $page, 'pages' => $pages, 'from' => $from, 'as_of' => $asOf,
         ];
     });
 }

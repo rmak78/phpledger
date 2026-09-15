@@ -94,6 +94,10 @@ Pakistan is first for accounting-framework research, followed by the UK and UAE.
 
 Early [tax research](docs/tax/README.md) covers eight countries and seven business types. Its 81 candidate regimes are **disabled and unreviewed**; they do not calculate taxes or establish eligibility. The [accounting rule register](docs/accounting/CORE_RULE_REGISTER.md) connects the core's controls with ICAP, ICMAP and ACCA guidance and records the remaining review gates.
 
+## Current local integration candidate
+
+Release **0.2.0-preview** is being verified locally: scoped read API/MCP, existing-user OAuth/Connections and server-side tables. The public download and hosted demo above remain **0.1.5-preview**. [Setup recipes and client matrix](docs/INTEGRATIONS.md) distinguish local protocol tests from actual client acceptance; financial commands and richer samples retain their later gates.
+
 ## Where we go from here
 
 | Next | Outcome |

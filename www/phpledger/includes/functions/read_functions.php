@@ -1,0 +1,174 @@
+<?php
+declare(strict_types=1);
+
+function pl_table_size(mixed $size): int
+{
+    if (!is_int($size) || !in_array($size, [25, 50, 100], true)) {
+        throw new DomainException('Choose 25, 50 or 100 rows per page.');
+    }
+    return $size;
+}
+
+/** SQL identifiers are selected only from a server-owned map. */
+function pl_table_order(array $options, array $columns, string $default, string $tie): string
+{
+    if (!isset($options['sort'])) { return $default; }
+    if (!is_string($options['sort']) || !isset($columns[$options['sort']]) || !in_array($options['direction'] ?? '', ['asc','desc'], true)) { throw new DomainException('Unsupported table order.'); }
+    return $columns[$options['sort']] . ' ' . strtoupper($options['direction']) . ', ' . $tie;
+}
+
+/** The same allowlist drives API validation, MCP schemas and the independent OpenAPI file. */
+function pl_read_catalog(): array
+{
+    $id = ['type' => 'integer', 'minimum' => 1, 'maximum' => 9007199254740991];
+    $date = ['type' => 'string', 'format' => 'date', 'pattern' => '^\\d{4}-\\d{2}-\\d{2}$', 'maxLength' => 10];
+    $scope = ['company_id' => $id, 'book_id' => $id];
+    $paging = ['page' => ['type' => 'integer', 'minimum' => 1, 'maximum' => 100000, 'default' => 1], 'page_size' => ['type' => 'integer', 'enum' => [25, 50, 100], 'default' => 25]];
+    $definitions = [
+        'companies' => ['List the company/book pairs explicitly authorized by this connection.', [], [], true],
+        'capabilities' => ['Read available reporting and module capabilities for a selected book.', [], [], false],
+        'accounts' => ['Read the chart of accounts. Amounts in reports use exact decimal strings.', [], [], true],
+        'transactions' => ['Read receipt and expense sources, including unposted drafts. Only posted sources affect reports.', ['from' => $date, 'to' => $date, 'status' => ['type' => 'string', 'enum' => ['all','draft','posted','reversed']], 'kind' => ['type' => 'string', 'enum' => ['all','receipt','expense']], 'search' => ['type' => 'string', 'maxLength' => 160]], [], true],
+        'general_journals' => ['Read general journal source summaries; follow an id with source_detail.', [], [], true],
+        'journal' => ['Read an immutable posted journal and its source reference.', ['journal_id' => $id], ['journal_id'], true],
+        'source_detail' => ['Read a receipt, expense or general journal source, including its posted journal link.', ['source_id' => $id, 'source_type' => ['type' => 'string', 'enum' => ['transaction','general_journal']]], ['source_id','source_type'], true],
+        'trial_balance' => ['Read the trial balance at a business date. Totals cover the whole report on every page.', ['as_of' => $date], ['as_of'], true],
+        'profit_loss' => ['Read posted income, expenses and net profit for an inclusive period. Totals cover all pages.', ['from' => $date, 'to' => $date], ['from','to'], true],
+        'balance_sheet' => ['Read assets, liabilities and equity at a date, with unclosed earnings shown separately. Totals cover all pages.', ['as_of' => $date], ['as_of'], true],
+        'account_statement' => ['Read opening, debit, credit, running and closing balances with journal/source links. Running balances follow canonical date/journal/line order before pagination.', ['account_id' => $id, 'from' => $date, 'as_of' => $date], ['account_id','from','as_of'], true],
+    ];
+    $catalog = [];
+    foreach ($definitions as $name => [$description, $properties, $required, $paginated]) {
+        $catalog[$name] = ['description' => $description, 'schema' => ['type' => 'object', 'properties' => ($name === 'companies' ? [] : $scope) + $properties + ($paginated ? $paging : []), 'required' => array_merge($name === 'companies' ? [] : array_keys($scope), $required), 'additionalProperties' => false]];
+    }
+    return $catalog;
+}
+
+function pl_read_arguments(string $operation, array $arguments, bool $query = false): array
+{
+    $schema = pl_read_catalog()[$operation]['schema'] ?? null;
+    if (!$schema) {
+        throw new DomainException('Unsupported operation. This interface provides authorized reads only.');
+    }
+    if (array_diff(array_keys($arguments), array_keys($schema['properties'])) !== []) {
+        throw new DomainException('Unknown arguments are not accepted.');
+    }
+    foreach ($schema['required'] as $name) {
+        if (!array_key_exists($name, $arguments)) {
+            throw new DomainException('Required argument: ' . $name . '.');
+        }
+    }
+    foreach ($schema['properties'] as $name => $rule) {
+        if (!array_key_exists($name, $arguments)) {
+            if (isset($rule['default'])) { $arguments[$name] = $rule['default']; }
+            continue;
+        }
+        $value = $arguments[$name];
+        if ($rule['type'] === 'integer') {
+            if ($query && is_string($value) && preg_match('/^[1-9][0-9]{0,15}$/D', $value)) { $value = (int) $value; }
+            if (!is_int($value) || $value < ($rule['minimum'] ?? 1) || $value > ($rule['maximum'] ?? 9007199254740991)) {
+                throw new DomainException($name . ' must be a bounded positive integer.');
+            }
+        } elseif (!is_string($value) || !mb_check_encoding($value, 'UTF-8') || mb_strlen($value, 'UTF-8') > ($rule['maxLength'] ?? 160)) {
+            throw new DomainException($name . ' must be a bounded UTF-8 string.');
+        }
+        if (isset($rule['enum']) && !in_array($value, $rule['enum'], true)) { throw new DomainException('Unsupported value for ' . $name . '.'); }
+        if (($rule['format'] ?? '') === 'date') { pl_ledger_date($value); }
+        $arguments[$name] = $value;
+    }
+    return $arguments;
+}
+
+/** Page metadata always refers to one named collection; totals are never page subtotals. */
+function pl_read_page(array $rows, int $page, int $size): array
+{
+    $total = count($rows);
+    $page = min($page, max(1, (int) ceil($total / $size)));
+    return ['rows' => array_slice($rows, ($page - 1) * $size, $size), 'pagination' => pl_read_pagination($total, $page, $size)];
+}
+
+function pl_read_pagination(int $total, int $page, int $size): array
+{
+    return ['page' => $page, 'page_size' => $size, 'total' => $total, 'pages' => max(1, (int) ceil($total / $size)), 'next_page' => $page * $size < $total ? $page + 1 : null];
+}
+
+/** Explicit DTO fields avoid leaking service internals or future private columns. */
+function pl_read_fields(array $row, array $fields): array
+{
+    $result = array_intersect_key($row, array_flip($fields));
+    foreach ($result as $key => &$value) {
+        if ($value !== null && ($key === 'id' || str_ends_with($key, '_id'))) { $value = (int) $value; }
+        if ($value !== null && str_ends_with($key, '_at')) { $value = str_replace(' ', 'T', $value) . 'Z'; }
+    }
+    unset($value);
+    return $result;
+}
+
+function pl_read_journal(array $row, int $page, int $size): array
+{
+    return pl_read_fields($row, ['id','company_id','book_id','reference','journal_date','description','currency','source_type','source_reference','reversal_of_id','posted_at'])
+        + ['lines' => pl_read_page(array_map(static fn (array $line): array => pl_read_fields($line, ['account_id','code','name','description','debit','credit']), $row['lines']), $page, $size)];
+}
+
+function pl_read_source(array $row, string $type, int $page, int $size): array
+{
+    $result = pl_read_fields($row, ['id','company_id','book_id','number','date','document_date','kind','status','reference','counterparty','memo','description','amount','money_account_id','category_account_id','journal_id','reversal_journal_id','created_at','updated_at']);
+    if ($type === 'general_journal') {
+        $result['totals'] = $row['totals'];
+        $result['lines'] = pl_read_page($row['lines'], $page, $size);
+    } else {
+        $result['journal'] = isset($row['journal']) ? pl_read_journal($row['journal'], $page, $size) : null;
+    }
+    return $result;
+}
+
+/** One scoped business interface for HTTP and MCP; only existing accounting services compute money. */
+function pl_read_operation(string $connectionId, string $operation, array $input): array
+{
+    $args = pl_read_arguments($operation, $input);
+    return pl_ledger_transaction(function () use ($connectionId, $operation, $args): array {
+        $connection = pl_connection_require($connectionId);
+        $actor = $connection['actor_id'];
+        $page = $args['page'] ?? 1;
+        $size = $args['page_size'] ?? 25;
+        if ($operation === 'companies') {
+            $rows = [];
+            foreach ($connection['books'] as $pair) {
+                $row = DB::queryFirstRow('SELECT c.id AS company_id, c.name, b.id AS book_id, c.currency FROM pl_companies c JOIN pl_books b ON b.company_id = c.id WHERE c.id = %i AND b.id = %i', $pair['company_id'], $pair['book_id']);
+                $rows[] = pl_read_fields($row, ['company_id','name','book_id','currency']);
+            }
+            return ['data' => pl_read_page($rows, $page, $size), 'access_expires_at' => str_replace(' ', 'T', $connection['expires_at']) . 'Z'];
+        }
+        $company = $args['company_id'];
+        $book = $args['book_id'];
+        pl_connection_scope($connection, $company, $book);
+        $bookInfo = pl_ledger_book($company, $book);
+        $data = match ($operation) {
+            'capabilities' => ['read_operations' => array_keys(pl_read_catalog()), 'financial_writes' => false, 'enabled_modules' => array_values(array_filter(array_keys(pl_module_registry()), static fn (string $id): bool => pl_module_available($actor, $company, $book, $id)))],
+            'accounts' => pl_read_page(array_map(static fn (array $row): array => pl_read_fields($row, ['id','code','name','type','role','is_active']), DB::query('SELECT id, code, name, type, role, is_active FROM pl_accounts WHERE company_id = %i AND book_id = %i ORDER BY code, id', $company, $book)), $page, $size),
+            'trial_balance' => pl_trial_balance($actor, $company, $book, $args['as_of']),
+            'profit_loss' => pl_profit_loss($actor, $company, $book, $args['from'], $args['to']),
+            'balance_sheet' => pl_balance_sheet($actor, $company, $book, $args['as_of']),
+            'journal' => pl_read_journal(pl_get_journal($actor, $company, $book, $args['journal_id']), $page, $size),
+            'source_detail' => pl_read_source($args['source_type'] === 'transaction' ? pl_get_document($actor, $company, $book, $args['source_id']) : pl_get_general_draft($actor, $company, $book, $args['source_id']), $args['source_type'], $page, $size),
+            'transactions' => pl_list_documents($actor, $company, $book, array_diff_key($args, array_flip(['company_id','book_id']))),
+            'general_journals' => pl_list_general_drafts($actor, $company, $book, $page, ['page_size' => $size]),
+            'account_statement' => pl_account_activity($actor, $company, $book, $args['account_id'], $args['as_of'], $page, $args['from'], ['page_size' => $size]),
+            default => throw new LogicException('Read operation is not implemented.'),
+        };
+        foreach (match ($operation) { 'trial_balance' => ['accounts'], 'profit_loss' => ['income','expenses'], 'balance_sheet' => ['assets','liabilities','equity'], default => [] } as $field) {
+            $data[$field] = pl_read_page($data[$field], $page, $size);
+        }
+        if (in_array($operation, ['transactions','general_journals','account_statement'], true)) {
+            $key = match ($operation) { 'transactions' => 'documents', 'general_journals' => 'rows', default => 'movements' };
+            if ($operation !== 'account_statement') {
+                $data[$key] = array_map(static fn (array $row): array => pl_read_fields($row, ['id','number','date','document_date','kind','status','reference','counterparty','memo','description','amount','totals','journal_id','reversal_journal_id']), $data[$key]);
+            }
+            $data['pagination'] = pl_read_pagination($data['total'], $data['page'], $size);
+            unset($data['page'], $data['pages']);
+        }
+        $result = ['company_id' => $company, 'book_id' => $book, 'currency' => $bookInfo['currency'], 'data' => $data, 'access_expires_at' => str_replace(' ', 'T', $connection['expires_at']) . 'Z'];
+        if (strlen(json_encode($result, JSON_THROW_ON_ERROR)) > 240000) { throw new LengthException('Response is too large. Reduce the page size or narrow the period.'); }
+        return $result;
+    });
+}

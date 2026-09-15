@@ -21,9 +21,9 @@ function installer_process(string $script, array $arguments = [], string $input 
 }
 
 test('installer prerequisites identify missing runtime, extensions and dependencies', function (): void {
-    assert_same([], pl_install_runtime_issues(80510, ['bcmath', 'mbstring', 'PDO', 'pdo_mysql', 'session'], true));
+    assert_same([], pl_install_runtime_issues(80510, ['bcmath', 'mbstring', 'PDO', 'pdo_mysql', 'session', 'curl', 'openssl', 'fileinfo'], true));
     $issues = pl_install_runtime_issues(80400, [], false);
-    assert_same(7, count($issues));
+    assert_same(10, count($issues));
     assert_true(str_contains(implode(' ', $issues), 'PHP 8.5'));
     assert_true(str_contains(implode(' ', $issues), 'Composer dependencies'));
     assert_throws(fn () => pl_require_runtime(80600), RuntimeException::class, 'PHP 8.5');

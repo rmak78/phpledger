@@ -18,7 +18,7 @@ $scopeQuery = $filters;
         <details class="date-filters"><summary>Date range</summary><div><label>From <input type="date" name="from" value="<?= pl_e($filters['from']) ?>"></label><label>To <input type="date" name="to" value="<?= pl_e($filters['to']) ?>"></label><button class="button secondary" type="submit">Apply dates</button></div></details>
         <?php if ($filters['search'] || $filters['from'] || $filters['to'] || $filters['kind'] !== 'all'): ?><a class="clear-filter" href="<?= pl_e(pl_url('/transactions', ['status' => $selectedStatus])) ?>">Clear filters</a><?php endif; ?>
     </form>
-    <div class="transaction-table table-wrap"><table class="data-table">
+    <div class="transaction-table table-wrap"><table class="data-table" data-ledger-table="transactions">
         <caption class="sr-only">Choose a transaction to inspect its details</caption>
         <thead><tr><th scope="col">Date / reference</th><th scope="col">Name</th><th scope="col" class="amount">Amount</th><th scope="col">Status</th></tr></thead>
         <tbody><?php foreach ($list['documents'] as $row): $selected = $document && (int) $document['id'] === (int) $row['id']; ?>

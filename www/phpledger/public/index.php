@@ -11,6 +11,10 @@ if ($basePath !== '' && ($path === $basePath || str_starts_with($path, $basePath
     $path = substr($path, strlen($basePath)) ?: '/';
 }
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+if ($path === '/mcp' || str_starts_with($path, '/api/v1/') || in_array($path, ['/oauth/token','/oauth/register','/oauth/revoke'], true) || str_starts_with($path, '/.well-known/oauth-')) {
+    require_once dirname(__DIR__) . '/includes/functions/integration_http_functions.php';
+    pl_integration_http($path, $method);
+}
 if ($path === '/health') {
     header('Content-Type: application/json; charset=utf-8');
     header("Content-Security-Policy: default-src 'none'; frame-ancestors 'none'; base-uri 'none'");
@@ -44,7 +48,7 @@ $routes = [
     '/reports/trial-balance' => ['GET'], '/reports/account' => ['GET'], '/journals/detail' => ['GET'], '/reports/export' => ['GET'],
     '/reports' => ['GET'], '/reports/balance-sheet' => ['GET'], '/reports/profit-loss' => ['GET'], '/reports/cash-forecast' => ['GET', 'POST'],
     '/pos' => ['GET'], '/pos/review' => ['GET', 'POST'], '/pos/edit' => ['POST'], '/pos/checkout' => ['POST'], '/pos/retry' => ['POST'], '/pos/receipt' => ['GET'],
-    '/help' => ['GET'], '/modules' => ['GET', 'POST'],
+    '/help' => ['GET'], '/modules' => ['GET', 'POST'], '/connections' => ['GET','POST'], '/oauth/authorize' => ['GET','POST'], '/tables' => ['GET'],
     '/accounts' => ['GET'], '/accounts/save' => ['POST'],
     '/general-journals' => ['GET'], '/general-journals/new' => ['GET'], '/general-journals/edit' => ['GET'],
     '/general-journals/detail' => ['GET'], '/general-journals/save' => ['POST'], '/general-journals/post' => ['POST'], '/general-journals/reverse' => ['POST'],
@@ -78,12 +82,18 @@ try {
         pl_require_post();
         pl_require_csrf(pl_web_text($_POST, 'csrf'));
     }
+    if ($path === '/oauth/authorize') {
+        require_once dirname(__DIR__) . '/includes/functions/connection_web_functions.php';
+        pl_web_oauth($actorId, $user, $method);
+    }
     if (pl_demo_enabled() && in_array($path, ['/onboarding', '/setup/review', '/company/select'], true)) {
         throw new DomainException('Business setup and administration are disabled in the public sample.');
     }
     if ($path === '/start') {
+        $pendingOAuth = $_SESSION['oauth_pending'] ?? null;
         $visit = pl_demo_begin_visit(pl_web_text($_POST, 'csrf'), pl_web_text($_POST, 'currency', 'USD'));
         $_SESSION['company_id'] = $visit['company_id'];
+        if (is_array($pendingOAuth)) { $_SESSION['oauth_pending'] = $pendingOAuth; pl_redirect('/oauth/authorize?resume=1'); }
         pl_redirect('/reports');
     }
     if ($path === '/login') {
@@ -101,7 +111,9 @@ try {
             if (!$authenticated) {
                 pl_form_failure('/login', ['email' => pl_web_text($_POST, 'email')], 'We could not sign you in. Check your details, or wait a few minutes before trying again.');
             }
+            $pendingOAuth = $_SESSION['oauth_pending'] ?? null;
             pl_login_session($authenticated);
+            if (is_array($pendingOAuth)) { $_SESSION['oauth_pending'] = $pendingOAuth; pl_redirect('/oauth/authorize?resume=1'); }
             pl_redirect('/companies');
         }
         pl_render('login', ['title' => 'Sign in', 'form' => pl_form_state('/login')]);
@@ -189,6 +201,14 @@ try {
     $company = pl_web_context($actorId);
     $companyId = (int) $company['id'];
     $bookId = (int) $company['book_id'];
+    if ($path === '/tables') {
+        require_once dirname(__DIR__) . '/includes/functions/table_web_functions.php';
+        pl_web_table($actorId, $company);
+    }
+    if ($path === '/connections') {
+        require_once dirname(__DIR__) . '/includes/functions/connection_web_functions.php';
+        pl_web_connections($actorId, $user, $company, $method);
+    }
     if ($path === '/reports/export') {
         $export = pl_export_report($actorId, $companyId, $bookId, pl_web_text($_GET, 'report'),
             pl_web_text($_GET, 'to', gmdate('Y-m-d')), pl_web_text($_GET, 'from') ?: null,

@@ -1,5 +1,16 @@
 'use strict';
 
+document.querySelectorAll('[data-demo-expiry]').forEach((element) => {
+    const expires = Date.parse(element.dataset.demoExpiry);
+    if (!Number.isFinite(expires)) return;
+    const update = () => {
+        const minutes = Math.max(0, Math.ceil((expires - Date.now()) / 60000));
+        element.textContent = minutes > 0 ? `${minutes} minute${minutes === 1 ? '' : 's'} remaining` : 'Sample expired. Start a new sample and reconnect your clients.';
+    };
+    update();
+    const timer = setInterval(() => { update(); if (Date.now() >= expires) clearInterval(timer); }, 15000);
+});
+
 // Server-rendered routes and forms remain usable without JavaScript.
 // After a rejected submission, move keyboard focus to the preserved error summary.
 document.querySelector('[data-form-error]')?.focus();

@@ -4,6 +4,14 @@ Source revision: `{{SOURCE_COMMIT}}`.
 
 This package is a development preview of the restarted PHP Ledger application. It preserves the lightweight BixiSoft PHP/MeekroDB structure while separating accounting functions, server permissions, templates and the public front controller. It is intended for evaluation and supported pilot preparation.
 
+## 0.2.0-preview candidate changes
+
+- Scoped read-only `/api/v1/` and native `/mcp` Streamable HTTP, using the same financial services as browser reports; standalone PHP STDIO-to-HTTPS bridge with no database credentials.
+- Existing-session Connections and OAuth consent, personal tokens shown once/stored hashed, S256 authorization code, exact redirect/resource checks, refresh rotation, durable revocation and demo generation/reset expiry. Seven additive tables in `011_read_connections`; twelve migration identities and the existing 35 accounting guards.
+- Locally bundled DataTables 3.0.4 for transactions, general journals, account movements and bank rows. Running balances precede filtering/sorting/paging; original views and CSV exports remain available.
+- Pinned MCP/OAuth dependencies and credential-free versioned client recipes, a disabled n8n native-MCP workflow and independent OpenAPI description.
+- This candidate is not a verified compatibility claim for Codex, Claude, ChatGPT, n8n, OpenClaw, Hermes Agent, Open WebUI or llm.bixisoft.com. Their separate application acceptance matrix remains open in `docs/INTEGRATIONS.md`; the public release remains 0.1.5 until the gates close. Multi-year demo packs follow in Release C.
+
 ## 0.1.5-preview changes
 
 - Product-specific accessible names for the no-JavaScript POS quantity inputs, contributed by [Nagulanvelu in PR #65](https://github.com/rmak78/phpledger/pull/65).

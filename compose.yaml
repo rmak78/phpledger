@@ -12,11 +12,15 @@ services:
       PL_DB_USER: phpledger
       PL_DB_PASSWORD: ${PL_DB_PASSWORD:?Set PL_DB_PASSWORD in .env}
       PL_SESSION_SECURE: "0"
+      PL_PUBLIC_URL: http://127.0.0.1:${PL_WEB_PORT:-18200}
+      PL_ALLOWED_ORIGINS: ${PL_ALLOWED_ORIGINS:-}
+      PL_OAUTH_KEY_DIRECTORY: /var/lib/phpledger/oauth
     volumes:
       - ./www:/var/www/phpledger/www:ro
       - ./tests:/var/www/phpledger/tests:ro
       - ./tools:/var/www/phpledger/tools:ro
       - ./resources:/var/www/phpledger/resources:ro
+      - ledger_private:/var/lib/phpledger:ro
     depends_on:
       db:
         condition: service_healthy
@@ -80,6 +84,7 @@ services:
     command: ["composer", "check"]
 volumes:
   ledger_data:
+  ledger_private:
 networks:
   default:
     ipam:

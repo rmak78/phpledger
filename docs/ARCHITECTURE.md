@@ -2,6 +2,12 @@
 
 ## Runtime and application structure
 
+### Read integration candidate (0.2.0-preview)
+
+The local candidate extends the shared bootstrap with connection/read services and the explicit front controller with `/api/v1/`, `/mcp`, OAuth, `/connections` and `/tables`. `mcp/sdk` 0.8.1 supplies Streamable HTTP protocol handling; League OAuth2 Server 9.4.1 supplies authorization-code/refresh flows using MeekroDB repositories and the existing users/permissions. No browser session is constructed for machine callers. Financial DTOs invoke the same accounting services as browser reports. Grants contain explicit actor/client/company/book scope and generation-bound demo expiry; each request rechecks current access and durable revocation.
+
+Migration `011_read_connections` adds seven lifecycle/session/rate/audit tables, without changing posted journals. Browser DataTables 3.0.4 calls the same scoped list services; account window balances are computed before search/sort/pagination. Runtime and key/proxy/discovery requirements, exact limits and the still-open named-client matrix are in [Integrations](INTEGRATIONS.md). This local implementation does not establish hosted/client compatibility or add financial commands.
+
 Target PHP 8.5 on its current stable patch and MySQL 8.4 LTS/InnoDB. Pin third-party PHP dependencies through Composer and commit the lockfile. Use Docker Compose for reproducible development; validate hosting compatibility before claiming a supported installation target.
 
 Keep BixiSoft's lightweight modular architecture: one application, one shared bootstrap, explicit routes, PHP-rendered templates, reusable typed functions, and a maintained MeekroDB dependency. Do not import Agency75 CRM business modules or settings. The reference project demonstrates conventions; it does not prove PHP 8.5 compatibility.

@@ -23,6 +23,8 @@ Clear the private shell variable after use. Sign in, create a business or isolat
 
 ## Verify changes
 
+The Release B candidate adds scoped API/MCP and Connections. Configure OAuth private storage and `PL_PUBLIC_URL` using [Integrations](INTEGRATIONS.md). Local Compose supplies the loopback public URL and a separate private volume; keys are generated once and mounted read-only into the web runtime. Rebuild the PHP images after changing `composer.lock`. Run `php tests/run.php --suite=connections` inside the isolated test service for the focused API/OAuth/bridge suite. `php tools/export-openapi.php` writes the independent OpenAPI description using the configured application URL.
+
 ```powershell
 docker compose --profile test run --rm test composer check
 docker compose --profile test run --rm test composer validate --no-interaction

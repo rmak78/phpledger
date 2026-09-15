@@ -214,7 +214,7 @@ function pl_bank_import_statement(int $actorId, int $companyId, int $bookId, arr
     });
 }
 
-function pl_bank_get_statement(int $actorId, int $companyId, int $bookId, int $statementId): array
+function pl_bank_get_statement(int $actorId, int $companyId, int $bookId, int $statementId, ?array $options = null): array
 {
     pl_require_company_access($actorId, $companyId);
     pl_ledger_book($companyId, $bookId);
@@ -225,7 +225,24 @@ function pl_bank_get_statement(int $actorId, int $companyId, int $bookId, int $s
     foreach (['id', 'company_id', 'book_id', 'account_id', 'revision', 'imported_by'] as $field) {
         $statement[$field] = (int) $statement[$field];
     }
-    $statement['rows'] = DB::query('SELECT r.*, m.journal_line_id, m.matched_at, m.matched_by, l.journal_id, j.journal_date FROM pl_bank_statement_rows r LEFT JOIN pl_bank_matches m ON m.row_id = r.id LEFT JOIN pl_journal_lines l ON l.id = m.journal_line_id LEFT JOIN pl_journals j ON j.id = l.journal_id WHERE r.statement_id = %i AND r.company_id = %i AND r.book_id = %i ORDER BY r.line_number FOR SHARE', $statementId, $companyId, $bookId);
+    $where = ' FROM pl_bank_statement_rows r LEFT JOIN pl_bank_matches m ON m.row_id = r.id LEFT JOIN pl_journal_lines l ON l.id = m.journal_line_id LEFT JOIN pl_journals j ON j.id = l.journal_id WHERE r.statement_id = %i AND r.company_id = %i AND r.book_id = %i';
+    $args = [$statementId, $companyId, $bookId];
+    $limit = '';
+    $order = 'r.line_number';
+    if ($options !== null) {
+        $size = pl_table_size($options['page_size'] ?? 25);
+        $statement['records_total'] = (int) DB::queryFirstField('SELECT COUNT(*)' . $where, ...$args);
+        $search = pl_ledger_text($options['search'] ?? '', 'Search', 160, false);
+        if ($search !== '') {
+            $where .= ' AND (LOCATE(%s, r.reference) > 0 OR LOCATE(%s, r.description) > 0)';
+            array_push($args, $search, $search);
+        }
+        $statement['filtered_total'] = $search === '' ? $statement['records_total'] : (int) DB::queryFirstField('SELECT COUNT(*)' . $where, ...$args);
+        $order = pl_table_order($options, ['date' => 'r.transaction_date', 'reference' => 'r.reference', 'money_in' => 'r.money_in', 'money_out' => 'r.money_out', 'match' => 'm.journal_line_id'], 'r.line_number', 'r.line_number');
+        $limit = ' LIMIT %i OFFSET %i';
+        array_push($args, $size, (max(1, (int) ($options['page'] ?? 1)) - 1) * $size);
+    }
+    $statement['rows'] = DB::query('SELECT r.*, m.journal_line_id, m.matched_at, m.matched_by, l.journal_id, j.journal_date' . $where . ' ORDER BY ' . $order . $limit . ' FOR SHARE', ...$args);
     return $statement;
 }
 

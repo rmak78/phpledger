@@ -15,3 +15,43 @@ MeekroDB is kept separately in vendor so recipients can inspect, modify and repl
 The PHP Ledger mark is supplied with the project owner's authorization to identify the application; no trademark rights are granted. Marketing photography and partner logos are not part of this application archive. PHPStan is development tooling and must not appear in its production dependency payload.
 
 The archive contains PHP source and browser assets, not PHP/MySQL/Apache/Docker binaries. Those are separately obtained runtime prerequisites. No third-party endorsement or accounting certification is claimed.
+
+## Integration candidate dependencies
+
+The 0.2.0 candidate retains every production dependency license file in `vendor`; exact versions and source revisions are pinned in `composer.lock`. PHPStan remains excluded.
+
+| Package | Version | Declared license |
+|---|---|---|
+| defuse/php-encryption | v2.4.0 | MIT |
+| doctrine/deprecations | 1.1.6 | MIT |
+| lcobucci/jwt | 5.6.0 | BSD-3-Clause |
+| league/event | 3.0.3 | MIT |
+| league/oauth2-server | 9.4.1 | MIT |
+| league/uri | 7.8.1 | MIT |
+| league/uri-interfaces | 7.8.1 | MIT |
+| mcp/sdk | v0.8.1 | Apache-2.0 |
+| nyholm/psr7 | 1.8.2 | MIT |
+| opis/json-schema | 2.6.0 | Apache-2.0 |
+| opis/string | 2.1.0 | Apache-2.0 |
+| opis/uri | 1.1.0 | Apache-2.0 |
+| paragonie/random_compat | v9.99.100 | MIT |
+| php-http/discovery | 1.20.0 | MIT |
+| phpdocumentor/reflection-common | 2.2.0 | MIT |
+| phpdocumentor/reflection-docblock | 6.0.3 | MIT |
+| phpdocumentor/type-resolver | 2.0.0 | MIT |
+| phpstan/phpdoc-parser | 2.3.5 | MIT |
+| psr/clock | 1.0.0 | MIT |
+| psr/container | 2.0.2 | MIT |
+| psr/event-dispatcher | 1.0.0 | MIT |
+| psr/http-client | 1.0.3 | MIT |
+| psr/http-factory | 1.1.0 | MIT |
+| psr/http-message | 2.0 | MIT |
+| psr/http-server-handler | 1.0.2 | MIT |
+| psr/http-server-middleware | 1.0.2 | MIT |
+| psr/log | 3.0.2 | MIT |
+| symfony/deprecation-contracts | v3.7.1 | MIT |
+| symfony/polyfill-uuid | v1.37.0 | MIT |
+| symfony/uid | v8.1.5 | MIT |
+| webmozart/assert | 2.4.1 | MIT |
+
+DataTables 3.0.4 is MIT licensed by SpryMedia Ltd. Its MIT notice and pinned source/hash record are bundled under `www/phpledger/public/assets/vendor/datatables-3.0.4`. It is served locally, without a CDN request during application use.

@@ -12,8 +12,14 @@
     <?php if ($view === 'general-editor'): ?><script src="<?= pl_e(pl_url('/assets/core-journal.js', ['v' => '0.1.2'])) ?>" defer></script><?php endif; ?>
     <?php if ($view === 'pos'): ?><link rel="stylesheet" href="<?= pl_e(pl_url('/assets/pos.css')) ?>"><script src="<?= pl_e(pl_url('/assets/pos.js')) ?>" defer></script><?php endif; ?>
     <script src="<?= pl_e(pl_url('/assets/app.js', ['v' => '20260915-accounting'])) ?>" defer></script>
+    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/ledger-tables.css')) ?>">
+    <?php if (in_array($view, ['transactions','general-journals','account','bank-reconciliation'], true)): ?>
+    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/vendor/datatables-3.0.4/dataTables.min.css')) ?>">
+    <script src="<?= pl_e(pl_url('/assets/vendor/datatables-3.0.4/dataTables.min.js')) ?>" defer></script>
+    <script src="<?= pl_e(pl_url('/assets/ledger-tables.js')) ?>" defer></script>
+    <?php endif; ?>
 </head>
-<body class="view-<?= pl_e($view) ?>">
+<body class="view-<?= pl_e($view) ?>" <?php if ($company): ?>data-company-id="<?= (int) $company['id'] ?>" data-book-id="<?= (int) $company['book_id'] ?>" data-table-url="<?= pl_e(pl_url('/tables')) ?>"<?php endif; ?>>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="app-header">
     <a class="brand" href="<?= pl_e(pl_url($user ? '/companies' : '/login')) ?>" aria-label="PHP Ledger home"><span class="brand-frame"><img src="<?= pl_e(pl_url('/assets/brand/phpledger-horizontal.png')) ?>" alt="PHP Ledger" width="2172" height="724"></span></a>
@@ -27,6 +33,7 @@
         <a href="<?= pl_e(pl_url('/pos')) ?>" <?= $view === 'pos' ? 'aria-current="page"' : '' ?>><?= pl_icon('receipt') ?><span>Point of sale</span></a><?php endif; ?>
         <a href="<?= pl_e(pl_url('/reports')) ?>" <?= in_array($view, ['reports', 'balance-sheet', 'profit-loss', 'cash-forecast', 'trial-balance', 'account', 'journal'], true) ? 'aria-current="page"' : '' ?>><?= pl_icon('book') ?><span>Reports</span></a>
         <?php else: ?><a href="<?= pl_e(pl_url('/companies')) ?>" <?= $view === 'companies' ? 'aria-current="page"' : '' ?>>Your businesses</a><?php endif; ?>
+        <?php if ($company): ?><a href="<?= pl_e(pl_url('/connections')) ?>" <?= $view === 'connections' ? 'aria-current="page"' : '' ?>>Connections</a><?php endif; ?>
         <a href="<?= pl_e(pl_url('/help')) ?>" <?= $view === 'help' ? 'aria-current="page"' : '' ?>>Help</a>
     </nav>
     <details class="user-menu"><summary><span class="avatar"><?= pl_e(mb_strtoupper(mb_substr($user['display_name'], 0, 1))) ?></span><span class="user-name"><?= pl_e($user['display_name']) ?></span><?= pl_icon('chevron-down') ?></summary>
@@ -35,7 +42,7 @@
     <?php else: ?><span class="header-note">Your business. Clearly accounted for.</span><?php endif; ?>
 </header>
 <?php if (pl_demo_enabled() && $view !== 'error'): $demoState = DB::queryFirstRow('SELECT next_reset_at FROM pl_demo_state WHERE id = 1'); ?>
-<div class="demo-banner"><span><strong>Public demo</strong> · Separate synthetic data for each visitor. Destructive actions are disabled.</span><span>Resets <time data-local-time datetime="<?= pl_e(str_replace(' ', 'T', $demoState['next_reset_at']) . 'Z') ?>"><?= pl_e($demoState['next_reset_at']) ?> UTC</time></span></div>
+<div class="demo-banner"><span><strong>Public demo</strong> · Separate synthetic data for each visitor. Destructive actions are disabled.</span><span>Resets <time data-local-time datetime="<?= pl_e(str_replace(' ', 'T', $demoState['next_reset_at']) . 'Z') ?>"><?= pl_e($demoState['next_reset_at']) ?> UTC</time> · <span data-demo-expiry="<?= pl_e(str_replace(' ', 'T', $demoState['next_reset_at']) . 'Z') ?>"><?= max(0, (int) ceil((strtotime($demoState['next_reset_at'] . ' UTC') - time()) / 60)) ?> minutes remaining</span></span></div>
 <?php endif; ?>
 <?php if ($company): ?>
 <div class="company-bar"><a href="<?= pl_e(pl_url('/companies')) ?>" class="company-switch"><?= pl_icon('building') ?><strong><?= pl_e($company['name']) ?></strong><?= pl_icon('chevron-down') ?></a>

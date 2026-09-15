@@ -114,6 +114,12 @@ function pl_get_general_draft(int $actorId, int $companyId, int $bookId, int $id
     pl_ledger_book($companyId, $bookId);
     $row = DB::queryFirstRow('SELECT d.*, r.id AS reversal_journal_id FROM pl_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.id = %i AND d.company_id = %i AND d.book_id = %i FOR SHARE', $id, $companyId, $bookId);
     if (!$row) { throw new DomainException('This general journal is not available in the selected company and book.'); }
+    return pl_general_draft_view($row);
+}
+
+/** Format an already authorized row; shared by single-source and bounded-list reads. */
+function pl_general_draft_view(array $row): array
+{
     foreach (['id', 'company_id', 'book_id', 'revision'] as $field) { $row[$field] = (int) $row[$field]; }
     foreach (['journal_id', 'reversal_journal_id'] as $field) { $row[$field] = $row[$field] === null ? null : (int) $row[$field]; }
     $row['lines'] = json_decode((string) $row['lines'], true, 512, JSON_THROW_ON_ERROR);
@@ -197,13 +203,23 @@ function pl_reverse_general_draft(int $actorId, int $companyId, int $bookId, int
     });
 }
 
-function pl_list_general_drafts(int $actorId, int $companyId, int $bookId, int $page = 1): array
+function pl_list_general_drafts(int $actorId, int $companyId, int $bookId, int $page = 1, array $options = []): array
 {
     pl_require_company_access($actorId, $companyId);
     pl_ledger_book($companyId, $bookId);
     $total = (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_general_drafts WHERE company_id = %i AND book_id = %i', $companyId, $bookId);
-    $pages = max(1, (int) ceil($total / 50));
+    $size = pl_table_size($options['page_size'] ?? 50);
+    $search = pl_ledger_text($options['search'] ?? '', 'Search', 160, false);
+    $where = ' FROM pl_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = %i AND d.book_id = %i';
+    $args = [$companyId, $bookId];
+    if ($search !== '') {
+        $where .= ' AND (LOCATE(%s, d.description) > 0 OR LOCATE(%s, d.reference) > 0 OR LOCATE(%s, CONCAT(\'GJ-\', LPAD(d.id, 6, \'0\'))) > 0)';
+        array_push($args, $search, $search, strtoupper($search));
+    }
+    $filtered = $search === '' ? $total : (int) DB::queryFirstField('SELECT COUNT(*)' . $where, ...$args);
+    $pages = max(1, (int) ceil($filtered / $size));
     $page = min($pages, max(1, $page));
-    $ids = DB::queryFirstColumn('SELECT id FROM pl_general_drafts WHERE company_id = %i AND book_id = %i ORDER BY document_date DESC, id DESC LIMIT 50 OFFSET %i', $companyId, $bookId, ($page - 1) * 50);
-    return ['rows' => array_map(static fn ($id) => pl_get_general_draft($actorId, $companyId, $bookId, (int) $id), $ids), 'total' => $total, 'page' => $page, 'pages' => $pages];
+    $order = pl_table_order($options, ['date' => 'd.document_date', 'description' => 'd.description', 'status' => "CASE WHEN d.journal_id IS NULL THEN 'draft' WHEN r.id IS NOT NULL THEN 'reversed' ELSE 'posted' END"], 'd.document_date DESC, d.id DESC', 'd.id DESC');
+    $rows = DB::query('SELECT d.*, r.id AS reversal_journal_id' . $where . ' ORDER BY ' . $order . ' LIMIT %i OFFSET %i', ...array_merge($args, [$size, ($page - 1) * $size]));
+    return ['rows' => array_map('pl_general_draft_view', $rows), 'total' => $filtered, 'records_total' => $total, 'page' => $page, 'pages' => $pages];
 }
