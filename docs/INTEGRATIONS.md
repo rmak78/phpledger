@@ -83,7 +83,7 @@ In a Claude account with custom remote connectors, add the exact HTTPS MCP URL a
 
 ### ChatGPT — recipe 1
 
-Use the account's supported custom connection/plugin setup, choose the HTTPS MCP URL and OAuth, and consent to the selected sample company/book. Product names and availability vary by account; record the exact supported UI and build. Ask for reports and trace one figure to its source. [Official custom plugin connection guide](https://developers.openai.com/plugins/deploy/connect-chatgpt). The current Chrome control failure prevents verifying that UI here.
+Use the account's supported custom connection/plugin setup, choose the HTTPS MCP URL and OAuth, and consent to the selected sample company/book. Product names and availability vary by account; record the exact supported UI and build. Ask for reports and trace one figure to its source. [Official custom plugin connection guide](https://developers.openai.com/plugins/deploy/connect-chatgpt). An authenticated custom connection UI was not available for this acceptance run.
 
 ### n8n — recipe 1
 
@@ -109,14 +109,14 @@ A fresh public `/props` read returned **b8790-be76dd0bb** on 15 September 2026, 
 
 | Client | Observed client version | Acceptance status |
 |---|---|---|
-| Codex (remote and STDIO) | CLI 0.154.0 installed | Open: application session/read journey not run |
+| Codex (remote and STDIO) | CLI 0.154.0 | Verified: live tool discovery, all four reports, exact browser parity, pagination/source detail, scope denial, revocation, hourly expiry/reset and new-generation reconnect |
 | Claude (OAuth HTTP) | Unavailable | Open: authenticated client UI unavailable |
 | ChatGPT (OAuth HTTP) | Unavailable | Open: authenticated custom connection UI unavailable |
 | n8n (native HTTP) | No installed version verified; recipe node 1.1 | Open: import/native execution and OAuth recipe test |
 | OpenClaw | No installed version verified | Open: private agent session |
 | Hermes Agent (HTTP and STDIO) | No installed version verified | Open: discovery/report/pagination session |
 | Open WebUI | No deployed version verified | Open: two-user OAuth isolation |
-| llm.bixisoft.com | b8790-be76dd0bb from public props | Open: actual deployed UI financial read |
+| llm.bixisoft.com | llama.cpp b8790-be76dd0bb; gemma-4-fast | Actual UI reads verified: all four reports, pagination/source, cross-company denial and expiry. Full compatibility gate remains partial: dedicated revocation and exhaustive browser parity checks pending |
 
 For **each** client, record endpoint, explicit transport, authentication, build, actor's authorized pairs, discovered tools, TB/P&L/Balance Sheet/account statement, pagination, source detail and exact browser comparison. Verify cross-company and write denial, expiry, revocation and the next real demo reset. Separate successful tool execution from model interpretation. Use concurrent private clients, malformed arguments and origin/reconnect checks. Credentials and result bodies never belong in published receipts.
 
@@ -129,3 +129,9 @@ Local browser evidence covers desktop 1440, tablet 768 and mobile 390, including
 ## Native-client corrections found during release verification
 
 The STDIO bridge preserves empty JSON objects in capabilities and schemas; decoding them as associative PHP arrays changed `{}` into `[]` and caused Codex to reject initialization. The demo now queues concurrent admissions for at most two seconds while preserving the same maintenance lock. Busy bootstrap responses retain CORS and Retry-After headers for approved origins. These corrections have targeted regression coverage; the actual client matrix is updated from execution receipts.
+
+## 0.2.1 live acceptance
+
+The [acceptance receipt](repository/sprint-05/PREVIEW-0.2.1-ACCEPTANCE.json) records final source `a8ee38a37616cc245102404bd47b6afea9373a23`. Codex 0.154.0 completed the same four-report journey through remote HTTPS and the packaged STDIO bridge with dedicated visitor credentials. All report totals matched the browser and API exactly. The real 19:00 UTC reset on 15 September completed at 19:00:13; old native credentials were denied and both transports read a fresh generation. Two independent users also passed browser OAuth consent, scope isolation, rotation and replay rejection.
+
+The actual BixiSoft UI discovered 11 tools and executed financial reads. Its model mislabelled the expected scope denial as a failed check; the server correctly denied the request. Its remaining matrix items are explicitly partial. No other named client is represented as tested by these results.
