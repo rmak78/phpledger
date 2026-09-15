@@ -1,5 +1,8 @@
 # Website design decisions
 
+Current live release: **0.1.4-preview**, including the financial-report/tablet layout correction. [Publication and validation](../../repository/sprint-05/PREVIEW-0.1.3-VALIDATION.md) records the exact package and hosted checks. Earlier dated publication sections below preserve their original scope.
+
+
 ## Current selected direction — 15 September 2026
 
 The owner's current selection is **A, Workbench, with B's photo treatment** from the [A/B design canvas](https://claude.ai/artifact/9KEqRSg3TL14tZSZVscuaF). The canvas contains home-page views at 1440 and 390 pixels and a download-page view for each direction. This decision supersedes the earlier Field Notes website selection preserved below.

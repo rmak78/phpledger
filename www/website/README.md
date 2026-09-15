@@ -25,7 +25,7 @@ The existing website Compose service serves `public` at [http://127.0.0.1:18201/
 | `/` | Product introduction, real screen captures, reports and start paths |
 | `/product/` | Company setup, receipt/expense posting, corrections and reports |
 | `/point-of-sale/` | Preview cash-sale journey and supported boundaries |
-| `/download/` | Verified 0.1.3-preview assets, checksum, installation requirements and FAQ |
+| `/download/` | Verified 0.1.4-preview assets, checksum, installation requirements and FAQ |
 | `/support/` | Setup/training/troubleshooting information and local email-draft form |
 | `/roadmap/` | Opening balances/cutover → period administration → bank reconciliation, then later gates |
 | `/news/` | Release index and RSS link |

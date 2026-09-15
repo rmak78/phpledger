@@ -45,3 +45,6 @@ API/MCP reads precede commands. Commands need explicit permissions, company scop
 No supported module lifecycle, public business API or MCP server is available in the preview. [[Tax research|Tax-Research]] contains research candidates only.
 
 [[Architecture]] · [[Accounting and reports|Accounting-and-Reports]] · [[Roadmap]]
+
+
+The planned read milestone also covers DataTables server-side pagination for large lists, reusing the same scoped MeekroDB query services and exact balances. See the [implementation plan](https://github.com/rmak78/phpledger/blob/master/docs/MODULE-ROADMAP.md#large-table-interface-and-meekrodb-follow-up-15-september-2026). Four compact multi-year company histories, including salaries/assets/cash/banks and closing examples, are [planned](https://github.com/rmak78/phpledger/blob/master/docs/DEMO.md#planned-multi-year-teaching-histories-owner-direction-15-september-2026); they are not in the current demo.

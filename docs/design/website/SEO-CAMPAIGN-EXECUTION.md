@@ -1,5 +1,8 @@
 # SEO discovery and preview campaign execution
 
+Publication update: 0.1.3 and the 0.1.4 layout correction are live. The website release `website-redesign-20260915-123255` includes the corrected crawler summary, download and new 0.1.4 article. IndexNow returned HTTP 202 for the initial ten URLs, then HTTP 200 for six changed 0.1.4 URLs; receipt does not establish indexing. Public release/news/RSS publication and discovery submission have started; social/ad execution and Google/Bing account verification remain pending. The 0.1.3 feature copy below remains a feature announcement; any new post should link to the current 0.1.4 download.
+
+
 **Priority: high, parallel to product development. Updated 15 September 2026.**
 
 The owner requested that completed work go live first and that discovery and marketing start in parallel. Product implementation keeps its approved order: **API/MCP read access → controlled commands → optional AR → optional AP**. This kit does not move subledgers ahead of that order.

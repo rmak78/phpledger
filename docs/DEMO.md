@@ -109,3 +109,42 @@ The hosted counterpart passed **68 HTTP checks**, including secure scoped cookie
 At the actual 18:00 UTC boundary the scheduler rebuilt only `phpledger_demo`. Empty synthetic tables and a temporary maintenance response were observed during rebuilding; by 18:00:17 the prior browser session had returned to entry and started a clean GBP sample. The generation changed, the next reset became 19:00 UTC, the scheduler did not restart, and the existing host MySQL process and demo database container were unchanged. The three session/reset assertions passed. The temporary maintenance interval and a separate busy response during concurrent QA are expected behavior of the current serialized demo, not throughput validation.
 
 Public browser evidence is recorded in the [independent launch check](design/website/qa/live-20260914/README.md). These checks do not establish production throughput, monitored disaster recovery, regulatory/accounting approval, receipt-printer compatibility, accessibility conformance or observed usability targets. The project license/provenance decision still gates the first downloadable package. See the [hosted publication receipt](VALIDATION.md#hosted-website-and-restricted-demo-publication) for exact deployment scope and follow-up static changes.
+
+
+## Planned multi-year teaching histories (owner direction, 15 September 2026)
+
+Status: research and implementation plan; not loaded into the public demo. The owner explicitly wants variety of transaction types across multiple years, not high transaction volume. Plan four choices at demo entry: service agency, retail shop, seasonal business and distributor. Retain one private company per visitor initially and the existing scoped services and reset model.
+
+Target approximately 50-80 counted documents/general-journal drafts per selected company across two years, including a small open-period practice tail and 2-4 editable drafts. Leave at least 20 visitor actions under the current default 100-document cap; counts are acceptance budgets, not a reason to increase the cap. Use versioned fixed business dates and report links that open populated periods. A reset restores the same reviewed fixture version rather than moving historical dates each hour.
+
+### Accounting variety and company stories
+
+| Company | Distinct situations and report questions |
+|---|---|
+| Service agency | Service income, customer advances and earned release, employee salary expense/payable/payment, contractor accrual, prepaid insurance/software, equipment/depreciation, owner funding/drawings. Why can cash rise before income is earned, or fall while profit grows? |
+| Retail shop | Cash sales, bank deposit, petty-cash spending/replenishment, stock purchases and explicitly manual supported COGS/count adjustments, supplier credits, salary changes, equipment and a linked correction. Why are bank deposits not revenue, and why can higher sales produce lower profit? |
+| Seasonal business | Quiet/busy months, booking advances, earned releases, refund/cancellation examples, pre-season maintenance, seasonal wages, prepaid costs and equipment. How does surplus from the busy period finance the quiet period? |
+| Distributor | Reconciled opening controls, manually recorded credit sales/purchases and settlements, late/partial collection across a year boundary, customer/supplier credits, delivery expenses, loan principal/interest and supported manual stock/COGS adjustments. Why can a profitable business be short of cash? |
+
+Each company has separate operating bank, second bank, cash-on-hand and petty-cash accounts, appropriate asset and accumulated-depreciation accounts, and a small fictional staff/salary schedule. Include bank-to-bank transfers, cash deposits, petty-cash replenishment, salary accrual and settlement, an asset purchase and later adjustment, a reversal, and an outstanding item that crosses a period boundary. Names, amounts and schedules are authored synthetic examples; no personal banking/payroll details or real customer identifiers are imported.
+
+### Closing examples
+
+| Frequency | Example and existing-capability boundary |
+|---|---|
+| Daily | Cash count, petty-cash check, bank deposit and documented difference/adjustment, followed by that day's journal/account balances. This is a teaching close checklist; a POS shift-lock workflow is not implemented. |
+| Monthly | Salary accrual/payment, depreciation, prepaid release, accrued expenses, exact bank reconciliation, trial balance, P&L and balance sheet, then the supported reasoned period close. Include a traceable correction/reopen example where the service permits it. |
+| Quarterly | Review three monthly periods, reconcile asset/payroll/control schedules, compare supported date-filtered results and document adjustments before closing the last open month. Do not create overlapping quarterly periods. |
+| Yearly | December adjustments, asset/liability review, annual report checks, outstanding balances carried into January and a next-year reversal/settlement. Monthly period closure is distinct from formal year-end earnings closing or issued reviewed statements; those rules need their own accounting acceptance. |
+
+Periods remain nonoverlapping. Daily, quarterly and yearly teaching reviews must not create ranges that overlap the monthly accounting periods. Salary journals and supporting staff schedules do not implement payroll calculations or statutory withholding. Distributor/retail control schedules and manual journals do not implement customer/vendor subledgers, allocations, inventory valuation or stock screens. Full module workflows become acceptance fixtures when their modules exist.
+
+### Delivery and acceptance
+
+1. Author original compact, versioned packs using the existing sample/resource conventions. Include source references, precise transaction types, expected effects and three guided report questions per company. Monthly summaries must say they are summaries; exclude individually illustrated transactions from them to prevent double recognition.
+2. Load only into new isolated samples through the current setup, account, posting/reversal, opening, period and bank services. Pin pack/version/digest/dates and deterministic source identities. No direct posted-journal insertion and no new auth/database layer.
+3. Independently reconcile each month end: opening+movement=closing, debit=credit, assets=liabilities+equity/earned profit, report totals=ledger details, and synthetic support schedules=declared controls. Cover filtered openings, same-day ordering, reversals and the 50-row page boundary with at least one meaningful ledger.
+4. Measure compact setup/read/reset behavior before proposing capacity or provisioning architecture changes. Preserve visitor isolation, the normal hourly reset and room for user experiments.
+5. Use the packs as reference fixtures alongside API/MCP reads, then controlled commands, then optional AR/AP. Dataset planning does not reprioritize AR/AP or mark reviewed reporting complete. No migration is currently proposed solely for the fixture content; any needed permission/workflow change requires its own narrow design.
+
+Research references: [UCI Online Retail II](https://archive.ics.uci.edu/dataset/502/online+retail+ii) provides two years of sales/cancellations, not complete books (CC BY 4.0; no workbook import planned). [Microsoft Wide World Importers workflows](https://learn.microsoft.com/en-us/sql/samples/wide-world-importers-what-is?view=sql-server-ver17) inform distributor event coverage. [OpenStax journal/ledger examples](https://openstax.org/books/principles-financial-accounting/pages/3-5-use-journal-entries-to-record-transactions-and-post-to-t-accounts) inform concept coverage; author original content rather than copying restricted teaching material. [ONS short-let seasonality](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/shorttermletsthroughonlinecollaborativeeconomyplatformsuk/july2024tojune2025) supports a seasonal business pattern, not invented revenue/cost facts. No Google Drive references were required.
