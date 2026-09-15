@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/rmak78/phpledger/releases/tag/v0.2.1-preview"><strong>Download 0.2.1-preview</strong></a> &nbsp; · &nbsp;
+  <a href="https://github.com/rmak78/phpledger/releases/tag/v0.3.0-preview"><strong>Download 0.3.0-preview</strong></a> &nbsp; · &nbsp;
   <a href="https://phpledger.com/demo/">Try the demo</a> &nbsp; · &nbsp;
   <a href="https://github.com/rmak78/phpledger/wiki">Read the Wiki</a> &nbsp; · &nbsp;
   <a href="https://github.com/rmak78/phpledger/wiki/Roadmap">Roadmap</a> &nbsp; · &nbsp;
@@ -32,15 +32,15 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 
 **Requirements:** PHP 8.2+ (8.3 recommended) with BCMath, PDO, PDO MySQL, mbstring, sessions, cURL, OpenSSL and fileinfo, MySQL 8.4 with InnoDB, HTTPS and terminal access. Serve only `www/phpledger/public`.
 
-**Not included in the 0.2.1-preview download:** receivables and payables, inventory and cost of sales, tax, detailed historical imports, multi-book, foreign-currency posting, translations, offline use, card payments, document scanning.
+**Not included in the 0.3.0-preview workflows:** customer/vendor invoices and bills, operator allocations and ageing, inventory and cost of sales, tax, detailed historical imports, multi-book, foreign-currency entry screens, revaluation/consolidation, translations, offline use, card payments and document scanning.
 
-**Local, unreleased foundation work:** [AR/AP foundation notes](docs/strategy/AR-AP-FOUNDATIONS-NOTES.md) describe currency snapshots/manual rates, party/contact storage, internal settlement and same-identity corrections. This is prerequisite code, without AR/AP invoice/bill workflows or a new published package.
+**0.3.0-preview foundations are published:** [AR/AP foundation notes](docs/strategy/AR-AP-FOUNDATIONS-NOTES.md) describe currency snapshots/manual rates, party/contact storage, authoritative open items, internal realised settlement, same-identity corrections and an unconfigured outbox. These are prerequisites without invoice/bill operator workflows. See the [publication record](docs/repository/sprint-05/PREVIEW-0.3.0-PUBLICATION.json).
 
-**0.2.1-preview scope:** opening trial-balance/CSV cutover, a reconciled unpaid-document register, reasoned periods, bank CSV matching/reconciliation, core CSV exports and owner-controlled POS modules. Open **Reports → Account ledger** for opening, debit, credit, running and closing balances; mobile entries display the balance beside each movement. Ordinary companies start with optional POS disabled. Scoped read API/MCP, existing-user OAuth/Connections and four multi-year synthetic businesses are included; AR and AP follow, with controlled commands sequenced after e-commerce/storefront. Customer/vendor subledgers, reviewed financial-statement packages, XLSX and detailed historical journals remain unfinished. See [core completion evidence](docs/repository/sprint-05/CORE-COMPLETION.md), [module contracts and validation](docs/repository/sprint-05/MODULE-FOUNDATION.md), and [local workflow guidance](docs/DEVELOPMENT.md#opening-cutover-periods-and-bank-reconciliation).
+**Existing cash and reporting scope retained in 0.3.0:** opening trial-balance/CSV cutover, a reconciled unpaid-document register, reasoned periods, bank CSV matching/reconciliation, core CSV exports and owner-controlled POS modules. Open **Reports → Account ledger** for opening, debit, credit, running and closing balances; mobile entries display the balance beside each movement. Ordinary companies start with optional POS disabled. Scoped read API/MCP, existing-user OAuth/Connections and four multi-year synthetic businesses are included; AR and AP follow, with controlled commands sequenced after e-commerce/storefront. Customer/vendor documents and operator workflows, reviewed financial-statement packages, XLSX and detailed historical journals remain unfinished. See [core completion evidence](docs/repository/sprint-05/CORE-COMPLETION.md), [module contracts and validation](docs/repository/sprint-05/MODULE-FOUNDATION.md), and [local workflow guidance](docs/DEVELOPMENT.md#opening-cutover-periods-and-bank-reconciliation).
 
 ## Who it is for
 
-The combined 0.2.1 release and four multi-year sample businesses are live. See [release validation](docs/repository/sprint-05/PREVIEW-0.2.1-VALIDATION.md), the [publication receipt](docs/repository/sprint-05/PREVIEW-0.2.1-PUBLICATION.json) and the [illustrated reporting guides](https://phpledger.com/guides/).
+The 0.3.0 foundations release and four multi-year sample businesses are live. Earlier 0.2.1 evidence remains available below. See [release validation](docs/repository/sprint-05/PREVIEW-0.2.1-VALIDATION.md), the [publication receipt](docs/repository/sprint-05/PREVIEW-0.2.1-PUBLICATION.json) and the [illustrated reporting guides](https://phpledger.com/guides/).
 
 PHP Ledger is country-neutral accounting software for small businesses, owners, bookkeepers, accountants and organisations managing multiple client companies. Pakistan is one intended regional direction, not the main market or the product's defining scope. Owner-equity reporting is a shared priority; partner capital, profit-sharing and drawings are planned examples that require the appropriate entity and accounting profile. Daily entry should work well on phones, with clear reporting and review on larger screens.
 
@@ -53,7 +53,7 @@ The application requires **PHP 8.2 or newer**; **PHP 8.3 is the recommended depl
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS remain development previews.*
 
 > [!NOTE]
-> **Evaluate the accounting core.** [Download 0.2.1-preview](https://github.com/rmak78/phpledger/releases/tag/v0.2.1-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional accounting review and pilot usability gates remain open.
+> **Evaluate the accounting core.** [Download 0.3.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.3.0-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional accounting review and pilot usability gates remain open.
 
 ## Explore the working preview
 

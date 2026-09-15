@@ -1,8 +1,8 @@
 # Revival roadmap
 
-## Local prerequisite work — AR/AP foundations, unreleased
+## Published prerequisite work — AR/AP foundations, 0.3.0-preview
 
-The owner-approved foundation task adds currency snapshots/manual rate revisions, country-neutral parties/contacts, internal open-item recognition and realised settlement, same-identity source corrections, and an inactive outbound dispatch foundation. [Foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) retain resolved decisions and validation. This work does not update the published 0.2.1 download, website, Wiki or demo.
+The owner-approved foundation task adds currency snapshots/manual rate revisions, country-neutral parties/contacts, internal open-item recognition and realised settlement, same-identity source corrections, and an inactive outbound dispatch foundation. [Foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) retain resolved decisions and validation. The owner subsequently authorized 0.3.0 publication of the package, hosted demo and completed website. The Wiki was not changed by this release; [the current publication record](repository/sprint-05/PREVIEW-0.3.0-PUBLICATION.json) separates live and local evidence.
 
 AR/AP invoice/bill documents and workflows follow this foundation. Existing aggregate balances require a reviewed cutover; internal open-item activation accepts unused controls only. Outgoing foreign-bank payments require a later carrying-value design. Vetting enforcement, bank approval, tag assignment, external connectors, rate providers, revaluation, consolidation and regional tax remain deferred.
 

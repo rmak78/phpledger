@@ -377,3 +377,9 @@ Changed files: new runtime helper and preflight CLI; bootstrap, migrate/create-a
 ## Core accounts and journals — 15 September 2026
 
 The [0.1.2 core release receipt](repository/sprint-04/CORE-0.1.2-VALIDATION.md) records account statements, audited chart management, general journals, disabled tax research, migration 006, current tests and synchronized publication. Earlier receipts above remain historical evidence.
+
+## 0.3.0 publication — 16 September 2026
+
+The owner authorized the foundations package, hosted synthetic demo and completed website publication. The [combined machine-readable receipt](repository/sprint-05/PREVIEW-0.3.0-PUBLICATION.json) records exact package bytes/hash, both extracted-package runtimes, frozen-backup rehearsal, preserved original fields/receipts, 17 live migration receipts, 62 guards, stable view definers and the real hourly reset. The reset observer's transient-database timing failure is recorded explicitly; it is not reported as a completed old-token replay.
+
+The live browser exercised all four sample packs, 1440/768/390 layouts, report drilldowns, no-JavaScript support and cross-visitor denial. Website checks covered all 62 indexable pages at four widths, ten interactions and twenty final layout/encoding correction checks; all 162 published static files matched their reviewed archive hashes. Qualified accounting review, independent security review and observed business usability remain open. No operational AR/AP documents, connector activation, messages or payments were introduced.

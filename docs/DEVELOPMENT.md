@@ -2,7 +2,7 @@
 
 ## AR/AP foundations — local service and upgrade contract
 
-Read [foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) before using migrations 013–016. These are local, unreleased prerequisites, without invoice/bill UI or public write endpoints. Keep the existing MeekroDB bootstrap and use the central posting functions.
+Read [foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) before using migrations 013–016. These prerequisites are included in 0.3.0-preview, without invoice/bill UI or public write endpoints. Keep the existing MeekroDB bootstrap and use the central posting functions.
 
 - `pl_currency_rate_enter(actor, company, book, input)` accepts decimal-string manual spot/actual rates, dated provenance, reason, request key and an optional superseded row. `pl_currency_rate_lookup(..., type, source)` selects the newest applicable date/revision from that exact source. Six rate types are reserved in schema; later types have no active calculation workflow.
 - `php tools/currency-rates.php ACTOR_ID COMPANY_ID BOOK_ID INPUT.json` records a manual rate and prints only its ID/revision. Keep private input outside the web root; use synthetic data during development.

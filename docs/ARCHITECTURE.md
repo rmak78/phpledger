@@ -1,8 +1,8 @@
 # Architecture
 
-## Local AR/AP foundations — unreleased
+## AR/AP foundations — 0.3.0-preview
 
-Migrations `013_currency_foundation` through `016_correction_identity` extend the existing services; the published 0.2.1 package is unchanged. [Foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) record owner decisions, scope and validation.
+Migrations `013_currency_foundation` through `016_correction_identity` extend the existing services and are published in 0.3.0-preview. [Foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) record owner decisions, scope and validation.
 
 Every journal line stores exact transaction/base amounts and a frozen twelve-place rate snapshot, including domestic rate-one entries. Books own immutable functional currency with compatible company metadata. Accounts may designate a currency and record known/unknown monetary classification. Manual rate revisions are append-only; lookup selects an explicit source and a date no later than posting. Prior-date selection remains visible as stale. Existing request hashes retain a bounded domestic compatibility path.
 

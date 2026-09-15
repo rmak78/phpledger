@@ -1,5 +1,9 @@
 # Restricted public demo operations
 
+## Foundations release — 0.3.0-preview
+
+The owner-authorized 0.3.0 package and hosted demo use source `2d8f4417229f8472b2112e941f9c5f439937eed4` on PHP 8.3.33. Migrations 013–016 bring the schema to 56 base tables, two effective-source views, 62 guards and 17 migration receipts. A frozen live backup was restored/upgraded in isolation before cutover; original fields and receipts were preserved. The permanent reset account defines the views, and the restricted web account can read them after the real hourly reset. The four synthetic businesses and scoped read connections remain; AR/AP documents and operational workflows are still deferred. See [publication evidence](repository/sprint-05/PREVIEW-0.3.0-PUBLICATION.json).
+
 ## Combined 0.2.1 release
 
 **Published:** [0.2.1-preview](https://github.com/rmak78/phpledger/releases/tag/v0.2.1-preview), source `a8ee38a37616cc245102404bd47b6afea9373a23`, PHP 8.3.33. The [publication receipt](repository/sprint-05/PREVIEW-0.2.1-PUBLICATION.json) records the live package, website, Wiki and thirteen migration receipts; [validation](repository/sprint-05/PREVIEW-0.2.1-VALIDATION.md) includes native Codex HTTP/STDIO checks and the actual 19:00 UTC scheduled reset on 15 September 2026. Other client results are recorded individually.
