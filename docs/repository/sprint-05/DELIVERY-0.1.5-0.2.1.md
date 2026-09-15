@@ -1,5 +1,11 @@
 # Staged delivery: 0.1.5 through 0.2.1
 
+## Current publication: combined 0.2.1-preview
+
+The owner approved combining Releases B and C with the complete existing core into **0.2.1-preview**, published on 15 September 2026 UTC (16 September PKT). Native Codex HTTP and STDIO are verified; other clients remain explicitly partial or pending. All four multi-year businesses and the three illustrated guides shipped with the package, website and demo. See [publication](PREVIEW-0.2.1-PUBLICATION.json), [acceptance](PREVIEW-0.2.1-ACCEPTANCE.json) and [validation](PREVIEW-0.2.1-VALIDATION.md). The [current roadmap](../../ROADMAP.md) records the subsequent feature sequence, PHP 8.2 minimum/8.3 deployment and country-neutral direction. Entries below retain the earlier plans and evidence; they do not supersede the current release.
+
+## Original staged plan and receipts
+
 Approved implementation plan, 15 September 2026. This receipt separates implemented and verified behavior from pending release gates.
 
 | Release | Scope | Gate |

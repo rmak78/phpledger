@@ -29,6 +29,6 @@ Migration 011 adds seven connection tables; 012 replaces two demo-period guards.
 
 Native testing found and corrected two integration defects: the bridge had converted empty JSON objects into arrays, and a busy bootstrap lost approved CORS headers. Regression coverage now preserves capability objects, retains retry headers and checks bounded demo lock admission.
 
-Full machine-readable results are in [the acceptance receipt](PREVIEW-0.2.1-ACCEPTANCE.json). The publication receipt records the final live download/website hashes. Financial commands, full AR/AP, payroll, inventory/COGS and tax connectors remain future work. Independent accounting review and real-business usability remain open gates.
+Full machine-readable results are in [the acceptance receipt](PREVIEW-0.2.1-ACCEPTANCE.json). The [publication receipt](PREVIEW-0.2.1-PUBLICATION.json) records the published GitHub release, verified public download, all 117 website files, Wiki commit and live migration receipts. The release was published at 19:05 UTC on 15 September 2026 (00:05 PKT on 16 September). IndexNow accepted nine updated URLs; this does not establish indexing. Financial commands, full AR/AP, payroll, inventory/COGS and tax connectors remain future work. Independent accounting review and real-business usability remain open gates.
 
 Migrations: yes. Schema changed: yes. Raw secrets exposed: no. External/live calls: yes. Live demo changed: yes. No Google Drive documents were required. No external messages or payments were sent.

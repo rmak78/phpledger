@@ -38,6 +38,8 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 
 ## Who it is for
 
+The combined 0.2.1 release and four multi-year sample businesses are live. See [release validation](docs/repository/sprint-05/PREVIEW-0.2.1-VALIDATION.md), the [publication receipt](docs/repository/sprint-05/PREVIEW-0.2.1-PUBLICATION.json) and the [illustrated reporting guides](https://phpledger.com/guides/).
+
 PHP Ledger is country-neutral accounting software for small businesses, owners, bookkeepers, accountants and organisations managing multiple client companies. Pakistan is one intended regional direction, not the main market or the product's defining scope. Owner-equity reporting is a shared priority; partner capital, profit-sharing and drawings are planned examples that require the appropriate entity and accounting profile. Daily entry should work well on phones, with clear reporting and review on larger screens.
 
 The application requires **PHP 8.2 or newer**; **PHP 8.3 is the recommended deployment version**. Dependencies resolve against the 8.2 floor. The [hosting and runtime record](docs/strategy/HOSTING-PHP-COMPATIBILITY.md) distinguishes tested PHP versions from unverified hosting plans. Urdu, Arabic/RTL, queued offline drafts, regional connectors including Pakistan FBR, native clients and later modules remain planned.

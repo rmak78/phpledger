@@ -2,14 +2,14 @@
 
 ## Expedited combined 0.2.1 release — owner-approved
 
-The current release effort combines the complete existing accounting core, read API/MCP, Connections/OAuth, server-side tables, four multi-year sample companies and three illustrated walkthroughs into **0.2.1-preview**. A separate public 0.2.0 release is unnecessary. Verified clients are named individually; unavailable or untested clients remain pending without holding this preview. Financial correctness, authorization, installation/restore and actual hourly demo reset remain release gates. Earlier staged entries below retain their historical context. No later AR/AP, tax, native-client or write-command module is added.
+**0.2.1-preview is published.** It combines the complete existing accounting core, read API/MCP, Connections/OAuth, server-side tables, four multi-year sample companies and three illustrated walkthroughs. The [publication receipt](repository/sprint-05/PREVIEW-0.2.1-PUBLICATION.json) and [validation](repository/sprint-05/PREVIEW-0.2.1-VALIDATION.md) record financial/access checks, exact-package installation/upgrade, restoration, actual native Codex HTTP/STDIO journeys and the scheduled hourly reset. Other clients remain individually partial or pending without holding this owner-approved preview. A separate public 0.2.0 release is unnecessary. Earlier staged entries below retain their historical context. No later AR/AP, tax, native-client or write-command module is added.
 
-## Current staged delivery
+## Earlier staged delivery, superseded by the combined release
 
 The 15 September implementation plan delivers A (0.1.5-preview: contributor POS accessibility and website/SEO), B (0.2.0-preview: read API/MCP, scoped connections and server-side tables), then C (0.2.1-preview: four multi-year demo packs and reporting walkthroughs). See the [delivery receipt](repository/sprint-05/DELIVERY-0.1.5-0.2.1.md) for current evidence and open gates. The evening strategy decisions below supersede the subsequent feature order. API/MCP reads finish first, then AR/AP; controlled commands follow e-commerce/storefront. Demo/SEO preparation remains local with its own release gates. The demo hostname move stays deferred.
 
 
-Current maintenance release: **0.1.6-preview**, including contributor POS accessibility and website information/SEO. [The maintenance publication record](repository/sprint-05/PREVIEW-0.1.6-VALIDATION.md) records its package and hosted proof. Release B API/MCP/OAuth/tables are implemented locally with [client acceptance gates still open](INTEGRATIONS.md). Earlier dated publication sections below preserve their original scope.
+The preceding maintenance release was **0.1.6-preview**, including POS accessibility and website information/SEO. [Its publication record](repository/sprint-05/PREVIEW-0.1.6-VALIDATION.md) retains that package and hosted proof. Release B API/MCP/OAuth/tables subsequently shipped in 0.2.1 with [client results recorded individually](INTEGRATIONS.md). Earlier dated publication sections below preserve their original scope.
 
 
 ## Current clarification — country-neutral product and supported PHP

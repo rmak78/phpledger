@@ -2,6 +2,8 @@
 
 ## Combined 0.2.1 release
 
+**Published:** [0.2.1-preview](https://github.com/rmak78/phpledger/releases/tag/v0.2.1-preview), source `a8ee38a37616cc245102404bd47b6afea9373a23`, PHP 8.3.33. The [publication receipt](repository/sprint-05/PREVIEW-0.2.1-PUBLICATION.json) records the live package, website, Wiki and thirteen migration receipts; [validation](repository/sprint-05/PREVIEW-0.2.1-VALIDATION.md) includes native Codex HTTP/STDIO checks and the actual 19:00 UTC scheduled reset on 15 September 2026. Other client results are recorded individually.
+
 The release includes service agency, retail shop, seasonal business and distributor packs, version 1.0.0. Each contains 74 sources and 36 exact monthly checkpoints across 2024–2026, including three editable practice drafts. The default 100-source limit leaves capacity for 26 additional source records. The 2024–2025 history is closed; 2026 is open for practice. Manual payroll, stock and unpaid-document schedules are illustrative support, not implemented payroll, inventory or AR/AP modules.
 
 `/demo/sample-guide` follows the visitor’s authorized company. Public illustrated guides live at `/guides/`. Scoped API/MCP credentials expire at the next hourly boundary and bind to the demo generation; refresh cannot extend it. Reconnect after starting a fresh sample. Migration 011 adds seven connection tables; migration 012 replaces two period guards while web and scheduler are stopped. OAuth keys belong in private storage, mounted read-only in the web service. See [Integrations](INTEGRATIONS.md) for discovery/proxy/CORS configuration. Earlier receipts below retain their dated scope; the 0.2.1 publication receipt records its separate live checks.
