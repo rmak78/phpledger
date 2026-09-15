@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/core.css', ['v' => '0.1.2'])) ?>">
     <?php if ($view === 'general-editor'): ?><script src="<?= pl_e(pl_url('/assets/core-journal.js', ['v' => '0.1.2'])) ?>" defer></script><?php endif; ?>
     <?php if ($view === 'pos'): ?><link rel="stylesheet" href="<?= pl_e(pl_url('/assets/pos.css')) ?>"><script src="<?= pl_e(pl_url('/assets/pos.js')) ?>" defer></script><?php endif; ?>
+    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/sample-guide.css')) ?>">
     <script src="<?= pl_e(pl_url('/assets/app.js', ['v' => '20260915-accounting'])) ?>" defer></script>
     <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/ledger-tables.css')) ?>">
     <?php if (in_array($view, ['transactions','general-journals','account','bank-reconciliation'], true)): ?>
@@ -50,6 +51,7 @@
     <span class="context-item"><?= pl_e($company['book_name']) ?></span><span class="context-item"><?= pl_e($company['currency']) ?></span>
     <span class="company-role"><?= pl_e(ucfirst($company['role'])) ?></span>
 </div>
+<?php if ($company['is_sample'] && pl_company_demo_pack((int) $user['id'], (int) $company['id'], (int) $company['book_id']) !== null): ?><a class="sample-guide-link" href="<?= pl_e(pl_url('/sample-guide')) ?>">Sample guide: Daily checks, monthly closing and yearly reports</a><?php endif; ?>
 <?php if (!pl_demo_enabled()): ?>
 <nav class="accounting-nav" aria-label="Book administration"><a href="<?= pl_e(pl_url('/opening-balances')) ?>" <?= $view === 'opening-balances' ? 'aria-current="page"' : '' ?>>Opening balances</a><a href="<?= pl_e(pl_url('/periods')) ?>" <?= $view === 'periods' ? 'aria-current="page"' : '' ?>>Periods</a><a href="<?= pl_e(pl_url('/bank-reconciliation')) ?>" <?= $view === 'bank-reconciliation' ? 'aria-current="page"' : '' ?>>Bank reconciliation</a><a href="<?= pl_e(pl_url('/modules')) ?>" <?= $view === 'modules' ? 'aria-current="page"' : '' ?>>Modules</a></nav>
 <?php endif; ?>
@@ -63,6 +65,6 @@
 <div class="signin-layout"><aside class="signin-story"><p class="eyebrow">Your business, clearly accounted for</p><h2>A day's work.<br>A clearer picture.</h2><p>Keep the everyday details connected to the bigger picture.</p><div class="signin-journey"><div><?= pl_icon('receipt') ?><span><strong>Capture the details</strong>Receipts and expenses, in one place.</span></div><div><?= pl_icon('book') ?><span><strong>Follow every entry</strong>From source document to balanced books.</span></div><div><?= pl_icon('file-text') ?><span><strong>Understand your business</strong>Readable reports with a path to the numbers.</span></div></div><p class="signin-footnote">PHP Ledger · Built for owners and bookkeepers</p></aside><div class="signin-form"><?php require __DIR__ . '/views/login.php'; ?></div></div>
 <?php else: require __DIR__ . '/views/' . $view . '.php'; endif; ?>
 </main>
-<footer class="app-footer"><span>PHP Ledger · Development preview · <a href="https://github.com/rmak78/phpledger/tree/v0.1.6-preview">Source code · AGPL-3.0+</a></span><span>English · <span data-timezone>UTC</span> <span class="muted">event times</span></span></footer>
+<footer class="app-footer"><span>PHP Ledger · Development preview · <a href="https://github.com/rmak78/phpledger/tree/v0.2.1-preview">Source code · AGPL-3.0+</a></span><span>English · <span data-timezone>UTC</span> <span class="muted">event times</span></span></footer>
 </body>
 </html>

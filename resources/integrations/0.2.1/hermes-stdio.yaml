@@ -1,0 +1,8 @@
+# Recipe 1. Replace the bridge path; inherit PL_MCP_URL and PL_MCP_TOKEN privately.
+mcp_servers:
+  phpledger:
+    command: "php"
+    args: ["/absolute/path/to/phpledger/tools/mcp-bridge.php"]
+    env:
+      PL_MCP_URL: "${PL_MCP_URL}"
+      PL_MCP_TOKEN: "${PL_MCP_TOKEN}"

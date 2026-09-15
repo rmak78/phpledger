@@ -126,7 +126,7 @@ function pl_demo_session_valid(int $userId): bool
     return is_string($current) && hash_equals($current, $generation);
 }
 
-function pl_demo_begin_visit(string $csrfToken, string $currency = 'USD'): array
+function pl_demo_begin_visit(string $csrfToken, string $currency = 'USD', ?string $samplePack = null): array
 {
     if (!pl_demo_enabled() || pl_demo_reset_process()) {
         throw new DomainException('Public samples are available only in the isolated demo environment.');
@@ -137,6 +137,7 @@ function pl_demo_begin_visit(string $csrfToken, string $currency = 'USD'): array
     if (!isset(pl_base_currency_options()[$currency])) {
         throw new DomainException('Choose one of the supported sample currencies. Foreign exchange is not enabled.');
     }
+    $pack = $samplePack === null ? null : pl_demo_pack($samplePack);
     $current = pl_current_user_id();
     if ($current !== null) {
         $existing = DB::queryFirstRow('SELECT v.company_id, b.id AS book_id, v.generation, u.id, u.email, u.display_name FROM pl_demo_visitors v JOIN pl_books b ON b.company_id = v.company_id JOIN pl_users u ON u.id = v.user_id WHERE v.user_id = %i', $current);
@@ -144,7 +145,7 @@ function pl_demo_begin_visit(string $csrfToken, string $currency = 'USD'): array
             return ['user' => ['id' => $current, 'email' => $existing['email'], 'display_name' => $existing['display_name']], 'company_id' => (int) $existing['company_id'], 'book_id' => (int) $existing['book_id'], 'generation' => $existing['generation']];
         }
     }
-    $result = pl_demo_provisioning(static fn (): array => pl_ledger_transaction(static function () use ($currency): array {
+    $result = pl_demo_provisioning(static fn (): array => pl_ledger_transaction(static function () use ($currency, $pack): array {
         $state = DB::queryFirstRow('SELECT * FROM pl_demo_state WHERE id = 1 FOR UPDATE');
         if (!$state || strtotime($state['next_reset_at'] . ' UTC') <= time()) {
             throw new PlDemoUnavailable('The hourly sample refresh is due. Please return after the demo has refreshed.');
@@ -158,9 +159,9 @@ function pl_demo_begin_visit(string $csrfToken, string $currency = 'USD'): array
         $name = 'Sample visitor';
         $userId = pl_create_user($email, $name, bin2hex(random_bytes(24)));
         $company = pl_setup_company($userId, [
-            'name' => 'Cedar Trading — Your private sample', 'currency' => $currency, 'start_date' => gmdate('Y-m-d'), 'fiscal_year_end' => '12-31',
+            'name' => ($pack['name'] ?? 'Cedar Trading') . ' — Your private sample', 'currency' => $currency, 'start_date' => $pack['start_date'] ?? gmdate('Y-m-d'), 'fiscal_year_end' => '12-31',
             'start_mode' => 'sample', 'template_digest' => pl_starter_template()['digest'], 'zero_balances_confirmed' => false,
-        ], 'visitor:' . $nonce);
+        ] + ($pack === null ? [] : ['sample_pack' => $pack['id']]), 'visitor:' . $nonce);
         DB::insert('pl_demo_visitors', ['user_id' => $userId, 'company_id' => $company['id'], 'generation' => $state['generation']]);
         return ['user' => ['id' => $userId, 'email' => $email, 'display_name' => $name], 'company_id' => $company['id'], 'book_id' => $company['book_id'], 'generation' => $state['generation']];
     }));

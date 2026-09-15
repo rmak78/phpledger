@@ -4,7 +4,7 @@ declare(strict_types=1);
 /** Period administration shares the posting service's authorization and book lock. */
 function pl_period_require_write(int $actorId, int $companyId, bool $reopen = false): void
 {
-    if (pl_demo_enabled()) {
+    if (pl_demo_enabled() && !pl_demo_provisioning()) {
         throw new DomainException('Period administration is disabled in the public sample.');
     }
     $member = pl_require_company_access($actorId, $companyId, true);

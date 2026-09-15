@@ -1,12 +1,12 @@
-# Authorized accounting reads (0.2.0-preview candidate)
+# Authorized accounting reads (0.2.1-preview)
 
-Recipe revision **1, 15 September 2026**. This is the local Release B candidate. The public download/demo are the **0.1.6-preview maintenance release**, with [PHP 8.2/8.3 and publication evidence](repository/sprint-05/PREVIEW-0.1.6-VALIDATION.md). Release B remains unpublished until the [client acceptance matrix](#client-acceptance-matrix) and installation/recovery gates close. A protocol harness is not an application compatibility result.
+Recipe revision **2, 15 September 2026**. The owner approved a combined **0.2.1-preview** with the existing accounting core, read integrations, server-side tables and four multi-year demos. Compatibility is recorded per tested client. Untested or inaccessible clients remain pending and do not hold this preview; financial/access, installation/recovery and demo isolation checks remain mandatory. Codex remote HTTP and STDIO require actual client acceptance. A protocol harness is not application compatibility proof. Publication and final client results are recorded separately.
 
 ## Configure an installation
 
 Keep the existing PHP 8.2+ / MySQL 8.4 / MeekroDB installation, identity system and public document root. Production dependencies are pinned in `composer.lock`, including `mcp/sdk` **0.8.1** and `league/oauth2-server` **9.4.1**. PHP needs BCMath, PDO MySQL, mbstring, curl, OpenSSL, fileinfo and sessions. There is no second database connection or external authentication provider.
 
-1. Back up the source, database, private configuration and existing private keys. Apply the versioned migration through `php www/phpledger/install/migrate.php`. `011_read_connections` adds seven integration tables; the complete chain has twelve receipts and retains 35 accounting guards. It changes no posted accounting rows.
+1. Back up the source, database, private configuration and existing private keys. Apply the versioned migration through `php www/phpledger/install/migrate.php`. `011_read_connections` adds seven integration tables; the complete chain has thirteen receipts and retains 35 accounting guards; `012_demo_history_periods` adjusts two demo period triggers before new sample assignment. It changes no posted accounting rows.
 2. Set `PL_PUBLIC_URL` to the exact HTTPS application URL, without a trailing slash: for example `https://ledger.example.com` or `https://phpledger.com/demo`. The resource/audience is that URL plus `/mcp`. Do not derive it from incoming headers.
 3. Set `PL_OAUTH_KEY_DIRECTORY` to a private directory outside the public root, or use `www/phpledger/storage/oauth`. Run `php tools/setup-oauth.php` once as the operating-system account that owns this private storage. It refuses an existing directory, generates a 3072-bit RSA key pair and an encryption key, and prints no key material. All three files must be readable by the PHP process, directory mode 0700 and file mode 0600 on Linux. Back them up securely with the installation; do not regenerate them during upgrades or hourly demo resets.
 4. Forward Authorization, Content-Type, Accept, MCP-Protocol-Version, Mcp-Session-Id, Mcp-Method and Mcp-Name through the HTTPS proxy. Disable response caching on API, MCP and OAuth routes. Do not record authorization headers, request bodies or financial result bodies in access/debug logs. Keep the application SDK logger disabled.
@@ -37,7 +37,7 @@ Every read rechecks active user, current company membership, book, client, expir
 
 ## Business interface
 
-Use Streamable HTTP at `<application URL>/mcp`. The hosted target is `https://phpledger.com/demo/mcp` **after Release B is published**. Do not append `/sse` or infer the transport from a suffix. Legacy SSE is not supplied. The PHP STDIO bridge forwards to this HTTPS endpoint and needs no database credentials.
+Use Streamable HTTP at `<application URL>/mcp`. The hosted target is `https://phpledger.com/demo/mcp` **when 0.2.1 is published**. Do not append `/sse` or infer the transport from a suffix. Legacy SSE is not supplied. The PHP STDIO bridge forwards to this HTTPS endpoint and needs no database credentials.
 
 | MCP tool | GET API path | Required selection beyond company_id/book_id |
 |---|---|---|
@@ -71,7 +71,7 @@ MCP returns the same result in `structuredContent` and a compact JSON text conte
 
 ## Versioned client recipes
 
-The files under [`resources/integrations/0.2.0`](../resources/integrations/0.2.0/) contain no credentials. Replace example URLs and IDs deliberately. Store bearer credentials in the client's private secret settings/environment. Never export a populated owner token as a shared team configuration.
+The files under [`resources/integrations/0.2.1`](../resources/integrations/0.2.1/) contain no credentials. Replace example URLs and IDs deliberately. Store bearer credentials in the client's private secret settings/environment. Never export a populated owner token as a shared team configuration.
 
 ### Codex — recipe 1
 

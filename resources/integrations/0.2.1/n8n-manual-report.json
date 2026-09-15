@@ -1,0 +1,55 @@
+{
+  "name": "PHP Ledger 0.2.1 - manual report (disabled recipe 1)",
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "none",
+    "saveDataErrorExecution": "none",
+    "saveManualExecutions": false
+  },
+  "nodes": [
+    {
+      "id": "manual-start",
+      "name": "Manual start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 0],
+      "parameters": {}
+    },
+    {
+      "id": "read-trial-balance",
+      "name": "Read authorized trial balance",
+      "type": "@n8n/n8n-nodes-langchain.mcpClient",
+      "typeVersion": 1.1,
+      "position": [240, 0],
+      "disabled": true,
+      "notes": "Choose a dedicated private bearer credential, replace endpoint and both zero IDs, then enable this node for a manual run. Recipe is unverified in an installed n8n application.",
+      "parameters": {
+        "serverTransport": "httpStreamable",
+        "endpointUrl": "https://ledger.example.com/mcp",
+        "authentication": "bearerAuth",
+        "tool": {"__rl": true, "mode": "id", "value": "ledger_trial_balance"},
+        "inputMode": "json",
+        "jsonInput": "{\"company_id\":0,\"book_id\":0,\"as_of\":\"2026-09-15\",\"page\":1,\"page_size\":25}",
+        "options": {"timeout": 30000, "convertToBinary": false}
+      }
+    },
+    {
+      "id": "format-private-summary",
+      "name": "Format summary - no send action",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 0],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return $input.all().map(item => { const text = item.json.content?.find(c => c.type === 'text')?.text; const result = item.json.structuredContent ?? (typeof text === 'string' ? JSON.parse(text) : text); if (!result?.data || result.data.balanced !== true) throw new Error('No balanced report returned. Check the connection and selected book.'); const d = result.data; const p = d.accounts.pagination; return { json: { summary: `Company ${result.company_id}, book ${result.book_id}: total debit ${d.total_debit} ${result.currency}, total credit ${d.total_credit} ${result.currency}. Balanced. Page ${p.page} of ${p.pages}.`, next_page: p.next_page, access_expires_at: result.access_expires_at, note: 'Totals cover the whole report; fetch next_page to inspect further account rows. No message was sent.' } }; });"
+      }
+    }
+  ],
+  "connections": {
+    "Manual start": {"main": [[{"node": "Read authorized trial balance", "type": "main", "index": 0}]]},
+    "Read authorized trial balance": {"main": [[{"node": "Format summary - no send action", "type": "main", "index": 0}]]}
+  },
+  "pinData": {},
+  "tags": []
+}

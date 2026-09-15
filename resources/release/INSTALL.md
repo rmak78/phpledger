@@ -21,7 +21,7 @@ Use a dedicated database account, never MySQL root in application configuration.
 
 Set `PL_ENV=production` in the server's PHP environment for web and CLI processes. Leave the hosted-demo mode disabled. The public demo's reset scheduler and credentials are not part of this installation. Do not copy a development environment into customer hosting.
 
-For the 0.2.0 integration candidate, follow [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md) to set the exact HTTPS `PL_PUBLIC_URL`, initialize private OAuth keys with `php tools/setup-oauth.php`, preserve those keys in backups and configure proxy/discovery/origin headers. Connections remain unavailable until the URL is configured; OAuth also requires its private keys. The browser application continues to use its existing users and company permissions. Serve only the public directory; keys, configuration and CLI tools must remain private.
+For the 0.2.1 read integrations, follow [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md) to set the exact HTTPS `PL_PUBLIC_URL`, initialize private OAuth keys with `php tools/setup-oauth.php`, preserve those keys in backups and configure proxy/discovery/origin headers. Connections remain unavailable until the URL is configured; OAuth also requires its private keys. The browser application continues to use its existing users and company permissions. Serve only the public directory; keys, configuration and CLI tools must remain private.
 
 ## 2. Unpack and configure privately
 

@@ -1,0 +1,5351 @@
+{
+  "id": "retail-shop",
+  "version": "1.0.0",
+  "name": "Willow Corner Shop",
+  "business": "Retail shop",
+  "demo_only": true,
+  "notice": "Original synthetic general-ledger examples. Manual staff, loan, outstanding-item and stock schedules do not implement payroll, AR/AP, inventory or tax modules. Period closure blocks posting; it is not statutory financial-statement approval or an earnings-transfer journal.",
+  "start_date": "2024-01-01",
+  "history_end": "2025-12-31",
+  "practice_end": "2026-12-31",
+  "source_count": 74,
+  "journal_count": 72,
+  "draft_count": 3,
+  "accounts": [
+    {
+      "code": "1010",
+      "name": "Reserve bank",
+      "type": "asset",
+      "role": "cash_bank"
+    },
+    {
+      "code": "1020",
+      "name": "Cash till",
+      "type": "asset",
+      "role": "cash_bank"
+    },
+    {
+      "code": "1030",
+      "name": "Petty cash",
+      "type": "asset",
+      "role": "cash_bank"
+    },
+    {
+      "code": "1200",
+      "name": "Prepaid insurance",
+      "type": "asset",
+      "role": null
+    },
+    {
+      "code": "1300",
+      "name": "Equipment at cost",
+      "type": "asset",
+      "role": null
+    },
+    {
+      "code": "1390",
+      "name": "Accumulated depreciation",
+      "type": "asset",
+      "role": null
+    },
+    {
+      "code": "2100",
+      "name": "Accrued staff bonus",
+      "type": "liability",
+      "role": null
+    },
+    {
+      "code": "2200",
+      "name": "Term loan",
+      "type": "liability",
+      "role": null
+    },
+    {
+      "code": "5100",
+      "name": "Fictional staff salaries",
+      "type": "expense",
+      "role": "expense"
+    },
+    {
+      "code": "5200",
+      "name": "Rent",
+      "type": "expense",
+      "role": "expense"
+    },
+    {
+      "code": "5300",
+      "name": "Utilities",
+      "type": "expense",
+      "role": "expense"
+    },
+    {
+      "code": "5400",
+      "name": "Insurance expense",
+      "type": "expense",
+      "role": "expense"
+    },
+    {
+      "code": "5500",
+      "name": "Depreciation expense",
+      "type": "expense",
+      "role": "expense"
+    },
+    {
+      "code": "5600",
+      "name": "Loan interest",
+      "type": "expense",
+      "role": "expense"
+    },
+    {
+      "code": "1400",
+      "name": "Stock - manual support schedule",
+      "type": "asset",
+      "role": null
+    },
+    {
+      "code": "5700",
+      "name": "Cost of sales - manual schedule",
+      "type": "expense",
+      "role": "expense"
+    }
+  ],
+  "events": [
+    {
+      "key": "capital",
+      "kind": "general_journal",
+      "date": "2024-01-01",
+      "reference": "retail-shop/capital",
+      "description": "Fictional owner introduces starting capital",
+      "lines": [
+        {
+          "code": "1000",
+          "debit": "25000.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "3000",
+          "debit": "0.0000",
+          "credit": "25000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "insurance-2024",
+      "kind": "general_journal",
+      "date": "2024-01-01",
+      "reference": "retail-shop/insurance-2024",
+      "description": "Prepay 2024 insurance: 1200, released at 100 per month",
+      "lines": [
+        {
+          "code": "1200",
+          "debit": "1200.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1200.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "reserve-transfer",
+      "kind": "general_journal",
+      "date": "2024-01-02",
+      "reference": "retail-shop/reserve-transfer",
+      "description": "Move funds between primary and reserve banks",
+      "lines": [
+        {
+          "code": "1010",
+          "debit": "12000.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "12000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "cash-float",
+      "kind": "general_journal",
+      "date": "2024-01-03",
+      "reference": "retail-shop/cash-float",
+      "description": "Fund the cash till",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "600.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "petty-float",
+      "kind": "general_journal",
+      "date": "2024-01-03",
+      "reference": "retail-shop/petty-float",
+      "description": "Establish a separately counted petty cash float",
+      "lines": [
+        {
+          "code": "1030",
+          "debit": "500.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "500.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2024-01",
+      "kind": "receipt",
+      "date": "2024-01-15",
+      "reference": "retail-shop/receipts-2024-01",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2024-01",
+      "kind": "general_journal",
+      "date": "2024-01-31",
+      "reference": "retail-shop/operations-2024-01",
+      "description": "2024-01 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "equipment",
+      "kind": "general_journal",
+      "date": "2024-02-01",
+      "reference": "retail-shop/equipment",
+      "description": "Equipment: 2400 cost, no residual, 60-month illustrative life from February 2024",
+      "lines": [
+        {
+          "code": "1300",
+          "debit": "2400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "2400.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2024-02",
+      "kind": "receipt",
+      "date": "2024-02-15",
+      "reference": "retail-shop/receipts-2024-02",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2024-02",
+      "kind": "general_journal",
+      "date": "2024-02-29",
+      "reference": "retail-shop/operations-2024-02",
+      "description": "2024-02 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "loan-advance",
+      "kind": "general_journal",
+      "date": "2024-03-01",
+      "reference": "retail-shop/loan-advance",
+      "description": "Fictional term-loan advance; separate principal and interest support",
+      "lines": [
+        {
+          "code": "1000",
+          "debit": "6000.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "2200",
+          "debit": "0.0000",
+          "credit": "6000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2024-03",
+      "kind": "receipt",
+      "date": "2024-03-15",
+      "reference": "retail-shop/receipts-2024-03",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2024-03",
+      "kind": "general_journal",
+      "date": "2024-03-31",
+      "reference": "retail-shop/operations-2024-03",
+      "description": "2024-03 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2024-04",
+      "kind": "receipt",
+      "date": "2024-04-15",
+      "reference": "retail-shop/receipts-2024-04",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2024-04",
+      "kind": "general_journal",
+      "date": "2024-04-30",
+      "reference": "retail-shop/operations-2024-04",
+      "description": "2024-04 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2024-05",
+      "kind": "receipt",
+      "date": "2024-05-15",
+      "reference": "retail-shop/receipts-2024-05",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2024-05",
+      "kind": "general_journal",
+      "date": "2024-05-31",
+      "reference": "retail-shop/operations-2024-05",
+      "description": "2024-05 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2024-06",
+      "kind": "receipt",
+      "date": "2024-06-15",
+      "reference": "retail-shop/receipts-2024-06",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2024-06",
+      "kind": "general_journal",
+      "date": "2024-06-30",
+      "reference": "retail-shop/operations-2024-06",
+      "description": "2024-06 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2024-07",
+      "kind": "receipt",
+      "date": "2024-07-15",
+      "reference": "retail-shop/receipts-2024-07",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2024-07",
+      "kind": "general_journal",
+      "date": "2024-07-31",
+      "reference": "retail-shop/operations-2024-07",
+      "description": "2024-07 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2024-08",
+      "kind": "receipt",
+      "date": "2024-08-15",
+      "reference": "retail-shop/receipts-2024-08",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2024-08",
+      "kind": "general_journal",
+      "date": "2024-08-31",
+      "reference": "retail-shop/operations-2024-08",
+      "description": "2024-08 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2024-09",
+      "kind": "receipt",
+      "date": "2024-09-15",
+      "reference": "retail-shop/receipts-2024-09",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2024-09",
+      "kind": "general_journal",
+      "date": "2024-09-30",
+      "reference": "retail-shop/operations-2024-09",
+      "description": "2024-09 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2024-10",
+      "kind": "receipt",
+      "date": "2024-10-15",
+      "reference": "retail-shop/receipts-2024-10",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2024-10",
+      "kind": "general_journal",
+      "date": "2024-10-31",
+      "reference": "retail-shop/operations-2024-10",
+      "description": "2024-10 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2024-11",
+      "kind": "receipt",
+      "date": "2024-11-15",
+      "reference": "retail-shop/receipts-2024-11",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2024-11",
+      "kind": "general_journal",
+      "date": "2024-11-30",
+      "reference": "retail-shop/operations-2024-11",
+      "description": "2024-11 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2024-12",
+      "kind": "receipt",
+      "date": "2024-12-15",
+      "reference": "retail-shop/receipts-2024-12",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "loan-payment-2024",
+      "kind": "general_journal",
+      "date": "2024-12-20",
+      "reference": "retail-shop/loan-payment-2024",
+      "description": "Annual loan instalment: principal 1200 and illustrative interest 300",
+      "lines": [
+        {
+          "code": "2200",
+          "debit": "1200.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "5600",
+          "debit": "300.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "outstanding-sale",
+      "kind": "general_journal",
+      "date": "2024-12-29",
+      "reference": "retail-shop/outstanding-sale",
+      "description": "Completed work for fictional Alder Customer: 800 outstanding at year end; manual receivable support",
+      "lines": [
+        {
+          "code": "1100",
+          "debit": "800.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "800.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "cash-deposit-2024",
+      "kind": "general_journal",
+      "date": "2024-12-30",
+      "reference": "retail-shop/cash-deposit-2024",
+      "description": "Deposit counted till cash into primary bank; transfer has no income effect",
+      "lines": [
+        {
+          "code": "1000",
+          "debit": "2500.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1020",
+          "debit": "0.0000",
+          "credit": "2500.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "bonus-accrual",
+      "kind": "general_journal",
+      "date": "2024-12-31",
+      "reference": "retail-shop/bonus-accrual",
+      "description": "Accrue fictional staff bonus: Mira Vale 168 and Noel Reed 252; paid next January",
+      "lines": [
+        {
+          "code": "5100",
+          "debit": "420.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "2100",
+          "debit": "0.0000",
+          "credit": "420.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "operations-2024-12",
+      "kind": "general_journal",
+      "date": "2024-12-31",
+      "reference": "retail-shop/operations-2024-12",
+      "description": "2024-12 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "insurance-2025",
+      "kind": "general_journal",
+      "date": "2025-01-01",
+      "reference": "retail-shop/insurance-2025",
+      "description": "Prepay 2025 insurance: 1200, released at 100 per month",
+      "lines": [
+        {
+          "code": "1200",
+          "debit": "1200.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1200.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "bonus-payment",
+      "kind": "general_journal",
+      "date": "2025-01-10",
+      "reference": "retail-shop/bonus-payment",
+      "description": "Settle the prior-year staff bonus; no second salary expense",
+      "lines": [
+        {
+          "code": "2100",
+          "debit": "420.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "420.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2025-01",
+      "kind": "receipt",
+      "date": "2025-01-15",
+      "reference": "retail-shop/receipts-2025-01",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2025-01",
+      "kind": "general_journal",
+      "date": "2025-01-31",
+      "reference": "retail-shop/operations-2025-01",
+      "description": "2025-01 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "collect-prior-sale",
+      "kind": "general_journal",
+      "date": "2025-02-10",
+      "reference": "retail-shop/collect-prior-sale",
+      "description": "Collect Alder Customer's prior-year 800; no second income entry",
+      "lines": [
+        {
+          "code": "1000",
+          "debit": "800.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1100",
+          "debit": "0.0000",
+          "credit": "800.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2025-02",
+      "kind": "receipt",
+      "date": "2025-02-15",
+      "reference": "retail-shop/receipts-2025-02",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2025-02",
+      "kind": "general_journal",
+      "date": "2025-02-28",
+      "reference": "retail-shop/operations-2025-02",
+      "description": "2025-02 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2025-03",
+      "kind": "receipt",
+      "date": "2025-03-15",
+      "reference": "retail-shop/receipts-2025-03",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2025-03",
+      "kind": "general_journal",
+      "date": "2025-03-31",
+      "reference": "retail-shop/operations-2025-03",
+      "description": "2025-03 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2025-04",
+      "kind": "receipt",
+      "date": "2025-04-15",
+      "reference": "retail-shop/receipts-2025-04",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2025-04",
+      "kind": "general_journal",
+      "date": "2025-04-30",
+      "reference": "retail-shop/operations-2025-04",
+      "description": "2025-04 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2025-05",
+      "kind": "receipt",
+      "date": "2025-05-15",
+      "reference": "retail-shop/receipts-2025-05",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2025-05",
+      "kind": "general_journal",
+      "date": "2025-05-31",
+      "reference": "retail-shop/operations-2025-05",
+      "description": "2025-05 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2025-06",
+      "kind": "receipt",
+      "date": "2025-06-15",
+      "reference": "retail-shop/receipts-2025-06",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2025-06",
+      "kind": "general_journal",
+      "date": "2025-06-30",
+      "reference": "retail-shop/operations-2025-06",
+      "description": "2025-06 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2025-07",
+      "kind": "receipt",
+      "date": "2025-07-15",
+      "reference": "retail-shop/receipts-2025-07",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2025-07",
+      "kind": "general_journal",
+      "date": "2025-07-31",
+      "reference": "retail-shop/operations-2025-07",
+      "description": "2025-07 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2025-08",
+      "kind": "receipt",
+      "date": "2025-08-15",
+      "reference": "retail-shop/receipts-2025-08",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "wrong-cost",
+      "kind": "general_journal",
+      "date": "2025-08-20",
+      "reference": "retail-shop/wrong-cost",
+      "description": "Correction exercise: 25 recorded instead of 45; this entry is reversed in full",
+      "lines": [
+        {
+          "code": "5000",
+          "debit": "25.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "25.0000",
+          "description": ""
+        }
+      ],
+      "reverse": true
+    },
+    {
+      "key": "correct-cost",
+      "kind": "general_journal",
+      "date": "2025-08-21",
+      "reference": "retail-shop/correct-cost",
+      "description": "Replacement for wrong-cost: correct maintenance cost 45, original and reversal retained",
+      "lines": [
+        {
+          "code": "5000",
+          "debit": "45.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "45.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "operations-2025-08",
+      "kind": "general_journal",
+      "date": "2025-08-31",
+      "reference": "retail-shop/operations-2025-08",
+      "description": "2025-08 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2025-09",
+      "kind": "receipt",
+      "date": "2025-09-15",
+      "reference": "retail-shop/receipts-2025-09",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2025-09",
+      "kind": "general_journal",
+      "date": "2025-09-30",
+      "reference": "retail-shop/operations-2025-09",
+      "description": "2025-09 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2025-10",
+      "kind": "receipt",
+      "date": "2025-10-15",
+      "reference": "retail-shop/receipts-2025-10",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2025-10",
+      "kind": "general_journal",
+      "date": "2025-10-31",
+      "reference": "retail-shop/operations-2025-10",
+      "description": "2025-10 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2025-11",
+      "kind": "receipt",
+      "date": "2025-11-15",
+      "reference": "retail-shop/receipts-2025-11",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2025-11",
+      "kind": "general_journal",
+      "date": "2025-11-30",
+      "reference": "retail-shop/operations-2025-11",
+      "description": "2025-11 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2025-12",
+      "kind": "receipt",
+      "date": "2025-12-15",
+      "reference": "retail-shop/receipts-2025-12",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "loan-payment-2025",
+      "kind": "general_journal",
+      "date": "2025-12-20",
+      "reference": "retail-shop/loan-payment-2025",
+      "description": "Annual loan instalment: principal 1200 and illustrative interest 300",
+      "lines": [
+        {
+          "code": "2200",
+          "debit": "1200.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "5600",
+          "debit": "300.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "outstanding-bill",
+      "kind": "general_journal",
+      "date": "2025-12-29",
+      "reference": "retail-shop/outstanding-bill",
+      "description": "Fictional Harbor maintenance: 550 expense incurred, unpaid at year end; manual payable support",
+      "lines": [
+        {
+          "code": "5000",
+          "debit": "550.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "2000",
+          "debit": "0.0000",
+          "credit": "550.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "cash-deposit-2025",
+      "kind": "general_journal",
+      "date": "2025-12-30",
+      "reference": "retail-shop/cash-deposit-2025",
+      "description": "Deposit counted till cash into primary bank; transfer has no income effect",
+      "lines": [
+        {
+          "code": "1000",
+          "debit": "3000.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1020",
+          "debit": "0.0000",
+          "credit": "3000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "operations-2025-12",
+      "kind": "general_journal",
+      "date": "2025-12-31",
+      "reference": "retail-shop/operations-2025-12",
+      "description": "2025-12 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "insurance-2026",
+      "kind": "general_journal",
+      "date": "2026-01-01",
+      "reference": "retail-shop/insurance-2026",
+      "description": "Prepay 2026 insurance: 1200, released at 100 per month",
+      "lines": [
+        {
+          "code": "1200",
+          "debit": "1200.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1200.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "pay-prior-bill",
+      "kind": "general_journal",
+      "date": "2026-01-10",
+      "reference": "retail-shop/pay-prior-bill",
+      "description": "Pay Harbor's prior-year maintenance bill; no second expense",
+      "lines": [
+        {
+          "code": "2000",
+          "debit": "550.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "550.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    },
+    {
+      "key": "receipts-2026-01",
+      "kind": "receipt",
+      "date": "2026-01-15",
+      "reference": "retail-shop/receipts-2026-01",
+      "description": "Retail shop: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4050.0000",
+      "money_code": "1000",
+      "category_code": "4000",
+      "counterparty": "Fictional monthly customer receipts"
+    },
+    {
+      "key": "operations-2026-01",
+      "kind": "general_journal",
+      "date": "2026-01-31",
+      "reference": "retail-shop/operations-2026-01",
+      "description": "2026-01 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
+      "lines": [
+        {
+          "code": "1020",
+          "debit": "450.0000",
+          "credit": "0.0000",
+          "description": "Cash sales per manual daily summaries"
+        },
+        {
+          "code": "4000",
+          "debit": "0.0000",
+          "credit": "450.0000",
+          "description": ""
+        },
+        {
+          "code": "5100",
+          "debit": "600.0000",
+          "credit": "0.0000",
+          "description": "Mira Vale, fictional staff: illustrative salary"
+        },
+        {
+          "code": "5100",
+          "debit": "900.0000",
+          "credit": "0.0000",
+          "description": "Noel Reed, fictional staff: illustrative salary"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1500.0000",
+          "description": ""
+        },
+        {
+          "code": "5200",
+          "debit": "400.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1010",
+          "debit": "0.0000",
+          "credit": "400.0000",
+          "description": ""
+        },
+        {
+          "code": "5300",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "90.0000",
+          "description": ""
+        },
+        {
+          "code": "1030",
+          "debit": "0.0000",
+          "credit": "10.0000",
+          "description": ""
+        },
+        {
+          "code": "5400",
+          "debit": "100.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1200",
+          "debit": "0.0000",
+          "credit": "100.0000",
+          "description": ""
+        },
+        {
+          "code": "5500",
+          "debit": "40.0000",
+          "credit": "0.0000",
+          "description": ""
+        },
+        {
+          "code": "1390",
+          "debit": "0.0000",
+          "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1050.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1050.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
+        }
+      ],
+      "reverse": false
+    }
+  ],
+  "drafts": [
+    {
+      "key": "practice-receipt",
+      "kind": "receipt",
+      "date": "2026-02-02",
+      "amount": "225.0000",
+      "counterparty": "Fictional new customer",
+      "reference": "PRACTICE-RECEIPT",
+      "memo": "Editable practice receipt. Review before posting."
+    },
+    {
+      "key": "practice-expense",
+      "kind": "expense",
+      "date": "2026-02-03",
+      "amount": "65.0000",
+      "counterparty": "Harbor Office Supply",
+      "reference": "PRACTICE-EXPENSE",
+      "memo": "Editable practice expense. No effect on books until posted."
+    },
+    {
+      "key": "practice-petty",
+      "kind": "expense",
+      "date": "2026-02-04",
+      "amount": "12.5000",
+      "money_code": "1030",
+      "counterparty": "Fictional local stationery",
+      "reference": "PRACTICE-PETTY",
+      "memo": "Compare the petty cash statement before and after posting."
+    }
+  ],
+  "monthly_support": [
+    {
+      "month": "2024-01",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "0.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2024-02",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2024-03",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2024-04",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2024-05",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2024-06",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2024-07",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2024-08",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2024-09",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2024-10",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2024-11",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2024-12",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2025-01",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2025-02",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2025-03",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2025-04",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2025-05",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2025-06",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2025-07",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2025-08",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2025-09",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2025-10",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2025-11",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2025-12",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    },
+    {
+      "month": "2026-01",
+      "gross_receipts": "4500.0000",
+      "bank_receipts": "4050.0000",
+      "cash_receipts": "450.0000",
+      "salaries": "1500.0000",
+      "rent": "400.0000",
+      "utilities": "100.0000",
+      "insurance_release": "100.0000",
+      "depreciation": "40.0000",
+      "stock_purchases": "1050.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 210,
+      "units_out": 200,
+      "unit_cost": "5.0000"
+    }
+  ],
+  "checkpoints": [
+    {
+      "from": "2024-01-01",
+      "to": "2024-01-31",
+      "balances": {
+        "1000": "12110.0000",
+        "1010": "11600.0000",
+        "1020": "1050.0000",
+        "1030": "490.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "0.0000",
+        "1390": "0.0000",
+        "1400": "50.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "0.0000",
+        "3000": "-25000.0000",
+        "4000": "-4500.0000",
+        "5000": "0.0000",
+        "5100": "1500.0000",
+        "5200": "400.0000",
+        "5300": "100.0000",
+        "5400": "100.0000",
+        "5500": "0.0000",
+        "5600": "0.0000",
+        "5700": "1000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3100.0000",
+      "profit": "1400.0000"
+    },
+    {
+      "from": "2024-02-01",
+      "to": "2024-02-29",
+      "balances": {
+        "1000": "11120.0000",
+        "1010": "11200.0000",
+        "1020": "1500.0000",
+        "1030": "480.0000",
+        "1100": "0.0000",
+        "1200": "1000.0000",
+        "1300": "2400.0000",
+        "1390": "-40.0000",
+        "1400": "100.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "0.0000",
+        "3000": "-25000.0000",
+        "4000": "-9000.0000",
+        "5000": "0.0000",
+        "5100": "3000.0000",
+        "5200": "800.0000",
+        "5300": "200.0000",
+        "5400": "200.0000",
+        "5500": "40.0000",
+        "5600": "0.0000",
+        "5700": "2000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2024-03-01",
+      "to": "2024-03-31",
+      "balances": {
+        "1000": "18530.0000",
+        "1010": "10800.0000",
+        "1020": "1950.0000",
+        "1030": "470.0000",
+        "1100": "0.0000",
+        "1200": "900.0000",
+        "1300": "2400.0000",
+        "1390": "-80.0000",
+        "1400": "150.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-6000.0000",
+        "3000": "-25000.0000",
+        "4000": "-13500.0000",
+        "5000": "0.0000",
+        "5100": "4500.0000",
+        "5200": "1200.0000",
+        "5300": "300.0000",
+        "5400": "300.0000",
+        "5500": "80.0000",
+        "5600": "0.0000",
+        "5700": "3000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2024-04-01",
+      "to": "2024-04-30",
+      "balances": {
+        "1000": "19940.0000",
+        "1010": "10400.0000",
+        "1020": "2400.0000",
+        "1030": "460.0000",
+        "1100": "0.0000",
+        "1200": "800.0000",
+        "1300": "2400.0000",
+        "1390": "-120.0000",
+        "1400": "200.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-6000.0000",
+        "3000": "-25000.0000",
+        "4000": "-18000.0000",
+        "5000": "0.0000",
+        "5100": "6000.0000",
+        "5200": "1600.0000",
+        "5300": "400.0000",
+        "5400": "400.0000",
+        "5500": "120.0000",
+        "5600": "0.0000",
+        "5700": "4000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2024-05-01",
+      "to": "2024-05-31",
+      "balances": {
+        "1000": "21350.0000",
+        "1010": "10000.0000",
+        "1020": "2850.0000",
+        "1030": "450.0000",
+        "1100": "0.0000",
+        "1200": "700.0000",
+        "1300": "2400.0000",
+        "1390": "-160.0000",
+        "1400": "250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-6000.0000",
+        "3000": "-25000.0000",
+        "4000": "-22500.0000",
+        "5000": "0.0000",
+        "5100": "7500.0000",
+        "5200": "2000.0000",
+        "5300": "500.0000",
+        "5400": "500.0000",
+        "5500": "160.0000",
+        "5600": "0.0000",
+        "5700": "5000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2024-06-01",
+      "to": "2024-06-30",
+      "balances": {
+        "1000": "22760.0000",
+        "1010": "9600.0000",
+        "1020": "3300.0000",
+        "1030": "440.0000",
+        "1100": "0.0000",
+        "1200": "600.0000",
+        "1300": "2400.0000",
+        "1390": "-200.0000",
+        "1400": "300.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-6000.0000",
+        "3000": "-25000.0000",
+        "4000": "-27000.0000",
+        "5000": "0.0000",
+        "5100": "9000.0000",
+        "5200": "2400.0000",
+        "5300": "600.0000",
+        "5400": "600.0000",
+        "5500": "200.0000",
+        "5600": "0.0000",
+        "5700": "6000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2024-07-01",
+      "to": "2024-07-31",
+      "balances": {
+        "1000": "24170.0000",
+        "1010": "9200.0000",
+        "1020": "3750.0000",
+        "1030": "430.0000",
+        "1100": "0.0000",
+        "1200": "500.0000",
+        "1300": "2400.0000",
+        "1390": "-240.0000",
+        "1400": "350.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-6000.0000",
+        "3000": "-25000.0000",
+        "4000": "-31500.0000",
+        "5000": "0.0000",
+        "5100": "10500.0000",
+        "5200": "2800.0000",
+        "5300": "700.0000",
+        "5400": "700.0000",
+        "5500": "240.0000",
+        "5600": "0.0000",
+        "5700": "7000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2024-08-01",
+      "to": "2024-08-31",
+      "balances": {
+        "1000": "25580.0000",
+        "1010": "8800.0000",
+        "1020": "4200.0000",
+        "1030": "420.0000",
+        "1100": "0.0000",
+        "1200": "400.0000",
+        "1300": "2400.0000",
+        "1390": "-280.0000",
+        "1400": "400.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-6000.0000",
+        "3000": "-25000.0000",
+        "4000": "-36000.0000",
+        "5000": "0.0000",
+        "5100": "12000.0000",
+        "5200": "3200.0000",
+        "5300": "800.0000",
+        "5400": "800.0000",
+        "5500": "280.0000",
+        "5600": "0.0000",
+        "5700": "8000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2024-09-01",
+      "to": "2024-09-30",
+      "balances": {
+        "1000": "26990.0000",
+        "1010": "8400.0000",
+        "1020": "4650.0000",
+        "1030": "410.0000",
+        "1100": "0.0000",
+        "1200": "300.0000",
+        "1300": "2400.0000",
+        "1390": "-320.0000",
+        "1400": "450.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-6000.0000",
+        "3000": "-25000.0000",
+        "4000": "-40500.0000",
+        "5000": "0.0000",
+        "5100": "13500.0000",
+        "5200": "3600.0000",
+        "5300": "900.0000",
+        "5400": "900.0000",
+        "5500": "320.0000",
+        "5600": "0.0000",
+        "5700": "9000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2024-10-01",
+      "to": "2024-10-31",
+      "balances": {
+        "1000": "28400.0000",
+        "1010": "8000.0000",
+        "1020": "5100.0000",
+        "1030": "400.0000",
+        "1100": "0.0000",
+        "1200": "200.0000",
+        "1300": "2400.0000",
+        "1390": "-360.0000",
+        "1400": "500.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-6000.0000",
+        "3000": "-25000.0000",
+        "4000": "-45000.0000",
+        "5000": "0.0000",
+        "5100": "15000.0000",
+        "5200": "4000.0000",
+        "5300": "1000.0000",
+        "5400": "1000.0000",
+        "5500": "360.0000",
+        "5600": "0.0000",
+        "5700": "10000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2024-11-01",
+      "to": "2024-11-30",
+      "balances": {
+        "1000": "29810.0000",
+        "1010": "7600.0000",
+        "1020": "5550.0000",
+        "1030": "390.0000",
+        "1100": "0.0000",
+        "1200": "100.0000",
+        "1300": "2400.0000",
+        "1390": "-400.0000",
+        "1400": "550.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-6000.0000",
+        "3000": "-25000.0000",
+        "4000": "-49500.0000",
+        "5000": "0.0000",
+        "5100": "16500.0000",
+        "5200": "4400.0000",
+        "5300": "1100.0000",
+        "5400": "1100.0000",
+        "5500": "400.0000",
+        "5600": "0.0000",
+        "5700": "11000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2024-12-01",
+      "to": "2024-12-31",
+      "balances": {
+        "1000": "32220.0000",
+        "1010": "7200.0000",
+        "1020": "3500.0000",
+        "1030": "380.0000",
+        "1100": "800.0000",
+        "1200": "0.0000",
+        "1300": "2400.0000",
+        "1390": "-440.0000",
+        "1400": "600.0000",
+        "2000": "0.0000",
+        "2100": "-420.0000",
+        "2200": "-4800.0000",
+        "3000": "-25000.0000",
+        "4000": "-54800.0000",
+        "5000": "0.0000",
+        "5100": "18420.0000",
+        "5200": "4800.0000",
+        "5300": "1200.0000",
+        "5400": "1200.0000",
+        "5500": "440.0000",
+        "5600": "300.0000",
+        "5700": "12000.0000"
+      },
+      "income": "5300.0000",
+      "expenses": "3860.0000",
+      "profit": "1440.0000"
+    },
+    {
+      "from": "2025-01-01",
+      "to": "2025-01-31",
+      "balances": {
+        "1000": "32010.0000",
+        "1010": "6800.0000",
+        "1020": "3950.0000",
+        "1030": "370.0000",
+        "1100": "800.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-480.0000",
+        "1400": "650.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-4800.0000",
+        "3000": "-25000.0000",
+        "4000": "-59300.0000",
+        "5000": "0.0000",
+        "5100": "19920.0000",
+        "5200": "5200.0000",
+        "5300": "1300.0000",
+        "5400": "1300.0000",
+        "5500": "480.0000",
+        "5600": "300.0000",
+        "5700": "13000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2025-02-01",
+      "to": "2025-02-28",
+      "balances": {
+        "1000": "34220.0000",
+        "1010": "6400.0000",
+        "1020": "4400.0000",
+        "1030": "360.0000",
+        "1100": "0.0000",
+        "1200": "1000.0000",
+        "1300": "2400.0000",
+        "1390": "-520.0000",
+        "1400": "700.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-4800.0000",
+        "3000": "-25000.0000",
+        "4000": "-63800.0000",
+        "5000": "0.0000",
+        "5100": "21420.0000",
+        "5200": "5600.0000",
+        "5300": "1400.0000",
+        "5400": "1400.0000",
+        "5500": "520.0000",
+        "5600": "300.0000",
+        "5700": "14000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2025-03-01",
+      "to": "2025-03-31",
+      "balances": {
+        "1000": "35630.0000",
+        "1010": "6000.0000",
+        "1020": "4850.0000",
+        "1030": "350.0000",
+        "1100": "0.0000",
+        "1200": "900.0000",
+        "1300": "2400.0000",
+        "1390": "-560.0000",
+        "1400": "750.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-4800.0000",
+        "3000": "-25000.0000",
+        "4000": "-68300.0000",
+        "5000": "0.0000",
+        "5100": "22920.0000",
+        "5200": "6000.0000",
+        "5300": "1500.0000",
+        "5400": "1500.0000",
+        "5500": "560.0000",
+        "5600": "300.0000",
+        "5700": "15000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2025-04-01",
+      "to": "2025-04-30",
+      "balances": {
+        "1000": "37040.0000",
+        "1010": "5600.0000",
+        "1020": "5300.0000",
+        "1030": "340.0000",
+        "1100": "0.0000",
+        "1200": "800.0000",
+        "1300": "2400.0000",
+        "1390": "-600.0000",
+        "1400": "800.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-4800.0000",
+        "3000": "-25000.0000",
+        "4000": "-72800.0000",
+        "5000": "0.0000",
+        "5100": "24420.0000",
+        "5200": "6400.0000",
+        "5300": "1600.0000",
+        "5400": "1600.0000",
+        "5500": "600.0000",
+        "5600": "300.0000",
+        "5700": "16000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2025-05-01",
+      "to": "2025-05-31",
+      "balances": {
+        "1000": "38450.0000",
+        "1010": "5200.0000",
+        "1020": "5750.0000",
+        "1030": "330.0000",
+        "1100": "0.0000",
+        "1200": "700.0000",
+        "1300": "2400.0000",
+        "1390": "-640.0000",
+        "1400": "850.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-4800.0000",
+        "3000": "-25000.0000",
+        "4000": "-77300.0000",
+        "5000": "0.0000",
+        "5100": "25920.0000",
+        "5200": "6800.0000",
+        "5300": "1700.0000",
+        "5400": "1700.0000",
+        "5500": "640.0000",
+        "5600": "300.0000",
+        "5700": "17000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2025-06-01",
+      "to": "2025-06-30",
+      "balances": {
+        "1000": "39860.0000",
+        "1010": "4800.0000",
+        "1020": "6200.0000",
+        "1030": "320.0000",
+        "1100": "0.0000",
+        "1200": "600.0000",
+        "1300": "2400.0000",
+        "1390": "-680.0000",
+        "1400": "900.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-4800.0000",
+        "3000": "-25000.0000",
+        "4000": "-81800.0000",
+        "5000": "0.0000",
+        "5100": "27420.0000",
+        "5200": "7200.0000",
+        "5300": "1800.0000",
+        "5400": "1800.0000",
+        "5500": "680.0000",
+        "5600": "300.0000",
+        "5700": "18000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2025-07-01",
+      "to": "2025-07-31",
+      "balances": {
+        "1000": "41270.0000",
+        "1010": "4400.0000",
+        "1020": "6650.0000",
+        "1030": "310.0000",
+        "1100": "0.0000",
+        "1200": "500.0000",
+        "1300": "2400.0000",
+        "1390": "-720.0000",
+        "1400": "950.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-4800.0000",
+        "3000": "-25000.0000",
+        "4000": "-86300.0000",
+        "5000": "0.0000",
+        "5100": "28920.0000",
+        "5200": "7600.0000",
+        "5300": "1900.0000",
+        "5400": "1900.0000",
+        "5500": "720.0000",
+        "5600": "300.0000",
+        "5700": "19000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2025-08-01",
+      "to": "2025-08-31",
+      "balances": {
+        "1000": "42635.0000",
+        "1010": "4000.0000",
+        "1020": "7100.0000",
+        "1030": "300.0000",
+        "1100": "0.0000",
+        "1200": "400.0000",
+        "1300": "2400.0000",
+        "1390": "-760.0000",
+        "1400": "1000.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-4800.0000",
+        "3000": "-25000.0000",
+        "4000": "-90800.0000",
+        "5000": "45.0000",
+        "5100": "30420.0000",
+        "5200": "8000.0000",
+        "5300": "2000.0000",
+        "5400": "2000.0000",
+        "5500": "760.0000",
+        "5600": "300.0000",
+        "5700": "20000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3185.0000",
+      "profit": "1315.0000"
+    },
+    {
+      "from": "2025-09-01",
+      "to": "2025-09-30",
+      "balances": {
+        "1000": "44045.0000",
+        "1010": "3600.0000",
+        "1020": "7550.0000",
+        "1030": "290.0000",
+        "1100": "0.0000",
+        "1200": "300.0000",
+        "1300": "2400.0000",
+        "1390": "-800.0000",
+        "1400": "1050.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-4800.0000",
+        "3000": "-25000.0000",
+        "4000": "-95300.0000",
+        "5000": "45.0000",
+        "5100": "31920.0000",
+        "5200": "8400.0000",
+        "5300": "2100.0000",
+        "5400": "2100.0000",
+        "5500": "800.0000",
+        "5600": "300.0000",
+        "5700": "21000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2025-10-01",
+      "to": "2025-10-31",
+      "balances": {
+        "1000": "45455.0000",
+        "1010": "3200.0000",
+        "1020": "8000.0000",
+        "1030": "280.0000",
+        "1100": "0.0000",
+        "1200": "200.0000",
+        "1300": "2400.0000",
+        "1390": "-840.0000",
+        "1400": "1100.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-4800.0000",
+        "3000": "-25000.0000",
+        "4000": "-99800.0000",
+        "5000": "45.0000",
+        "5100": "33420.0000",
+        "5200": "8800.0000",
+        "5300": "2200.0000",
+        "5400": "2200.0000",
+        "5500": "840.0000",
+        "5600": "300.0000",
+        "5700": "22000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2025-11-01",
+      "to": "2025-11-30",
+      "balances": {
+        "1000": "46865.0000",
+        "1010": "2800.0000",
+        "1020": "8450.0000",
+        "1030": "270.0000",
+        "1100": "0.0000",
+        "1200": "100.0000",
+        "1300": "2400.0000",
+        "1390": "-880.0000",
+        "1400": "1150.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-4800.0000",
+        "3000": "-25000.0000",
+        "4000": "-104300.0000",
+        "5000": "45.0000",
+        "5100": "34920.0000",
+        "5200": "9200.0000",
+        "5300": "2300.0000",
+        "5400": "2300.0000",
+        "5500": "880.0000",
+        "5600": "300.0000",
+        "5700": "23000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2025-12-01",
+      "to": "2025-12-31",
+      "balances": {
+        "1000": "49775.0000",
+        "1010": "2400.0000",
+        "1020": "5900.0000",
+        "1030": "260.0000",
+        "1100": "0.0000",
+        "1200": "0.0000",
+        "1300": "2400.0000",
+        "1390": "-920.0000",
+        "1400": "1200.0000",
+        "2000": "-550.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-108800.0000",
+        "5000": "595.0000",
+        "5100": "36420.0000",
+        "5200": "9600.0000",
+        "5300": "2400.0000",
+        "5400": "2400.0000",
+        "5500": "920.0000",
+        "5600": "600.0000",
+        "5700": "24000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3990.0000",
+      "profit": "510.0000"
+    },
+    {
+      "from": "2026-01-01",
+      "to": "2026-01-31",
+      "balances": {
+        "1000": "49435.0000",
+        "1010": "2000.0000",
+        "1020": "6350.0000",
+        "1030": "250.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-960.0000",
+        "1400": "1250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-113300.0000",
+        "5000": "595.0000",
+        "5100": "37920.0000",
+        "5200": "10000.0000",
+        "5300": "2500.0000",
+        "5400": "2500.0000",
+        "5500": "960.0000",
+        "5600": "600.0000",
+        "5700": "25000.0000"
+      },
+      "income": "4500.0000",
+      "expenses": "3140.0000",
+      "profit": "1360.0000"
+    },
+    {
+      "from": "2026-02-01",
+      "to": "2026-02-28",
+      "balances": {
+        "1000": "49435.0000",
+        "1010": "2000.0000",
+        "1020": "6350.0000",
+        "1030": "250.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-960.0000",
+        "1400": "1250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-113300.0000",
+        "5000": "595.0000",
+        "5100": "37920.0000",
+        "5200": "10000.0000",
+        "5300": "2500.0000",
+        "5400": "2500.0000",
+        "5500": "960.0000",
+        "5600": "600.0000",
+        "5700": "25000.0000"
+      },
+      "income": "0.0000",
+      "expenses": "0.0000",
+      "profit": "0.0000"
+    },
+    {
+      "from": "2026-03-01",
+      "to": "2026-03-31",
+      "balances": {
+        "1000": "49435.0000",
+        "1010": "2000.0000",
+        "1020": "6350.0000",
+        "1030": "250.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-960.0000",
+        "1400": "1250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-113300.0000",
+        "5000": "595.0000",
+        "5100": "37920.0000",
+        "5200": "10000.0000",
+        "5300": "2500.0000",
+        "5400": "2500.0000",
+        "5500": "960.0000",
+        "5600": "600.0000",
+        "5700": "25000.0000"
+      },
+      "income": "0.0000",
+      "expenses": "0.0000",
+      "profit": "0.0000"
+    },
+    {
+      "from": "2026-04-01",
+      "to": "2026-04-30",
+      "balances": {
+        "1000": "49435.0000",
+        "1010": "2000.0000",
+        "1020": "6350.0000",
+        "1030": "250.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-960.0000",
+        "1400": "1250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-113300.0000",
+        "5000": "595.0000",
+        "5100": "37920.0000",
+        "5200": "10000.0000",
+        "5300": "2500.0000",
+        "5400": "2500.0000",
+        "5500": "960.0000",
+        "5600": "600.0000",
+        "5700": "25000.0000"
+      },
+      "income": "0.0000",
+      "expenses": "0.0000",
+      "profit": "0.0000"
+    },
+    {
+      "from": "2026-05-01",
+      "to": "2026-05-31",
+      "balances": {
+        "1000": "49435.0000",
+        "1010": "2000.0000",
+        "1020": "6350.0000",
+        "1030": "250.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-960.0000",
+        "1400": "1250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-113300.0000",
+        "5000": "595.0000",
+        "5100": "37920.0000",
+        "5200": "10000.0000",
+        "5300": "2500.0000",
+        "5400": "2500.0000",
+        "5500": "960.0000",
+        "5600": "600.0000",
+        "5700": "25000.0000"
+      },
+      "income": "0.0000",
+      "expenses": "0.0000",
+      "profit": "0.0000"
+    },
+    {
+      "from": "2026-06-01",
+      "to": "2026-06-30",
+      "balances": {
+        "1000": "49435.0000",
+        "1010": "2000.0000",
+        "1020": "6350.0000",
+        "1030": "250.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-960.0000",
+        "1400": "1250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-113300.0000",
+        "5000": "595.0000",
+        "5100": "37920.0000",
+        "5200": "10000.0000",
+        "5300": "2500.0000",
+        "5400": "2500.0000",
+        "5500": "960.0000",
+        "5600": "600.0000",
+        "5700": "25000.0000"
+      },
+      "income": "0.0000",
+      "expenses": "0.0000",
+      "profit": "0.0000"
+    },
+    {
+      "from": "2026-07-01",
+      "to": "2026-07-31",
+      "balances": {
+        "1000": "49435.0000",
+        "1010": "2000.0000",
+        "1020": "6350.0000",
+        "1030": "250.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-960.0000",
+        "1400": "1250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-113300.0000",
+        "5000": "595.0000",
+        "5100": "37920.0000",
+        "5200": "10000.0000",
+        "5300": "2500.0000",
+        "5400": "2500.0000",
+        "5500": "960.0000",
+        "5600": "600.0000",
+        "5700": "25000.0000"
+      },
+      "income": "0.0000",
+      "expenses": "0.0000",
+      "profit": "0.0000"
+    },
+    {
+      "from": "2026-08-01",
+      "to": "2026-08-31",
+      "balances": {
+        "1000": "49435.0000",
+        "1010": "2000.0000",
+        "1020": "6350.0000",
+        "1030": "250.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-960.0000",
+        "1400": "1250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-113300.0000",
+        "5000": "595.0000",
+        "5100": "37920.0000",
+        "5200": "10000.0000",
+        "5300": "2500.0000",
+        "5400": "2500.0000",
+        "5500": "960.0000",
+        "5600": "600.0000",
+        "5700": "25000.0000"
+      },
+      "income": "0.0000",
+      "expenses": "0.0000",
+      "profit": "0.0000"
+    },
+    {
+      "from": "2026-09-01",
+      "to": "2026-09-30",
+      "balances": {
+        "1000": "49435.0000",
+        "1010": "2000.0000",
+        "1020": "6350.0000",
+        "1030": "250.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-960.0000",
+        "1400": "1250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-113300.0000",
+        "5000": "595.0000",
+        "5100": "37920.0000",
+        "5200": "10000.0000",
+        "5300": "2500.0000",
+        "5400": "2500.0000",
+        "5500": "960.0000",
+        "5600": "600.0000",
+        "5700": "25000.0000"
+      },
+      "income": "0.0000",
+      "expenses": "0.0000",
+      "profit": "0.0000"
+    },
+    {
+      "from": "2026-10-01",
+      "to": "2026-10-31",
+      "balances": {
+        "1000": "49435.0000",
+        "1010": "2000.0000",
+        "1020": "6350.0000",
+        "1030": "250.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-960.0000",
+        "1400": "1250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-113300.0000",
+        "5000": "595.0000",
+        "5100": "37920.0000",
+        "5200": "10000.0000",
+        "5300": "2500.0000",
+        "5400": "2500.0000",
+        "5500": "960.0000",
+        "5600": "600.0000",
+        "5700": "25000.0000"
+      },
+      "income": "0.0000",
+      "expenses": "0.0000",
+      "profit": "0.0000"
+    },
+    {
+      "from": "2026-11-01",
+      "to": "2026-11-30",
+      "balances": {
+        "1000": "49435.0000",
+        "1010": "2000.0000",
+        "1020": "6350.0000",
+        "1030": "250.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-960.0000",
+        "1400": "1250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-113300.0000",
+        "5000": "595.0000",
+        "5100": "37920.0000",
+        "5200": "10000.0000",
+        "5300": "2500.0000",
+        "5400": "2500.0000",
+        "5500": "960.0000",
+        "5600": "600.0000",
+        "5700": "25000.0000"
+      },
+      "income": "0.0000",
+      "expenses": "0.0000",
+      "profit": "0.0000"
+    },
+    {
+      "from": "2026-12-01",
+      "to": "2026-12-31",
+      "balances": {
+        "1000": "49435.0000",
+        "1010": "2000.0000",
+        "1020": "6350.0000",
+        "1030": "250.0000",
+        "1100": "0.0000",
+        "1200": "1100.0000",
+        "1300": "2400.0000",
+        "1390": "-960.0000",
+        "1400": "1250.0000",
+        "2000": "0.0000",
+        "2100": "0.0000",
+        "2200": "-3600.0000",
+        "3000": "-25000.0000",
+        "4000": "-113300.0000",
+        "5000": "595.0000",
+        "5100": "37920.0000",
+        "5200": "10000.0000",
+        "5300": "2500.0000",
+        "5400": "2500.0000",
+        "5500": "960.0000",
+        "5600": "600.0000",
+        "5700": "25000.0000"
+      },
+      "income": "0.0000",
+      "expenses": "0.0000",
+      "profit": "0.0000"
+    }
+  ]
+}

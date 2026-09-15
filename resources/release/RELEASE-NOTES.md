@@ -4,13 +4,21 @@ Source revision: `{{SOURCE_COMMIT}}`.
 
 This package is a development preview of the restarted PHP Ledger application. It preserves the lightweight BixiSoft PHP/MeekroDB structure while separating accounting functions, server permissions, templates and the public front controller. It is intended for evaluation and supported pilot preparation.
 
-## 0.2.0-preview candidate changes
+## 0.2.1-preview combined release
+
+- Retains company/book permissions, chart of accounts, receipt/expense and general-journal drafts, balanced posting, linked reversals, opening balances with an unpaid-document register, period controls, bank CSV reconciliation, financial reports, running account balances and CSV exports.
+- Adds four original synthetic companies: service agency, retail shop, seasonal business and distributor. Each has 74 source records, three editable drafts, closed 2024–2025 history, open 2026 practice and 36 reconciled month-end checkpoints. Private guides explain daily, monthly and quarterly/yearly reporting, with separate public illustrated walkthroughs.
+- Ships read API/MCP, Connections/OAuth and server-side tables described below. Compatibility claims apply only to client versions actually tested; other named clients remain pending.
+- Thirteen migration receipts, 34 tables and 35 accounting guards. `012_demo_history_periods` replaces two demo period guards while web/scheduler services are stopped; it permits guarded sample preparation before assignment and continues to reject visitor period administration.
+- Manual support schedules explain payroll, stock and unpaid items; full payroll, inventory and AR/AP modules remain future work. Regional connectors, including Pakistan FBR, remain planned.
+
+## Read integration changes
 
 - Scoped read-only `/api/v1/` and native `/mcp` Streamable HTTP, using the same financial services as browser reports; standalone PHP STDIO-to-HTTPS bridge with no database credentials.
 - Existing-session Connections and OAuth consent, personal tokens shown once/stored hashed, S256 authorization code, exact redirect/resource checks, refresh rotation, durable revocation and demo generation/reset expiry. Seven additive tables in `011_read_connections`; twelve migration identities and the existing 35 accounting guards.
 - Locally bundled DataTables 3.0.4 for transactions, general journals, account movements and bank rows. Running balances precede filtering/sorting/paging; original views and CSV exports remain available.
 - Pinned MCP/OAuth dependencies and credential-free versioned client recipes, a disabled n8n native-MCP workflow and independent OpenAPI description.
-- This candidate is not a verified compatibility claim for Codex, Claude, ChatGPT, n8n, OpenClaw, Hermes Agent, Open WebUI or llm.bixisoft.com. Their separate application acceptance matrix remains open in `docs/INTEGRATIONS.md`; the public maintenance release is 0.1.6 while these gates remain open. Multi-year demo packs follow in Release C.
+- This candidate is not a verified compatibility claim for Codex, Claude, ChatGPT, n8n, OpenClaw, Hermes Agent, Open WebUI or llm.bixisoft.com. Their separate application acceptance matrix remains open in `docs/INTEGRATIONS.md`; untested client entries remain pending under the owner-approved preview policy. Multi-year demo packs are included in this combined release.
 
 ## 0.1.6-preview changes
 

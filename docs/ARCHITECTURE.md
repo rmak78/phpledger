@@ -2,9 +2,9 @@
 
 ## Runtime and application structure
 
-### Read integration candidate (0.2.0-preview)
+### Read integration and richer-demo release (0.2.1-preview)
 
-The local candidate extends the shared bootstrap with connection/read services and the explicit front controller with `/api/v1/`, `/mcp`, OAuth, `/connections` and `/tables`. `mcp/sdk` 0.8.1 supplies Streamable HTTP protocol handling; League OAuth2 Server 9.4.1 supplies authorization-code/refresh flows using MeekroDB repositories and the existing users/permissions. No browser session is constructed for machine callers. Financial DTOs invoke the same accounting services as browser reports. Grants contain explicit actor/client/company/book scope and generation-bound demo expiry; each request rechecks current access and durable revocation.
+The 0.2.1 implementation extends the shared bootstrap with connection/read services and the explicit front controller with `/api/v1/`, `/mcp`, OAuth, `/connections` and `/tables`. `mcp/sdk` 0.8.1 supplies Streamable HTTP protocol handling; League OAuth2 Server 9.4.1 supplies authorization-code/refresh flows using MeekroDB repositories and the existing users/permissions. No browser session is constructed for machine callers. Financial DTOs invoke the same accounting services as browser reports. Grants contain explicit actor/client/company/book scope and generation-bound demo expiry; each request rechecks current access and durable revocation.
 
 Migration `011_read_connections` adds seven lifecycle/session/rate/audit tables, without changing posted journals. Browser DataTables 3.0.4 calls the same scoped list services; account window balances are computed before search/sort/pagination. Runtime and key/proxy/discovery requirements, exact limits and the still-open named-client matrix are in [Integrations](INTEGRATIONS.md). This local implementation does not establish hosted/client compatibility or add financial commands.
 

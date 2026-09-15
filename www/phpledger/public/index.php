@@ -48,7 +48,7 @@ $routes = [
     '/reports/trial-balance' => ['GET'], '/reports/account' => ['GET'], '/journals/detail' => ['GET'], '/reports/export' => ['GET'],
     '/reports' => ['GET'], '/reports/balance-sheet' => ['GET'], '/reports/profit-loss' => ['GET'], '/reports/cash-forecast' => ['GET', 'POST'],
     '/pos' => ['GET'], '/pos/review' => ['GET', 'POST'], '/pos/edit' => ['POST'], '/pos/checkout' => ['POST'], '/pos/retry' => ['POST'], '/pos/receipt' => ['GET'],
-    '/help' => ['GET'], '/modules' => ['GET', 'POST'], '/connections' => ['GET','POST'], '/oauth/authorize' => ['GET','POST'], '/tables' => ['GET'],
+    '/sample-guide' => ['GET'], '/help' => ['GET'], '/modules' => ['GET', 'POST'], '/connections' => ['GET','POST'], '/oauth/authorize' => ['GET','POST'], '/tables' => ['GET'],
     '/accounts' => ['GET'], '/accounts/save' => ['POST'],
     '/general-journals' => ['GET'], '/general-journals/new' => ['GET'], '/general-journals/edit' => ['GET'],
     '/general-journals/detail' => ['GET'], '/general-journals/save' => ['POST'], '/general-journals/post' => ['POST'], '/general-journals/reverse' => ['POST'],
@@ -91,10 +91,10 @@ try {
     }
     if ($path === '/start') {
         $pendingOAuth = $_SESSION['oauth_pending'] ?? null;
-        $visit = pl_demo_begin_visit(pl_web_text($_POST, 'csrf'), pl_web_text($_POST, 'currency', 'USD'));
+        $visit = pl_demo_begin_visit(pl_web_text($_POST, 'csrf'), pl_web_text($_POST, 'currency', 'USD'), isset($_POST['sample_pack']) ? pl_web_text($_POST, 'sample_pack') : null);
         $_SESSION['company_id'] = $visit['company_id'];
         if (is_array($pendingOAuth)) { $_SESSION['oauth_pending'] = $pendingOAuth; pl_redirect('/oauth/authorize?resume=1'); }
-        pl_redirect('/reports');
+        pl_redirect(isset($_POST['sample_pack']) ? '/sample-guide' : '/reports');
     }
     if ($path === '/login') {
         if ($actorId) {
@@ -201,6 +201,16 @@ try {
     $company = pl_web_context($actorId);
     $companyId = (int) $company['id'];
     $bookId = (int) $company['book_id'];
+    if ($path === '/sample-guide') {
+        $pack = pl_company_demo_pack($actorId, $companyId, $bookId);
+        if ($pack === null) { throw new DomainException('This guide belongs to a new historical sample. Your existing company has not been changed.'); }
+        $sourceIds = [];
+        foreach (['receipt' => ['pl_documents', 'receipts-2026-01'], 'operations' => ['pl_general_drafts', 'operations-2025-12'], 'correction' => ['pl_general_drafts', 'wrong-cost']] as $key => [$table, $reference]) {
+            $sourceIds[$key] = (int) DB::queryFirstField('SELECT id FROM %b WHERE company_id = %i AND book_id = %i AND reference = %s', $table, $companyId, $bookId, $pack['id'] . '/' . $reference);
+        }
+        pl_render('sample-guide', ['title' => 'Explore ' . $pack['name'], 'user' => $user, 'company' => $company,
+            'pack' => $pack, 'sourceIds' => $sourceIds, 'accountIds' => array_column($company['accounts'], 'id', 'code')]);
+    }
     if ($path === '/tables') {
         require_once dirname(__DIR__) . '/includes/functions/table_web_functions.php';
         pl_web_table($actorId, $company);

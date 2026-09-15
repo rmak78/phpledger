@@ -99,4 +99,32 @@ pl_logout_session();
 demo_denied(static fn () => pl_demo_begin_visit(pl_csrf_token()));
 demo_check((int) DB::queryFirstField('SELECT COUNT(*) FROM pl_demo_visitors') === 2, 'Visitor capacity was bypassed.');
 demo_check(is_string($oldGeneration) && strlen($oldGeneration) === 64, 'A generation marker was not recorded.');
+putenv('PL_DEMO_MAX_VISITORS=100');
+putenv('PL_DEMO_MAX_DOCUMENTS=100');
+$priorPack = null;
+foreach (array_keys(pl_demo_pack_catalog()) as $packId) {
+    pl_logout_session();
+    $rich = pl_demo_begin_visit(pl_csrf_token(), 'USD', $packId);
+    $actor = $rich['user']['id']; $cid = $rich['company_id']; $bid = $rich['book_id'];
+    $periods = pl_list_periods($actor, $cid, $bid);
+    demo_check(count($periods) === 14 && count(array_filter($periods, static fn (array $p): bool => $p['status'] === 'closed')) === 13, 'Historical periods were not closed during restricted provisioning.');
+    demo_check(pl_company_demo_pack($actor, $cid, $bid)['id'] === $packId, 'The selected private pack was not pinned.');
+    demo_denied(static fn () => pl_change_period_status($actor, $cid, $bid, (int) $periods[0]['id'], 'closed', 1, 'Forbidden visitor close', 'forbidden-close'));
+    demo_denied(static fn () => DB::update('pl_periods', ['status' => 'closed'], 'id = %i', $periods[0]['id']));
+    // Even an internal caller cannot reuse provisioning to alter an assigned company.
+    demo_denied(static fn () => pl_demo_provisioning(static fn () => pl_change_period_status($actor, $cid, $bid, (int) $periods[0]['id'], 'closed', 1, 'Forbidden provisioning reuse', 'forbidden-provision')));
+    demo_denied(static fn () => pl_demo_provisioning(static fn () => pl_create_period($actor, $cid, $bid, ['start_date' => '2027-01-01', 'end_date' => '2027-12-31', 'reason' => 'Forbidden assigned sample action', 'request_key' => 'forbidden-create'])));
+    demo_check(count(pl_list_periods($actor, $cid, $bid)) === 14, 'Rejected period action left a partial period.');
+    if ($priorPack !== null) { demo_denied(static fn () => pl_company_demo_pack($actor, $priorPack['company_id'], $priorPack['book_id'])); }
+    $context = pl_company_context($actor, $cid); $codes = array_column($context['accounts'], 'id', 'code');
+    $capacityInput = ['kind' => 'expense', 'date' => '2026-02-05', 'amount' => '1.0000', 'money_account_id' => $codes['1000'],
+        'category_account_id' => $codes['5000'], 'counterparty' => 'Synthetic visitor practice', 'reference' => '', 'memo' => 'Capacity verification'];
+    for ($i = 0; $i < 20; $i++) {
+        $practice = pl_save_document($actor, $cid, $bid, $capacityInput + ['creation_key' => 'rich-capacity:' . $i]);
+        pl_post_document($actor, $cid, $bid, $practice['id'], $practice['revision']);
+    }
+    demo_check(pl_trial_balance($actor, $cid, $bid)['balanced'], 'Practice capacity did not preserve balanced journals.');
+    $priorPack = $rich;
+}
 echo "Demo smoke passed: concurrent maintenance-lock denial, CSRF start, private visitor sessions, idempotent start, scoped posting/reversal, cross-visitor denial, setup/admin/delete/period/posted-edit denial, stale generation expiry, document and visitor limits.\n";
+echo "Four historical packs passed under restricted grants: 144 checkpoints, closed historical periods, assigned-company trigger protection, source isolation and twenty extra posted visitor records per company.\n";

@@ -1,5 +1,9 @@
 # Revival roadmap
 
+## Expedited combined 0.2.1 release — owner-approved
+
+The current release effort combines the complete existing accounting core, read API/MCP, Connections/OAuth, server-side tables, four multi-year sample companies and three illustrated walkthroughs into **0.2.1-preview**. A separate public 0.2.0 release is unnecessary. Verified clients are named individually; unavailable or untested clients remain pending without holding this preview. Financial correctness, authorization, installation/restore and actual hourly demo reset remain release gates. Earlier staged entries below retain their historical context. No later AR/AP, tax, native-client or write-command module is added.
+
 ## Current staged delivery
 
 The 15 September implementation plan delivers A (0.1.5-preview: contributor POS accessibility and website/SEO), B (0.2.0-preview: read API/MCP, scoped connections and server-side tables), then C (0.2.1-preview: four multi-year demo packs and reporting walkthroughs). See the [delivery receipt](repository/sprint-05/DELIVERY-0.1.5-0.2.1.md) for current evidence and open gates. The evening strategy decisions below supersede the subsequent feature order. API/MCP reads finish first, then AR/AP; controlled commands follow e-commerce/storefront. Demo/SEO preparation remains local with its own release gates. The demo hostname move stays deferred.

@@ -46,12 +46,15 @@ function assert_throws(callable $action, string $class = Throwable::class, ?stri
     throw new RuntimeException('Expected exception was not thrown.');
 }
 
-$suites = ['auth_test.php', 'ledger_test.php', 'concurrency_test.php', 'document_test.php', 'regional_test.php', 'report_test.php', 'pos_test.php', 'core_test.php', 'opening_test.php', 'period_test.php', 'reconciliation_test.php', 'core_completion_test.php', 'module_test.php', 'installer_test.php', 'connection_test.php'];
+$suites = ['auth_test.php', 'ledger_test.php', 'concurrency_test.php', 'document_test.php', 'regional_test.php', 'report_test.php', 'pos_test.php', 'core_test.php', 'opening_test.php', 'period_test.php', 'reconciliation_test.php', 'core_completion_test.php', 'module_test.php', 'installer_test.php', 'connection_test.php', 'demo_pack_test.php'];
 if (($argv[1] ?? '') === '--suite=installer') {
     $suites = ['installer_test.php'];
 }
 if (($argv[1] ?? '') === '--suite=connections') {
     $suites = ['ledger_test.php', 'connection_test.php'];
+}
+if (($argv[1] ?? '') === '--suite=demo-packs') {
+    $suites = ['ledger_test.php', 'demo_pack_test.php'];
 }
 foreach ($suites as $suite) {
     if (is_file(__DIR__ . '/' . $suite)) {

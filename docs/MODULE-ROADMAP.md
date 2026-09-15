@@ -1,5 +1,9 @@
 # Core accounting and optional modules
 
+## Expedited combined 0.2.1 release — owner-approved
+
+The current release effort combines the complete existing accounting core, read API/MCP, Connections/OAuth, server-side tables, four multi-year sample companies and three illustrated walkthroughs into **0.2.1-preview**. A separate public 0.2.0 release is unnecessary. Verified clients are named individually; unavailable or untested clients remain pending without holding this preview. Financial correctness, authorization, installation/restore and actual hourly demo reset remain release gates. Earlier staged entries below retain their historical context. No later AR/AP, tax, native-client or write-command module is added.
+
 Owner decisions adopted on 15 September 2026 from the supplied local `docs/strategy/DECISION-REGISTER.md`, section D, as corrected by the [country-neutral direction clarification](strategy/PRODUCT-DIRECTION-CLARIFICATION-2026-09-15.md). The accounting core stays open source; optional modules and commercial licensing follow [Licensing policy](LICENSING-POLICY.md). These decisions supersede the earlier order that put controlled commands and the installer before AR/AP. These are delivery priorities and gates, not new implemented features or dates.
 
 ## Current status

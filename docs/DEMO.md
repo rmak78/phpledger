@@ -1,5 +1,11 @@
 # Restricted public demo operations
 
+## Combined 0.2.1 release
+
+The release includes service agency, retail shop, seasonal business and distributor packs, version 1.0.0. Each contains 74 sources and 36 exact monthly checkpoints across 2024–2026, including three editable practice drafts. The default 100-source limit leaves capacity for 26 additional source records. The 2024–2025 history is closed; 2026 is open for practice. Manual payroll, stock and unpaid-document schedules are illustrative support, not implemented payroll, inventory or AR/AP modules.
+
+`/demo/sample-guide` follows the visitor’s authorized company. Public illustrated guides live at `/guides/`. Scoped API/MCP credentials expire at the next hourly boundary and bind to the demo generation; refresh cannot extend it. Reconnect after starting a fresh sample. Migration 011 adds seven connection tables; migration 012 replaces two period guards while web and scheduler are stopped. OAuth keys belong in private storage, mounted read-only in the web service. See [Integrations](INTEGRATIONS.md) for discovery/proxy/CORS configuration. Earlier receipts below retain their dated scope; the 0.2.1 publication receipt records its separate live checks.
+
 ## Website-only publication: 15 September 2026
 
 The approved multi-page website was published at **08:08 UTC (13:08 PKT)** as `website-redesign-20260915-080700`. Its static root was switched independently of the demo. Existing **core-0.1.2-preview-da5ff133e645** demo containers, upstream proxy target, application files and database were preserved. No demo reset or migration was run.
