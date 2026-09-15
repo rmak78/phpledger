@@ -93,7 +93,7 @@ $canCheckout = pl_can_write($company) && $company['setup_status'] === 'ready' &&
                         <span class="eyebrow"><?= pl_e((string) $product['category']) ?></span><strong class="pos-product-name"><?= pl_e((string) $product['name']) ?></strong><span class="pos-sku"><?= pl_e((string) $product['sku']) ?></span><span class="pos-price amount"><?= pl_e((string) $company['currency']) ?> <?= pl_e(pl_money((string) $product['unit_price'])) ?></span>
                     </button>
                     <input type="hidden" name="items[<?= pl_e((string) $index) ?>][sku]" value="<?= pl_e((string) $product['sku']) ?>">
-                    <label class="field pos-fallback-quantity" for="pos-qty-<?= pl_e((string) $index) ?>">Quantity<input aria-label="<?= pl_e('Quantity for ' . $product['name']) ?>" id="pos-qty-<?= pl_e((string) $index) ?>" type="text" inputmode="numeric" pattern="(?:0|[1-9][0-9]?)" maxlength="2" name="items[<?= pl_e((string) $index) ?>][quantity]" value="<?= pl_e($quantities[$product['sku']] ?? '0') ?>" data-pos-quantity<?= !$canCheckout ? ' disabled' : '' ?>></label>
+                    <label class="field pos-fallback-quantity" for="pos-qty-<?= pl_e((string) $index) ?>">Quantity<input id="pos-qty-<?= pl_e((string) $index) ?>" type="text" inputmode="numeric" pattern="(?:0|[1-9][0-9]?)" maxlength="2" name="items[<?= pl_e((string) $index) ?>][quantity]" value="<?= pl_e($quantities[$product['sku']] ?? '0') ?>" data-pos-quantity<?= !$canCheckout ? ' disabled' : '' ?>></label>
                 </article>
             <?php endforeach; ?>
             </div><p class="muted pos-no-results" data-pos-no-results hidden>No products match. Try another name or category.</p>
