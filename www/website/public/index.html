@@ -7,12 +7,16 @@
 <title>PHP Ledger: open-source, self-hosted accounting software</title>
 <meta name="description" content="Open-source, self-hosted double-entry accounting with a cash POS for small businesses. PHP 8.2+ and MySQL 8.4. Development preview with a live demo.">
 <link rel="canonical" href="https://phpledger.com/">
+<link rel="alternate" hreflang="en" href="https://phpledger.com/">
+<link rel="alternate" hreflang="x-default" href="https://phpledger.com/">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/icon-192.png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="dns-prefetch" href="https://github.com">
 <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=65fc48aadd">
+<link rel="stylesheet" href="/assets/site.css?v=1870e2e375">
 <meta property="og:site_name" content="PHP Ledger">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
@@ -88,12 +92,12 @@
         "BusinessApplication",
         "FinanceApplication"
       ],
-      "operatingSystem": "Self-hosted web application on a Linux server with PHP 8.5 and MySQL 8.4",
+      "operatingSystem": "Self-hosted web application; PHP 8.2 or newer and MySQL 8.4",
       "softwareRequirements": "PHP 8.2+ (8.3 recommended), MySQL 8.4 (InnoDB), HTTPS, terminal access",
-      "softwareVersion": "0.2.1-preview",
-      "datePublished": "2026-09-15",
-      "releaseNotes": "https://github.com/rmak78/phpledger/releases/tag/v0.2.1-preview",
-      "downloadUrl": "https://github.com/rmak78/phpledger/releases/download/v0.2.1-preview/phpledger-0.2.1-preview.zip",
+      "softwareVersion": "0.3.0-preview",
+      "datePublished": "2026-09-16",
+      "releaseNotes": "https://github.com/rmak78/phpledger/releases/tag/v0.3.0-preview",
+      "downloadUrl": "https://github.com/rmak78/phpledger/releases/download/v0.3.0-preview/phpledger-0.3.0-preview.zip",
       "license": "https://github.com/rmak78/phpledger/blob/master/LICENSE",
       "isAccessibleForFree": true,
       "offers": {
@@ -117,6 +121,131 @@
         "@id": "https://phpledger.com/#organization"
       },
       "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://phpledger.com/#webpage",
+      "url": "https://phpledger.com/",
+      "name": "PHP Ledger: open-source, self-hosted accounting software",
+      "description": "Open-source, self-hosted double-entry accounting with a cash POS for small businesses. PHP 8.2+ and MySQL 8.4. Development preview with a live demo.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://phpledger.com/#website"
+      },
+      "datePublished": "2026-09-16",
+      "dateModified": "2026-09-16",
+      "author": {
+        "@id": "https://phpledger.com/#maintainer"
+      },
+      "publisher": {
+        "@id": "https://phpledger.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://phpledger.com/assets/og/home.png"
+      },
+      "breadcrumb": {
+        "@id": "https://phpledger.com/#breadcrumb"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".summary"
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phpledger.com/#maintainer",
+      "name": "Rana Mansoor Akbar Khan",
+      "url": "https://pk.linkedin.com/in/rmak78",
+      "sameAs": [
+        "https://pk.linkedin.com/in/rmak78"
+      ],
+      "jobTitle": "PHP Ledger project maintainer",
+      "worksFor": {
+        "@id": "https://phpledger.com/#organization"
+      },
+      "knowsAbout": [
+        "double-entry bookkeeping",
+        "PHP application architecture",
+        "self-hosted software"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://phpledger.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://phpledger.com/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://phpledger.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is PHP Ledger really free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The project-owned core is free under AGPL-3.0-or-later. Hosting, setup, optional support and a separate commercial licence have their own terms. The 0.1.0 through 0.1.5 previews retain their earlier MIT grants."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do I need to run it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use PHP 8.2 or newer for both web and command-line requests, MySQL 8.4, HTTPS and terminal access. The package includes dependencies and an installation guide. PHP 8.3 is recommended."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work on shared cPanel hosting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A panel alone does not prove compatibility. Your plan must provide the required PHP extensions, MySQL 8.4, terminal access, private files and the correct public document root. Run package preflight on the actual account."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does PHP Ledger send my data anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There are no licence-key or licensing-server calls. The static website has no analytics or form submission endpoint. The separate application has a documented optional country lookup; connections are explicit and scoped. Read the privacy page for the distinct website, demo and installed-application boundaries."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can it invoice customers or settle bills yet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No operator invoice, bill or settlement workflows are released. Version 0.3.0 adds the party, currency, correction and open-item foundations those workflows will need. A cash POS receipt is not a formal invoice."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it ready for real books?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It remains a development preview. Technical tests and balanced reports are evidence for evaluation, but qualified accounting review, observed business use and supported statement packages remain open gates. Use synthetic records until you complete a reviewed acceptance process."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if the project stops?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You retain the source and your self-hosted database under the applicable licence. Continued maintenance, recovery and data extraction still need an operator. Keep tested backups and portable report exports rather than relying on the existence of a ZIP alone."
+          }
+        }
+      ]
     }
   ]
 }
@@ -128,19 +257,20 @@
   <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger"></span></a>
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0"/><path d="M4 12l16 0"/><path d="M4 18l16 0"/></svg>Menu</button>
   <nav id="navigation" aria-label="Main navigation">
-    <a href="/product/">Product</a><a href="/point-of-sale/">Point of sale</a><a href="/download/">Download</a><a href="/support/">Support</a><a href="/roadmap/">Roadmap</a>
+    <a href="/product/">Product</a><a href="/point-of-sale/">Point of sale</a><a href="/learn/">Learn</a><a href="/download/">Download</a><a href="/support/">Support</a><a href="/roadmap/">Roadmap</a>
     <a class="button button--small" href="/demo/">Try the demo</a>
   </nav>
 </header>
 <main id="main">
 <section class="container hero" aria-labelledby="hero-heading">
   <h1 id="hero-heading">Double-entry accounting that runs on your own PHP and MySQL hosting</h1>
-  <p class="lead">PHP Ledger records receipts, expenses and cash sales as balanced journals, then shows the profit and loss, balance sheet and cash position behind them. It is open source, with new code under the MIT licence, and version 0.2.1-preview is ready to download.</p>
-  <div class="actions"><a class="button button--large" href="/demo/">Try the demo</a><a class="button button--large button--secondary" href="/download/">Download 0.2.1-preview</a></div>
+  <p class="lead">PHP Ledger records receipts, expenses and cash sales as balanced journals, then shows the profit and loss, balance sheet and cash position behind them. It is open source, with new project-owned code under AGPL-3.0-or-later, and version 0.3.0-preview is ready to download.</p><aside class="summary"><h2 id="in-short">In short</h2><p>Evaluate connected bookkeeping on your own hosting, with clear limits on the unfinished business modules.</p><ul><li>PHP Ledger 0.3.0-preview records receipts, expenses, journals and cash sales on your own PHP 8.2+ and MySQL 8.4 hosting.</li><li>The public demo offers four fictional businesses and resets every hour. Each visit has its own sample company.</li><li>The download includes production dependencies; new code uses AGPL-3.0-or-later, with commercial licensing available.</li><li>Invoice and bill workflows, inventory, tax engines and professionally accepted statements remain future work.</li></ul></aside>
+<nav class="page-toc" aria-label="On this page"><p><strong>On this page</strong></p><ol><li><a href="#in-short">In short</a></li><li><a href="#chapter-sale">A cash sale at the counter becomes a receipt and a balanced journal</a></li><li><a href="#chapter-entry">Each expense keeps its payee, date, category and journal together</a></li><li><a href="#chapter-report">At the end of the day the owner sees 875.00 in the bank and knows why</a></li><li><a href="#reports-heading">Reports and a cash scenario in one place</a></li><li><a href="#start-heading">Three ways to get started</a></li><li><a href="#preview-heading">What is in the preview, and what comes next</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li></ol></nav>
+  <div class="actions"><a class="button button--large" href="/demo/">Try the demo</a><a class="button button--large button--secondary" href="/download/">Download 0.3.0-preview</a></div>
   <p class="capture-label" data-capture-status>Development preview 0.1.0. Every screen on this page shows synthetic sample data.</p>
   <figure class="capture hero-capture">
     <button type="button" class="capture-enlarge" data-enlarge data-title="Your business at a glance" data-full="/assets/screens/owner-overview.webp"><span class="capture-frame"><img src="/assets/screens/owner-overview.webp" srcset="/assets/screens/owner-overview-720.webp 720w, /assets/screens/owner-overview.webp 1425w" sizes="(max-width: 1240px) 100vw, 1180px" width="1425" height="1188" alt="PHP Ledger owner overview for the sample company: cash and bank 875.00, income 1,000.00, expenses 125.00 and net profit 875.00, with links to the balance sheet, profit and loss and cash scenario." fetchpriority="high"></span></button>
-  </figure>
+  <figcaption>The owner overview connects synthetic balances with the reports behind them.</figcaption></figure>
 </section>
 <hr class="rule container">
 
@@ -152,12 +282,13 @@
   <div class="container chapter-body">
     <div class="chapter-text">
       <h2 id="chapter-sale">A cash sale at the counter becomes a receipt and a balanced journal</h2>
-      <p>Choose from the catalog, take the cash, print the receipt. The sale posts through the same service as every other entry: <span class="fig">5.75</span> to cash, <span class="fig">5.75</span> to sales. No stock, tax or card payments yet, on purpose.</p>
+      <p>A cash sale creates a printable receipt and a journal through the central posting service.</p>
+      <h3>What happens when a sale is posted?</h3><p>Choose from the catalog, take the cash and print the receipt. The balanced entry records: <span class="fig">5.75</span> to cash, <span class="fig">5.75</span> to sales. Stock movement, tax and card payments are not included.</p><p>Compare the basket total with cash received and change before posting. In the synthetic screen, 10.00 received against a 5.75 sale leaves 4.25 change. This cash counter is useful for evaluating the posting path; it does not provide a tax invoice or a customer credit account.</p>
       <a class="link-strong" href="/point-of-sale/">See the point of sale <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a>
     </div>
     <figure class="capture chapter-capture">
       <button type="button" class="capture-enlarge" data-enlarge data-title="Point of sale with a sample basket" data-full="/assets/screens/point-of-sale.webp"><span class="capture-frame"><img src="/assets/screens/point-of-sale-720.webp" srcset="/assets/screens/point-of-sale-720.webp 720w, /assets/screens/point-of-sale.webp 1425w" sizes="(max-width: 900px) 100vw, 780px" width="1425" height="1188" alt="Point of sale screen with a searchable sample catalog on the left and a basket of two items on the right: total 5.75, cash received 10.00, change 4.25." loading="lazy"></span></button>
-    </figure>
+    <figcaption>A fictional expense is saved before its financial effect is posted.</figcaption></figure>
   </div>
 </section>
 
@@ -169,12 +300,12 @@
   <div class="container chapter-body">
     <div class="chapter-text">
       <h2 id="chapter-entry">Each expense keeps its payee, date, category and journal together</h2>
-      <p>Save a draft first. Nothing touches the books until you post it, and posting creates one balanced entry: <span class="fig">125.00</span> to general expenses, <span class="fig">125.00</span> from cash and bank. A correction is a linked reversal, so the history stays complete.</p>
+      <p>A draft stays outside the posted books until you review and post it.</p><p>Posting creates one balanced entry: <span class="fig">125.00</span> to general expenses, <span class="fig">125.00</span> from cash and bank. The source remains connected to its journal.</p><h3>Why does a correction create a reversal?</h3><p>A linked reversing entry preserves the original posted history and explains the change.</p><p>The correction foundation keeps the same document identity across reversal and reposting. Review the reason, reversal date and period controls instead of treating a posted amount as an editable cell. The <a href="/learn/correcting-mistakes-reversal-vs-edit/">correction lesson</a> explains the accounting distinction.</p>
       <a class="link-strong" href="/product/">How the books work <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a>
     </div>
     <figure class="capture chapter-capture">
       <button type="button" class="capture-enlarge" data-enlarge data-title="A posted expense beside its journal" data-full="/assets/screens/expense.webp"><span class="capture-frame"><img src="/assets/screens/expense-720.webp" srcset="/assets/screens/expense-720.webp 720w, /assets/screens/expense.webp 1425w" sizes="(max-width: 900px) 100vw, 780px" width="1425" height="1106" alt="Transactions screen showing a posted expense of 125.00 to Harbor Office Supply beside its journal: general expenses debited 125.00, cash and bank credited 125.00." loading="lazy"></span></button>
-    </figure>
+    <figcaption>The posted sample keeps its debit and credit evidence together.</figcaption></figure>
   </div>
 </section>
 
@@ -186,12 +317,12 @@
   <div class="container chapter-body">
     <div class="chapter-text">
       <h2 id="chapter-report">At the end of the day the owner sees <span class="fig">875.00</span> in the bank and knows why</h2>
-      <p><span class="fig">1,000.00</span> came in and <span class="fig">125.00</span> went out. The profit and loss, balance sheet and trial balance read the same posted entries, and every figure drills back to the journal and the record behind it.</p>
+      <p>The reports read the same posted entries and connect their totals to the journal and source record.</p><h3>How does the sample reach 875.00?</h3><p>With no opening balance or other activity, 1,000.00 of cash income less 125.00 of cash expenses leaves 875.00.</p><p>Profit equals cash in this small example because both transactions are cash movements. A loan or unpaid sale would change that relationship. Check the company, dates and account classification before comparing reports; the <a href="/learn/profit-and-loss-vs-balance-sheet/">reporting lesson</a> works through the difference.</p>
       <a class="link-strong" href="/product/#reports">See the reports <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a>
     </div>
     <figure class="capture chapter-capture">
       <button type="button" class="capture-enlarge" data-enlarge data-title="Profit and loss" data-full="/assets/screens/profit-loss.webp"><span class="capture-frame"><img src="/assets/screens/profit-loss-720.webp" srcset="/assets/screens/profit-loss-720.webp 720w, /assets/screens/profit-loss.webp 1440w" sizes="(max-width: 900px) 100vw, 780px" width="1440" height="1200" alt="Profit and loss report for the sample company: income 1,000.00, expenses 125.00, net profit 875.00." loading="lazy"></span></button>
-    </figure>
+    <figcaption>Account movements explain the sample balance and retain source links.</figcaption></figure>
   </div>
 </section>
 
@@ -209,20 +340,20 @@
 </section>
 
 <section class="container start" id="enterprise" aria-labelledby="start-heading">
-  <h2 id="start-heading">Three ways to get started</h2>
+  <h2 id="start-heading">Three ways to get started</h2><p>Start with fictional records in the browser, then test the package and recovery process on your own hosting.</p>
   <div class="start-grid" id="quick-start">
     <div class="start-card">
-      <h3>Try it in the browser</h3>
+      <h3>Who should start with the demo?</h3>
       <p>A private sample company with synthetic records. It resets every hour, so keep real books out of it.</p>
       <a class="button" href="/demo/">Try the demo</a>
     </div>
     <div class="start-card">
-      <h3>Install it on your server</h3>
+      <h3>How do you test your own hosting?</h3>
       <p>PHP 8.2+, MySQL 8.4 and HTTPS. The ZIP ships with its SHA-256 checksum and an installation guide.</p>
-      <a class="button button--secondary" href="/download/">Download 0.2.1-preview</a>
+      <a class="button button--secondary" href="/download/">Download 0.3.0-preview</a>
     </div>
     <div class="start-card" id="pilot">
-      <h3>Ask for help setting it up</h3>
+      <h3>When should you ask for setup help?</h3>
       <p>Installation assistance, training and troubleshooting on your own hosting, scoped in writing before work starts.</p>
       <a class="button button--secondary" href="/support/">Ask about support</a>
     </div>
@@ -232,20 +363,21 @@
 <section class="container section preview-split" id="roadmap" aria-labelledby="preview-heading">
   <div class="intro" id="contribute">
     <h2 id="preview-heading">What is in the preview, and what comes next</h2>
-    <p>The current package covers connected accounts, general journals, daily transactions and reports. Further capabilities follow the roadmap and need accounting and usability review. Contributions, worked accounting examples and installation reports are welcome on GitHub.</p>
-    <a class="link-strong" href="/roadmap/">See the roadmap <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a>
+    <p>The preview connects daily bookkeeping and reports, with internal foundations for the next AR/AP milestone.</p><p>Further capabilities follow the roadmap and need accounting and usability review. Contributions, worked accounting examples and installation reports are welcome on GitHub.</p>
+    <dl><dt>Version</dt><dd>0.3.0-preview, released 16 September 2026</dd><dt>Licence</dt><dd>AGPL-3.0-or-later for new project-owned code; commercial licence available.</dd><dt>Requirements</dt><dd>PHP 8.2+ (8.3 recommended), MySQL 8.4 (InnoDB), HTTPS, terminal access</dd><dt>Demo</dt><dd>Four synthetic businesses; hourly reset.</dd><dt>Source</dt><dd><a href="https://github.com/rmak78/phpledger">Public Git repository</a></dd></dl><a class="link-strong" href="/roadmap/">See the roadmap <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a>
   </div>
-  <div class="facts" id="faq">
+  <div class="facts" id="preview-facts">
     <div>
-      <h3>In 0.2.1-preview</h3>
-      <ul><li>Company setup and audited account management</li><li>Receipt, expense and general-journal drafts, posting, linked reversals</li><li>Account statements, trial balance, profit and loss, balance sheet</li><li>Cash scenario from your own assumptions</li><li>Cash point of sale with a printable receipt</li><li>Ten base currencies, one per company</li></ul>
+      <h3>Which capabilities can you evaluate now?</h3><p>Use the existing bookkeeping screens and distinguish their supported tasks from internal service foundations.</p>
+      <ul><li>Company setup and account management with audit history</li><li>Receipt, expense and general-journal drafts, posting, linked reversals</li><li>Account statements, trial balance, profit and loss, balance sheet</li><li>Cash scenario from your own assumptions</li><li>Cash point of sale with a printable receipt</li><li>Ten supported functional currencies; one immutable functional currency per company/book</li><li>Internal party, multi-currency, open-item settlement and correction foundations</li></ul>
     </div>
     <div class="facts--not">
-      <h3>Not yet</h3>
-      <ul><li>Receivables and payables</li><li>Inventory and cost of sales</li><li>Tax</li><li>Detailed historical imports and reviewed reporting</li><li>Foreign-currency posting and translations</li><li>Card payments, offline use and document scanning</li></ul>
+      <h3>What remains unfinished?</h3><p>The next business modules need operator workflows and review before they can support daily work.</p>
+      <ul><li>Customer invoice, vendor bill and settlement workflows</li><li>Inventory and cost of sales</li><li>Tax</li><li>Detailed historical imports and reviewed reporting</li><li>Foreign-currency entry screens, revaluation and consolidation</li><li>Card payments, offline use and document scanning</li></ul>
     </div>
   </div>
-</section>
+  <div class="table-scroll" role="region" aria-label="Current preview and future scope" tabindex="0"><table><caption>Current preview and future scope</caption><thead><tr><th scope="col">Area</th><th scope="col">In 0.3.0-preview</th><th scope="col">Future work</th></tr></thead><tbody><tr><th scope="row">Bookkeeping</th><td>Drafts, posting, reversals and reports</td><td>Reviewed statement packages</td></tr><tr><th scope="row">AR/AP and currency</th><td>Party, currency and settlement service foundations</td><td>Invoice, bill and foreign-currency entry screens</td></tr><tr><th scope="row">Retail</th><td>Cash POS and printable receipts</td><td>Inventory costing, tax and card payments</td></tr></tbody></table></div>
+</section><section class="container section faq" id="faq"><h2 id="frequently-asked-questions">Frequently asked questions</h2><p>These answers describe the current release and the choices you need to make before evaluating it.</p><details><summary>Is PHP Ledger really free?</summary><p>The project-owned core is free under AGPL-3.0-or-later. Hosting, setup, optional support and a separate commercial licence have their own terms. The 0.1.0 through 0.1.5 previews retain their earlier MIT grants.</p></details><details><summary>What do I need to run it?</summary><p>Use PHP 8.2 or newer for both web and command-line requests, MySQL 8.4, HTTPS and terminal access. The package includes dependencies and an installation guide. PHP 8.3 is recommended.</p></details><details><summary>Does it work on shared cPanel hosting?</summary><p>A panel alone does not prove compatibility. Your plan must provide the required PHP extensions, MySQL 8.4, terminal access, private files and the correct public document root. Run package preflight on the actual account.</p></details><details><summary>Does PHP Ledger send my data anywhere?</summary><p>There are no licence-key or licensing-server calls. The static website has no analytics or form submission endpoint. The separate application has a documented optional country lookup; connections are explicit and scoped. Read the privacy page for the distinct website, demo and installed-application boundaries.</p></details><details><summary>Can it invoice customers or settle bills yet?</summary><p>No operator invoice, bill or settlement workflows are released. Version 0.3.0 adds the party, currency, correction and open-item foundations those workflows will need. A cash POS receipt is not a formal invoice.</p></details><details><summary>Is it ready for real books?</summary><p>It remains a development preview. Technical tests and balanced reports are evidence for evaluation, but qualified accounting review, observed business use and supported statement packages remain open gates. Use synthetic records until you complete a reviewed acceptance process.</p></details><details><summary>What if the project stops?</summary><p>You retain the source and your self-hosted database under the applicable licence. Continued maintenance, recovery and data extraction still need an operator. Keep tested backups and portable report exports rather than relying on the existence of a ZIP alone.</p></details></section>
 </main>
 <footer class="site-footer">
   <div class="container">
@@ -254,9 +386,10 @@
         <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger" loading="lazy"></span></a>
         <p>Open-source, self-hosted accounting and cash POS for small businesses. PHP 8.2+ and MySQL 8.4. Development preview.</p>
       </div>
-      <div class="footer-col"><h2>Product</h2><a href="/product/">Accounting features</a><a href="/guides/">Reporting guides</a><a href="/point-of-sale/">Point of sale</a><a href="/roadmap/">Roadmap</a><a href="/news/">News</a></div>
-      <div class="footer-col" id="docs"><h2>Get started</h2><a href="/demo/">Try the demo</a><a href="/download/">Download</a><a href="https://github.com/rmak78/phpledger/wiki/Getting-Started">Getting started guide</a><a href="https://github.com/rmak78/phpledger/wiki">Wiki</a></div>
-      <div class="footer-col"><h2>Project</h2><a href="/about/">About</a><a href="https://github.com/rmak78/phpledger">GitHub</a><a href="https://github.com/rmak78/phpledger/discussions">Discussions</a><a href="/support/">Support</a><a href="/credits/">Credits</a><a href="/privacy/">Privacy</a><a href="/terms/">Demo use and terms</a></div>
+      <div class="footer-col"><h2>Product</h2><a href="/product/">Accounting features</a><a href="/point-of-sale/">Point of sale</a><a href="/for/">Who it is for</a><a href="/demo/">Try the demo</a><a href="/download/">Download</a><a href="/roadmap/">Roadmap</a></div>
+      <div class="footer-col" id="docs"><h2>Learn</h2><a href="/learn/">Bookkeeping lessons</a><a href="/glossary/">Glossary</a><a href="/guides/">Reporting guides</a><a href="/self-hosting/">Self-hosting</a><a href="https://github.com/rmak78/phpledger/wiki/Getting-Started">Getting started guide</a><a href="https://github.com/rmak78/phpledger/wiki">Wiki</a></div>
+      <div class="footer-col"><h2>Compare</h2><a href="/compare/">Compare accounting software</a><a href="/compare/open-source-accounting-software/">Open-source options</a><a href="/research/">Research and sources</a></div>
+      <div class="footer-col"><h2>Project</h2><a href="/about/">About</a><a href="https://github.com/rmak78/phpledger">GitHub</a><a href="https://github.com/rmak78/phpledger/discussions">Discussions</a><a href="/news/">News</a><a href="/support/">Support</a><a href="/credits/">Credits</a><a href="/privacy/">Privacy</a><a href="/terms/">Demo use and terms</a></div>
       <div class="footer-col"><h2>Contact</h2><a href="mailto:rmak78@gmail.com">rmak78@gmail.com</a><a href="https://pk.linkedin.com/in/rmak78">Rana Mansoor Akbar Khan on LinkedIn</a><address>Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan</address></div>
     </div>
     <div class="supporters">
@@ -268,7 +401,9 @@
         <li><a href="https://agency75.com/"><img class="mark-square" src="/assets/partners/agency75.webp" width="240" height="240" alt="Agency75" loading="lazy"></a></li>
       </ul>
     </div>
+    <nav class="trust-links" aria-label="Project policies"><a href="https://github.com/rmak78/phpledger/blob/master/LICENSE">Licence</a><a href="https://github.com/rmak78/phpledger/blob/master/SECURITY.md">Security contact</a><a href="https://github.com/rmak78/phpledger/blob/master/CODE_OF_CONDUCT.md">Code of conduct</a><a href="/privacy/">Privacy and data boundaries</a></nav>
     <p class="footer-legal">New project-owned code uses AGPL-3.0-or-later; a commercial licence is available. The pre-adoption 0.1.0 through 0.1.5 previews retain MIT; dependencies, fonts and the archived 2015 application keep their own terms. Photographs are illustrative and are not customer endorsements. Screens show synthetic sample data from the development preview.</p>
+    <p class="footer-meta">Maintained by <a href="/about/" rel="author">Rana Mansoor Akbar Khan</a>, PHP Ledger project maintainer. Last reviewed <time datetime="2026-09-16">2026-09-16</time>.</p>
   </div>
 </footer>
 <dialog id="screen-dialog" aria-labelledby="screen-dialog-title"><div class="dialog-heading"><h2 id="screen-dialog-title">Product screen</h2><button type="button" class="dialog-close" aria-label="Close enlarged screen"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>Close</button></div><p id="screen-dialog-note">Development preview with synthetic sample data</p><p class="dialog-hint" id="dialog-hint">Scroll the image to explore it. With a keyboard, focus the image area and use the arrow keys.</p><div class="dialog-image-wrap" tabindex="0" role="region" aria-label="Enlarged product image" aria-describedby="dialog-hint"><img id="dialog-image" width="1440" height="1200" alt=""></div></dialog>

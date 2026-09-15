@@ -305,6 +305,8 @@ function checkPage(doc) {
   let ogHeight = null;
   let twitterImage = null;
   let title = null;
+  let insideHead = false;
+  let headTitleCount = 0;
   let h1Count = 0;
   let imageIndex = 0;
   let insideNav = false;
@@ -316,6 +318,7 @@ function checkPage(doc) {
   for (const tag of tags) {
     if (tag.closing) {
       if (tag.name === 'nav') insideNav = false;
+      if (tag.name === 'head') insideHead = false;
       continue;
     }
     for (const a of tag.attrs) {
@@ -336,7 +339,8 @@ function checkPage(doc) {
       }
     }
     switch (tag.name) {
-      case 'title': title = visibleText(tag.text); break;
+      case 'head': insideHead = true; break;
+      case 'title': if (insideHead) { title = visibleText(tag.text); headTitleCount += 1; } break;
       case 'h1': h1Count += 1; break;
       case 'style': error(page, 'csp-style-element', '<style> elements are not allowed'); break;
       case 'object': case 'embed': error(page, 'csp-object', `<${tag.name}> is blocked by object-src 'none'`); break;
@@ -437,7 +441,7 @@ function checkPage(doc) {
 
   stats.title = title;
   if (!isStub) {
-    if (!title) error(page, 'title', '<title> is missing or empty');
+    if (headTitleCount !== 1 || !title) error(page, 'title', 'Document head needs exactly one non-empty <title>');
     else if (titles.has(title)) error(page, 'title-unique', `<title> "${title}" is also used by ${titles.get(title)}`);
     else titles.set(title, page);
     if (h1Count !== 1) error(page, 'h1-count', `page has ${h1Count} <h1> elements; exactly one is required`);

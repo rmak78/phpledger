@@ -4,28 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0c2052">
-<title>Synthetic reporting walkthroughs | PHP Ledger</title>
-<meta name="description" content="Read a daily bank check, a month-end close and a quarterly/yearly review using the reconciled Cedar Studio sample.">
+<title>Practical accounting and reporting guides | PHP Ledger</title>
+<meta name="description" content="Work through synthetic posting, cutover, bank reconciliation, corrections and financial statements with explicit baselines and preview boundaries.">
 <link rel="canonical" href="https://phpledger.com/guides/">
+<link rel="alternate" hreflang="en" href="https://phpledger.com/guides/">
+<link rel="alternate" hreflang="x-default" href="https://phpledger.com/guides/">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/icon-192.png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="dns-prefetch" href="https://github.com">
 <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=65fc48aadd">
+<link rel="stylesheet" href="/assets/site.css?v=1870e2e375">
 <meta property="og:site_name" content="PHP Ledger">
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="en_GB">
-<meta property="og:title" content="Synthetic reporting walkthroughs | PHP Ledger">
-<meta property="og:description" content="Read a daily bank check, a month-end close and a quarterly/yearly review using the reconciled Cedar Studio sample.">
+<meta property="og:title" content="Practical accounting and reporting guides | PHP Ledger">
+<meta property="og:description" content="Work through synthetic posting, cutover, bank reconciliation, corrections and financial statements with explicit baselines and preview boundaries.">
 <meta property="og:url" content="https://phpledger.com/guides/">
 <meta property="og:image" content="https://phpledger.com/assets/og/home.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
 <meta property="og:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Synthetic reporting walkthroughs | PHP Ledger">
-<meta name="twitter:description" content="Read a daily bank check, a month-end close and a quarterly/yearly review using the reconciled Cedar Studio sample.">
+<meta name="twitter:title" content="Practical accounting and reporting guides | PHP Ledger">
+<meta name="twitter:description" content="Work through synthetic posting, cutover, bank reconciliation, corrections and financial statements with explicit baselines and preview boundaries.">
 <meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
 <meta name="twitter:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
@@ -67,6 +71,69 @@
       ]
     },
     {
+      "@type": "WebSite",
+      "@id": "https://phpledger.com/#website",
+      "url": "https://phpledger.com/",
+      "name": "PHP Ledger",
+      "alternateName": "phpledger",
+      "description": "PHP Ledger is open-source, self-hosted double-entry accounting software with a simple cash point of sale for small businesses, built on PHP 8.2+ and MySQL 8.4 and currently in development preview.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://phpledger.com/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://phpledger.com/guides/#webpage",
+      "url": "https://phpledger.com/guides/",
+      "name": "Practical accounting and reporting guides | PHP Ledger",
+      "description": "Work through synthetic posting, cutover, bank reconciliation, corrections and financial statements with explicit baselines and preview boundaries.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://phpledger.com/#website"
+      },
+      "datePublished": "2026-09-16",
+      "dateModified": "2026-09-16",
+      "author": {
+        "@id": "https://phpledger.com/#maintainer"
+      },
+      "publisher": {
+        "@id": "https://phpledger.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://phpledger.com/assets/og/home.png"
+      },
+      "breadcrumb": {
+        "@id": "https://phpledger.com/guides/#breadcrumb"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".summary"
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phpledger.com/#maintainer",
+      "name": "Rana Mansoor Akbar Khan",
+      "url": "https://pk.linkedin.com/in/rmak78",
+      "sameAs": [
+        "https://pk.linkedin.com/in/rmak78"
+      ],
+      "jobTitle": "PHP Ledger project maintainer",
+      "worksFor": {
+        "@id": "https://phpledger.com/#organization"
+      },
+      "knowsAbout": [
+        "double-entry bookkeeping",
+        "PHP application architecture",
+        "self-hosted software"
+      ]
+    },
+    {
       "@type": "BreadcrumbList",
       "@id": "https://phpledger.com/guides/#breadcrumb",
       "itemListElement": [
@@ -79,8 +146,30 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Reporting walkthroughs",
+          "name": "Practical accounting and reporting guides",
           "item": "https://phpledger.com/guides/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://phpledger.com/guides/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do all guides use the same sample company?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The installed Cedar Studio sample, empty-book exercises and retail documentation fixture have different baselines."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I perform every operation in the public demo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Opening import and bank-reconciliation writes are restricted there; use an isolated self-hosted installation for those exercises."
+          }
         }
       ]
     }
@@ -94,13 +183,13 @@
   <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger"></span></a>
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0"/><path d="M4 12l16 0"/><path d="M4 18l16 0"/></svg>Menu</button>
   <nav id="navigation" aria-label="Main navigation">
-    <a href="/product/">Product</a><a href="/point-of-sale/">Point of sale</a><a href="/download/">Download</a><a href="/support/">Support</a><a href="/roadmap/">Roadmap</a>
+    <a href="/product/">Product</a><a href="/point-of-sale/">Point of sale</a><a href="/learn/">Learn</a><a href="/download/">Download</a><a href="/support/">Support</a><a href="/roadmap/">Roadmap</a>
     <a class="button button--small" href="/demo/">Try the demo</a>
   </nav>
 </header>
 <main id="main">
-<section class="container page-intro page-intro--simple"><h1>Follow the books, one check at a time</h1><p class="lead">Three worked examples from the reconciled Cedar Studio sample.</p><p>Included in 0.2.1-preview. Start a private sample company in the demo to follow these reports and try the 2026 practice entries.</p></section>
-<section class="container section"><ul class="news-list"><li><span>Daily</span><div><h2><a href="/guides/daily-cash-check/">Follow a bank movement to its source</a></h2><p>Opening balance, one receipt, closing balance and the original transaction.</p></div></li><li><span>Monthly</span><div><h2><a href="/guides/monthly-closing/">Read the adjustments behind a month-end close</a></h2><p>Staff costs, prepayments, depreciation, interest and an unpaid bill.</p></div></li><li><span>Quarterly / yearly</span><div><h2><a href="/guides/quarterly-yearly-review/">Compare periods and reconcile the year end</a></h2><p>Separate quarters, annual profit, accumulated earnings and outstanding items.</p></div></li></ul></section>
+<article class="container article section"><p><a href="/guides/">Practical guides</a></p><h1>Practical accounting and reporting guides</h1><p class="lead">Follow a source into the <a href="/glossary/#ledger">ledger</a>, reconcile the result and keep the evidence that explains it.</p><p class="small">PHP Ledger guidance: use this page with the matching release notes and evaluate the workflow using synthetic records.</p><aside class="summary"><h2 id="key-takeaways">Key takeaways</h2><p>Use the checks below to decide what to do next and what evidence to keep.</p><ul><li>Choose the guide whose baseline matches your exercise.</li><li>Check sources, dates and account meaning as well as arithmetic.</li><li>Concepts and internal foundations do not imply unshipped workflows.</li></ul></aside>
+<nav class="page-toc" aria-label="On this page"><p><strong>On this page</strong></p><ol><li><a href="#key-takeaways">Key takeaways</a></li><li><a href="#which-walkthrough-should-you-start-with">Which walkthrough should you start with?</a></li><li><a href="#keep-the-three-example-baselines-separate">Keep the three example baselines separate</a></li><li><a href="#how-should-you-work-through-a-guide">How should you work through a guide?</a></li><li><a href="#what-does-the-current-preview-provide">What does the current preview provide?</a></li><li><a href="#when-are-these-guides-the-wrong-source">When are these guides the wrong source?</a></li><li><a href="#questions-before-you-continue">Questions before you continue</a></li><li><a href="#sources-and-next-steps">Sources and next steps</a></li></ol></nav><section><h2 id="which-walkthrough-should-you-start-with">Which walkthrough should you start with?</h2><p>Choose a guide that matches the question you are trying to answer and the evidence you have.</p><div class="table-wrap"><table><caption>Choose a practical starting point</caption><thead><tr><th scope="col">Your question</th><th scope="col">Walkthrough</th><th scope="col">Evidence used</th></tr></thead><tbody><tr><th scope="row">How does a <a href="/glossary/#receipt">receipt</a> affect reports?</th><td><a href="/guides/first-week-on-the-books/">First week on the books</a></td><td>Two events in an empty fictional company</td></tr><tr><th scope="row">Where did this bank movement come from?</th><td><a href="/guides/daily-cash-check/">Daily cash check</a></td><td>Installed Cedar Studio sample</td></tr><tr><th scope="row">What explains the month-end result?</th><td><a href="/guides/monthly-closing/">Monthly closing</a></td><td>Installed sample adjustments and reports</td></tr><tr><th scope="row">How do quarters connect to year end?</th><td><a href="/guides/quarterly-yearly-review/">Quarterly and yearly review</a></td><td>Installed sample period comparisons</td></tr><tr><th scope="row">How do financial statements connect?</th><td><a href="/guides/retail-two-year-statements/">Retail two-year statements</a></td><td>Separate synthetic documentation fixture</td></tr><tr><th scope="row">How do I move an existing position?</th><td><a href="/guides/opening-balances-cutover/">Opening balances and cutover</a></td><td>Reviewed opening CSV and unpaid evidence</td></tr><tr><th scope="row">Does the ledger agree with the bank?</th><td><a href="/guides/bank-reconciliation-walkthrough/">Bank reconciliation walkthrough</a></td><td>Synthetic statement and posted movements</td></tr><tr><th scope="row">How do I preserve a correction trail?</th><td><a href="/guides/correcting-a-posted-entry/">Correcting a posted entry</a></td><td>Original, reversing and replacement entries</td></tr></tbody></table></div></section><section><h2 id="keep-the-three-example-baselines-separate">Keep the three example baselines separate</h2><p>Installed sample reports, empty-book exercises and documentation fixtures serve different learning purposes.</p><p>The daily, monthly and quarterly/yearly guides use the reconciled Cedar Studio sample. Start a private sample company through the demo’s supported flow to inspect that history and its practice entries. Its accounts already contain data. Adding the first-week exercise to that company will not produce the same totals as an empty book, because the starting position is different.</p><p>The first-week, opening, reconciliation and correction walkthroughs use explicitly fictional figures to explain an operation. Some require permissions available in a private self-hosted installation but restricted in the public demo. The retail statements page is a separate documentation fixture with supplied two-year figures. It is not an installed retail company, a report export or a complete transaction dataset. Read each page’s baseline before comparing a screen with its expected numbers.</p></section><section><h2 id="how-should-you-work-through-a-guide">How should you work through a guide?</h2><p>Write down the expected result first, then trace the source and journal before checking the report.</p><ol><li>Confirm the company, book, currency and date range.</li><li>Identify the source evidence and whether the record is <a href="/glossary/#unposted-draft">draft</a> or posted.</li><li>Calculate the expected account movements independently.</li><li>Inspect the linked journal and the corresponding report.</li><li>Explain any difference before creating another entry.</li></ol><p>A <a href="/glossary/#trial-balance">trial balance</a> can balance while an account or date is wrong. A bank balance can be correct while a statement remains unreconciled. These guides therefore ask you to follow references and timing as well as totals. Keep concise nonsecret notes so that another reviewer can repeat the check. Avoid using real customer records in a public demonstration.</p></section><section><h2 id="what-does-the-current-preview-provide">What does the current preview provide?</h2><p>The 0.3.0-preview release adds internal accounting foundations while the existing user workflows remain bounded.</p><p>You can evaluate the existing receipt, expense and general-journal paths, reports, period controls and the documented opening and bank workflows. The release also adds currency snapshots, parties, internal open items and same-identity correction mechanics. Those foundations do not mean that customer invoice or vendor bill screens, settlement workflows, regional tax filing, inventory costing or group consolidation are shipped.</p><p>A page explaining a concept is not a product capability declaration. Where a guide discusses a backend mechanic, it says so. For installation and upgrade work, follow the exact package instructions and the <a href="/self-hosting/">self-hosting guides</a>. For a concept before an operation, use the <a href="/learn/">learning pages</a> and <a href="/glossary/">glossary</a>.</p></section><section><h2 id="when-are-these-guides-the-wrong-source">When are these guides the wrong source?</h2><p>Use reviewed business records and qualified advice for decisions that depend on a real reporting obligation.</p><h3>What should you do next?</h3><p>These are synthetic learning and evaluation materials. They do not establish statutory compliance, a tax calculation, independent accounting acceptance or complete operational readiness. If the needed workflow is absent from the preview, choose a product that currently supports it rather than improvising with unrelated entries. A successful exercise is useful evidence of the path you checked, with the assumptions and limits recorded.</p><p>Start with one question from the table, complete its checks and keep the result. Then move to the related guide that answers the next question. This makes the books understandable a step at a time without confusing a worked illustration with a complete business implementation.</p></section><section><h2 id="questions-before-you-continue">Questions before you continue</h2><p>Check these boundaries before applying the procedure to a business installation.</p><details><summary>Do all guides use the same sample company?</summary><p>No. The installed Cedar Studio sample, empty-book exercises and retail documentation fixture have different baselines.</p></details><details><summary>Can I perform every operation in the public demo?</summary><p>No. Opening import and bank-reconciliation writes are restricted there; use an isolated self-hosted installation for those exercises.</p></details></section><section><h2 id="sources-and-next-steps">Sources and next steps</h2><p>Technical references and project behavior were checked on 16 September 2026; hosting access remains plan-specific.</p><ul><li><a href="https://github.com/rmak78/phpledger/blob/master/resources/release/README.md">Current release scope</a></li><li><a href="https://github.com/rmak78/phpledger/blob/master/docs/accounting/examples/retail-statements.md">Synthetic retail fixture</a></li></ul><p>The linked project files describe the current preview. Follow the instructions inside your exact downloaded package if a later release changes a command. Technical testing does not establish statutory compliance or independent accounting acceptance. See <a href="/about/">the project and preview limits</a>.</p><ul><li><a href="/learn/">Build the accounting concepts</a></li><li><a href="/self-hosting/">Prepare an isolated installation</a></li></ul></section></article>
 </main>
 <footer class="site-footer">
   <div class="container">
@@ -109,9 +198,10 @@
         <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger" loading="lazy"></span></a>
         <p>Open-source, self-hosted accounting and cash POS for small businesses. PHP 8.2+ and MySQL 8.4. Development preview.</p>
       </div>
-      <div class="footer-col"><h2>Product</h2><a href="/product/">Accounting features</a><a href="/guides/">Reporting guides</a><a href="/point-of-sale/">Point of sale</a><a href="/roadmap/">Roadmap</a><a href="/news/">News</a></div>
-      <div class="footer-col" id="docs"><h2>Get started</h2><a href="/demo/">Try the demo</a><a href="/download/">Download</a><a href="https://github.com/rmak78/phpledger/wiki/Getting-Started">Getting started guide</a><a href="https://github.com/rmak78/phpledger/wiki">Wiki</a></div>
-      <div class="footer-col"><h2>Project</h2><a href="/about/">About</a><a href="https://github.com/rmak78/phpledger">GitHub</a><a href="https://github.com/rmak78/phpledger/discussions">Discussions</a><a href="/support/">Support</a><a href="/credits/">Credits</a><a href="/privacy/">Privacy</a><a href="/terms/">Demo use and terms</a></div>
+      <div class="footer-col"><h2>Product</h2><a href="/product/">Accounting features</a><a href="/point-of-sale/">Point of sale</a><a href="/for/">Who it is for</a><a href="/demo/">Try the demo</a><a href="/download/">Download</a><a href="/roadmap/">Roadmap</a></div>
+      <div class="footer-col" id="docs"><h2>Learn</h2><a href="/learn/">Bookkeeping lessons</a><a href="/glossary/">Glossary</a><a href="/guides/">Reporting guides</a><a href="/self-hosting/">Self-hosting</a><a href="https://github.com/rmak78/phpledger/wiki/Getting-Started">Getting started guide</a><a href="https://github.com/rmak78/phpledger/wiki">Wiki</a></div>
+      <div class="footer-col"><h2>Compare</h2><a href="/compare/">Compare accounting software</a><a href="/compare/open-source-accounting-software/">Open-source options</a><a href="/research/">Research and sources</a></div>
+      <div class="footer-col"><h2>Project</h2><a href="/about/">About</a><a href="https://github.com/rmak78/phpledger">GitHub</a><a href="https://github.com/rmak78/phpledger/discussions">Discussions</a><a href="/news/">News</a><a href="/support/">Support</a><a href="/credits/">Credits</a><a href="/privacy/">Privacy</a><a href="/terms/">Demo use and terms</a></div>
       <div class="footer-col"><h2>Contact</h2><a href="mailto:rmak78@gmail.com">rmak78@gmail.com</a><a href="https://pk.linkedin.com/in/rmak78">Rana Mansoor Akbar Khan on LinkedIn</a><address>Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan</address></div>
     </div>
     <div class="supporters">
@@ -123,7 +213,9 @@
         <li><a href="https://agency75.com/"><img class="mark-square" src="/assets/partners/agency75.webp" width="240" height="240" alt="Agency75" loading="lazy"></a></li>
       </ul>
     </div>
+    <nav class="trust-links" aria-label="Project policies"><a href="https://github.com/rmak78/phpledger/blob/master/LICENSE">Licence</a><a href="https://github.com/rmak78/phpledger/blob/master/SECURITY.md">Security contact</a><a href="https://github.com/rmak78/phpledger/blob/master/CODE_OF_CONDUCT.md">Code of conduct</a><a href="/privacy/">Privacy and data boundaries</a></nav>
     <p class="footer-legal">New project-owned code uses AGPL-3.0-or-later; a commercial licence is available. The pre-adoption 0.1.0 through 0.1.5 previews retain MIT; dependencies, fonts and the archived 2015 application keep their own terms. Photographs are illustrative and are not customer endorsements. Screens show synthetic sample data from the development preview.</p>
+    <p class="footer-meta">Maintained by <a href="/about/" rel="author">Rana Mansoor Akbar Khan</a>, PHP Ledger project maintainer. Last reviewed <time datetime="2026-09-16">2026-09-16</time>.</p>
   </div>
 </footer>
 <dialog id="screen-dialog" aria-labelledby="screen-dialog-title"><div class="dialog-heading"><h2 id="screen-dialog-title">Product screen</h2><button type="button" class="dialog-close" aria-label="Close enlarged screen"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>Close</button></div><p id="screen-dialog-note">Development preview with synthetic sample data</p><p class="dialog-hint" id="dialog-hint">Scroll the image to explore it. With a keyboard, focus the image area and use the arrow keys.</p><div class="dialog-image-wrap" tabindex="0" role="region" aria-label="Enlarged product image" aria-describedby="dialog-hint"><img id="dialog-image" width="1440" height="1200" alt=""></div></dialog>

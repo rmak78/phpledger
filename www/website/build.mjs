@@ -30,8 +30,8 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.join(ROOT, 'src');
 const PUBLIC = path.join(ROOT, 'public');
 
-const PAGE_KEYS = new Set(['path', 'slug', 'nav', 'title', 'description', 'ogImage', 'ogImageAlt', 'ogType', 'bodyClass', 'jsonld', 'breadcrumb', 'faq', 'article', 'noindex', 'budgetEager', 'budgetTotal', 'headExtra', 'lastmod']);
-const GRAPH_PARTS = ['organization', 'website', 'software', 'breadcrumb', 'faq', 'article'];
+const PAGE_KEYS = new Set(['path', 'slug', 'nav', 'title', 'description', 'ogImage', 'ogImageAlt', 'ogType', 'bodyClass', 'jsonld', 'breadcrumb', 'faq', 'article', 'howto', 'itemlist', 'noindex', 'budgetEager', 'budgetTotal', 'headExtra', 'lastmod']);
+const GRAPH_PARTS = ['organization', 'website', 'software', 'webpage', 'person', 'breadcrumb', 'faq', 'article', 'howto', 'itemlist'];
 const TEXT_EXTENSIONS = new Set(['.txt', '.html', '.xml', '.json', '.css', '.js', '.mjs', '.svg', '.md', '.webmanifest']);
 const FORBIDDEN_JSONLD_KEYS = /"(aggregateRating|review|reviews|userInteractionCount|interactionStatistic)"\s*:/;
 
@@ -97,18 +97,29 @@ function parsePage(file, id) {
       if (Number.isNaN(Date.parse(meta.article[key]))) fail(`${id}: article.${key} is not a valid date`);
     }
   }
-  if (meta.ogType === 'article' && !meta.article) fail(`${id}: ogType "article" needs an "article" front matter object`);
+  // Educational pages can use the Open Graph article type without becoming
+  // release BlogPostings or entries in the release-news RSS feed.
   if ((meta.jsonld || []).includes('faq') && !meta.faq) fail(`${id}: jsonld "faq" needs a "faq" array`);
   if ((meta.jsonld || []).includes('article') && !meta.article) fail(`${id}: jsonld "article" needs an "article" object`);
+  if (meta.howto !== undefined && (!meta.howto || typeof meta.howto.name !== 'string' || !meta.howto.name.trim()
+      || !Array.isArray(meta.howto.step) || !meta.howto.step.length
+      || meta.howto.step.some((step) => !step || typeof step.name !== 'string' || !step.name.trim()
+        || typeof step.text !== 'string' || !step.text.trim() || (step.url !== undefined && !/^#[A-Za-z][A-Za-z0-9_-]*$/.test(step.url))))) fail(`${id}: howto needs a name and non-empty steps with name, text and optional local anchor`);
+  if ((meta.jsonld || []).includes('howto') && !meta.howto) fail(`${id}: jsonld "howto" needs a howto object`);
+  if (meta.itemlist !== undefined && (!Array.isArray(meta.itemlist) || !meta.itemlist.length
+      || meta.itemlist.some((item) => !item || item['@type'] !== 'ListItem' || !Number.isInteger(item.position) || item.position < 1
+        || typeof item.name !== 'string' || !item.name || typeof item.url !== 'string' || !/^https:\/\//.test(item.url)))) fail(`${id}: itemlist needs ListItems with positive position, name and HTTPS URL`);
+  if ((meta.jsonld || []).includes('itemlist') && !meta.itemlist) fail(`${id}: jsonld "itemlist" needs an itemlist array`);
   for (const key of ['budgetEager', 'budgetTotal']) {
     if (meta[key] !== undefined && !(Number.isInteger(meta[key]) && meta[key] > 0)) fail(`${id}: ${key} must be a positive integer`);
   }
-  if (meta.lastmod !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(meta.lastmod)) fail(`${id}: lastmod must be YYYY-MM-DD`);
+  if (typeof meta.lastmod !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(meta.lastmod)
+      || Number.isNaN(Date.parse(meta.lastmod)) || new Date(meta.lastmod).toISOString().slice(0, 10) !== meta.lastmod) fail(`${id}: lastmod is required and must be a valid YYYY-MM-DD date`);
   if (meta.headExtra !== undefined && typeof meta.headExtra !== 'string') fail(`${id}: headExtra must be a string`);
   const outFile = meta.path === '/' ? 'index.html' : meta.path.endsWith('/') ? `${meta.path.slice(1)}index.html` : meta.path.slice(1);
   const slug = meta.slug || (meta.path === '/' ? 'index' : meta.path.replace(/^\/|\/$/g, '').replace(/\.html$/, ''));
   const content = raw.slice(match[0].length).replace(/\s+$/, '');
-  const lastmod = meta.lastmod || fs.statSync(file).mtime.toISOString().slice(0, 10);
+  const lastmod = meta.lastmod;
   return { ...meta, id, file, slug, outFile, content, lastmod, noindex: Boolean(meta.noindex) };
 }
 
@@ -175,7 +186,7 @@ function render(template, context, where) {
 }
 
 const navHtml = (page) => site.nav
-  .map(([key, label, href]) => `<a href="${escapeHtml(href)}"${key === page.nav ? ' aria-current="page"' : ''}>${escapeHtml(label)}</a>`)
+  .map(([key, label, href]) => `<a href="${escapeHtml(href)}"${key === page.nav && page.path === href ? ' aria-current="page"' : ''}>${escapeHtml(label)}</a>`)
   .join('');
 
 /* ---------- images ---------- */
@@ -238,6 +249,7 @@ const ids = {
   organization: `${site.baseUrl}/#organization`,
   website: `${site.baseUrl}/#website`,
   software: `${site.baseUrl}/#software`,
+  person: `${site.baseUrl}/#maintainer`,
 };
 
 function compact(value) {
@@ -299,7 +311,7 @@ const builders = {
     alternateName: site.alternateName,
     description: site.entity,
     applicationCategory: ['BusinessApplication', 'FinanceApplication'],
-    operatingSystem: 'Self-hosted web application on a Linux server with PHP 8.5 and MySQL 8.4',
+    operatingSystem: 'Self-hosted web application; PHP 8.2 or newer and MySQL 8.4',
     softwareRequirements: site.requirements,
     softwareVersion: site.release.version,
     datePublished: site.release.date,
@@ -315,6 +327,19 @@ const builders = {
     author: { '@id': ids.organization },
     publisher: { '@id': ids.organization },
     inLanguage: 'en',
+  }),
+  person: () => ({
+    '@type': 'Person', '@id': ids.person, name: site.founder.name, url: site.founder.url,
+    sameAs: site.founder.url ? [site.founder.url] : [], jobTitle: 'PHP Ledger project maintainer',
+    worksFor: { '@id': ids.organization }, knowsAbout: ['double-entry bookkeeping', 'PHP application architecture', 'self-hosted software'],
+  }),
+  webpage: (page, byPath) => ({
+    '@type': 'WebPage', '@id': `${absolute(page.path)}#webpage`, url: absolute(page.path), name: page.title,
+    description: page.description, inLanguage: 'en', isPartOf: { '@id': ids.website },
+    datePublished: page.lastmod, dateModified: page.lastmod, author: { '@id': ids.person }, publisher: { '@id': ids.organization },
+    primaryImageOfPage: { '@type': 'ImageObject', url: absolute(page.ogImage || site.ogDefault) },
+    breadcrumb: { '@id': `${absolute(page.path)}#breadcrumb` },
+    speakable: { '@type': 'SpeakableSpecification', cssSelector: /class="[^"]*\bsummary\b/.test(page.content) ? ['h1', '.summary'] : ['h1', '.lead'] },
   }),
   breadcrumb: (page, byPath) => {
     const crumbs = [{ name: 'Home', item: `${site.baseUrl}/` }];
@@ -337,14 +362,20 @@ const builders = {
     '@id': `${absolute(page.path)}#faq`,
     mainEntity: page.faq.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
   }),
+  howto: (page) => ({
+    '@type': 'HowTo', '@id': `${absolute(page.path)}#howto`, name: page.howto.name, totalTime: page.howto.totalTime,
+    supply: page.howto.supply, tool: page.howto.tool,
+    step: page.howto.step.map((step, index) => ({ '@type': 'HowToStep', position: index + 1, ...step, url: `${absolute(page.path)}${step.url || ''}` })),
+  }),
+  itemlist: (page) => ({ '@type': 'ItemList', '@id': `${absolute(page.path)}#itemlist`, itemListElement: page.itemlist }),
   article: (page) => ({
-    '@type': 'BlogPosting',
+    '@type': page.path.startsWith('/news/') ? 'BlogPosting' : 'Article',
     '@id': `${absolute(page.path)}#article`,
     headline: page.article.headline,
     description: page.description,
     datePublished: page.article.datePublished,
     dateModified: page.article.dateModified,
-    author: { '@type': 'Person', name: site.founder.name, url: site.founder.url },
+    author: { '@id': ids.person },
     publisher: { '@id': ids.organization },
     image: absolute(page.ogImage || site.ogDefault),
     mainEntityOfPage: absolute(page.path),
@@ -356,7 +387,11 @@ const builders = {
 
 function jsonLd(page, byPath) {
   const parts = new Set(page.jsonld || []);
-  if (parts.has('website') || parts.has('software') || parts.has('article')) parts.add('organization');
+  parts.add('webpage');
+  parts.add('website');
+  parts.add('breadcrumb');
+  if (parts.has('website') || parts.has('software') || parts.has('article') || parts.has('webpage') || parts.has('person')) parts.add('organization');
+  if (parts.has('webpage') || parts.has('article')) parts.add('person');
   const graph = GRAPH_PARTS.filter((part) => parts.has(part)).map((part) => builders[part](page, byPath));
   if (!graph.length) return '';
   const json = JSON.stringify(compact({ '@context': 'https://schema.org', '@graph': graph }), null, 2).replace(/<\//g, '<\\/');
@@ -365,6 +400,41 @@ function jsonLd(page, byPath) {
 }
 
 /* ---------- page assembly ---------- */
+
+function addContents(html, page) {
+  if (page.noindex || ['/404.html', '/privacy/', '/terms/'].includes(page.path)) return html;
+  const headings = [...html.matchAll(/<h2\b[^>]*>[\s\S]*?<\/h2>/gi)];
+  if (headings.length < 4) return html;
+  const used = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]));
+  const items = [];
+  const includeH3 = html.replace(/<[^>]+>/g, ' ').split(/\s+/).length > 1500;
+  html = html.replace(/<h([23])\b([^>]*)>([\s\S]*?)<\/h\1>/gi, (all, level, attributes, content) => {
+    if (level === '3' && !includeH3) return all;
+    const text = content.replace(/<[^>]+>/g, '').trim();
+    let id = attributes.match(/\bid="([^"]+)"/)?.[1];
+    if (!id) {
+      const slug = text.toLowerCase().replace(/&[^;]+;/g, '-').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section';
+      id = slug;
+      for (let suffix = 2; used.has(id); suffix++) id = `${slug}-${suffix}`;
+      used.add(id);
+      attributes += ` id="${id}"`;
+    }
+    items.push(`<li${level === '3' ? ' class="toc-subsection"' : ''}><a href="#${escapeHtml(id)}">${text}</a></li>`);
+    return `<h${level}${attributes}>${content}</h${level}>`;
+  });
+  const toc = `<nav class="page-toc" aria-label="On this page"><p><strong>On this page</strong></p><ol>${items.join('')}</ol></nav>`;
+  // Authored summary blocks are simple section/aside/div elements; retain their complete contents.
+  const summary = /<(section|aside|div)\b[^>]*class="[^"]*\bsummary\b[^"]*"[^>]*>[\s\S]*?<\/\1>/i;
+  if (summary.test(html)) return html.replace(summary, (block) => `${block}\n${toc}`);
+  if (/<article\b/i.test(html)) return html.replace(/<h2\b/i, `${toc}\n<h2`);
+  const h1 = html.indexOf('</h1>');
+  const firstSectionEnd = html.indexOf('</section>', h1);
+  if (h1 >= 0 && firstSectionEnd >= 0) {
+    const end = firstSectionEnd + '</section>'.length;
+    return `${html.slice(0, end)}\n<div class="container">${toc}</div>\n${html.slice(end)}`;
+  }
+  return `${toc}\n${html}`;
+}
 
 function buildPage(page, byPath, assets) {
   const canonical = absolute(page.path);
@@ -387,7 +457,7 @@ function buildPage(page, byPath, assets) {
   const header = render(partials.header, context, 'src/partials/header.html');
   const footer = render(partials.footer, context, 'src/partials/footer.html');
   const dialog = render(partials.dialog, context, 'src/partials/dialog.html');
-  const main = render(page.content, context, page.id);
+  const main = addContents(render(page.content, context, page.id), page);
   const bodyClass = page.bodyClass ? ` class="${escapeHtml(page.bodyClass)}"` : '';
   return [
     '<!doctype html>',
@@ -467,6 +537,25 @@ function copyStatic(reserved) {
   return copied;
 }
 
+function writeDiscovery(pages) {
+  const listed = pages.filter((page) => !page.noindex).sort((a, b) => a.path.localeCompare(b.path));
+  const licence = 'New project-owned code: AGPL-3.0-or-later; commercial licensing available. Pre-adoption 0.1.0 through 0.1.5 previews retain MIT; dependencies and archived code keep their own terms.';
+  const facts = {
+    name: site.name, description: site.entity, version: site.release.version, releaseDate: site.release.date,
+    license: licence, requirements: site.requirements, repository: site.repo,
+    release: site.release.url, packageSha256: site.release.sha256,
+    demo: { url: absolute(site.demo), warning: 'Synthetic data only; private sample companies reset hourly.' },
+    capabilities: site.capabilities, notYet: site.limitations,
+  };
+  if (!Array.isArray(facts.capabilities) || !Array.isArray(facts.notYet)) fail('site.json needs capabilities and limitations arrays for generated discovery');
+  const faqs = listed.flatMap((page) => (page.faq || []).map(({ q, a }) => ({ question: q, answer: a, source: absolute(page.path) })));
+  writeText(path.join(PUBLIC, 'ai', 'summary.json'), `${JSON.stringify(facts, null, 2)}\n`);
+  writeText(path.join(PUBLIC, 'ai', 'faq.json'), `${JSON.stringify(faqs, null, 2)}\n`);
+  writeText(path.join(PUBLIC, '.well-known', 'ai.txt'), `${site.name}\n\n${site.entity}\n\nCurrent development preview: ${site.release.version} (${site.release.date}).\n${licence}\n\nRead ${site.baseUrl}/llms.txt and ${site.baseUrl}/ai/summary.json.\nContact: ${site.email}. The public demo uses synthetic data and resets hourly.\nThe static website has no analytics; the separate application has a documented optional country lookup.\n`);
+  const links = listed.map((page) => `- [${page.breadcrumb || page.title}](${absolute(page.path)}): ${page.description}`);
+  writeText(path.join(PUBLIC, 'llms.txt'), `# ${site.name}\n\n> ${site.entity}\n\nCurrent preview: ${site.release.version}. ${site.requirements}.\n\n${licence}\n\n## Implemented scope\n\n${site.capabilities.map((item) => `- ${item}`).join('\n')}\n\n## Outside the current workflows\n\n${site.limitations.map((item) => `- ${item}`).join('\n')}\n\n## Documentation and pages\n\n${links.join('\n')}\n\nThe public demo contains fictional records only. Technical validation is not professional accounting acceptance.\n`);
+}
+
 /* ---------- main ---------- */
 
 function build() {
@@ -482,10 +571,11 @@ function build() {
   writeText(path.join(PUBLIC, 'assets', 'site.css'), css);
   writeText(path.join(PUBLIC, 'assets', 'site.js'), js);
 
-  const articles = pages.filter((page) => page.article);
+  const articles = pages.filter((page) => page.article && page.path.startsWith('/news/'));
   const assets = { cssHref: `/assets/site.css?v=${cssHash}`, jsHref: `/assets/site.js?v=${jsHash}`, hasFeed: articles.length > 0 };
-  const reserved = new Set([...pages.map((page) => page.outFile), 'sitemap.xml', 'assets/site.css', 'assets/site.js', 'news/feed.xml']);
+  const reserved = new Set([...pages.map((page) => page.outFile), 'sitemap.xml', 'assets/site.css', 'assets/site.js', 'news/feed.xml', 'llms.txt', 'ai/summary.json', 'ai/faq.json', '.well-known/ai.txt']);
   const staticFiles = copyStatic(reserved);
+  writeDiscovery(pages);
 
   const written = [];
   for (const page of pages) {

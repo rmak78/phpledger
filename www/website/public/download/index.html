@@ -7,12 +7,16 @@
 <title>Download the current PHP Ledger preview</title>
 <meta name="description" content="Download the self-hosted PHP Ledger evaluation package and SHA-256 checksum. Review PHP 8.2+, MySQL 8.4, HTTPS and installation requirements.">
 <link rel="canonical" href="https://phpledger.com/download/">
+<link rel="alternate" hreflang="en" href="https://phpledger.com/download/">
+<link rel="alternate" hreflang="x-default" href="https://phpledger.com/download/">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/icon-192.png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="dns-prefetch" href="https://github.com">
 <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=65fc48aadd">
+<link rel="stylesheet" href="/assets/site.css?v=1870e2e375">
 <meta property="og:site_name" content="PHP Ledger">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
@@ -29,6 +33,7 @@
 <meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
 <meta name="twitter:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
 <link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
+<link rel="preconnect" href="https://github.com" crossorigin>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -64,6 +69,69 @@
       },
       "sameAs": [
         "https://github.com/rmak78/phpledger"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://phpledger.com/#website",
+      "url": "https://phpledger.com/",
+      "name": "PHP Ledger",
+      "alternateName": "phpledger",
+      "description": "PHP Ledger is open-source, self-hosted double-entry accounting software with a simple cash point of sale for small businesses, built on PHP 8.2+ and MySQL 8.4 and currently in development preview.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://phpledger.com/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://phpledger.com/download/#webpage",
+      "url": "https://phpledger.com/download/",
+      "name": "Download the current PHP Ledger preview",
+      "description": "Download the self-hosted PHP Ledger evaluation package and SHA-256 checksum. Review PHP 8.2+, MySQL 8.4, HTTPS and installation requirements.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://phpledger.com/#website"
+      },
+      "datePublished": "2026-09-16",
+      "dateModified": "2026-09-16",
+      "author": {
+        "@id": "https://phpledger.com/#maintainer"
+      },
+      "publisher": {
+        "@id": "https://phpledger.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://phpledger.com/assets/og/home.png"
+      },
+      "breadcrumb": {
+        "@id": "https://phpledger.com/download/#breadcrumb"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".summary"
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phpledger.com/#maintainer",
+      "name": "Rana Mansoor Akbar Khan",
+      "url": "https://pk.linkedin.com/in/rmak78",
+      "sameAs": [
+        "https://pk.linkedin.com/in/rmak78"
+      ],
+      "jobTitle": "PHP Ledger project maintainer",
+      "worksFor": {
+        "@id": "https://phpledger.com/#organization"
+      },
+      "knowsAbout": [
+        "double-entry bookkeeping",
+        "PHP application architecture",
+        "self-hosted software"
       ]
     },
     {
@@ -125,8 +193,52 @@
           "name": "Can I bring an existing business into the preview?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The preview supports opening trial-balance/CSV review, explicit cutover confirmation and an unpaid-document register reconciled to control accounts. Detailed historical imports and AR/AP settlement are not included. Use synthetic data for evaluation and obtain accounting review before a business cutover."
+            "text": "The preview supports opening trial-balance/CSV review, explicit cutover confirmation and an unpaid-document register reconciled to control accounts. Detailed historical imports and operator AR/AP settlement workflows are not included. Use synthetic data for evaluation and obtain accounting review before a business cutover."
           }
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://phpledger.com/download/#howto",
+      "name": "Install the PHP Ledger evaluation package",
+      "supply": [
+        "Verified release ZIP",
+        "Dedicated empty MySQL 8.4 database"
+      ],
+      "tool": [
+        "PHP 8.2+ web and command-line runtime",
+        "HTTPS web server",
+        "Terminal access"
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Unpack privately",
+          "text": "Read INSTALL.md. Keep configuration, dependencies and installation tools outside the web document root.",
+          "url": "https://phpledger.com/download/#quick-start"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure the host",
+          "text": "Use a dedicated database account and private config. Set production mode, HTTPS and routing as described in the package.",
+          "url": "https://phpledger.com/download/#quick-start"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Check and initialize",
+          "text": "Run preflight, migration and preflight again, proceeding only when each command succeeds. Keep all seventeen supplied migration files unchanged.",
+          "url": "https://phpledger.com/download/#quick-start"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Verify with sample books",
+          "text": "Create the initial sign-in user using secure stdin. Test a sample receipt, account statement, general-journal draft, posting, report and linked reversal.",
+          "url": "https://phpledger.com/download/#quick-start"
         }
       ]
     }
@@ -140,16 +252,16 @@
   <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger"></span></a>
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0"/><path d="M4 12l16 0"/><path d="M4 18l16 0"/></svg>Menu</button>
   <nav id="navigation" aria-label="Main navigation">
-    <a href="/product/">Product</a><a href="/point-of-sale/">Point of sale</a><a href="/download/" aria-current="page">Download</a><a href="/support/">Support</a><a href="/roadmap/">Roadmap</a>
+    <a href="/product/">Product</a><a href="/point-of-sale/">Point of sale</a><a href="/learn/">Learn</a><a href="/download/" aria-current="page">Download</a><a href="/support/">Support</a><a href="/roadmap/">Roadmap</a>
     <a class="button button--small" href="/demo/">Try the demo</a>
   </nav>
 </header>
 <main id="main">
-
-<section class="container page-intro page-intro--simple"><h1>Download 0.2.1-preview</h1><p class="lead">An evaluation package for your own PHP and MySQL hosting. It includes production dependencies and installation instructions. Use synthetic records while you assess the preview.</p><div class="actions"><a class="button" href="https://github.com/rmak78/phpledger/releases/download/v0.2.1-preview/phpledger-0.2.1-preview.zip">Download ZIP · 3.05 MB</a><a class="button button--secondary" href="https://github.com/rmak78/phpledger/releases/download/v0.2.1-preview/phpledger-0.2.1-preview.zip.sha256">Download SHA-256</a></div><p class="small">Released 15 September 2026 · Development preview · <a href="https://github.com/rmak78/phpledger/releases/tag/v0.2.1-preview">Release notes on GitHub</a></p></section>
-<section class="container section stack stack--loose"><h2>Check the package before installing</h2><p>Compare the ZIP's SHA-256 with the checksum file published beside the release.</p><p class="checksum">65eca3c57b084e185affb93a4167fa36cc141e94d5fd6f9e6c1243844ee696d1</p><h3>PowerShell</h3><pre><code>Get-FileHash -Algorithm SHA256 ./phpledger-0.2.1-preview.zip</code></pre><h3>Linux</h3><pre><code>sha256sum -c phpledger-0.2.1-preview.zip.sha256</code></pre><p class="small">The published package is 3,054,692 bytes. The source and build validation are recorded with the release. Downloading it does not update an existing installation.</p></section>
-<section class="section section--paper"><div class="container stack stack--loose"><h2>Hosting requirements</h2><table class="req-table"><tbody><tr><th scope="row">PHP</th><td>8.2 or newer for web requests and the command line; 8.3 recommended. BCMath, PDO, PDO MySQL, mbstring, cURL, OpenSSL, fileinfo and sessions.</td></tr><tr><th scope="row">Database</th><td>MySQL 8.4 with InnoDB. Start with an empty, dedicated database. MariaDB is not validated for this package.</td></tr><tr><th scope="row">Web server</th><td>HTTPS, PHP execution and front-controller routing. Serve only <code>www/phpledger/public</code>.</td></tr><tr><th scope="row">Operator access</th><td>A terminal to run preflight, migrations and initial-user creation. Private writable PHP session storage.</td></tr></tbody></table></div></section>
-<section class="container section stack stack--loose" id="quick-start"><h2>Install from the included guide</h2><ol class="steps"><li><div><h3>Unpack privately</h3><p>Read INSTALL.md. Keep configuration, dependencies and installation tools outside the web document root.</p></div></li><li><div><h3>Configure the host</h3><p>Use a dedicated database account and private config. Set production mode, HTTPS and routing as described in the package.</p></div></li><li><div><h3>Check and initialize</h3><p>Run preflight, migration and preflight again, proceeding only when each command succeeds. Keep all thirteen migration files supplied with this version, including both distinct 006 files and the module lifecycle migration. Never rename or change an applied migration.</p></div></li><li><div><h3>Verify with sample books</h3><p>Create the initial sign-in user using secure stdin. Test a sample receipt, account statement, general-journal draft, posting, report and linked reversal.</p></div></li></ol><p>For an existing database, read UPGRADE.md first and rehearse a private backup restore. The historical 2015 application and its SQL dumps are excluded from the new installation path.</p><p>The package includes reviewed opening trial-balance/CSV cutover and unpaid-document reconciliation. Detailed historical journals, XLSX and customer/vendor settlement workflows remain future work. Evaluate with synthetic records and obtain accounting review before a business cutover.</p><div class="actions"><a class="button button--secondary" href="https://github.com/rmak78/phpledger/wiki/Getting-Started">Read the getting started guide</a><a class="link-strong" href="/support/">Ask for installation help <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></div></section>
+<section class="container page-intro page-intro--simple"><h1>Download 0.3.0-preview</h1><p class="lead">An evaluation package for your own PHP and MySQL hosting. It includes production dependencies and installation instructions. Use synthetic records while you assess the preview.</p><p class="small">PHP Ledger guidance: use this page with the matching release notes and evaluate the workflow using synthetic records.</p><aside class="summary"><h2 id="in-short">In short</h2><ul><li>The 0.3.0-preview ZIP is 3,091,799 bytes and includes production dependencies.</li><li>Verify the SHA-256 before unpacking, then follow the included INSTALL.md or UPGRADE.md.</li><li>Use PHP 8.2+ and MySQL 8.4, a dedicated database, HTTPS and a document root limited to www/phpledger/public.</li></ul></aside>
+<nav class="page-toc" aria-label="On this page"><p><strong>On this page</strong></p><ol><li><a href="#in-short">In short</a></li><li><a href="#check-the-package-before-installing">Check the package before installing</a></li><li><a href="#hosting-requirements">Hosting requirements</a></li><li><a href="#install-from-the-included-guide">Install from the included guide</a></li><li><a href="#faq-heading">Frequently asked questions</a></li></ol></nav><div class="actions"><a class="button" href="https://github.com/rmak78/phpledger/releases/download/v0.3.0-preview/phpledger-0.3.0-preview.zip">Download ZIP · 3.09 MB</a><a class="button button--secondary" href="https://github.com/rmak78/phpledger/releases/download/v0.3.0-preview/phpledger-0.3.0-preview.zip.sha256">Download SHA-256</a></div><p class="small">Released 16 September 2026 · Development preview · <a href="https://github.com/rmak78/phpledger/releases/tag/v0.3.0-preview">Release notes on GitHub</a></p></section>
+<section class="container section stack stack--loose"><h2 id="check-the-package-before-installing">Check the package before installing</h2><dl><dt>Version</dt><dd>0.3.0-preview</dd><dt>Released</dt><dd>16 September 2026</dd><dt>Package size</dt><dd>3.09 MB / 3,091,799 bytes</dd><dt>SHA-256</dt><dd><code>6b335fa3e6a9699cb775b081570749981e7491068a2ef5221996b48fa27b76e4</code></dd><dt>Licence</dt><dd>AGPL-3.0-or-later; commercial licence available</dd><dt>Runtime</dt><dd>PHP 8.2+ (8.3 recommended), MySQL 8.4 (InnoDB), HTTPS, terminal access</dd></dl><p>Compare the ZIP's SHA-256 with the checksum file published beside the release.</p><p class="checksum">6b335fa3e6a9699cb775b081570749981e7491068a2ef5221996b48fa27b76e4</p><h3>PowerShell</h3><pre><code>Get-FileHash -Algorithm SHA256 ./phpledger-0.3.0-preview.zip</code></pre><h3>Linux</h3><pre><code>sha256sum -c phpledger-0.3.0-preview.zip.sha256</code></pre><p class="small">The published package is 3,091,799 bytes. The source and build validation are recorded with the release. Downloading it does not update an existing installation.</p></section>
+<section class="section section--paper"><div class="container stack stack--loose"><h2 id="hosting-requirements">Hosting requirements</h2><table class="req-table"><tbody><tr><th scope="row">PHP</th><td>8.2 or newer for web requests and the command line; 8.3 recommended. BCMath, PDO, PDO MySQL, mbstring, cURL, OpenSSL, fileinfo and sessions.</td></tr><tr><th scope="row">Database</th><td>MySQL 8.4 with InnoDB. Start with an empty, dedicated database. MariaDB is not validated for this package.</td></tr><tr><th scope="row">Web server</th><td>HTTPS, PHP execution and front-controller routing. Serve only <code>www/phpledger/public</code>.</td></tr><tr><th scope="row">Operator access</th><td>A terminal to run preflight, migrations and initial-user creation. Private writable PHP session storage.</td></tr></tbody></table></div></section>
+<section class="container section stack stack--loose" id="quick-start"><h2 id="install-from-the-included-guide">Install from the included guide</h2><ol class="steps"><li><div><h3>Unpack privately</h3><p>Read INSTALL.md. Keep configuration, dependencies and installation tools outside the web document root.</p></div></li><li><div><h3>Configure the host</h3><p>Use a dedicated database account and private config. Set production mode, HTTPS and routing as described in the package.</p></div></li><li><div><h3>Check and initialize</h3><p>Run preflight, migration and preflight again, proceeding only when each command succeeds. Keep all seventeen migration files supplied with this version, including both distinct 006 files and foundations migrations 013–016. Never rename or change an applied migration.</p></div></li><li><div><h3>Verify with sample books</h3><p>Create the initial sign-in user using secure stdin. Test a sample receipt, account statement, general-journal draft, posting, report and linked reversal.</p></div></li></ol><p>For an existing database, read UPGRADE.md first and rehearse a private backup restore. The historical 2015 application and its SQL dumps are excluded from the new installation path.</p><p>The package includes reviewed opening trial-balance/CSV cutover and unpaid-document reconciliation. Detailed historical journals, XLSX and customer/vendor settlement workflows remain future work. Evaluate with synthetic records and obtain accounting review before a business cutover.</p><div class="actions"><a class="button button--secondary" href="https://github.com/rmak78/phpledger/wiki/Getting-Started">Read the getting started guide</a><a class="link-strong" href="/support/">Ask for installation help <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></div></section>
 
 
 <section class="container section faq" id="faq" aria-labelledby="faq-heading">
@@ -158,7 +270,7 @@
 <details><summary>Do I need Composer to install the download?</summary><p>No. The ZIP includes production dependencies and its installation guide. Keep vendor files, configuration and installation tools outside the web document root.</p></details>
 <details><summary>How do I check that the ZIP is intact?</summary><p>Download the ZIP and its SHA-256 file from the same GitHub release. Calculate the ZIP checksum using the command above and compare it with the published checksum before unpacking.</p></details>
 <details><summary>Does downloading the ZIP upgrade my existing installation?</summary><p>No. Read the included UPGRADE.md, which covers recognized prior modern installations. Back up the database and application, rehearse restoration, then follow its maintenance, preflight and migration steps. Historical installations and customized schemas need separate review.</p></details>
-<details><summary>Can I bring an existing business into the preview?</summary><p>The preview supports opening trial-balance/CSV review, explicit cutover confirmation and an unpaid-document register reconciled to control accounts. Detailed historical imports and AR/AP settlement are not included. Use synthetic data for evaluation and obtain accounting review before a business cutover.</p></details>
+<details><summary>Can I bring an existing business into the preview?</summary><p>The preview supports opening trial-balance/CSV review, explicit cutover confirmation and an unpaid-document register reconciled to control accounts. Detailed historical imports and operator AR/AP settlement workflows are not included. Use synthetic data for evaluation and obtain accounting review before a business cutover.</p></details>
 </section>
 </main>
 <footer class="site-footer">
@@ -168,9 +280,10 @@
         <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger" loading="lazy"></span></a>
         <p>Open-source, self-hosted accounting and cash POS for small businesses. PHP 8.2+ and MySQL 8.4. Development preview.</p>
       </div>
-      <div class="footer-col"><h2>Product</h2><a href="/product/">Accounting features</a><a href="/guides/">Reporting guides</a><a href="/point-of-sale/">Point of sale</a><a href="/roadmap/">Roadmap</a><a href="/news/">News</a></div>
-      <div class="footer-col" id="docs"><h2>Get started</h2><a href="/demo/">Try the demo</a><a href="/download/">Download</a><a href="https://github.com/rmak78/phpledger/wiki/Getting-Started">Getting started guide</a><a href="https://github.com/rmak78/phpledger/wiki">Wiki</a></div>
-      <div class="footer-col"><h2>Project</h2><a href="/about/">About</a><a href="https://github.com/rmak78/phpledger">GitHub</a><a href="https://github.com/rmak78/phpledger/discussions">Discussions</a><a href="/support/">Support</a><a href="/credits/">Credits</a><a href="/privacy/">Privacy</a><a href="/terms/">Demo use and terms</a></div>
+      <div class="footer-col"><h2>Product</h2><a href="/product/">Accounting features</a><a href="/point-of-sale/">Point of sale</a><a href="/for/">Who it is for</a><a href="/demo/">Try the demo</a><a href="/download/">Download</a><a href="/roadmap/">Roadmap</a></div>
+      <div class="footer-col" id="docs"><h2>Learn</h2><a href="/learn/">Bookkeeping lessons</a><a href="/glossary/">Glossary</a><a href="/guides/">Reporting guides</a><a href="/self-hosting/">Self-hosting</a><a href="https://github.com/rmak78/phpledger/wiki/Getting-Started">Getting started guide</a><a href="https://github.com/rmak78/phpledger/wiki">Wiki</a></div>
+      <div class="footer-col"><h2>Compare</h2><a href="/compare/">Compare accounting software</a><a href="/compare/open-source-accounting-software/">Open-source options</a><a href="/research/">Research and sources</a></div>
+      <div class="footer-col"><h2>Project</h2><a href="/about/">About</a><a href="https://github.com/rmak78/phpledger">GitHub</a><a href="https://github.com/rmak78/phpledger/discussions">Discussions</a><a href="/news/">News</a><a href="/support/">Support</a><a href="/credits/">Credits</a><a href="/privacy/">Privacy</a><a href="/terms/">Demo use and terms</a></div>
       <div class="footer-col"><h2>Contact</h2><a href="mailto:rmak78@gmail.com">rmak78@gmail.com</a><a href="https://pk.linkedin.com/in/rmak78">Rana Mansoor Akbar Khan on LinkedIn</a><address>Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan</address></div>
     </div>
     <div class="supporters">
@@ -182,7 +295,9 @@
         <li><a href="https://agency75.com/"><img class="mark-square" src="/assets/partners/agency75.webp" width="240" height="240" alt="Agency75" loading="lazy"></a></li>
       </ul>
     </div>
+    <nav class="trust-links" aria-label="Project policies"><a href="https://github.com/rmak78/phpledger/blob/master/LICENSE">Licence</a><a href="https://github.com/rmak78/phpledger/blob/master/SECURITY.md">Security contact</a><a href="https://github.com/rmak78/phpledger/blob/master/CODE_OF_CONDUCT.md">Code of conduct</a><a href="/privacy/">Privacy and data boundaries</a></nav>
     <p class="footer-legal">New project-owned code uses AGPL-3.0-or-later; a commercial licence is available. The pre-adoption 0.1.0 through 0.1.5 previews retain MIT; dependencies, fonts and the archived 2015 application keep their own terms. Photographs are illustrative and are not customer endorsements. Screens show synthetic sample data from the development preview.</p>
+    <p class="footer-meta">Maintained by <a href="/about/" rel="author">Rana Mansoor Akbar Khan</a>, PHP Ledger project maintainer. Last reviewed <time datetime="2026-09-16">2026-09-16</time>.</p>
   </div>
 </footer>
 <dialog id="screen-dialog" aria-labelledby="screen-dialog-title"><div class="dialog-heading"><h2 id="screen-dialog-title">Product screen</h2><button type="button" class="dialog-close" aria-label="Close enlarged screen"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>Close</button></div><p id="screen-dialog-note">Development preview with synthetic sample data</p><p class="dialog-hint" id="dialog-hint">Scroll the image to explore it. With a keyboard, focus the image area and use the arrow keys.</p><div class="dialog-image-wrap" tabindex="0" role="region" aria-label="Enlarged product image" aria-describedby="dialog-hint"><img id="dialog-image" width="1440" height="1200" alt=""></div></dialog>

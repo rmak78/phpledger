@@ -1,5 +1,25 @@
 # Website design and publication QA
 
+## Completed content library and publication — 16 September 2026
+
+The owner authorized takeover, completion, review and publication of the shared website work. The earlier 53-page stub pass is superseded by this completed release: 63 source pages, 64 HTML outputs, 62 sitemap URLs, seven release-feed items and 162 static files. The [content register](../../docs/design/website/CONTENT-REGISTER.md) records each page and the remaining professional-review boundaries.
+
+| Check | Observed result |
+|---|---|
+| Build/static check | 64 HTML pages; zero errors and zero warnings |
+| Syntax and content guard | Build, checker and AEO audit JavaScript passed; main-content metrics exclude shared footer/navigation |
+| Generator regression checks | 21 isolated cases passed: two positive controls and 19 expected invalid-metadata rejections |
+| Browser layout | 62 indexable routes × 1440, 768, 390 and 320 pixels = 248 checks; images loaded and no script errors |
+| Public browser | Nine routes at four widths: 36 checks passed after publication |
+| Final corrections | 20 targeted route/width checks passed after correcting the home grid span and punctuation encoding; no mojibake markers remain in page sources |
+| Interactions | 10 checks passed: mobile menu/Escape, FAQ, capture dialog/Escape, support validation, local draft, no HTTP submission and no-JavaScript fallback |
+| Nginx | Local syntax/reload and hosted syntax/reload passed; public archive bytes, HTTPS manifest MIME, discovery routes and existing demo behavior verified |
+| Publication | `website-redesign-20260915-211542`, 02:17 PKT on 16 September; all 162 static files matched over public HTTP(S), with private prior-site/config backup |
+
+Screenshots were inspected separately from automated overflow checks. Visual inspection caught the homepage scope table occupying one grid column and corrupted punctuation in four pages; both were fixed before publication. Full-page screenshots can be downscaled by viewers and do not establish pixel-level typography or observed usability. The OS email-send path, actual business users, exact browser zoom, screen-reader sessions, Core Web Vitals, qualified accounting/legal acceptance and installed competitor benchmarks were not tested. No email, payment, search submission, social account or campaign was created.
+
+The site remains an independent static release; its publication preserved demo container identity, proxy/OAuth locations and demo noindex. The separate 0.3.0 app release did run migrations, as recorded in [the combined release evidence](../../docs/repository/sprint-05/PREVIEW-0.3.0-PUBLICATION.json). See [the website receipt](../../docs/design/website/qa/live-20260916-content-publication.json).
+
 ## Live publication: 15 September 2026
 
 **Published successfully at 08:08 UTC (13:08 PKT)** to [phpledger.com](https://phpledger.com/), static release `website-redesign-20260915-080700`. This current receipt supersedes the local-only publication status in the historical sections below.

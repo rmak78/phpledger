@@ -12,3 +12,8 @@ The current application is a tested accounting preview, not a complete supported
 - [Typography study](../design/typography-review/README.md): designer reference and font roles, with Inter retained for financial figures.
 
 Before a profile is described as supported, maintain a traceable requirement register: official source/paragraph, effective date, reviewer interpretation/policy, implementation, reconciled fixture and measured acceptance result. Verify current laws/notifications and applicable rights to use reference material. Accounting review and user task testing remain open; no professional-body endorsement is implied.
+## Education and research publication boundary
+
+The owner authorized the website education/research publication on 16 September 2026. The `/learn/` set is general, country-neutral bookkeeping education with synthetic arithmetic; it has not been reviewed by a qualified accountant. The content register records editorial and technical checking separately.
+
+Dated jurisdiction research may be published with explicit unreviewed status, primary sources and unresolved-current-law limits, as required by the owner-approved website brief. This does not authorize presenting tax instructions, filings, recognition policies or issued statements as supported or professionally accepted. Those claims still need qualified review for the applicable entity, jurisdiction, framework and effective date. A website build or technical test does not close that gate.

@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c2052">
+<title>Back up and restore PHP Ledger | PHP Ledger</title>
+<meta name="description" content="Build a matched PHP Ledger recovery set, rehearse restoration and preserve migration guards and database view access during populated upgrades.">
+<link rel="canonical" href="https://phpledger.com/self-hosting/backup-and-restore/">
+<link rel="alternate" hreflang="en" href="https://phpledger.com/self-hosting/backup-and-restore/">
+<link rel="alternate" hreflang="x-default" href="https://phpledger.com/self-hosting/backup-and-restore/">
+<meta name="robots" content="max-image-preview:large">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/icon-192.png">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="dns-prefetch" href="https://github.com">
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=1870e2e375">
+<meta property="og:site_name" content="PHP Ledger">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="Back up and restore PHP Ledger | PHP Ledger">
+<meta property="og:description" content="Build a matched PHP Ledger recovery set, rehearse restoration and preserve migration guards and database view access during populated upgrades.">
+<meta property="og:url" content="https://phpledger.com/self-hosting/backup-and-restore/">
+<meta property="og:image" content="https://phpledger.com/assets/og/home.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Back up and restore PHP Ledger | PHP Ledger">
+<meta name="twitter:description" content="Build a matched PHP Ledger recovery set, rehearse restoration and preserve migration guards and database view access during populated upgrades.">
+<meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
+<meta name="twitter:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
+<link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://phpledger.com/#organization",
+      "name": "PHP Ledger",
+      "alternateName": "phpledger",
+      "url": "https://phpledger.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://phpledger.com/assets/brand/phpledger-logo-600.png",
+        "width": 600,
+        "height": 200
+      },
+      "email": "rmak78@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Innovista Chenab, Arcade Plaza, Sector C, DHA Multan",
+        "addressLocality": "Multan",
+        "addressRegion": "Punjab",
+        "postalCode": "60000",
+        "addressCountry": "PK"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Rana Mansoor Akbar Khan",
+        "url": "https://pk.linkedin.com/in/rmak78",
+        "sameAs": [
+          "https://pk.linkedin.com/in/rmak78"
+        ]
+      },
+      "sameAs": [
+        "https://github.com/rmak78/phpledger"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://phpledger.com/#website",
+      "url": "https://phpledger.com/",
+      "name": "PHP Ledger",
+      "alternateName": "phpledger",
+      "description": "PHP Ledger is open-source, self-hosted double-entry accounting software with a simple cash point of sale for small businesses, built on PHP 8.2+ and MySQL 8.4 and currently in development preview.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://phpledger.com/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://phpledger.com/self-hosting/backup-and-restore/#webpage",
+      "url": "https://phpledger.com/self-hosting/backup-and-restore/",
+      "name": "Back up and restore PHP Ledger | PHP Ledger",
+      "description": "Build a matched PHP Ledger recovery set, rehearse restoration and preserve migration guards and database view access during populated upgrades.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://phpledger.com/#website"
+      },
+      "datePublished": "2026-09-16",
+      "dateModified": "2026-09-16",
+      "author": {
+        "@id": "https://phpledger.com/#maintainer"
+      },
+      "publisher": {
+        "@id": "https://phpledger.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://phpledger.com/assets/og/home.png"
+      },
+      "breadcrumb": {
+        "@id": "https://phpledger.com/self-hosting/backup-and-restore/#breadcrumb"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".summary"
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://phpledger.com/#maintainer",
+      "name": "Rana Mansoor Akbar Khan",
+      "url": "https://pk.linkedin.com/in/rmak78",
+      "sameAs": [
+        "https://pk.linkedin.com/in/rmak78"
+      ],
+      "jobTitle": "PHP Ledger project maintainer",
+      "worksFor": {
+        "@id": "https://phpledger.com/#organization"
+      },
+      "knowsAbout": [
+        "double-entry bookkeeping",
+        "PHP application architecture",
+        "self-hosted software"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://phpledger.com/self-hosting/backup-and-restore/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://phpledger.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Self-host accounting software with a recovery plan",
+          "item": "https://phpledger.com/self-hosting/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Back up and restore PHP Ledger",
+          "item": "https://phpledger.com/self-hosting/backup-and-restore/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://phpledger.com/self-hosting/backup-and-restore/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is a code-only rollback enough after migration?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Restore a compatible database and release together using the matched recovery set."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a successful dump prove recovery?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Restore it into an isolated environment and verify schema objects, source reads, permissions and reports."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="page-guide">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger"></span></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0"/><path d="M4 12l16 0"/><path d="M4 18l16 0"/></svg>Menu</button>
+  <nav id="navigation" aria-label="Main navigation">
+    <a href="/product/">Product</a><a href="/point-of-sale/">Point of sale</a><a href="/learn/">Learn</a><a href="/download/">Download</a><a href="/support/">Support</a><a href="/roadmap/">Roadmap</a>
+    <a class="button button--small" href="/demo/">Try the demo</a>
+  </nav>
+</header>
+<main id="main">
+<article class="container article section"><p><a href="/self-hosting/">Self-hosting</a></p><h1>Back up and restore PHP Ledger</h1><p class="lead">A usable backup is one you can restore into the matching application and verify through real record reads.</p><aside class="summary"><h2 id="key-takeaways">Key takeaways</h2><p>Use the checks below to decide what to do next and what evidence to keep.</p><ul><li>Keep code, database, receipts and private configuration together.</li><li>Stop writers before a populated upgrade and preserve interrupted guards.</li><li>Test restored views with the restricted runtime account.</li></ul></aside>
+<nav class="page-toc" aria-label="On this page"><p><strong>On this page</strong></p><ol><li><a href="#key-takeaways">Key takeaways</a></li><li><a href="#what-must-a-recoverable-backup-contain">What must a recoverable backup contain?</a></li><li><a href="#how-should-you-take-a-pre-upgrade-backup">How should you take a pre-upgrade backup?</a></li><li><a href="#what-changes-with-the-currency-foundation-upgrade">What changes with the currency-foundation upgrade?</a></li><li><a href="#why-do-database-view-definers-matter">Why do database view definers matter?</a></li><li><a href="#how-do-you-rehearse-a-restore">How do you rehearse a restore?</a></li><li><a href="#how-should-you-decide-retention-and-recovery-targets">How should you decide retention and recovery targets?</a></li><li><a href="#when-is-the-backup-plan-insufficient">When is the backup plan insufficient?</a></li><li><a href="#questions-before-you-continue">Questions before you continue</a></li><li><a href="#sources-and-next-steps">Sources and next steps</a></li></ol></nav><section><h2 id="what-must-a-recoverable-backup-contain">What must a recoverable backup contain?</h2><p>Keep the database, matching release, migration history and private configuration as one identifiable recovery set.</p><p>An accounting installation is more than a collection of PHP files. The database holds posted journal lines, source records, memberships, migration receipts and other operational state. The release interprets that schema. Private configuration identifies the database and preserves any keys needed by enabled integrations. A backup that omits one of these parts may restore a login page while leaving records unreadable or credentials invalid.</p><p>Label each set with the release version, source identity where available, database version, backup time and operator. Store that inventory without including passwords or private keys in an ordinary log. Protect backup access as carefully as live database access. The contents can expose business records and authentication material even when the file is compressed. Keep a copy away from the live server so that a disk or account failure does not remove both.</p></section><section><h2 id="how-should-you-take-a-pre-upgrade-backup">How should you take a pre-upgrade backup?</h2><p>Pause all writers, confirm the intended database and capture the matched state before replacing code or running migrations.</p><p>Put the application into the operator’s maintenance arrangement and stop scheduled processes that could write. Keep the previous release available. Record the current migration state and verify that the backup target is the intended installation. Read the exact package UPGRADE instructions before preparing commands; a populated upgrade has different risks from installing into an empty database.</p><p>MySQL documents logical backups with mysqldump. Use a private option file or a trusted password prompt rather than embedding a password in shell arguments. Include the schema objects required by the application, including views and triggers. Check the utility’s exit status and inspect the resulting backup inventory. A nonempty dump file is not proof that the command completed successfully or that the file contains every required object.</p><p>A transaction-consistent dump of InnoDB tables can be useful, but it does not make concurrent schema changes safe. Coordinate backup, migration and writer shutdown. Do not run a second deployment while the first operator is capturing or changing the database. Keep the application’s release files and private configuration associated with the same backup, rather than assuming the latest files on disk are necessarily the correct match.</p></section><section><h2 id="what-changes-with-the-currency-foundation-upgrade">What changes with the currency-foundation upgrade?</h2><p>Migration 013 adds metadata to populated journal lines while guarding the original posted values.</p><p>The upgrade fills domestic currency snapshots without rewriting the historical <a href="/glossary/#debit">debit</a>, <a href="/glossary/#credit">credit</a> or stored payload hash. During that operation, restrictive migration guards protect the original columns and prevent ordinary connections from inserting or filling metadata. This is a maintenance operation: the web application and scheduled writers should remain stopped until the chain finishes and the final guards are verified.</p><p>If the process stops mid-migration, preserve the failed state and its receipts. The installer rejects an applying <a href="/glossary/#receipt">receipt</a> rather than pretending the database is current. Do not delete the receipt, disable all guards or issue broad journal updates to make startup proceed. Recovery means following the reviewed remaining-step procedure with the migration lock and guard conditions, or restoring the matched backup. MySQL DDL can commit independently, so a generic transaction rollback is not a complete recovery strategy.</p></section><section><h2 id="why-do-database-view-definers-matter">Why do database view definers matter?</h2><p>The restored source views need a valid definer account and sufficient access to their underlying tables.</p><p>Migration 016 introduces effective source views. Their default security model uses the account that created them as the definer. If installation used a temporary account and that account is later removed, normal source reads may fail. A dump can retain a definer name that does not exist on the destination server. Plan this before migration and again before restoration; do not discover it only when a user opens an expense.</p><p>Use a stable, reviewed account arrangement and verify the runtime account’s view reads after restoration. A restore performed with a highly privileged administrator may succeed while the restricted application account still cannot read the necessary objects. Test through the application as well as through the restoration utility. Do not casually rewrite view definitions or assign global privileges as a universal fix; preserve the intended schema and scope the account arrangement to this installation.</p></section><section><h2 id="how-do-you-rehearse-a-restore">How do you rehearse a restore?</h2><p>Restore into an isolated destination and check the data through the matching application before declaring the backup usable.</p><ol><li>Identify the recovery set and verify its integrity and intended restore time.</li><li>Prepare an isolated database and release directory with private access.</li><li>Restore schema, data and required database objects using the documented procedure.</li><li>Restore private configuration and required keys for that isolated destination.</li><li>Run preflight, then check sources, reports, permissions and synthetic <a href="/glossary/#posting">posting</a> behavior.</li><li>Record elapsed recovery time and any corrections needed in the runbook.</li></ol><pre><code>php www/phpledger/install/preflight.php</code></pre><p>The command above is a post-restore check from the matching package root, not a command that performs the restore. Keep the staging destination separate from live credentials. Disable any external delivery configuration in the isolated environment before allowing application activity. The current foundation has no installed connector, but an operator must still inspect the actual installation rather than assume every future setup is inert.</p><p>Compare a known journal, its source and a dated <a href="/glossary/#trial-balance">trial balance</a> with the pre-backup evidence. Confirm the expected company and book memberships. Verify both effective source views using the restricted runtime account. A successful login and connectivity health check are insufficient because neither necessarily exercises the objects whose permissions changed during restoration.</p></section><section><h2 id="how-should-you-decide-retention-and-recovery-targets">How should you decide retention and recovery targets?</h2><p>Set an acceptable data-loss window and recovery time based on the business’s working pattern.</p><div class="table-wrap"><table><caption>Questions for the owner and operator</caption><thead><tr><th scope="col">Decision</th><th scope="col">Evidence to retain</th></tr></thead><tbody><tr><th scope="row">How much recent work could be re-entered?</th><td>Backup frequency and the latest successful backup time</td></tr><tr><th scope="row">How long can posting remain unavailable?</th><td>Measured restoration duration and an available operator</td></tr><tr><th scope="row">Where does a second copy live?</th><td>Private off-server location and access ownership</td></tr><tr><th scope="row">How long are older sets retained?</th><td>Retention policy and enough capacity to apply it</td></tr><tr><th scope="row">Who can recover if the usual operator is absent?</th><td>A tested handoff and securely available credentials</td></tr></tbody></table></div><p>Do not choose targets only from the backup tool’s default schedule. A weekly copy may be unsuitable for a book with daily posting, while retaining every copy forever creates storage and access problems. Review the policy after a change in transaction volume, hosting or personnel. Test periodically and after material schema or configuration changes.</p></section><section><h2 id="when-is-the-backup-plan-insufficient">When is the backup plan insufficient?</h2><p>A plan is insufficient when nobody has demonstrated recovery of a matched set.</p><h3>What should you do next?</h3><p>A provider snapshot, a green backup notification or a copied ZIP can each be useful, but none alone proves application recovery. If the provider cannot explain database consistency, object restoration and access to an older copy, add a reviewed recovery route. If no operator can perform the rehearsal, arrange support before storing business records. Finish with a written acceptance record rather than a promise to test when an incident happens.</p></section><section><h2 id="questions-before-you-continue">Questions before you continue</h2><p>Check these boundaries before applying the procedure to a business installation.</p><details><summary>Is a code-only rollback enough after migration?</summary><p>No. Restore a compatible database and release together using the matched recovery set.</p></details><details><summary>Does a successful dump prove recovery?</summary><p>No. Restore it into an isolated environment and verify schema objects, source reads, permissions and reports.</p></details></section><section><h2 id="sources-and-next-steps">Sources and next steps</h2><p>Technical references and project behavior were checked on 16 September 2026; hosting access remains plan-specific.</p><ul><li><a href="https://github.com/rmak78/phpledger/blob/master/resources/release/INSTALL.md">Package installation instructions</a></li><li><a href="https://github.com/rmak78/phpledger/blob/master/resources/release/UPGRADE.md">Package upgrade and recovery instructions</a></li><li><a href="https://dev.mysql.com/doc/refman/8.4/en/mysqldump.html">MySQL 8.4 logical backup documentation</a></li></ul><p>The linked project files describe the current preview. Follow the instructions inside your exact downloaded package if a later release changes a command. Technical testing does not establish statutory compliance or independent accounting acceptance. See <a href="/about/">the project and preview limits</a>.</p><ul><li><a href="/self-hosting/vps-install/">Review installation acceptance</a></li><li><a href="/self-hosting/requirements/">Check database and file prerequisites</a></li></ul></section></article>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger" loading="lazy"></span></a>
+        <p>Open-source, self-hosted accounting and cash POS for small businesses. PHP 8.2+ and MySQL 8.4. Development preview.</p>
+      </div>
+      <div class="footer-col"><h2>Product</h2><a href="/product/">Accounting features</a><a href="/point-of-sale/">Point of sale</a><a href="/for/">Who it is for</a><a href="/demo/">Try the demo</a><a href="/download/">Download</a><a href="/roadmap/">Roadmap</a></div>
+      <div class="footer-col" id="docs"><h2>Learn</h2><a href="/learn/">Bookkeeping lessons</a><a href="/glossary/">Glossary</a><a href="/guides/">Reporting guides</a><a href="/self-hosting/">Self-hosting</a><a href="https://github.com/rmak78/phpledger/wiki/Getting-Started">Getting started guide</a><a href="https://github.com/rmak78/phpledger/wiki">Wiki</a></div>
+      <div class="footer-col"><h2>Compare</h2><a href="/compare/">Compare accounting software</a><a href="/compare/open-source-accounting-software/">Open-source options</a><a href="/research/">Research and sources</a></div>
+      <div class="footer-col"><h2>Project</h2><a href="/about/">About</a><a href="https://github.com/rmak78/phpledger">GitHub</a><a href="https://github.com/rmak78/phpledger/discussions">Discussions</a><a href="/news/">News</a><a href="/support/">Support</a><a href="/credits/">Credits</a><a href="/privacy/">Privacy</a><a href="/terms/">Demo use and terms</a></div>
+      <div class="footer-col"><h2>Contact</h2><a href="mailto:rmak78@gmail.com">rmak78@gmail.com</a><a href="https://pk.linkedin.com/in/rmak78">Rana Mansoor Akbar Khan on LinkedIn</a><address>Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan</address></div>
+    </div>
+    <div class="supporters">
+      <p>Companies supporting the open-source initiative</p>
+      <ul>
+        <li><a href="https://www.bixitech.com/"><img class="mark-square" src="/assets/partners/bixitech.webp" width="216" height="216" alt="BixiTech" loading="lazy"></a></li>
+        <li><a href="https://bixisoft.com/"><img class="mark-wide" src="/assets/partners/bixisoft.webp" width="300" height="105" alt="BixiSoft" loading="lazy"></a></li>
+        <li><a href="https://brownbag.pk/"><img class="mark-wide" src="/assets/partners/brownbag.webp" width="360" height="158" alt="BrownBag" loading="lazy"></a></li>
+        <li><a href="https://agency75.com/"><img class="mark-square" src="/assets/partners/agency75.webp" width="240" height="240" alt="Agency75" loading="lazy"></a></li>
+      </ul>
+    </div>
+    <nav class="trust-links" aria-label="Project policies"><a href="https://github.com/rmak78/phpledger/blob/master/LICENSE">Licence</a><a href="https://github.com/rmak78/phpledger/blob/master/SECURITY.md">Security contact</a><a href="https://github.com/rmak78/phpledger/blob/master/CODE_OF_CONDUCT.md">Code of conduct</a><a href="/privacy/">Privacy and data boundaries</a></nav>
+    <p class="footer-legal">New project-owned code uses AGPL-3.0-or-later; a commercial licence is available. The pre-adoption 0.1.0 through 0.1.5 previews retain MIT; dependencies, fonts and the archived 2015 application keep their own terms. Photographs are illustrative and are not customer endorsements. Screens show synthetic sample data from the development preview.</p>
+    <p class="footer-meta">Maintained by <a href="/about/" rel="author">Rana Mansoor Akbar Khan</a>, PHP Ledger project maintainer. Last reviewed <time datetime="2026-09-16">2026-09-16</time>.</p>
+  </div>
+</footer>
+<dialog id="screen-dialog" aria-labelledby="screen-dialog-title"><div class="dialog-heading"><h2 id="screen-dialog-title">Product screen</h2><button type="button" class="dialog-close" aria-label="Close enlarged screen"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>Close</button></div><p id="screen-dialog-note">Development preview with synthetic sample data</p><p class="dialog-hint" id="dialog-hint">Scroll the image to explore it. With a keyboard, focus the image area and use the arrow keys.</p><div class="dialog-image-wrap" tabindex="0" role="region" aria-label="Enlarged product image" aria-describedby="dialog-hint"><img id="dialog-image" width="1440" height="1200" alt=""></div></dialog>
+<script src="/assets/site.js?v=e0d64eaf32" defer></script>
+</body>
+</html>
