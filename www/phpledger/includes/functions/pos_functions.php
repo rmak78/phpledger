@@ -81,6 +81,57 @@ function pl_pos_normalize_checkout(array $input): array
     ];
 }
 
+/** Price a normalized cart from the current catalog, without touching the books. */
+function pl_pos_price_cart(array $request, array $catalog): array
+{
+    if (!hash_equals($catalog['digest'], $request['catalog_digest'])) {
+        throw new DomainException('The sample catalog changed. Reload and review current prices before checkout.');
+    }
+    $products = array_column($catalog['products'], null, 'sku');
+    $lines = [];
+    $total = '0.0000';
+    $units = 0;
+    foreach ($request['items'] as $item) {
+        $product = $products[$item['sku']] ?? null;
+        if ($product === null) {
+            throw new DomainException('A selected product is not in the current sample catalog.');
+        }
+        $price = pl_amount($product['unit_price']);
+        $lineTotal = bcmul($price, (string) $item['quantity'], 4);
+        $total = pl_amount(bcadd($total, $lineTotal, 4));
+        $units += $item['quantity'];
+        $lines[] = ['sku' => $item['sku'], 'name' => $product['name'], 'category' => $product['category'],
+            'quantity' => $item['quantity'], 'unit_price' => $price, 'line_total' => $lineTotal];
+    }
+    return ['items' => $lines, 'total' => $total, 'units' => $units];
+}
+
+/** Validate and quote an unposted sale; cash confirmation is a separate action. */
+function pl_pos_quote(array $input): array
+{
+    if (array_diff(array_keys($input), ['checkout_key', 'catalog_digest', 'date', 'items']) !== []) {
+        throw new DomainException('Sale review accepts catalog items and quantities, not custom prices, totals or cash.');
+    }
+    $request = pl_pos_normalize_checkout($input + ['cash_received' => '0']);
+    unset($request['cash_received']);
+    $catalog = pl_pos_catalog();
+    return ['request' => $request] + pl_pos_price_cart($request, $catalog) + [
+        'catalog_id' => $catalog['id'], 'catalog_version' => $catalog['version'], 'catalog_digest' => $catalog['digest'],
+    ];
+}
+
+/** Preserve the exact canonical request while an interrupted checkout is unresolved. */
+function pl_pos_recovery(int $companyId, int $bookId, array $input, ?array $quote = null): array
+{
+    $request = pl_pos_normalize_checkout($input);
+    $quotedRequest = $request;
+    unset($quotedRequest['cash_received']);
+    if (($quote['request'] ?? null) !== $quotedRequest) {
+        $quote = null;
+    }
+    return ['company_id' => $companyId, 'book_id' => $bookId, 'request' => $request, 'quote' => $quote];
+}
+
 function pl_get_pos_receipt(int $actorId, int $companyId, int $bookId, int $documentId): array
 {
     pl_require_company_access($actorId, $companyId);
@@ -110,8 +161,7 @@ function pl_checkout_pos(int $actorId, int $companyId, int $bookId, array $input
 {
     $request = pl_pos_normalize_checkout($input);
     $requestHash = hash('sha256', json_encode($request, JSON_THROW_ON_ERROR));
-    $catalog = pl_pos_catalog();
-    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $request, $requestHash, $catalog): array {
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $request, $requestHash): array {
         pl_require_company_access($actorId, $companyId, true);
         $book = pl_ledger_book($companyId, $bookId, true);
         pl_require_book_ready($companyId);
@@ -122,23 +172,11 @@ function pl_checkout_pos(int $actorId, int $companyId, int $bookId, array $input
             }
             return pl_get_pos_receipt($actorId, $companyId, $bookId, (int) $existing['document_id']);
         }
-        if (!hash_equals($catalog['digest'], $request['catalog_digest'])) {
-            throw new DomainException('The sample catalog changed. Reload and review current prices before checkout.');
-        }
-        $products = array_column($catalog['products'], null, 'sku');
-        $lines = [];
-        $total = '0.0000';
-        foreach ($request['items'] as $item) {
-            $product = $products[$item['sku']] ?? null;
-            if ($product === null) {
-                throw new DomainException('A selected product is not in the current sample catalog.');
-            }
-            $price = pl_amount($product['unit_price']);
-            $lineTotal = bcmul($price, (string) $item['quantity'], 4);
-            $total = pl_amount(bcadd($total, $lineTotal, 4));
-            $lines[] = ['sku' => $item['sku'], 'name' => $product['name'], 'category' => $product['category'],
-                'quantity' => $item['quantity'], 'unit_price' => $price, 'line_total' => $lineTotal];
-        }
+        // An identical committed retry must survive a catalog update or unavailable catalog.
+        $catalog = pl_pos_catalog();
+        $priced = pl_pos_price_cart($request, $catalog);
+        $lines = $priced['items'];
+        $total = $priced['total'];
         if (bccomp($request['cash_received'], $total, 4) < 0) {
             throw new DomainException('Cash received must cover the sale total. Credit sales are not available in this showcase.');
         }

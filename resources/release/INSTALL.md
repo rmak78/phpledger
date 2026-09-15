@@ -27,6 +27,7 @@ Verify the downloaded archive against its published checksum, then unpack it in 
 phpledger-{{VERSION}}/
   vendor/
   resources/
+  tools/         <-- optional read-only tax research validator
   www/phpledger/
     includes/
     install/
@@ -54,7 +55,7 @@ A nonempty password is required. Restrict this file to the operator and PHP proc
 
 ## 3. Configure HTTPS and routing
 
-Use a dedicated hostname with the application mounted at `/`. Set its document root to the absolute path ending in `www/phpledger/public`. The package root, `includes`, `install`, `templates`, `resources` and `vendor` must not be exposed by aliases or static-file rules.
+Use a dedicated hostname with the application mounted at `/`. Set its document root to the absolute path ending in `www/phpledger/public`. The package root, `includes`, `install`, `templates`, `resources`, `tools` and `vendor` must not be exposed by aliases or static-file rules.
 
 For Apache 2.4, the following fragment belongs inside your hosting administrator's HTTPS virtual host. Replace the example absolute path with your unpacked directory; this fragment does not configure certificates or the PHP handler:
 
@@ -100,13 +101,15 @@ Replace the example email and name. On another shell, use its secure input mecha
 
 ## 6. Verify the first journey
 
-Open the HTTPS hostname and sign in. Confirm that refresh and navigation retain the session. Create a clearly isolated sample company, record a small synthetic receipt or expense, open its journal, and locate its effect in the reports. Verify a linked reversal in that sample. Check that private file paths cannot be downloaded and that HTTPS/session cookies are configured correctly.
+Open the HTTPS hostname and sign in. Confirm that refresh and navigation retain the session. In a clearly isolated sample company, record a small synthetic receipt or expense and follow its journal into the reports. Open an account statement and check its opening, period and closing balances. Add an account, review a balanced general-journal draft, post it and verify a linked reversal with its own date and reason. Confirm that the chart and journals retain their history. Check that private file paths cannot be downloaded and that HTTPS/session cookies are configured correctly.
 
 `/health` checks database connectivity only; it does not prove that migrations, users or accounting workflows are ready. Run the journey above as well as the CLI checks. Delete no real records to perform acceptance checks.
 
 For a real business, choose the appropriate start date, fiscal year and base currency deliberately. Existing-business onboarding remains blocked until an owner/accountant previews and confirms its opening trial balance and reconciled unpaid-document register at `/opening-balances`. Cutover is the close of the accounting start date; ordinary transactions start afterward. Use the exact CSV columns shown on screen, or enter account balances manually. Do not bypass that gate by misclassifying an existing business as new. Invoice collection/bill settlement and detailed historical journals remain outside this cutover workflow.
 
 Use `/periods` to create nonoverlapping date ranges and close them with a recorded reason; only the owner can reopen. Use `/bank-reconciliation` for strict statement CSV preview/import, explicit journal-line matching and confirmed reconciliation. The first bank baseline requires all earlier entries cleared and a matching ledger opening. These local workflows do not connect to a bank or make payments.
+
+The files in `resources/tax/` are disabled, unreviewed research candidates. They are not loaded into company settings or POS calculations. Optional `php tools/validate-tax-catalog.php --self-test` checks their structure without database access or activation; it does not verify tax law or approve a tax profile. See [RELEASE-NOTES.md](RELEASE-NOTES.md).
 
 ## Country suggestion and operation
 

@@ -52,6 +52,16 @@ demo_denied(static fn () => pl_confirm_existing_setup($f, $first['company_id'], 
 demo_denied(static fn () => DB::delete('pl_documents', 'id = %i', $draft['id']));
 demo_denied(static fn () => DB::update('pl_periods', ['status' => 'closed'], 'book_id = %i', $first['book_id']));
 demo_denied(static fn () => DB::update('pl_documents', ['amount' => '999'], 'id = %i', $draft['id']));
+$coreAccounts = array_column($company['accounts'], 'id', 'semantic_key');
+$general = pl_save_general_draft($f, $first['company_id'], $first['book_id'], ['date' => gmdate('Y-m-d'), 'reference' => 'DEMO-GENERAL', 'description' => 'Synthetic capital entry', 'creation_key' => 'demo-general', 'lines' => [
+    ['account_id' => $coreAccounts['core.cash_bank'], 'debit' => '25.0001', 'credit' => '0'],
+    ['account_id' => $coreAccounts['core.equity.owner'], 'debit' => '0', 'credit' => '25.0001'],
+]]);
+demo_check(pl_post_general_draft($f, $first['company_id'], $first['book_id'], $general['id'], 1)['status'] === 'posted', 'Demo general posting failed.');
+demo_check(pl_reverse_general_draft($f, $first['company_id'], $first['book_id'], $general['id'], gmdate('Y-m-d'), 'Synthetic general correction')['status'] === 'reversed', 'Demo general linked reversal failed.');
+demo_denied(static fn () => pl_save_account($f, $first['company_id'], $first['book_id'], []));
+demo_denied(static fn () => DB::delete('pl_general_drafts', 'id = %i', $general['id']));
+demo_denied(static fn () => DB::update('pl_general_drafts', ['description' => 'Overwritten'], 'id = %i', $general['id']));
 $oldGeneration = $_SESSION['demo_generation'];
 $_SESSION['demo_generation'] = str_repeat('0', 64);
 demo_check(pl_current_user_id() === null, 'A stale generation retained a reused numeric identity.');
@@ -59,11 +69,12 @@ $second = pl_demo_begin_visit(pl_csrf_token(), 'PKR');
 demo_check(pl_company_context($second['user']['id'], $second['company_id'])['currency'] === 'PKR', 'Explicit sample currency choice was ignored.');
 demo_check($first['company_id'] !== $second['company_id'] && $f !== $second['user']['id'], 'Visitors shared a company or account.');
 demo_denied(static fn () => pl_get_document($second['user']['id'], $first['company_id'], $first['book_id'], $draft['id']));
+demo_denied(static fn () => pl_get_general_draft($second['user']['id'], $first['company_id'], $first['book_id'], $general['id']));
 demo_check(pl_list_documents($second['user']['id'], $second['company_id'], $second['book_id'])['total'] === 6, 'The other visitor inherited edited records.');
 putenv('PL_DEMO_MAX_DOCUMENTS=10');
 $accounts = array_column($company['accounts'], 'id', 'semantic_key');
 $input = ['kind' => 'expense', 'date' => gmdate('Y-m-d'), 'amount' => '1', 'money_account_id' => $accounts['core.cash_bank'], 'category_account_id' => $accounts['core.expense.general'], 'counterparty' => 'Synthetic capacity test', 'memo' => '', 'reference' => ''];
-for ($i = 0; $i < 4; $i++) {
+for ($i = 0; $i < 3; $i++) {
     pl_save_document($f, $first['company_id'], $first['book_id'], $input + ['creation_key' => 'capacity:' . $i]);
 }
 demo_denied(static fn () => pl_save_document($f, $first['company_id'], $first['book_id'], $input + ['creation_key' => 'capacity:overflow']));

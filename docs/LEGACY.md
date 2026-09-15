@@ -1,8 +1,8 @@
-> The modern publication relocates the historical root application to `legacy/`. Historical paths below describe the original checkout; prepend `legacy/` when locating those archived files.
+> On 15 September 2026 the owner requested removal of the historical application from the current repository tree. Use Git history at `2972e57:legacy/` or the original baseline below for research. The history has not been rewritten; historical paths below are not current installation paths.
 
 # Legacy reference
 
-Historical baseline: `fe528eb52a8be277f3b2806022d23a817c01bda8` from `master`. The legacy application remains at the repository root for traceability. Its files and SQL dumps are not a supported runtime or migration path for the revived application.
+Historical baseline: `fe528eb52a8be277f3b2806022d23a817c01bda8` from `master`. The legacy application is retained only in Git history for traceability. Its files and SQL dumps are not a supported runtime or migration path for the revived application.
 
 The user describes this codebase as not having been properly maintained since 2014. Repository history also contains 2015 application changes and 2023 setup commits; those commits do not establish modern runtime or security readiness.
 

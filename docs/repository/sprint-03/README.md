@@ -1,5 +1,13 @@
 # Sprint 03 GitHub milestone and issues
 
+## Current delivery
+
+[v0.1.1-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.1-preview) is published; see the [package validation receipt](PREVIEW-0.1.1-VALIDATION.md). The published POS update implements product click-to-add and separate cash confirmation, with [its own validation receipt](POS-CHECKOUT-VALIDATION.md). Representative cashier sessions remain pending; package and hosted-demo publication are verified.
+
+## Historical milestone creation receipt
+
+The following records the initial publication of the milestone and issue bodies; its open-issue counts and proposed package status are historical.
+
 Published and read back from GitHub: **[Sprint 03: First installable preview](https://github.com/rmak78/phpledger/milestone/4)**, milestone **4**, with five open issues. All five are unassigned; the milestone has no due date. `0.1.0-preview` remains a proposed candidate name, not a created tag or released package.
 
 The [manifest](manifest.json) records the live issue/milestone URLs and IDs, dependencies, body hashes and verification result. The [milestone description](milestone.md) and local issue bodies match their published content:

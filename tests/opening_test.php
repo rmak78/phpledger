@@ -31,6 +31,21 @@ function opening_confirm(array $f, array $preview): array
     return pl_confirm_opening($f['actor_id'], $f['company_id'], $f['book_id'], (int) $preview['id'], $preview['payload_hash'], true);
 }
 
+test('opening restart preserves saved general journals from the merged core workflow', function (): void {
+    $f = opening_fixture();
+    $cutover = opening_confirm($f, opening_preview($f));
+    pl_save_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], [
+        'date' => '2026-09-02', 'reference' => 'Merged core draft', 'description' => 'Synthetic journal',
+        'creation_key' => bin2hex(random_bytes(16)),
+        'lines' => [
+            ['account_id' => $f['accounts']['1000'], 'debit' => '10', 'credit' => '0', 'description' => 'Cash'],
+            ['account_id' => $f['accounts']['4000'], 'debit' => '0', 'credit' => '10', 'description' => 'Income'],
+        ],
+    ]);
+    assert_throws(fn() => pl_reverse_opening($f['actor_id'], $f['company_id'], $f['book_id'], (int) $cutover['id'], 'Correct reviewed opening'), DomainException::class, 'business activity');
+    assert_same('ready', pl_company_context($f['actor_id'], $f['company_id'])['setup_status']);
+});
+
 test('opening preview preserves readiness and confirmation posts reconciled controls exactly once', function (): void {
     $f = opening_fixture();
     $preview = opening_preview($f);

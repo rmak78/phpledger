@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "country": {
+    "code": "NP",
+    "name": "Nepal",
+    "currency": "NPR"
+  },
+  "status": "research_only",
+  "enabled": false,
+  "research_date": "2026-09-15",
+  "review_required": true,
+  "sources": [
+    {
+      "id": "np-vat-faq",
+      "title": "IRD FAQ: VAT rate, input deduction and zero-rate/exemption distinctions",
+      "url": "https://ird.gov.np/faq/",
+      "publisher": "Inland Revenue Department, Nepal",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "np-vat-act-register",
+      "title": "VAT Act register including the version amended by Finance Act 2082",
+      "url": "https://ird.gov.np/category/valueaddedtaxact/",
+      "publisher": "Inland Revenue Department, Nepal",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "np-vat-english-register",
+      "title": "The Value-Added Tax Act, 1996 (2052): English publication page",
+      "url": "https://ird.gov.np/content/7798/thevalueaddedtaxact19962052/",
+      "publisher": "Inland Revenue Department, Nepal",
+      "checked_on": "2026-09-15"
+    }
+  ],
+  "regimes": [
+    {
+      "id": "np-vat-standard",
+      "name": "Standard VAT research candidate",
+      "authority": "Inland Revenue Department, Nepal",
+      "tax_family": "vat",
+      "jurisdiction": "NP",
+      "rate_percent": "13",
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Taxable goods/services under the ordinary VAT regime.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "IRD FAQ explicitly states 13%; commencement date and current fiscal-year amendments are unresolved.",
+        "Verify VAT registration, current turnover thresholds and mandatory categories.",
+        "Input deduction requires eligible business use, evidence and mixed-supply allocation."
+      ],
+      "source_ids": [
+        "np-vat-faq",
+        "np-vat-act-register"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "np-vat-zero",
+      "name": "Zero-rated supply classification",
+      "authority": "Inland Revenue Department, Nepal",
+      "tax_family": "vat",
+      "jurisdiction": "NP",
+      "rate_percent": "0",
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Only supplies legally qualifying for zero-rating.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "IRD distinguishes zero-rated taxable supplies from exemptions and allows related recovery under applicable rules.",
+        "Confirm the current schedule and evidence, especially exports; an overseas customer alone is insufficient."
+      ],
+      "source_ids": [
+        "np-vat-faq",
+        "np-vat-act-register"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "np-vat-exempt",
+      "name": "VAT exemption classification",
+      "authority": "Inland Revenue Department, Nepal",
+      "tax_family": "vat",
+      "jurisdiction": "NP",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Only supplies within the current exemption provisions.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Exempt supplies do not create ordinary related input-credit entitlement.",
+        "Review medicine, food and service classifications individually."
+      ],
+      "source_ids": [
+        "np-vat-faq",
+        "np-vat-act-register"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "np-income-tax-review",
+      "name": "Business or company income-tax review",
+      "authority": "Inland Revenue Department, Nepal",
+      "tax_family": "income_tax",
+      "jurisdiction": "NP",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Entity/fiscal-year income tax; never a checkout tax.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Review the Income Tax Act and annual Finance Act for the selected fiscal year."
+      ],
+      "source_ids": [
+        "np-vat-faq"
+      ],
+      "review_status": "unreviewed"
+    }
+  ],
+  "industry_profiles": [
+    {
+      "industry_code": "restaurant",
+      "regime_ids": [
+        "np-vat-standard",
+        "np-vat-zero",
+        "np-vat-exempt",
+        "np-income-tax-review"
+      ],
+      "classification_questions": [
+        "Which charges are meals, takeaway goods, catering, delivery, alcohol, tips or service charges?",
+        "How are discounts, deposits, vouchers and refunds treated at the relevant tax point?",
+        "Which mandatory-registration and mixed goods/service rules cover this outlet?"
+      ]
+    },
+    {
+      "industry_code": "membership_club",
+      "regime_ids": [
+        "np-vat-standard",
+        "np-vat-zero",
+        "np-vat-exempt",
+        "np-income-tax-review"
+      ],
+      "classification_questions": [
+        "Which receipts are subscriptions, joining fees, donations, facility hire, food or admissions?",
+        "What is the club's legal form and which activities are commercial supplies?",
+        "Are dues, sporting access, dining, events and donations legally distinct supplies?"
+      ]
+    },
+    {
+      "industry_code": "pharmacy",
+      "regime_ids": [
+        "np-vat-standard",
+        "np-vat-zero",
+        "np-vat-exempt",
+        "np-income-tax-review"
+      ],
+      "classification_questions": [
+        "Which individual products are medicines, medical devices, supplements or cosmetics?",
+        "Does the business also provide clinical services, manufacture goods or import them?",
+        "Which items qualify under the current medicine/medical exemption schedule?"
+      ]
+    },
+    {
+      "industry_code": "trader",
+      "regime_ids": [
+        "np-vat-standard",
+        "np-vat-zero",
+        "np-vat-exempt",
+        "np-income-tax-review"
+      ],
+      "classification_questions": [
+        "Does the business act as principal, agent, importer, exporter or manufacturer?",
+        "Which tariff/product codes and documentary evidence support each treatment?",
+        "Which current import/export registration exceptions and documentary tests apply?"
+      ]
+    },
+    {
+      "industry_code": "distributor",
+      "regime_ids": [
+        "np-vat-standard",
+        "np-vat-zero",
+        "np-vat-exempt",
+        "np-income-tax-review"
+      ],
+      "classification_questions": [
+        "Are sales on own account, consignment or commission, and is there a manufacturer appointment?",
+        "How are rebates, returns, free stock and cross-border transactions documented?",
+        "How are taxable and exempt purchases allocated through distribution and returns?"
+      ]
+    },
+    {
+      "industry_code": "retail_shop",
+      "regime_ids": [
+        "np-vat-standard",
+        "np-vat-zero",
+        "np-vat-exempt",
+        "np-income-tax-review"
+      ],
+      "classification_questions": [
+        "Which SKU classifications apply to the actual product mix?",
+        "Are there bundled goods/services, gift vouchers, used goods or imports?",
+        "Does PAN status differ from actual VAT registration and authority to charge VAT?"
+      ]
+    },
+    {
+      "industry_code": "workshop",
+      "regime_ids": [
+        "np-vat-standard",
+        "np-vat-zero",
+        "np-vat-exempt",
+        "np-income-tax-review"
+      ],
+      "classification_questions": [
+        "Are parts, labor, consumables, subcontract work and warranties separately supplied or bundled?",
+        "Does the workshop repair, manufacture, import or export goods?",
+        "Which threshold or compulsory-registration category applies to mixed parts and labor?"
+      ]
+    }
+  ],
+  "open_questions": [
+    "The readable FAQ supports broad rate/input concepts but contains multiple historical fiscal-year examples. No threshold, filing deadline or withholding rate was copied into the seed.",
+    "The current VAT register lists a Finance Act 2082 consolidation and announces Finance Act 2083 materials. Linked current text and the older English PDF could not be retrieved; review the enacted FY2083/84 law.",
+    "All legal start/end dates remain null until the controlling text and Gregorian/Bikram Sambat date conversion are verified.",
+    "Resolve current product schedules, registration categories, input restrictions, excise/local levies and income-tax treatment with a Nepal-qualified reviewer."
+  ]
+}

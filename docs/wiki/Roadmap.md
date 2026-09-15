@@ -1,43 +1,47 @@
 # The complete future path
 
-PHP Ledger develops through eight stages. Working preview code and research already support parts of the early stages; that does not mean their user, accounting, funding or release gates are complete. The immediate deliverable is [[the first installable package|First-Package]].
+The direction confirmed on 15 September 2026 is **complete accounting core first, optional business modules next**, with a business API and MCP access over the same services. The current preview supplies working slices; it does not complete the accounting, user or release gates below.
+
+The [[module roadmap|Module-Roadmap]] gives the detailed delivery order. [[First package|First-Package]] describes the 0.1.2-preview scope and the next core work.
 
 | Stage | What it delivers | Completion gate |
 |---|---|---|
-| **1. Discovery and restart** | Preserved history, product scope, accounting examples, architecture, licence review and priorities | Owner/accountant decisions and actual research support the scope. |
-| **2. Experience and stack proof** | Selected UI direction, onboarding/entry/report prototypes, authentication and database transactions | Runtime checks and observed core journeys support the design. |
-| **3. Complete product slice** | Business setup → starter accounts → receipt/expense → journal → trial balance → reversal | Results reconcile and representative users complete the journey without coaching. |
-| **4. Website and early validation** | Product website, isolated demonstration, documentation, contributor paths and pilot interest | Accurate claims, working public journeys, accounting reviewers and prospective pilots. |
-| **5. Milestone funding** | A costed, measurable next release and verified receiving route | Licence, funding eligibility, budget and delivery capacity are established. |
-| **6. Accounting MVP and pilots** | Journals/fiscal controls, AR/AP, cash/bank, starter imports, reconciliation, statements/exports, installation and upgrades | Supported pilots complete an accounting period; reports and recovery reconcile. |
-| **7. Multi-book and localization** | An approved book model, traceable differences, reviewed regional templates and tax adapters | Each book balances; differences are explainable; each supported profile is reviewed. |
-| **8. ERP expansion** | Inventory/purchasing, production retail POS, van distribution and later specialist releases | Demand, usable operations, funded scope and accounting reconciliation support each release. |
+| **1. Discovery and restart** | Preserved history, product scope, accounting examples, architecture, licence review and priorities | Owner/accountant decisions and source research support the scope. |
+| **2. Experience and stack proof** | Selected design, onboarding/entry/report prototypes, authentication and transactions | Runtime checks and observed journeys support the design. |
+| **3. Complete product slice** | Business setup, accounts, receipt/expense, journal, trial balance and reversal | Results reconcile and representative users complete the journey. |
+| **4. Website and validation** | Website, isolated demo, documentation, contributor paths and pilot interest | Accurate claims and working public journeys, with reviewers and prospective pilots. |
+| **5. Milestone funding** | A costed next release and verified receiving route | Licence, eligibility, budget and delivery capacity are established. |
+| **6. Complete accounting core and pilots** | Statements, chart, general journals, opening/cutover, periods, cash/bank reconciliation, reports/exports and recovery | A supported core-only business completes a period; accounting review and observed usability pass. |
+| **7. Extension and integration foundation** | Module/dependency contracts, company capability gates, shared master data, business API and MCP | Scoped clients, consistent results, retained history and idempotent audited commands. |
+| **8. Optional business modules** | AR, AP, purchasing/inventory, tax, shop and restaurant POS, distribution and specialists | Each module passes its own accounting and operational gates. |
+| **9. Further regional and multi-book support** | Reviewed profiles/adapters, approved alternative-book model, translations and multicurrency | Defined entity/period support; every book and difference reconciles. |
 
 ## Required accounting progression
 
-Historical data matters. CSV/XLSX starter imports should cover accounts, contacts, opening balances and unpaid documents through preview, correction, reconciliation and confirmation. Detailed transaction history and source-system adapters form a later migration milestone. AR/AP, bank reconciliation and stock reports need their underlying records, not just report screens.
+Account statements, chart management and general journals are the current core slice. Reviewed opening entries, period-close/reopen administration and bank reconciliation come next. Historical import must preview mappings, errors and totals before confirmation, with a cutover that does not double count existing balances.
 
-Country accounting proceeds **Pakistan → UK → UAE**, with explicit entity/period profiles and separately reviewed tax behavior. Multi-book meaning must be approved before implementing cross-book copying or reporting adjustments. Every book and difference must remain traceable.
+AR/AP open-item records and stock valuation belong to their future modules. An account statement alone cannot provide aging, outstanding invoices/bills or stock reports. Unexplained opening controls must keep readiness unresolved.
 
-The current cash forecast is an entered scenario, not a prediction engine. Any future forecast based on invoices, bills, inventory or other operational data must disclose its inputs and assumptions and remain distinct from posted accounting.
+Financial-reporting work proceeds **Pakistan → UK → UAE**, with explicit entity/period profiles. Tax research runs alongside it, covers eight countries and seven industries, and remains disabled and unreviewed. [[Tax research|Tax-Research]] explains that separate boundary.
 
-## Regional and business expansion
+## Optional business expansion
 
-- **Language and formatting:** English fallback, reviewed translations/RTL, terminal-local event display, flexible dates and money presentation without changing stored values.
-- **Multicurrency:** fixed/fetched/manual rates, immutable rate snapshots, stale-data visibility and reviewed rounding/revaluation policies.
-- **Inventory and purchasing:** products, warehouses, stock movements and a reviewed valuation method tied to COGS and journals.
-- **Production retail:** returns, payment reconciliation, taxes, tills/hardware and end-of-day controls beyond the current sample cash sale.
-- **Van distribution:** van warehouses, route deliveries, collections and reconciled evening settlement.
-- **Specialist releases:** restaurant tables/kitchen tickets; pharmacy batches/expiry; jewelry material/weight/labour pricing; club memberships; workshop jobs/parts/labour. Each needs its own validation.
+- **AR and AP:** invoices/bills, credit notes, receipts/payments, allocations, aging and reconciled unpaid-document imports.
+- **Purchasing and inventory:** products, receiving/returns, warehouses, quantities, reviewed valuation and COGS.
+- **Tax:** reviewed jurisdiction adapters, effective rules and immutable calculation snapshots; required before applicable production use.
+- **Shop and restaurant POS:** shared checkout, shop entry or table/order/kitchen operations, returns and settlement controls.
+- **Distribution and specialists:** route/van stock and collections; pharmacy batch/expiry; jewelry pricing; membership dues; workshop jobs/parts/labour.
 
-Original demonstration scenarios cover restaurants, clubs, pharmacies, traders, distributors, shops and workshops. They support research and future onboarding; they do not mean those operational modules are available.
+A supported module lifecycle and API/MCP access are planned, not current interfaces. The sample POS remains part of the application until its module boundary is implemented. Optional software does not make legal obligations optional.
 
 ## Later investigations
 
-One **Scan document** action is planned for receipts, invoices and cheques. AI would identify the document and suggest editable fields for human review before the normal save/posting process. It is deferred, with no promise for the next sprint and no current extraction capability.
+Reviewed translations/RTL and number/date preferences must preserve stored amounts and business dates. Multicurrency needs immutable rate snapshots and reviewed rounding/revaluation. Alternative books require an approved meaning and reconciliation rules.
 
-Offline synchronization, durable asynchronous operational events and native wrappers follow demonstrated need. They must preserve duplicate protection, authoritative posting and visible reconciliation across interruptions.
+One **Scan document** action is planned to suggest editable fields from receipts, invoices and cheques for review before the normal save/post flow. It has no current extraction capability or next-sprint promise.
 
-Each release is scoped and funded separately. A roadmap entry is not a delivery date, funding commitment or claim of regulatory support.
+Offline synchronization, durable background events and native wrappers follow demonstrated need, with duplicate protection, recovery and authoritative posting.
 
-[[First package|First-Package]] · [[Accounting and reports|Accounting-and-Reports]] · [[Contributing and support|Contributing-and-Support]]
+Each release is scoped separately. Roadmap entries are not delivery dates, funding commitments or regulatory support claims.
+
+[[Module roadmap|Module-Roadmap]] · [[First package|First-Package]] · [[Contributing and support|Contributing-and-Support]]

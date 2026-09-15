@@ -107,7 +107,7 @@ function pl_demo_require_document_capacity(int $companyId, int $bookId): void
         return;
     }
     $limit = min(500, max(10, (int) (getenv('PL_DEMO_MAX_DOCUMENTS') ?: 100)));
-    if ((int) DB::queryFirstField('SELECT COUNT(*) FROM pl_documents WHERE company_id = %i AND book_id = %i', $companyId, $bookId) >= $limit) {
+    if ((int) DB::queryFirstField('SELECT (SELECT COUNT(*) FROM pl_documents WHERE company_id = %i AND book_id = %i) + (SELECT COUNT(*) FROM pl_general_drafts WHERE company_id = %i AND book_id = %i)', $companyId, $bookId, $companyId, $bookId) >= $limit) {
         throw new DomainException('This sample has reached its transaction limit. Existing records remain available until the hourly refresh.');
     }
 }

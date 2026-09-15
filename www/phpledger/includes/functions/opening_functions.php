@@ -318,6 +318,7 @@ function pl_reverse_opening(int $actorId, int $companyId, int $bookId, int $cuto
         }
         $ordinary = DB::queryFirstField("SELECT j.id FROM pl_journals j WHERE j.book_id = %i AND j.source_type <> 'opening_balance' AND NOT (j.source_type = 'reversal' AND EXISTS (SELECT 1 FROM pl_opening_cutovers c WHERE c.journal_id = j.reversal_of_id)) LIMIT 1 FOR UPDATE", $bookId);
         if ($ordinary || DB::queryFirstField('SELECT id FROM pl_documents WHERE book_id = %i LIMIT 1 FOR UPDATE', $bookId)
+            || DB::queryFirstField('SELECT id FROM pl_general_drafts WHERE book_id = %i LIMIT 1 FOR UPDATE', $bookId)
             || DB::queryFirstField('SELECT id FROM pl_bank_statements WHERE book_id = %i LIMIT 1 FOR UPDATE', $bookId)) {
             throw new DomainException('This book already has business activity. Keep its cutover history and have an accountant review correcting entries.');
         }

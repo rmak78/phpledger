@@ -8,7 +8,7 @@ Keep BixiSoft's lightweight modular architecture: one application, one shared bo
 
 PHP Ledger is a standalone PHP application. It does not run inside WordPress or depend on WordPress plugins, themes, hooks, or its database model. Its maintainability depends on explicit service boundaries, small testable functions, versioned migrations and documented extension contracts; adding ERP modules must preserve those boundaries.
 
-New code belongs under `www/phpledger`. Only its `public` directory is web-accessible. Configuration, Composer dependencies, migrations, command-line tools, tests, and private storage remain outside that document root. Historical code is preserved in `legacy/` for research and never included by the new bootstrap.
+New code belongs under `www/phpledger`. Only its `public` directory is web-accessible. Configuration, Composer dependencies, migrations, command-line tools, tests, and private storage remain outside that document root. The historical application was removed from the current tree at the owner's request. It remains in Git history for research and is never included by the bootstrap.
 
 Use modern CSS and small JavaScript modules for progressive enhancement. Financial decisions stay on the server. The approved Review Console direction and Inter typography produce one reusable component system. Replace the legacy UI in the new application without editing historical assets for cosmetic consistency.
 
@@ -32,7 +32,7 @@ All decision reads use current locking reads under the book transaction, includi
 
 Financial amounts use exact fixed precision; never use floating-point arithmetic for ledger decisions. Validate date, currency, account ownership, amount precision, period availability, actor permissions, and balanced totals before writing. Database changes use versioned migrations against a canonical new schema, not historical dumps.
 
-Every financial module submits through one posting interface carrying company/book identity, source-document reference, posting date, currency, duplicate-prevention key, and debit/credit lines. Return a durable journal reference or an explicit validation/access failure. This is an internal application interface in the foundation, not a promised public network API.
+Every financial module submits through one posting interface carrying company/book identity, source-document reference, posting date, currency, duplicate-prevention key, and debit/credit lines. Return a durable journal reference or an explicit validation/access failure. This is currently an internal application interface; the approved future business API and MCP adapters will expose the same services after their access and compatibility gates, not a second posting implementation.
 
 Post synchronously and atomically: all header, line, source, and audit records succeed or roll back together. Repeated submissions return the original journal only when their payloads agree; reuse of a key with different financial content is a conflict. Tests must cover concurrent submissions, not just sequential duplicates.
 
@@ -87,6 +87,28 @@ Installation checks runtime extensions, database connectivity, writable private 
 Keep development services bound to loopback and the database internal by default. Installation documentation must distinguish local HTTP from production HTTPS/session requirements. Backup/restore and upgrade verification are release gates. Do not add hosted-account billing, telemetry collection, provider calls on page load, or external sending to the foundation.
 
 The user subsequently authorized a public `/demo` at the marketing website, with a separate synthetic database, hourly controlled reset, and server-enforced restrictions on destructive user operations. This is an explicit demo deployment scope, not permission to expose customer books. Keep demo identity, allowed actions, storage/reset targets, and session/base-path behavior separate from ordinary installations. Use the shared URL helper for routes, forms, redirects, and assets so the application operates correctly below `/demo`. Reset is backend-controlled, not a public destructive action. Verify customer-database isolation, denied operations, active-session behavior during reset, and recovery before claiming the hosted demo is ready. Deployment and reset evidence remain pending.
+
+## Core, optional modules and integration direction
+
+The user confirmed on 15 September 2026 that core accounting comes first and AR, AP, taxes and industry POS are optional modules. The [core and module roadmap](MODULE-ROADMAP.md) provides the proposed order and acceptance criteria. The current code has explicit service files and a wired-in POS showcase, not a supported install/enable/upgrade/disable lifecycle. Public business API and MCP access are approved future work, not implemented interfaces.
+
+Keep companies/books, authentication/permissions, chart of accounts, journals/posting, periods, opening/cutover, cash/bank reconciliation and general-ledger reporting in the required core. A supported core-only installation must complete its accounting work with every add-on disabled. Universal account statements belong to the core; AR/AP aging and open-item statements, inventory valuation and operational reports belong to their modules and must reconcile to the core ledger.
+
+Use one shared contact identity with customer/vendor roles, and one product/service catalog identity with optional module-owned attributes. Introduce those shared capabilities for their first consumer instead of making a catalog mandatory for a general-ledger-only company. Inventory owns stock and valuation; restaurant operations own tables, modifiers and kitchen state. Shop and restaurant interfaces compose shared POS checkout, posting, identity and permissions. Stocked sales require inventory/costing; non-stock/service checkout can run without it. Credit and applicable tax introduce their own capability requirements.
+
+Define a small explicit module registry in the existing application. Versioned manifests declare supported core contracts, dependencies, migrations/data ownership, routes, permissions, settings and API/MCP operations. Package installation is separate from per-company activation. Use reviewed project-owned packages initially; arbitrary web-uploaded executable plug-ins are outside this design. All new project-owned modules retain the chosen MIT license and separate dependency notices.
+
+Enforce enabled capabilities, dependencies and actor/company/book permissions at execution on every transport. A hidden menu or unadvertised MCP tool is not a security boundary. Refuse incompatible dependencies/upgrades and preserve applied migration checksums. Disabling stops new operations while retaining journal/source snapshots, authorized history/export access and audit; it never silently deletes accounting data. Corrections use core linked reversals, but module-backed documents require compatible correction services and subledger reconciliation; disablement cannot permit an isolated ledger reversal to bypass them. Test disabled modules and dependency combinations as well as ordinary installation.
+
+Reserve effective-version tax contracts and immutable document calculation snapshots before AR/AP/checkout document schemas are finalized. Implement/review the required adapter before enabling transactions that need it, even if that moves adapter delivery earlier than the illustrative module order. An optional tax module does not waive a business's obligations or justify treating unsupported tax as zero. Regional accounting/reporting profiles remain a distinct reviewed requirement.
+
+### Business API and MCP adapters
+
+Add a versioned HTTP business API described with OpenAPI, then MCP tools over the same typed service contracts. Keep the existing bootstrap/router, MeekroDB connection and identity/authorization model; transport-specific credential handling must not create a parallel user store or independent ledger. Start with scoped company/capability, account, journal and report reads. Add draft/validate commands before explicit posting/reversal/period commands. Browser routes and `/health` remain the only current network interfaces documented below.
+
+Machine/client access needs scoped companies/books/actions, revocation/expiry, bounded reads and audit. Mutating commands require durable request identity, matching-content retry receipts, execution-time validation and configured review policy; neither model intent nor a tool annotation grants permission. Return exact decimal strings, stable IDs, business DATE values, UTC event times and structured errors. Retain source/actor/client/command references without logging credentials. API/MCP tests must prove the same totals and denied operations as browser/service tests, including lost-response retries and revocation.
+
+Select and record supported API/MCP protocol versions and authentication transport during implementation. HTTP MCP requires a protocol-compatible authorization design, including discovery and token audience checks; browser cookies alone are not that design. No remote provider, message or payment action is implicitly enabled. The [module roadmap's protocol references](MODULE-ROADMAP.md#api-and-mcp-contract-decisions) point to official OpenAPI and MCP documentation consulted for this plan.
 
 ## Extension path and quality gates
 
@@ -172,7 +194,23 @@ A local HTTP acceptance checkpoint passed **26 checks** using its own synthetic 
 
 `pl_profit_loss()` reads posted income/expense movements for an inclusive business-date range. `pl_balance_sheet()` classifies posted balances as assets, liabilities, and recorded equity, with accumulated unclosed earnings included once; the result reconciles assets against liabilities plus equity. `pl_cash_balance()` reads scoped asset accounts carrying the cash/bank role. Reversals remain posted records and naturally change their report effect; drafts do not appear.
 
+The 0.1.2-preview implementation extends `pl_account_activity()` and `GET /reports/account?id=...` into an account statement. An optional `from` business date and inclusive `as_of` cutoff define the period. Opening is all posted debit-minus-credit activity before `from` (zero when omitted); period debit/credit totals cover the selected dates; closing equals opening plus period movement and therefore all activity through the cutoff. The existing `balance` return field remains period movement for internal-caller compatibility; `opening_balance` and `closing_balance` carry the new meanings.
+
+Running balances use debit-positive signed amounts in business-date, journal-ID and line-number order across the whole period before 50-row pagination; each page includes its brought-forward and carried-forward amounts. Totals, rows and source reads share one transaction holding the shared book lock while posting takes its exclusive lock. Company/book access is enforced and inactive accounts retain readable history. The statement does not create an opening/cutover entry or implement an import/reconciliation workflow. See the [local account-statement validation receipt](repository/sprint-04/ACCOUNT-STATEMENTS-VALIDATION.md) for test/browser evidence and release status.
+
 `pl_cash_forecast()` is an exact-decimal scenario function. The browser takes the selected date's authorized posted cash balance and explicitly entered weekly cash in/out over 1–52 weeks, then shows closing balances and the first negative point. It does not infer future revenue, outstanding invoices, bills, stock, or tax. It neither changes the ledger nor represents a cash-flow statement. Full receivables/payables/stock reports await their respective modules and cannot be derived honestly from this small receipt/expense ledger alone.
+
+### Core accounts and general journals (0.1.2-preview)
+
+Migration **006_core_accounts_journals** appends account revisions and stable creation identities, `pl_general_drafts` and append-only `pl_core_audit`. It preserves migrations 001–005 and prior accounts, journals, documents and template mappings. A fully migrated installation has 17 tables, six receipts and thirteen guard triggers.
+
+`GET /accounts` lists scoped accounts and shows creation/edit/history; `POST /accounts/save` requires permission, CSRF, a reason and the expected revision. Creation keys reject conflicting reuse. Existing codes, types and purpose roles are immutable; names and active status are audited. Inactive accounts retain their statements. Public-demo account administration is blocked on the server.
+
+`GET /general-journals`, `/new`, `/edit` and `/detail` provide saved general journals. `POST /general-journals/save`, `/post` and `/reverse` reuse the shared bootstrap, auth, CSRF, readiness, book lock and posting services. Drafts may be unbalanced but each used line has one exact positive debit or credit; posting requires a balanced saved revision. The posting request supplies identity/revision and explicit intent, never replacement financial values. The durable `general:ID:post` key links source and journal atomically with the audit entry. Posted sources are immutable; a dated, reasoned reversal preserves linked history.
+
+Current locking reads revalidate account/draft revisions even inside an older repeatable-read transaction. Audit or source-link failure rolls back all financial effects. General-journal drafts share the public demo's document capacity; demo post/reversal remains allowed through the same services. General-ledger source links resolve original and reversing entries. Browser/API/MCP module transports do not bypass these rules; the latter two interfaces remain planned.
+
+The [core rule register](accounting/CORE_RULE_REGISTER.md) maps behavior and tests to researched professional guidance without claiming professional certification. The [tax catalog](tax/README.md) is versioned research data only, excluded from runtime activation and calculation.
 
 ### POS posting contract
 

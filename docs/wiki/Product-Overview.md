@@ -14,8 +14,8 @@ PHP Ledger aims to make the first useful accounting task straightforward while p
 
 1. Explore an isolated sample or create a business.
 2. Enter the business name, base currency, accounting start date and fiscal year.
-3. Review the preliminary starter accounts.
-4. Save a receipt or expense as a draft and correct any errors.
+3. Review the accounts and open a statement to inspect its balances.
+4. Save a receipt, expense or general journal as a draft and correct any errors.
 5. Post it and inspect its balanced journal.
 6. Find the report effect and return to the source transaction.
 
@@ -29,6 +29,6 @@ The initial goals are simple-company setup within five minutes and a first usefu
 
 ## What comes next
 
-The product expands through [[the accounting MVP and eight-stage roadmap|Roadmap]], with a bounded [[first package|First-Package]] before broader operations. Industry research covers restaurants, clubs, pharmacies, traders, distributors, shops and workshops; sample scenarios are not installed industry modules.
+The product follows a [[core-first module roadmap|Module-Roadmap]]: complete opening/cutover, periods and bank reconciliation, then add module contracts, business API/MCP access and optional operational modules. The [[current package|First-Package]] is a development preview. Industry research covers restaurants, clubs, pharmacies, traders, distributors, shops and workshops; sample scenarios and disabled [[tax candidates|Tax-Research]] are not installed industry modules.
 
 [[Getting started|Getting-Started]] · [[Accounting and reports|Accounting-and-Reports]] · [[POS showcase|POS-Showcase]]

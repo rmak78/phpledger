@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview"><strong>Download 0.1.0-preview</strong></a> &nbsp; · &nbsp;
+  <a href="https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview"><strong>Download 0.1.2-preview</strong></a> &nbsp; · &nbsp;
   <a href="https://phpledger.com/demo/">Try the demo</a> &nbsp; · &nbsp;
   <a href="https://github.com/rmak78/phpledger/wiki">Read the Wiki</a> &nbsp; · &nbsp;
   <a href="https://github.com/rmak78/phpledger/wiki/Roadmap">Roadmap</a> &nbsp; · &nbsp;
@@ -28,11 +28,11 @@
 
 PHP Ledger is open-source, self-hosted double-entry accounting software with a simple cash point of sale for small businesses, built on PHP 8.5 and MySQL 8.4 and currently in development preview.
 
-It records receipts and expenses as balanced double-entry journals, keeps posted entries immutable with linked reversals, and shows a trial balance, profit and loss, balance sheet and an entered cash scenario. A small cash point of sale posts sales through the same service and prints a receipt. Modern source lives in `www/phpledger`; the 2015 application is preserved, unmaintained, under `legacy/` with its own terms.
+It records receipts and expenses as balanced double-entry journals, keeps posted entries immutable with linked reversals, and shows a trial balance, profit and loss, balance sheet and an entered cash scenario. A small cash point of sale posts sales through the same service and prints a receipt. Modern source lives in `www/phpledger`; the historical application is available only in Git history under its original terms.
 
 **Requirements:** PHP 8.5.x with the BCMath, PDO, PDO MySQL, mbstring and session extensions, MySQL 8.4 with InnoDB, HTTPS and terminal access. Serve only `www/phpledger/public`.
 
-**Not included in the 0.1.0-preview download:** receivables and payables, inventory and cost of sales, tax, historical imports, bank reconciliation, multi-book, foreign-currency posting, translations, offline use, card payments, document scanning.
+**Not included in the 0.1.2-preview download:** receivables and payables, inventory and cost of sales, tax, historical imports, bank reconciliation, multi-book, foreign-currency posting, translations, offline use, card payments, document scanning.
 
 **Current local development:** `website-redesign` adds opening trial-balance/CSV cutover with a reconciled unpaid-document register, reasoned period administration, and bank CSV import/matching/reconciliation. These changes are separate from the download above and have not been deployed by this work. Invoice collection/bill settlement, XLSX and detailed historical journals remain future work. See [local setup and workflow contracts](docs/DEVELOPMENT.md#opening-cutover-periods-and-bank-reconciliation) and [current validation](docs/VALIDATION.md#website-redesign-and-accounting-continuation).
 
@@ -40,10 +40,10 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 
 [![PHP Ledger owner overview: synthetic cash, income, expenses and profit with linked reports.](docs/repository/assets/owner-overview-preview.webp)](docs/repository/assets/owner-overview-preview.webp)
 
-*Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS are being refined for the first supported pilot package.*
+*Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS remain development previews.*
 
 > [!NOTE]
-> **The 0.1.0-preview package is available for evaluation.** [Download 0.1.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview), check the ZIP against its SHA-256 file and follow the `INSTALL.md` inside it. Evaluate it with synthetic data; a stable release is not yet available. Modern source lives in `www/phpledger`; historical code is preserved in `legacy/`. Regional accounting review, POS refinement and pilot usability gates remain open.
+> **Evaluate the accounting core.** [Download 0.1.2-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional accounting review and pilot usability gates remain open.
 
 ## Explore the working preview
 
@@ -51,9 +51,10 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 |---|---|
 | **Start a business** | Company setup, a preliminary account template and an isolated sample company. |
 | **Record the day** | Receipt and expense drafts, clear posting, balanced journals and linked reversals. |
-| **Understand the numbers** | Profit and loss, balance sheet, cash balance, account activity and trial balance, with source drill-down. |
+| **Work on the books** | Account creation, audited name/status changes and general-journal drafts with a separate posting review. Account administration is available in an installation; the public demo keeps it read-only. |
+| **Understand the numbers** | Profit and loss, balance sheet, cash balance, trial balance and account statements with opening, running and closing balances, linked to their sources. |
 | **Look ahead** | A cash scenario using the inflows and outflows you enter; assumptions remain visible. |
-| **Try the counter** | A small illustrative catalog, cash tender and change, a printable receipt and the linked journal. |
+| **Try the counter** | Click-to-add sample products, quick cart controls, separate review/cash confirmation, a printable receipt and linked journal. |
 
 <details>
 <summary><strong>See the transaction and its accounting entry</strong></summary>
@@ -67,9 +68,9 @@ A saved draft has no effect on the books. Posting creates the balanced entry; a 
 <details>
 <summary><strong>See the cash POS preview</strong></summary>
 
-[![Early PHP Ledger cash POS with illustrative products, basket, amount due, tender and change.](docs/repository/assets/cash-pos-preview.webp)](docs/repository/assets/cash-pos-preview.webp)
+[![PHP Ledger click-to-add POS with selected products, cart quantity controls and a separate review action.](docs/repository/assets/cash-pos-click-preview.png)](docs/repository/assets/cash-pos-click-preview.png)
 
-An early working cash-sale flow, with an illustrative unposted basket. A more compact register and clearer payment journey are planned. Stock deduction, COGS, tax, card processing and credit sales are not implemented by this showcase.
+The owner-approved cash-sale layout: click a product to add one, adjust quantities in the cart, then review the sale before confirming cash. This actual capture contains an unposted synthetic cart. Stock deduction, COGS, tax, card processing and credit sales are not implemented by this showcase.
 
 </details>
 
@@ -83,7 +84,7 @@ The modern foundation uses **PHP 8.5, MySQL 8.4/InnoDB and MeekroDB** in BixiSof
 
 Every financial write follows the same posting path: exact decimal amounts, company/book permissions, atomic transactions, duplicate protection, period controls and immutable posted history. Local checks cover these behaviors; they do not replace independent security, accounting or usability review. [Explore the architecture →](https://github.com/rmak78/phpledger/wiki/Architecture)
 
-Developers can work with the modern source using the [local development guide](docs/DEVELOPMENT.md). Serve only `www/phpledger/public`; the repository root and `legacy/` are not web document roots. Source availability is separate from a tested installable release.
+Developers can work with the modern source using the [local development guide](docs/DEVELOPMENT.md). Serve only `www/phpledger/public`; the repository root is not a web document root. Source availability is separate from a tested installable release.
 
 ### Currencies and regions
 
@@ -91,17 +92,21 @@ The current preview is English and uses one base currency per book. Choose **USD
 
 Pakistan is first for accounting-framework research, followed by the UK and UAE. Currency selection does not activate country accounting or tax rules. Reviewed translations, flexible date/number formats and fixed, fetched or manually overridden exchange rates are part of the future path. [Countries and currencies →](https://github.com/rmak78/phpledger/wiki/Countries-and-Currencies)
 
-## What comes next
+Early [tax research](docs/tax/README.md) covers eight countries and seven business types. Its 81 candidate regimes are **disabled and unreviewed**; they do not calculate taxes or establish eligibility. The [accounting rule register](docs/accounting/CORE_RULE_REGISTER.md) connects the core's controls with ICAP, ICMAP and ACCA guidance and records the remaining review gates.
+
+## Where we go from here
 
 | Next | Outcome |
 |---|---|
-| **First supported pilot package** | Refined reports and POS, qualified accounting review, observed usability and explicit supported scope. The foundation preview is available now. |
-| **Accounting MVP and pilots** | Receivables, payables, opening balances, historical imports, reconciliation and reviewed period-end reporting. |
-| **Regional accounting and ERP** | Explainable multi-book differences, reviewed country adapters, inventory/purchasing, production POS and distribution. |
+| **Complete the accounting core** | Statements, chart management and general journals are in this preview. Next: reviewed opening balances/imports, fiscal-period administration, bank reconciliation and supported reports. |
+| **Extension and integration foundation** | Optional-module contracts and lifecycle, then a versioned business API and MCP access using the same accounting services and permissions. These interfaces are planned. |
+| **Optional business modules** | AR → AP → purchasing/inventory → reviewed Pakistan tax → shop POS → restaurant POS → distribution and specialist modules. Required tax support precedes affected production use. |
+
+The core must work independently of add-ons. Shop and restaurant interfaces will share checkout and accounting services while providing their own operational workflows. Qualified accounting review, observed usability and an explicit supported scope remain release gates. [Module build order and completion gates →](docs/MODULE-ROADMAP.md)
 
 Restaurant, pharmacy, club, trader, distributor, shop and workshop scenarios inform the longer-term product. **Scan document** and AI extraction come later, with human review before saving or posting.
 
-[**Full roadmap**](https://github.com/rmak78/phpledger/wiki/Roadmap) · [**First-package scope**](https://github.com/rmak78/phpledger/wiki/First-Package) · [**Sprint 03 progress**](https://github.com/rmak78/phpledger/milestone/4)
+[**Full roadmap**](https://github.com/rmak78/phpledger/wiki/Roadmap) · [**Package scope**](https://github.com/rmak78/phpledger/wiki/First-Package) · [**Core release validation**](docs/repository/sprint-04/CORE-0.1.2-VALIDATION.md)
 
 ## How to get involved
 
@@ -116,7 +121,7 @@ We welcome thoughtful feedback from business owners, bookkeepers, accountants, d
 
 **Location:** Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan.
 
-**Supporting the initiative:** BixiTech · BixiSoft · BrownBag · Agency75. These are project supporters, not customers.
+**Companies that support our open-source initiative:** [BixiTech](https://www.bixitech.com/) · [BixiSoft](https://bixisoft.com/) · [BrownBag](https://brownbag.pk/) · [Agency75](https://agency75.com/).
 
 The new project-owned code and documentation use the [MIT License](LICENSE), with paid setup, training and support on customer-owned hosting. [Licence scope](LICENSE-SCOPE.md) preserves separate terms for historical code, dependencies, fonts, datasets and company marks; the legacy application's provenance is not resolved by this grant, and MeekroDB keeps its LGPLv3 terms. No stable-release, jurisdiction-compliance or support-response guarantee is implied by the preview.
 

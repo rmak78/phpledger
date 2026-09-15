@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "country": {
+    "code": "LK",
+    "name": "Sri Lanka",
+    "currency": "LKR"
+  },
+  "status": "research_only",
+  "enabled": false,
+  "research_date": "2026-09-15",
+  "review_required": true,
+  "sources": [
+    {
+      "id": "lk-vat-overview",
+      "title": "Value Added Tax: rates and registration",
+      "url": "https://www.ird.gov.lk/en/type%20of%20taxes/sitepages/value%20added%20tax%20(vat).aspx",
+      "publisher": "Inland Revenue Department, Sri Lanka",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "lk-vat-consolidated-2025",
+      "title": "VAT Act No.14 of 2002: non-statutory consolidation through 2025",
+      "url": "https://www.ird.gov.lk/en/publications/Value%20Added%20Tax_Acts/VAT_Act_No_14%5BE%5D_2002_(Consolidation_2025).pdf",
+      "publisher": "Inland Revenue Department, Sri Lanka",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "lk-sscl-overview",
+      "title": "Social Security Contribution Levy: scope and liable-turnover bases",
+      "url": "https://www.ird.gov.lk/en/type%20of%20taxes/sitepages/social%20security%20contribution%20levy%20(sscl).aspx?menuid=1207",
+      "publisher": "Inland Revenue Department, Sri Lanka",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "lk-income-overview",
+      "title": "Income Tax and amendment register",
+      "url": "https://www.ird.gov.lk/en/Type%20of%20Taxes/SitePages/Income%20Tax.aspx?menuid=1201",
+      "publisher": "Inland Revenue Department, Sri Lanka",
+      "checked_on": "2026-09-15"
+    }
+  ],
+  "regimes": [
+    {
+      "id": "lk-vat-standard",
+      "name": "Standard VAT candidate",
+      "authority": "Inland Revenue Department, Sri Lanka",
+      "tax_family": "vat",
+      "jurisdiction": "LK",
+      "rate_percent": "18",
+      "effective_from": "2024-01-01",
+      "effective_to": null,
+      "applicability": "Taxable domestic supplies and imports under the ordinary VAT regime.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "IRD lists LKR 15 million per quarter or LKR 60 million over 12 months; confirm actual/expected-turnover tests.",
+        "Commercial importers/exporters require registration regardless of those thresholds; voluntary registration is available.",
+        "Input recovery requires section 22 eligibility and valid evidence."
+      ],
+      "source_ids": [
+        "lk-vat-overview",
+        "lk-vat-consolidated-2025"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "lk-vat-zero",
+      "name": "Zero-rated exports candidate",
+      "authority": "Inland Revenue Department, Sri Lanka",
+      "tax_family": "vat",
+      "jurisdiction": "LK",
+      "rate_percent": "0",
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Qualifying exports under section 7.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Verify export, payment and documentary conditions for the transaction date.",
+        "Do not reuse the expired 2019-2022 tourism/restaurant concession."
+      ],
+      "source_ids": [
+        "lk-vat-overview",
+        "lk-vat-consolidated-2025"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "lk-vat-exempt",
+      "name": "VAT exemption classification",
+      "authority": "Inland Revenue Department, Sri Lanka",
+      "tax_family": "vat",
+      "jurisdiction": "LK",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Goods/services meeting the current First Schedule or other lawful exemption.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Exempt is not zero-rated; classify associated input tax separately.",
+        "Verify medicines by product and therapeutic/prophylactic use; cosmetics cannot inherit medicine treatment.",
+        "Check 2026 amendments before relying on the 2025 consolidation."
+      ],
+      "source_ids": [
+        "lk-vat-consolidated-2025",
+        "lk-vat-overview"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "lk-sscl-review",
+      "name": "Social Security Contribution Levy candidate",
+      "authority": "Inland Revenue Department, Sri Lanka",
+      "tax_family": "turnover_levy",
+      "jurisdiction": "LK",
+      "rate_percent": "2.5",
+      "effective_from": "2022-10-01",
+      "effective_to": null,
+      "applicability": "Levy on legally defined liable turnover; separate from VAT.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "IRD shows different bases for imports, manufacturing, services and wholesale/retail.",
+        "Manufacturer-appointed distributor classification may change the base; a business name is insufficient.",
+        "Registration, exemptions, calculation base and accounting presentation require review; not a universal 2.5% checkout addition."
+      ],
+      "source_ids": [
+        "lk-sscl-overview"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "lk-income-tax-review",
+      "name": "Business or company income-tax review",
+      "authority": "Inland Revenue Department, Sri Lanka",
+      "tax_family": "income_tax",
+      "jurisdiction": "LK",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Annual gains/profits and entity-specific tax; never a checkout tax.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Confirm legal form, residence, assessment year, deductions and latest amendments."
+      ],
+      "source_ids": [
+        "lk-income-overview"
+      ],
+      "review_status": "unreviewed"
+    }
+  ],
+  "industry_profiles": [
+    {
+      "industry_code": "restaurant",
+      "regime_ids": [
+        "lk-vat-standard",
+        "lk-vat-zero",
+        "lk-vat-exempt",
+        "lk-sscl-review",
+        "lk-income-tax-review"
+      ],
+      "classification_questions": [
+        "Which charges are meals, takeaway goods, catering, delivery, alcohol, tips or service charges?",
+        "How are discounts, deposits, vouchers and refunds treated at the relevant tax point?",
+        "Is anyone relying on a historical tourism zero-rate that ended in 2022?"
+      ]
+    },
+    {
+      "industry_code": "membership_club",
+      "regime_ids": [
+        "lk-vat-standard",
+        "lk-vat-zero",
+        "lk-vat-exempt",
+        "lk-sscl-review",
+        "lk-income-tax-review"
+      ],
+      "classification_questions": [
+        "Which receipts are subscriptions, joining fees, donations, facility hire, food or admissions?",
+        "What is the club's legal form and which activities are commercial supplies?",
+        "Which member and non-member receipts are taxable supplies, and are donations genuine?"
+      ]
+    },
+    {
+      "industry_code": "pharmacy",
+      "regime_ids": [
+        "lk-vat-standard",
+        "lk-vat-zero",
+        "lk-vat-exempt",
+        "lk-sscl-review",
+        "lk-income-tax-review"
+      ],
+      "classification_questions": [
+        "Which individual products are medicines, medical devices, supplements or cosmetics?",
+        "Does the business also provide clinical services, manufacture goods or import them?",
+        "Does each claimed medicine exemption meet the current therapeutic/prophylactic classification?"
+      ]
+    },
+    {
+      "industry_code": "trader",
+      "regime_ids": [
+        "lk-vat-standard",
+        "lk-vat-zero",
+        "lk-vat-exempt",
+        "lk-sscl-review",
+        "lk-income-tax-review"
+      ],
+      "classification_questions": [
+        "Does the business act as principal, agent, importer, exporter or manufacturer?",
+        "Which tariff/product codes and documentary evidence support each treatment?",
+        "Are commercial imports/exports creating mandatory registration independently of turnover?"
+      ]
+    },
+    {
+      "industry_code": "distributor",
+      "regime_ids": [
+        "lk-vat-standard",
+        "lk-vat-zero",
+        "lk-vat-exempt",
+        "lk-sscl-review",
+        "lk-income-tax-review"
+      ],
+      "classification_questions": [
+        "Are sales on own account, consignment or commission, and is there a manufacturer appointment?",
+        "How are rebates, returns, free stock and cross-border transactions documented?",
+        "Is the distributor appointed/registered in relation to a domestic manufacturer for SSCL purposes?"
+      ]
+    },
+    {
+      "industry_code": "retail_shop",
+      "regime_ids": [
+        "lk-vat-standard",
+        "lk-vat-zero",
+        "lk-vat-exempt",
+        "lk-sscl-review",
+        "lk-income-tax-review"
+      ],
+      "classification_questions": [
+        "Which SKU classifications apply to the actual product mix?",
+        "Are there bundled goods/services, gift vouchers, used goods or imports?",
+        "Which SSCL liable-turnover base and VAT product classification apply separately?"
+      ]
+    },
+    {
+      "industry_code": "workshop",
+      "regime_ids": [
+        "lk-vat-standard",
+        "lk-vat-zero",
+        "lk-vat-exempt",
+        "lk-sscl-review",
+        "lk-income-tax-review"
+      ],
+      "classification_questions": [
+        "Are parts, labor, consumables, subcontract work and warranties separately supplied or bundled?",
+        "Does the workshop repair, manufacture, import or export goods?",
+        "Which supplies are services versus goods for both VAT and SSCL?"
+      ]
+    }
+  ],
+  "open_questions": [
+    "Read the original VAT Amendment Act No.14 of 2026 and associated instruments: the IRD overview lists it, but its linked text failed to fetch in this pass.",
+    "The 2025 consolidated VAT text expressly says it is not a statutory consolidation; reconcile controlling amendments and legal commencement dates.",
+    "Review SSCL registration/exemptions and base allocation per activity, including import followed by resale; no universal checkout or input-credit rule is supplied.",
+    "Current export refund procedures, invoice requirements, medicine exemptions, club treatment and entity income-tax rules need qualified local review."
+  ]
+}

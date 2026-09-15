@@ -7,7 +7,7 @@ Read `README.md`, `docs/ARCHITECTURE.md`, and `docs/ROADMAP.md`, then the releva
 ## Working boundaries
 
 - Work locally unless the user explicitly authorizes a live action. Do not push, deploy, publish, send messages, or collect payments merely because a design or implementation was approved.
-- Preserve unrelated work and historical files. Never run `legacy/install/*.sql` dumps against the new database. Never serve the repository root.
+- Preserve unrelated work. The owner removed the legacy application from the current tree on 15 September 2026; refer to Git history for research and do not restore it into the runtime. Never run historical SQL dumps against the new database. Never serve the repository root.
 - The new application is `www/phpledger`; its only web document root is `www/phpledger/public`. Use the new shared bootstrap and existing helper interfaces. Do not load legacy root code into the new application.
 - Retain BixiSoft's modular PHP/MeekroDB architecture. Do not add an alternative framework, ORM, authentication stack, router, or second database connection layer without an explicit design decision.
 - Keep secrets and real customer data out of files, logs, fixtures, screenshots, commits, and responses. Use synthetic fixtures and local-only services for development.

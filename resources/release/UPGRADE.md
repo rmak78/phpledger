@@ -2,7 +2,7 @@
 
 Source revision: `{{SOURCE_COMMIT}}`.
 
-There is no established package-to-package upgrade range and no automatic upgrade from the historical PHP Ledger application. The new migration runner requires the complete supplied chain, preserving all earlier migration files and checksums. Source-side baseline-001 upgrade tests do not establish compatibility with an arbitrary old installation, customized schema or historical database. Source changes and local validation do not by themselves publish a new package or upgrade a deployed one.
+The current development source adds reviewed opening/cutover, period administration and bank reconciliation to the unmodified 0.1.2-preview core. Preserve the complete supplied migration chain and all existing checksums. The released 0.1.1-to-0.1.2 upgrade receipt remains historical evidence; this combined development source needs its own package acceptance before publication. No automatic upgrade from the historical application or customized schema is supported.
 
 ## Before changing an installation
 
@@ -46,7 +46,9 @@ php www/phpledger/install/migrate.php
 php www/phpledger/install/preflight.php
 ```
 
-Stop on any nonzero exit status. Preflight must distinguish a recognized incomplete chain from an unknown/interrupted/altered schema; only a recognized upgrade path may proceed. Switch the web root to the new `www/phpledger/public` after successful migration. Recheck sign-in, company selection, a synthetic draft/post/report/reversal journey and existing totals before reopening access. Do not recreate the initial user during an upgrade.
+Stop on any nonzero exit status. Preflight must distinguish a recognized pending migration from an unknown/interrupted/altered schema; only a recognized upgrade path may proceed. An unknown migration receipt or checksum mismatch stops the upgrade. Switch the web root to the new `www/phpledger/public` after successful migration. Recheck sign-in, company selection, existing totals and account statement balances. In an isolated sample company, check account creation/rename/status and a general-journal draft, review, post and dated reversal before reopening access. Do not recreate the initial user during an upgrade.
+
+Migration `006` preserves existing account IDs, posted journals and source records; it does not replace the chart, calculate opening balances or clear existing-business readiness restrictions. Compare your saved totals and confirm six applied receipts and thirteen triggers. The bundled tax research stays disabled and unreviewed; installing it does not enable tax calculations, country adapters or MCP access.
 
 ## Interrupted migration or rollback
 

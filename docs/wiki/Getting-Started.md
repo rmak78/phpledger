@@ -1,36 +1,43 @@
 # Start with the preview
 
-**The hosted preview is live.** Start at [the PHP Ledger website](https://phpledger.com/) or [open the demonstration](https://phpledger.com/demo/). The updated website and demo were published on 14 September 2026.
+Start at [the PHP Ledger website](https://phpledger.com/) or [open the demonstration](https://phpledger.com/demo/).
 
-**[Download the 0.1.0-preview foundation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview).** Choose `phpledger-0.1.0-preview.zip` and its SHA-256 file from the release assets; the automatic source archives do not include installed dependencies. Read `INSTALL.md` inside the ZIP. The package requires PHP 8.5.x, MySQL 8.4, HTTPS and terminal access. Evaluate it with synthetic data; it is not a stable or country-certified release. Modern source is in `www/phpledger`, with historical code in `legacy/`. Developers can use the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md).
+**[Download the 0.1.2-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.2-preview).** Choose `phpledger-0.1.2-preview.zip` and its SHA-256 file from the release assets; automatic source archives do not include installed dependencies. Follow the package's `INSTALL.md`, or `UPGRADE.md` when upgrading an existing installation. Use synthetic data for evaluation.
 
-The new project-owned code and documentation are [MIT licensed](https://github.com/rmak78/phpledger/blob/master/LICENSE). Read [licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) for the separate historical, dependency and asset terms.
+This release adds universal account statements, chart management and saved general-journal draft/review/post/reverse workflows. It retains receipts, expenses, owner reports and the sample cash POS. It is a development preview, with the remaining gates described in [[First package|First-Package]].
+
+Modern source is in `www/phpledger`; historical code remains only in Git history. Developers can use the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md). New project-owned code and documentation are [MIT licensed](https://github.com/rmak78/phpledger/blob/master/LICENSE); [licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) preserves separate historical, dependency and asset terms.
 
 ## Try the demonstration
 
-The demo gives each visitor a separate fictional business, uses synthetic records and resets hourly. Treat entries as temporary: an hourly refresh ends the old sample session. Destructive administrative operations are restricted on the server. Do not enter real customer records, credentials or business documents.
+Each visitor receives a separate fictional business. Synthetic records reset hourly, ending the old sample session. Capacity limits apply to temporary writes. Do not enter real customer records, credentials or business documents.
 
-Start by recording a small expense, following its journal into a report, and trying the [[sample shop sale|POS-Showcase]]. Opening balances, posted totals and report limitations should remain visible. The preview is for evaluation rather than live bookkeeping.
+1. Open an account and inspect its statement: opening balance, period activity and closing balance.
+2. Create a general-journal draft with synthetic amounts and save it.
+3. Reopen it, review the lines and balance debits against credits before posting.
+4. Follow its source and journal into the account statement and trial balance.
+5. Try a linked reversal with a reason, or explore the [[sample shop sale|POS-Showcase]].
+
+Accounts are read-only in the public demo; account creation and changes are reserved for authorized owners/accountants in a self-hosted installation. General-journal draft editing, posting and linked reversals are available within the visitor's books. Reset removes temporary work.
 
 ## Planning a self-hosted installation
 
-The new foundation has been exercised locally with:
-
-| Requirement | Current foundation direction |
+| Requirement | Preview environment |
 |---|---|
-| PHP | PHP 8.5, using a maintained stable patch |
+| PHP | PHP 8.5.x |
 | PHP extensions | BCMath, PDO, PDO MySQL and mbstring |
 | Database | MySQL 8.4 LTS with InnoDB |
-| Dependencies | Composer with a pinned lockfile |
-| Reproducible development | Docker Compose |
+| Dependencies | Composer with a pinned lockfile; production dependencies included in the package |
+| Development environment | Docker Compose |
 | Web root | Only the new application's `www/phpledger/public` directory |
+| Operations | HTTPS, terminal access, private configuration, backups and tested restoration |
 
-Hosting support will be documented against tested configurations. Never serve the repository root or `legacy/`, and never use historical `legacy/install/` SQL dumps as the new application's migration path. A customer installation also needs HTTPS, private configuration, reliable backups and a tested restoration procedure.
+Never serve the repository root, and never use historical installation SQL dumps as the new application's migration path. Follow the instructions for the exact package and retain a reconciled backup before an upgrade.
 
 ## Installation and business setup are separate
 
-An administrator prepares the server and creates the initial administrator account. An owner or accountant then creates a business, reviews its accounts and resolves any opening-position requirements. Importing past records is a separate guided accounting process, not a shortcut around opening reconciliation.
+An administrator prepares the server and initial administrator account. An owner or accountant then creates a business and reviews its accounts and opening-position requirements.
 
-The [[first package plan|First-Package]] includes a versioned archive, verified installation instructions, an upgrade path and recovery checks. The [v0.1.0-preview release](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) is available for download: `phpledger-0.1.0-preview.zip` with its SHA-256 file, for PHP 8.5.x (BCMath, PDO, PDO MySQL, mbstring and sessions), MySQL 8.4 with InnoDB, HTTPS and terminal access; `INSTALL.md` and `UPGRADE.md` are inside the ZIP. It is not a stable release, and the remaining first-package gates stay open; evaluate it with synthetic data.
+Guided opening imports, period completion and bank reconciliation remain future core work. Existing-business setup must not be treated as complete merely because a name and currency were entered. AR/AP, tax, inventory and production POS are planned optional modules; the eight-country tax research catalog does not activate tax rules.
 
-[[Current status|Home]] · [[Countries and currencies|Countries-and-Currencies]] · [[Support enquiries|Contributing-and-Support]]
+[[Package scope and remaining gates|First-Package]] · [[Module roadmap|Module-Roadmap]] · [[Support enquiries|Contributing-and-Support]]

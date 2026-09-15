@@ -1,3 +1,5 @@
+> **Current decision, 14 September 2026:** MIT is approved for new project-owned code and documentation; see [LICENSE](../LICENSE), [scope](../LICENSE-SCOPE.md) and [the recorded decision](repository/sprint-03/LICENSE-DECISION.md). The historical audit below is retained as evidence and its pending-choice language is superseded for the modern code. Historical paths are retained only in Git history; their provenance remains separate.
+
 # License and provenance review
 
 Status: **open; no new project license has been selected or applied.** The product direction is that software and modules remain open source. The inspected historical repository does not contain a project-level license grant sufficient to treat that selection as settled. Its README's invitation to use the application is historical wording, not the chosen license for the revival.
@@ -11,7 +13,7 @@ This is a source-file inventory and review checklist, not a legal opinion. Prese
 | Original project README | Names Sutlej Solutions and invites use; no identified standard project license | Confirm original ownership and intended license grant |
 | Git history | Contributions include Rana Mansoor Akbar Khan and `waseem238`; this is not a complete rights inventory | Review contributors and provenance of reused project code |
 | `includes/classes/meekrodb.2.2.class.php` and `meekrodb.2.3.class.php` | Sergey Tsalkov copyright; LGPL version 3 or later notice | Keep legacy notices; review the separately pinned current Composer dependency and its own license |
-| `includes/classes/html_table.class.php` | Sharon Paine copyright 2001–2014; MIT notice | Preserve applicable notice if reused |
+| `includes/classes/html_table.class.php` | Sharon Paine copyright 2001â€“2014; MIT notice | Preserve applicable notice if reused |
 | `includes/classes/JSON.php` | Services_JSON author/copyright headers; BSD license reference and embedded terms | Preserve embedded terms if reused; do not assume legacy JSON code is needed on modern PHP |
 | `assets/plugins/ckeditor/LICENSE.md` | CKSource copyright; GPL 2+, LGPL 2.1+, or MPL 1.1 terms stated in the bundled file | Review actual bundled version and any distribution choice if reused |
 | CKEditor WSC/SCAYT plugins | Separate `LICENSE.md` files exist | Read their terms separately before reuse |

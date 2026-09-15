@@ -35,6 +35,6 @@ Use the pull request template to record implementation, validation, documentatio
 
 ## Licensing and release status
 
-The project intends to keep its software and modules open source, but the project license and legacy provenance review are unresolved. Read [License review](docs/LICENSE_REVIEW.md) before proposing code or asset reuse. Preserve existing third-party notices; do not infer a license from public repository visibility or add an SPDX identifier, CLA, or DCO policy without an explicit decision.
+New project-owned code and documentation use the [MIT License](LICENSE), selected by the owner on 14 September 2026. Submit original contributions that you have the right to provide under MIT; clearly identify separately licensed dependencies and assets and preserve their notices. Read [licence scope](LICENSE-SCOPE.md) and the [provenance review](docs/repository/sprint-03/LICENSE-DECISION.md) before proposing reuse.
 
-Local technical review can continue while those decisions are pending. A public contribution/funding launch and distributable release require the documented rights and license review. No support response time, production hosting coverage, or regulatory approval is implied by this guide.
+Historical code retained in Git history retains its existing notices and unresolved provenance; the modern MIT grant does not relicense it. No separate CLA or DCO process has been adopted. Technical checks do not establish accounting certification, production readiness or a support-response guarantee. Funding and supported-pilot commitments require their own reviewed scope.

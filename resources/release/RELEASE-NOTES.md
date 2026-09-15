@@ -4,21 +4,32 @@ Source revision: `{{SOURCE_COMMIT}}`.
 
 This package is a development preview of the restarted PHP Ledger application. It preserves the lightweight BixiSoft PHP/MeekroDB structure while separating accounting functions, server permissions, templates and the public front controller. It is intended for evaluation and supported pilot preparation.
 
+## Changes in 0.1.2-preview
+
+- Account statements show opening balance, period debits/credits, running balance and closing balance for all five account classes.
+- The chart supports new accounts and audited name/status changes with stable account IDs. Existing account code, type and role remain fixed; changing classification needs a reviewed mapping/correction process that this preview does not supply.
+- General journals have saved drafts, review before posting, exact balanced posting and linked dated reversals. Source records and audit history retain the connection to posted entries; posted entries remain immutable.
+- Migration `006` adds two tables, account revision/creation metadata and four triggers. The full installation has six migrations and thirteen triggers. Existing migration files and production dependencies are retained.
+- Eight country tax research catalogs are packaged as disabled, unreviewed candidates, with an optional standalone structural validator.
+
+The 0.1.1-preview cash POS interactions remain included: click-to-add products, retained validation inputs and separate cart review/cash confirmation.
+
 ## Working scope
 
 - PHP 8.5.x, MySQL 8.4, pinned production dependencies and a versioned migration runner.
 - Command-line prerequisite checks, schema installation and initial-user creation; private database configuration and HTTPS sessions.
 - Company setup with an account template, new-business readiness rules and opt-in synthetic sample data.
 - Company/book-scoped receipts and expenses, drafts, atomic balanced posting, fixed-precision amounts, duplicate protection, linked sources, period locking and reversals.
+- Company/book-scoped chart management, general-journal drafts and audit history, plus statements for asset, liability, equity, income and expense accounts.
 - Owner overview, trial balance, balance sheet, profit and loss, and an editable cash scenario. A scenario reflects entered assumptions; it is not a prediction or a statement of cash flows.
-- An illustrative cash POS with catalog search, quantity entry, exact cash/change, an explicit checkout action, receipt and linked accounting entry.
+- An illustrative cash POS with click-to-add product tiles, cart plus/minus controls, server-priced review, separate cash confirmation, exact amount/change, receipt and linked accounting entry.
 - Opening balance entry/CSV preview and confirmation, an unpaid-document register reconciled to AR/AP control balances, and owner correction before business activity.
 - Period creation, reasoned close/reopen actions and immutable audit receipts; bank CSV import, explicit matching, outstanding entries and protected completed reconciliations.
 - English screens, supported base-currency choices, regional date/number formatting and local terminal timezone display with UTC event storage.
 
 ## Known limits
 
-The reports are country-neutral management views. Pakistan, UK and UAE accounting/reporting research does not amount to ICAP, ICMAP or ACCA approval, statutory presentation compliance, tax certification or filing support. Obtain appropriate accounting review before relying on this preview for a business period.
+The reports are country-neutral management views. Accounting/reporting research does not amount to ICAP, ICMAP or ACCA approval, statutory presentation compliance, tax certification or filing support. Obtain appropriate accounting review before relying on this preview for a business period.
 
 The POS is a cash-sale demonstration of the posting foundation. Stock quantities, cost of goods sold, tax calculations, credit accounts, payment-provider capture, hardware integrations and complete retail/restaurant workflows are not implemented. The sample catalog is illustrative.
 
@@ -26,13 +37,17 @@ Each book has one base currency. Currency choices and formatting do not implemen
 
 Detailed historical journal imports, XLSX, customer invoicing and invoice collection, bill settlement, aging, inventory/stock reports, country tax adapters, offline operation and receipt/document scanning remain future work. Opening AR/AP is a reconciled cutover snapshot, not an operational subledger. Credit notes, advance balances and unresolved prior bank outstanding items require a separately reviewed workflow. Existing-business setup remains blocked until opening balances are explicitly confirmed; new transactions must be dated after cutover.
 
-The selected UI is a working preview. Country-specific report layouts and the next POS design are still under review. Passing technical checks does not establish observed usability success, independent accounting acceptance or a completed security review.
+The `resources/tax/` catalogs cover Pakistan, the UK, UAE, Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore, with classification questions for restaurants, membership clubs, pharmacies, traders, distributors, retail shops and workshops. Every candidate remains `research_only`, `enabled: false` and `unreviewed`. Product/service, registration, jurisdiction, effective-period and recovery conditions require qualified review; an industry name never selects a universal rate. Null rates mean unresolved or non-flat treatment, not zero tax. No catalog is imported into company settings or used by POS, and no tax activation, filing, public business API, MCP or module lifecycle interface is included.
+
+Optional `php tools/validate-tax-catalog.php --self-test` validates local schema, disabled states and references without database access. It neither checks legal accuracy nor approves the sources, rates or dates. Approved tax profiles, effective-period snapshots and their separate accounting mappings remain future module work.
+
+The selected UI is a working preview. The click-to-add POS direction is owner-approved; representative cashier sessions and country-specific report review remain pending. Passing technical checks does not establish observed usability success, independent accounting acceptance or a completed security review.
 
 ## Installation and compatibility
 
 Use [INSTALL.md](INSTALL.md) for the current CLI installation. Only `www/phpledger/public` may be served. Dependencies and the complete versioned migration chain are included; the historical root application, development tools, marketing website and hosted-demo scheduler are excluded.
 
-The package has no automatic upgrade from the old PHP Ledger database and no established earlier customer-package compatibility range. See [UPGRADE.md](UPGRADE.md) for maintenance and restoration requirements. Keep deployment-specific validation records separate from these feature notes; this document does not claim that your host or data has passed acceptance.
+The package has no automatic upgrade from the historical PHP Ledger database. Upgrading from unmodified 0.1.1-preview preserves migrations `001`–`005` and applies additive migration `006`; use the documented backup, preflight and controlled replacement procedure. MySQL schema changes are not rolled back as one application transaction. See [UPGRADE.md](UPGRADE.md) for maintenance and restoration requirements. Keep release test results and deployment-specific validation records separate from these feature notes; this document does not claim that your host or data has passed acceptance.
 
 ## Feedback and next steps
 

@@ -1,0 +1,209 @@
+<?php
+declare(strict_types=1);
+
+function pl_core_audit(int $actorId, int $companyId, int $bookId, string $entity, int $id, string $action, string $reason, ?array $before, array $after): void
+{
+    DB::insert('pl_core_audit', [
+        'company_id' => $companyId, 'book_id' => $bookId, 'actor_id' => $actorId,
+        'entity_type' => $entity, 'entity_id' => $id, 'action' => $action, 'reason' => $reason,
+        'before_state' => $before === null ? null : json_encode($before, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE),
+        'after_state' => json_encode($after, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE),
+    ]);
+}
+
+function pl_core_history(int $actorId, int $companyId, int $bookId, string $entity, int $id): array
+{
+    pl_require_company_access($actorId, $companyId);
+    pl_ledger_book($companyId, $bookId);
+    return DB::query('SELECT a.id, a.action, a.reason, a.recorded_at, u.display_name FROM pl_core_audit a JOIN pl_users u ON u.id = a.actor_id WHERE a.company_id = %i AND a.book_id = %i AND a.entity_type = %s AND a.entity_id = %i ORDER BY a.id DESC LIMIT 50', $companyId, $bookId, $entity, $id);
+}
+
+function pl_get_account(int $actorId, int $companyId, int $bookId, int $id): array
+{
+    pl_require_company_access($actorId, $companyId);
+    pl_ledger_book($companyId, $bookId);
+    $row = DB::queryFirstRow('SELECT id, code, name, type, role, semantic_key, is_active, revision FROM pl_accounts WHERE id = %i AND company_id = %i AND book_id = %i FOR SHARE', $id, $companyId, $bookId);
+    if (!$row) { throw new DomainException('This account is not available in the selected company and book.'); }
+    $row['id'] = (int) $row['id'];
+    $row['revision'] = (int) $row['revision'];
+    $row['is_active'] = (bool) $row['is_active'];
+    return $row;
+}
+
+/** Stable code, root type and operational role cannot be silently reclassified by an edit. */
+function pl_save_account(int $actorId, int $companyId, int $bookId, array $input, ?int $id = null, ?int $revision = null): array
+{
+    pl_demo_require_setup_action();
+    $name = pl_ledger_text($input['name'] ?? null, 'Account name', 120);
+    $reason = pl_ledger_text($input['reason'] ?? null, 'Reason for this change', 500);
+    if (!is_bool($input['is_active'] ?? null)) { throw new DomainException('Choose whether this account is active.'); }
+    $active = $input['is_active'];
+    $code = pl_ledger_text($input['code'] ?? null, 'Account code', 20);
+    if (!preg_match('/^[A-Za-z0-9][A-Za-z0-9._-]{0,19}$/D', $code)) { throw new DomainException('Use letters, digits, dots, dashes or underscores for the account code.'); }
+    $type = $input['type'] ?? '';
+    if (!in_array($type, ['asset', 'liability', 'equity', 'income', 'expense'], true)) { throw new DomainException('Choose an account classification.'); }
+    $role = $input['role'] ?? null;
+    $roleTypes = ['cash_bank' => 'asset', 'receivables' => 'asset', 'payables' => 'liability', 'owner_equity' => 'equity', 'income' => 'income', 'expense' => 'expense'];
+    if ($role !== null && (!is_string($role) || !isset($roleTypes[$role]) || $roleTypes[$role] !== $type)) {
+        throw new DomainException('The account purpose must match its classification.');
+    }
+    $data = ['code' => $code, 'name' => $name, 'type' => $type, 'role' => $role, 'is_active' => $active];
+    $hash = hash('sha256', json_encode($data, JSON_THROW_ON_ERROR));
+    $key = $id === null ? pl_request_key(pl_ledger_text($input['creation_key'] ?? null, 'Request identity', 128)) : null;
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $id, $revision, $reason, $data, $key, $hash): array {
+        pl_require_company_access($actorId, $companyId, true);
+        pl_ledger_book($companyId, $bookId, true);
+        if ($id === null) {
+            $prior = DB::queryFirstRow('SELECT id, creation_hash FROM pl_accounts WHERE book_id = %i AND company_id = %i AND creation_key = %s FOR UPDATE', $bookId, $companyId, $key);
+            if ($prior) {
+                if (!hash_equals((string) $prior['creation_hash'], $hash)) { throw new DomainException('This request already created a different account. Open the existing account.'); }
+                return pl_get_account($actorId, $companyId, $bookId, (int) $prior['id']);
+            }
+            if (DB::queryFirstField('SELECT id FROM pl_accounts WHERE book_id = %i AND code = %s FOR SHARE', $bookId, $data['code'])) {
+                throw new DomainException('This account code is already in use. Choose a different code.');
+            }
+            DB::insert('pl_accounts', $data + ['company_id' => $companyId, 'book_id' => $bookId, 'creation_key' => $key, 'creation_hash' => $hash]);
+            $id = (int) DB::insertId();
+            $before = null;
+        } else {
+            $before = pl_get_account($actorId, $companyId, $bookId, $id);
+            if ($revision !== $before['revision']) { throw new DomainException('Someone changed this account. Your values are retained; reload the latest account before applying your changes.'); }
+            foreach (['code', 'type', 'role'] as $field) {
+                if ($data[$field] !== $before[$field]) { throw new DomainException('Account code, classification and purpose are fixed. Create a new account and use a reviewed journal to correct classification.'); }
+            }
+            DB::update('pl_accounts', ['name' => $data['name'], 'is_active' => $data['is_active'], 'revision' => $before['revision'] + 1], 'id = %i AND company_id = %i AND book_id = %i', $id, $companyId, $bookId);
+        }
+        $account = pl_get_account($actorId, $companyId, $bookId, $id);
+        pl_core_audit($actorId, $companyId, $bookId, 'account', $id, $before === null ? 'created' : 'updated', $reason, $before, $account);
+        return $account;
+    });
+}
+
+/** Drafts may be unbalanced, but each retained line must be valid and use exact amounts. */
+function pl_normalize_general_draft(array $input): array
+{
+    $data = [
+        'document_date' => pl_ledger_date(pl_ledger_text($input['date'] ?? null, 'Journal date', 10)),
+        'reference' => pl_ledger_text($input['reference'] ?? '', 'Reference', 120, false),
+        'description' => pl_ledger_text($input['description'] ?? null, 'Journal description', 500), 'lines' => [],
+    ];
+    $lines = $input['lines'] ?? null;
+    if (!is_array($lines) || !array_is_list($lines) || count($lines) > 100) { throw new DomainException('A general journal supports up to 100 lines.'); }
+    foreach ($lines as $line) {
+        if (!is_array($line) || !is_int($line['account_id'] ?? null) || $line['account_id'] < 1) { throw new DomainException('Choose an account for every journal line.'); }
+        if (!is_string($line['debit'] ?? null) || !is_string($line['credit'] ?? null)) { throw new DomainException('Enter debit and credit as exact decimal amounts.'); }
+        $debit = pl_amount($line['debit']);
+        $credit = pl_amount($line['credit']);
+        if ((bccomp($debit, '0', 4) > 0) === (bccomp($credit, '0', 4) > 0)) { throw new DomainException('Each line needs a positive debit or credit, but not both.'); }
+        $data['lines'][] = ['account_id' => $line['account_id'], 'debit' => $debit, 'credit' => $credit, 'description' => pl_ledger_text($line['description'] ?? '', 'Line description', 500, false)];
+    }
+    if ($data['lines'] === []) { throw new DomainException('Add at least one journal line before saving a draft.'); }
+    return $data;
+}
+
+function pl_general_totals(array $lines): array
+{
+    $debit = '0.0000'; $credit = '0.0000';
+    foreach ($lines as $line) { $debit = bcadd($debit, $line['debit'], 4); $credit = bcadd($credit, $line['credit'], 4); }
+    return ['debit' => $debit, 'credit' => $credit, 'difference' => bcsub($debit, $credit, 4), 'balanced' => count($lines) >= 2 && bccomp($debit, $credit, 4) === 0];
+}
+
+function pl_get_general_draft(int $actorId, int $companyId, int $bookId, int $id): array
+{
+    pl_require_company_access($actorId, $companyId);
+    pl_ledger_book($companyId, $bookId);
+    $row = DB::queryFirstRow('SELECT d.*, r.id AS reversal_journal_id FROM pl_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.id = %i AND d.company_id = %i AND d.book_id = %i FOR SHARE', $id, $companyId, $bookId);
+    if (!$row) { throw new DomainException('This general journal is not available in the selected company and book.'); }
+    foreach (['id', 'company_id', 'book_id', 'revision'] as $field) { $row[$field] = (int) $row[$field]; }
+    foreach (['journal_id', 'reversal_journal_id'] as $field) { $row[$field] = $row[$field] === null ? null : (int) $row[$field]; }
+    $row['lines'] = json_decode((string) $row['lines'], true, 512, JSON_THROW_ON_ERROR);
+    $row['totals'] = pl_general_totals($row['lines']);
+    $row['status'] = $row['journal_id'] === null ? 'draft' : ($row['reversal_journal_id'] === null ? 'posted' : 'reversed');
+    $row['number'] = 'GJ-' . str_pad((string) $row['id'], 6, '0', STR_PAD_LEFT);
+    unset($row['creation_key'], $row['creation_hash']);
+    return $row;
+}
+
+function pl_save_general_draft(int $actorId, int $companyId, int $bookId, array $input, ?int $id = null, ?int $revision = null): array
+{
+    $data = pl_normalize_general_draft($input);
+    $key = $id === null ? pl_request_key(pl_ledger_text($input['creation_key'] ?? null, 'Request identity', 128)) : null;
+    $hash = hash('sha256', json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $data, $key, $hash, $id, $revision): array {
+        pl_require_company_access($actorId, $companyId, true);
+        pl_ledger_book($companyId, $bookId, true);
+        pl_require_book_ready($companyId);
+        foreach ($data['lines'] as $line) {
+            $account = pl_get_account($actorId, $companyId, $bookId, $line['account_id']);
+            if (!$account['is_active']) { throw new DomainException('Choose active accounts. Inactive accounts retain history but cannot receive new entries.'); }
+        }
+        $storage = $data;
+        $storage['lines'] = json_encode($data['lines'], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
+        if ($id === null) {
+            $prior = DB::queryFirstRow('SELECT id, creation_hash FROM pl_general_drafts WHERE company_id = %i AND book_id = %i AND creation_key = %s FOR UPDATE', $companyId, $bookId, $key);
+            if ($prior) {
+                if (!hash_equals((string) $prior['creation_hash'], $hash)) { throw new DomainException('This request already created a different draft. Open the saved general journal.'); }
+                return pl_get_general_draft($actorId, $companyId, $bookId, (int) $prior['id']);
+            }
+            pl_demo_require_document_capacity($companyId, $bookId);
+            DB::insert('pl_general_drafts', $storage + ['company_id' => $companyId, 'book_id' => $bookId, 'creation_key' => $key, 'creation_hash' => $hash, 'created_by' => $actorId, 'updated_by' => $actorId]);
+            $id = (int) DB::insertId();
+            $before = null;
+        } else {
+            $before = pl_get_general_draft($actorId, $companyId, $bookId, $id);
+            if ($before['journal_id'] !== null) { throw new DomainException('Posted general journals cannot be edited. Use a linked reversal.'); }
+            if ($revision !== $before['revision']) { throw new DomainException('Someone changed this draft. Your values are retained; reload the saved version before editing again.'); }
+            DB::update('pl_general_drafts', $storage + ['revision' => $before['revision'] + 1, 'updated_by' => $actorId, 'updated_at' => gmdate('Y-m-d H:i:s')], 'id = %i', $id);
+        }
+        $draft = pl_get_general_draft($actorId, $companyId, $bookId, $id);
+        pl_core_audit($actorId, $companyId, $bookId, 'general_journal', $id, 'draft_saved', $data['description'], $before, $draft);
+        return $draft;
+    });
+}
+
+function pl_post_general_draft(int $actorId, int $companyId, int $bookId, int $id, int $revision): array
+{
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $id, $revision): array {
+        pl_require_company_access($actorId, $companyId, true);
+        $book = pl_ledger_book($companyId, $bookId, true);
+        pl_require_book_ready($companyId);
+        $draft = pl_get_general_draft($actorId, $companyId, $bookId, $id);
+        if ($revision !== $draft['revision']) { throw new DomainException('The saved draft changed. Review its latest version before posting.'); }
+        if ($draft['journal_id'] !== null) { return $draft; }
+        $journal = pl_post_journal($actorId, $companyId, $bookId, [
+            'date' => $draft['document_date'], 'currency' => $book['currency'], 'source_type' => 'general_journal',
+            'source_reference' => 'general:' . $id, 'description' => $draft['description'],
+            'idempotency_key' => 'general:' . $id . ':post', 'lines' => $draft['lines'],
+        ]);
+        DB::update('pl_general_drafts', ['journal_id' => $journal['id'], 'updated_by' => $actorId, 'updated_at' => gmdate('Y-m-d H:i:s')], 'id = %i', $id);
+        $posted = pl_get_general_draft($actorId, $companyId, $bookId, $id);
+        pl_core_audit($actorId, $companyId, $bookId, 'general_journal', $id, 'posted', $draft['description'], $draft, $posted);
+        return $posted;
+    });
+}
+
+function pl_reverse_general_draft(int $actorId, int $companyId, int $bookId, int $id, string $date, string $reason): array
+{
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $id, $date, $reason): array {
+        pl_require_company_access($actorId, $companyId, true);
+        pl_ledger_book($companyId, $bookId, true);
+        pl_require_book_ready($companyId);
+        $draft = pl_get_general_draft($actorId, $companyId, $bookId, $id);
+        if ($draft['journal_id'] === null) { throw new DomainException('Only a posted general journal can be reversed.'); }
+        pl_reverse_journal($actorId, $companyId, $bookId, $draft['journal_id'], $date, 'general:' . $id . ':reverse', $reason);
+        $reversed = pl_get_general_draft($actorId, $companyId, $bookId, $id);
+        if ($draft['reversal_journal_id'] === null) { pl_core_audit($actorId, $companyId, $bookId, 'general_journal', $id, 'reversed', $reason, $draft, $reversed); }
+        return $reversed;
+    });
+}
+
+function pl_list_general_drafts(int $actorId, int $companyId, int $bookId, int $page = 1): array
+{
+    pl_require_company_access($actorId, $companyId);
+    pl_ledger_book($companyId, $bookId);
+    $total = (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_general_drafts WHERE company_id = %i AND book_id = %i', $companyId, $bookId);
+    $pages = max(1, (int) ceil($total / 50));
+    $page = min($pages, max(1, $page));
+    $ids = DB::queryFirstColumn('SELECT id FROM pl_general_drafts WHERE company_id = %i AND book_id = %i ORDER BY document_date DESC, id DESC LIMIT 50 OFFSET %i', $companyId, $bookId, ($page - 1) * 50);
+    return ['rows' => array_map(static fn ($id) => pl_get_general_draft($actorId, $companyId, $bookId, (int) $id), $ids), 'total' => $total, 'page' => $page, 'pages' => $pages];
+}

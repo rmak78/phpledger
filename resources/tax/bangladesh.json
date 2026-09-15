@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "country": {
+    "code": "BD",
+    "name": "Bangladesh",
+    "currency": "BDT"
+  },
+  "status": "research_only",
+  "enabled": false,
+  "research_date": "2026-09-15",
+  "review_required": true,
+  "sources": [
+    {
+      "id": "bd-vat-faq",
+      "title": "VAT FAQ; contains historical 2015-2017 material",
+      "url": "https://nbr.gov.bd/faq/vat-faq/eng",
+      "publisher": "National Board of Revenue (NBR), Bangladesh",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "bd-vat-acts",
+      "title": "VAT Acts register; English 2012 text listed as draft",
+      "url": "https://nbr.gov.bd/regulations/acts/vat-acts/eng",
+      "publisher": "National Board of Revenue (NBR), Bangladesh",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "bd-vat-sros",
+      "title": "VAT SRO register including June 2026 amendments",
+      "url": "https://nbr.gov.bd/regulations/sros/vat-sros/eng",
+      "publisher": "National Board of Revenue (NBR), Bangladesh",
+      "checked_on": "2026-09-15"
+    },
+    {
+      "id": "bd-income-acts",
+      "title": "Income Tax Acts register",
+      "url": "https://nbr.gov.bd/regulations/acts/income-tax-acts/eng",
+      "publisher": "National Board of Revenue (NBR), Bangladesh",
+      "checked_on": "2026-09-15"
+    }
+  ],
+  "regimes": [
+    {
+      "id": "bd-vat-standard",
+      "name": "Standard VAT research candidate",
+      "authority": "National Board of Revenue (NBR), Bangladesh",
+      "tax_family": "vat",
+      "jurisdiction": "BD",
+      "rate_percent": "15",
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Taxable domestic supplies/imports if the standard regime applies.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Rate appears in NBR FAQ; the page also contains stale law and threshold text.",
+        "Verify current registration, product/service code, SRO and input-credit eligibility."
+      ],
+      "source_ids": [
+        "bd-vat-faq",
+        "bd-vat-sros"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "bd-vat-zero",
+      "name": "Zero-rated export research candidate",
+      "authority": "National Board of Revenue (NBR), Bangladesh",
+      "tax_family": "vat",
+      "jurisdiction": "BD",
+      "rate_percent": "0",
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Qualifying export transactions only.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Keep zero-rated taxable supplies distinct from exempt supplies.",
+        "Confirm export evidence, current statutory conditions and input-credit rules."
+      ],
+      "source_ids": [
+        "bd-vat-faq",
+        "bd-vat-acts"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "bd-vat-exempt",
+      "name": "VAT exemption classification",
+      "authority": "National Board of Revenue (NBR), Bangladesh",
+      "tax_family": "vat",
+      "jurisdiction": "BD",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Supply/import covered by an applicable exemption schedule or SRO.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "No blanket pharmacy, food or club exemption.",
+        "Document the current instrument and restrictions on related input recovery."
+      ],
+      "source_ids": [
+        "bd-vat-faq",
+        "bd-vat-sros"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "bd-turnover-tax-review",
+      "name": "Turnover-tax eligibility review",
+      "authority": "National Board of Revenue (NBR), Bangladesh",
+      "tax_family": "turnover_tax",
+      "jurisdiction": "BD",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Potential alternative small-business regime; eligibility and rate unresolved.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Do not use the FAQ's historical thresholds/rate.",
+        "Do not combine turnover-tax and ordinary VAT treatment without a reviewed rule."
+      ],
+      "source_ids": [
+        "bd-vat-faq",
+        "bd-vat-sros"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "bd-supplementary-duty-review",
+      "name": "Supplementary-duty classification",
+      "authority": "National Board of Revenue (NBR), Bangladesh",
+      "tax_family": "supplementary_duty",
+      "jurisdiction": "BD",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Specified goods/services only; not a universal surcharge.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Review product/service code, duty base, rate, stage and amendments."
+      ],
+      "source_ids": [
+        "bd-vat-faq",
+        "bd-vat-sros"
+      ],
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "bd-income-tax-review",
+      "name": "Business or company income-tax review",
+      "authority": "National Board of Revenue (NBR), Bangladesh",
+      "tax_family": "income_tax",
+      "jurisdiction": "BD",
+      "rate_percent": null,
+      "effective_from": null,
+      "effective_to": null,
+      "applicability": "Entity/year-specific income tax; never a checkout tax.",
+      "industry_codes": [
+        "restaurant",
+        "membership_club",
+        "pharmacy",
+        "trader",
+        "distributor",
+        "retail_shop",
+        "workshop"
+      ],
+      "conditions": [
+        "Confirm legal form, assessment year and enacted amendments.",
+        "Withholding and advance income tax require separate treatment and reconciliation."
+      ],
+      "source_ids": [
+        "bd-income-acts"
+      ],
+      "review_status": "unreviewed"
+    }
+  ],
+  "industry_profiles": [
+    {
+      "industry_code": "restaurant",
+      "classification_questions": [
+        "Which charges are meals, takeaway goods, catering, delivery, alcohol, tips or service charges?",
+        "How are discounts, deposits, vouchers and refunds treated at the relevant tax point?",
+        "Which current NBR restaurant/catering service code, rate and supplementary-duty conditions apply?"
+      ],
+      "regime_ids": [
+        "bd-vat-standard",
+        "bd-vat-zero",
+        "bd-vat-exempt",
+        "bd-turnover-tax-review",
+        "bd-supplementary-duty-review",
+        "bd-income-tax-review"
+      ]
+    },
+    {
+      "industry_code": "membership_club",
+      "classification_questions": [
+        "Which receipts are subscriptions, joining fees, donations, facility hire, food or admissions?",
+        "What is the club's legal form and which activities are commercial supplies?",
+        "Are subscriptions, entertainment and restaurant sales governed by different service codes?"
+      ],
+      "regime_ids": [
+        "bd-vat-standard",
+        "bd-vat-zero",
+        "bd-vat-exempt",
+        "bd-turnover-tax-review",
+        "bd-supplementary-duty-review",
+        "bd-income-tax-review"
+      ]
+    },
+    {
+      "industry_code": "pharmacy",
+      "classification_questions": [
+        "Which individual products are medicines, medical devices, supplements or cosmetics?",
+        "Does the business also provide clinical services, manufacture goods or import them?",
+        "Which medicine/product stage and exemption or reduced-rate SRO applies to each SKU?"
+      ],
+      "regime_ids": [
+        "bd-vat-standard",
+        "bd-vat-zero",
+        "bd-vat-exempt",
+        "bd-turnover-tax-review",
+        "bd-supplementary-duty-review",
+        "bd-income-tax-review"
+      ]
+    },
+    {
+      "industry_code": "trader",
+      "classification_questions": [
+        "Does the business act as principal, agent, importer, exporter or manufacturer?",
+        "Which tariff/product codes and documentary evidence support each treatment?",
+        "Which current trading-stage regime and input-credit restrictions apply?"
+      ],
+      "regime_ids": [
+        "bd-vat-standard",
+        "bd-vat-zero",
+        "bd-vat-exempt",
+        "bd-turnover-tax-review",
+        "bd-supplementary-duty-review",
+        "bd-income-tax-review"
+      ]
+    },
+    {
+      "industry_code": "distributor",
+      "classification_questions": [
+        "Are sales on own account, consignment or commission, and is there a manufacturer appointment?",
+        "How are rebates, returns, free stock and cross-border transactions documented?",
+        "Do distributor commissions and goods sales require different classifications?"
+      ],
+      "regime_ids": [
+        "bd-vat-standard",
+        "bd-vat-zero",
+        "bd-vat-exempt",
+        "bd-turnover-tax-review",
+        "bd-supplementary-duty-review",
+        "bd-income-tax-review"
+      ]
+    },
+    {
+      "industry_code": "retail_shop",
+      "classification_questions": [
+        "Which SKU classifications apply to the actual product mix?",
+        "Are there bundled goods/services, gift vouchers, used goods or imports?",
+        "Does the selected retail class require ordinary VAT, a special rate or turnover-tax enlistment?"
+      ],
+      "regime_ids": [
+        "bd-vat-standard",
+        "bd-vat-zero",
+        "bd-vat-exempt",
+        "bd-turnover-tax-review",
+        "bd-supplementary-duty-review",
+        "bd-income-tax-review"
+      ]
+    },
+    {
+      "industry_code": "workshop",
+      "classification_questions": [
+        "Are parts, labor, consumables, subcontract work and warranties separately supplied or bundled?",
+        "Does the workshop repair, manufacture, import or export goods?",
+        "Which service code covers repair labor and how are separately sold parts taxed?"
+      ],
+      "regime_ids": [
+        "bd-vat-standard",
+        "bd-vat-zero",
+        "bd-vat-exempt",
+        "bd-turnover-tax-review",
+        "bd-supplementary-duty-review",
+        "bd-income-tax-review"
+      ]
+    }
+  ],
+  "open_questions": [
+    "The NBR FAQ includes prospective 2017 commencement language, 2015-2016 reduced rates and historical thresholds. None establishes current small-business or industry liability.",
+    "Resolve the enacted Finance Act/Ordinance and all applicable 2025-2026 SRO amendments in authoritative Bangla; the listed English draft is not controlling law.",
+    "Confirm registration/enlistment thresholds, mandatory-registration categories, input-credit restrictions and VAT withholding before activation.",
+    "Industry rates, supplementary duty, medicine-stage exemptions and effective dates remain unverified; no default zero-tax fallback is permitted."
+  ]
+}

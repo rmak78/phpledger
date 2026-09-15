@@ -1,6 +1,6 @@
 # Local revival development
 
-These instructions apply to the modern source containing `compose.yaml`, `composer.json` and `www/phpledger`. The published repository preserves the historical application under `legacy/`; it is not this runtime. Use the public [Wiki](https://github.com/rmak78/phpledger/wiki) for visitor documentation and package availability. The [foundation evaluation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) includes production dependencies; this page covers development from source.
+These instructions apply to the modern source containing `compose.yaml`, `composer.json` and `www/phpledger`. The current source tree contains the modern application; historical code remains only in Git history. Use the public [Wiki](https://github.com/rmak78/phpledger/wiki) for visitor documentation and package availability. The [foundation evaluation package](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) includes production dependencies; this page covers development from source.
 
 ## Start the verified environment
 
@@ -11,7 +11,7 @@ docker compose up -d --build
 docker compose exec -T web php www/phpledger/install/migrate.php
 ```
 
-Open the local sign-in screen at `http://127.0.0.1:18200/login`. Serve only `www/phpledger/public`, never the repository root or `legacy/`. Historical `legacy/install/` dumps are not part of the revival; never run them against the modern database. Use synthetic data and a separate development database.
+Open the local sign-in screen at `http://127.0.0.1:18200/login`. Serve only `www/phpledger/public`, never the repository root. Historical installation dumps are not part of the revival; never run them against the modern database. Use synthetic data and a separate development database.
 
 Create the first administrator through the controlled command. Supply its password through standard input or a private `PL_ADMIN_PASSWORD` variable; never put the password in command arguments or committed files.
 

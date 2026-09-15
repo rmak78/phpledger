@@ -25,6 +25,8 @@ Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore are the five latest country
 
 Country and industry Chart of Accounts research is intended to improve the setup wizard. Those researched candidates are not yet installed, reviewed jurisdiction-specific templates. The current foundation does not claim compliance in any country.
 
+The separate [[tax research catalog|Tax-Research]] covers Pakistan, the UK, UAE, Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore across seven industries. Its source-linked candidates remain disabled and unreviewed. Tax research coverage, selectable currencies and implemented financial-reporting support are separate scopes.
+
 ## Language, time and number display
 
 The current interface is English. Event timestamps are stored in UTC and displayed in the terminal's local timezone. Posting, fiscal and cutover dates remain the same business calendar dates everywhere.
