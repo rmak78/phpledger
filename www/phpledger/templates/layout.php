@@ -58,7 +58,7 @@
     <span class="context-item"><?= pl_e($company['book_name']) ?></span><span class="context-item"><?= pl_e($company['currency']) ?></span>
     <span class="company-role"><?= pl_e(ucfirst($company['role'])) ?></span>
 </div>
-<?php if ($company['is_sample'] && pl_company_demo_pack((int) $user['id'], (int) $company['id'], (int) $company['book_id']) !== null): ?><a class="sample-guide-link" href="<?= pl_e(pl_url('/sample-guide')) ?>">Sample guide: Daily checks, monthly closing and yearly reports</a><?php endif; ?>
+<?php if ($company['is_sample'] && pl_company_demo_pack((int) $user['id'], (int) $company['id'], (int) $company['book_id']) !== null): ?><a class="sample-guide-link" href="<?= pl_e(pl_url('/sample-guide')) ?>">Sample guide: Explore your business</a><?php endif; ?>
 <?php if (!pl_demo_enabled()): ?>
 <nav class="accounting-nav" aria-label="Book administration"><a href="<?= pl_e(pl_url('/opening-balances')) ?>" <?= $view === 'opening-balances' ? 'aria-current="page"' : '' ?>>Opening balances</a><a href="<?= pl_e(pl_url('/periods')) ?>" <?= $view === 'periods' ? 'aria-current="page"' : '' ?>>Periods</a><a href="<?= pl_e(pl_url('/bank-reconciliation')) ?>" <?= $view === 'bank-reconciliation' ? 'aria-current="page"' : '' ?>>Bank reconciliation</a><a href="<?= pl_e(pl_url('/modules')) ?>" <?= $view === 'modules' ? 'aria-current="page"' : '' ?>>Modules</a></nav>
 <?php endif; ?>
