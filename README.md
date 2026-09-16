@@ -26,7 +26,7 @@
 
 ## What is PHP Ledger
 
-The working `docs/` folder is maintained locally and excluded from Git. Documentation links below point to the published 0.4.0-era record; new local research and design reviews are not release claims. Package builds still require the explicitly listed local documentation inputs in `tools/package-files.json`.
+The working `docs/` folder is maintained locally and excluded from Git. Documentation links below point to the published release record; new local research and design reviews are not release claims. Package builds still require the explicitly listed local documentation inputs in `tools/package-files.json`.
 
 PHP Ledger is open-source, self-hosted double-entry accounting software with a simple cash point of sale for small businesses, built on PHP 8.2+ and MySQL 8.4 and currently in development preview.
 
@@ -36,11 +36,11 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 
 The accounting starter adds customer invoices, supplier bills, partial payments, credits and ageing to the base accounting core. Purchasing and shared Inventory are bundled optional modules. A manually configurable core tax engine supports inclusive or exclusive entered prices. All financial activity uses the same posting and reporting services.
 
-**Release status:** **0.5.0-preview is a local release candidate**, extending the published 0.4.0 starter with eleven isolated synthetic sample companies. Hosted publication, package validation, observed usability, accessibility sign-off and production readiness remain separate gates.
+**Release status:** **0.5.0-preview is published**, extending the 0.4.0 starter with eleven isolated synthetic sample companies. The hosted demo and marketing site point to the same release. It remains a development preview; observed usability, accessibility certification and production readiness for every business workflow remain separate limits.
 
-## Current release: 0.5.0-preview release candidate
+## Current release: 0.5.0-preview
 
-The accounting starter and eleven-pack chooser are implemented in this local candidate. The published download and hosted demo remain on the prior 0.4.0 release until the 0.5.0 preview gates are completed. In local Docker, sign in, open **Your businesses**, and use **Try a sample company** to provision only the selected synthetic book.
+The accounting starter, eleven-pack chooser, responsive shell and catalogue-led setup are included in the published preview. In local Docker, sign in, open **Your businesses**, and use **Try a sample company** to provision only the selected synthetic book.
 
 ### Local test login
 
