@@ -76,6 +76,19 @@ class PackageTests(unittest.TestCase):
             self.build()
         self.assertFalse((self.root / "one").exists())
 
+    def test_untracked_release_input_requires_and_checks_sha256(self):
+        local_doc = self.source / "docs/local-release.md"
+        local_doc.parent.mkdir()
+        local_doc.write_text("Synthetic local release input", encoding="utf-8")
+        (self.source / ".git/info/exclude").write_text("/docs/local-release.md\n", encoding="utf-8")
+        self.policy["files"].append({"source": "docs/local-release.md", "destination": "docs/local-release.md"})
+        with self.assertRaisesRegex(builder.PackageError, "SHA-256 pin"):
+            self.build()
+        import hashlib
+        self.policy["files"][-1]["sha256"] = hashlib.sha256(local_doc.read_bytes()).hexdigest()
+        # The ignored/untracked file is accepted only after its exact bytes are pinned.
+        self.assertTrue(self.build().is_file())
+
     def test_upstream_test_dump_is_excluded_but_runtime_remains(self):
         library = self.vendor / "sergeytsalkov/meekrodb"
         (library / "simpletest").mkdir(parents=True)

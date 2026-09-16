@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/preflight.php';
+
 /** @return array{applied: list<string>, skipped: list<string>} */
 function pl_migrate(): array
 {
@@ -38,7 +40,7 @@ function pl_migrate(): array
             }
             $receipt = DB::queryFirstRow('SELECT * FROM pl_schema_migrations WHERE version = %s', $version);
             if ($receipt) {
-                if (!hash_equals((string) $receipt['checksum'], (string) $checksum)) {
+                if (!pl_install_checksum_matches($version, $checksum, (string) $receipt['checksum'])) {
                     throw new DomainException('Migration checksum mismatch: ' . $version . '. Restore the original migration before continuing.');
                 }
                 if ($receipt['status'] !== 'applied') {

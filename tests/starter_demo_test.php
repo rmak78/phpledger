@@ -11,9 +11,21 @@ function starter_demo_fixture(): array
     return ['actor' => $actor, 'input' => $input, 'key' => $key, 'company' => pl_setup_company($actor, $input, $key)];
 }
 
-test('starter playground is a separate explicit choice and retains the four pinned histories', function (): void {
-    assert_same(['service-agency', 'retail-shop', 'seasonal-business', 'distributor'], array_keys(pl_demo_pack_catalog()));
-    assert_same(5, count(pl_demo_sample_choices()));
+test('starter playground is a separate explicit choice and retains the eleven pinned histories', function (): void {
+    assert_same(['service-agency', 'retail-shop', 'seasonal-business', 'distributor', 'trader', 'restaurant', 'membership-club', 'pharmacy', 'jewelry-studio', 'light-manufacturing', 'service-workshop'], array_keys(pl_demo_pack_catalog()));
+    assert_same(12, count(pl_demo_sample_choices()));
+    foreach (pl_demo_pack_catalog() as $id => $entry) {
+        $pack = pl_demo_pack($id);
+        assert_same($entry['sha256'], $pack['digest']);
+        assert_true(is_array($pack['source_material']) && is_string($pack['source_material']['runtime_note']));
+        assert_true(is_array($pack['scenario']) && $pack['scenario']['id'] !== '');
+        if ($entry['status'] === 'preview_only') {
+            $research = $pack['source_material']['research_evidence'];
+            assert_true($research !== null, $id . ' has no operational research evidence');
+            assert_true(in_array($pack['source_material']['research_status'], ['available', 'generated_candidate'], true), $id . ' has an invalid research status');
+            assert_true(count($research['operational_event_contract']) > 0, $id . ' has no operational event contract');
+        }
+    }
     $starter = pl_demo_sample('accounting-starter');
     assert_same('starter_playground', $starter['kind']);
     assert_same(gmdate('Y') . '-01-01', $starter['start_date']);

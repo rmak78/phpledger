@@ -36,6 +36,23 @@ const today = new Date();
 const localDay = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 document.querySelectorAll('[data-local-today]').forEach(input => { input.value = localDay; });
 
+// Keep the common year-end choices compact while retaining a no-JavaScript fallback.
+// The server remains authoritative for the selected period and MM-DD validation.
+document.querySelectorAll('[data-fiscal-year-end-choice]').forEach(select => {
+    const targetSelector = select.dataset.fiscalCustomTarget;
+    const customInput = targetSelector ? document.querySelector(targetSelector) : null;
+    const customGroup = customInput?.closest('[data-fiscal-custom-group]');
+    if (!customInput || !customGroup) return;
+    const sync = () => {
+        const isCustom = select.value === 'custom';
+        customGroup.hidden = !isCustom;
+        customInput.disabled = !isCustom;
+        customInput.setAttribute('aria-hidden', isCustom ? 'false' : 'true');
+    };
+    select.addEventListener('change', sync);
+    sync();
+});
+
 document.querySelectorAll('[data-record-link]').forEach(link => {
     if (window.matchMedia('(min-width: 981px)').matches) {
         const url = new URL(link.href);

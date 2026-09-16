@@ -16,7 +16,7 @@ $roleInput = is_array($reviewInput['roles'] ?? null) ? $reviewInput['roles'] : [
     <?php elseif ($company['setup_status'] !== 'review_required'): ?>
         <div class="panel"><h2>Setup review is complete</h2><p>Your current setup does not need the prior-foundation account review.</p><a class="button primary" href="<?= pl_e(pl_url('/transactions')) ?>">Open transactions</a></div>
     <?php elseif (!pl_can_write($company)): ?>
-        <div class="panel"><h2>An owner or accountant needs to review this setup</h2><p>You can read these books, but your role cannot change account assignments or confirm the opening review.</p><a class="button secondary" href="<?= pl_e(pl_url('/reports/trial-balance')) ?>">View trial balance</a></div>
+        <div class="panel"><h2>An authorised owner needs to review this setup</h2><p>You can read these books, but your role cannot change account assignments or confirm the opening setup.</p><a class="button secondary" href="<?= pl_e(pl_url('/reports/trial-balance')) ?>">View trial balance</a></div>
     <?php else: ?>
         <div class="panel"><h2>Keep your existing records intact</h2><p>Choose which existing account serves each purpose below. This records account roles without replacing account names, balances, or posted journals. Each purpose needs a separate active account of the matching type.</p><p class="muted"><?= pl_e((string) $template['name']) ?>, version <?= pl_e((string) $template['version']) ?>. <?= pl_e((string) $template['notice']) ?></p><a href="<?= pl_e(pl_url('/reports/trial-balance')) ?>">Review the current trial balance</a></div>
         <form action="<?= pl_e(pl_url('/setup/review')) ?>" method="post" class="panel form-grid">

@@ -86,7 +86,7 @@ test('draft creation is idempotent and edits and posting reject stale revisions'
 });
 
 test('receipt expense and linked reversal reconcile immutable sources and report drilldown', function (): void {
-    $f = ledger_fixture();
+    $f = ledger_fixture(); $today = gmdate('Y-m-d');
     $receipt = pl_save_document($f['actor_id'], $f['company_id'], $f['book_id'], document_input($f, 'receipt', '1000'));
     pl_post_document($f['actor_id'], $f['company_id'], $f['book_id'], $receipt['id'], 1);
     $expense = pl_save_document($f['actor_id'], $f['company_id'], $f['book_id'], document_input($f));
@@ -102,10 +102,10 @@ test('receipt expense and linked reversal reconcile immutable sources and report
     assert_throws(fn () => DB::update('pl_documents', ['amount' => '200'], 'id = %i', $expense['id']));
     assert_throws(fn () => DB::delete('pl_documents', 'id = %i', $expense['id']));
     assert_throws(fn () => pl_save_document($f['actor_id'], $f['company_id'], $f['book_id'], document_input($f), $expense['id'], 1), DomainException::class, 'cannot be edited');
-    $reversed = pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $expense['id'], '2026-09-15', 'Duplicate purchase');
+    $reversed = pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $expense['id'], $today, 'Duplicate purchase');
     assert_same('reversed', $reversed['status']);
-    assert_same($reversed['reversal_journal_id'], pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $expense['id'], '2026-09-15', 'Duplicate purchase')['reversal_journal_id']);
-    assert_throws(fn () => pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $expense['id'], '2026-09-15', 'Changed reason'), DomainException::class, 'different journal');
+    assert_same($reversed['reversal_journal_id'], pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $expense['id'], $today, 'Duplicate purchase')['reversal_journal_id']);
+    assert_throws(fn () => pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $expense['id'], $today, 'Changed reason'), DomainException::class, 'different journal');
     assert_same('1000.0000', pl_account_activity($f['actor_id'], $f['company_id'], $f['book_id'], $f['accounts']['1000'])['balance']);
     assert_same('875.0000', pl_account_activity($f['actor_id'], $f['company_id'], $f['book_id'], $f['accounts']['1000'], '2026-09-14')['balance']);
     assert_same('0.0000', pl_account_activity($f['actor_id'], $f['company_id'], $f['book_id'], $f['accounts']['5000'])['balance']);

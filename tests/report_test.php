@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 test('owner statements reconcile posted receipt expense and dated reversal without including drafts', function (): void {
-    $f = ledger_fixture();
+    $f = ledger_fixture(); $today = gmdate('Y-m-d');
     $receipt = pl_save_document($f['actor_id'], $f['company_id'], $f['book_id'], document_input($f, 'receipt', '1000'));
     pl_post_document($f['actor_id'], $f['company_id'], $f['book_id'], $receipt['id'], 1);
     $expense = pl_save_document($f['actor_id'], $f['company_id'], $f['book_id'], document_input($f));
@@ -19,12 +19,12 @@ test('owner statements reconcile posted receipt expense and dated reversal witho
     assert_same('875.0000', $balance['total_equity']);
     assert_true($balance['balanced']);
     assert_same('875.0000', pl_cash_balance($f['actor_id'], $f['company_id'], $f['book_id'], '2026-09-14'));
-    pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $expense['id'], '2026-09-15', 'Synthetic report correction');
+    pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $expense['id'], $today, 'Synthetic report correction');
     assert_same('875.0000', pl_balance_sheet($f['actor_id'], $f['company_id'], $f['book_id'], '2026-09-14')['earned_profit']);
-    assert_same('1000.0000', pl_balance_sheet($f['actor_id'], $f['company_id'], $f['book_id'], '2026-09-15')['total_assets']);
-    assert_same('-125.0000', pl_profit_loss($f['actor_id'], $f['company_id'], $f['book_id'], '2026-09-15', '2026-09-15')['total_expenses']);
-    $activity = pl_account_activity($f['actor_id'], $f['company_id'], $f['book_id'], $f['accounts']['5000'], '2026-09-15', 1, '2026-09-15');
-    assert_same('2026-09-15', $activity['from']);
+    assert_same('1000.0000', pl_balance_sheet($f['actor_id'], $f['company_id'], $f['book_id'], $today)['total_assets']);
+    assert_same('-125.0000', pl_profit_loss($f['actor_id'], $f['company_id'], $f['book_id'], $today, $today)['total_expenses']);
+    $activity = pl_account_activity($f['actor_id'], $f['company_id'], $f['book_id'], $f['accounts']['5000'], $today, 1, $today);
+    assert_same($today, $activity['from']);
     assert_same(1, $activity['total']);
     assert_same('-125.0000', $activity['balance']);
     assert_same('0.0000', $activity['debit_movement']);

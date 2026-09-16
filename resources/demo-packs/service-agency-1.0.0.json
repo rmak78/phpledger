@@ -2,8 +2,662 @@
   "id": "service-agency",
   "version": "1.0.0",
   "name": "Cedar Studio",
-  "business": "Service agency",
+  "business": "Professional services / agency",
   "demo_only": true,
+  "status": "released_demo_only",
+  "synthetic": true,
+  "capability_note": "This sample demonstrates bookkeeping examples only; it is not an implementation of the named industry's operational, regulatory or compliance systems.",
+  "source_material": {
+    "description": "Reconciled successor of synthetic teaching material; no real customer data.",
+    "runtime_note": "The pinned ledger history below is reconciled through the current supported general-journal and cash-document services. On isolated sample creation, the operational contract is replayed through the existing AR/AP, Purchasing, Inventory and general-journal services; unsupported vertical operations remain explicitly staged. This generated candidate contract is synthetic source material; specialist operational controls remain outside the accounting replay.",
+    "industry_profile_id": "professional-services-agency",
+    "industry_profile": {
+      "id": "professional-services-agency",
+      "sample_ids": [
+        "service-agency"
+      ],
+      "name": "Professional services and agency",
+      "operating_model": "Project and recurring client work with subcontractor and delivery-tool costs.",
+      "distinct_controls": [
+        "project or client dimension",
+        "earned versus unearned retainer",
+        "direct contractor and delivery costs",
+        "client disbursement principal-versus-agent treatment"
+      ],
+      "unsupported_in_sample": [
+        "time capture",
+        "milestone engine",
+        "payroll",
+        "pass-through tax treatment"
+      ],
+      "seed_role_labels": {
+        "service_revenue": "Project and recurring service income",
+        "sales_revenue": "Project and recurring service income",
+        "contractor_expense": "Direct contractor delivery costs",
+        "operating_expense": "Agency operating expenses",
+        "expense": "Agency operating expenses"
+      },
+      "accounts": [
+        {
+          "semantic_key": "service.income.projects",
+          "code": "4100",
+          "name": "Project fees",
+          "type": "income",
+          "fixture_role": "service_revenue",
+          "normal_balance": "credit",
+          "source_ids": [
+            "matrix-67",
+            "agency-coa"
+          ]
+        },
+        {
+          "semantic_key": "service.income.recurring",
+          "code": "4110",
+          "name": "Recurring service fees",
+          "type": "income",
+          "fixture_role": "service_revenue",
+          "normal_balance": "credit",
+          "source_ids": [
+            "agency-coa"
+          ]
+        },
+        {
+          "semantic_key": "service.cost.contractors",
+          "code": "5110",
+          "name": "Direct contractor delivery costs",
+          "type": "expense",
+          "fixture_role": "contractor_expense",
+          "normal_balance": "debit",
+          "source_ids": [
+            "agency-coa"
+          ]
+        },
+        {
+          "semantic_key": "service.cost.delivery_tools",
+          "code": "5120",
+          "name": "Project delivery tools",
+          "type": "expense",
+          "fixture_role": "operating_expense",
+          "normal_balance": "debit",
+          "source_ids": [
+            "agency-coa"
+          ]
+        },
+        {
+          "semantic_key": "service.liability.retainer",
+          "code": "2310",
+          "name": "Unearned client retainers",
+          "type": "liability",
+          "fixture_role": "deferred_revenue",
+          "normal_balance": "credit",
+          "source_ids": [
+            "agency-coa"
+          ]
+        }
+      ],
+      "research_basis": [
+        {
+          "title": "Matrix: marketing / advertising / media agency",
+          "url": "https://hysabone.com/industries/media/",
+          "supports": "Campaign/project lifecycle, milestone billing, vendors and profitability context."
+        },
+        {
+          "title": "Agency chart of accounts example",
+          "url": "https://cocountant.com/blog/bookkeeping/what-should-my-agency-chart-of-accounts-look-like/",
+          "supports": "Retainers, deferred revenue, project revenue, contractor and delivery cost distinctions."
+        }
+      ]
+    },
+    "research_status": "generated_candidate",
+    "research_evidence": {
+      "source_pack_id": "service-agency-generated-candidate",
+      "source_pack_version": "0.1.0",
+      "source_status": "generated_candidate_not_runtime_seed",
+      "source_created_on": "2026-09-16",
+      "review_status": "generated_candidate",
+      "business_profile": {
+        "display_name": "Cedar Studio (candidate)",
+        "business_type": "professional-services-agency",
+        "description": "Small design and web-services studio with retainers, milestone billing and subcontractor costs."
+      },
+      "semantic_accounts": [
+        {
+          "fixture_role": "accounts_payable",
+          "mapping_status": "requires_template_snapshot"
+        },
+        {
+          "fixture_role": "accounts_receivable",
+          "mapping_status": "requires_template_snapshot"
+        },
+        {
+          "fixture_role": "bank_current",
+          "mapping_status": "requires_template_snapshot"
+        },
+        {
+          "fixture_role": "cash_on_hand",
+          "mapping_status": "requires_template_snapshot"
+        },
+        {
+          "fixture_role": "contractor_expense",
+          "mapping_status": "requires_template_snapshot"
+        },
+        {
+          "fixture_role": "operating_expense",
+          "mapping_status": "requires_template_snapshot"
+        },
+        {
+          "fixture_role": "sales_revenue",
+          "mapping_status": "requires_template_snapshot"
+        }
+      ],
+      "contacts": [
+        {
+          "id": "client-retainer",
+          "name": "Northstar Foods (Sample)",
+          "role": "customer",
+          "email": "cedar-studio.client@example.invalid",
+          "synthetic": true
+        },
+        {
+          "id": "contractor",
+          "name": "Blue Kite Copywriting (Sample)",
+          "role": "vendor",
+          "email": "cedar-studio.vendor@example.invalid",
+          "synthetic": true
+        }
+      ],
+      "products": [
+        {
+          "id": "monthly-retainer",
+          "name": "Monthly design retainer (Sample)",
+          "kind": "service",
+          "unit": "month",
+          "sale_price": "1800.0000"
+        },
+        {
+          "id": "campaign-sprint",
+          "name": "Campaign sprint (Sample)",
+          "kind": "service",
+          "unit": "project",
+          "sale_price": "950.0000"
+        }
+      ],
+      "locations": [],
+      "opening_evidence": {
+        "date": "2026-09-01",
+        "status": "candidate_not_posted",
+        "notes": "Opening quantities and balances require independent reconciliation before runtime import."
+      },
+      "operational_event_contract": [
+        {
+          "id": "agency-invoice-2026-09",
+          "date": "2026-09-05",
+          "kind": "invoice",
+          "source_reference": "candidate:cedar-studio:invoice:2026-09",
+          "amount": "1800.0000",
+          "expected_journal": [
+            {
+              "account_role": "accounts_receivable",
+              "debit": "1800.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "sales_revenue",
+              "debit": "0.0000",
+              "credit": "1800.0000"
+            }
+          ],
+          "document_id": "agency-invoice-2026-09"
+        },
+        {
+          "id": "agency-receipt-partial",
+          "date": "2026-09-15",
+          "kind": "receipt",
+          "source_reference": "candidate:cedar-studio:receipt:partial",
+          "amount": "1000.0000",
+          "expected_journal": [
+            {
+              "account_role": "bank_current",
+              "debit": "1000.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "accounts_receivable",
+              "debit": "0.0000",
+              "credit": "1000.0000"
+            }
+          ],
+          "allocations": [
+            {
+              "document_id": "agency-invoice-2026-09",
+              "amount": "1000.0000"
+            }
+          ]
+        },
+        {
+          "id": "agency-credit",
+          "date": "2026-09-20",
+          "kind": "customer_credit",
+          "source_reference": "candidate:cedar-studio:credit:2026-09",
+          "amount": "200.0000",
+          "expected_journal": [
+            {
+              "account_role": "sales_revenue",
+              "debit": "200.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "accounts_receivable",
+              "debit": "0.0000",
+              "credit": "200.0000"
+            }
+          ],
+          "original_event_id": "agency-invoice-2026-09",
+          "related_document_id": "agency-invoice-2026-09"
+        },
+        {
+          "id": "agency-receipt-final",
+          "date": "2026-09-25",
+          "kind": "receipt",
+          "source_reference": "candidate:cedar-studio:receipt:final",
+          "amount": "600.0000",
+          "expected_journal": [
+            {
+              "account_role": "bank_current",
+              "debit": "600.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "accounts_receivable",
+              "debit": "0.0000",
+              "credit": "600.0000"
+            }
+          ],
+          "allocations": [
+            {
+              "document_id": "agency-invoice-2026-09",
+              "amount": "600.0000"
+            }
+          ]
+        },
+        {
+          "id": "agency-contractor-bill",
+          "date": "2026-09-28",
+          "kind": "bill",
+          "source_reference": "candidate:cedar-studio:bill:contractor",
+          "amount": "750.0000",
+          "expected_journal": [
+            {
+              "account_role": "contractor_expense",
+              "debit": "750.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "accounts_payable",
+              "debit": "0.0000",
+              "credit": "750.0000"
+            }
+          ],
+          "document_id": "agency-contractor-bill"
+        },
+        {
+          "id": "agency-supplier-payment",
+          "date": "2026-09-30",
+          "kind": "supplier_payment",
+          "source_reference": "candidate:cedar-studio:payment:contractor",
+          "amount": "450.0000",
+          "expected_journal": [
+            {
+              "account_role": "accounts_payable",
+              "debit": "450.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "bank_current",
+              "debit": "0.0000",
+              "credit": "450.0000"
+            }
+          ],
+          "allocations": [
+            {
+              "document_id": "agency-contractor-bill",
+              "amount": "450.0000"
+            }
+          ]
+        },
+        {
+          "id": "agency-cash-sprint",
+          "date": "2026-08-08",
+          "kind": "cash_sale",
+          "source_reference": "candidate:cedar-studio:cash-sale:sprint",
+          "amount": "450.0000",
+          "expected_journal": [
+            {
+              "account_role": "cash_on_hand",
+              "debit": "450.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "sales_revenue",
+              "debit": "0.0000",
+              "credit": "450.0000"
+            }
+          ]
+        },
+        {
+          "id": "agency-office-cost",
+          "date": "2026-09-10",
+          "kind": "expense",
+          "source_reference": "candidate:cedar-studio:expense:office",
+          "amount": "180.0000",
+          "expected_journal": [
+            {
+              "account_role": "operating_expense",
+              "debit": "180.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "bank_current",
+              "debit": "0.0000",
+              "credit": "180.0000"
+            }
+          ]
+        },
+        {
+          "id": "agency-office-correction",
+          "date": "2026-09-29",
+          "kind": "reversal",
+          "source_reference": "candidate:cedar-studio:reversal:office",
+          "amount": "180.0000",
+          "reverses_event_id": "agency-office-cost",
+          "expected_journal": [
+            {
+              "account_role": "operating_expense",
+              "debit": "0.0000",
+              "credit": "180.0000"
+            },
+            {
+              "account_role": "bank_current",
+              "debit": "180.0000",
+              "credit": "0.0000"
+            }
+          ]
+        },
+        {
+          "id": "agency-office-corrected",
+          "date": "2026-09-29",
+          "kind": "expense",
+          "source_reference": "candidate:cedar-studio:expense:office-corrected",
+          "amount": "165.0000",
+          "linked_event_id": "agency-office-correction",
+          "expected_journal": [
+            {
+              "account_role": "operating_expense",
+              "debit": "165.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "bank_current",
+              "debit": "0.0000",
+              "credit": "165.0000"
+            }
+          ]
+        },
+        {
+          "id": "agency-supplier-payment-final",
+          "date": "2026-09-30",
+          "kind": "supplier_payment",
+          "source_reference": "candidate:cedar-studio:payment:contractor:final",
+          "amount": "300.0000",
+          "expected_journal": [
+            {
+              "account_role": "accounts_payable",
+              "debit": "300.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "bank_current",
+              "debit": "0.0000",
+              "credit": "300.0000"
+            }
+          ],
+          "allocations": [
+            {
+              "document_id": "agency-contractor-bill",
+              "amount": "300.0000"
+            }
+          ]
+        },
+        {
+          "id": "service-agency-cash-transfer",
+          "date": "2026-09-29",
+          "kind": "cash_transfer",
+          "source_reference": "candidate:service-agency:bank:cash-transfer",
+          "amount": "250.0000",
+          "expected_journal": [
+            {
+              "account_role": "bank_current",
+              "debit": "250.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "cash_on_hand",
+              "debit": "0.0000",
+              "credit": "250.0000"
+            }
+          ]
+        }
+      ],
+      "expected_reports": {
+        "status": "candidate_balanced_event_contract_not_runtime_replayed",
+        "as_of_date": "2026-09-30",
+        "monthly": {
+          "2026-08": {
+            "income": "450.0000",
+            "expenses": "0.0000",
+            "cash_change": "450.0000",
+            "receivable_balance": "0.0000",
+            "payable_balance": "0.0000",
+            "inventory": {},
+            "profit": "450.0000"
+          },
+          "2026-09": {
+            "income": "1600.0000",
+            "expenses": "915.0000",
+            "cash_change": "685.0000",
+            "receivable_balance": "0.0000",
+            "payable_balance": "0.0000",
+            "inventory": {},
+            "profit": "685.0000"
+          }
+        },
+        "annual": {
+          "2026": {
+            "income": "2050.0000",
+            "expenses": "915.0000",
+            "cash_change": "1135.0000",
+            "profit": "1135.0000",
+            "receivable_balance": "0.0000",
+            "payable_balance": "0.0000",
+            "inventory": {}
+          }
+        },
+        "ar_ap": {
+          "receivable_balance": "0.0000",
+          "payable_balance": "0.0000",
+          "documents": [
+            {
+              "event_id": "agency-invoice-2026-09",
+              "date": "2026-09-05",
+              "kind": "invoice",
+              "source_reference": "candidate:cedar-studio:invoice:2026-09",
+              "amount": "1800.0000",
+              "receivable_balance_after": "1800.0000",
+              "payable_balance_after": "0.0000"
+            },
+            {
+              "event_id": "agency-credit",
+              "date": "2026-09-20",
+              "kind": "customer_credit",
+              "source_reference": "candidate:cedar-studio:credit:2026-09",
+              "amount": "200.0000",
+              "receivable_balance_after": "600.0000",
+              "payable_balance_after": "0.0000"
+            },
+            {
+              "event_id": "agency-contractor-bill",
+              "date": "2026-09-28",
+              "kind": "bill",
+              "source_reference": "candidate:cedar-studio:bill:contractor",
+              "amount": "750.0000",
+              "receivable_balance_after": "0.0000",
+              "payable_balance_after": "750.0000"
+            }
+          ]
+        },
+        "ageing": {
+          "receivables": {
+            "current": "0.0000",
+            "1_30": "0.0000",
+            "31_60": "0.0000",
+            "61_90": "0.0000",
+            "91_plus": "0.0000",
+            "total": "0.0000"
+          },
+          "payables": {
+            "current": "0.0000",
+            "1_30": "0.0000",
+            "31_60": "0.0000",
+            "61_90": "0.0000",
+            "91_plus": "0.0000",
+            "total": "0.0000"
+          }
+        },
+        "inventory": {}
+      },
+      "industry_scenarios": [
+        {
+          "id": "retainer-billing",
+          "status": "future_module_scenario_not_implemented",
+          "description": "Retainers, time capture, milestone billing and subcontractor approval need a reviewed service workflow."
+        }
+      ],
+      "industry_profile_id": "professional-services-agency",
+      "industry_profile": {
+        "id": "professional-services-agency",
+        "sample_ids": [
+          "service-agency"
+        ],
+        "name": "Professional services and agency",
+        "operating_model": "Project and recurring client work with subcontractor and delivery-tool costs.",
+        "distinct_controls": [
+          "project or client dimension",
+          "earned versus unearned retainer",
+          "direct contractor and delivery costs",
+          "client disbursement principal-versus-agent treatment"
+        ],
+        "unsupported_in_sample": [
+          "time capture",
+          "milestone engine",
+          "payroll",
+          "pass-through tax treatment"
+        ],
+        "seed_role_labels": {
+          "service_revenue": "Project and recurring service income",
+          "sales_revenue": "Project and recurring service income",
+          "contractor_expense": "Direct contractor delivery costs",
+          "operating_expense": "Agency operating expenses",
+          "expense": "Agency operating expenses"
+        },
+        "accounts": [
+          {
+            "semantic_key": "service.income.projects",
+            "code": "4100",
+            "name": "Project fees",
+            "type": "income",
+            "fixture_role": "service_revenue",
+            "normal_balance": "credit",
+            "source_ids": [
+              "matrix-67",
+              "agency-coa"
+            ]
+          },
+          {
+            "semantic_key": "service.income.recurring",
+            "code": "4110",
+            "name": "Recurring service fees",
+            "type": "income",
+            "fixture_role": "service_revenue",
+            "normal_balance": "credit",
+            "source_ids": [
+              "agency-coa"
+            ]
+          },
+          {
+            "semantic_key": "service.cost.contractors",
+            "code": "5110",
+            "name": "Direct contractor delivery costs",
+            "type": "expense",
+            "fixture_role": "contractor_expense",
+            "normal_balance": "debit",
+            "source_ids": [
+              "agency-coa"
+            ]
+          },
+          {
+            "semantic_key": "service.cost.delivery_tools",
+            "code": "5120",
+            "name": "Project delivery tools",
+            "type": "expense",
+            "fixture_role": "operating_expense",
+            "normal_balance": "debit",
+            "source_ids": [
+              "agency-coa"
+            ]
+          },
+          {
+            "semantic_key": "service.liability.retainer",
+            "code": "2310",
+            "name": "Unearned client retainers",
+            "type": "liability",
+            "fixture_role": "deferred_revenue",
+            "normal_balance": "credit",
+            "source_ids": [
+              "agency-coa"
+            ]
+          }
+        ],
+        "research_basis": [
+          {
+            "title": "Matrix: marketing / advertising / media agency",
+            "url": "https://hysabone.com/industries/media/",
+            "supports": "Campaign/project lifecycle, milestone billing, vendors and profitability context."
+          },
+          {
+            "title": "Agency chart of accounts example",
+            "url": "https://cocountant.com/blog/bookkeeping/what-should-my-agency-chart-of-accounts-look-like/",
+            "supports": "Retainers, deferred revenue, project revenue, contractor and delivery cost distinctions."
+          }
+        ]
+      }
+    }
+  },
+  "scenario": {
+    "id": "agency-month-end",
+    "title": "Review project income and operating costs",
+    "goal": "Follow a professional-services month from client receipts and cash sales to staff, rent, insurance and a corrected expense.",
+    "steps": [
+      "Trace a monthly client receipt and separate cash activity in the bank and till accounts.",
+      "Review recurring staff, rent, utilities and insurance entries in the month-end journal.",
+      "Follow the year-end customer collection without recording income twice.",
+      "Review the mistaken cost, linked reversal and corrected replacement."
+    ],
+    "checks": [
+      "Staff entries are illustrative support schedules, not payroll, withholding or employment compliance.",
+      "Client work is represented by general-ledger examples, not project management or time billing.",
+      "The open 2026 drafts are separate practice records and do not alter closed history."
+    ]
+  },
   "notice": "Original synthetic general-ledger examples. Manual staff, loan, outstanding-item and stock schedules do not implement payroll, AR/AP, inventory or tax modules. Period closure blocks posting; it is not statutory financial-statement approval or an earnings-transfer journal.",
   "start_date": "2024-01-01",
   "history_end": "2025-12-31",
@@ -213,7 +867,7 @@
       "kind": "receipt",
       "date": "2024-01-15",
       "reference": "service-agency/receipts-2024-01",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -328,7 +982,7 @@
       "kind": "receipt",
       "date": "2024-02-15",
       "reference": "service-agency/receipts-2024-02",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -455,7 +1109,7 @@
       "kind": "receipt",
       "date": "2024-03-15",
       "reference": "service-agency/receipts-2024-03",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -560,7 +1214,7 @@
       "kind": "receipt",
       "date": "2024-04-15",
       "reference": "service-agency/receipts-2024-04",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -665,7 +1319,7 @@
       "kind": "receipt",
       "date": "2024-05-15",
       "reference": "service-agency/receipts-2024-05",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -770,7 +1424,7 @@
       "kind": "receipt",
       "date": "2024-06-15",
       "reference": "service-agency/receipts-2024-06",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -875,7 +1529,7 @@
       "kind": "receipt",
       "date": "2024-07-15",
       "reference": "service-agency/receipts-2024-07",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -980,7 +1634,7 @@
       "kind": "receipt",
       "date": "2024-08-15",
       "reference": "service-agency/receipts-2024-08",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1085,7 +1739,7 @@
       "kind": "receipt",
       "date": "2024-09-15",
       "reference": "service-agency/receipts-2024-09",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1190,7 +1844,7 @@
       "kind": "receipt",
       "date": "2024-10-15",
       "reference": "service-agency/receipts-2024-10",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1295,7 +1949,7 @@
       "kind": "receipt",
       "date": "2024-11-15",
       "reference": "service-agency/receipts-2024-11",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1400,7 +2054,7 @@
       "kind": "receipt",
       "date": "2024-12-15",
       "reference": "service-agency/receipts-2024-12",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1643,7 +2297,7 @@
       "kind": "receipt",
       "date": "2025-01-15",
       "reference": "service-agency/receipts-2025-01",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1770,7 +2424,7 @@
       "kind": "receipt",
       "date": "2025-02-15",
       "reference": "service-agency/receipts-2025-02",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1875,7 +2529,7 @@
       "kind": "receipt",
       "date": "2025-03-15",
       "reference": "service-agency/receipts-2025-03",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1980,7 +2634,7 @@
       "kind": "receipt",
       "date": "2025-04-15",
       "reference": "service-agency/receipts-2025-04",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2085,7 +2739,7 @@
       "kind": "receipt",
       "date": "2025-05-15",
       "reference": "service-agency/receipts-2025-05",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2190,7 +2844,7 @@
       "kind": "receipt",
       "date": "2025-06-15",
       "reference": "service-agency/receipts-2025-06",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2295,7 +2949,7 @@
       "kind": "receipt",
       "date": "2025-07-15",
       "reference": "service-agency/receipts-2025-07",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2400,7 +3054,7 @@
       "kind": "receipt",
       "date": "2025-08-15",
       "reference": "service-agency/receipts-2025-08",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2549,7 +3203,7 @@
       "kind": "receipt",
       "date": "2025-09-15",
       "reference": "service-agency/receipts-2025-09",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2654,7 +3308,7 @@
       "kind": "receipt",
       "date": "2025-10-15",
       "reference": "service-agency/receipts-2025-10",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2759,7 +3413,7 @@
       "kind": "receipt",
       "date": "2025-11-15",
       "reference": "service-agency/receipts-2025-11",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2864,7 +3518,7 @@
       "kind": "receipt",
       "date": "2025-12-15",
       "reference": "service-agency/receipts-2025-12",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -3085,7 +3739,7 @@
       "kind": "receipt",
       "date": "2026-01-15",
       "reference": "service-agency/receipts-2026-01",
-      "description": "Service agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Professional services / agency: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "2700.0000",
       "money_code": "1000",
       "category_code": "4000",

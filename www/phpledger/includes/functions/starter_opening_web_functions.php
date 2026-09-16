@@ -26,7 +26,7 @@ function pl_web_starter_opening(int $actorId,int $companyId,int $bookId,array $u
                 $itemId=pl_web_id($_POST,'item_id');
                 if (!DB::queryFirstField('SELECT id FROM pl_open_item_entries WHERE item_id=%i AND company_id=%i AND book_id=%i AND opening_document_id IS NOT NULL',$itemId,$companyId,$bookId)) { throw new DomainException('Choose a converted opening debt in this book.'); }
                 pl_settle_open_item($actorId,$companyId,$bookId,['item_id'=>$itemId,'date'=>pl_web_text($_POST,'date'),'amount_fc'=>pl_web_text($_POST,'amount_fc'),
-                    'bank_account_id'=>pl_web_id($_POST,'bank_account_id'),'gain_account_id'=>pl_web_id($_POST,'gain_account_id'),'loss_account_id'=>pl_web_id($_POST,'loss_account_id'),
+                    'bank_account_id'=>pl_web_id($_POST,'bank_account_id'),'gain_account_id'=>pl_web_id($_POST,'gain_account_id')?:null,'loss_account_id'=>pl_web_id($_POST,'loss_account_id')?:null,
                     'actual_rate'=>pl_web_text($_POST,'actual_rate')?:null,'description'=>pl_web_text($_POST,'description'),'idempotency_key'=>pl_web_text($_POST,'request_key')]);
                 pl_notice('Opening debt payment recorded.');
             } else { throw new DomainException('Choose an opening debt action.'); }

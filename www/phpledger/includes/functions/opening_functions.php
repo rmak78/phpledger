@@ -322,7 +322,7 @@ function pl_reverse_opening(int $actorId, int $companyId, int $bookId, int $cuto
             || DB::queryFirstField('SELECT id FROM pl_ar_documents WHERE book_id = %i LIMIT 1 FOR UPDATE', $bookId)
             || DB::queryFirstField('SELECT id FROM pl_purchase_orders WHERE book_id = %i LIMIT 1 FOR UPDATE', $bookId)
             || DB::queryFirstField('SELECT id FROM pl_bank_statements WHERE book_id = %i LIMIT 1 FOR UPDATE', $bookId)) {
-            throw new DomainException('This book already has business activity. Keep its cutover history and have an accountant review correcting entries.');
+            throw new DomainException('This book already has business activity. Keep its cutover history and review correcting entries before proceeding.');
         }
         $reversalId = null;
         if ($cutover['journal_id'] !== null) {

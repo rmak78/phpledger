@@ -84,7 +84,7 @@ test('all added base currencies survive sample setup POS posting and reconciled 
         $key = bin2hex(random_bytes(16));
         $company = pl_setup_company($f['actor_id'], $setup, $key);
         assert_same($currency, $company['currency']);
-        $snapshot = json_decode(DB::queryFirstField('SELECT snapshot FROM pl_template_installations WHERE company_id = %i', $company['id']), true, 512, JSON_THROW_ON_ERROR);
+        $snapshot = json_decode(DB::queryFirstField('SELECT snapshot FROM pl_template_installation_history WHERE company_id = %i AND snapshot_kind = %s ORDER BY id DESC LIMIT 1', $company['id'], 'sample'), true, 512, JSON_THROW_ON_ERROR);
         assert_same($currency, $snapshot['sample_pack']['currency']);
         $sale = pl_checkout_pos($f['actor_id'], $company['id'], $company['book_id'], pos_input());
         assert_same($currency, $sale['currency']);

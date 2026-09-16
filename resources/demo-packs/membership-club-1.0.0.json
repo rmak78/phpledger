@@ -1,750 +1,910 @@
 {
-  "id": "seasonal-business",
+  "id": "membership-club",
   "version": "1.0.0",
-  "name": "Sunrise Garden Services",
-  "business": "Seasonal business",
+  "name": "Riverside Community Club",
+  "business": "Membership club",
   "demo_only": true,
-  "status": "released_demo_only",
+  "status": "preview_only",
   "synthetic": true,
-  "capability_note": "This sample demonstrates bookkeeping examples only; it is not an implementation of the named industry's operational, regulatory or compliance systems.",
+  "capability_note": "Membership-income bookkeeping example; membership administration, renewals, charity status and dues compliance are not implemented.",
   "source_material": {
     "description": "Reconciled successor of synthetic teaching material; no real customer data.",
-    "runtime_note": "The pinned ledger history below is reconciled through the current supported general-journal and cash-document services. On isolated sample creation, the operational contract is replayed through the existing AR/AP, Purchasing, Inventory and general-journal services; unsupported vertical operations remain explicitly staged. This generated candidate contract is synthetic source material; specialist operational controls remain outside the accounting replay.",
-    "industry_profile_id": "seasonal-field-services",
+    "runtime_note": "The pinned ledger history below is reconciled through the current supported general-journal and cash-document services. On isolated sample creation, the operational contract is replayed through the existing AR/AP, Purchasing, Inventory and general-journal services; unsupported vertical operations remain explicitly staged. The authored contract is retained as the synthetic source record and its supported bookkeeping events are replayable; location transfers, advanced revenue timing and other specialist controls remain evidence-only.",
+    "industry_profile_id": "membership-club",
     "industry_profile": {
-      "id": "seasonal-field-services",
+      "id": "membership-club",
       "sample_ids": [
-        "seasonal-business"
+        "membership-club"
       ],
-      "name": "Seasonal garden and field services",
-      "operating_model": "Recurring maintenance routes and seasonal installation work with crew, plant/material and vehicle costs.",
+      "name": "Membership club",
+      "operating_model": "Member dues and events with advance receipts, vendor expenses, reserves and board-readable reporting.",
       "distinct_controls": [
-        "recurring route versus installation revenue",
-        "job materials",
-        "field labor",
-        "equipment and vehicle cost",
-        "seasonality by month"
+        "earned dues",
+        "event income",
+        "unearned/prepaid dues",
+        "restricted or designated funds",
+        "member-level subledger"
       ],
       "unsupported_in_sample": [
-        "route scheduling",
-        "weather forecasting",
-        "crew payroll",
-        "property-level job costing"
+        "fund accounting",
+        "membership renewals",
+        "donation receipting",
+        "charity or tax status"
       ],
       "seed_role_labels": {
-        "sales_revenue": "Garden maintenance and installation income",
-        "supplies_expense": "Plants and job materials",
-        "vehicle_expense": "Field vehicle and fuel costs",
-        "insurance_expense": "Business and equipment insurance",
-        "operating_expense": "Field service operating expenses",
-        "expense": "Field service operating expenses"
+        "membership_revenue": "Membership dues income",
+        "service_revenue": "Club event income",
+        "deferred_revenue": "Unearned membership dues",
+        "operating_expense": "Club operating expenses",
+        "expense": "Club operating expenses"
       },
       "accounts": [
         {
-          "semantic_key": "seasonal.income.maintenance",
+          "semantic_key": "club.income.membership",
           "code": "4100",
-          "name": "Recurring garden maintenance income",
+          "name": "Membership dues income",
           "type": "income",
-          "fixture_role": "sales_revenue",
+          "fixture_role": "membership_revenue",
           "normal_balance": "credit",
           "source_ids": [
-            "matrix-78",
-            "landscape-coa"
+            "club-coa",
+            "acnc-nscoa"
           ]
         },
         {
-          "semantic_key": "seasonal.income.installation",
+          "semantic_key": "club.income.events",
           "code": "4110",
-          "name": "Seasonal planting and installation income",
+          "name": "Club event income",
           "type": "income",
-          "fixture_role": "sales_revenue",
+          "fixture_role": "service_revenue",
           "normal_balance": "credit",
           "source_ids": [
-            "landscape-coa"
+            "club-coa",
+            "acnc-nscoa"
           ]
         },
         {
-          "semantic_key": "seasonal.cost.materials",
-          "code": "5110",
-          "name": "Plants and job materials",
-          "type": "expense",
-          "fixture_role": "supplies_expense",
-          "normal_balance": "debit",
+          "semantic_key": "club.liability.prepaid_dues",
+          "code": "2310",
+          "name": "Unearned membership dues",
+          "type": "liability",
+          "fixture_role": "deferred_revenue",
+          "normal_balance": "credit",
           "source_ids": [
-            "landscape-coa"
+            "club-coa",
+            "acnc-nscoa"
           ]
         },
         {
-          "semantic_key": "seasonal.cost.field_labor",
-          "code": "5120",
-          "name": "Direct field crew costs",
+          "semantic_key": "club.expense.program",
+          "code": "5110",
+          "name": "Program and activity costs",
           "type": "expense",
           "fixture_role": "operating_expense",
           "normal_balance": "debit",
           "source_ids": [
-            "landscape-coa"
+            "club-coa",
+            "acnc-nscoa"
           ]
         },
         {
-          "semantic_key": "seasonal.cost.vehicle",
-          "code": "5130",
-          "name": "Field vehicle and fuel costs",
-          "type": "expense",
-          "fixture_role": "vehicle_expense",
-          "normal_balance": "debit",
+          "semantic_key": "club.equity.reserves",
+          "code": "3210",
+          "name": "Board-designated reserves",
+          "type": "equity",
+          "fixture_role": "designated_reserves",
+          "normal_balance": "credit",
           "source_ids": [
-            "landscape-coa"
+            "acnc-nscoa"
           ]
         }
       ],
       "research_basis": [
         {
-          "title": "Matrix: landscaping / lawn-care company",
-          "url": "https://www.getjobber.com/industries/",
-          "supports": "Recurring route, crew, materials, completion and renewal workflow context."
+          "title": "Matrix: membership club",
+          "url": "https://www.getalignmint.org/blog/accounting-software-for-nonprofit-clubs",
+          "supports": "Dues, event income, reimbursements, reserves and member-oriented reporting context."
         },
         {
-          "title": "Landscaping chart of accounts",
-          "url": "https://www.youraspire.com/templates/landscaping/chart-of-accounts",
-          "supports": "Recurring mowing, installation, direct labor, materials, fuel and equipment cost categories."
+          "title": "National Standard Chart of Accounts",
+          "url": "https://www.acnc.gov.au/for-charities/manage-your-charity/national-standard-chart-accounts",
+          "supports": "Membership fees, events, restricted/unrestricted funds and functional reporting concepts."
+        },
+        {
+          "title": "Club accounting example",
+          "url": "https://www.ala.org/aboutala/mleader/budget/chartofaccounts",
+          "supports": "Dues, funds and member-organization account vocabulary."
         }
       ]
     },
-    "research_status": "generated_candidate",
+    "research_status": "available",
     "research_evidence": {
-      "source_pack_id": "seasonal-business-generated-candidate",
-      "source_pack_version": "0.1.0",
-      "source_status": "generated_candidate_not_runtime_seed",
-      "source_created_on": "2026-09-16",
-      "review_status": "generated_candidate",
+      "source_pack_id": "membership-club",
+      "source_pack_version": "1.0.0",
+      "source_status": "authored_candidate_not_runtime_seed",
+      "source_created_on": "2026-09-14",
+      "review_status": "synthetic_candidate",
       "business_profile": {
-        "display_name": "Sunrise Garden Services (candidate)",
-        "business_type": "seasonal-landscape-services",
-        "description": "Seasonal garden maintenance service with spring demand, recurring customers and a supplier payable."
+        "display_name": "Riverside Community Club (Sample)",
+        "business_type": "membership-club",
+        "description": "Member-funded recreation club; no charity or nonprofit status is assumed.",
+        "base_currency": "USD",
+        "accounting_start_date": "2026-09-01",
+        "as_of_date": "2026-09-30"
       },
       "semantic_accounts": [
         {
-          "fixture_role": "accounts_payable",
-          "mapping_status": "requires_template_snapshot"
+          "key": "core.cash.on_hand",
+          "type": "asset",
+          "label": "Cash On Hand",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "cash_on_hand"
         },
         {
-          "fixture_role": "accounts_receivable",
-          "mapping_status": "requires_template_snapshot"
+          "key": "core.bank.operating",
+          "type": "asset",
+          "label": "Bank Current",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "bank_current"
         },
         {
-          "fixture_role": "bank_current",
-          "mapping_status": "requires_template_snapshot"
+          "key": "core.receivables.trade",
+          "type": "asset",
+          "label": "Accounts Receivable",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "accounts_receivable"
         },
         {
-          "fixture_role": "cash_on_hand",
-          "mapping_status": "requires_template_snapshot"
+          "key": "core.assets.equipment",
+          "type": "asset",
+          "label": "Equipment",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "equipment"
         },
         {
-          "fixture_role": "insurance_expense",
-          "mapping_status": "requires_template_snapshot"
+          "key": "core.payables.trade",
+          "type": "liability",
+          "label": "Accounts Payable",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "accounts_payable"
         },
         {
-          "fixture_role": "sales_revenue",
-          "mapping_status": "requires_template_snapshot"
+          "key": "club.liability.prepaid_dues",
+          "type": "liability",
+          "label": "Deferred Revenue",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "deferred_revenue"
         },
         {
-          "fixture_role": "supplies_expense",
-          "mapping_status": "requires_template_snapshot"
+          "key": "core.equity.capital",
+          "type": "equity",
+          "label": "Owner Equity",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "owner_equity"
         },
         {
-          "fixture_role": "vehicle_expense",
-          "mapping_status": "requires_template_snapshot"
+          "key": "club.income.events",
+          "type": "income",
+          "label": "Service Revenue",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "service_revenue"
+        },
+        {
+          "key": "club.income.membership",
+          "type": "income",
+          "label": "Membership Revenue",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "membership_revenue"
+        },
+        {
+          "key": "core.expense.rent",
+          "type": "expense",
+          "label": "Rent Expense",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "rent_expense"
+        },
+        {
+          "key": "core.expense.utilities",
+          "type": "expense",
+          "label": "Utilities Expense",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "utilities_expense"
         }
       ],
       "contacts": [
         {
-          "id": "garden-client",
-          "name": "Greenbank Residence (Sample)",
+          "id": "member-01",
+          "name": "Demo Member Group One (Sample)",
           "role": "customer",
-          "email": "sunrise-garden.client@example.invalid",
+          "email": "membership-club.member-01@example.invalid",
           "synthetic": true
         },
         {
-          "id": "nursery-vendor",
-          "name": "Riverbend Nursery (Sample)",
+          "id": "member-02",
+          "name": "Demo Member Group Two (Sample)",
+          "role": "customer",
+          "email": "membership-club.member-02@example.invalid",
+          "synthetic": true
+        },
+        {
+          "id": "vendor-01",
+          "name": "Demo Hall Provider (Sample)",
           "role": "vendor",
-          "email": "sunrise-garden.vendor@example.invalid",
+          "email": "membership-club.vendor-01@example.invalid",
+          "synthetic": true
+        },
+        {
+          "id": "vendor-02",
+          "name": "Demo Event Supplier (Sample)",
+          "role": "vendor",
+          "email": "membership-club.vendor-02@example.invalid",
           "synthetic": true
         }
       ],
       "products": [
         {
-          "id": "maintenance-visit",
-          "name": "Garden maintenance visit (Sample)",
+          "id": "annual-plan",
+          "name": "Annual group membership (Sample)",
           "kind": "service",
-          "unit": "visit",
-          "sale_price": "275.0000"
+          "unit": "membership",
+          "sale_price": "120.0000",
+          "fixture_unit_cost": "0.0000",
+          "income_account_key": "club.income.membership",
+          "inventory_account_key": null,
+          "cost_account_key": null,
+          "lot_tracking": false,
+          "medical_use": false
         },
         {
-          "id": "planting-project",
-          "name": "Seasonal planting project (Sample)",
+          "id": "monthly-plan",
+          "name": "September membership dues (Sample)",
           "kind": "service",
-          "unit": "project",
-          "sale_price": "2200.0000"
+          "unit": "membership",
+          "sale_price": "20.0000",
+          "fixture_unit_cost": "0.0000",
+          "income_account_key": "club.income.membership",
+          "inventory_account_key": null,
+          "cost_account_key": null,
+          "lot_tracking": false,
+          "medical_use": false
+        },
+        {
+          "id": "event-ticket",
+          "name": "September community event ticket (Sample)",
+          "kind": "service",
+          "unit": "ticket",
+          "sale_price": "15.0000",
+          "fixture_unit_cost": "0.0000",
+          "income_account_key": "club.income.events",
+          "inventory_account_key": null,
+          "cost_account_key": null,
+          "lot_tracking": false,
+          "medical_use": false
         }
       ],
-      "locations": [],
+      "locations": [
+        {
+          "id": "main",
+          "name": "Main premises (Sample)"
+        }
+      ],
       "opening_evidence": {
         "date": "2026-09-01",
-        "status": "candidate_not_posted",
-        "notes": "Opening quantities and balances require independent reconciliation before runtime import."
+        "journal": [
+          {
+            "account_key": "core.cash.on_hand",
+            "debit": "200.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.bank.operating",
+            "debit": "5000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.receivables.trade",
+            "debit": "120.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.assets.equipment",
+            "debit": "1500.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.payables.trade",
+            "debit": "0.0000",
+            "credit": "300.0000"
+          },
+          {
+            "account_key": "club.liability.prepaid_dues",
+            "debit": "0.0000",
+            "credit": "1100.0000"
+          },
+          {
+            "account_key": "core.equity.capital",
+            "debit": "0.0000",
+            "credit": "5420.0000"
+          }
+        ],
+        "documents": [
+          {
+            "id": "opening-invoice",
+            "kind": "invoice",
+            "contact_id": "member-01",
+            "issued_on": "2026-08-20",
+            "due_on": "2026-09-10",
+            "description": "August dues remain unpaid at the cutover date.",
+            "original_amount": "120.0000",
+            "paid_before_cutover": "0.0000",
+            "outstanding_at_cutover": "120.0000",
+            "posting_mode": "opening_control_detail_only"
+          },
+          {
+            "id": "opening-bill",
+            "kind": "bill",
+            "contact_id": "vendor-01",
+            "issued_on": "2026-08-20",
+            "due_on": "2026-09-10",
+            "description": "Unpaid August hall bill.",
+            "original_amount": "300.0000",
+            "paid_before_cutover": "0.0000",
+            "outstanding_at_cutover": "300.0000",
+            "posting_mode": "opening_control_detail_only"
+          }
+        ],
+        "stock": [],
+        "deferred_contracts": [
+          {
+            "id": "contract-opening",
+            "contact_id": "member-01",
+            "coverage_start": "2026-08-01",
+            "coverage_end": "2027-07-31",
+            "original_prepayment": "1200.0000",
+            "recognized_before_cutover": "100.0000",
+            "deferred_at_cutover": "1100.0000",
+            "monthly_recognition": "100.0000"
+          }
+        ]
       },
       "operational_event_contract": [
         {
-          "id": "seasonal-invoice",
-          "date": "2026-04-05",
-          "kind": "invoice",
-          "source_reference": "candidate:sunrise-garden:invoice:2026-04",
-          "amount": "2200.0000",
-          "expected_journal": [
-            {
-              "account_role": "accounts_receivable",
-              "debit": "2200.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "sales_revenue",
-              "debit": "0.0000",
-              "credit": "2200.0000"
-            }
-          ],
-          "document_id": "seasonal-invoice"
-        },
-        {
-          "id": "seasonal-receipt-partial",
-          "date": "2026-04-20",
-          "kind": "receipt",
-          "source_reference": "candidate:sunrise-garden:receipt:partial",
-          "amount": "1200.0000",
-          "expected_journal": [
-            {
-              "account_role": "bank_current",
-              "debit": "1200.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "accounts_receivable",
-              "debit": "0.0000",
-              "credit": "1200.0000"
-            }
-          ],
-          "allocations": [
-            {
-              "document_id": "seasonal-invoice",
-              "amount": "1200.0000"
-            }
-          ]
-        },
-        {
-          "id": "seasonal-receipt-final",
-          "date": "2026-05-05",
-          "kind": "receipt",
-          "source_reference": "candidate:sunrise-garden:receipt:final",
-          "amount": "1000.0000",
-          "expected_journal": [
-            {
-              "account_role": "bank_current",
-              "debit": "1000.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "accounts_receivable",
-              "debit": "0.0000",
-              "credit": "1000.0000"
-            }
-          ],
-          "allocations": [
-            {
-              "document_id": "seasonal-invoice",
-              "amount": "1000.0000"
-            }
-          ]
-        },
-        {
-          "id": "seasonal-supplier-bill",
-          "date": "2026-04-22",
-          "kind": "bill",
-          "source_reference": "candidate:sunrise-garden:bill:nursery",
-          "amount": "400.0000",
-          "expected_journal": [
-            {
-              "account_role": "supplies_expense",
-              "debit": "400.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "accounts_payable",
-              "debit": "0.0000",
-              "credit": "400.0000"
-            }
-          ],
-          "document_id": "seasonal-supplier-bill"
-        },
-        {
-          "id": "seasonal-supplier-payment",
-          "date": "2026-05-10",
-          "kind": "supplier_payment",
-          "source_reference": "candidate:sunrise-garden:payment:nursery",
-          "amount": "250.0000",
-          "expected_journal": [
-            {
-              "account_role": "accounts_payable",
-              "debit": "250.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "bank_current",
-              "debit": "0.0000",
-              "credit": "250.0000"
-            }
-          ],
-          "allocations": [
-            {
-              "document_id": "seasonal-supplier-bill",
-              "amount": "250.0000"
-            }
-          ]
-        },
-        {
-          "id": "seasonal-peak-invoice",
-          "date": "2026-08-05",
-          "kind": "invoice",
-          "source_reference": "candidate:sunrise-garden:invoice:2026-08",
-          "amount": "1650.0000",
-          "expected_journal": [
-            {
-              "account_role": "accounts_receivable",
-              "debit": "1650.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "sales_revenue",
-              "debit": "0.0000",
-              "credit": "1650.0000"
-            }
-          ],
-          "document_id": "seasonal-peak-invoice"
-        },
-        {
-          "id": "seasonal-peak-receipt",
-          "date": "2026-08-20",
-          "kind": "receipt",
-          "source_reference": "candidate:sunrise-garden:receipt:peak-partial",
-          "amount": "825.0000",
-          "expected_journal": [
-            {
-              "account_role": "bank_current",
-              "debit": "825.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "accounts_receivable",
-              "debit": "0.0000",
-              "credit": "825.0000"
-            }
-          ],
-          "allocations": [
-            {
-              "document_id": "seasonal-peak-invoice",
-              "amount": "825.0000"
-            }
-          ]
-        },
-        {
-          "id": "seasonal-insurance",
-          "date": "2026-04-30",
-          "kind": "expense",
-          "source_reference": "candidate:sunrise-garden:expense:insurance",
-          "amount": "150.0000",
-          "expected_journal": [
-            {
-              "account_role": "insurance_expense",
-              "debit": "150.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "bank_current",
-              "debit": "0.0000",
-              "credit": "150.0000"
-            }
-          ]
-        },
-        {
-          "id": "seasonal-fuel",
-          "date": "2026-07-12",
-          "kind": "expense",
-          "source_reference": "candidate:sunrise-garden:expense:fuel",
-          "amount": "225.0000",
-          "expected_journal": [
-            {
-              "account_role": "vehicle_expense",
-              "debit": "225.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "bank_current",
-              "debit": "0.0000",
-              "credit": "225.0000"
-            }
-          ]
-        },
-        {
-          "id": "seasonal-peak-credit",
+          "id": "membership-club-event-01",
           "date": "2026-09-02",
-          "kind": "customer_credit",
-          "source_reference": "candidate:sunrise-garden:credit:peak-adjustment",
-          "amount": "225.0000",
-          "original_event_id": "seasonal-peak-invoice",
-          "related_document_id": "seasonal-peak-invoice",
+          "kind": "prepayment",
+          "description": "Receive two prepaid annual memberships",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:membership-club:v1:event-01",
           "expected_journal": [
             {
-              "account_role": "sales_revenue",
-              "debit": "225.0000",
+              "account_key": "core.bank.operating",
+              "debit": "240.0000",
               "credit": "0.0000"
             },
             {
-              "account_role": "accounts_receivable",
+              "account_key": "club.liability.prepaid_dues",
               "debit": "0.0000",
-              "credit": "225.0000"
+              "credit": "240.0000"
             }
-          ]
+          ],
+          "document_id": "annual-prepayment",
+          "contract": {
+            "id": "contract-new",
+            "coverage_start": "2026-09-01",
+            "coverage_end": "2027-08-31",
+            "monthly_recognition": "20.0000"
+          }
         },
         {
-          "id": "seasonal-supplier-payment-final",
-          "date": "2026-05-17",
-          "kind": "supplier_payment",
-          "source_reference": "candidate:sunrise-garden:payment:nursery:final",
-          "amount": "150.0000",
+          "id": "membership-club-event-02",
+          "date": "2026-09-04",
+          "kind": "credit_sale",
+          "description": "Record dues-001",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:membership-club:v1:event-02",
           "expected_journal": [
             {
-              "account_role": "accounts_payable",
+              "account_key": "core.receivables.trade",
+              "debit": "60.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "club.income.membership",
+              "debit": "0.0000",
+              "credit": "60.0000"
+            }
+          ],
+          "document_id": "dues-001",
+          "stock_movements": []
+        },
+        {
+          "id": "membership-club-event-03",
+          "date": "2026-09-07",
+          "kind": "cash_sale",
+          "description": "Record event-sale-001",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:membership-club:v1:event-03",
+          "expected_journal": [
+            {
+              "account_key": "core.cash.on_hand",
               "debit": "150.0000",
               "credit": "0.0000"
             },
             {
-              "account_role": "bank_current",
+              "account_key": "club.income.events",
               "debit": "0.0000",
               "credit": "150.0000"
             }
           ],
+          "document_id": "event-sale-001",
+          "stock_movements": []
+        },
+        {
+          "id": "membership-club-event-04",
+          "date": "2026-09-10",
+          "kind": "receipt",
+          "description": "Allocate customer receipt to named documents",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:membership-club:v1:event-04",
+          "expected_journal": [
+            {
+              "account_key": "core.bank.operating",
+              "debit": "100.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.receivables.trade",
+              "debit": "0.0000",
+              "credit": "100.0000"
+            }
+          ],
           "allocations": [
             {
-              "document_id": "seasonal-supplier-bill",
-              "amount": "150.0000"
-            }
-          ]
-        },
-        {
-          "id": "seasonal-fuel-reversal",
-          "date": "2026-07-13",
-          "kind": "reversal",
-          "source_reference": "candidate:sunrise-garden:expense:fuel:reversal",
-          "amount": "225.0000",
-          "reverses_event_id": "seasonal-fuel",
-          "expected_journal": [
-            {
-              "account_role": "vehicle_expense",
-              "debit": "0.0000",
-              "credit": "225.0000"
+              "document_id": "opening-invoice",
+              "amount": "80.0000"
             },
             {
-              "account_role": "bank_current",
-              "debit": "225.0000",
-              "credit": "0.0000"
+              "document_id": "dues-001",
+              "amount": "20.0000"
             }
-          ]
+          ],
+          "total": "100.0000"
         },
         {
-          "id": "seasonal-fuel-corrected",
-          "date": "2026-07-14",
+          "id": "membership-club-event-05",
+          "date": "2026-09-12",
+          "kind": "supplier_payment",
+          "description": "Pay supplier bills",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:membership-club:v1:event-05",
+          "expected_journal": [
+            {
+              "account_key": "core.payables.trade",
+              "debit": "200.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "0.0000",
+              "credit": "200.0000"
+            }
+          ],
+          "allocations": [
+            {
+              "document_id": "opening-bill",
+              "amount": "200.0000"
+            }
+          ],
+          "total": "200.0000"
+        },
+        {
+          "id": "membership-club-event-06",
+          "date": "2026-09-15",
+          "kind": "expense_bill",
+          "description": "Record September hall hire as unpaid",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:membership-club:v1:event-06",
+          "expected_journal": [
+            {
+              "account_key": "core.expense.rent",
+              "debit": "300.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.payables.trade",
+              "debit": "0.0000",
+              "credit": "300.0000"
+            }
+          ],
+          "document_id": "hall-bill-001"
+        },
+        {
+          "id": "membership-club-event-07",
+          "date": "2026-09-18",
           "kind": "expense",
-          "source_reference": "candidate:sunrise-garden:expense:fuel:corrected",
-          "amount": "210.0000",
-          "linked_event_id": "seasonal-fuel",
+          "description": "Pay event lighting and utility charge",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:membership-club:v1:event-07",
           "expected_journal": [
             {
-              "account_role": "vehicle_expense",
-              "debit": "210.0000",
+              "account_key": "core.expense.utilities",
+              "debit": "40.0000",
               "credit": "0.0000"
             },
             {
-              "account_role": "bank_current",
+              "account_key": "core.bank.operating",
               "debit": "0.0000",
-              "credit": "210.0000"
+              "credit": "40.0000"
             }
-          ]
+          ],
+          "expense_account_key": "core.expense.utilities",
+          "total": "40.0000"
         },
         {
-          "id": "seasonal-business-cash-transfer",
-          "date": "2026-08-25",
+          "id": "membership-club-event-08",
+          "date": "2026-09-20",
           "kind": "cash_transfer",
-          "source_reference": "candidate:seasonal-business:bank:cash-transfer",
-          "amount": "250.0000",
+          "description": "Deposit counted till cash into bank",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:membership-club:v1:event-08",
           "expected_journal": [
             {
-              "account_role": "bank_current",
-              "debit": "250.0000",
+              "account_key": "core.bank.operating",
+              "debit": "100.0000",
               "credit": "0.0000"
             },
             {
-              "account_role": "cash_on_hand",
+              "account_key": "core.cash.on_hand",
               "debit": "0.0000",
-              "credit": "250.0000"
+              "credit": "100.0000"
             }
-          ]
+          ],
+          "total": "100.0000"
+        },
+        {
+          "id": "membership-club-event-09",
+          "date": "2026-09-30",
+          "kind": "revenue_recognition",
+          "description": "Recognize one month of prepaid memberships",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:membership-club:v1:event-09",
+          "expected_journal": [
+            {
+              "account_key": "club.liability.prepaid_dues",
+              "debit": "120.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "club.income.membership",
+              "debit": "0.0000",
+              "credit": "120.0000"
+            }
+          ],
+          "contract_recognition": [
+            {
+              "contract_id": "contract-opening",
+              "amount": "100.0000"
+            },
+            {
+              "contract_id": "contract-new",
+              "amount": "20.0000"
+            }
+          ],
+          "recognition_period": "2026-09"
+        },
+        {
+          "id": "membership-club-event-07-reversal",
+          "date": "2026-09-19",
+          "kind": "reversal",
+          "description": "Reverse the club utility entry for source correction review.",
+          "runtime_status": "derived_evidence_only",
+          "idempotency_key": "derived:membership-club:correction:reversal",
+          "expected_journal": [
+            {
+              "account_key": "core.expense.utilities",
+              "debit": "0.0000",
+              "credit": "40.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "40.0000",
+              "credit": "0.0000"
+            }
+          ],
+          "reverses_event_id": "membership-club-event-07"
+        },
+        {
+          "id": "membership-club-event-07-corrected",
+          "date": "2026-09-19",
+          "kind": "expense",
+          "description": "Re-enter the verified club utility amount after correction review.",
+          "runtime_status": "derived_evidence_only",
+          "idempotency_key": "derived:membership-club:correction:corrected",
+          "expected_journal": [
+            {
+              "account_key": "core.expense.utilities",
+              "debit": "40.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "0.0000",
+              "credit": "40.0000"
+            }
+          ],
+          "linked_event_id": "membership-club-event-07"
         }
       ],
       "expected_reports": {
-        "status": "candidate_balanced_event_contract_not_runtime_replayed",
         "as_of_date": "2026-09-30",
-        "monthly": {
-          "2026-04": {
-            "income": "2200.0000",
-            "expenses": "550.0000",
-            "cash_change": "1050.0000",
-            "receivable_balance": "1000.0000",
-            "payable_balance": "400.0000",
-            "inventory": {},
-            "profit": "1650.0000"
+        "trial_balance": [
+          {
+            "account_key": "core.cash.on_hand",
+            "debit": "250.0000",
+            "credit": "0.0000"
           },
-          "2026-05": {
-            "income": "0.0000",
-            "expenses": "0.0000",
-            "cash_change": "600.0000",
-            "receivable_balance": "0.0000",
-            "payable_balance": "0.0000",
-            "inventory": {},
-            "profit": "0.0000"
+          {
+            "account_key": "core.bank.operating",
+            "debit": "5200.0000",
+            "credit": "0.0000"
           },
-          "2026-07": {
-            "income": "0.0000",
-            "expenses": "210.0000",
-            "cash_change": "-210.0000",
-            "receivable_balance": "0.0000",
-            "payable_balance": "0.0000",
-            "inventory": {},
-            "profit": "-210.0000"
+          {
+            "account_key": "core.receivables.trade",
+            "debit": "80.0000",
+            "credit": "0.0000"
           },
-          "2026-08": {
-            "income": "1650.0000",
-            "expenses": "0.0000",
-            "cash_change": "825.0000",
-            "receivable_balance": "825.0000",
-            "payable_balance": "0.0000",
-            "inventory": {},
-            "profit": "1650.0000"
+          {
+            "account_key": "core.assets.equipment",
+            "debit": "1500.0000",
+            "credit": "0.0000"
           },
-          "2026-09": {
-            "income": "-225.0000",
-            "expenses": "0.0000",
-            "cash_change": "0.0000",
-            "receivable_balance": "600.0000",
-            "payable_balance": "0.0000",
-            "inventory": {},
-            "profit": "-225.0000"
+          {
+            "account_key": "core.payables.trade",
+            "debit": "0.0000",
+            "credit": "400.0000"
+          },
+          {
+            "account_key": "club.liability.prepaid_dues",
+            "debit": "0.0000",
+            "credit": "1220.0000"
+          },
+          {
+            "account_key": "core.equity.capital",
+            "debit": "0.0000",
+            "credit": "5420.0000"
+          },
+          {
+            "account_key": "club.income.events",
+            "debit": "0.0000",
+            "credit": "150.0000"
+          },
+          {
+            "account_key": "club.income.membership",
+            "debit": "0.0000",
+            "credit": "180.0000"
+          },
+          {
+            "account_key": "core.expense.rent",
+            "debit": "300.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.expense.utilities",
+            "debit": "40.0000",
+            "credit": "0.0000"
           }
-        },
-        "annual": {
-          "2026": {
-            "income": "3625.0000",
-            "expenses": "760.0000",
-            "cash_change": "2265.0000",
-            "profit": "2865.0000",
-            "receivable_balance": "600.0000",
-            "payable_balance": "0.0000",
-            "inventory": {}
+        ],
+        "trial_balance_debit": "7370.0000",
+        "trial_balance_credit": "7370.0000",
+        "journal_turnover_debit_including_opening": "8130.0000",
+        "journal_turnover_credit_including_opening": "8130.0000",
+        "income": "330.0000",
+        "expenses": "340.0000",
+        "net_result": "-10.0000",
+        "assets": "7030.0000",
+        "liabilities": "1620.0000",
+        "opening_equity": "5420.0000",
+        "equity_including_current_result": "5410.0000",
+        "accounts_receivable": "80.0000",
+        "accounts_payable": "400.0000",
+        "inventory_value": "0.0000",
+        "cash_on_hand": "250.0000",
+        "bank_current": "5200.0000",
+        "document_balances": [
+          {
+            "document_id": "opening-invoice",
+            "kind": "invoice",
+            "outstanding": "40.0000"
+          },
+          {
+            "document_id": "opening-bill",
+            "kind": "bill",
+            "outstanding": "100.0000"
+          },
+          {
+            "document_id": "dues-001",
+            "kind": "invoice",
+            "outstanding": "40.0000"
+          },
+          {
+            "document_id": "hall-bill-001",
+            "kind": "bill",
+            "outstanding": "300.0000"
           }
-        },
-        "ar_ap": {
-          "receivable_balance": "600.0000",
-          "payable_balance": "0.0000",
-          "documents": [
-            {
-              "event_id": "seasonal-invoice",
-              "date": "2026-04-05",
-              "kind": "invoice",
-              "source_reference": "candidate:sunrise-garden:invoice:2026-04",
-              "amount": "2200.0000",
-              "receivable_balance_after": "2200.0000",
-              "payable_balance_after": "0.0000"
-            },
-            {
-              "event_id": "seasonal-supplier-bill",
-              "date": "2026-04-22",
-              "kind": "bill",
-              "source_reference": "candidate:sunrise-garden:bill:nursery",
-              "amount": "400.0000",
-              "receivable_balance_after": "1000.0000",
-              "payable_balance_after": "400.0000"
-            },
-            {
-              "event_id": "seasonal-peak-invoice",
-              "date": "2026-08-05",
-              "kind": "invoice",
-              "source_reference": "candidate:sunrise-garden:invoice:2026-08",
-              "amount": "1650.0000",
-              "receivable_balance_after": "1650.0000",
-              "payable_balance_after": "0.0000"
-            },
-            {
-              "event_id": "seasonal-peak-credit",
-              "date": "2026-09-02",
-              "kind": "customer_credit",
-              "source_reference": "candidate:sunrise-garden:credit:peak-adjustment",
-              "amount": "225.0000",
-              "receivable_balance_after": "600.0000",
-              "payable_balance_after": "0.0000"
-            }
-          ]
-        },
+        ],
+        "stock_on_hand": [],
         "ageing": {
           "receivables": {
             "current": "0.0000",
-            "1_30": "600.0000",
+            "1_30": "80.0000",
             "31_60": "0.0000",
             "61_90": "0.0000",
             "91_plus": "0.0000",
-            "total": "600.0000"
+            "total": "80.0000"
           },
           "payables": {
-            "current": "0.0000",
-            "1_30": "0.0000",
+            "current": "300.0000",
+            "1_30": "100.0000",
             "31_60": "0.0000",
             "61_90": "0.0000",
             "91_plus": "0.0000",
-            "total": "0.0000"
+            "total": "400.0000"
           }
-        },
-        "inventory": {}
+        }
       },
       "industry_scenarios": [
         {
-          "id": "seasonal-cycle",
+          "id": "membership-dues",
+          "title": "Separate renewals, overdue dues and earned income",
           "status": "future_module_scenario_not_implemented",
-          "description": "Seasonal scheduling, weather exposure, workforce costing and contract forecasting need separate reviewed workflows."
+          "fixture_entity": {
+            "membership_cycle": "monthly_and_annual",
+            "group_contacts": [
+              "member-01",
+              "member-02"
+            ],
+            "contract_ids": [
+              "contract-opening",
+              "contract-new"
+            ],
+            "dues_document_id": "dues-001",
+            "renewal_preview_date": "2027-08-01"
+          },
+          "steps": [
+            "Compare open dues with prepaid membership contracts.",
+            "Recognize September service before showing monthly income.",
+            "Preview a renewal without issuing or sending a message."
+          ],
+          "acceptance_checks": [
+            "Prepaid cash is deferred until the modelled service month.",
+            "Member groups represent synthetic aggregate households, not real individuals.",
+            "Recurring invoicing, attendance, access control and renewal messages remain future modules."
+          ]
         }
       ],
-      "industry_profile_id": "seasonal-field-services",
+      "industry_profile_id": "membership-club",
       "industry_profile": {
-        "id": "seasonal-field-services",
+        "id": "membership-club",
         "sample_ids": [
-          "seasonal-business"
+          "membership-club"
         ],
-        "name": "Seasonal garden and field services",
-        "operating_model": "Recurring maintenance routes and seasonal installation work with crew, plant/material and vehicle costs.",
+        "name": "Membership club",
+        "operating_model": "Member dues and events with advance receipts, vendor expenses, reserves and board-readable reporting.",
         "distinct_controls": [
-          "recurring route versus installation revenue",
-          "job materials",
-          "field labor",
-          "equipment and vehicle cost",
-          "seasonality by month"
+          "earned dues",
+          "event income",
+          "unearned/prepaid dues",
+          "restricted or designated funds",
+          "member-level subledger"
         ],
         "unsupported_in_sample": [
-          "route scheduling",
-          "weather forecasting",
-          "crew payroll",
-          "property-level job costing"
+          "fund accounting",
+          "membership renewals",
+          "donation receipting",
+          "charity or tax status"
         ],
         "seed_role_labels": {
-          "sales_revenue": "Garden maintenance and installation income",
-          "supplies_expense": "Plants and job materials",
-          "vehicle_expense": "Field vehicle and fuel costs",
-          "insurance_expense": "Business and equipment insurance",
-          "operating_expense": "Field service operating expenses",
-          "expense": "Field service operating expenses"
+          "membership_revenue": "Membership dues income",
+          "service_revenue": "Club event income",
+          "deferred_revenue": "Unearned membership dues",
+          "operating_expense": "Club operating expenses",
+          "expense": "Club operating expenses"
         },
         "accounts": [
           {
-            "semantic_key": "seasonal.income.maintenance",
+            "semantic_key": "club.income.membership",
             "code": "4100",
-            "name": "Recurring garden maintenance income",
+            "name": "Membership dues income",
             "type": "income",
-            "fixture_role": "sales_revenue",
+            "fixture_role": "membership_revenue",
             "normal_balance": "credit",
             "source_ids": [
-              "matrix-78",
-              "landscape-coa"
+              "club-coa",
+              "acnc-nscoa"
             ]
           },
           {
-            "semantic_key": "seasonal.income.installation",
+            "semantic_key": "club.income.events",
             "code": "4110",
-            "name": "Seasonal planting and installation income",
+            "name": "Club event income",
             "type": "income",
-            "fixture_role": "sales_revenue",
+            "fixture_role": "service_revenue",
             "normal_balance": "credit",
             "source_ids": [
-              "landscape-coa"
+              "club-coa",
+              "acnc-nscoa"
             ]
           },
           {
-            "semantic_key": "seasonal.cost.materials",
-            "code": "5110",
-            "name": "Plants and job materials",
-            "type": "expense",
-            "fixture_role": "supplies_expense",
-            "normal_balance": "debit",
+            "semantic_key": "club.liability.prepaid_dues",
+            "code": "2310",
+            "name": "Unearned membership dues",
+            "type": "liability",
+            "fixture_role": "deferred_revenue",
+            "normal_balance": "credit",
             "source_ids": [
-              "landscape-coa"
+              "club-coa",
+              "acnc-nscoa"
             ]
           },
           {
-            "semantic_key": "seasonal.cost.field_labor",
-            "code": "5120",
-            "name": "Direct field crew costs",
+            "semantic_key": "club.expense.program",
+            "code": "5110",
+            "name": "Program and activity costs",
             "type": "expense",
             "fixture_role": "operating_expense",
             "normal_balance": "debit",
             "source_ids": [
-              "landscape-coa"
+              "club-coa",
+              "acnc-nscoa"
             ]
           },
           {
-            "semantic_key": "seasonal.cost.vehicle",
-            "code": "5130",
-            "name": "Field vehicle and fuel costs",
-            "type": "expense",
-            "fixture_role": "vehicle_expense",
-            "normal_balance": "debit",
+            "semantic_key": "club.equity.reserves",
+            "code": "3210",
+            "name": "Board-designated reserves",
+            "type": "equity",
+            "fixture_role": "designated_reserves",
+            "normal_balance": "credit",
             "source_ids": [
-              "landscape-coa"
+              "acnc-nscoa"
             ]
           }
         ],
         "research_basis": [
           {
-            "title": "Matrix: landscaping / lawn-care company",
-            "url": "https://www.getjobber.com/industries/",
-            "supports": "Recurring route, crew, materials, completion and renewal workflow context."
+            "title": "Matrix: membership club",
+            "url": "https://www.getalignmint.org/blog/accounting-software-for-nonprofit-clubs",
+            "supports": "Dues, event income, reimbursements, reserves and member-oriented reporting context."
           },
           {
-            "title": "Landscaping chart of accounts",
-            "url": "https://www.youraspire.com/templates/landscaping/chart-of-accounts",
-            "supports": "Recurring mowing, installation, direct labor, materials, fuel and equipment cost categories."
+            "title": "National Standard Chart of Accounts",
+            "url": "https://www.acnc.gov.au/for-charities/manage-your-charity/national-standard-chart-accounts",
+            "supports": "Membership fees, events, restricted/unrestricted funds and functional reporting concepts."
+          },
+          {
+            "title": "Club accounting example",
+            "url": "https://www.ala.org/aboutala/mleader/budget/chartofaccounts",
+            "supports": "Dues, funds and member-organization account vocabulary."
           }
         ]
       }
     }
   },
   "scenario": {
-    "id": "seasonal-cash-cycle",
-    "title": "Compare a seasonal cash cycle",
-    "goal": "Compare monthly receipts across a seasonal service year while keeping operating costs, prepayments and settlements traceable.",
+    "id": "membership-dues",
+    "title": "Separate membership income from cash timing",
+    "goal": "Follow a fictional club prepayment, recognition schedule, invoice, payment and expense bill.",
     "steps": [
-      "Compare low-season and peak-season monthly receipt summaries.",
-      "Trace recurring operating costs and insurance release through the general ledger.",
-      "Review the cross-year customer collection and supplier payment.",
-      "Use the open 2026 drafts to test a new seasonal entry without changing history."
+      "Review the opening receivable and payable detail without reposting opening balances.",
+      "Trace a membership prepayment into deferred revenue.",
+      "Inspect the monthly recognition entry and compare it with the cash receipt.",
+      "Review the supplier bill, payment and the club's period result."
     ],
     "checks": [
-      "The receipt curve is a synthetic teaching pattern, not a forecast or business benchmark.",
-      "No workforce scheduling, weather model, contract pipeline or seasonal tax treatment is implemented.",
-      "Profit and cash are reviewed through the existing statements and account movements."
+      "Deferred revenue is not recognised before the stated coverage period.",
+      "The club scenario does not claim charity, nonprofit, member administration or renewal compliance.",
+      "Opening AR/AP detail remains evidence reconciled to the opening control journal."
     ]
   },
   "notice": "Original synthetic general-ledger examples. Manual staff, loan, outstanding-item and stock schedules do not implement payroll, AR/AP, inventory or tax modules. Period closure blocks posting; it is not statutory financial-statement approval or an earnings-transfer journal.",
@@ -845,7 +1005,7 @@
       "key": "capital",
       "kind": "general_journal",
       "date": "2024-01-01",
-      "reference": "seasonal-business/capital",
+      "reference": "membership-club/capital",
       "description": "Fictional owner introduces starting capital",
       "lines": [
         {
@@ -867,7 +1027,7 @@
       "key": "insurance-2024",
       "kind": "general_journal",
       "date": "2024-01-01",
-      "reference": "seasonal-business/insurance-2024",
+      "reference": "membership-club/insurance-2024",
       "description": "Prepay 2024 insurance: 1200, released at 100 per month",
       "lines": [
         {
@@ -889,7 +1049,7 @@
       "key": "reserve-transfer",
       "kind": "general_journal",
       "date": "2024-01-02",
-      "reference": "seasonal-business/reserve-transfer",
+      "reference": "membership-club/reserve-transfer",
       "description": "Move funds between primary and reserve banks",
       "lines": [
         {
@@ -911,7 +1071,7 @@
       "key": "cash-float",
       "kind": "general_journal",
       "date": "2024-01-03",
-      "reference": "seasonal-business/cash-float",
+      "reference": "membership-club/cash-float",
       "description": "Fund the cash till",
       "lines": [
         {
@@ -933,7 +1093,7 @@
       "key": "petty-float",
       "kind": "general_journal",
       "date": "2024-01-03",
-      "reference": "seasonal-business/petty-float",
+      "reference": "membership-club/petty-float",
       "description": "Establish a separately counted petty cash float",
       "lines": [
         {
@@ -955,9 +1115,9 @@
       "key": "receipts-2024-01",
       "kind": "receipt",
       "date": "2024-01-15",
-      "reference": "seasonal-business/receipts-2024-01",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "membership-club/receipts-2024-01",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -966,19 +1126,19 @@
       "key": "operations-2024-01",
       "kind": "general_journal",
       "date": "2024-01-31",
-      "reference": "seasonal-business/operations-2024-01",
+      "reference": "membership-club/operations-2024-01",
       "description": "2024-01 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -1048,7 +1208,7 @@
       "key": "equipment",
       "kind": "general_journal",
       "date": "2024-02-01",
-      "reference": "seasonal-business/equipment",
+      "reference": "membership-club/equipment",
       "description": "Equipment: 2400 cost, no residual, 60-month illustrative life from February 2024",
       "lines": [
         {
@@ -1070,9 +1230,9 @@
       "key": "receipts-2024-02",
       "kind": "receipt",
       "date": "2024-02-15",
-      "reference": "seasonal-business/receipts-2024-02",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "membership-club/receipts-2024-02",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1081,19 +1241,19 @@
       "key": "operations-2024-02",
       "kind": "general_journal",
       "date": "2024-02-29",
-      "reference": "seasonal-business/operations-2024-02",
+      "reference": "membership-club/operations-2024-02",
       "description": "2024-02 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -1175,7 +1335,7 @@
       "key": "loan-advance",
       "kind": "general_journal",
       "date": "2024-03-01",
-      "reference": "seasonal-business/loan-advance",
+      "reference": "membership-club/loan-advance",
       "description": "Fictional term-loan advance; separate principal and interest support",
       "lines": [
         {
@@ -1197,9 +1357,9 @@
       "key": "receipts-2024-03",
       "kind": "receipt",
       "date": "2024-03-15",
-      "reference": "seasonal-business/receipts-2024-03",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "2250.0000",
+      "reference": "membership-club/receipts-2024-03",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1208,19 +1368,19 @@
       "key": "operations-2024-03",
       "kind": "general_journal",
       "date": "2024-03-31",
-      "reference": "seasonal-business/operations-2024-03",
+      "reference": "membership-club/operations-2024-03",
       "description": "2024-03 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "250.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "250.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -1302,9 +1462,9 @@
       "key": "receipts-2024-04",
       "kind": "receipt",
       "date": "2024-04-15",
-      "reference": "seasonal-business/receipts-2024-04",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4050.0000",
+      "reference": "membership-club/receipts-2024-04",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1313,19 +1473,19 @@
       "key": "operations-2024-04",
       "kind": "general_journal",
       "date": "2024-04-30",
-      "reference": "seasonal-business/operations-2024-04",
+      "reference": "membership-club/operations-2024-04",
       "description": "2024-04 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "450.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "450.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -1407,9 +1567,9 @@
       "key": "receipts-2024-05",
       "kind": "receipt",
       "date": "2024-05-15",
-      "reference": "seasonal-business/receipts-2024-05",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4950.0000",
+      "reference": "membership-club/receipts-2024-05",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1418,19 +1578,19 @@
       "key": "operations-2024-05",
       "kind": "general_journal",
       "date": "2024-05-31",
-      "reference": "seasonal-business/operations-2024-05",
+      "reference": "membership-club/operations-2024-05",
       "description": "2024-05 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "550.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "550.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -1512,9 +1672,9 @@
       "key": "receipts-2024-06",
       "kind": "receipt",
       "date": "2024-06-15",
-      "reference": "seasonal-business/receipts-2024-06",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "5400.0000",
+      "reference": "membership-club/receipts-2024-06",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1523,19 +1683,19 @@
       "key": "operations-2024-06",
       "kind": "general_journal",
       "date": "2024-06-30",
-      "reference": "seasonal-business/operations-2024-06",
+      "reference": "membership-club/operations-2024-06",
       "description": "2024-06 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "600.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "600.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -1617,9 +1777,9 @@
       "key": "receipts-2024-07",
       "kind": "receipt",
       "date": "2024-07-15",
-      "reference": "seasonal-business/receipts-2024-07",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "5400.0000",
+      "reference": "membership-club/receipts-2024-07",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1628,19 +1788,19 @@
       "key": "operations-2024-07",
       "kind": "general_journal",
       "date": "2024-07-31",
-      "reference": "seasonal-business/operations-2024-07",
+      "reference": "membership-club/operations-2024-07",
       "description": "2024-07 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "600.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "600.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -1722,9 +1882,9 @@
       "key": "receipts-2024-08",
       "kind": "receipt",
       "date": "2024-08-15",
-      "reference": "seasonal-business/receipts-2024-08",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4950.0000",
+      "reference": "membership-club/receipts-2024-08",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1733,19 +1893,19 @@
       "key": "operations-2024-08",
       "kind": "general_journal",
       "date": "2024-08-31",
-      "reference": "seasonal-business/operations-2024-08",
+      "reference": "membership-club/operations-2024-08",
       "description": "2024-08 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "550.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "550.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -1827,9 +1987,9 @@
       "key": "receipts-2024-09",
       "kind": "receipt",
       "date": "2024-09-15",
-      "reference": "seasonal-business/receipts-2024-09",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4050.0000",
+      "reference": "membership-club/receipts-2024-09",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1838,19 +1998,19 @@
       "key": "operations-2024-09",
       "kind": "general_journal",
       "date": "2024-09-30",
-      "reference": "seasonal-business/operations-2024-09",
+      "reference": "membership-club/operations-2024-09",
       "description": "2024-09 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "450.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "450.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -1932,9 +2092,9 @@
       "key": "receipts-2024-10",
       "kind": "receipt",
       "date": "2024-10-15",
-      "reference": "seasonal-business/receipts-2024-10",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "2250.0000",
+      "reference": "membership-club/receipts-2024-10",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1943,19 +2103,19 @@
       "key": "operations-2024-10",
       "kind": "general_journal",
       "date": "2024-10-31",
-      "reference": "seasonal-business/operations-2024-10",
+      "reference": "membership-club/operations-2024-10",
       "description": "2024-10 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "250.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "250.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -2037,9 +2197,9 @@
       "key": "receipts-2024-11",
       "kind": "receipt",
       "date": "2024-11-15",
-      "reference": "seasonal-business/receipts-2024-11",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "membership-club/receipts-2024-11",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2048,19 +2208,19 @@
       "key": "operations-2024-11",
       "kind": "general_journal",
       "date": "2024-11-30",
-      "reference": "seasonal-business/operations-2024-11",
+      "reference": "membership-club/operations-2024-11",
       "description": "2024-11 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -2142,9 +2302,9 @@
       "key": "receipts-2024-12",
       "kind": "receipt",
       "date": "2024-12-15",
-      "reference": "seasonal-business/receipts-2024-12",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "membership-club/receipts-2024-12",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2153,7 +2313,7 @@
       "key": "loan-payment-2024",
       "kind": "general_journal",
       "date": "2024-12-20",
-      "reference": "seasonal-business/loan-payment-2024",
+      "reference": "membership-club/loan-payment-2024",
       "description": "Annual loan instalment: principal 1200 and illustrative interest 300",
       "lines": [
         {
@@ -2181,7 +2341,7 @@
       "key": "outstanding-sale",
       "kind": "general_journal",
       "date": "2024-12-29",
-      "reference": "seasonal-business/outstanding-sale",
+      "reference": "membership-club/outstanding-sale",
       "description": "Completed work for fictional Alder Customer: 800 outstanding at year end; manual receivable support",
       "lines": [
         {
@@ -2203,7 +2363,7 @@
       "key": "cash-deposit-2024",
       "kind": "general_journal",
       "date": "2024-12-30",
-      "reference": "seasonal-business/cash-deposit-2024",
+      "reference": "membership-club/cash-deposit-2024",
       "description": "Deposit counted till cash into primary bank; transfer has no income effect",
       "lines": [
         {
@@ -2225,7 +2385,7 @@
       "key": "bonus-accrual",
       "kind": "general_journal",
       "date": "2024-12-31",
-      "reference": "seasonal-business/bonus-accrual",
+      "reference": "membership-club/bonus-accrual",
       "description": "Accrue fictional staff bonus: Mira Vale 168 and Noel Reed 252; paid next January",
       "lines": [
         {
@@ -2247,19 +2407,19 @@
       "key": "operations-2024-12",
       "kind": "general_journal",
       "date": "2024-12-31",
-      "reference": "seasonal-business/operations-2024-12",
+      "reference": "membership-club/operations-2024-12",
       "description": "2024-12 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -2341,7 +2501,7 @@
       "key": "insurance-2025",
       "kind": "general_journal",
       "date": "2025-01-01",
-      "reference": "seasonal-business/insurance-2025",
+      "reference": "membership-club/insurance-2025",
       "description": "Prepay 2025 insurance: 1200, released at 100 per month",
       "lines": [
         {
@@ -2363,7 +2523,7 @@
       "key": "bonus-payment",
       "kind": "general_journal",
       "date": "2025-01-10",
-      "reference": "seasonal-business/bonus-payment",
+      "reference": "membership-club/bonus-payment",
       "description": "Settle the prior-year staff bonus; no second salary expense",
       "lines": [
         {
@@ -2385,9 +2545,9 @@
       "key": "receipts-2025-01",
       "kind": "receipt",
       "date": "2025-01-15",
-      "reference": "seasonal-business/receipts-2025-01",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "membership-club/receipts-2025-01",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2396,19 +2556,19 @@
       "key": "operations-2025-01",
       "kind": "general_journal",
       "date": "2025-01-31",
-      "reference": "seasonal-business/operations-2025-01",
+      "reference": "membership-club/operations-2025-01",
       "description": "2025-01 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -2490,7 +2650,7 @@
       "key": "collect-prior-sale",
       "kind": "general_journal",
       "date": "2025-02-10",
-      "reference": "seasonal-business/collect-prior-sale",
+      "reference": "membership-club/collect-prior-sale",
       "description": "Collect Alder Customer's prior-year 800; no second income entry",
       "lines": [
         {
@@ -2512,9 +2672,9 @@
       "key": "receipts-2025-02",
       "kind": "receipt",
       "date": "2025-02-15",
-      "reference": "seasonal-business/receipts-2025-02",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "membership-club/receipts-2025-02",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2523,19 +2683,19 @@
       "key": "operations-2025-02",
       "kind": "general_journal",
       "date": "2025-02-28",
-      "reference": "seasonal-business/operations-2025-02",
+      "reference": "membership-club/operations-2025-02",
       "description": "2025-02 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -2617,9 +2777,9 @@
       "key": "receipts-2025-03",
       "kind": "receipt",
       "date": "2025-03-15",
-      "reference": "seasonal-business/receipts-2025-03",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "2250.0000",
+      "reference": "membership-club/receipts-2025-03",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2628,19 +2788,19 @@
       "key": "operations-2025-03",
       "kind": "general_journal",
       "date": "2025-03-31",
-      "reference": "seasonal-business/operations-2025-03",
+      "reference": "membership-club/operations-2025-03",
       "description": "2025-03 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "250.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "250.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -2722,9 +2882,9 @@
       "key": "receipts-2025-04",
       "kind": "receipt",
       "date": "2025-04-15",
-      "reference": "seasonal-business/receipts-2025-04",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4050.0000",
+      "reference": "membership-club/receipts-2025-04",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2733,19 +2893,19 @@
       "key": "operations-2025-04",
       "kind": "general_journal",
       "date": "2025-04-30",
-      "reference": "seasonal-business/operations-2025-04",
+      "reference": "membership-club/operations-2025-04",
       "description": "2025-04 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "450.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "450.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -2827,9 +2987,9 @@
       "key": "receipts-2025-05",
       "kind": "receipt",
       "date": "2025-05-15",
-      "reference": "seasonal-business/receipts-2025-05",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4950.0000",
+      "reference": "membership-club/receipts-2025-05",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2838,19 +2998,19 @@
       "key": "operations-2025-05",
       "kind": "general_journal",
       "date": "2025-05-31",
-      "reference": "seasonal-business/operations-2025-05",
+      "reference": "membership-club/operations-2025-05",
       "description": "2025-05 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "550.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "550.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -2932,9 +3092,9 @@
       "key": "receipts-2025-06",
       "kind": "receipt",
       "date": "2025-06-15",
-      "reference": "seasonal-business/receipts-2025-06",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "5400.0000",
+      "reference": "membership-club/receipts-2025-06",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2943,19 +3103,19 @@
       "key": "operations-2025-06",
       "kind": "general_journal",
       "date": "2025-06-30",
-      "reference": "seasonal-business/operations-2025-06",
+      "reference": "membership-club/operations-2025-06",
       "description": "2025-06 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "600.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "600.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -3037,9 +3197,9 @@
       "key": "receipts-2025-07",
       "kind": "receipt",
       "date": "2025-07-15",
-      "reference": "seasonal-business/receipts-2025-07",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "5400.0000",
+      "reference": "membership-club/receipts-2025-07",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3048,19 +3208,19 @@
       "key": "operations-2025-07",
       "kind": "general_journal",
       "date": "2025-07-31",
-      "reference": "seasonal-business/operations-2025-07",
+      "reference": "membership-club/operations-2025-07",
       "description": "2025-07 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "600.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "600.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -3142,9 +3302,9 @@
       "key": "receipts-2025-08",
       "kind": "receipt",
       "date": "2025-08-15",
-      "reference": "seasonal-business/receipts-2025-08",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4950.0000",
+      "reference": "membership-club/receipts-2025-08",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3153,7 +3313,7 @@
       "key": "wrong-cost",
       "kind": "general_journal",
       "date": "2025-08-20",
-      "reference": "seasonal-business/wrong-cost",
+      "reference": "membership-club/wrong-cost",
       "description": "Correction exercise: 25 recorded instead of 45; this entry is reversed in full",
       "lines": [
         {
@@ -3175,7 +3335,7 @@
       "key": "correct-cost",
       "kind": "general_journal",
       "date": "2025-08-21",
-      "reference": "seasonal-business/correct-cost",
+      "reference": "membership-club/correct-cost",
       "description": "Replacement for wrong-cost: correct maintenance cost 45, original and reversal retained",
       "lines": [
         {
@@ -3197,19 +3357,19 @@
       "key": "operations-2025-08",
       "kind": "general_journal",
       "date": "2025-08-31",
-      "reference": "seasonal-business/operations-2025-08",
+      "reference": "membership-club/operations-2025-08",
       "description": "2025-08 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "550.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "550.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -3291,9 +3451,9 @@
       "key": "receipts-2025-09",
       "kind": "receipt",
       "date": "2025-09-15",
-      "reference": "seasonal-business/receipts-2025-09",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4050.0000",
+      "reference": "membership-club/receipts-2025-09",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3302,19 +3462,19 @@
       "key": "operations-2025-09",
       "kind": "general_journal",
       "date": "2025-09-30",
-      "reference": "seasonal-business/operations-2025-09",
+      "reference": "membership-club/operations-2025-09",
       "description": "2025-09 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "450.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "450.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -3396,9 +3556,9 @@
       "key": "receipts-2025-10",
       "kind": "receipt",
       "date": "2025-10-15",
-      "reference": "seasonal-business/receipts-2025-10",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "2250.0000",
+      "reference": "membership-club/receipts-2025-10",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3407,19 +3567,19 @@
       "key": "operations-2025-10",
       "kind": "general_journal",
       "date": "2025-10-31",
-      "reference": "seasonal-business/operations-2025-10",
+      "reference": "membership-club/operations-2025-10",
       "description": "2025-10 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "250.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "250.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -3501,9 +3661,9 @@
       "key": "receipts-2025-11",
       "kind": "receipt",
       "date": "2025-11-15",
-      "reference": "seasonal-business/receipts-2025-11",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "membership-club/receipts-2025-11",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3512,19 +3672,19 @@
       "key": "operations-2025-11",
       "kind": "general_journal",
       "date": "2025-11-30",
-      "reference": "seasonal-business/operations-2025-11",
+      "reference": "membership-club/operations-2025-11",
       "description": "2025-11 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -3606,9 +3766,9 @@
       "key": "receipts-2025-12",
       "kind": "receipt",
       "date": "2025-12-15",
-      "reference": "seasonal-business/receipts-2025-12",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "membership-club/receipts-2025-12",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3617,7 +3777,7 @@
       "key": "loan-payment-2025",
       "kind": "general_journal",
       "date": "2025-12-20",
-      "reference": "seasonal-business/loan-payment-2025",
+      "reference": "membership-club/loan-payment-2025",
       "description": "Annual loan instalment: principal 1200 and illustrative interest 300",
       "lines": [
         {
@@ -3645,7 +3805,7 @@
       "key": "outstanding-bill",
       "kind": "general_journal",
       "date": "2025-12-29",
-      "reference": "seasonal-business/outstanding-bill",
+      "reference": "membership-club/outstanding-bill",
       "description": "Fictional Harbor maintenance: 550 expense incurred, unpaid at year end; manual payable support",
       "lines": [
         {
@@ -3667,7 +3827,7 @@
       "key": "cash-deposit-2025",
       "kind": "general_journal",
       "date": "2025-12-30",
-      "reference": "seasonal-business/cash-deposit-2025",
+      "reference": "membership-club/cash-deposit-2025",
       "description": "Deposit counted till cash into primary bank; transfer has no income effect",
       "lines": [
         {
@@ -3689,19 +3849,19 @@
       "key": "operations-2025-12",
       "kind": "general_journal",
       "date": "2025-12-31",
-      "reference": "seasonal-business/operations-2025-12",
+      "reference": "membership-club/operations-2025-12",
       "description": "2025-12 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -3783,7 +3943,7 @@
       "key": "insurance-2026",
       "kind": "general_journal",
       "date": "2026-01-01",
-      "reference": "seasonal-business/insurance-2026",
+      "reference": "membership-club/insurance-2026",
       "description": "Prepay 2026 insurance: 1200, released at 100 per month",
       "lines": [
         {
@@ -3805,7 +3965,7 @@
       "key": "pay-prior-bill",
       "kind": "general_journal",
       "date": "2026-01-10",
-      "reference": "seasonal-business/pay-prior-bill",
+      "reference": "membership-club/pay-prior-bill",
       "description": "Pay Harbor's prior-year maintenance bill; no second expense",
       "lines": [
         {
@@ -3827,9 +3987,9 @@
       "key": "receipts-2026-01",
       "kind": "receipt",
       "date": "2026-01-15",
-      "reference": "seasonal-business/receipts-2026-01",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "membership-club/receipts-2026-01",
+      "description": "Membership club: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "2520.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3838,19 +3998,19 @@
       "key": "operations-2026-01",
       "kind": "general_journal",
       "date": "2026-01-31",
-      "reference": "seasonal-business/operations-2026-01",
+      "reference": "membership-club/operations-2026-01",
       "description": "2026-01 manual cash, staff, rent, utilities, prepayment and depreciation support",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "280.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "280.0000",
           "description": ""
         },
         {
@@ -3962,9 +4122,9 @@
   "monthly_support": [
     {
       "month": "2024-01",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -3978,9 +4138,9 @@
     },
     {
       "month": "2024-02",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -3994,9 +4154,9 @@
     },
     {
       "month": "2024-03",
-      "gross_receipts": "2500.0000",
-      "bank_receipts": "2250.0000",
-      "cash_receipts": "250.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4010,9 +4170,9 @@
     },
     {
       "month": "2024-04",
-      "gross_receipts": "4500.0000",
-      "bank_receipts": "4050.0000",
-      "cash_receipts": "450.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4026,9 +4186,9 @@
     },
     {
       "month": "2024-05",
-      "gross_receipts": "5500.0000",
-      "bank_receipts": "4950.0000",
-      "cash_receipts": "550.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4042,9 +4202,9 @@
     },
     {
       "month": "2024-06",
-      "gross_receipts": "6000.0000",
-      "bank_receipts": "5400.0000",
-      "cash_receipts": "600.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4058,9 +4218,9 @@
     },
     {
       "month": "2024-07",
-      "gross_receipts": "6000.0000",
-      "bank_receipts": "5400.0000",
-      "cash_receipts": "600.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4074,9 +4234,9 @@
     },
     {
       "month": "2024-08",
-      "gross_receipts": "5500.0000",
-      "bank_receipts": "4950.0000",
-      "cash_receipts": "550.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4090,9 +4250,9 @@
     },
     {
       "month": "2024-09",
-      "gross_receipts": "4500.0000",
-      "bank_receipts": "4050.0000",
-      "cash_receipts": "450.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4106,9 +4266,9 @@
     },
     {
       "month": "2024-10",
-      "gross_receipts": "2500.0000",
-      "bank_receipts": "2250.0000",
-      "cash_receipts": "250.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4122,9 +4282,9 @@
     },
     {
       "month": "2024-11",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4138,9 +4298,9 @@
     },
     {
       "month": "2024-12",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4154,9 +4314,9 @@
     },
     {
       "month": "2025-01",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4170,9 +4330,9 @@
     },
     {
       "month": "2025-02",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4186,9 +4346,9 @@
     },
     {
       "month": "2025-03",
-      "gross_receipts": "2500.0000",
-      "bank_receipts": "2250.0000",
-      "cash_receipts": "250.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4202,9 +4362,9 @@
     },
     {
       "month": "2025-04",
-      "gross_receipts": "4500.0000",
-      "bank_receipts": "4050.0000",
-      "cash_receipts": "450.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4218,9 +4378,9 @@
     },
     {
       "month": "2025-05",
-      "gross_receipts": "5500.0000",
-      "bank_receipts": "4950.0000",
-      "cash_receipts": "550.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4234,9 +4394,9 @@
     },
     {
       "month": "2025-06",
-      "gross_receipts": "6000.0000",
-      "bank_receipts": "5400.0000",
-      "cash_receipts": "600.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4250,9 +4410,9 @@
     },
     {
       "month": "2025-07",
-      "gross_receipts": "6000.0000",
-      "bank_receipts": "5400.0000",
-      "cash_receipts": "600.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4266,9 +4426,9 @@
     },
     {
       "month": "2025-08",
-      "gross_receipts": "5500.0000",
-      "bank_receipts": "4950.0000",
-      "cash_receipts": "550.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4282,9 +4442,9 @@
     },
     {
       "month": "2025-09",
-      "gross_receipts": "4500.0000",
-      "bank_receipts": "4050.0000",
-      "cash_receipts": "450.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4298,9 +4458,9 @@
     },
     {
       "month": "2025-10",
-      "gross_receipts": "2500.0000",
-      "bank_receipts": "2250.0000",
-      "cash_receipts": "250.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4314,9 +4474,9 @@
     },
     {
       "month": "2025-11",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4330,9 +4490,9 @@
     },
     {
       "month": "2025-12",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4346,9 +4506,9 @@
     },
     {
       "month": "2026-01",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "2800.0000",
+      "bank_receipts": "2520.0000",
+      "cash_receipts": "280.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
@@ -4366,9 +4526,9 @@
       "from": "2024-01-01",
       "to": "2024-01-31",
       "balances": {
-        "1000": "10190.0000",
+        "1000": "11630.0000",
         "1010": "11600.0000",
-        "1020": "720.0000",
+        "1020": "880.0000",
         "1030": "490.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -4378,7 +4538,7 @@
         "2100": "0.0000",
         "2200": "0.0000",
         "3000": "-25000.0000",
-        "4000": "-1200.0000",
+        "4000": "-2800.0000",
         "5000": "0.0000",
         "5100": "1500.0000",
         "5200": "400.0000",
@@ -4387,17 +4547,17 @@
         "5500": "0.0000",
         "5600": "0.0000"
       },
-      "income": "1200.0000",
+      "income": "2800.0000",
       "expenses": "2100.0000",
-      "profit": "-900.0000"
+      "profit": "700.0000"
     },
     {
       "from": "2024-02-01",
       "to": "2024-02-29",
       "balances": {
-        "1000": "7280.0000",
+        "1000": "10160.0000",
         "1010": "11200.0000",
-        "1020": "840.0000",
+        "1020": "1160.0000",
         "1030": "480.0000",
         "1100": "0.0000",
         "1200": "1000.0000",
@@ -4407,7 +4567,7 @@
         "2100": "0.0000",
         "2200": "0.0000",
         "3000": "-25000.0000",
-        "4000": "-2400.0000",
+        "4000": "-5600.0000",
         "5000": "0.0000",
         "5100": "3000.0000",
         "5200": "800.0000",
@@ -4416,17 +4576,17 @@
         "5500": "40.0000",
         "5600": "0.0000"
       },
-      "income": "1200.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "-940.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2024-03-01",
       "to": "2024-03-31",
       "balances": {
-        "1000": "13940.0000",
+        "1000": "17090.0000",
         "1010": "10800.0000",
-        "1020": "1090.0000",
+        "1020": "1440.0000",
         "1030": "470.0000",
         "1100": "0.0000",
         "1200": "900.0000",
@@ -4436,7 +4596,7 @@
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-4900.0000",
+        "4000": "-8400.0000",
         "5000": "0.0000",
         "5100": "4500.0000",
         "5200": "1200.0000",
@@ -4445,17 +4605,17 @@
         "5500": "80.0000",
         "5600": "0.0000"
       },
-      "income": "2500.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "360.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2024-04-01",
       "to": "2024-04-30",
       "balances": {
-        "1000": "16400.0000",
+        "1000": "18020.0000",
         "1010": "10400.0000",
-        "1020": "1540.0000",
+        "1020": "1720.0000",
         "1030": "460.0000",
         "1100": "0.0000",
         "1200": "800.0000",
@@ -4465,7 +4625,7 @@
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-9400.0000",
+        "4000": "-11200.0000",
         "5000": "0.0000",
         "5100": "6000.0000",
         "5200": "1600.0000",
@@ -4474,17 +4634,17 @@
         "5500": "120.0000",
         "5600": "0.0000"
       },
-      "income": "4500.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "2360.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2024-05-01",
       "to": "2024-05-31",
       "balances": {
-        "1000": "19760.0000",
+        "1000": "18950.0000",
         "1010": "10000.0000",
-        "1020": "2090.0000",
+        "1020": "2000.0000",
         "1030": "450.0000",
         "1100": "0.0000",
         "1200": "700.0000",
@@ -4494,7 +4654,7 @@
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-14900.0000",
+        "4000": "-14000.0000",
         "5000": "0.0000",
         "5100": "7500.0000",
         "5200": "2000.0000",
@@ -4503,17 +4663,17 @@
         "5500": "160.0000",
         "5600": "0.0000"
       },
-      "income": "5500.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "3360.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2024-06-01",
       "to": "2024-06-30",
       "balances": {
-        "1000": "23570.0000",
+        "1000": "19880.0000",
         "1010": "9600.0000",
-        "1020": "2690.0000",
+        "1020": "2280.0000",
         "1030": "440.0000",
         "1100": "0.0000",
         "1200": "600.0000",
@@ -4523,7 +4683,7 @@
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-20900.0000",
+        "4000": "-16800.0000",
         "5000": "0.0000",
         "5100": "9000.0000",
         "5200": "2400.0000",
@@ -4532,17 +4692,17 @@
         "5500": "200.0000",
         "5600": "0.0000"
       },
-      "income": "6000.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "3860.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2024-07-01",
       "to": "2024-07-31",
       "balances": {
-        "1000": "27380.0000",
+        "1000": "20810.0000",
         "1010": "9200.0000",
-        "1020": "3290.0000",
+        "1020": "2560.0000",
         "1030": "430.0000",
         "1100": "0.0000",
         "1200": "500.0000",
@@ -4552,7 +4712,7 @@
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-26900.0000",
+        "4000": "-19600.0000",
         "5000": "0.0000",
         "5100": "10500.0000",
         "5200": "2800.0000",
@@ -4561,17 +4721,17 @@
         "5500": "240.0000",
         "5600": "0.0000"
       },
-      "income": "6000.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "3860.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2024-08-01",
       "to": "2024-08-31",
       "balances": {
-        "1000": "30740.0000",
+        "1000": "21740.0000",
         "1010": "8800.0000",
-        "1020": "3840.0000",
+        "1020": "2840.0000",
         "1030": "420.0000",
         "1100": "0.0000",
         "1200": "400.0000",
@@ -4581,7 +4741,7 @@
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-32400.0000",
+        "4000": "-22400.0000",
         "5000": "0.0000",
         "5100": "12000.0000",
         "5200": "3200.0000",
@@ -4590,17 +4750,17 @@
         "5500": "280.0000",
         "5600": "0.0000"
       },
-      "income": "5500.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "3360.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2024-09-01",
       "to": "2024-09-30",
       "balances": {
-        "1000": "33200.0000",
+        "1000": "22670.0000",
         "1010": "8400.0000",
-        "1020": "4290.0000",
+        "1020": "3120.0000",
         "1030": "410.0000",
         "1100": "0.0000",
         "1200": "300.0000",
@@ -4610,7 +4770,7 @@
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-36900.0000",
+        "4000": "-25200.0000",
         "5000": "0.0000",
         "5100": "13500.0000",
         "5200": "3600.0000",
@@ -4619,17 +4779,17 @@
         "5500": "320.0000",
         "5600": "0.0000"
       },
-      "income": "4500.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "2360.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2024-10-01",
       "to": "2024-10-31",
       "balances": {
-        "1000": "33860.0000",
+        "1000": "23600.0000",
         "1010": "8000.0000",
-        "1020": "4540.0000",
+        "1020": "3400.0000",
         "1030": "400.0000",
         "1100": "0.0000",
         "1200": "200.0000",
@@ -4639,7 +4799,7 @@
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-39400.0000",
+        "4000": "-28000.0000",
         "5000": "0.0000",
         "5100": "15000.0000",
         "5200": "4000.0000",
@@ -4648,17 +4808,17 @@
         "5500": "360.0000",
         "5600": "0.0000"
       },
-      "income": "2500.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "360.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2024-11-01",
       "to": "2024-11-30",
       "balances": {
-        "1000": "33350.0000",
+        "1000": "24530.0000",
         "1010": "7600.0000",
-        "1020": "4660.0000",
+        "1020": "3680.0000",
         "1030": "390.0000",
         "1100": "0.0000",
         "1200": "100.0000",
@@ -4668,7 +4828,7 @@
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-40600.0000",
+        "4000": "-30800.0000",
         "5000": "0.0000",
         "5100": "16500.0000",
         "5200": "4400.0000",
@@ -4677,17 +4837,17 @@
         "5500": "400.0000",
         "5600": "0.0000"
       },
-      "income": "1200.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "-940.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2024-12-01",
       "to": "2024-12-31",
       "balances": {
-        "1000": "33840.0000",
+        "1000": "26460.0000",
         "1010": "7200.0000",
-        "1020": "2280.0000",
+        "1020": "1460.0000",
         "1030": "380.0000",
         "1100": "800.0000",
         "1200": "0.0000",
@@ -4697,7 +4857,7 @@
         "2100": "-420.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-42600.0000",
+        "4000": "-34400.0000",
         "5000": "0.0000",
         "5100": "18420.0000",
         "5200": "4800.0000",
@@ -4706,17 +4866,17 @@
         "5500": "440.0000",
         "5600": "300.0000"
       },
-      "income": "2000.0000",
+      "income": "3600.0000",
       "expenses": "2860.0000",
-      "profit": "-860.0000"
+      "profit": "740.0000"
     },
     {
       "from": "2025-01-01",
       "to": "2025-01-31",
       "balances": {
-        "1000": "31710.0000",
+        "1000": "25770.0000",
         "1010": "6800.0000",
-        "1020": "2400.0000",
+        "1020": "1740.0000",
         "1030": "370.0000",
         "1100": "800.0000",
         "1200": "1100.0000",
@@ -4726,7 +4886,7 @@
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-43800.0000",
+        "4000": "-37200.0000",
         "5000": "0.0000",
         "5100": "19920.0000",
         "5200": "5200.0000",
@@ -4735,17 +4895,17 @@
         "5500": "480.0000",
         "5600": "300.0000"
       },
-      "income": "1200.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "-940.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2025-02-01",
       "to": "2025-02-28",
       "balances": {
-        "1000": "32000.0000",
+        "1000": "27500.0000",
         "1010": "6400.0000",
-        "1020": "2520.0000",
+        "1020": "2020.0000",
         "1030": "360.0000",
         "1100": "0.0000",
         "1200": "1000.0000",
@@ -4755,7 +4915,7 @@
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-45000.0000",
+        "4000": "-40000.0000",
         "5000": "0.0000",
         "5100": "21420.0000",
         "5200": "5600.0000",
@@ -4764,17 +4924,17 @@
         "5500": "520.0000",
         "5600": "300.0000"
       },
-      "income": "1200.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "-940.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2025-03-01",
       "to": "2025-03-31",
       "balances": {
-        "1000": "32660.0000",
+        "1000": "28430.0000",
         "1010": "6000.0000",
-        "1020": "2770.0000",
+        "1020": "2300.0000",
         "1030": "350.0000",
         "1100": "0.0000",
         "1200": "900.0000",
@@ -4784,7 +4944,7 @@
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-47500.0000",
+        "4000": "-42800.0000",
         "5000": "0.0000",
         "5100": "22920.0000",
         "5200": "6000.0000",
@@ -4793,17 +4953,17 @@
         "5500": "560.0000",
         "5600": "300.0000"
       },
-      "income": "2500.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "360.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2025-04-01",
       "to": "2025-04-30",
       "balances": {
-        "1000": "35120.0000",
+        "1000": "29360.0000",
         "1010": "5600.0000",
-        "1020": "3220.0000",
+        "1020": "2580.0000",
         "1030": "340.0000",
         "1100": "0.0000",
         "1200": "800.0000",
@@ -4813,7 +4973,7 @@
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-52000.0000",
+        "4000": "-45600.0000",
         "5000": "0.0000",
         "5100": "24420.0000",
         "5200": "6400.0000",
@@ -4822,17 +4982,17 @@
         "5500": "600.0000",
         "5600": "300.0000"
       },
-      "income": "4500.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "2360.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2025-05-01",
       "to": "2025-05-31",
       "balances": {
-        "1000": "38480.0000",
+        "1000": "30290.0000",
         "1010": "5200.0000",
-        "1020": "3770.0000",
+        "1020": "2860.0000",
         "1030": "330.0000",
         "1100": "0.0000",
         "1200": "700.0000",
@@ -4842,7 +5002,7 @@
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-57500.0000",
+        "4000": "-48400.0000",
         "5000": "0.0000",
         "5100": "25920.0000",
         "5200": "6800.0000",
@@ -4851,17 +5011,17 @@
         "5500": "640.0000",
         "5600": "300.0000"
       },
-      "income": "5500.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "3360.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2025-06-01",
       "to": "2025-06-30",
       "balances": {
-        "1000": "42290.0000",
+        "1000": "31220.0000",
         "1010": "4800.0000",
-        "1020": "4370.0000",
+        "1020": "3140.0000",
         "1030": "320.0000",
         "1100": "0.0000",
         "1200": "600.0000",
@@ -4871,7 +5031,7 @@
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-63500.0000",
+        "4000": "-51200.0000",
         "5000": "0.0000",
         "5100": "27420.0000",
         "5200": "7200.0000",
@@ -4880,17 +5040,17 @@
         "5500": "680.0000",
         "5600": "300.0000"
       },
-      "income": "6000.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "3860.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2025-07-01",
       "to": "2025-07-31",
       "balances": {
-        "1000": "46100.0000",
+        "1000": "32150.0000",
         "1010": "4400.0000",
-        "1020": "4970.0000",
+        "1020": "3420.0000",
         "1030": "310.0000",
         "1100": "0.0000",
         "1200": "500.0000",
@@ -4900,7 +5060,7 @@
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-69500.0000",
+        "4000": "-54000.0000",
         "5000": "0.0000",
         "5100": "28920.0000",
         "5200": "7600.0000",
@@ -4909,17 +5069,17 @@
         "5500": "720.0000",
         "5600": "300.0000"
       },
-      "income": "6000.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "3860.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2025-08-01",
       "to": "2025-08-31",
       "balances": {
-        "1000": "49415.0000",
+        "1000": "33035.0000",
         "1010": "4000.0000",
-        "1020": "5520.0000",
+        "1020": "3700.0000",
         "1030": "300.0000",
         "1100": "0.0000",
         "1200": "400.0000",
@@ -4929,7 +5089,7 @@
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-75000.0000",
+        "4000": "-56800.0000",
         "5000": "45.0000",
         "5100": "30420.0000",
         "5200": "8000.0000",
@@ -4938,17 +5098,17 @@
         "5500": "760.0000",
         "5600": "300.0000"
       },
-      "income": "5500.0000",
+      "income": "2800.0000",
       "expenses": "2185.0000",
-      "profit": "3315.0000"
+      "profit": "615.0000"
     },
     {
       "from": "2025-09-01",
       "to": "2025-09-30",
       "balances": {
-        "1000": "51875.0000",
+        "1000": "33965.0000",
         "1010": "3600.0000",
-        "1020": "5970.0000",
+        "1020": "3980.0000",
         "1030": "290.0000",
         "1100": "0.0000",
         "1200": "300.0000",
@@ -4958,7 +5118,7 @@
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-79500.0000",
+        "4000": "-59600.0000",
         "5000": "45.0000",
         "5100": "31920.0000",
         "5200": "8400.0000",
@@ -4967,17 +5127,17 @@
         "5500": "800.0000",
         "5600": "300.0000"
       },
-      "income": "4500.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "2360.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2025-10-01",
       "to": "2025-10-31",
       "balances": {
-        "1000": "52535.0000",
+        "1000": "34895.0000",
         "1010": "3200.0000",
-        "1020": "6220.0000",
+        "1020": "4260.0000",
         "1030": "280.0000",
         "1100": "0.0000",
         "1200": "200.0000",
@@ -4987,7 +5147,7 @@
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-82000.0000",
+        "4000": "-62400.0000",
         "5000": "45.0000",
         "5100": "33420.0000",
         "5200": "8800.0000",
@@ -4996,17 +5156,17 @@
         "5500": "840.0000",
         "5600": "300.0000"
       },
-      "income": "2500.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "360.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2025-11-01",
       "to": "2025-11-30",
       "balances": {
-        "1000": "52025.0000",
+        "1000": "35825.0000",
         "1010": "2800.0000",
-        "1020": "6340.0000",
+        "1020": "4540.0000",
         "1030": "270.0000",
         "1100": "0.0000",
         "1200": "100.0000",
@@ -5016,7 +5176,7 @@
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-83200.0000",
+        "4000": "-65200.0000",
         "5000": "45.0000",
         "5100": "34920.0000",
         "5200": "9200.0000",
@@ -5025,17 +5185,17 @@
         "5500": "880.0000",
         "5600": "300.0000"
       },
-      "income": "1200.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "-940.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2025-12-01",
       "to": "2025-12-31",
       "balances": {
-        "1000": "53015.0000",
+        "1000": "38255.0000",
         "1010": "2400.0000",
-        "1020": "3460.0000",
+        "1020": "1820.0000",
         "1030": "260.0000",
         "1100": "0.0000",
         "1200": "0.0000",
@@ -5045,7 +5205,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-84400.0000",
+        "4000": "-68000.0000",
         "5000": "595.0000",
         "5100": "36420.0000",
         "5200": "9600.0000",
@@ -5054,17 +5214,17 @@
         "5500": "920.0000",
         "5600": "600.0000"
       },
-      "income": "1200.0000",
+      "income": "2800.0000",
       "expenses": "2990.0000",
-      "profit": "-1790.0000"
+      "profit": "-190.0000"
     },
     {
       "from": "2026-01-01",
       "to": "2026-01-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "37435.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "2100.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -5074,7 +5234,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-70800.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
@@ -5083,17 +5243,17 @@
         "5500": "960.0000",
         "5600": "600.0000"
       },
-      "income": "1200.0000",
+      "income": "2800.0000",
       "expenses": "2140.0000",
-      "profit": "-940.0000"
+      "profit": "660.0000"
     },
     {
       "from": "2026-02-01",
       "to": "2026-02-28",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "37435.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "2100.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -5103,7 +5263,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-70800.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
@@ -5120,9 +5280,9 @@
       "from": "2026-03-01",
       "to": "2026-03-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "37435.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "2100.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -5132,7 +5292,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-70800.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
@@ -5149,9 +5309,9 @@
       "from": "2026-04-01",
       "to": "2026-04-30",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "37435.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "2100.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -5161,7 +5321,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-70800.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
@@ -5178,9 +5338,9 @@
       "from": "2026-05-01",
       "to": "2026-05-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "37435.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "2100.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -5190,7 +5350,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-70800.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
@@ -5207,9 +5367,9 @@
       "from": "2026-06-01",
       "to": "2026-06-30",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "37435.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "2100.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -5219,7 +5379,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-70800.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
@@ -5236,9 +5396,9 @@
       "from": "2026-07-01",
       "to": "2026-07-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "37435.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "2100.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -5248,7 +5408,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-70800.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
@@ -5265,9 +5425,9 @@
       "from": "2026-08-01",
       "to": "2026-08-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "37435.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "2100.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -5277,7 +5437,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-70800.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
@@ -5294,9 +5454,9 @@
       "from": "2026-09-01",
       "to": "2026-09-30",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "37435.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "2100.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -5306,7 +5466,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-70800.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
@@ -5323,9 +5483,9 @@
       "from": "2026-10-01",
       "to": "2026-10-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "37435.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "2100.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -5335,7 +5495,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-70800.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
@@ -5352,9 +5512,9 @@
       "from": "2026-11-01",
       "to": "2026-11-30",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "37435.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "2100.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -5364,7 +5524,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-70800.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
@@ -5381,9 +5541,9 @@
       "from": "2026-12-01",
       "to": "2026-12-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "37435.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "2100.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
@@ -5393,7 +5553,7 @@
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-70800.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",

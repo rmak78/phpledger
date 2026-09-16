@@ -36,6 +36,32 @@ function pl_install_require_runtime(): void
     }
 }
 
+/**
+ * The 0.4 preview shipped an AR/AP schema under the same 017 identity. Keep
+ * that one published receipt admissible so the additive 027 upgrade can
+ * migrate it; every other changed receipt remains a hard failure.
+ */
+function pl_install_legacy_migration_checksums(): array
+{
+    return [
+        '017_ar_ap_documents' => ['9464c5c1f3f62c294e628bb1a8361918ac0b153c155ce2fa21c9d3bd63f7b936'],
+        '027_ar_ap_upgrade' => ['84067974e6e2fe81ffa4db0f075b5cbc806c0ec1895fe4bdb869653a3d69d9c3'],
+    ];
+}
+
+function pl_install_checksum_matches(string $version, string $checksum, string $receiptChecksum): bool
+{
+    if (hash_equals($checksum, $receiptChecksum)) {
+        return true;
+    }
+    foreach (pl_install_legacy_migration_checksums()[$version] ?? [] as $legacyChecksum) {
+        if (hash_equals($legacyChecksum, $receiptChecksum)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /** This checks the CLI identity only; it does not start a session or create a probe file. */
 function pl_install_session_check(string $handler, string $path): array
 {
@@ -71,7 +97,7 @@ function pl_install_schema_state(?array $receipts, array $checksums, int $tableC
         if ($receipt['status'] !== 'applied') {
             throw new DomainException('A previous migration is incomplete. Inspect or restore the database before retrying installation.');
         }
-        if (!hash_equals($checksums[$version], (string) $receipt['checksum'])) {
+        if (!pl_install_checksum_matches($version, $checksums[$version], (string) $receipt['checksum'])) {
             throw new DomainException('A migration checksum differs from this package. Restore the original file; do not edit the receipt.');
         }
         $seen[$version] = true;

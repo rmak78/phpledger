@@ -41,7 +41,7 @@ header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-sr
 $routes = [
     '/tax' => ['GET','POST'], '/ar' => ['GET','POST'], '/ap' => ['GET','POST'], '/parties' => ['GET','POST'], '/inventory' => ['GET','POST'], '/purchasing' => ['GET','POST'], '/opening-conversion' => ['GET','POST'],
     '/' => ['GET'], '/login' => ['GET', 'POST'], '/logout' => ['POST'], '/start' => ['POST'],
-    '/companies' => ['GET'], '/company/select' => ['POST'], '/onboarding' => ['GET', 'POST'],
+    '/companies' => ['GET'], '/company/select' => ['POST'], '/sample-chooser' => ['GET', 'POST'], '/onboarding' => ['GET', 'POST'],
     '/setup/review' => ['GET', 'POST'], '/transactions' => ['GET'], '/transactions/detail' => ['GET'],
     '/opening-balances' => ['GET', 'POST'], '/periods' => ['GET', 'POST'], '/bank-reconciliation' => ['GET', 'POST'],
     '/transactions/new' => ['GET'], '/transactions/edit' => ['GET'], '/transactions/save' => ['POST'],
@@ -87,7 +87,7 @@ try {
         require_once dirname(__DIR__) . '/includes/functions/connection_web_functions.php';
         pl_web_oauth($actorId, $user, $method);
     }
-    if (pl_demo_enabled() && in_array($path, ['/onboarding', '/setup/review', '/company/select'], true)) {
+    if (pl_demo_enabled() && in_array($path, ['/onboarding', '/sample-chooser', '/setup/review', '/company/select'], true)) {
         throw new DomainException('Business setup and administration are disabled in the public sample.');
     }
     if ($path === '/start') {
@@ -138,19 +138,135 @@ try {
         }
         pl_render('companies', ['title' => 'Your businesses', 'user' => $user, 'companies' => pl_list_companies($actorId)]);
     }
+    if ($path === '/sample-chooser') {
+        if (!in_array(getenv('PL_ENV'), ['local', 'test'], true)) {
+            throw new DomainException('The local sample chooser is unavailable in this environment.');
+        }
+        if ($method === 'POST') {
+            try {
+                $sampleId = pl_web_text($_POST, 'sample_pack');
+                $pack = pl_demo_sample($sampleId);
+                $currency = pl_web_text($_POST, 'currency', 'USD');
+                if (!isset(pl_base_currency_options()[$currency])) {
+                    throw new DomainException('Choose one of the supported sample currencies.');
+                }
+                $created = pl_setup_company($actorId, [
+                    'name' => (string) $pack['name'] . ' — Local sample', 'currency' => $currency,
+                    'start_date' => (string) $pack['start_date'], 'fiscal_year_end' => '12-31',
+                    'start_mode' => 'sample', 'sample_pack' => $pack['id'],
+                    'template_digest' => pl_starter_template()['digest'], 'zero_balances_confirmed' => false,
+                ], 'local-sample:' . bin2hex(random_bytes(16)));
+                $_SESSION['company_id'] = (int) $created['id'];
+                pl_notice('Your separate local sample company is ready to explore.');
+                pl_redirect('/sample-guide');
+            } catch (DomainException $error) {
+                pl_form_failure('/sample-chooser', $_POST, $error->getMessage());
+            }
+        }
+        pl_render('sample-chooser', ['title' => 'Choose a sample company', 'user' => $user, 'form' => pl_form_state('/sample-chooser')]);
+    }
     if ($path === '/onboarding') {
         $template = pl_starter_template();
         if ($method === 'POST') {
             $action = pl_web_text($_POST, 'action');
+            if ($action === 'next') {
+                $wizardStep = (int) pl_web_text($_POST, 'wizard_step', '1');
+                if ($wizardStep < 1 || $wizardStep > 4) {
+                    throw new DomainException('Choose a valid setup step.');
+                }
+                $stored = is_array($_SESSION['onboarding']['input'] ?? null) ? $_SESSION['onboarding']['input'] : [];
+                $input = $stored;
+                try {
+                    if ($wizardStep === 1) {
+                        $startMode = pl_web_text($_POST, 'start_mode', '');
+                        if (!in_array($startMode, ['fresh', 'existing', 'sample'], true)) {
+                            throw new DomainException('Choose whether to start fresh, bring past records, or explore a sample.');
+                        }
+                        if ($startMode === 'sample') {
+                            if (!in_array(getenv('PL_ENV'), ['local', 'test'], true)) {
+                                throw new DomainException('Sample companies are available through the isolated demo or local development environment.');
+                            }
+                            pl_redirect('/sample-chooser');
+                        }
+                        $input['start_mode'] = $startMode;
+                    } elseif ($wizardStep === 2) {
+                        $input['name'] = pl_web_text($_POST, 'name');
+                        $input['currency'] = pl_web_text($_POST, 'currency');
+                        $input['start_date'] = pl_web_text($_POST, 'start_date');
+                        pl_ledger_text($input['name'], 'Business name', 160);
+                        if (!isset(pl_base_currency_options()[$input['currency']])) {
+                            throw new DomainException('Choose one of the supported base currencies.');
+                        }
+                        pl_ledger_date($input['start_date']);
+                    } elseif ($wizardStep === 3) {
+                        $input['entity_type'] = pl_web_text($_POST, 'entity_type', 'other');
+                        if (!array_key_exists($input['entity_type'], pl_setup_entity_type_options())) {
+                            throw new DomainException('Choose the type of business or organisation you are setting up.');
+                        }
+                        $choice = pl_web_text($_POST, 'fiscal_year_end_choice');
+                        $input['fiscal_year_end_choice'] = $choice;
+                        $input['fiscal_year_end_custom'] = pl_web_text($_POST, 'fiscal_year_end_custom');
+                        if ($choice === 'custom') {
+                            $input['fiscal_year_end'] = $input['fiscal_year_end_custom'];
+                        } elseif (array_key_exists($choice, pl_fiscal_year_end_options()) && $choice !== 'custom') {
+                            $input['fiscal_year_end'] = $choice;
+                        } else {
+                            throw new DomainException('Choose a listed year-end option or enter a custom year end.');
+                        }
+                        pl_ledger_date('2001-' . $input['fiscal_year_end']);
+                    } else {
+                        $input['chart_choice'] = pl_web_text($_POST, 'chart_choice', 'neutral');
+                        if (!in_array($input['chart_choice'], ['neutral', 'bring_own'], true)) {
+                            throw new DomainException('Choose a chart starting point.');
+                        }
+                        if ($input['chart_choice'] === 'bring_own' && ($input['start_mode'] ?? '') !== 'existing') {
+                            throw new DomainException('Bring-your-own-chart is available when bringing past records.');
+                        }
+                        $input['zero_balances_confirmed'] = pl_web_text($_POST, 'zero_balances_confirmed') === '1';
+                        if (($input['start_mode'] ?? '') === 'fresh' && !$input['zero_balances_confirmed']) {
+                            throw new DomainException('Confirm that this business starts with no prior balances, or choose Bring past records.');
+                        }
+                        $input['template_digest'] = (string) $template['digest'];
+                    }
+                    $_SESSION['onboarding'] = ['input' => $input, 'request_key' => $_SESSION['onboarding']['request_key'] ?? bin2hex(random_bytes(24))];
+                    pl_redirect('/onboarding?step=' . ($wizardStep + 1));
+                } catch (DomainException $error) {
+                    pl_form_failure('/onboarding?step=' . $wizardStep, $_POST, $error->getMessage());
+                }
+            }
             if ($action === 'preview') {
                 $input = [
                     'name' => pl_web_text($_POST, 'name'), 'currency' => pl_web_text($_POST, 'currency'),
-                    'start_date' => pl_web_text($_POST, 'start_date'), 'fiscal_year_end' => pl_web_text($_POST, 'fiscal_year_end'),
+                    'start_date' => pl_web_text($_POST, 'start_date'),
+                    'entity_type' => pl_web_text($_POST, 'entity_type', 'other'),
+                    'fiscal_year_end_choice' => pl_web_text($_POST, 'fiscal_year_end_choice'),
+                    'fiscal_year_end_custom' => pl_web_text($_POST, 'fiscal_year_end_custom'),
+                    'chart_choice' => pl_web_text($_POST, 'chart_choice', 'neutral'),
                     'start_mode' => pl_web_text($_POST, 'start_mode', 'fresh'),
                     'template_digest' => (string) $template['digest'],
                     'zero_balances_confirmed' => pl_web_text($_POST, 'zero_balances_confirmed') === '1',
                 ];
                 try {
+                    if (!array_key_exists($input['entity_type'], pl_setup_entity_type_options())) {
+                        throw new DomainException('Choose the type of business or organisation you are setting up.');
+                    }
+                    $yearEndChoice = $input['fiscal_year_end_choice'];
+                    if ($yearEndChoice === 'custom') {
+                        $input['fiscal_year_end'] = $input['fiscal_year_end_custom'];
+                    } elseif ($yearEndChoice !== '') {
+                        if (!array_key_exists($yearEndChoice, pl_fiscal_year_end_options()) || $yearEndChoice === 'custom') {
+                            throw new DomainException('Choose a listed year-end option or enter a custom year end.');
+                        }
+                        $input['fiscal_year_end'] = $yearEndChoice;
+                    } else {
+                        // Preserve compatibility with existing non-browser callers using fiscal_year_end.
+                        $input['fiscal_year_end'] = pl_web_text($_POST, 'fiscal_year_end');
+                        $input['fiscal_year_end_choice'] = array_key_exists($input['fiscal_year_end'], pl_fiscal_year_end_options())
+                            ? $input['fiscal_year_end'] : 'custom';
+                        if ($input['fiscal_year_end_choice'] === 'custom') {
+                            $input['fiscal_year_end_custom'] = $input['fiscal_year_end'];
+                        }
+                    }
                     if (!in_array($input['start_mode'], ['fresh', 'existing', 'sample'], true)) {
                         throw new DomainException('Choose how you want to start.');
                     }
@@ -191,10 +307,15 @@ try {
             }
             throw new DomainException('Choose a valid setup action.');
         }
-        $preview = pl_web_text($_GET, 'step') === 'preview' && isset($_SESSION['onboarding']);
-        $form = pl_form_state($preview ? '/onboarding?step=preview' : '/onboarding');
+        $requestedStep = pl_web_text($_GET, 'step');
+        $preview = $requestedStep === 'preview' || ($requestedStep === '5' && isset($_SESSION['onboarding']));
+        $wizardStep = $preview ? 5 : max(1, min(4, (int) ($requestedStep !== '' ? $requestedStep : 1)));
+        if (!$preview && $wizardStep > 1 && !isset($_SESSION['onboarding'])) {
+            pl_redirect('/onboarding?step=1');
+        }
+        $form = pl_form_state($preview ? '/onboarding?step=preview' : '/onboarding?step=' . $wizardStep);
         $input = $form['input'] ?: ($_SESSION['onboarding']['input'] ?? []);
-        pl_render('onboarding', ['title' => $preview ? 'Review your setup' : 'Set up a business', 'user' => $user, 'template' => $template, 'preview' => $preview, 'form' => $form, 'input' => $input]);
+        pl_render('onboarding', ['title' => $preview ? 'Preview your setup' : 'Set up a business', 'user' => $user, 'template' => $template, 'preview' => $preview, 'wizard_step' => $wizardStep, 'form' => $form, 'input' => $input]);
     }
     if ($path === '/help') {
         pl_render('help', ['title' => 'Getting started', 'user' => $user]);

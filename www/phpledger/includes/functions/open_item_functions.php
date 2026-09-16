@@ -164,7 +164,9 @@ function pl_settle_open_item(int $actorId, int $companyId, int $bookId, array $i
 {
     $data = [
         'action' => 'settle', 'item_id' => pl_oi_id($input, 'item_id'), 'bank_account_id' => pl_oi_id($input, 'bank_account_id'),
-        'gain_account_id' => pl_oi_id($input, 'gain_account_id'), 'loss_account_id' => pl_oi_id($input, 'loss_account_id'),
+        // FX accounts are only needed when the frozen settlement produces a difference.
+        'gain_account_id' => isset($input['gain_account_id']) && $input['gain_account_id'] !== '' ? pl_oi_id($input, 'gain_account_id') : null,
+        'loss_account_id' => isset($input['loss_account_id']) && $input['loss_account_id'] !== '' ? pl_oi_id($input, 'loss_account_id') : null,
         'amount_fc' => pl_amount(pl_ledger_text($input['amount_fc'] ?? null, 'Allocated amount', 30)),
         'date' => pl_ledger_date(pl_ledger_text($input['date'] ?? null, 'Settlement date', 10)),
         'actual_rate' => isset($input['actual_rate']) ? pl_fx_rate(pl_ledger_text($input['actual_rate'], 'Actual rate', 40)) : null,
@@ -179,9 +181,6 @@ function pl_settle_open_item(int $actorId, int $companyId, int $bookId, array $i
             $book = pl_ledger_book($companyId, $bookId);
             $bank = DB::queryFirstRow('SELECT * FROM pl_accounts WHERE id = %i AND company_id = %i AND book_id = %i FOR SHARE', $data['bank_account_id'], $companyId, $bookId);
             if (!$bank || $bank['role'] !== 'cash_bank' || !(bool) $bank['is_active']) { throw new DomainException('Choose an active cash/bank account in this book.'); }
-            foreach (['gain_account_id' => 'income', 'loss_account_id' => 'expense'] as $field => $type) {
-                if (!DB::queryFirstRow('SELECT id FROM pl_accounts WHERE id = %i AND company_id = %i AND book_id = %i AND type = %s AND is_active = 1 FOR SHARE', $data[$field], $companyId, $bookId, $type)) { throw new DomainException('Choose scoped, active realised gain and loss accounts.'); }
-            }
             $snapshot = pl_oi_rate($actorId, $companyId, $bookId, $item['currency'], $data['date'], $data['actual_rate'], $data['rate_source_id'], 'actual');
             $settlementBase = pl_fx_convert($data['amount_fc'], $snapshot['rate']);
             $bankCurrency = $bank['currency'] ?? $book['currency'];
@@ -199,8 +198,12 @@ function pl_settle_open_item(int $actorId, int $companyId, int $bookId, array $i
             $difference = bcsub($settlementBase, $carrying, 4);
             if (bccomp($difference, '0', 4) !== 0) {
                 $gain = ($receipt && bccomp($difference, '0', 4) > 0) || (!$receipt && bccomp($difference, '0', 4) < 0);
+                $differenceAccount = $gain ? $data['gain_account_id'] : $data['loss_account_id'];
+                if ($differenceAccount === null || !DB::queryFirstRow('SELECT id FROM pl_accounts WHERE id = %i AND company_id = %i AND book_id = %i AND type = %s AND is_active = 1 FOR SHARE', $differenceAccount, $companyId, $bookId, $gain ? 'income' : 'expense')) {
+                    throw new DomainException('Choose a scoped, active realised gain/loss account when the settlement has an exchange difference.');
+                }
                 $magnitude = ltrim($difference, '-');
-                $lines[] = pl_oi_line($gain ? $data['gain_account_id'] : $data['loss_account_id'], $magnitude, $magnitude, !$gain, $domestic, $gain ? 'Realised FX gain' : 'Realised FX loss');
+                $lines[] = pl_oi_line($differenceAccount, $magnitude, $magnitude, !$gain, $domestic, $gain ? 'Realised FX gain' : 'Realised FX loss');
             }
             $journal = pl_post_journal_locked($actorId, $companyId, $bookId, ['date' => $data['date'], 'currency' => $book['currency'], 'source_type' => 'open_item_settlement', 'source_reference' => 'open-item:' . $item['id'], 'idempotency_key' => $journalKey, 'description' => $data['description'], 'lines' => $lines], null, (int) $item['id']);
             return ['item_id' => (int) $item['id'], 'journal_id' => (int) $journal['id'], 'allocated_fc' => $data['amount_fc'], 'allocated_base' => $carrying, 'settlement_base' => $settlementBase,

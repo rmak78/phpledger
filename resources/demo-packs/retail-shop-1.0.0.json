@@ -4,6 +4,1032 @@
   "name": "Willow Corner Shop",
   "business": "Retail shop",
   "demo_only": true,
+  "status": "released_demo_only",
+  "synthetic": true,
+  "capability_note": "This sample demonstrates bookkeeping examples only; it is not an implementation of the named industry's operational, regulatory or compliance systems.",
+  "source_material": {
+    "description": "Reconciled successor of synthetic teaching material; no real customer data.",
+    "runtime_note": "The pinned ledger history below is reconciled through the current supported general-journal and cash-document services. On isolated sample creation, the operational contract is replayed through the existing AR/AP, Purchasing, Inventory and general-journal services; unsupported vertical operations remain explicitly staged. The authored contract is retained as the synthetic source record and its supported bookkeeping events are replayable; location transfers, advanced revenue timing and other specialist controls remain evidence-only.",
+    "industry_profile_id": "retail-store",
+    "industry_profile": {
+      "id": "retail-store",
+      "sample_ids": [
+        "retail-shop"
+      ],
+      "name": "Retail store",
+      "operating_model": "Counter/POS sales of owned merchandise with purchasing, stock counts, returns and cash/card settlement.",
+      "distinct_controls": [
+        "merchandise inventory",
+        "cost of goods sold",
+        "sales returns",
+        "till and card settlement",
+        "shrinkage and count adjustments"
+      ],
+      "unsupported_in_sample": [
+        "barcode POS session close",
+        "loyalty",
+        "serial/IMEI tracking",
+        "size-color variant matrix"
+      ],
+      "seed_role_labels": {
+        "sales_revenue": "Merchandise sales",
+        "inventory": "Merchandise inventory",
+        "cost_of_goods_sold": "Merchandise cost of sales",
+        "operating_expense": "Retail operating expenses",
+        "expense": "Retail operating expenses"
+      },
+      "accounts": [
+        {
+          "semantic_key": "retail.inventory.goods",
+          "code": "1410",
+          "name": "Merchandise inventory",
+          "type": "asset",
+          "fixture_role": "inventory",
+          "normal_balance": "debit",
+          "source_ids": [
+            "matrix-11",
+            "ifrs-standardized-coa"
+          ]
+        },
+        {
+          "semantic_key": "retail.income.goods",
+          "code": "4100",
+          "name": "Merchandise sales",
+          "type": "income",
+          "fixture_role": "sales_revenue",
+          "normal_balance": "credit",
+          "source_ids": [
+            "matrix-11",
+            "ifrs-standardized-coa"
+          ]
+        },
+        {
+          "semantic_key": "retail.cost.goods",
+          "code": "5110",
+          "name": "Merchandise cost of sales",
+          "type": "expense",
+          "fixture_role": "cost_of_goods_sold",
+          "normal_balance": "debit",
+          "source_ids": [
+            "ifrs-standardized-coa"
+          ]
+        },
+        {
+          "semantic_key": "retail.cost.shrinkage",
+          "code": "5120",
+          "name": "Stock losses and write-downs",
+          "type": "expense",
+          "fixture_role": "shrinkage_expense",
+          "normal_balance": "debit",
+          "source_ids": [
+            "ifrs-standardized-coa"
+          ]
+        },
+        {
+          "semantic_key": "retail.liability.gift_credit",
+          "code": "2320",
+          "name": "Unredeemed store credit",
+          "type": "liability",
+          "fixture_role": "store_credit_liability",
+          "normal_balance": "credit",
+          "source_ids": [
+            "matrix-11"
+          ]
+        }
+      ],
+      "research_basis": [
+        {
+          "title": "Matrix: grocery and specialty retail segments",
+          "url": "https://hysabone.com/industries/supermarket/",
+          "supports": "POS, replenishment, multi-store and expiry-sensitive retail context."
+        },
+        {
+          "title": "Standardized chart of accounts: IFRS and US GAAP",
+          "url": "https://www.ifrs-gaap.com/standardized-chart-accounts",
+          "supports": "General asset, liability, equity, income, expense and contra-account vocabulary."
+        },
+        {
+          "title": "ERPNext POS profile",
+          "url": "https://docs.frappe.io/erpnext/pos-profile",
+          "supports": "Fast retail POS, warehouse, payment method and write-off control concepts."
+        }
+      ]
+    },
+    "research_status": "available",
+    "research_evidence": {
+      "source_pack_id": "retail-shop",
+      "source_pack_version": "1.0.0",
+      "source_status": "authored_candidate_not_runtime_seed",
+      "source_created_on": "2026-09-14",
+      "review_status": "synthetic_candidate",
+      "business_profile": {
+        "display_name": "Corner Stationery (Sample)",
+        "business_type": "retail-shop",
+        "description": "Counter shop selling notebooks and pen sets.",
+        "base_currency": "USD",
+        "accounting_start_date": "2026-09-01",
+        "as_of_date": "2026-09-30"
+      },
+      "semantic_accounts": [
+        {
+          "key": "core.cash.on_hand",
+          "type": "asset",
+          "label": "Cash On Hand",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "cash_on_hand"
+        },
+        {
+          "key": "core.bank.operating",
+          "type": "asset",
+          "label": "Bank Current",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "bank_current"
+        },
+        {
+          "key": "core.receivables.trade",
+          "type": "asset",
+          "label": "Accounts Receivable",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "accounts_receivable"
+        },
+        {
+          "key": "retail.inventory.goods",
+          "type": "asset",
+          "label": "Inventory",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "inventory"
+        },
+        {
+          "key": "core.assets.equipment",
+          "type": "asset",
+          "label": "Equipment",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "equipment"
+        },
+        {
+          "key": "core.payables.trade",
+          "type": "liability",
+          "label": "Accounts Payable",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "accounts_payable"
+        },
+        {
+          "key": "core.equity.capital",
+          "type": "equity",
+          "label": "Owner Equity",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "owner_equity"
+        },
+        {
+          "key": "retail.income.goods",
+          "type": "income",
+          "label": "Sales Revenue",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "sales_revenue"
+        },
+        {
+          "key": "retail.cost.goods",
+          "type": "expense",
+          "label": "Cost Of Goods Sold",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "cost_of_goods_sold"
+        },
+        {
+          "key": "core.expense.rent",
+          "type": "expense",
+          "label": "Rent Expense",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "rent_expense"
+        },
+        {
+          "key": "core.expense.utilities",
+          "type": "expense",
+          "label": "Utilities Expense",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "utilities_expense"
+        }
+      ],
+      "contacts": [
+        {
+          "id": "customer-01",
+          "name": "Demo Business Buyer (Sample)",
+          "role": "customer",
+          "email": "retail-shop.customer-01@example.invalid",
+          "synthetic": true
+        },
+        {
+          "id": "customer-02",
+          "name": "Demo Counter Customer (Sample)",
+          "role": "customer",
+          "email": "retail-shop.customer-02@example.invalid",
+          "synthetic": true
+        },
+        {
+          "id": "vendor-01",
+          "name": "Demo Supply Partner (Sample)",
+          "role": "vendor",
+          "email": "retail-shop.vendor-01@example.invalid",
+          "synthetic": true
+        },
+        {
+          "id": "vendor-02",
+          "name": "Demo Premises Provider (Sample)",
+          "role": "vendor",
+          "email": "retail-shop.vendor-02@example.invalid",
+          "synthetic": true
+        }
+      ],
+      "products": [
+        {
+          "id": "notebook",
+          "name": "Lined notebook (Sample)",
+          "kind": "stock",
+          "unit": "each",
+          "sale_price": "5.0000",
+          "fixture_unit_cost": "3.0000",
+          "income_account_key": "retail.income.goods",
+          "inventory_account_key": "retail.inventory.goods",
+          "cost_account_key": "retail.cost.goods",
+          "lot_tracking": false,
+          "medical_use": false
+        },
+        {
+          "id": "pen-set",
+          "name": "Three-pen set (Sample)",
+          "kind": "stock",
+          "unit": "set",
+          "sale_price": "8.0000",
+          "fixture_unit_cost": "4.0000",
+          "income_account_key": "retail.income.goods",
+          "inventory_account_key": "retail.inventory.goods",
+          "cost_account_key": "retail.cost.goods",
+          "lot_tracking": false,
+          "medical_use": false
+        }
+      ],
+      "locations": [
+        {
+          "id": "main",
+          "name": "Main premises (Sample)"
+        }
+      ],
+      "opening_evidence": {
+        "date": "2026-09-01",
+        "journal": [
+          {
+            "account_key": "core.cash.on_hand",
+            "debit": "500.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.bank.operating",
+            "debit": "3000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.receivables.trade",
+            "debit": "300.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "retail.inventory.goods",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.assets.equipment",
+            "debit": "2000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.payables.trade",
+            "debit": "0.0000",
+            "credit": "400.0000"
+          },
+          {
+            "account_key": "core.equity.capital",
+            "debit": "0.0000",
+            "credit": "6400.0000"
+          }
+        ],
+        "documents": [
+          {
+            "id": "opening-invoice",
+            "kind": "invoice",
+            "contact_id": "customer-01",
+            "issued_on": "2026-08-20",
+            "due_on": "2026-09-10",
+            "description": "Unpaid portion of August invoice; already included in opening receivables.",
+            "original_amount": "500.0000",
+            "paid_before_cutover": "200.0000",
+            "outstanding_at_cutover": "300.0000",
+            "posting_mode": "opening_control_detail_only"
+          },
+          {
+            "id": "opening-bill",
+            "kind": "bill",
+            "contact_id": "vendor-01",
+            "issued_on": "2026-08-20",
+            "due_on": "2026-09-10",
+            "description": "Unpaid portion of August supplier bill; already included in opening payables.",
+            "original_amount": "500.0000",
+            "paid_before_cutover": "100.0000",
+            "outstanding_at_cutover": "400.0000",
+            "posting_mode": "opening_control_detail_only"
+          }
+        ],
+        "stock": [
+          {
+            "item_id": "notebook",
+            "location_id": "main",
+            "lot_id": null,
+            "expires_on": null,
+            "quantity": "200.0000",
+            "unit_cost": "3.0000",
+            "value": "600.0000"
+          },
+          {
+            "item_id": "pen-set",
+            "location_id": "main",
+            "lot_id": null,
+            "expires_on": null,
+            "quantity": "100.0000",
+            "unit_cost": "4.0000",
+            "value": "400.0000"
+          }
+        ],
+        "deferred_contracts": []
+      },
+      "operational_event_contract": [
+        {
+          "id": "retail-shop-event-01",
+          "date": "2026-09-02",
+          "kind": "purchase",
+          "description": "Receive stock against purchase-001",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:retail-shop:v1:event-01",
+          "expected_journal": [
+            {
+              "account_key": "retail.inventory.goods",
+              "debit": "500.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.payables.trade",
+              "debit": "0.0000",
+              "credit": "500.0000"
+            }
+          ],
+          "document_id": "purchase-001",
+          "stock_movements": [
+            {
+              "item_id": "notebook",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "100.0000",
+              "unit_cost": "3.0000"
+            },
+            {
+              "item_id": "pen-set",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "50.0000",
+              "unit_cost": "4.0000"
+            }
+          ]
+        },
+        {
+          "id": "retail-shop-event-02",
+          "date": "2026-09-04",
+          "kind": "cash_sale",
+          "description": "Record sale-001",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:retail-shop:v1:event-02",
+          "expected_journal": [
+            {
+              "account_key": "core.cash.on_hand",
+              "debit": "124.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "retail.income.goods",
+              "debit": "0.0000",
+              "credit": "60.0000"
+            },
+            {
+              "account_key": "retail.income.goods",
+              "debit": "0.0000",
+              "credit": "64.0000"
+            },
+            {
+              "account_key": "retail.cost.goods",
+              "debit": "68.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "retail.inventory.goods",
+              "debit": "0.0000",
+              "credit": "68.0000"
+            }
+          ],
+          "document_id": "sale-001",
+          "stock_movements": [
+            {
+              "item_id": "notebook",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "-12.0000",
+              "unit_cost": "3.0000"
+            },
+            {
+              "item_id": "pen-set",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "-8.0000",
+              "unit_cost": "4.0000"
+            }
+          ]
+        },
+        {
+          "id": "retail-shop-event-03",
+          "date": "2026-09-06",
+          "kind": "credit_sale",
+          "description": "Record invoice-001",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:retail-shop:v1:event-03",
+          "expected_journal": [
+            {
+              "account_key": "core.receivables.trade",
+              "debit": "180.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "retail.income.goods",
+              "debit": "0.0000",
+              "credit": "100.0000"
+            },
+            {
+              "account_key": "retail.income.goods",
+              "debit": "0.0000",
+              "credit": "80.0000"
+            },
+            {
+              "account_key": "retail.cost.goods",
+              "debit": "100.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "retail.inventory.goods",
+              "debit": "0.0000",
+              "credit": "100.0000"
+            }
+          ],
+          "document_id": "invoice-001",
+          "stock_movements": [
+            {
+              "item_id": "notebook",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "-20.0000",
+              "unit_cost": "3.0000"
+            },
+            {
+              "item_id": "pen-set",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "-10.0000",
+              "unit_cost": "4.0000"
+            }
+          ]
+        },
+        {
+          "id": "retail-shop-event-04",
+          "date": "2026-09-10",
+          "kind": "receipt",
+          "description": "Allocate customer receipt to named documents",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:retail-shop:v1:event-04",
+          "expected_journal": [
+            {
+              "account_key": "core.bank.operating",
+              "debit": "200.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.receivables.trade",
+              "debit": "0.0000",
+              "credit": "200.0000"
+            }
+          ],
+          "allocations": [
+            {
+              "document_id": "opening-invoice",
+              "amount": "120.0000"
+            },
+            {
+              "document_id": "invoice-001",
+              "amount": "80.0000"
+            }
+          ],
+          "total": "200.0000"
+        },
+        {
+          "id": "retail-shop-event-05",
+          "date": "2026-09-12",
+          "kind": "supplier_payment",
+          "description": "Pay supplier bills",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:retail-shop:v1:event-05",
+          "expected_journal": [
+            {
+              "account_key": "core.payables.trade",
+              "debit": "400.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "0.0000",
+              "credit": "400.0000"
+            }
+          ],
+          "allocations": [
+            {
+              "document_id": "opening-bill",
+              "amount": "200.0000"
+            },
+            {
+              "document_id": "purchase-001",
+              "amount": "200.0000"
+            }
+          ],
+          "total": "400.0000"
+        },
+        {
+          "id": "retail-shop-event-06",
+          "date": "2026-09-14",
+          "kind": "expense",
+          "description": "Pay September premises expense",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:retail-shop:v1:event-06",
+          "expected_journal": [
+            {
+              "account_key": "core.expense.rent",
+              "debit": "100.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "0.0000",
+              "credit": "100.0000"
+            }
+          ],
+          "expense_account_key": "core.expense.rent",
+          "total": "100.0000"
+        },
+        {
+          "id": "retail-shop-event-07",
+          "date": "2026-09-16",
+          "kind": "sales_return",
+          "description": "Return stock and credit invoice-001",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:retail-shop:v1:event-07",
+          "expected_journal": [
+            {
+              "account_key": "retail.income.goods",
+              "debit": "16.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.receivables.trade",
+              "debit": "0.0000",
+              "credit": "16.0000"
+            },
+            {
+              "account_key": "retail.inventory.goods",
+              "debit": "8.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "retail.cost.goods",
+              "debit": "0.0000",
+              "credit": "8.0000"
+            }
+          ],
+          "document_id": "credit-001",
+          "allocations": [
+            {
+              "document_id": "invoice-001",
+              "amount": "16.0000"
+            }
+          ],
+          "stock_movements": [
+            {
+              "item_id": "pen-set",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "2.0000",
+              "unit_cost": "4.0000"
+            }
+          ]
+        },
+        {
+          "id": "retail-shop-event-08",
+          "date": "2026-09-20",
+          "kind": "cash_transfer",
+          "description": "Deposit counted till cash into bank",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:retail-shop:v1:event-08",
+          "expected_journal": [
+            {
+              "account_key": "core.bank.operating",
+              "debit": "200.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.cash.on_hand",
+              "debit": "0.0000",
+              "credit": "200.0000"
+            }
+          ],
+          "total": "200.0000"
+        },
+        {
+          "id": "retail-shop-event-09",
+          "date": "2026-09-22",
+          "kind": "expense",
+          "description": "Utility charge entered against the wrong source amount",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:retail-shop:v1:event-09",
+          "expected_journal": [
+            {
+              "account_key": "core.expense.utilities",
+              "debit": "60.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "0.0000",
+              "credit": "60.0000"
+            }
+          ],
+          "expense_account_key": "core.expense.utilities",
+          "total": "60.0000"
+        },
+        {
+          "id": "retail-shop-event-10",
+          "date": "2026-09-23",
+          "kind": "reversal",
+          "description": "Reverse the incorrect utility entry",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:retail-shop:v1:event-10",
+          "expected_journal": [
+            {
+              "account_key": "core.expense.utilities",
+              "debit": "0.0000",
+              "credit": "60.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "60.0000",
+              "credit": "0.0000"
+            }
+          ],
+          "reverses_event_id": "retail-shop-event-09",
+          "reason": "Source receipt confirms 45.00, not 60.00"
+        },
+        {
+          "id": "retail-shop-event-11",
+          "date": "2026-09-23",
+          "kind": "expense",
+          "description": "Post corrected utility charge from the source receipt",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:retail-shop:v1:event-11",
+          "expected_journal": [
+            {
+              "account_key": "core.expense.utilities",
+              "debit": "45.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "0.0000",
+              "credit": "45.0000"
+            }
+          ],
+          "expense_account_key": "core.expense.utilities",
+          "total": "45.0000"
+        },
+        {
+          "id": "retail-shop-stock-count-2026-09-30",
+          "date": "2026-09-30",
+          "kind": "stock_count",
+          "description": "Counted closing stock against the pinned September valuation.",
+          "runtime_status": "derived_evidence_only",
+          "idempotency_key": "derived:retail-shop:stock-count:2026-09-30",
+          "expected_journal": [],
+          "counted_stock": [
+            {
+              "item_id": "notebook",
+              "location_id": "main",
+              "lot_id": null,
+              "quantity": "268.0000"
+            },
+            {
+              "item_id": "pen-set",
+              "location_id": "main",
+              "lot_id": null,
+              "quantity": "134.0000"
+            }
+          ],
+          "valuation": {
+            "method": "moving_weighted_average",
+            "total_value": "1340.0000"
+          }
+        }
+      ],
+      "expected_reports": {
+        "as_of_date": "2026-09-30",
+        "trial_balance": [
+          {
+            "account_key": "core.cash.on_hand",
+            "debit": "424.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.bank.operating",
+            "debit": "2855.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.receivables.trade",
+            "debit": "264.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "retail.inventory.goods",
+            "debit": "1340.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.assets.equipment",
+            "debit": "2000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.payables.trade",
+            "debit": "0.0000",
+            "credit": "500.0000"
+          },
+          {
+            "account_key": "core.equity.capital",
+            "debit": "0.0000",
+            "credit": "6400.0000"
+          },
+          {
+            "account_key": "retail.income.goods",
+            "debit": "0.0000",
+            "credit": "288.0000"
+          },
+          {
+            "account_key": "retail.cost.goods",
+            "debit": "160.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.expense.rent",
+            "debit": "100.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.expense.utilities",
+            "debit": "45.0000",
+            "credit": "0.0000"
+          }
+        ],
+        "trial_balance_debit": "7188.0000",
+        "trial_balance_credit": "7188.0000",
+        "journal_turnover_debit_including_opening": "8861.0000",
+        "journal_turnover_credit_including_opening": "8861.0000",
+        "income": "288.0000",
+        "expenses": "305.0000",
+        "net_result": "-17.0000",
+        "assets": "6883.0000",
+        "liabilities": "500.0000",
+        "opening_equity": "6400.0000",
+        "equity_including_current_result": "6383.0000",
+        "accounts_receivable": "264.0000",
+        "accounts_payable": "500.0000",
+        "inventory_value": "1340.0000",
+        "cash_on_hand": "424.0000",
+        "bank_current": "2855.0000",
+        "document_balances": [
+          {
+            "document_id": "opening-invoice",
+            "kind": "invoice",
+            "outstanding": "180.0000"
+          },
+          {
+            "document_id": "opening-bill",
+            "kind": "bill",
+            "outstanding": "200.0000"
+          },
+          {
+            "document_id": "purchase-001",
+            "kind": "bill",
+            "outstanding": "300.0000"
+          },
+          {
+            "document_id": "invoice-001",
+            "kind": "invoice",
+            "outstanding": "84.0000"
+          }
+        ],
+        "stock_on_hand": [
+          {
+            "item_id": "notebook",
+            "location_id": "main",
+            "lot_id": null,
+            "quantity": "268.0000"
+          },
+          {
+            "item_id": "pen-set",
+            "location_id": "main",
+            "lot_id": null,
+            "quantity": "134.0000"
+          }
+        ],
+        "ageing": {
+          "receivables": {
+            "current": "0.0000",
+            "1_30": "264.0000",
+            "31_60": "0.0000",
+            "61_90": "0.0000",
+            "91_plus": "0.0000",
+            "total": "264.0000"
+          },
+          "payables": {
+            "current": "0.0000",
+            "1_30": "500.0000",
+            "31_60": "0.0000",
+            "61_90": "0.0000",
+            "91_plus": "0.0000",
+            "total": "500.0000"
+          }
+        }
+      },
+      "industry_scenarios": [
+        {
+          "id": "register-close",
+          "title": "Check a sale, return and counted till",
+          "status": "future_module_scenario_not_implemented",
+          "fixture_entity": {
+            "register_id": "register-01",
+            "cash_sale_document_id": "sale-001",
+            "credit_return_document_id": "credit-001",
+            "opening_float": "500.0000"
+          },
+          "steps": [
+            "Enter the stationery cash sale.",
+            "Review a return credited to the business invoice.",
+            "Deposit 200 from the till and compare counted cash to the expected report."
+          ],
+          "acceptance_checks": [
+            "A credit-note return does not pay cash when applied to an unpaid invoice.",
+            "SKU identity survives returns and stock reporting.",
+            "Barcode scanning and register sessions remain later UI features."
+          ]
+        }
+      ],
+      "industry_profile_id": "retail-store",
+      "industry_profile": {
+        "id": "retail-store",
+        "sample_ids": [
+          "retail-shop"
+        ],
+        "name": "Retail store",
+        "operating_model": "Counter/POS sales of owned merchandise with purchasing, stock counts, returns and cash/card settlement.",
+        "distinct_controls": [
+          "merchandise inventory",
+          "cost of goods sold",
+          "sales returns",
+          "till and card settlement",
+          "shrinkage and count adjustments"
+        ],
+        "unsupported_in_sample": [
+          "barcode POS session close",
+          "loyalty",
+          "serial/IMEI tracking",
+          "size-color variant matrix"
+        ],
+        "seed_role_labels": {
+          "sales_revenue": "Merchandise sales",
+          "inventory": "Merchandise inventory",
+          "cost_of_goods_sold": "Merchandise cost of sales",
+          "operating_expense": "Retail operating expenses",
+          "expense": "Retail operating expenses"
+        },
+        "accounts": [
+          {
+            "semantic_key": "retail.inventory.goods",
+            "code": "1410",
+            "name": "Merchandise inventory",
+            "type": "asset",
+            "fixture_role": "inventory",
+            "normal_balance": "debit",
+            "source_ids": [
+              "matrix-11",
+              "ifrs-standardized-coa"
+            ]
+          },
+          {
+            "semantic_key": "retail.income.goods",
+            "code": "4100",
+            "name": "Merchandise sales",
+            "type": "income",
+            "fixture_role": "sales_revenue",
+            "normal_balance": "credit",
+            "source_ids": [
+              "matrix-11",
+              "ifrs-standardized-coa"
+            ]
+          },
+          {
+            "semantic_key": "retail.cost.goods",
+            "code": "5110",
+            "name": "Merchandise cost of sales",
+            "type": "expense",
+            "fixture_role": "cost_of_goods_sold",
+            "normal_balance": "debit",
+            "source_ids": [
+              "ifrs-standardized-coa"
+            ]
+          },
+          {
+            "semantic_key": "retail.cost.shrinkage",
+            "code": "5120",
+            "name": "Stock losses and write-downs",
+            "type": "expense",
+            "fixture_role": "shrinkage_expense",
+            "normal_balance": "debit",
+            "source_ids": [
+              "ifrs-standardized-coa"
+            ]
+          },
+          {
+            "semantic_key": "retail.liability.gift_credit",
+            "code": "2320",
+            "name": "Unredeemed store credit",
+            "type": "liability",
+            "fixture_role": "store_credit_liability",
+            "normal_balance": "credit",
+            "source_ids": [
+              "matrix-11"
+            ]
+          }
+        ],
+        "research_basis": [
+          {
+            "title": "Matrix: grocery and specialty retail segments",
+            "url": "https://hysabone.com/industries/supermarket/",
+            "supports": "POS, replenishment, multi-store and expiry-sensitive retail context."
+          },
+          {
+            "title": "Standardized chart of accounts: IFRS and US GAAP",
+            "url": "https://www.ifrs-gaap.com/standardized-chart-accounts",
+            "supports": "General asset, liability, equity, income, expense and contra-account vocabulary."
+          },
+          {
+            "title": "ERPNext POS profile",
+            "url": "https://docs.frappe.io/erpnext/pos-profile",
+            "supports": "Fast retail POS, warehouse, payment method and write-off control concepts."
+          }
+        ]
+      }
+    }
+  },
+  "scenario": {
+    "id": "register-close",
+    "title": "Check a sale, return and counted till",
+    "goal": "Compare a small retail sale, return, till deposit, stock balance and customer settlement.",
+    "steps": [
+      "Review the opening till, bank, receivable, payable and stock evidence.",
+      "Trace the stationery cash sale and its cost of goods sold.",
+      "Review the customer invoice, receipt and linked return credit.",
+      "Compare the counted till transfer with the cash and bank account movements."
+    ],
+    "checks": [
+      "A credit-note return does not create a second sale or cash receipt.",
+      "SKU identity survives the sale, return and stock reports.",
+      "Barcode scanning and register sessions remain future UI features."
+    ]
+  },
   "notice": "Original synthetic general-ledger examples. Manual staff, loan, outstanding-item and stock schedules do not implement payroll, AR/AP, inventory or tax modules. Period closure blocks posting; it is not statutory financial-statement approval or an earnings-transfer journal.",
   "start_date": "2024-01-01",
   "history_end": "2025-12-31",

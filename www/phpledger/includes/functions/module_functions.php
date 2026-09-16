@@ -66,7 +66,11 @@ function pl_module_installed(array $manifest): void
     foreach ($manifest['migrations'] as $version) {
         $path = PL_APP . '/install/migrations/' . $version . '.php';
         $receipt = DB::queryFirstRow('SELECT status, checksum FROM pl_schema_migrations WHERE version = %s FOR SHARE', $version);
-        if (!$receipt || $receipt['status'] !== 'applied' || !is_file($path) || !hash_equals($receipt['checksum'], (string) hash_file('sha256', $path))) {
+        $checksum = is_file($path) ? hash_file('sha256', $path) : false;
+        $legacyReceipt = $version === '017_ar_ap_documents'
+            && hash_equals('9464c5c1f3f62c294e628bb1a8361918ac0b153c155ce2fa21c9d3bd63f7b936', (string) ($receipt['checksum'] ?? ''));
+        if (!$receipt || $receipt['status'] !== 'applied' || $checksum === false
+            || (!hash_equals((string) $receipt['checksum'], $checksum) && !$legacyReceipt)) {
             throw new DomainException('Module installation is incomplete or incompatible. Run the reviewed package preflight and migrations.');
         }
     }

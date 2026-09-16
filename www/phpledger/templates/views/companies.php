@@ -6,7 +6,7 @@
             <h1 id="companies-title">Your businesses</h1>
             <p class="muted">Choose the books you want to work with, or set up a separate business.</p>
         </div>
-        <a class="button primary" href="<?= pl_e(pl_url('/onboarding')) ?>">Set up a business</a>
+        <div class="actions"><?php if (in_array(getenv('PL_ENV'), ['local', 'test'], true)): ?><a class="button secondary" href="<?= pl_e(pl_url('/sample-chooser')) ?>">Try a sample company</a><?php endif; ?><a class="button primary" href="<?= pl_e(pl_url('/onboarding')) ?>">Set up a business</a></div>
     </div>
     <?php if ($companies === []): ?>
         <div class="panel">
@@ -15,6 +15,7 @@
             <p class="muted">The sample uses fictional transactions and will not be added to your real business.</p>
             <div class="actions">
                 <a class="button primary" href="<?= pl_e(pl_url('/onboarding')) ?>">Choose how to start</a>
+                <?php if (in_array(getenv('PL_ENV'), ['local', 'test'], true)): ?><a class="button secondary" href="<?= pl_e(pl_url('/sample-chooser')) ?>">Try a sample company</a><?php endif; ?>
                 <a class="button secondary" href="<?= pl_e(pl_url('/help')) ?>">Read the getting-started guide</a>
             </div>
         </div>

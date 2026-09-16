@@ -4,14 +4,15 @@
   "research_date": "2026-09-14",
   "status": "unreviewed",
   "runtime_importable": false,
-  "accountant_reviewed": false,
+  "product_owner_validated": false,
   "purpose": "Research metadata and source inventory for future installation templates. Not an account seed, migration, tax engine, or approved country package.",
   "documents": [
     "docs/coa/README.md",
     "docs/coa/ACCOUNT_CANDIDATES.md",
     "docs/coa/TEMPLATE_MODEL.md",
     "docs/coa/SOURCES.md",
-    "docs/coa/DISCOVERY_GAPS.md"
+    "docs/coa/DISCOVERY_GAPS.md",
+    "resources/coa/industry-profiles-0.5.0.json"
   ],
   "account_type_values": [
     "asset",
@@ -23,6 +24,7 @@
   "composition_proposal": {
     "core_packages": 1,
     "primary_industry_profiles": 1,
+    "selected_sample_profiles": 11,
     "country_packages": "zero_or_one",
     "reviewed_optional_capabilities": true,
     "tax_rates_included": false,
@@ -55,7 +57,7 @@
         "service.income.recurring",
         "service.cost.contractors"
       ],
-      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+      "review_gate": "Product-owner and practitioner review; source references support concepts, not each proposed account; operational feature implementation separate"
     },
     {
       "id": "retail",
@@ -71,7 +73,7 @@
         "retail.income.goods",
         "retail.cost.goods"
       ],
-      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+      "review_gate": "Product-owner and practitioner review; source references support concepts, not each proposed account; operational feature implementation separate"
     },
     {
       "id": "wholesale-distribution",
@@ -87,7 +89,7 @@
         "wholesale.asset.route_cash",
         "wholesale.cost.goods"
       ],
-      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+      "review_gate": "Product-owner and practitioner review; source references support concepts, not each proposed account; operational feature implementation separate"
     },
     {
       "id": "restaurant-cafe",
@@ -103,7 +105,7 @@
         "restaurant.income.food",
         "restaurant.cost.consumption"
       ],
-      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+      "review_gate": "Product-owner and practitioner review; source references support concepts, not each proposed account; operational feature implementation separate"
     },
     {
       "id": "pharmacy",
@@ -119,7 +121,7 @@
         "pharmacy.income.medicines",
         "pharmacy.cost.goods"
       ],
-      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+      "review_gate": "Product-owner and practitioner review; source references support concepts, not each proposed account; operational feature implementation separate"
     },
     {
       "id": "jewelry",
@@ -135,7 +137,7 @@
         "jewelry.inventory.finished",
         "jewelry.cost.goods"
       ],
-      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+      "review_gate": "Product-owner and practitioner review; source references support concepts, not each proposed account; operational feature implementation separate"
     },
     {
       "id": "light-manufacturing",
@@ -151,7 +153,7 @@
         "manufacturing.inventory.work",
         "manufacturing.inventory.finished"
       ],
-      "review_gate": "Practitioner and accountant review; source references support concepts, not each proposed account; operational feature implementation separate"
+      "review_gate": "Product-owner and practitioner review; source references support concepts, not each proposed account; operational feature implementation separate"
     },
     {
       "id": "PK",
@@ -166,7 +168,7 @@
         "SRC-SECP-ACTS"
       ],
       "tax_rules_included": false,
-      "review_gate": "Country accountant, legal-form/registration requirements, provenance and accounting scenarios verified before release"
+      "review_gate": "Local legal-form/registration requirements, provenance and accounting scenarios verified before release"
     },
     {
       "id": "IN",
@@ -181,7 +183,7 @@
         "SRC-ICAI-UPDATES"
       ],
       "tax_rules_included": false,
-      "review_gate": "Country accountant, legal-form/registration requirements, provenance and accounting scenarios verified before release"
+      "review_gate": "Local legal-form/registration requirements, provenance and accounting scenarios verified before release"
     },
     {
       "id": "AE",
@@ -194,7 +196,7 @@
         "SRC-FTA-RECORDS"
       ],
       "tax_rules_included": false,
-      "review_gate": "Country accountant, legal-form/registration requirements, provenance and accounting scenarios verified before release"
+      "review_gate": "Local legal-form/registration requirements, provenance and accounting scenarios verified before release"
     },
     {
       "id": "GB",
@@ -206,7 +208,7 @@
         "SRC-HMRC-VAT"
       ],
       "tax_rules_included": false,
-      "review_gate": "Country accountant, legal-form/registration requirements, provenance and accounting scenarios verified before release"
+      "review_gate": "Local legal-form/registration requirements, provenance and accounting scenarios verified before release"
     },
     {
       "id": "US",
@@ -218,7 +220,7 @@
         "SRC-IRS-RECORDS"
       ],
       "tax_rules_included": false,
-      "review_gate": "Country accountant, legal-form/registration requirements, provenance and accounting scenarios verified before release"
+      "review_gate": "Local legal-form/registration requirements, provenance and accounting scenarios verified before release"
     },
     {
       "id": "membership-club",
@@ -590,6 +592,305 @@
       "relevance": "Records should identify income, expenses and supporting documents",
       "caveat": "Not a complete US chart, state/local sales-tax guide, or compliance guarantee",
       "retrieved_on": "2026-09-14",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "matrix-1",
+      "title": "Local SMB vertical research matrix row 1",
+      "url": "PHPLedger-SMB-Vertical-Research-Matrix.xlsx",
+      "version": "Local matrix snapshot",
+      "source_date": "2026-09-16",
+      "license": "Local research input; not a redistributed external source",
+      "access": "local_only",
+      "relevance": "Business family and operating-model seed context",
+      "caveat": "Matrix evidence is a product research input and does not establish statutory treatment",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "matrix-2",
+      "title": "Local SMB vertical research matrix row 2",
+      "url": "PHPLedger-SMB-Vertical-Research-Matrix.xlsx",
+      "version": "Local matrix snapshot",
+      "source_date": "2026-09-16",
+      "license": "Local research input; not a redistributed external source",
+      "access": "local_only",
+      "relevance": "Business family and operating-model seed context",
+      "caveat": "Matrix evidence is a product research input and does not establish statutory treatment",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "matrix-8",
+      "title": "Local SMB vertical research matrix row 8",
+      "url": "PHPLedger-SMB-Vertical-Research-Matrix.xlsx",
+      "version": "Local matrix snapshot",
+      "source_date": "2026-09-16",
+      "license": "Local research input; not a redistributed external source",
+      "access": "local_only",
+      "relevance": "Business family and operating-model seed context",
+      "caveat": "Matrix evidence is a product research input and does not establish statutory treatment",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "matrix-11",
+      "title": "Local SMB vertical research matrix row 11",
+      "url": "PHPLedger-SMB-Vertical-Research-Matrix.xlsx",
+      "version": "Local matrix snapshot",
+      "source_date": "2026-09-16",
+      "license": "Local research input; not a redistributed external source",
+      "access": "local_only",
+      "relevance": "Business family and operating-model seed context",
+      "caveat": "Matrix evidence is a product research input and does not establish statutory treatment",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "matrix-23",
+      "title": "Local SMB vertical research matrix row 23",
+      "url": "PHPLedger-SMB-Vertical-Research-Matrix.xlsx",
+      "version": "Local matrix snapshot",
+      "source_date": "2026-09-16",
+      "license": "Local research input; not a redistributed external source",
+      "access": "local_only",
+      "relevance": "Business family and operating-model seed context",
+      "caveat": "Matrix evidence is a product research input and does not establish statutory treatment",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "matrix-26",
+      "title": "Local SMB vertical research matrix row 26",
+      "url": "PHPLedger-SMB-Vertical-Research-Matrix.xlsx",
+      "version": "Local matrix snapshot",
+      "source_date": "2026-09-16",
+      "license": "Local research input; not a redistributed external source",
+      "access": "local_only",
+      "relevance": "Business family and operating-model seed context",
+      "caveat": "Matrix evidence is a product research input and does not establish statutory treatment",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "matrix-67",
+      "title": "Local SMB vertical research matrix row 67",
+      "url": "PHPLedger-SMB-Vertical-Research-Matrix.xlsx",
+      "version": "Local matrix snapshot",
+      "source_date": "2026-09-16",
+      "license": "Local research input; not a redistributed external source",
+      "access": "local_only",
+      "relevance": "Business family and operating-model seed context",
+      "caveat": "Matrix evidence is a product research input and does not establish statutory treatment",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "matrix-78",
+      "title": "Local SMB vertical research matrix row 78",
+      "url": "PHPLedger-SMB-Vertical-Research-Matrix.xlsx",
+      "version": "Local matrix snapshot",
+      "source_date": "2026-09-16",
+      "license": "Local research input; not a redistributed external source",
+      "access": "local_only",
+      "relevance": "Business family and operating-model seed context",
+      "caveat": "Matrix evidence is a product research input and does not establish statutory treatment",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "agency-coa",
+      "title": "Agency chart of accounts example",
+      "url": "https://cocountant.com/blog/bookkeeping/what-should-my-agency-chart-of-accounts-look-like/",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Retainers, project income, contractor delivery costs and deferred revenue vocabulary",
+      "caveat": "Practitioner example; not adopted as a statutory or PHP Ledger chart",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "landscape-coa",
+      "title": "Landscaping chart of accounts",
+      "url": "https://www.youraspire.com/templates/landscaping/chart-of-accounts",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Recurring service, installation, materials, field labor, fuel and equipment categories",
+      "caveat": "Vendor template; not adopted as a statutory or PHP Ledger chart",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "ifrs-standardized-coa",
+      "title": "IFRS and US GAAP standardized chart of accounts",
+      "url": "https://www.ifrs-gaap.com/standardized-chart-accounts",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Common account naming and statement grouping comparison",
+      "caveat": "Illustrative reference; not a national chart or PHP Ledger import",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "hysabone-fmcg",
+      "title": "HysabOne FMCG industry overview",
+      "url": "https://hysabone.com/industries/fmcg/",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Distribution, inventory, receivables, purchasing and route-oriented controls",
+      "caveat": "Product overview; does not establish a complete chart or compliance treatment",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "erpnext-accounting-entries",
+      "title": "ERPNext accounting entries guide",
+      "url": "https://docs.frappe.io/erpnext/accounting-entries",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Document-to-ledger and stock/accounting entry relationships",
+      "caveat": "Comparison guidance, not a PHP Ledger schema or implementation requirement",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "erpnext-accounting-stock",
+      "title": "ERPNext accounting of inventory stock",
+      "url": "https://docs.frappe.io/erpnext/accounting-of-inventory-stock",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Perpetual inventory, stock valuation and ledger update concepts",
+      "caveat": "Comparison guidance; PHP Ledger remains one-location weighted-average in this preview",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "erpnext-bom",
+      "title": "ERPNext bill of materials",
+      "url": "https://docs.frappe.io/erpnext/bill-of-materials",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Manufacturing material-to-finished-good vocabulary and deferred boundary",
+      "caveat": "Used to label unsupported manufacturing operations, not to seed production documents",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "erpnext-work-order",
+      "title": "ERPNext work order",
+      "url": "https://docs.frappe.io/erpnext/work-order",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Production-order and work-in-progress boundary for light manufacturing",
+      "caveat": "Used to label unsupported operations; no work-order engine is claimed",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "odoo-expiration",
+      "title": "Odoo expiration dates",
+      "url": "https://www.odoo.com/documentation/18.0/applications/inventory_and_mrp/inventory/product_management/product_tracking/expiration_dates.html",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Lot/expiry metadata boundary for the non-medicinal training sample",
+      "caveat": "No dispensing, patient, controlled-substance or regulatory workflow is implemented",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "restaurant-coa",
+      "title": "Restaurant and cafe chart of accounts",
+      "url": "https://knowledge-base.mesa.cpa/chart-of-accounts-restaurant-cafe",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Food/beverage sales, ingredient consumption, labor and operating expense categories",
+      "caveat": "Practitioner reference; no recipe, kitchen, table or food-safety workflow is claimed",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "acnc-nscoa",
+      "title": "ACNC National Standard Chart of Accounts",
+      "url": "https://www.acnc.gov.au/for-charities/manage-your-charity/national-standard-chart-accounts",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Membership/nonprofit account grouping and restricted-fund vocabulary",
+      "caveat": "Australian charity reference; the sample is not a charity compliance implementation",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "club-coa",
+      "title": "Club accounting chart example",
+      "url": "https://www.ala.org/aboutala/mleader/budget/chartofaccounts",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Membership dues, events, grants and restricted-purpose account vocabulary",
+      "caveat": "Example reference; no nonprofit or membership administration feature is claimed",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "jewelry-accounting",
+      "title": "Jewelry inventory accounting guide",
+      "url": "https://accountingforjewelers.com/track-and-price-jewelry-inventory/",
+      "version": "Retrieved vertical reference",
+      "source_date": null,
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Finished piece, material, SKU, unit-cost and inventory tracking distinctions",
+      "caveat": "Specialist reference; no commodity, consignment, appraisal or hallmarking treatment is claimed",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "auto-repair-coa",
+      "title": "Auto repair shop bookkeeping and chart guide",
+      "url": "https://beancount.io/blog/2026/08/21/auto-repair-shop-bookkeeping-parts-inventory-labor-rate-comeback-warranty-guide",
+      "version": "Retrieved vertical reference",
+      "source_date": "2026-08-21",
+      "license": "Reference only; redistribution permission not assessed",
+      "access": "retrieved",
+      "relevance": "Parts, labor, customer-owned property and warranty/comeback boundary",
+      "caveat": "Practitioner guide; job cards, custody and warranty workflows remain unsupported",
+      "retrieved_on": "2026-09-16",
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "SRC-HYSABONE-PLAYLIST",
+      "title": "HysabOne setup playlist supplied for workflow research",
+      "url": "https://www.youtube.com/playlist?list=PLNwqFA4984plD2TXqWHAjrzsasdTDCW5L",
+      "version": "Playlist title confirmed; complete listing intermittently throttled",
+      "source_date": null,
+      "license": "Reference only; no video assets or transcript redistributed",
+      "access": "title_confirmed_listing_throttled",
+      "relevance": "Pakistan-market setup, daily activity and module-discoverability inspiration",
+      "caveat": "Workflow inspiration only; no feature, price, compliance or usability claim is adopted",
+      "retrieved_on": "2026-09-16",
       "review_status": "unreviewed"
     }
   ]

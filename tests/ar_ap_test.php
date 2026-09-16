@@ -25,6 +25,16 @@ test('AR AP exact draft lines round once and prohibit quote kinds', function ():
     assert_throws(fn()=>pl_ar_line_amount('3','1.234567'),DomainException::class);
 });
 
+test('domestic settlement does not require unused realised FX accounts', function (): void {
+    $f = ar_ap_fixture(); $draft = pl_save_ar_document($f['actor_id'], $f['company_id'], $f['book_id'], ar_ap_input($f));
+    $doc = pl_post_ar_document($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], 1);
+    $payment = ar_ap_payment($f, '1000', '2026-01-06');
+    unset($payment['gain_account_id'], $payment['loss_account_id']);
+    $settled = pl_settle_ar_document($f['actor_id'], $f['company_id'], $f['book_id'], $doc['id'], $payment);
+    assert_same('1000.0000', $settled['allocated_fc']);
+    assert_same('1000.0000', $settled['settlement_base']);
+});
+
 test('AR AP shared starter supports invoice receipt credit final receipt and historical ageing', function (): void {
     $f=ar_ap_fixture(); $input=ar_ap_input($f);
     $draft=pl_save_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$input);

@@ -17,9 +17,15 @@ foreach (array_keys(pl_demo_pack_catalog()) as $packId) {
         $id = $company['id']; $book = $company['book_id']; $pack = pl_demo_pack($packId);
         assert_same($id, pl_setup_company($actor, $f['input'], $f['key'])['id']);
         assert_same($pack['digest'], pl_company_demo_pack($actor, $id, $book)['digest']);
-        assert_same(74, (int) DB::queryFirstField('SELECT (SELECT COUNT(*) FROM pl_documents WHERE book_id = %i) + (SELECT COUNT(*) FROM pl_general_drafts WHERE book_id = %i)', $book, $book));
-        assert_same(72, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id = %i', $book));
-        assert_same(1, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id = %i AND reversal_of_id IS NOT NULL', $book));
+        assert_true((int) DB::queryFirstField('SELECT (SELECT COUNT(*) FROM pl_documents WHERE book_id = %i) + (SELECT COUNT(*) FROM pl_general_drafts WHERE book_id = %i)', $book, $book) >= 74, 'The pinned history was not retained.');
+        assert_true((int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id = %i', $book) >= 72, 'The pinned history journals were not retained.');
+        assert_true((int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id = %i AND reversal_of_id IS NOT NULL', $book) >= 1, 'The pinned correction was not retained.');
+        $snapshot = json_decode((string) DB::queryFirstField('SELECT snapshot FROM pl_template_installation_history WHERE company_id = %i AND book_id = %i AND snapshot_kind = %s ORDER BY id DESC LIMIT 1', $id, $book, 'sample'), true, 512, JSON_THROW_ON_ERROR);
+        assert_true((int) ($snapshot['sample_pack']['operational_replay']['event_count'] ?? 0) > 0, 'Operational replay receipt has no events.');
+        assert_true(in_array($snapshot['sample_pack']['operational_replay']['status'] ?? '', ['runtime_replayed', 'runtime_replayed_with_staged_vertical_evidence'], true), 'Operational replay receipt is missing.');
+        assert_same(2, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_template_installation_history WHERE company_id = %i AND book_id = %i', $id, $book));
+        $chartSnapshot = json_decode((string) DB::queryFirstField('SELECT snapshot FROM pl_template_installations WHERE company_id = %i AND book_id = %i', $id, $book), true, 512, JSON_THROW_ON_ERROR);
+        assert_true(!isset($chartSnapshot['sample_pack']), 'The original chart snapshot was overwritten by sample metadata.');
         $periods = pl_list_periods($actor, $id, $book);
         assert_same(14, count($periods));
         assert_same(13, count(array_filter($periods, static fn (array $p): bool => $p['status'] === 'closed')));
@@ -58,6 +64,14 @@ foreach (array_keys(pl_demo_pack_catalog()) as $packId) {
         assert_throws(fn () => pl_setup_company($actor, array_replace($f['input'], ['sample_pack' => $packId === 'distributor' ? 'service-agency' : 'distributor']), $f['key']), DomainException::class, 'different');
     });
 }
+
+test('installation history snapshots reject updates and deletes', function (): void {
+    $f = demo_pack_fixture('service-agency');
+    $historyId = (int) DB::queryFirstField('SELECT id FROM pl_template_installation_history WHERE company_id = %i AND snapshot_kind = %s ORDER BY id DESC LIMIT 1', $f['company']['id'], 'sample');
+    assert_true($historyId > 0, 'The sample installation history row was not created.');
+    assert_throws(fn () => DB::update('pl_template_installation_history', ['snapshot_digest' => str_repeat('a', 64)], 'id = %i', $historyId), MeekroDBException::class, 'immutable');
+    assert_throws(fn () => DB::delete('pl_template_installation_history', 'id = %i', $historyId), MeekroDBException::class, 'immutable');
+});
 
 test('sample selection rejects paths dates ordinary companies and foreign guide access atomically', function (): void {
     assert_throws(fn () => pl_demo_pack('../core-samples/core-accounting'), DomainException::class);

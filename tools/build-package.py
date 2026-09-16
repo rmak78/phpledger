@@ -54,6 +54,31 @@ def committed_file(root: Path, name: str) -> bytes:
     return result.stdout
 
 
+def release_input(root: Path, entry: dict, tracked: set[str]) -> bytes:
+    """Read a package input from Git, or an explicitly checksummed local file.
+
+    The public source checkout deliberately ignores local ``docs/``.  Release
+    documentation may therefore be supplied from the operator's local release
+    inputs, but only when the package specification pins its exact bytes.
+    """
+    origin = safe_path(entry["source"])
+    if origin in tracked:
+        data = committed_file(root, origin)
+    else:
+        expected = entry.get("sha256")
+        if not isinstance(expected, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", expected):
+            raise PackageError(f"Untracked input requires a SHA-256 pin: {origin}")
+        data = read_file(root, origin)
+    expected = entry.get("sha256")
+    if expected is not None:
+        if not isinstance(expected, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", expected):
+            raise PackageError(f"Invalid SHA-256 pin: {origin}")
+        actual = hashlib.sha256(data).hexdigest()
+        if actual.lower() != expected.lower():
+            raise PackageError(f"SHA-256 pin does not match local input: {origin}")
+    return data
+
+
 def git(root: Path, *args: str) -> str:
     result = subprocess.run(["git", "-C", str(root), *args], capture_output=True, text=True)
     if result.returncode:
@@ -74,10 +99,11 @@ def gather(source: Path, vendor: Path, specification: dict, version: str) -> tup
     for entry in specification["files"]:
         origin, destination = safe_path(entry["source"]), safe_path(entry["destination"])
         if origin not in tracked:
-            raise PackageError(f"Input is not in the recorded source revision: {origin}")
+            if "sha256" not in entry:
+                raise PackageError(f"Input is not in the recorded source revision and has no SHA-256 pin: {origin}")
         if destination in payload or destination.startswith("vendor/"):
             raise PackageError("Duplicate or reserved package destination")
-        data = committed_file(source, origin)
+        data = release_input(source, entry, tracked)
         if destination in {"README.md", "INSTALL.md", "UPGRADE.md", "RELEASE-NOTES.md"}:
             data = data.replace(b"{{VERSION}}", version.encode()).replace(b"{{SOURCE_COMMIT}}", revision.encode())
             if b"{{" in data:

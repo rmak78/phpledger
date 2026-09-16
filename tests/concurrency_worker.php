@@ -98,7 +98,7 @@ try {
         $journal = ['id' => $document['journal_id']];
     } else {
         $journal = $input['mode'] === 'reverse'
-        ? pl_reverse_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['journal_id'], '2026-09-15', $input['key'], 'Concurrent correction proof')
+        ? pl_reverse_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['journal_id'], gmdate('Y-m-d'), $input['key'], 'Concurrent correction proof')
             : pl_post_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['payload']);
     }
     echo json_encode(['id' => $journal['id']], JSON_THROW_ON_ERROR);

@@ -45,6 +45,15 @@ test('company setup creates one book, an owner, an annual period and scoped temp
     assert_throws(fn() => pl_create_company(0, 'Missing actor', 'USD', '2026-01-01'), DomainException::class);
 });
 
+test('setup exposes safe entity and year-end choices without changing the accounting contract', function (): void {
+    assert_same('30 June — common Pakistan year end', pl_fiscal_year_end_label('06-30'));
+    assert_same('31 December — calendar year', pl_fiscal_year_end_label('12-31'));
+    assert_same('02-28 — custom year end', pl_fiscal_year_end_label('02-28'));
+    assert_same('AOP / partnership / association', pl_setup_entity_type_options()['aop']);
+    assert_true(array_key_exists('custom', pl_fiscal_year_end_options()));
+    assert_throws(fn() => pl_create_company(ledger_fixture()['actor_id'], 'Invalid fiscal end', 'USD', '2026-01-01', '02-29'), DomainException::class);
+});
+
 test('balanced receipt posts and report figures drill down to exact source lines', function (): void {
     $fixture = ledger_fixture();
     $payload = ledger_payload($fixture, '9999999999999999.9999');
@@ -144,15 +153,15 @@ test('currency mismatch, inactive accounts and overlapping periods prevent posti
 });
 
 test('reversal is linked, one-time, idempotent and preserves the original', function (): void {
-    $fixture = ledger_fixture();
+    $fixture = ledger_fixture(); $today = gmdate('Y-m-d');
     $journal = pl_post_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], ledger_payload($fixture));
-    $reversal = pl_reverse_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $journal['id'], '2026-09-15', 'reverse-once', 'Entered twice');
+    $reversal = pl_reverse_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $journal['id'], $today, 'reverse-once', 'Entered twice');
     assert_same($journal['id'], (int) $reversal['reversal_of_id']);
     assert_same($journal['lines'][0]['debit'], $reversal['lines'][0]['credit']);
     assert_same($journal, pl_get_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $journal['id']));
-    assert_same($reversal['id'], pl_reverse_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $journal['id'], '2026-09-15', 'reverse-once', 'Entered twice')['id']);
-    assert_throws(fn() => pl_reverse_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $journal['id'], '2026-09-15', 'reverse-twice', 'Entered twice'), DomainException::class, 'already');
-    assert_throws(fn() => pl_reverse_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $journal['id'], '2026-09-15', 'reverse-once', 'Different reason'), DomainException::class, 'different journal');
+    assert_same($reversal['id'], pl_reverse_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $journal['id'], $today, 'reverse-once', 'Entered twice')['id']);
+    assert_throws(fn() => pl_reverse_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $journal['id'], $today, 'reverse-twice', 'Entered twice'), DomainException::class, 'already');
+    assert_throws(fn() => pl_reverse_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $journal['id'], $today, 'reverse-once', 'Different reason'), DomainException::class, 'different journal');
     assert_throws(fn() => pl_reverse_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $reversal['id'], '2026-09-16', 'reverse-reversal', 'No'), DomainException::class);
     $report = pl_trial_balance($fixture['actor_id'], $fixture['company_id'], $fixture['book_id']);
     assert_same('0.0000', $report['total_debit']);

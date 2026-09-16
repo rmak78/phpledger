@@ -2,25 +2,26 @@
 
 Country-neutral, open-source bookkeeping for small businesses, built with PHP and MySQL. Project-owned code uses AGPL-3.0-or-later; a commercial licence is available. Self-hosting is free without licence keys or licensing-server calls. Published pre-adoption 0.1.0 through 0.1.5 previews retain MIT. See [Licensing policy](docs/LICENSING-POLICY.md).
 
-**Development preview.** Evaluate this accounting starter with synthetic data before arranging an accountant-reviewed pilot. Known workflow and reporting limits remain; it is not a completed ERP or a country-certified accounting product.
+**Development preview.** Evaluate this accounting starter with synthetic data before arranging a supported pilot. Known workflow and reporting limits remain; it is not a completed ERP or a country-certified accounting product.
 
 Source revision: `{{SOURCE_COMMIT}}`
 
 ## Start here
 
 1. Read [INSTALL.md](INSTALL.md) for hosting requirements, private configuration and the three setup commands.
-2. Sign in and create an isolated sample company or a new business. Review the chart and create a customer/vendor party before recording an invoice or bill.
+2. Sign in and create an isolated sample company or a new business. In local development, the separate sample chooser provisions only the selected synthetic company. Review the chart and create a customer/vendor party before recording an invoice or bill.
 3. Review and post the document, record a partial payment, and follow the remaining balance into ageing, its journal and the account statement. Corrections retain the same document identity and preserve linked reversal history.
 4. For stock businesses, enable Inventory and then Purchasing in **Modules**. Create a stock product, confirm a purchase order, receive goods and match the later supplier bill. Review stock valuation and received-but-unbilled reconciliation.
 5. Configure any required tax codes, accounts and dated rates manually in **Tax**. Choose exclusive or inclusive price entry; documents show the separate net, tax and total. For existing businesses, review opening debt/stock conversion before using their imported balances operationally.
 
 The package needs PHP **8.2+ (8.3 recommended)**, MySQL **8.4**, HTTPS and command-line access. Production Composer dependencies are included. Keep the supplied directory layout: only `www/phpledger/public` is the web document root. Do not serve the package root.
 
-## Included in this preview
+## Included in the 0.5.0-preview candidate
 
-- Four synthetic businesses with closed 2024–2025 histories, open 2026 practice, three editable drafts per company and private reporting walkthroughs. The public website carries three illustrated guide articles. See [demo packs](resources/demo-packs/README.md).
+- Eleven synthetic businesses with closed 2024–2025 histories, open 2026 practice, three editable drafts per company and private reporting walkthroughs. The public website carries three illustrated guide articles. Only the selected sample is provisioned for a visitor. See [demo packs](resources/demo-packs/README.md).
 
 - Sign-in, company setup, a preliminary account template and a clearly identified synthetic sample.
+- Seven newer vertical successors carry pinned research evidence and remain `preview_only` until their operational treatment is independently reviewed. The current importer posts the reconciled supported history; future specialist records remain review evidence.
 - Receipt/expense drafts, balanced posting, durable source references, duplicate protection, period controls and linked reversals.
 - Chart management with stable account IDs and audited name/status changes; general-journal drafts, review, posting and dated reversals.
 - Account statements for all five account classes, with opening, period, running and closing balances.

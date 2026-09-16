@@ -92,15 +92,15 @@ test('general drafts preserve unbalanced work and exclude it from reports until 
 });
 
 test('general journal reversals retain dated source and restore account balances once', function (): void {
-    $f = ledger_fixture(); $input = core_general_input($f);
+    $f = ledger_fixture(); $input = core_general_input($f); $today = gmdate('Y-m-d');
     $draft = pl_save_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $input);
     assert_same($draft['id'], pl_save_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $input)['id']);
     assert_throws(fn () => pl_save_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], array_replace($input, ['description' => 'Different'])), DomainException::class);
     pl_post_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], 1);
-    $reversed = pl_reverse_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], '2026-09-15', 'Capital entry correction');
+    $reversed = pl_reverse_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], $today, 'Capital entry correction');
     assert_same('reversed', $reversed['status']);
-    assert_same($reversed['reversal_journal_id'], pl_reverse_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], '2026-09-15', 'Capital entry correction')['reversal_journal_id']);
-    $statement = pl_account_activity($f['actor_id'], $f['company_id'], $f['book_id'], $f['accounts']['1000'], '2026-09-15', 1, '2026-09-15');
+    assert_same($reversed['reversal_journal_id'], pl_reverse_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], $today, 'Capital entry correction')['reversal_journal_id']);
+    $statement = pl_account_activity($f['actor_id'], $f['company_id'], $f['book_id'], $f['accounts']['1000'], $today, 1, $today);
     assert_same('1000.0001', $statement['opening_balance']);
     assert_same('0.0000', $statement['closing_balance']);
     assert_same($draft['id'], $statement['movements'][0]['general_id']);

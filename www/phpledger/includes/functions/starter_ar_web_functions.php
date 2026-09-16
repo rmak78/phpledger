@@ -25,8 +25,8 @@ function pl_web_starter_ar(int $actorId,int $companyId,int $bookId,array $user,a
                 pl_post_ar_document($actorId,$companyId,$bookId,$id,pl_web_id($_POST,'revision'),null,pl_web_text($_POST,'rate')?:null);
             } elseif ($action==='settle') {
                 pl_settle_ar_document($actorId,$companyId,$bookId,$id,['date'=>pl_web_text($_POST,'date'),'amount_fc'=>pl_web_text($_POST,'amount_fc'),
-                    'bank_account_id'=>pl_web_id($_POST,'bank_account_id'),'gain_account_id'=>pl_web_id($_POST,'gain_account_id'),
-                    'loss_account_id'=>pl_web_id($_POST,'loss_account_id'),'actual_rate'=>pl_web_text($_POST,'actual_rate')?:null,
+                    'bank_account_id'=>pl_web_id($_POST,'bank_account_id'),'gain_account_id'=>pl_web_id($_POST,'gain_account_id')?:null,
+                    'loss_account_id'=>pl_web_id($_POST,'loss_account_id')?:null,'actual_rate'=>pl_web_text($_POST,'actual_rate')?:null,
                     'description'=>pl_web_text($_POST,'description'),'idempotency_key'=>$key]);
             } elseif ($action==='reverse') {
                 pl_reverse_ar_document($actorId,$companyId,$bookId,$id,pl_web_text($_POST,'date')?:null,pl_web_text($_POST,'reason'),$key);

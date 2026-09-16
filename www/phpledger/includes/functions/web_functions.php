@@ -7,6 +7,12 @@ function pl_web_text(array $source, string $key, string $default = ''): string
     return isset($source[$key]) && is_string($source[$key]) ? trim($source[$key]) : $default;
 }
 
+/** The application version is a shared presentation value, not a user-controlled setting. */
+function pl_app_version(): string
+{
+    return '0.5.0-preview';
+}
+
 function pl_web_id(array $source, string $key, int $default = 0): int
 {
     $value = $source[$key] ?? null;
@@ -180,7 +186,7 @@ function pl_web_general_input(array $input): array
 
 function pl_render(string $view, array $data = []): never
 {
-    $allowed = ['ar','ap','parties','inventory','purchasing','tax','opening-conversion','login', 'companies', 'onboarding', 'setup-review', 'transactions', 'editor',
+    $allowed = ['ar','ap','parties','inventory','purchasing','tax','opening-conversion','login', 'companies', 'sample-chooser', 'onboarding', 'setup-review', 'transactions', 'editor',
         'trial-balance', 'account', 'journal', 'help', 'error', 'demo', 'reports', 'balance-sheet', 'profit-loss', 'cash-forecast', 'pos',
         'accounts', 'general-journals', 'general-editor', 'general-detail', 'modules', 'opening-balances', 'periods', 'bank-reconciliation', 'connections', 'oauth-consent', 'sample-guide'];
     if (!in_array($view, $allowed, true)) {

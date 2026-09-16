@@ -1,126 +1,162 @@
 {
-  "id": "seasonal-business",
+  "id": "light-manufacturing",
   "version": "1.0.0",
-  "name": "Sunrise Garden Services",
-  "business": "Seasonal business",
+  "name": "Maple Bench Works",
+  "business": "Light manufacturing",
   "demo_only": true,
-  "status": "released_demo_only",
+  "status": "preview_only",
   "synthetic": true,
-  "capability_note": "This sample demonstrates bookkeeping examples only; it is not an implementation of the named industry's operational, regulatory or compliance systems.",
+  "capability_note": "Light-manufacturing bookkeeping example; bills of material, production planning, work orders and recipes are not implemented.",
   "source_material": {
     "description": "Reconciled successor of synthetic teaching material; no real customer data.",
     "runtime_note": "The pinned ledger history below is reconciled through the current supported general-journal and cash-document services. On isolated sample creation, the operational contract is replayed through the existing AR/AP, Purchasing, Inventory and general-journal services; unsupported vertical operations remain explicitly staged. This generated candidate contract is synthetic source material; specialist operational controls remain outside the accounting replay.",
-    "industry_profile_id": "seasonal-field-services",
+    "industry_profile_id": "light-manufacturing",
     "industry_profile": {
-      "id": "seasonal-field-services",
+      "id": "light-manufacturing",
       "sample_ids": [
-        "seasonal-business"
+        "light-manufacturing"
       ],
-      "name": "Seasonal garden and field services",
-      "operating_model": "Recurring maintenance routes and seasonal installation work with crew, plant/material and vehicle costs.",
+      "name": "Light manufacturing",
+      "operating_model": "Bought-in materials converted into simple finished goods, with WIP and production-cost distinctions kept explicit.",
       "distinct_controls": [
-        "recurring route versus installation revenue",
-        "job materials",
-        "field labor",
-        "equipment and vehicle cost",
-        "seasonality by month"
+        "raw materials",
+        "WIP",
+        "finished goods",
+        "production overhead",
+        "normal versus abnormal waste",
+        "GRNI"
       ],
       "unsupported_in_sample": [
-        "route scheduling",
-        "weather forecasting",
-        "crew payroll",
-        "property-level job costing"
+        "BOM",
+        "work orders",
+        "routing",
+        "labor absorption",
+        "production planning",
+        "quality module"
       ],
       "seed_role_labels": {
-        "sales_revenue": "Garden maintenance and installation income",
-        "supplies_expense": "Plants and job materials",
-        "vehicle_expense": "Field vehicle and fuel costs",
-        "insurance_expense": "Business and equipment insurance",
-        "operating_expense": "Field service operating expenses",
-        "expense": "Field service operating expenses"
+        "sales_revenue": "Manufactured product income",
+        "inventory": "Finished goods and production material inventory",
+        "cost_of_goods_sold": "Manufactured cost of sales",
+        "workshop_expense": "Production workshop costs",
+        "operating_expense": "Manufacturing operating expenses",
+        "expense": "Manufacturing operating expenses"
       },
       "accounts": [
         {
-          "semantic_key": "seasonal.income.maintenance",
+          "semantic_key": "manufacturing.inventory.raw",
+          "code": "1410",
+          "name": "Raw material inventory",
+          "type": "asset",
+          "fixture_role": "raw_inventory",
+          "normal_balance": "debit",
+          "source_ids": [
+            "erpnext-bom",
+            "SRC-IAS2"
+          ]
+        },
+        {
+          "semantic_key": "manufacturing.inventory.work",
+          "code": "1420",
+          "name": "Production in progress",
+          "type": "asset",
+          "fixture_role": "wip_inventory",
+          "normal_balance": "debit",
+          "source_ids": [
+            "erpnext-work-order",
+            "SRC-IAS2"
+          ]
+        },
+        {
+          "semantic_key": "manufacturing.inventory.finished",
+          "code": "1430",
+          "name": "Finished goods inventory",
+          "type": "asset",
+          "fixture_role": "inventory",
+          "normal_balance": "debit",
+          "source_ids": [
+            "erpnext-accounting-stock"
+          ]
+        },
+        {
+          "semantic_key": "manufacturing.income.goods",
           "code": "4100",
-          "name": "Recurring garden maintenance income",
+          "name": "Manufactured product income",
           "type": "income",
           "fixture_role": "sales_revenue",
           "normal_balance": "credit",
           "source_ids": [
-            "matrix-78",
-            "landscape-coa"
+            "erpnext-accounting-entries"
           ]
         },
         {
-          "semantic_key": "seasonal.income.installation",
-          "code": "4110",
-          "name": "Seasonal planting and installation income",
-          "type": "income",
-          "fixture_role": "sales_revenue",
-          "normal_balance": "credit",
-          "source_ids": [
-            "landscape-coa"
-          ]
-        },
-        {
-          "semantic_key": "seasonal.cost.materials",
+          "semantic_key": "manufacturing.cost.goods",
           "code": "5110",
-          "name": "Plants and job materials",
+          "name": "Manufactured cost of sales",
           "type": "expense",
-          "fixture_role": "supplies_expense",
+          "fixture_role": "cost_of_goods_sold",
           "normal_balance": "debit",
           "source_ids": [
-            "landscape-coa"
+            "erpnext-accounting-entries"
           ]
         },
         {
-          "semantic_key": "seasonal.cost.field_labor",
+          "semantic_key": "manufacturing.cost.overhead",
           "code": "5120",
-          "name": "Direct field crew costs",
+          "name": "Production workshop costs",
           "type": "expense",
-          "fixture_role": "operating_expense",
+          "fixture_role": "workshop_expense",
           "normal_balance": "debit",
           "source_ids": [
-            "landscape-coa"
+            "erpnext-work-order"
           ]
         },
         {
-          "semantic_key": "seasonal.cost.vehicle",
+          "semantic_key": "manufacturing.cost.abnormal",
           "code": "5130",
-          "name": "Field vehicle and fuel costs",
+          "name": "Abnormal production losses",
           "type": "expense",
-          "fixture_role": "vehicle_expense",
+          "fixture_role": "abnormal_loss_expense",
           "normal_balance": "debit",
           "source_ids": [
-            "landscape-coa"
+            "SRC-IAS2"
           ]
         }
       ],
       "research_basis": [
         {
-          "title": "Matrix: landscaping / lawn-care company",
-          "url": "https://www.getjobber.com/industries/",
-          "supports": "Recurring route, crew, materials, completion and renewal workflow context."
+          "title": "ERPNext bill of materials",
+          "url": "https://docs.frappe.io/erpnext/bill-of-materials",
+          "supports": "BOM, operations, material issue, scrap and costing concepts."
         },
         {
-          "title": "Landscaping chart of accounts",
-          "url": "https://www.youraspire.com/templates/landscaping/chart-of-accounts",
-          "supports": "Recurring mowing, installation, direct labor, materials, fuel and equipment cost categories."
+          "title": "ERPNext work order",
+          "url": "https://docs.frappe.io/erpnext/work-order",
+          "supports": "Source/WIP/target warehouses, required quantities, operations and production completion."
+        },
+        {
+          "title": "ERPNext accounting of inventory stock",
+          "url": "https://docs.frappe.io/erpnext/accounting-of-inventory-stock",
+          "supports": "Perpetual inventory and stock/accounting synchronization."
+        },
+        {
+          "title": "IFRS IAS 2 Inventories",
+          "url": "https://www.ifrs.org/issued-standards/list-of-standards/ias-2-inventories/",
+          "supports": "Inventory cost and measurement concepts; not a PHP Ledger implementation decision."
         }
       ]
     },
     "research_status": "generated_candidate",
     "research_evidence": {
-      "source_pack_id": "seasonal-business-generated-candidate",
+      "source_pack_id": "light-manufacturing-generated-candidate",
       "source_pack_version": "0.1.0",
       "source_status": "generated_candidate_not_runtime_seed",
       "source_created_on": "2026-09-16",
       "review_status": "generated_candidate",
       "business_profile": {
-        "display_name": "Sunrise Garden Services (candidate)",
-        "business_type": "seasonal-landscape-services",
-        "description": "Seasonal garden maintenance service with spring demand, recurring customers and a supplier payable."
+        "display_name": "Maple Bench Works (candidate)",
+        "business_type": "light-manufacturing",
+        "description": "Small workshop buying timber and hardware, assembling simple benches and selling finished units."
       },
       "semantic_accounts": [
         {
@@ -140,7 +176,11 @@
           "mapping_status": "requires_template_snapshot"
         },
         {
-          "fixture_role": "insurance_expense",
+          "fixture_role": "cost_of_goods_sold",
+          "mapping_status": "requires_template_snapshot"
+        },
+        {
+          "fixture_role": "inventory",
           "mapping_status": "requires_template_snapshot"
         },
         {
@@ -148,47 +188,49 @@
           "mapping_status": "requires_template_snapshot"
         },
         {
-          "fixture_role": "supplies_expense",
-          "mapping_status": "requires_template_snapshot"
-        },
-        {
-          "fixture_role": "vehicle_expense",
+          "fixture_role": "workshop_expense",
           "mapping_status": "requires_template_snapshot"
         }
       ],
       "contacts": [
         {
-          "id": "garden-client",
-          "name": "Greenbank Residence (Sample)",
+          "id": "manufacturing-customer",
+          "name": "Civic Studio Interiors (Sample)",
           "role": "customer",
-          "email": "sunrise-garden.client@example.invalid",
+          "email": "maple-bench.client@example.invalid",
           "synthetic": true
         },
         {
-          "id": "nursery-vendor",
-          "name": "Riverbend Nursery (Sample)",
+          "id": "manufacturing-supplier",
+          "name": "Mill Road Timber (Sample)",
           "role": "vendor",
-          "email": "sunrise-garden.vendor@example.invalid",
+          "email": "maple-bench.vendor@example.invalid",
           "synthetic": true
         }
       ],
       "products": [
         {
-          "id": "maintenance-visit",
-          "name": "Garden maintenance visit (Sample)",
-          "kind": "service",
-          "unit": "visit",
-          "sale_price": "275.0000"
+          "id": "bench-finished",
+          "name": "Finished bench teaching unit (Sample)",
+          "kind": "stock",
+          "unit": "piece",
+          "sale_price": "650.0000",
+          "fixture_unit_cost": "300.0000"
         },
         {
-          "id": "planting-project",
-          "name": "Seasonal planting project (Sample)",
+          "id": "bench-service",
+          "name": "Bench finishing service (Sample)",
           "kind": "service",
-          "unit": "project",
-          "sale_price": "2200.0000"
+          "unit": "job",
+          "sale_price": "120.0000"
         }
       ],
-      "locations": [],
+      "locations": [
+        {
+          "id": "workshop",
+          "name": "Workshop stock (Sample)"
+        }
+      ],
       "opening_evidence": {
         "date": "2026-09-01",
         "status": "candidate_not_posted",
@@ -196,55 +238,76 @@
       },
       "operational_event_contract": [
         {
-          "id": "seasonal-invoice",
-          "date": "2026-04-05",
+          "id": "manufacturing-material-receipt",
+          "date": "2026-07-02",
+          "kind": "purchase",
+          "source_reference": "candidate:maple-bench:receipt:materials",
+          "amount": "1200.0000",
+          "expected_journal": [
+            {
+              "account_role": "inventory",
+              "debit": "1200.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "accounts_payable",
+              "debit": "0.0000",
+              "credit": "1200.0000"
+            }
+          ],
+          "stock_movements": [
+            {
+              "item_id": "bench-finished",
+              "location_id": "workshop",
+              "quantity_delta": "4.0000",
+              "unit_cost": "300.0000"
+            }
+          ],
+          "document_id": "manufacturing-material-receipt"
+        },
+        {
+          "id": "manufacturing-sale",
+          "date": "2026-07-20",
           "kind": "invoice",
-          "source_reference": "candidate:sunrise-garden:invoice:2026-04",
-          "amount": "2200.0000",
+          "source_reference": "candidate:maple-bench:invoice:interiors",
+          "amount": "1950.0000",
           "expected_journal": [
             {
               "account_role": "accounts_receivable",
-              "debit": "2200.0000",
+              "debit": "1950.0000",
               "credit": "0.0000"
             },
             {
               "account_role": "sales_revenue",
               "debit": "0.0000",
-              "credit": "2200.0000"
-            }
-          ],
-          "document_id": "seasonal-invoice"
-        },
-        {
-          "id": "seasonal-receipt-partial",
-          "date": "2026-04-20",
-          "kind": "receipt",
-          "source_reference": "candidate:sunrise-garden:receipt:partial",
-          "amount": "1200.0000",
-          "expected_journal": [
+              "credit": "1950.0000"
+            },
             {
-              "account_role": "bank_current",
-              "debit": "1200.0000",
+              "account_role": "cost_of_goods_sold",
+              "debit": "900.0000",
               "credit": "0.0000"
             },
             {
-              "account_role": "accounts_receivable",
+              "account_role": "inventory",
               "debit": "0.0000",
-              "credit": "1200.0000"
+              "credit": "900.0000"
             }
           ],
-          "allocations": [
+          "stock_movements": [
             {
-              "document_id": "seasonal-invoice",
-              "amount": "1200.0000"
+              "item_id": "bench-finished",
+              "location_id": "workshop",
+              "quantity_delta": "-3.0000",
+              "unit_cost": "300.0000"
             }
-          ]
+          ],
+          "document_id": "manufacturing-sale"
         },
         {
-          "id": "seasonal-receipt-final",
-          "date": "2026-05-05",
+          "id": "manufacturing-receipt",
+          "date": "2026-08-05",
           "kind": "receipt",
-          "source_reference": "candidate:sunrise-garden:receipt:final",
+          "source_reference": "candidate:maple-bench:receipt:partial",
           "amount": "1000.0000",
           "expected_journal": [
             {
@@ -260,40 +323,87 @@
           ],
           "allocations": [
             {
-              "document_id": "seasonal-invoice",
+              "document_id": "manufacturing-sale",
               "amount": "1000.0000"
             }
           ]
         },
         {
-          "id": "seasonal-supplier-bill",
-          "date": "2026-04-22",
-          "kind": "bill",
-          "source_reference": "candidate:sunrise-garden:bill:nursery",
-          "amount": "400.0000",
+          "id": "manufacturing-count",
+          "date": "2026-08-31",
+          "kind": "stock_count",
+          "source_reference": "candidate:maple-bench:count:2026-08",
+          "amount": "0.0000",
+          "expected_journal": [],
+          "valuation": {
+            "method": "moving_weighted_average",
+            "quantities": {
+              "bench-finished|workshop": {
+                "quantity": "2.0000",
+                "value": "600.0000"
+              }
+            }
+          }
+        },
+        {
+          "id": "manufacturing-supplier-payment",
+          "date": "2026-07-15",
+          "kind": "supplier_payment",
+          "source_reference": "candidate:maple-bench:payment:timber",
+          "amount": "800.0000",
           "expected_journal": [
             {
-              "account_role": "supplies_expense",
-              "debit": "400.0000",
+              "account_role": "accounts_payable",
+              "debit": "800.0000",
               "credit": "0.0000"
             },
             {
-              "account_role": "accounts_payable",
+              "account_role": "bank_current",
               "debit": "0.0000",
-              "credit": "400.0000"
+              "credit": "800.0000"
             }
           ],
-          "document_id": "seasonal-supplier-bill"
+          "allocations": [
+            {
+              "document_id": "manufacturing-material-receipt",
+              "amount": "800.0000"
+            }
+          ]
         },
         {
-          "id": "seasonal-supplier-payment",
-          "date": "2026-05-10",
-          "kind": "supplier_payment",
-          "source_reference": "candidate:sunrise-garden:payment:nursery",
+          "id": "manufacturing-final-receipt",
+          "date": "2026-08-20",
+          "kind": "receipt",
+          "source_reference": "candidate:maple-bench:receipt:balance",
+          "amount": "300.0000",
+          "expected_journal": [
+            {
+              "account_role": "bank_current",
+              "debit": "300.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "accounts_receivable",
+              "debit": "0.0000",
+              "credit": "300.0000"
+            }
+          ],
+          "allocations": [
+            {
+              "document_id": "manufacturing-sale",
+              "amount": "300.0000"
+            }
+          ]
+        },
+        {
+          "id": "manufacturing-workshop-expense",
+          "date": "2026-08-25",
+          "kind": "expense",
+          "source_reference": "candidate:maple-bench:expense:workshop",
           "amount": "250.0000",
           "expected_journal": [
             {
-              "account_role": "accounts_payable",
+              "account_role": "workshop_expense",
               "debit": "250.0000",
               "credit": "0.0000"
             },
@@ -302,188 +412,117 @@
               "debit": "0.0000",
               "credit": "250.0000"
             }
-          ],
-          "allocations": [
-            {
-              "document_id": "seasonal-supplier-bill",
-              "amount": "250.0000"
-            }
           ]
         },
         {
-          "id": "seasonal-peak-invoice",
-          "date": "2026-08-05",
-          "kind": "invoice",
-          "source_reference": "candidate:sunrise-garden:invoice:2026-08",
-          "amount": "1650.0000",
-          "expected_journal": [
-            {
-              "account_role": "accounts_receivable",
-              "debit": "1650.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "sales_revenue",
-              "debit": "0.0000",
-              "credit": "1650.0000"
-            }
-          ],
-          "document_id": "seasonal-peak-invoice"
-        },
-        {
-          "id": "seasonal-peak-receipt",
-          "date": "2026-08-20",
-          "kind": "receipt",
-          "source_reference": "candidate:sunrise-garden:receipt:peak-partial",
-          "amount": "825.0000",
-          "expected_journal": [
-            {
-              "account_role": "bank_current",
-              "debit": "825.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "accounts_receivable",
-              "debit": "0.0000",
-              "credit": "825.0000"
-            }
-          ],
-          "allocations": [
-            {
-              "document_id": "seasonal-peak-invoice",
-              "amount": "825.0000"
-            }
-          ]
-        },
-        {
-          "id": "seasonal-insurance",
-          "date": "2026-04-30",
-          "kind": "expense",
-          "source_reference": "candidate:sunrise-garden:expense:insurance",
-          "amount": "150.0000",
-          "expected_journal": [
-            {
-              "account_role": "insurance_expense",
-              "debit": "150.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "bank_current",
-              "debit": "0.0000",
-              "credit": "150.0000"
-            }
-          ]
-        },
-        {
-          "id": "seasonal-fuel",
-          "date": "2026-07-12",
-          "kind": "expense",
-          "source_reference": "candidate:sunrise-garden:expense:fuel",
-          "amount": "225.0000",
-          "expected_journal": [
-            {
-              "account_role": "vehicle_expense",
-              "debit": "225.0000",
-              "credit": "0.0000"
-            },
-            {
-              "account_role": "bank_current",
-              "debit": "0.0000",
-              "credit": "225.0000"
-            }
-          ]
-        },
-        {
-          "id": "seasonal-peak-credit",
-          "date": "2026-09-02",
+          "id": "manufacturing-customer-return",
+          "date": "2026-08-28",
           "kind": "customer_credit",
-          "source_reference": "candidate:sunrise-garden:credit:peak-adjustment",
-          "amount": "225.0000",
-          "original_event_id": "seasonal-peak-invoice",
-          "related_document_id": "seasonal-peak-invoice",
+          "source_reference": "candidate:maple-bench:credit:return",
+          "amount": "650.0000",
           "expected_journal": [
             {
               "account_role": "sales_revenue",
-              "debit": "225.0000",
+              "debit": "650.0000",
               "credit": "0.0000"
             },
             {
               "account_role": "accounts_receivable",
               "debit": "0.0000",
-              "credit": "225.0000"
+              "credit": "650.0000"
+            },
+            {
+              "account_role": "inventory",
+              "debit": "300.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_role": "cost_of_goods_sold",
+              "debit": "0.0000",
+              "credit": "300.0000"
             }
-          ]
+          ],
+          "stock_movements": [
+            {
+              "item_id": "bench-finished",
+              "location_id": "workshop",
+              "quantity_delta": "1.0000",
+              "unit_cost": "300.0000"
+            }
+          ],
+          "original_event_id": "manufacturing-sale",
+          "related_document_id": "manufacturing-sale"
         },
         {
-          "id": "seasonal-supplier-payment-final",
-          "date": "2026-05-17",
+          "id": "manufacturing-supplier-payment-final",
+          "date": "2026-07-22",
           "kind": "supplier_payment",
-          "source_reference": "candidate:sunrise-garden:payment:nursery:final",
-          "amount": "150.0000",
+          "source_reference": "candidate:maple-bench:payment:timber:final",
+          "amount": "400.0000",
           "expected_journal": [
             {
               "account_role": "accounts_payable",
-              "debit": "150.0000",
+              "debit": "400.0000",
               "credit": "0.0000"
             },
             {
               "account_role": "bank_current",
               "debit": "0.0000",
-              "credit": "150.0000"
+              "credit": "400.0000"
             }
           ],
           "allocations": [
             {
-              "document_id": "seasonal-supplier-bill",
-              "amount": "150.0000"
+              "document_id": "manufacturing-material-receipt",
+              "amount": "400.0000"
             }
           ]
         },
         {
-          "id": "seasonal-fuel-reversal",
-          "date": "2026-07-13",
+          "id": "manufacturing-workshop-expense-reversal",
+          "date": "2026-08-26",
           "kind": "reversal",
-          "source_reference": "candidate:sunrise-garden:expense:fuel:reversal",
-          "amount": "225.0000",
-          "reverses_event_id": "seasonal-fuel",
+          "source_reference": "candidate:maple-bench:expense:workshop:reversal",
+          "amount": "250.0000",
+          "reverses_event_id": "manufacturing-workshop-expense",
           "expected_journal": [
             {
-              "account_role": "vehicle_expense",
+              "account_role": "workshop_expense",
               "debit": "0.0000",
-              "credit": "225.0000"
+              "credit": "250.0000"
             },
             {
               "account_role": "bank_current",
-              "debit": "225.0000",
+              "debit": "250.0000",
               "credit": "0.0000"
             }
           ]
         },
         {
-          "id": "seasonal-fuel-corrected",
-          "date": "2026-07-14",
+          "id": "manufacturing-workshop-expense-corrected",
+          "date": "2026-08-27",
           "kind": "expense",
-          "source_reference": "candidate:sunrise-garden:expense:fuel:corrected",
-          "amount": "210.0000",
-          "linked_event_id": "seasonal-fuel",
+          "source_reference": "candidate:maple-bench:expense:workshop:corrected",
+          "amount": "235.0000",
+          "linked_event_id": "manufacturing-workshop-expense",
           "expected_journal": [
             {
-              "account_role": "vehicle_expense",
-              "debit": "210.0000",
+              "account_role": "workshop_expense",
+              "debit": "235.0000",
               "credit": "0.0000"
             },
             {
               "account_role": "bank_current",
               "debit": "0.0000",
-              "credit": "210.0000"
+              "credit": "235.0000"
             }
           ]
         },
         {
-          "id": "seasonal-business-cash-transfer",
-          "date": "2026-08-25",
+          "id": "light-manufacturing-cash-transfer",
+          "date": "2026-08-10",
           "kind": "cash_transfer",
-          "source_reference": "candidate:seasonal-business:bank:cash-transfer",
+          "source_reference": "candidate:light-manufacturing:bank:cash-transfer",
           "amount": "250.0000",
           "expected_journal": [
             {
@@ -503,101 +542,80 @@
         "status": "candidate_balanced_event_contract_not_runtime_replayed",
         "as_of_date": "2026-09-30",
         "monthly": {
-          "2026-04": {
-            "income": "2200.0000",
-            "expenses": "550.0000",
-            "cash_change": "1050.0000",
-            "receivable_balance": "1000.0000",
-            "payable_balance": "400.0000",
-            "inventory": {},
-            "profit": "1650.0000"
-          },
-          "2026-05": {
-            "income": "0.0000",
-            "expenses": "0.0000",
-            "cash_change": "600.0000",
-            "receivable_balance": "0.0000",
-            "payable_balance": "0.0000",
-            "inventory": {},
-            "profit": "0.0000"
-          },
           "2026-07": {
-            "income": "0.0000",
-            "expenses": "210.0000",
-            "cash_change": "-210.0000",
-            "receivable_balance": "0.0000",
+            "income": "1950.0000",
+            "expenses": "900.0000",
+            "cash_change": "-1200.0000",
+            "receivable_balance": "1950.0000",
             "payable_balance": "0.0000",
-            "inventory": {},
-            "profit": "-210.0000"
+            "inventory": {
+              "bench-finished|workshop": {
+                "quantity": "1.0000",
+                "value": "300.0000"
+              }
+            },
+            "profit": "1050.0000"
           },
           "2026-08": {
-            "income": "1650.0000",
-            "expenses": "0.0000",
-            "cash_change": "825.0000",
-            "receivable_balance": "825.0000",
+            "income": "-650.0000",
+            "expenses": "-65.0000",
+            "cash_change": "1065.0000",
+            "receivable_balance": "0.0000",
             "payable_balance": "0.0000",
-            "inventory": {},
-            "profit": "1650.0000"
-          },
-          "2026-09": {
-            "income": "-225.0000",
-            "expenses": "0.0000",
-            "cash_change": "0.0000",
-            "receivable_balance": "600.0000",
-            "payable_balance": "0.0000",
-            "inventory": {},
-            "profit": "-225.0000"
+            "inventory": {
+              "bench-finished|workshop": {
+                "quantity": "2.0000",
+                "value": "600.0000"
+              }
+            },
+            "profit": "-585.0000"
           }
         },
         "annual": {
           "2026": {
-            "income": "3625.0000",
-            "expenses": "760.0000",
-            "cash_change": "2265.0000",
-            "profit": "2865.0000",
-            "receivable_balance": "600.0000",
+            "income": "1300.0000",
+            "expenses": "835.0000",
+            "cash_change": "-135.0000",
+            "profit": "465.0000",
+            "receivable_balance": "0.0000",
             "payable_balance": "0.0000",
-            "inventory": {}
+            "inventory": {
+              "bench-finished|workshop": {
+                "quantity": "2.0000",
+                "value": "600.0000"
+              }
+            }
           }
         },
         "ar_ap": {
-          "receivable_balance": "600.0000",
+          "receivable_balance": "0.0000",
           "payable_balance": "0.0000",
           "documents": [
             {
-              "event_id": "seasonal-invoice",
-              "date": "2026-04-05",
-              "kind": "invoice",
-              "source_reference": "candidate:sunrise-garden:invoice:2026-04",
-              "amount": "2200.0000",
-              "receivable_balance_after": "2200.0000",
-              "payable_balance_after": "0.0000"
+              "event_id": "manufacturing-material-receipt",
+              "date": "2026-07-02",
+              "kind": "purchase",
+              "source_reference": "candidate:maple-bench:receipt:materials",
+              "amount": "1200.0000",
+              "receivable_balance_after": "0.0000",
+              "payable_balance_after": "1200.0000"
             },
             {
-              "event_id": "seasonal-supplier-bill",
-              "date": "2026-04-22",
-              "kind": "bill",
-              "source_reference": "candidate:sunrise-garden:bill:nursery",
-              "amount": "400.0000",
-              "receivable_balance_after": "1000.0000",
+              "event_id": "manufacturing-sale",
+              "date": "2026-07-20",
+              "kind": "invoice",
+              "source_reference": "candidate:maple-bench:invoice:interiors",
+              "amount": "1950.0000",
+              "receivable_balance_after": "1950.0000",
               "payable_balance_after": "400.0000"
             },
             {
-              "event_id": "seasonal-peak-invoice",
-              "date": "2026-08-05",
-              "kind": "invoice",
-              "source_reference": "candidate:sunrise-garden:invoice:2026-08",
-              "amount": "1650.0000",
-              "receivable_balance_after": "1650.0000",
-              "payable_balance_after": "0.0000"
-            },
-            {
-              "event_id": "seasonal-peak-credit",
-              "date": "2026-09-02",
+              "event_id": "manufacturing-customer-return",
+              "date": "2026-08-28",
               "kind": "customer_credit",
-              "source_reference": "candidate:sunrise-garden:credit:peak-adjustment",
-              "amount": "225.0000",
-              "receivable_balance_after": "600.0000",
+              "source_reference": "candidate:maple-bench:credit:return",
+              "amount": "650.0000",
+              "receivable_balance_after": "0.0000",
               "payable_balance_after": "0.0000"
             }
           ]
@@ -605,11 +623,11 @@
         "ageing": {
           "receivables": {
             "current": "0.0000",
-            "1_30": "600.0000",
+            "1_30": "0.0000",
             "31_60": "0.0000",
             "61_90": "0.0000",
             "91_plus": "0.0000",
-            "total": "600.0000"
+            "total": "0.0000"
           },
           "payables": {
             "current": "0.0000",
@@ -620,131 +638,172 @@
             "total": "0.0000"
           }
         },
-        "inventory": {}
+        "inventory": {
+          "bench-finished|workshop": {
+            "quantity": "2.0000",
+            "value": "600.0000"
+          }
+        }
       },
       "industry_scenarios": [
         {
-          "id": "seasonal-cycle",
+          "id": "workshop-conversion",
           "status": "future_module_scenario_not_implemented",
-          "description": "Seasonal scheduling, weather exposure, workforce costing and contract forecasting need separate reviewed workflows."
+          "description": "Bills of material, production orders, work in progress, labour absorption and finished-goods conversion need a separate reviewed module."
         }
       ],
-      "industry_profile_id": "seasonal-field-services",
+      "industry_profile_id": "light-manufacturing",
       "industry_profile": {
-        "id": "seasonal-field-services",
+        "id": "light-manufacturing",
         "sample_ids": [
-          "seasonal-business"
+          "light-manufacturing"
         ],
-        "name": "Seasonal garden and field services",
-        "operating_model": "Recurring maintenance routes and seasonal installation work with crew, plant/material and vehicle costs.",
+        "name": "Light manufacturing",
+        "operating_model": "Bought-in materials converted into simple finished goods, with WIP and production-cost distinctions kept explicit.",
         "distinct_controls": [
-          "recurring route versus installation revenue",
-          "job materials",
-          "field labor",
-          "equipment and vehicle cost",
-          "seasonality by month"
+          "raw materials",
+          "WIP",
+          "finished goods",
+          "production overhead",
+          "normal versus abnormal waste",
+          "GRNI"
         ],
         "unsupported_in_sample": [
-          "route scheduling",
-          "weather forecasting",
-          "crew payroll",
-          "property-level job costing"
+          "BOM",
+          "work orders",
+          "routing",
+          "labor absorption",
+          "production planning",
+          "quality module"
         ],
         "seed_role_labels": {
-          "sales_revenue": "Garden maintenance and installation income",
-          "supplies_expense": "Plants and job materials",
-          "vehicle_expense": "Field vehicle and fuel costs",
-          "insurance_expense": "Business and equipment insurance",
-          "operating_expense": "Field service operating expenses",
-          "expense": "Field service operating expenses"
+          "sales_revenue": "Manufactured product income",
+          "inventory": "Finished goods and production material inventory",
+          "cost_of_goods_sold": "Manufactured cost of sales",
+          "workshop_expense": "Production workshop costs",
+          "operating_expense": "Manufacturing operating expenses",
+          "expense": "Manufacturing operating expenses"
         },
         "accounts": [
           {
-            "semantic_key": "seasonal.income.maintenance",
+            "semantic_key": "manufacturing.inventory.raw",
+            "code": "1410",
+            "name": "Raw material inventory",
+            "type": "asset",
+            "fixture_role": "raw_inventory",
+            "normal_balance": "debit",
+            "source_ids": [
+              "erpnext-bom",
+              "SRC-IAS2"
+            ]
+          },
+          {
+            "semantic_key": "manufacturing.inventory.work",
+            "code": "1420",
+            "name": "Production in progress",
+            "type": "asset",
+            "fixture_role": "wip_inventory",
+            "normal_balance": "debit",
+            "source_ids": [
+              "erpnext-work-order",
+              "SRC-IAS2"
+            ]
+          },
+          {
+            "semantic_key": "manufacturing.inventory.finished",
+            "code": "1430",
+            "name": "Finished goods inventory",
+            "type": "asset",
+            "fixture_role": "inventory",
+            "normal_balance": "debit",
+            "source_ids": [
+              "erpnext-accounting-stock"
+            ]
+          },
+          {
+            "semantic_key": "manufacturing.income.goods",
             "code": "4100",
-            "name": "Recurring garden maintenance income",
+            "name": "Manufactured product income",
             "type": "income",
             "fixture_role": "sales_revenue",
             "normal_balance": "credit",
             "source_ids": [
-              "matrix-78",
-              "landscape-coa"
+              "erpnext-accounting-entries"
             ]
           },
           {
-            "semantic_key": "seasonal.income.installation",
-            "code": "4110",
-            "name": "Seasonal planting and installation income",
-            "type": "income",
-            "fixture_role": "sales_revenue",
-            "normal_balance": "credit",
-            "source_ids": [
-              "landscape-coa"
-            ]
-          },
-          {
-            "semantic_key": "seasonal.cost.materials",
+            "semantic_key": "manufacturing.cost.goods",
             "code": "5110",
-            "name": "Plants and job materials",
+            "name": "Manufactured cost of sales",
             "type": "expense",
-            "fixture_role": "supplies_expense",
+            "fixture_role": "cost_of_goods_sold",
             "normal_balance": "debit",
             "source_ids": [
-              "landscape-coa"
+              "erpnext-accounting-entries"
             ]
           },
           {
-            "semantic_key": "seasonal.cost.field_labor",
+            "semantic_key": "manufacturing.cost.overhead",
             "code": "5120",
-            "name": "Direct field crew costs",
+            "name": "Production workshop costs",
             "type": "expense",
-            "fixture_role": "operating_expense",
+            "fixture_role": "workshop_expense",
             "normal_balance": "debit",
             "source_ids": [
-              "landscape-coa"
+              "erpnext-work-order"
             ]
           },
           {
-            "semantic_key": "seasonal.cost.vehicle",
+            "semantic_key": "manufacturing.cost.abnormal",
             "code": "5130",
-            "name": "Field vehicle and fuel costs",
+            "name": "Abnormal production losses",
             "type": "expense",
-            "fixture_role": "vehicle_expense",
+            "fixture_role": "abnormal_loss_expense",
             "normal_balance": "debit",
             "source_ids": [
-              "landscape-coa"
+              "SRC-IAS2"
             ]
           }
         ],
         "research_basis": [
           {
-            "title": "Matrix: landscaping / lawn-care company",
-            "url": "https://www.getjobber.com/industries/",
-            "supports": "Recurring route, crew, materials, completion and renewal workflow context."
+            "title": "ERPNext bill of materials",
+            "url": "https://docs.frappe.io/erpnext/bill-of-materials",
+            "supports": "BOM, operations, material issue, scrap and costing concepts."
           },
           {
-            "title": "Landscaping chart of accounts",
-            "url": "https://www.youraspire.com/templates/landscaping/chart-of-accounts",
-            "supports": "Recurring mowing, installation, direct labor, materials, fuel and equipment cost categories."
+            "title": "ERPNext work order",
+            "url": "https://docs.frappe.io/erpnext/work-order",
+            "supports": "Source/WIP/target warehouses, required quantities, operations and production completion."
+          },
+          {
+            "title": "ERPNext accounting of inventory stock",
+            "url": "https://docs.frappe.io/erpnext/accounting-of-inventory-stock",
+            "supports": "Perpetual inventory and stock/accounting synchronization."
+          },
+          {
+            "title": "IFRS IAS 2 Inventories",
+            "url": "https://www.ifrs.org/issued-standards/list-of-standards/ias-2-inventories/",
+            "supports": "Inventory cost and measurement concepts; not a PHP Ledger implementation decision."
           }
         ]
       }
     }
   },
   "scenario": {
-    "id": "seasonal-cash-cycle",
-    "title": "Compare a seasonal cash cycle",
-    "goal": "Compare monthly receipts across a seasonal service year while keeping operating costs, prepayments and settlements traceable.",
+    "id": "workshop-conversion",
+    "title": "Review a simple materials-to-sales example",
+    "goal": "Use a light-manufacturing bookkeeping example to inspect material purchases, finished-goods movement, sales and operating costs.",
     "steps": [
-      "Compare low-season and peak-season monthly receipt summaries.",
-      "Trace recurring operating costs and insurance release through the general ledger.",
-      "Review the cross-year customer collection and supplier payment.",
-      "Use the open 2026 drafts to test a new seasonal entry without changing history."
+      "Review the synthetic material and finished-goods balances at the start of the example.",
+      "Trace purchases and stock issues to their ledger accounts.",
+      "Review the finished-goods sale, customer settlement and any returned quantity.",
+      "Compare the period result and closing stock with the stated fixture checkpoints."
     ],
     "checks": [
-      "The receipt curve is a synthetic teaching pattern, not a forecast or business benchmark.",
-      "No workforce scheduling, weather model, contract pipeline or seasonal tax treatment is implemented.",
-      "Profit and cash are reviewed through the existing statements and account movements."
+      "This does not implement bills of material, production orders, work-in-progress or overhead absorption.",
+      "The conversion amounts are fixed teaching data, not a production-costing policy.",
+      "The pack is a bookkeeping preview; production costing and conversion controls are outside the current module."
     ]
   },
   "notice": "Original synthetic general-ledger examples. Manual staff, loan, outstanding-item and stock schedules do not implement payroll, AR/AP, inventory or tax modules. Period closure blocks posting; it is not statutory financial-statement approval or an earnings-transfer journal.",
@@ -838,6 +897,18 @@
       "name": "Loan interest",
       "type": "expense",
       "role": "expense"
+    },
+    {
+      "code": "1400",
+      "name": "Stock - manual support schedule",
+      "type": "asset",
+      "role": null
+    },
+    {
+      "code": "5700",
+      "name": "Cost of sales - manual schedule",
+      "type": "expense",
+      "role": "expense"
     }
   ],
   "events": [
@@ -845,7 +916,7 @@
       "key": "capital",
       "kind": "general_journal",
       "date": "2024-01-01",
-      "reference": "seasonal-business/capital",
+      "reference": "light-manufacturing/capital",
       "description": "Fictional owner introduces starting capital",
       "lines": [
         {
@@ -867,7 +938,7 @@
       "key": "insurance-2024",
       "kind": "general_journal",
       "date": "2024-01-01",
-      "reference": "seasonal-business/insurance-2024",
+      "reference": "light-manufacturing/insurance-2024",
       "description": "Prepay 2024 insurance: 1200, released at 100 per month",
       "lines": [
         {
@@ -889,7 +960,7 @@
       "key": "reserve-transfer",
       "kind": "general_journal",
       "date": "2024-01-02",
-      "reference": "seasonal-business/reserve-transfer",
+      "reference": "light-manufacturing/reserve-transfer",
       "description": "Move funds between primary and reserve banks",
       "lines": [
         {
@@ -911,7 +982,7 @@
       "key": "cash-float",
       "kind": "general_journal",
       "date": "2024-01-03",
-      "reference": "seasonal-business/cash-float",
+      "reference": "light-manufacturing/cash-float",
       "description": "Fund the cash till",
       "lines": [
         {
@@ -933,7 +1004,7 @@
       "key": "petty-float",
       "kind": "general_journal",
       "date": "2024-01-03",
-      "reference": "seasonal-business/petty-float",
+      "reference": "light-manufacturing/petty-float",
       "description": "Establish a separately counted petty cash float",
       "lines": [
         {
@@ -955,9 +1026,9 @@
       "key": "receipts-2024-01",
       "kind": "receipt",
       "date": "2024-01-15",
-      "reference": "seasonal-business/receipts-2024-01",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "light-manufacturing/receipts-2024-01",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -966,19 +1037,19 @@
       "key": "operations-2024-01",
       "kind": "general_journal",
       "date": "2024-01-31",
-      "reference": "seasonal-business/operations-2024-01",
-      "description": "2024-01 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2024-01",
+      "description": "2024-01 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -1040,6 +1111,30 @@
           "debit": "0.0000",
           "credit": "100.0000",
           "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
         }
       ],
       "reverse": false
@@ -1048,7 +1143,7 @@
       "key": "equipment",
       "kind": "general_journal",
       "date": "2024-02-01",
-      "reference": "seasonal-business/equipment",
+      "reference": "light-manufacturing/equipment",
       "description": "Equipment: 2400 cost, no residual, 60-month illustrative life from February 2024",
       "lines": [
         {
@@ -1070,9 +1165,9 @@
       "key": "receipts-2024-02",
       "kind": "receipt",
       "date": "2024-02-15",
-      "reference": "seasonal-business/receipts-2024-02",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "light-manufacturing/receipts-2024-02",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1081,19 +1176,19 @@
       "key": "operations-2024-02",
       "kind": "general_journal",
       "date": "2024-02-29",
-      "reference": "seasonal-business/operations-2024-02",
-      "description": "2024-02 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2024-02",
+      "description": "2024-02 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -1167,6 +1262,30 @@
           "debit": "0.0000",
           "credit": "40.0000",
           "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
         }
       ],
       "reverse": false
@@ -1175,7 +1294,7 @@
       "key": "loan-advance",
       "kind": "general_journal",
       "date": "2024-03-01",
-      "reference": "seasonal-business/loan-advance",
+      "reference": "light-manufacturing/loan-advance",
       "description": "Fictional term-loan advance; separate principal and interest support",
       "lines": [
         {
@@ -1197,9 +1316,9 @@
       "key": "receipts-2024-03",
       "kind": "receipt",
       "date": "2024-03-15",
-      "reference": "seasonal-business/receipts-2024-03",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "2250.0000",
+      "reference": "light-manufacturing/receipts-2024-03",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1208,19 +1327,19 @@
       "key": "operations-2024-03",
       "kind": "general_journal",
       "date": "2024-03-31",
-      "reference": "seasonal-business/operations-2024-03",
-      "description": "2024-03 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2024-03",
+      "description": "2024-03 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "250.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "250.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -1293,6 +1412,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -1302,9 +1445,9 @@
       "key": "receipts-2024-04",
       "kind": "receipt",
       "date": "2024-04-15",
-      "reference": "seasonal-business/receipts-2024-04",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4050.0000",
+      "reference": "light-manufacturing/receipts-2024-04",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1313,19 +1456,19 @@
       "key": "operations-2024-04",
       "kind": "general_journal",
       "date": "2024-04-30",
-      "reference": "seasonal-business/operations-2024-04",
-      "description": "2024-04 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2024-04",
+      "description": "2024-04 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "450.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "450.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -1398,6 +1541,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -1407,9 +1574,9 @@
       "key": "receipts-2024-05",
       "kind": "receipt",
       "date": "2024-05-15",
-      "reference": "seasonal-business/receipts-2024-05",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4950.0000",
+      "reference": "light-manufacturing/receipts-2024-05",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1418,19 +1585,19 @@
       "key": "operations-2024-05",
       "kind": "general_journal",
       "date": "2024-05-31",
-      "reference": "seasonal-business/operations-2024-05",
-      "description": "2024-05 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2024-05",
+      "description": "2024-05 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "550.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "550.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -1503,6 +1670,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -1512,9 +1703,9 @@
       "key": "receipts-2024-06",
       "kind": "receipt",
       "date": "2024-06-15",
-      "reference": "seasonal-business/receipts-2024-06",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "5400.0000",
+      "reference": "light-manufacturing/receipts-2024-06",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1523,19 +1714,19 @@
       "key": "operations-2024-06",
       "kind": "general_journal",
       "date": "2024-06-30",
-      "reference": "seasonal-business/operations-2024-06",
-      "description": "2024-06 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2024-06",
+      "description": "2024-06 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "600.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "600.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -1608,6 +1799,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -1617,9 +1832,9 @@
       "key": "receipts-2024-07",
       "kind": "receipt",
       "date": "2024-07-15",
-      "reference": "seasonal-business/receipts-2024-07",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "5400.0000",
+      "reference": "light-manufacturing/receipts-2024-07",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1628,19 +1843,19 @@
       "key": "operations-2024-07",
       "kind": "general_journal",
       "date": "2024-07-31",
-      "reference": "seasonal-business/operations-2024-07",
-      "description": "2024-07 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2024-07",
+      "description": "2024-07 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "600.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "600.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -1713,6 +1928,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -1722,9 +1961,9 @@
       "key": "receipts-2024-08",
       "kind": "receipt",
       "date": "2024-08-15",
-      "reference": "seasonal-business/receipts-2024-08",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4950.0000",
+      "reference": "light-manufacturing/receipts-2024-08",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1733,19 +1972,19 @@
       "key": "operations-2024-08",
       "kind": "general_journal",
       "date": "2024-08-31",
-      "reference": "seasonal-business/operations-2024-08",
-      "description": "2024-08 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2024-08",
+      "description": "2024-08 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "550.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "550.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -1818,6 +2057,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -1827,9 +2090,9 @@
       "key": "receipts-2024-09",
       "kind": "receipt",
       "date": "2024-09-15",
-      "reference": "seasonal-business/receipts-2024-09",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4050.0000",
+      "reference": "light-manufacturing/receipts-2024-09",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1838,19 +2101,19 @@
       "key": "operations-2024-09",
       "kind": "general_journal",
       "date": "2024-09-30",
-      "reference": "seasonal-business/operations-2024-09",
-      "description": "2024-09 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2024-09",
+      "description": "2024-09 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "450.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "450.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -1923,6 +2186,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -1932,9 +2219,9 @@
       "key": "receipts-2024-10",
       "kind": "receipt",
       "date": "2024-10-15",
-      "reference": "seasonal-business/receipts-2024-10",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "2250.0000",
+      "reference": "light-manufacturing/receipts-2024-10",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -1943,19 +2230,19 @@
       "key": "operations-2024-10",
       "kind": "general_journal",
       "date": "2024-10-31",
-      "reference": "seasonal-business/operations-2024-10",
-      "description": "2024-10 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2024-10",
+      "description": "2024-10 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "250.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "250.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -2028,6 +2315,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -2037,9 +2348,9 @@
       "key": "receipts-2024-11",
       "kind": "receipt",
       "date": "2024-11-15",
-      "reference": "seasonal-business/receipts-2024-11",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "light-manufacturing/receipts-2024-11",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2048,19 +2359,19 @@
       "key": "operations-2024-11",
       "kind": "general_journal",
       "date": "2024-11-30",
-      "reference": "seasonal-business/operations-2024-11",
-      "description": "2024-11 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2024-11",
+      "description": "2024-11 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -2134,6 +2445,30 @@
           "debit": "0.0000",
           "credit": "40.0000",
           "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
         }
       ],
       "reverse": false
@@ -2142,9 +2477,9 @@
       "key": "receipts-2024-12",
       "kind": "receipt",
       "date": "2024-12-15",
-      "reference": "seasonal-business/receipts-2024-12",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "light-manufacturing/receipts-2024-12",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2153,7 +2488,7 @@
       "key": "loan-payment-2024",
       "kind": "general_journal",
       "date": "2024-12-20",
-      "reference": "seasonal-business/loan-payment-2024",
+      "reference": "light-manufacturing/loan-payment-2024",
       "description": "Annual loan instalment: principal 1200 and illustrative interest 300",
       "lines": [
         {
@@ -2181,7 +2516,7 @@
       "key": "outstanding-sale",
       "kind": "general_journal",
       "date": "2024-12-29",
-      "reference": "seasonal-business/outstanding-sale",
+      "reference": "light-manufacturing/outstanding-sale",
       "description": "Completed work for fictional Alder Customer: 800 outstanding at year end; manual receivable support",
       "lines": [
         {
@@ -2203,7 +2538,7 @@
       "key": "cash-deposit-2024",
       "kind": "general_journal",
       "date": "2024-12-30",
-      "reference": "seasonal-business/cash-deposit-2024",
+      "reference": "light-manufacturing/cash-deposit-2024",
       "description": "Deposit counted till cash into primary bank; transfer has no income effect",
       "lines": [
         {
@@ -2225,7 +2560,7 @@
       "key": "bonus-accrual",
       "kind": "general_journal",
       "date": "2024-12-31",
-      "reference": "seasonal-business/bonus-accrual",
+      "reference": "light-manufacturing/bonus-accrual",
       "description": "Accrue fictional staff bonus: Mira Vale 168 and Noel Reed 252; paid next January",
       "lines": [
         {
@@ -2247,19 +2582,19 @@
       "key": "operations-2024-12",
       "kind": "general_journal",
       "date": "2024-12-31",
-      "reference": "seasonal-business/operations-2024-12",
-      "description": "2024-12 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2024-12",
+      "description": "2024-12 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -2333,6 +2668,30 @@
           "debit": "0.0000",
           "credit": "40.0000",
           "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
         }
       ],
       "reverse": false
@@ -2341,7 +2700,7 @@
       "key": "insurance-2025",
       "kind": "general_journal",
       "date": "2025-01-01",
-      "reference": "seasonal-business/insurance-2025",
+      "reference": "light-manufacturing/insurance-2025",
       "description": "Prepay 2025 insurance: 1200, released at 100 per month",
       "lines": [
         {
@@ -2363,7 +2722,7 @@
       "key": "bonus-payment",
       "kind": "general_journal",
       "date": "2025-01-10",
-      "reference": "seasonal-business/bonus-payment",
+      "reference": "light-manufacturing/bonus-payment",
       "description": "Settle the prior-year staff bonus; no second salary expense",
       "lines": [
         {
@@ -2385,9 +2744,9 @@
       "key": "receipts-2025-01",
       "kind": "receipt",
       "date": "2025-01-15",
-      "reference": "seasonal-business/receipts-2025-01",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "light-manufacturing/receipts-2025-01",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2396,19 +2755,19 @@
       "key": "operations-2025-01",
       "kind": "general_journal",
       "date": "2025-01-31",
-      "reference": "seasonal-business/operations-2025-01",
-      "description": "2025-01 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2025-01",
+      "description": "2025-01 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -2482,6 +2841,30 @@
           "debit": "0.0000",
           "credit": "40.0000",
           "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
         }
       ],
       "reverse": false
@@ -2490,7 +2873,7 @@
       "key": "collect-prior-sale",
       "kind": "general_journal",
       "date": "2025-02-10",
-      "reference": "seasonal-business/collect-prior-sale",
+      "reference": "light-manufacturing/collect-prior-sale",
       "description": "Collect Alder Customer's prior-year 800; no second income entry",
       "lines": [
         {
@@ -2512,9 +2895,9 @@
       "key": "receipts-2025-02",
       "kind": "receipt",
       "date": "2025-02-15",
-      "reference": "seasonal-business/receipts-2025-02",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "light-manufacturing/receipts-2025-02",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2523,19 +2906,19 @@
       "key": "operations-2025-02",
       "kind": "general_journal",
       "date": "2025-02-28",
-      "reference": "seasonal-business/operations-2025-02",
-      "description": "2025-02 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2025-02",
+      "description": "2025-02 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -2608,6 +2991,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -2617,9 +3024,9 @@
       "key": "receipts-2025-03",
       "kind": "receipt",
       "date": "2025-03-15",
-      "reference": "seasonal-business/receipts-2025-03",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "2250.0000",
+      "reference": "light-manufacturing/receipts-2025-03",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2628,19 +3035,19 @@
       "key": "operations-2025-03",
       "kind": "general_journal",
       "date": "2025-03-31",
-      "reference": "seasonal-business/operations-2025-03",
-      "description": "2025-03 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2025-03",
+      "description": "2025-03 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "250.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "250.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -2713,6 +3120,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -2722,9 +3153,9 @@
       "key": "receipts-2025-04",
       "kind": "receipt",
       "date": "2025-04-15",
-      "reference": "seasonal-business/receipts-2025-04",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4050.0000",
+      "reference": "light-manufacturing/receipts-2025-04",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2733,19 +3164,19 @@
       "key": "operations-2025-04",
       "kind": "general_journal",
       "date": "2025-04-30",
-      "reference": "seasonal-business/operations-2025-04",
-      "description": "2025-04 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2025-04",
+      "description": "2025-04 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "450.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "450.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -2818,6 +3249,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -2827,9 +3282,9 @@
       "key": "receipts-2025-05",
       "kind": "receipt",
       "date": "2025-05-15",
-      "reference": "seasonal-business/receipts-2025-05",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4950.0000",
+      "reference": "light-manufacturing/receipts-2025-05",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2838,19 +3293,19 @@
       "key": "operations-2025-05",
       "kind": "general_journal",
       "date": "2025-05-31",
-      "reference": "seasonal-business/operations-2025-05",
-      "description": "2025-05 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2025-05",
+      "description": "2025-05 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "550.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "550.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -2923,6 +3378,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -2932,9 +3411,9 @@
       "key": "receipts-2025-06",
       "kind": "receipt",
       "date": "2025-06-15",
-      "reference": "seasonal-business/receipts-2025-06",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "5400.0000",
+      "reference": "light-manufacturing/receipts-2025-06",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -2943,19 +3422,19 @@
       "key": "operations-2025-06",
       "kind": "general_journal",
       "date": "2025-06-30",
-      "reference": "seasonal-business/operations-2025-06",
-      "description": "2025-06 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2025-06",
+      "description": "2025-06 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "600.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "600.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -3028,6 +3507,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -3037,9 +3540,9 @@
       "key": "receipts-2025-07",
       "kind": "receipt",
       "date": "2025-07-15",
-      "reference": "seasonal-business/receipts-2025-07",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "5400.0000",
+      "reference": "light-manufacturing/receipts-2025-07",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3048,19 +3551,19 @@
       "key": "operations-2025-07",
       "kind": "general_journal",
       "date": "2025-07-31",
-      "reference": "seasonal-business/operations-2025-07",
-      "description": "2025-07 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2025-07",
+      "description": "2025-07 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "600.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "600.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -3134,6 +3637,30 @@
           "debit": "0.0000",
           "credit": "40.0000",
           "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
         }
       ],
       "reverse": false
@@ -3142,9 +3669,9 @@
       "key": "receipts-2025-08",
       "kind": "receipt",
       "date": "2025-08-15",
-      "reference": "seasonal-business/receipts-2025-08",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4950.0000",
+      "reference": "light-manufacturing/receipts-2025-08",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3153,7 +3680,7 @@
       "key": "wrong-cost",
       "kind": "general_journal",
       "date": "2025-08-20",
-      "reference": "seasonal-business/wrong-cost",
+      "reference": "light-manufacturing/wrong-cost",
       "description": "Correction exercise: 25 recorded instead of 45; this entry is reversed in full",
       "lines": [
         {
@@ -3175,7 +3702,7 @@
       "key": "correct-cost",
       "kind": "general_journal",
       "date": "2025-08-21",
-      "reference": "seasonal-business/correct-cost",
+      "reference": "light-manufacturing/correct-cost",
       "description": "Replacement for wrong-cost: correct maintenance cost 45, original and reversal retained",
       "lines": [
         {
@@ -3197,19 +3724,19 @@
       "key": "operations-2025-08",
       "kind": "general_journal",
       "date": "2025-08-31",
-      "reference": "seasonal-business/operations-2025-08",
-      "description": "2025-08 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2025-08",
+      "description": "2025-08 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "550.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "550.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -3282,6 +3809,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -3291,9 +3842,9 @@
       "key": "receipts-2025-09",
       "kind": "receipt",
       "date": "2025-09-15",
-      "reference": "seasonal-business/receipts-2025-09",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "4050.0000",
+      "reference": "light-manufacturing/receipts-2025-09",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3302,19 +3853,19 @@
       "key": "operations-2025-09",
       "kind": "general_journal",
       "date": "2025-09-30",
-      "reference": "seasonal-business/operations-2025-09",
-      "description": "2025-09 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2025-09",
+      "description": "2025-09 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "450.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "450.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -3387,6 +3938,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -3396,9 +3971,9 @@
       "key": "receipts-2025-10",
       "kind": "receipt",
       "date": "2025-10-15",
-      "reference": "seasonal-business/receipts-2025-10",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "2250.0000",
+      "reference": "light-manufacturing/receipts-2025-10",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3407,19 +3982,19 @@
       "key": "operations-2025-10",
       "kind": "general_journal",
       "date": "2025-10-31",
-      "reference": "seasonal-business/operations-2025-10",
-      "description": "2025-10 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2025-10",
+      "description": "2025-10 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "250.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "250.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -3492,6 +4067,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -3501,9 +4100,9 @@
       "key": "receipts-2025-11",
       "kind": "receipt",
       "date": "2025-11-15",
-      "reference": "seasonal-business/receipts-2025-11",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "light-manufacturing/receipts-2025-11",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3512,19 +4111,19 @@
       "key": "operations-2025-11",
       "kind": "general_journal",
       "date": "2025-11-30",
-      "reference": "seasonal-business/operations-2025-11",
-      "description": "2025-11 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2025-11",
+      "description": "2025-11 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -3598,6 +4197,30 @@
           "debit": "0.0000",
           "credit": "40.0000",
           "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
         }
       ],
       "reverse": false
@@ -3606,9 +4229,9 @@
       "key": "receipts-2025-12",
       "kind": "receipt",
       "date": "2025-12-15",
-      "reference": "seasonal-business/receipts-2025-12",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "light-manufacturing/receipts-2025-12",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3617,7 +4240,7 @@
       "key": "loan-payment-2025",
       "kind": "general_journal",
       "date": "2025-12-20",
-      "reference": "seasonal-business/loan-payment-2025",
+      "reference": "light-manufacturing/loan-payment-2025",
       "description": "Annual loan instalment: principal 1200 and illustrative interest 300",
       "lines": [
         {
@@ -3645,7 +4268,7 @@
       "key": "outstanding-bill",
       "kind": "general_journal",
       "date": "2025-12-29",
-      "reference": "seasonal-business/outstanding-bill",
+      "reference": "light-manufacturing/outstanding-bill",
       "description": "Fictional Harbor maintenance: 550 expense incurred, unpaid at year end; manual payable support",
       "lines": [
         {
@@ -3667,7 +4290,7 @@
       "key": "cash-deposit-2025",
       "kind": "general_journal",
       "date": "2025-12-30",
-      "reference": "seasonal-business/cash-deposit-2025",
+      "reference": "light-manufacturing/cash-deposit-2025",
       "description": "Deposit counted till cash into primary bank; transfer has no income effect",
       "lines": [
         {
@@ -3689,19 +4312,19 @@
       "key": "operations-2025-12",
       "kind": "general_journal",
       "date": "2025-12-31",
-      "reference": "seasonal-business/operations-2025-12",
-      "description": "2025-12 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2025-12",
+      "description": "2025-12 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -3775,6 +4398,30 @@
           "debit": "0.0000",
           "credit": "40.0000",
           "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
+          "description": ""
         }
       ],
       "reverse": false
@@ -3783,7 +4430,7 @@
       "key": "insurance-2026",
       "kind": "general_journal",
       "date": "2026-01-01",
-      "reference": "seasonal-business/insurance-2026",
+      "reference": "light-manufacturing/insurance-2026",
       "description": "Prepay 2026 insurance: 1200, released at 100 per month",
       "lines": [
         {
@@ -3805,7 +4452,7 @@
       "key": "pay-prior-bill",
       "kind": "general_journal",
       "date": "2026-01-10",
-      "reference": "seasonal-business/pay-prior-bill",
+      "reference": "light-manufacturing/pay-prior-bill",
       "description": "Pay Harbor's prior-year maintenance bill; no second expense",
       "lines": [
         {
@@ -3827,9 +4474,9 @@
       "key": "receipts-2026-01",
       "kind": "receipt",
       "date": "2026-01-15",
-      "reference": "seasonal-business/receipts-2026-01",
-      "description": "Seasonal business: monthly bank receipt summary; cash sales are in the separate operating schedule",
-      "amount": "1080.0000",
+      "reference": "light-manufacturing/receipts-2026-01",
+      "description": "Light manufacturing: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "amount": "4230.0000",
       "money_code": "1000",
       "category_code": "4000",
       "counterparty": "Fictional monthly customer receipts"
@@ -3838,19 +4485,19 @@
       "key": "operations-2026-01",
       "kind": "general_journal",
       "date": "2026-01-31",
-      "reference": "seasonal-business/operations-2026-01",
-      "description": "2026-01 manual cash, staff, rent, utilities, prepayment and depreciation support",
+      "reference": "light-manufacturing/operations-2026-01",
+      "description": "2026-01 manual cash, staff, rent, utilities, prepayment and depreciation support; includes stock and cost-of-sales schedule",
       "lines": [
         {
           "code": "1020",
-          "debit": "120.0000",
+          "debit": "470.0000",
           "credit": "0.0000",
           "description": "Cash sales per manual daily summaries"
         },
         {
           "code": "4000",
           "debit": "0.0000",
-          "credit": "120.0000",
+          "credit": "470.0000",
           "description": ""
         },
         {
@@ -3923,6 +4570,30 @@
           "code": "1390",
           "debit": "0.0000",
           "credit": "40.0000",
+          "description": ""
+        },
+        {
+          "code": "1400",
+          "debit": "1100.0000",
+          "credit": "0.0000",
+          "description": "Manual stock purchases"
+        },
+        {
+          "code": "1000",
+          "debit": "0.0000",
+          "credit": "1100.0000",
+          "description": ""
+        },
+        {
+          "code": "5700",
+          "debit": "1000.0000",
+          "credit": "0.0000",
+          "description": "Manual units sold at pinned cost"
+        },
+        {
+          "code": "1400",
+          "debit": "0.0000",
+          "credit": "1000.0000",
           "description": ""
         }
       ],
@@ -3962,403 +4633,403 @@
   "monthly_support": [
     {
       "month": "2024-01",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "0.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2024-02",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2024-03",
-      "gross_receipts": "2500.0000",
-      "bank_receipts": "2250.0000",
-      "cash_receipts": "250.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2024-04",
-      "gross_receipts": "4500.0000",
-      "bank_receipts": "4050.0000",
-      "cash_receipts": "450.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2024-05",
-      "gross_receipts": "5500.0000",
-      "bank_receipts": "4950.0000",
-      "cash_receipts": "550.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2024-06",
-      "gross_receipts": "6000.0000",
-      "bank_receipts": "5400.0000",
-      "cash_receipts": "600.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2024-07",
-      "gross_receipts": "6000.0000",
-      "bank_receipts": "5400.0000",
-      "cash_receipts": "600.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2024-08",
-      "gross_receipts": "5500.0000",
-      "bank_receipts": "4950.0000",
-      "cash_receipts": "550.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2024-09",
-      "gross_receipts": "4500.0000",
-      "bank_receipts": "4050.0000",
-      "cash_receipts": "450.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2024-10",
-      "gross_receipts": "2500.0000",
-      "bank_receipts": "2250.0000",
-      "cash_receipts": "250.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2024-11",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2024-12",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2025-01",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2025-02",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2025-03",
-      "gross_receipts": "2500.0000",
-      "bank_receipts": "2250.0000",
-      "cash_receipts": "250.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2025-04",
-      "gross_receipts": "4500.0000",
-      "bank_receipts": "4050.0000",
-      "cash_receipts": "450.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2025-05",
-      "gross_receipts": "5500.0000",
-      "bank_receipts": "4950.0000",
-      "cash_receipts": "550.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2025-06",
-      "gross_receipts": "6000.0000",
-      "bank_receipts": "5400.0000",
-      "cash_receipts": "600.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2025-07",
-      "gross_receipts": "6000.0000",
-      "bank_receipts": "5400.0000",
-      "cash_receipts": "600.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2025-08",
-      "gross_receipts": "5500.0000",
-      "bank_receipts": "4950.0000",
-      "cash_receipts": "550.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2025-09",
-      "gross_receipts": "4500.0000",
-      "bank_receipts": "4050.0000",
-      "cash_receipts": "450.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2025-10",
-      "gross_receipts": "2500.0000",
-      "bank_receipts": "2250.0000",
-      "cash_receipts": "250.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2025-11",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2025-12",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     },
     {
       "month": "2026-01",
-      "gross_receipts": "1200.0000",
-      "bank_receipts": "1080.0000",
-      "cash_receipts": "120.0000",
+      "gross_receipts": "4700.0000",
+      "bank_receipts": "4230.0000",
+      "cash_receipts": "470.0000",
       "salaries": "1500.0000",
       "rent": "400.0000",
       "utilities": "100.0000",
       "insurance_release": "100.0000",
       "depreciation": "40.0000",
-      "stock_purchases": "0.0000",
-      "cost_of_sales": "0.0000",
-      "units_in": 0,
-      "units_out": 0,
-      "unit_cost": "0.0000"
+      "stock_purchases": "1100.0000",
+      "cost_of_sales": "1000.0000",
+      "units_in": 110,
+      "units_out": 100,
+      "unit_cost": "10.0000"
     }
   ],
   "checkpoints": [
@@ -4366,751 +5037,803 @@
       "from": "2024-01-01",
       "to": "2024-01-31",
       "balances": {
-        "1000": "10190.0000",
+        "1000": "12240.0000",
         "1010": "11600.0000",
-        "1020": "720.0000",
+        "1020": "1070.0000",
         "1030": "490.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "0.0000",
         "1390": "0.0000",
+        "1400": "100.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "0.0000",
         "3000": "-25000.0000",
-        "4000": "-1200.0000",
+        "4000": "-4700.0000",
         "5000": "0.0000",
         "5100": "1500.0000",
         "5200": "400.0000",
         "5300": "100.0000",
         "5400": "100.0000",
         "5500": "0.0000",
-        "5600": "0.0000"
+        "5600": "0.0000",
+        "5700": "1000.0000"
       },
-      "income": "1200.0000",
-      "expenses": "2100.0000",
-      "profit": "-900.0000"
+      "income": "4700.0000",
+      "expenses": "3100.0000",
+      "profit": "1600.0000"
     },
     {
       "from": "2024-02-01",
       "to": "2024-02-29",
       "balances": {
-        "1000": "7280.0000",
+        "1000": "11380.0000",
         "1010": "11200.0000",
-        "1020": "840.0000",
+        "1020": "1540.0000",
         "1030": "480.0000",
         "1100": "0.0000",
         "1200": "1000.0000",
         "1300": "2400.0000",
         "1390": "-40.0000",
+        "1400": "200.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "0.0000",
         "3000": "-25000.0000",
-        "4000": "-2400.0000",
+        "4000": "-9400.0000",
         "5000": "0.0000",
         "5100": "3000.0000",
         "5200": "800.0000",
         "5300": "200.0000",
         "5400": "200.0000",
         "5500": "40.0000",
-        "5600": "0.0000"
+        "5600": "0.0000",
+        "5700": "2000.0000"
       },
-      "income": "1200.0000",
-      "expenses": "2140.0000",
-      "profit": "-940.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2024-03-01",
       "to": "2024-03-31",
       "balances": {
-        "1000": "13940.0000",
+        "1000": "18920.0000",
         "1010": "10800.0000",
-        "1020": "1090.0000",
+        "1020": "2010.0000",
         "1030": "470.0000",
         "1100": "0.0000",
         "1200": "900.0000",
         "1300": "2400.0000",
         "1390": "-80.0000",
+        "1400": "300.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-4900.0000",
+        "4000": "-14100.0000",
         "5000": "0.0000",
         "5100": "4500.0000",
         "5200": "1200.0000",
         "5300": "300.0000",
         "5400": "300.0000",
         "5500": "80.0000",
-        "5600": "0.0000"
+        "5600": "0.0000",
+        "5700": "3000.0000"
       },
-      "income": "2500.0000",
-      "expenses": "2140.0000",
-      "profit": "360.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2024-04-01",
       "to": "2024-04-30",
       "balances": {
-        "1000": "16400.0000",
+        "1000": "20460.0000",
         "1010": "10400.0000",
-        "1020": "1540.0000",
+        "1020": "2480.0000",
         "1030": "460.0000",
         "1100": "0.0000",
         "1200": "800.0000",
         "1300": "2400.0000",
         "1390": "-120.0000",
+        "1400": "400.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-9400.0000",
+        "4000": "-18800.0000",
         "5000": "0.0000",
         "5100": "6000.0000",
         "5200": "1600.0000",
         "5300": "400.0000",
         "5400": "400.0000",
         "5500": "120.0000",
-        "5600": "0.0000"
+        "5600": "0.0000",
+        "5700": "4000.0000"
       },
-      "income": "4500.0000",
-      "expenses": "2140.0000",
-      "profit": "2360.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2024-05-01",
       "to": "2024-05-31",
       "balances": {
-        "1000": "19760.0000",
+        "1000": "22000.0000",
         "1010": "10000.0000",
-        "1020": "2090.0000",
+        "1020": "2950.0000",
         "1030": "450.0000",
         "1100": "0.0000",
         "1200": "700.0000",
         "1300": "2400.0000",
         "1390": "-160.0000",
+        "1400": "500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-14900.0000",
+        "4000": "-23500.0000",
         "5000": "0.0000",
         "5100": "7500.0000",
         "5200": "2000.0000",
         "5300": "500.0000",
         "5400": "500.0000",
         "5500": "160.0000",
-        "5600": "0.0000"
+        "5600": "0.0000",
+        "5700": "5000.0000"
       },
-      "income": "5500.0000",
-      "expenses": "2140.0000",
-      "profit": "3360.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2024-06-01",
       "to": "2024-06-30",
       "balances": {
-        "1000": "23570.0000",
+        "1000": "23540.0000",
         "1010": "9600.0000",
-        "1020": "2690.0000",
+        "1020": "3420.0000",
         "1030": "440.0000",
         "1100": "0.0000",
         "1200": "600.0000",
         "1300": "2400.0000",
         "1390": "-200.0000",
+        "1400": "600.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-20900.0000",
+        "4000": "-28200.0000",
         "5000": "0.0000",
         "5100": "9000.0000",
         "5200": "2400.0000",
         "5300": "600.0000",
         "5400": "600.0000",
         "5500": "200.0000",
-        "5600": "0.0000"
+        "5600": "0.0000",
+        "5700": "6000.0000"
       },
-      "income": "6000.0000",
-      "expenses": "2140.0000",
-      "profit": "3860.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2024-07-01",
       "to": "2024-07-31",
       "balances": {
-        "1000": "27380.0000",
+        "1000": "25080.0000",
         "1010": "9200.0000",
-        "1020": "3290.0000",
+        "1020": "3890.0000",
         "1030": "430.0000",
         "1100": "0.0000",
         "1200": "500.0000",
         "1300": "2400.0000",
         "1390": "-240.0000",
+        "1400": "700.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-26900.0000",
+        "4000": "-32900.0000",
         "5000": "0.0000",
         "5100": "10500.0000",
         "5200": "2800.0000",
         "5300": "700.0000",
         "5400": "700.0000",
         "5500": "240.0000",
-        "5600": "0.0000"
+        "5600": "0.0000",
+        "5700": "7000.0000"
       },
-      "income": "6000.0000",
-      "expenses": "2140.0000",
-      "profit": "3860.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2024-08-01",
       "to": "2024-08-31",
       "balances": {
-        "1000": "30740.0000",
+        "1000": "26620.0000",
         "1010": "8800.0000",
-        "1020": "3840.0000",
+        "1020": "4360.0000",
         "1030": "420.0000",
         "1100": "0.0000",
         "1200": "400.0000",
         "1300": "2400.0000",
         "1390": "-280.0000",
+        "1400": "800.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-32400.0000",
+        "4000": "-37600.0000",
         "5000": "0.0000",
         "5100": "12000.0000",
         "5200": "3200.0000",
         "5300": "800.0000",
         "5400": "800.0000",
         "5500": "280.0000",
-        "5600": "0.0000"
+        "5600": "0.0000",
+        "5700": "8000.0000"
       },
-      "income": "5500.0000",
-      "expenses": "2140.0000",
-      "profit": "3360.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2024-09-01",
       "to": "2024-09-30",
       "balances": {
-        "1000": "33200.0000",
+        "1000": "28160.0000",
         "1010": "8400.0000",
-        "1020": "4290.0000",
+        "1020": "4830.0000",
         "1030": "410.0000",
         "1100": "0.0000",
         "1200": "300.0000",
         "1300": "2400.0000",
         "1390": "-320.0000",
+        "1400": "900.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-36900.0000",
+        "4000": "-42300.0000",
         "5000": "0.0000",
         "5100": "13500.0000",
         "5200": "3600.0000",
         "5300": "900.0000",
         "5400": "900.0000",
         "5500": "320.0000",
-        "5600": "0.0000"
+        "5600": "0.0000",
+        "5700": "9000.0000"
       },
-      "income": "4500.0000",
-      "expenses": "2140.0000",
-      "profit": "2360.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2024-10-01",
       "to": "2024-10-31",
       "balances": {
-        "1000": "33860.0000",
+        "1000": "29700.0000",
         "1010": "8000.0000",
-        "1020": "4540.0000",
+        "1020": "5300.0000",
         "1030": "400.0000",
         "1100": "0.0000",
         "1200": "200.0000",
         "1300": "2400.0000",
         "1390": "-360.0000",
+        "1400": "1000.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-39400.0000",
+        "4000": "-47000.0000",
         "5000": "0.0000",
         "5100": "15000.0000",
         "5200": "4000.0000",
         "5300": "1000.0000",
         "5400": "1000.0000",
         "5500": "360.0000",
-        "5600": "0.0000"
+        "5600": "0.0000",
+        "5700": "10000.0000"
       },
-      "income": "2500.0000",
-      "expenses": "2140.0000",
-      "profit": "360.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2024-11-01",
       "to": "2024-11-30",
       "balances": {
-        "1000": "33350.0000",
+        "1000": "31240.0000",
         "1010": "7600.0000",
-        "1020": "4660.0000",
+        "1020": "5770.0000",
         "1030": "390.0000",
         "1100": "0.0000",
         "1200": "100.0000",
         "1300": "2400.0000",
         "1390": "-400.0000",
+        "1400": "1100.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-6000.0000",
         "3000": "-25000.0000",
-        "4000": "-40600.0000",
+        "4000": "-51700.0000",
         "5000": "0.0000",
         "5100": "16500.0000",
         "5200": "4400.0000",
         "5300": "1100.0000",
         "5400": "1100.0000",
         "5500": "400.0000",
-        "5600": "0.0000"
+        "5600": "0.0000",
+        "5700": "11000.0000"
       },
-      "income": "1200.0000",
-      "expenses": "2140.0000",
-      "profit": "-940.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2024-12-01",
       "to": "2024-12-31",
       "balances": {
-        "1000": "33840.0000",
+        "1000": "33780.0000",
         "1010": "7200.0000",
-        "1020": "2280.0000",
+        "1020": "3740.0000",
         "1030": "380.0000",
         "1100": "800.0000",
         "1200": "0.0000",
         "1300": "2400.0000",
         "1390": "-440.0000",
+        "1400": "1200.0000",
         "2000": "0.0000",
         "2100": "-420.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-42600.0000",
+        "4000": "-57200.0000",
         "5000": "0.0000",
         "5100": "18420.0000",
         "5200": "4800.0000",
         "5300": "1200.0000",
         "5400": "1200.0000",
         "5500": "440.0000",
-        "5600": "300.0000"
+        "5600": "300.0000",
+        "5700": "12000.0000"
       },
-      "income": "2000.0000",
-      "expenses": "2860.0000",
-      "profit": "-860.0000"
+      "income": "5500.0000",
+      "expenses": "3860.0000",
+      "profit": "1640.0000"
     },
     {
       "from": "2025-01-01",
       "to": "2025-01-31",
       "balances": {
-        "1000": "31710.0000",
+        "1000": "33700.0000",
         "1010": "6800.0000",
-        "1020": "2400.0000",
+        "1020": "4210.0000",
         "1030": "370.0000",
         "1100": "800.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-480.0000",
+        "1400": "1300.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-43800.0000",
+        "4000": "-61900.0000",
         "5000": "0.0000",
         "5100": "19920.0000",
         "5200": "5200.0000",
         "5300": "1300.0000",
         "5400": "1300.0000",
         "5500": "480.0000",
-        "5600": "300.0000"
+        "5600": "300.0000",
+        "5700": "13000.0000"
       },
-      "income": "1200.0000",
-      "expenses": "2140.0000",
-      "profit": "-940.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2025-02-01",
       "to": "2025-02-28",
       "balances": {
-        "1000": "32000.0000",
+        "1000": "36040.0000",
         "1010": "6400.0000",
-        "1020": "2520.0000",
+        "1020": "4680.0000",
         "1030": "360.0000",
         "1100": "0.0000",
         "1200": "1000.0000",
         "1300": "2400.0000",
         "1390": "-520.0000",
+        "1400": "1400.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-45000.0000",
+        "4000": "-66600.0000",
         "5000": "0.0000",
         "5100": "21420.0000",
         "5200": "5600.0000",
         "5300": "1400.0000",
         "5400": "1400.0000",
         "5500": "520.0000",
-        "5600": "300.0000"
+        "5600": "300.0000",
+        "5700": "14000.0000"
       },
-      "income": "1200.0000",
-      "expenses": "2140.0000",
-      "profit": "-940.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2025-03-01",
       "to": "2025-03-31",
       "balances": {
-        "1000": "32660.0000",
+        "1000": "37580.0000",
         "1010": "6000.0000",
-        "1020": "2770.0000",
+        "1020": "5150.0000",
         "1030": "350.0000",
         "1100": "0.0000",
         "1200": "900.0000",
         "1300": "2400.0000",
         "1390": "-560.0000",
+        "1400": "1500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-47500.0000",
+        "4000": "-71300.0000",
         "5000": "0.0000",
         "5100": "22920.0000",
         "5200": "6000.0000",
         "5300": "1500.0000",
         "5400": "1500.0000",
         "5500": "560.0000",
-        "5600": "300.0000"
+        "5600": "300.0000",
+        "5700": "15000.0000"
       },
-      "income": "2500.0000",
-      "expenses": "2140.0000",
-      "profit": "360.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2025-04-01",
       "to": "2025-04-30",
       "balances": {
-        "1000": "35120.0000",
+        "1000": "39120.0000",
         "1010": "5600.0000",
-        "1020": "3220.0000",
+        "1020": "5620.0000",
         "1030": "340.0000",
         "1100": "0.0000",
         "1200": "800.0000",
         "1300": "2400.0000",
         "1390": "-600.0000",
+        "1400": "1600.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-52000.0000",
+        "4000": "-76000.0000",
         "5000": "0.0000",
         "5100": "24420.0000",
         "5200": "6400.0000",
         "5300": "1600.0000",
         "5400": "1600.0000",
         "5500": "600.0000",
-        "5600": "300.0000"
+        "5600": "300.0000",
+        "5700": "16000.0000"
       },
-      "income": "4500.0000",
-      "expenses": "2140.0000",
-      "profit": "2360.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2025-05-01",
       "to": "2025-05-31",
       "balances": {
-        "1000": "38480.0000",
+        "1000": "40660.0000",
         "1010": "5200.0000",
-        "1020": "3770.0000",
+        "1020": "6090.0000",
         "1030": "330.0000",
         "1100": "0.0000",
         "1200": "700.0000",
         "1300": "2400.0000",
         "1390": "-640.0000",
+        "1400": "1700.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-57500.0000",
+        "4000": "-80700.0000",
         "5000": "0.0000",
         "5100": "25920.0000",
         "5200": "6800.0000",
         "5300": "1700.0000",
         "5400": "1700.0000",
         "5500": "640.0000",
-        "5600": "300.0000"
+        "5600": "300.0000",
+        "5700": "17000.0000"
       },
-      "income": "5500.0000",
-      "expenses": "2140.0000",
-      "profit": "3360.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2025-06-01",
       "to": "2025-06-30",
       "balances": {
-        "1000": "42290.0000",
+        "1000": "42200.0000",
         "1010": "4800.0000",
-        "1020": "4370.0000",
+        "1020": "6560.0000",
         "1030": "320.0000",
         "1100": "0.0000",
         "1200": "600.0000",
         "1300": "2400.0000",
         "1390": "-680.0000",
+        "1400": "1800.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-63500.0000",
+        "4000": "-85400.0000",
         "5000": "0.0000",
         "5100": "27420.0000",
         "5200": "7200.0000",
         "5300": "1800.0000",
         "5400": "1800.0000",
         "5500": "680.0000",
-        "5600": "300.0000"
+        "5600": "300.0000",
+        "5700": "18000.0000"
       },
-      "income": "6000.0000",
-      "expenses": "2140.0000",
-      "profit": "3860.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2025-07-01",
       "to": "2025-07-31",
       "balances": {
-        "1000": "46100.0000",
+        "1000": "43740.0000",
         "1010": "4400.0000",
-        "1020": "4970.0000",
+        "1020": "7030.0000",
         "1030": "310.0000",
         "1100": "0.0000",
         "1200": "500.0000",
         "1300": "2400.0000",
         "1390": "-720.0000",
+        "1400": "1900.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-69500.0000",
+        "4000": "-90100.0000",
         "5000": "0.0000",
         "5100": "28920.0000",
         "5200": "7600.0000",
         "5300": "1900.0000",
         "5400": "1900.0000",
         "5500": "720.0000",
-        "5600": "300.0000"
+        "5600": "300.0000",
+        "5700": "19000.0000"
       },
-      "income": "6000.0000",
-      "expenses": "2140.0000",
-      "profit": "3860.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2025-08-01",
       "to": "2025-08-31",
       "balances": {
-        "1000": "49415.0000",
+        "1000": "45235.0000",
         "1010": "4000.0000",
-        "1020": "5520.0000",
+        "1020": "7500.0000",
         "1030": "300.0000",
         "1100": "0.0000",
         "1200": "400.0000",
         "1300": "2400.0000",
         "1390": "-760.0000",
+        "1400": "2000.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-75000.0000",
+        "4000": "-94800.0000",
         "5000": "45.0000",
         "5100": "30420.0000",
         "5200": "8000.0000",
         "5300": "2000.0000",
         "5400": "2000.0000",
         "5500": "760.0000",
-        "5600": "300.0000"
+        "5600": "300.0000",
+        "5700": "20000.0000"
       },
-      "income": "5500.0000",
-      "expenses": "2185.0000",
-      "profit": "3315.0000"
+      "income": "4700.0000",
+      "expenses": "3185.0000",
+      "profit": "1515.0000"
     },
     {
       "from": "2025-09-01",
       "to": "2025-09-30",
       "balances": {
-        "1000": "51875.0000",
+        "1000": "46775.0000",
         "1010": "3600.0000",
-        "1020": "5970.0000",
+        "1020": "7970.0000",
         "1030": "290.0000",
         "1100": "0.0000",
         "1200": "300.0000",
         "1300": "2400.0000",
         "1390": "-800.0000",
+        "1400": "2100.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-79500.0000",
+        "4000": "-99500.0000",
         "5000": "45.0000",
         "5100": "31920.0000",
         "5200": "8400.0000",
         "5300": "2100.0000",
         "5400": "2100.0000",
         "5500": "800.0000",
-        "5600": "300.0000"
+        "5600": "300.0000",
+        "5700": "21000.0000"
       },
-      "income": "4500.0000",
-      "expenses": "2140.0000",
-      "profit": "2360.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2025-10-01",
       "to": "2025-10-31",
       "balances": {
-        "1000": "52535.0000",
+        "1000": "48315.0000",
         "1010": "3200.0000",
-        "1020": "6220.0000",
+        "1020": "8440.0000",
         "1030": "280.0000",
         "1100": "0.0000",
         "1200": "200.0000",
         "1300": "2400.0000",
         "1390": "-840.0000",
+        "1400": "2200.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-82000.0000",
+        "4000": "-104200.0000",
         "5000": "45.0000",
         "5100": "33420.0000",
         "5200": "8800.0000",
         "5300": "2200.0000",
         "5400": "2200.0000",
         "5500": "840.0000",
-        "5600": "300.0000"
+        "5600": "300.0000",
+        "5700": "22000.0000"
       },
-      "income": "2500.0000",
-      "expenses": "2140.0000",
-      "profit": "360.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2025-11-01",
       "to": "2025-11-30",
       "balances": {
-        "1000": "52025.0000",
+        "1000": "49855.0000",
         "1010": "2800.0000",
-        "1020": "6340.0000",
+        "1020": "8910.0000",
         "1030": "270.0000",
         "1100": "0.0000",
         "1200": "100.0000",
         "1300": "2400.0000",
         "1390": "-880.0000",
+        "1400": "2300.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-4800.0000",
         "3000": "-25000.0000",
-        "4000": "-83200.0000",
+        "4000": "-108900.0000",
         "5000": "45.0000",
         "5100": "34920.0000",
         "5200": "9200.0000",
         "5300": "2300.0000",
         "5400": "2300.0000",
         "5500": "880.0000",
-        "5600": "300.0000"
+        "5600": "300.0000",
+        "5700": "23000.0000"
       },
-      "income": "1200.0000",
-      "expenses": "2140.0000",
-      "profit": "-940.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2025-12-01",
       "to": "2025-12-31",
       "balances": {
-        "1000": "53015.0000",
+        "1000": "52895.0000",
         "1010": "2400.0000",
-        "1020": "3460.0000",
+        "1020": "6380.0000",
         "1030": "260.0000",
         "1100": "0.0000",
         "1200": "0.0000",
         "1300": "2400.0000",
         "1390": "-920.0000",
+        "1400": "2400.0000",
         "2000": "-550.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-84400.0000",
+        "4000": "-113600.0000",
         "5000": "595.0000",
         "5100": "36420.0000",
         "5200": "9600.0000",
         "5300": "2400.0000",
         "5400": "2400.0000",
         "5500": "920.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "24000.0000"
       },
-      "income": "1200.0000",
-      "expenses": "2990.0000",
-      "profit": "-1790.0000"
+      "income": "4700.0000",
+      "expenses": "3990.0000",
+      "profit": "710.0000"
     },
     {
       "from": "2026-01-01",
       "to": "2026-01-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "52685.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "6850.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-960.0000",
+        "1400": "2500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-118300.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
         "5300": "2500.0000",
         "5400": "2500.0000",
         "5500": "960.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "25000.0000"
       },
-      "income": "1200.0000",
-      "expenses": "2140.0000",
-      "profit": "-940.0000"
+      "income": "4700.0000",
+      "expenses": "3140.0000",
+      "profit": "1560.0000"
     },
     {
       "from": "2026-02-01",
       "to": "2026-02-28",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "52685.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "6850.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-960.0000",
+        "1400": "2500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-118300.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
         "5300": "2500.0000",
         "5400": "2500.0000",
         "5500": "960.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "25000.0000"
       },
       "income": "0.0000",
       "expenses": "0.0000",
@@ -5120,26 +5843,28 @@
       "from": "2026-03-01",
       "to": "2026-03-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "52685.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "6850.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-960.0000",
+        "1400": "2500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-118300.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
         "5300": "2500.0000",
         "5400": "2500.0000",
         "5500": "960.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "25000.0000"
       },
       "income": "0.0000",
       "expenses": "0.0000",
@@ -5149,26 +5874,28 @@
       "from": "2026-04-01",
       "to": "2026-04-30",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "52685.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "6850.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-960.0000",
+        "1400": "2500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-118300.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
         "5300": "2500.0000",
         "5400": "2500.0000",
         "5500": "960.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "25000.0000"
       },
       "income": "0.0000",
       "expenses": "0.0000",
@@ -5178,26 +5905,28 @@
       "from": "2026-05-01",
       "to": "2026-05-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "52685.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "6850.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-960.0000",
+        "1400": "2500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-118300.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
         "5300": "2500.0000",
         "5400": "2500.0000",
         "5500": "960.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "25000.0000"
       },
       "income": "0.0000",
       "expenses": "0.0000",
@@ -5207,26 +5936,28 @@
       "from": "2026-06-01",
       "to": "2026-06-30",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "52685.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "6850.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-960.0000",
+        "1400": "2500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-118300.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
         "5300": "2500.0000",
         "5400": "2500.0000",
         "5500": "960.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "25000.0000"
       },
       "income": "0.0000",
       "expenses": "0.0000",
@@ -5236,26 +5967,28 @@
       "from": "2026-07-01",
       "to": "2026-07-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "52685.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "6850.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-960.0000",
+        "1400": "2500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-118300.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
         "5300": "2500.0000",
         "5400": "2500.0000",
         "5500": "960.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "25000.0000"
       },
       "income": "0.0000",
       "expenses": "0.0000",
@@ -5265,26 +5998,28 @@
       "from": "2026-08-01",
       "to": "2026-08-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "52685.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "6850.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-960.0000",
+        "1400": "2500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-118300.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
         "5300": "2500.0000",
         "5400": "2500.0000",
         "5500": "960.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "25000.0000"
       },
       "income": "0.0000",
       "expenses": "0.0000",
@@ -5294,26 +6029,28 @@
       "from": "2026-09-01",
       "to": "2026-09-30",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "52685.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "6850.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-960.0000",
+        "1400": "2500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-118300.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
         "5300": "2500.0000",
         "5400": "2500.0000",
         "5500": "960.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "25000.0000"
       },
       "income": "0.0000",
       "expenses": "0.0000",
@@ -5323,26 +6060,28 @@
       "from": "2026-10-01",
       "to": "2026-10-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "52685.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "6850.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-960.0000",
+        "1400": "2500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-118300.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
         "5300": "2500.0000",
         "5400": "2500.0000",
         "5500": "960.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "25000.0000"
       },
       "income": "0.0000",
       "expenses": "0.0000",
@@ -5352,26 +6091,28 @@
       "from": "2026-11-01",
       "to": "2026-11-30",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "52685.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "6850.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-960.0000",
+        "1400": "2500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-118300.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
         "5300": "2500.0000",
         "5400": "2500.0000",
         "5500": "960.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "25000.0000"
       },
       "income": "0.0000",
       "expenses": "0.0000",
@@ -5381,26 +6122,28 @@
       "from": "2026-12-01",
       "to": "2026-12-31",
       "balances": {
-        "1000": "50755.0000",
+        "1000": "52685.0000",
         "1010": "2000.0000",
-        "1020": "3580.0000",
+        "1020": "6850.0000",
         "1030": "250.0000",
         "1100": "0.0000",
         "1200": "1100.0000",
         "1300": "2400.0000",
         "1390": "-960.0000",
+        "1400": "2500.0000",
         "2000": "0.0000",
         "2100": "0.0000",
         "2200": "-3600.0000",
         "3000": "-25000.0000",
-        "4000": "-85600.0000",
+        "4000": "-118300.0000",
         "5000": "595.0000",
         "5100": "37920.0000",
         "5200": "10000.0000",
         "5300": "2500.0000",
         "5400": "2500.0000",
         "5500": "960.0000",
-        "5600": "600.0000"
+        "5600": "600.0000",
+        "5700": "25000.0000"
       },
       "income": "0.0000",
       "expenses": "0.0000",

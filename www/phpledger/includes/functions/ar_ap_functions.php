@@ -9,6 +9,7 @@ function pl_ar_document_number(int $id, string $kind): string
         'supplier_credit' => 'SC-' . str_pad((string) $id, 6, '0', STR_PAD_LEFT),
         'invoice' => 'INV-' . str_pad((string) $id, 6, '0', STR_PAD_LEFT),
         'bill' => 'BILL-' . str_pad((string) $id, 6, '0', STR_PAD_LEFT),
+        'quote' => 'QUOTE-' . str_pad((string) $id, 6, '0', STR_PAD_LEFT),
         default => throw new LogicException('Unknown AR/AP document kind.'),
     };
 }

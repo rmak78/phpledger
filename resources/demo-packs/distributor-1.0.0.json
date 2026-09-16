@@ -2,8 +2,1165 @@
   "id": "distributor",
   "version": "1.0.0",
   "name": "Harbor Supply Company",
-  "business": "Distributor",
+  "business": "Distribution",
   "demo_only": true,
+  "status": "released_demo_only",
+  "synthetic": true,
+  "capability_note": "This sample demonstrates bookkeeping examples only; it is not an implementation of the named industry's operational, regulatory or compliance systems.",
+  "source_material": {
+    "description": "Reconciled successor of synthetic teaching material; no real customer data.",
+    "runtime_note": "The pinned ledger history below is reconciled through the current supported general-journal and cash-document services. On isolated sample creation, the operational contract is replayed through the existing AR/AP, Purchasing, Inventory and general-journal services; unsupported vertical operations remain explicitly staged. The authored contract is retained as the synthetic source record and its supported bookkeeping events are replayable; location transfers, advanced revenue timing and other specialist controls remain evidence-only.",
+    "industry_profile_id": "fmcg-distribution",
+    "industry_profile": {
+      "id": "fmcg-distribution",
+      "sample_ids": [
+        "distributor"
+      ],
+      "name": "FMCG distribution",
+      "operating_model": "Warehouse or route distribution of fast-moving goods with retailer credit, field recovery, returns and scheme effects.",
+      "distinct_controls": [
+        "warehouse stock",
+        "retailer AR and recovery",
+        "route cash",
+        "trade schemes and bonus quantities",
+        "expiry/returns where applicable"
+      ],
+      "unsupported_in_sample": [
+        "sales-rep territories",
+        "GPS/beat planning",
+        "scheme engine",
+        "batch and expiry enforcement"
+      ],
+      "seed_role_labels": {
+        "sales_revenue": "FMCG distribution income",
+        "inventory": "FMCG distribution stock",
+        "cost_of_goods_sold": "FMCG distribution cost of sales",
+        "operating_expense": "Distribution operating expenses",
+        "expense": "Distribution operating expenses"
+      },
+      "accounts": [
+        {
+          "semantic_key": "distribution.inventory.goods",
+          "code": "1410",
+          "name": "FMCG distribution stock",
+          "type": "asset",
+          "fixture_role": "inventory",
+          "normal_balance": "debit",
+          "source_ids": [
+            "matrix-2",
+            "hysabone-fmcg"
+          ]
+        },
+        {
+          "semantic_key": "distribution.income.goods",
+          "code": "4100",
+          "name": "FMCG distribution income",
+          "type": "income",
+          "fixture_role": "sales_revenue",
+          "normal_balance": "credit",
+          "source_ids": [
+            "matrix-2",
+            "hysabone-fmcg"
+          ]
+        },
+        {
+          "semantic_key": "distribution.cost.goods",
+          "code": "5110",
+          "name": "FMCG distribution cost of sales",
+          "type": "expense",
+          "fixture_role": "cost_of_goods_sold",
+          "normal_balance": "debit",
+          "source_ids": [
+            "ifrs-standardized-coa"
+          ]
+        },
+        {
+          "semantic_key": "distribution.cost.delivery",
+          "code": "5120",
+          "name": "Route and delivery costs",
+          "type": "expense",
+          "fixture_role": "delivery_expense",
+          "normal_balance": "debit",
+          "source_ids": [
+            "matrix-2"
+          ]
+        },
+        {
+          "semantic_key": "distribution.asset.route_cash",
+          "code": "1210",
+          "name": "Route collections awaiting deposit",
+          "type": "asset",
+          "fixture_role": "route_cash",
+          "normal_balance": "debit",
+          "source_ids": [
+            "matrix-2"
+          ]
+        }
+      ],
+      "research_basis": [
+        {
+          "title": "HysabOne pharma distribution and FMCG evidence",
+          "url": "https://hysabone.com/industries/fmcg/",
+          "supports": "Route planning, sales-force, schemes, secondary sales and retailer recovery context."
+        },
+        {
+          "title": "HysabOne pharma distribution",
+          "url": "https://hysabone.com/industries/pharma-distribution/",
+          "supports": "Distribution claims, returns, field credit, batch/expiry and multi-warehouse distinctions."
+        },
+        {
+          "title": "ERPNext accounting introduction",
+          "url": "https://docs.frappe.io/erpnext/accounting-introduction",
+          "supports": "Operational documents producing balanced GL and stock entries."
+        }
+      ]
+    },
+    "research_status": "available",
+    "research_evidence": {
+      "source_pack_id": "distributor",
+      "source_pack_version": "1.0.0",
+      "source_status": "authored_candidate_not_runtime_seed",
+      "source_created_on": "2026-09-14",
+      "review_status": "synthetic_candidate",
+      "business_profile": {
+        "display_name": "North Loop Distribution (Sample)",
+        "business_type": "distributor",
+        "description": "Warehouse supply business with one demonstration delivery van.",
+        "base_currency": "USD",
+        "accounting_start_date": "2026-09-01",
+        "as_of_date": "2026-09-30"
+      },
+      "semantic_accounts": [
+        {
+          "key": "core.cash.on_hand",
+          "type": "asset",
+          "label": "Cash On Hand",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "cash_on_hand"
+        },
+        {
+          "key": "core.bank.operating",
+          "type": "asset",
+          "label": "Bank Current",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "bank_current"
+        },
+        {
+          "key": "core.receivables.trade",
+          "type": "asset",
+          "label": "Accounts Receivable",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "accounts_receivable"
+        },
+        {
+          "key": "wholesale.inventory.goods",
+          "type": "asset",
+          "label": "Inventory",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "inventory"
+        },
+        {
+          "key": "core.assets.equipment",
+          "type": "asset",
+          "label": "Equipment",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "equipment"
+        },
+        {
+          "key": "core.payables.trade",
+          "type": "liability",
+          "label": "Accounts Payable",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "accounts_payable"
+        },
+        {
+          "key": "core.equity.capital",
+          "type": "equity",
+          "label": "Owner Equity",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "owner_equity"
+        },
+        {
+          "key": "wholesale.income.goods",
+          "type": "income",
+          "label": "Sales Revenue",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "sales_revenue"
+        },
+        {
+          "key": "wholesale.cost.goods",
+          "type": "expense",
+          "label": "Cost Of Goods Sold",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "cost_of_goods_sold"
+        },
+        {
+          "key": "core.expense.rent",
+          "type": "expense",
+          "label": "Rent Expense",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "rent_expense"
+        },
+        {
+          "key": "core.expense.utilities",
+          "type": "expense",
+          "label": "Utilities Expense",
+          "mapping_status": "semantic_reference_requires_reviewed_template_snapshot",
+          "fixture_role": "utilities_expense"
+        }
+      ],
+      "contacts": [
+        {
+          "id": "customer-01",
+          "name": "Demo Business Buyer (Sample)",
+          "role": "customer",
+          "email": "distributor.customer-01@example.invalid",
+          "synthetic": true
+        },
+        {
+          "id": "customer-02",
+          "name": "Demo Counter Customer (Sample)",
+          "role": "customer",
+          "email": "distributor.customer-02@example.invalid",
+          "synthetic": true
+        },
+        {
+          "id": "vendor-01",
+          "name": "Demo Supply Partner (Sample)",
+          "role": "vendor",
+          "email": "distributor.vendor-01@example.invalid",
+          "synthetic": true
+        },
+        {
+          "id": "vendor-02",
+          "name": "Demo Premises Provider (Sample)",
+          "role": "vendor",
+          "email": "distributor.vendor-02@example.invalid",
+          "synthetic": true
+        }
+      ],
+      "products": [
+        {
+          "id": "snack-case",
+          "name": "Packaged snack case (Sample)",
+          "kind": "stock",
+          "unit": "case",
+          "sale_price": "24.0000",
+          "fixture_unit_cost": "15.0000",
+          "income_account_key": "wholesale.income.goods",
+          "inventory_account_key": "wholesale.inventory.goods",
+          "cost_account_key": "wholesale.cost.goods",
+          "lot_tracking": false,
+          "medical_use": false
+        },
+        {
+          "id": "water-case",
+          "name": "Bottled water case (Sample)",
+          "kind": "stock",
+          "unit": "case",
+          "sale_price": "12.0000",
+          "fixture_unit_cost": "7.0000",
+          "income_account_key": "wholesale.income.goods",
+          "inventory_account_key": "wholesale.inventory.goods",
+          "cost_account_key": "wholesale.cost.goods",
+          "lot_tracking": false,
+          "medical_use": false
+        }
+      ],
+      "locations": [
+        {
+          "id": "main",
+          "name": "Main premises (Sample)"
+        },
+        {
+          "id": "van-01",
+          "name": "Van 01 (Sample)"
+        }
+      ],
+      "opening_evidence": {
+        "date": "2026-09-01",
+        "journal": [
+          {
+            "account_key": "core.cash.on_hand",
+            "debit": "500.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.bank.operating",
+            "debit": "3000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.receivables.trade",
+            "debit": "300.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "wholesale.inventory.goods",
+            "debit": "1900.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.assets.equipment",
+            "debit": "2000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.payables.trade",
+            "debit": "0.0000",
+            "credit": "400.0000"
+          },
+          {
+            "account_key": "core.equity.capital",
+            "debit": "0.0000",
+            "credit": "7300.0000"
+          }
+        ],
+        "documents": [
+          {
+            "id": "opening-invoice",
+            "kind": "invoice",
+            "contact_id": "customer-01",
+            "issued_on": "2026-08-20",
+            "due_on": "2026-09-10",
+            "description": "Unpaid portion of August invoice; already included in opening receivables.",
+            "original_amount": "500.0000",
+            "paid_before_cutover": "200.0000",
+            "outstanding_at_cutover": "300.0000",
+            "posting_mode": "opening_control_detail_only"
+          },
+          {
+            "id": "opening-bill",
+            "kind": "bill",
+            "contact_id": "vendor-01",
+            "issued_on": "2026-08-20",
+            "due_on": "2026-09-10",
+            "description": "Unpaid portion of August supplier bill; already included in opening payables.",
+            "original_amount": "500.0000",
+            "paid_before_cutover": "100.0000",
+            "outstanding_at_cutover": "400.0000",
+            "posting_mode": "opening_control_detail_only"
+          }
+        ],
+        "stock": [
+          {
+            "item_id": "snack-case",
+            "location_id": "main",
+            "lot_id": null,
+            "expires_on": null,
+            "quantity": "80.0000",
+            "unit_cost": "15.0000",
+            "value": "1200.0000"
+          },
+          {
+            "item_id": "water-case",
+            "location_id": "main",
+            "lot_id": null,
+            "expires_on": null,
+            "quantity": "100.0000",
+            "unit_cost": "7.0000",
+            "value": "700.0000"
+          }
+        ],
+        "deferred_contracts": []
+      },
+      "operational_event_contract": [
+        {
+          "id": "distributor-event-01",
+          "date": "2026-09-02",
+          "kind": "purchase",
+          "description": "Receive stock against purchase-001",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-01",
+          "expected_journal": [
+            {
+              "account_key": "wholesale.inventory.goods",
+              "debit": "440.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.payables.trade",
+              "debit": "0.0000",
+              "credit": "440.0000"
+            }
+          ],
+          "document_id": "purchase-001",
+          "stock_movements": [
+            {
+              "item_id": "snack-case",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "20.0000",
+              "unit_cost": "15.0000"
+            },
+            {
+              "item_id": "water-case",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "20.0000",
+              "unit_cost": "7.0000"
+            }
+          ]
+        },
+        {
+          "id": "distributor-event-02",
+          "date": "2026-09-03",
+          "kind": "stock_transfer",
+          "description": "Move counted stock from main to van-01",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-02",
+          "expected_journal": [],
+          "stock_movements": [
+            {
+              "item_id": "snack-case",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "-40.0000",
+              "unit_cost": "15.0000"
+            },
+            {
+              "item_id": "water-case",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "-50.0000",
+              "unit_cost": "7.0000"
+            },
+            {
+              "item_id": "snack-case",
+              "location_id": "van-01",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "40.0000",
+              "unit_cost": "15.0000"
+            },
+            {
+              "item_id": "water-case",
+              "location_id": "van-01",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "50.0000",
+              "unit_cost": "7.0000"
+            }
+          ],
+          "posting_effect": "none_same_company_book_inventory_control"
+        },
+        {
+          "id": "distributor-event-03",
+          "date": "2026-09-04",
+          "kind": "cash_sale",
+          "description": "Record sale-001",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-03",
+          "expected_journal": [
+            {
+              "account_key": "core.cash.on_hand",
+              "debit": "360.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "wholesale.income.goods",
+              "debit": "0.0000",
+              "credit": "240.0000"
+            },
+            {
+              "account_key": "wholesale.income.goods",
+              "debit": "0.0000",
+              "credit": "120.0000"
+            },
+            {
+              "account_key": "wholesale.cost.goods",
+              "debit": "220.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "wholesale.inventory.goods",
+              "debit": "0.0000",
+              "credit": "220.0000"
+            }
+          ],
+          "document_id": "sale-001",
+          "stock_movements": [
+            {
+              "item_id": "snack-case",
+              "location_id": "van-01",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "-10.0000",
+              "unit_cost": "15.0000"
+            },
+            {
+              "item_id": "water-case",
+              "location_id": "van-01",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "-10.0000",
+              "unit_cost": "7.0000"
+            }
+          ]
+        },
+        {
+          "id": "distributor-event-04",
+          "date": "2026-09-06",
+          "kind": "credit_sale",
+          "description": "Record invoice-001",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-04",
+          "expected_journal": [
+            {
+              "account_key": "core.receivables.trade",
+              "debit": "720.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "wholesale.income.goods",
+              "debit": "0.0000",
+              "credit": "480.0000"
+            },
+            {
+              "account_key": "wholesale.income.goods",
+              "debit": "0.0000",
+              "credit": "240.0000"
+            },
+            {
+              "account_key": "wholesale.cost.goods",
+              "debit": "440.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "wholesale.inventory.goods",
+              "debit": "0.0000",
+              "credit": "440.0000"
+            }
+          ],
+          "document_id": "invoice-001",
+          "stock_movements": [
+            {
+              "item_id": "snack-case",
+              "location_id": "van-01",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "-20.0000",
+              "unit_cost": "15.0000"
+            },
+            {
+              "item_id": "water-case",
+              "location_id": "van-01",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "-20.0000",
+              "unit_cost": "7.0000"
+            }
+          ]
+        },
+        {
+          "id": "distributor-event-05",
+          "date": "2026-09-10",
+          "kind": "receipt",
+          "description": "Allocate customer receipt to named documents",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-05",
+          "expected_journal": [
+            {
+              "account_key": "core.bank.operating",
+              "debit": "200.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.receivables.trade",
+              "debit": "0.0000",
+              "credit": "200.0000"
+            }
+          ],
+          "allocations": [
+            {
+              "document_id": "opening-invoice",
+              "amount": "120.0000"
+            },
+            {
+              "document_id": "invoice-001",
+              "amount": "80.0000"
+            }
+          ],
+          "total": "200.0000"
+        },
+        {
+          "id": "distributor-event-06",
+          "date": "2026-09-12",
+          "kind": "supplier_payment",
+          "description": "Pay supplier bills",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-06",
+          "expected_journal": [
+            {
+              "account_key": "core.payables.trade",
+              "debit": "400.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "0.0000",
+              "credit": "400.0000"
+            }
+          ],
+          "allocations": [
+            {
+              "document_id": "opening-bill",
+              "amount": "200.0000"
+            },
+            {
+              "document_id": "purchase-001",
+              "amount": "200.0000"
+            }
+          ],
+          "total": "400.0000"
+        },
+        {
+          "id": "distributor-event-07",
+          "date": "2026-09-14",
+          "kind": "expense",
+          "description": "Pay September premises expense",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-07",
+          "expected_journal": [
+            {
+              "account_key": "core.expense.rent",
+              "debit": "100.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "0.0000",
+              "credit": "100.0000"
+            }
+          ],
+          "expense_account_key": "core.expense.rent",
+          "total": "100.0000"
+        },
+        {
+          "id": "distributor-event-08",
+          "date": "2026-09-16",
+          "kind": "sales_return",
+          "description": "Return stock and credit invoice-001",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-08",
+          "expected_journal": [
+            {
+              "account_key": "wholesale.income.goods",
+              "debit": "24.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.receivables.trade",
+              "debit": "0.0000",
+              "credit": "24.0000"
+            },
+            {
+              "account_key": "wholesale.inventory.goods",
+              "debit": "14.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "wholesale.cost.goods",
+              "debit": "0.0000",
+              "credit": "14.0000"
+            }
+          ],
+          "document_id": "credit-001",
+          "allocations": [
+            {
+              "document_id": "invoice-001",
+              "amount": "24.0000"
+            }
+          ],
+          "stock_movements": [
+            {
+              "item_id": "water-case",
+              "location_id": "van-01",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "2.0000",
+              "unit_cost": "7.0000"
+            }
+          ]
+        },
+        {
+          "id": "distributor-event-09",
+          "date": "2026-09-18",
+          "kind": "stock_transfer",
+          "description": "Move counted stock from van-01 to main",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-09",
+          "expected_journal": [],
+          "stock_movements": [
+            {
+              "item_id": "snack-case",
+              "location_id": "van-01",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "-10.0000",
+              "unit_cost": "15.0000"
+            },
+            {
+              "item_id": "water-case",
+              "location_id": "van-01",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "-22.0000",
+              "unit_cost": "7.0000"
+            },
+            {
+              "item_id": "snack-case",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "10.0000",
+              "unit_cost": "15.0000"
+            },
+            {
+              "item_id": "water-case",
+              "location_id": "main",
+              "lot_id": null,
+              "expires_on": null,
+              "quantity_delta": "22.0000",
+              "unit_cost": "7.0000"
+            }
+          ],
+          "posting_effect": "none_same_company_book_inventory_control"
+        },
+        {
+          "id": "distributor-event-10",
+          "date": "2026-09-20",
+          "kind": "cash_transfer",
+          "description": "Deposit counted till cash into bank",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-10",
+          "expected_journal": [
+            {
+              "account_key": "core.bank.operating",
+              "debit": "200.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.cash.on_hand",
+              "debit": "0.0000",
+              "credit": "200.0000"
+            }
+          ],
+          "total": "200.0000"
+        },
+        {
+          "id": "distributor-event-11",
+          "date": "2026-09-22",
+          "kind": "expense",
+          "description": "Utility charge entered against the wrong source amount",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-11",
+          "expected_journal": [
+            {
+              "account_key": "core.expense.utilities",
+              "debit": "60.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "0.0000",
+              "credit": "60.0000"
+            }
+          ],
+          "expense_account_key": "core.expense.utilities",
+          "total": "60.0000"
+        },
+        {
+          "id": "distributor-event-12",
+          "date": "2026-09-23",
+          "kind": "reversal",
+          "description": "Reverse the incorrect utility entry",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-12",
+          "expected_journal": [
+            {
+              "account_key": "core.expense.utilities",
+              "debit": "0.0000",
+              "credit": "60.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "60.0000",
+              "credit": "0.0000"
+            }
+          ],
+          "reverses_event_id": "distributor-event-11",
+          "reason": "Source receipt confirms 45.00, not 60.00"
+        },
+        {
+          "id": "distributor-event-13",
+          "date": "2026-09-23",
+          "kind": "expense",
+          "description": "Post corrected utility charge from the source receipt",
+          "runtime_status": "expected_accounting_fixture_only",
+          "idempotency_key": "demo:distributor:v1:event-13",
+          "expected_journal": [
+            {
+              "account_key": "core.expense.utilities",
+              "debit": "45.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account_key": "core.bank.operating",
+              "debit": "0.0000",
+              "credit": "45.0000"
+            }
+          ],
+          "expense_account_key": "core.expense.utilities",
+          "total": "45.0000"
+        },
+        {
+          "id": "distributor-stock-count-2026-09-30",
+          "date": "2026-09-30",
+          "kind": "stock_count",
+          "description": "Counted closing stock against the pinned September valuation.",
+          "runtime_status": "derived_evidence_only",
+          "idempotency_key": "derived:distributor:stock-count:2026-09-30",
+          "expected_journal": [],
+          "counted_stock": [
+            {
+              "item_id": "snack-case",
+              "location_id": "main",
+              "lot_id": null,
+              "quantity": "70.0000"
+            },
+            {
+              "item_id": "snack-case",
+              "location_id": "van-01",
+              "lot_id": null,
+              "quantity": "0.0000"
+            },
+            {
+              "item_id": "water-case",
+              "location_id": "main",
+              "lot_id": null,
+              "quantity": "92.0000"
+            },
+            {
+              "item_id": "water-case",
+              "location_id": "van-01",
+              "lot_id": null,
+              "quantity": "0.0000"
+            }
+          ],
+          "valuation": {
+            "method": "moving_weighted_average",
+            "total_value": "1694.0000"
+          }
+        }
+      ],
+      "expected_reports": {
+        "as_of_date": "2026-09-30",
+        "trial_balance": [
+          {
+            "account_key": "core.cash.on_hand",
+            "debit": "660.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.bank.operating",
+            "debit": "2855.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.receivables.trade",
+            "debit": "796.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "wholesale.inventory.goods",
+            "debit": "1694.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.assets.equipment",
+            "debit": "2000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.payables.trade",
+            "debit": "0.0000",
+            "credit": "440.0000"
+          },
+          {
+            "account_key": "core.equity.capital",
+            "debit": "0.0000",
+            "credit": "7300.0000"
+          },
+          {
+            "account_key": "wholesale.income.goods",
+            "debit": "0.0000",
+            "credit": "1056.0000"
+          },
+          {
+            "account_key": "wholesale.cost.goods",
+            "debit": "646.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.expense.rent",
+            "debit": "100.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account_key": "core.expense.utilities",
+            "debit": "45.0000",
+            "credit": "0.0000"
+          }
+        ],
+        "trial_balance_debit": "8796.0000",
+        "trial_balance_credit": "8796.0000",
+        "journal_turnover_debit_including_opening": "10983.0000",
+        "journal_turnover_credit_including_opening": "10983.0000",
+        "income": "1056.0000",
+        "expenses": "791.0000",
+        "net_result": "265.0000",
+        "assets": "8005.0000",
+        "liabilities": "440.0000",
+        "opening_equity": "7300.0000",
+        "equity_including_current_result": "7565.0000",
+        "accounts_receivable": "796.0000",
+        "accounts_payable": "440.0000",
+        "inventory_value": "1694.0000",
+        "cash_on_hand": "660.0000",
+        "bank_current": "2855.0000",
+        "document_balances": [
+          {
+            "document_id": "opening-invoice",
+            "kind": "invoice",
+            "outstanding": "180.0000"
+          },
+          {
+            "document_id": "opening-bill",
+            "kind": "bill",
+            "outstanding": "200.0000"
+          },
+          {
+            "document_id": "purchase-001",
+            "kind": "bill",
+            "outstanding": "240.0000"
+          },
+          {
+            "document_id": "invoice-001",
+            "kind": "invoice",
+            "outstanding": "616.0000"
+          }
+        ],
+        "stock_on_hand": [
+          {
+            "item_id": "snack-case",
+            "location_id": "main",
+            "lot_id": null,
+            "quantity": "70.0000"
+          },
+          {
+            "item_id": "snack-case",
+            "location_id": "van-01",
+            "lot_id": null,
+            "quantity": "0.0000"
+          },
+          {
+            "item_id": "water-case",
+            "location_id": "main",
+            "lot_id": null,
+            "quantity": "92.0000"
+          },
+          {
+            "item_id": "water-case",
+            "location_id": "van-01",
+            "lot_id": null,
+            "quantity": "0.0000"
+          }
+        ],
+        "ageing": {
+          "receivables": {
+            "current": "0.0000",
+            "1_30": "796.0000",
+            "31_60": "0.0000",
+            "61_90": "0.0000",
+            "91_plus": "0.0000",
+            "total": "796.0000"
+          },
+          "payables": {
+            "current": "0.0000",
+            "1_30": "440.0000",
+            "31_60": "0.0000",
+            "61_90": "0.0000",
+            "91_plus": "0.0000",
+            "total": "440.0000"
+          }
+        }
+      },
+      "industry_scenarios": [
+        {
+          "id": "route-settlement",
+          "title": "Load, deliver, collect and settle one van",
+          "status": "future_module_scenario_not_implemented",
+          "fixture_entity": {
+            "route_id": "route-north-01",
+            "van_location_id": "van-01",
+            "stops": [
+              {
+                "sequence": 1,
+                "contact_id": "customer-02",
+                "document_id": "sale-001"
+              },
+              {
+                "sequence": 2,
+                "contact_id": "customer-01",
+                "document_id": "invoice-001"
+              }
+            ],
+            "cash_sale_amount": "360.0000",
+            "banked_from_till": "200.0000",
+            "cash_from_route_retained": "160.0000"
+          },
+          "steps": [
+            "Load 40 snack cases and 50 water cases.",
+            "Deliver 30 cases of each across two stops; accept two returned water cases.",
+            "Return 10 snack cases and 22 water cases to the warehouse.",
+            "Reconcile cash sale 360, bank deposit 200 and retained cash 160 separately from bank-transfer receipts."
+          ],
+          "acceptance_checks": [
+            "Van quantities end at zero.",
+            "Location transfers do not change company-wide inventory or profit.",
+            "Credit invoices are receivables, not collected route cash.",
+            "No routing, location tracking or offline operation is implemented."
+          ]
+        }
+      ],
+      "industry_profile_id": "fmcg-distribution",
+      "industry_profile": {
+        "id": "fmcg-distribution",
+        "sample_ids": [
+          "distributor"
+        ],
+        "name": "FMCG distribution",
+        "operating_model": "Warehouse or route distribution of fast-moving goods with retailer credit, field recovery, returns and scheme effects.",
+        "distinct_controls": [
+          "warehouse stock",
+          "retailer AR and recovery",
+          "route cash",
+          "trade schemes and bonus quantities",
+          "expiry/returns where applicable"
+        ],
+        "unsupported_in_sample": [
+          "sales-rep territories",
+          "GPS/beat planning",
+          "scheme engine",
+          "batch and expiry enforcement"
+        ],
+        "seed_role_labels": {
+          "sales_revenue": "FMCG distribution income",
+          "inventory": "FMCG distribution stock",
+          "cost_of_goods_sold": "FMCG distribution cost of sales",
+          "operating_expense": "Distribution operating expenses",
+          "expense": "Distribution operating expenses"
+        },
+        "accounts": [
+          {
+            "semantic_key": "distribution.inventory.goods",
+            "code": "1410",
+            "name": "FMCG distribution stock",
+            "type": "asset",
+            "fixture_role": "inventory",
+            "normal_balance": "debit",
+            "source_ids": [
+              "matrix-2",
+              "hysabone-fmcg"
+            ]
+          },
+          {
+            "semantic_key": "distribution.income.goods",
+            "code": "4100",
+            "name": "FMCG distribution income",
+            "type": "income",
+            "fixture_role": "sales_revenue",
+            "normal_balance": "credit",
+            "source_ids": [
+              "matrix-2",
+              "hysabone-fmcg"
+            ]
+          },
+          {
+            "semantic_key": "distribution.cost.goods",
+            "code": "5110",
+            "name": "FMCG distribution cost of sales",
+            "type": "expense",
+            "fixture_role": "cost_of_goods_sold",
+            "normal_balance": "debit",
+            "source_ids": [
+              "ifrs-standardized-coa"
+            ]
+          },
+          {
+            "semantic_key": "distribution.cost.delivery",
+            "code": "5120",
+            "name": "Route and delivery costs",
+            "type": "expense",
+            "fixture_role": "delivery_expense",
+            "normal_balance": "debit",
+            "source_ids": [
+              "matrix-2"
+            ]
+          },
+          {
+            "semantic_key": "distribution.asset.route_cash",
+            "code": "1210",
+            "name": "Route collections awaiting deposit",
+            "type": "asset",
+            "fixture_role": "route_cash",
+            "normal_balance": "debit",
+            "source_ids": [
+              "matrix-2"
+            ]
+          }
+        ],
+        "research_basis": [
+          {
+            "title": "HysabOne pharma distribution and FMCG evidence",
+            "url": "https://hysabone.com/industries/fmcg/",
+            "supports": "Route planning, sales-force, schemes, secondary sales and retailer recovery context."
+          },
+          {
+            "title": "HysabOne pharma distribution",
+            "url": "https://hysabone.com/industries/pharma-distribution/",
+            "supports": "Distribution claims, returns, field credit, batch/expiry and multi-warehouse distinctions."
+          },
+          {
+            "title": "ERPNext accounting introduction",
+            "url": "https://docs.frappe.io/erpnext/accounting-introduction",
+            "supports": "Operational documents producing balanced GL and stock entries."
+          }
+        ]
+      }
+    }
+  },
+  "scenario": {
+    "id": "route-settlement",
+    "title": "Follow a distribution route settlement",
+    "goal": "Review a distributor's stock, customer invoice, supplier bill, settlement and route-level bookkeeping evidence.",
+    "steps": [
+      "Review the opening stock, customer receivable and supplier payable evidence.",
+      "Trace stock receipt and a credit sale through inventory, cost and control accounts.",
+      "Apply the named customer and supplier settlements and inspect residuals.",
+      "Review the route and cash-transfer notes as bookkeeping references only."
+    ],
+    "checks": [
+      "The distribution scenario does not implement route planning, dispatch, delivery proof or fleet accounting.",
+      "Inventory uses one location and the shared moving-average service.",
+      "Customer and supplier settlement remains separate from operational delivery status."
+    ]
+  },
   "notice": "Original synthetic general-ledger examples. Manual staff, loan, outstanding-item and stock schedules do not implement payroll, AR/AP, inventory or tax modules. Period closure blocks posting; it is not statutory financial-statement approval or an earnings-transfer journal.",
   "start_date": "2024-01-01",
   "history_end": "2025-12-31",
@@ -225,7 +1382,7 @@
       "kind": "receipt",
       "date": "2024-01-15",
       "reference": "distributor/receipts-2024-01",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -364,7 +1521,7 @@
       "kind": "receipt",
       "date": "2024-02-15",
       "reference": "distributor/receipts-2024-02",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -515,7 +1672,7 @@
       "kind": "receipt",
       "date": "2024-03-15",
       "reference": "distributor/receipts-2024-03",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -644,7 +1801,7 @@
       "kind": "receipt",
       "date": "2024-04-15",
       "reference": "distributor/receipts-2024-04",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -773,7 +1930,7 @@
       "kind": "receipt",
       "date": "2024-05-15",
       "reference": "distributor/receipts-2024-05",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -902,7 +2059,7 @@
       "kind": "receipt",
       "date": "2024-06-15",
       "reference": "distributor/receipts-2024-06",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1031,7 +2188,7 @@
       "kind": "receipt",
       "date": "2024-07-15",
       "reference": "distributor/receipts-2024-07",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1160,7 +2317,7 @@
       "kind": "receipt",
       "date": "2024-08-15",
       "reference": "distributor/receipts-2024-08",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1289,7 +2446,7 @@
       "kind": "receipt",
       "date": "2024-09-15",
       "reference": "distributor/receipts-2024-09",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1418,7 +2575,7 @@
       "kind": "receipt",
       "date": "2024-10-15",
       "reference": "distributor/receipts-2024-10",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1547,7 +2704,7 @@
       "kind": "receipt",
       "date": "2024-11-15",
       "reference": "distributor/receipts-2024-11",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1676,7 +2833,7 @@
       "kind": "receipt",
       "date": "2024-12-15",
       "reference": "distributor/receipts-2024-12",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -1943,7 +3100,7 @@
       "kind": "receipt",
       "date": "2025-01-15",
       "reference": "distributor/receipts-2025-01",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2094,7 +3251,7 @@
       "kind": "receipt",
       "date": "2025-02-15",
       "reference": "distributor/receipts-2025-02",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2223,7 +3380,7 @@
       "kind": "receipt",
       "date": "2025-03-15",
       "reference": "distributor/receipts-2025-03",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2352,7 +3509,7 @@
       "kind": "receipt",
       "date": "2025-04-15",
       "reference": "distributor/receipts-2025-04",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2481,7 +3638,7 @@
       "kind": "receipt",
       "date": "2025-05-15",
       "reference": "distributor/receipts-2025-05",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2610,7 +3767,7 @@
       "kind": "receipt",
       "date": "2025-06-15",
       "reference": "distributor/receipts-2025-06",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2739,7 +3896,7 @@
       "kind": "receipt",
       "date": "2025-07-15",
       "reference": "distributor/receipts-2025-07",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -2868,7 +4025,7 @@
       "kind": "receipt",
       "date": "2025-08-15",
       "reference": "distributor/receipts-2025-08",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -3041,7 +4198,7 @@
       "kind": "receipt",
       "date": "2025-09-15",
       "reference": "distributor/receipts-2025-09",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -3170,7 +4327,7 @@
       "kind": "receipt",
       "date": "2025-10-15",
       "reference": "distributor/receipts-2025-10",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -3299,7 +4456,7 @@
       "kind": "receipt",
       "date": "2025-11-15",
       "reference": "distributor/receipts-2025-11",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -3428,7 +4585,7 @@
       "kind": "receipt",
       "date": "2025-12-15",
       "reference": "distributor/receipts-2025-12",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",
@@ -3673,7 +4830,7 @@
       "kind": "receipt",
       "date": "2026-01-15",
       "reference": "distributor/receipts-2026-01",
-      "description": "Distributor: monthly bank receipt summary; cash sales are in the separate operating schedule",
+      "description": "Distribution: monthly bank receipt summary; cash sales are in the separate operating schedule",
       "amount": "5400.0000",
       "money_code": "1000",
       "category_code": "4000",

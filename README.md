@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview"><strong>Download 0.4.0-preview</strong></a> &nbsp; · &nbsp;
+  <a href="https://github.com/rmak78/phpledger/releases"><strong>Release downloads</strong></a> &nbsp; · &nbsp;
   <a href="https://phpledger.com/demo/">Try the demo</a> &nbsp; · &nbsp;
   <a href="https://github.com/rmak78/phpledger/wiki">Read the Wiki</a> &nbsp; · &nbsp;
   <a href="https://github.com/rmak78/phpledger/wiki/Roadmap">Roadmap</a> &nbsp; · &nbsp;
@@ -36,13 +36,25 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 
 The accounting starter adds customer invoices, supplier bills, partial payments, credits and ageing to the base accounting core. Purchasing and shared Inventory are bundled optional modules. A manually configurable core tax engine supports inclusive or exclusive entered prices. All financial activity uses the same posting and reporting services.
 
-**Release status:** **0.4.0-preview is published**, including the downloadable package, hosted starter playground and [press/media kit](https://github.com/rmak78/phpledger/releases/download/v0.4.0-preview/phpledger-0.4.0-preview-media-kit.zip). The [publication receipt](https://github.com/rmak78/phpledger/blob/8cf7386/docs/repository/sprint-06/PREVIEW-0.4.0-PUBLICATION.json) separates local checks, archive verification and live evidence.
+**Release status:** **0.5.0-preview is a local release candidate**, extending the published 0.4.0 starter with eleven isolated synthetic sample companies. Hosted publication, package validation, observed usability, accessibility sign-off and production readiness remain separate gates.
 
-## Current release: 0.4.0-preview accounting starter
+## Current release: 0.5.0-preview release candidate
 
-The accounting starter is available in the download and hosted demo. Choose **Accounting starter playground** in the demo for the new workflows, or select one of the four existing historical examples.
+The accounting starter and eleven-pack chooser are implemented in this local candidate. The published download and hosted demo remain on the prior 0.4.0 release until the 0.5.0 preview gates are completed. In local Docker, sign in, open **Your businesses**, and use **Try a sample company** to provision only the selected synthetic book.
 
-| Area | Included in 0.4.0-preview |
+### Local test login
+
+There is no shared development password. After the local database is healthy and migrated, create a synthetic owner account with the installer and keep the password in memory only:
+
+```powershell
+$testPassword = Read-Host 'Choose a local test password (12-72 characters)'
+$testPassword | & 'C:\xampp\php\php.exe' www/phpledger/install/create-admin.php --email='ledger-test@example.invalid' --name='Local Ledger Tester' --password-stdin
+Remove-Variable testPassword
+```
+
+Use that email and the password you entered at `http://127.0.0.1:18200/login`. The command requires the local database configuration and completed migrations; it does not send email or create a production account.
+
+| Area | Included in the 0.5.0-preview candidate |
 |---|---|
 | Base accounting: AR and AP | Customer invoices, supplier bills, partial/final payments, linked credit notes, historical ageing and control-account reconciliation. Separate service modules are included in the required accounting core. |
 | Purchasing | Optional module for purchase orders, partial goods receipts, later supplier bills, receipt matching, returns and received-but-unbilled reconciliation. Supplier balances always belong to AP. |
@@ -52,13 +64,17 @@ The accounting starter is available in the download and hosted demo. Choose **Ac
 
 Owners can hide AR/AP navigation without disabling accounting services or changing reports. Purchasing and Inventory use the existing module activation controls; historical records remain readable after disabling new operations. Quotes are preserved separately on `codex/quotes-plugin` and are excluded from this starter.
 
+The 0.5.0-preview candidate adds eleven selectable synthetic businesses: Cedar Studio, Sunrise Garden Services, Willow Corner Shop, Harbour Trade, Harbor Supply Company, Cedar Table, Riverside Community Club, Meadow Training Pharmacy, Lantern Finch Jewelry Studio, Maple Bench Works and Wheel & Spoke Workshop. Each historical pack contains fixed 2024-2025 examples, an open 2026 practice year, durable source identities, a pinned digest and reconciled monthly checkpoints. Industry names describe teaching scenarios only; unsupported operational, regulatory and compliance features remain out of scope.
+
+The candidate also carries `resources/coa/industry-profiles-0.5.0.json`, a research-backed vertical account vocabulary for all eleven samples. It improves the isolated sample chart labels and keeps distinctions such as food versus beverage, labor versus parts, raw material versus WIP versus finished goods, and earned versus unearned dues visible. Its illustrative codes are not statutory account numbers and it does not activate country tax rules.
+
 **Boundaries:** no country tax rules or automatic rates, statutory forms/e-filing, batches/serials/expiry, landed cost, LC flows, multiple warehouses, advances/unapplied credits/refunds, automatic sends, bank feeds or public financial write API. Those remain later plugins or explicitly reviewed extensions. The existing cash POS showcase does not deduct stock from Inventory.
 
-See [starter implementation and validation](https://github.com/rmak78/phpledger/blob/8cf7386/docs/repository/sprint-06/ACCOUNTING-STARTER.md) and [release notes](resources/release/RELEASE-NOTES.md). Technical checks do not constitute professional accounting or tax review.
+See [starter implementation and validation](https://github.com/rmak78/phpledger/blob/8cf7386/docs/repository/sprint-06/ACCOUNTING-STARTER.md) and [release notes](resources/release/RELEASE-NOTES.md). Technical checks describe the tested candidate and do not alone establish production readiness.
 
 ## Who it is for
 
-The public demo has four multi-year synthetic businesses and a separate, empty Accounting starter playground with prepared accounts, parties, a product and illustrative tax configuration. This small practice book is distinct from the later eleven-company sample program.
+The public demo has eleven multi-year synthetic businesses and a separate, empty Accounting starter playground with prepared accounts, parties, a product and illustrative tax configuration. A visitor selects one sample; only that isolated company is provisioned, and trusted seed history is separate from the visitor's practice-record allowance.
 
 PHP Ledger is country-neutral accounting software for small businesses, owners, bookkeepers, accountants and organisations managing multiple client companies. Pakistan is one intended regional direction, not the main market or the product's defining scope. Owner-equity reporting is a shared priority; partner capital, profit-sharing and drawings are planned examples that require the appropriate entity and accounting profile. Daily entry should work well on phones, with clear reporting and review on larger screens.
 
@@ -71,7 +87,7 @@ The application requires **PHP 8.2 or newer**; **PHP 8.3 is the recommended depl
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS remain development previews.*
 
 > [!NOTE]
-> **Evaluate the accounting core.** [Download 0.4.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional accounting review and pilot usability gates remain open.
+> **Evaluate the accounting core.** [Download 0.5.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.5.0-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional package validation and pilot usability gates remain open.
 
 ## Explore the working preview
 
@@ -130,11 +146,11 @@ Release **0.2.1-preview** combines scoped read API/MCP, existing-user OAuth/Conn
 
 | Next | Outcome |
 |---|---|
-| **Complete the accounting core** | Statements, chart management and general journals are in this preview. Opening cutover, period controls, bank CSV reconciliation and CSV exports are included. Independent accounting review and supported statement packages remain open. |
+| **Complete the accounting core** | Statements, chart management and general journals are in this preview. Opening cutover, period controls, bank CSV reconciliation and CSV exports are included. Supported statement packages and release validation remain open. |
 | **Extension and integration foundation** | Optional-module contracts and lifecycle are implemented. This preview adds read API/MCP using the same accounting services and permissions. Only tested client versions enter the verified matrix. |
 | **Optional business modules** | AR → AP → distribution/updater tooling → reviewed regional tax/e-invoicing connectors → purchasing/inventory → shop POS → e-commerce/storefront → controlled API/MCP commands → restaurant → distribution and specialists. Required tax support precedes affected production use. |
 
-The core must work independently of add-ons. Shop and restaurant interfaces will share checkout and accounting services while providing their own operational workflows. Qualified accounting review, observed usability and an explicit supported scope remain release gates. [Module build order and completion gates →](https://github.com/rmak78/phpledger/blob/8cf7386/docs/MODULE-ROADMAP.md)
+The core must work independently of add-ons. Shop and restaurant interfaces will share checkout and accounting services while providing their own operational workflows. Observed usability, package validation and an explicit supported scope remain release gates. [Module build order and completion gates →](https://github.com/rmak78/phpledger/blob/8cf7386/docs/MODULE-ROADMAP.md)
 
 Restaurant, pharmacy, club, trader, distributor, shop and workshop scenarios inform the longer-term product. **Scan document** and AI extraction come later, with human review before saving or posting.
 

@@ -13,6 +13,35 @@ function pl_starter_template(): array
     return $template;
 }
 
+/** Entity choices guide setup copy only; they do not enable regional tax rules. */
+function pl_setup_entity_type_options(): array
+{
+    return [
+        'individual' => 'Individual / sole proprietor',
+        'aop' => 'AOP / partnership / association',
+        'company' => 'Company / incorporated business',
+        'other' => 'Other or not sure',
+    ];
+}
+
+/** Common year-end choices keep the stored accounting contract as MM-DD. */
+function pl_fiscal_year_end_options(): array
+{
+    return [
+        '06-30' => '30 June — common Pakistan year end',
+        '12-31' => '31 December — calendar year',
+        '03-31' => '31 March — alternative year end',
+        '09-30' => '30 September — alternative year end',
+        'custom' => 'Another year end — enter a custom date',
+    ];
+}
+
+function pl_fiscal_year_end_label(string $fiscalYearEnd): string
+{
+    $options = pl_fiscal_year_end_options();
+    return $options[$fiscalYearEnd] ?? $fiscalYearEnd . ' — custom year end';
+}
+
 function pl_request_key(string $key): string
 {
     if (!preg_match('/^[A-Za-z0-9._:-]{1,128}$/D', $key)) {
@@ -34,12 +63,27 @@ function pl_require_book_ready(int $companyId): void
 
 function pl_install_template_snapshot(int $actorId, int $companyId, int $bookId, array $template, array $mapping): void
 {
+    $snapshot = json_encode(['template' => $template, 'account_mapping' => $mapping], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
     DB::insert('pl_template_installations', [
         'company_id' => $companyId, 'book_id' => $bookId,
         'template_id' => $template['id'], 'template_version' => $template['version'], 'template_digest' => $template['digest'],
-        'snapshot' => json_encode(['template' => $template, 'account_mapping' => $mapping], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE),
+        'snapshot' => $snapshot,
         'confirmed_by' => $actorId,
     ]);
+    pl_record_installation_history($actorId, $companyId, $bookId, 'chart', $template, $snapshot);
+}
+
+/** Record a complete installation fact without changing the original chart row. */
+function pl_record_installation_history(int $actorId, int $companyId, int $bookId, string $kind, array $template, string $snapshot): void
+{
+    if (!in_array($kind, ['chart', 'sample'], true)) {
+        throw new DomainException('Unknown installation history snapshot kind.');
+    }
+    $digest = hash('sha256', $snapshot);
+    DB::query(
+        'INSERT IGNORE INTO pl_template_installation_history (company_id,book_id,snapshot_kind,template_id,template_version,template_digest,snapshot,snapshot_digest,confirmed_by) VALUES (%i,%i,%s,%s,%s,%s,%s,%s,%i)',
+        $companyId, $bookId, $kind, $template['id'], $template['version'], $template['digest'], $snapshot, $digest, $actorId
+    );
 }
 
 function pl_company_context(int $actorId, int $companyId): array
@@ -86,12 +130,17 @@ function pl_setup_company(int $actorId, array $input, string $requestKey): array
     if ($mode === 'fresh' && ($input['zero_balances_confirmed'] ?? false) !== true) {
         throw new DomainException('Confirm this is a new business with no opening balances or unpaid documents.');
     }
+    $chartChoice = $input['chart_choice'] ?? 'neutral';
+    if (!in_array($chartChoice, ['neutral', 'bring_own'], true)
+        || ($chartChoice === 'bring_own' && $mode !== 'existing')) {
+        throw new DomainException('Choose the neutral starter chart, or bring an existing chart with past records.');
+    }
     $canonical = [
         'name' => pl_ledger_text($input['name'] ?? null, 'Business name', 160),
         'currency' => pl_ledger_text($input['currency'] ?? null, 'Currency', 3),
         'start_date' => pl_ledger_date(pl_ledger_text($input['start_date'] ?? null, 'Accounting start date', 10)),
         'fiscal_year_end' => pl_ledger_text($input['fiscal_year_end'] ?? '12-31', 'Fiscal year end', 5),
-        'start_mode' => $mode, 'template_digest' => $template['digest'],
+        'start_mode' => $mode, 'chart_choice' => $chartChoice, 'template_digest' => $template['digest'],
     ];
     if (isset($input['sample_pack'])) {
         if ($mode !== 'sample' || !is_string($input['sample_pack'])) { throw new DomainException('Choose a sample pack only for a new isolated sample.'); }
@@ -214,10 +263,10 @@ function pl_seed_core_sample(int $actorId, int $companyId, int $bookId): void
             || $drafts['total_amount'] !== $sample['expected']['draft_total'] || $drafts['total'] !== count($sample['drafts'])) {
             throw new RuntimeException('The sample pack did not reconcile; the entire setup was rolled back.');
         }
-        // Pin the exact synthetic pack alongside the chart within this new-company transaction.
-        $snapshot = json_decode((string) DB::queryFirstField('SELECT snapshot FROM pl_template_installations WHERE company_id = %i FOR UPDATE', $companyId), true, 512, JSON_THROW_ON_ERROR);
-        $snapshot['sample_pack'] = ['id' => $sample['id'], 'version' => $sample['version'], 'digest' => hash('sha256', $contents), 'date' => $company['start_date'], 'currency' => $company['currency']];
-        DB::update('pl_template_installations', ['snapshot' => json_encode($snapshot, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)], 'company_id = %i', $companyId);
+        // Pin the exact synthetic pack in append-only installation history;
+        // the original chart snapshot remains unchanged.
+        $snapshot = json_encode(['sample_pack' => ['id' => $sample['id'], 'version' => $sample['version'], 'digest' => hash('sha256', $contents), 'date' => $company['start_date'], 'currency' => $company['currency']]], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
+        pl_record_installation_history($actorId, $companyId, $bookId, 'sample', pl_starter_template(), $snapshot);
         $manifest = pl_module_registry()['pos-showcase'];
         pl_set_company_module($actorId, $companyId, 'pos-showcase', true, 0, $manifest['digest'], 'Explicit isolated sample includes the cash POS showcase.', 'sample-pos');
     });

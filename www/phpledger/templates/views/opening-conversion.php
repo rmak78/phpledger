@@ -36,8 +36,8 @@ pl_starter_field('Reason','reason',$confirmInput['reason']??'');
 pl_starter_field('Date','date',$settleInput['date']??gmdate('Y-m-d'),'date');
 pl_starter_field('Amount','amount_fc',$settleInput['amount_fc']??$item['remaining_fc']);
 pl_starter_select('Cash or bank','bank_account_id',pl_starter_options(array_filter($accounts,fn($a)=>$a['role']==='cash_bank')),$settleInput['bank_account_id']??'');
-pl_starter_select('Realised FX gain','gain_account_id',pl_starter_options(array_filter($accounts,fn($a)=>$a['type']==='income')),$settleInput['gain_account_id']??'');
-pl_starter_select('Realised FX loss','loss_account_id',pl_starter_options(array_filter($accounts,fn($a)=>$a['type']==='expense')),$settleInput['loss_account_id']??'');
+pl_starter_select('Realised FX gain (optional)','gain_account_id',pl_starter_options(array_filter($accounts,fn($a)=>$a['type']==='income')),$settleInput['gain_account_id']??'',false);
+pl_starter_select('Realised FX loss (optional)','loss_account_id',pl_starter_options(array_filter($accounts,fn($a)=>$a['type']==='expense')),$settleInput['loss_account_id']??'',false);
 pl_starter_field('Actual rate (optional)','actual_rate',$settleInput['actual_rate']??'','text',false);
 pl_starter_field('Description / payment reference','description',$settleInput['description']??'');
 ?></div><button class="button secondary">Record payment</button></form></details><?php endif; ?></article><?php endforeach; ?></section>

@@ -4,6 +4,21 @@ Source revision: `{{SOURCE_COMMIT}}`.
 
 This package is a development preview of the restarted PHP Ledger application. It preserves the lightweight BixiSoft PHP/MeekroDB structure while separating accounting functions, server permissions, templates and the public front controller. It is intended for evaluation and supported pilot preparation.
 
+## 0.5.0-preview: eleven isolated sample companies and shared UX candidate
+
+The release candidate extends the 0.4.0 accounting starter with eleven versioned, synthetic sample companies: Cedar Studio, Sunrise Garden Services, Willow Corner Shop, Harbour Trade, Harbor Supply Company, Cedar Table, Riverside Community Club, Meadow Training Pharmacy, Lantern Finch Jewelry Studio, Maple Bench Works and Wheel & Spoke Workshop.
+
+- Each selected historical pack contains fixed 2024-2025 bookkeeping history, an open 2026 practice year, 74 source/draft records, 36 month-end checkpoints, durable source references and a pinned SHA-256 digest.
+- The public chooser provisions only the company selected by the visitor. Existing isolation, hourly reset, capacity limits, CSRF/session boundaries and the existing posting/reporting services remain in force.
+- Pack metadata states synthetic provenance, demo-only release status and unsupported vertical boundaries. Pharmacy is non-medicinal training inventory only; workshop customer-owned property remains separate from stock; restaurant, club, jewelry and manufacturing operations are teaching scenarios, not compliance or operational modules.
+- Successor fixtures retain the authored or generated synthetic research contract in pinned JSON, including business profile, contacts, products or locations, opening evidence, operational event identities, expected reports and scenario acceptance checks. Isolated sample provisioning now replays supported operational events through the existing AR/AP, Purchasing, Inventory and general-journal services, while future vertical records remain visibly staged as research evidence.
+- Chart installations and sample-import receipts are now recorded in append-only installation history. The original chart snapshot is never overwritten when a sample pack is attached; the guide reads the immutable, company/book-scoped sample receipt and rejects later changes.
+- The new `resources/coa/industry-profiles-0.5.0.json` catalogue maps all eleven samples to research-backed account vocabulary and role labels. It distinguishes, for example, food versus beverage, labor versus parts, raw material versus WIP versus finished goods, and earned versus unearned dues. Illustrative codes are not statutory numbers, and unsupported vertical controls remain outside the sample runtime.
+- Domestic customer receipts and supplier payments no longer require unused realised-FX accounts. The settlement service still requires a scoped gain/loss account when a genuine exchange difference is posted, and retains the existing foreign-bank and carrying-value safeguards.
+- No country chart is promoted by this candidate. Country research remains unavailable for real-company installation pending package validation and release criteria.
+
+This is a local release candidate. Hosted publication, observed usability, accessibility sign-off, capacity evidence and production readiness remain open gates. No live system, provider, payment, message or webhook action is performed by sample provisioning.
+
 ## 0.4.0-preview: accounting starter
 
 AR and AP are now included in the base accounting core, with separate internal module ownership. Purchasing and shared Inventory are bundled optional modules. Core tax configuration is country-neutral and owner-managed.
@@ -18,7 +33,7 @@ AR and AP are now included in the base accounting core, with separate internal m
 - The hosted demo adds a separate Accounting starter playground with synthetic parties, a stock product and illustrative tax configuration. Its four historical examples remain available. Demo administration remains restricted; removing lines from an existing demo invoice/order draft requires starting a new draft.
 - Quotes are excluded and preserved on a separate plugin branch. Advanced stock features, LC flows, tax country packs, forms and e-filing remain outside this build.
 
-New migrations are additive to 0.3.0. Review the [starter record](https://github.com/rmak78/phpledger/blob/{{SOURCE_COMMIT}}/docs/repository/sprint-06/ACCOUNTING-STARTER.md) for exact migration and test evidence. Use a matched database/code backup and stop application/worker traffic for an upgrade. Package and hosted publication are recorded separately from professional accounting acceptance.
+New migrations are additive to 0.3.0. Review the [starter record](https://github.com/rmak78/phpledger/blob/{{SOURCE_COMMIT}}/docs/repository/sprint-06/ACCOUNTING-STARTER.md) for exact migration and test evidence. Use a matched database/code backup and stop application/worker traffic for an upgrade. Package and hosted publication remain separate release gates.
 
 ## Historical 0.3.0-preview: accounting foundations before AR/AP
 
@@ -97,7 +112,7 @@ The 0.1.1-preview cash POS interactions remain included: click-to-add products, 
 
 ## Current starter limits
 
-The reports are country-neutral management views. Accounting/reporting research does not amount to ICAP, ICMAP or ACCA approval, statutory presentation compliance, tax certification or filing support. Obtain appropriate accounting review before relying on this preview for a business period.
+The reports are country-neutral management views. Accounting/reporting research does not provide statutory presentation compliance, tax certification or filing support. Use this preview within its documented management-accounting scope.
 
 The existing cash POS is a demonstration with its own illustrative sample catalogue. It does not deduct stock from shared Inventory or apply the new document tax engine. Stock quantities, valuation and cost of goods sold are available through the starter's Inventory and stock-invoice flows; extending the POS to use them, payment-provider capture, hardware integrations and complete retail/restaurant workflows remain deferred.
 
@@ -105,11 +120,11 @@ Each book has one immutable functional currency. The posting foundation now supp
 
 Detailed historical journal imports, XLSX, country tax adapters, offline operation and receipt/document scanning remain future work. The local starter now supplies invoice collection, bill settlement, linked credit notes, ageing and inventory reports described above; those capabilities were absent from the historical published 0.3.0 package. Existing opening AR/AP rows remain immutable source evidence until the explicit reviewed conversion maps them into operational open items. Opening credits, advances, unapplied credits and refunds remain deferred. Existing-business setup requires confirmed opening balances; ordinary new transactions must be dated after cutover, and unresolved earlier bank items require explicit review before a reconciliation baseline.
 
-The `resources/tax/` catalogs cover Pakistan, the UK, UAE, Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore, with classification questions for restaurants, membership clubs, pharmacies, traders, distributors, retail shops and workshops. Every candidate remains `research_only`, `enabled: false` and `unreviewed`. Product/service, registration, jurisdiction, effective-period and recovery conditions require qualified review; an industry name never selects a universal rate. Null rates mean unresolved or non-flat treatment, not zero tax. No catalog is imported into company settings or used by POS. The starter's manually configured core tax codes, dated rates and account mappings are separate from these packaged references; no country-pack activation, statutory filing or tax-specific API/MCP interface is included.
+The `resources/tax/` catalogs cover Pakistan, the UK, UAE, Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore, with classification questions for restaurants, membership clubs, pharmacies, traders, distributors, retail shops and workshops. Every candidate remains `research_only` and `enabled: false`. Product/service, registration, jurisdiction, effective-period and recovery conditions are not enabled by an industry name; an industry name never selects a universal rate. Null rates mean unresolved or non-flat treatment, not zero tax. No catalog is imported into company settings or used by POS. The starter's manually configured core tax codes, dated rates and account mappings are separate from these packaged references; no country-pack activation, statutory filing or tax-specific API/MCP interface is included.
 
 Optional `php tools/validate-tax-catalog.php --self-test` validates local catalog schema, disabled states and references without database access. It neither checks legal accuracy nor approves sources, rates or dates. Core document tax snapshots and input/output account mappings are implemented for manually configured rates; country-specific tax profiles, withholding, nonrecoverable/partial-recovery policies, compound taxes and filing rules remain future work.
 
-The selected UI is a working preview. The click-to-add POS direction is owner-approved; representative cashier sessions and country-specific report review remain pending. Passing technical checks does not establish observed usability success, independent accounting acceptance or a completed security review.
+The selected UI is a working preview. The click-to-add POS direction is owner-approved; representative cashier sessions and country-specific report review remain pending. Passing technical checks does not establish observed usability success or a completed security review.
 
 ## Installation and compatibility
 
