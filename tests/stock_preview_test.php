@@ -1,6 +1,37 @@
 <?php
 declare(strict_types=1);
 
+test('goods receipt preview shares exact stock and GRNI amounts with posting and remains read-only', function (): void {
+    $f=purchasing_fixture(); $order=purchasing_order($f,'10','1.2345');
+    $input=purchasing_receipt_input($f,$order,'3');
+    $plan=pl_preview_purchase_receipt($f['actor_id'],$f['company_id'],$f['book_id'],$order['id'],$input);
+    assert_same('3.7035',$plan['total_base']); assert_same('7.0000',$plan['lines'][0]['remaining_after']);
+    assert_same(0,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_purchase_receipts WHERE book_id=%i',$f['book_id']));
+    assert_same(0,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_inventory_movements WHERE book_id=%i',$f['book_id']));
+    assert_same(0,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id=%i',$f['book_id']));
+    $hash=hash('sha256',json_encode($plan,JSON_THROW_ON_ERROR));
+    $posted=pl_confirm_purchase_receipt($f['actor_id'],$f['company_id'],$f['book_id'],$order['id'],$input,$hash);
+    assert_same($plan['total_base'],$posted['lines'][0]['amount_base']);
+    assert_true($posted==pl_confirm_purchase_receipt($f['actor_id'],$f['company_id'],$f['book_id'],$order['id'],$input,$hash));
+    $journal=pl_get_journal($f['actor_id'],$f['company_id'],$f['book_id'],$posted['lines'][0]['journal_id']);
+    assert_same('3.7035',$journal['lines'][0]['debit']); assert_same('3.7035',$journal['lines'][1]['credit']);
+    assert_same('0.0000',pl_purchase_received_unbilled($f['actor_id'],$f['company_id'],$f['book_id'])['accounts'][0]['difference']);
+});
+
+test('goods receipt confirmation rejects changed remaining quantities and preview retains scope guards', function (): void {
+    $f=purchasing_fixture(); $order=purchasing_order($f); $input=purchasing_receipt_input($f,$order,'2');
+    $plan=pl_preview_purchase_receipt($f['actor_id'],$f['company_id'],$f['book_id'],$order['id'],$input);
+    pl_receive_purchase_order($f['actor_id'],$f['company_id'],$f['book_id'],$order['id'],purchasing_receipt_input($f,$order,'1'));
+    assert_throws(fn()=>pl_confirm_purchase_receipt($f['actor_id'],$f['company_id'],$f['book_id'],$order['id'],$input,hash('sha256',json_encode($plan,JSON_THROW_ON_ERROR))),DomainException::class,'Update the preview');
+    $bad=$input; $bad['lines'][0]['quantity']='10';
+    assert_throws(fn()=>pl_preview_purchase_receipt($f['actor_id'],$f['company_id'],$f['book_id'],$order['id'],$bad),DomainException::class);
+    $bad=$input; $bad['lines'][]=$bad['lines'][0];
+    assert_throws(fn()=>pl_preview_purchase_receipt($f['actor_id'],$f['company_id'],$f['book_id'],$order['id'],$bad),DomainException::class,'each order line once');
+    $other=ledger_fixture();
+    assert_throws(fn()=>pl_preview_purchase_receipt($other['actor_id'],$f['company_id'],$f['book_id'],$order['id'],$input),DomainException::class);
+    assert_same(1,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_purchase_receipts WHERE book_id=%i',$f['book_id']));
+});
+
 test('stock count preview writes nothing and confirmation uses the exact reviewed journal effect', function (): void {
     $f=inventory_fixture();
     pl_inventory_receive($f['actor_id'],$f['company_id'],$f['book_id'],inventory_move_input($f,'3','10'));

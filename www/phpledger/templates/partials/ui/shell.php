@@ -14,7 +14,7 @@ $navGroups = [
     ],
     'Purchases' => [
         ['/ap', 'Bills', 'file-text', ['ap'], $visibility['show_ap']],
-        ['/purchasing', 'Purchase orders', 'list', ['purchasing'], $moduleVisible('purchasing')],
+        ['/purchasing', 'Purchase orders', 'list', ['purchasing','goods-receipt'], $moduleVisible('purchasing')],
         ['/parties?role=vendor', 'Suppliers', 'building', [], $visibility['show_ap']],
     ],
     'Inventory' => [['/inventory', 'Products & stock', 'list', ['inventory','stock-count'], $moduleVisible('inventory')]],

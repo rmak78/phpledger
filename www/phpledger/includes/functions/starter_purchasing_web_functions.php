@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 function pl_web_starter_purchasing(int $actorId, int $companyId, int $bookId, array $user, array $company, string $path, string $method): never
 {
+    if (isset($_GET['receive']) || in_array(pl_web_text($_POST,'action'),['receive','receipt_preview','receipt_confirm'],true)) {
+        pl_web_goods_receipt($actorId,$companyId,$bookId,$user,$company,$method);
+    }
     if ($method === 'POST') {
         $id = pl_web_id($_POST, 'id');
         try {
@@ -68,4 +71,44 @@ function pl_web_starter_purchasing(int $actorId, int $companyId, int $bookId, ar
         'orders' => pl_list_purchase_orders($actorId, $companyId, $bookId), 'receipts' => pl_purchasing_receipts($actorId, $companyId, $bookId),
         'reconciliation' => pl_purchase_received_unbilled($actorId, $companyId, $bookId, pl_web_text($_GET, 'as_of') ?: null),
         'priceMode' => pl_tax_price_mode($actorId, $companyId, $bookId), 'taxCodes' => pl_list_tax_codes($actorId, $companyId, $bookId), 'preview' => $preview]);
+}
+
+function pl_web_goods_receipt_input(array $input): array
+{
+    $lines=[];
+    foreach (pl_purchase_rows($input['lines']??null) as $line) {
+        if (pl_web_text($line,'quantity')==='') { continue; }
+        $lines[]=['order_line_id'=>pl_web_id($line,'order_line_id'),'quantity'=>pl_web_text($line,'quantity')];
+    }
+    return ['date'=>pl_web_text($input,'date'),'grni_account_id'=>pl_web_id($input,'grni_account_id'),'rate'=>pl_web_text($input,'rate')?:null,
+        'idempotency_key'=>pl_web_text($input,'request_key'),'lines'=>$lines];
+}
+
+function pl_web_goods_receipt(int $actorId,int $companyId,int $bookId,array $user,array $company,string $method): never
+{
+    pl_require_company_access($actorId,$companyId,true);
+    $id=pl_web_id($method==='POST'?$_POST:$_GET,'id'); $return=pl_url('/purchasing',['id'=>$id,'receive'=>'1']);
+    if ($method==='POST') {
+        try {
+            $input=pl_web_goods_receipt_input($_POST);
+            if (pl_web_text($_POST,'action')==='receipt_confirm') {
+                if (pl_web_text($_POST,'confirmed')!=='1') { throw new DomainException('Confirm that the quantities shown were physically received.'); }
+                $review=$_SESSION['goods_receipt_review']??[];
+                $hash=is_array($review) && ($review['company_id']??null)===$companyId && ($review['book_id']??null)===$bookId && ($review['key']??null)===$input['idempotency_key'] ? ($review['hash']??'') : '';
+                pl_confirm_purchase_receipt($actorId,$companyId,$bookId,$id,$input,is_string($hash)?$hash:'');
+                pl_notice('Goods receipt recorded. Stock and received-but-unbilled value were posted together.');
+                pl_redirect(pl_url('/purchasing',['id'=>$id]));
+            }
+            $preview=pl_preview_purchase_receipt($actorId,$companyId,$bookId,$id,$input);
+            $_SESSION['goods_receipt_review']=['company_id'=>$companyId,'book_id'=>$bookId,'key'=>$input['idempotency_key'],'hash'=>hash('sha256',json_encode($preview,JSON_THROW_ON_ERROR))];
+            pl_form_failure($return,$_POST,'',200);
+        } catch (DomainException $error) { pl_form_failure($return,$_POST,$error->getMessage()); }
+    }
+    $order=pl_get_purchase_order($actorId,$companyId,$bookId,$id); $form=pl_form_state($return); $input=$form['input']; $preview=null;
+    if ($input) {
+        try { $preview=pl_preview_purchase_receipt($actorId,$companyId,$bookId,$id,pl_web_goods_receipt_input($input)); }
+        catch (DomainException $error) { if ($form['message']==='') { $form['message']=$error->getMessage(); } }
+    }
+    pl_render('goods-receipt',['title'=>'Receive goods','user'=>$user,'company'=>$company,'order'=>$order,'form'=>$form,'input'=>$input,'preview'=>$preview,
+        'accounts'=>pl_starter_accounts($actorId,$companyId,$bookId)]);
 }

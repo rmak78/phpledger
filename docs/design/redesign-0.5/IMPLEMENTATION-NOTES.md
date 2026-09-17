@@ -266,3 +266,19 @@ Home's use of that service needs review alongside list-performance work.
   static analysis passed. JS syntax and compiled CSS build passed. No migration.
 - Whole inventory list/product layouts and goods-receipt previews remain pending;
   this checkpoint does not close the entire inventory lane or release gates.
+
+## Goods-receipt preview checkpoint
+
+- Receipt quantities, remaining-order checks, currency conversion and totals now
+  come from one shared read-only plan used by the receipt writer. Preview uses
+  the inventory movement plan for the actual stock and GRNI journal effects.
+- A focused receive state on /purchasing shows ordered/received/remaining quantities,
+  per-line value and the journal effect before physical-receipt confirmation.
+  Confirmation rejects changed order or stock balances under the book lock.
+- The original purchasing command remains the durable retry identity; inventory
+  still posts its own source-linked movements through the central ledger funnel.
+- Targeted suite: 62 tests, zero failures. PHP lint (191 files), static analysis,
+  JavaScript syntax and CSS build passed. JS/no-JS browser receipt posting and
+  stale-review rejection passed; both folds, portrait and phone had no overflow.
+- No migration. Purchase-order editor/list fidelity and complete route acceptance
+  remain pending. No external or hosted system changed for this checkpoint.

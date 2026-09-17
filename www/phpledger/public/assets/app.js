@@ -592,7 +592,8 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
     update();
 })();
 document.querySelectorAll('[data-reviewed-form]').forEach(form => {
-    form.addEventListener('input', () => {
+    form.addEventListener('input', event => {
+        if (event.target.name === 'confirmed') return;
         form.querySelectorAll('[data-review-preview]').forEach(preview => { preview.hidden = true; });
         [...form.elements].filter(control => control.hasAttribute('data-review-confirm')).forEach(control => { control.disabled = true; });
         const message = form.querySelector('[data-review-message]');
