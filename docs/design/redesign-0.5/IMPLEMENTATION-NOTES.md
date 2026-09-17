@@ -225,3 +225,29 @@ Home's use of that service needs review alongside list-performance work.
 - Fresh install (31 migration files) and the synthetic 0.5 upgrade/replay passed.
   The upgrade verifier confirms old accounts remain unclassified and posted data
   unchanged. Complete historical starter/currency scenarios still remain pending.
+
+## Multi-item settlement checkpoint
+
+- One receipt/payment allocates across 1–30 unique open items for the same party,
+  currency and direction. Allocations must equal the payment exactly; any remainder
+  is rejected explicitly in both the service and the screen.
+- Posting remains one central journal: historic carrying lines per item, one bank
+  line and only the applicable net FX line. No new settlement migration. Whole
+  payment reversal restores every allocation and is named as such in the UI.
+- Preview performs no writes. Confirmation binds the normalized payment, current
+  remaining balances and rate provenance under the book lock; stale reviews are
+  rejected. Selecting the applicable FX account after preview is allowed. Durable
+  command identity makes retries return the same journal, including after reversal.
+- Local synthetic browser checks passed with JavaScript and without it: domestic
+  AR/AP allocations, preview and posting, both folds, portrait tablet and phone
+  overflow. Foreign zero-net preview has no FX selector; a gain exposes only its
+  gain account and posts after selection. Screenshots are local in output/playwright.
+- An expanded retry test exposed MySQL JSON object ordering in nested receipts;
+  settlement results now use the existing canonical result helper. Final full
+  composer check passed: 187 PHP files linted, static analysis and sample validation
+  passed, 259 tests with zero failures. Composer needed a 900-second process limit
+  for the expanded suite in the accumulated synthetic database; the prior run
+  reached the default 300-second limit and was not counted as a pass.
+- Payment layout still needs the final prototype-fidelity sweep, along with the
+  rest of the sales/purchases/inventory lane. Full route, scale, accessibility,
+  historical upgrade and publication gates remain open.

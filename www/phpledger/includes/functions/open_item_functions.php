@@ -220,15 +220,44 @@ function pl_open_item_validate_settlement_basis(int $companyId, int $bookId, arr
     $lines = array_values(array_filter($payload['lines'], static fn (array $line): bool => (int) $line['account_id'] === (int) $item['control_account_id']));
     if (count($lines) !== 1) { throw new DomainException('A settlement needs exactly one open-item control line.'); }
     $line = $lines[0];
+    pl_open_item_validate_settlement_line($item, $line, $payload['date']);
+    return (int) $item['control_account_id'];
+}
+
+function pl_open_item_validate_settlement_line(array $item, array $line, string $date): void
+{
     $expected = pl_oi_allocated_base($item, $line['amount_fc']);
     $debit = $item['direction'] === 'payable';
-    if ($payload['date'] < $item['latest_activity_date'] || $line['amount_base'] !== $expected
+    if ((int)$line['account_id'] !== (int)$item['control_account_id'] || $date < $item['latest_activity_date'] || $line['amount_base'] !== $expected
         || $line[$debit ? 'debit' : 'credit'] !== $expected) { throw new DomainException('Settlement must relieve the persisted historic carrying amount.'); }
     foreach (['currency', 'rate', 'rate_type', 'rate_source_id', 'rate_is_stale', 'ic_counterparty_entity_id'] as $field) {
         $matches = $field === 'rate_is_stale' ? (bool) $line[$field] === (bool) $item['recognition'][$field] : (string) $line[$field] === (string) $item['recognition'][$field];
         if (!$matches) { throw new DomainException('Settlement must retain the recognition currency snapshot.'); }
     }
-    return (int) $item['control_account_id'];
+}
+
+/** Validate every mapped carrying line and reject unmapped tracked-control lines. */
+function pl_open_item_validate_batch_basis(int $companyId, int $bookId, array $payload, array $allocations): void
+{
+    if ($payload['source_type'] !== 'open_item_batch_settlement' || !preg_match('/^open-item-batch:[a-f0-9]{64}$/D',$payload['source_reference'])
+        || count($allocations)<1 || count($allocations)>30 || count(array_unique($allocations))!==count($allocations)) {
+        throw new DomainException('Invalid multi-item settlement source.');
+    }
+    $scope = null;
+    $tracked = array_map('intval',DB::queryFirstColumn('SELECT account_id FROM pl_open_item_accounts WHERE company_id=%i AND book_id=%i',$companyId,$bookId));
+    foreach ($allocations as $index=>$itemId) {
+        if (!is_int($index) || !is_int($itemId) || !isset($payload['lines'][$index])) { throw new DomainException('Invalid allocation line mapping.'); }
+        $item=pl_open_item_state($companyId,$bookId,$itemId);
+        $identity=[(int)$item['party_id'],$item['currency'],$item['direction']];
+        $scope ??= $identity;
+        if ($scope!==$identity) { throw new DomainException('One payment must use one party, currency and payment direction.'); }
+        pl_open_item_validate_settlement_line($item,$payload['lines'][$index],$payload['date']);
+    }
+    foreach ($payload['lines'] as $index=>$line) {
+        if (in_array($line['account_id'],$tracked,true) !== array_key_exists($index,$allocations)) {
+            throw new DomainException('Every tracked control line must have exactly one allocation.');
+        }
+    }
 }
 
 function pl_open_item_assert_correction_allowed(int $companyId, int $bookId, int $journalId): void
@@ -256,7 +285,7 @@ function pl_open_item_validate_posting(int $companyId, int $bookId, array $paylo
     $ids = array_map('intval', array_column($tracked, 'account_id'));
     $controls = array_values(array_filter($payload['lines'], static fn (array $line): bool => in_array((int) $line['account_id'], $ids, true)));
     if ($controls === []) {
-        if (in_array($payload['source_type'], ['open_item_recognition', 'open_item_settlement'], true)) { throw new DomainException('An open-item source must post to its tracked control account.'); }
+        if (in_array($payload['source_type'], ['open_item_recognition', 'open_item_settlement', 'open_item_batch_settlement'], true)) { throw new DomainException('An open-item source must post to its tracked control account.'); }
         return;
     }
     if ($reversalOf !== null) {
@@ -280,8 +309,15 @@ function pl_open_item_validate_posting(int $companyId, int $bookId, array $paylo
 }
 
 /** Atomic construction ties the only outstanding calculator to the exact posted GL lines. */
-function pl_open_item_track_posting(int $companyId, int $bookId, int $journalId, array $payload, ?int $reversalOf = null): void
+function pl_open_item_track_posting(int $companyId, int $bookId, int $journalId, array $payload, ?int $reversalOf = null, ?array $allocations = null): void
 {
+    if ($allocations !== null) {
+        foreach ($allocations as $index=>$itemId) {
+            $lineId=DB::queryFirstField('SELECT id FROM pl_journal_lines WHERE journal_id=%i AND company_id=%i AND book_id=%i AND line_number=%i',$journalId,$companyId,$bookId,$index+1);
+            DB::insert('pl_open_item_entries',['company_id'=>$companyId,'book_id'=>$bookId,'item_id'=>$itemId,'kind'=>'allocation','journal_line_id'=>$lineId,'reversal_of_id'=>null]);
+        }
+        return;
+    }
     if ($reversalOf !== null) {
         $entries = DB::query('SELECT e.*, l.line_number FROM pl_open_item_entries e JOIN pl_journal_lines l ON l.id = e.journal_line_id WHERE l.journal_id = %i AND e.company_id = %i AND e.book_id = %i', $reversalOf, $companyId, $bookId);
         foreach ($entries as $entry) {

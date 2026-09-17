@@ -591,3 +591,34 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
     window.addEventListener('pageshow', update);
     update();
 })();
+// Informational allocation totals; the server validates exact amounts again at posting.
+document.querySelectorAll('[data-settlement-form]').forEach(form => {
+    const amount = value => {
+        const match = /^(\d{1,16})(?:\.(\d{1,4}))?$/.exec(value.trim());
+        return match ? BigInt(match[1]) * 10000n + BigInt((match[2] || '').padEnd(4, '0')) : null;
+    };
+    const format = value => `${value < 0n ? '-' : ''}${(value < 0n ? -value : value) / 10000n}.${((value < 0n ? -value : value) % 10000n).toString().padStart(4, '0')}`;
+    const output = form.querySelector('[data-allocation-total]');
+    const update = () => {
+        const payment = amount(form.elements.namedItem('amount_fc').value);
+        const allocations = [...form.querySelectorAll('[data-allocation-amount]')].map(input => input.value.trim() === '' ? 0n : amount(input.value));
+        if (payment === null || allocations.some(value => value === null)) {
+            output.textContent = 'Enter valid amounts with up to four decimal places.';
+            return;
+        }
+        const total = allocations.reduce((sum, value) => sum + value, 0n);
+        output.textContent = `Allocated ${format(total)} · Unallocated ${format(payment - total)}`;
+    };
+    form.addEventListener('input', event => {
+        update();
+        if (['gain_account_id', 'loss_account_id'].includes(event.target.name)) return;
+        const preview = form.querySelector('[data-settlement-preview]');
+        if (preview) {
+            preview.hidden = true;
+            const message = document.createElement('p');
+            message.textContent = 'Payment changed. Update the preview before confirming.';
+            preview.replaceWith(message);
+        }
+    });
+    update();
+});

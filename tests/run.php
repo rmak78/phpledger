@@ -52,6 +52,10 @@ $suites = array_merge($suites, ['ar_ap_test.php','inventory_test.php','purchasin
 $suites[] = 'list_test.php';
 $suites[] = 'home_test.php';
 $suites[] = 'editor_test.php';
+$suites[] = 'settlement_test.php';
+if (($argv[1] ?? '') === '--suite=settlements') {
+    $suites = ['ledger_test.php','concurrency_test.php','open_item_test.php','settlement_test.php'];
+}
 if (($argv[1] ?? '') === '--suite=editors') {
     $suites = ['ledger_test.php', 'concurrency_test.php', 'core_test.php', 'editor_test.php'];
 }
