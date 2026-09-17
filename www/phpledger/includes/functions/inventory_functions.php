@@ -120,8 +120,8 @@ function pl_inventory_movement_input(array $input): array
     return $data;
 }
 
-/** Internal movement writer. All callers hold the book lock and append through this single stock funnel. */
-function pl_inventory_record(int $actorId, int $companyId, int $bookId, array $data, string $kind, string $quantity, string $value, string $key, ?int $original = null): array
+/** Read-only movement plan, shared by preview and the single inventory writer. */
+function pl_inventory_movement_plan(int $actorId, int $companyId, int $bookId, array $data, string $quantity, string $value): array
 {
     pl_require_module($actorId, $companyId, $bookId, 'inventory');
     $book = pl_ledger_book($companyId, $bookId, true); pl_require_book_ready($companyId);
@@ -143,17 +143,28 @@ function pl_inventory_record(int $actorId, int $companyId, int $bookId, array $d
     if (DB::queryFirstField('SELECT id FROM pl_inventory_movements WHERE book_id=%i AND source_type=%s AND source_reference=%s FOR SHARE', $bookId, $data['source_type'], $data['source_reference'])) { throw new DomainException('This stock source already has a movement. Reuse its original request key.'); }
     $period = DB::query('SELECT id,status FROM pl_periods WHERE company_id=%i AND book_id=%i AND start_date<=%s AND end_date>=%s FOR UPDATE', $companyId, $bookId, $data['date'], $data['date']);
     if (count($period) !== 1 || $period[0]['status'] !== 'open') { throw new DomainException('The movement date must fall within exactly one open accounting period.'); }
-    $journalId = null;
+    $journalPayload = null;
     if (bccomp($value, '0', 4) !== 0) {
         if ($data['offset_account_id'] === null || $data['offset_account_id'] === $product['inventory_account_id']) { throw new DomainException('Choose a distinct offset account for the stock value.'); }
         $offset = pl_get_account($actorId, $companyId, $bookId, $data['offset_account_id']);
         if (!$offset['is_active'] || in_array($offset['role'], ['receivables','payables'], true)) { throw new DomainException('Use the shared AR/AP services for customer and supplier balances.'); }
         $positive = bccomp($value, '0', 4) > 0; $amount = ltrim($value, '-');
-        $journal = pl_post_journal($actorId, $companyId, $bookId, ['date' => $data['date'], 'currency' => $book['currency'], 'source_type' => 'inventory_movement',
-            'source_reference' => $data['source_type'] . ':' . substr(hash('sha256', $data['source_reference']), 0, 48), 'idempotency_key' => 'inventory:' . hash('sha256', $key), 'description' => $data['reason'],
+        $journalPayload = ['date' => $data['date'], 'currency' => $book['currency'], 'source_type' => 'inventory_movement',
+            'source_reference' => $data['source_type'] . ':' . substr(hash('sha256', $data['source_reference']), 0, 48), 'description' => $data['reason'],
             'lines' => [['account_id' => $product['inventory_account_id'], 'debit' => $positive ? $amount : '0', 'credit' => $positive ? '0' : $amount],
-                ['account_id' => $data['offset_account_id'], 'debit' => $positive ? '0' : $amount, 'credit' => $positive ? $amount : '0']]]);
-        $journalId = (int) $journal['id'];
+                ['account_id' => $data['offset_account_id'], 'debit' => $positive ? '0' : $amount, 'credit' => $positive ? $amount : '0']]];
+    }
+    return ['product'=>$product,'recorded'=>$state,'quantity_after'=>$quantityAfter,'value_after'=>$valueAfter,'journal'=>$journalPayload];
+}
+
+/** Internal movement writer. All callers hold the book lock and append through this single stock funnel. */
+function pl_inventory_record(int $actorId, int $companyId, int $bookId, array $data, string $kind, string $quantity, string $value, string $key, ?int $original = null): array
+{
+    $plan=pl_inventory_movement_plan($actorId,$companyId,$bookId,$data,$quantity,$value);
+    $product=$plan['product']; $journalId=null;
+    if ($plan['journal']!==null) {
+        $journal=pl_post_journal($actorId,$companyId,$bookId,$plan['journal']+['idempotency_key'=>'inventory:'.hash('sha256',$key)]);
+        $journalId=(int)$journal['id'];
     }
     DB::insert('pl_inventory_movements', ['company_id' => $companyId, 'book_id' => $bookId, 'product_id' => $product['id'], 'movement_date' => $data['date'], 'kind' => $kind,
         'quantity_delta' => $quantity, 'value_delta' => $value, 'inventory_account_id' => $product['inventory_account_id'], 'offset_account_id' => $data['offset_account_id'], 'journal_id' => $journalId,
@@ -233,21 +244,57 @@ function pl_inventory_value_adjustment(int $actorId, int $companyId, int $bookId
         });
 }
 
+/** The count effect is calculated once for preview and posting. */
+function pl_inventory_count_effect(array $balance, string $count, string $expected, ?string $unitCost): array
+{
+    if ($balance['quantity'] !== $expected) { throw new DomainException('Stock changed since this count was reviewed. Refresh the expected quantity.'); }
+    $change = bcsub($count, $expected, 4);
+    if (bccomp($change, '0', 4) === 0) { throw new DomainException('The count already matches stock; no adjustment is needed.'); }
+    if (bccomp($change, '0', 4) < 0) { $value = bcsub('0', pl_inventory_cost($balance['value_base'], $balance['quantity'], substr($change, 1)), 4); }
+    else {
+        if ($unitCost === null || bccomp($unitCost, '0', 4) <= 0) { throw new DomainException('A count increase needs an explicitly reviewed positive unit cost.'); }
+        $value = pl_fx_convert($change, $unitCost);
+    }
+    return ['quantity_delta'=>$change,'value_delta'=>$value];
+}
+
 function pl_inventory_adjust_count(int $actorId, int $companyId, int $bookId, array $input): array
 {
     $data = pl_inventory_movement_input($input); $count = pl_amount(pl_ledger_text($input['counted_quantity'] ?? null, 'Counted quantity', 21));
     $expected = pl_amount(pl_ledger_text($input['expected_quantity'] ?? null, 'Expected quantity', 21)); $unitCost = isset($input['unit_cost']) ? pl_amount(pl_ledger_text($input['unit_cost'], 'Unit cost', 21)) : null;
     return pl_inventory_command($actorId, $companyId, $bookId, (string) ($input['idempotency_key'] ?? ''), ['count', $data, $count, $expected, $unitCost], function (string $key) use ($actorId, $companyId, $bookId, $data, $count, $expected, $unitCost): array {
         $balance = pl_inventory_balance($actorId, $companyId, $bookId, $data['product_id']);
-        if ($balance['quantity'] !== $expected) { throw new DomainException('Stock changed since this count was reviewed. Refresh the expected quantity.'); }
-        $change = bcsub($count, $expected, 4);
-        if (bccomp($change, '0', 4) === 0) { throw new DomainException('The count already matches stock; no adjustment is needed.'); }
-        if (bccomp($change, '0', 4) < 0) { $value = bcsub('0', pl_inventory_cost($balance['value_base'], $balance['quantity'], substr($change, 1)), 4); }
-        else {
-            if ($unitCost === null || bccomp($unitCost, '0', 4) <= 0) { throw new DomainException('A count increase needs an explicitly reviewed positive unit cost.'); }
-            $value = pl_fx_convert($change, $unitCost);
+        $effect=pl_inventory_count_effect($balance,$count,$expected,$unitCost);
+        return pl_inventory_record($actorId, $companyId, $bookId, $data, 'adjustment', $effect['quantity_delta'], $effect['value_delta'], $key);
+    });
+}
+
+function pl_preview_inventory_count(int $actorId, int $companyId, int $bookId, array $input): array
+{
+    $data=pl_inventory_movement_input($input);
+    $count=pl_amount(pl_ledger_text($input['counted_quantity']??null,'Counted quantity',21));
+    $expected=pl_amount(pl_ledger_text($input['expected_quantity']??null,'Expected quantity',21));
+    $unitCost=isset($input['unit_cost'])?pl_amount(pl_ledger_text($input['unit_cost'],'Unit cost',21)):null;
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$data,$count,$expected,$unitCost): array {
+        pl_require_company_access($actorId,$companyId,true); pl_ledger_book($companyId,$bookId,true);
+        $balance=pl_inventory_balance($actorId,$companyId,$bookId,$data['product_id']);
+        $effect=pl_inventory_count_effect($balance,$count,$expected,$unitCost);
+        $plan=pl_inventory_movement_plan($actorId,$companyId,$bookId,$data,$effect['quantity_delta'],$effect['value_delta']);
+        return ['input'=>$data,'recorded'=>$balance,'counted_quantity'=>$count,'unit_cost'=>$unitCost,'effect'=>$effect,'journal'=>$plan['journal'],'product'=>$plan['product']];
+    });
+}
+
+/** A reviewed count cannot silently use a changed carrying value or stock balance. */
+function pl_confirm_inventory_count(int $actorId, int $companyId, int $bookId, array $input, string $expectedHash): array
+{
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$input,$expectedHash): array {
+        pl_require_company_access($actorId,$companyId,true); pl_ledger_book($companyId,$bookId,true);
+        $key=pl_request_key(pl_ledger_text($input['idempotency_key']??null,'Count identity',128));
+        if (!DB::queryFirstField('SELECT request_key FROM pl_inventory_commands WHERE company_id=%i AND book_id=%i AND request_key=%s',$companyId,$bookId,$key)) {
+            $plan=pl_preview_inventory_count($actorId,$companyId,$bookId,$input);
+            if (!hash_equals($expectedHash,hash('sha256',json_encode($plan,JSON_THROW_ON_ERROR)))) { throw new DomainException('The count or its stock value changed. Update the preview before confirming.'); }
         }
-        return pl_inventory_record($actorId, $companyId, $bookId, $data, 'adjustment', $change, $value, $key);
+        return pl_inventory_adjust_count($actorId,$companyId,$bookId,$input);
     });
 }
 

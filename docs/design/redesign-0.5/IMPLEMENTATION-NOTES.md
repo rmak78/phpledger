@@ -251,3 +251,18 @@ Home's use of that service needs review alongside list-performance work.
 - Payment layout still needs the final prototype-fidelity sweep, along with the
   rest of the sales/purchases/inventory lane. Full route, scale, accessibility,
   historical upgrade and publication gates remain open.
+
+## Stock-count preview checkpoint
+
+- The inventory writer and read-only preview share one movement plan and exact
+  count-effect calculation. Preview includes recorded/counted quantities,
+  difference, carrying-value effect and the same journal lines used by posting.
+- Confirmation binds the reviewed values under the book lock and rejects a changed
+  quantity or carrying value. Exact retries still return the original movement.
+- The existing inventory route gains a focused count state with sticky document
+  actions. Browser increases and decreases passed with JS and without it, including
+  stale-review rejection, both folds, portrait tablet and phone overflow checks.
+- Targeted accounting suite: 60 tests, zero failures; PHP lint (190 files) and
+  static analysis passed. JS syntax and compiled CSS build passed. No migration.
+- Whole inventory list/product layouts and goods-receipt previews remain pending;
+  this checkpoint does not close the entire inventory lane or release gates.

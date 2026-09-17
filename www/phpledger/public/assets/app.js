@@ -591,6 +591,15 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
     window.addEventListener('pageshow', update);
     update();
 })();
+document.querySelectorAll('[data-reviewed-form]').forEach(form => {
+    form.addEventListener('input', () => {
+        form.querySelectorAll('[data-review-preview]').forEach(preview => { preview.hidden = true; });
+        [...form.elements].filter(control => control.hasAttribute('data-review-confirm')).forEach(control => { control.disabled = true; });
+        const message = form.querySelector('[data-review-message]');
+        if (message) message.textContent = 'Values changed. Update the preview before confirming.';
+    });
+});
+
 // Informational allocation totals; the server validates exact amounts again at posting.
 document.querySelectorAll('[data-settlement-form]').forEach(form => {
     const amount = value => {

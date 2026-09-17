@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 function pl_web_starter_inventory(int $actorId,int $companyId,int $bookId,array $user,array $company,string $path,string $method): never
 {
+    if (isset($_GET['count']) || in_array(pl_web_text($_POST,'action'),['count','count_preview','count_confirm'],true)) {
+        pl_web_stock_count($actorId,$companyId,$bookId,$user,$company,$method);
+    }
     if ($method==='POST') {
         $id=pl_web_id($_POST,'id');
         try {
@@ -55,4 +58,44 @@ function pl_web_starter_inventory(int $actorId,int $companyId,int $bookId,array 
         'products'=>pl_list_inventory_products($actorId,$companyId,$bookId),'valuation'=>pl_inventory_valuation($actorId,$companyId,$bookId,pl_web_text($_GET,'as_of')?:null),
         'movements'=>pl_inventory_history($actorId,$companyId,$bookId,$id?:null),'preview'=>$preview,
         'balance'=>$product?pl_inventory_balance($actorId,$companyId,$bookId,$id):null]);
+}
+
+function pl_web_stock_count_input(array $input): array
+{
+    return ['product_id'=>pl_web_id($input,'id'),'date'=>pl_web_text($input,'date'),'counted_quantity'=>pl_web_text($input,'counted_quantity'),
+        'expected_quantity'=>pl_web_text($input,'expected_quantity'),'unit_cost'=>pl_web_text($input,'unit_cost')?:null,
+        'offset_account_id'=>pl_web_id($input,'offset_account_id'),'source_type'=>'manual_stock','source_reference'=>pl_web_text($input,'reference'),
+        'reason'=>pl_web_text($input,'reason'),'idempotency_key'=>pl_web_text($input,'request_key')];
+}
+
+function pl_web_stock_count(int $actorId,int $companyId,int $bookId,array $user,array $company,string $method): never
+{
+    pl_require_company_access($actorId,$companyId,true);
+    $id=pl_web_id($method==='POST'?$_POST:$_GET,'id');
+    $return=pl_url('/inventory',['id'=>$id,'count'=>'1']);
+    if ($method==='POST') {
+        try {
+            $input=pl_web_stock_count_input($_POST);
+            if (pl_web_text($_POST,'action')==='count_confirm') {
+                $review=$_SESSION['stock_count_review']??[];
+                $hash=is_array($review) && ($review['company_id']??null)===$companyId && ($review['book_id']??null)===$bookId && ($review['key']??null)===$input['idempotency_key'] ? ($review['hash']??'') : '';
+                pl_confirm_inventory_count($actorId,$companyId,$bookId,$input,is_string($hash)?$hash:'');
+                pl_notice('Stock count recorded. Quantity and carrying value were adjusted together.');
+                pl_redirect(pl_url('/inventory',['id'=>$id]));
+            }
+            $preview=pl_preview_inventory_count($actorId,$companyId,$bookId,$input);
+            $_SESSION['stock_count_review']=['company_id'=>$companyId,'book_id'=>$bookId,'key'=>$input['idempotency_key'],'hash'=>hash('sha256',json_encode($preview,JSON_THROW_ON_ERROR))];
+            pl_form_failure($return,$_POST,'',200);
+        } catch (DomainException $error) { pl_form_failure($return,$_POST,$error->getMessage()); }
+    }
+    $product=pl_get_inventory_product($actorId,$companyId,$bookId,$id);
+    if ($product['kind']!=='stock') { throw new DomainException('Choose a stock product to record a physical count.'); }
+    $balance=pl_inventory_balance($actorId,$companyId,$bookId,$id); $form=pl_form_state($return); $preview=null;
+    $input=$form['input']?:['id'=>$id,'expected_quantity'=>$balance['quantity'],'date'=>gmdate('Y-m-d')];
+    if ($form['input']) {
+        try { $preview=pl_preview_inventory_count($actorId,$companyId,$bookId,pl_web_stock_count_input($input)); }
+        catch (DomainException $error) { if ($form['message']==='') { $form['message']=$error->getMessage(); } }
+    }
+    pl_render('stock-count',['title'=>'Record stock count','user'=>$user,'company'=>$company,'product'=>$product,'balance'=>$balance,'form'=>$form,'input'=>$input,'preview'=>$preview,
+        'accounts'=>pl_starter_accounts($actorId,$companyId,$bookId)]);
 }
