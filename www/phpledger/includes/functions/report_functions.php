@@ -49,16 +49,17 @@ function pl_profit_loss(int $actorId, int $companyId, int $bookId, string $from,
     if ($from > $to) {
         throw new DomainException('The report start date must be on or before its end date.');
     }
-    $rows = DB::query("SELECT a.id, a.code, a.name, a.type,
+    $rows = DB::query("SELECT a.id, a.code, a.name, a.type, a.report_classification,
         COALESCE(SUM(CASE WHEN j.id IS NOT NULL THEN l.debit ELSE 0 END), 0) AS debit,
         COALESCE(SUM(CASE WHEN j.id IS NOT NULL THEN l.credit ELSE 0 END), 0) AS credit
         FROM pl_accounts a
         LEFT JOIN pl_journal_lines l ON l.account_id = a.id AND l.company_id = a.company_id AND l.book_id = a.book_id
         LEFT JOIN pl_journals j ON j.id = l.journal_id AND j.company_id = a.company_id AND j.book_id = a.book_id AND j.journal_date >= %s AND j.journal_date <= %s
         WHERE a.company_id = %i AND a.book_id = %i AND a.type IN ('income','expense')
-        GROUP BY a.id, a.code, a.name, a.type ORDER BY a.code", $from, $to, $companyId, $bookId);
+        GROUP BY a.id, a.code, a.name, a.type, a.report_classification ORDER BY a.code", $from, $to, $companyId, $bookId);
     $income = [];
     $expenses = [];
+    $costOfSales = []; $totalCostOfSales = '0.0000';
     $totalIncome = '0.0000';
     $totalExpenses = '0.0000';
     foreach ($rows as $row) {
@@ -67,13 +68,17 @@ function pl_profit_loss(int $actorId, int $companyId, int $bookId, string $from,
         if ($row['type'] === 'income') {
             $income[] = $entry;
             $totalIncome = bcadd($totalIncome, $amount, 4);
+        } elseif ($row['report_classification'] === 'cost_of_sales') {
+            $costOfSales[] = $entry;
+            $totalCostOfSales = bcadd($totalCostOfSales, $amount, 4);
         } else {
             $expenses[] = $entry;
             $totalExpenses = bcadd($totalExpenses, $amount, 4);
         }
     }
-    return ['from' => $from, 'to' => $to, 'currency' => $book['currency'], 'income' => $income, 'expenses' => $expenses,
-        'total_income' => $totalIncome, 'total_expenses' => $totalExpenses, 'net_profit' => bcsub($totalIncome, $totalExpenses, 4)];
+    $grossProfit = bcsub($totalIncome, $totalCostOfSales, 4);
+    return ['from' => $from, 'to' => $to, 'currency' => $book['currency'], 'income' => $income, 'cost_of_sales'=>$costOfSales, 'expenses' => $expenses,
+        'total_income' => $totalIncome, 'total_cost_of_sales'=>$totalCostOfSales, 'gross_profit'=>$grossProfit, 'total_expenses' => $totalExpenses, 'net_profit' => bcsub($grossProfit, $totalExpenses, 4)];
 }
 
 /** Chart-classified balances; accumulated unclosed earnings appear once beside recorded equity. */

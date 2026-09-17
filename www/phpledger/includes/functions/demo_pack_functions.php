@@ -165,7 +165,7 @@ function pl_demo_pack_reconcile(int $actorId, int $companyId, int $bookId, array
         $profit = pl_profit_loss($actorId, $companyId, $bookId, $checkpoint['from'], $checkpoint['to']);
         $balance = pl_balance_sheet($actorId, $companyId, $bookId, $checkpoint['to']);
         if (!$trial['balanced'] || $actual !== $expected || !$balance['balanced']
-            || $profit['total_income'] !== $checkpoint['income'] || $profit['total_expenses'] !== $checkpoint['expenses']
+            || $profit['total_income'] !== $checkpoint['income'] || bcadd($profit['total_expenses'],$profit['total_cost_of_sales'],4) !== $checkpoint['expenses']
             || $profit['net_profit'] !== $checkpoint['profit']) {
             throw new RuntimeException('The sample did not reconcile at ' . $checkpoint['to'] . '; setup was rolled back.');
         }
@@ -276,9 +276,15 @@ function pl_demo_operational_master_data(int $actorId, int $companyId, int $book
         [$type, $accountRole] = pl_demo_operational_role_type($role);
         $code = (string) ($next[$type]++);
         $accountLabel = is_string($roleLabels[$role] ?? null) && $roleLabels[$role] !== '' ? $roleLabels[$role] : pl_demo_operational_role_label($role);
+        $classification = [];
+        if ($role === 'cost_of_goods_sold') {
+            // Preserve old sample-account retries; only new charts get this default.
+            $prior = DB::queryFirstRow('SELECT report_classification FROM pl_accounts WHERE company_id=%i AND book_id=%i AND creation_key=%s', $companyId,$bookId,pl_request_key($prefix.'operational-account:'.$role));
+            if ($prior === null || $prior['report_classification'] === 'cost_of_sales') { $classification = ['report_classification'=>'cost_of_sales']; }
+        }
         $account = pl_save_account($actorId, $companyId, $bookId, ['code' => $code, 'name' => $accountLabel, 'type' => $type,
             'role' => $accountRole, 'is_active' => true, 'reason' => 'Deterministic operational account for the isolated synthetic sample.',
-            'creation_key' => $prefix . 'operational-account:' . $role]);
+            'creation_key' => $prefix . 'operational-account:' . $role] + $classification);
         $mapping[$role] = (int) $account['id'];
     }
     $needsInventory = ($evidence['products'] ?? []) !== []; $needsPurchasing = false;

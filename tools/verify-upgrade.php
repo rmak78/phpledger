@@ -75,7 +75,8 @@ try {
         $migration = pl_migrate();
         if ($migration['applied'] !== array_values(array_diff($allVersions,$baseVersions))
             || $before !== pl_get_journal($actor,$f['company_id'],$f['book_id'],$journal['id'])
-            || $beforeAccounts !== DB::query('SELECT * FROM pl_accounts ORDER BY id')
+            || $beforeAccounts !== array_map(static fn(array $row): array=>array_intersect_key($row,$beforeAccounts[0]), DB::query('SELECT * FROM pl_accounts ORDER BY id'))
+            || (int)DB::queryFirstField('SELECT COUNT(*) FROM pl_accounts WHERE report_classification IS NOT NULL') !== 0
             || DB::queryFirstField('SELECT access_mode FROM pl_connections WHERE id=%s',$connectionId) !== 'full'
             || pl_company_context($actor,$f['company_id'])['setup_status'] !== 'ready'
             || pl_trial_balance($actor,$f['company_id'],$f['book_id'])['total_debit'] !== '125.0000'

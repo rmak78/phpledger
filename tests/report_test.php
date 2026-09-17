@@ -1,5 +1,34 @@
 <?php
 declare(strict_types=1);
+require_once dirname(__DIR__) . '/www/phpledger/includes/functions/web_functions.php';
+
+test('calendar report presets cover leap months quarter and custom boundaries', function (): void {
+    assert_same(['from'=>'2024-02-01','to'=>'2024-02-29'],pl_report_period('last_month','2024-03-31'));
+    assert_same(['from'=>'2026-07-01','to'=>'2026-09-18'],pl_report_period('quarter','2026-09-18'));
+    assert_same(['from'=>'2026-01-01','to'=>'2026-09-18'],pl_report_period('year','2026-09-18'));
+    assert_same(null,pl_report_period('custom','2026-09-18'));
+    assert_throws(fn()=>pl_report_period('unknown','2026-09-18'),DomainException::class);
+});
+
+test('cost-of-sales classification preserves net profit and immutable entries and is auditable', function (): void {
+    $f=ledger_fixture();
+    foreach (['receipt'=>'1000','expense'=>'125'] as $kind=>$amount) {
+        $draft=pl_save_document($f['actor_id'],$f['company_id'],$f['book_id'],document_input($f,$kind,$amount));
+        pl_post_document($f['actor_id'],$f['company_id'],$f['book_id'],$draft['id'],$draft['revision']);
+    }
+    $before=pl_profit_loss($f['actor_id'],$f['company_id'],$f['book_id'],'2026-01-01','2026-12-31');
+    assert_same('0.0000',$before['total_cost_of_sales']); assert_same('1000.0000',$before['gross_profit']);
+    $entries=DB::query('SELECT * FROM pl_journal_lines WHERE book_id=%i ORDER BY id',$f['book_id']);
+    $account=pl_get_account($f['actor_id'],$f['company_id'],$f['book_id'],$f['accounts']['5000']);
+    pl_save_account($f['actor_id'],$f['company_id'],$f['book_id'],array_replace($account,['report_classification'=>'cost_of_sales','reason'=>'Synthetic reviewed cost classification']),$account['id'],$account['revision']);
+    $after=pl_profit_loss($f['actor_id'],$f['company_id'],$f['book_id'],'2026-01-01','2026-12-31');
+    assert_same('125.0000',$after['total_cost_of_sales']); assert_same('0.0000',$after['total_expenses']);
+    assert_same('875.0000',$after['gross_profit']); assert_same($before['net_profit'],$after['net_profit']);
+    assert_same($entries,DB::query('SELECT * FROM pl_journal_lines WHERE book_id=%i ORDER BY id',$f['book_id']));
+    assert_true(count(pl_core_history($f['actor_id'],$f['company_id'],$f['book_id'],'account',$account['id']))>0);
+    $cash=pl_get_account($f['actor_id'],$f['company_id'],$f['book_id'],$f['accounts']['1000']);
+    assert_throws(fn()=>pl_save_account($f['actor_id'],$f['company_id'],$f['book_id'],array_replace($cash,['report_classification'=>'cost_of_sales','reason'=>'Invalid type']),$cash['id'],$cash['revision']),DomainException::class);
+});
 
 test('owner statements reconcile posted receipt expense and dated reversal without including drafts', function (): void {
     $f = ledger_fixture(); $today = gmdate('Y-m-d');

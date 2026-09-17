@@ -54,10 +54,12 @@ function pl_export_report(int $actorId, int $companyId, int $bookId, string $kin
             if ($from === null) { throw new DomainException('Choose a start date for profit and loss.'); }
             $report = pl_profit_loss($actorId, $companyId, $bookId, $from, $to);
             $rows[] = ['Section', 'Account ID', 'Code', 'Name', 'Amount'];
-            foreach (['income', 'expenses'] as $group) {
+            foreach (['income', 'cost_of_sales', 'expenses'] as $group) {
                 foreach ($report[$group] as $a) { $rows[] = [$group, (string) $a['id'], pl_csv_text($a['code']), pl_csv_text($a['name']), $a['amount']]; }
             }
             $rows[] = ['Total income', '', '', '', $report['total_income']];
+            $rows[] = ['Total cost of sales', '', '', '', $report['total_cost_of_sales']];
+            $rows[] = ['Gross profit', '', '', '', $report['gross_profit']];
             $rows[] = ['Total expenses', '', '', '', $report['total_expenses']];
             $rows[] = ['Net profit', '', '', '', $report['net_profit']];
         } else {

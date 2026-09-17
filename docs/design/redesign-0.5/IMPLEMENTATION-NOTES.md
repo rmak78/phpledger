@@ -201,3 +201,27 @@ Home's use of that service needs review alongside list-performance work.
   caught and corrected a missing template allow-list entry before acceptance.
 - No additional migration. This uses the existing ageing service; its all-item
   read and document drill-down performance still need the release scale checks.
+
+## Cost of sales and account guidance checkpoint
+
+- Migration 030 adds nullable report_classification to accounts. Every existing
+  account stays unclassified. Account edits can explicitly assign expense accounts
+  to cost of sales; the existing account audit records the change. The form explains
+  that grouping changes all report periods without changing postings or net profit.
+- New operational sample cost_of_goods_sold accounts default to this section;
+  existing sample-account retries retain their prior classification. Generic new
+  starter charts keep their general expense account unclassified.
+- Profit and loss returns Income, Cost of sales, Gross profit, Expenses and Net
+  profit. CSV and API/MCP pagination include the new section. Sample checkpoint
+  verification reconciles combined expense and cost totals to the original fixture.
+- Calendar presets work through GET without JS and populate date fields with JS.
+  Account statement return links preserve the report's exact date range.
+- Account form explains statement consequences and warns before deactivation of
+  cash/bank, AR/AP or tax-linked accounts. This is guidance, not a new posting lock.
+- Full composer check: 184 PHP files linted, static analysis/sample validation
+  passed, 252 tests with zero failures. Final template edits were linted again.
+  JS/no-JS browser classification, P&L, period presets and statement return passed;
+  P&L captured at both folds, portrait tablet and phone without page overflow.
+- Fresh install (31 migration files) and the synthetic 0.5 upgrade/replay passed.
+  The upgrade verifier confirms old accounts remain unclassified and posted data
+  unchanged. Complete historical starter/currency scenarios still remain pending.

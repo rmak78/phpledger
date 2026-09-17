@@ -381,6 +381,7 @@ try {
             $account = pl_save_account($actorId, $companyId, $bookId, [
                 'name' => pl_web_text($_POST, 'name'), 'code' => pl_web_text($_POST, 'code'),
                 'type' => pl_web_text($_POST, 'type'), 'role' => pl_web_text($_POST, 'role') ?: null,
+                'report_classification' => pl_web_text($_POST, 'report_classification') ?: null,
                 'is_active' => pl_web_text($_POST, 'is_active') === '1', 'reason' => pl_web_text($_POST, 'reason'),
                 'creation_key' => pl_web_text($_POST, 'creation_key'),
             ], $id ?: null, $id ? pl_web_id($_POST, 'revision') : null);
@@ -392,9 +393,11 @@ try {
         $id = pl_web_id($_GET, 'id');
         $isNew = pl_web_text($_GET, 'new') === '1';
         $account = $id ? pl_get_account($actorId, $companyId, $bookId, $id) : null;
+        $operationalWarning = $account !== null && (in_array($account['role'], ['cash_bank','receivables','payables'], true)
+            || DB::queryFirstField('SELECT id FROM pl_tax_codes WHERE company_id=%i AND book_id=%i AND (sales_account_id=%i OR purchase_account_id=%i) LIMIT 1',$companyId,$bookId,$id,$id) !== null);
         $form = pl_form_state(pl_url('/accounts', $id ? ['id' => $id] : ($isNew ? ['new' => '1'] : [])));
         $input = $form['input'] ?: ($account ?? ['code' => '', 'name' => '', 'type' => 'expense', 'role' => 'expense', 'is_active' => true, 'creation_key' => bin2hex(random_bytes(24))]);
-        pl_render('accounts', ['title' => 'Chart of accounts', 'user' => $user, 'company' => $company, 'account' => $account, 'isNew' => $isNew, 'input' => $input, 'form' => $form, 'history' => $id ? pl_core_history($actorId, $companyId, $bookId, 'account', $id) : []]);
+        pl_render('accounts', ['title' => 'Chart of accounts', 'user' => $user, 'company' => $company, 'account' => $account, 'isNew' => $isNew, 'input' => $input, 'form' => $form, 'operationalWarning'=>$operationalWarning, 'history' => $id ? pl_core_history($actorId, $companyId, $bookId, 'account', $id) : []]);
     }
     if (str_starts_with($path, '/general-journals')) {
         $id = pl_web_id($method === 'POST' ? $_POST : $_GET, 'id');
@@ -574,10 +577,12 @@ try {
         pl_render('balance-sheet', ['title' => 'Balance sheet', 'user' => $user, 'company' => $company, 'report' => $report, 'asOf' => $asOf]);
     }
     if ($path === '/reports/profit-loss') {
-        $to = pl_web_text($_GET, 'to', gmdate('Y-m-d'));
-        $from = pl_web_text($_GET, 'from', $company['start_date']);
+        $preset = pl_web_text($_GET, 'preset', 'custom');
+        $period = pl_report_period($preset, gmdate('Y-m-d'));
+        $to = $period['to'] ?? pl_web_text($_GET, 'to', gmdate('Y-m-d'));
+        $from = $period['from'] ?? pl_web_text($_GET, 'from', $company['start_date']);
         $report = pl_profit_loss($actorId, $companyId, $bookId, $from, $to);
-        pl_render('profit-loss', ['title' => 'Profit & loss', 'user' => $user, 'company' => $company, 'report' => $report, 'from' => $from, 'to' => $to]);
+        pl_render('profit-loss', ['title' => 'Profit & loss', 'user' => $user, 'company' => $company, 'report' => $report, 'from' => $from, 'to' => $to, 'preset'=>$preset]);
     }
     if ($path === '/reports/cash-forecast') {
         $asOf = gmdate('Y-m-d');

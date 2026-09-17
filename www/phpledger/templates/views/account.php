@@ -12,6 +12,7 @@ $firstPage = ($activity['page'] ?? 1) === 1;
 $lastPage = ($activity['page'] ?? 1) === ($activity['pages'] ?? 1);
 ?>
 <section class="page-wrap account-statement" aria-labelledby="account-title">
+    <?php if (pl_web_text($_GET,'return_report')==='profit-loss'): ?><a class="btn btn-ghost" href="<?= pl_e(pl_url('/reports/profit-loss',['from'=>$statementFrom,'to'=>$asOf,'preset'=>'custom'])) ?>"><?= pl_icon('arrow-left') ?> Back to profit &amp; loss</a><?php endif; ?>
     <div class="page-heading">
         <div>
             <p class="eyebrow"><?= pl_e((string) $company['name']) ?> &middot; <?= pl_e((string) $company['currency']) ?></p>

@@ -22,7 +22,7 @@ function pl_get_account(int $actorId, int $companyId, int $bookId, int $id): arr
 {
     pl_require_company_access($actorId, $companyId);
     pl_ledger_book($companyId, $bookId);
-    $row = DB::queryFirstRow('SELECT id, code, name, type, role, semantic_key, is_active, revision, currency, is_monetary, revaluation_account_id, group_account_id FROM pl_accounts WHERE id = %i AND company_id = %i AND book_id = %i FOR SHARE', $id, $companyId, $bookId);
+    $row = DB::queryFirstRow('SELECT id, code, name, type, role, report_classification, semantic_key, is_active, revision, currency, is_monetary, revaluation_account_id, group_account_id FROM pl_accounts WHERE id = %i AND company_id = %i AND book_id = %i FOR SHARE', $id, $companyId, $bookId);
     if (!$row) { throw new DomainException('This account is not available in the selected company and book.'); }
     $row['id'] = (int) $row['id'];
     $row['revision'] = (int) $row['revision'];
@@ -50,9 +50,14 @@ function pl_save_account(int $actorId, int $companyId, int $bookId, array $input
         throw new DomainException('The account purpose must match its classification.');
     }
     $data = ['code' => $code, 'name' => $name, 'type' => $type, 'role' => $role, 'is_active' => $active];
+    $reportClassification = $input['report_classification'] ?? null;
+    if ($reportClassification !== null && ($reportClassification !== 'cost_of_sales' || $type !== 'expense')) {
+        throw new DomainException('Cost of sales is available only for expense accounts.');
+    }
     $legacyHash = hash('sha256', json_encode($data, JSON_THROW_ON_ERROR));
     $currencyInput = $input;
     if ($id === null) { $data += pl_currency_account_properties($input); }
+    if ($reportClassification !== null) { $data['report_classification'] = $reportClassification; }
     $hash = hash('sha256', json_encode($data, JSON_THROW_ON_ERROR));
     $key = $id === null ? pl_request_key(pl_ledger_text($input['creation_key'] ?? null, 'Request identity', 128)) : null;
     return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $id, $revision, $reason, $data, $key, $hash, $currencyInput, $legacyHash): array {
@@ -62,7 +67,7 @@ function pl_save_account(int $actorId, int $companyId, int $bookId, array $input
             pl_currency_validate_account_links($companyId, $bookId, $data);
             $prior = DB::queryFirstRow('SELECT id, creation_hash FROM pl_accounts WHERE book_id = %i AND company_id = %i AND creation_key = %s FOR UPDATE', $bookId, $companyId, $key);
             if ($prior) {
-                if (!hash_equals((string) $prior['creation_hash'], $hash) && !(array_intersect_key($currencyInput, array_flip(['currency','is_monetary','revaluation_account_id','group_account_id'])) === [] && hash_equals((string) $prior['creation_hash'], $legacyHash))) { throw new DomainException('This request already created a different account. Open the existing account.'); }
+                if (!hash_equals((string) $prior['creation_hash'], $hash) && !(array_intersect_key($currencyInput, array_flip(['currency','is_monetary','revaluation_account_id','group_account_id','report_classification'])) === [] && hash_equals((string) $prior['creation_hash'], $legacyHash))) { throw new DomainException('This request already created a different account. Open the existing account.'); }
                 return pl_get_account($actorId, $companyId, $bookId, (int) $prior['id']);
             }
             if (DB::queryFirstField('SELECT id FROM pl_accounts WHERE book_id = %i AND code = %s FOR SHARE', $bookId, $data['code'])) {
@@ -83,7 +88,7 @@ function pl_save_account(int $actorId, int $companyId, int $bookId, array $input
                 && DB::queryFirstField('SELECT journal_id FROM pl_journal_lines WHERE account_id=%i AND company_id=%i AND book_id=%i LIMIT 1 FOR SHARE', $id, $companyId, $bookId)) {
                 throw new DomainException('Currency and monetary classification are fixed once this account has postings.');
             }
-            DB::update('pl_accounts', $properties + ['name' => $data['name'], 'is_active' => $data['is_active'], 'revision' => $before['revision'] + 1], 'id = %i AND company_id = %i AND book_id = %i', $id, $companyId, $bookId);
+            DB::update('pl_accounts', $properties + ['name' => $data['name'], 'is_active' => $data['is_active'], 'report_classification'=>array_key_exists('report_classification',$currencyInput) ? $currencyInput['report_classification'] : $before['report_classification'], 'revision' => $before['revision'] + 1], 'id = %i AND company_id = %i AND book_id = %i', $id, $companyId, $bookId);
         }
         $account = pl_get_account($actorId, $companyId, $bookId, $id);
         pl_core_audit($actorId, $companyId, $bookId, 'account', $id, $before === null ? 'created' : 'updated', $reason, $before, $account);

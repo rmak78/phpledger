@@ -1,5 +1,26 @@
 'use strict';
 
+document.querySelectorAll('[data-report-period]').forEach(form => {
+    const preset = form.elements.namedItem('preset');
+    const from = form.elements.namedItem('from');
+    const to = form.elements.namedItem('to');
+    preset.addEventListener('change', () => {
+        const option = preset.selectedOptions[0];
+        if (option.dataset.from) { from.value = option.dataset.from; to.value = option.dataset.to; }
+    });
+    [from, to].forEach(input => input.addEventListener('input', () => { preset.value = 'custom'; }));
+});
+
+document.querySelectorAll('.core-account-form').forEach(form => {
+    const type = form.elements.namedItem('type');
+    const hint = form.querySelector('[data-account-consequence]');
+    if (!type || !hint) return;
+    type.addEventListener('change', () => {
+        hint.textContent = ['income', 'expense'].includes(type.value)
+            ? 'This account appears on Profit & loss.' : 'This account appears on the Balance sheet.';
+    });
+});
+
 // Native details preserves an explicit review step without JavaScript.
 document.querySelectorAll('[data-confirmation]').forEach((details, index) => {
     if (typeof HTMLDialogElement === 'undefined') return;

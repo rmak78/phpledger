@@ -171,7 +171,7 @@ function pl_read_operation(string $connectionId, string $operation, array $input
             'account_statement' => pl_account_activity($actor, $company, $book, $args['account_id'], $args['as_of'], $page, $args['from'], ['page_size' => $size]),
             default => throw new LogicException('Read operation is not implemented.'),
         };
-        foreach (match ($operation) { 'trial_balance' => ['accounts'], 'profit_loss' => ['income','expenses'], 'balance_sheet' => ['assets','liabilities','equity'], default => [] } as $field) {
+        foreach (match ($operation) { 'trial_balance' => ['accounts'], 'profit_loss' => ['income','cost_of_sales','expenses'], 'balance_sheet' => ['assets','liabilities','equity'], default => [] } as $field) {
             $data[$field] = pl_read_page($data[$field], $page, $size);
         }
         if (in_array($operation, ['transactions','general_journals','account_statement'], true)) {

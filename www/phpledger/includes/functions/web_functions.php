@@ -286,6 +286,24 @@ function pl_web_document_input(array $input): array
     ];
 }
 
+/** Calendar presets resolve on the server too, including without JavaScript. */
+function pl_report_period(string $preset, string $today): ?array
+{
+    $date = new DateTimeImmutable(pl_ledger_date($today));
+    $quarterMonth = intdiv((int)$date->format('n') - 1, 3) * 3 + 1;
+    $start = match ($preset) {
+        'month' => $date->modify('first day of this month'),
+        'last_month' => $date->modify('first day of last month'),
+        'quarter' => $date->setDate((int)$date->format('Y'), $quarterMonth, 1),
+        'year' => $date->setDate((int)$date->format('Y'), 1, 1),
+        'custom' => null,
+        default => throw new DomainException('Choose a supported report period.'),
+    };
+    if ($start === null) { return null; }
+    $end = $preset === 'last_month' ? $date->modify('last day of last month') : $date;
+    return ['from'=>$start->format('Y-m-d'), 'to'=>$end->format('Y-m-d')];
+}
+
 function pl_web_general_input(array $input): array
 {
     $rows = $input['lines'] ?? [];
