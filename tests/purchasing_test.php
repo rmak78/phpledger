@@ -1,5 +1,27 @@
 <?php
 declare(strict_types=1);
+require_once dirname(__DIR__).'/www/phpledger/includes/functions/web_functions.php';
+
+test('purchase order list pages exact totals and derives receipt progress without changing order state',function(): void {
+    $f=purchasing_fixture(); $args=[$f['actor_id'],$f['company_id'],$f['book_id']]; $first=null;
+    for ($i=0;$i<26;$i++) {
+        $row=pl_save_purchase_order(...array_merge($args,[['party_id'=>$f['party_id'],'date'=>'2026-01-05','currency'=>'USD','reference'=>'Paged order '.$i,'creation_key'=>bin2hex(random_bytes(16)),
+            'lines'=>[['product_id'=>$f['product_id'],'description'=>'Synthetic goods','quantity'=>'3','unit_price'=>(string)($i+1)]]]]));
+        $first??=$row;
+    }
+    $run=fn(array $q):array=>pl_list_query(...array_merge($args,['purchasing',$q]));
+    $firstPage=$run(['sort'=>'amount','dir'=>'asc']); $last=$run(['sort'=>'amount','dir'=>'asc','page'=>'999']);
+    assert_same(26,$firstPage['total']); assert_same(25,count($firstPage['orders'])); assert_same(2,$last['page']); assert_same('78.0000',$last['orders'][0]['total']);
+    $order=pl_confirm_purchase_order(...array_merge($args,[$first['id'],$first['revision'],bin2hex(random_bytes(16))]));
+    assert_same(1,$run(['status'=>'ordered'])['total']);
+    pl_receive_purchase_order(...array_merge($args,[$order['id'],purchasing_receipt_input($f,$order,'1')]));
+    $partial=$run(['status'=>'partial']); assert_same(1,$partial['total']); assert_same('confirmed',$partial['orders'][0]['status']); assert_same('partial',pl_purchase_order_progress($partial['orders'][0]));
+    pl_receive_purchase_order(...array_merge($args,[$order['id'],purchasing_receipt_input($f,$order,'2')]));
+    assert_same(1,$run(['status'=>'received'])['total']); assert_same(0,$run(['status'=>'partial'])['total']);
+    assert_same(25,$run(['status'=>'draft'])['total']); assert_same(1,$run(['q'=>$order['number']])['total']); assert_same(0,$run(['q'=>'%'])['total']);
+    foreach ([['sort'=>'amount DESC'],['status'=>'posted'],['dir'=>'invalid']] as $bad) { assert_throws(fn()=>$run($bad),DomainException::class); }
+    $other=ledger_fixture(); assert_throws(fn()=>pl_page_purchase_orders($other['actor_id'],$f['company_id'],$f['book_id'],[]),DomainException::class);
+});
 
 function purchasing_fixture(): array
 {

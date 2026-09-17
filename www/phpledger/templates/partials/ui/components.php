@@ -14,7 +14,7 @@ function pl_ui_page_header(string $title, string $description = '', ?callable $a
 function pl_ui_badge(string $status, ?string $label = null): void
 {
     $allowed = ['draft','posted','reversed','unpaid','paid','partially-paid','due-soon','overdue','info','sample'];
-    $kind = match ($status) { 'active'=>'posted','inactive'=>'unpaid',default=>in_array($status, $allowed, true) ? $status : 'draft' };
+    $kind = match ($status) { 'active','received'=>'posted','inactive','cancelled'=>'unpaid','ordered'=>'info','partially-received'=>'partially-paid',default=>in_array($status, $allowed, true) ? $status : 'draft' };
     echo '<span class="badge badge-' . $kind . '"><span class="badge-dot" aria-hidden="true"></span>'
         . pl_e($label ?? ucfirst(str_replace('-', ' ', $status))) . '</span>';
 }

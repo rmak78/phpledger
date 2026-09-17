@@ -468,3 +468,21 @@ rates, or separately design code editing. The owner subsequently approved the re
   opening journal. Screenshots of the list/detail and editor were inspected.
 - No additional migration or hosted change. Full route/accessibility acceptance,
   remaining purchasing/report/admin ports and final release packaging are pending.
+
+## Purchasing register and operations checkpoint — 18 September
+
+- Added the compact, SQL-paged purchase-order register with search, fixed sort
+  allow-lists and derived ordered/partially received/received filters. Stored
+  draft/confirmed/cancelled states and posting rules are unchanged.
+- Ported order records and preserved goods receipt, matched supplier bill,
+  physical return and GRNI reconciliation operations. Filter state survives
+  editor, receipt and cancellation actions. Cancellation errors appear inside
+  the open sheet as well as the page summary.
+- Full composer check passed: 273 tests, zero failures; lint 209 PHP files,
+  PHPStan and sample validation passed. Browser checks with JS on/off covered
+  list selection and filters, editor save/confirm, goods receipt preview and
+  posting, cancellation with stale-revision recovery, matched supplier bill
+  preview/post and billed goods return with linked supplier credit. List,
+  record, editor and goods receipt screens checked at 1366, 1024, 768 and 390px.
+- No additional migration, schema change or hosted change. Report/admin ports,
+  comprehensive accessibility/fidelity acceptance and packaging remain open.

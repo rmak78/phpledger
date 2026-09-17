@@ -81,6 +81,48 @@ function pl_list_purchase_orders(int $actorId, int $companyId, int $bookId): arr
     return array_map(static fn(array $row): array => pl_get_purchase_order($actorId, $companyId, $bookId, (int) $row['id']), $ids);
 }
 
+/** Receipt progress is a display state; the stored draft/confirmed/cancelled state is unchanged. */
+function pl_purchase_order_progress(array $order): string
+{
+    if ($order['status']!=='confirmed') { return $order['status']; }
+    $received=false; $remaining=false;
+    foreach ($order['lines'] as $line) {
+        $received=$received || bccomp($line['received_quantity'],'0',4)>0;
+        $remaining=$remaining || bccomp($line['remaining_quantity'],'0',4)>0;
+    }
+    return !$remaining?'received':($received?'partial':'ordered');
+}
+
+function pl_page_purchase_orders(int $actorId,int $companyId,int $bookId,array $filters): array
+{
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$filters): array {
+        pl_require_company_access($actorId,$companyId); pl_ledger_book($companyId,$bookId);
+        $orders=['date'=>['asc'=>'q.document_date ASC,q.id ASC','desc'=>'q.document_date DESC,q.id DESC'],'name'=>['asc'=>'q.party_name ASC,q.id DESC','desc'=>'q.party_name DESC,q.id DESC'],'amount'=>['asc'=>'q.total ASC,q.id DESC','desc'=>'q.total DESC,q.id DESC']];
+        $sort=$filters['sort']??'date'; $dir=$filters['dir']??'desc'; $status=$filters['status']??'all';
+        if (!is_string($sort) || !is_string($dir) || !isset($orders[$sort][$dir]) || !in_array($status,['all','draft','ordered','partial','received','cancelled'],true)) { throw new DomainException('Unsupported purchase order filter.'); }
+        $size=pl_table_size($filters['per_page']??25); $search=pl_ledger_text($filters['q']??'','Search',160,false);
+        $cte=<<<'SQL'
+WITH orders AS (
+ SELECT o.*,p.legal_name AS party_name,
+ (SELECT COALESCE(SUM(ROUND(l.quantity*l.unit_price,4)),0) FROM pl_purchase_order_lines l WHERE l.order_id=o.id) AS total,
+ EXISTS(SELECT 1 FROM pl_purchase_order_lines l JOIN pl_purchase_receipt_lines r ON r.order_line_id=l.id WHERE l.order_id=o.id) AS any_received,
+ EXISTS(SELECT 1 FROM pl_purchase_order_lines l WHERE l.order_id=o.id AND l.quantity>(SELECT COALESCE(SUM(r.quantity),0) FROM pl_purchase_receipt_lines r WHERE r.order_line_id=l.id)) AS has_remaining
+ FROM pl_purchase_orders o JOIN pl_parties p ON p.id=o.party_id AND p.company_id=o.company_id WHERE o.company_id=%i AND o.book_id=%i
+)
+SQL;
+        $where=<<<'SQL'
+ FROM orders q WHERE (%s='' OR LOCATE(%s,q.party_name)>0 OR LOCATE(%s,q.reference)>0 OR LOCATE(%s,CONCAT('PO-',LPAD(q.id,6,'0')))>0)
+ AND (%s='all' OR (%s='draft' AND q.status='draft') OR (%s='cancelled' AND q.status='cancelled')
+ OR (q.status='confirmed' AND ((%s='ordered' AND q.any_received=0) OR (%s='partial' AND q.any_received=1 AND q.has_remaining=1) OR (%s='received' AND q.has_remaining=0))))
+SQL;
+        $args=[$companyId,$bookId,$search,$search,$search,strtoupper($search),$status,$status,$status,$status,$status,$status];
+        $total=(int)DB::queryFirstField($cte.' SELECT COUNT(*)'.$where,...$args); $pages=max(1,(int)ceil($total/$size)); $page=min($pages,max(1,(int)($filters['page']??1)));
+        $ids=DB::queryFirstColumn($cte.' SELECT q.id'.$where.' ORDER BY '.$orders[$sort][$dir].' LIMIT %i OFFSET %i',...array_merge($args,[$size,($page-1)*$size]));
+        $rows=array_map(static fn($id):array=>pl_get_purchase_order($actorId,$companyId,$bookId,(int)$id),$ids);
+        return ['orders'=>$rows,'total'=>$total,'page'=>$page,'pages'=>$pages];
+    });
+}
+
 function pl_save_purchase_order(int $actorId, int $companyId, int $bookId, array $input, ?int $id = null, ?int $expectedRevision = null): array
 {
     $data = ['party_id' => pl_oi_id($input, 'party_id'), 'document_date' => pl_ledger_date(pl_ledger_text($input['date'] ?? null, 'Order date', 10)), 'currency' => pl_currency_code(pl_ledger_text($input['currency'] ?? null, 'Currency', 3)), 'reference' => pl_ledger_text($input['reference'] ?? '', 'Reference', 120, false), 'notes' => pl_ledger_text($input['notes'] ?? '', 'Notes', 2000, false)];

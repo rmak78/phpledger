@@ -149,6 +149,7 @@ function pl_list_filters(array $input, string $screen): array
         'ar','ap' => ['date','name','amount','due'],
         'parties' => ['name','country'],
         'inventory' => ['name','sku'],
+        'purchasing' => ['date','name','amount'],
         default => throw new DomainException('Unknown list.'),
     };
     $page = $input['page'] ?? '1';
@@ -176,6 +177,11 @@ function pl_list_filters(array $input, string $screen): array
         $kind=$input['kind']??'all'; $status=$input['status']??'all'; $date=$input['as_of']??gmdate('Y-m-d');
         if (!in_array($kind,['all','stock','nonstock'],true) || !in_array($status,['all','active','inactive'],true) || !is_string($date)) { throw new DomainException('Choose valid product filters.'); }
         $filters+=['kind'=>$kind,'status'=>$status,'as_of'=>pl_ledger_date($date)];
+    }
+    if ($screen==='purchasing') {
+        $status=$input['status']??'all'; $date=$input['as_of']??gmdate('Y-m-d');
+        if (!in_array($status,['all','draft','ordered','partial','received','cancelled'],true) || !is_string($date)) { throw new DomainException('Choose valid purchase order filters.'); }
+        $filters+=['status'=>$status,'as_of'=>pl_ledger_date($date)];
     }
     if (in_array($screen, ['transactions','general-journals'], true)) {
         $status = $input['status'] ?? ($screen === 'transactions' ? 'draft' : 'all');
@@ -227,6 +233,7 @@ function pl_list_query(int $actorId, int $companyId, int $bookId, string $screen
         'ar','ap' => pl_page_ar_documents($actorId,$companyId,$bookId,$screen,$filters),
         'parties' => pl_page_parties($actorId,$companyId,$bookId,$filters),
         'inventory' => pl_page_inventory_products($actorId,$companyId,$bookId,$filters),
+        'purchasing' => pl_page_purchase_orders($actorId,$companyId,$bookId,$filters),
         default => throw new DomainException('Unknown list.'),
     };
 }
