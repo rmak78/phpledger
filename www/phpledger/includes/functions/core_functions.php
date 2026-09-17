@@ -200,6 +200,15 @@ function pl_save_general_draft(int $actorId, int $companyId, int $bookId, array 
     });
 }
 
+/** Save the reviewed editor values and post atomically through the existing funnel. */
+function pl_save_and_post_general_draft(int $actorId, int $companyId, int $bookId, array $input, ?int $id = null, ?int $revision = null): array
+{
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $input, $id, $revision): array {
+        $draft = pl_save_general_draft($actorId, $companyId, $bookId, $input, $id, $revision);
+        return pl_post_general_draft($actorId, $companyId, $bookId, $draft['id'], $draft['revision']);
+    });
+}
+
 function pl_post_general_draft(int $actorId, int $companyId, int $bookId, int $id, int $revision): array
 {
     return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $id, $revision): array {

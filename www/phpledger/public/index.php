@@ -404,6 +404,15 @@ try {
             try {
                 pl_web_assert_scope($company, $_POST);
                 if ($path === '/general-journals/save') {
+                    if (pl_web_text($_POST, 'editor_action') === 'add_line' || isset($_POST['remove_line'])) {
+                        if (!pl_can_write($company)) { throw new DomainException('Your role can read journals but cannot edit them.'); }
+                        pl_form_failure($return, pl_web_journal_line_action($_POST), '', 200);
+                    }
+                    if (pl_web_text($_POST, 'editor_action') === 'post_reviewed_journal') {
+                        $draft = pl_save_and_post_general_draft($actorId, $companyId, $bookId, pl_web_general_input($_POST), $id ?: null, $id ? pl_web_id($_POST, 'revision') : null);
+                        pl_notice('General journal posted. Your account statements are updated.');
+                        pl_redirect(pl_url('/general-journals/detail', ['id' => $draft['id']]));
+                    }
                     $draft = pl_save_general_draft($actorId, $companyId, $bookId, pl_web_general_input($_POST), $id ?: null, $id ? pl_web_id($_POST, 'revision') : null);
                     pl_notice('Draft saved. Review the journal before posting.');
                 } elseif ($path === '/general-journals/post') {

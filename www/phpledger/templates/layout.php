@@ -14,10 +14,6 @@ $workspace = $user !== null && $company !== null && $view !== 'oauth-consent';
     <link rel="preload" href="<?= pl_e(pl_url('/assets/fonts/InterVariable.woff2')) ?>" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/app.css', ['v' => 'redesign-foundation'])) ?>">
 
-    <?php if ($view === 'general-editor'): ?><script src="<?= pl_e(pl_url('/assets/core-journal.js', ['v' => '0.1.2'])) ?>" defer></script><?php endif; ?>
-    <?php if ($view === 'pos'): ?><script src="<?= pl_e(pl_url('/assets/pos.js')) ?>" defer></script><?php endif; ?>
-
-
     <script src="<?= pl_e(pl_url('/assets/app.js', ['v' => '20260916-setup'])) ?>" defer></script>
 
 

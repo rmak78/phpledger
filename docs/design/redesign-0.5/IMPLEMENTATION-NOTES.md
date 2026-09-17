@@ -123,3 +123,21 @@ Targeted Home suite: 43 tests passed. Browser smoke captures at 1366x768,
 and drawer remain usable. Full verification and populated-state fold review
 remain release gates. The current AR/AP source-list service loads all documents;
 Home's use of that service needs review alongside list-performance work.
+
+## Journal editor checkpoint
+
+- New journal starts with one line. Add/remove works through POST/redirect with
+  JavaScript disabled and preserves incomplete fields; JavaScript enhances the
+  same controls. Four-decimal display totals retain the existing BigInt logic.
+- Editor posting saves and posts in one outer transaction through the existing
+  draft and central posting services. Invalid posting rolls back the editor save;
+  original saved values/revisions survive. Repeated new-entry submissions retain
+  the existing source identity and cannot post a duplicate.
+- Journal and POS behavior are folded into app.js; separate scripts and package
+  entries removed. CSP unchanged. POS cart/exact-cash/checkout smoke passed in an
+  isolated synthetic company after consolidation.
+- 32 targeted editor/core tests passed; full composer check passed with 247 tests,
+  zero failures. Browser JS/no-JS flows both added a second line, preserved entered
+  values and posted a synthetic balanced 12.3401 journal. Both desktop folds were
+  captured; table actions and totals are visible after compacting metadata.
+- The remaining daily-work record/list/editor states are not yet accepted.

@@ -91,10 +91,10 @@ function pl_notice(string $message): void
     $_SESSION['notice'] = $message;
 }
 
-function pl_form_failure(string $path, array $input, string $message): never
+function pl_form_failure(string $path, array $input, string $message, int $status = 422): never
 {
     unset($input['password'], $input['csrf']);
-    $_SESSION['form_failure'] = ['path' => $path, 'input' => $input, 'message' => $message];
+    $_SESSION['form_failure'] = ['path' => $path, 'input' => $input, 'message' => $message, 'status' => $status === 200 ? 200 : 422];
     pl_redirect($path);
 }
 
@@ -103,7 +103,7 @@ function pl_form_state(string $path): array
     $failure = $_SESSION['form_failure'] ?? null;
     if (is_array($failure) && ($failure['path'] ?? null) === $path) {
         unset($_SESSION['form_failure']);
-        http_response_code(422);
+        http_response_code(($failure['status'] ?? 422) === 200 ? 200 : 422);
         return $failure;
     }
     return ['input' => [], 'message' => ''];
@@ -247,6 +247,27 @@ function pl_can_write(array $company): bool
 }
 
 /** Convert browser rows to service input; blank spare rows are not accounting entries. */
+/** A no-JavaScript line action preserves incomplete fields without saving a draft. */
+function pl_web_journal_line_action(array $input): array
+{
+    $lines = $input['lines'] ?? [];
+    if (!is_array($lines) || count($lines) > 100 || count(array_filter($lines, 'is_array')) !== count($lines)) {
+        throw new DomainException('Use up to 100 journal lines.');
+    }
+    $lines = array_values($lines);
+    if (pl_web_text($input, 'editor_action') === 'add_line') {
+        if (count($lines) >= 100) { throw new DomainException('A journal supports up to 100 lines.'); }
+        $lines[] = [];
+    } elseif (isset($input['remove_line'])) {
+        $index = pl_web_text($input, 'remove_line');
+        if ($index === '' || !ctype_digit($index) || !array_key_exists((int) $index, $lines)) { throw new DomainException('Choose a current journal line.'); }
+        array_splice($lines, (int) $index, 1);
+    } else { throw new DomainException('Choose an add or remove line action.'); }
+    $input['lines'] = $lines ?: [[]];
+    unset($input['editor_action'], $input['remove_line']);
+    return $input;
+}
+
 function pl_web_general_input(array $input): array
 {
     $rows = $input['lines'] ?? [];
