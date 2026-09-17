@@ -36,9 +36,13 @@ after verification are approved. Mobile refinement is deferred; overflow safety 
 
 ## Status
 
-Implementation in progress. No release, production change, migration, or completed
-PHP screen rebuild is claimed by this record. Verification receipts will be added
-as checks actually complete. Publication is blocked until all required gates pass.
+Implementation remains in progress on codex/ui-redesign-0.6. The branch includes
+screen rebuilds and migrations 029-031; the latest full local suite passed 276
+tests with zero failures. The unified evidence index contains 33 screen states
+and 132 captures, with remaining state/visual/keyboard acceptance explicitly open.
+No 0.6 release or hosted update has been published. The checkpoint sections below
+are chronological evidence, not a claim that every release gate has passed.
+See AUDIT-CLOSURE.md for unresolved findings and publication limits.
 
 ## Foundation checkpoint, 17 September 2026
 
@@ -418,7 +422,7 @@ rates, or separately design code editing. The owner subsequently approved the re
   was changed. The tax-code prototype conflict above was subsequently resolved by the owner.
 
 
-## Tax settings and product editor checkpoint � 18 September
+## Tax settings and product editor checkpoint — 18 September
 
 - Owner accepted the recommended tax-code conflict resolution in this task:
   existing code/name/treatment/account definitions remain read-only; offer
@@ -624,3 +628,21 @@ rates, or separately design code editing. The owner subsequently approved the re
 - No new migration/schema, recipient messages or hosted changes. Publication
   remains gated on remaining fidelity, full route/state and accessibility review,
   audit closure, package upgrade/fresh-install checks and matching release assets.
+
+## Audit follow-up decision — 18 September
+
+The OAuth-invalid prototype repeats the old generic company-permissions advice.
+The reporting/admin audit explicitly identifies that advice as incorrect for an
+invalid or expired client request. Resolve this copy conflict with request-specific
+recovery (restart in the client), keeping validation and trusted-redirect checks
+unchanged. The same generic paragraph is inappropriate for a timed demo refresh;
+use a safe local retry and explain sample-session expiry instead. Opening-conversion
+empty states should link to the actual missing opening prerequisite.
+
+Validation for the recovery follow-up: malformed and expired OAuth requests retained
+HTTP 403 and the local origin at four widths; recovery links were not clipped.
+Opening-prerequisite, setup, opening preview/conversion, Help and 404/405 checks
+passed at both fold sizes with JS enabled/disabled. PHP lint passed. The actual
+expired demo generation was not induced; its new copy is not browser acceptance
+of that state. AUDIT-CLOSURE.md records every original audit finding's current
+closed/partial/open disposition, including the remaining publication gates.

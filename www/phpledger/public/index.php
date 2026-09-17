@@ -721,10 +721,10 @@ try {
 } catch (PlDemoUnavailable $error) {
     http_response_code(503);
     header('Retry-After: 10');
-    pl_render('error', ['title' => 'Your sample will be ready shortly', 'message' => $error->getMessage(), 'user' => null]);
+    pl_render('error', ['title' => 'Your sample will be ready shortly', 'message' => $error->getMessage(), 'user' => null, 'errorContext' => 'demo']);
 } catch (DomainException $error) {
     http_response_code(403);
-    pl_render('error', ['title' => 'This action is unavailable', 'message' => $error->getMessage(), 'user' => $user ?? null]);
+    pl_render('error', ['title' => $path === '/oauth/authorize' ? 'The connection request could not be completed' : 'This action is unavailable', 'message' => $error->getMessage(), 'user' => $user ?? null, 'errorContext' => $path === '/oauth/authorize' ? 'oauth' : 'general']);
 } catch (Throwable $error) {
     http_response_code(503);
     error_log('PHP Ledger request unavailable (' . get_class($error) . ').');
