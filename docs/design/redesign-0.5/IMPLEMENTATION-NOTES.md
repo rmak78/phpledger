@@ -108,3 +108,18 @@ or JavaScript errors; a new isolated fictional starter visitor was provisioned.
 The demo and sample-guide layouts now have an initial port. Historical guide and
 OAuth consent state coverage remain pending. Additional icons are unchanged MIT
 Tabler 3.46.0 assets from the prototype lockfile and explicitly included in packaging.
+
+## Home checkpoint
+
+`/home` now composes existing cash, receipt/expense draft, journal, AR/AP and
+open-item reports. A selected-company `/` and company selection lead to Home.
+Attention includes setup, drafts, due/overdue open items and unmatched rows in
+draft bank statements. Open-item/control discrepancies remain visible instead
+of being presented as reconciled. New bank attention counting is tested against
+the existing reconciliation summary and excludes cancelled statements.
+
+Targeted Home suite: 43 tests passed. Browser smoke captures at 1366x768,
+1024x768, 768x1024 and 390x844: no page overflow or JavaScript errors; palette
+and drawer remain usable. Full verification and populated-state fold review
+remain release gates. The current AR/AP source-list service loads all documents;
+Home's use of that service needs review alongside list-performance work.

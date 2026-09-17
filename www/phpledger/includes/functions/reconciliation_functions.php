@@ -1,6 +1,14 @@
 <?php
 declare(strict_types=1);
 
+/** Count the same unmatched statement rows shown by reconciliation, across draft statements. */
+function pl_bank_pending_review_count(int $actorId, int $companyId, int $bookId): int
+{
+    pl_require_company_access($actorId, $companyId);
+    pl_ledger_book($companyId, $bookId);
+    return (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_bank_statement_rows r JOIN pl_bank_statements s ON s.id=r.statement_id AND s.company_id=r.company_id AND s.book_id=r.book_id LEFT JOIN pl_bank_matches m ON m.row_id=r.id WHERE s.company_id=%i AND s.book_id=%i AND s.status=%s AND m.journal_line_id IS NULL', $companyId, $bookId, 'draft');
+}
+
 /** A statement balance may be overdrawn; transaction columns remain unsigned. */
 function pl_bank_signed_amount(string $value): string
 {

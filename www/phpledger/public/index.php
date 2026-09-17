@@ -40,7 +40,7 @@ header('Content-Type: text/html; charset=utf-8');
 header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'");
 $routes = [
     '/tax' => ['GET','POST'], '/ar' => ['GET','POST'], '/ap' => ['GET','POST'], '/parties' => ['GET','POST'], '/inventory' => ['GET','POST'], '/purchasing' => ['GET','POST'], '/opening-conversion' => ['GET','POST'],
-    '/' => ['GET'], '/login' => ['GET', 'POST'], '/logout' => ['POST'], '/start' => ['POST'],
+    '/' => ['GET'], '/home' => ['GET'], '/login' => ['GET', 'POST'], '/logout' => ['POST'], '/start' => ['POST'],
     '/companies' => ['GET'], '/company/select' => ['POST'], '/sample-chooser' => ['GET', 'POST'], '/onboarding' => ['GET', 'POST'],
     '/setup/review' => ['GET', 'POST'], '/transactions' => ['GET'], '/transactions/detail' => ['GET'],
     '/opening-balances' => ['GET', 'POST'], '/periods' => ['GET', 'POST'], '/bank-reconciliation' => ['GET', 'POST'],
@@ -75,7 +75,7 @@ try {
     $actorId = pl_current_user_id();
     $user = $actorId ? DB::queryFirstRow('SELECT id, display_name, email FROM pl_users WHERE id = %i', $actorId) : null;
     if ($path === '/') {
-        pl_redirect($actorId ? (pl_demo_enabled() ? '/transactions' : '/companies') : '/login');
+        pl_redirect($actorId ? (!empty($_SESSION['company_id']) ? '/home' : '/companies') : '/login');
     }
     if ($method === 'POST') {
         pl_require_post();
@@ -128,7 +128,7 @@ try {
     if ($path === '/company/select') {
         $selected = pl_company_context($actorId, pl_web_id($_POST, 'company_id'));
         $_SESSION['company_id'] = (int) $selected['id'];
-        pl_redirect('/transactions');
+        pl_redirect('/home');
     }
     if ($path === '/companies') {
         if (pl_demo_enabled()) {
@@ -321,6 +321,10 @@ try {
     $company = pl_web_context($actorId);
     $companyId = (int) $company['id'];
     $bookId = (int) $company['book_id'];
+    if ($path === '/home') {
+        $overview = pl_home_overview($actorId, $companyId, $bookId, gmdate('Y-m-d'));
+        pl_render('home', ['title' => 'Home', 'user' => $user, 'company' => $company, 'overview' => $overview]);
+    }
     if ($path === '/sample-guide') {
         $pack = pl_company_demo_pack($actorId, $companyId, $bookId);
         if ($pack === null) { throw new DomainException('This guide belongs to a selected sample. Your existing company has not been changed.'); }

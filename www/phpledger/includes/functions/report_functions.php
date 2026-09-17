@@ -1,6 +1,44 @@
 <?php
 declare(strict_types=1);
 
+/** Home is a read-only composition of the same reports and source lists. */
+function pl_home_overview(int $actorId, int $companyId, int $bookId, string $asOf): array
+{
+    pl_require_company_access($actorId, $companyId);
+    $book = pl_ledger_book($companyId, $bookId);
+    $asOf = pl_ledger_date($asOf);
+    $receivables = pl_ar_ap_open_items($actorId, $companyId, $bookId, 'receivable', $asOf);
+    $payables = pl_ar_ap_open_items($actorId, $companyId, $bookId, 'payable', $asOf);
+    $dueThrough = (new DateTimeImmutable($asOf))->modify('+3 days')->format('Y-m-d');
+    $drafts = pl_list_documents($actorId, $companyId, $bookId, ['status' => 'draft', 'page_size' => 25]);
+    $journals = pl_list_general_drafts($actorId, $companyId, $bookId, 1, ['status' => 'draft', 'page_size' => 25]);
+    $recent = pl_list_documents($actorId, $companyId, $bookId, ['page_size' => 25]);
+    $activity = [];
+    foreach ($recent['documents'] as $row) {
+        $activity[] = ['id'=>$row['id'], 'date'=>$row['date'], 'number'=>$row['number'], 'description'=>$row['counterparty'], 'kind'=>ucfirst($row['kind']), 'amount'=>$row['amount'], 'currency'=>$book['currency'], 'status'=>$row['status'], 'path'=>'/transactions/detail'];
+    }
+    foreach (pl_list_general_drafts($actorId, $companyId, $bookId, 1, ['page_size'=>25])['rows'] as $row) {
+        $activity[] = ['id'=>$row['id'], 'date'=>$row['document_date'], 'number'=>$row['number'], 'description'=>$row['description'], 'kind'=>'Journal', 'amount'=>$row['totals']['debit'], 'currency'=>$book['currency'], 'status'=>$row['status'], 'path'=>'/general-journals/detail'];
+    }
+    $arDrafts = 0; $apDrafts = 0;
+    foreach (pl_list_ar_documents($actorId, $companyId, $bookId)['documents'] as $row) {
+        $sales = in_array($row['kind'], ['invoice','customer_credit'], true);
+        if ($row['status'] === 'draft') { if ($sales) { $arDrafts++; } else { $apDrafts++; } }
+        $activity[] = ['id'=>$row['id'], 'date'=>$row['date'], 'number'=>$row['number'], 'description'=>$row['party']['legal_name'], 'kind'=>ucfirst(str_replace('_',' ',$row['kind'])), 'amount'=>$row['total'], 'currency'=>$row['currency'], 'status'=>$row['reversal_journal_id'] !== null ? 'reversed' : $row['status'], 'path'=>$sales ? '/ar' : '/ap'];
+    }
+    usort($activity, static fn (array $a, array $b): int => [$b['date'],$b['number']] <=> [$a['date'],$a['number']]);
+    return [
+        'as_of' => $asOf, 'currency' => $book['currency'],
+        'cash' => pl_cash_balance($actorId, $companyId, $bookId, $asOf),
+        'drafts' => $drafts, 'journal_drafts' => $journals['total'], 'ar_drafts'=>$arDrafts, 'ap_drafts'=>$apDrafts,
+        'receivables' => $receivables, 'payables' => $payables,
+        'overdue_invoices' => array_values(array_filter($receivables['items'], static fn (array $item): bool => $item['age_days'] > 0)),
+        'bills_due' => array_values(array_filter($payables['items'], static fn (array $item): bool => $item['due_date'] !== null && $item['due_date'] <= $dueThrough)),
+        'bank_lines' => pl_bank_pending_review_count($actorId, $companyId, $bookId),
+        'recent' => array_slice($activity, 0, 5),
+    ];
+}
+
 /** Posted income and expense movements for an inclusive business-date range. */
 function pl_profit_loss(int $actorId, int $companyId, int $bookId, string $from, string $to): array
 {

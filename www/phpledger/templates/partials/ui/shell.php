@@ -64,6 +64,7 @@ $quickCreate = [
         </div>
     </details>
     <nav class="shell-nav" aria-label="Workspace">
+        <a class="nav-item" href="<?= pl_e(pl_url('/home')) ?>" title="Home"<?= $view === 'home' ? ' aria-current="page"' : '' ?>><?= pl_icon('home') ?><span>Home</span></a>
         <?php foreach ($navGroups as $group => $items): ?>
             <?php $items = array_filter($items, static fn (array $item): bool => (bool)$item[4]); if ($items === []) { continue; } ?>
             <?php if ($group === 'Setup'): ?><details class="nav-group-collapsible"<?= in_array($view, ['accounts','tax','opening-balances','opening-conversion','periods','modules','connections'], true) ? ' open' : '' ?>><summary class="nav-group-summary"><span>Setup</span><?= pl_icon('chevron-down') ?></summary><div class="nav-group-body"><?php else: ?><p class="nav-group-label"><?= pl_e($group) ?></p><?php endif; ?>

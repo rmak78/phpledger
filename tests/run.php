@@ -50,6 +50,10 @@ $suites = ['auth_test.php', 'ledger_test.php', 'concurrency_test.php', 'document
 $suites = array_merge($suites, ['currency_test.php', 'party_test.php', 'outbound_test.php', 'open_item_test.php', 'correction_test.php']);
 $suites = array_merge($suites, ['ar_ap_test.php','inventory_test.php','purchasing_test.php','opening_conversion_test.php','tax_test.php','starter_module_test.php','starter_demo_test.php','shell_test.php']);
 $suites[] = 'list_test.php';
+$suites[] = 'home_test.php';
+if (($argv[1] ?? '') === '--suite=home') {
+    $suites = ['ledger_test.php', 'concurrency_test.php', 'document_test.php', 'reconciliation_test.php', 'home_test.php'];
+}
 if (($argv[1] ?? '') === '--suite=starter') {
     $suites = ['ledger_test.php','concurrency_test.php','ar_ap_test.php','inventory_test.php','purchasing_test.php','opening_test.php','opening_conversion_test.php','tax_test.php','starter_module_test.php','starter_demo_test.php'];
 }
