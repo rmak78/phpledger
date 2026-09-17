@@ -2,6 +2,24 @@
 declare(strict_types=1);
 
 /** Web presentation helpers. Financial rules remain in the existing services. */
+function pl_web_unavailable_page(int $status): void
+{
+    // Route and dependency failures must render without opening a database/session.
+    require_once __DIR__ . '/security_functions.php';
+    require_once dirname(__DIR__, 2) . '/templates/partials/ui/components.php';
+    $title = match ($status) {
+        404 => "We couldn't find that page.",
+        405 => 'That action needs a different request.',
+        default => 'PHP Ledger is temporarily unavailable.',
+    };
+    $message = match ($status) {
+        404 => 'It may have moved, or the link may be out of date. Nothing was changed in your books.',
+        405 => "This link only works when it is submitted from its own form. Go back and use the on-screen button instead of visiting this address directly. Nothing was saved.",
+        default => 'Your request could not be completed. Please try again. If this is a new installation, check its setup and migration status.',
+    };
+    require dirname(__DIR__, 2) . '/templates/partials/ui/unavailable.php';
+}
+
 function pl_web_text(array $source, string $key, string $default = ''): string
 {
     return isset($source[$key]) && is_string($source[$key]) ? trim($source[$key]) : $default;
@@ -199,7 +217,13 @@ function pl_icon(string $name): string
 {
     $allowed = ['search', 'plus', 'chevron-down', 'chevron-left', 'chevron-right', 'arrow-left',
         'arrow-right', 'logout', 'building', 'check', 'x', 'info-circle', 'alert-circle',
-        'file-text', 'book', 'adjustments-horizontal', 'external-link', 'arrow-back-up', 'receipt', 'list', 'menu-2'];
+        'file-text', 'book', 'adjustments-horizontal', 'external-link', 'arrow-back-up', 'receipt', 'list', 'menu-2',
+        'alert-triangle', 'arrows-shuffle', 'book-2', 'briefcase', 'building-bank', 'building-cog', 'building-store',
+        'calendar', 'cash', 'cash-register', 'chart-line', 'chef-hat', 'circle-check', 'clipboard-check', 'clipboard-list',
+        'copy', 'diamond', 'dots-vertical', 'download', 'file-check', 'file-dollar', 'file-invoice', 'filter', 'flag-2',
+        'flask', 'git-branch', 'grid-dots', 'help-circle', 'history', 'home', 'key', 'layout-sidebar-left-collapse', 'link',
+        'list-check', 'list-details', 'lock', 'package', 'pencil', 'printer', 'receipt-2', 'receipt-refund', 'receipt-tax',
+        'refresh', 'report', 'rocket', 'scale', 'shopping-bag', 'stethoscope', 'trash', 'trending-up', 'truck', 'truck-delivery', 'user-plus', 'users'];
     if (!in_array($name, $allowed, true)) {
         return '';
     }

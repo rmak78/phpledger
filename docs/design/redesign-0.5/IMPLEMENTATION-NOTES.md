@@ -71,3 +71,40 @@ all-route/state captures, keyboard/contrast review by pattern, 5,000-row indexed
 query-plan evidence, fresh install and 0.5 upgrade, package content acceptance,
 release documentation/media, publication and live receipts. No migration or live
 system change has been made.
+
+## Access/setup checkpoint, 17 September 2026
+
+- Ported the six-step onboarding frame, sample chooser, setup-review account
+  mappings, OAuth consent, Help task cards, and error-page presentation. Opening
+  balances now uses a bounded account table and sticky preview action; opening
+  conversion uses mapping and control-reconciliation tables. These are partial
+  lane changes, not acceptance of every access/setup state.
+- Fixed native select text clipping caused by inherited legacy block padding.
+  Isolated shell-template variables from page data after browser testing exposed
+  a navigation loop overwriting the opening-conversion item list. A rendering
+  regression test protects the boundary.
+- Full composer check after helper integration: 176 PHP files, PHPStan clean,
+  sample validation clean, 241 tests passed. Subsequent error/rendering changes:
+  178 PHP files lint clean and all four shell tests passed. The next full check
+  must include the added regression test and error-page adapter.
+- Local synthetic browser checks at both desktop folds, with JavaScript on and
+  off: setup review, opening balances and zero preview, opening-document mappings
+  and reconciled preview, Help, 404 and 405. No horizontal overflow; marked actions
+  within the viewport. Login, businesses, chooser and onboarding through preview
+  also captured at both folds with no console errors. Confirmation was not
+  submitted in these browser passes; service tests retain the accounting checks.
+- `tests/redesign_browser_fixture.php` provides isolated synthetic setup states
+  and refuses any database except the dedicated test database. Browser evidence
+  remains local under output/playwright; no real customer data was used.
+- Outstanding in this lane: complete demo/sample-guide port, OAuth browser
+  consent evidence, complete field-error mapping, confirmed setup/conversion
+  states and portrait coverage. Existing compatibility CSS is still temporary.
+
+Follow-up verification: full composer check passed with 242 tests, zero failures,
+including the shell-variable regression and error adapter. Subsequent sample-guide,
+demo, and icon changes passed PHP lint (178 files). Local demo welcome and starter
+guide were captured at 1366, 1024, 768 and 390 pixels with no page-width overflow
+or JavaScript errors; a new isolated fictional starter visitor was provisioned.
+The demo and sample-guide layouts now have an initial port. Historical guide and
+OAuth consent state coverage remain pending. Additional icons are unchanged MIT
+Tabler 3.46.0 assets from the prototype lockfile and explicitly included in packaging.

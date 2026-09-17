@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__ . '/partials/ui/components.php';
-$workspace = $user !== null && $company !== null;
+$workspace = $user !== null && $company !== null && $view !== 'oauth-consent';
 ?>
 <!doctype html>
 <html lang="en" data-screen="<?= pl_e($view) ?>">
@@ -24,7 +24,12 @@ $workspace = $user !== null && $company !== null;
 </head>
 <body class="view-<?= pl_e($view) ?>">
 <a class="skip-link" href="#main">Skip to content</a>
-<?php if ($workspace): require __DIR__ . '/partials/ui/shell.php'; ?>
+<?php if ($workspace):
+    // Keep navigation iteration variables out of the view's extracted data.
+    (static function (array $user, array $company, string $view, string $title): void {
+        require __DIR__ . '/partials/ui/shell.php';
+    })($user, $company, $view, $title);
+?>
 <div class="shell-strips">
 <?php if (pl_demo_enabled() && $view !== 'error'): $demoState = DB::queryFirstRow('SELECT next_reset_at FROM pl_demo_state WHERE id = 1'); ?>
 <div class="demo-banner"><span><strong>Public demo</strong> · Separate synthetic data for each visitor. Destructive actions are disabled.</span><span>Resets <time data-local-time datetime="<?= pl_e(str_replace(' ', 'T', $demoState['next_reset_at']) . 'Z') ?>"><?= pl_e($demoState['next_reset_at']) ?> UTC</time> · <span data-demo-expiry="<?= pl_e(str_replace(' ', 'T', $demoState['next_reset_at']) . 'Z') ?>"><?= max(0, (int) ceil((strtotime($demoState['next_reset_at'] . ' UTC') - time()) / 60)) ?> minutes remaining</span></span></div>

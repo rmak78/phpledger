@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 /** Presentation only. Callbacks render trusted templates; all text is escaped here. */
-function pl_ui_page_header(string $title, string $description = '', ?callable $actions = null): void
+function pl_ui_page_header(string $title, string $description = '', ?callable $actions = null, string $id = ''): void
 {
-    echo '<header class="page-header"><div><h1 class="page-title">' . pl_e($title) . '</h1>';
+    echo '<header class="page-header"><div><h1 class="page-title"' . ($id !== '' ? ' id="' . pl_e($id) . '"' : '') . '>' . pl_e($title) . '</h1>';
     if ($description !== '') { echo '<p class="text-sm text-ink-muted mt-1">' . pl_e($description) . '</p>'; }
     echo '</div><div class="page-header-actions" data-fold="primary actions">';
     if ($actions !== null) { $actions(); }

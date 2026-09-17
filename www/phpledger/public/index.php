@@ -59,9 +59,7 @@ if (!isset($routes[$path]) || !in_array($method, $routes[$path], true)) {
     if (isset($routes[$path])) {
         header('Allow: ' . implode(', ', $routes[$path]));
     }
-    echo '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PHP Ledger</title><link rel="stylesheet" href="' . htmlspecialchars(pl_url('/assets/app.css'), ENT_QUOTES, 'UTF-8') . '"><main class="standalone"><h1>'
-        . (isset($routes[$path]) ? 'That action needs a different request.' : 'Page not found.')
-        . '</h1><p><a href="' . htmlspecialchars(pl_url('/'), ENT_QUOTES, 'UTF-8') . '">Return to PHP Ledger</a></p></main></html>';
+    pl_web_unavailable_page(isset($routes[$path]) ? 405 : 404);
     exit;
 }
 
@@ -687,5 +685,5 @@ try {
 } catch (Throwable $error) {
     http_response_code(503);
     error_log('PHP Ledger request unavailable (' . get_class($error) . ').');
-    echo '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PHP Ledger unavailable</title><link rel="stylesheet" href="' . htmlspecialchars(pl_url('/assets/app.css'), ENT_QUOTES, 'UTF-8') . '"><main class="standalone"><h1>PHP Ledger is temporarily unavailable.</h1><p>Your request could not be completed. Please try again. If this is a new installation, check its setup and migration status.</p><a href="' . htmlspecialchars(pl_url('/'), ENT_QUOTES, 'UTF-8') . '">Try again</a></main></html>';
+    pl_web_unavailable_page(503);
 }

@@ -236,12 +236,34 @@ a {
 
   body { margin: 0; background: var(--canvas); color: var(--ink); font-family: var(--font-sans); font-size: 14px; line-height: 20px; }
   [hidden] { display: none !important; }
+  .btn-primary > img.icon { filter: brightness(0) invert(1); }
+  .auth-panel .page-header { position: static; background: transparent; padding-block: 0 .75rem; }
   .input, .select { min-height: var(--control-h); height: var(--control-h); }
   .auth-panel h1 { margin: 0; }
   .auth-panel p { line-height: inherit; }
   #main.shell-main { width: auto; max-width: none; margin: 0; padding: 0; }
   .auth-shell #main { width: 100%; max-width: none; margin: 0; padding: 0; }
   .auth-card.auth-card-wide { max-width: 1080px; }
+  .ui-wizard-grid { display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 1.75rem; }
+  .auth-panel .page-heading { margin-block-end: 1.25rem; padding: 0; }
+  .auth-panel .page-heading h1 { font-size: 20px; }
+  .ui-wizard-grid .setup-step-panel { max-width: none; margin: 0; padding: 0; }
+  .ui-wizard-grid .setup-preview-panel, .ui-wizard-grid .setup-chart-panel { margin-block-end: 1rem; }
+  .ui-wizard-grid .setup-summary { gap: .5rem 1rem; }
+  .ui-role-mappings { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .sample-guide .sample-journeys { display: flex; flex-direction: column; gap: .625rem; }
+  .sample-guide .sample-exercise { margin-block: 0; padding: 1rem; }
+  .sample-exercise > summary { cursor: pointer; }
+  .ui-wizard-grid .setup-summary dd { font-size: .8125rem; }
+  .ui-wizard-grid .panel-actions { padding-inline: 0; }
+  .ui-wizard-grid .setup-option { padding: .625rem; margin-block: .25rem; }
+  .ui-wizard-grid p { font-size: .8125rem; }
+  @media (max-width: 767px) {
+    .ui-wizard-grid { grid-template-columns: minmax(0, 1fr); }
+    .ui-role-mappings { grid-template-columns: minmax(0, 1fr); }
+    .ui-wizard-grid > aside { overflow-x: auto; }
+    .ui-wizard-grid .stepper { flex-direction: row; gap: .75rem; }
+  }
   .shell-main-inner > .page-wrap { padding-inline: 0; }
   .shell-main-inner .page-heading { margin-block: 1.25rem; }
   .shell-main-inner .page-heading h1 { font-size: 20px; }
@@ -356,6 +378,7 @@ a {
     width: 100%;
     height: var(--control-h);
     padding-inline: .625rem;
+    padding-block: 0;
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-control);
     background: var(--surface);
