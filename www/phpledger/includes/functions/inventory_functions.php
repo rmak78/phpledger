@@ -94,6 +94,21 @@ function pl_list_inventory_products(int $actorId, int $companyId, int $bookId): 
     return array_map(static fn (array $row): array => pl_get_inventory_product($actorId, $companyId, $bookId, (int) $row['id']), $rows);
 }
 
+/** Product master paging; financial valuation remains in the existing stock service. */
+function pl_page_inventory_products(int $actorId,int $companyId,int $bookId,array $filters): array
+{
+    pl_require_company_access($actorId,$companyId); pl_ledger_book($companyId,$bookId);
+    $orders=['name'=>['asc'=>'name ASC,id ASC','desc'=>'name DESC,id ASC'],'sku'=>['asc'=>'sku ASC,id ASC','desc'=>'sku DESC,id ASC']];
+    $sort=$filters['sort']??'name'; $dir=$filters['dir']??'asc'; $kind=$filters['kind']??'all'; $status=$filters['status']??'all';
+    if (!is_string($sort) || !is_string($dir) || !isset($orders[$sort][$dir]) || !in_array($kind,['all','stock','nonstock'],true) || !in_array($status,['all','active','inactive'],true)) { throw new DomainException('Unsupported product list filter.'); }
+    $size=pl_table_size($filters['per_page']??25); $search=pl_ledger_text($filters['q']??'','Search',160,false);
+    $where=' FROM pl_products WHERE company_id=%i AND book_id=%i AND (%s=\'all\' OR kind=%s) AND (%s=\'all\' OR (%s=\'active\' AND is_active=1) OR (%s=\'inactive\' AND is_active=0)) AND (%s=\'\' OR LOCATE(%s,name)>0 OR LOCATE(%s,sku)>0)';
+    $args=[$companyId,$bookId,$kind,$kind,$status,$status,$status,$search,$search,$search];
+    $total=(int)DB::queryFirstField('SELECT COUNT(*)'.$where,...$args); $pages=max(1,(int)ceil($total/$size)); $page=min($pages,max(1,(int)($filters['page']??1)));
+    $rows=DB::query('SELECT id,sku,name,kind,base_unit,is_active'.$where.' ORDER BY '.$orders[$sort][$dir].' LIMIT %i OFFSET %i',...array_merge($args,[$size,($page-1)*$size]));
+    return ['rows'=>$rows,'total'=>$total,'page'=>$page,'pages'=>$pages];
+}
+
 function pl_inventory_balance(int $actorId, int $companyId, int $bookId, int $productId, ?string $asOf = null): array
 {
     pl_get_inventory_product($actorId, $companyId, $bookId, $productId);

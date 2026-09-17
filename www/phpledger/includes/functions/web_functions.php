@@ -148,6 +148,7 @@ function pl_list_filters(array $input, string $screen): array
         'bank' => ['date','reference','money_in','money_out','match'],
         'ar','ap' => ['date','name','amount','due'],
         'parties' => ['name','country'],
+        'inventory' => ['name','sku'],
         default => throw new DomainException('Unknown list.'),
     };
     $page = $input['page'] ?? '1';
@@ -158,8 +159,8 @@ function pl_list_filters(array $input, string $screen): array
         }
     }
     if ((int)$page > 100000 || !in_array((int)$size, [25,50,100], true)) { throw new DomainException('Choose 25, 50 or 100 rows per page.'); }
-    $sort = $input['sort'] ?? ($screen === 'parties' ? 'name' : 'date');
-    $direction = $input['dir'] ?? (in_array($screen,['account','parties'],true) ? 'asc' : 'desc');
+    $sort = $input['sort'] ?? (in_array($screen,['parties','inventory'],true) ? 'name' : 'date');
+    $direction = $input['dir'] ?? (in_array($screen,['account','parties','inventory'],true) ? 'asc' : 'desc');
     if (!is_string($sort) || !in_array($sort, $sorts, true) || !in_array($direction, ['asc','desc'], true)) {
         throw new DomainException('Unsupported list order.');
     }
@@ -170,6 +171,11 @@ function pl_list_filters(array $input, string $screen): array
         $role=$input['role']??'all';
         if (!in_array($role,['all','customer','vendor'],true)) { throw new DomainException('Choose customers, suppliers or all parties.'); }
         $filters['role']=$role;
+    }
+    if ($screen==='inventory') {
+        $kind=$input['kind']??'all'; $status=$input['status']??'all'; $date=$input['as_of']??gmdate('Y-m-d');
+        if (!in_array($kind,['all','stock','nonstock'],true) || !in_array($status,['all','active','inactive'],true) || !is_string($date)) { throw new DomainException('Choose valid product filters.'); }
+        $filters+=['kind'=>$kind,'status'=>$status,'as_of'=>pl_ledger_date($date)];
     }
     if (in_array($screen, ['transactions','general-journals'], true)) {
         $status = $input['status'] ?? ($screen === 'transactions' ? 'draft' : 'all');
@@ -220,6 +226,7 @@ function pl_list_query(int $actorId, int $companyId, int $bookId, string $screen
         'bank' => pl_bank_get_statement($actorId, $companyId, $bookId, pl_web_id($input, 'statement_id'), $options),
         'ar','ap' => pl_page_ar_documents($actorId,$companyId,$bookId,$screen,$filters),
         'parties' => pl_page_parties($actorId,$companyId,$bookId,$filters),
+        'inventory' => pl_page_inventory_products($actorId,$companyId,$bookId,$filters),
         default => throw new DomainException('Unknown list.'),
     };
 }
@@ -281,15 +288,16 @@ function pl_web_journal_line_action(array $input): array
     return pl_web_line_action($input);
 }
 
-function pl_web_line_action(array $input): array
+function pl_web_line_action(array $input,int $limit=100): array
 {
+    if ($limit<1 || $limit>500) { throw new DomainException('Invalid line limit.'); }
     $lines = $input['lines'] ?? [];
-    if (!is_array($lines) || count($lines) > 100 || count(array_filter($lines, 'is_array')) !== count($lines)) {
-        throw new DomainException('Use up to 100 document lines.');
+    if (!is_array($lines) || count($lines) > $limit || count(array_filter($lines, 'is_array')) !== count($lines)) {
+        throw new DomainException('Use up to '.$limit.' document lines.');
     }
     $lines = array_values($lines);
     if (pl_web_text($input, 'editor_action') === 'add_line') {
-        if (count($lines) >= 100) { throw new DomainException('A document supports up to 100 lines.'); }
+        if (count($lines) >= $limit) { throw new DomainException('A document supports up to '.$limit.' lines.'); }
         $lines[] = [];
     } elseif (isset($input['remove_line'])) {
         $index = pl_web_text($input, 'remove_line');

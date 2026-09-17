@@ -1,5 +1,26 @@
 <?php
 declare(strict_types=1);
+require_once dirname(__DIR__).'/www/phpledger/includes/functions/web_functions.php';
+
+test('product register pages and filters without changing valuation scope',function(): void {
+    $f=inventory_fixture();
+    for ($i=0;$i<26;$i++) {
+        $input=inventory_product_input($f); $input['name']='Paged '.str_pad((string)$i,2,'0',STR_PAD_LEFT); $input['sku']='PAGE-'.$i;
+        $input['is_active']=$i%2===0; pl_save_inventory_product($f['actor_id'],$f['company_id'],$f['book_id'],$input);
+    }
+    $args=[$f['actor_id'],$f['company_id'],$f['book_id']];
+    pl_inventory_receive(...array_merge($args,[inventory_move_input($f,'3','10')]));
+    $before=pl_inventory_valuation(...$args);
+    $run=fn(array $q):array=>pl_list_query(...array_merge($args,['inventory',$q]));
+    $first=$run(['q'=>'Paged']); $last=$run(['q'=>'Paged','page'=>'999']);
+    assert_same(26,$first['total']); assert_same(25,count($first['rows'])); assert_same(2,$last['page']); assert_same(1,count($last['rows']));
+    assert_same('Paged 25',$last['rows'][0]['name']); assert_same(13,$run(['q'=>'Paged','status'=>'inactive'])['total']);
+    assert_same(0,$run(['kind'=>'nonstock'])['total']); assert_same(0,$run(['q'=>'%'])['total']);
+    assert_same('Paged 25',$run(['q'=>'Paged','dir'=>'desc'])['rows'][0]['name']);
+    foreach ([['sort'=>'name DESC'],['kind'=>'service'],['status'=>'posted'],['as_of'=>'invalid']] as $bad) { assert_throws(fn()=>$run($bad),DomainException::class); }
+    assert_same($before,pl_inventory_valuation(...$args));
+    $other=ledger_fixture(); assert_throws(fn()=>pl_page_inventory_products($other['actor_id'],$f['company_id'],$f['book_id'],[]),DomainException::class);
+});
 
 function inventory_fixture(): array
 {

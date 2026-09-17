@@ -444,3 +444,27 @@ rates, or separately design code editing. The owner subsequently approved the re
   manual stock receipt, action visibility and no page overflow. Sheet position,
   Escape and focus return were checked; screenshots were visually inspected.
   No migration or hosted change in this checkpoint.
+
+## Inventory register and opening-entry checkpoint — 18 September
+
+- Replaced the remaining inventory register with the approved split list/detail
+  pattern: SQL paging, search, stock/non-stock and active-state filters, a dated
+  valuation, protected account details, movement/source links and stock-count
+  actions. Page/search filters never narrow the authoritative full stock-to-ledger
+  reconciliation; the screen states that scope explicitly.
+- Validated URL filters survive product changes, manual stock actions, count
+  preview/confirmation and opening conversion. Existing module and owner guards
+  remain in the service/controller. Reads remain available when Inventory is off.
+- Opening stock now starts with one row and uses the shared server-side add/remove
+  helper with its existing 500-row opening limit. Ordinary editors retain their
+  100-row limit. Row edits clear a prior opening preview. Invalid values remain
+  visible, and confirmation still links existing opening value without reposting.
+- Full composer check: 272 tests, zero failures; lint 206 files, PHPStan and sample
+  validation passed. Subsequent row-control browser checks and lint passed.
+  Product list/editor/count checks passed with JS on/off at both desktop folds,
+  portrait and phone widths. Opening checks passed one-row defaults, add/remove,
+  invalid-value retention, rejection of a value mismatch, preview, confirmation
+  and filter retention. Both synthetic conversions kept exactly one original
+  opening journal. Screenshots of the list/detail and editor were inspected.
+- No additional migration or hosted change. Full route/accessibility acceptance,
+  remaining purchasing/report/admin ports and final release packaging are pending.

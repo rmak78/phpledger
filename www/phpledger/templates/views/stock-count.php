@@ -1,14 +1,14 @@
 <?php declare(strict_types=1); ?>
 <div class="py-5"><section class="rounded-panel border border-border bg-surface">
-<?php pl_ui_document_header('Stock count · '.$product['name'],'draft',static function () use ($product,$preview): void { ?>
-<a class="btn btn-ghost" href="<?= pl_e(pl_url('/inventory',['id'=>$product['id']])) ?>">Cancel</a>
+<?php pl_ui_document_header('Stock count · '.$product['name'],'draft',static function () use ($product,$preview,$filters): void { ?>
+<a class="btn btn-ghost" href="<?= pl_e(pl_url('/inventory',['id'=>$product['id'],'return_filters'=>$filters])) ?>">Cancel</a>
 <button class="btn btn-secondary" form="stock-count-editor" name="action" value="count_preview">Update count preview</button>
 <?php if ($preview): ?><button class="btn btn-primary" form="stock-count-editor" name="action" value="count_confirm" data-review-confirm>Confirm stock count</button><?php endif; ?>
 <?php }); ?>
 <form id="stock-count-editor" class="doc-body" method="post" action="<?= pl_e(pl_url('/inventory')) ?>" data-reviewed-form>
-<?= pl_csrf_field() ?><?= pl_scope_fields($company) ?>
+<?php pl_ui_return_filters($filters); ?><?= pl_csrf_field() ?><?= pl_scope_fields($company) ?>
 <?php foreach (['id'=>$product['id'],'expected_quantity'=>$input['expected_quantity']??$balance['quantity'],'request_key'=>$input['request_key']??bin2hex(random_bytes(20))] as $key=>$value) { pl_starter_hidden($key,$value); } ?>
-<?php if ($form['message']!==''): ?><div class="alert alert-danger" role="alert" tabindex="-1" data-form-error><?= pl_e($form['message']) ?><p>Your values are retained. <a href="<?= pl_e(pl_url('/inventory',['id'=>$product['id'],'count'=>'1'])) ?>">Reload current stock</a> if the recorded quantity changed.</p></div><?php endif; ?>
+<?php if ($form['message']!==''): ?><div class="alert alert-danger" role="alert" tabindex="-1" data-form-error><?= pl_e($form['message']) ?><p>Your values are retained. <a href="<?= pl_e(pl_url('/inventory',['id'=>$product['id'],'count'=>'1','return_filters'=>$filters])) ?>">Reload current stock</a> if the recorded quantity changed.</p></div><?php endif; ?>
 <p class="text-xs text-ink-muted">Use Purchasing for ordered goods and supplier returns. A count needs an explicit counterpart account and reason, and adjusts quantity and value together.</p>
 <section><h2 class="section-title mb-2">Recorded vs. counted</h2><div class="grid grid-cols-2 md:grid-cols-4 gap-4 rounded-panel border border-border p-4" data-review-preview>
 <?php foreach (['Recorded'=>$preview['recorded']['quantity']??$balance['quantity'],'Counted'=>$preview['counted_quantity']??'—','Difference'=>$preview['effect']['quantity_delta']??'—','Value effect ('.$company['currency'].')'=>$preview['effect']['value_delta']??'—'] as $label=>$value): ?><div><span class="text-xs text-ink-muted"><?= pl_e($label) ?></span><p class="text-xl font-semibold amount mt-1"><?= pl_e($value) ?></p></div><?php endforeach; ?>

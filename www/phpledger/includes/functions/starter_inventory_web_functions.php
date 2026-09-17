@@ -6,6 +6,7 @@ function pl_web_starter_inventory(int $actorId,int $companyId,int $bookId,array 
     if (isset($_GET['count']) || in_array(pl_web_text($_POST,'action'),['count','count_preview','count_confirm'],true)) {
         pl_web_stock_count($actorId,$companyId,$bookId,$user,$company,$method);
     }
+    $filters=($method==='POST' || isset($_GET['id']) || isset($_GET['new'])) ? pl_return_list_filters($method==='POST'?$_POST:$_GET,'inventory') : pl_list_filters($_GET,'inventory');
     if ($method==='POST') {
         $id=pl_web_id($_POST,'id');
         try {
@@ -27,6 +28,11 @@ function pl_web_starter_inventory(int $actorId,int $companyId,int $bookId,array 
                 else { $input['counted_quantity']=pl_web_text($_POST,'counted_quantity'); $input['expected_quantity']=pl_web_text($_POST,'expected_quantity'); $input['unit_cost']=pl_web_text($_POST,'unit_cost','0'); pl_inventory_adjust_count($actorId,$companyId,$bookId,$input); }
             } elseif ($action==='opening_preview') {
                 unset($_SESSION['starter_inventory_preview']);
+                if (pl_web_text($_POST,'editor_action')==='add_line' || isset($_POST['remove_line'])) {
+                    if (pl_require_company_access($actorId,$companyId,true)['role']!=='owner') { throw new DomainException('Only the owner can prepare opening stock.'); }
+                    pl_require_module($actorId,$companyId,$bookId,'inventory');
+                    pl_form_failure(pl_url($path,$filters),pl_web_line_action($_POST,500),'',200);
+                }
                 $lines=[];
                 $submittedLines=$_POST['lines']??[];
                 if (!is_array($submittedLines)||count($submittedLines)>500) { throw new DomainException('Use up to 500 opening product rows.'); }
@@ -39,24 +45,27 @@ function pl_web_starter_inventory(int $actorId,int $companyId,int $bookId,array 
                 pl_confirm_inventory_opening($actorId,$companyId,$bookId,pl_web_id($_POST,'preview_id'),pl_web_text($_POST,'expected_hash'),pl_web_text($_POST,'confirmed')==='1',$key);
                 unset($_SESSION['starter_inventory_preview']);
             } else { throw new DomainException('Choose an inventory action.'); }
-            pl_notice($action==='opening_preview'?'Opening quantities and values reconcile. Review before confirmation.':'Inventory action completed.'); pl_redirect(pl_url($path,['id'=>$id?:null]));
+            pl_notice($action==='opening_preview'?'Opening quantities and values reconcile. Review before confirmation.':'Inventory action completed.'); pl_redirect(pl_url($path,$id?['id'=>$id,'return_filters'=>$filters]:$filters));
         } catch (DomainException $error) {
             $input=array_map(static fn(mixed $value): string=>is_scalar($value)?(string)$value:'',$_POST);
             $input['lines']=is_array($_POST['lines']??null)?array_values(array_map(
                 static fn(array $line): array=>array_map(static fn(mixed $value): string=>is_scalar($value)?(string)$value:'',$line),
                 array_filter($_POST['lines'],'is_array')
             )):[];
-            pl_form_failure(pl_url($path,['id'=>$id?:null,'new'=>!$id&&pl_web_text($_POST,'action')==='product'?'1':null]),$input,$error->getMessage());
+            $query=$id?['id'=>$id,'return_filters'=>$filters]:(pl_web_text($_POST,'action')==='product'?['new'=>'1','return_filters'=>$filters]:$filters);
+            pl_form_failure(pl_url($path,$query),$input,$error->getMessage());
         }
     }
     $id=pl_web_id($_GET,'id'); $product=$id?pl_get_inventory_product($actorId,$companyId,$bookId,$id):null;
+    $selectionId=pl_web_id($_GET,'select'); $selection=$selectionId?pl_get_inventory_product($actorId,$companyId,$bookId,$selectionId):null;
     $preview=$_SESSION['starter_inventory_preview']??null;
     if ($preview && ($preview['company_id']!==$companyId||$preview['book_id']!==$bookId)) { $preview=null; }
-    pl_render('inventory',['title'=>'Inventory','user'=>$user,'company'=>$company,'product'=>$product,
-        'form'=>pl_form_state(pl_url($path,['id'=>$id?:null,'new'=>$id?null:(pl_web_text($_GET,'new')?:null)])),
+    pl_render('inventory',['title'=>'Products and stock','user'=>$user,'company'=>$company,'product'=>$product,'selection'=>$selection,'filters'=>$filters,
+        'list'=>!$product && !isset($_GET['new'])?pl_list_query($actorId,$companyId,$bookId,'inventory',$filters):null,
+        'form'=>pl_form_state(pl_url($path,$id?['id'=>$id,'return_filters'=>$filters]:(isset($_GET['new'])?['new'=>'1','return_filters'=>$filters]:$filters))),
         'enabled'=>pl_module_available($actorId,$companyId,$bookId,'inventory'),'accounts'=>pl_starter_accounts($actorId,$companyId,$bookId),
-        'products'=>pl_list_inventory_products($actorId,$companyId,$bookId),'valuation'=>pl_inventory_valuation($actorId,$companyId,$bookId,pl_web_text($_GET,'as_of')?:null),
-        'movements'=>pl_inventory_history($actorId,$companyId,$bookId,$id?:null),'preview'=>$preview,
+        'products'=>pl_list_inventory_products($actorId,$companyId,$bookId),'valuation'=>pl_inventory_valuation($actorId,$companyId,$bookId,$filters['as_of']),
+        'movements'=>pl_inventory_history($actorId,$companyId,$bookId,$id?:($selectionId?:null)),'preview'=>$preview,
         'balance'=>$product?pl_inventory_balance($actorId,$companyId,$bookId,$id):null]);
 }
 
@@ -71,8 +80,9 @@ function pl_web_stock_count_input(array $input): array
 function pl_web_stock_count(int $actorId,int $companyId,int $bookId,array $user,array $company,string $method): never
 {
     pl_require_company_access($actorId,$companyId,true);
+    $filters=pl_return_list_filters($method==='POST'?$_POST:$_GET,'inventory');
     $id=pl_web_id($method==='POST'?$_POST:$_GET,'id');
-    $return=pl_url('/inventory',['id'=>$id,'count'=>'1']);
+    $return=pl_url('/inventory',['id'=>$id,'count'=>'1','return_filters'=>$filters]);
     if ($method==='POST') {
         try {
             $input=pl_web_stock_count_input($_POST);
@@ -81,7 +91,7 @@ function pl_web_stock_count(int $actorId,int $companyId,int $bookId,array $user,
                 $hash=is_array($review) && ($review['company_id']??null)===$companyId && ($review['book_id']??null)===$bookId && ($review['key']??null)===$input['idempotency_key'] ? ($review['hash']??'') : '';
                 pl_confirm_inventory_count($actorId,$companyId,$bookId,$input,is_string($hash)?$hash:'');
                 pl_notice('Stock count recorded. Quantity and carrying value were adjusted together.');
-                pl_redirect(pl_url('/inventory',['id'=>$id]));
+                pl_redirect(pl_url('/inventory',['id'=>$id,'return_filters'=>$filters]));
             }
             $preview=pl_preview_inventory_count($actorId,$companyId,$bookId,$input);
             $_SESSION['stock_count_review']=['company_id'=>$companyId,'book_id'=>$bookId,'key'=>$input['idempotency_key'],'hash'=>hash('sha256',json_encode($preview,JSON_THROW_ON_ERROR))];
@@ -96,6 +106,6 @@ function pl_web_stock_count(int $actorId,int $companyId,int $bookId,array $user,
         try { $preview=pl_preview_inventory_count($actorId,$companyId,$bookId,pl_web_stock_count_input($input)); }
         catch (DomainException $error) { if ($form['message']==='') { $form['message']=$error->getMessage(); } }
     }
-    pl_render('stock-count',['title'=>'Record stock count','user'=>$user,'company'=>$company,'product'=>$product,'balance'=>$balance,'form'=>$form,'input'=>$input,'preview'=>$preview,
+    pl_render('stock-count',['title'=>'Record stock count','user'=>$user,'company'=>$company,'product'=>$product,'balance'=>$balance,'form'=>$form,'input'=>$input,'preview'=>$preview,'filters'=>$filters,
         'accounts'=>pl_starter_accounts($actorId,$companyId,$bookId)]);
 }
