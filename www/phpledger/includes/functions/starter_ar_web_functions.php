@@ -84,6 +84,7 @@ function pl_web_starter_ar(int $actorId,int $companyId,int $bookId,array $user,a
     pl_render($receivable?'ar':'ap',['title'=>$receivable?'Accounts receivable':'Accounts payable','user'=>$user,'company'=>$company,'path'=>$path,
         'form'=>$form,'document'=>$document,'original'=>$original,'normalKind'=>$normalKind,'creditKind'=>$creditKind,'documents'=>$documents,'report'=>$report,'postingPreview'=>$postingPreview,
         'taxContext'=>(isset($_GET['new']) || isset($_GET['edit']) || isset($_GET['correct']) || $original!==null || in_array($form['input']['action']??'',['save','correct'],true))?pl_ar_editor_tax_context($actorId,$companyId,$bookId,$original,$id?:null):null,
+        'recordJournal'=>$document && $document['journal_id']?pl_get_journal($actorId,$companyId,$bookId,$document['journal_id']):null,
         'accounts'=>pl_starter_accounts($actorId,$companyId,$bookId),'parties'=>pl_starter_parties($actorId,$companyId,$bookId),
         'priceMode'=>pl_tax_price_mode($actorId,$companyId,$bookId),'products'=>pl_list_inventory_products($actorId,$companyId,$bookId),'taxCodes'=>pl_list_tax_codes($actorId,$companyId,$bookId),'settlements'=>$settlements]);
 }

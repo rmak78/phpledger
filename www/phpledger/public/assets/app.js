@@ -591,6 +591,10 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
     window.addEventListener('pageshow', update);
     update();
 })();
+document.querySelectorAll('[data-print-document]').forEach(button => {
+    button.hidden = false;
+    button.addEventListener('click', () => window.print());
+});
 document.querySelectorAll('[data-commercial-form]').forEach(form => {
     const body = form.querySelector('[data-commercial-rows]');
     if (!body) return;

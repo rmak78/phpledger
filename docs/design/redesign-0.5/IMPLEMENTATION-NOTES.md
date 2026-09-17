@@ -342,3 +342,18 @@ Home's use of that service needs review alongside list-performance work.
 - No migration or live system change. Correction preview, remaining screen ports,
   complete route/accessibility evidence and historical upgrade verification remain
   open; this is not release acceptance.
+
+## Customer and supplier record views checkpoint
+
+- Draft, posted, credited and reversed documents now have a dedicated record view
+  with sticky document actions, compact metadata, line/tax totals, the actual posted
+  journal, ledger activity and revision history. The register and full ageing table
+  no longer follow every opened document. All prior correction, cancellation and
+  whole-payment reversal controls and warnings remain available.
+- Print is progressively enhanced; browser Print remains the no-JS instruction.
+- PHP lint (195 files), PHPStan, JS syntax and compiled CSS build passed. Browser
+  JS invoice/no-JS bill checks passed for draft saving, posting, journal links,
+  linked credits, reversal status/links, primary actions at both folds and overflow
+  at both folds, portrait and phone. No financial service or schema change here.
+- List filtering/paging, retained drill-down state and full acceptance are still
+  pending for AR/AP. No release or hosted system changed.
