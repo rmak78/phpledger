@@ -267,7 +267,7 @@ function pl_ar_document_row(array $row, int $actorId): array
 }
 
 /** Only unused controls may be automatically activated by an owner. Existing books require reviewed conversion. */
-function pl_ar_control(int $actorId, int $companyId, int $bookId, array $document): int
+function pl_ar_control(int $actorId, int $companyId, int $bookId, array $document, bool $activate = true): int
 {
     $payable = in_array($document['kind'], ['bill','supplier_credit'], true);
     $role = $payable ? 'payables' : 'receivables';
@@ -281,7 +281,8 @@ function pl_ar_control(int $actorId, int $companyId, int $bookId, array $documen
         throw new DomainException('Choose a matching active customer or supplier control account.');
     }
     if (!DB::queryFirstField('SELECT account_id FROM pl_open_item_accounts WHERE account_id=%i FOR SHARE', $control)) {
-        pl_activate_open_item_account($actorId, $companyId, $bookId, (int) $control, 'Explicit posting of the first customer/vendor document to an unused control');
+        if ($activate) { pl_activate_open_item_account($actorId, $companyId, $bookId, (int) $control, 'Explicit posting of the first customer/vendor document to an unused control'); }
+        else { pl_open_item_activation_check($actorId,$companyId,$bookId,(int)$control); }
     }
     return (int) $control;
 }
@@ -295,7 +296,8 @@ function pl_ar_snapshot(array $line): array
 }
 
 /** Internal work under the document command and book lock. No independent balance is stored. */
-function pl_ar_post_version(int $actorId, int $companyId, int $bookId, array $document, ?int $offsetAccountId, ?string $rate, string $key): array
+/** Shared financial posting plan; preview does not activate a control or create an item. */
+function pl_ar_posting_plan(int $actorId, int $companyId, int $bookId, array $document, ?int $offsetAccountId, ?string $rate, bool $activateControl): array
 {
     pl_require_module($actorId, $companyId, $bookId, in_array($document['kind'], ['bill','supplier_credit'], true) ? 'ap' : 'ar');
     pl_require_book_ready($companyId); pl_ar_validate_source($actorId, $companyId, $bookId, $document);
@@ -319,12 +321,11 @@ function pl_ar_post_version(int $actorId, int $companyId, int $bookId, array $do
         $snapshot = pl_ar_snapshot($item['recognition']);
         if ($rate !== null && pl_fx_rate($rate) !== $snapshot['rate']) { throw new DomainException('Credits retain the original transaction rate and carrying value.'); }
     } else {
-        $control = pl_ar_control($actorId, $companyId, $bookId, $document);
+        $control = pl_ar_control($actorId, $companyId, $bookId, $document, $activateControl);
         $snapshot = pl_oi_rate($actorId, $companyId, $bookId, $document['currency'], $document['document_date'], $rate, null, 'spot');
         if (($document['party']['linked_entity_id'] ?? null) !== null) { $snapshot['ic_counterparty_entity_id'] = (int) $document['party']['linked_entity_id']; }
         $base = pl_fx_convert($document['total'], $snapshot['rate']);
-        DB::insert('pl_open_items', ['company_id'=>$companyId,'book_id'=>$bookId,'party_id'=>$document['party_id'],'control_account_id'=>$control,'direction'=>$receivable ? 'receivable' : 'payable','currency'=>$document['currency'],'source_reference'=>'ar-document:' . $document['id'] . ':revision:' . $document['revision'],'created_by'=>$actorId]);
-        $itemId = (int) DB::insertId();
+        $itemId = null;
     }
     $description = $document['number'] . ' - ' . $document['party']['legal_name'];
     $controlDebit = $receivable !== $credit;
@@ -355,6 +356,19 @@ function pl_ar_post_version(int $actorId, int $companyId, int $bookId, array $do
         $domestic = pl_oi_rate($actorId, $companyId, $bookId, $book['currency'], $document['document_date'], null, null, 'spot');
         $lines[] = pl_oi_line($roundingId, $magnitude, $magnitude, bccomp($difference, '0', 4) > 0 ? !$controlDebit : $controlDebit, $domestic, 'Explicit currency rounding');
     }
+    return ['document'=>$document,'original'=>$original,'currency'=>$book['currency'],'credit'=>$credit,'receivable'=>$receivable,'control'=>$control,'item_id'=>$itemId,'description'=>$description,'lines'=>$lines];
+}
+
+function pl_ar_post_version(int $actorId, int $companyId, int $bookId, array $document, ?int $offsetAccountId, ?string $rate, string $key): array
+{
+    $plan=pl_ar_posting_plan($actorId,$companyId,$bookId,$document,$offsetAccountId,$rate,true);
+    $document=$plan['document']; $original=$plan['original']; $credit=$plan['credit']; $receivable=$plan['receivable'];
+    $control=$plan['control']; $itemId=$plan['item_id']; $lines=$plan['lines']; $description=$plan['description'];
+    $book=['currency'=>$plan['currency']];
+    if ($itemId===null) {
+        DB::insert('pl_open_items', ['company_id'=>$companyId,'book_id'=>$bookId,'party_id'=>$document['party_id'],'control_account_id'=>$control,'direction'=>$receivable ? 'receivable' : 'payable','currency'=>$document['currency'],'source_reference'=>'ar-document:' . $document['id'] . ':revision:' . $document['revision'],'created_by'=>$actorId]);
+        $itemId = (int) DB::insertId();
+    }
     $journal = pl_post_journal_locked($actorId, $companyId, $bookId, ['date'=>$document['document_date'],'currency'=>$book['currency'],'source_type'=>$credit ? 'open_item_settlement' : 'open_item_recognition','source_reference'=>'open-item:' . $itemId,'idempotency_key'=>$key,'description'=>$description,'lines'=>$lines], null, $credit ? $itemId : null);
     $document['journal_id'] = (int) $journal['id']; $document['open_item_id'] = $itemId; $document['status'] = 'posted';
     if ($document['kind'] === 'invoice') { pl_inventory_issue_ar_document($actorId, $companyId, $bookId, $document, (int) $journal['id'], $key . ':stock'); }
@@ -366,6 +380,36 @@ function pl_ar_record_version(int $actorId, array $document, string $reason): vo
 {
     $snapshot = array_intersect_key($document, array_flip(['kind','party_id','document_date','due_date','currency','subtotal','tax_total','total','price_mode','reference','terms','notes','lines','original_document_id','original_revision','rounding_account_id']));
     DB::insert('pl_ar_document_revisions', ['document_id'=>$document['id'],'company_id'=>$document['company_id'],'book_id'=>$document['book_id'],'revision'=>$document['revision'],'journal_id'=>$document['journal_id'],'open_item_id'=>$document['open_item_id'],'source_snapshot'=>json_encode($snapshot, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE),'actor_id'=>$actorId,'reason'=>$reason]);
+}
+
+/** Preview current editor values without saving a draft, activating controls or posting. */
+function pl_preview_ar_document(int $actorId,int $companyId,int $bookId,array $input,?int $documentId=null,?int $revision=null,?string $rate=null): array
+{
+    $data=pl_normalize_ar_document($input);
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$data,$documentId,$revision,$rate): array {
+        pl_require_company_access($actorId,$companyId,true); pl_ledger_book($companyId,$bookId,true);
+        if ($documentId!==null) {
+            $current=pl_get_ar_document($actorId,$companyId,$bookId,$documentId);
+            if ($current['status']!=='draft' || $current['revision']!==$revision || $current['kind']!==$data['kind']) { throw new DomainException('Review the current draft before previewing these changes.'); }
+        }
+        $document=pl_ar_price_document($actorId,$companyId,$bookId,$data,$documentId);
+        $document+=['id'=>$documentId??0,'revision'=>$revision??0,'number'=>$documentId===null?'New '.str_replace('_',' ',$data['kind']):pl_ar_document_number($documentId,$data['kind']),
+            'party'=>pl_ar_document_party($actorId,$companyId,$bookId,$data['party_id'],$data['kind'])];
+        return pl_ar_posting_plan($actorId,$companyId,$bookId,$document,null,$rate,false);
+    });
+}
+
+/** Posting from an editor is one atomic save/review/post operation with stable retries. */
+function pl_save_and_post_ar_document(int $actorId,int $companyId,int $bookId,array $input,string $expectedHash,?int $documentId=null,?int $revision=null,?string $rate=null): array
+{
+    $key=pl_ledger_text($input['creation_key']??null,'Document identity',128);
+    return pl_ar_action($actorId,$companyId,$bookId,$documentId,'editor_post','ar-editor:'.hash('sha256',$key),[$input,$revision,$rate],
+        function () use ($actorId,$companyId,$bookId,$input,$expectedHash,$documentId,$revision,$rate): array {
+            $plan=pl_preview_ar_document($actorId,$companyId,$bookId,$input,$documentId,$revision,$rate);
+            if (!hash_equals($expectedHash,hash('sha256',json_encode($plan,JSON_THROW_ON_ERROR)))) { throw new DomainException('The document or its posting basis changed. Update the preview before posting.'); }
+            $draft=pl_save_ar_document($actorId,$companyId,$bookId,$input,$documentId,$revision);
+            return pl_post_ar_document($actorId,$companyId,$bookId,$draft['id'],$draft['revision'],null,$rate);
+        });
 }
 
 function pl_post_ar_document(int $actorId, int $companyId, int $bookId, int $documentId, int $expectedRevision, ?int $offsetAccountId = null, ?string $rate = null): array

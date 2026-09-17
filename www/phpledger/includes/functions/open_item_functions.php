@@ -15,6 +15,17 @@ function pl_activate_open_item_account(int $actorId, int $companyId, int $bookId
     pl_demo_require_setup_action();
     $reason = pl_ledger_text($reason, 'Activation reason', 500);
     return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $accountId, $reason): array {
+        $prior=pl_open_item_activation_check($actorId,$companyId,$bookId,$accountId);
+        if ($prior!==null) { return $prior; }
+        DB::insert('pl_open_item_accounts', ['account_id' => $accountId, 'company_id' => $companyId, 'book_id' => $bookId, 'activated_by' => $actorId, 'reason' => $reason]);
+        return DB::queryFirstRow('SELECT * FROM pl_open_item_accounts WHERE account_id = %i', $accountId);
+    });
+}
+
+/** Read-only eligibility check, shared with activation and editor preview. */
+function pl_open_item_activation_check(int $actorId,int $companyId,int $bookId,int $accountId): ?array
+{
+    pl_demo_require_setup_action();
         $access = pl_require_company_access($actorId, $companyId, true);
         if ($access['role'] !== 'owner') { throw new DomainException('Only an owner can activate open-item accounting.'); }
         pl_ledger_book($companyId, $bookId, true);
@@ -28,9 +39,7 @@ function pl_activate_open_item_account(int $actorId, int $companyId, int $bookId
             || DB::queryFirstField('SELECT id FROM pl_opening_documents WHERE company_id = %i AND book_id = %i AND account_id = %i LIMIT 1 FOR SHARE', $companyId, $bookId, $accountId)) {
             throw new DomainException('Only unused control accounts can be activated. Existing balances require a reviewed AR/AP cutover.');
         }
-        DB::insert('pl_open_item_accounts', ['account_id' => $accountId, 'company_id' => $companyId, 'book_id' => $bookId, 'activated_by' => $actorId, 'reason' => $reason]);
-        return DB::queryFirstRow('SELECT * FROM pl_open_item_accounts WHERE account_id = %i', $accountId);
-    });
+    return null;
 }
 
 /** Outstanding is a sum of immutable referenced GL line amounts, never an independently editable total. */

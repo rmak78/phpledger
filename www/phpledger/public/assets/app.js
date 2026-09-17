@@ -623,9 +623,9 @@ document.querySelectorAll('[data-commercial-form]').forEach(form => {
         });
         const message = form.querySelector('[data-commercial-total]');
         message.textContent = valid ? `Entered total ${format(total)} · Server validation applies when saving.` : 'Complete each entered quantity and unit price to calculate the total.';
-        const grand = form.querySelector('[data-fold="document total"] dd');
+        const grand = form.querySelector('[data-commercial-grand] dd');
         if (grand) grand.textContent = valid ? format(total) : '—';
-        const label = form.querySelector('[data-fold="document total"] dt');
+        const label = form.querySelector('[data-commercial-grand] dt');
         if (label) label.textContent = `Total order value (${form.elements.namedItem('currency').value.toUpperCase()})`;
     };
     form.addEventListener('click', event => {

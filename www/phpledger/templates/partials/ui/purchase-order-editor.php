@@ -18,5 +18,5 @@ try { foreach ($v['lines']??[] as $line) { $enteredTotal=bcadd($enteredTotal,pl_
 </section>
 <section><h2 class="section-title mb-2">Order lines</h2><?php pl_ui_commercial_lines($v['lines']??[],['product_id'=>$productOptions],false,true); ?>
 <p class="text-xs text-ink-muted mt-3">Purchase order prices are tax-exclusive; tax is applied when the supplier bill is matched. Amounts allow four decimal places.</p>
-<div class="flex justify-end mt-3" data-fold="document total"><?php pl_ui_totals(['Total order value ('.$company['currency'].')'=>$order?pl_money($order['total']):'—']); ?></div>
+<div class="flex justify-end mt-3" data-fold="document total" data-commercial-grand><?php pl_ui_totals(['Total order value ('.$company['currency'].')'=>$order?pl_money($order['total']):'—']); ?></div>
 </section></form></section></div>

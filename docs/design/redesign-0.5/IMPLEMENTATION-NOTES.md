@@ -302,3 +302,23 @@ Home's use of that service needs review alongside list-performance work.
   exact displayed/saved totals, save and confirm; both folds plus portrait and phone.
 - No migration. Invoices, bills and credits still need the shared editor port and
   their complete tax/posting previews; the full release acceptance matrix is open.
+
+## Invoice/bill/credit editor checkpoint (stock preview extension pending)
+
+- Invoices, bills, customer credits and supplier credits use the shared one-row
+  commercial editor with sticky actions and working JS/no-JS add/remove controls.
+  Correction fields and the existing linked-reversal workflow remain available.
+- Extracted the financial posting plan from the existing document posting service.
+  Editor preview reuses tax pricing, historical credit carrying values, FX snapshots
+  and rounding lines. The read-only control-activation eligibility check is shared
+  with actual activation; preview creates no draft, control, item or journal.
+- Posting reviewed editor values saves and posts atomically with durable retries;
+  a closed-period rejection rolls back the draft and any control activation.
+- Targeted AR/inventory/purchasing suite: 63 tests, zero failures. PHP lint
+  (194 files) and static analysis passed; JS syntax and CSS build passed.
+- Browser invoice (JS) and bill (no-JS) checks passed for one row, add/remove,
+  retained input, five-percent tax preview, posting and a linked partial credit.
+  Both folds plus portrait/phone had no overflow and posting stayed above the fold.
+- Outstanding: stock invoice/credit preview must include the linked inventory
+  journal effects; live tax totals and correction preview need their final pass.
+  This checkpoint closes neither the full editor feature nor the release gate.

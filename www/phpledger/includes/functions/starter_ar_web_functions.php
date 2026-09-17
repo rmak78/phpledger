@@ -15,14 +15,26 @@ function pl_web_starter_ar(int $actorId,int $companyId,int $bookId,array $user,a
             if (in_array($action,['save','correct'],true)) {
                 $kind=pl_web_text($_POST,'kind',$normalKind);
                 if (!in_array($kind,[$normalKind,$creditKind],true)) { throw new DomainException('Invalid document type for this module.'); }
-                $input=['kind'=>$kind,'price_mode'=>pl_web_text($_POST,'price_mode')?:null,'party_id'=>pl_web_id($_POST,'party_id'),'date'=>pl_web_text($_POST,'date'),
-                    'due_date'=>pl_web_text($_POST,'due_date'),'currency'=>strtoupper(pl_web_text($_POST,'currency')),
-                    'reference'=>pl_web_text($_POST,'reference'),'terms'=>pl_web_text($_POST,'terms'),'notes'=>pl_web_text($_POST,'notes'),
-                    'creation_key'=>$key,'rounding_account_id'=>pl_web_id($_POST,'rounding_account_id')?:null,'lines'=>pl_starter_lines($_POST)];
-                if ($kind===$creditKind) { $input['original_document_id']=pl_web_id($_POST,'original_document_id'); }
+                $return=pl_url($path,['id'=>$id?:null,'new'=>$id?null:'1']);
+                if (pl_web_text($_POST,'editor_action')==='add_line' || isset($_POST['remove_line'])) {
+                    pl_require_company_access($actorId,$companyId,true);
+                    pl_form_failure($return,pl_web_line_action($_POST),'',200);
+                }
+                $input=pl_web_ar_editor_input($_POST,$kind);
+                if ($action==='save' && pl_web_text($_POST,'editor_action')==='preview') {
+                    $preview=pl_preview_ar_document($actorId,$companyId,$bookId,$input,$id?:null,$id?pl_web_id($_POST,'revision'):null,pl_web_text($_POST,'rate')?:null);
+                    $_SESSION['ar_editor_review']=['company_id'=>$companyId,'book_id'=>$bookId,'key'=>$key,'hash'=>hash('sha256',json_encode($preview,JSON_THROW_ON_ERROR))];
+                    pl_form_failure($return,$_POST,'',200);
+                }
+                if ($action==='save' && pl_web_text($_POST,'editor_action')==='post_reviewed_document') {
+                    $review=$_SESSION['ar_editor_review']??[];
+                    $hash=is_array($review) && ($review['company_id']??null)===$companyId && ($review['book_id']??null)===$bookId && ($review['key']??null)===$key ? ($review['hash']??'') : '';
+                    $result=pl_save_and_post_ar_document($actorId,$companyId,$bookId,$input,is_string($hash)?$hash:'',$id?:null,$id?pl_web_id($_POST,'revision'):null,pl_web_text($_POST,'rate')?:null);
+                } else {
                 $result=$action==='correct'
                     ?pl_correct_ar_document($actorId,$companyId,$bookId,$id,$input,pl_web_id($_POST,'revision'),$key,pl_web_text($_POST,'reason'),pl_web_text($_POST,'reversal_date')?:null,pl_web_text($_POST,'rate')?:null)
                     :pl_save_ar_document($actorId,$companyId,$bookId,$input,$id?:null,$id?pl_web_id($_POST,'revision'):null);
+                }
                 $id=(int)$result['id'];
             } elseif ($action==='post') {
                 pl_post_ar_document($actorId,$companyId,$bookId,$id,pl_web_id($_POST,'revision'),null,pl_web_text($_POST,'rate')?:null);
@@ -61,13 +73,28 @@ function pl_web_starter_ar(int $actorId,int $companyId,int $bookId,array $user,a
     $originalId=$document['original_document_id']??pl_web_id($form['input'],'original_document_id');
     if ($original===null && $originalId) { $original=pl_get_ar_document($actorId,$companyId,$bookId,(int)$originalId); }
     $all=pl_list_ar_documents($actorId,$companyId,$bookId);
+    $postingPreview=null;
+    if (($form['input']['action']??'')==='save' && in_array($form['input']['editor_action']??'',['preview','post_reviewed_document'],true)) {
+        try { $postingPreview=pl_preview_ar_document($actorId,$companyId,$bookId,pl_web_ar_editor_input($form['input'],pl_web_text($form['input'],'kind',$normalKind)),$id?:null,$id?pl_web_id($form['input'],'revision'):null,pl_web_text($form['input'],'rate')?:null); }
+        catch (DomainException $error) { if ($form['message']==='') { $form['message']=$error->getMessage(); } }
+    }
     $documents=array_values(array_filter($all['documents'],fn($d)=>in_array($d['kind'],[$normalKind,$creditKind],true)));
     $report=pl_ar_ap_open_items($actorId,$companyId,$bookId,$receivable?'receivable':'payable',pl_web_text($_GET,'as_of')?:null);
     $settlements=$document&&$document['open_item_id']?DB::query("SELECT e.kind,l.journal_id,l.amount_fc,l.amount_base,j.journal_date AS posting_date,j.source_type,d.id AS credit_document_id,d.kind AS credit_kind,EXISTS(SELECT 1 FROM pl_journals v WHERE v.reversal_of_id=j.id) AS already_reversed FROM pl_open_item_entries e JOIN pl_journal_lines l ON l.id=e.journal_line_id JOIN pl_journals j ON j.id=l.journal_id LEFT JOIN pl_ar_document_revisions r ON r.journal_id=j.id AND r.company_id=e.company_id AND r.book_id=e.book_id LEFT JOIN pl_ar_documents d ON d.id=r.document_id AND d.kind IN ('customer_credit','supplier_credit') WHERE e.item_id=%i AND e.company_id=%i AND e.book_id=%i ORDER BY e.id",$document['open_item_id'],$companyId,$bookId):[];
     pl_render($receivable?'ar':'ap',['title'=>$receivable?'Accounts receivable':'Accounts payable','user'=>$user,'company'=>$company,'path'=>$path,
-        'form'=>$form,'document'=>$document,'original'=>$original,'normalKind'=>$normalKind,'creditKind'=>$creditKind,'documents'=>$documents,'report'=>$report,
+        'form'=>$form,'document'=>$document,'original'=>$original,'normalKind'=>$normalKind,'creditKind'=>$creditKind,'documents'=>$documents,'report'=>$report,'postingPreview'=>$postingPreview,
         'accounts'=>pl_starter_accounts($actorId,$companyId,$bookId),'parties'=>pl_starter_parties($actorId,$companyId,$bookId),
         'priceMode'=>pl_tax_price_mode($actorId,$companyId,$bookId),'products'=>pl_list_inventory_products($actorId,$companyId,$bookId),'taxCodes'=>pl_list_tax_codes($actorId,$companyId,$bookId),'settlements'=>$settlements]);
+}
+
+function pl_web_ar_editor_input(array $input,string $kind): array
+{
+    $data=['kind'=>$kind,'price_mode'=>pl_web_text($input,'price_mode')?:null,'party_id'=>pl_web_id($input,'party_id'),'date'=>pl_web_text($input,'date'),
+        'due_date'=>pl_web_text($input,'due_date'),'currency'=>strtoupper(pl_web_text($input,'currency')),'reference'=>pl_web_text($input,'reference'),
+        'terms'=>pl_web_text($input,'terms'),'notes'=>pl_web_text($input,'notes'),'creation_key'=>pl_web_text($input,'request_key'),
+        'rounding_account_id'=>pl_web_id($input,'rounding_account_id')?:null,'lines'=>pl_starter_lines($input)];
+    if (in_array($kind,['customer_credit','supplier_credit'],true)) { $data['original_document_id']=pl_web_id($input,'original_document_id'); }
+    return $data;
 }
 
 function pl_web_settlement_input(array $input,string $direction): array
