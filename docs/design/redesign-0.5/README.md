@@ -1,6 +1,13 @@
 # PHP Ledger 0.5 interface redesign: prototype
 
-**Status: prototype for owner review, 17 Sep 2026.** Nothing here is in the running app yet. This folder replaces the pending "Ledger Desk / Today First / Books & Workspaces" shell selection (release board P0.4). The owner chose a Frappe/ERPNext-style workspace with Akaunting-style document forms, in a calm "Claude-like" tone.
+**Status: owner-approved prototype, implementation in progress, 17 Sep 2026.**
+The owner approved all fourteen improvements, including the service changes,
+DataTables removal and publication after verification. This folder replaces the
+pending "Ledger Desk / Today First / Books & Workspaces" shell selection (P0.4).
+The owner chose a Frappe/ERPNext workspace with Akaunting document forms in a calm
+"Claude-like" tone. Historical "proposed" annotations below describe the prototype
+before approval; they are not pending permission. See
+[implementation record](IMPLEMENTATION-NOTES.md) for current evidence and gaps.
 
 ## Owner decisions (17 Sep 2026)
 

@@ -1,21 +1,21 @@
 <?php
 declare(strict_types=1);
 
-    $layout = file_get_contents(dirname(__DIR__) . '/www/phpledger/templates/layout.php');
-    $styles = file_get_contents(dirname(__DIR__) . '/www/phpledger/public/assets/starter.css');
+    $layout = file_get_contents(dirname(__DIR__) . '/www/phpledger/templates/layout.php') . file_get_contents(dirname(__DIR__) . '/www/phpledger/templates/partials/ui/shell.php');
+    $styles = file_get_contents(dirname(__DIR__) . '/www/phpledger/public/assets/app.css');
     $app = file_get_contents(dirname(__DIR__) . '/www/phpledger/public/assets/app.js');
     $guide = file_get_contents(dirname(__DIR__) . '/www/phpledger/templates/views/sample-guide.php');
 
 test('shared shell exposes the candidate version and grouped navigation contract', function () use ($layout, $styles, $app, $guide): void {
     assert_true(is_string($layout) && str_contains($layout, 'pl_app_version()'), 'Layout does not use the shared version helper.');
-    assert_true(is_string($layout) && substr_count($layout, 'pl_app_version()') >= 2, 'Version is not rendered in both brand and footer.');
-    assert_true(is_string($layout) && str_contains($layout, 'class="nav-menu"'), 'Grouped navigation is missing.');
-    assert_true(is_string($layout) && str_contains($layout, 'app-sidebar'), 'Workspace sidebar hook is missing.');
+    assert_true(is_string($layout) && substr_count($layout, 'pl_app_version()') >= 2, 'Version is not rendered in both workspace and focused layouts.');
+    assert_true(is_string($layout) && str_contains($layout, 'class="shell-nav"'), 'Grouped navigation is missing.');
+    assert_true(is_string($layout) && str_contains($layout, 'shell-sidebar'), 'Workspace sidebar hook is missing.');
     assert_true(is_string($layout) && !str_contains($layout, '<nav class="accounting-nav"'), 'The shell still renders a second administration navigation strip.');
     assert_true(is_string($layout) && str_contains($layout, 'pl_module_available'), 'Navigation lost server-side module checks.');
-    assert_true(is_string($styles) && str_contains($styles, '.brand-version'), 'Brand version treatment is missing.');
-    assert_true(is_string($styles) && str_contains($styles, '.nav-menu-panel'), 'Responsive navigation panel treatment is missing.');
-    assert_true(is_string($styles) && str_contains($styles, '.has-app-shell>.app-header>.app-sidebar'), 'Desktop workspace rail styling is missing.');
+    assert_true(is_string($styles) && str_contains($styles, '.shell-version'), 'Brand version treatment is missing.');
+    assert_true(is_string($styles) && str_contains($styles, '.menu-panel'), 'Responsive navigation panel treatment is missing.');
+    assert_true(is_string($styles) && str_contains($styles, '.shell-sidebar'), 'Desktop workspace rail styling is missing.');
     assert_true(is_string($app) && str_contains($app, '[data-fiscal-year-end-choice]') && str_contains($app, 'customGroup.hidden = !isCustom'), 'Fiscal year-end progressive disclosure behavior is missing.');
     assert_true(is_string($guide) && str_contains($guide, 'sample-evidence'), 'Sample guide does not expose pinned research evidence.');
     assert_true(is_string($guide) && str_contains($guide, 'research_evidence'), 'Sample guide does not bind its evidence section to the pack contract.');

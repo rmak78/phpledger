@@ -4,7 +4,8 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs';
 import path from 'node:path';
-const root = path.dirname(new URL(import.meta.url).pathname);
+import { fileURLToPath, pathToFileURL } from 'node:url';
+const root = path.dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
 const sizes = (args.find((a) => a.startsWith('--sizes='))?.slice(8) || '1366x768,1024x768').split(',').map((s) => s.split('x').map(Number));
 const full = args.includes('--full');
@@ -13,14 +14,14 @@ let ids = args.filter((a) => !a.startsWith('--'));
 const manifest = JSON.parse(fs.readFileSync(path.join(root, dist, 'index.html'), 'utf8').match(/<script type="application\/json" id="screen-manifest">([\s\S]*?)<\/script>/)[1]);
 if (!ids.length) ids = manifest.map((m) => m.id);
 fs.mkdirSync(path.join(root, 'shots'), { recursive: true });
-const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
+const browser = await chromium.launch(process.env.PLAYWRIGHT_EXECUTABLE_PATH ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH } : { channel: 'chrome' });
 let problems = 0;
 for (const [w, h] of sizes) {
   const page = await browser.newPage({ viewport: { width: w, height: h } });
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
-  await page.goto('file://' + path.join(root, dist, 'index.html'));
+  await page.goto(pathToFileURL(path.join(root, dist, 'index.html')).href);
   for (const id of ids) {
     errors.length = 0;
     await page.evaluate((id) => { location.hash = '#/' + id; }, id);
@@ -66,3 +67,4 @@ for (const [w, h] of sizes) {
 }
 await browser.close();
 console.log(problems ? `${problems} screen/size combinations need attention` : 'All checked screens pass fold/overflow/error checks');
+process.exitCode = problems ? 1 : 0;

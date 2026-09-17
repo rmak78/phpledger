@@ -1,0 +1,100 @@
+/* Extra components for the daily screens. Use @layer components; tokens only. */
+@layer components {
+  /* Danger counterpart to app.css's .balanced-label, for an out-of-balance journal draft. */
+  .balance-label-danger {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--danger);
+  }
+  .balance-label-danger .icon { width: 14px; height: 14px; }
+
+  /* POS: product tiles (pos.html). Plain <button>s styled as small selectable cards — a repeated
+     piece (six per screen), so named here rather than repeating utility soup per tile. */
+  .pos-product {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .1875rem;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+    background: var(--surface);
+    padding: .75rem .875rem;
+    text-align: start;
+    cursor: pointer;
+    transition: border-color .12s ease, background-color .12s ease;
+  }
+  .pos-product:hover { border-color: var(--border-strong); background: var(--surface-subtle); }
+  .pos-product.is-in-cart { border-color: var(--brand-blue); background: var(--brand-selected); }
+  .pos-product-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--brand-navy);
+    color: #fff;
+    font-weight: 700;
+    font-size: .6875rem;
+    flex: none;
+    margin-block-end: .1875rem;
+  }
+  .pos-product-qty-badge {
+    position: absolute;
+    inset-block-start: .5rem;
+    inset-inline-end: .5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding-inline: .3rem;
+    border-radius: 999px;
+    background: var(--brand-navy);
+    color: #fff;
+    font-size: .6875rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* POS: cart line + qty stepper (pos.html cart, pos-review read-only variant reuses .table). */
+  .pos-cart-line {
+    display: flex;
+    flex-direction: column;
+    gap: .375rem;
+    padding-block: .625rem;
+    border-block-end: 1px solid var(--border);
+  }
+  .pos-cart-line:last-child { border-block-end: none; }
+  .pos-qty-stepper { display: inline-flex; align-items: center; gap: .5rem; }
+  .pos-qty-stepper button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .pos-qty-stepper button:hover { background: var(--surface-subtle); }
+  .pos-qty-stepper span {
+    min-width: 1.125rem;
+    text-align: center;
+    font-size: .8125rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* POS: narrow printed-receipt preview (pos-receipt.html) — dashed rules stand in for a
+     perforated paper edge without switching the whole app's type to monospace. */
+  .receipt-paper { width: 100%; }
+  .receipt-rule { border-block-start: 1px dashed var(--border-strong); margin-block: .75rem; }
+}

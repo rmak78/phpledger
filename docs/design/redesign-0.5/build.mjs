@@ -4,8 +4,9 @@
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = path.dirname(new URL(import.meta.url).pathname);
+const root = path.dirname(fileURLToPath(import.meta.url));
 const r = (p) => path.join(root, p);
 const outArg = process.argv.find((a) => a.startsWith('--out='));
 const out = outArg ? outArg.slice(6) : 'dist';
@@ -13,7 +14,8 @@ fs.mkdirSync(r(out), { recursive: true });
 
 execSync(`npx @tailwindcss/cli -i src/app.css -o ${out}/app.css --minify`, { cwd: root, stdio: 'pipe' });
 let css = fs.readFileSync(r(`${out}/app.css`), 'utf8');
-const font = fs.readFileSync(r('src/fonts/InterVariable.woff2')).toString('base64');
+const fontPath = fs.existsSync(r('src/fonts/InterVariable.woff2')) ? r('src/fonts/InterVariable.woff2') : r('../../../www/phpledger/public/assets/fonts/InterVariable.woff2');
+const font = fs.readFileSync(fontPath).toString('base64');
 css = css.replace(/url\((["']?)[^)"']*InterVariable\.woff2\1\)/g, `url(data:font/woff2;base64,${font})`);
 
 const iconDir = r('node_modules/@tabler/icons/icons/outline');

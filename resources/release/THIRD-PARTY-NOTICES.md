@@ -54,4 +54,6 @@ The 0.2.0 candidate retains every production dependency license file in `vendor`
 | symfony/uid | v7.4.17 | MIT |
 | webmozart/assert | 2.4.1 | MIT |
 
-DataTables 3.0.4 is MIT licensed by SpryMedia Ltd. Its MIT notice and pinned source/hash record are bundled under `www/phpledger/public/assets/vendor/datatables-3.0.4`. It is served locally, without a CDN request during application use.
+Tailwind CSS 4.3.3 is MIT licensed by Tailwind Labs, Inc. It is a development-only
+compiler; the application ships its compiled stylesheet and does not require Node
+or npm on the host. Its licence is bundled under `resources/licenses/tailwindcss.txt`.

@@ -39,3 +39,35 @@ after verification are approved. Mobile refinement is deferred; overflow safety 
 Implementation in progress. No release, production change, migration, or completed
 PHP screen rebuild is claimed by this record. Verification receipts will be added
 as checks actually complete. Publication is blocked until all required gates pass.
+
+## Foundation checkpoint, 17 September 2026
+
+- Tailwind 4.3.3 development build and committed compiled CSS; existing styles
+  temporarily folded into a development source compatibility layer. The final
+  screen rebuild must remove that dependency before interface acceptance.
+- Shared sidebar/company switcher, 48px topbar, quick create, real-navigation
+  command palette, tablet rail, small-screen drawer and focused login ported.
+  Companies uses compact rows with the existing CSRF-protected selection POST.
+  Home and the complete screen inventory remain outstanding.
+- DataTables browser dependency removed. Ordinary GET controls added for
+  transactions, journals, account statements and statement rows. `/tables` retained.
+  Journal status filtering added to the existing scoped source-list service.
+- Existing reversal test corrected to use its original posting date: the old
+  16 September cancellation date became an invalid backdate on 17 September.
+  The production reversal policy was not changed.
+- `composer check`: 176 PHP files linted; PHPStan no errors; sample validation and
+  eight invalid-pack checks passed; 241 tests, zero failures. Targeted foundations:
+  76 tests passed. Targeted lists: 19 tests passed.
+- Isolated synthetic browser fixture on localhost:18219. Shell captures at
+  1366x768, 1024x768, 768x1024 and 390x844: no page-width overflow or console errors.
+  Command palette filtering and Escape; drawer open/Escape/focus restoration checked.
+  This is a foundation smoke check, not the required complete route/state evidence.
+- Prototype builder now resolves Windows paths and can use the packaged Inter
+  font; screenshot script selects installed Chrome (or an explicit executable)
+  and fails its process when fold/overflow checks fail.
+
+Still open: full prototype-to-PHP rebuild, remaining approved improvements,
+all-route/state captures, keyboard/contrast review by pattern, 5,000-row indexed
+query-plan evidence, fresh install and 0.5 upgrade, package content acceptance,
+release documentation/media, publication and live receipts. No migration or live
+system change has been made.
