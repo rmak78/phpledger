@@ -486,3 +486,27 @@ rates, or separately design code editing. The owner subsequently approved the re
   record, editor and goods receipt screens checked at 1366, 1024, 768 and 390px.
 - No additional migration, schema change or hosted change. Report/admin ports,
   comprehensive accessibility/fidelity acceptance and packaging remain open.
+
+## Reports and period controls checkpoint — 18 September
+
+- Ported the report directory, trial balance, balance sheet and account statement
+  to the compact report pattern. Balance sheet uses one statement with grouped
+  accounts; trial balance includes account type. CSV exports and exact existing
+  report amounts remain authoritative. The hub's costs/expenses summary includes
+  classified cost of sales, so it reconciles with net profit.
+- Account drill-down retains the original report dates and preset through filter,
+  sorting and paging changes, using a fixed report destination allow-list.
+- Cash forecast retains its non-posting scenario service, exact table and negative
+  cash warning. Its optional chart reads design tokens and hides without JS.
+- Period administration uses compact controls, accessible close/reopen dialogs
+  with native no-JS disclosure fallback and a reason/actor/time history timeline.
+  Existing create/close/reopen permissions and service semantics are unchanged.
+- Full composer check passed: 274 tests, zero failures, lint 209 files, PHPStan
+  and sample validation passed. The first static check used an older browser
+  container config; the current test image includes the UI helper scan and passed.
+  Subsequent template lint, JS syntax and CSS build passed. Browser checks passed
+  JS on/off at 1366, 1024, 768 and 390px, all four CSV exports, original-period
+  return links, scenario update, period create/close/reopen, Escape and history.
+  Trial balance, account, cash and period screenshots were visually inspected.
+- No new migration/schema or hosted changes. Banking, remaining daily/setup
+  fidelity, complete accessibility evidence and release packaging remain pending.

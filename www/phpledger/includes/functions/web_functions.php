@@ -168,6 +168,16 @@ function pl_list_filters(array $input, string $screen): array
     $query = $input['q'] ?? $input['search'] ?? '';
     if (!is_string($query) || mb_strlen($query) > 160) { throw new DomainException('Search must be text of up to 160 characters.'); }
     $filters = ['page' => (int)$page, 'per_page' => (int)$size, 'q' => trim($query), 'sort' => $sort, 'dir' => $direction];
+    if ($screen==='account' && ($input['return_report']??'')!=='') {
+        $report=$input['return_report'];
+        if (!in_array($report,['profit-loss','balance-sheet','trial-balance'],true)) { throw new DomainException('Choose a valid return report.'); }
+        $to=$input['return_to']??$input['as_of']??gmdate('Y-m-d');
+        $from=$input['return_from']??$input['from']??'';
+        $preset=$input['return_preset']??'custom';
+        if (!is_string($to) || !is_string($from) || !in_array($preset,['month','last_month','quarter','year','custom'],true)) { throw new DomainException('Choose valid return report dates.'); }
+        $filters+=['return_report'=>$report,'return_to'=>pl_ledger_date($to),'return_from'=>$from===''?'':pl_ledger_date($from),'return_preset'=>$preset];
+        if ($from!=='' && $from>$to) { throw new DomainException('The return report start date must be on or before its end date.'); }
+    }
     if ($screen==='parties') {
         $role=$input['role']??'all';
         if (!in_array($role,['all','customer','vendor'],true)) { throw new DomainException('Choose customers, suppliers or all parties.'); }

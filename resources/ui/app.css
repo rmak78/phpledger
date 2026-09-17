@@ -606,7 +606,7 @@ a {
     z-index: 1;
   }
   .table th.num, .table td.num { text-align: end; }
-  .table td {
+  .table td, .table tbody th, .table tfoot th {
     padding-block: .5rem;
     padding-inline: .75rem;
     border-block-end: 1px solid var(--border);
@@ -614,7 +614,9 @@ a {
     color: var(--ink);
     height: var(--table-row-h);
   }
-  .table tbody tr:last-child td { border-block-end: none; }
+  .table tbody th, .table tfoot th { text-align: start; font-weight: 500; }
+  .table a { color: var(--brand-blue); }
+  .table tbody tr:last-child td, .table tbody tr:last-child th { border-block-end: none; }
   .table tbody tr:hover { background: var(--surface-subtle); }
   .table tbody tr[data-href] { cursor: pointer; }
   .table tbody tr[aria-selected="true"] { background: var(--selected, var(--brand-selected)); }
@@ -629,7 +631,7 @@ a {
   }
   .table .row-title { font-weight: 600; color: var(--ink); display: block; }
   .table .row-sub { display: block; color: var(--ink-muted); font-size: .75rem; margin-block-start: 1px; }
-  .table tfoot td, .table-totals td {
+  .table tfoot td, .table tfoot th, .table-totals td, .table-totals th {
     font-weight: 700;
     background: var(--surface-subtle);
     border-block-start: 1px solid var(--border-strong);

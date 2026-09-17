@@ -1,1 +1,15 @@
 /* Extra components for the reports screens. Use @layer components; tokens only. */
+/* Compact report pages share the same heading and filter rhythm. */
+@layer components {
+  :is(.view-reports, .view-trial-balance, .view-balance-sheet, .view-profit-loss, .view-account, .view-cash-forecast, .view-periods) .page-header {
+    position: static;
+    padding-block: 0;
+  }
+  :is(.view-reports, .view-trial-balance, .view-balance-sheet, .view-profit-loss, .view-account, .view-cash-forecast, .view-periods) .page-header p {
+    margin-block-end: 0;
+  }
+  :is(.view-trial-balance, .view-balance-sheet, .view-profit-loss, .view-account, .view-cash-forecast, .view-periods) .filter-bar {
+    align-items: end;
+    padding-block: 0;
+  }
+}

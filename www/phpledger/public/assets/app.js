@@ -300,6 +300,9 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
     const values = JSON.parse(canvas.dataset.values).map(Number);
     const context = canvas.getContext('2d');
     if (!context || !values.length || values.some(value => !Number.isFinite(value))) return;
+    canvas.hidden = false;
+    const tokens = getComputedStyle(document.documentElement);
+    const color = name => tokens.getPropertyValue(name).trim();
     const width = canvas.width;
     const height = canvas.height;
     const pad = {left:70, right:22, top:30, bottom:38};
@@ -308,22 +311,22 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
     const range = high - low || 1;
     const x = index => pad.left + index * (width-pad.left-pad.right) / Math.max(1, values.length-1);
     const y = value => height-pad.bottom - (value-low) / range * (height-pad.top-pad.bottom);
-    context.font = '12px Inter, sans-serif';
+    context.font = '12px "Inter Variable", sans-serif';
     context.textBaseline = 'middle';
     for (let i=0; i<=4; i++) {
         const value = low + range * i / 4;
-        context.strokeStyle = '#e1e6ee';
+        context.strokeStyle = color('--border');
         context.beginPath(); context.moveTo(pad.left, y(value)); context.lineTo(width-pad.right,y(value)); context.stroke();
-        context.fillStyle = '#65718a'; context.textAlign='right';
+        context.fillStyle = color('--ink-muted'); context.textAlign='right';
         context.fillText(new Intl.NumberFormat('en',{notation:'compact',maximumFractionDigits:1}).format(value),pad.left-12,y(value));
     }
     context.beginPath();
     context.moveTo(x(0),y(values[0])); values.forEach((value,index)=>context.lineTo(x(index),y(value)));
     context.lineTo(x(values.length-1),height-pad.bottom);context.lineTo(x(0),height-pad.bottom);context.closePath();
-    context.fillStyle='#eef1ff';context.fill();
+    context.fillStyle=color('--brand-selected');context.fill();
     context.beginPath(); values.forEach((value,index)=>index?context.lineTo(x(index),y(value)):context.moveTo(x(index),y(value)));
-    context.strokeStyle='#304dea';context.lineWidth=3;context.lineJoin='round';context.stroke();
-    context.fillStyle='#65718a';context.textAlign='center';
+    context.strokeStyle=color('--brand-blue');context.lineWidth=3;context.lineJoin='round';context.stroke();
+    context.fillStyle=color('--ink-muted');context.textAlign='center';
     [0,Math.floor((values.length-1)/2),values.length-1].forEach(index=>context.fillText(index===0?'Today':`Week ${index}`,x(index),height-13));
 });
 

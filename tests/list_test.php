@@ -50,3 +50,13 @@ test('journal status and text filters use the effective source and reconcile pag
     pl_post_general_draft($f['actor_id'],$f['company_id'],$f['book_id'],$draft['id'],$draft['revision']);
     assert_same(0,$run('draft')['total']); assert_same(1,$run('posted')['total']);
 });
+
+test('account report return context keeps original dates and rejects arbitrary destinations', function (): void {
+    $filters=pl_list_filters(['return_report'=>'profit-loss','from'=>'2026-01-01','as_of'=>'2026-09-17','return_preset'=>'year'],'account');
+    assert_same('2026-01-01',$filters['return_from']); assert_same('2026-09-17',$filters['return_to']);
+    $next=pl_list_filters($filters+['from'=>'2026-09-01','as_of'=>'2026-09-18'],'account');
+    assert_same('2026-01-01',$next['return_from']); assert_same('2026-09-17',$next['return_to']);
+    foreach ([['return_report'=>'https://example.invalid'],['return_report'=>['profit-loss']],['return_report'=>'profit-loss','return_to'=>[]],['return_report'=>'profit-loss','return_from'=>'2026-09-20','return_to'=>'2026-09-01'],['return_report'=>'profit-loss','return_preset'=>'unknown']] as $input) {
+        assert_throws(fn()=>pl_list_filters($input,'account'),DomainException::class);
+    }
+});

@@ -1,33 +1,40 @@
 <?php
 declare(strict_types=1);
 $hasOverview = isset($overview) && is_array($overview);
+$groups = [
+    'Financial statements' => [
+        ['/reports/balance-sheet','Balance sheet','Assets, liabilities and the equity behind your business.','building'],
+        ['/reports/profit-loss','Profit & loss','Income, cost of sales and expenses, with gross and net profit for a period.','file-text'],
+        ['/reports/trial-balance','Trial balance','Every account’s debit and credit balance, and whether they agree.','book'],
+    ],
+    'Ledgers' => [
+        ['/reports/account','Account statement','Opening balance, every debit and credit, and the running balance for one account.','book'],
+        ['/accounts','Chart of accounts','Account classifications, operational roles and active status.','list'],
+    ],
+    'Receivables & payables' => [
+        ['/ar','Invoices','Follow customer invoices from draft to paid, and see what is overdue.','file-text'],
+        ['/ap','Bills','Track supplier bills and when they are due.','file-text'],
+        ['/reports/ageing','Receivables & payables ageing','Current, 1–30, 31–60, 61–90 and over-90-day balances, reconciled to control accounts.','calendar'],
+    ],
+    'Cash' => [
+        ['/reports/cash-forecast','Cash forecast','Explore cash needs using your own expected money in and out. Scenario only; no posting.','arrow-right'],
+        ['/bank-reconciliation','Bank reconciliation','Compare a bank statement with your posted entries.','building'],
+    ],
+];
 ?>
-<div class="page-wrap owner-reports">
-    <div class="page-heading owner-heading">
-        <div><p class="eyebrow">Your business at a glance</p><h1>A clearer picture.</h1><p class="muted"><?= pl_e($company['name']) ?> · <?= pl_e($company['book_name']) ?></p></div>
-        <div class="owner-heading-actions">
-            <?php if ($hasOverview): ?><span class="as-of-label">Through <?= pl_e(pl_date_label($overview['as_of'])) ?></span><?php endif; ?>
-            <?php if (pl_can_write($company)): ?><a class="button primary" href="<?= pl_e(pl_url('/transactions/new')) ?>"><?= pl_icon('plus') ?> New transaction</a><?php endif; ?>
-        </div>
-    </div>
-    <?php if ($hasOverview):
-        $chartMax = max(abs((float) $overview['income']), abs((float) $overview['expenses']), 1);
-        $incomeWidth = max(0, min(360, (int) round(abs((float) $overview['income']) / $chartMax * 360)));
-        $expenseWidth = max(0, min(360, (int) round(abs((float) $overview['expenses']) / $chartMax * 360)));
-        // Rounded widths are presentation only; displayed amounts retain fixed-precision formatting.
-    ?>
-    <section class="owner-overview" aria-label="Posted business balances">
-        <div class="cash-highlight"><div class="cash-label"><?= pl_icon('building') ?><span>Cash &amp; bank</span><span class="actual-label">Posted balance</span></div><p class="hero-amount"><span><?= pl_e($company['currency']) ?></span><?= pl_e(pl_money($overview['cash'])) ?></p><p>Balance across your recorded cash and bank accounts.</p><a href="<?= pl_e(pl_url('/reports/balance-sheet')) ?>">See your financial position <?= pl_icon('arrow-right') ?></a></div>
-        <div class="performance-highlight"><div class="performance-heading"><h2>Money earned. Money spent.</h2><span><?= pl_e(pl_date_label($overview['period_from'])) ?> – <?= pl_e(pl_date_label($overview['as_of'])) ?></span></div><div class="performance-numbers"><div><span class="metric-label"><i class="metric-dot income-dot" aria-hidden="true"></i>Income</span><strong><?= pl_e(pl_money($overview['income'])) ?></strong></div><div><span class="metric-label"><i class="metric-dot expense-dot" aria-hidden="true"></i>Expenses</span><strong><?= pl_e(pl_money($overview['expenses'])) ?></strong></div><div><span class="metric-label"><?= bccomp($overview['profit'], '0', 4) < 0 ? 'Net loss' : 'Net profit' ?></span><strong><?= pl_e(pl_money($overview['profit'])) ?></strong></div></div><div class="performance-chart"><svg viewBox="0 0 360 54" role="img" aria-label="Relative magnitude of posted income and expenses. Exact amounts appear above."><rect x="0" y="3" width="360" height="17" rx="6" class="chart-track"/><rect x="0" y="3" width="<?= $incomeWidth ?>" height="17" rx="6" class="chart-income"/><rect x="0" y="33" width="360" height="17" rx="6" class="chart-track"/><rect x="0" y="33" width="<?= $expenseWidth ?>" height="17" rx="6" class="chart-expense"/></svg><a href="<?= pl_e(pl_url('/reports/profit-loss')) ?>">Explore profit &amp; loss <?= pl_icon('arrow-right') ?></a></div><p class="small muted">Amounts in <?= pl_e($company['currency']) ?> · Posted entries only</p></div>
-    </section>
-    <?php endif; ?>
-    <div class="report-section-title"><div><p class="eyebrow">Look a little closer</p><h2>The answers behind the numbers.</h2></div><p>Start with the question you want to answer.</p></div>
-    <div class="report-directory">
-        <a href="<?= pl_e(pl_url('/reports/ageing')) ?>"><span class="report-symbol"><?= pl_icon('calendar') ?></span><span class="report-type">Unpaid balances</span><h2>What is overdue?</h2><p>Receivables and payables in 30, 60 and 90 day buckets, reconciled to control accounts.</p><span class="report-link">Ageing report <?= pl_icon('arrow-right') ?></span></a>
-        <a href="<?= pl_e(pl_url('/reports/balance-sheet')) ?>"><span class="report-symbol"><?= pl_icon('building') ?></span><span class="report-type">Financial position</span><h2>What do I own<br> and owe?</h2><p>Assets, liabilities and the equity behind your business.</p><span class="report-link">Balance sheet <?= pl_icon('arrow-right') ?></span></a>
-        <a href="<?= pl_e(pl_url('/reports/profit-loss')) ?>"><span class="report-symbol"><?= pl_icon('file-text') ?></span><span class="report-type">Business performance</span><h2>What am I<br> earning?</h2><p>Income and expenses, with the profit left over for a period.</p><span class="report-link">Profit &amp; loss <?= pl_icon('arrow-right') ?></span></a>
-        <a class="forecast-directory" href="<?= pl_e(pl_url('/reports/cash-forecast')) ?>"><span class="report-symbol"><?= pl_icon('arrow-right') ?></span><span class="report-type">Planning scenario</span><h2>What could<br> come next?</h2><p>Explore cash needs using your own expected money in and out.</p><span class="report-link">Cash forecast <?= pl_icon('arrow-right') ?></span></a>
-    </div>
-    <div class="accountant-report"><span class="accountant-icon"><?= pl_icon('book') ?></span><div><h3>Account ledger &amp; running balances</h3><p>Choose an account to follow its opening balance, every debit and credit, and the balance after each entry.</p></div><a href="<?= pl_e(pl_url('/reports/account')) ?>" class="button secondary">Open account ledger <?= pl_icon('arrow-right') ?></a><a href="<?= pl_e(pl_url('/reports/trial-balance')) ?>" class="button secondary">Trial balance <?= pl_icon('arrow-right') ?></a></div>
-    <p class="report-scope-note"><?= pl_icon('info-circle') ?><span>Actual reports exclude drafts. Cash forecasts are scenarios based on your assumptions. Country-neutral statements are not statutory filing reports.</span></p>
+<div class="flex flex-col gap-6 py-5">
+<?php pl_ui_page_header('Reports','Your business in numbers · '.$company['name'].($hasOverview?' · Through '.pl_date_label($overview['as_of']):''),static function () use ($company): void { if (pl_can_write($company)): ?>
+<a class="btn btn-primary" href="<?= pl_e(pl_url('/transactions/new')) ?>"><?= pl_icon('plus') ?> New transaction</a>
+<?php endif; }); ?>
+<?php if ($hasOverview): ?>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-panel border border-border bg-border" aria-label="Posted business balances">
+<?php foreach (['cash'=>['Cash & bank','/reports/balance-sheet'],'income'=>['Income YTD','/reports/profit-loss'],'expenses'=>['Costs & expenses YTD','/reports/profit-loss'],'profit'=>['Net profit / loss YTD','/reports/profit-loss']] as $key=>[$label,$path]): ?>
+<a class="bg-surface px-4 py-3 hover:bg-surface-subtle" href="<?= pl_e(pl_url($path,$key==='cash'?['as_of'=>$overview['as_of']]:['preset'=>'custom','from'=>$overview['period_from'],'to'=>$overview['as_of']])) ?>"><span class="text-xs text-ink-muted"><?= pl_e($label) ?></span><p class="amount-lg mt-1"><?= pl_e(pl_money($overview[$key])) ?></p></a>
+<?php endforeach; ?></div>
+<p class="text-xs text-ink-muted">Amounts in <?= pl_e($company['currency']) ?> · Posted entries only, <?= pl_e(pl_date_label($overview['period_from']).' – '.pl_date_label($overview['as_of'])) ?>. Cash and bank is the balance through that date.</p>
+<?php endif; ?>
+<?php foreach ($groups as $heading=>$links): ?><section><h2 class="section-title mb-2"><?= pl_e($heading) ?></h2><div class="rounded-panel border border-border bg-surface p-2"><ul class="flex flex-col">
+<?php foreach ($links as [$path,$label,$description,$icon]): ?><li><a class="flex items-center gap-3 rounded-control px-3 py-2.5 hover:bg-surface-subtle" href="<?= pl_e(pl_url($path)) ?>"><span class="inline-flex size-8 flex-none items-center justify-center rounded-full bg-surface-subtle text-ink-muted"><?= pl_icon($icon) ?></span><span class="min-w-0 flex-1"><span class="block text-sm font-semibold text-ink"><?= pl_e($label) ?></span><span class="block text-xs text-ink-muted"><?= pl_e($description) ?></span></span><?= pl_icon('chevron-right') ?></a></li><?php endforeach; ?>
+</ul></div></section><?php endforeach; ?>
+<p class="text-xs text-ink-muted">Financial statements exclude drafts. Cash forecasts are scenarios based on your assumptions. Country-neutral statements are not statutory filing reports.</p>
 </div>

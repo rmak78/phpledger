@@ -562,7 +562,7 @@ try {
         $periodFrom = min($company['start_date'], $today);
         $profit = pl_profit_loss($actorId, $companyId, $bookId, $periodFrom, $today);
         $balance = pl_balance_sheet($actorId, $companyId, $bookId, $today);
-        $overview = ['as_of' => $today, 'period_from' => $periodFrom, 'cash' => pl_cash_balance($actorId, $companyId, $bookId, $today), 'income' => $profit['total_income'], 'expenses' => $profit['total_expenses'], 'profit' => $profit['net_profit'], 'assets' => $balance['total_assets'], 'liabilities' => $balance['total_liabilities'], 'equity' => $balance['total_equity']];
+        $overview = ['as_of' => $today, 'period_from' => $periodFrom, 'cash' => pl_cash_balance($actorId, $companyId, $bookId, $today), 'income' => $profit['total_income'], 'expenses' => bcadd($profit['total_cost_of_sales'], $profit['total_expenses'], 4), 'profit' => $profit['net_profit'], 'assets' => $balance['total_assets'], 'liabilities' => $balance['total_liabilities'], 'equity' => $balance['total_equity']];
         pl_render('reports', ['title' => 'Your business in numbers', 'user' => $user, 'company' => $company, 'overview' => $overview]);
     }
     if ($path === '/reports/ageing') {
