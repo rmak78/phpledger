@@ -16,7 +16,7 @@ function pl_web_connections(int $actor, array $user, array $company, string $met
             pl_connection_rate('connection-create:' . $actor, 10);
             $action = pl_web_text($_POST, 'action');
             if ($action === 'create') {
-                $result = pl_create_personal_token($actor, pl_web_text($_POST, 'name'), [['company_id' => (int) $company['id'], 'book_id' => (int) $company['book_id']]]);
+                $result = pl_create_personal_token($actor, pl_web_text($_POST, 'name'), [['company_id' => (int) $company['id'], 'book_id' => (int) $company['book_id']]], pl_web_text($_POST, 'access_mode', 'reports'));
             } elseif ($action === 'revoke') {
                 // A company screen cannot be used to target an unseen connection in another book.
                 if (!DB::queryFirstField('SELECT connection_id FROM pl_connection_books WHERE connection_id = %s AND company_id = %i AND book_id = %i', pl_web_text($_POST, 'connection_id'), (int) $company['id'], (int) $company['book_id'])) { throw new DomainException('This connection is not available in the selected book.'); }
@@ -76,8 +76,9 @@ function pl_web_oauth(?int $actor, ?array $user, string $method): never
             $company = pl_company_context($actor, pl_web_id($_POST, 'company_id'));
             $scopes = array_map(static fn ($scope): string => $scope->getIdentifier(), $validated->getScopes());
             if (!in_array('ledger.read', $scopes, true) || array_diff($scopes, ['ledger.read','offline_access']) !== []) { throw new DomainException('This client must request read access.'); }
-            $response = pl_ledger_transaction(function () use ($actor, $company, $validated, $scopes): Psr\Http\Message\ResponseInterface {
-                $connection = pl_create_connection($actor, $validated->getClient()->getIdentifier(), $validated->getClient()->getName(), [['company_id' => (int) $company['id'], 'book_id' => (int) $company['book_id']]], 'oauth', in_array('offline_access', $scopes, true) ? 'ledger.read offline_access' : 'ledger.read');
+            $accessMode = pl_web_text($_POST, 'access_mode', 'reports');
+            $response = pl_ledger_transaction(function () use ($actor, $company, $validated, $scopes, $accessMode): Psr\Http\Message\ResponseInterface {
+                $connection = pl_create_connection($actor, $validated->getClient()->getIdentifier(), $validated->getClient()->getName(), [['company_id' => (int) $company['id'], 'book_id' => (int) $company['book_id']]], 'oauth', in_array('offline_access', $scopes, true) ? 'ledger.read offline_access' : 'ledger.read', $accessMode);
                 $repositories = new PlOAuthRepositories();
                 $repositories->connectionId = $connection['id'];
                 $validated->setUser(new PlOAuthUser($actor));

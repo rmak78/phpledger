@@ -1,5 +1,30 @@
 'use strict';
 
+// Native details preserves an explicit review step without JavaScript.
+document.querySelectorAll('[data-confirmation]').forEach((details, index) => {
+    if (typeof HTMLDialogElement === 'undefined') return;
+    const summary = details.querySelector('summary');
+    const body = details.querySelector('[data-confirmation-body]');
+    const dialog = document.createElement('dialog');
+    dialog.className = 'dialog';
+    const title = body.querySelector('h2');
+    title.id = 'confirmation-title-' + index;
+    dialog.setAttribute('aria-labelledby', title.id);
+    body.classList.add('dialog-body');
+    body.replaceWith(dialog);
+    dialog.append(body);
+    const cancel = body.querySelector('[data-confirmation-cancel]');
+    cancel.hidden = false;
+    cancel.addEventListener('click', () => dialog.close());
+    summary.addEventListener('click', event => {
+        event.preventDefault();
+        details.open = true;
+        dialog.showModal();
+        cancel.focus();
+    });
+    dialog.addEventListener('close', () => { details.open = false; summary.focus(); });
+});
+
 // Local section links remain ordinary anchors when JavaScript is unavailable.
 document.querySelectorAll('[data-ui-tabs]').forEach(nav => {
     const tabs = [...nav.querySelectorAll('a[href^="#"]')];

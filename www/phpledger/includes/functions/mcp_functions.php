@@ -66,6 +66,7 @@ function pl_mcp_response(ServerRequestInterface $request, array $connection): Re
         ->setModernVersions([Mcp\Schema\Enum\ProtocolVersion::V2026_07_28])
         ->setSession(new PlMcpSessions($connection['id']));
     foreach (pl_read_catalog() as $operation => $definition) {
+        if (!in_array($operation, pl_connection_read_operations($connection), true)) { continue; }
         $tool = Mcp\Schema\Tool::fromArray(['name' => 'ledger_' . $operation, 'description' => $definition['description'], 'inputSchema' => $definition['schema'], 'annotations' => ['readOnlyHint' => true, 'destructiveHint' => false, 'idempotentHint' => true, 'openWorldHint' => false]]);
         $builder->add($tool, new PlMcpReadTool($connection['id'], $operation));
     }

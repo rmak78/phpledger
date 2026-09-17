@@ -95,8 +95,8 @@ function pl_ui_side_panel(string $title, callable $body): void
 /** The confirmation is server-rendered; JavaScript may enhance its native details. */
 function pl_ui_confirmation(string $title, string $consequence, callable $form): void
 {
-    echo '<details class="panel"><summary>' . pl_e($title) . '</summary><p class="field-hint">' . pl_e($consequence) . '</p>';
-    $form(); echo '</details>';
+    echo '<details class="confirmation" data-confirmation><summary class="btn btn-secondary">' . pl_e($title) . '</summary><div data-confirmation-body><h2 class="section-title">' . pl_e($title) . '?</h2><p class="field-hint">' . pl_e($consequence) . '</p><div class="flex flex-wrap gap-2 mt-3">';
+    $form(); echo '<button type="button" class="btn btn-ghost" data-confirmation-cancel hidden>Cancel</button></div></div></details>';
 }
 
 function pl_ui_pagination(string $path, array $filters, int $page, int $pages): void
@@ -106,6 +106,14 @@ function pl_ui_pagination(string $path, array $filters, int $page, int $pages): 
     echo '<span>Page ' . $page . ' of ' . max(1, $pages) . '</span>';
     if ($page < $pages) { echo '<a class="btn btn-secondary btn-sm" href="' . pl_e(pl_url($path, array_replace($filters, ['page' => $page + 1]))) . '">Next</a>'; }
     echo '</nav>';
+}
+
+function pl_ui_connection_scope(string $id): void
+{
+    pl_ui_field($id, 'Access scope', static function () use ($id): void {
+        echo '<select class="select" id="' . pl_e($id) . '" name="access_mode" required><option value="reports">Report-only — summary financial reports</option><option value="full">Full read — reports and individual records</option></select>';
+    });
+    echo '<p class="field-hint">Report-only includes company discovery, trial balance, profit and loss, and balance sheet. Full read also includes accounts, transactions, journals and account statements. Neither permits financial writes.</p>';
 }
 
 /** Canonical list filters, never a user-controlled redirect URL. */

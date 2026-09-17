@@ -124,12 +124,25 @@ function pl_read_source(array $row, string $type, int $page, int $size): array
     return $result;
 }
 
+/** Report-only grants exclude transaction-level records and account statements. */
+function pl_connection_read_operations(array $connection): array
+{
+    return match ($connection['access_mode'] ?? null) {
+        'reports' => ['companies', 'capabilities', 'trial_balance', 'profit_loss', 'balance_sheet'],
+        'full' => array_keys(pl_read_catalog()),
+        default => throw new DomainException('This connection has an unsupported access scope.'),
+    };
+}
+
 /** One scoped business interface for HTTP and MCP; only existing accounting services compute money. */
 function pl_read_operation(string $connectionId, string $operation, array $input): array
 {
     $args = pl_read_arguments($operation, $input);
     return pl_ledger_transaction(function () use ($connectionId, $operation, $args): array {
         $connection = pl_connection_require($connectionId);
+        if (!in_array($operation, pl_connection_read_operations($connection), true)) {
+            throw new DomainException('This connection permits summary reports only. Create a full read connection to read individual records.');
+        }
         $actor = $connection['actor_id'];
         $page = $args['page'] ?? 1;
         $size = $args['page_size'] ?? 25;
@@ -146,7 +159,7 @@ function pl_read_operation(string $connectionId, string $operation, array $input
         pl_connection_scope($connection, $company, $book);
         $bookInfo = pl_ledger_book($company, $book);
         $data = match ($operation) {
-            'capabilities' => ['read_operations' => array_keys(pl_read_catalog()), 'financial_writes' => false, 'enabled_modules' => array_values(array_filter(array_keys(pl_module_registry()), static fn (string $id): bool => pl_module_available($actor, $company, $book, $id)))],
+            'capabilities' => ['read_operations' => pl_connection_read_operations($connection), 'financial_writes' => false, 'enabled_modules' => array_values(array_filter(array_keys(pl_module_registry()), static fn (string $id): bool => pl_module_available($actor, $company, $book, $id)))],
             'accounts' => pl_read_page(array_map(static fn (array $row): array => pl_read_fields($row, ['id','code','name','type','role','is_active']), DB::query('SELECT id, code, name, type, role, is_active FROM pl_accounts WHERE company_id = %i AND book_id = %i ORDER BY code, id', $company, $book)), $page, $size),
             'trial_balance' => pl_trial_balance($actor, $company, $book, $args['as_of']),
             'profit_loss' => pl_profit_loss($actor, $company, $book, $args['from'], $args['to']),

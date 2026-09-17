@@ -162,3 +162,27 @@ Home's use of that service needs review alongside list-performance work.
 - POS cart/review/checkout/receipt passed with JavaScript on and off; captures at
   1366, 1024, 768 and 390 pixels wide had no horizontal page overflow or JS errors.
   This does not yet close the entire daily-work lane or release verification.
+
+## Connection access and confirmations checkpoint
+
+- Migration 029 adds connection access_mode. Existing credentials default to full
+  read, preserving their grants. New personal-token and OAuth browser forms default
+  to report-only; the owner can explicitly select full read.
+- Report-only allows company discovery/capabilities, trial balance, profit and loss,
+  and balance sheet. It excludes accounts, account statements, transactions,
+  journals and source detail. OAuth ledger.read remains the transport scope;
+  access_mode is an additional server-side grant restriction, reloaded for every
+  shared API/MCP read. MCP discovery and capabilities reflect the restriction.
+- Module disable and connection revoke use a shared confirmation. Native details
+  retains an explicit consequence/review step without JavaScript. With JavaScript,
+  a native modal traps focus, starts on Cancel and restores the trigger on close.
+- Browser module disable/re-enable and revoke cancel/confirm passed locally.
+  Personal token report-only creation and revoke passed with JS on and off. Token
+  values were neither captured nor logged. No external client was contacted.
+- Full composer check passed: 182 PHP files linted, static analysis and sample
+  validation passed, 250 tests with zero failures. The 33-test connection suite
+  separately verifies personal and OAuth API/MCP restrictions.
+- Disposable fresh install passed (30 migration files). New preview-0.5.0 upgrade
+  verifier built schema through 028, preserved a posted journal, accounts, ready
+  setup and full-read connection, and verified balanced totals and migration replay.
+  Full AR/AP/inventory/currency upgrade scenarios remain part of the release gate.

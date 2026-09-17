@@ -21,6 +21,7 @@
                 <?php foreach ($companies as $availableCompany): ?><option value="<?= (int) $availableCompany['id'] ?>"><?= pl_e($availableCompany['name']) ?> · Book <?= (int) $availableCompany['book_id'] ?></option><?php endforeach; ?>
             </select>
         <?php }); ?>
+        <?php pl_ui_connection_scope('consent-scope'); ?>
         <div class="panel-actions" data-fold="primary action"><button class="btn btn-primary" name="decision" value="allow">Allow read access</button><button class="btn btn-ghost" name="decision" value="deny" formnovalidate>Cancel</button></div>
     </form>
 </section>
