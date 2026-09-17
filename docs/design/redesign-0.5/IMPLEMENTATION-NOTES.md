@@ -547,3 +547,25 @@ rates, or separately design code editing. The owner subsequently approved the re
   posting at 12.3401 and primary actions at both desktop/tablet fold targets.
 - No new migrations, schema or hosted changes. Setup/help ports and final
   whole-application accessibility, package and publication gates remain open.
+
+## Setup, opening debts and Help checkpoint — 18 September
+
+- Ported opening balances, conversion, prior-book setup review and error panels
+  to the shared controls. Conversion failures identify missing/ineligible party
+  mappings beside their fields and link the error summary to each control;
+  valid selections survive the rejected preview.
+- Converted debts use the shared reviewed payment editor, including the existing
+  multi-item allocation and conditional FX rules. Browser-confirmed both opening
+  AR and AP conversion and partial payments with JS enabled/disabled; exact
+  remaining amounts were 299.00 and 199.00 from 300.00 and 200.00 fixtures.
+  No new opening journal is introduced by the conversion service.
+- Help puts correction guidance before optional reference disclosures and keeps
+  the active company's workspace shell. It remains available before company
+  selection and when a previous company's access has been revoked.
+- Lint 209 PHP files, PHPStan and CSS build passed. Both fold sizes passed with
+  JS on/off for setup review, opening entry/preview, conversion preview, Help and
+  404/405. Converted debt results also checked at portrait/phone widths. Help
+  context/disclosures and mapping error retention/focus passed browser checks.
+  The preceding full suite remains 276 tests, zero failures; no service changes
+  in this checkpoint. Full release acceptance is still pending.
+- No migration/schema, external recipient messages or hosted changes.

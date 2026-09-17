@@ -317,7 +317,12 @@ try {
         pl_render('onboarding', ['title' => $preview ? 'Preview your setup' : 'Set up a business', 'user' => $user, 'template' => $template, 'preview' => $preview, 'wizard_step' => $wizardStep, 'form' => $form, 'input' => $input]);
     }
     if ($path === '/help') {
-        pl_render('help', ['title' => 'Getting started', 'user' => $user]);
+        $helpCompany = null;
+        if (!empty($_SESSION['company_id'])) {
+            try { $helpCompany = pl_company_context($actorId, (int) $_SESSION['company_id']); }
+            catch (DomainException) { /* Help remains available if prior company access was revoked. */ }
+        }
+        pl_render('help', ['title' => 'Getting started', 'user' => $user, 'company' => $helpCompany]);
     }
     $company = pl_web_context($actorId);
     $companyId = (int) $company['id'];
