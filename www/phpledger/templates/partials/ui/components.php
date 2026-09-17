@@ -14,7 +14,7 @@ function pl_ui_page_header(string $title, string $description = '', ?callable $a
 function pl_ui_badge(string $status, ?string $label = null): void
 {
     $allowed = ['draft','posted','reversed','unpaid','paid','partially-paid','due-soon','overdue','info','sample'];
-    $kind = in_array($status, $allowed, true) ? $status : 'draft';
+    $kind = match ($status) { 'active'=>'posted','inactive'=>'unpaid',default=>in_array($status, $allowed, true) ? $status : 'draft' };
     echo '<span class="badge badge-' . $kind . '"><span class="badge-dot" aria-hidden="true"></span>'
         . pl_e($label ?? ucfirst(str_replace('-', ' ', $status))) . '</span>';
 }
@@ -97,6 +97,13 @@ function pl_ui_confirmation(string $title, string $consequence, callable $form):
 {
     echo '<details class="confirmation" data-confirmation><summary class="btn btn-secondary">' . pl_e($title) . '</summary><div data-confirmation-body><h2 class="section-title">' . pl_e($title) . '?</h2><p class="field-hint">' . pl_e($consequence) . '</p><div class="flex flex-wrap gap-2 mt-3">';
     $form(); echo '<button type="button" class="btn btn-ghost" data-confirmation-cancel hidden>Cancel</button></div></div></details>';
+}
+
+/** Native details becomes an accessible modal sheet when JS is available. */
+function pl_ui_sheet(string $title,callable $body,bool $open=false,string $button='btn btn-secondary'): void
+{
+    echo '<details data-editor-sheet'.($open?' open':'').'><summary class="'.pl_e($button).'">'.pl_e($title).'</summary><div data-confirmation-body><div class="flex justify-between items-center gap-3 mb-4"><h2 class="section-title">'.pl_e($title).'</h2><button type="button" class="btn btn-ghost" data-confirmation-cancel hidden>Close</button></div>';
+    $body(); echo '</div></details>';
 }
 
 function pl_ui_pagination(string $path, array $filters, int $page, int $pages): void

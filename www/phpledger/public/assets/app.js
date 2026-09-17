@@ -22,12 +22,13 @@ document.querySelectorAll('.core-account-form').forEach(form => {
 });
 
 // Native details preserves an explicit review step without JavaScript.
-document.querySelectorAll('[data-confirmation]').forEach((details, index) => {
+document.querySelectorAll('[data-confirmation], [data-editor-sheet]').forEach((details, index) => {
     if (typeof HTMLDialogElement === 'undefined') return;
     const summary = details.querySelector('summary');
     const body = details.querySelector('[data-confirmation-body]');
     const dialog = document.createElement('dialog');
-    dialog.className = 'dialog';
+    const sheet = details.hasAttribute('data-editor-sheet');
+    dialog.className = sheet ? 'dialog sheet' : 'dialog';
     const title = body.querySelector('h2');
     title.id = 'confirmation-title-' + index;
     dialog.setAttribute('aria-labelledby', title.id);
@@ -41,9 +42,10 @@ document.querySelectorAll('[data-confirmation]').forEach((details, index) => {
         event.preventDefault();
         details.open = true;
         dialog.showModal();
-        cancel.focus();
+        (sheet ? body.querySelector('input:not([type="hidden"]), select, button') : cancel)?.focus();
     });
     dialog.addEventListener('close', () => { details.open = false; summary.focus(); });
+    if (sheet && details.open) dialog.showModal();
 });
 
 // Local section links remain ordinary anchors when JavaScript is unavailable.

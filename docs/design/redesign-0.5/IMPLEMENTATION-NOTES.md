@@ -376,7 +376,7 @@ Home's use of that service needs review alongside list-performance work.
 - No migration or live change. The four required 5,000-row query-plan checks and
   complete screen/accessibility acceptance remain open.
 
-## Pending prototype conflict: tax-code editing
+## Resolved prototype conflict: tax-code editing
 
 The `tax-codes.html` prototype exposes editable fields for an existing code's
 name, treatment and accounts. The current `pl_create_tax_code` service only
@@ -384,8 +384,7 @@ creates immutable code definitions; changes to rates use dated revisions.
 No code-edit service or browser action exists. Implementing that prototype action
 would add accounting behavior beyond a template port. Owner clarification was
 requested on 18 September: keep existing code fields read-only and allow dated
-rates, or separately design code editing. Tax-screen implementation is held at
-this conflict; other approved release work continues.
+rates, or separately design code editing. The owner subsequently approved the recommendation below; tax-screen implementation resumed.
 
 ## Capacity, party screens and regression checkpoint — 18 September
 
@@ -416,4 +415,32 @@ this conflict; other approved release work continues.
   `tools/verify-preview-upgrade.php` verified preservation across migrations
   029–031; details are in `evidence-0.6.0/UPGRADE-0.5.md`.
 - All changes remain local. No release, hosted demo, website or production data
-  was changed. The tax-code prototype conflict above remains pending owner choice.
+  was changed. The tax-code prototype conflict above was subsequently resolved by the owner.
+
+
+## Tax settings and product editor checkpoint � 18 September
+
+- Owner accepted the recommended tax-code conflict resolution in this task:
+  existing code/name/treatment/account definitions remain read-only; offer
+  **Manage rates**, effective-dated revisions with reasons, and **New tax code**.
+  A different treatment or account mapping requires a new code. Metadata editing
+  is not introduced in 0.6. Posted tax snapshots remain unchanged.
+- Official ERPNext Item Tax Template and Sales Taxes and Charges Template docs
+  were consulted for the recommendation (date-valid assignments and copied
+  transaction tax rows). They were read-only references, not a claim that every
+  accounting product prohibits master-data editing.
+- Rebuilt `/tax` with compact settings, code/rate tables and accessible sheets.
+  Native details keep code creation and dated rates usable without JavaScript.
+  Shared sheets use the same dialog enhancement as confirmations, with Escape
+  and focus return; CSS now centers dialogs and anchors full-height sheets to
+  the logical end edge. All strict-CSP behavior stays in the external JS file.
+- Product editors now have sticky Save/Cancel/count actions and retain protected
+  identity/stock accounts, active state, all editable fields and manual receipt,
+  issue and value-adjustment actions. No financial service changes were needed.
+  The inventory register and opening conversion still need their complete port.
+- PHP lint: 204 files, zero failures. PHPStan, JS syntax and CSS build passed.
+  Tax and product browser checks passed with JS on/off at 1366, 1024, 768 and
+  390px: create/edit, invalid rate retention, dated rate entry, protected fields,
+  manual stock receipt, action visibility and no page overflow. Sheet position,
+  Escape and focus return were checked; screenshots were visually inspected.
+  No migration or hosted change in this checkpoint.

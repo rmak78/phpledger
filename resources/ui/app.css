@@ -757,6 +757,8 @@ a {
 
   /* Dialog / sheet ------------------------------------------------------------ */
   dialog.dialog {
+    margin: auto;
+    max-block-size: 90dvh;
     border: 0;
     border-radius: var(--radius-panel);
     padding: 0;
@@ -803,6 +805,16 @@ a {
     z-index: 50;
     overflow-y: auto;
   }
+  dialog.dialog.sheet {
+    inset-inline-start: auto;
+    margin: 0;
+    inline-size: min(480px, 100vw);
+    block-size: 100dvh;
+    max-block-size: 100dvh;
+    max-inline-size: 100vw;
+    border-radius: 0;
+  }
+  dialog.sheet .dialog-body { max-block-size: none; padding: 1.25rem; overflow: visible; }
 
   /* kbd -------------------------------------------------------------------- */
   .kbd-group { display: inline-flex; align-items: center; gap: .1875rem; }
