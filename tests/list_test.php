@@ -60,3 +60,19 @@ test('account report return context keeps original dates and rejects arbitrary d
         assert_throws(fn()=>pl_list_filters($input,'account'),DomainException::class);
     }
 });
+
+test('bank summary counts every row independently of paged or searched statement views', function (): void {
+    $f=ledger_fixture(); $rows=[];
+    for ($i=1;$i<=26;$i++) { $rows[]=bank_fixture_row('PAGE-'.$i,'1'); }
+    $statement=bank_fixture_import($f,bank_fixture_input($f,$rows,'26'));
+    $summary=pl_bank_reconciliation_summary($f['actor_id'],$f['company_id'],$f['book_id'],(int)$statement['id']);
+    assert_same(26,$summary['row_count']); assert_same(26,$summary['unmatched_count']);
+    $page=pl_list_query($f['actor_id'],$f['company_id'],$f['book_id'],'bank',['statement_id'=>$statement['id'],'page'=>'2']);
+    assert_same(1,count($page['rows']));
+    $journal=pl_post_journal($f['actor_id'],$f['company_id'],$f['book_id'],ledger_payload($f,'1'));
+    $candidates=pl_bank_candidates($f['actor_id'],$f['company_id'],$f['book_id'],(int)$statement['id'],(int)$statement['rows'][0]['id']);
+    $matched=pl_bank_match_row($f['actor_id'],$f['company_id'],$f['book_id'],(int)$statement['id'],(int)$statement['rows'][0]['id'],(int)$candidates[0]['id'],1);
+    $summary=pl_bank_reconciliation_summary($f['actor_id'],$f['company_id'],$f['book_id'],(int)$statement['id']);
+    assert_same(26,$summary['row_count']); assert_same(25,$summary['unmatched_count']);
+    assert_throws(fn()=>pl_bank_cancel_statement($f['actor_id'],$f['company_id'],$f['book_id'],(int)$statement['id'],(int)$matched['revision'],'Synthetic correction','paged-cancel'),DomainException::class);
+});

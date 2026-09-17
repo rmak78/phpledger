@@ -510,3 +510,23 @@ rates, or separately design code editing. The owner subsequently approved the re
   Trial balance, account, cash and period screenshots were visually inspected.
 - No new migration/schema or hosted changes. Banking, remaining daily/setup
   fidelity, complete accessibility evidence and release packaging remain pending.
+
+## Bank reconciliation checkpoint — 18 September
+
+- Rebuilt the statement summary, exact reconciliation totals, paged statement
+  rows and matching panel; completion, cancellation, import preview and full
+  outstanding-entry review remain available. No automatic matching or posting
+  was introduced. Import/outstanding headings no longer pretend to sort the
+  separate paged statement list.
+- Match/unmatch/complete/cancel submissions and candidate/outstanding pagination
+  retain the validated row filters. Fixed cancellation availability to compare
+  full statement row count with full unmatched count, rather than current-page
+  length; the authoritative service still rejects cancellation with any match.
+- Full composer check passed: 275 tests, zero failures, PHPStan, lint and sample
+  checks green. Browser checks passed with JS on/off: preview/import, matching,
+  unmatching, retained filters, completion and cancellation of a 26-row import.
+  Import, matching and completed views checked at four widths; the match action
+  was checked above the fold at 1366 and 1024px after resetting the shell scroll.
+  Bank account/candidate selects now have explicit labels. Screenshots inspected.
+- No new migration/schema or hosted changes. Final whole-application evidence,
+  accessibility review, remaining screen fidelity and publication remain open.

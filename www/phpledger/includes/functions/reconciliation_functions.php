@@ -323,7 +323,7 @@ function pl_bank_reconciliation_summary(int $actorId, int $companyId, int $bookI
     $unmatched = count(array_filter($statement['rows'], static fn(array $row): bool => $row['journal_line_id'] === null));
     $adjusted = bcadd((string) $statement['closing_balance'], (string) $outstanding['amount'], 4);
     $difference = bcsub($ledger, $adjusted, 4);
-    return ['ledger_balance' => $ledger, 'outstanding_balance' => bcadd((string) $outstanding['amount'], '0', 4), 'outstanding_count' => (int) $outstanding['count'], 'adjusted_statement_balance' => $adjusted, 'difference' => $difference, 'unmatched_count' => $unmatched, 'baseline_unchanged' => bccomp($baseline, (string) $statement['baseline_balance'], 4) === 0, 'ready' => $unmatched === 0 && bccomp($difference, '0', 4) === 0 && bccomp($baseline, (string) $statement['baseline_balance'], 4) === 0];
+    return ['ledger_balance' => $ledger, 'outstanding_balance' => bcadd((string) $outstanding['amount'], '0', 4), 'outstanding_count' => (int) $outstanding['count'], 'adjusted_statement_balance' => $adjusted, 'difference' => $difference, 'unmatched_count' => $unmatched, 'row_count'=>count($statement['rows']), 'baseline_unchanged' => bccomp($baseline, (string) $statement['baseline_balance'], 4) === 0, 'ready' => $unmatched === 0 && bccomp($difference, '0', 4) === 0 && bccomp($baseline, (string) $statement['baseline_balance'], 4) === 0];
 }
 
 function pl_bank_complete_statement(int $actorId, int $companyId, int $bookId, int $statementId, int $expectedRevision, string $key): array

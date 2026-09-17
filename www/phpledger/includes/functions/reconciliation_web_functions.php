@@ -28,11 +28,11 @@ function pl_web_bank_csv(array $post, array $files): string
 function pl_web_reconciliation(int $actorId, int $companyId, int $bookId, array $user, array $company, string $method): never
 {
     $sessionKey = $actorId . ':' . $companyId . ':' . $bookId;
-    $statementId = pl_web_id($_GET, 'id');
+    $statementId = pl_web_id($method==='POST'?$_POST:$_GET, $method==='POST'?'statement_id':'id');
+    $listFilters = ($method==='POST'?pl_return_list_filters($_POST,'bank'):pl_list_filters($_GET,'bank')) + ['id'=>$statementId];
+    $return = $statementId > 0 ? pl_url('/bank-reconciliation',$listFilters) : '/bank-reconciliation';
     if ($method === 'POST') {
         pl_require_csrf(pl_web_text($_POST, 'csrf'));
-        $statementId = pl_web_id($_POST, 'statement_id');
-        $return = '/bank-reconciliation' . ($statementId > 0 ? '?id=' . $statementId : '');
         $preserved = $_POST;
         try {
             pl_web_assert_scope($company, $_POST);
@@ -91,7 +91,7 @@ function pl_web_reconciliation(int $actorId, int $companyId, int $bookId, array 
     }
     pl_require_company_access($actorId, $companyId);
     pl_ledger_book($companyId, $bookId);
-    $form = pl_form_state('/bank-reconciliation' . ($statementId > 0 ? '?id=' . $statementId : ''));
+    $form = pl_form_state($return);
     $saved = $_SESSION['bank_preview'] ?? null;
     $preview = pl_web_text($_GET, 'preview') === '1' && is_array($saved) && ($saved['scope'] ?? '') === $sessionKey ? $saved : null;
     $input = $form['input'] ?: ($preview['input'] ?? []);
@@ -100,7 +100,6 @@ function pl_web_reconciliation(int $actorId, int $companyId, int $bookId, array 
     $statements = DB::query('SELECT s.id, s.reference, s.start_date, s.end_date, s.closing_balance, s.status, a.name AS account_name FROM pl_bank_statements s JOIN pl_accounts a ON a.id = s.account_id WHERE s.company_id = %i AND s.book_id = %i ORDER BY s.id DESC LIMIT 51 OFFSET %i', $companyId, $bookId, ($page - 1) * 50);
     $hasMore = count($statements) > 50;
     $statements = array_slice($statements, 0, 50);
-    $listFilters = pl_list_filters($_GET, 'bank') + ['id' => $statementId];
     $statement = $statementId > 0 ? pl_list_query($actorId, $companyId, $bookId, 'bank', array_replace($_GET, ['statement_id' => $statementId])) : null;
     $summary = $statement ? pl_bank_reconciliation_summary($actorId, $companyId, $bookId, $statementId) : null;
     $selectedRowId = pl_web_id($_GET, 'row');
