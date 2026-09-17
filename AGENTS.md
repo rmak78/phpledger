@@ -35,6 +35,12 @@ Read `README.md`, `docs/ARCHITECTURE.md`, and `docs/ROADMAP.md`, then the releva
 - Attach the kit to the GitHub release and include its download link in the release notes and owner handoff. Include factual announcement/press copy, social and email drafts, a guided demo, FAQs and verified screenshots from that release with captions and alt text. Use synthetic data and distinguish shipped capabilities from limitations or planned work.
 - Verify the public media-kit download and record its checksum in the publication receipt. Preparing or attaching the kit does not itself authorize sending campaigns to external recipients.
 
+## Every release updates documentation and repository metadata
+
+- Every release, including previews and patches, must review and update the GitHub Wiki, repository About description, website URL and topics, README, changelog/release notes, version manifests, package metadata, website download metadata and social/share metadata where affected. Keep unchanged facts unchanged; do not churn metadata merely to change a version.
+- All release surfaces must describe the same shipped capabilities, version, download links and limitations. Preserve historical release records and distinguish future roadmap items from shipped behavior.
+- Verify the published Wiki, About details and affected metadata after publication, and record updated or reviewed-unchanged status in the publication receipt and owner handoff. These checks are required alongside the application archive, checksum and media kit.
+
 ## Reference boundaries
 
 BixiSoft conventions were consulted from local Agency75 architecture documentation. That project's CRM workflows, production settings, credentials, providers, and deployment arrangements are not PHP Ledger requirements. Required external references should be read if available; reference access does not authorize editing them.

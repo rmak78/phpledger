@@ -40,6 +40,8 @@ The accounting starter adds customer invoices, supplier bills, partial payments,
 
 Every release, including previews and patch releases, must publish the application archive, its SHA-256 checksum and a matching versioned media kit. The kit contains factual announcement/press copy, guided experiments, FAQs, social/email drafts and verified screenshots from that release with captions and alt text. Attach it to the GitHub release, link it in the release notes and owner handoff, and verify its public download and checksum. A release is incomplete without its media kit. The [0.5.0-preview media kit](https://github.com/rmak78/phpledger/releases/download/v0.5.0-preview/phpledger-0.5.0-preview-media-kit.zip) is attached to the GitHub release; campaign publication remains a human decision.
 
+Every release also reviews and updates the GitHub Wiki, repository About description, website URL and topics, README, release notes, version/package manifests, and affected website download and social/share metadata. Verify the public results and record each surface as updated or reviewed unchanged in the publication receipt and owner handoff. All surfaces must agree on shipped capabilities, version, download links and preview limitations.
+
 ## Current release: 0.5.0-preview
 
 The accounting starter, eleven-pack chooser, responsive shell and catalogue-led setup are included in the published preview. In local Docker, sign in, open **Your businesses**, and use **Try a sample company** to provision only the selected synthetic book.
