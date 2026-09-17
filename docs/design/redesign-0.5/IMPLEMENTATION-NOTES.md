@@ -357,3 +357,21 @@ Home's use of that service needs review alongside list-performance work.
   at both folds, portrait and phone. No financial service or schema change here.
 - List filtering/paging, retained drill-down state and full acceptance are still
   pending for AR/AP. No release or hosted system changed.
+
+## Customer and supplier register checkpoint
+
+- Rebuilt AR/AP as compact paged lists with the approved detail panel, journal and
+  history tabs, a reconciled ageing summary and links to the full ageing report.
+  Search, status, date, sort and page-size state are GET parameters. Record and
+  editor navigation, including no-JS row changes and posting, retains those filters.
+- SQL selects the current immutable revision before filtering, ordering and paging;
+  only the selected page is hydrated. Corrections therefore keep their identity but
+  sort/filter on their replacement date, party and amount. Open-item entries supply
+  paid/unpaid state. The existing unpaged service remains available to its callers.
+- Targeted AR/list suite passed: 40 tests, zero failures, including 26-row boundaries,
+  corrected revisions, settlement state, literal search, invalid order and isolation.
+  PHP lint (197 files), PHPStan and CSS build passed. JS invoice/no-JS bill browser
+  checks passed for both folds and narrow widths, detail selection, return filters,
+  retained incomplete editor input, tax preview and posting/credit regression.
+- No migration or live change. The four required 5,000-row query-plan checks and
+  complete screen/accessibility acceptance remain open.

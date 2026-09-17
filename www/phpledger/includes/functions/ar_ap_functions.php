@@ -512,6 +512,67 @@ function pl_list_ar_documents(int $actorId, int $companyId, int $bookId, array $
     });
 }
 
+/** Page the current revision, including corrections, before hydrating document detail. */
+function pl_page_ar_documents(int $actorId,int $companyId,int $bookId,string $side,array $filters): array
+{
+    if (!in_array($side,['ar','ap'],true)) { throw new DomainException('Choose customer or supplier documents.'); }
+    $orders=[
+        'date'=>['asc'=>'q.effective_date ASC, q.id ASC','desc'=>'q.effective_date DESC, q.id DESC'],
+        'name'=>['asc'=>'p.legal_name ASC, q.id ASC','desc'=>'p.legal_name DESC, q.id DESC'],
+        'amount'=>['asc'=>'q.current_total ASC, q.id ASC','desc'=>'q.current_total DESC, q.id DESC'],
+        'due'=>['asc'=>'q.current_due ASC, q.id ASC','desc'=>'q.current_due DESC, q.id DESC'],
+    ];
+    $sort=$filters['sort']??'date'; $dir=$filters['dir']??'desc';
+    if (!is_string($sort) || !is_string($dir) || !isset($orders[$sort][$dir])) { throw new DomainException('Unsupported document order.'); }
+    $order=$orders[$sort][$dir]; $size=pl_table_size($filters['per_page']??25);
+    $status=$filters['status']??'all';
+    if (!in_array($status,['all','draft','unpaid','overdue','paid','reversed'],true)) { throw new DomainException('Choose a valid document status.'); }
+    $search=pl_ledger_text($filters['q']??'','Search',160,false);
+    $from=($filters['from']??'')===''?'':pl_ledger_date($filters['from']); $to=($filters['to']??'')===''?'':pl_ledger_date($filters['to']);
+    if ($from!=='' && $to!=='' && $from>$to) { throw new DomainException('The beginning of the date range must be on or before its end.'); }
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$side,$filters,$order,$size,$status,$search,$from,$to): array {
+        pl_require_company_access($actorId,$companyId); pl_ledger_book($companyId,$bookId);
+        // Complete fixed order clauses above; no browser column or direction is SQL text.
+        $cte=<<<'SQL'
+WITH effective AS (
+ SELECT d.id,d.kind,d.reference,
+ COALESCE(r.journal_id,d.journal_id) AS current_journal,
+ COALESCE(r.open_item_id,d.open_item_id) AS current_item,
+ IF(r.id IS NULL,d.party_id,CAST(JSON_UNQUOTE(JSON_EXTRACT(r.source_snapshot,'$.party_id')) AS UNSIGNED)) AS current_party,
+ IF(r.id IS NULL,d.document_date,JSON_UNQUOTE(JSON_EXTRACT(r.source_snapshot,'$.document_date'))) AS effective_date,
+ IF(r.id IS NULL,d.due_date,JSON_UNQUOTE(JSON_EXTRACT(r.source_snapshot,'$.due_date'))) AS current_due,
+ CAST(IF(r.id IS NULL,d.total,JSON_UNQUOTE(JSON_EXTRACT(r.source_snapshot,'$.total'))) AS DECIMAL(20,4)) AS current_total
+ FROM pl_ar_documents d
+ LEFT JOIN pl_ar_document_revisions r ON r.document_id=d.id AND r.company_id=d.company_id AND r.book_id=d.book_id
+ AND r.revision=(SELECT MAX(n.revision) FROM pl_ar_document_revisions n WHERE n.document_id=d.id)
+ WHERE d.company_id=%i AND d.book_id=%i AND d.kind IN %ls
+), registry AS (
+ SELECT effective.*,v.id AS reversed,
+ (SELECT COALESCE(SUM(CASE WHEN e.kind IN ('recognition','allocation_reversal') THEN COALESCE(e.allocated_amount_fc,l.amount_fc) ELSE -COALESCE(e.allocated_amount_fc,l.amount_fc) END),0)
+ FROM pl_open_item_entries e JOIN pl_journal_lines l ON l.id=e.journal_line_id AND l.company_id=e.company_id AND l.book_id=e.book_id
+ WHERE e.company_id=%i AND e.book_id=%i AND e.item_id=effective.current_item) AS remaining
+ FROM effective LEFT JOIN pl_journals v ON v.reversal_of_id=effective.current_journal
+)
+SQL;
+        $join=<<<'SQL'
+ FROM registry q JOIN pl_parties p ON p.id=q.current_party AND p.company_id=%i
+ WHERE (%s='' OR q.effective_date>=%s) AND (%s='' OR q.effective_date<=%s)
+ AND (%s='' OR LOCATE(%s,p.legal_name)>0 OR LOCATE(%s,q.reference)>0 OR LOCATE(%s,CONCAT(CASE q.kind WHEN 'invoice' THEN 'INV-' WHEN 'bill' THEN 'BILL-' WHEN 'customer_credit' THEN 'CR-' ELSE 'SC-' END,LPAD(q.id,6,'0')))>0)
+ AND (%s='all' OR (%s='draft' AND q.current_journal IS NULL)
+ OR (%s='reversed' AND q.reversed IS NOT NULL)
+ OR (%s='paid' AND q.current_journal IS NOT NULL AND q.reversed IS NULL AND q.kind IN ('invoice','bill') AND q.remaining=0)
+ OR (%s='unpaid' AND q.current_journal IS NOT NULL AND q.reversed IS NULL AND q.kind IN ('invoice','bill') AND q.remaining>0)
+ OR (%s='overdue' AND q.current_journal IS NOT NULL AND q.reversed IS NULL AND q.kind IN ('invoice','bill') AND q.remaining>0 AND q.current_due<%s))
+SQL;
+        $args=[$companyId,$bookId,$side==='ar'?['invoice','customer_credit']:['bill','supplier_credit'],$companyId,$bookId,$companyId,$from,$from,$to,$to,$search,$search,$search,strtoupper($search),$status,$status,$status,$status,$status,$status,gmdate('Y-m-d')];
+        $total=(int)DB::queryFirstField($cte.' SELECT COUNT(*)'.$join,...$args);
+        $pages=max(1,(int)ceil($total/$size)); $page=min($pages,max(1,(int)($filters['page']??1)));
+        $ids=DB::queryFirstColumn($cte.' SELECT q.id'.$join.' ORDER BY '.$order.' LIMIT %i OFFSET %i',...array_merge($args,[$size,($page-1)*$size]));
+        $documents=array_map(static fn($id): array=>pl_get_ar_document($actorId,$companyId,$bookId,(int)$id),$ids);
+        return ['documents'=>$documents,'total'=>$total,'page'=>$page,'pages'=>$pages];
+    });
+}
+
 /** Historical balances use the authoritative entries including dated reversals and opening allocations. */
 function pl_ar_ap_open_items(int $actorId, int $companyId, int $bookId, string $direction, ?string $asOf = null): array
 {

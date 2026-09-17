@@ -4,6 +4,9 @@ declare(strict_types=1);
 function pl_web_starter_ar(int $actorId,int $companyId,int $bookId,array $user,array $company,string $path,string $method): never
 {
     $receivable=$path==='/ar'; $normalKind=$receivable?'invoice':'bill'; $creditKind=$receivable?'customer_credit':'supplier_credit';
+    $filterInput=$_GET['return_filters']??$_GET;
+    if (!is_array($filterInput)) { throw new DomainException('Invalid list return filters.'); }
+    $filters=pl_list_filters($filterInput,$receivable?'ar':'ap');
     if (isset($_GET['settle']) || in_array(pl_web_text($_POST,'action'),['preview_settlement','confirm_settlement'],true)) {
         pl_web_settlement($actorId,$companyId,$bookId,$user,$company,$path,$method);
     }
@@ -15,7 +18,7 @@ function pl_web_starter_ar(int $actorId,int $companyId,int $bookId,array $user,a
             if (in_array($action,['save','correct'],true)) {
                 $kind=pl_web_text($_POST,'kind',$normalKind);
                 if (!in_array($kind,[$normalKind,$creditKind],true)) { throw new DomainException('Invalid document type for this module.'); }
-                $return=pl_url($path,['id'=>$id?:null,'new'=>$id?null:'1']);
+                $return=pl_url($path,['id'=>$id?:null,'new'=>$id?null:'1','return_filters'=>$filters]);
                 if (pl_web_text($_POST,'editor_action')==='add_line' || isset($_POST['remove_line'])) {
                     pl_require_company_access($actorId,$companyId,true);
                     pl_form_failure($return,pl_web_line_action($_POST),'',200);
@@ -58,33 +61,41 @@ function pl_web_starter_ar(int $actorId,int $companyId,int $bookId,array $user,a
                 pl_activate_open_item_account($actorId,$companyId,$bookId,pl_web_id($_POST,'account_id'),pl_web_text($_POST,'reason'));
             } else { throw new DomainException('Choose a document action.'); }
             pl_notice('Accounting action completed. Review the updated document and balances.');
-            pl_redirect(pl_url($path,['id'=>$id?:null]));
+            pl_redirect(pl_url($path,['id'=>$id?:null,'return_filters'=>$filters]));
         } catch (DomainException $error) {
             $input=array_filter($_POST,static fn(mixed $value):bool=>is_scalar($value));
             if (is_array($_POST['lines']??null)) { $input['lines']=array_values(array_map(static fn(array $line):array=>array_filter($line,static fn(mixed $value):bool=>is_scalar($value)),array_filter($_POST['lines'],'is_array'))); }
-            pl_form_failure(pl_url($path,['id'=>$id?:null,'new'=>!$id&&in_array(pl_web_text($_POST,'action'),['save','correct'],true)?'1':null]),$input,$error->getMessage());
+            pl_form_failure(pl_url($path,['id'=>$id?:null,'new'=>!$id&&in_array(pl_web_text($_POST,'action'),['save','correct'],true)?'1':null,'return_filters'=>$filters]),$input,$error->getMessage());
         }
     }
     $id=pl_web_id($_GET,'id'); $document=$id?pl_get_ar_document($actorId,$companyId,$bookId,$id):null;
     if ($document && !in_array($document['kind'],[$normalKind,$creditKind],true)) { throw new DomainException('Open this document in its owning module.'); }
     $creditFor=pl_web_id($_GET,'credit_for'); $original=$creditFor?pl_get_ar_document($actorId,$companyId,$bookId,$creditFor):null;
     if ($original && ($original['kind']!==$normalKind || $original['journal_id']===null || $original['payment_status']==='reversed' || bccomp($original['outstanding_fc'],'0',4)<=0)) { throw new DomainException('Choose a posted invoice or bill with an outstanding amount in this module.'); }
-    $form=pl_form_state(pl_url($path,['id'=>$id?:null,'new'=>$id?null:(pl_web_text($_GET,'new')?:null)]));
+    $form=pl_form_state(pl_url($path,['id'=>$id?:null,'new'=>$id?null:(pl_web_text($_GET,'new')?:null),'return_filters'=>isset($_GET['return_filters'])?$filters:null]));
     $originalId=$document['original_document_id']??pl_web_id($form['input'],'original_document_id');
     if ($original===null && $originalId) { $original=pl_get_ar_document($actorId,$companyId,$bookId,(int)$originalId); }
-    $all=pl_list_ar_documents($actorId,$companyId,$bookId);
+    $editing=isset($_GET['new']) || isset($_GET['edit']) || isset($_GET['correct']) || $original!==null && !$document || in_array($form['input']['action']??'',['save','correct'],true);
+    $list=$id || $editing?['documents'=>[],'total'=>0,'page'=>1,'pages'=>1]:pl_list_query($actorId,$companyId,$bookId,$receivable?'ar':'ap',$filters);
+    $selection=null;
+    if (!$id && !$editing) {
+        $selectedId=pl_web_id($_GET,'select');
+        $selection=$selectedId?pl_get_ar_document($actorId,$companyId,$bookId,$selectedId):($list['documents'][0]??null);
+        if ($selection && !in_array($selection['kind'],[$normalKind,$creditKind],true)) { throw new DomainException('Open this document in its owning module.'); }
+    }
     $postingPreview=null;
     if (($form['input']['action']??'')==='save' && in_array($form['input']['editor_action']??'',['preview','post_reviewed_document'],true)) {
         try { $postingPreview=pl_preview_ar_document($actorId,$companyId,$bookId,pl_web_ar_editor_input($form['input'],pl_web_text($form['input'],'kind',$normalKind)),$id?:null,$id?pl_web_id($form['input'],'revision'):null,pl_web_text($form['input'],'rate')?:null); }
         catch (DomainException $error) { if ($form['message']==='') { $form['message']=$error->getMessage(); } }
     }
-    $documents=array_values(array_filter($all['documents'],fn($d)=>in_array($d['kind'],[$normalKind,$creditKind],true)));
+    $documents=$list['documents'];
     $report=pl_ar_ap_open_items($actorId,$companyId,$bookId,$receivable?'receivable':'payable',pl_web_text($_GET,'as_of')?:null);
     $settlements=$document&&$document['open_item_id']?DB::query("SELECT e.kind,l.journal_id,l.amount_fc,l.amount_base,j.journal_date AS posting_date,j.source_type,d.id AS credit_document_id,d.kind AS credit_kind,EXISTS(SELECT 1 FROM pl_journals v WHERE v.reversal_of_id=j.id) AS already_reversed FROM pl_open_item_entries e JOIN pl_journal_lines l ON l.id=e.journal_line_id JOIN pl_journals j ON j.id=l.journal_id LEFT JOIN pl_ar_document_revisions r ON r.journal_id=j.id AND r.company_id=e.company_id AND r.book_id=e.book_id LEFT JOIN pl_ar_documents d ON d.id=r.document_id AND d.kind IN ('customer_credit','supplier_credit') WHERE e.item_id=%i AND e.company_id=%i AND e.book_id=%i ORDER BY e.id",$document['open_item_id'],$companyId,$bookId):[];
-    pl_render($receivable?'ar':'ap',['title'=>$receivable?'Accounts receivable':'Accounts payable','user'=>$user,'company'=>$company,'path'=>$path,
+    pl_render($receivable?'ar':'ap',['title'=>$receivable?'Invoices':'Bills','user'=>$user,'company'=>$company,'path'=>$path,'filters'=>$filters,'list'=>$list,'selection'=>$selection,
         'form'=>$form,'document'=>$document,'original'=>$original,'normalKind'=>$normalKind,'creditKind'=>$creditKind,'documents'=>$documents,'report'=>$report,'postingPreview'=>$postingPreview,
         'taxContext'=>(isset($_GET['new']) || isset($_GET['edit']) || isset($_GET['correct']) || $original!==null || in_array($form['input']['action']??'',['save','correct'],true))?pl_ar_editor_tax_context($actorId,$companyId,$bookId,$original,$id?:null):null,
         'recordJournal'=>$document && $document['journal_id']?pl_get_journal($actorId,$companyId,$bookId,$document['journal_id']):null,
+        'selectionJournal'=>$selection && $selection['journal_id']?pl_get_journal($actorId,$companyId,$bookId,$selection['journal_id']):null,
         'accounts'=>pl_starter_accounts($actorId,$companyId,$bookId),'parties'=>pl_starter_parties($actorId,$companyId,$bookId),
         'priceMode'=>pl_tax_price_mode($actorId,$companyId,$bookId),'products'=>pl_list_inventory_products($actorId,$companyId,$bookId),'taxCodes'=>pl_list_tax_codes($actorId,$companyId,$bookId),'settlements'=>$settlements]);
 }

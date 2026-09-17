@@ -146,6 +146,7 @@ function pl_list_filters(array $input, string $screen): array
         'general-journals' => ['date','description','status'],
         'account' => ['date','journal','description','source','debit','credit','balance'],
         'bank' => ['date','reference','money_in','money_out','match'],
+        'ar','ap' => ['date','name','amount','due'],
         default => throw new DomainException('Unknown list.'),
     };
     $page = $input['page'] ?? '1';
@@ -179,6 +180,17 @@ function pl_list_filters(array $input, string $screen): array
             $filters[$key] = $value === '' ? '' : pl_ledger_date($value);
         }
     }
+    if (in_array($screen,['ar','ap'],true)) {
+        $status=$input['status']??'all';
+        if (!in_array($status,['all','draft','unpaid','overdue','paid','reversed'],true)) { throw new DomainException('Choose a valid document status.'); }
+        $filters['status']=$status;
+        foreach (['from','to'] as $key) {
+            $value=$input[$key]??'';
+            if (!is_string($value)) { throw new DomainException('Choose a valid filter date.'); }
+            $filters[$key]=$value===''?'':pl_ledger_date($value);
+        }
+        if ($filters['from']!=='' && $filters['to']!=='' && $filters['from']>$filters['to']) { throw new DomainException('The beginning of the date range must be on or before its end.'); }
+    }
     return $filters;
 }
 
@@ -200,6 +212,7 @@ function pl_list_query(int $actorId, int $companyId, int $bookId, string $screen
         'general-journals' => pl_list_general_drafts($actorId, $companyId, $bookId, $filters['page'], $options),
         'account' => pl_account_activity($actorId, $companyId, $bookId, pl_web_id($input, 'id'), pl_web_text($input, 'as_of', gmdate('Y-m-d')), $filters['page'], pl_web_text($input, 'from') ?: null, $options),
         'bank' => pl_bank_get_statement($actorId, $companyId, $bookId, pl_web_id($input, 'statement_id'), $options),
+        'ar','ap' => pl_page_ar_documents($actorId,$companyId,$bookId,$screen,$filters),
         default => throw new DomainException('Unknown list.'),
     };
 }

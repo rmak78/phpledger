@@ -55,6 +55,10 @@ $suites[] = 'editor_test.php';
 $suites[] = 'settlement_test.php';
 $suites[] = 'stock_preview_test.php';
 $suites[] = 'ar_preview_test.php';
+$suites[] = 'ar_list_test.php';
+if (($argv[1] ?? '') === '--suite=ar-lists') {
+    $suites = ['ledger_test.php','concurrency_test.php','ar_ap_test.php','ar_list_test.php','list_test.php'];
+}
 if (($argv[1] ?? '') === '--suite=ar-editors') {
     $suites = ['ledger_test.php','concurrency_test.php','ar_ap_test.php','inventory_test.php','purchasing_test.php','tax_test.php','ar_preview_test.php'];
 }
