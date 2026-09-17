@@ -600,9 +600,15 @@ document.querySelectorAll('[data-commercial-form]').forEach(form => {
         return match ? BigInt(match[1]) * 10000n + BigInt((match[2] || '').padEnd(4, '0')) : null;
     };
     const format = value => `${value / 10000n}.${(value % 10000n).toString().padStart(4, '0')}`;
+    const taxContext = form.dataset.taxContext ? JSON.parse(form.dataset.taxContext) : null;
+    const roundedRatio = (numerator, denominator) => (numerator * 2n + denominator) / (denominator * 2n);
     let dirty = false;
     const update = () => {
         let total = 0n, valid = true;
+        let netTotal = 0n, taxTotal = 0n, taxValid = true;
+        const inclusive = form.elements.namedItem('price_mode')?.value === 'inclusive';
+        const date = form.elements.namedItem('date')?.value || '';
+        const remaining = Object.fromEntries(Object.entries(taxContext?.sources || {}).map(([key, source]) => [key, {...source, net: parse(source.net), tax: parse(source.tax)}]));
         [...body.children].forEach((row, index) => {
             row.querySelectorAll('[data-commercial-field]').forEach(control => {
                 const field = control.dataset.commercialField;
@@ -620,6 +626,33 @@ document.querySelectorAll('[data-commercial-form]').forEach(form => {
             const amount = quantity === null || price === null ? null : (quantity * price + 5000n) / 10000n;
             row.querySelector('[data-commercial-amount]').textContent = amount === null ? '—' : format(amount);
             if (amount !== null) total += amount; else if (!empty) valid = false;
+            if (taxContext && amount !== null) {
+                const code = row.querySelector('[data-commercial-field=tax_code_id]').value;
+                let net = amount, tax = 0n;
+                if (taxContext.credit) {
+                    const number = row.querySelector('[data-commercial-field=original_line_number]')?.value || '';
+                    const source = remaining[number];
+                    if (number && source) {
+                        const basis = inclusive ? source.net + source.tax : source.net;
+                        if (basis <= 0n || amount > basis || (code && code !== String(source.tax_code_id))) taxValid = false;
+                        else {
+                            tax = amount === basis ? source.tax : roundedRatio(source.tax * amount, basis);
+                            net = inclusive ? amount - tax : amount;
+                            source.net -= net; source.tax -= tax;
+                        }
+                    } else if (number || taxContext.requires_line || code) taxValid = false;
+                } else if (code) {
+                    const rate = taxContext.rates.find(rate => String(rate.tax_code_id) === code && rate.effective_from <= date);
+                    if (!rate) taxValid = false;
+                    else {
+                        const percentage = BigInt(rate.percentage.replace('.', ''));
+                        if (inclusive) { net = roundedRatio(amount * 100000000n, 100000000n + percentage); tax = amount - net; }
+                        else tax = roundedRatio(amount * percentage, 100000000n);
+                    }
+                }
+                if (net <= 0n) taxValid = false;
+                netTotal += net; taxTotal += tax;
+            }
         });
         const message = form.querySelector('[data-commercial-total]');
         message.textContent = valid ? `Entered total ${format(total)} · Server validation applies when saving.` : 'Complete each entered quantity and unit price to calculate the total.';
@@ -627,6 +660,14 @@ document.querySelectorAll('[data-commercial-form]').forEach(form => {
         if (grand) grand.textContent = valid ? format(total) : '—';
         const label = form.querySelector('[data-commercial-grand] dt');
         if (label) label.textContent = `Total order value (${form.elements.namedItem('currency').value.toUpperCase()})`;
+        const taxTotals = form.querySelector('[data-commercial-tax-totals]');
+        if (taxTotals) {
+            const amounts = [netTotal, taxTotal, netTotal + taxTotal];
+            taxTotals.querySelectorAll('dd').forEach((amount, index) => { amount.textContent = valid && taxValid ? format(amounts[index]) : '—'; });
+            taxTotals.querySelector('div.doc-totals-row:last-child dt').textContent = `Total (${form.elements.namedItem('currency').value.toUpperCase()})`;
+            if (!taxValid) message.textContent = 'Update the posting preview to resolve the tax date, original line or remaining credit amount.';
+            else if (valid) message.textContent = 'Display totals use the selected date and tax mode. The server recomputes them when you preview or save.';
+        }
     };
     form.addEventListener('click', event => {
         const add = event.target.closest('[data-add-commercial-row]');

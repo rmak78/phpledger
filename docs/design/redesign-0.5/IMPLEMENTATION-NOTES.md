@@ -322,3 +322,23 @@ Home's use of that service needs review alongside list-performance work.
 - Outstanding: stock invoice/credit preview must include the linked inventory
   journal effects; live tax totals and correction preview need their final pass.
   This checkpoint closes neither the full editor feature nor the release gate.
+
+## Stock effects and live tax totals checkpoint
+
+- Invoice previews now include sequential stock issues and cost of sales. Credit
+  previews use the same historical return allocation and residual-cost functions
+  as posting. Review hashes bind current stock balances; a changed cost basis
+  rejects confirmation without saving a draft. Existing source and retry keys stay
+  intact, and inventory still posts through the central ledger interface.
+- Live display totals use exact integer arithmetic for dated tax, inclusive entry,
+  and the remaining original net/tax basis after earlier credits. Missing rates or
+  invalid credit selections show an unresolved total. Server pricing is authoritative;
+  preview/save rechecks the current state. Tax configuration is scoped server-side.
+- Full composer check passed: lint (194 files), PHPStan, sample validation and
+  269 tests, zero failures. JS syntax and compiled CSS build passed.
+- Browser checks passed for stock invoice/credit preview and posting, exclusive and
+  inclusive tax, missing effective rates, four-place rounding, sequential credit
+  residuals, JS invoice/no-JS bill posting and credits, both folds plus narrow widths.
+- No migration or live system change. Correction preview, remaining screen ports,
+  complete route/accessibility evidence and historical upgrade verification remain
+  open; this is not release acceptance.

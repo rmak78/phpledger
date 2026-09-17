@@ -173,6 +173,42 @@ function pl_ar_validate_source(int $actorId, int $companyId, int $bookId, array 
 }
 
 /** Freeze calculated taxes during review; credits reuse original line rates and exact residuals. */
+/** Posted, unreversed credit consumption for the current original revision. */
+function pl_ar_credit_used(int $companyId,int $bookId,array $original,?int $excludeCreditId=null): array
+{
+    $used=[];
+    $prior=DB::query("SELECT r.source_snapshot,d.id FROM pl_ar_documents d JOIN pl_ar_document_revisions r ON r.document_id=d.id WHERE d.company_id=%i AND d.book_id=%i AND d.original_document_id=%i AND d.id<>%i AND NOT EXISTS (SELECT 1 FROM pl_ar_document_revisions n WHERE n.document_id=r.document_id AND n.revision>r.revision) AND NOT EXISTS (SELECT 1 FROM pl_journals j WHERE j.reversal_of_id=r.journal_id) FOR SHARE",$companyId,$bookId,$original['id'],$excludeCreditId??0);
+    foreach ($prior as $previous) {
+        $snapshot=json_decode($previous['source_snapshot'],true,512,JSON_THROW_ON_ERROR);
+        if (($snapshot['original_revision']??null)!==$original['revision']) { continue; }
+        foreach ($snapshot['lines'] as $line) {
+            if (($line['original_line_number']??null)===null) { continue; }
+            $number=$line['original_line_number']; $used[$number]??=['net'=>'0.0000','tax'=>'0.0000'];
+            $used[$number]['net']=bcadd($used[$number]['net'],$line['line_total'],4);
+            $used[$number]['tax']=bcadd($used[$number]['tax'],$line['tax_amount'],4);
+        }
+    }
+    return $used;
+}
+
+/** Safe display inputs only; the pricing service still validates and recomputes on save. */
+function pl_ar_editor_tax_context(int $actorId,int $companyId,int $bookId,?array $original=null,?int $excludeCreditId=null): array
+{
+    pl_require_company_access($actorId,$companyId); pl_ledger_book($companyId,$bookId);
+    $rates=DB::query('SELECT tax_code_id,effective_from,revision,percentage FROM pl_tax_rates WHERE company_id=%i AND book_id=%i ORDER BY effective_from DESC,revision DESC',$companyId,$bookId);
+    $sources=[]; $requiresLine=false;
+    if ($original!==null) {
+        $original=pl_get_ar_document($actorId,$companyId,$bookId,(int)$original['id']);
+        $used=pl_ar_credit_used($companyId,$bookId,$original,$excludeCreditId);
+        foreach ($original['lines'] as $line) {
+            $number=$line['line_number'];
+            $sources[$number]=['net'=>bcsub($line['line_total'],$used[$number]['net']??'0',4),'tax'=>bcsub($line['tax_amount'],$used[$number]['tax']??'0',4),'tax_code_id'=>$line['tax_code_id']];
+            $requiresLine=$requiresLine || $line['tax_code_id']!==null;
+        }
+    }
+    return ['rates'=>$rates,'credit'=>$original!==null,'requires_line'=>$requiresLine,'sources'=>$sources];
+}
+
 function pl_ar_price_document(int $actorId, int $companyId, int $bookId, array $data, ?int $excludeCreditId = null): array
 {
     $credit = in_array($data['kind'], ['customer_credit','supplier_credit'], true);
@@ -180,20 +216,7 @@ function pl_ar_price_document(int $actorId, int $companyId, int $bookId, array $
     $data['original_revision'] = $original === null ? null : $original['revision'];
     if ($original !== null && ($data['price_mode'] ?? null) !== null && $data['price_mode'] !== $original['price_mode']) { throw new DomainException('A credit retains the original document price mode.'); }
     $data['price_mode'] = $original['price_mode'] ?? $data['price_mode'] ?? pl_tax_price_mode($actorId,$companyId,$bookId);
-    $used = [];
-    if ($original !== null) {
-        $prior = DB::query("SELECT r.source_snapshot,d.id FROM pl_ar_documents d JOIN pl_ar_document_revisions r ON r.document_id=d.id WHERE d.company_id=%i AND d.book_id=%i AND d.original_document_id=%i AND d.id<>%i AND NOT EXISTS (SELECT 1 FROM pl_ar_document_revisions n WHERE n.document_id=r.document_id AND n.revision>r.revision) AND NOT EXISTS (SELECT 1 FROM pl_journals j WHERE j.reversal_of_id=r.journal_id) FOR SHARE", $companyId,$bookId,$original['id'],$excludeCreditId ?? 0);
-        foreach ($prior as $previous) {
-            $snapshot = json_decode($previous['source_snapshot'], true, 512, JSON_THROW_ON_ERROR);
-            if (($snapshot['original_revision'] ?? null) !== $original['revision']) { continue; }
-            foreach ($snapshot['lines'] as $line) {
-                if (($line['original_line_number'] ?? null) === null) { continue; }
-                $number = $line['original_line_number']; $used[$number] ??= ['net'=>'0.0000','tax'=>'0.0000'];
-                $used[$number]['net'] = bcadd($used[$number]['net'], $line['line_total'], 4);
-                $used[$number]['tax'] = bcadd($used[$number]['tax'], $line['tax_amount'], 4);
-            }
-        }
-    }
+    $used=$original===null?[]:pl_ar_credit_used($companyId,$bookId,$original,$excludeCreditId);
     $taxTotal = '0.0000'; $subtotal = '0.0000';
     foreach ($data['lines'] as &$line) {
         $rawAmount = pl_ar_line_amount($line['quantity'], $line['unit_price']);
@@ -395,7 +418,9 @@ function pl_preview_ar_document(int $actorId,int $companyId,int $bookId,array $i
         $document=pl_ar_price_document($actorId,$companyId,$bookId,$data,$documentId);
         $document+=['id'=>$documentId??0,'revision'=>$revision??0,'number'=>$documentId===null?'New '.str_replace('_',' ',$data['kind']):pl_ar_document_number($documentId,$data['kind']),
             'party'=>pl_ar_document_party($actorId,$companyId,$bookId,$data['party_id'],$data['kind'])];
-        return pl_ar_posting_plan($actorId,$companyId,$bookId,$document,null,$rate,false);
+        $plan=pl_ar_posting_plan($actorId,$companyId,$bookId,$document,null,$rate,false);
+        $plan['stock']=pl_inventory_ar_preview($actorId,$companyId,$bookId,$plan['document'],$plan['original']);
+        return $plan;
     });
 }
 

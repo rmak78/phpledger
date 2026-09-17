@@ -186,12 +186,21 @@ function pl_inventory_issue(int $actorId, int $companyId, int $bookId, array $in
     $data = pl_inventory_movement_input($input); $quantity = pl_amount(pl_ledger_text($input['quantity'] ?? null, 'Quantity', 21));
     if (bccomp($quantity, '0', 4) <= 0) { throw new DomainException('An issue needs a positive quantity.'); }
     return pl_inventory_command($actorId, $companyId, $bookId, (string) ($input['idempotency_key'] ?? ''), ['issue', $data, $quantity], function (string $key) use ($actorId, $companyId, $bookId, $data, $quantity): array {
-        $product = pl_get_inventory_product($actorId, $companyId, $bookId, $data['product_id']);
-        $data['offset_account_id'] ??= $product['cogs_account_id'];
-        $balance = pl_inventory_balance($actorId, $companyId, $bookId, $product['id']);
-        $cost = pl_inventory_cost($balance['value_base'], $balance['quantity'], $quantity);
-        return pl_inventory_record($actorId, $companyId, $bookId, $data, 'issue', bcsub('0', $quantity, 4), bcsub('0', $cost, 4), $key);
+        $plan=pl_inventory_issue_plan($actorId,$companyId,$bookId,$data,$quantity);
+        return pl_inventory_record($actorId,$companyId,$bookId,$plan['data'],'issue',$plan['quantity_delta'],$plan['value_delta'],$key);
     });
+}
+
+/** Shared issue plan; a preview may supply its earlier simulated lines' remaining basis. */
+function pl_inventory_issue_plan(int $actorId,int $companyId,int $bookId,array $data,string $quantity,?array $basis=null): array
+{
+    $product=pl_get_inventory_product($actorId,$companyId,$bookId,$data['product_id']);
+    $data['offset_account_id']??=$product['cogs_account_id'];
+    $basis??=pl_inventory_balance($actorId,$companyId,$bookId,$product['id']);
+    $cost=pl_inventory_cost($basis['value_base'],$basis['quantity'],$quantity);
+    $quantityDelta=bcsub('0',$quantity,4); $valueDelta=bcsub('0',$cost,4);
+    return ['data'=>$data,'basis'=>$basis,'quantity_delta'=>$quantityDelta,'value_delta'=>$valueDelta,
+        'movement'=>pl_inventory_movement_plan($actorId,$companyId,$bookId,$data,$quantityDelta,$valueDelta)];
 }
 
 /** Both return directions consume the original movement's exact unreturned carrying basis. */
@@ -208,12 +217,18 @@ function pl_inventory_return(int $actorId, int $companyId, int $bookId, array $i
     if (bccomp($quantity, '0', 4) <= 0) { throw new DomainException('A return needs positive quantity.'); }
     return pl_inventory_command($actorId, $companyId, $bookId, (string) ($input['idempotency_key'] ?? ''), ['return', $originalId, $data, $quantity], function (string $key) use ($actorId, $companyId, $bookId, $data, $quantity, $original, $originalId): array {
         $remaining = pl_inventory_return_basis($companyId, $bookId, $original);
-        $remainingQuantity = $remaining['quantity']; $remainingValue = $remaining['value_base'];
-        if ($data['date'] < $original['movement_date']) { throw new DomainException('A return cannot precede its source movement.'); }
-        $cost = pl_inventory_cost($remainingValue, $remainingQuantity, $quantity);
-        $customer = $original['kind'] === 'issue';
-        return pl_inventory_record($actorId, $companyId, $bookId, $data, $customer ? 'customer_return' : 'purchase_return', $customer ? $quantity : bcsub('0', $quantity, 4), $customer ? $cost : bcsub('0', $cost, 4), $key, $originalId);
+        $effect=pl_inventory_return_effect($original,$data,$quantity,$remaining);
+        return pl_inventory_record($actorId,$companyId,$bookId,$data,$effect['kind'],$effect['quantity_delta'],$effect['value_delta'],$key,$originalId);
     });
+}
+
+/** Historical return cost is shared by preview and the return writer. */
+function pl_inventory_return_effect(array $original,array $data,string $quantity,array $remaining): array
+{
+    if ($data['date']<$original['movement_date']) { throw new DomainException('A return cannot precede its source movement.'); }
+    $cost=pl_inventory_cost($remaining['value_base'],$remaining['quantity'],$quantity);
+    $customer=$original['kind']==='issue';
+    return ['kind'=>$customer?'customer_return':'purchase_return','quantity_delta'=>$customer?$quantity:bcsub('0',$quantity,4),'value_delta'=>$customer?$cost:bcsub('0',$cost,4)];
 }
 
 /** Explicit credit-return reversals restore the original sale's unreturned quantity and basis. */
@@ -392,32 +407,74 @@ function pl_inventory_credit_ar_document(int $actorId, int $companyId, int $book
         fn (): array => pl_inventory_credit_ar_document_locked($actorId, $companyId, $bookId, $credit, $original, $key));
 }
 
+/** Allocate a credit across its original issue movements without changing their residuals. */
+function pl_inventory_credit_allocations(int $actorId,int $companyId,int $bookId,array $credit,array $original): array
+{
+    $allocations=[]; $basis=[];
+    foreach ($credit['lines'] as $index=>$line) {
+        if (($line['product_id']??null)===null) { continue; }
+        $product=pl_get_inventory_product($actorId,$companyId,$bookId,(int)$line['product_id']);
+        if ($product['kind']!=='stock') { continue; }
+        $take=pl_amount($line['quantity']);
+        $sources=DB::query("SELECT * FROM pl_inventory_movements WHERE company_id=%i AND book_id=%i AND product_id=%i AND source_type='ar_invoice' AND source_document_id=%i AND source_journal_id=%i ORDER BY id FOR SHARE",$companyId,$bookId,$product['id'],(int)$original['id'],(int)$original['journal_id']);
+        foreach ($sources as $source) {
+            if (bccomp($take,'0',4)<=0) { break; }
+            $id=(int)$source['id']; $basis[$id]??=pl_inventory_return_basis($companyId,$bookId,$source);
+            $remaining=$basis[$id];
+            if (bccomp($remaining['quantity'],'0',4)<=0) { continue; }
+            $part=bccomp($take,$remaining['quantity'],4)>0?$remaining['quantity']:$take;
+            $effect=pl_inventory_return_effect($source,['date'=>$credit['document_date']??$credit['date']],$part,$remaining);
+            $allocations[]=['index'=>$index,'source'=>$source,'basis'=>$remaining,'quantity'=>$part,'effect'=>$effect];
+            $basis[$id]=['quantity'=>bcsub($remaining['quantity'],$part,4),'value_base'=>bcsub($remaining['value_base'],$effect['value_delta'],4)];
+            $take=bcsub($take,$part,4);
+        }
+        if (bccomp($take,'0',4)!==0) { throw new DomainException('The credit return exceeds the original invoice quantity still available to return.'); }
+    }
+    return $allocations;
+}
+
 function pl_inventory_credit_ar_document_locked(int $actorId, int $companyId, int $bookId, array $credit, array $original, string $key): array
 {
-    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $credit, $original, $key): array {
-        pl_require_company_access($actorId, $companyId, true); pl_ledger_book($companyId, $bookId, true);
-        $results = [];
-        foreach ($credit['lines'] as $index => $line) {
-            if (($line['product_id'] ?? null) === null) { continue; }
-            $product = pl_get_inventory_product($actorId, $companyId, $bookId, (int) $line['product_id']);
-            if ($product['kind'] !== 'stock') { continue; }
-            $take = pl_amount($line['quantity']);
-            $sources = DB::query("SELECT * FROM pl_inventory_movements WHERE company_id=%i AND book_id=%i AND product_id=%i AND source_type='ar_invoice' AND source_document_id=%i AND source_journal_id=%i ORDER BY id FOR SHARE", $companyId, $bookId, $product['id'], (int) $original['id'], (int) $original['journal_id']);
-            foreach ($sources as $source) {
-                if (bccomp($take, '0', 4) <= 0) { break; }
-                $remaining = pl_inventory_return_basis($companyId, $bookId, $source)['quantity'];
-                if (bccomp($remaining, '0', 4) <= 0) { continue; }
-                $part = bccomp($take, $remaining, 4) > 0 ? $remaining : $take;
-                $results[] = pl_inventory_return($actorId, $companyId, $bookId, ['original_movement_id' => (int) $source['id'], 'quantity' => $part,
-                    'date' => $credit['document_date'] ?? $credit['date'], 'source_type' => 'ar_credit', 'source_reference' => $credit['journal_id'] . ':' . $index . ':' . $source['id'], 'source_document_id' => (int) $credit['id'],
-                    'source_journal_id' => isset($credit['journal_id']) ? (int) $credit['journal_id'] : null, 'reason' => 'Stock returned on credit ' . $credit['id'],
-                    'idempotency_key' => 'ar-credit-stock:' . hash('sha256', $key . ':' . $index . ':' . $source['id'])]);
-                $take = bcsub($take, $part, 4);
-            }
-            if (bccomp($take, '0', 4) !== 0) { throw new DomainException('The credit return exceeds the original invoice quantity still available to return.'); }
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$credit,$original,$key): array {
+        pl_require_company_access($actorId,$companyId,true); pl_ledger_book($companyId,$bookId,true);
+        $results=[];
+        foreach (pl_inventory_credit_allocations($actorId,$companyId,$bookId,$credit,$original) as $allocation) {
+            $index=$allocation['index']; $source=$allocation['source'];
+            $results[]=pl_inventory_return($actorId,$companyId,$bookId,['original_movement_id'=>(int)$source['id'],'quantity'=>$allocation['quantity'],
+                'date'=>$credit['document_date']??$credit['date'],'source_type'=>'ar_credit','source_reference'=>$credit['journal_id'].':'.$index.':'.$source['id'],'source_document_id'=>(int)$credit['id'],
+                'source_journal_id'=>isset($credit['journal_id'])?(int)$credit['journal_id']:null,'reason'=>'Stock returned on credit '.$credit['id'],
+                'idempotency_key'=>'ar-credit-stock:'.hash('sha256',$key.':'.$index.':'.$source['id'])]);
         }
         return $results;
     });
+}
+
+/** Read-only inventory effects for the financial document editor. */
+function pl_inventory_ar_preview(int $actorId,int $companyId,int $bookId,array $document,?array $original): array
+{
+    $plans=[]; $balances=[];
+    if ($document['kind']==='invoice') {
+        foreach ($document['lines'] as $index=>$line) {
+            if (($line['product_id']??null)===null) { continue; }
+            $product=pl_get_inventory_product($actorId,$companyId,$bookId,(int)$line['product_id']);
+            if ($product['kind']!=='stock') { continue; }
+            $id=$product['id']; $balances[$id]??=pl_inventory_balance($actorId,$companyId,$bookId,$id);
+            $data=pl_inventory_movement_input(['product_id'=>$id,'date'=>$document['document_date'],'source_type'=>'ar_invoice','source_reference'=>'editor-preview:'.$index,'reason'=>'Invoice stock issue preview']);
+            $plan=pl_inventory_issue_plan($actorId,$companyId,$bookId,$data,$line['quantity'],$balances[$id]);
+            $plans[]=$plan+['line_number'=>$index+1,'product_name'=>$product['name']];
+            $balances[$id]['quantity']=bcadd($balances[$id]['quantity'],$plan['quantity_delta'],4);
+            $balances[$id]['value_base']=bcadd($balances[$id]['value_base'],$plan['value_delta'],4);
+        }
+    } elseif ($document['kind']==='customer_credit' && $original!==null) {
+        foreach (pl_inventory_credit_allocations($actorId,$companyId,$bookId,$document,$original) as $allocation) {
+            $source=$allocation['source']; $effect=$allocation['effect'];
+            $data=pl_inventory_movement_input(['product_id'=>(int)$source['product_id'],'date'=>$document['document_date'],'offset_account_id'=>(int)$source['offset_account_id'],
+                'source_type'=>'ar_credit','source_reference'=>'editor-preview:'.$allocation['index'].':'.$source['id'],'reason'=>'Credit stock return preview']);
+            $movement=pl_inventory_movement_plan($actorId,$companyId,$bookId,$data,$effect['quantity_delta'],$effect['value_delta']);
+            $plans[]=['line_number'=>$allocation['index']+1,'product_name'=>$movement['product']['name'],'basis'=>$allocation['basis'],'quantity_delta'=>$effect['quantity_delta'],'value_delta'=>$effect['value_delta'],'movement'=>$movement];
+        }
+    }
+    return $plans;
 }
 
 /** Builds explicit allocations to an existing opening journal. It never creates a new GL opening. */
