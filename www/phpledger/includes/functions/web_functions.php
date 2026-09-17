@@ -373,6 +373,19 @@ function pl_web_general_input(array $input): array
     return ['date' => pl_web_text($input, 'date'), 'reference' => pl_web_text($input, 'reference'), 'description' => pl_web_text($input, 'description'), 'creation_key' => pl_web_text($input, 'creation_key'), 'lines' => $lines];
 }
 
+/** Fixed account-statement destination; a browser may supply filters, never a URL. */
+function pl_web_account_return(array $input): array
+{
+    $source=$input['return_account']??[];
+    if (!is_array($source)) { throw new DomainException('Invalid account return filters.'); }
+    if ($source===[]) { return []; }
+    $id=pl_web_id($source,'id'); $from=pl_web_text($source,'from'); $to=pl_web_text($source,'as_of');
+    if ($id<1 || $to==='') { throw new DomainException('Choose a valid account return destination.'); }
+    $filters=pl_list_filters($source,'account')+['id'=>$id,'as_of'=>pl_ledger_date($to),'from'=>$from===''?'':pl_ledger_date($from)];
+    if ($from!=='' && $from>$to) { throw new DomainException('The account return start date must be on or before its end date.'); }
+    return $filters;
+}
+
 function pl_render(string $view, array $data = []): never
 {
     $allowed = ['home','ar','ap','parties','inventory','purchasing','tax','opening-conversion','login', 'companies', 'sample-chooser', 'onboarding', 'setup-review', 'transactions', 'editor',
@@ -381,6 +394,7 @@ function pl_render(string $view, array $data = []): never
     if (!in_array($view, $allowed, true)) {
         throw new LogicException('Unknown template.');
     }
+    $accountReturn=in_array($view,['journal','general-detail','transactions'],true)?pl_web_account_return($_GET):[];
     extract($data, EXTR_SKIP);
     $title = $data['title'] ?? 'PHP Ledger';
     $company = $data['company'] ?? null;

@@ -398,6 +398,7 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
             });
             row.querySelectorAll('[data-line-label]').forEach((label) => {
                 label.textContent = label.dataset.lineLabel + ', line ' + (index + 1);
+                label.parentElement.querySelector('input, select')?.setAttribute('aria-label', label.textContent);
             });
             const remove = row.querySelector('[data-remove-journal-row]');
             remove.hidden = false;

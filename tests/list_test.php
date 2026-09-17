@@ -76,3 +76,12 @@ test('bank summary counts every row independently of paged or searched statement
     assert_same(26,$summary['row_count']); assert_same(25,$summary['unmatched_count']);
     assert_throws(fn()=>pl_bank_cancel_statement($f['actor_id'],$f['company_id'],$f['book_id'],(int)$statement['id'],(int)$matched['revision'],'Synthetic correction','paged-cancel'),DomainException::class);
 });
+
+test('source return links retain account filters and cannot choose an external destination', function (): void {
+    $input=['id'=>'12','as_of'=>'2026-09-17','from'=>'2026-09-01','q'=>'service','page'=>'2','sort'=>'credit','dir'=>'desc','return_report'=>'trial-balance'];
+    $filters=pl_web_account_return(['return_account'=>$input]);
+    assert_same(12,$filters['id']); assert_same(2,$filters['page']); assert_same('service',$filters['q']); assert_same('trial-balance',$filters['return_report']);
+    foreach (['https://example.invalid',['id'=>'0','as_of'=>'2026-09-17'],['id'=>'12','as_of'=>'invalid'],['id'=>'12','as_of'=>'2026-09-17','sort'=>'arbitrary']] as $bad) {
+        assert_throws(fn()=>pl_web_account_return(['return_account'=>$bad]),DomainException::class);
+    }
+});

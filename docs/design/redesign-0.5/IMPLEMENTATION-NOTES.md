@@ -530,3 +530,20 @@ rates, or separately design code editing. The owner subsequently approved the re
   Bank account/candidate selects now have explicit labels. Screenshots inspected.
 - No new migration/schema or hosted changes. Final whole-application evidence,
   accessibility review, remaining screen fidelity and publication remain open.
+
+## Journal and source-return checkpoint — 18 September
+
+- Rebuilt the general-journal register with list/detail selection, retained search,
+  status and ordering, draft actions and a compact posted record with linked
+  reversal and history. The editor preserves list context through save/post/back.
+- Account activity links carry validated account/report filters into journal and
+  source records, with a fixed-route return link. Arbitrary destinations and
+  malformed dates are rejected. This does not claim every nested action retains
+  the original account context; complete route acceptance remains pending.
+- Full composer check passed: 276 tests, zero failures, lint 209 PHP files,
+  PHPStan and sample validation green. JS syntax passed. Browser checks with
+  JS enabled/disabled passed draft/edit/post/reverse, list filters and source
+  returns; journal totals were compared exactly. Rechecked two-line direct
+  posting at 12.3401 and primary actions at both desktop/tablet fold targets.
+- No new migrations, schema or hosted changes. Setup/help ports and final
+  whole-application accessibility, package and publication gates remain open.

@@ -9,37 +9,35 @@ if ($journal['source_type'] === 'general_journal' && preg_match('/^general:([1-9
     $generalSource = $sourceMatch[1];
 }
 ?>
-<section class="page-wrap" aria-labelledby="journal-title">
-    <div class="page-heading">
-        <div><p class="eyebrow">Posted journal</p><h1 id="journal-title"><?= pl_e((string) $journal['reference']) ?></h1><p class="muted"><?= pl_e((string) $company['name']) ?> · <?= pl_e((string) $journal['currency']) ?> · <?= pl_e(pl_date_label((string) $journal['journal_date'])) ?></p></div>
-        <a class="button secondary" href="<?= pl_e(pl_url('/reports/trial-balance')) ?>">Trial balance</a>
-    </div>
-    <div class="panel">
-        <h2>Entry details</h2>
+<section class="flex flex-col gap-4 my-5 rounded-panel border border-border bg-surface" aria-labelledby="journal-title">
+<?php pl_ui_document_header($journal['reference'],'posted',static function (): void { ?><a class="btn btn-secondary" href="<?= pl_e(pl_url('/reports/trial-balance')) ?>">Trial balance</a><?php },'journal-title'); ?>
+<p class="text-sm text-ink-muted px-5"><?= pl_e($company['name'].' · '.$journal['currency'].' · '.pl_date_label($journal['journal_date'])) ?></p>
+    <div class="doc-body">
+        <h2 class="section-title">Entry details</h2>
         <p><?= pl_e((string) $journal['description']) ?></p>
-        <dl class="form-grid">
+        <dl class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div><dt>Source type</dt><dd><?= pl_e(ucfirst((string) $journal['source_type'])) ?></dd></div>
             <div><dt>Source reference</dt><dd><?= pl_e((string) $journal['source_reference']) ?></dd></div>
             <div><dt>Posted at</dt><dd><time datetime="<?= pl_e(str_replace(' ', 'T', (string) $journal['posted_at']) . 'Z') ?>" data-local-time><?= pl_e((string) $journal['posted_at']) ?> UTC</time></dd></div>
         </dl>
-        <div class="actions">
-            <?php if ($documentSource !== null): ?><a class="button secondary" href="<?= pl_e(pl_url('/transactions/detail', ['id' => $documentSource])) ?>">View source transaction</a><?php endif; ?>
-            <?php if ($journal['source_type'] === 'opening_balance'): ?><a class="button secondary" href="<?= pl_e(pl_url('/opening-balances')) ?>">View opening cutover</a><?php endif; ?>
-            <?php if ($generalSource !== null): ?><a class="button secondary" href="<?= pl_e(pl_url('/general-journals/detail', ['id' => $generalSource])) ?>">View source general journal</a><?php endif; ?>
-            <?php if ($journal['reversal_of_id'] !== null): ?><a class="button secondary" href="<?= pl_e(pl_url('/journals/detail', ['id' => $journal['reversal_of_id']])) ?>">View original journal</a><?php endif; ?>
+        <div class="flex flex-wrap gap-2">
+            <?php if ($documentSource !== null): ?><a class="btn btn-secondary" href="<?= pl_e(pl_url('/transactions/detail', ['id' => $documentSource,'return_account'=>$accountReturn])) ?>">View source transaction</a><?php endif; ?>
+            <?php if ($journal['source_type'] === 'opening_balance'): ?><a class="btn btn-secondary" href="<?= pl_e(pl_url('/opening-balances')) ?>">View opening cutover</a><?php endif; ?>
+            <?php if ($generalSource !== null): ?><a class="btn btn-secondary" href="<?= pl_e(pl_url('/general-journals/detail', ['id' => $generalSource,'return_account'=>$accountReturn])) ?>">View source general journal</a><?php endif; ?>
+            <?php if ($journal['reversal_of_id'] !== null): ?><a class="btn btn-secondary" href="<?= pl_e(pl_url('/journals/detail', ['id' => $journal['reversal_of_id'],'return_account'=>$accountReturn])) ?>">View original journal</a><?php endif; ?>
         </div>
         <?php if ($journal['reversal_of_id'] !== null): ?><p class="badge">Linked reversal</p><?php endif; ?>
-        <p class="muted">Select an account name below to see its running balance. Posted entries are preserved; corrections use a linked reversal.</p>
+        <p class="text-xs text-ink-muted">Select an account name below to see its running balance. Posted entries are preserved; corrections use a linked reversal.</p>
     </div>
-    <div class="panel table-wrap" tabindex="0" role="region" aria-label="Posted journal lines">
-        <table class="data-table">
+    <div class="table-wrap mx-5 mb-5" tabindex="0" role="region" aria-label="Posted journal lines">
+        <table class="table">
             <caption>Journal lines in <?= pl_e((string) $journal['currency']) ?></caption>
             <thead><tr><th scope="col">Account</th><th scope="col">Description</th><th scope="col" class="amount">Debit</th><th scope="col" class="amount">Credit</th></tr></thead>
             <tbody>
                 <?php foreach ($journal['lines'] as $line): ?>
                     <tr><th scope="row"><a href="<?= pl_e(pl_url('/reports/account', ['id' => $line['account_id'], 'as_of' => $journal['journal_date']])) ?>"><?= pl_e($line['code'] . ' — ' . $line['name']) ?></a></th><td><?= pl_e((string) $line['description']) ?></td><td class="amount"><?= pl_e(pl_money((string) $line['debit'])) ?></td><td class="amount"><?= pl_e(pl_money((string) $line['credit'])) ?></td></tr>
                 <?php endforeach; ?>
-            </tbody>
+            </tbody><?php $totals=pl_general_totals($journal['lines']); ?><tfoot><tr><th scope="row" colspan="2">Total</th><td class="num"><?= pl_e(pl_money($totals['debit'])) ?></td><td class="num"><?= pl_e(pl_money($totals['credit'])) ?></td></tr></tfoot>
         </table>
     </div>
 </section>

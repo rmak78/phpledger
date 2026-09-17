@@ -65,9 +65,9 @@ $lastPage = ($activity['page'] ?? 1) === ($activity['pages'] ?? 1);
                 <?php foreach ($activity['movements'] as $row): ?>
                     <tr>
                         <td><?= pl_e(pl_date_label((string) $row['date'])) ?></td>
-                        <td><a href="<?= pl_e(pl_url('/journals/detail', ['id' => $row['journal_id']])) ?>"><?= pl_e((string) $row['journal_reference']) ?></a><?php if ($row['reversal_of_id'] !== null): ?> <span class="badge">Reversal</span><?php endif; ?></td>
+                        <td><a href="<?= pl_e(pl_url('/journals/detail', ['id' => $row['journal_id'],'return_account'=>$filters])) ?>"><?= pl_e((string) $row['journal_reference']) ?></a><?php if ($row['reversal_of_id'] !== null): ?> <span class="badge">Reversal</span><?php endif; ?></td>
                         <td><?= pl_e((string) $row['description']) ?></td>
-                        <td><?php if ($row['document_id'] !== null): ?><a href="<?= pl_e(pl_url('/transactions/detail', ['id' => $row['document_id']])) ?>">View transaction</a><?php elseif ($row['general_id'] !== null): ?><a href="<?= pl_e(pl_url('/general-journals/detail', ['id' => $row['general_id']])) ?>">View general journal</a><?php else: ?><?= pl_e(ucfirst((string) $row['source_type'])) ?><?php endif; ?></td>
+                        <td><?php if ($row['document_id'] !== null): ?><a href="<?= pl_e(pl_url('/transactions/detail', ['id' => $row['document_id'],'return_account'=>$filters])) ?>">View transaction</a><?php elseif ($row['general_id'] !== null): ?><a href="<?= pl_e(pl_url('/general-journals/detail', ['id' => $row['general_id'],'return_account'=>$filters])) ?>">View general journal</a><?php else: ?><?= pl_e(ucfirst((string) $row['source_type'])) ?><?php endif; ?></td>
                         <td class="amount" data-label="Debit"><?= pl_e(pl_money((string) $row['debit'])) ?></td>
                         <td class="amount" data-label="Credit"><?= pl_e(pl_money((string) $row['credit'])) ?></td>
                         <td class="num" data-label="Running balance"><?= pl_e($statementBalance((string) $row['running_balance'])) ?></td>

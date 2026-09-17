@@ -401,10 +401,11 @@ try {
     }
     if (str_starts_with($path, '/general-journals')) {
         $id = pl_web_id($method === 'POST' ? $_POST : $_GET, 'id');
+        $journalFilters = $method==='POST' || isset($_GET['return_filters']) ? pl_return_list_filters($method==='POST'?$_POST:$_GET,'general-journals') : pl_list_filters($_GET,'general-journals');
         if ($method === 'POST') {
             $return = $path === '/general-journals/save'
-                ? ($id ? pl_url('/general-journals/edit', ['id' => $id]) : pl_url('/general-journals/new'))
-                : pl_url('/general-journals/detail', ['id' => $id]);
+                ? ($id ? pl_url('/general-journals/edit', ['id' => $id,'return_filters'=>$journalFilters]) : pl_url('/general-journals/new',['return_filters'=>$journalFilters]))
+                : pl_url('/general-journals/detail', ['id' => $id,'return_filters'=>$journalFilters]);
             try {
                 pl_web_assert_scope($company, $_POST);
                 if ($path === '/general-journals/save') {
@@ -415,7 +416,7 @@ try {
                     if (pl_web_text($_POST, 'editor_action') === 'post_reviewed_journal') {
                         $draft = pl_save_and_post_general_draft($actorId, $companyId, $bookId, pl_web_general_input($_POST), $id ?: null, $id ? pl_web_id($_POST, 'revision') : null);
                         pl_notice('General journal posted. Your account statements are updated.');
-                        pl_redirect(pl_url('/general-journals/detail', ['id' => $draft['id']]));
+                        pl_redirect(pl_url('/general-journals/detail', ['id' => $draft['id'],'return_filters'=>$journalFilters]));
                     }
                     $draft = pl_save_general_draft($actorId, $companyId, $bookId, pl_web_general_input($_POST), $id ?: null, $id ? pl_web_id($_POST, 'revision') : null);
                     pl_notice('Draft saved. Review the journal before posting.');
@@ -427,22 +428,22 @@ try {
                     $draft = pl_reverse_general_draft($actorId, $companyId, $bookId, $id, pl_web_text($_POST, 'date'), pl_web_text($_POST, 'reason'));
                     pl_notice('Linked reversal posted. The original journal is preserved.');
                 }
-                pl_redirect(pl_url('/general-journals/detail', ['id' => $draft['id']]));
+                pl_redirect(pl_url('/general-journals/detail', ['id' => $draft['id'],'return_filters'=>$journalFilters]));
             } catch (DomainException $error) { pl_form_failure($return, $_POST, $error->getMessage()); }
         }
         if ($path === '/general-journals') {
-            pl_render('general-journals', ['title' => 'General journals', 'user' => $user, 'company' => $company, 'filters' => pl_list_filters($_GET, 'general-journals'), 'list' => pl_list_query($actorId, $companyId, $bookId, 'general-journals', $_GET)]);
+            pl_render('general-journals', ['title' => 'General journals', 'user' => $user, 'company' => $company, 'selection'=>pl_web_id($_GET,'select')?pl_get_general_draft($actorId,$companyId,$bookId,pl_web_id($_GET,'select')):null,'filters' => $journalFilters, 'list' => pl_list_query($actorId, $companyId, $bookId, 'general-journals', $_GET)]);
         }
         $draft = $id ? pl_get_general_draft($actorId, $companyId, $bookId, $id) : null;
         if ($path === '/general-journals/detail') {
             if (!$draft) { throw new DomainException('Choose a saved general journal.'); }
-            pl_render('general-detail', ['title' => $draft['number'], 'user' => $user, 'company' => $company, 'draft' => $draft, 'form' => pl_form_state(pl_url('/general-journals/detail', ['id' => $id])), 'history' => pl_core_history($actorId, $companyId, $bookId, 'general_journal', $id)]);
+            pl_render('general-detail', ['title' => $draft['number'], 'user' => $user, 'company' => $company, 'draft' => $draft, 'filters'=>$journalFilters, 'form' => pl_form_state(pl_url('/general-journals/detail', ['id' => $id,'return_filters'=>$journalFilters])), 'history' => pl_core_history($actorId, $companyId, $bookId, 'general_journal', $id)]);
         }
         if (!pl_can_write($company)) { throw new DomainException('Your role can read journals but cannot edit them.'); }
-        if ($draft && $draft['status'] !== 'draft') { pl_redirect(pl_url('/general-journals/detail', ['id' => $id])); }
-        $form = pl_form_state($id ? pl_url('/general-journals/edit', ['id' => $id]) : pl_url('/general-journals/new'));
+        if ($draft && $draft['status'] !== 'draft') { pl_redirect(pl_url('/general-journals/detail', ['id' => $id,'return_filters'=>$journalFilters])); }
+        $form = pl_form_state($id ? pl_url('/general-journals/edit', ['id' => $id,'return_filters'=>$journalFilters]) : pl_url('/general-journals/new',['return_filters'=>$journalFilters]));
         $input = $form['input'] ?: ($draft ? $draft + ['date' => $draft['document_date']] : ['date' => gmdate('Y-m-d'), 'reference' => '', 'description' => '', 'lines' => [], 'creation_key' => bin2hex(random_bytes(24))]);
-        pl_render('general-editor', ['title' => $id ? 'Edit general journal' : 'New general journal', 'user' => $user, 'company' => $company, 'draft' => $draft, 'input' => $input, 'form' => $form]);
+        pl_render('general-editor', ['title' => $id ? 'Edit general journal' : 'New general journal', 'user' => $user, 'company' => $company, 'draft' => $draft, 'filters'=>$journalFilters, 'input' => $input, 'form' => $form]);
     }
     if (in_array($path, ['/pos', '/pos/review', '/pos/edit', '/pos/checkout', '/pos/retry', '/pos/receipt'], true)) {
         require_once dirname(__DIR__) . '/includes/functions/pos_functions.php';
