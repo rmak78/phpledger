@@ -141,3 +141,24 @@ Home's use of that service needs review alongside list-performance work.
   values and posted a synthetic balanced 12.3401 journal. Both desktop folds were
   captured; table actions and totals are visible after compacting metadata.
 - The remaining daily-work record/list/editor states are not yet accepted.
+
+## Receipt, expense and POS checkpoint
+
+- Receipt/expense editor preview normalizes and validates through the same service
+  payload as posting, without creating drafts or journals. Editing a displayed
+  preview hides it and asks for an updated server preview.
+- Transactions use the split layout with keyboard-operated Details/Journal/History
+  tabs. Without JavaScript all sections remain available. Validated list filters
+  survive preview, editing, saving, posting and the back link.
+- Full composer check: PHP lint (181 files), static analysis, sample validation,
+  and 249 tests passed before the POS layout changes. POS follow-up lint and static
+  analysis passed; 45 targeted POS/dependency tests passed.
+- Browser receipt/expense preview/save/post passed with JavaScript on and off at
+  1366x768 and 1024x768. Filter persistence and tab keyboard operation were checked.
+- POS now uses its standalone header and records no new financial identity:
+  existing sale.created_by and the journal's document source link identify the
+  creator. Receipts resolve that creator's display name rather than the viewer's.
+  No till/shift management. Historical display names are not snapshotted.
+- POS cart/review/checkout/receipt passed with JavaScript on and off; captures at
+  1366, 1024, 768 and 390 pixels wide had no horizontal page overflow or JS errors.
+  This does not yet close the entire daily-work lane or release verification.

@@ -1,5 +1,41 @@
 /* Extra components for the daily screens. Use @layer components; tokens only. */
 @layer components {
+  .pos-topbar { display: flex; align-items: center; gap: 1rem; min-block-size: 48px; padding: .4rem 1rem; border-block-end: 1px solid var(--border); background: var(--surface); font-size: .8125rem; }
+  .pos-progress { display: flex; gap: 1rem; list-style: none; padding: 0; margin: 0; color: var(--ink-muted); font-size: .75rem; }
+  .pos-progress li { display: flex; align-items: center; gap: .35rem; }
+  .pos-progress li span { display: grid; place-items: center; inline-size: 20px; block-size: 20px; border: 1px solid var(--border-strong); border-radius: 50%; }
+  .pos-progress [aria-current] { color: var(--ink); font-weight: 600; }
+  .pos-progress [aria-current] span { color: var(--surface); background: var(--brand-navy); }
+  .pos-cashier { margin-inline-start: auto; font-size: .75rem; color: var(--ink-muted); }
+  .view-pos .pos-workspace { max-inline-size: none; margin: 0; padding: 1rem; }
+  .view-pos .pos-heading { margin-block-end: .75rem; }
+  .view-pos .pos-heading h1 { font-size: 1.25rem; }
+  .view-pos .pos-scope { margin-block-end: .75rem; }
+  .view-pos .pos-grid, .view-pos .pos-review-grid { grid-template-columns: minmax(0,1fr) 360px; gap: 1rem; }
+  .view-pos .pos-product { padding: 0; align-items: stretch; }
+  .view-pos .pos-products { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .view-pos .pos-enhanced .pos-fallback-quantity { display: none; }
+  .view-pos .pos-product-pick { padding: .75rem; text-align: start; background: var(--surface); }
+  .view-pos .pos-product-top { margin-block-end: .5rem; }
+  .view-pos .pos-product-name { font-size: .875rem; }
+  .view-pos .pos-price { padding-block-start: .5rem; font-size: 1rem; }
+  .view-pos .pos-cart, .view-pos .pos-payment, .view-pos .pos-review-lines { padding: 1rem; inset-block-start: 1rem; }
+  .view-pos .pos-cart-row, .view-pos .pos-review-line { padding-block: .625rem; }
+  .view-pos .pos-cart [data-pos-cart] { max-block-size: 270px; overflow-y: auto; }
+  .view-pos .pos-cart > .field, .view-pos .pos-payment > .field { margin-block: .75rem; }
+  .view-pos .pos-cart > .btn, .view-pos [data-pos-checkout] { inline-size: 100%; margin-block-start: .75rem; }
+  .view-pos .pos-total { margin-block-start: .75rem; padding-block-start: .75rem; }
+  .view-pos .pos-total strong { font-size: 1.25rem; }
+  .view-pos .pos-small { margin-block-start: .5rem; font-size: .75rem; }
+  .view-pos .pos-receipt { max-inline-size: 480px; margin-inline: auto; padding: 1.25rem; }
+  .view-pos .pos-section-heading h2 { font-size: 1rem; }
+  @media (max-width: 899px) {
+    .pos-topbar { flex-wrap: wrap; }
+    .pos-progress { order: 3; flex-basis: 100%; }
+    .view-pos .pos-grid, .view-pos .pos-review-grid { grid-template-columns: minmax(0,1fr); }
+    .view-pos .pos-cart, .view-pos .pos-payment { position: static; }
+    .view-pos .pos-products { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  }
   /* Danger counterpart to app.css's .balanced-label, for an out-of-balance journal draft. */
   .balance-label-danger {
     display: inline-flex;

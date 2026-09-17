@@ -1,5 +1,42 @@
 'use strict';
 
+// Local section links remain ordinary anchors when JavaScript is unavailable.
+document.querySelectorAll('[data-ui-tabs]').forEach(nav => {
+    const tabs = [...nav.querySelectorAll('a[href^="#"]')];
+    const panels = tabs.map(tab => document.getElementById(tab.hash.slice(1)));
+    if (!tabs.length || panels.some(panel => !panel?.hasAttribute('data-ui-tab-panel'))) return;
+    nav.setAttribute('role', 'tablist');
+    const activate = (index, focus = false) => {
+        tabs.forEach((tab, i) => {
+            tab.setAttribute('aria-selected', String(i === index));
+            tab.removeAttribute('aria-current');
+            tab.tabIndex = i === index ? 0 : -1;
+            panels[i].hidden = i !== index;
+        });
+        if (focus) tabs[index].focus();
+    };
+    tabs.forEach((tab, index) => {
+        tab.id = panels[index].id + '-tab';
+        tab.setAttribute('role', 'tab');
+        tab.setAttribute('aria-controls', panels[index].id);
+        panels[index].setAttribute('role', 'tabpanel');
+        panels[index].setAttribute('aria-labelledby', tab.id);
+        panels[index].tabIndex = 0;
+        tab.addEventListener('click', event => { event.preventDefault(); activate(index); });
+        tab.addEventListener('keydown', event => {
+            let next;
+            const forward = getComputedStyle(nav).direction === 'rtl' ? -1 : 1;
+            if (event.key === 'ArrowRight') next = (index + tabs.length + forward) % tabs.length;
+            if (event.key === 'ArrowLeft') next = (index + tabs.length - forward) % tabs.length;
+            if (event.key === 'Home') next = 0;
+            if (event.key === 'End') next = tabs.length - 1;
+            if (next !== undefined) { event.preventDefault(); activate(next, true); }
+        });
+    });
+    const initial = tabs.findIndex(tab => tab.hash === location.hash);
+    activate(initial < 0 ? 0 : initial);
+});
+
 // Shared workspace controls enhance ordinary links and native details menus.
 (() => {
     const shell = document.querySelector('[data-shell]');
@@ -164,7 +201,7 @@ document.querySelectorAll('[data-fiscal-year-end-choice]').forEach(select => {
 });
 
 document.querySelectorAll('[data-record-link]').forEach(link => {
-    if (window.matchMedia('(min-width: 981px)').matches) {
+    if (window.matchMedia('(min-width: 900px)').matches) {
         const url = new URL(link.href);
         url.pathname = url.pathname.replace(/\/transactions\/detail$/, '/transactions');
         link.href = url.toString();
@@ -193,6 +230,17 @@ if (documentForm) {
     filterCategories();
     let changed = false;
     documentForm.addEventListener('input', () => { changed = true; });
+    documentForm.addEventListener('input', () => {
+        const preview = documentForm.querySelector('[data-server-preview]');
+        if (preview && !preview.hidden) {
+            preview.hidden = true;
+            const stale = document.createElement('p');
+            stale.className = 'text-xs text-warning mt-2';
+            stale.setAttribute('role', 'status');
+            stale.textContent = 'Fields changed. Update the posting preview to see the current journal lines.';
+            preview.after(stale);
+        }
+    });
     documentForm.addEventListener('submit', () => { changed = false; });
     window.addEventListener('beforeunload', event => {
         if (changed) { event.preventDefault(); event.returnValue = ''; }

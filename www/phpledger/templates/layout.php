@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__ . '/partials/ui/components.php';
-$workspace = $user !== null && $company !== null && $view !== 'oauth-consent';
+$posLayout = $user !== null && $company !== null && $view === 'pos';
+$workspace = $user !== null && $company !== null && !in_array($view, ['oauth-consent', 'pos'], true);
 ?>
 <!doctype html>
 <html lang="en" data-screen="<?= pl_e($view) ?>">
@@ -37,6 +38,8 @@ $workspace = $user !== null && $company !== null && $view !== 'oauth-consent';
 <?php endif; ?>
 </div>
 <main id="main" class="shell-main" tabindex="-1"><div class="shell-main-inner">
+<?php elseif ($posLayout): ?>
+<main id="main" tabindex="-1">
 <?php else: ?>
 <div class="auth-shell"><div class="auth-card<?= in_array($view, ['login','oauth-consent','error'], true) ? '' : ' auth-card-wide' ?>">
 <a href="<?= pl_e(pl_url('/')) ?>" aria-label="PHP Ledger home"><img class="auth-logo" src="<?= pl_e(pl_url('/assets/brand/phpledger-horizontal.png')) ?>" alt="PHP Ledger" width="2172" height="724"></a>
@@ -44,6 +47,6 @@ $workspace = $user !== null && $company !== null && $view !== 'oauth-consent';
 <?php endif; ?>
 <?php if ($notice): ?><div class="strip strip-info" role="status" data-dismissible><p><?= pl_e($notice) ?></p><button type="button" class="strip-dismiss" data-dismiss aria-label="Dismiss notification"><?= pl_icon('x') ?></button></div><?php endif; ?>
 <?php require __DIR__ . '/views/' . $view . '.php'; ?>
-<?php if ($workspace): ?></div></main></div></div><?php else: ?></main><p class="text-xs text-ink-muted">PHP Ledger <?= pl_e(pl_app_version()) ?> · Development preview</p></div></div><?php endif; ?>
+<?php if ($workspace): ?></div></main></div></div><?php elseif ($posLayout): ?></main><?php else: ?></main><p class="text-xs text-ink-muted">PHP Ledger <?= pl_e(pl_app_version()) ?> · Development preview</p></div></div><?php endif; ?>
 </body>
 </html>

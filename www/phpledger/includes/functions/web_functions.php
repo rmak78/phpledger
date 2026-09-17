@@ -182,6 +182,14 @@ function pl_list_filters(array $input, string $screen): array
     return $filters;
 }
 
+/** Carry only validated list state through editor submissions and record actions. */
+function pl_return_list_filters(array $input, string $screen): array
+{
+    $filters = $input['return_filters'] ?? [];
+    if (!is_array($filters)) { throw new DomainException('Invalid list return filters.'); }
+    return pl_list_filters($filters, $screen);
+}
+
 /** Reuse the existing scoped, counted LIMIT/OFFSET services, including running balances. */
 function pl_list_query(int $actorId, int $companyId, int $bookId, string $screen, array $input): array
 {
@@ -266,6 +274,16 @@ function pl_web_journal_line_action(array $input): array
     $input['lines'] = $lines ?: [[]];
     unset($input['editor_action'], $input['remove_line']);
     return $input;
+}
+
+function pl_web_document_input(array $input): array
+{
+    return [
+        'kind'=>pl_web_text($input,'kind'), 'date'=>pl_web_text($input,'date'),
+        'amount'=>pl_web_text($input,'amount'), 'money_account_id'=>pl_web_id($input,'money_account_id'),
+        'category_account_id'=>pl_web_id($input,'category_account_id'), 'counterparty'=>pl_web_text($input,'counterparty'),
+        'reference'=>pl_web_text($input,'reference'), 'memo'=>pl_web_text($input,'memo'), 'creation_key'=>pl_web_text($input,'creation_key'),
+    ];
 }
 
 function pl_web_general_input(array $input): array

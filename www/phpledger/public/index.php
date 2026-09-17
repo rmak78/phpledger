@@ -613,26 +613,27 @@ try {
     }
     if ($path === '/transactions/save') {
         $documentId = pl_web_id($_POST, 'id');
+        $returnFilters = pl_return_list_filters($_POST, 'transactions');
         $return = $documentId ? pl_url('/transactions/edit', ['id' => $documentId]) : '/transactions/new';
         try {
             pl_web_assert_scope($company, $_POST);
-            $input = [
-                'kind' => pl_web_text($_POST, 'kind'), 'date' => pl_web_text($_POST, 'date'),
-                'amount' => pl_web_text($_POST, 'amount'), 'money_account_id' => pl_web_id($_POST, 'money_account_id'),
-                'category_account_id' => pl_web_id($_POST, 'category_account_id'), 'counterparty' => pl_web_text($_POST, 'counterparty'),
-                'reference' => pl_web_text($_POST, 'reference'), 'memo' => pl_web_text($_POST, 'memo'),
-                'creation_key' => pl_web_text($_POST, 'creation_key'),
-            ];
+            $input = pl_web_document_input($_POST);
+            if (pl_web_text($_POST, 'editor_action') === 'preview') {
+                if (!pl_can_write($company)) { throw new DomainException('Your role can read transactions but cannot edit them.'); }
+                pl_preview_document($actorId, $companyId, $bookId, $input);
+                pl_form_failure($return, $_POST, '', 200);
+            }
             $saved = pl_save_document($actorId, $companyId, $bookId, $input, $documentId ?: null, $documentId ? pl_web_id($_POST, 'revision') : null);
             pl_notice('Draft saved. Your accounts have not changed.');
-            pl_redirect(pl_url('/transactions', ['id' => $saved['id'], 'status' => 'draft']));
+            pl_redirect(pl_url('/transactions', ['id' => $saved['id']] + $returnFilters));
         } catch (DomainException $error) {
             pl_form_failure($return, $_POST, $error->getMessage());
         }
     }
     if ($path === '/transactions/post' || $path === '/transactions/reverse') {
         $id = pl_web_id($_POST, 'id');
-        $return = pl_url('/transactions/detail', ['id' => $id]);
+        $returnFilters = pl_return_list_filters($_POST, 'transactions');
+        $return = pl_url('/transactions/detail', ['id' => $id] + $returnFilters);
         try {
             pl_web_assert_scope($company, $_POST);
             if ($path === '/transactions/post') {
@@ -642,7 +643,7 @@ try {
                 $saved = pl_reverse_document($actorId, $companyId, $bookId, $id, pl_web_text($_POST, 'date'), pl_web_text($_POST, 'reason'));
                 pl_notice('Reversal posted. The original transaction and its history are preserved.');
             }
-            pl_redirect(pl_url('/transactions', ['id' => $id, 'status' => $saved['status']]));
+            pl_redirect(pl_url('/transactions', ['id' => $id] + $returnFilters));
         } catch (DomainException $error) {
             pl_form_failure($return, $_POST, $error->getMessage());
         }
@@ -658,7 +659,13 @@ try {
         }
         $form = pl_form_state($document ? pl_url('/transactions/edit', ['id' => $id]) : '/transactions/new');
         $input = $form['input'] ?: ($document ?? ['kind' => pl_web_text($_GET, 'kind', 'expense'), 'date' => gmdate('Y-m-d'), 'creation_key' => bin2hex(random_bytes(24))]);
-        pl_render('editor', ['title' => $document ? 'Edit draft' : 'New transaction', 'user' => $user, 'company' => $company, 'document' => $document, 'input' => $input, 'form' => $form]);
+        $preview = null;
+        if (pl_web_text($input, 'editor_action') === 'preview') {
+            try { $preview = pl_preview_document($actorId, $companyId, $bookId, pl_web_document_input($input)); }
+            catch (DomainException $error) { $form['message'] = $error->getMessage(); }
+        }
+        $returnFilters = pl_return_list_filters($form['input'] ?: $_GET, 'transactions');
+        pl_render('editor', ['title' => $document ? 'Edit draft' : 'New transaction', 'user' => $user, 'company' => $company, 'document' => $document, 'input' => $input, 'form' => $form, 'preview'=>$preview, 'returnFilters'=>$returnFilters]);
     }
     if ($path === '/transactions' || $path === '/transactions/detail') {
         $filters = pl_list_filters($_GET, 'transactions');
@@ -668,7 +675,7 @@ try {
             $id = (int) $list['documents'][0]['id'];
         }
         $document = $id ? pl_get_document($actorId, $companyId, $bookId, $id) : null;
-        $form = $id ? pl_form_state(pl_url('/transactions/detail', ['id' => $id])) : ['message' => '', 'input' => []];
+        $form = $id ? pl_form_state(pl_url('/transactions/detail', ['id' => $id] + $filters)) : ['message' => '', 'input' => []];
         pl_render('transactions', ['title' => 'Transactions', 'user' => $user, 'company' => $company, 'list' => $list, 'filters' => $filters, 'document' => $document, 'form' => $form, 'detailOnly' => $path === '/transactions/detail']);
     }
     if ($path === '/reports/trial-balance') {

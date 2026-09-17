@@ -240,6 +240,21 @@ a {
   .auth-panel .page-header { position: static; background: transparent; padding-block: 0 .75rem; }
   .grid > .panel { margin-block: 0; }
   .view-home .empty-state { padding-block: 1.25rem; }
+  .transaction-detail.split-view-detail { padding: 1rem; min-inline-size: 0; max-block-size: calc(100dvh - 14rem); }
+  .transaction-detail.split-view-detail > * { flex-shrink: 0; }
+  .transaction-detail .detail-heading { flex-wrap: wrap; gap: .5rem; margin-block-end: .75rem; }
+  .transaction-detail .detail-heading h2 { font-size: 1.0625rem; }
+  .transaction-detail .detail-heading h3 { font-size: .875rem; }
+  .transaction-detail .detail-amount { font-size: .75rem; }
+  .transaction-detail .detail-amount strong { font-size: 1.375rem; }
+  .transaction-detail .record-details { grid-template-columns: minmax(0, 1fr); gap: .625rem; margin-block: .75rem; }
+  .transaction-detail .record-details > div { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: .5rem; }
+  .transaction-detail .record-details dt, .transaction-detail .record-details dd { font-size: .8125rem; }
+  .transaction-detail .panel-actions { margin-block-start: 1rem; padding-inline: 0; }
+  .split-view.transaction-record-view { grid-template-columns: minmax(0, 1fr); }
+  .transaction-record-view > .split-view-list { display: none; }
+  .transaction-record-view .split-view-back { display: inline-flex; }
+  @media (max-width: 899px) { .split-view-list:not(.has-detail) + .split-view-detail { display: none; } }
   .core-journal-form { padding: 1rem; }
   .core-journal-meta { grid-template-columns: repeat(3, minmax(0, 1fr)); max-inline-size: none; margin-block-end: 1rem; gap: .75rem; }
   .core-journal-meta .journal-description { min-block-size: var(--control-h); block-size: var(--control-h); padding-block: .375rem; }
@@ -283,7 +298,7 @@ a {
     *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
   }
   .shell-topbar details { position: relative; }
-  html:not([data-ui-ready]) .shell-sidebar { position: static; width: var(--sidebar-w); }
+  html:not([data-ui-ready]) .shell-sidebar { position: static; }
   @media (max-width: 899px) {
     html:not([data-ui-ready]) [data-shell] { flex-direction: column; }
     html:not([data-ui-ready]) .shell-sidebar { height: auto; width: 100%; }

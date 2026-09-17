@@ -129,6 +129,22 @@ function pl_save_document(int $actorId, int $companyId, int $bookId, array $inpu
 }
 
 /** The browser never supplies financial journal lines or a posting identity. */
+function pl_preview_document(int $actorId, int $companyId, int $bookId, array $input): array
+{
+    pl_require_company_access($actorId, $companyId);
+    $book = pl_ledger_book($companyId, $bookId);
+    $document = pl_normalize_document($input);
+    pl_validate_document_accounts($companyId, $bookId, $document);
+    $payload = pl_document_posting_payload($document + ['id'=>0], $book['currency']);
+    foreach ($payload['lines'] as &$line) {
+        $account = pl_get_account($actorId, $companyId, $bookId, $line['account_id']);
+        $line['code'] = $account['code']; $line['name'] = $account['name'];
+    }
+    unset($line);
+    return ['date'=>$payload['date'], 'currency'=>$payload['currency'], 'lines'=>$payload['lines']];
+}
+
+/** The browser never supplies financial journal lines or a posting identity. */
 function pl_document_posting_payload(array $document, string $currency): array
 {
     $money = ['account_id' => (int) $document['money_account_id'], 'debit' => '0.0000', 'credit' => '0.0000', 'description' => (string) $document['counterparty']];

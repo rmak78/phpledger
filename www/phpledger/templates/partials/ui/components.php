@@ -71,9 +71,9 @@ function pl_ui_stepper(array $steps, int $current): void
 }
 
 /** Native links keep all sections available without JavaScript. */
-function pl_ui_tabs(array $links, string $current): void
+function pl_ui_tabs(array $links, string $current, bool $enhance = false): void
 {
-    echo '<nav class="tabs-underline" aria-label="Sections">';
+    echo '<nav class="tabs-underline" aria-label="Sections"' . ($enhance ? ' data-ui-tabs' : '') . '>';
     foreach ($links as $label => $href) {
         echo '<a class="tabs-underline-item" href="' . pl_e((string)$href) . '"' . ((string)$label === $current ? ' aria-current="page"' : '') . '>' . pl_e((string)$label) . '</a>';
     }
@@ -106,6 +106,14 @@ function pl_ui_pagination(string $path, array $filters, int $page, int $pages): 
     echo '<span>Page ' . $page . ' of ' . max(1, $pages) . '</span>';
     if ($page < $pages) { echo '<a class="btn btn-secondary btn-sm" href="' . pl_e(pl_url($path, array_replace($filters, ['page' => $page + 1]))) . '">Next</a>'; }
     echo '</nav>';
+}
+
+/** Canonical list filters, never a user-controlled redirect URL. */
+function pl_ui_return_filters(array $filters): void
+{
+    foreach ($filters as $key=>$value) {
+        echo '<input type="hidden" name="return_filters[' . pl_e((string)$key) . ']" value="' . pl_e((string)$value) . '">';
+    }
 }
 
 function pl_ui_sort(string $path, array $filters, string $column, string $label): void

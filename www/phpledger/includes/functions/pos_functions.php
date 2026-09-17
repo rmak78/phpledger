@@ -143,6 +143,8 @@ function pl_get_pos_receipt(int $actorId, int $companyId, int $bookId, int $docu
     $sale['document_id'] = (int) $sale['document_id'];
     $sale['company_id'] = (int) $sale['company_id'];
     $sale['book_id'] = (int) $sale['book_id'];
+    $sale['created_by'] = (int) $sale['created_by'];
+    $sale['cashier_name'] = (string) DB::queryFirstField('SELECT display_name FROM pl_users WHERE id = %i', $sale['created_by']);
     foreach (['total', 'cash_received', 'change_due'] as $field) {
         $sale[$field] = bcadd((string) $sale[$field], '0', 4);
     }

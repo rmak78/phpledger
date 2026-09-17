@@ -55,6 +55,9 @@ $suites[] = 'editor_test.php';
 if (($argv[1] ?? '') === '--suite=editors') {
     $suites = ['ledger_test.php', 'concurrency_test.php', 'core_test.php', 'editor_test.php'];
 }
+if (($argv[1] ?? '') === '--suite=pos') {
+    $suites = ['ledger_test.php', 'concurrency_test.php', 'document_test.php', 'pos_test.php'];
+}
 if (($argv[1] ?? '') === '--suite=home') {
     $suites = ['ledger_test.php', 'concurrency_test.php', 'document_test.php', 'reconciliation_test.php', 'home_test.php'];
 }

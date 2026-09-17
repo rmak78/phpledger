@@ -1,26 +1,38 @@
 <?php
-declare(strict_types=1);
-$kind = pl_web_text($input, 'kind', 'expense');
-$cashAccounts = array_filter($company['accounts'], static fn (array $a): bool => $a['semantic_key'] === 'core.cash_bank' && $a['is_active']);
-$categoryAccounts = array_filter($company['accounts'], static fn (array $a): bool => in_array($a['type'], ['income', 'expense'], true) && $a['is_active']);
-$defaultCash = array_key_first($cashAccounts);
-$cashId = pl_web_id($input, 'money_account_id', $defaultCash === null ? 0 : (int) $cashAccounts[$defaultCash]['id']);
+ declare(strict_types=1);
+ $kind = pl_web_text($input, 'kind', 'expense');
+ $cashAccounts = array_filter($company['accounts'], static fn (array $a): bool => $a['role'] === 'cash_bank' && $a['type'] === 'asset' && $a['is_active']);
+ $categoryAccounts = array_filter($company['accounts'], static fn (array $a): bool => in_array($a['type'], ['income','expense'], true) && $a['role'] === $a['type'] && $a['is_active']);
+ $defaultCash = array_key_first($cashAccounts);
+ $cashId = pl_web_id($input, 'money_account_id', $defaultCash === null ? 0 : (int) $cashAccounts[$defaultCash]['id']);
+ $returnPath = pl_url($document ? '/transactions/detail' : '/transactions', ($document ? ['id'=>$document['id']] : []) + $returnFilters);
 ?>
-<div class="page-wrap editor-wrap"><a class="back-link" href="<?= pl_e(pl_url($document ? '/transactions/detail' : '/transactions', $document ? ['id' => $document['id']] : [])) ?>"><?= pl_icon('arrow-left') ?> Back to <?= $document ? 'transaction' : 'transactions' ?></a>
-<div class="page-heading"><div><p class="eyebrow"><?= $document ? pl_e($document['number']) . ' · Editing draft' : 'Money in. Money out.' ?></p><h1><?= $document ? 'Edit draft' : 'Record a transaction' ?></h1><p class="muted">Save first. Review the entry. Post when you're ready.</p></div><span class="badge draft">Draft</span></div>
-<?php if ($form['message']): ?><div class="alert" role="alert"><strong>Your draft has not been changed.</strong><p><?= pl_e($form['message']) ?></p><p>Your submitted values are kept below.<?php if ($document): ?> <a href="<?= pl_e(pl_url('/transactions/edit', ['id' => $document['id']])) ?>">Reload the latest saved version</a> to resolve a revision conflict.<?php endif; ?></p></div><?php endif; ?>
-<div class="editor-grid"><form class="panel editor-form" method="post" action="<?= pl_e(pl_url('/transactions/save')) ?>" data-document-form>
-    <?= pl_csrf_field() ?><?= pl_scope_fields($company) ?>
-    <input type="hidden" name="creation_key" value="<?= pl_e(pl_web_text($input, 'creation_key')) ?>">
-    <?php if ($document): ?><input type="hidden" name="id" value="<?= (int) $document['id'] ?>"><input type="hidden" name="revision" value="<?= pl_web_id($input, 'revision', (int) $document['revision']) ?>"><?php endif; ?>
-    <div class="form-grid"><fieldset class="transaction-kind full-width"><legend>Transaction type</legend><label><input type="radio" name="kind" value="expense" <?= $kind !== 'receipt' ? 'checked' : '' ?>> Money out <span>Expense</span></label><label><input type="radio" name="kind" value="receipt" <?= $kind === 'receipt' ? 'checked' : '' ?>> Money in <span>Receipt</span></label></fieldset>
-    <label class="field">Date<input type="date" name="date" value="<?= pl_e(pl_web_text($input, 'date')) ?>" required <?= !$document && !$form['input'] ? 'data-local-today' : '' ?>><span class="field-hint">The accounting date for this transaction.</span></label>
-    <label class="field">Amount (<?= pl_e($company['currency']) ?>)<input type="text" inputmode="decimal" name="amount" value="<?= pl_e(pl_web_text($input, 'amount')) ?>" placeholder="0.00" maxlength="21" pattern="[0-9]+(\.[0-9]{1,4})?" required autocomplete="off"><span class="field-hint">Use a decimal point, without separators.</span></label>
-    <label class="field full-width">Counterparty name<input type="text" name="counterparty" value="<?= pl_e(pl_web_text($input, 'counterparty')) ?>" maxlength="160" placeholder="Who did you pay or receive money from?" required></label>
-    <label class="field">Cash / bank account<select name="money_account_id" required><?php foreach ($cashAccounts as $account): ?><option value="<?= (int) $account['id'] ?>" <?= $cashId === (int) $account['id'] ? 'selected' : '' ?>><?= pl_e($account['name']) ?></option><?php endforeach; ?></select></label>
-    <label class="field">Category<select name="category_account_id" required><option value="">Choose a category</option><?php foreach ($categoryAccounts as $account): ?><option value="<?= (int) $account['id'] ?>" data-category-kind="<?= $account['type'] === 'income' ? 'receipt' : 'expense' ?>" <?= pl_web_id($input, 'category_account_id') === (int) $account['id'] ? 'selected' : '' ?>><?= pl_e($account['name']) ?></option><?php endforeach; ?></select></label>
-    <label class="field full-width">Reference <span class="optional">optional</span><input type="text" name="reference" value="<?= pl_e(pl_web_text($input, 'reference')) ?>" maxlength="120" placeholder="Receipt number or your own reference"></label>
-    <label class="field full-width">Memo <span class="optional">optional</span><textarea name="memo" rows="3" maxlength="500" placeholder="What was this transaction for?"><?= pl_e(pl_web_text($input, 'memo')) ?></textarea></label></div>
-    <div class="form-actions"><a href="<?= pl_e(pl_url($document ? '/transactions/detail' : '/transactions', $document ? ['id' => $document['id']] : [])) ?>" class="button secondary">Cancel</a><button type="submit" class="button primary">Save draft <?= pl_icon('arrow-right') ?></button></div>
-</form><aside class="editor-guide"><span class="eyebrow">01 / Record</span><h2>Get the details right.<br>The books follow.</h2><p>This step saves your work without affecting your balances.</p><ol class="journey-steps"><li aria-current="step"><strong>Record</strong><span>Add the date, amount and category.</span></li><li><strong>Review</strong><span>Inspect the balanced journal.</span></li><li><strong>Post</strong><span>Include the entry in your reports.</span></li></ol><p class="muted small">This preview supports one category in your business's base currency. Split entries, tax and foreign currency posting are planned.</p></aside></div>
-</div>
+<section class="py-5" aria-labelledby="transaction-editor-title">
+    <a class="back-link" href="<?= pl_e($returnPath) ?>"><?= pl_icon('arrow-left') ?> Back to transactions</a>
+    <?php pl_ui_document_header($document ? $document['number'] . ' · Edit draft' : 'New ' . ($kind === 'receipt' ? 'receipt' : 'expense'), 'draft', static function () use ($returnPath): void { ?>
+        <a class="btn btn-ghost" href="<?= pl_e($returnPath) ?>">Cancel</a><button class="btn btn-primary" form="transaction-editor" type="submit">Save draft</button>
+    <?php }, 'transaction-editor-title'); ?>
+    <?php if ($form['message']): ?><div class="alert alert-danger" role="alert" tabindex="-1" data-form-error><strong>Your draft has not been changed.</strong><p><?= pl_e($form['message']) ?></p><p>Your submitted values are kept below.<?php if ($document): ?> <a href="<?= pl_e(pl_url('/transactions/edit', ['id'=>$document['id']])) ?>">Reload the latest saved version</a> to resolve a revision conflict.<?php endif; ?></p></div><?php endif; ?>
+    <form id="transaction-editor" class="panel doc-body" method="post" action="<?= pl_e(pl_url('/transactions/save')) ?>" data-document-form>
+        <?= pl_csrf_field() ?><?= pl_scope_fields($company) ?>
+        <?php pl_ui_return_filters($returnFilters); ?>
+        <input type="hidden" name="creation_key" value="<?= pl_e(pl_web_text($input,'creation_key')) ?>">
+        <?php if ($document): ?><input type="hidden" name="id" value="<?= (int) $document['id'] ?>"><input type="hidden" name="revision" value="<?= pl_web_id($input,'revision',(int)$document['revision']) ?>"><?php endif; ?>
+        <fieldset class="flex flex-wrap items-center gap-4"><legend class="field-label">Transaction type</legend><label><input type="radio" name="kind" value="expense" <?= $kind !== 'receipt' ? 'checked' : '' ?>> Money out · Expense</label><label><input type="radio" name="kind" value="receipt" <?= $kind === 'receipt' ? 'checked' : '' ?>> Money in · Receipt</label></fieldset>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <?php pl_ui_field('transaction-date','Date',static function () use ($input,$document,$form): void { ?><input class="input" id="transaction-date" type="date" name="date" value="<?= pl_e(pl_web_text($input,'date')) ?>" required <?= !$document && !$form['input'] ? 'data-local-today' : '' ?>><?php }, 'The accounting date for this transaction.'); ?>
+        <?php pl_ui_field('transaction-amount','Amount (' . $company['currency'] . ')',static function () use ($input): void { ?><input class="input input-amount" id="transaction-amount" type="text" inputmode="decimal" name="amount" value="<?= pl_e(pl_web_text($input,'amount')) ?>" placeholder="0.00" maxlength="21" pattern="[0-9]+(\.[0-9]{1,4})?" required autocomplete="off"><?php }, 'Use a decimal point, without separators.'); ?>
+        <?php pl_ui_field('transaction-party','Counterparty name',static function () use ($input): void { ?><input class="input" id="transaction-party" name="counterparty" value="<?= pl_e(pl_web_text($input,'counterparty')) ?>" maxlength="160" required><?php }); ?>
+        <?php pl_ui_field('transaction-cash','Cash / bank account',static function () use ($cashAccounts,$cashId): void { ?><select class="select" id="transaction-cash" name="money_account_id" required><?php foreach ($cashAccounts as $account): ?><option value="<?= (int)$account['id'] ?>" <?= $cashId === (int)$account['id'] ? 'selected' : '' ?>><?= pl_e($account['name']) ?></option><?php endforeach; ?></select><?php }); ?>
+        <?php pl_ui_field('transaction-category','Category',static function () use ($categoryAccounts,$input): void { ?><select class="select" id="transaction-category" name="category_account_id" required><option value="">Choose a category</option><?php foreach ($categoryAccounts as $account): ?><option value="<?= (int)$account['id'] ?>" data-category-kind="<?= $account['type'] === 'income' ? 'receipt' : 'expense' ?>" <?= pl_web_id($input,'category_account_id') === (int)$account['id'] ? 'selected' : '' ?>><?= pl_e($account['name']) ?></option><?php endforeach; ?></select><?php }); ?>
+        <?php pl_ui_field('transaction-reference','Reference (optional)',static function () use ($input): void { ?><input class="input" id="transaction-reference" name="reference" value="<?= pl_e(pl_web_text($input,'reference')) ?>" maxlength="120" placeholder="Receipt number or your own reference"><?php }); ?>
+        <div class="sm:col-span-2 lg:col-span-4"><?php pl_ui_field('transaction-memo','Memo (optional)',static function () use ($input): void { ?><textarea class="textarea" id="transaction-memo" name="memo" rows="2" maxlength="500" placeholder="What was this transaction for?"><?= pl_e(pl_web_text($input,'memo')) ?></textarea><?php }); ?></div>
+        </div>
+        <p class="text-xs text-ink-muted">This entry uses one category in <?= pl_e($company['currency']) ?>. Split entries, tax and foreign-currency amounts are not supported by this receipt/expense form.</p>
+        <section class="rounded-panel border border-border p-3" aria-labelledby="posting-preview-title">
+            <div class="flex flex-wrap items-center justify-between gap-2"><h2 class="section-title" id="posting-preview-title">Posting preview</h2><button class="btn btn-secondary btn-sm" name="editor_action" value="preview" type="submit">Update posting preview</button></div>
+            <?php if ($preview): ?><div class="mt-3" data-server-preview><?php $entryLines=$preview['lines']; require __DIR__ . '/../partials/entry.php'; ?></div><p class="text-xs text-ink-muted mt-2">This preview uses the same posting payload as the saved transaction. Update it after changing fields. Permissions, revisions and open periods are checked again when posting.</p><?php else: ?><p class="text-xs text-ink-muted mt-2">Enter the transaction details, then update the preview to inspect the exact journal lines without saving or posting.</p><?php endif; ?>
+            <p class="text-xs text-ink-muted mt-2">Posting adds this transaction to reports. A saved draft does not change your books.</p>
+        </section>
+    </form>
+</section>
