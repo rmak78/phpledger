@@ -1,0 +1,85 @@
+<!--meta {"id":"sample-chooser","title":"Choose a sample company","route":"/sample-chooser","group":"Setup & access","nav":"","crumbs":[["Choose a sample company"]],"layout":"auth","pattern":"focused-auth","state":"Starter playground selected"} -->
+<div class="auth-panel">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <p class="eyebrow">Local synthetic catalogue</p>
+      <h1 class="page-title">Choose one sample company</h1>
+      <p class="mt-1 text-sm text-ink-muted">Each choice creates one new, isolated company and book. Your existing businesses are never used as a target and are not changed.</p>
+    </div>
+    <a class="btn btn-ghost btn-sm" href="#/companies"><i data-icon="arrow-left" class="icon"></i>Back</a>
+  </div>
+
+  <form class="mt-3 flex flex-col gap-3">
+    <fieldset>
+      <legend class="field-label mb-1.5">Sample company</legend>
+      <div class="grid grid-cols-1 gap-2" data-fold="sample choices">
+        <label class="pick-card">
+          <input type="radio" name="sample-pack" checked>
+          <span class="pick-card-head">
+            <span class="flex items-center gap-2.5">
+              <span class="pick-card-icon"><i data-icon="rocket" class="icon"></i></span>
+              <span class="pick-card-title">Accounting starter playground</span>
+            </span>
+            <span class="badge badge-info">Recommended start</span>
+          </span>
+          <span class="pick-card-desc">Zero opening balances, ready-made products, one customer/supplier and a synthetic 5% tax — try a purchase, an invoice and partial payments from a clean slate.</span>
+        </label>
+      </div>
+      <div class="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        <label class="pick-card">
+          <input type="radio" name="sample-pack">
+          <span class="pick-card-head"><span class="pick-card-icon"><i data-icon="shopping-bag" class="icon"></i></span><span class="badge badge-draft">Sample</span></span>
+          <span class="pick-card-title">Retail shop</span>
+          <span class="pick-card-desc">Two years of shop sales, restocking and cash reconciliation.</span>
+        </label>
+        <label class="pick-card">
+          <input type="radio" name="sample-pack">
+          <span class="pick-card-head"><span class="pick-card-icon"><i data-icon="briefcase" class="icon"></i></span><span class="badge badge-draft">Sample</span></span>
+          <span class="pick-card-title">Service agency</span>
+          <span class="pick-card-desc">Client invoicing, retainers and payroll-adjacent expenses.</span>
+        </label>
+        <label class="pick-card">
+          <input type="radio" name="sample-pack">
+          <span class="pick-card-head"><span class="pick-card-icon"><i data-icon="truck" class="icon"></i></span><span class="badge badge-draft">Sample</span></span>
+          <span class="pick-card-title">Distributor / trader</span>
+          <span class="pick-card-desc">Purchasing, stock and supplier settlement over two years.</span>
+        </label>
+        <label class="pick-card">
+          <input type="radio" name="sample-pack">
+          <span class="pick-card-head"><span class="pick-card-icon"><i data-icon="chef-hat" class="icon"></i></span><span class="badge badge-info">Preview</span></span>
+          <span class="pick-card-title">Restaurant</span>
+          <span class="pick-card-desc">Cash point-of-sale alongside supplier bills.</span>
+        </label>
+        <label class="pick-card">
+          <input type="radio" name="sample-pack">
+          <span class="pick-card-head"><span class="pick-card-icon"><i data-icon="stethoscope" class="icon"></i></span><span class="badge badge-info">Preview</span></span>
+          <span class="pick-card-title">Pharmacy</span>
+          <span class="pick-card-desc">Batch-tracked stock with frequent small sales.</span>
+        </label>
+        <label class="pick-card">
+          <input type="radio" name="sample-pack">
+          <span class="pick-card-head"><span class="pick-card-icon"><i data-icon="diamond" class="icon"></i></span><span class="badge badge-info">Preview</span></span>
+          <span class="pick-card-title">Jewelry studio</span>
+          <span class="pick-card-desc">High-value stock, deposits and custom orders.</span>
+        </label>
+      </div>
+      <p class="field-hint">Sample and Preview are catalogue status, not a claim about country tax or compliance.</p>
+    </fieldset>
+
+    <div class="flex flex-wrap items-end justify-between gap-4 border-t border-border pt-3" data-fold="primary action">
+      <div class="field max-w-[14rem]">
+        <label class="field-label" for="sample-currency">Functional currency</label>
+        <select class="select" id="sample-currency">
+          <option selected>PKR — Pakistani rupee</option>
+          <option>USD — US dollar</option>
+          <option>AED — UAE dirham</option>
+        </select>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" class="btn btn-primary">Create this separate sample</button>
+        <a class="btn btn-ghost" href="#/companies">Cancel</a>
+      </div>
+    </div>
+    <p class="text-xs text-ink-muted">Samples are synthetic teaching books. Provisioning uses the bundled catalogue only and never sends messages, payments or provider requests.</p>
+  </form>
+</div>

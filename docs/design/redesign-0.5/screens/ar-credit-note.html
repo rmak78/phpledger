@@ -1,0 +1,132 @@
+<!--meta {"id":"ar-credit-note","title":"New credit note","route":"/ar?new=1&credit_for=188","group":"Sales","nav":"invoices","crumbs":[["Sales","#/ar-list"],["Invoices","#/ar-list"],["Credit note"]],"pattern":"document-editor","layout":"app","state":"Draft, 1 line, against INV-000188"} -->
+<div class="py-5">
+  <div class="flex flex-col rounded-panel border border-border bg-surface">
+    <header class="doc-header" data-fold="doc header">
+      <div class="doc-heading">
+        <span class="doc-type">Credit note</span>
+        <h1 class="doc-number">New</h1>
+        <span class="badge badge-draft"><i class="badge-dot"></i>Draft</span>
+        <span class="doc-savestate">Not saved yet</span>
+      </div>
+      <div class="doc-actions">
+        <a class="btn btn-ghost" href="#/ar-list">Cancel</a>
+        <button type="button" class="btn btn-secondary">Save draft for review</button>
+        <button type="button" class="btn btn-primary" data-fold="primary action">Post</button>
+      </div>
+    </header>
+
+    <div class="doc-body">
+      <section>
+        <div class="alert alert-info">
+          <i data-icon="info-circle" class="icon"></i>
+          <div><span class="alert-title">Credit against INV-000188, revision 1</span><p>Bismillah Garments &middot; PKR 26,800.00 &middot; entered prices exclude tax, matching the original. Choose the original line for each taxed credit.</p></div>
+        </div>
+        <div class="table-wrap mt-3">
+          <table class="table">
+            <thead><tr><th>Original line</th><th>Description</th><th class="num">Net</th><th class="num">Tax</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Cotton lawn fabric</td><td class="num">22,711.86</td><td class="num">4,088.14</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
+          <div class="field">
+            <label class="field-label" for="cr-customer">Customer</label>
+            <input class="input" id="cr-customer" type="text" value="Bismillah Garments" disabled>
+          </div>
+          <div class="field">
+            <label class="field-label" for="cr-date">Document date</label>
+            <span class="input-affix"><input class="input" id="cr-date" type="text" value="17 Sep 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+          </div>
+          <div class="field">
+            <label class="field-label" for="cr-currency">Currency</label>
+            <input class="input" id="cr-currency" type="text" value="PKR" disabled>
+          </div>
+          <div class="field">
+            <label class="field-label" for="cr-reference">Reference <span class="optional">(optional)</span></label>
+            <input class="input" id="cr-reference" type="text" value="BG-RETURN-09">
+          </div>
+          <div class="field lg:col-span-2">
+            <label class="field-label" for="cr-reason">Reason for credit</label>
+            <input class="input" id="cr-reason" type="text" value="Damaged fabric returned by customer, 40m of line 1">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title mb-2">Lines</h2>
+        <div class="table-wrap">
+          <table class="table doc-lines-table">
+            <thead>
+              <tr>
+                <th class="w-[29.2%]">Description</th>
+                <th class="w-[14.6%]">Orig. line</th>
+                <th class="num w-[9.2%]">Qty</th>
+                <th class="num w-[13.4%]">Unit price</th>
+                <th class="w-[14.6%]">Tax code</th>
+                <th class="num w-[14.6%]" data-proposed title="Proposed: a computed, always-visible line amount. Today's form shows blank inputs with no running calculation.">Amount</th>
+                <th class="w-[4.4%]"></th>
+              </tr>
+            </thead>
+            <tbody id="cr-lines-body">
+              <tr data-row>
+                <td><input class="input" value="Cotton lawn fabric &mdash; return"></td>
+                <td><input class="input" value="1"></td>
+                <td><input class="input input-amount" value="40"></td>
+                <td><input class="input input-amount" value="200.00"></td>
+                <td><select class="select"><option selected>GST 18%</option><option>No tax</option></select></td>
+                <td class="num" data-proposed>8,000.00</td>
+                <td><button type="button" class="btn btn-ghost btn-icon btn-sm" data-remove-row aria-label="Remove line"><i data-icon="trash" class="icon"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <template id="cr-line-template">
+          <tr data-row>
+            <td><input class="input" placeholder="Description"></td>
+            <td><input class="input" placeholder="Line #"></td>
+            <td><input class="input input-amount" placeholder="0"></td>
+            <td><input class="input input-amount" placeholder="0.00"></td>
+            <td><select class="select"><option selected>No tax</option></select></td>
+            <td class="num text-ink-faint">0.00</td>
+            <td><button type="button" class="btn btn-ghost btn-icon btn-sm" data-remove-row aria-label="Remove line"><i data-icon="trash" class="icon"></i></button></td>
+          </tr>
+        </template>
+        <div class="mt-3 flex flex-wrap items-start justify-between gap-4">
+          <div class="flex flex-col items-start gap-2">
+            <button type="button" class="btn btn-ghost btn-sm" data-add-row="cr-lines-body" data-row-template="cr-line-template" data-proposed title="Proposed: start with one line and add more as needed. Addresses a P1 finding in the UX audit."><i data-icon="plus" class="icon"></i>Add line</button>
+            <p class="max-w-xs text-xs text-ink-muted">Partial credits use the original tax rate and cannot exceed the original line's remaining amount.</p>
+          </div>
+          <div class="doc-totals" data-fold="document total">
+            <div class="doc-totals-row"><span>Subtotal</span><span class="amount">8,000.00</span></div>
+            <div class="doc-totals-row"><span>Tax (GST 18%)</span><span class="amount">1,440.00</span></div>
+            <div class="doc-totals-row is-grand"><span>Total credit</span><span class="amount">PKR 9,440.00</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <details class="w-full rounded-panel border border-border">
+          <summary class="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-semibold text-ink"><span class="flex items-center gap-2"><i data-icon="chevron-right" class="icon"></i>Posting preview</span><span class="balanced-label"><i data-icon="check" class="icon"></i>Balanced</span></summary>
+          <div class="border-t border-border px-4 py-3">
+            <div class="table-wrap">
+              <table class="table journal-table">
+                <thead><tr><th>Account</th><th class="num">Debit (PKR)</th><th class="num">Credit (PKR)</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="row-title">4000</span><span class="row-sub">Fabric sales</span></td><td class="num">8,000.00</td><td class="num">0.00</td></tr>
+                  <tr><td><span class="row-title">2100</span><span class="row-sub">GST payable (output)</span></td><td class="num">1,440.00</td><td class="num">0.00</td></tr>
+                  <tr><td><span class="row-title">1100</span><span class="row-sub">Accounts receivable</span></td><td class="num">0.00</td><td class="num">9,440.00</td></tr>
+                </tbody>
+                <tfoot><tr class="table-totals"><td>Total</td><td class="num">9,440.00</td><td class="num">9,440.00</td></tr></tfoot>
+              </table>
+            </div>
+            <p class="mt-2 text-xs text-ink-muted">Posting reduces INV-000188's outstanding balance from 26,800.00 to 17,360.00 and does not touch stock.</p>
+          </div>
+        </details>
+      </section>
+    </div>
+  </div>
+</div>

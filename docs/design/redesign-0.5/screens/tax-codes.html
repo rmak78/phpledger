@@ -1,0 +1,123 @@
+<!--meta {"id":"tax-codes","title":"Tax codes","route":"/tax","group":"Setup","nav":"tax","crumbs":[["Setup","#/tax-codes"],["Tax codes"]],"pattern":"settings-list","layout":"app","state":"3 codes · edit sheet closed"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Tax codes</h1>
+      <p class="mt-1 text-sm text-ink-muted">Country-neutral codes with dated rates and frozen document amounts</p>
+    </div>
+    <div class="page-header-actions">
+      <button type="button" class="btn btn-primary" data-dialog-open="tax-code-sheet" data-fold="new tax code button"><i data-icon="plus" class="icon"></i>New tax code</button>
+    </div>
+  </header>
+
+  <div class="alert alert-info" data-fold="no rules note">
+    <i data-icon="info-circle" class="icon"></i>
+    <div><span class="alert-title">No national tax rules are inferred</span><p>Codes, rates and accounts are entered manually. Choose whether entered prices include or exclude tax; the rate effective on a document's date is frozen into that document when it is saved.</p></div>
+  </div>
+
+  <section>
+    <div class="panel-header">
+      <h2 class="section-title">Price entry default</h2>
+    </div>
+    <div class="panel flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <p class="text-sm text-ink">Current default: <strong>Prices exclude tax</strong></p>
+        <p class="mt-1 text-xs text-ink-muted">Applies to new documents. Existing documents retain the price mode they were saved with.</p>
+      </div>
+      <select class="select max-w-[14rem]" aria-label="Entered prices default">
+        <option selected>Exclude tax (tax added)</option>
+        <option>Include tax (tax extracted)</option>
+      </select>
+    </div>
+  </section>
+
+  <section>
+    <div class="panel-header">
+      <h2 class="section-title">Codes</h2>
+    </div>
+    <div class="table-wrap" data-fold="tax code rows">
+      <table class="table">
+        <thead><tr><th>Code</th><th>Treatment</th><th>Effective rate</th><th>Output account</th><th>Input account</th><th class="w-[3rem]"></th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="row-title">GST 18% (sample, manual)</span><span class="row-sub">Since 01 Jul 2026</span></td>
+            <td>Standard rate</td>
+            <td class="num">18.000000%</td>
+            <td>2100 &middot; GST payable (output)</td>
+            <td>1450 &middot; GST recoverable (input)</td>
+            <td><button type="button" class="btn btn-ghost btn-icon btn-sm" data-dialog-open="tax-code-sheet" aria-label="Edit GST 18%"><i data-icon="pencil" class="icon"></i></button></td>
+          </tr>
+          <tr>
+            <td><span class="row-title">GST 0% (zero-rated, sample)</span><span class="row-sub">Since 01 Jul 2026</span></td>
+            <td>Zero-rated</td>
+            <td class="num">0.000000%</td>
+            <td>2100 &middot; GST payable (output)</td>
+            <td>1450 &middot; GST recoverable (input)</td>
+            <td><button type="button" class="btn btn-ghost btn-icon btn-sm" aria-label="Edit GST 0%"><i data-icon="pencil" class="icon"></i></button></td>
+          </tr>
+          <tr>
+            <td><span class="row-title">Exempt (sample)</span><span class="row-sub">Since 01 Jul 2026</span></td>
+            <td>Exempt</td>
+            <td class="num text-ink-faint">&mdash;</td>
+            <td class="text-ink-faint">&mdash;</td>
+            <td class="text-ink-faint">&mdash;</td>
+            <td><button type="button" class="btn btn-ghost btn-icon btn-sm" aria-label="Edit Exempt"><i data-icon="pencil" class="icon"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="panel-header">
+      <h2 class="section-title">Rate history</h2>
+    </div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Code</th><th>Effective from</th><th class="num">Percentage</th><th class="num">Revision</th><th>Reason</th></tr></thead>
+        <tbody>
+          <tr><td>GST 18%</td><td>01 Jul 2026</td><td class="num">18.000000%</td><td class="num">1</td><td>Initial sample rate for onboarding</td></tr>
+          <tr><td>GST 0%</td><td>01 Jul 2026</td><td class="num">0.000000%</td><td class="num">1</td><td>Zero-rated exports, sample</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<dialog id="tax-code-sheet" class="dialog sheet" aria-label="Edit tax code">
+  <div class="dialog-header">
+    <h2 class="text-sm font-semibold text-ink">Edit tax code</h2>
+    <form method="dialog"><button type="submit" class="btn btn-ghost btn-icon" aria-label="Close"><i data-icon="x" class="icon"></i></button></form>
+  </div>
+  <div class="dialog-body">
+    <div class="flex flex-col gap-4 p-3">
+      <div class="field"><label class="field-label" for="tc-code">Code</label><input class="input" id="tc-code" type="text" value="GST 18% (sample, manual)"></div>
+      <div class="field"><label class="field-label" for="tc-name">Name</label><input class="input" id="tc-name" type="text" value="Standard GST"></div>
+      <div class="field">
+        <label class="field-label" for="tc-treatment">Treatment</label>
+        <select class="select" id="tc-treatment"><option selected>Standard rate</option><option>Zero-rated</option><option>Exempt</option></select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="tc-sales">Output tax liability account</label>
+        <select class="select" id="tc-sales"><option selected>2100 &middot; GST payable (output)</option></select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="tc-purchase">Recoverable input tax asset account</label>
+        <select class="select" id="tc-purchase"><option selected>1450 &middot; GST recoverable (input)</option></select>
+      </div>
+      <div class="border-t border-border pt-4">
+        <p class="section-title mb-2 text-[.8125rem]">Add dated rate</p>
+        <p class="mb-2 text-xs text-ink-muted">A new effective date applies until the next dated rate. Posted documents keep their original snapshot.</p>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="field"><label class="field-label" for="tc-eff">Effective from</label><span class="input-affix"><input class="input" id="tc-eff" type="text" value="01 Oct 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span></div>
+          <div class="field"><label class="field-label" for="tc-pct">Percentage</label><input class="input input-amount" id="tc-pct" type="text" value="18.000000"></div>
+        </div>
+      </div>
+      <div class="field"><label class="field-label" for="tc-reason">Reason</label><input class="input" id="tc-reason" type="text" placeholder="e.g. FY27 sample rate refresh"></div>
+    </div>
+  </div>
+  <div class="dialog-footer">
+    <form method="dialog"><button type="button" class="btn btn-ghost">Cancel</button></form>
+    <button type="button" class="btn btn-primary">Save tax code</button>
+  </div>
+</dialog>

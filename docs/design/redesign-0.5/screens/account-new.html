@@ -1,0 +1,91 @@
+<!--meta {"id":"account-new","title":"New account","route":"/accounts?new=1","group":"Setup","nav":"accounts","crumbs":[["Setup"],["Chart of accounts","#/accounts"],["New account"]],"pattern":"list-detail","layout":"app","state":"New account form"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Chart of accounts</h1>
+      <p class="mt-1 text-sm text-ink-muted">21 accounts · PKR</p>
+    </div>
+    <div class="page-header-actions">
+      <a class="btn btn-primary" href="#/account-new"><i data-icon="plus" class="icon"></i>New account</a>
+    </div>
+  </header>
+
+  <div class="split-view">
+    <section class="split-view-list has-detail" aria-label="Chart of accounts">
+      <div class="flex flex-col gap-3">
+        <div class="table-wrap max-h-[560px] overflow-y-auto">
+          <table class="table">
+            <thead><tr><th>Code / account</th><th>Role</th><th>Status</th><th class="num">Balance</th></tr></thead>
+            <tbody>
+              <tr class="bg-surface-subtle"><td colspan="4" class="text-xs font-semibold uppercase tracking-wide text-ink-faint">Assets</td></tr>
+              <tr data-href="#/accounts"><td><span class="row-title">Cash in hand</span><span class="row-sub">1000</span></td><td><span class="badge badge-info"><i class="badge-dot"></i>Cash/bank</span></td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td><td class="num">42,650.00</td></tr>
+              <tr data-href="#/accounts"><td><span class="row-title">Meezan Bank — Current</span><span class="row-sub">1010</span></td><td><span class="badge badge-info"><i class="badge-dot"></i>Cash/bank</span></td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td><td class="num">1,800,000.00</td></tr>
+              <tr data-href="#/accounts"><td><span class="row-title">Accounts receivable</span><span class="row-sub">1100</span></td><td><span class="badge badge-info"><i class="badge-dot"></i>Receivables</span></td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td><td class="num">312,400.00</td></tr>
+              <tr data-href="#/accounts"><td><span class="row-title">Inventory — fabric stock</span><span class="row-sub">1200</span></td><td class="text-ink-faint">—</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td><td class="num">640,000.00</td></tr>
+              <tr data-href="#/accounts"><td><span class="row-title">Prepaid insurance</span><span class="row-sub">1300</span></td><td class="text-ink-faint">—</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td><td class="num">18,000.00</td></tr>
+              <tr data-href="#/accounts"><td><span class="row-title">Equipment &amp; fixtures</span><span class="row-sub">1400</span></td><td class="text-ink-faint">—</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td><td class="num">220,000.00</td></tr>
+              <tr class="bg-surface-subtle"><td colspan="4" class="text-xs font-semibold uppercase tracking-wide text-ink-faint">Liabilities</td></tr>
+              <tr data-href="#/accounts"><td><span class="row-title">Accounts payable</span><span class="row-sub">2000</span></td><td><span class="badge badge-info"><i class="badge-dot"></i>Payables</span></td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td><td class="num">219,610.00</td></tr>
+              <tr data-href="#/accounts"><td><span class="row-title">Term loan — Meezan Bank</span><span class="row-sub">2300</span></td><td class="text-ink-faint">—</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td><td class="num">250,000.00</td></tr>
+              <tr class="bg-surface-subtle"><td colspan="4" class="text-xs font-semibold uppercase tracking-wide text-ink-faint">Expense</td></tr>
+              <tr data-href="#/accounts"><td><span class="row-title">Rent</span><span class="row-sub">5200</span></td><td class="text-ink-faint">—</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td><td class="num">180,000.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="sample-note"><i data-icon="info-circle" class="icon"></i>Showing a shortened list in this state. The full chart has 21 accounts.</p>
+      </div>
+    </section>
+
+    <section class="split-view-detail" aria-label="New account">
+      <a class="split-view-back link" href="#/accounts"><i data-icon="arrow-left" class="icon"></i>Back to accounts</a>
+      <div class="border-b border-border px-5 pb-3 pt-3">
+        <h2 class="text-[1.0625rem] font-semibold text-ink" data-fold="detail heading">New account</h2>
+      </div>
+      <div class="flex min-h-0 flex-1 flex-col overflow-y-auto px-5 pt-3">
+        <div class="grid grid-cols-2 gap-x-4 gap-y-3">
+          <div class="field">
+            <label class="field-label" for="new-acct-code">Account code</label>
+            <input class="input" id="new-acct-code" type="text" placeholder="5800" autocomplete="off">
+          </div>
+          <div class="field">
+            <label class="field-label" for="new-acct-type">Classification</label>
+            <select class="select" id="new-acct-type">
+              <option>Asset</option><option>Liability</option><option>Equity</option><option>Income</option><option selected>Expense</option>
+            </select>
+          </div>
+          <div class="field col-span-2">
+            <label class="field-label" for="new-acct-role">Operational purpose <span class="optional">(same classification, or none)</span></label>
+            <select class="select" id="new-acct-role">
+              <option>No operational purpose</option>
+              <option>Cash / bank — Asset</option>
+              <option>Receivables — Asset</option>
+              <option>Payables — Liability</option>
+              <option>Owner equity — Equity</option>
+              <option>Income — Income</option>
+              <option selected>Expense — Expense</option>
+            </select>
+          </div>
+          <div class="field col-span-2">
+            <label class="field-label" for="new-acct-name">Account name</label>
+            <input class="input" id="new-acct-name" type="text" placeholder="For example, Delivery &amp; freight">
+          </div>
+        </div>
+        <div class="mt-3 flex items-end gap-4">
+          <label class="flex items-center gap-2 whitespace-nowrap text-sm text-ink"><input type="checkbox" checked> Active</label>
+          <div class="field flex-1">
+            <label class="field-label" for="new-acct-reason">Reason for adding this account</label>
+            <input class="input" id="new-acct-reason" type="text" placeholder="Why this account is needed">
+          </div>
+        </div>
+        <div class="alert alert-info mt-3 py-2" data-proposed title="Proposed: an explicit, in-context consequence hint next to the classification. Today the form does not preview which statement a new account will appear on.">
+          <i data-icon="info-circle" class="icon"></i>
+          <p><strong class="font-semibold text-ink">Where this shows up:</strong> an Expense account reduces net profit on Profit &amp; loss as it's used; it does not appear on the balance sheet.</p>
+        </div>
+      </div>
+      <div class="panel-actions">
+        <p class="panel-actions-note">Code, classification and purpose cannot be changed later.</p>
+        <button type="button" class="btn btn-primary" data-fold="create button">Create account</button>
+      </div>
+    </section>
+  </div>
+</div>

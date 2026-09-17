@@ -1,0 +1,57 @@
+<!--meta {"id":"pos-review","title":"Confirm cash sale","route":"/pos/review","group":"Daily work","nav":"pos","crumbs":[["Point of sale","#/pos"],["Review"]],"pattern":"pos","layout":"bare","state":"Cash review, change due"} -->
+<div class="min-h-dvh flex flex-col bg-canvas">
+  <header class="flex h-12 flex-none items-center gap-4 border-b border-border bg-surface px-4">
+    <div class="flex items-center gap-2.5">
+      <span class="company-switcher-mark" aria-hidden="true">R</span>
+      <div class="flex flex-col leading-tight">
+        <span class="whitespace-nowrap text-sm font-semibold text-ink">Ravi Textile Traders</span>
+        <span class="text-[11px] text-ink-muted">Point of sale</span>
+      </div>
+    </div>
+    <ol class="ms-4 flex items-center gap-4 text-xs text-ink-muted" aria-label="Sale progress">
+      <li class="flex items-center gap-1.5"><span class="flex size-5 items-center justify-center rounded-full bg-success-bg text-success"><i data-icon="check" class="icon size-3"></i></span>Build cart</li>
+      <li class="flex items-center gap-1.5 font-semibold text-ink"><span class="flex size-5 items-center justify-center rounded-full bg-brand text-[11px] text-white">2</span>Review &amp; cash</li>
+      <li class="flex items-center gap-1.5"><span class="flex size-5 items-center justify-center rounded-full border border-border-strong text-[11px]">3</span>Receipt</li>
+    </ol>
+    <div class="ms-auto flex items-center gap-3">
+      <span class="hidden whitespace-nowrap text-xs text-ink-muted min-[860px]:inline" data-proposed title="Proposed: today's app has no till or cashier identity — point of sale uses the same company session as the rest of the app.">Cashier: Ayesha Khan</span>
+      <a class="btn btn-ghost btn-sm" href="#/home"><i data-icon="logout" class="icon"></i>Exit to app</a>
+    </div>
+  </header>
+
+  <div class="mx-auto grid w-full max-w-4xl flex-1 grid-cols-1 gap-4 p-4 sm:grid-cols-[1fr_320px]">
+    <section class="rounded-panel border border-border bg-surface p-4" aria-label="Review your items">
+      <div class="mb-3 flex items-center justify-between">
+        <h2 class="section-title">Review your items</h2>
+        <span class="text-xs text-ink-muted">11 units</span>
+      </div>
+      <div class="table-wrap" data-fold="first rows">
+        <table class="table">
+          <thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Each</th><th class="num">Total</th></tr></thead>
+          <tbody>
+            <tr><td>Cotton Lawn (metre)<span class="row-sub">FAB-CTN-45</span></td><td class="num">6</td><td class="num">380.00</td><td class="num">2,280.00</td></tr>
+            <tr><td>Embroidered Dupatta<span class="row-sub">RDY-DUP-EMB</span></td><td class="num">1</td><td class="num">1,800.00</td><td class="num">1,800.00</td></tr>
+            <tr><td>Cotton Thread (spool)<span class="row-sub">NOT-THR-40</span></td><td class="num">4</td><td class="num">90.00</td><td class="num">360.00</td></tr>
+          </tbody>
+          <tfoot><tr class="table-totals"><td colspan="3">Total · PKR</td><td class="num">4,440.00</td></tr></tfoot>
+        </table>
+      </div>
+      <a class="btn btn-secondary mt-3" href="#/pos"><i data-icon="arrow-left" class="icon"></i>Edit cart</a>
+      <p class="mt-2 text-xs text-ink-muted">Prices verified against the sample catalog. Reviewing does not change the books.</p>
+    </section>
+
+    <aside class="rounded-panel border border-border bg-surface p-4" aria-label="Cash payment">
+      <p class="eyebrow mb-1">Cash payment</p>
+      <h2 class="section-title mb-1">Amount due</h2>
+      <p class="amount-xl mb-4 text-brand"><span class="align-top text-xs font-normal text-ink-muted">PKR</span> 4,440.00</p>
+      <div class="field mb-2">
+        <label class="field-label" for="pos-cash">Cash received (PKR)</label>
+        <input class="input input-amount" id="pos-cash" type="text" value="5,000.00">
+      </div>
+      <button type="button" class="btn btn-secondary btn-sm mb-3">Exact amount</button>
+      <p class="mb-4 text-sm font-semibold text-success" aria-live="polite">Change: PKR 560.00</p>
+      <button type="button" class="btn btn-primary w-full justify-center" data-fold="primary action">Record cash sale</button>
+      <p class="mt-2 text-xs text-ink-muted">Confirming saves the receipt and its balanced journal together. No actual payment is collected by this showcase.</p>
+    </aside>
+  </div>
+</div>

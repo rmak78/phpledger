@@ -1,0 +1,81 @@
+<!--meta {"id":"onboarding-validation","title":"Set up a business — Business & period","route":"/onboarding","group":"Setup & access","nav":"","crumbs":[["Your businesses","#/companies"],["Set up a business"]],"layout":"auth","pattern":"wizard","state":"Step 2 of 5 · 2 field errors"} -->
+<div class="auth-panel">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <p class="eyebrow">Business setup · Step 2 of 5</p>
+      <h1 class="page-title">Business &amp; period</h1>
+    </div>
+    <a class="btn btn-ghost btn-sm" href="#/companies">Cancel</a>
+  </div>
+
+  <div class="alert alert-danger mt-4" role="alert" tabindex="-1" data-fold="error summary">
+    <i data-icon="alert-triangle" class="icon"></i>
+    <div>
+      <span class="alert-title">Check this step — 2 items need attention.</span>
+      <ul class="mt-1 list-inside list-disc">
+        <li><a class="link" href="#ob-name">Business name is required.</a></li>
+        <li><a class="link" href="#ob-year-end-custom">Enter the year end as MM-DD, e.g. 06-30.</a></li>
+      </ul>
+      <p class="mt-1">Your setup details have been kept so you can correct them.</p>
+    </div>
+  </div>
+
+  <div class="mt-4 grid grid-cols-1 gap-7 lg:grid-cols-[168px_1fr]">
+    <ol class="stepper">
+      <li class="stepper-step is-done"><span class="stepper-index"><i data-icon="check" class="icon"></i></span><span class="stepper-label">Purpose</span></li>
+      <li class="stepper-step is-current"><span class="stepper-index">2</span><span class="stepper-label">Business &amp; period</span></li>
+      <li class="stepper-step"><span class="stepper-index">3</span><span class="stepper-label">Chart</span></li>
+      <li class="stepper-step"><span class="stepper-index">4</span><span class="stepper-label">Preview</span></li>
+      <li class="stepper-step"><span class="stepper-index">5</span><span class="stepper-label">Confirm</span></li>
+    </ol>
+
+    <div>
+      <div class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
+        <div class="field field-error sm:col-span-2">
+          <label class="field-label" for="ob-name">Business name</label>
+          <input class="input" id="ob-name" type="text" value="" autocomplete="organization">
+          <p class="field-error-text">Business name is required.</p>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ob-currency">Base currency</label>
+          <select class="select" id="ob-currency">
+            <option selected>PKR — Pakistani rupee</option>
+            <option>USD — US dollar</option>
+            <option>AED — UAE dirham</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ob-start">Accounting start date</label>
+          <span class="input-affix"><input class="input" id="ob-start" type="text" value="30 Jun 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ob-entity">Business or entity type</label>
+          <select class="select" id="ob-entity">
+            <option>Individual / sole proprietor</option>
+            <option>Association of persons (AOP) / partnership</option>
+            <option selected>Company (Pvt Ltd / Ltd)</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ob-year-end">Financial year end</label>
+          <select class="select" id="ob-year-end">
+            <option>30 June</option>
+            <option>31 December</option>
+            <option selected>Custom…</option>
+          </select>
+        </div>
+        <div class="field field-error">
+          <label class="field-label" for="ob-year-end-custom">Custom year end</label>
+          <input class="input" id="ob-year-end-custom" type="text" inputmode="numeric" placeholder="MM-DD" value="13-45">
+          <p class="field-error-text">Enter the year end as MM-DD, e.g. 06-30.</p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center justify-between gap-2 border-t border-border pt-4">
+        <a class="btn btn-ghost" href="#/onboarding-purpose">Back</a>
+        <a class="btn btn-primary" href="#/onboarding-chart" data-fold="primary action">Continue</a>
+      </div>
+    </div>
+  </div>
+</div>

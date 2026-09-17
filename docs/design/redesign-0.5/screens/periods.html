@@ -1,0 +1,97 @@
+<!--meta {"id":"periods","title":"Accounting periods","route":"/periods","group":"Setup","nav":"periods","crumbs":[["Setup"],["Periods"]],"pattern":"settings-list","layout":"app","state":"2026 open · 4 closed 2025 periods"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Accounting periods</h1>
+      <p class="mt-1 text-sm text-ink-muted">Create date ranges, close completed periods and review their history.</p>
+    </div>
+    <div class="page-header-actions">
+      <a class="btn btn-ghost" href="#/reports"><i data-icon="report" class="icon"></i>View reports</a>
+    </div>
+  </header>
+
+  <div class="alert alert-info">
+    <i data-icon="info-circle" class="icon"></i>
+    <div><span class="alert-title">Closing prevents new entries and reversals dated within the period</span>
+      <p>Existing entries remain readable. Review drafts, reports and reconciliations before closing. A business owner can reopen a period with a recorded reason. Closing does not create year-end adjustment entries, transfer profit, or certify the accounts.</p></div>
+  </div>
+
+  <details class="rounded-panel border border-border">
+    <summary class="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-semibold text-ink"><span class="flex items-center gap-2"><i data-icon="chevron-right" class="icon"></i>Create an accounting period</span></summary>
+    <div class="border-t border-border px-4 py-4">
+      <div class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3">
+        <div class="field"><label class="field-label" for="period-start">Start date</label><span class="input-affix"><input class="input" id="period-start" type="text" value="01 Jan 2027"><i data-icon="calendar" class="icon input-affix-icon"></i></span></div>
+        <div class="field"><label class="field-label" for="period-end">End date</label><span class="input-affix"><input class="input" id="period-end" type="text" value="31 Dec 2027"><i data-icon="calendar" class="icon input-affix-icon"></i></span></div>
+        <div class="field sm:col-span-3"><label class="field-label" for="period-reason">Reason</label><input class="input" id="period-reason" type="text" placeholder="Why this period is being created"><p class="field-hint">Dates include both endpoints and must not overlap another period.</p></div>
+      </div>
+      <button type="button" class="btn btn-primary mt-3">Create open period</button>
+    </div>
+  </details>
+
+  <section data-fold="periods list">
+    <h2 class="section-title mb-2">Periods</h2>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Start date</th><th>End date</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          <tr class="bg-surface-subtle"><td colspan="4" class="text-xs font-semibold uppercase tracking-wide text-ink-faint">2026</td></tr>
+          <tr>
+            <td>01 Jan 2026</td><td>31 Dec 2026</td>
+            <td><span class="badge badge-info"><i class="badge-dot"></i>Open</span></td>
+            <td class="text-end"><button type="button" class="btn btn-secondary btn-sm" data-dialog-open="close-period-1">Close period</button></td>
+          </tr>
+          <tr class="bg-surface-subtle"><td colspan="4" class="text-xs font-semibold uppercase tracking-wide text-ink-faint">2025</td></tr>
+          <tr>
+            <td>01 Oct 2025</td><td>31 Dec 2025</td>
+            <td><span class="badge badge-posted"><i class="badge-dot"></i>Closed</span></td>
+            <td class="text-end"><button type="button" class="btn btn-secondary btn-sm" data-dialog-open="reopen-period-1">Reopen period</button></td>
+          </tr>
+          <tr><td>01 Jul 2025</td><td>30 Sep 2025</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Closed</span></td><td class="text-end"><span class="text-xs text-ink-faint">Owner can reopen</span></td></tr>
+          <tr><td>01 Apr 2025</td><td>30 Jun 2025</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Closed</span></td><td class="text-end"><span class="text-xs text-ink-faint">Owner can reopen</span></td></tr>
+          <tr><td>01 Jan 2025</td><td>31 Mar 2025</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Closed</span></td><td class="text-end"><span class="text-xs text-ink-faint">Owner can reopen</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <dialog id="close-period-1" class="dialog">
+    <div class="dialog-header"><h2 class="text-sm font-semibold">Close 01 Jan – 31 Dec 2026?</h2><form method="dialog"><button class="btn btn-ghost btn-icon" aria-label="Close"><i data-icon="x" class="icon"></i></button></form></div>
+    <div class="dialog-body">
+      <p class="text-sm text-ink-muted">Prevents new entries and reversals dated in this period. Existing entries stay readable, and a business owner can reopen it later with a recorded reason.</p>
+      <div class="field mt-3"><label class="field-label" for="close-reason-1">Reason for closing</label><input class="input" id="close-reason-1" type="text" placeholder="For example, September review complete"></div>
+    </div>
+    <div class="dialog-footer"><form method="dialog"><button class="btn btn-ghost">Cancel</button></form><button type="button" class="btn btn-primary">Confirm close</button></div>
+  </dialog>
+  <dialog id="reopen-period-1" class="dialog">
+    <div class="dialog-header"><h2 class="text-sm font-semibold">Reopen 01 Oct – 31 Dec 2025?</h2><form method="dialog"><button class="btn btn-ghost btn-icon" aria-label="Close"><i data-icon="x" class="icon"></i></button></form></div>
+    <div class="dialog-body">
+      <div class="alert alert-warning"><i data-icon="alert-triangle" class="icon"></i><div><span class="alert-title">Only a business owner can do this</span><p>Reopening allows new and reversed entries dated in this period again.</p></div></div>
+      <div class="field mt-3"><label class="field-label" for="reopen-reason-1">Reason for reopening</label><input class="input" id="reopen-reason-1" type="text" placeholder="For example, correcting a posting error"></div>
+    </div>
+    <div class="dialog-footer"><form method="dialog"><button class="btn btn-ghost">Cancel</button></form><button type="button" class="btn btn-secondary">Confirm reopen</button></div>
+  </dialog>
+
+  <section>
+    <h2 class="section-title mb-2">Recent administration history</h2>
+    <p class="mb-2 text-xs text-ink-muted">Latest 100 actions. Periods created during initial business setup have no separate administration action.</p>
+    <div class="panel">
+      <ol class="flex flex-col gap-3 border-s border-border ps-3">
+        <li>
+          <div class="flex items-center gap-2"><span class="badge badge-posted"><i class="badge-dot"></i>Closed</span><p class="text-sm font-medium text-ink">01 Oct – 31 Dec 2025</p></div>
+          <p class="mt-1 text-xs text-ink-muted">Quarter reviewed and reconciled; no further postings expected.</p>
+          <p class="mt-0.5 text-xs text-ink-faint">16 Sep 2026, 09:40 · Ayesha Khan</p>
+        </li>
+        <li>
+          <div class="flex items-center gap-2"><span class="badge badge-posted"><i class="badge-dot"></i>Closed</span><p class="text-sm font-medium text-ink">01 Jul – 30 Sep 2025</p></div>
+          <p class="mt-1 text-xs text-ink-muted">Quarter reviewed and reconciled; no further postings expected.</p>
+          <p class="mt-0.5 text-xs text-ink-faint">03 Jan 2026, 14:05 · Ayesha Khan</p>
+        </li>
+        <li>
+          <div class="flex items-center gap-2"><span class="badge badge-info"><i class="badge-dot"></i>Created open</span><p class="text-sm font-medium text-ink">01 Jan – 31 Dec 2026</p></div>
+          <p class="mt-1 text-xs text-ink-muted">Opened the current practice year.</p>
+          <p class="mt-0.5 text-xs text-ink-faint">02 Jan 2026, 09:12 · Ayesha Khan</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+</div>

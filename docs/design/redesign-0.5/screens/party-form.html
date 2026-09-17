@@ -1,0 +1,103 @@
+<!--meta {"id":"party-form","title":"Edit party","route":"/parties?id=2","group":"Sales","nav":"customers","crumbs":[["Sales","#/parties-list"],["Customers","#/parties-list"],["Bismillah Garments"]],"pattern":"document-editor","layout":"app","state":"Editing Bismillah Garments"} -->
+<div class="py-5">
+  <div class="flex flex-col rounded-panel border border-border bg-surface">
+    <header class="doc-header" data-fold="doc header">
+      <div class="doc-heading">
+        <span class="doc-type">Party</span>
+        <h1 class="doc-number">Bismillah Garments</h1>
+        <span class="role-tag">Customer</span>
+      </div>
+      <div class="doc-actions">
+        <a class="btn btn-ghost" href="#/parties-list">Cancel</a>
+        <button type="button" class="btn btn-primary" data-fold="primary action">Save party</button>
+      </div>
+    </header>
+
+    <div class="doc-body">
+      <section>
+        <h2 class="section-title mb-2">Identity &amp; role</h2>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
+          <div class="field">
+            <label class="field-label" for="pf-legal">Legal name</label>
+            <input class="input" id="pf-legal" type="text" value="Bismillah Garments">
+          </div>
+          <div class="field">
+            <label class="field-label" for="pf-trading">Trading name <span class="optional">(optional)</span></label>
+            <input class="input" id="pf-trading" type="text" value="Bismillah Garments Pvt. Ltd.">
+          </div>
+          <div class="field">
+            <label class="field-label" for="pf-entity">Entity type</label>
+            <input class="input" id="pf-entity" type="text" value="Business">
+          </div>
+          <div class="field">
+            <label class="field-label" for="pf-country">Country code</label>
+            <input class="input" id="pf-country" type="text" value="PK">
+          </div>
+        </div>
+        <div class="mt-2 flex flex-wrap items-center gap-5">
+          <label class="inline-flex items-center gap-2 text-sm text-ink"><input type="checkbox" checked>Customer</label>
+          <label class="inline-flex items-center gap-2 text-sm text-ink"><input type="checkbox">Supplier</label>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title mb-2">Financial</h2>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
+          <div class="field">
+            <label class="field-label" for="pf-currency">Default currency</label>
+            <input class="input" id="pf-currency" type="text" value="PKR">
+          </div>
+          <div class="field">
+            <label class="field-label" for="pf-terms">Payment terms</label>
+            <input class="input" id="pf-terms" type="text" value="Net 30">
+          </div>
+          <div class="field">
+            <label class="field-label" for="pf-ar">Receivables account override <span class="optional">(optional)</span></label>
+            <select class="select" id="pf-ar"><option selected>Company default (1200 &middot; Accounts receivable)</option><option>Choose&hellip;</option></select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="pf-reason">Reason for this change</label>
+            <input class="input" id="pf-reason" type="text" placeholder="e.g. added trading name">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <details>
+          <summary class="flex cursor-pointer list-none items-center gap-2 px-1 py-1.5 text-sm font-semibold text-ink"><i data-icon="chevron-right" class="icon"></i>Legal identifier</summary>
+          <div class="border-t border-border px-1 pt-3">
+            <p class="text-xs text-ink-muted">PK / NTN &middot; 1234567-8</p>
+          </div>
+        </details>
+      </section>
+
+      <section>
+        <h2 class="section-title mb-2">Contacts</h2>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Phone</th></tr></thead>
+            <tbody>
+              <tr><td>Nasir Mahmood <span class="role-tag ms-1">Primary</span></td><td>Billing</td><td>nasir@bismillahgarments.example</td><td>+92 300 1234567</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <details class="mt-3 w-full rounded-panel border border-border">
+          <summary class="flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-sm font-semibold text-ink"><i data-icon="chevron-right" class="icon"></i>Add contact</summary>
+          <div class="border-t border-border px-4 py-3">
+            <div class="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
+              <div class="field"><label class="field-label" for="pf-c-name">Name</label><input class="input" id="pf-c-name" type="text" placeholder="Full name"></div>
+              <div class="field"><label class="field-label" for="pf-c-email">Email <span class="optional">(optional)</span></label><input class="input" id="pf-c-email" type="email" placeholder="name@example.com"></div>
+              <div class="field"><label class="field-label" for="pf-c-phone">Phone <span class="optional">(optional)</span></label><input class="input" id="pf-c-phone" type="tel" placeholder="+92 3&hellip;"></div>
+              <div class="field">
+                <label class="field-label" for="pf-c-role">Role</label>
+                <select class="select" id="pf-c-role"><option selected>Billing</option><option>Receiving</option><option>Authorised signatory</option><option>Owner</option></select>
+              </div>
+            </div>
+            <label class="mt-2 inline-flex items-center gap-2 text-sm text-ink"><input type="checkbox">Primary contact</label>
+            <div><button type="button" class="btn btn-secondary btn-sm mt-3">Save contact</button></div>
+          </div>
+        </details>
+      </section>
+    </div>
+  </div>
+</div>

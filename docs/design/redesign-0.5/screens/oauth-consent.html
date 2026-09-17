@@ -1,0 +1,31 @@
+<!--meta {"id":"oauth-consent","title":"Connect Karobar Analytics","route":"/oauth/authorize","group":"Setup & access","nav":"","crumbs":[["Connect Karobar Analytics"]],"layout":"auth","pattern":"focused-auth","state":"Pending consent decision"} -->
+<div class="auth-panel">
+  <p class="eyebrow">Authorize a reporting client</p>
+  <h1 class="page-title">Connect Karobar Analytics</h1>
+  <p class="mt-1.5 text-sm text-ink-muted">You are signed in as Ayesha Khan. Choose the company this client may read.</p>
+
+  <section class="panel mt-4 !p-3.5">
+    <h2 class="text-sm font-semibold text-ink">Requested access</h2>
+    <p class="mt-1.5 text-sm text-ink-muted">Accounts, transactions, posted journals and financial reports for the selected company and book. Your current membership and permissions are checked on every request. <strong class="text-ink">Financial writes are unavailable.</strong></p>
+    <dl class="dgrid mt-2">
+      <div class="dgrid-row"><dt>Client identifier</dt><dd><code class="text-xs">karobar-analytics-3f9a</code></dd></div>
+      <div class="dgrid-row"><dt>Return address</dt><dd class="break-all"><code class="text-xs">https://app.karobaranalytics.pk/oauth/callback</code></dd></div>
+    </dl>
+    <p class="mt-2 text-xs text-ink-muted">Financial results will be sent to this client. Review its identity and data handling before allowing access. The grant expires in 30 days and can be revoked sooner in Connections. Access tokens last up to 15 minutes.</p>
+  </section>
+
+  <form class="mt-4 flex flex-col gap-4">
+    <div class="field">
+      <label class="field-label" for="consent-company">Company and book</label>
+      <select class="select" id="consent-company">
+        <option>Choose a company…</option>
+        <option selected>Ravi Textile Traders · Primary book</option>
+        <option>Noor Surgical Instruments (Pvt) Ltd · Primary book</option>
+      </select>
+    </div>
+    <div class="flex items-center justify-end gap-2">
+      <button type="button" class="btn btn-ghost">Cancel</button>
+      <button type="button" class="btn btn-primary" data-fold="primary action">Allow read access</button>
+    </div>
+  </form>
+</div>

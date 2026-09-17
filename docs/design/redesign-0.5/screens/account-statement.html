@@ -1,0 +1,68 @@
+<!--meta {"id":"account-statement","title":"Account statement","route":"/reports/account","group":"Reports","nav":"account-statement","crumbs":[["Reports","#/reports"],["Account statement"]],"pattern":"report","layout":"app","state":"Meezan Bank – Current · 01–17 Sep 2026"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Account statement</h1>
+      <p class="mt-1 text-sm text-ink-muted">Ravi Textile Traders · PKR · 1010 · Meezan Bank — Current</p>
+    </div>
+    <div class="page-header-actions">
+      <button type="button" class="btn btn-secondary" data-fold="export"><i data-icon="download" class="icon"></i>Export all pages CSV</button>
+    </div>
+  </header>
+
+  <div class="filter-bar" data-fold="filter bar">
+    <div class="field">
+      <label class="field-label" for="as-account">Account</label>
+      <select class="select max-w-[13rem]" id="as-account">
+        <option>1000 · Cash in hand</option>
+        <option selected>1010 · Meezan Bank — Current</option>
+        <option>1100 · Accounts receivable</option>
+        <option>2000 · Accounts payable</option>
+        <option>4000 · Fabric sales</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="field-label" for="as-from">From <span class="optional">(optional)</span></label>
+      <span class="input-affix"><input class="input max-w-[7.5rem]" id="as-from" type="text" value="01 Sep 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+    </div>
+    <div class="field">
+      <label class="field-label" for="as-to">Through date</label>
+      <span class="input-affix"><input class="input max-w-[7.5rem]" id="as-to" type="text" value="17 Sep 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+    </div>
+    <button type="button" class="btn btn-secondary">Update statement</button>
+  </div>
+
+  <div class="grid grid-cols-2 gap-px overflow-hidden rounded-panel border border-border bg-border min-[720px]:grid-cols-4" data-fold="summary">
+    <div class="bg-surface px-4 py-3"><p class="text-xs text-ink-muted">Opening balance</p><p class="amount-lg mt-1">1,522,600.00 <span class="text-xs font-normal text-ink-muted">Dr</span></p><p class="mt-0.5 text-xs text-ink-faint">Before 01 Sep 2026</p></div>
+    <div class="bg-surface px-4 py-3"><p class="text-xs text-ink-muted">Total debits</p><p class="amount-lg mt-1">383,500.00</p><p class="mt-0.5 text-xs text-ink-faint">In the selected period</p></div>
+    <div class="bg-surface px-4 py-3"><p class="text-xs text-ink-muted">Total credits</p><p class="amount-lg mt-1">106,100.00</p><p class="mt-0.5 text-xs text-ink-faint">In the selected period</p></div>
+    <div class="bg-surface px-4 py-3"><p class="text-xs text-ink-muted">Closing balance</p><p class="amount-lg mt-1 text-brand">1,800,000.00 <span class="text-xs font-normal text-ink-muted">Dr</span></p><p class="mt-0.5 text-xs text-ink-faint">Through 17 Sep 2026</p></div>
+  </div>
+  <p class="text-xs text-ink-muted">Opening balance + debits − credits = closing balance. Dr means debit; Cr means credit. Drafts are excluded.</p>
+
+  <div class="table-wrap">
+    <table class="table">
+      <thead data-fold="first rows"><tr><th>Date</th><th>Description</th><th>Source</th><th class="num">Debit</th><th class="num">Credit</th><th class="num">Running balance</th></tr></thead>
+      <tbody>
+        <tr class="bg-surface-subtle">
+          <td colspan="5" class="font-semibold text-ink">Opening balance<span class="row-sub block font-normal">Before 01 Sep 2026</span></td>
+          <td class="num font-semibold">1,522,600.00 Dr</td>
+        </tr>
+        <tr><td>02 Sep 2026</td><td>Lahore Fabric House — receipt against INV-000188</td><td><a class="link" href="#/transactions-list">REC-000581</a></td><td class="num">145,000.00</td><td class="num">0.00</td><td class="num">1,667,600.00 Dr</td></tr>
+        <tr><td>05 Sep 2026</td><td>Faisalabad Yarn Mills — yarn purchase payment</td><td><a class="link" href="#/transactions-list">EXP-000582</a></td><td class="num">0.00</td><td class="num">85,000.00</td><td class="num">1,582,600.00 Dr</td></tr>
+        <tr><td>08 Sep 2026</td><td>Karachi Linen Co. — receipt against INV-000189</td><td><a class="link" href="#/transactions-list">REC-000583</a></td><td class="num">96,500.00</td><td class="num">0.00</td><td class="num">1,679,100.00 Dr</td></tr>
+        <tr><td>10 Sep 2026</td><td>Lahore Fabric House — receipt against INV-000192</td><td><a class="link" href="#/transactions-list">REC-000584</a></td><td class="num">92,000.00</td><td class="num">0.00</td><td class="num">1,771,100.00 Dr</td></tr>
+        <tr><td>12 Sep 2026</td><td>K-Electric — utilities (Aug billing)</td><td><a class="link" href="#/transactions-list">EXP-000585</a></td><td class="num">0.00</td><td class="num">18,600.00</td><td class="num">1,752,500.00 Dr</td></tr>
+        <tr><td>15 Sep 2026</td><td>Bank charges &amp; transfer adjustment</td><td><a class="link" href="#/journals-list">JRN-000109</a></td><td class="num">0.00</td><td class="num">2,500.00</td><td class="num">1,750,000.00 Dr</td></tr>
+        <tr><td>17 Sep 2026</td><td>Bismillah Garments — receipt against INV-000193</td><td><a class="link" href="#/transactions-list">REC-000586</a></td><td class="num">50,000.00</td><td class="num">0.00</td><td class="num">1,800,000.00 Dr</td></tr>
+        <tr class="bg-surface-subtle">
+          <td colspan="5" class="font-semibold text-ink">Closing balance<span class="row-sub block font-normal">Through 17 Sep 2026</span></td>
+          <td class="num font-semibold text-brand">1,800,000.00 Dr</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination">
+    <span class="pagination-summary">7 posted lines · Page 1 of 1</span>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<!--meta {"id":"readiness-strip","title":"Receipts & expenses","route":"/transactions","group":"Setup & access","nav":"transactions","crumbs":[["Receipts & expenses"]],"layout":"app","pattern":"list-detail","state":"Opening balances required — Post blocked"} -->
+<div data-shell-strip class="strip strip-warning" data-dismissible>
+  <i data-icon="alert-triangle" class="icon"></i>
+  <p>Opening balances required — reconcile opening balances before posting. <a href="#/opening-balances">Review setup →</a></p>
+  <button type="button" class="strip-dismiss" data-dismiss aria-label="Dismiss"><i data-icon="x" class="icon"></i></button>
+</div>
+
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Receipts &amp; expenses</h1>
+      <p class="mt-1 text-sm text-ink-muted">Noor Surgical Instruments (Pvt) Ltd · 2 drafts, none postable yet</p>
+    </div>
+    <div class="page-header-actions">
+      <button type="button" class="btn btn-primary" title="You can save drafts, but posting is blocked until opening balances are reconciled." data-fold="new transaction button"><i data-icon="plus" class="icon"></i>New transaction</button>
+    </div>
+  </header>
+
+  <div class="split-view">
+    <section class="split-view-list has-detail" aria-label="Transaction list">
+      <div class="table-wrap" data-fold="first rows">
+        <table class="table">
+          <thead><tr><th>Date / reference</th><th>Name</th><th class="num">Amount</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr data-href="#/readiness-strip" aria-selected="true">
+              <td><span class="row-title">15 Sep 2026</span><span class="row-sub">EXP-000002</span></td>
+              <td>Sialkot Steel Forgings<span class="row-sub">Expense</span></td>
+              <td class="num">18,400.00</td>
+              <td><span class="badge badge-draft"><i class="badge-dot"></i>Draft</span></td>
+            </tr>
+            <tr data-href="#/readiness-strip">
+              <td><span class="row-title">12 Sep 2026</span><span class="row-sub">REC-000001</span></td>
+              <td>Multan Hospital Supplies<span class="row-sub">Receipt</span></td>
+              <td class="num">32,000.00</td>
+              <td><span class="badge badge-draft"><i class="badge-dot"></i>Draft</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="split-view-detail" aria-label="Transaction details">
+      <a class="split-view-back link" href="#/readiness-strip"><i data-icon="arrow-left" class="icon"></i>Back to list</a>
+      <div class="border-b border-border px-5 pb-4 pt-4">
+        <div class="mb-1.5 flex flex-wrap items-center gap-2">
+          <h2 class="text-[1.0625rem] font-semibold text-ink">EXP-000002</h2>
+          <span class="badge badge-draft"><i class="badge-dot"></i>Draft</span>
+        </div>
+        <div class="flex items-end justify-between gap-3">
+          <h3 class="text-sm text-ink-muted">Sialkot Steel Forgings</h3>
+          <p class="amount-lg whitespace-nowrap"><span class="text-xs font-normal text-ink-muted">PKR</span> 18,400.00</p>
+        </div>
+      </div>
+      <div class="flex min-h-0 flex-1 flex-col overflow-y-auto px-5 pt-4">
+        <dl class="dgrid">
+          <div class="dgrid-row"><dt>Paid to</dt><dd>Sialkot Steel Forgings</dd></div>
+          <div class="dgrid-row"><dt>Date</dt><dd>15 Sep 2026</dd></div>
+          <div class="dgrid-row"><dt>Paid from</dt><dd>Meezan Bank – Current</dd></div>
+          <div class="dgrid-row"><dt>Category</dt><dd>Raw materials</dd></div>
+        </dl>
+      </div>
+      <div class="panel-actions" data-fold="blocked post action">
+        <p class="panel-actions-note flex items-center gap-1.5 text-warning"><i data-icon="alert-triangle" class="icon size-3.5 flex-none"></i>Posting is blocked until opening balances are reconciled. <a class="link font-semibold" href="#/opening-balances">Review setup →</a></p>
+        <button type="button" class="btn btn-secondary">Edit draft</button>
+        <button type="button" class="btn btn-primary" disabled title="Reconcile opening balances before posting">Post expense</button>
+      </div>
+    </section>
+  </div>
+</div>

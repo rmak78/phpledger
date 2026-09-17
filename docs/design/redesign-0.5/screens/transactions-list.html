@@ -1,0 +1,148 @@
+<!--meta {"id":"transactions-list","title":"Receipts & expenses","route":"/transactions","group":"Daily work","nav":"transactions","crumbs":[["Receipts & expenses"]],"pattern":"list-detail","layout":"app","state":"Drafts · EXP-000590 selected"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Receipts &amp; expenses</h1>
+      <p class="mt-1 text-sm text-ink-muted">3 drafts · PKR 113,850.00</p>
+    </div>
+    <div class="page-header-actions">
+      <a class="btn btn-ghost" href="#/account-statement" title="Account ledger &amp; running balances"><i data-icon="book-2" class="icon"></i>Account ledger</a>
+      <button type="button" class="btn btn-primary" data-fold="new transaction button"><i data-icon="plus" class="icon"></i>New transaction</button>
+    </div>
+  </header>
+
+  <div class="split-view">
+    <section class="split-view-list has-detail" aria-label="Transaction list">
+     <div class="flex flex-col gap-3">
+      <div class="filter-bar" data-fold="filter bar">
+        <div class="tabs-seg" role="tablist" aria-label="Transaction status">
+          <button type="button" class="tabs-seg-item" aria-selected="true">Drafts</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false" title="Built as a separate screen state">Posted</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false" title="Built as a separate screen state">Reversed</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false" title="Built as a separate screen state">All</button>
+        </div>
+        <label class="search-field"><i data-icon="search" class="icon"></i><input type="search" placeholder="Name, reference or memo" aria-label="Search transactions"></label>
+        <select class="select max-w-[7.5rem]" aria-label="Transaction type">
+          <option>All types</option>
+          <option>Expenses</option>
+          <option>Receipts</option>
+        </select>
+        <details class="menu">
+          <summary class="btn btn-secondary"><i data-icon="filter" class="icon"></i>Filters</summary>
+          <div class="menu-panel menu-panel-wide">
+            <p class="menu-label">Date range</p>
+            <div class="flex items-center gap-2 px-2 py-1">
+              <div class="field"><label class="field-label" for="tl-from">From</label>
+                <span class="input-affix"><input class="input" type="text" value="01 Sep 2026" id="tl-from"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+              </div>
+              <div class="field"><label class="field-label" for="tl-to">To</label>
+                <span class="input-affix"><input class="input" type="text" value="17 Sep 2026" id="tl-to"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+              </div>
+            </div>
+            <div class="px-2 pb-1 pt-2"><button type="button" class="btn btn-secondary btn-sm w-full justify-center">Apply dates</button></div>
+          </div>
+        </details>
+        <button type="button" class="btn btn-secondary btn-icon" aria-label="Export list"><i data-icon="download" class="icon"></i></button>
+      </div>
+
+      <div class="table-wrap" data-fold="first rows">
+        <table class="table">
+          <thead><tr><th>Date / reference</th><th>Name</th><th class="num">Amount</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr data-href="#/transactions-list" aria-selected="true">
+              <td><span class="row-title">14 Sep 2026</span><span class="row-sub">EXP-000590</span></td>
+              <td>Sialkot Packaging<span class="row-sub">Expense</span></td>
+              <td class="num">3,250.00</td>
+              <td><span class="badge badge-draft"><i class="badge-dot"></i>Draft</span></td>
+            </tr>
+            <tr data-href="#/transactions-list">
+              <td><span class="row-title">12 Sep 2026</span><span class="row-sub">EXP-000589</span></td>
+              <td>K-Electric<span class="row-sub">Expense</span></td>
+              <td class="num">18,600.00</td>
+              <td><span class="badge badge-draft"><i class="badge-dot"></i>Draft</span></td>
+            </tr>
+            <tr data-href="#/transactions-list">
+              <td><span class="row-title">10 Sep 2026</span><span class="row-sub">REC-000588</span></td>
+              <td>Lahore Fabric House<span class="row-sub">Receipt</span></td>
+              <td class="num">92,000.00</td>
+              <td><span class="badge badge-draft"><i class="badge-dot"></i>Draft</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span class="pagination-summary">3 records · Total <strong class="text-ink">PKR 113,850.00</strong></span>
+        <div class="pagination-controls">
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" disabled aria-label="Previous page"><i data-icon="chevron-left" class="icon"></i></button>
+          <span class="pagination-page">Page 1 of 1</span>
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" disabled aria-label="Next page"><i data-icon="chevron-right" class="icon"></i></button>
+        </div>
+      </div>
+      <p class="sample-note"><i data-icon="info-circle" class="icon"></i>These are synthetic records in a separate sample company.</p>
+     </div>
+    </section>
+
+    <section class="split-view-detail" aria-label="Transaction details">
+      <a class="split-view-back link" href="#/transactions-list"><i data-icon="arrow-left" class="icon"></i>Back to list</a>
+      <div class="border-b border-border px-5 pb-4 pt-4">
+        <div class="mb-1.5 flex flex-wrap items-center gap-2">
+          <h2 class="text-[1.0625rem] font-semibold text-ink">EXP-000590</h2>
+          <span class="badge badge-draft"><i class="badge-dot"></i>Draft</span>
+        </div>
+        <div class="flex items-end justify-between gap-3">
+          <h3 class="text-sm text-ink-muted">Sialkot Packaging</h3>
+          <p class="amount-lg whitespace-nowrap" data-fold="document total"><span class="text-xs font-normal text-ink-muted">PKR</span> 3,250.00</p>
+        </div>
+      </div>
+
+      <div class="flex min-h-0 flex-1 flex-col overflow-y-auto px-5 pt-4">
+        <div class="tabs-underline" data-tabs role="tablist" aria-label="Record sections">
+          <button type="button" class="tabs-underline-item" data-tab="details" aria-selected="true">Details</button>
+          <button type="button" class="tabs-underline-item" data-tab="journal" aria-selected="false">Journal</button>
+          <button type="button" class="tabs-underline-item" data-tab="history" aria-selected="false">History</button>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="details">
+          <dl class="dgrid">
+            <div class="dgrid-row"><dt>Paid to</dt><dd>Sialkot Packaging</dd></div>
+            <div class="dgrid-row"><dt>Reference</dt><dd>PKG-SEP-14</dd></div>
+            <div class="dgrid-row"><dt>Date</dt><dd>14 Sep 2026</dd></div>
+            <div class="dgrid-row"><dt>Paid from</dt><dd>Cash in hand</dd></div>
+            <div class="dgrid-row"><dt>Category</dt><dd>Packaging &amp; printing</dd></div>
+            <div class="dgrid-row"><dt>Memo</dt><dd>Packaging cartons for the September dispatch run.</dd></div>
+          </dl>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="journal" hidden>
+          <div class="posting-preview-head"><h3 class="text-sm font-semibold text-ink">Posting preview</h3><span class="balanced-label"><i data-icon="check" class="icon"></i>Balanced</span></div>
+          <div class="table-wrap">
+            <table class="table journal-table">
+              <thead><tr><th>Account</th><th class="num">Debit (PKR)</th><th class="num">Credit (PKR)</th></tr></thead>
+              <tbody>
+                <tr><td><span class="row-title">5400</span><span class="row-sub">Packaging &amp; printing</span></td><td class="num">3,250.00</td><td class="num">0.00</td></tr>
+                <tr><td><span class="row-title">1000</span><span class="row-sub">Cash in hand</span></td><td class="num">0.00</td><td class="num">3,250.00</td></tr>
+              </tbody>
+              <tfoot><tr class="table-totals"><td>Total</td><td class="num">3,250.00</td><td class="num">3,250.00</td></tr></tfoot>
+            </table>
+          </div>
+          <p class="mt-2 text-xs text-ink-muted">Posting adds this transaction to reports. A saved draft does not change your books.</p>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="history" hidden>
+          <dl class="dgrid">
+            <div class="dgrid-row"><dt>Created</dt><dd>14 Sep 2026, 10:12 · Asia/Karachi</dd></div>
+            <div class="dgrid-row"><dt>Last saved</dt><dd>14 Sep 2026, 10:12 · Asia/Karachi</dd></div>
+            <div class="dgrid-row"><dt>Revision</dt><dd>1</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="panel-actions">
+        <p class="panel-actions-note">Posting adds this to reports. A draft does not change your books.</p>
+        <button type="button" class="btn btn-secondary">Edit draft</button>
+        <button type="button" class="btn btn-primary" data-fold="post button">Post expense</button>
+      </div>
+    </section>
+  </div>
+</div>

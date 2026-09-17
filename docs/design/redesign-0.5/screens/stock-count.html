@@ -1,0 +1,77 @@
+<!--meta {"id":"stock-count","title":"Record stock count · Cotton yarn 20s","route":"/inventory?id=3","group":"Inventory","nav":"products","crumbs":[["Inventory","#/products-list"],["Products & stock","#/products-list"],["Record stock count"]],"pattern":"document-editor","layout":"app","state":"Counted, -20 kg difference, awaiting confirmation"} -->
+<div class="py-5">
+  <div class="flex flex-col rounded-panel border border-border bg-surface">
+    <header class="doc-header" data-fold="doc header">
+      <div class="doc-heading">
+        <span class="doc-type">Stock count</span>
+        <h1 class="doc-number">Cotton yarn 20s</h1>
+      </div>
+      <div class="doc-actions">
+        <a class="btn btn-ghost" href="#/products-list">Cancel</a>
+        <button type="button" class="btn btn-primary" data-fold="primary action"><i data-icon="clipboard-check" class="icon"></i>Confirm stock count</button>
+      </div>
+    </header>
+
+    <div class="doc-body">
+      <p class="mb-4 text-xs text-ink-muted">Use Purchasing for ordered goods and supplier returns. A count needs an explicit counterpart account and reason, and adjusts quantity and value together.</p>
+      <section data-proposed title="Proposed: recorded → counted → difference → value effect shown together before confirming. Today's form asks for the counted quantity, counterpart account and reason with no preview of the resulting difference or value change (UX audit P2).">
+        <h2 class="section-title mb-2">Recorded vs. counted</h2>
+        <div class="count-compare rounded-panel border border-border p-4">
+          <div class="count-compare-item"><span class="count-compare-label">Recorded</span><span class="count-compare-value">1,200.0000 kg</span></div>
+          <div class="count-compare-item"><span class="count-compare-label">Counted</span><span class="count-compare-value">1,180.0000 kg</span></div>
+          <div class="count-compare-item"><span class="count-compare-label">Difference</span><span class="count-compare-value is-negative">&minus;20.0000 kg</span></div>
+          <div class="count-compare-item"><span class="count-compare-label">Value effect</span><span class="count-compare-value is-negative">&minus;4,200.00</span></div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title mb-2">Count details</h2>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
+          <div class="field">
+            <label class="field-label" for="sc-date">Date</label>
+            <span class="input-affix"><input class="input" id="sc-date" type="text" value="17 Sep 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+          </div>
+          <div class="field">
+            <label class="field-label" for="sc-counted">Counted quantity</label>
+            <input class="input input-amount" id="sc-counted" type="text" value="1,180.0000">
+          </div>
+          <div class="field">
+            <label class="field-label" for="sc-cost">Unit cost for count increases</label>
+            <input class="input input-amount" id="sc-cost" type="text" value="210.0000">
+          </div>
+          <div class="field">
+            <label class="field-label" for="sc-offset">Counterpart account</label>
+            <select class="select" id="sc-offset"><option selected>5150 &middot; Inventory shrinkage</option><option>Choose&hellip;</option></select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="sc-ref">Source reference</label>
+            <input class="input" id="sc-ref" type="text" value="Cycle count &ndash; Sep 2026">
+          </div>
+          <div class="field lg:col-span-2">
+            <label class="field-label" for="sc-reason">Reason</label>
+            <input class="input" id="sc-reason" type="text" value="Physical cycle count, raw material store">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <details class="w-full rounded-panel border border-border" open>
+          <summary class="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-semibold text-ink"><span class="flex items-center gap-2"><i data-icon="chevron-right" class="icon"></i>Journal effect</span><span class="balanced-label"><i data-icon="check" class="icon"></i>Balanced</span></summary>
+          <div class="border-t border-border px-4 py-3">
+            <div class="table-wrap">
+              <table class="table journal-table">
+                <thead><tr><th>Account</th><th class="num">Debit (PKR)</th><th class="num">Credit (PKR)</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="row-title">5150</span><span class="row-sub">Inventory shrinkage</span></td><td class="num">4,200.00</td><td class="num">0.00</td></tr>
+                  <tr><td><span class="row-title">1310</span><span class="row-sub">Raw materials on hand</span></td><td class="num">0.00</td><td class="num">4,200.00</td></tr>
+                </tbody>
+                <tfoot><tr class="table-totals"><td>Total</td><td class="num">4,200.00</td><td class="num">4,200.00</td></tr></tfoot>
+              </table>
+            </div>
+            <p class="mt-2 text-xs text-ink-muted">Confirming rejects safely if the recorded quantity has changed since this count was reviewed.</p>
+          </div>
+        </details>
+      </section>
+    </div>
+  </div>
+</div>

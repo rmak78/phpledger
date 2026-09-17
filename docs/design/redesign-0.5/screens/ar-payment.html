@@ -1,0 +1,95 @@
+<!--meta {"id":"ar-payment","title":"Record customer receipt","route":"/ar?id=190","group":"Sales","nav":"invoices","crumbs":[["Sales","#/ar-list"],["Invoices","#/ar-list"],["Record receipt"]],"pattern":"document-editor","layout":"app","state":"Lahore Fabric House · 2 invoices to allocate"} -->
+<div class="py-5">
+  <div class="flex flex-col rounded-panel border border-border bg-surface">
+    <header class="doc-header" data-fold="doc header">
+      <div class="doc-heading">
+        <span class="doc-type">Receipt</span>
+        <h1 class="doc-number">New</h1>
+        <span class="badge badge-draft"><i class="badge-dot"></i>Not posted</span>
+      </div>
+      <div class="doc-actions">
+        <a class="btn btn-ghost" href="#/ar-list">Cancel</a>
+        <button type="button" class="btn btn-primary" data-fold="primary action"><i data-icon="check" class="icon"></i>Record receipt</button>
+      </div>
+    </header>
+
+    <div class="doc-body">
+      <section>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
+          <div class="field">
+            <label class="field-label" for="pay-customer">Customer</label>
+            <select class="select" id="pay-customer">
+              <option>Choose&hellip;</option>
+              <option selected>Lahore Fabric House</option>
+              <option>Bismillah Garments</option>
+              <option>Karachi Linen Co.</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="pay-date">Payment date</label>
+            <span class="input-affix"><input class="input" id="pay-date" type="text" value="17 Sep 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+          </div>
+          <div class="field">
+            <label class="field-label" for="pay-account">Deposit to</label>
+            <select class="select" id="pay-account">
+              <option>Choose&hellip;</option>
+              <option selected>Meezan Bank &ndash; Current</option>
+              <option>Cash in hand</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="pay-amount">Amount received (PKR)</label>
+            <input class="input input-amount" id="pay-amount" type="text" value="70,000.00">
+          </div>
+          <div class="field md:col-span-2 lg:col-span-2">
+            <label class="field-label" for="pay-ref">Description / reference <span class="optional">(optional)</span></label>
+            <input class="input" id="pay-ref" type="text" value="LFH bank transfer, ref 88213">
+          </div>
+        </div>
+        <button type="button" class="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-accent" data-toggle="pay-fx" aria-expanded="false" aria-controls="pay-fx"><i data-icon="chevron-right" class="icon"></i>Foreign currency settlement (optional)</button>
+        <div id="pay-fx" class="mt-3" hidden data-proposed title="Proposed: gain/loss accounts and an actual rate are shown only when the receipt currency differs from PKR or an exchange difference exists. Today's form always requires a gain and a loss account, even for a same-currency PKR receipt (UX audit P1).">
+          <div class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3 max-w-2xl">
+            <div class="field"><label class="field-label" for="pay-gain">Realised FX gain account</label><select class="select" id="pay-gain"><option>Choose&hellip;</option></select></div>
+            <div class="field"><label class="field-label" for="pay-loss">Realised FX loss account</label><select class="select" id="pay-loss"><option>Choose&hellip;</option></select></div>
+            <div class="field"><label class="field-label" for="pay-rate">Actual exchange rate</label><input class="input" id="pay-rate" type="text" placeholder="e.g. 278.4500"></div>
+          </div>
+          <p class="field-hint">This receipt is in PKR against PKR invoices, so no exchange difference applies.</p>
+        </div>
+      </section>
+
+      <section>
+        <div class="mb-2 flex items-center justify-between">
+          <h2 class="section-title">Allocate to open invoices</h2>
+          <span class="text-xs text-ink-muted" data-proposed title="Proposed: allocating one receipt across several open invoices in one screen. Today's app records a receipt from inside a single invoice at a time, one open item per settlement.">Lahore Fabric House &middot; 2 open invoices</span>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Invoice</th><th>Due date</th><th class="num">Remaining</th><th class="num w-[9rem]">Allocate</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="row-title">INV-000185</span><span class="row-sub">Overdue &middot; 16 days</span></td>
+                <td>01 Sep 2026</td>
+                <td class="num">20,000.00</td>
+                <td class="num"><input class="input input-amount alloc-input" id="alloc-185" type="text" value="20,000.00" max="20000" aria-label="Allocate to INV-000185"></td>
+              </tr>
+              <tr>
+                <td><span class="row-title">INV-000190</span><span class="row-sub">Due 19 Sep 2026</span></td>
+                <td>19 Sep 2026</td>
+                <td class="num">47,144.00</td>
+                <td class="num"><input class="input input-amount alloc-input" id="alloc-190" type="text" value="47,144.00" max="47144" aria-label="Allocate to INV-000190"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-2 text-xs text-ink-muted">Each allocation is capped at the invoice's remaining balance &mdash; an amount above that is rejected before posting.</p>
+        <div class="mt-3 flex justify-end">
+          <div class="doc-totals" data-fold="document total">
+            <div class="doc-totals-row"><span>Amount received</span><span class="amount">70,000.00</span></div>
+            <div class="doc-totals-row"><span>Allocated</span><span class="amount">67,144.00</span></div>
+            <div class="doc-totals-row is-grand"><span>Unallocated</span><span class="amount">PKR 2,856.00</span></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

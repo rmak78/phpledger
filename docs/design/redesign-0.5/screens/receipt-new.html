@@ -1,0 +1,83 @@
+<!--meta {"id":"receipt-new","title":"New receipt","route":"/transactions/new?type=receipt","group":"Daily work","nav":"transactions","crumbs":[["Receipts & expenses","#/transactions-list"],["New receipt"]],"pattern":"document-editor","layout":"app","state":"Draft, not saved yet"} -->
+<div class="py-5">
+  <div class="flex flex-col rounded-panel border border-border bg-surface">
+    <header class="doc-header" data-fold="doc header">
+      <div class="doc-heading">
+        <span class="doc-type">Receipt</span>
+        <h1 class="doc-number">New</h1>
+        <span class="badge badge-draft"><i class="badge-dot"></i>Draft</span>
+        <span class="doc-savestate">Not saved yet</span>
+      </div>
+      <div class="doc-actions">
+        <a class="btn btn-ghost" href="#/transactions-list">Cancel</a>
+        <button type="button" class="btn btn-primary" data-fold="primary action">Save draft</button>
+      </div>
+    </header>
+
+    <div class="doc-body">
+      <section>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
+          <div class="field">
+            <label class="field-label" for="rn-date">Date</label>
+            <span class="input-affix"><input class="input" id="rn-date" type="text" value="17 Sep 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+            <p class="field-hint">The accounting date for this transaction.</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="rn-amount">Amount (PKR)</label>
+            <input class="input input-amount" id="rn-amount" type="text" value="65,000.00">
+            <p class="field-hint">Use a decimal point, without separators.</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="rn-payer">Received from</label>
+            <input class="input" id="rn-payer" type="text" value="Lahore Fabric House">
+          </div>
+          <div class="field">
+            <label class="field-label" for="rn-money">Deposited to</label>
+            <select class="select" id="rn-money">
+              <option>Cash in hand</option>
+              <option>Petty cash</option>
+              <option selected>Meezan Bank – Current</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="rn-category">Category</label>
+            <select class="select" id="rn-category">
+              <option>Choose a category</option>
+              <option selected>Fabric sales</option>
+              <option>Services</option>
+              <option>Retail sales</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="rn-reference">Reference <span class="optional">(optional)</span></label>
+            <input class="input" id="rn-reference" type="text" value="LFH-ADV-09" placeholder="Receipt number or your own reference">
+          </div>
+          <div class="field col-span-2 md:col-span-3 lg:col-span-4">
+            <label class="field-label" for="rn-memo">Memo <span class="optional">(optional)</span></label>
+            <textarea class="textarea" id="rn-memo" rows="2" placeholder="What was this transaction for?">Advance against a pending fabric order — to be adjusted against the final invoice.</textarea>
+          </div>
+        </div>
+        <p class="mt-3 max-w-2xl text-xs text-ink-muted">This entry posts to one category account in PKR. Split lines, tax and foreign-currency amounts aren't supported here yet — use a general journal for those.</p>
+      </section>
+
+      <section>
+        <details class="w-full rounded-panel border border-border" data-proposed title="Proposed: today's editor has no live posting preview — the balanced entry only appears after saving, on the transaction's detail page.">
+          <summary class="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-semibold text-ink"><span class="flex items-center gap-2"><i data-icon="chevron-right" class="icon"></i>Posting preview</span><span class="balanced-label"><i data-icon="check" class="icon"></i>Balanced</span></summary>
+          <div class="border-t border-border px-4 py-3">
+            <div class="table-wrap">
+              <table class="table journal-table">
+                <thead><tr><th>Account</th><th class="num">Debit (PKR)</th><th class="num">Credit (PKR)</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="row-title">1010</span><span class="row-sub">Meezan Bank – Current</span></td><td class="num">65,000.00</td><td class="num">0.00</td></tr>
+                  <tr><td><span class="row-title">4000</span><span class="row-sub">Fabric sales</span></td><td class="num">0.00</td><td class="num">65,000.00</td></tr>
+                </tbody>
+                <tfoot><tr class="table-totals"><td>Total</td><td class="num">65,000.00</td><td class="num">65,000.00</td></tr></tfoot>
+              </table>
+            </div>
+            <p class="mt-2 text-xs text-ink-muted">Posting adds this transaction to reports. A saved draft does not change your books.</p>
+          </div>
+        </details>
+      </section>
+    </div>
+  </div>
+</div>

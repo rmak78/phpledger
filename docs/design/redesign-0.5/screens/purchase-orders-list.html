@@ -1,0 +1,104 @@
+<!--meta {"id":"purchase-orders-list","title":"Purchase orders","route":"/purchasing","group":"Purchases","nav":"purchase-orders","crumbs":[["Purchases","#/purchase-orders-list"],["Purchase orders"]],"pattern":"list-detail","layout":"app","state":"All · PO-000017 selected"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Purchase orders</h1>
+      <p class="mt-1 text-sm text-ink-muted">6 orders &middot; 800.0000 kg unreceived on PO-000017</p>
+    </div>
+    <div class="page-header-actions">
+      <a class="btn btn-ghost" href="#/products-list"><i data-icon="package" class="icon"></i>Products &amp; stock</a>
+      <a class="btn btn-primary" href="#/purchase-order-new" data-fold="new order button"><i data-icon="plus" class="icon"></i>New purchase order</a>
+    </div>
+  </header>
+
+  <div class="split-view">
+    <section class="split-view-list has-detail" aria-label="Purchase order list">
+     <div class="flex flex-col gap-3">
+      <div class="filter-bar" data-fold="filter bar">
+        <div class="tabs-seg" role="tablist" aria-label="Order status">
+          <button type="button" class="tabs-seg-item" aria-selected="false">Draft</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Ordered</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Partially received</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Received</button>
+          <button type="button" class="tabs-seg-item" aria-selected="true">All</button>
+        </div>
+        <label class="search-field"><i data-icon="search" class="icon"></i><input type="search" placeholder="Supplier or reference" aria-label="Search purchase orders"></label>
+        <button type="button" class="btn btn-secondary btn-icon" aria-label="Export list"><i data-icon="download" class="icon"></i></button>
+      </div>
+
+      <div class="table-wrap" data-fold="first rows">
+        <table class="table">
+          <thead><tr><th>Order / date</th><th>Supplier</th><th class="num">Value</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr data-href="#/purchase-orders-list"><td><span class="row-title">16 Sep 2026</span><span class="row-sub">PO-000018</span></td><td>Sialkot Packaging</td><td class="num">34,900.00</td><td><span class="badge badge-draft"><i class="badge-dot"></i>Draft</span></td></tr>
+            <tr data-href="#/purchase-orders-list" aria-selected="true"><td><span class="row-title">15 Sep 2026</span><span class="row-sub">PO-000017</span></td><td>Faisalabad Yarn Mills</td><td class="num">420,000.00</td><td><span class="badge badge-partially-paid"><i class="badge-dot"></i>Partially received</span></td></tr>
+            <tr data-href="#/purchase-orders-list"><td><span class="row-title">01 Sep 2026</span><span class="row-sub">PO-000016</span></td><td>Faisalabad Yarn Mills</td><td class="num">104,000.00</td><td><span class="badge badge-info"><i class="badge-dot"></i>Ordered</span></td></tr>
+            <tr data-href="#/purchase-orders-list"><td><span class="row-title">15 Aug 2026</span><span class="row-sub">PO-000015</span></td><td>Faisalabad Yarn Mills</td><td class="num">169,600.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Received</span></td></tr>
+            <tr data-href="#/purchase-orders-list"><td><span class="row-title">01 Aug 2026</span><span class="row-sub">PO-000013</span></td><td>Faisalabad Yarn Mills</td><td class="num">66,000.00</td><td><span class="badge badge-unpaid"><i class="badge-dot"></i>Cancelled</span></td></tr>
+            <tr data-href="#/purchase-orders-list"><td><span class="row-title">10 Jul 2026</span><span class="row-sub">PO-000011</span></td><td>Faisalabad Yarn Mills</td><td class="num">123,000.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Received</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span class="pagination-summary">6 records &middot; Total <strong class="text-ink">PKR 917,500.00</strong></span>
+        <div class="pagination-controls">
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" disabled aria-label="Previous page"><i data-icon="chevron-left" class="icon"></i></button>
+          <span class="pagination-page">Page 1 of 1</span>
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" disabled aria-label="Next page"><i data-icon="chevron-right" class="icon"></i></button>
+        </div>
+      </div>
+      <p class="sample-note"><i data-icon="info-circle" class="icon"></i>These are synthetic records in a separate sample company.</p>
+     </div>
+    </section>
+
+    <section class="split-view-detail" aria-label="Purchase order details">
+      <a class="split-view-back link" href="#/purchase-orders-list"><i data-icon="arrow-left" class="icon"></i>Back to list</a>
+      <div class="border-b border-border px-5 pb-4 pt-4">
+        <div class="mb-1.5 flex flex-wrap items-center gap-2">
+          <h2 class="text-[1.0625rem] font-semibold text-ink">PO-000017</h2>
+          <span class="badge badge-partially-paid"><i class="badge-dot"></i>Partially received</span>
+        </div>
+        <div class="flex items-end justify-between gap-3">
+          <h3 class="text-sm text-ink-muted">Faisalabad Yarn Mills</h3>
+          <p class="amount-lg whitespace-nowrap" data-fold="document total"><span class="text-xs font-normal text-ink-muted">PKR</span> 420,000.00</p>
+        </div>
+      </div>
+
+      <div class="flex min-h-0 flex-1 flex-col overflow-y-auto px-5 pt-4">
+        <div class="tabs-underline" data-tabs role="tablist" aria-label="Record sections">
+          <button type="button" class="tabs-underline-item" data-tab="details" aria-selected="true">Details</button>
+          <button type="button" class="tabs-underline-item" data-tab="receipts" aria-selected="false">Receipts</button>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="details">
+          <dl class="dgrid">
+            <div class="dgrid-row"><dt>Order date</dt><dd>15 Sep 2026</dd></div>
+            <div class="dgrid-row"><dt>Reference</dt><dd>FYM-Q3-07</dd></div>
+            <div class="dgrid-row"><dt>Goods</dt><dd>Cotton yarn 20s</dd></div>
+            <div class="dgrid-row"><dt>Ordered</dt><dd>2,000.0000 kg</dd></div>
+            <div class="dgrid-row"><dt>Received</dt><dd>1,200.0000 kg</dd></div>
+            <div class="dgrid-row"><dt>Unreceived</dt><dd class="font-semibold text-ink">800.0000 kg</dd></div>
+          </dl>
+          <div class="mt-1 flex items-center gap-2">
+            <div class="meter" role="img" aria-label="60% received"><div class="meter-fill w-[60%]"></div></div>
+            <span class="text-xs text-ink-muted">60%</span>
+          </div>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="receipts" hidden>
+          <dl class="dgrid">
+            <div class="dgrid-row"><dt>GRN-000009</dt><dd>10 Sep 2026 &middot; 1,200.0000 kg &middot; 700.0000 kg billed</dd></div>
+            <div class="dgrid-row"><dt>Unbilled from GRN-000009</dt><dd>500.0000 kg</dd></div>
+            <div class="dgrid-row"><dt>Matched bill</dt><dd><a class="link" href="#/ap-list">BILL-000038</a></dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="panel-actions">
+        <p class="panel-actions-note">800.0000 kg unreceived.</p>
+        <a class="btn btn-primary" href="#/goods-receipt" data-fold="post button"><i data-icon="truck-delivery" class="icon"></i>Receive goods</a>
+      </div>
+    </section>
+  </div>
+</div>

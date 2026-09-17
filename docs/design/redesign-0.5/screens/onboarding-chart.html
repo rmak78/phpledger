@@ -1,0 +1,51 @@
+<!--meta {"id":"onboarding-chart","title":"Set up a business — Chart choice","route":"/onboarding","group":"Setup & access","nav":"","crumbs":[["Your businesses","#/companies"],["Set up a business"]],"layout":"auth","pattern":"wizard","state":"Step 3 of 5 · Bring my existing chart"} -->
+<div class="auth-panel">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <p class="eyebrow">Business setup · Step 3 of 5</p>
+      <h1 class="page-title">Which chart starts this book?</h1>
+    </div>
+    <a class="btn btn-ghost btn-sm" href="#/companies">Cancel</a>
+  </div>
+
+  <div class="mt-5 grid grid-cols-1 gap-7 lg:grid-cols-[168px_1fr]">
+    <ol class="stepper">
+      <li class="stepper-step is-done"><span class="stepper-index"><i data-icon="check" class="icon"></i></span><span class="stepper-label">Purpose</span></li>
+      <li class="stepper-step is-done"><span class="stepper-index"><i data-icon="check" class="icon"></i></span><span class="stepper-label">Business &amp; period</span></li>
+      <li class="stepper-step is-current"><span class="stepper-index">3</span><span class="stepper-label">Chart</span></li>
+      <li class="stepper-step"><span class="stepper-index">4</span><span class="stepper-label">Preview</span></li>
+      <li class="stepper-step"><span class="stepper-index">5</span><span class="stepper-label">Confirm</span></li>
+    </ol>
+
+    <div>
+      <fieldset class="flex flex-col gap-2.5" data-fold="chart options">
+        <legend class="sr-only">Which chart starts this book?</legend>
+        <label class="option-card">
+          <input type="radio" name="chart-choice">
+          <span class="option-card-body">
+            <span class="option-card-title">Use the neutral starter chart</span>
+            <span class="option-card-desc block">Start with PHP Ledger's compact country-neutral accounts and review the exact codes next.</span>
+          </span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="chart-choice" checked>
+          <span class="option-card-body">
+            <span class="option-card-title">Prepare to bring my existing chart</span>
+            <span class="option-card-desc block">Keep the existing chart as the opening-conversion source; review its mapping after this setup.</span>
+          </span>
+        </label>
+      </fieldset>
+
+      <label class="mt-4 flex items-start gap-2 text-sm text-ink">
+        <input type="checkbox" class="mt-0.5">
+        <span>For a new business, I confirm there are no opening balances or unpaid invoices/bills to bring forward.</span>
+      </label>
+      <p class="field-hint ms-6">Leave this unchecked when bringing past records — you'll reconcile real balances in Opening balances next.</p>
+
+      <div class="mt-6 flex items-center justify-between gap-2 border-t border-border pt-4">
+        <a class="btn btn-ghost" href="#/onboarding-business">Back</a>
+        <a class="btn btn-primary" href="#/onboarding-preview" data-fold="primary action">Preview setup</a>
+      </div>
+    </div>
+  </div>
+</div>

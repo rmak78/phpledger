@@ -1,0 +1,59 @@
+<!--meta {"id":"pos-receipt","title":"Receipt ready","route":"/pos/receipt","group":"Daily work","nav":"pos","crumbs":[["Point of sale","#/pos"],["Receipt"]],"pattern":"pos","layout":"bare","state":"Sale saved, receipt preview"} -->
+<div class="min-h-dvh flex flex-col bg-canvas">
+  <header class="flex h-12 flex-none items-center gap-4 border-b border-border bg-surface px-4">
+    <div class="flex items-center gap-2.5">
+      <span class="company-switcher-mark" aria-hidden="true">R</span>
+      <div class="flex flex-col leading-tight">
+        <span class="whitespace-nowrap text-sm font-semibold text-ink">Ravi Textile Traders</span>
+        <span class="text-[11px] text-ink-muted">Point of sale</span>
+      </div>
+    </div>
+    <ol class="ms-4 flex items-center gap-4 text-xs text-ink-muted" aria-label="Sale progress">
+      <li class="flex items-center gap-1.5"><span class="flex size-5 items-center justify-center rounded-full bg-success-bg text-success"><i data-icon="check" class="icon size-3"></i></span>Build cart</li>
+      <li class="flex items-center gap-1.5"><span class="flex size-5 items-center justify-center rounded-full bg-success-bg text-success"><i data-icon="check" class="icon size-3"></i></span>Review &amp; cash</li>
+      <li class="flex items-center gap-1.5 font-semibold text-ink"><span class="flex size-5 items-center justify-center rounded-full bg-brand text-[11px] text-white">3</span>Receipt</li>
+    </ol>
+    <div class="ms-auto flex items-center gap-3">
+      <a class="btn btn-ghost btn-sm" href="#/home"><i data-icon="logout" class="icon"></i>Exit to app</a>
+    </div>
+  </header>
+
+  <div class="mx-auto w-full max-w-md flex-1 overflow-y-auto p-4">
+    <div class="mb-4 flex items-start justify-between gap-3">
+      <div>
+        <p class="eyebrow">Cash sale recorded</p>
+        <h1 class="page-title">Receipt ready</h1>
+        <p class="mt-1 text-sm text-ink-muted">The receipt and its balanced journal have been saved together.</p>
+      </div>
+    </div>
+    <a class="btn btn-primary mb-4 w-full justify-center" href="#/pos" data-fold="primary action">Start another sale</a>
+
+    <article class="receipt-paper rounded-panel border border-dashed border-border-strong bg-surface p-5" data-fold="first rows">
+      <p class="eyebrow text-center">Sample shop · Cash receipt</p>
+      <h2 class="page-title text-center text-base">Ravi Textile Traders</h2>
+      <p class="text-center text-xs text-ink-muted">REC-000591 · 17 Sep 2026</p>
+      <div class="receipt-rule"></div>
+      <table class="w-full text-xs">
+        <thead><tr class="text-ink-faint"><th class="text-start font-semibold">Item</th><th class="num font-semibold">Qty</th><th class="num font-semibold">Each</th><th class="num font-semibold">Total</th></tr></thead>
+        <tbody>
+          <tr><td class="py-1">Cotton Lawn (metre)</td><td class="num py-1">6</td><td class="num py-1">380.00</td><td class="num py-1">2,280.00</td></tr>
+          <tr><td class="py-1">Embroidered Dupatta</td><td class="num py-1">1</td><td class="num py-1">1,800.00</td><td class="num py-1">1,800.00</td></tr>
+          <tr><td class="py-1">Cotton Thread (spool)</td><td class="num py-1">4</td><td class="num py-1">90.00</td><td class="num py-1">360.00</td></tr>
+        </tbody>
+      </table>
+      <div class="receipt-rule"></div>
+      <div class="flex justify-between text-sm font-semibold text-ink"><span>Sale total</span><span class="amount">PKR 4,440.00</span></div>
+      <div class="mt-1 flex justify-between text-xs text-ink-muted"><span>Cash received</span><span class="amount">5,000.00</span></div>
+      <div class="flex justify-between text-xs text-ink-muted"><span>Change</span><span class="amount">560.00</span></div>
+      <div class="receipt-rule"></div>
+      <p class="text-[11px] text-ink-faint">Illustrative products and prices. No payment was collected by this application. This showcase does not calculate tax, stock movements, or cost of goods sold.</p>
+      <p class="mt-1 text-[11px] text-ink-faint">Catalog sample-textile-counter · v1</p>
+    </article>
+
+    <div class="mt-4 flex flex-wrap gap-2">
+      <button type="button" class="btn btn-secondary"><i data-icon="printer" class="icon"></i>Print receipt</button>
+      <a class="btn btn-ghost" href="#/transaction-posted">View source transaction</a>
+      <a class="btn btn-ghost" href="#/journal-entry">View journal</a>
+    </div>
+  </div>
+</div>
