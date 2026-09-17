@@ -34,7 +34,9 @@ function pl_web_connections(int $actor, array $user, array $company, string $met
         http_response_code(503);
     }
     // Tokens are rendered only in this no-store response, never put in flash/session state.
-    pl_render('connections', ['title' => 'Connections', 'user' => $user, 'company' => $company, 'endpoint' => $endpoint, 'message' => $message, 'issued' => $result, 'connections' => pl_list_connections($actor, (int) $company['id'], (int) $company['book_id'])]);
+    $input = $method === 'POST' && pl_web_text($_POST, 'action') === 'create' && $result === null
+        ? ['name' => pl_web_text($_POST, 'name'), 'access_mode' => pl_web_text($_POST, 'access_mode', 'reports')] : [];
+    pl_render('connections', ['title' => 'Connections', 'user' => $user, 'company' => $company, 'endpoint' => $endpoint, 'message' => $message, 'input' => $input, 'issued' => $result, 'connections' => pl_list_connections($actor, (int) $company['id'], (int) $company['book_id'])]);
 }
 
 function pl_web_oauth(?int $actor, ?array $user, string $method): never

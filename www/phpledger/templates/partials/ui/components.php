@@ -115,10 +115,10 @@ function pl_ui_pagination(string $path, array $filters, int $page, int $pages): 
     echo '</nav>';
 }
 
-function pl_ui_connection_scope(string $id): void
+function pl_ui_connection_scope(string $id, string $value = 'reports'): void
 {
-    pl_ui_field($id, 'Access scope', static function () use ($id): void {
-        echo '<select class="select" id="' . pl_e($id) . '" name="access_mode" required><option value="reports">Report-only — summary financial reports</option><option value="full">Full read — reports and individual records</option></select>';
+    pl_ui_field($id, 'Access scope', static function () use ($id, $value): void {
+        echo '<select class="select" id="' . pl_e($id) . '" name="access_mode" required><option value="reports">Report-only — summary financial reports</option><option value="full"' . ($value === 'full' ? ' selected' : '') . '>Full read — reports and individual records</option></select>';
     });
     echo '<p class="field-hint">Report-only includes company discovery, trial balance, profit and loss, and balance sheet. Full read also includes accounts, transactions, journals and account statements. Neither permits financial writes.</p>';
 }

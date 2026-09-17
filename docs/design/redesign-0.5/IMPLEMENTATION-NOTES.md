@@ -594,3 +594,33 @@ rates, or separately design code editing. The owner subsequently approved the re
   during rendered review and rechecked conversion error links/focus.
 - No migrations/schema or hosted changes. Remaining screen fidelity, complete
   evidence/audit closure and package/publication checks are still open.
+
+## Settings and evidence checkpoint — 18 September
+
+- Modules and Connections now use the shared settings cards and compact controls.
+  The token creation action is in the page header; rejected creation retains the
+  selected scope. Endpoint/token copy buttons are progressive enhancements with
+  an announced manual-copy fallback. One-time token display remains no-store and
+  outside session/flash state; screenshots never capture issued credentials.
+- Confirmed module disable/re-enable, Cancel/Escape/focus return, connection
+  report-only creation and revoke with JS enabled/disabled. Copy success/denial,
+  full-read scope retention and one-time display were browser-checked with a
+  clipboard stub, without logging tokens or writing the OS clipboard.
+- Full composer check passed again: 276 tests, zero failures; PHP lint, PHPStan
+  and sample validation green. JS syntax and compiled CSS build passed.
+- Repeated the 33-state sweep after the layout/overflow fixes: 132 captures at
+  1366x768, 1024x768, 768x1024 and 390x844, no page overflow, console errors or
+  failed requests. The evidence index maps these to prototype IDs while leaving
+  full visual/keyboard acceptance pending. This is not all 38 routes/75 states.
+- Contrast review found the prototype's faint text below 3:1. Changed ink-faint
+  from #9A968E to #706D66 (4.65:1 or better on the three normal surfaces), and
+  control border-strong from #D6D3CC to #8C8880 (3.18:1 or better). Approved navy,
+  blue and warm canvas remain unchanged. This is an accessibility-driven design
+  adjustment. Twenty named token-pair checks are recorded in contrast-tokens.json;
+  they do not certify all rendered states or WCAG conformance.
+- The combined nine-pattern keyboard audit command was rejected by automatic
+  approval review with no specific reason returned. It did not run and remains
+  incomplete; earlier individual keyboard/dialog checks are separate evidence.
+- No new migration/schema, recipient messages or hosted changes. Publication
+  remains gated on remaining fidelity, full route/state and accessibility review,
+  audit closure, package upgrade/fresh-install checks and matching release assets.

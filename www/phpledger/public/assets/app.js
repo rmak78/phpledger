@@ -1,5 +1,20 @@
 'use strict';
 
+document.querySelectorAll('[data-copy-from]').forEach(button => {
+    const source = document.getElementById(button.dataset.copyFrom);
+    if (!source || !navigator.clipboard?.writeText) return;
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+        const status = button.parentElement.querySelector('[data-copy-status]');
+        try {
+            await navigator.clipboard.writeText('value' in source ? source.value : source.textContent.trim());
+            if (status) status.textContent = 'Copied.';
+        } catch {
+            if (status) status.textContent = 'Select the text and copy it manually.';
+        }
+    });
+});
+
 document.querySelectorAll('[data-report-period]').forEach(form => {
     const preset = form.elements.namedItem('preset');
     const from = form.elements.namedItem('from');
