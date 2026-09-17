@@ -131,3 +131,18 @@
   }
   .recon-row:last-child { border-block-end: 0; }
 }
+
+/* Sample exercises share the workspace type, spacing and focus tokens. */
+@layer components {
+  .sample-guide { font-size: .8125rem; }
+  .sample-guide p { line-height: 1.5; }
+  .sample-guide ul, .sample-guide ol { padding-inline-start: 1.25rem; }
+  .sample-guide li { margin-block-end: .25rem; }
+  .sample-guide a:not(.btn) { color: var(--brand-blue); text-underline-offset: .2em; }
+  .sample-guide summary { cursor: pointer; font-weight: 600; }
+  .sample-guide details:not(.sample-exercise) > summary { padding-block: .5rem; }
+  .sample-schedules, .sample-months { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .sample-schedules dt { font-weight: 600; margin-block-end: .5rem; }
+  .sample-schedules dd { margin: 0; line-height: 1.5; }
+  @media (max-width: 767px) { .sample-schedules, .sample-months { grid-template-columns: minmax(0, 1fr); } }
+}

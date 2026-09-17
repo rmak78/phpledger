@@ -402,7 +402,12 @@ try {
             || DB::queryFirstField('SELECT id FROM pl_tax_codes WHERE company_id=%i AND book_id=%i AND (sales_account_id=%i OR purchase_account_id=%i) LIMIT 1',$companyId,$bookId,$id,$id) !== null);
         $form = pl_form_state(pl_url('/accounts', $id ? ['id' => $id] : ($isNew ? ['new' => '1'] : [])));
         $input = $form['input'] ?: ($account ?? ['code' => '', 'name' => '', 'type' => 'expense', 'role' => 'expense', 'is_active' => true, 'creation_key' => bin2hex(random_bytes(24))]);
-        pl_render('accounts', ['title' => 'Chart of accounts', 'user' => $user, 'company' => $company, 'account' => $account, 'isNew' => $isNew, 'input' => $input, 'form' => $form, 'operationalWarning'=>$operationalWarning, 'history' => $id ? pl_core_history($actorId, $companyId, $bookId, 'account', $id) : []]);
+        $balanceDate = gmdate('Y-m-d'); $balances = [];
+        foreach (pl_trial_balance($actorId, $companyId, $bookId, $balanceDate)['accounts'] as $balanceRow) {
+            $balances[$balanceRow['id']] = in_array($balanceRow['type'], ['asset', 'expense'], true)
+                ? $balanceRow['balance'] : bcsub('0', $balanceRow['balance'], 4);
+        }
+        pl_render('accounts', ['title' => 'Chart of accounts', 'user' => $user, 'company' => $company, 'account' => $account, 'isNew' => $isNew, 'input' => $input, 'form' => $form, 'balances' => $balances, 'balanceDate' => $balanceDate, 'operationalWarning'=>$operationalWarning, 'history' => $id ? pl_core_history($actorId, $companyId, $bookId, 'account', $id) : []]);
     }
     if (str_starts_with($path, '/general-journals')) {
         $id = pl_web_id($method === 'POST' ? $_POST : $_GET, 'id');

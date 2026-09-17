@@ -21,7 +21,7 @@
 ?>
 <section class="flex flex-col gap-3 py-5">
 <?php pl_starter_header('Opening documents','Map unpaid opening documents into the shared receivables and payables ledger.',$form,$company); ?>
-<?php if ($mappingErrors): ?><div class="alert alert-danger" role="alert" tabindex="-1" data-form-error><div><strong><?= count($mappingErrors) ?> rows need attention.</strong><ul class="list-disc ps-5"><?php foreach ($mappingErrors as $documentId=>$error): ?><li><a class="link" href="#opening-party-<?= $documentId ?>"><?= pl_e($error['reference'].' — '.$error['message']) ?></a></li><?php endforeach; ?></ul></div></div><?php endif; ?>
+<?php if ($mappingErrors): ?><div class="alert alert-danger" role="alert" tabindex="-1" data-form-error><div><strong><?= count($mappingErrors) ?> rows need attention.</strong><ul class="list-disc ps-5"><?php foreach ($mappingErrors as $documentId=>$error): ?><li><a class="link" href="#opening-party-<?= $documentId ?>"><?= pl_e($error['reference'].' â€” '.$error['message']) ?></a></li><?php endforeach; ?></ul></div></div><?php endif; ?>
 <p class="text-sm text-ink-muted">Conversion preserves the original trial balance and creates no new journal. Each unpaid document needs an explicit party mapping, with an exact reconciliation to its existing control account.</p>
 <?php foreach ($cutovers as $cutover):
     if (!$cutover['documents']) { continue; }
@@ -38,7 +38,7 @@ foreach ($cutover['documents'] as $index=>$document): ?><tr><td><?= (int) $index
 $options=pl_starter_options(array_filter($parties,fn($p)=>(bool)$p[$document['kind']==='receivable'?'is_customer':'is_vendor']),'legal_name');
 $selected=$selectedParties[(int)$document['id']]??'';
 pl_ui_field($fieldId,'Party for '.$document['reference'],static function () use ($fieldId,$error,$options,$selected,$index):void { ?>
-<select class="select" id="<?= pl_e($fieldId) ?>" name="mappings[<?= $index ?>][party_id]" required<?= $error!==''?' aria-invalid="true" aria-describedby="'.pl_e($fieldId).'-error"':'' ?>><option value="">Choose…</option><?php foreach ($options as $id=>$label): ?><option value="<?= (int)$id ?>"<?= (string)$selected===(string)$id?' selected':'' ?>><?= pl_e($label) ?></option><?php endforeach; ?></select>
+<select class="select" id="<?= pl_e($fieldId) ?>" name="mappings[<?= $index ?>][party_id]" required<?= $error!==''?' aria-invalid="true" aria-describedby="'.pl_e($fieldId).'-error"':'' ?>><option value="">Chooseâ€¦</option><?php foreach ($options as $id=>$label): ?><option value="<?= (int)$id ?>"<?= (string)$selected===(string)$id?' selected':'' ?>><?= pl_e($label) ?></option><?php endforeach; ?></select>
 <?php },'',$error); ?></td></tr><?php endforeach;
 }, 'Unpaid opening documents and party mappings'); ?>
 <div class="panel-actions" data-fold="primary action"><button class="btn btn-primary">Preview mapped debts</button></div></form><?php else: ?><p>The company owner must review opening conversion.</p><?php endif; ?></details><?php endforeach; ?>

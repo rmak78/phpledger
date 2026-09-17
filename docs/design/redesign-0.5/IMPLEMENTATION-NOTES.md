@@ -569,3 +569,28 @@ rates, or separately design code editing. The owner subsequently approved the re
   The preceding full suite remains 276 tests, zero failures; no service changes
   in this checkpoint. Full release acceptance is still pending.
 - No migration/schema, external recipient messages or hosted changes.
+
+## Account and sample-guide fidelity checkpoint — 18 September
+
+- Replaced the old account console with the shared split view. Accounts group by
+  classification and link their posted balance to the account statement. Figures
+  come from the existing scoped trial-balance service, through the stated date,
+  with debit-normal assets/expenses and credit-normal liabilities/equity/income.
+  Fixed classifications, operational warnings and reasoned changes remain intact.
+- Sample guides use the shared typography, cards and native exercise disclosures;
+  removed the obsolete sample-guide CSS block. Historical pack exercises retain
+  their actual dates and amounts instead of copying the prototype's fictional
+  September examples into January fixtures.
+- A 33-state automated sweep at four widths found no desktop/tablet page overflow,
+  request failures or JS errors. It exposed a phone-width journal table minimum
+  width conflict; fixed the selector and rechecked the overflowing elements plus
+  exact two-line posting at both fold sizes. This sweep is preliminary evidence,
+  not final route/state or accessibility acceptance.
+- Browser checks with JS on/off passed account create, rejected-input retention,
+  rename, immutable classifications, operational warnings and statement links at
+  four widths. Both starter and historical sample guides passed four widths and
+  exercise links with JS on/off. Screenshots visually reviewed. PHP lint and
+  PHPStan passed; CSS build passed. Fixed two non-UTF-8 punctuation bytes found
+  during rendered review and rechecked conversion error links/focus.
+- No migrations/schema or hosted changes. Remaining screen fidelity, complete
+  evidence/audit closure and package/publication checks are still open.
