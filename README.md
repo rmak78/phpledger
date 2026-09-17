@@ -38,7 +38,7 @@ The accounting starter adds customer invoices, supplier bills, partial payments,
 
 **Release status:** **0.5.0-preview is published**, extending the 0.4.0 starter with eleven isolated synthetic sample companies. The hosted demo and marketing site point to the same release. It remains a development preview; observed usability, accessibility certification and production readiness for every business workflow remain separate limits.
 
-Each release publishes the application archive, its SHA-256 checksum and a release-specific marketing kit containing factual announcement copy, guided experiments, FAQs, social/email drafts and genuine screenshots with captions and alt text. The [0.5.0-preview media kit](https://github.com/rmak78/phpledger/releases/download/v0.5.0-preview/phpledger-0.5.0-preview-media-kit.zip) is attached to the GitHub release; campaign publication remains a human decision.
+Every release, including previews and patch releases, must publish the application archive, its SHA-256 checksum and a matching versioned media kit. The kit contains factual announcement/press copy, guided experiments, FAQs, social/email drafts and verified screenshots from that release with captions and alt text. Attach it to the GitHub release, link it in the release notes and owner handoff, and verify its public download and checksum. A release is incomplete without its media kit. The [0.5.0-preview media kit](https://github.com/rmak78/phpledger/releases/download/v0.5.0-preview/phpledger-0.5.0-preview-media-kit.zip) is attached to the GitHub release; campaign publication remains a human decision.
 
 ## Current release: 0.5.0-preview
 

@@ -29,6 +29,12 @@ Read `README.md`, `docs/ARCHITECTURE.md`, and `docs/ROADMAP.md`, then the releva
 - State exactly what ran and what was skipped. Never equate a build, screenshot, or passing technical test with accounting review or observed usability success.
 - Report changed files, tested workflows, references read, migration/schema status, secret exposure, external/live calls, production impact, test results, and remaining risks.
 
+## Every release includes a media kit
+
+- Every release, including previews and patch releases, must ship a matching versioned media kit alongside the application archive and checksum. A release is incomplete without it.
+- Attach the kit to the GitHub release and include its download link in the release notes and owner handoff. Include factual announcement/press copy, social and email drafts, a guided demo, FAQs and verified screenshots from that release with captions and alt text. Use synthetic data and distinguish shipped capabilities from limitations or planned work.
+- Verify the public media-kit download and record its checksum in the publication receipt. Preparing or attaching the kit does not itself authorize sending campaigns to external recipients.
+
 ## Reference boundaries
 
 BixiSoft conventions were consulted from local Agency75 architecture documentation. That project's CRM workflows, production settings, credentials, providers, and deployment arrangements are not PHP Ledger requirements. Required external references should be read if available; reference access does not authorize editing them.
