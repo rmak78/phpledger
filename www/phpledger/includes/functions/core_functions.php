@@ -271,7 +271,7 @@ function pl_list_general_drafts(int $actorId, int $companyId, int $bookId, int $
     $filtered = $search === '' && $status === 'all' ? $total : (int) DB::queryFirstField('SELECT COUNT(*)' . $where, ...$args);
     $pages = max(1, (int) ceil($filtered / $size));
     $page = min($pages, max(1, $page));
-    $order = pl_table_order($options, ['date' => 'd.document_date', 'description' => 'd.description', 'status' => "CASE WHEN d.journal_id IS NULL THEN 'draft' WHEN r.id IS NOT NULL THEN 'reversed' ELSE 'posted' END"], 'd.document_date DESC, d.id DESC', 'd.id DESC');
+    $order = pl_table_order($options, 'general-journals');
     $rows = DB::query('SELECT d.*, r.id AS reversal_journal_id' . $where . ' ORDER BY ' . $order . ' LIMIT %i OFFSET %i', ...array_merge($args, [$size, ($page - 1) * $size]));
     return ['rows' => array_map('pl_general_draft_view', $rows), 'total' => $filtered, 'records_total' => $total, 'page' => $page, 'pages' => $pages];
 }

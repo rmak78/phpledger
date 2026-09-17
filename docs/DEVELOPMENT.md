@@ -1,0 +1,233 @@
+# Local revival development
+
+## 0.6 interface branch: local development only
+
+The approved interface is being implemented on `codex/ui-redesign-0.6`. It is not
+the published release. The source stylesheet is `resources/ui/app.css`; run
+`npm ci` then `npm run build:css` and commit the generated
+`www/phpledger/public/assets/app.css`. Tailwind 4.3.3 is development-only.
+Packages include compiled CSS, the existing local Inter font and the Tailwind
+licence, and exclude npm dependencies, Tailwind sources and prototype files.
+`resources/ui/legacy.css` temporarily retains styling for screens awaiting their
+individual rebuild. Its presence is not acceptance of those screens.
+
+Shared presentation functions live in `templates/partials/ui/components.php`,
+with the workspace shell in `templates/partials/ui/shell.php`. All rendering
+continues through the existing PHP layout and posting services. CSP is unchanged.
+
+List pages use `pl_list_filters()` and `pl_list_query()` over the existing scoped
+services. GET parameters are `page`, `per_page` (25, 50, 100), `q` (160 characters),
+`sort` from the screen's allow-list and `dir` (`asc`/`desc`). Transaction status,
+kind and date filters remain in the URL; journals now accept status and text.
+Invoices and bills also use this contract, with current-revision dates/amounts,
+paid/unpaid/overdue status and filter-preserving record/editor return links.
+Sort keys select complete fixed SQL order clauses; no column name or direction
+from the request is assembled into SQL. All filter values and page bounds are bound.
+The helper uses the existing counted LIMIT/OFFSET queries. Statement running
+balances still come from the existing accounting service. `/tables` retains its
+original JSON contract for API consumers; pages no longer load DataTables.
+Run `docker compose --profile test run --rm test php tests/run.php --suite=lists`
+for the targeted list tests, and `--suite=ar-lists` for current-revision AR/AP lists.
+`docker compose --profile test run --rm test php tools/verify-list-capacity.php`
+seeds 5,000 synthetic receipt drafts, posted journals and bank rows using normal
+services on the isolated test database, then records bounded query plans/timings.
+Use `--measure-only` to reuse that fixture. Bank statements retain their 500-row
+limit; the fixture has ten separate statements/accounts. Migration 031 indexes
+the source lookup used by effective receipt/expense correction history.
+Local before/after evidence is in `docs/design/redesign-0.5/evidence-0.6.0/`.
+
+## Accounting starter — current local service and route contract
+
+The current source adds AR, AP, Purchasing, Inventory and the configurable core tax engine. The published package and hosted demo remain **0.3.0-preview** until a separately recorded release. Read the [starter scope and validation record](repository/sprint-06/ACCOUNTING-STARTER.md) before implementation or testing; the historical foundation section below describes the published prerequisite release.
+
+AR and AP have separate internal module ownership and are required parts of the accounting core. They cannot be disabled. Owner-controlled visibility settings hide navigation without changing permissions, accounting balances or access from another module. Inventory is optional; Purchasing is optional and depends on Inventory and AP. Enable Inventory before Purchasing through `/modules`. Disabling an optional module blocks new operations while preserving authorised access to its history. Quotes remain outside this build on the preserved plugin branch.
+
+| Route | Development workflow |
+|---|---|
+| `/parties` | Maintain the shared customer/vendor party and contacts; both roles may belong to one party. |
+| `/ar`, `/ap` | Save and review invoices/bills, post explicitly, allocate partial/final payments, issue linked credits, inspect source revisions and historical ageing/control reconciliation. |
+| `/purchasing` | Save/confirm orders, receive partial quantities, preview/confirm later supplier bills, record linked returns and reconcile received-but-unbilled amounts. |
+| `/inventory` | Maintain stock/non-stock products, inspect one-location quantity/value, record scoped stock movements/counts and review opening stock conversion. |
+| `/opening-conversion` | Preview explicit party mappings, confirm reconciled opening debt allocations and record subsequent payments. |
+| `/tax` | Configure tax codes and dated rates manually; choose the company's default exclusive/inclusive price entry. |
+| `/modules` | Review optional module activation and owner-controlled AR/AP navigation preferences. |
+
+Keep browser adapters in the existing front controller, shared bootstrap and `starter_*_web_functions.php` helpers. Each browser POST retains CSRF and company/book scope checks, and every service repeats authorisation. IDs are integers; money and quantities are decimal strings with up to four places, FX rates up to twelve and tax percentages up to six. Never convert financial input through a PHP float. Financial mutations use the shared book transaction, durable request keys and central journal posting service; templates and vertical modules do not insert journals or maintain separate payable/receivable balances.
+
+### Internal service entry points
+
+- **AR/AP:** `pl_save_ar_document(actor, company, book, input, id?, expectedRevision?)`, `pl_post_ar_document(..., id, revision, offsetAccountId?, rate?)`, `pl_settle_ar_document(..., id, input)` and the existing reversal/correction functions. Documents accept `invoice`, `bill`, `customer_credit` or `supplier_credit`; lines identify posting accounts, optional products and tax codes. Credits link their original document and, for taxed lines, the original line number. A stock invoice issues goods through Inventory atomically with financial posting. Outstanding amounts come from the authoritative open-item entries.
+- **Purchasing:** `pl_save_purchase_order`, `pl_confirm_purchase_order`, `pl_receive_purchase_order`, `pl_preview_purchase_bill`, `pl_bill_purchase_receipts` and `pl_return_purchase_receipt`. Orders are non-posting commitments. Goods receipts recognise stock and received-but-unbilled value; matched AP bills clear the receipt basis. Order prices are explicitly net of tax. Bill input may be inclusive or exclusive; net matching remains separate from input tax. Posting rechecks the bill preview digest. Price/rate differences and fractional return carrying differences require explicit variance review; they never overwrite receipt history.
+- **Inventory:** `pl_save_inventory_product`, `pl_inventory_receive`, `pl_inventory_issue`, `pl_inventory_return`, `pl_inventory_adjust_count` and `pl_inventory_value_adjustment`. Use the product's single stock location and moving weighted-average basis. Negative stock and movements dated before later product activity are rejected. A value adjustment supplies the expected quantity and carrying value so a stale review cannot silently change stock value. Returns retain their source movement and its remaining historical cost.
+- **Opening conversion:** `pl_preview_opening_conversion(..., cutoverId, mappings)` and `pl_confirm_opening_conversion(..., cutoverId, mappings, expectedHash, confirmed, key, reason)` require explicit party mapping and exact control reconciliation. `pl_preview_inventory_opening(..., input)` and `pl_confirm_inventory_opening(..., previewId, expectedHash, confirmed, key)` provide the separate product/quantity review. Both link allocations to existing opening journal amounts without posting those balances again. Ambiguous, already-converted or otherwise-used bases fail explicitly.
+- **Core tax:** `pl_create_tax_code`, `pl_enter_tax_rate` and `pl_tax_calculate` use manually selected code/account/date inputs. `pl_set_tax_price_mode(actor, company, book, mode, revision, reason, key)` is owner-only; `pl_tax_price_mode` reads the default. Modes are `exclusive` and `inclusive`, with exclusive as the initial default. Each document freezes its reviewed mode and tax snapshot. Inclusive entry preserves the entered gross; both modes display net, tax and total. Later rate/default changes do not rewrite posted documents, and credits retain their original source basis.
+
+The packaged country tax catalogs remain disabled research references. The core engine does not infer country rates, applicability, withholding, recovery restrictions or filing rules from those catalogs. Public API/MCP financial write commands and external sends are not introduced by these internal service interfaces.
+
+### Shared bank matching and correction limits
+
+Receipts and supplier payments create ordinary bank-account journal lines through the same posting funnel. Match those lines in the existing `/bank-reconciliation` CSV workflow: one statement row matches one journal line with the same signed amount. Reconciliation creates no second payment or journal. Split/aggregate matching and bank feeds remain deferred.
+
+Keep same-identity reversal/repost separate from a commercial credit. Reverse dependent payments/credits explicitly before correcting their source, subject to period and completed bank-reconciliation restrictions. Purchasing matches, stock movements and converted opening bases cannot be detached through a standalone journal reversal. The existing outgoing foreign-currency-bank restriction remains in force. See the [starter record](repository/sprint-06/ACCOUNTING-STARTER.md) for the bounded return, credit, inventory and tax policies.
+
+### Starter migration and validation commands
+
+Nine migrations extend the published 0.3.0 chain: `017_ar_ap_documents`, `018_inventory`, `019_purchasing`, `020_opening_conversion`, `021_module_visibility`, `022_tax_engine`, `023_inventory_product_audit`, `024_opening_allocation_guard` and `025_tax_price_mode`. The complete chain has **26 receipts**, including both historical `006_*` filenames. Preserve all applied names and checksums; do not use the unpublished quote worktree as an upgrade baseline.
+
+Back up the matched code/database and stop application and worker writes before applying the complete existing migration command. MySQL schema changes do not roll back as one application transaction. Keep deployment-specific migration and restore evidence separate from local test results.
+
+```powershell
+docker compose exec -T web php www/phpledger/install/migrate.php
+docker compose --profile test run --rm test php tests/run.php --suite=starter
+docker compose --profile test run --rm test composer check
+docker compose --profile test run --rm -e PL_DB_USER=root -e PL_DB_PASSWORD=local-test-root-only test php tools/verify-starter-upgrade.php
+```
+
+`verify-starter-upgrade.php` is **disposable-test-only**. It rejects non-CLI use, non-test environments and any effective connection other than the local `db_test` service, `phpledger_test` database and its test root account. It creates a randomly named `phpledger_starter_verify_*` schema, reconstructs a synthetic published 0.3.0 baseline through migration 016, checks original rows/receipts during upgrade and exercises subsequent posting/settlement. Its fixture-only historical inserts are not an application posting interface. Cleanup removes only that run's random schema and preserves `phpledger_test` and browser fixtures. The literal password above is the existing disposable test credential, not a deployment credential.
+
+Run financial suites serially against the shared test service. Run backup/restore verification after other writers finish. Follow [validation evidence](VALIDATION.md) and the [starter record](repository/sprint-06/ACCOUNTING-STARTER.md) for commands actually executed, browser viewports and unresolved review gates; a passing suite is not accounting or tax approval.
+
+## Historical 0.3.0 AR/AP foundations — service and upgrade contract
+
+Read [foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) before using migrations 013–016. These prerequisites are included in 0.3.0-preview, without invoice/bill UI or public write endpoints. Keep the existing MeekroDB bootstrap and use the central posting functions.
+
+- `pl_currency_rate_enter(actor, company, book, input)` accepts decimal-string manual spot/actual rates, dated provenance, reason, request key and an optional superseded row. `pl_currency_rate_lookup(..., type, source)` selects the newest applicable date/revision from that exact source. Six rate types are reserved in schema; later types have no active calculation workflow.
+- `php tools/currency-rates.php ACTOR_ID COMPANY_ID BOOK_ID INPUT.json` records a manual rate and prints only its ID/revision. Keep private input outside the web root; use synthetic data during development.
+- `pl_save_party` and `pl_save_contact` use company/book scope, request receipts and optimistic revisions. Party tax identifiers use jurisdiction/scheme/value, and phone duplicates require acknowledgement with a reason. Bank/tag/attachment/status-transition fields cannot be mutated through generic party entry.
+- `pl_activate_open_item_account(actor, company, book, account, reason)` is owner-only and rejects used or currency-designated controls. `pl_open_item_recognize(..., input)` accepts party/control/offset account IDs, currency, amount_fc, date, source_reference, description, optional rate/rate_source_id and idempotency_key.
+- `pl_settle_open_item(..., input)` accepts item/bank/gain/loss account IDs, amount_fc, date, description, actual_rate or rate_source_id and idempotency_key. Exact historical basis is read from the ledger; the command receipt retains the actual settlement rate even when bank lines are in functional currency. Partial settlement, final residual and allocation reversal remain atomic with journal posting. Outgoing foreign-bank payments and activity dated before the latest item event are rejected.
+- `pl_correct_source(actor, company, book, type, sourceId, expectedRevision, sourceInput, reversalDate, key, reason)` supports receipts, expenses and general journals. Pass null for UTC-today reversal; an owner may select the original date while open. Preserve source reference. `pl_source_posting_history` returns scoped immutable revisions. No correction UI is added.
+- `php tools/dispatch-outbound-events.php` runs the bounded queue. The default registry is empty and makes no delivery. Tests pass explicit fake handlers; no endpoint, connector, secret or scheduled task is installed.
+
+For a populated upgrade, back up the database and stop application/cron writers before running the existing migration command. Migration 013 temporarily exchanges blanket line-update protection for a restrictive migration-lock-owned initial metadata backfill guard; original amounts and identities cannot change. It restores blanket protection before completion. An interrupted `applying` receipt must remain blocked: restore the verified backup, or review the exact completed statements and finish under the existing migration lock. Never modify migration checksums or mark an incomplete upgrade applied.
+
+When restoring to a different database or database account, verify that the effective source views reference the restored tables and that their retained SQL definers have the required read permission. The disposable backup verifier checks definitions, dependency schemas, effective row digests and current/original source links as well as base tables and triggers.
+
+Focused validation: `docker compose --profile test run --rm test php tests/run.php --suite=foundations`. The complete `composer check` includes these suites. Upgrade verification accepts `fresh`, `foundation`, `core-0.1.2`, `opening-local` and `preview-0.2.1`. Run `tools/verify-currency-upgrade.php` with the same disposable-test root invocation as the existing upgrade verifier to exercise interrupted backfill, second-connection guards, recovery and legacy request replay. Only randomly created databases in `db_test` are touched by those upgrade verifiers.
+
+These instructions apply to the modern source containing `compose.yaml`, `composer.json` and `www/phpledger`. The current source tree contains the modern application; historical code remains only in Git history. Use the public [Wiki](https://github.com/rmak78/phpledger/wiki) for visitor documentation and package availability. The published [0.3.0 foundation package](https://github.com/rmak78/phpledger/releases/tag/v0.3.0-preview) includes production dependencies; this page covers development from source.
+
+## Start the verified environment
+
+Use Docker Compose for PHP 8.2+ and MySQL 8.4. Preserve any existing `.env`. For a fresh checkout, copy `.env.example` to `.env` and privately set independent random development database passwords.
+
+```powershell
+docker compose up -d --build
+docker compose exec -T web php www/phpledger/install/migrate.php
+```
+
+Open the local sign-in screen at `http://127.0.0.1:18200/login`. Serve only `www/phpledger/public`, never the repository root. Historical installation dumps are not part of the revival; never run them against the modern database. Use synthetic data and a separate development database.
+
+Create the first administrator through the controlled command. Supply its password through standard input or a private `PL_ADMIN_PASSWORD` variable; never put the password in command arguments or committed files.
+
+```powershell
+docker compose exec -T -e PL_ADMIN_PASSWORD web php www/phpledger/install/create-admin.php --email=owner@example.test --name=Owner
+```
+
+Clear the private shell variable after use. Sign in, create a business or isolated sample, and follow setup through the first receipt or expense. Existing businesses require reviewed opening balances before posting. Installation, business onboarding and historical-data cutover are separate workflows.
+
+## Verify changes
+
+The Release B candidate adds scoped API/MCP and Connections. Configure OAuth private storage and `PL_PUBLIC_URL` using [Integrations](INTEGRATIONS.md). Local Compose supplies the loopback public URL and a separate private volume; keys are generated once and mounted read-only into the web runtime. Rebuild the PHP images after changing `composer.lock`. Run `php tests/run.php --suite=connections` inside the isolated test service for the focused API/OAuth/bridge suite. `php tools/export-openapi.php` writes the independent OpenAPI description using the configured application URL.
+
+```powershell
+docker compose --profile test run --rm test composer check
+docker compose --profile test run --rm test composer validate --no-interaction
+docker compose --profile test run --rm test composer audit --no-interaction
+./tools/verify-backup-restore.ps1
+```
+
+The test profile uses `phpledger_test` in its separate `db_test` service. The restore check creates and removes only its own isolated test database. See [validation receipts](VALIDATION.md) for exact executed checks and remaining limits.
+
+Optional browser-facing acceptance scripts are [core HTTP](../tests/http-smoke.py), [POS HTTP](../tests/pos-http-smoke.py) and [demo HTTP](../tests/demo-http-smoke.py). They use local synthetic records; read each script's scope and required private inputs before running it. Do not broaden their targets to production or real customer books.
+
+## Opening cutover, periods and bank reconciliation
+
+These existing core workflows are also used by the accounting starter. Back up existing development data, then apply the complete versioned migration chain with `docker compose exec -T web php www/phpledger/install/migrate.php`. Local source changes do not update a published package or hosted demo.
+
+| Route | Workflow |
+|---|---|
+| `/opening-balances` | Existing-business setup → balances/manual or CSV → saved validated preview → explicit confirmation → ready after cutover. Source evidence and correction history remain visible. |
+| `/periods` | List periods/history, create a nonoverlapping range, close with reason, owner-only reopen. A fresh revision prevents stale changes; retries have durable receipts. |
+| `/bank-reconciliation` | Preview/import statement, choose each match, inspect outstanding entries, then explicitly complete with zero adjusted difference. Consecutive statements carry the prior closing balance. |
+
+An existing company's accounting start date is its cutover **closing date**. Bring reviewed balances through that day and date ordinary transactions afterward. This also lets a first bank statement begin the next day with the confirmed cash opening. The unpaid register is cutover evidence. In the starter, review its explicit party mappings through `/opening-conversion` before settling those debts through the shared open-item ledger; do not recreate them as newly posted invoices or bills.
+
+CSV is UTF-8 with comma separators, a header in the exact order below, ISO `YYYY-MM-DD` dates, and decimal amounts without grouping separators/exponents. Limits are 500 data rows and 512 KiB per CSV. Zero-side amounts must be `0`; each nonzero balance/transaction uses only one side. Imports reject malformed quoting, unknown/duplicate account codes, missing data, wrong precision, repeated document/transaction identities and unbalanced totals. XLSX and automatic column/bank-format guessing are not implemented.
+
+```csv
+account_code,debit,credit
+1000,1000,0
+1100,300,0
+2000,0,200
+3000,0,1100
+```
+
+```csv
+kind,account_code,party,reference,document_date,due_date,outstanding
+receivable,1100,Synthetic customer,INV-01,2026-08-15,2026-09-15,300
+payable,2000,Synthetic supplier,BILL-01,2026-08-20,2026-09-20,200
+```
+
+The two examples reconcile an opening cutover at 2026-09-01: cash 1,000 + receivables 300 = payables 200 + equity 1,100. Unpaid amounts are source evidence for those control balances and are never posted a second time. This opening register supports positive unpaid invoices/bills; importing opening credits or advances remains deferred. Opening stock quantities and value use the separate reviewed Inventory conversion. Use the actual scoped account codes, which may differ from the example.
+
+```csv
+date,reference,description,money_in,money_out
+2026-09-02,BANK-001,Synthetic receipt,125,0
+2026-09-03,BANK-002,Synthetic expense,0,25
+```
+
+For that bank example, enter opening 1,000 and closing 1,100 and explicitly confirm the first cleared baseline. The corresponding receipt/expense must already be posted through the normal services before matching; import/reconciliation creates no financial entries. Review bank-only fees or other missing transactions and record them through the normal accounting workflow before matching. A first baseline with unresolved earlier outstanding items is rejected; resolve or reconcile the earlier history first. Completion protects history from backdated postings even if a period is reopened.
+
+An incorrectly imported draft can be cancelled with a reason after explicitly removing its matches. The original statement, rows and match/unmatch history remain; a corrected import may reuse its bank references. Completed statements remain immutable. Split or aggregate matches are not supported: each bank row matches one posted line with the same signed amount.
+
+```powershell
+docker compose --profile test run --rm test composer check
+python tests/accounting-http-smoke.py
+docker compose --profile test run --rm -e PL_DB_USER=root -e PL_DB_PASSWORD=local-test-root-only test php tools/verify-upgrade.php
+./tools/verify-backup-restore.ps1
+node www/website/build.mjs
+node www/website/check.mjs
+```
+
+`accounting-http-smoke.py` is hard-limited to `http://127.0.0.1:18200`, creates isolated synthetic owner/viewer companies and keeps random credentials in memory/stdin. It retains its synthetic data for inspection. Unit/financial tests use only `db_test`; upgrade/restore scripts create, validate and remove their own randomly named databases in that disposable test service. The literal root password shown is solely the documented disposable test credential.
+
+## Company modules
+
+Open `/modules` in an installation to inspect required AR/AP, optional Inventory/Purchasing, the cash POS showcase and recent changes. An owner enters a reason to enable, disable or apply a reviewed optional-module version. Accountants/viewers may inspect status/history; the public demo cannot administer modules. Ordinary companies default to optional modules disabled, including after upgrade. Inventory must be enabled before Purchasing. Explicit new sample-company provisioning enables its POS showcase through the same audited service. Core accounting, AR/AP and tax configuration remain available with every optional module off; AR/AP navigation visibility is a separate owner preference.
+
+Run the existing preflight/migrations before using new source. The original `010_module_lifecycle` adds state/audit tables without activating existing companies; the starter extends the supplied registry and adds audited visibility preferences. Retain both `006_*` migrations unchanged. A changed optional-module manifest requires owner review, and missing or mismatched migration receipts block operation. Disabling preserves source/journal history; new requests, including retries, still pass the current service gate. See [the original lifecycle contract](repository/sprint-05/MODULE-FOUNDATION.md) and the [current starter dependencies](repository/sprint-06/ACCOUNTING-STARTER.md).
+
+Run `python tests/module-http-smoke.py` for the existing local-only HTTP assertions with synthetic owner/viewer books. Run `composer check` through the test container for service, concurrency and rollback tests; `./tools/verify-demo.ps1` verifies isolated sample provisioning/reset in `db_test`. Existing read API/MCP remains available; the starter adds no public financial write endpoint or machine credential.
+
+## Repository working boundaries
+
+### Core CSV exports
+
+**Account ledger entry point:** `/reports/account` without an account ID now opens the company-scoped account chooser. Reports, Transactions and Journals link directly to it. Choose an account and optional date range; the existing statement service supplies opening, debit/credit movement, running and closing balances across all pages. On phones, each table row lays out its date/source, debit, credit and running balance without horizontal scrolling. Draft document totals are not account balances; statement calculations continue to include only posted journal lines. Existing `id`, `as_of`, `from` and `page` links remain supported and authorized on the server.
+
+`GET /reports/export?report=trial-balance|account|profit-loss|balance-sheet&to=YYYY-MM-DD` downloads a CSV through the existing signed-in company/book scope. Account statements accept `account_id` and optional `from`; profit and loss requires `from`. Each report screen links the current date selection to its export. Viewers may export their authorized books. All statement pages are included, with a 10,000-movement limit that rejects oversized exports before sending any CSV. A shared book transaction keeps pages and totals coherent. CSV preserves four-place decimal strings, business dates, scope, readiness and source references; potentially executable spreadsheet text receives an apostrophe prefix. The CSV is a management preview, not an issued statutory statement.
+
+### Consolidated installation checks
+
+`tools/verify-upgrade.php` covers the existing historical baselines; `tools/verify-starter-upgrade.php` specifically exercises the published 0.3.0-to-starter transition. Run them with the disposable-test root invocation above. Each verifier creates/removes its own random database and preserves existing test/development data. The two `006_*` files have distinct full migration identities from separate branches; preserve both names and original checksums. The migration runner uses full filenames, not just numeric prefixes. The current starter chain ends at `025_tax_price_mode`.
+
+The PowerShell restoration check explicitly uses UTF-8 for native process input/output so non-ASCII descriptions survive dump/import. Run restore checks after the test suite completes, without concurrent database writes.
+
+Read [architecture](ARCHITECTURE.md), [contribution guidance](../CONTRIBUTING.md) and [repository instructions](../AGENTS.md). Reuse the bootstrap, MeekroDB helpers, explicit routes and central posting service. Preserve historical files and migration receipts. Configuration, dependencies and storage remain outside the public document root.
+
+The [demo runbook](DEMO.md) covers separate synthetic storage, restricted runtime permissions, hourly UTC reset and deployment. The [roadmap](ROADMAP.md) preserves future language/formatting/FX, imports, regional accounting, inventory, production POS and industry modules. Development checks are not accounting sign-off, observed usability evidence or a stable-release claim.
+
+### Published 0.5-to-0.6 data verification
+
+`tools/verify-preview-upgrade.php` has `seed` and `check` phases. Run both in the
+same disposable test container using the local test root account. Before `seed`,
+extract `git archive v0.5.0-preview www/phpledger resources tests` to the container's
+`/tmp/phpledger-preview-05` and link its `vendor` directory to the test image's
+installed vendor directory. `seed` uses the published bootstrap and fixture
+builders; `check` uses the current checkout. Both phases reject non-test effective
+configuration. The script creates its own random schema and removes it after the
+check; do not run it against a hosted database. See the local redesign upgrade
+receipt for fixture coverage and limitations. The new migration chain currently
+continues through `031_posting_source_lookup`; historical migration checksums stay
+unchanged.

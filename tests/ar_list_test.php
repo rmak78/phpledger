@@ -12,11 +12,16 @@ test('customer and supplier lists page and filter the effective immutable revisi
     assert_same(26,$page['total']); assert_same(25,count($page['documents'])); assert_same(2,$last['page']); assert_same(1,count($last['documents']));
     assert_same([],array_values(array_intersect(array_column($page['documents'],'id'),array_column($last['documents'],'id'))));
     assert_same('1.0000',$page['documents'][0]['total']); assert_same('26.0000',$last['documents'][0]['total']);
+    assert_same(20,count(pl_party_document_activity($f['actor_id'],$f['company_id'],$f['book_id'],$f['party_id'])));
     $posted=pl_post_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$first['id'],$first['revision']);
     $input=ar_ap_input($f,'invoice','75'); $input['date']='2026-02-05'; $input['due_date']='2026-03-05';
+    $replacementParty=pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],['legal_name'=>'Synthetic corrected party','entity_type'=>'business','country_code'=>'US','is_customer'=>true,'is_vendor'=>false,'currency'=>'USD','request_key'=>bin2hex(random_bytes(16)),'reason'=>'Synthetic activity scope']);
+    $input['party_id']=$replacementParty['id'];
     $corrected=pl_correct_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$posted['id'],$input,$posted['revision'],bin2hex(random_bytes(16)),'Synthetic list correction','2026-01-05');
     $current=$run(['from'=>'2026-02-01','sort'=>'amount','dir'=>'desc','status'=>'unpaid']);
     assert_same(1,$current['total']); assert_same('75.0000',$current['documents'][0]['total']); assert_same(2,$current['documents'][0]['revision']);
+    $activity=pl_party_document_activity($f['actor_id'],$f['company_id'],$f['book_id'],$replacementParty['id']);
+    assert_same(1,count($activity)); assert_same($corrected['id'],$activity[0]['id']); assert_same('75.0000',$activity[0]['total']);
     assert_same(1,$run(['q'=>$corrected['number']])['total']); assert_same(0,$run(['q'=>'%'])['total']);
     pl_settle_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$corrected['id'],ar_ap_payment($f,'75','2026-02-06'));
     assert_same(1,$run(['status'=>'paid'])['total']); assert_same(0,$run(['status'=>'unpaid'])['total']);

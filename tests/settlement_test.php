@@ -95,7 +95,9 @@ test('concurrent identical multi-item requests settle once', function (): void {
     $f=settlement_fixture(); $input=settlement_input($f);
     $job=['mode'=>'open_items_settle','fixture'=>$f,'settlement_input'=>$input];
     $results=ledger_race([$job,$job]);
-    assert_same($results[0]['journal_id'],$results[1]['journal_id']);
+    assert_true((int)$results[0]['id'] > 0);
+    assert_true((int)$results[1]['id'] > 0);
+    assert_same($results[0]['id'],$results[1]['id']);
     assert_same(1,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id=%i AND source_type=%s',$f['book_id'],'open_item_batch_settlement'));
 });
 

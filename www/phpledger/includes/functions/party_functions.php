@@ -106,6 +106,31 @@ function pl_party_normalize(array $input): array
     return ['party' => $party, 'details' => $details, 'identifiers' => $identifiers, 'financial' => $financial];
 }
 
+/** Company master records, with counted SQL paging and fixed complete order clauses. */
+function pl_page_parties(int $actorId,int $companyId,int $bookId,array $filters): array
+{
+    pl_require_company_access($actorId,$companyId); pl_ledger_book($companyId,$bookId);
+    $orders=['name'=>['asc'=>'legal_name ASC,id ASC','desc'=>'legal_name DESC,id ASC'],
+        'country'=>['asc'=>'country_code ASC,legal_name ASC,id ASC','desc'=>'country_code DESC,legal_name ASC,id ASC']];
+    $sort=$filters['sort']??'name'; $dir=$filters['dir']??'asc'; $role=$filters['role']??'all';
+    if (!is_string($sort) || !is_string($dir) || !isset($orders[$sort][$dir]) || !in_array($role,['all','customer','vendor'],true)) { throw new DomainException('Unsupported party list filter.'); }
+    $size=pl_table_size($filters['per_page']??25); $search=pl_ledger_text($filters['q']??'','Search',160,false);
+    $where=' FROM pl_parties WHERE company_id=%i AND (%s=\'all\' OR (%s=\'customer\' AND is_customer=1) OR (%s=\'vendor\' AND is_vendor=1)) AND (%s=\'\' OR LOCATE(%s,legal_name)>0 OR LOCATE(%s,trading_name)>0)';
+    $args=[$companyId,$role,$role,$role,$search,$search,$search];
+    $total=(int)DB::queryFirstField('SELECT COUNT(*)'.$where,...$args);
+    $pages=max(1,(int)ceil($total/$size)); $page=min($pages,max(1,(int)($filters['page']??1)));
+    $rows=DB::query('SELECT id,legal_name,trading_name,country_code,is_customer,is_vendor'.$where.' ORDER BY '.$orders[$sort][$dir].' LIMIT %i OFFSET %i',...array_merge($args,[$size,($page-1)*$size]));
+    return ['rows'=>$rows,'total'=>$total,'page'=>$page,'pages'=>$pages];
+}
+
+/** Recent activity follows the party on the current immutable document revision. */
+function pl_party_document_activity(int $actorId,int $companyId,int $bookId,int $partyId): array
+{
+    pl_get_party($actorId,$companyId,$bookId,$partyId);
+    $ids=DB::queryFirstColumn('SELECT d.id FROM pl_ar_documents d LEFT JOIN pl_ar_document_revisions r ON r.id=(SELECT MAX(x.id) FROM pl_ar_document_revisions x WHERE x.document_id=d.id) WHERE d.company_id=%i AND d.book_id=%i AND COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(r.source_snapshot,\'$.party_id\')) AS UNSIGNED),d.party_id)=%i ORDER BY d.id DESC LIMIT 20',$companyId,$bookId,$partyId);
+    return array_map(static fn($id):array=>pl_get_ar_document($actorId,$companyId,$bookId,(int)$id),$ids);
+}
+
 function pl_get_party(int $actorId, int $companyId, int $bookId, int $partyId): array
 {
     pl_require_company_access($actorId, $companyId);

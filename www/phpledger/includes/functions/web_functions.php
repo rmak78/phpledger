@@ -147,6 +147,7 @@ function pl_list_filters(array $input, string $screen): array
         'account' => ['date','journal','description','source','debit','credit','balance'],
         'bank' => ['date','reference','money_in','money_out','match'],
         'ar','ap' => ['date','name','amount','due'],
+        'parties' => ['name','country'],
         default => throw new DomainException('Unknown list.'),
     };
     $page = $input['page'] ?? '1';
@@ -157,14 +158,19 @@ function pl_list_filters(array $input, string $screen): array
         }
     }
     if ((int)$page > 100000 || !in_array((int)$size, [25,50,100], true)) { throw new DomainException('Choose 25, 50 or 100 rows per page.'); }
-    $sort = $input['sort'] ?? 'date';
-    $direction = $input['dir'] ?? ($screen === 'account' ? 'asc' : 'desc');
+    $sort = $input['sort'] ?? ($screen === 'parties' ? 'name' : 'date');
+    $direction = $input['dir'] ?? (in_array($screen,['account','parties'],true) ? 'asc' : 'desc');
     if (!is_string($sort) || !in_array($sort, $sorts, true) || !in_array($direction, ['asc','desc'], true)) {
         throw new DomainException('Unsupported list order.');
     }
     $query = $input['q'] ?? $input['search'] ?? '';
     if (!is_string($query) || mb_strlen($query) > 160) { throw new DomainException('Search must be text of up to 160 characters.'); }
     $filters = ['page' => (int)$page, 'per_page' => (int)$size, 'q' => trim($query), 'sort' => $sort, 'dir' => $direction];
+    if ($screen==='parties') {
+        $role=$input['role']??'all';
+        if (!in_array($role,['all','customer','vendor'],true)) { throw new DomainException('Choose customers, suppliers or all parties.'); }
+        $filters['role']=$role;
+    }
     if (in_array($screen, ['transactions','general-journals'], true)) {
         $status = $input['status'] ?? ($screen === 'transactions' ? 'draft' : 'all');
         if (!in_array($status, ['all','draft','posted','reversed'], true)) { throw new DomainException('Choose a valid status.'); }
@@ -213,6 +219,7 @@ function pl_list_query(int $actorId, int $companyId, int $bookId, string $screen
         'account' => pl_account_activity($actorId, $companyId, $bookId, pl_web_id($input, 'id'), pl_web_text($input, 'as_of', gmdate('Y-m-d')), $filters['page'], pl_web_text($input, 'from') ?: null, $options),
         'bank' => pl_bank_get_statement($actorId, $companyId, $bookId, pl_web_id($input, 'statement_id'), $options),
         'ar','ap' => pl_page_ar_documents($actorId,$companyId,$bookId,$screen,$filters),
+        'parties' => pl_page_parties($actorId,$companyId,$bookId,$filters),
         default => throw new DomainException('Unknown list.'),
     };
 }

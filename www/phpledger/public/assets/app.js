@@ -338,6 +338,7 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
     const rows = () => Array.from(body.querySelectorAll('[data-journal-row]'));
     const template = rows()[0]?.cloneNode(true);
     if (!template) return;
+    let dirty = false;
 
     const amount = (text) => {
         const value = text.trim();
@@ -416,6 +417,7 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
     add.addEventListener('click', (event) => {
         event.preventDefault();
         if (rows().length >= 100) return;
+        dirty = true;
         const row = template.cloneNode(true);
         clearRow(row);
         body.append(row);
@@ -428,6 +430,7 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
         const remove = event.target.closest('[data-remove-journal-row]');
         if (!remove) return;
         event.preventDefault();
+        dirty = true;
         const row = remove.closest('[data-journal-row]');
         const currentRows = rows();
         const index = currentRows.indexOf(row);
@@ -443,7 +446,9 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
         refreshTotals();
         message.textContent = 'Line ' + (index + 1) + ' removed from this draft.';
     });
-    form.addEventListener('input', refreshTotals);
+    form.addEventListener('input', () => { dirty = true; refreshTotals(); });
+    form.addEventListener('submit', () => { dirty = false; });
+    window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
     form.addEventListener('change', refreshTotals);
     numberRows();
     refreshTotals();

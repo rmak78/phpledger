@@ -12,6 +12,7 @@ $canCheckout = pl_can_write($company) && $company['setup_status'] === 'ready' &&
     <ol class="pos-progress" aria-label="Sale progress"><?php foreach (['Build cart','Review & cash','Receipt'] as $index => $step): ?><li<?= ($receipt !== null ? 2 : ($quote !== null || $recovery !== null ? 1 : 0)) === $index ? ' aria-current="step"' : '' ?>><span><?= $index + 1 ?></span><?= pl_e($step) ?></li><?php endforeach; ?></ol>
     <span class="pos-cashier">Cashier: <?= pl_e($user['display_name']) ?></span><a class="btn btn-ghost btn-sm" href="<?= pl_e(pl_url('/home')) ?>"><?= pl_icon('logout') ?> Exit to app</a>
 </header>
+<div class="pos-noprint"><?php require dirname(__DIR__).'/partials/ui/context-strips.php'; ?></div>
 <section class="page-wrap pos-workspace" data-pos-root data-currency="<?= pl_e((string) $company['currency']) ?>">
 <?php if ($receipt !== null): ?>
     <div class="page-heading pos-noprint"><div><p class="eyebrow">Cash sale recorded</p><h1>Receipt ready</h1><p class="muted">The receipt and its balanced journal have been saved together.</p></div><?php if ($canCheckout): ?><a class="btn btn-primary" href="<?= pl_e(pl_url('/pos')) ?>">Start another sale</a><?php endif; ?></div>

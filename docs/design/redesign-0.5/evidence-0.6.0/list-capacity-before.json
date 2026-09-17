@@ -1,0 +1,2378 @@
+{
+  "synthetic": true,
+  "company_id": 4996,
+  "book_id": 4996,
+  "source_rows": 5000,
+  "bank_statement_rows": 500,
+  "bank_book_rows": 5000,
+  "bank_limit_note": "The unchanged service limit is 500 rows per statement; ten statements on separate bank accounts provide 5000 book rows.",
+  "checks": {
+    "transactions": {
+      "first": {
+        "service_ms": 40519.94,
+        "total": 5000,
+        "page": 1,
+        "returned": 25,
+        "queries": [
+          {
+            "sql": "SELECT d.*, r.id AS reversal_journal_id FROM pl_effective_documents d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = ? AND d.book_id = ? ORDER BY d.document_date DESC, d.id ASC LIMIT ? OFFSET ?",
+            "query_ms": 20349.955797,
+            "plan": {
+              "query_block": {
+                "select_id": 1,
+                "cost_info": {
+                  "query_cost": "2710556.62"
+                },
+                "ordering_operation": {
+                  "using_temporary_table": true,
+                  "using_filesort": true,
+                  "nested_loop": [
+                    {
+                      "table": {
+                        "table_name": "d",
+                        "access_type": "ref",
+                        "possible_keys": [
+                          "uq_documents_creation",
+                          "ix_documents_list",
+                          "fk_document_book"
+                        ],
+                        "key": "ix_documents_list",
+                        "used_key_parts": [
+                          "book_id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "const"
+                        ],
+                        "rows_examined_per_scan": 5000,
+                        "rows_produced_per_join": 500,
+                        "filtered": "10.00",
+                        "cost_info": {
+                          "read_cost": "216.75",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "716.75",
+                          "data_read_per_join": "1M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "company_id",
+                          "book_id",
+                          "kind",
+                          "document_date",
+                          "amount",
+                          "money_account_id",
+                          "category_account_id",
+                          "counterparty",
+                          "reference",
+                          "memo",
+                          "revision",
+                          "creation_key",
+                          "creation_hash",
+                          "journal_id",
+                          "created_by",
+                          "updated_by",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "attached_condition": "(`phpledger_test`.`d`.`company_id` = 4996)"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "i",
+                        "access_type": "ref",
+                        "possible_keys": [
+                          "uq_posting_identity",
+                          "fk_posting_identity_book"
+                        ],
+                        "key": "fk_posting_identity_book",
+                        "used_key_parts": [
+                          "book_id",
+                          "company_id"
+                        ],
+                        "key_length": "16",
+                        "ref": [
+                          "const",
+                          "const"
+                        ],
+                        "rows_examined_per_scan": 5000,
+                        "rows_produced_per_join": 2500000,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "76160.16",
+                          "eval_cost": "250000.00",
+                          "prefix_cost": "326876.91",
+                          "data_read_per_join": "209M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "company_id",
+                          "book_id",
+                          "source_type",
+                          "source_id"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(i), ((`phpledger_test`.`i`.`source_id` = `phpledger_test`.`d`.`id`) and (`phpledger_test`.`i`.`source_type` = `phpledger_test`.`d`.`kind`)), true)"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "v",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_posting_revision",
+                          "fk_posting_revision_identity"
+                        ],
+                        "key": "uq_posting_revision",
+                        "used_key_parts": [
+                          "identity_id",
+                          "revision"
+                        ],
+                        "key_length": "12",
+                        "ref": [
+                          "phpledger_test.i.id",
+                          "func"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 2500000,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "4084.09",
+                          "eval_cost": "250000.00",
+                          "prefix_cost": "580961.00",
+                          "data_read_per_join": "171M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "identity_id",
+                          "revision",
+                          "journal_id",
+                          "source_snapshot",
+                          "actor_id",
+                          "recorded_at"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(v), (`phpledger_test`.`v`.`revision` = (/* select#3 */ select max(`phpledger_test`.`v2`.`revision`) from `phpledger_test`.`pl_posting_revisions` `v2` where (`phpledger_test`.`v2`.`identity_id` = `phpledger_test`.`i`.`id`))), true)",
+                        "attached_subqueries": [
+                          {
+                            "dependent": true,
+                            "cacheable": false,
+                            "query_block": {
+                              "select_id": 3,
+                              "cost_info": {
+                                "query_cost": "0.35"
+                              },
+                              "table": {
+                                "table_name": "v2",
+                                "access_type": "ref",
+                                "possible_keys": [
+                                  "uq_posting_revision",
+                                  "fk_posting_revision_identity"
+                                ],
+                                "key": "uq_posting_revision",
+                                "used_key_parts": [
+                                  "identity_id"
+                                ],
+                                "key_length": "8",
+                                "ref": [
+                                  "phpledger_test.i.id"
+                                ],
+                                "rows_examined_per_scan": 1,
+                                "rows_produced_per_join": 1,
+                                "filtered": "100.00",
+                                "using_index": true,
+                                "cost_info": {
+                                  "read_cost": "0.25",
+                                  "eval_cost": "0.10",
+                                  "prefix_cost": "0.35",
+                                  "data_read_per_join": "72"
+                                },
+                                "used_columns": [
+                                  "identity_id",
+                                  "revision"
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "r",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_journals_reversal",
+                          "fk_journals_reversal"
+                        ],
+                        "key": "uq_journals_reversal",
+                        "used_key_parts": [
+                          "reversal_of_id"
+                        ],
+                        "key_length": "9",
+                        "ref": [
+                          "func"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 2500000,
+                        "filtered": "100.00",
+                        "using_index": true,
+                        "cost_info": {
+                          "read_cost": "1879595.62",
+                          "eval_cost": "250000.00",
+                          "prefix_cost": "2710556.62",
+                          "data_read_per_join": "6G"
+                        },
+                        "used_columns": [
+                          "id",
+                          "reversal_of_id"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(r), (`phpledger_test`.`r`.`reversal_of_id` = coalesce(`phpledger_test`.`v`.`journal_id`,`phpledger_test`.`d`.`journal_id`)), true)"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "last": {
+        "service_ms": 42865.42,
+        "total": 5000,
+        "page": 200,
+        "returned": 25,
+        "queries": [
+          {
+            "sql": "SELECT d.*, r.id AS reversal_journal_id FROM pl_effective_documents d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = ? AND d.book_id = ? ORDER BY d.document_date DESC, d.id ASC LIMIT ? OFFSET ?",
+            "query_ms": 21903.929949,
+            "plan": {
+              "query_block": {
+                "select_id": 1,
+                "cost_info": {
+                  "query_cost": "2710556.62"
+                },
+                "ordering_operation": {
+                  "using_temporary_table": true,
+                  "using_filesort": true,
+                  "nested_loop": [
+                    {
+                      "table": {
+                        "table_name": "d",
+                        "access_type": "ref",
+                        "possible_keys": [
+                          "uq_documents_creation",
+                          "ix_documents_list",
+                          "fk_document_book"
+                        ],
+                        "key": "ix_documents_list",
+                        "used_key_parts": [
+                          "book_id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "const"
+                        ],
+                        "rows_examined_per_scan": 5000,
+                        "rows_produced_per_join": 500,
+                        "filtered": "10.00",
+                        "cost_info": {
+                          "read_cost": "216.75",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "716.75",
+                          "data_read_per_join": "1M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "company_id",
+                          "book_id",
+                          "kind",
+                          "document_date",
+                          "amount",
+                          "money_account_id",
+                          "category_account_id",
+                          "counterparty",
+                          "reference",
+                          "memo",
+                          "revision",
+                          "creation_key",
+                          "creation_hash",
+                          "journal_id",
+                          "created_by",
+                          "updated_by",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "attached_condition": "(`phpledger_test`.`d`.`company_id` = 4996)"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "i",
+                        "access_type": "ref",
+                        "possible_keys": [
+                          "uq_posting_identity",
+                          "fk_posting_identity_book"
+                        ],
+                        "key": "fk_posting_identity_book",
+                        "used_key_parts": [
+                          "book_id",
+                          "company_id"
+                        ],
+                        "key_length": "16",
+                        "ref": [
+                          "const",
+                          "const"
+                        ],
+                        "rows_examined_per_scan": 5000,
+                        "rows_produced_per_join": 2500000,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "76160.16",
+                          "eval_cost": "250000.00",
+                          "prefix_cost": "326876.91",
+                          "data_read_per_join": "209M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "company_id",
+                          "book_id",
+                          "source_type",
+                          "source_id"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(i), ((`phpledger_test`.`i`.`source_id` = `phpledger_test`.`d`.`id`) and (`phpledger_test`.`i`.`source_type` = `phpledger_test`.`d`.`kind`)), true)"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "v",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_posting_revision",
+                          "fk_posting_revision_identity"
+                        ],
+                        "key": "uq_posting_revision",
+                        "used_key_parts": [
+                          "identity_id",
+                          "revision"
+                        ],
+                        "key_length": "12",
+                        "ref": [
+                          "phpledger_test.i.id",
+                          "func"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 2500000,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "4084.09",
+                          "eval_cost": "250000.00",
+                          "prefix_cost": "580961.00",
+                          "data_read_per_join": "171M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "identity_id",
+                          "revision",
+                          "journal_id",
+                          "source_snapshot",
+                          "actor_id",
+                          "recorded_at"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(v), (`phpledger_test`.`v`.`revision` = (/* select#3 */ select max(`phpledger_test`.`v2`.`revision`) from `phpledger_test`.`pl_posting_revisions` `v2` where (`phpledger_test`.`v2`.`identity_id` = `phpledger_test`.`i`.`id`))), true)",
+                        "attached_subqueries": [
+                          {
+                            "dependent": true,
+                            "cacheable": false,
+                            "query_block": {
+                              "select_id": 3,
+                              "cost_info": {
+                                "query_cost": "0.35"
+                              },
+                              "table": {
+                                "table_name": "v2",
+                                "access_type": "ref",
+                                "possible_keys": [
+                                  "uq_posting_revision",
+                                  "fk_posting_revision_identity"
+                                ],
+                                "key": "uq_posting_revision",
+                                "used_key_parts": [
+                                  "identity_id"
+                                ],
+                                "key_length": "8",
+                                "ref": [
+                                  "phpledger_test.i.id"
+                                ],
+                                "rows_examined_per_scan": 1,
+                                "rows_produced_per_join": 1,
+                                "filtered": "100.00",
+                                "using_index": true,
+                                "cost_info": {
+                                  "read_cost": "0.25",
+                                  "eval_cost": "0.10",
+                                  "prefix_cost": "0.35",
+                                  "data_read_per_join": "72"
+                                },
+                                "used_columns": [
+                                  "identity_id",
+                                  "revision"
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "r",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_journals_reversal",
+                          "fk_journals_reversal"
+                        ],
+                        "key": "uq_journals_reversal",
+                        "used_key_parts": [
+                          "reversal_of_id"
+                        ],
+                        "key_length": "9",
+                        "ref": [
+                          "func"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 2500000,
+                        "filtered": "100.00",
+                        "using_index": true,
+                        "cost_info": {
+                          "read_cost": "1879595.62",
+                          "eval_cost": "250000.00",
+                          "prefix_cost": "2710556.62",
+                          "data_read_per_join": "6G"
+                        },
+                        "used_columns": [
+                          "id",
+                          "reversal_of_id"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(r), (`phpledger_test`.`r`.`reversal_of_id` = coalesce(`phpledger_test`.`v`.`journal_id`,`phpledger_test`.`d`.`journal_id`)), true)"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "search": {
+        "service_ms": 42652.57,
+        "total": 111,
+        "page": 1,
+        "returned": 25,
+        "queries": [
+          {
+            "sql": "SELECT d.*, r.id AS reversal_journal_id FROM pl_effective_documents d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = ? AND d.book_id = ? AND (LOCATE(?, d.counterparty) > 0 OR LOCATE(?, d.reference) > 0 OR LOCATE(?, d.memo) > 0 OR LOCATE(?, CONCAT(IF(d.kind = 'receipt', 'REC-', 'EXP-'), LPAD(d.id, 6, '0'))) > 0) ORDER BY d.document_date DESC, d.id ASC LIMIT ? OFFSET ?",
+            "query_ms": 19366.633892,
+            "plan": {
+              "query_block": {
+                "select_id": 1,
+                "cost_info": {
+                  "query_cost": "2710556.62"
+                },
+                "ordering_operation": {
+                  "using_temporary_table": true,
+                  "using_filesort": true,
+                  "nested_loop": [
+                    {
+                      "table": {
+                        "table_name": "d",
+                        "access_type": "ref",
+                        "possible_keys": [
+                          "uq_documents_creation",
+                          "ix_documents_list",
+                          "fk_document_book"
+                        ],
+                        "key": "ix_documents_list",
+                        "used_key_parts": [
+                          "book_id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "const"
+                        ],
+                        "rows_examined_per_scan": 5000,
+                        "rows_produced_per_join": 500,
+                        "filtered": "10.00",
+                        "cost_info": {
+                          "read_cost": "216.75",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "716.75",
+                          "data_read_per_join": "1M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "company_id",
+                          "book_id",
+                          "kind",
+                          "document_date",
+                          "amount",
+                          "money_account_id",
+                          "category_account_id",
+                          "counterparty",
+                          "reference",
+                          "memo",
+                          "revision",
+                          "creation_key",
+                          "creation_hash",
+                          "journal_id",
+                          "created_by",
+                          "updated_by",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "attached_condition": "(`phpledger_test`.`d`.`company_id` = 4996)"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "i",
+                        "access_type": "ref",
+                        "possible_keys": [
+                          "uq_posting_identity",
+                          "fk_posting_identity_book"
+                        ],
+                        "key": "fk_posting_identity_book",
+                        "used_key_parts": [
+                          "book_id",
+                          "company_id"
+                        ],
+                        "key_length": "16",
+                        "ref": [
+                          "const",
+                          "const"
+                        ],
+                        "rows_examined_per_scan": 5000,
+                        "rows_produced_per_join": 2500000,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "76160.16",
+                          "eval_cost": "250000.00",
+                          "prefix_cost": "326876.91",
+                          "data_read_per_join": "209M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "company_id",
+                          "book_id",
+                          "source_type",
+                          "source_id"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(i), ((`phpledger_test`.`i`.`source_id` = `phpledger_test`.`d`.`id`) and (`phpledger_test`.`i`.`source_type` = `phpledger_test`.`d`.`kind`)), true)"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "v",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_posting_revision",
+                          "fk_posting_revision_identity"
+                        ],
+                        "key": "uq_posting_revision",
+                        "used_key_parts": [
+                          "identity_id",
+                          "revision"
+                        ],
+                        "key_length": "12",
+                        "ref": [
+                          "phpledger_test.i.id",
+                          "func"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 2500000,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "4084.09",
+                          "eval_cost": "250000.00",
+                          "prefix_cost": "580961.00",
+                          "data_read_per_join": "171M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "identity_id",
+                          "revision",
+                          "journal_id",
+                          "source_snapshot",
+                          "actor_id",
+                          "recorded_at"
+                        ],
+                        "attached_condition": "(<if>(found_match(v), ((locate('CAPACITY-49',coalesce(json_unquote(json_extract(`phpledger_test`.`v`.`source_snapshot`,'$.counterparty')),`phpledger_test`.`d`.`counterparty`)) > 0) or (locate('CAPACITY-49',coalesce(json_unquote(json_extract(`phpledger_test`.`v`.`source_snapshot`,'$.reference')),`phpledger_test`.`d`.`reference`)) > 0) or (locate('CAPACITY-49',coalesce(json_unquote(json_extract(`phpledger_test`.`v`.`source_snapshot`,'$.memo')),`phpledger_test`.`d`.`memo`)) > 0) or (locate('CAPACITY-49',concat(if((coalesce(json_unquote(json_extract(`phpledger_test`.`v`.`source_snapshot`,'$.kind')),`phpledger_test`.`d`.`kind`) = 'receipt'),'REC-','EXP-'),lpad(`phpledger_test`.`d`.`id`,6,'0'))) > 0)), true) and <if>(is_not_null_compl(v), (`phpledger_test`.`v`.`revision` = (/* select#3 */ select max(`phpledger_test`.`v2`.`revision`) from `phpledger_test`.`pl_posting_revisions` `v2` where (`phpledger_test`.`v2`.`identity_id` = `phpledger_test`.`i`.`id`))), true))",
+                        "attached_subqueries": [
+                          {
+                            "dependent": true,
+                            "cacheable": false,
+                            "query_block": {
+                              "select_id": 3,
+                              "cost_info": {
+                                "query_cost": "0.35"
+                              },
+                              "table": {
+                                "table_name": "v2",
+                                "access_type": "ref",
+                                "possible_keys": [
+                                  "uq_posting_revision",
+                                  "fk_posting_revision_identity"
+                                ],
+                                "key": "uq_posting_revision",
+                                "used_key_parts": [
+                                  "identity_id"
+                                ],
+                                "key_length": "8",
+                                "ref": [
+                                  "phpledger_test.i.id"
+                                ],
+                                "rows_examined_per_scan": 1,
+                                "rows_produced_per_join": 1,
+                                "filtered": "100.00",
+                                "using_index": true,
+                                "cost_info": {
+                                  "read_cost": "0.25",
+                                  "eval_cost": "0.10",
+                                  "prefix_cost": "0.35",
+                                  "data_read_per_join": "72"
+                                },
+                                "used_columns": [
+                                  "identity_id",
+                                  "revision"
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "r",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_journals_reversal",
+                          "fk_journals_reversal"
+                        ],
+                        "key": "uq_journals_reversal",
+                        "used_key_parts": [
+                          "reversal_of_id"
+                        ],
+                        "key_length": "9",
+                        "ref": [
+                          "func"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 2500000,
+                        "filtered": "100.00",
+                        "using_index": true,
+                        "cost_info": {
+                          "read_cost": "1879595.62",
+                          "eval_cost": "250000.00",
+                          "prefix_cost": "2710556.62",
+                          "data_read_per_join": "6G"
+                        },
+                        "used_columns": [
+                          "id",
+                          "reversal_of_id"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(r), (`phpledger_test`.`r`.`reversal_of_id` = coalesce(`phpledger_test`.`v`.`journal_id`,`phpledger_test`.`d`.`journal_id`)), true)"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "general-journals": {
+      "first": {
+        "service_ms": 58.82,
+        "total": 5000,
+        "page": 1,
+        "returned": 25,
+        "queries": [
+          {
+            "sql": "SELECT d.*, r.id AS reversal_journal_id FROM pl_effective_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = ? AND d.book_id = ? ORDER BY d.document_date DESC, d.id DESC LIMIT ? OFFSET ?",
+            "query_ms": 55.713892,
+            "plan": {
+              "query_block": {
+                "select_id": 1,
+                "cost_info": {
+                  "query_cost": "2022.87"
+                },
+                "ordering_operation": {
+                  "using_temporary_table": true,
+                  "using_filesort": true,
+                  "nested_loop": [
+                    {
+                      "table": {
+                        "table_name": "d",
+                        "access_type": "ref",
+                        "possible_keys": [
+                          "uq_general_creation",
+                          "ix_general_list",
+                          "fk_general_book"
+                        ],
+                        "key": "ix_general_list",
+                        "used_key_parts": [
+                          "book_id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "const"
+                        ],
+                        "rows_examined_per_scan": 5000,
+                        "rows_produced_per_join": 500,
+                        "filtered": "10.00",
+                        "cost_info": {
+                          "read_cost": "326.82",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "826.83",
+                          "data_read_per_join": "1M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "company_id",
+                          "book_id",
+                          "document_date",
+                          "reference",
+                          "description",
+                          "lines",
+                          "revision",
+                          "creation_key",
+                          "creation_hash",
+                          "journal_id",
+                          "created_by",
+                          "updated_by",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "attached_condition": "(`phpledger_test`.`d`.`company_id` = 4996)"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "i",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_posting_identity",
+                          "fk_posting_identity_book"
+                        ],
+                        "key": "uq_posting_identity",
+                        "used_key_parts": [
+                          "book_id",
+                          "source_type",
+                          "source_id"
+                        ],
+                        "key_length": "58",
+                        "ref": [
+                          "const",
+                          "const",
+                          "phpledger_test.d.id"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 500,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "261.72",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "1138.54",
+                          "data_read_per_join": "42K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "company_id",
+                          "book_id",
+                          "source_type",
+                          "source_id"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(i), (`phpledger_test`.`i`.`company_id` = 4996), true)"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "v",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_posting_revision",
+                          "fk_posting_revision_identity"
+                        ],
+                        "key": "uq_posting_revision",
+                        "used_key_parts": [
+                          "identity_id",
+                          "revision"
+                        ],
+                        "key_length": "12",
+                        "ref": [
+                          "phpledger_test.i.id",
+                          "func"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 500,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "408.41",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "1596.95",
+                          "data_read_per_join": "35K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "identity_id",
+                          "revision",
+                          "journal_id",
+                          "source_snapshot",
+                          "actor_id",
+                          "recorded_at"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(v), (`phpledger_test`.`v`.`revision` = (/* select#3 */ select max(`phpledger_test`.`v2`.`revision`) from `phpledger_test`.`pl_posting_revisions` `v2` where (`phpledger_test`.`v2`.`identity_id` = `phpledger_test`.`i`.`id`))), true)",
+                        "attached_subqueries": [
+                          {
+                            "dependent": true,
+                            "cacheable": false,
+                            "query_block": {
+                              "select_id": 3,
+                              "cost_info": {
+                                "query_cost": "0.35"
+                              },
+                              "table": {
+                                "table_name": "v2",
+                                "access_type": "ref",
+                                "possible_keys": [
+                                  "uq_posting_revision",
+                                  "fk_posting_revision_identity"
+                                ],
+                                "key": "uq_posting_revision",
+                                "used_key_parts": [
+                                  "identity_id"
+                                ],
+                                "key_length": "8",
+                                "ref": [
+                                  "phpledger_test.i.id"
+                                ],
+                                "rows_examined_per_scan": 1,
+                                "rows_produced_per_join": 1,
+                                "filtered": "100.00",
+                                "using_index": true,
+                                "cost_info": {
+                                  "read_cost": "0.25",
+                                  "eval_cost": "0.10",
+                                  "prefix_cost": "0.35",
+                                  "data_read_per_join": "72"
+                                },
+                                "used_columns": [
+                                  "identity_id",
+                                  "revision"
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "r",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_journals_reversal",
+                          "fk_journals_reversal"
+                        ],
+                        "key": "uq_journals_reversal",
+                        "used_key_parts": [
+                          "reversal_of_id"
+                        ],
+                        "key_length": "9",
+                        "ref": [
+                          "func"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 500,
+                        "filtered": "100.00",
+                        "using_index": true,
+                        "cost_info": {
+                          "read_cost": "375.92",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "2022.87",
+                          "data_read_per_join": "1M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "reversal_of_id"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(r), (`phpledger_test`.`r`.`reversal_of_id` = coalesce(`phpledger_test`.`v`.`journal_id`,`phpledger_test`.`d`.`journal_id`)), true)"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "last": {
+        "service_ms": 56.25,
+        "total": 5000,
+        "page": 200,
+        "returned": 25,
+        "queries": [
+          {
+            "sql": "SELECT d.*, r.id AS reversal_journal_id FROM pl_effective_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = ? AND d.book_id = ? ORDER BY d.document_date DESC, d.id DESC LIMIT ? OFFSET ?",
+            "query_ms": 54.651022,
+            "plan": {
+              "query_block": {
+                "select_id": 1,
+                "cost_info": {
+                  "query_cost": "2022.87"
+                },
+                "ordering_operation": {
+                  "using_temporary_table": true,
+                  "using_filesort": true,
+                  "nested_loop": [
+                    {
+                      "table": {
+                        "table_name": "d",
+                        "access_type": "ref",
+                        "possible_keys": [
+                          "uq_general_creation",
+                          "ix_general_list",
+                          "fk_general_book"
+                        ],
+                        "key": "ix_general_list",
+                        "used_key_parts": [
+                          "book_id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "const"
+                        ],
+                        "rows_examined_per_scan": 5000,
+                        "rows_produced_per_join": 500,
+                        "filtered": "10.00",
+                        "cost_info": {
+                          "read_cost": "326.82",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "826.83",
+                          "data_read_per_join": "1M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "company_id",
+                          "book_id",
+                          "document_date",
+                          "reference",
+                          "description",
+                          "lines",
+                          "revision",
+                          "creation_key",
+                          "creation_hash",
+                          "journal_id",
+                          "created_by",
+                          "updated_by",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "attached_condition": "(`phpledger_test`.`d`.`company_id` = 4996)"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "i",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_posting_identity",
+                          "fk_posting_identity_book"
+                        ],
+                        "key": "uq_posting_identity",
+                        "used_key_parts": [
+                          "book_id",
+                          "source_type",
+                          "source_id"
+                        ],
+                        "key_length": "58",
+                        "ref": [
+                          "const",
+                          "const",
+                          "phpledger_test.d.id"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 500,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "261.72",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "1138.54",
+                          "data_read_per_join": "42K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "company_id",
+                          "book_id",
+                          "source_type",
+                          "source_id"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(i), (`phpledger_test`.`i`.`company_id` = 4996), true)"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "v",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_posting_revision",
+                          "fk_posting_revision_identity"
+                        ],
+                        "key": "uq_posting_revision",
+                        "used_key_parts": [
+                          "identity_id",
+                          "revision"
+                        ],
+                        "key_length": "12",
+                        "ref": [
+                          "phpledger_test.i.id",
+                          "func"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 500,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "408.41",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "1596.95",
+                          "data_read_per_join": "35K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "identity_id",
+                          "revision",
+                          "journal_id",
+                          "source_snapshot",
+                          "actor_id",
+                          "recorded_at"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(v), (`phpledger_test`.`v`.`revision` = (/* select#3 */ select max(`phpledger_test`.`v2`.`revision`) from `phpledger_test`.`pl_posting_revisions` `v2` where (`phpledger_test`.`v2`.`identity_id` = `phpledger_test`.`i`.`id`))), true)",
+                        "attached_subqueries": [
+                          {
+                            "dependent": true,
+                            "cacheable": false,
+                            "query_block": {
+                              "select_id": 3,
+                              "cost_info": {
+                                "query_cost": "0.35"
+                              },
+                              "table": {
+                                "table_name": "v2",
+                                "access_type": "ref",
+                                "possible_keys": [
+                                  "uq_posting_revision",
+                                  "fk_posting_revision_identity"
+                                ],
+                                "key": "uq_posting_revision",
+                                "used_key_parts": [
+                                  "identity_id"
+                                ],
+                                "key_length": "8",
+                                "ref": [
+                                  "phpledger_test.i.id"
+                                ],
+                                "rows_examined_per_scan": 1,
+                                "rows_produced_per_join": 1,
+                                "filtered": "100.00",
+                                "using_index": true,
+                                "cost_info": {
+                                  "read_cost": "0.25",
+                                  "eval_cost": "0.10",
+                                  "prefix_cost": "0.35",
+                                  "data_read_per_join": "72"
+                                },
+                                "used_columns": [
+                                  "identity_id",
+                                  "revision"
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "r",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_journals_reversal",
+                          "fk_journals_reversal"
+                        ],
+                        "key": "uq_journals_reversal",
+                        "used_key_parts": [
+                          "reversal_of_id"
+                        ],
+                        "key_length": "9",
+                        "ref": [
+                          "func"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 500,
+                        "filtered": "100.00",
+                        "using_index": true,
+                        "cost_info": {
+                          "read_cost": "375.92",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "2022.87",
+                          "data_read_per_join": "1M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "reversal_of_id"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(r), (`phpledger_test`.`r`.`reversal_of_id` = coalesce(`phpledger_test`.`v`.`journal_id`,`phpledger_test`.`d`.`journal_id`)), true)"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "search": {
+        "service_ms": 91.48,
+        "total": 111,
+        "page": 1,
+        "returned": 25,
+        "queries": [
+          {
+            "sql": "SELECT d.*, r.id AS reversal_journal_id FROM pl_effective_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = ? AND d.book_id = ? AND (LOCATE(?, d.description) > 0 OR LOCATE(?, d.reference) > 0 OR LOCATE(?, CONCAT('GJ-', LPAD(d.id, 6, '0'))) > 0) ORDER BY d.document_date DESC, d.id DESC LIMIT ? OFFSET ?",
+            "query_ms": 46.564102,
+            "plan": {
+              "query_block": {
+                "select_id": 1,
+                "cost_info": {
+                  "query_cost": "2022.87"
+                },
+                "ordering_operation": {
+                  "using_temporary_table": true,
+                  "using_filesort": true,
+                  "nested_loop": [
+                    {
+                      "table": {
+                        "table_name": "d",
+                        "access_type": "ref",
+                        "possible_keys": [
+                          "uq_general_creation",
+                          "ix_general_list",
+                          "fk_general_book"
+                        ],
+                        "key": "ix_general_list",
+                        "used_key_parts": [
+                          "book_id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "const"
+                        ],
+                        "rows_examined_per_scan": 5000,
+                        "rows_produced_per_join": 500,
+                        "filtered": "10.00",
+                        "cost_info": {
+                          "read_cost": "326.82",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "826.83",
+                          "data_read_per_join": "1M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "company_id",
+                          "book_id",
+                          "document_date",
+                          "reference",
+                          "description",
+                          "lines",
+                          "revision",
+                          "creation_key",
+                          "creation_hash",
+                          "journal_id",
+                          "created_by",
+                          "updated_by",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "attached_condition": "(`phpledger_test`.`d`.`company_id` = 4996)"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "i",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_posting_identity",
+                          "fk_posting_identity_book"
+                        ],
+                        "key": "uq_posting_identity",
+                        "used_key_parts": [
+                          "book_id",
+                          "source_type",
+                          "source_id"
+                        ],
+                        "key_length": "58",
+                        "ref": [
+                          "const",
+                          "const",
+                          "phpledger_test.d.id"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 500,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "261.72",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "1138.54",
+                          "data_read_per_join": "42K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "company_id",
+                          "book_id",
+                          "source_type",
+                          "source_id"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(i), (`phpledger_test`.`i`.`company_id` = 4996), true)"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "v",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_posting_revision",
+                          "fk_posting_revision_identity"
+                        ],
+                        "key": "uq_posting_revision",
+                        "used_key_parts": [
+                          "identity_id",
+                          "revision"
+                        ],
+                        "key_length": "12",
+                        "ref": [
+                          "phpledger_test.i.id",
+                          "func"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 500,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "408.41",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "1596.95",
+                          "data_read_per_join": "35K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "identity_id",
+                          "revision",
+                          "journal_id",
+                          "source_snapshot",
+                          "actor_id",
+                          "recorded_at"
+                        ],
+                        "attached_condition": "(<if>(found_match(v), ((locate('CAPACITY-49',coalesce(json_unquote(json_extract(`phpledger_test`.`v`.`source_snapshot`,'$.description')),`phpledger_test`.`d`.`description`)) > 0) or (locate('CAPACITY-49',coalesce(json_unquote(json_extract(`phpledger_test`.`v`.`source_snapshot`,'$.reference')),`phpledger_test`.`d`.`reference`)) > 0) or (locate('CAPACITY-49',concat('GJ-',lpad(`phpledger_test`.`d`.`id`,6,'0'))) > 0)), true) and <if>(is_not_null_compl(v), (`phpledger_test`.`v`.`revision` = (/* select#3 */ select max(`phpledger_test`.`v2`.`revision`) from `phpledger_test`.`pl_posting_revisions` `v2` where (`phpledger_test`.`v2`.`identity_id` = `phpledger_test`.`i`.`id`))), true))",
+                        "attached_subqueries": [
+                          {
+                            "dependent": true,
+                            "cacheable": false,
+                            "query_block": {
+                              "select_id": 3,
+                              "cost_info": {
+                                "query_cost": "0.35"
+                              },
+                              "table": {
+                                "table_name": "v2",
+                                "access_type": "ref",
+                                "possible_keys": [
+                                  "uq_posting_revision",
+                                  "fk_posting_revision_identity"
+                                ],
+                                "key": "uq_posting_revision",
+                                "used_key_parts": [
+                                  "identity_id"
+                                ],
+                                "key_length": "8",
+                                "ref": [
+                                  "phpledger_test.i.id"
+                                ],
+                                "rows_examined_per_scan": 1,
+                                "rows_produced_per_join": 1,
+                                "filtered": "100.00",
+                                "using_index": true,
+                                "cost_info": {
+                                  "read_cost": "0.25",
+                                  "eval_cost": "0.10",
+                                  "prefix_cost": "0.35",
+                                  "data_read_per_join": "72"
+                                },
+                                "used_columns": [
+                                  "identity_id",
+                                  "revision"
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "r",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "uq_journals_reversal",
+                          "fk_journals_reversal"
+                        ],
+                        "key": "uq_journals_reversal",
+                        "used_key_parts": [
+                          "reversal_of_id"
+                        ],
+                        "key_length": "9",
+                        "ref": [
+                          "func"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 500,
+                        "filtered": "100.00",
+                        "using_index": true,
+                        "cost_info": {
+                          "read_cost": "375.92",
+                          "eval_cost": "50.00",
+                          "prefix_cost": "2022.87",
+                          "data_read_per_join": "1M"
+                        },
+                        "used_columns": [
+                          "id",
+                          "reversal_of_id"
+                        ],
+                        "attached_condition": "<if>(is_not_null_compl(r), (`phpledger_test`.`r`.`reversal_of_id` = coalesce(`phpledger_test`.`v`.`journal_id`,`phpledger_test`.`d`.`journal_id`)), true)"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "account": {
+      "first": {
+        "service_ms": 70.14,
+        "total": 5000,
+        "page": 1,
+        "returned": 25,
+        "queries": [
+          {
+            "sql": "SELECT q.* FROM (SELECT j.id AS journal_id, j.journal_date AS date, j.description, j.source_type, j.source_reference, j.reversal_of_id, l.line_number, l.debit, l.credit, SUM(l.debit - l.credit) OVER (ORDER BY j.journal_date, j.id, l.line_number ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_movement FROM pl_journal_lines l JOIN pl_journals j ON j.id = l.journal_id AND j.company_id = l.company_id AND j.book_id = l.book_id WHERE l.account_id = ? AND l.company_id = ? AND l.book_id = ? AND j.journal_date <= ? AND j.journal_date >= ?) q ORDER BY q.date ASC, q.date, q.journal_id, q.line_number LIMIT ? OFFSET ?",
+            "query_ms": 45.273781,
+            "plan": {
+              "query_block": {
+                "select_id": 1,
+                "cost_info": {
+                  "query_cost": "5.54"
+                },
+                "ordering_operation": {
+                  "using_filesort": true,
+                  "table": {
+                    "table_name": "q",
+                    "access_type": "ALL",
+                    "rows_examined_per_scan": 27,
+                    "rows_produced_per_join": 27,
+                    "filtered": "100.00",
+                    "cost_info": {
+                      "read_cost": "2.84",
+                      "eval_cost": "2.70",
+                      "prefix_cost": "5.54",
+                      "data_read_per_join": "68K"
+                    },
+                    "used_columns": [
+                      "journal_id",
+                      "date",
+                      "description",
+                      "source_type",
+                      "source_reference",
+                      "reversal_of_id",
+                      "line_number",
+                      "debit",
+                      "credit",
+                      "running_movement"
+                    ],
+                    "materialized_from_subquery": {
+                      "using_temporary_table": true,
+                      "dependent": false,
+                      "cacheable": true,
+                      "query_block": {
+                        "select_id": 2,
+                        "cost_info": {
+                          "query_cost": "4209.95"
+                        },
+                        "windowing": {
+                          "windows": [
+                            {
+                              "name": "<unnamed window>",
+                              "using_filesort": true,
+                              "filesort_key": [
+                                "`journal_date`",
+                                "`id`",
+                                "`line_number`"
+                              ],
+                              "functions": [
+                                "sum"
+                              ]
+                            }
+                          ],
+                          "cost_info": {
+                            "sort_cost": "27.77"
+                          },
+                          "buffer_result": {
+                            "using_temporary_table": true,
+                            "nested_loop": [
+                              {
+                                "table": {
+                                  "table_name": "j",
+                                  "access_type": "ref",
+                                  "possible_keys": [
+                                    "PRIMARY",
+                                    "uq_journals_request",
+                                    "uq_journals_scope",
+                                    "ix_journals_report",
+                                    "fk_journals_book"
+                                  ],
+                                  "key": "fk_journals_book",
+                                  "used_key_parts": [
+                                    "book_id",
+                                    "company_id"
+                                  ],
+                                  "key_length": "16",
+                                  "ref": [
+                                    "const",
+                                    "const"
+                                  ],
+                                  "rows_examined_per_scan": 5000,
+                                  "rows_produced_per_join": 555,
+                                  "filtered": "11.11",
+                                  "cost_info": {
+                                    "read_cost": "940.55",
+                                    "eval_cost": "55.54",
+                                    "prefix_cost": "1440.55",
+                                    "data_read_per_join": "1M"
+                                  },
+                                  "used_columns": [
+                                    "id",
+                                    "company_id",
+                                    "book_id",
+                                    "journal_date",
+                                    "description",
+                                    "source_type",
+                                    "source_reference",
+                                    "reversal_of_id"
+                                  ],
+                                  "attached_condition": "((`phpledger_test`.`j`.`journal_date` <= DATE'2026-12-31') and (`phpledger_test`.`j`.`journal_date` >= DATE'2026-01-01'))"
+                                }
+                              },
+                              {
+                                "table": {
+                                  "table_name": "l",
+                                  "access_type": "ref",
+                                  "possible_keys": [
+                                    "uq_lines_number",
+                                    "fk_lines_journal",
+                                    "fk_lines_account"
+                                  ],
+                                  "key": "fk_lines_journal",
+                                  "used_key_parts": [
+                                    "journal_id",
+                                    "company_id",
+                                    "book_id"
+                                  ],
+                                  "key_length": "24",
+                                  "ref": [
+                                    "phpledger_test.j.id",
+                                    "const",
+                                    "const"
+                                  ],
+                                  "rows_examined_per_scan": 5,
+                                  "rows_produced_per_join": 27,
+                                  "filtered": "0.98",
+                                  "cost_info": {
+                                    "read_cost": "2458.29",
+                                    "eval_cost": "2.78",
+                                    "prefix_cost": "4182.18",
+                                    "data_read_per_join": "57K"
+                                  },
+                                  "used_columns": [
+                                    "id",
+                                    "journal_id",
+                                    "company_id",
+                                    "book_id",
+                                    "line_number",
+                                    "account_id",
+                                    "debit",
+                                    "credit"
+                                  ],
+                                  "attached_condition": "(`phpledger_test`.`l`.`account_id` = 36201)"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "last": {
+        "service_ms": 50.47,
+        "total": 5000,
+        "page": 200,
+        "returned": 25,
+        "queries": [
+          {
+            "sql": "SELECT q.* FROM (SELECT j.id AS journal_id, j.journal_date AS date, j.description, j.source_type, j.source_reference, j.reversal_of_id, l.line_number, l.debit, l.credit, SUM(l.debit - l.credit) OVER (ORDER BY j.journal_date, j.id, l.line_number ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_movement FROM pl_journal_lines l JOIN pl_journals j ON j.id = l.journal_id AND j.company_id = l.company_id AND j.book_id = l.book_id WHERE l.account_id = ? AND l.company_id = ? AND l.book_id = ? AND j.journal_date <= ? AND j.journal_date >= ?) q ORDER BY q.date ASC, q.date, q.journal_id, q.line_number LIMIT ? OFFSET ?",
+            "query_ms": 28.836966,
+            "plan": {
+              "query_block": {
+                "select_id": 1,
+                "cost_info": {
+                  "query_cost": "32.54"
+                },
+                "ordering_operation": {
+                  "using_filesort": true,
+                  "cost_info": {
+                    "sort_cost": "27.00"
+                  },
+                  "table": {
+                    "table_name": "q",
+                    "access_type": "ALL",
+                    "rows_examined_per_scan": 27,
+                    "rows_produced_per_join": 27,
+                    "filtered": "100.00",
+                    "cost_info": {
+                      "read_cost": "2.84",
+                      "eval_cost": "2.70",
+                      "prefix_cost": "5.54",
+                      "data_read_per_join": "68K"
+                    },
+                    "used_columns": [
+                      "journal_id",
+                      "date",
+                      "description",
+                      "source_type",
+                      "source_reference",
+                      "reversal_of_id",
+                      "line_number",
+                      "debit",
+                      "credit",
+                      "running_movement"
+                    ],
+                    "materialized_from_subquery": {
+                      "using_temporary_table": true,
+                      "dependent": false,
+                      "cacheable": true,
+                      "query_block": {
+                        "select_id": 2,
+                        "cost_info": {
+                          "query_cost": "4209.95"
+                        },
+                        "windowing": {
+                          "windows": [
+                            {
+                              "name": "<unnamed window>",
+                              "using_filesort": true,
+                              "filesort_key": [
+                                "`journal_date`",
+                                "`id`",
+                                "`line_number`"
+                              ],
+                              "functions": [
+                                "sum"
+                              ]
+                            }
+                          ],
+                          "cost_info": {
+                            "sort_cost": "27.77"
+                          },
+                          "buffer_result": {
+                            "using_temporary_table": true,
+                            "nested_loop": [
+                              {
+                                "table": {
+                                  "table_name": "j",
+                                  "access_type": "ref",
+                                  "possible_keys": [
+                                    "PRIMARY",
+                                    "uq_journals_request",
+                                    "uq_journals_scope",
+                                    "ix_journals_report",
+                                    "fk_journals_book"
+                                  ],
+                                  "key": "fk_journals_book",
+                                  "used_key_parts": [
+                                    "book_id",
+                                    "company_id"
+                                  ],
+                                  "key_length": "16",
+                                  "ref": [
+                                    "const",
+                                    "const"
+                                  ],
+                                  "rows_examined_per_scan": 5000,
+                                  "rows_produced_per_join": 555,
+                                  "filtered": "11.11",
+                                  "cost_info": {
+                                    "read_cost": "940.55",
+                                    "eval_cost": "55.54",
+                                    "prefix_cost": "1440.55",
+                                    "data_read_per_join": "1M"
+                                  },
+                                  "used_columns": [
+                                    "id",
+                                    "company_id",
+                                    "book_id",
+                                    "journal_date",
+                                    "description",
+                                    "source_type",
+                                    "source_reference",
+                                    "reversal_of_id"
+                                  ],
+                                  "attached_condition": "((`phpledger_test`.`j`.`journal_date` <= DATE'2026-12-31') and (`phpledger_test`.`j`.`journal_date` >= DATE'2026-01-01'))"
+                                }
+                              },
+                              {
+                                "table": {
+                                  "table_name": "l",
+                                  "access_type": "ref",
+                                  "possible_keys": [
+                                    "uq_lines_number",
+                                    "fk_lines_journal",
+                                    "fk_lines_account"
+                                  ],
+                                  "key": "fk_lines_journal",
+                                  "used_key_parts": [
+                                    "journal_id",
+                                    "company_id",
+                                    "book_id"
+                                  ],
+                                  "key_length": "24",
+                                  "ref": [
+                                    "phpledger_test.j.id",
+                                    "const",
+                                    "const"
+                                  ],
+                                  "rows_examined_per_scan": 5,
+                                  "rows_produced_per_join": 27,
+                                  "filtered": "0.98",
+                                  "cost_info": {
+                                    "read_cost": "2458.29",
+                                    "eval_cost": "2.78",
+                                    "prefix_cost": "4182.18",
+                                    "data_read_per_join": "57K"
+                                  },
+                                  "used_columns": [
+                                    "id",
+                                    "journal_id",
+                                    "company_id",
+                                    "book_id",
+                                    "line_number",
+                                    "account_id",
+                                    "debit",
+                                    "credit"
+                                  ],
+                                  "attached_condition": "(`phpledger_test`.`l`.`account_id` = 36201)"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "search": {
+        "service_ms": 74.1,
+        "total": 5000,
+        "page": 1,
+        "returned": 0,
+        "queries": [
+          {
+            "sql": "SELECT q.* FROM (SELECT j.id AS journal_id, j.journal_date AS date, j.description, j.source_type, j.source_reference, j.reversal_of_id, l.line_number, l.debit, l.credit, SUM(l.debit - l.credit) OVER (ORDER BY j.journal_date, j.id, l.line_number ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_movement FROM pl_journal_lines l JOIN pl_journals j ON j.id = l.journal_id AND j.company_id = l.company_id AND j.book_id = l.book_id WHERE l.account_id = ? AND l.company_id = ? AND l.book_id = ? AND j.journal_date <= ? AND j.journal_date >= ?) q WHERE LOCATE(?, q.description) > 0 OR LOCATE(?, q.source_reference) > 0 OR LOCATE(?, CONCAT('PL-', LPAD(q.journal_id, 8, '0'))) > 0 ORDER BY q.date ASC, q.date, q.journal_id, q.line_number LIMIT ? OFFSET ?",
+            "query_ms": 27.724028,
+            "plan": {
+              "query_block": {
+                "select_id": 1,
+                "cost_info": {
+                  "query_cost": "5.54"
+                },
+                "ordering_operation": {
+                  "using_filesort": true,
+                  "table": {
+                    "table_name": "q",
+                    "access_type": "ALL",
+                    "rows_examined_per_scan": 27,
+                    "rows_produced_per_join": 27,
+                    "filtered": "100.00",
+                    "cost_info": {
+                      "read_cost": "2.84",
+                      "eval_cost": "2.70",
+                      "prefix_cost": "5.54",
+                      "data_read_per_join": "68K"
+                    },
+                    "used_columns": [
+                      "journal_id",
+                      "date",
+                      "description",
+                      "source_type",
+                      "source_reference",
+                      "reversal_of_id",
+                      "line_number",
+                      "debit",
+                      "credit",
+                      "running_movement"
+                    ],
+                    "attached_condition": "((locate('CAPACITY-49',`q`.`description`) > 0) or (locate('CAPACITY-49',`q`.`source_reference`) > 0) or (locate('CAPACITY-49',concat('PL-',lpad(`q`.`journal_id`,8,'0'))) > 0))",
+                    "materialized_from_subquery": {
+                      "using_temporary_table": true,
+                      "dependent": false,
+                      "cacheable": true,
+                      "query_block": {
+                        "select_id": 2,
+                        "cost_info": {
+                          "query_cost": "4209.95"
+                        },
+                        "windowing": {
+                          "windows": [
+                            {
+                              "name": "<unnamed window>",
+                              "using_filesort": true,
+                              "filesort_key": [
+                                "`journal_date`",
+                                "`id`",
+                                "`line_number`"
+                              ],
+                              "functions": [
+                                "sum"
+                              ]
+                            }
+                          ],
+                          "cost_info": {
+                            "sort_cost": "27.77"
+                          },
+                          "buffer_result": {
+                            "using_temporary_table": true,
+                            "nested_loop": [
+                              {
+                                "table": {
+                                  "table_name": "j",
+                                  "access_type": "ref",
+                                  "possible_keys": [
+                                    "PRIMARY",
+                                    "uq_journals_request",
+                                    "uq_journals_scope",
+                                    "ix_journals_report",
+                                    "fk_journals_book"
+                                  ],
+                                  "key": "fk_journals_book",
+                                  "used_key_parts": [
+                                    "book_id",
+                                    "company_id"
+                                  ],
+                                  "key_length": "16",
+                                  "ref": [
+                                    "const",
+                                    "const"
+                                  ],
+                                  "rows_examined_per_scan": 5000,
+                                  "rows_produced_per_join": 555,
+                                  "filtered": "11.11",
+                                  "cost_info": {
+                                    "read_cost": "940.55",
+                                    "eval_cost": "55.54",
+                                    "prefix_cost": "1440.55",
+                                    "data_read_per_join": "1M"
+                                  },
+                                  "used_columns": [
+                                    "id",
+                                    "company_id",
+                                    "book_id",
+                                    "journal_date",
+                                    "description",
+                                    "source_type",
+                                    "source_reference",
+                                    "reversal_of_id"
+                                  ],
+                                  "attached_condition": "((`phpledger_test`.`j`.`journal_date` <= DATE'2026-12-31') and (`phpledger_test`.`j`.`journal_date` >= DATE'2026-01-01'))"
+                                }
+                              },
+                              {
+                                "table": {
+                                  "table_name": "l",
+                                  "access_type": "ref",
+                                  "possible_keys": [
+                                    "uq_lines_number",
+                                    "fk_lines_journal",
+                                    "fk_lines_account"
+                                  ],
+                                  "key": "fk_lines_journal",
+                                  "used_key_parts": [
+                                    "journal_id",
+                                    "company_id",
+                                    "book_id"
+                                  ],
+                                  "key_length": "24",
+                                  "ref": [
+                                    "phpledger_test.j.id",
+                                    "const",
+                                    "const"
+                                  ],
+                                  "rows_examined_per_scan": 5,
+                                  "rows_produced_per_join": 27,
+                                  "filtered": "0.98",
+                                  "cost_info": {
+                                    "read_cost": "2458.29",
+                                    "eval_cost": "2.78",
+                                    "prefix_cost": "4182.18",
+                                    "data_read_per_join": "57K"
+                                  },
+                                  "used_columns": [
+                                    "id",
+                                    "journal_id",
+                                    "company_id",
+                                    "book_id",
+                                    "line_number",
+                                    "account_id",
+                                    "debit",
+                                    "credit"
+                                  ],
+                                  "attached_condition": "(`phpledger_test`.`l`.`account_id` = 36201)"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "bank": {
+      "first": {
+        "service_ms": 3.9,
+        "total": 500,
+        "page": 1,
+        "returned": 25,
+        "queries": [
+          {
+            "sql": "SELECT r.*, m.journal_line_id, m.matched_at, m.matched_by, l.journal_id, j.journal_date FROM pl_bank_statement_rows r LEFT JOIN pl_bank_matches m ON m.row_id = r.id LEFT JOIN pl_journal_lines l ON l.id = m.journal_line_id LEFT JOIN pl_journals j ON j.id = l.journal_id WHERE r.statement_id = ? AND r.company_id = ? AND r.book_id = ? ORDER BY r.transaction_date DESC, r.line_number LIMIT ? OFFSET ? FOR SHARE",
+            "query_ms": 1.682997,
+            "plan": {
+              "query_block": {
+                "select_id": 1,
+                "cost_info": {
+                  "query_cost": "176.97"
+                },
+                "ordering_operation": {
+                  "using_filesort": true,
+                  "nested_loop": [
+                    {
+                      "table": {
+                        "table_name": "r",
+                        "access_type": "ref",
+                        "possible_keys": [
+                          "uq_bank_line_number",
+                          "uq_bank_row_active_ref",
+                          "fk_bank_row_statement"
+                        ],
+                        "key": "uq_bank_line_number",
+                        "used_key_parts": [
+                          "statement_id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "const"
+                        ],
+                        "rows_examined_per_scan": 500,
+                        "rows_produced_per_join": 24,
+                        "filtered": "5.00",
+                        "cost_info": {
+                          "read_cost": "72.75",
+                          "eval_cost": "2.50",
+                          "prefix_cost": "122.75",
+                          "data_read_per_join": "74K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "statement_id",
+                          "company_id",
+                          "book_id",
+                          "account_id",
+                          "line_number",
+                          "transaction_date",
+                          "reference",
+                          "description",
+                          "money_in",
+                          "money_out",
+                          "active_reference"
+                        ],
+                        "attached_condition": "((`phpledger_test`.`r`.`book_id` = 4996) and (`phpledger_test`.`r`.`company_id` = 4996))"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "m",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "PRIMARY",
+                          "fk_bank_match_row"
+                        ],
+                        "key": "PRIMARY",
+                        "used_key_parts": [
+                          "row_id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "phpledger_test.r.id"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 24,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "6.25",
+                          "eval_cost": "2.50",
+                          "prefix_cost": "131.50",
+                          "data_read_per_join": "1K"
+                        },
+                        "used_columns": [
+                          "row_id",
+                          "journal_line_id",
+                          "matched_by",
+                          "matched_at"
+                        ]
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "l",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "PRIMARY",
+                          "uq_lines_bank_scope",
+                          "uq_line_scoped_identity"
+                        ],
+                        "key": "PRIMARY",
+                        "used_key_parts": [
+                          "id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "phpledger_test.m.journal_line_id"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 24,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "21.69",
+                          "eval_cost": "2.50",
+                          "prefix_cost": "155.68",
+                          "data_read_per_join": "51K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "journal_id"
+                        ]
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "j",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "PRIMARY",
+                          "uq_journals_scope"
+                        ],
+                        "key": "PRIMARY",
+                        "used_key_parts": [
+                          "id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "phpledger_test.l.journal_id"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 24,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "18.79",
+                          "eval_cost": "2.50",
+                          "prefix_cost": "176.98",
+                          "data_read_per_join": "67K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "journal_date"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "last": {
+        "service_ms": 3.82,
+        "total": 500,
+        "page": 20,
+        "returned": 25,
+        "queries": [
+          {
+            "sql": "SELECT r.*, m.journal_line_id, m.matched_at, m.matched_by, l.journal_id, j.journal_date FROM pl_bank_statement_rows r LEFT JOIN pl_bank_matches m ON m.row_id = r.id LEFT JOIN pl_journal_lines l ON l.id = m.journal_line_id LEFT JOIN pl_journals j ON j.id = l.journal_id WHERE r.statement_id = ? AND r.company_id = ? AND r.book_id = ? ORDER BY r.transaction_date DESC, r.line_number LIMIT ? OFFSET ? FOR SHARE",
+            "query_ms": 1.742125,
+            "plan": {
+              "query_block": {
+                "select_id": 1,
+                "cost_info": {
+                  "query_cost": "176.97"
+                },
+                "ordering_operation": {
+                  "using_filesort": true,
+                  "nested_loop": [
+                    {
+                      "table": {
+                        "table_name": "r",
+                        "access_type": "ref",
+                        "possible_keys": [
+                          "uq_bank_line_number",
+                          "uq_bank_row_active_ref",
+                          "fk_bank_row_statement"
+                        ],
+                        "key": "uq_bank_line_number",
+                        "used_key_parts": [
+                          "statement_id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "const"
+                        ],
+                        "rows_examined_per_scan": 500,
+                        "rows_produced_per_join": 24,
+                        "filtered": "5.00",
+                        "cost_info": {
+                          "read_cost": "72.75",
+                          "eval_cost": "2.50",
+                          "prefix_cost": "122.75",
+                          "data_read_per_join": "74K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "statement_id",
+                          "company_id",
+                          "book_id",
+                          "account_id",
+                          "line_number",
+                          "transaction_date",
+                          "reference",
+                          "description",
+                          "money_in",
+                          "money_out",
+                          "active_reference"
+                        ],
+                        "attached_condition": "((`phpledger_test`.`r`.`book_id` = 4996) and (`phpledger_test`.`r`.`company_id` = 4996))"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "m",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "PRIMARY",
+                          "fk_bank_match_row"
+                        ],
+                        "key": "PRIMARY",
+                        "used_key_parts": [
+                          "row_id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "phpledger_test.r.id"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 24,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "6.25",
+                          "eval_cost": "2.50",
+                          "prefix_cost": "131.50",
+                          "data_read_per_join": "1K"
+                        },
+                        "used_columns": [
+                          "row_id",
+                          "journal_line_id",
+                          "matched_by",
+                          "matched_at"
+                        ]
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "l",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "PRIMARY",
+                          "uq_lines_bank_scope",
+                          "uq_line_scoped_identity"
+                        ],
+                        "key": "PRIMARY",
+                        "used_key_parts": [
+                          "id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "phpledger_test.m.journal_line_id"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 24,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "21.69",
+                          "eval_cost": "2.50",
+                          "prefix_cost": "155.68",
+                          "data_read_per_join": "51K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "journal_id"
+                        ]
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "j",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "PRIMARY",
+                          "uq_journals_scope"
+                        ],
+                        "key": "PRIMARY",
+                        "used_key_parts": [
+                          "id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "phpledger_test.l.journal_id"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 24,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "18.79",
+                          "eval_cost": "2.50",
+                          "prefix_cost": "176.98",
+                          "data_read_per_join": "67K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "journal_date"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "search": {
+        "service_ms": 2.76,
+        "total": 0,
+        "page": 1,
+        "returned": 0,
+        "queries": [
+          {
+            "sql": "SELECT r.*, m.journal_line_id, m.matched_at, m.matched_by, l.journal_id, j.journal_date FROM pl_bank_statement_rows r LEFT JOIN pl_bank_matches m ON m.row_id = r.id LEFT JOIN pl_journal_lines l ON l.id = m.journal_line_id LEFT JOIN pl_journals j ON j.id = l.journal_id WHERE r.statement_id = ? AND r.company_id = ? AND r.book_id = ? AND (LOCATE(?, r.reference) > 0 OR LOCATE(?, r.description) > 0) ORDER BY r.transaction_date DESC, r.line_number LIMIT ? OFFSET ? FOR SHARE",
+            "query_ms": 0.800848,
+            "plan": {
+              "query_block": {
+                "select_id": 1,
+                "cost_info": {
+                  "query_cost": "176.97"
+                },
+                "ordering_operation": {
+                  "using_filesort": true,
+                  "nested_loop": [
+                    {
+                      "table": {
+                        "table_name": "r",
+                        "access_type": "ref",
+                        "possible_keys": [
+                          "uq_bank_line_number",
+                          "uq_bank_row_active_ref",
+                          "fk_bank_row_statement"
+                        ],
+                        "key": "uq_bank_line_number",
+                        "used_key_parts": [
+                          "statement_id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "const"
+                        ],
+                        "rows_examined_per_scan": 500,
+                        "rows_produced_per_join": 24,
+                        "filtered": "5.00",
+                        "cost_info": {
+                          "read_cost": "72.75",
+                          "eval_cost": "2.50",
+                          "prefix_cost": "122.75",
+                          "data_read_per_join": "74K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "statement_id",
+                          "company_id",
+                          "book_id",
+                          "account_id",
+                          "line_number",
+                          "transaction_date",
+                          "reference",
+                          "description",
+                          "money_in",
+                          "money_out",
+                          "active_reference"
+                        ],
+                        "attached_condition": "((`phpledger_test`.`r`.`book_id` = 4996) and (`phpledger_test`.`r`.`company_id` = 4996) and ((locate('CAPACITY-49',`phpledger_test`.`r`.`reference`) > 0) or (locate('CAPACITY-49',`phpledger_test`.`r`.`description`) > 0)))"
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "m",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "PRIMARY",
+                          "fk_bank_match_row"
+                        ],
+                        "key": "PRIMARY",
+                        "used_key_parts": [
+                          "row_id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "phpledger_test.r.id"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 24,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "6.25",
+                          "eval_cost": "2.50",
+                          "prefix_cost": "131.50",
+                          "data_read_per_join": "1K"
+                        },
+                        "used_columns": [
+                          "row_id",
+                          "journal_line_id",
+                          "matched_by",
+                          "matched_at"
+                        ]
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "l",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "PRIMARY",
+                          "uq_lines_bank_scope",
+                          "uq_line_scoped_identity"
+                        ],
+                        "key": "PRIMARY",
+                        "used_key_parts": [
+                          "id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "phpledger_test.m.journal_line_id"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 24,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "21.69",
+                          "eval_cost": "2.50",
+                          "prefix_cost": "155.68",
+                          "data_read_per_join": "51K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "journal_id"
+                        ]
+                      }
+                    },
+                    {
+                      "table": {
+                        "table_name": "j",
+                        "access_type": "eq_ref",
+                        "possible_keys": [
+                          "PRIMARY",
+                          "uq_journals_scope"
+                        ],
+                        "key": "PRIMARY",
+                        "used_key_parts": [
+                          "id"
+                        ],
+                        "key_length": "8",
+                        "ref": [
+                          "phpledger_test.l.journal_id"
+                        ],
+                        "rows_examined_per_scan": 1,
+                        "rows_produced_per_join": 24,
+                        "filtered": "100.00",
+                        "cost_info": {
+                          "read_cost": "18.79",
+                          "eval_cost": "2.50",
+                          "prefix_cost": "176.98",
+                          "data_read_per_join": "67K"
+                        },
+                        "used_columns": [
+                          "id",
+                          "journal_date"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

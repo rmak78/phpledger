@@ -246,7 +246,7 @@ function pl_bank_get_statement(int $actorId, int $companyId, int $bookId, int $s
             array_push($args, $search, $search);
         }
         $statement['filtered_total'] = $search === '' ? $statement['records_total'] : (int) DB::queryFirstField('SELECT COUNT(*)' . $where, ...$args);
-        $order = pl_table_order($options, ['date' => 'r.transaction_date', 'reference' => 'r.reference', 'money_in' => 'r.money_in', 'money_out' => 'r.money_out', 'match' => 'm.journal_line_id'], 'r.line_number', 'r.line_number');
+        $order = pl_table_order($options, 'bank');
         $limit = ' LIMIT %i OFFSET %i';
         $statement['pages'] = max(1, (int)ceil($statement['filtered_total'] / $size));
         $statement['page'] = min($statement['pages'], max(1, (int)($options['page'] ?? 1)));

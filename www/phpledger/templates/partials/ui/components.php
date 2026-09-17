@@ -83,7 +83,7 @@ function pl_ui_tabs(array $links, string $current, bool $enhance = false): void
 function pl_ui_document_header(string $title, string $status, callable $actions, string $id = ''): void
 {
     echo '<header class="doc-header"><div class="doc-heading"><h1 class="doc-number"' . ($id !== '' ? ' id="' . pl_e($id) . '"' : '') . '>' . pl_e($title) . '</h1>';
-    pl_ui_badge($status);
+    if ($status!=='') { pl_ui_badge($status); }
     echo '</div><div class="doc-actions" data-fold="primary actions">'; $actions(); echo '</div></header>';
 }
 

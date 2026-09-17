@@ -4,6 +4,12 @@ require_once dirname(__DIR__) . '/www/phpledger/includes/functions/web_functions
 require_once dirname(__DIR__) . '/www/phpledger/templates/partials/ui/components.php';
 
 test('list request rejects untrusted order identifiers malformed paging and array query input', function (): void {
+    foreach (['transactions','general-journals','account','bank'] as $screen) {
+        assert_throws(fn()=>pl_table_order(['sort'=>'date','direction'=>'DESC; SELECT 1'],$screen),DomainException::class);
+        assert_throws(fn()=>pl_table_order(['sort'=>'default','direction'=>'asc'],$screen),DomainException::class);
+    }
+    assert_same('d.amount DESC, d.id ASC',pl_table_order(['sort'=>'amount','direction'=>'desc'],'transactions'));
+    assert_same('r.line_number',pl_table_order([],'bank'));
     foreach ([['sort'=>'date DESC; DROP TABLE pl_users'], ['dir'=>'desc NULLS LAST'], ['page'=>'0'], ['page'=>'100001'], ['per_page'=>'250'], ['q'=>['x']], ['sort'=>'money_in']] as $input) {
         assert_throws(fn() => pl_list_filters($input, 'transactions'), DomainException::class);
     }

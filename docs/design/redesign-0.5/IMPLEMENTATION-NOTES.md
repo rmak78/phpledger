@@ -375,3 +375,45 @@ Home's use of that service needs review alongside list-performance work.
   retained incomplete editor input, tax preview and posting/credit regression.
 - No migration or live change. The four required 5,000-row query-plan checks and
   complete screen/accessibility acceptance remain open.
+
+## Pending prototype conflict: tax-code editing
+
+The `tax-codes.html` prototype exposes editable fields for an existing code's
+name, treatment and accounts. The current `pl_create_tax_code` service only
+creates immutable code definitions; changes to rates use dated revisions.
+No code-edit service or browser action exists. Implementing that prototype action
+would add accounting behavior beyond a template port. Owner clarification was
+requested on 18 September: keep existing code fields read-only and allow dated
+rates, or separately design code editing. Tax-screen implementation is held at
+this conflict; other approved release work continues.
+
+## Capacity, party screens and regression checkpoint — 18 September
+
+- Fixed complete SQL order clauses now serve the original four paged lists.
+  `031_posting_source_lookup` adds an index identified by the 5,000-row receipt
+  query plan. Local receipt pages improved from about 40 seconds to 40–45 ms;
+  exact plans, scoped-scan limitations and bank statement bounds are recorded in
+  `evidence-0.6.0/LIST-CAPACITY.md`. The index does not change uniqueness or history.
+- Party screens now use the compact register/detail pattern and sticky editor.
+  Role/search/sort/page filters are validated GET state retained through editing,
+  validation failures and contact creation. SQL counts/pages master records;
+  balances reuse the existing authoritative ageing services. Recent activity
+  follows the party on the current immutable document revision and is limited
+  to the latest 20 document identities. No party financial rules were changed.
+- Restored public-demo/setup context strips in standalone POS, corrected the
+  active navigation for settlements, and added journal unsaved-change protection.
+- A settlement concurrency assertion incorrectly compared two absent result
+  keys. It now requires positive journal IDs and equality, alongside the existing
+  one-journal database assertion. The clean full check passed 271 tests, lint,
+  PHPStan and sample validation. Subsequent verifier lint/static checks passed.
+- Party register/editor browser checks passed with JS on and off, create/update,
+  contact creation, retained invalid values/filters, and 1366, 1024, 768 and 390px
+  widths. Screenshots were inspected. POS public-demo strips and journal leave
+  protection also passed. These checks do not close every-route accessibility
+  or observed usability gates.
+- The actual published 0.5 source (tag commit
+  `849ae91f1f6f41527fc4f0ab44f560ccaa8362bb`) created isolated historical fixtures.
+  `tools/verify-preview-upgrade.php` verified preservation across migrations
+  029–031; details are in `evidence-0.6.0/UPGRADE-0.5.md`.
+- All changes remain local. No release, hosted demo, website or production data
+  was changed. The tax-code prototype conflict above remains pending owner choice.
