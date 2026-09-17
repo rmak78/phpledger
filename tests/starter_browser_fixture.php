@@ -19,4 +19,13 @@ $product=pl_save_inventory_product($actor,$company,$book,['sku'=>'DEMO-ITEM','na
     'inventory_account_id'=>$extra['inventory'],'cogs_account_id'=>$f['accounts']['5000'],'sales_account_id'=>$f['accounts']['4000'],'purchase_account_id'=>$f['accounts']['5000'],'reason'=>'Synthetic browser fixture','idempotency_key'=>'product']);
 $tax=pl_create_tax_code($actor,$company,$book,['code'=>'DEMO5','name'=>'Synthetic five percent','treatment'=>'standard','sales_account_id'=>$extra['tax_out'],'purchase_account_id'=>$extra['tax_in'],'reason'=>'Synthetic browser fixture','idempotency_key'=>'tax-code']);
 pl_enter_tax_rate($actor,$company,$book,['tax_code_id'=>$tax['id'],'effective_from'=>'2026-01-01','percentage'=>'5','reason'=>'Synthetic browser fixture','idempotency_key'=>'tax-rate']);
+if (($argv[1] ?? '') === '--ageing') {
+    foreach (['invoice','bill'] as $kind) {
+        foreach (['2026-09-30','2026-09-01','2026-08-01','2026-07-01','2026-05-01'] as $index=>$due) {
+            $draft=pl_save_ar_document($actor,$company,$book,['kind'=>$kind,'party_id'=>$party['id'],'date'=>'2026-01-05','due_date'=>$due,'currency'=>'USD','reference'=>'Synthetic ageing bucket '.($index+1),'creation_key'=>'ageing-'.$kind.'-'.$index,
+                'lines'=>[['description'=>'Synthetic ageing service','quantity'=>'1','unit_price'=>'10.2500','account_id'=>$f['accounts'][$kind==='invoice'?'4000':'5000']]]]);
+            pl_post_ar_document($actor,$company,$book,$draft['id'],$draft['revision']);
+        }
+    }
+}
 echo json_encode(['email'=>$email,'actor_id'=>$actor,'company_id'=>$company,'book_id'=>$book,'party_id'=>$party['id'],'product_id'=>$product['id'],'tax_code_id'=>$tax['id'],'accounts'=>$f['accounts'],'extra'=>$extra],JSON_THROW_ON_ERROR|JSON_PRETTY_PRINT)."\n";

@@ -186,3 +186,18 @@ Home's use of that service needs review alongside list-performance work.
   verifier built schema through 028, preserved a posted journal, accounts, ready
   setup and full-read connection, and verified balanced totals and migration replay.
   Full AR/AP/inventory/currency upgrade scenarios remain part of the release gate.
+
+## Ageing report checkpoint
+
+- Added /reports/ageing as a first-class report using pl_ar_ap_open_items without
+  duplicating its financial calculations. Includes receivable/payable selection,
+  as-of date, five overdue buckets, document/carrying amounts and per-account
+  control reconciliation. Source-document return links preserve direction/date.
+- Browser fixture option --ageing creates five exact synthetic balances per
+  direction. JS/no-JS browser checks passed for both populated directions and an
+  empty historical state, both desktop folds, portrait tablet and phone overflow.
+  Update action remained visible; source-return state was checked.
+- PHP lint: 183 files, zero failures; static analysis passed. Browser testing
+  caught and corrected a missing template allow-list entry before acceptance.
+- No additional migration. This uses the existing ageing service; its all-item
+  read and document drill-down performance still need the release scale checks.

@@ -48,6 +48,7 @@ $routes = [
     '/transactions/post' => ['POST'], '/transactions/reverse' => ['POST'],
     '/reports/trial-balance' => ['GET'], '/reports/account' => ['GET'], '/journals/detail' => ['GET'], '/reports/export' => ['GET'],
     '/reports' => ['GET'], '/reports/balance-sheet' => ['GET'], '/reports/profit-loss' => ['GET'], '/reports/cash-forecast' => ['GET', 'POST'],
+    '/reports/ageing' => ['GET'],
     '/pos' => ['GET'], '/pos/review' => ['GET', 'POST'], '/pos/edit' => ['POST'], '/pos/checkout' => ['POST'], '/pos/retry' => ['POST'], '/pos/receipt' => ['GET'],
     '/sample-guide' => ['GET'], '/help' => ['GET'], '/modules' => ['GET', 'POST'], '/connections' => ['GET','POST'], '/oauth/authorize' => ['GET','POST'], '/tables' => ['GET'],
     '/accounts' => ['GET'], '/accounts/save' => ['POST'],
@@ -560,6 +561,12 @@ try {
         $balance = pl_balance_sheet($actorId, $companyId, $bookId, $today);
         $overview = ['as_of' => $today, 'period_from' => $periodFrom, 'cash' => pl_cash_balance($actorId, $companyId, $bookId, $today), 'income' => $profit['total_income'], 'expenses' => $profit['total_expenses'], 'profit' => $profit['net_profit'], 'assets' => $balance['total_assets'], 'liabilities' => $balance['total_liabilities'], 'equity' => $balance['total_equity']];
         pl_render('reports', ['title' => 'Your business in numbers', 'user' => $user, 'company' => $company, 'overview' => $overview]);
+    }
+    if ($path === '/reports/ageing') {
+        $direction = pl_web_text($_GET, 'direction', 'receivable');
+        $asOf = pl_web_text($_GET, 'as_of', gmdate('Y-m-d'));
+        $report = pl_ar_ap_open_items($actorId, $companyId, $bookId, $direction, $asOf);
+        pl_render('ageing', ['title'=>'Receivables & payables ageing','user'=>$user,'company'=>$company,'report'=>$report]);
     }
     if ($path === '/reports/balance-sheet') {
         $asOf = pl_web_text($_GET, 'as_of', gmdate('Y-m-d'));

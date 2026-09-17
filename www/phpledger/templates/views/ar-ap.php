@@ -10,6 +10,7 @@ $reverseInput=$failedAction==='reverse'?$form['input']:[];
 $postInput=$failedAction==='post'?$form['input']:[];
 ?>
 <section class="page-wrap starter-detail">
+<?php if (pl_web_text($_GET,'return_report')==='ageing'): ?><a class="btn btn-ghost" href="<?= pl_e(pl_url('/reports/ageing',['direction'=>$isAr?'receivable':'payable','as_of'=>$report['as_of']])) ?>"><?= pl_icon('arrow-left') ?> Back to ageing report</a><?php endif; ?>
 <?php pl_starter_header($isAr?'Accounts receivable':'Accounts payable',$isAr?'Invoice customers, record collections and follow what remains due.':'Record supplier bills, payments and credits, with a traceable balance.',$form,$company); ?>
 <div class="starter-actions"><?php if (pl_can_write($company)): ?><a class="button primary" href="<?= pl_e(pl_url($path,['new'=>'1'])) ?>">New <?= $isAr?'invoice':'bill' ?></a><a class="button secondary" href="<?= pl_e(pl_url('/parties',['new'=>'1'])) ?>">Add customer or vendor</a><?php endif; ?><a class="button secondary" href="<?= pl_e(pl_url('/bank-reconciliation')) ?>">Bank reconciliation</a></div>
 <?php if ($editing && pl_can_write($company)): ?><section class="panel"><h2><?= $correct?'Correct under the same document identity':($document?'Edit draft':ucwords(str_replace('_',' ',$kind))) ?></h2>

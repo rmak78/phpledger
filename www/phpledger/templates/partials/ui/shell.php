@@ -22,6 +22,7 @@ $navGroups = [
     'Reports' => [
         ['/reports', 'All reports', 'book', ['reports'], true],
         ['/reports/profit-loss', 'Profit & loss', 'file-text', ['profit-loss'], true],
+        ['/reports/ageing', 'Receivables & payables ageing', 'calendar', ['ageing'], true],
         ['/reports/balance-sheet', 'Balance sheet', 'file-text', ['balance-sheet'], true],
         ['/reports/trial-balance', 'Trial balance', 'list', ['trial-balance'], true],
         ['/reports/account', 'Account statement', 'file-text', ['account'], true],
