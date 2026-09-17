@@ -120,6 +120,64 @@ function pl_filters(array $input): array
     ];
 }
 
+/** Canonical bookmarkable list input; never pass a browser column name to SQL. */
+function pl_list_filters(array $input, string $screen): array
+{
+    $sorts = match ($screen) {
+        'transactions' => ['date','name','amount','status'],
+        'general-journals' => ['date','description','status'],
+        'account' => ['date','journal','description','source','debit','credit','balance'],
+        'bank' => ['date','reference','money_in','money_out','match'],
+        default => throw new DomainException('Unknown list.'),
+    };
+    $page = $input['page'] ?? '1';
+    $size = $input['per_page'] ?? '25';
+    foreach ([$page, $size] as $number) {
+        if ((!is_int($number) && !is_string($number)) || !preg_match('/^[1-9][0-9]{0,5}$/D', (string)$number)) {
+            throw new DomainException('Choose a valid list page and page size.');
+        }
+    }
+    if ((int)$page > 100000 || !in_array((int)$size, [25,50,100], true)) { throw new DomainException('Choose 25, 50 or 100 rows per page.'); }
+    $sort = $input['sort'] ?? 'date';
+    $direction = $input['dir'] ?? ($screen === 'account' ? 'asc' : 'desc');
+    if (!is_string($sort) || !in_array($sort, $sorts, true) || !in_array($direction, ['asc','desc'], true)) {
+        throw new DomainException('Unsupported list order.');
+    }
+    $query = $input['q'] ?? $input['search'] ?? '';
+    if (!is_string($query) || mb_strlen($query) > 160) { throw new DomainException('Search must be text of up to 160 characters.'); }
+    $filters = ['page' => (int)$page, 'per_page' => (int)$size, 'q' => trim($query), 'sort' => $sort, 'dir' => $direction];
+    if (in_array($screen, ['transactions','general-journals'], true)) {
+        $status = $input['status'] ?? ($screen === 'transactions' ? 'draft' : 'all');
+        if (!in_array($status, ['all','draft','posted','reversed'], true)) { throw new DomainException('Choose a valid status.'); }
+        $filters['status'] = $status;
+    }
+    if ($screen === 'transactions') {
+        $kind = $input['kind'] ?? 'all';
+        if (!in_array($kind, ['all','receipt','expense'], true)) { throw new DomainException('Choose a valid transaction type.'); }
+        $filters['kind'] = $kind;
+        foreach (['from','to'] as $key) {
+            $value = $input[$key] ?? '';
+            if (!is_string($value)) { throw new DomainException('Choose a valid filter date.'); }
+            $filters[$key] = $value === '' ? '' : pl_ledger_date($value);
+        }
+    }
+    return $filters;
+}
+
+/** Reuse the existing scoped, counted LIMIT/OFFSET services, including running balances. */
+function pl_list_query(int $actorId, int $companyId, int $bookId, string $screen, array $input): array
+{
+    $filters = pl_list_filters($input, $screen);
+    $options = $filters + ['page_size' => $filters['per_page'], 'search' => $filters['q'], 'direction' => $filters['dir']];
+    return match ($screen) {
+        'transactions' => pl_list_documents($actorId, $companyId, $bookId, $options),
+        'general-journals' => pl_list_general_drafts($actorId, $companyId, $bookId, $filters['page'], $options),
+        'account' => pl_account_activity($actorId, $companyId, $bookId, pl_web_id($input, 'id'), pl_web_text($input, 'as_of', gmdate('Y-m-d')), $filters['page'], pl_web_text($input, 'from') ?: null, $options),
+        'bank' => pl_bank_get_statement($actorId, $companyId, $bookId, pl_web_id($input, 'statement_id'), $options),
+        default => throw new DomainException('Unknown list.'),
+    };
+}
+
 function pl_money(string $amount): string
 {
     if (!preg_match('/^(-?)([0-9]+)(?:\.([0-9]{1,4}))?$/D', $amount, $match)) {

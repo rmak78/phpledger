@@ -416,7 +416,7 @@ try {
             } catch (DomainException $error) { pl_form_failure($return, $_POST, $error->getMessage()); }
         }
         if ($path === '/general-journals') {
-            pl_render('general-journals', ['title' => 'General journals', 'user' => $user, 'company' => $company, 'list' => pl_list_general_drafts($actorId, $companyId, $bookId, pl_web_id($_GET, 'page', 1))]);
+            pl_render('general-journals', ['title' => 'General journals', 'user' => $user, 'company' => $company, 'filters' => pl_list_filters($_GET, 'general-journals'), 'list' => pl_list_query($actorId, $companyId, $bookId, 'general-journals', $_GET)]);
         }
         $draft = $id ? pl_get_general_draft($actorId, $companyId, $bookId, $id) : null;
         if ($path === '/general-journals/detail') {
@@ -650,8 +650,8 @@ try {
         pl_render('editor', ['title' => $document ? 'Edit draft' : 'New transaction', 'user' => $user, 'company' => $company, 'document' => $document, 'input' => $input, 'form' => $form]);
     }
     if ($path === '/transactions' || $path === '/transactions/detail') {
-        $filters = pl_filters($_GET);
-        $list = pl_list_documents($actorId, $companyId, $bookId, $filters);
+        $filters = pl_list_filters($_GET, 'transactions');
+        $list = pl_list_query($actorId, $companyId, $bookId, 'transactions', $_GET);
         $id = pl_web_id($_GET, 'id');
         if (!$id && $list['documents']) {
             $id = (int) $list['documents'][0]['id'];
@@ -671,8 +671,8 @@ try {
         pl_ledger_date($asOf);
         if ($from !== null && (pl_ledger_date($from) > $asOf)) { throw new DomainException('The activity start date must be on or before its end date.'); }
         $accountId = pl_web_id($_GET, 'id');
-        $activity = $accountId ? pl_account_activity($actorId, $companyId, $bookId, $accountId, $asOf, max(1, pl_web_id($_GET, 'page', 1)), $from) : null;
-        pl_render('account', ['title' => $activity ? 'Account statement' : 'Account ledger', 'user' => $user, 'company' => $company, 'activity' => $activity, 'asOf' => $asOf, 'from' => $from]);
+        $activity = $accountId ? pl_list_query($actorId, $companyId, $bookId, 'account', $_GET) : null;
+        pl_render('account', ['title' => $activity ? 'Account statement' : 'Account ledger', 'user' => $user, 'company' => $company, 'activity' => $activity, 'asOf' => $asOf, 'from' => $from, 'filters' => pl_list_filters($_GET, 'account') + ['id' => $accountId, 'as_of' => $asOf, 'from' => $from]]);
     }
     // The remaining method-checked route is /journals/detail.
     $journal = pl_get_journal($actorId, $companyId, $bookId, pl_web_id($_GET, 'id'));

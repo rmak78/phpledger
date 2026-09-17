@@ -49,6 +49,7 @@ function assert_throws(callable $action, string $class = Throwable::class, ?stri
 $suites = ['auth_test.php', 'ledger_test.php', 'concurrency_test.php', 'document_test.php', 'regional_test.php', 'report_test.php', 'pos_test.php', 'core_test.php', 'opening_test.php', 'period_test.php', 'reconciliation_test.php', 'core_completion_test.php', 'module_test.php', 'installer_test.php', 'connection_test.php', 'demo_pack_test.php'];
 $suites = array_merge($suites, ['currency_test.php', 'party_test.php', 'outbound_test.php', 'open_item_test.php', 'correction_test.php']);
 $suites = array_merge($suites, ['ar_ap_test.php','inventory_test.php','purchasing_test.php','opening_conversion_test.php','tax_test.php','starter_module_test.php','starter_demo_test.php','shell_test.php']);
+$suites[] = 'list_test.php';
 if (($argv[1] ?? '') === '--suite=starter') {
     $suites = ['ledger_test.php','concurrency_test.php','ar_ap_test.php','inventory_test.php','purchasing_test.php','opening_test.php','opening_conversion_test.php','tax_test.php','starter_module_test.php','starter_demo_test.php'];
 }
@@ -66,6 +67,9 @@ if (($argv[1] ?? '') === '--suite=demo-packs') {
 }
 if (($argv[1] ?? '') === '--suite=shell') {
     $suites = ['shell_test.php'];
+}
+if (($argv[1] ?? '') === '--suite=lists') {
+    $suites = ['ledger_test.php', 'list_test.php'];
 }
 foreach ($suites as $suite) {
     if (is_file(__DIR__ . '/' . $suite)) {

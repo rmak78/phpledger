@@ -33,6 +33,7 @@ $lastPage = ($activity['page'] ?? 1) === ($activity['pages'] ?? 1);
         <div class="field"><label for="activity-from">From date <span class="optional">optional</span></label><input id="activity-from" name="from" type="date" value="<?= pl_e($statementFrom ?? '') ?>"></div>
         <div class="field"><label for="activity-date">Through date</label><input id="activity-date" name="as_of" type="date" required value="<?= pl_e($asOf) ?>"></div>
         <button class="button secondary" type="submit"><?= $activity ? 'Update statement' : 'Open statement' ?></button>
+        <?php pl_ui_list_controls($filters); ?>
         <?php if ($activity): ?><a class="button secondary" href="<?= pl_e(pl_url('/reports/export', ['report' => 'account', 'account_id' => $activity['account']['id'], 'from' => $statementFrom ?? '', 'to' => $asOf])) ?>">Export all pages CSV</a><?php endif; ?>
     </form>
 
@@ -51,9 +52,9 @@ $lastPage = ($activity['page'] ?? 1) === ($activity['pages'] ?? 1);
     <?php endif; ?>
 
     <div class="panel table-wrap statement-table-wrap" tabindex="0" role="region" aria-label="Account statement entries; scroll horizontally on smaller screens">
-        <table class="data-table account-ledger-table" data-ledger-table="account" data-account-id="<?= (int) $activity['account']['id'] ?>" data-as-of="<?= pl_e($asOf) ?>" data-from="<?= pl_e($statementFrom ?? '') ?>">
+        <table class="table account-ledger-table">
             <caption>Posted entries in <?= pl_e((string) $company['currency']) ?> &middot; Date, journal and line order</caption>
-            <thead><tr><th scope="col">Date</th><th scope="col">Journal</th><th scope="col">Description</th><th scope="col">Source</th><th scope="col" class="amount">Debit</th><th scope="col" class="amount">Credit</th><th scope="col" class="amount">Running balance</th></tr></thead>
+            <thead><tr><th scope="col"><?php pl_ui_sort('/reports/account', $filters, 'date', 'Date'); ?></th><th scope="col"><?php pl_ui_sort('/reports/account', $filters, 'journal', 'Journal'); ?></th><th scope="col"><?php pl_ui_sort('/reports/account', $filters, 'description', 'Description'); ?></th><th scope="col"><?php pl_ui_sort('/reports/account', $filters, 'source', 'Source'); ?></th><th scope="col" class="amount"><?php pl_ui_sort('/reports/account', $filters, 'debit', 'Debit'); ?></th><th scope="col" class="amount"><?php pl_ui_sort('/reports/account', $filters, 'credit', 'Credit'); ?></th><th scope="col" class="amount"><?php pl_ui_sort('/reports/account', $filters, 'balance', 'Running balance'); ?></th></tr></thead>
             <tbody>
                 <tr class="statement-forward-row">
                     <th colspan="6" scope="row"><?= $firstPage ? 'Opening balance' : 'Brought forward from previous page' ?><span class="row-secondary"><?= $firstPage ? ($statementFrom !== null ? 'Before ' . pl_e(pl_date_label($statementFrom)) : 'Before recorded history') : 'Balance before the first entry on this page' ?></span></th>
@@ -80,9 +81,9 @@ $lastPage = ($activity['page'] ?? 1) === ($activity['pages'] ?? 1);
 
     <?php if ($activity['movements'] !== []): ?>
         <nav class="actions statement-pagination" aria-label="Account statement pages">
-            <?php if (!$firstPage): ?><a class="button secondary" href="<?= pl_e(pl_url('/reports/account', ['id' => $activity['account']['id'], 'as_of' => $asOf, 'from' => $statementFrom, 'page' => $activity['page'] - 1])) ?>">Previous page</a><?php endif; ?>
+            <?php if (!$firstPage): ?><a class="button secondary" href="<?= pl_e(pl_url('/reports/account', array_replace($filters, ['page' => $activity['page'] - 1]))) ?>">Previous page</a><?php endif; ?>
             <p class="muted">Page <?= pl_e((string) $activity['page']) ?> of <?= pl_e((string) $activity['pages']) ?> &middot; <?= pl_e((string) $activity['total']) ?> posted lines</p>
-            <?php if (!$lastPage): ?><a class="button secondary" href="<?= pl_e(pl_url('/reports/account', ['id' => $activity['account']['id'], 'as_of' => $asOf, 'from' => $statementFrom, 'page' => $activity['page'] + 1])) ?>">Next page</a><?php endif; ?>
+            <?php if (!$lastPage): ?><a class="button secondary" href="<?= pl_e(pl_url('/reports/account', array_replace($filters, ['page' => $activity['page'] + 1]))) ?>">Next page</a><?php endif; ?>
         </nav>
     <?php endif; ?>
 </section>

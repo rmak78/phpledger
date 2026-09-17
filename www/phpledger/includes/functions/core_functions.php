@@ -245,11 +245,16 @@ function pl_list_general_drafts(int $actorId, int $companyId, int $bookId, int $
     $search = pl_ledger_text($options['search'] ?? '', 'Search', 160, false);
     $where = ' FROM pl_effective_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = %i AND d.book_id = %i';
     $args = [$companyId, $bookId];
+    $status = $options['status'] ?? 'all';
+    if (!in_array($status, ['all','draft','posted','reversed'], true)) { throw new DomainException('Choose a valid journal status.'); }
+    if ($status === 'draft') { $where .= ' AND d.journal_id IS NULL'; }
+    elseif ($status === 'posted') { $where .= ' AND d.journal_id IS NOT NULL AND r.id IS NULL'; }
+    elseif ($status === 'reversed') { $where .= ' AND r.id IS NOT NULL'; }
     if ($search !== '') {
         $where .= ' AND (LOCATE(%s, d.description) > 0 OR LOCATE(%s, d.reference) > 0 OR LOCATE(%s, CONCAT(\'GJ-\', LPAD(d.id, 6, \'0\'))) > 0)';
         array_push($args, $search, $search, strtoupper($search));
     }
-    $filtered = $search === '' ? $total : (int) DB::queryFirstField('SELECT COUNT(*)' . $where, ...$args);
+    $filtered = $search === '' && $status === 'all' ? $total : (int) DB::queryFirstField('SELECT COUNT(*)' . $where, ...$args);
     $pages = max(1, (int) ceil($filtered / $size));
     $page = min($pages, max(1, $page));
     $order = pl_table_order($options, ['date' => 'd.document_date', 'description' => 'd.description', 'status' => "CASE WHEN d.journal_id IS NULL THEN 'draft' WHEN r.id IS NOT NULL THEN 'reversed' ELSE 'posted' END"], 'd.document_date DESC, d.id DESC', 'd.id DESC');

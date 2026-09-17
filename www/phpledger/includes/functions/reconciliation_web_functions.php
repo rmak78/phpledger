@@ -100,7 +100,8 @@ function pl_web_reconciliation(int $actorId, int $companyId, int $bookId, array 
     $statements = DB::query('SELECT s.id, s.reference, s.start_date, s.end_date, s.closing_balance, s.status, a.name AS account_name FROM pl_bank_statements s JOIN pl_accounts a ON a.id = s.account_id WHERE s.company_id = %i AND s.book_id = %i ORDER BY s.id DESC LIMIT 51 OFFSET %i', $companyId, $bookId, ($page - 1) * 50);
     $hasMore = count($statements) > 50;
     $statements = array_slice($statements, 0, 50);
-    $statement = $statementId > 0 ? pl_bank_get_statement($actorId, $companyId, $bookId, $statementId) : null;
+    $listFilters = pl_list_filters($_GET, 'bank') + ['id' => $statementId];
+    $statement = $statementId > 0 ? pl_list_query($actorId, $companyId, $bookId, 'bank', array_replace($_GET, ['statement_id' => $statementId])) : null;
     $summary = $statement ? pl_bank_reconciliation_summary($actorId, $companyId, $bookId, $statementId) : null;
     $selectedRowId = pl_web_id($_GET, 'row');
     $candidatePage = min(1000000, max(1, pl_web_id($_GET, 'candidate_page', 1)));
@@ -113,5 +114,5 @@ function pl_web_reconciliation(int $actorId, int $companyId, int $bookId, array 
             $selectedRow = $row;
         }
     }
-    pl_render('bank-reconciliation', ['title' => 'Bank reconciliation', 'user' => $user, 'company' => $company, 'form' => $form, 'input' => $input, 'preview' => $preview, 'accounts' => $accounts, 'statements' => $statements, 'statement' => $statement, 'summary' => $summary, 'selectedRow' => $selectedRow, 'candidates' => $candidates, 'candidatePage' => $candidatePage, 'outstandingPage' => $outstandingPage, 'outstandingLines' => $outstandingLines, 'page' => $page, 'hasMore' => $hasMore]);
+    pl_render('bank-reconciliation', ['title' => 'Bank reconciliation', 'user' => $user, 'company' => $company, 'form' => $form, 'input' => $input, 'preview' => $preview, 'accounts' => $accounts, 'statements' => $statements, 'statement' => $statement, 'summary' => $summary, 'selectedRow' => $selectedRow, 'candidates' => $candidates, 'candidatePage' => $candidatePage, 'outstandingPage' => $outstandingPage, 'outstandingLines' => $outstandingLines, 'page' => $page, 'hasMore' => $hasMore, 'filters' => $listFilters]);
 }
