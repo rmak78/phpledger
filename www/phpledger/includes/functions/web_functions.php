@@ -258,17 +258,22 @@ function pl_can_write(array $company): bool
 /** A no-JavaScript line action preserves incomplete fields without saving a draft. */
 function pl_web_journal_line_action(array $input): array
 {
+    return pl_web_line_action($input);
+}
+
+function pl_web_line_action(array $input): array
+{
     $lines = $input['lines'] ?? [];
     if (!is_array($lines) || count($lines) > 100 || count(array_filter($lines, 'is_array')) !== count($lines)) {
-        throw new DomainException('Use up to 100 journal lines.');
+        throw new DomainException('Use up to 100 document lines.');
     }
     $lines = array_values($lines);
     if (pl_web_text($input, 'editor_action') === 'add_line') {
-        if (count($lines) >= 100) { throw new DomainException('A journal supports up to 100 lines.'); }
+        if (count($lines) >= 100) { throw new DomainException('A document supports up to 100 lines.'); }
         $lines[] = [];
     } elseif (isset($input['remove_line'])) {
         $index = pl_web_text($input, 'remove_line');
-        if ($index === '' || !ctype_digit($index) || !array_key_exists((int) $index, $lines)) { throw new DomainException('Choose a current journal line.'); }
+        if ($index === '' || !ctype_digit($index) || !array_key_exists((int) $index, $lines)) { throw new DomainException('Choose a current document line.'); }
         array_splice($lines, (int) $index, 1);
     } else { throw new DomainException('Choose an add or remove line action.'); }
     $input['lines'] = $lines ?: [[]];

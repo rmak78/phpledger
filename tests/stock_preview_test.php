@@ -1,6 +1,20 @@
 <?php
 declare(strict_types=1);
 
+test('purchase order editor confirms current values atomically and retries without a journal', function (): void {
+    $f=purchasing_fixture();
+    $input=['party_id'=>$f['party_id'],'date'=>'2026-01-05','currency'=>'USD','reference'=>'Editor proof','creation_key'=>bin2hex(random_bytes(16)),
+        'lines'=>[['product_id'=>$f['product_id'],'description'=>'Synthetic goods','quantity'=>'2','unit_price'=>'1.2345']]];
+    $order=pl_save_and_confirm_purchase_order($f['actor_id'],$f['company_id'],$f['book_id'],$input);
+    assert_same('confirmed',$order['status']); assert_same('2.4690',$order['total']);
+    assert_true($order==pl_save_and_confirm_purchase_order($f['actor_id'],$f['company_id'],$f['book_id'],$input));
+    assert_same(1,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_purchase_orders WHERE book_id=%i',$f['book_id']));
+    assert_same(0,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id=%i',$f['book_id']));
+    $input['creation_key']=bin2hex(random_bytes(16)); $input['lines'][]=$input['lines'][0];
+    assert_throws(fn()=>pl_save_and_confirm_purchase_order($f['actor_id'],$f['company_id'],$f['book_id'],$input),DomainException::class,'each product once');
+    assert_same(1,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_purchase_orders WHERE book_id=%i',$f['book_id']));
+});
+
 test('goods receipt preview shares exact stock and GRNI amounts with posting and remains read-only', function (): void {
     $f=purchasing_fixture(); $order=purchasing_order($f,'10','1.2345');
     $input=purchasing_receipt_input($f,$order,'3');

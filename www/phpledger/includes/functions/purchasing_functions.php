@@ -132,6 +132,17 @@ function pl_confirm_purchase_order(int $actorId, int $companyId, int $bookId, in
     });
 }
 
+/** Confirm exactly the editor values in one transaction, with a durable retry receipt. */
+function pl_save_and_confirm_purchase_order(int $actorId,int $companyId,int $bookId,array $input,?int $id=null,?int $revision=null): array
+{
+    $key=pl_ledger_text($input['creation_key']??null,'Order request identity',128);
+    return pl_purchase_command($actorId,$companyId,$bookId,'editor_confirm','editor-confirm:'.hash('sha256',$key),[$id,$revision,$input],
+        function () use ($actorId,$companyId,$bookId,$input,$id,$revision,$key): array {
+            $draft=pl_save_purchase_order($actorId,$companyId,$bookId,$input,$id,$revision);
+            return pl_confirm_purchase_order($actorId,$companyId,$bookId,$draft['id'],$draft['revision'],'editor-confirm-order:'.hash('sha256',$key));
+        });
+}
+
 function pl_cancel_purchase_order(int $actorId, int $companyId, int $bookId, int $id, int $revision, string $reason, string $key): array
 {
     $reason = pl_ledger_text($reason, 'Cancellation reason', 500);

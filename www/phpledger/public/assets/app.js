@@ -591,6 +591,63 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
     window.addEventListener('pageshow', update);
     update();
 })();
+document.querySelectorAll('[data-commercial-form]').forEach(form => {
+    const body = form.querySelector('[data-commercial-rows]');
+    if (!body) return;
+    const template = body.firstElementChild.cloneNode(true);
+    const parse = value => {
+        const match = /^(0|[1-9]\d{0,15})(?:\.(\d{1,4}))?$/.exec(value.trim());
+        return match ? BigInt(match[1]) * 10000n + BigInt((match[2] || '').padEnd(4, '0')) : null;
+    };
+    const format = value => `${value / 10000n}.${(value % 10000n).toString().padStart(4, '0')}`;
+    let dirty = false;
+    const update = () => {
+        let total = 0n, valid = true;
+        [...body.children].forEach((row, index) => {
+            row.querySelectorAll('[data-commercial-field]').forEach(control => {
+                const field = control.dataset.commercialField;
+                control.name = `lines[${index}][${field}]`;
+                control.id = `commercial-${index}-${field}`;
+                const label = control.previousElementSibling;
+                label.htmlFor = control.id;
+                label.textContent = `${label.dataset.commercialLabel}, line ${index + 1}`;
+            });
+            const remove = row.querySelector('[data-remove-commercial-row]');
+            remove.value = index; remove.setAttribute('aria-label', `Remove line ${index + 1}`);
+            const quantity = parse(row.querySelector('[data-commercial-field=quantity]').value);
+            const price = parse(row.querySelector('[data-commercial-field=unit_price]').value);
+            const empty = [...row.querySelectorAll('[data-commercial-field]')].every(control => control.value === '');
+            const amount = quantity === null || price === null ? null : (quantity * price + 5000n) / 10000n;
+            row.querySelector('[data-commercial-amount]').textContent = amount === null ? '—' : format(amount);
+            if (amount !== null) total += amount; else if (!empty) valid = false;
+        });
+        const message = form.querySelector('[data-commercial-total]');
+        message.textContent = valid ? `Entered total ${format(total)} · Server validation applies when saving.` : 'Complete each entered quantity and unit price to calculate the total.';
+        const grand = form.querySelector('[data-fold="document total"] dd');
+        if (grand) grand.textContent = valid ? format(total) : '—';
+        const label = form.querySelector('[data-fold="document total"] dt');
+        if (label) label.textContent = `Total order value (${form.elements.namedItem('currency').value.toUpperCase()})`;
+    };
+    form.addEventListener('click', event => {
+        const add = event.target.closest('[data-add-commercial-row]');
+        const remove = event.target.closest('[data-remove-commercial-row]');
+        if (!add && !remove) return;
+        event.preventDefault();
+        if (add && body.children.length >= 100) { form.querySelector('[data-commercial-total]').textContent = 'A document supports up to 100 lines.'; return; }
+        if (remove) remove.closest('[data-commercial-row]').remove();
+        if (add || body.children.length === 0) {
+            const row = template.cloneNode(true);
+            row.querySelectorAll('input,select').forEach(control => { control.value = ''; });
+            body.append(row); update(); row.querySelector('input,select').focus();
+        } else { update(); (body.children[Math.min(Number(remove.value), body.children.length - 1)].querySelector('input,select')).focus(); }
+        dirty = true;
+    });
+    form.addEventListener('input', () => { dirty = true; update(); });
+    form.addEventListener('submit', () => { dirty = false; });
+    window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
+    update();
+});
+
 document.querySelectorAll('[data-reviewed-form]').forEach(form => {
     form.addEventListener('input', event => {
         if (event.target.name === 'confirmed') return;

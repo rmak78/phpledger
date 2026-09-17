@@ -11,9 +11,14 @@ function pl_web_starter_purchasing(int $actorId, int $companyId, int $bookId, ar
         try {
             $action = pl_web_text($_POST, 'action'); $key = pl_web_text($_POST, 'request_key');
             if ($action === 'save') {
+                if (pl_web_text($_POST,'editor_action')==='add_line' || isset($_POST['remove_line'])) {
+                    pl_require_module($actorId,$companyId,$bookId,'purchasing');
+                    pl_form_failure(pl_url($path,['id'=>$id?:null,'new'=>$id?null:'1']),pl_web_line_action($_POST),'',200);
+                }
                 $lines = [];
                 foreach (pl_starter_lines($_POST) as $line) { $lines[] = array_intersect_key($line, array_flip(['product_id', 'description', 'quantity', 'unit_price'])); }
-                $order = pl_save_purchase_order($actorId, $companyId, $bookId, ['party_id' => pl_web_id($_POST, 'party_id'), 'date' => pl_web_text($_POST, 'date'), 'currency' => strtoupper(pl_web_text($_POST, 'currency')), 'reference' => pl_web_text($_POST, 'reference'), 'notes' => pl_web_text($_POST, 'notes'), 'creation_key' => $key, 'lines' => $lines], $id ?: null, $id ? pl_web_id($_POST, 'revision') : null);
+                $save=pl_web_text($_POST,'editor_action')==='confirm_order'?'pl_save_and_confirm_purchase_order':'pl_save_purchase_order';
+                $order = $save($actorId, $companyId, $bookId, ['party_id' => pl_web_id($_POST, 'party_id'), 'date' => pl_web_text($_POST, 'date'), 'currency' => strtoupper(pl_web_text($_POST, 'currency')), 'reference' => pl_web_text($_POST, 'reference'), 'notes' => pl_web_text($_POST, 'notes'), 'creation_key' => $key, 'lines' => $lines], $id ?: null, $id ? pl_web_id($_POST, 'revision') : null);
                 $id = $order['id'];
             } elseif ($action === 'confirm') {
                 pl_confirm_purchase_order($actorId, $companyId, $bookId, $id, pl_web_id($_POST, 'revision'), $key);

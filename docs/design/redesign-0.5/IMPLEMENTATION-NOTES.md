@@ -282,3 +282,23 @@ Home's use of that service needs review alongside list-performance work.
   stale-review rejection passed; both folds, portrait and phone had no overflow.
 - No migration. Purchase-order editor/list fidelity and complete route acceptance
   remain pending. No external or hosted system changed for this checkpoint.
+
+## Purchase-order editor checkpoint
+
+- Replaced fixed blank fieldsets with the shared compact commercial-line helper.
+  A new order starts with one row; add/remove retains incomplete input with or
+  without JavaScript. Exact BigInt display totals use four-decimal rounding;
+  saving still calculates authoritative amounts in the purchasing service.
+- Save and confirm actions stay in the document header. Confirming from the editor
+  saves those exact values and confirms the order atomically, with a durable retry
+  receipt. Confirmation creates no journal; receipt/billing remain separate.
+- JS editing warns before leaving unsaved work. Removing a row restores keyboard
+  focus. Narrow action wrapping and positioning within the table's scroll region
+  prevent screen-reader labels from creating horizontal page overflow.
+- Targeted purchasing/inventory suite: 63 tests, zero failures. Existing editor
+  regression suite: 34 tests, zero failures. PHP lint (192 files), static analysis,
+  JS syntax and CSS compilation passed; final shared-line markup linted again.
+- Browser JS/no-JS checks passed: one row, incomplete-input preservation, add/remove,
+  exact displayed/saved totals, save and confirm; both folds plus portrait and phone.
+- No migration. Invoices, bills and credits still need the shared editor port and
+  their complete tax/posting previews; the full release acceptance matrix is open.
