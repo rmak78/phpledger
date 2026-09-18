@@ -1,0 +1,685 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "ceb81e6421e4529e866e969aac4967d9291bb483f9b363e3ff87411ff6167541",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/vn",
+  "country_code": "VN",
+  "country_name": "Vietnam",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Vietnam - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_vn' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "General Solutions",
+    "module": "l10n_vn",
+    "module_name": "Vietnam - Accounting",
+    "module_version": "2.0.3",
+    "contributing_modules": [
+      "l10n_vn"
+    ],
+    "template_code": "vn",
+    "template_chain": [
+      "vn"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_vn/data/template/account.account-vn.csv",
+        "sha256": "85b1e7c97943ea209da1ab223a929bdf235cc02a408370767226fd183599ca0b",
+        "rows": 216
+      },
+      {
+        "path": "addons/l10n_vn/data/template/account.group-vn.csv",
+        "sha256": "86efce63daef21a5a29b19965e6504c1a21756c3f38815ea2483e743e03de984",
+        "rows": 106
+      }
+    ],
+    "python_files": [
+      "addons/l10n_vn/models/template_vn.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "4",
+    "anglo_saxon_accounting": true,
+    "account_code_prefixes": {
+      "bank": "112",
+      "cash": "111",
+      "transfer": "113"
+    },
+    "default_sale_tax": "tax_sale_vat10",
+    "default_purchase_tax": "tax_purchase_vat10",
+    "tax_calculation_rounding_method": "round_per_line"
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "chart1311",
+        "code": "1311",
+        "name": "Trade receivables - short term",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "chart3311",
+        "code": "3311",
+        "name": "Trade payables - short term",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "chart5111",
+        "code": "511",
+        "name": "Revenue from sales and services",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "chart632",
+        "code": "632",
+        "name": "Costs of goods sold",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "chart152",
+        "code": "152",
+        "name": "Raw materials",
+        "resolved": true
+      },
+      {
+        "source_field": "property_stock_valuation_account_id",
+        "source_id": "chart1551",
+        "code": "155",
+        "name": "Finished Goods",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "chart1311",
+        "code": "1311",
+        "name": "Trade receivables - short term",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "chart1121",
+        "code": "1121",
+        "name": "Bank Suspense Account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "chart515",
+        "code": "515",
+        "name": "Financial income",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "chart635",
+        "code": "635",
+        "name": "Financial expenses",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "chart711",
+        "code": "711",
+        "name": "Other Income",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "chart811",
+        "code": "811",
+        "name": "Other Expenses",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "chart515",
+        "code": "515",
+        "name": "Financial income",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "chart635",
+        "code": "635",
+        "name": "Financial expenses",
+        "resolved": true
+      }
+    ],
+    "production_wip": [
+      {
+        "source_field": "account_production_wip_account_id",
+        "source_id": "chart1541",
+        "code": "1541",
+        "name": "Work in Progress - Short term",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "chart2421",
+        "code": "2421",
+        "name": "Expenses waiting for allocation - short term",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "chart33871",
+        "code": "33871",
+        "name": "Unearned revenue - short term",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 216,
+    "posting_accounts": 216,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 89,
+      "equity": 14,
+      "expense": 37,
+      "income": 4,
+      "liability": 72
+    },
+    "by_subtype": {
+      "cash_bank": 3,
+      "current_asset": 27,
+      "current_liability": 40,
+      "depreciation": 3,
+      "direct_cost": 15,
+      "equity": 13,
+      "expense": 19,
+      "fixed_asset": 3,
+      "income": 3,
+      "non_current_asset": 37,
+      "other_income": 1,
+      "payable": 32,
+      "prepayment": 2,
+      "receivable": 17,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 3,
+      "expense": 1,
+      "income": 1,
+      "payables": 32,
+      "receivables": 17
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "vi_VN"
+    ],
+    "groups": 106
+  },
+  "groups": [
+    {"source_id": "l10n_vn_group_111", "code_prefix_start": "111", "code_prefix_end": "111", "name": "Cash", "translations": {"vi": "Tiền mặt"}, "parent_source_id": null, "path": ["Cash"]},
+    {"source_id": "l10n_vn_group_112", "code_prefix_start": "112", "code_prefix_end": "112", "name": "Demand Deposit", "translations": {"vi": "Tiền gửi không kỳ hạn"}, "parent_source_id": null, "path": ["Demand Deposit"]},
+    {"source_id": "l10n_vn_group_113", "code_prefix_start": "113", "code_prefix_end": "113", "name": "Money in transit", "translations": {"vi": "Tiền đang chuyển"}, "parent_source_id": null, "path": ["Money in transit"]},
+    {"source_id": "l10n_vn_group_121", "code_prefix_start": "121", "code_prefix_end": "121", "name": "Trading Securities", "translations": {"vi": "Chứng khoán kinh doanh"}, "parent_source_id": null, "path": ["Trading Securities"]},
+    {"source_id": "l10n_vn_group_128", "code_prefix_start": "128", "code_prefix_end": "128", "name": "Investment held to maturity", "translations": {"vi": "Đầu tư nắm giữ đến ngày đáo hạn"}, "parent_source_id": null, "path": ["Investment held to maturity"]},
+    {"source_id": "l10n_vn_group_131", "code_prefix_start": "131", "code_prefix_end": "131", "name": "Trade receivables", "translations": {"vi": "Phải thu của khách hàng"}, "parent_source_id": null, "path": ["Trade receivables"]},
+    {"source_id": "l10n_vn_group_133", "code_prefix_start": "133", "code_prefix_end": "133", "name": "Deductible VAT", "translations": {"vi": "Thuế GTGT được khấu trừ"}, "parent_source_id": null, "path": ["Deductible VAT"]},
+    {"source_id": "l10n_vn_group_136", "code_prefix_start": "136", "code_prefix_end": "136", "name": "Internal Receivables", "translations": {"vi": "Phải thu nội bộ"}, "parent_source_id": null, "path": ["Internal Receivables"]},
+    {"source_id": "l10n_vn_group_138", "code_prefix_start": "138", "code_prefix_end": "138", "name": "Other receivables", "translations": {"vi": "Phải thu khác"}, "parent_source_id": null, "path": ["Other receivables"]},
+    {"source_id": "l10n_vn_group_141", "code_prefix_start": "141", "code_prefix_end": "141", "name": "Advances", "translations": {"vi": "Tạm ứng"}, "parent_source_id": null, "path": ["Advances"]},
+    {"source_id": "l10n_vn_group_151", "code_prefix_start": "151", "code_prefix_end": "151", "name": "Goods in transit", "translations": {"vi": "Hàng mua đang đi đường"}, "parent_source_id": null, "path": ["Goods in transit"]},
+    {"source_id": "l10n_vn_group_152", "code_prefix_start": "152", "code_prefix_end": "152", "name": "Raw materials", "translations": {"vi": "Nguyên liệu, vật liệu"}, "parent_source_id": null, "path": ["Raw materials"]},
+    {"source_id": "l10n_vn_group_153", "code_prefix_start": "153", "code_prefix_end": "153", "name": "Tools & supplies", "translations": {"vi": "Công cụ, dụng cụ"}, "parent_source_id": null, "path": ["Tools & supplies"]},
+    {"source_id": "l10n_vn_group_154", "code_prefix_start": "154", "code_prefix_end": "154", "name": "Work in Progress", "translations": {"vi": "Chi phí sản xuất, kinh doanh dở dang"}, "parent_source_id": null, "path": ["Work in Progress"]},
+    {"source_id": "l10n_vn_group_155", "code_prefix_start": "155", "code_prefix_end": "155", "name": "Finished Goods", "translations": {"vi": "Sản phẩm"}, "parent_source_id": null, "path": ["Finished Goods"]},
+    {"source_id": "l10n_vn_group_156", "code_prefix_start": "156", "code_prefix_end": "156", "name": "Goods", "translations": {"vi": "Hàng hoá"}, "parent_source_id": null, "path": ["Goods"]},
+    {"source_id": "l10n_vn_group_157", "code_prefix_start": "157", "code_prefix_end": "157", "name": "Outward goods on consignment", "translations": {"vi": "Hàng gửi đi bán"}, "parent_source_id": null, "path": ["Outward goods on consignment"]},
+    {"source_id": "l10n_vn_group_158", "code_prefix_start": "158", "code_prefix_end": "158", "name": "Goods in bonded warehouse", "translations": {"vi": "Hàng hóa kho bảo thuế"}, "parent_source_id": null, "path": ["Goods in bonded warehouse"]},
+    {"source_id": "l10n_vn_group_171", "code_prefix_start": "171", "code_prefix_end": "171", "name": "Government bonds purchase-resale", "translations": {"vi": "Giao dịch mua bán lại trái phiếu chính phủ"}, "parent_source_id": null, "path": ["Government bonds purchase-resale"]},
+    {"source_id": "l10n_vn_group_211", "code_prefix_start": "211", "code_prefix_end": "211", "name": "Tangile fixed assets", "translations": {"vi": "Tài sản cố định hữu hình"}, "parent_source_id": null, "path": ["Tangile fixed assets"]},
+    {"source_id": "l10n_vn_group_212", "code_prefix_start": "212", "code_prefix_end": "212", "name": "Financial leased tangible fixed assets", "translations": {"vi": "Tài sản cố định thuê tài chính"}, "parent_source_id": null, "path": ["Financial leased tangible fixed assets"]},
+    {"source_id": "l10n_vn_group_213", "code_prefix_start": "213", "code_prefix_end": "213", "name": "Intangible fixed assets", "translations": {"vi": "Tài sản cố định vô hình"}, "parent_source_id": null, "path": ["Intangible fixed assets"]},
+    {"source_id": "l10n_vn_group_214", "code_prefix_start": "214", "code_prefix_end": "214", "name": "Depreciation of fixed assets", "translations": {"vi": "Hao mòn TSCĐ"}, "parent_source_id": null, "path": ["Depreciation of fixed assets"]},
+    {"source_id": "l10n_vn_group_215", "code_prefix_start": "215", "code_prefix_end": "215", "name": "Biology Asset", "translations": {"vi": "Tài sản sinh học"}, "parent_source_id": null, "path": ["Biology Asset"]},
+    {"source_id": "l10n_vn_group_217", "code_prefix_start": "217", "code_prefix_end": "217", "name": "Investment properties", "translations": {"vi": "Bất động sản đầu tư"}, "parent_source_id": null, "path": ["Investment properties"]},
+    {"source_id": "l10n_vn_group_221", "code_prefix_start": "221", "code_prefix_end": "221", "name": "Investment in subsidiaries", "translations": {"vi": "Đầu tư vào công ty con"}, "parent_source_id": null, "path": ["Investment in subsidiaries"]},
+    {"source_id": "l10n_vn_group_222", "code_prefix_start": "222", "code_prefix_end": "222", "name": "Investment in joint ventures and associates", "translations": {"vi": "Đầu tư vào công ty liên doanh, liên kết"}, "parent_source_id": null, "path": ["Investment in joint ventures and associates"]},
+    {"source_id": "l10n_vn_group_228", "code_prefix_start": "228", "code_prefix_end": "228", "name": "Other Investment", "translations": {"vi": "Đầu tư khác"}, "parent_source_id": null, "path": ["Other Investment"]},
+    {"source_id": "l10n_vn_group_229", "code_prefix_start": "229", "code_prefix_end": "229", "name": "Provision for asset loss", "translations": {"vi": "Dự phòng tổn thất tài sản"}, "parent_source_id": null, "path": ["Provision for asset loss"]},
+    {"source_id": "l10n_vn_group_241", "code_prefix_start": "241", "code_prefix_end": "241", "name": "Construction in progress", "translations": {"vi": "Xây dựng cơ bản dở dang"}, "parent_source_id": null, "path": ["Construction in progress"]},
+    {"source_id": "l10n_vn_group_242", "code_prefix_start": "242", "code_prefix_end": "242", "name": "Expenses waiting for allocation", "translations": {"vi": "Chi phí chờ phân bổ"}, "parent_source_id": null, "path": ["Expenses waiting for allocation"]},
+    {"source_id": "l10n_vn_group_243", "code_prefix_start": "243", "code_prefix_end": "243", "name": "Deferred tax assets", "translations": {"vi": "Tài sản thuế thu nhập hoãn lại"}, "parent_source_id": null, "path": ["Deferred tax assets"]},
+    {"source_id": "l10n_vn_group_244", "code_prefix_start": "244", "code_prefix_end": "244", "name": "Deposits", "translations": {"vi": "Ký quỹ, ký cược"}, "parent_source_id": null, "path": ["Deposits"]},
+    {"source_id": "l10n_vn_group_331", "code_prefix_start": "331", "code_prefix_end": "331", "name": "Trade payables", "translations": {"vi": "Phải trả cho người bán"}, "parent_source_id": null, "path": ["Trade payables"]},
+    {"source_id": "l10n_vn_group_332", "code_prefix_start": "332", "code_prefix_end": "332", "name": "Divident payable", "translations": {"vi": "Phải trả cổ tức, lợi nhuận"}, "parent_source_id": null, "path": ["Divident payable"]},
+    {"source_id": "l10n_vn_group_333", "code_prefix_start": "333", "code_prefix_end": "333", "name": "Taxes and amount payable to Government", "translations": {"vi": "Thuế và các khoản phải nộp Nhà nước"}, "parent_source_id": null, "path": ["Taxes and amount payable to Government"]},
+    {"source_id": "l10n_vn_group_334", "code_prefix_start": "334", "code_prefix_end": "334", "name": "Employees payable", "translations": {"vi": "Phải trả người lao động"}, "parent_source_id": null, "path": ["Employees payable"]},
+    {"source_id": "l10n_vn_group_335", "code_prefix_start": "335", "code_prefix_end": "335", "name": "Accrued expenses", "translations": {"vi": "Chi phí phải trả"}, "parent_source_id": null, "path": ["Accrued expenses"]},
+    {"source_id": "l10n_vn_group_336", "code_prefix_start": "336", "code_prefix_end": "336", "name": "Internal Payables", "translations": {"vi": "Phải trả nội bộ"}, "parent_source_id": null, "path": ["Internal Payables"]},
+    {"source_id": "l10n_vn_group_337", "code_prefix_start": "337", "code_prefix_end": "337", "name": "Progress billings for construction contracts", "translations": {"vi": "Thanh toán theo tiến độ hợp đồng xây dựng"}, "parent_source_id": null, "path": ["Progress billings for construction contracts"]},
+    {"source_id": "l10n_vn_group_338", "code_prefix_start": "338", "code_prefix_end": "338", "name": "Other payables", "translations": {"vi": "Phải trả, phải nộp khác"}, "parent_source_id": null, "path": ["Other payables"]},
+    {"source_id": "l10n_vn_group_341", "code_prefix_start": "341", "code_prefix_end": "341", "name": "Borrowings and financial lease", "translations": {"vi": "Vay và nợ thuê tài chính"}, "parent_source_id": null, "path": ["Borrowings and financial lease"]},
+    {"source_id": "l10n_vn_group_343", "code_prefix_start": "343", "code_prefix_end": "343", "name": "Issued bonds", "translations": {"vi": "Trái phiếu phát hành"}, "parent_source_id": null, "path": ["Issued bonds"]},
+    {"source_id": "l10n_vn_group_344", "code_prefix_start": "344", "code_prefix_end": "344", "name": "Deposits received", "translations": {"vi": "Nhận ký quỹ, ký cược"}, "parent_source_id": null, "path": ["Deposits received"]},
+    {"source_id": "l10n_vn_group_347", "code_prefix_start": "347", "code_prefix_end": "347", "name": "Deferred tax liabilities", "translations": {"vi": "Thuế thu nhập hoãn lại phải trả"}, "parent_source_id": null, "path": ["Deferred tax liabilities"]},
+    {"source_id": "l10n_vn_group_352", "code_prefix_start": "352", "code_prefix_end": "352", "name": "Provisions payable", "translations": {"vi": "Dự phòng phải trả"}, "parent_source_id": null, "path": ["Provisions payable"]},
+    {"source_id": "l10n_vn_group_353", "code_prefix_start": "353", "code_prefix_end": "353", "name": "Bonus and Welfare fund", "translations": {"vi": "Quỹ khen thưởng, phúc lợi"}, "parent_source_id": null, "path": ["Bonus and Welfare fund"]},
+    {"source_id": "l10n_vn_group_356", "code_prefix_start": "356", "code_prefix_end": "356", "name": "Science and technology development fund", "translations": {"vi": "Quỹ phát triển khoa học và công nghệ"}, "parent_source_id": null, "path": ["Science and technology development fund"]},
+    {"source_id": "l10n_vn_group_357", "code_prefix_start": "357", "code_prefix_end": "357", "name": "Price stabilization fund", "translations": {"vi": "Quỹ bình ổn giá"}, "parent_source_id": null, "path": ["Price stabilization fund"]},
+    {"source_id": "l10n_vn_group_411", "code_prefix_start": "411", "code_prefix_end": "411", "name": "Owner's equity", "translations": {"vi": "Vốn đầu tư của chủ sở hữu"}, "parent_source_id": null, "path": ["Owner's equity"]},
+    {"source_id": "l10n_vn_group_412", "code_prefix_start": "412", "code_prefix_end": "412", "name": "Revaluation differences on asset", "translations": {"vi": "Chênh lệch đánh giá lại tài sản"}, "parent_source_id": null, "path": ["Revaluation differences on asset"]},
+    {"source_id": "l10n_vn_group_413", "code_prefix_start": "413", "code_prefix_end": "413", "name": "Exchange rate differences", "translations": {"vi": "Chênh lệch tỷ giá hối đoái"}, "parent_source_id": null, "path": ["Exchange rate differences"]},
+    {"source_id": "l10n_vn_group_414", "code_prefix_start": "414", "code_prefix_end": "414", "name": "Investment & development fund", "translations": {"vi": "Quỹ đầu tư phát triển"}, "parent_source_id": null, "path": ["Investment & development fund"]},
+    {"source_id": "l10n_vn_group_418", "code_prefix_start": "418", "code_prefix_end": "418", "name": "Other equity funds", "translations": {"vi": "Các quỹ khác thuộc vốn chủ sở hữu"}, "parent_source_id": null, "path": ["Other equity funds"]},
+    {"source_id": "l10n_vn_group_419", "code_prefix_start": "419", "code_prefix_end": "419", "name": "Stocks bought from oneself", "translations": {"vi": "Cổ phiếu mua lại của chính mình"}, "parent_source_id": null, "path": ["Stocks bought from oneself"]},
+    {"source_id": "l10n_vn_group_421", "code_prefix_start": "421", "code_prefix_end": "421", "name": "Undistributed profit after tax", "translations": {"vi": "Lợi nhuận sau thuế chưa phân phối"}, "parent_source_id": null, "path": ["Undistributed profit after tax"]},
+    {"source_id": "l10n_vn_group_511", "code_prefix_start": "511", "code_prefix_end": "511", "name": "Revenue from sales and services", "translations": {"vi": "Doanh thu bán hàng và cung cấp dịch vụ"}, "parent_source_id": null, "path": ["Revenue from sales and services"]},
+    {"source_id": "l10n_vn_group_515", "code_prefix_start": "515", "code_prefix_end": "515", "name": "Financial income", "translations": {"vi": "Doanh thu hoạt động tài chính"}, "parent_source_id": null, "path": ["Financial income"]},
+    {"source_id": "l10n_vn_group_521", "code_prefix_start": "521", "code_prefix_end": "521", "name": "Sales discounts", "translations": {"vi": "Các khoản giảm trừ doanh thu"}, "parent_source_id": null, "path": ["Sales discounts"]},
+    {"source_id": "l10n_vn_group_621", "code_prefix_start": "621", "code_prefix_end": "621", "name": "Direct raw material costs", "translations": {"vi": "Chi phí nguyên liệu, vật liệu trực tiếp"}, "parent_source_id": null, "path": ["Direct raw material costs"]},
+    {"source_id": "l10n_vn_group_622", "code_prefix_start": "622", "code_prefix_end": "622", "name": "Direct labour costs", "translations": {"vi": "Chi phí nhân công trực tiếp"}, "parent_source_id": null, "path": ["Direct labour costs"]},
+    {"source_id": "l10n_vn_group_627", "code_prefix_start": "627", "code_prefix_end": "627", "name": "Manufacturing overhead cost", "translations": {"vi": "Chi phí sản xuất chung"}, "parent_source_id": null, "path": ["Manufacturing overhead cost"]},
+    {"source_id": "l10n_vn_group_632", "code_prefix_start": "632", "code_prefix_end": "632", "name": "Costs of goods sold", "translations": {"vi": "Giá vốn hàng bán"}, "parent_source_id": null, "path": ["Costs of goods sold"]},
+    {"source_id": "l10n_vn_group_635", "code_prefix_start": "635", "code_prefix_end": "635", "name": "Financial expenses", "translations": {"vi": "Chi phí tài chính"}, "parent_source_id": null, "path": ["Financial expenses"]},
+    {"source_id": "l10n_vn_group_641", "code_prefix_start": "641", "code_prefix_end": "641", "name": "Selling expenses", "translations": {"vi": "Chi phí bán hàng"}, "parent_source_id": null, "path": ["Selling expenses"]},
+    {"source_id": "l10n_vn_group_642", "code_prefix_start": "642", "code_prefix_end": "642", "name": "Management expenses", "translations": {"vi": "Chi phí quản lý doanh nghiệp"}, "parent_source_id": null, "path": ["Management expenses"]},
+    {"source_id": "l10n_vn_group_711", "code_prefix_start": "711", "code_prefix_end": "711", "name": "Other Income", "translations": {"vi": "Thu nhập khác"}, "parent_source_id": null, "path": ["Other Income"]},
+    {"source_id": "l10n_vn_group_811", "code_prefix_start": "811", "code_prefix_end": "811", "name": "Other Expenses", "translations": {"vi": "Chi phí khác"}, "parent_source_id": null, "path": ["Other Expenses"]},
+    {"source_id": "l10n_vn_group_821", "code_prefix_start": "821", "code_prefix_end": "821", "name": "Corporate income tax expenses", "translations": {"vi": "Chi phí thu nhập doanh nghiệp"}, "parent_source_id": null, "path": ["Corporate income tax expenses"]},
+    {"source_id": "l10n_vn_group_911", "code_prefix_start": "911", "code_prefix_end": "911", "name": "Income Summary", "translations": {"vi": "Xác định kết quả kinh doanh"}, "parent_source_id": null, "path": ["Income Summary"]},
+    {"source_id": "l10n_vn_group_1281", "code_prefix_start": "1281", "code_prefix_end": "1281", "name": "Time Deposits", "translations": {"vi": "Tiền gửi có kỳ hạn"}, "parent_source_id": "l10n_vn_group_128", "path": ["Investment held to maturity", "Time Deposits"]},
+    {"source_id": "l10n_vn_group_1282", "code_prefix_start": "1282", "code_prefix_end": "1282", "name": "Bonds", "translations": {"vi": "Trái phiếu"}, "parent_source_id": "l10n_vn_group_128", "path": ["Investment held to maturity", "Bonds"]},
+    {"source_id": "l10n_vn_group_1283", "code_prefix_start": "1283", "code_prefix_end": "1283", "name": "Loan", "translations": {"vi": "Cho vay"}, "parent_source_id": "l10n_vn_group_128", "path": ["Investment held to maturity", "Loan"]},
+    {"source_id": "l10n_vn_group_1288", "code_prefix_start": "1288", "code_prefix_end": "1288", "name": "Securities and other financial instruments", "translations": {"vi": "Các khoản đầu tư khác nắm giữ đến ngày đáo hạn"}, "parent_source_id": "l10n_vn_group_128", "path": ["Investment held to maturity", "Securities and other financial instruments"]},
+    {"source_id": "l10n_vn_group_1361", "code_prefix_start": "1361", "code_prefix_end": "1361", "name": "Working capital provided to sub-units", "translations": {"vi": "Vốn kinh doanh ở các đơn vị trực thuộc"}, "parent_source_id": "l10n_vn_group_136", "path": ["Internal Receivables", "Working capital provided to sub-units"]},
+    {"source_id": "l10n_vn_group_1362", "code_prefix_start": "1362", "code_prefix_end": "1362", "name": "Internal receivables on foreign exchange difference", "translations": {"vi": "Phải thu nội bộ về chênh lệch tỷ giá"}, "parent_source_id": "l10n_vn_group_136", "path": ["Internal Receivables", "Internal receivables on foreign exchange difference"]},
+    {"source_id": "l10n_vn_group_1363", "code_prefix_start": "1363", "code_prefix_end": "1363", "name": "Internal receivables on borrowing costs eligible for capitalization", "translations": {"vi": "Phải thu nội bộ về chi phí đi vay đủ điều kiện được vốn hoá"}, "parent_source_id": "l10n_vn_group_136", "path": ["Internal Receivables", "Internal receivables on borrowing costs eligible for capitalization"]},
+    {"source_id": "l10n_vn_group_1368", "code_prefix_start": "1368", "code_prefix_end": "1368", "name": "Other internal receivables", "translations": {"vi": "Phải thu nội bộ khác"}, "parent_source_id": "l10n_vn_group_136", "path": ["Internal Receivables", "Other internal receivables"]},
+    {"source_id": "l10n_vn_group_1381", "code_prefix_start": "1381", "code_prefix_end": "1381", "name": "Shortage of assets awaiting resolution", "translations": {"vi": "Tài sản thiếu chờ xử lý"}, "parent_source_id": "l10n_vn_group_138", "path": ["Other receivables", "Shortage of assets awaiting resolution"]},
+    {"source_id": "l10n_vn_group_1383", "code_prefix_start": "1383", "code_prefix_end": "1383", "name": "Special consumption tax of imported goods", "translations": {"vi": "Thuế TTĐB của hàng nhập khẩu"}, "parent_source_id": "l10n_vn_group_138", "path": ["Other receivables", "Special consumption tax of imported goods"]},
+    {"source_id": "l10n_vn_group_1388", "code_prefix_start": "1388", "code_prefix_end": "1388", "name": "Other receivables", "translations": {"vi": "Phải thu khác"}, "parent_source_id": "l10n_vn_group_138", "path": ["Other receivables", "Other receivables"]},
+    {"source_id": "l10n_vn_group_2151", "code_prefix_start": "2151", "code_prefix_end": "2151", "name": "Livestock for periodic production", "translations": {"vi": "Súc vật nuôi cho sản phẩm định kỳ"}, "parent_source_id": "l10n_vn_group_215", "path": ["Biology Asset", "Livestock for periodic production"]},
+    {"source_id": "l10n_vn_group_2293", "code_prefix_start": "2293", "code_prefix_end": "2293", "name": "Provision for doubtful debts", "translations": {"vi": "Dự phòng phải thu khó đòi"}, "parent_source_id": "l10n_vn_group_229", "path": ["Provision for asset loss", "Provision for doubtful debts"]},
+    {"source_id": "l10n_vn_group_2294", "code_prefix_start": "2294", "code_prefix_end": "2294", "name": "Provision for reserve inventories", "translations": {"vi": "Dự phòng giảm giá hàng tồn kho"}, "parent_source_id": "l10n_vn_group_229", "path": ["Provision for asset loss", "Provision for reserve inventories"]},
+    {"source_id": "l10n_vn_group_3331", "code_prefix_start": "3331", "code_prefix_end": "3331", "name": "VAT payable", "translations": {"vi": "Thuế GTGT phải nộp"}, "parent_source_id": "l10n_vn_group_333", "path": ["Taxes and amount payable to Government", "VAT payable"]},
+    {"source_id": "l10n_vn_group_3338", "code_prefix_start": "3338", "code_prefix_end": "3338", "name": "Environment protection tax and other taxes", "translations": {"vi": "Thuế bảo vệ mội trường và các loại thuế khác"}, "parent_source_id": "l10n_vn_group_333", "path": ["Taxes and amount payable to Government", "Environment protection tax and other taxes"]},
+    {"source_id": "l10n_vn_group_3362", "code_prefix_start": "3362", "code_prefix_end": "3362", "name": "Internal payables for foreign exchange differences", "translations": {"vi": "Phải trả nội bộ về chênh lệch tỉ giá"}, "parent_source_id": "l10n_vn_group_336", "path": ["Internal Payables", "Internal payables for foreign exchange differences"]},
+    {"source_id": "l10n_vn_group_3363", "code_prefix_start": "3363", "code_prefix_end": "3363", "name": "Internal payables for borrowing costs eligible for capitalization", "translations": {"vi": "Phải trả nội bộ về chi phí đi vay đủ điều kiện được vốn hoá"}, "parent_source_id": "l10n_vn_group_336", "path": ["Internal Payables", "Internal payables for borrowing costs eligible for capitalization"]},
+    {"source_id": "l10n_vn_group_3368", "code_prefix_start": "3368", "code_prefix_end": "3368", "name": "Other internal payables", "translations": {"vi": "Phải trả nội bộ khác"}, "parent_source_id": "l10n_vn_group_336", "path": ["Internal Payables", "Other internal payables"]},
+    {"source_id": "l10n_vn_group_3381", "code_prefix_start": "3381", "code_prefix_end": "3381", "name": "Surplus of assets awaiting for resolution", "translations": {"vi": "Tài sản thừa chờ giải quyết"}, "parent_source_id": "l10n_vn_group_338", "path": ["Other payables", "Surplus of assets awaiting for resolution"]},
+    {"source_id": "l10n_vn_group_3382", "code_prefix_start": "3382", "code_prefix_end": "3382", "name": "Trade union fees", "translations": {"vi": "Kinh phí công đoàn"}, "parent_source_id": "l10n_vn_group_338", "path": ["Other payables", "Trade union fees"]},
+    {"source_id": "l10n_vn_group_3383", "code_prefix_start": "3383", "code_prefix_end": "3383", "name": "Social insurance", "translations": {"vi": "Bảo hiểm xã hội"}, "parent_source_id": "l10n_vn_group_338", "path": ["Other payables", "Social insurance"]},
+    {"source_id": "l10n_vn_group_3384", "code_prefix_start": "3384", "code_prefix_end": "3384", "name": "Health insurance", "translations": {"vi": "Bảo hiểm y tế"}, "parent_source_id": "l10n_vn_group_338", "path": ["Other payables", "Health insurance"]},
+    {"source_id": "l10n_vn_group_3385", "code_prefix_start": "3385", "code_prefix_end": "3385", "name": "Payables on equilization", "translations": {"vi": "Phải trả về cổ phần hoá"}, "parent_source_id": "l10n_vn_group_338", "path": ["Other payables", "Payables on equilization"]},
+    {"source_id": "l10n_vn_group_3386", "code_prefix_start": "3386", "code_prefix_end": "3386", "name": "Unemployment insurance", "translations": {"vi": "Bảo hiểm thất nghiệp"}, "parent_source_id": "l10n_vn_group_338", "path": ["Other payables", "Unemployment insurance"]},
+    {"source_id": "l10n_vn_group_3387", "code_prefix_start": "3387", "code_prefix_end": "3387", "name": "Unearned revenue", "translations": {"vi": "Doanh thu chưa thực hiện"}, "parent_source_id": "l10n_vn_group_338", "path": ["Other payables", "Unearned revenue"]},
+    {"source_id": "l10n_vn_group_3388", "code_prefix_start": "3388", "code_prefix_end": "3388", "name": "Other payables", "translations": {"vi": "Phải trả, phải nộp khác"}, "parent_source_id": "l10n_vn_group_338", "path": ["Other payables", "Other payables"]},
+    {"source_id": "l10n_vn_group_3411", "code_prefix_start": "3411", "code_prefix_end": "3411", "name": "Borrowings", "translations": {"vi": "Các khoản đi vay"}, "parent_source_id": "l10n_vn_group_341", "path": ["Borrowings and financial lease", "Borrowings"]},
+    {"source_id": "l10n_vn_group_3412", "code_prefix_start": "3412", "code_prefix_end": "3412", "name": "Financial leased liabilities", "translations": {"vi": "Nợ thuê tài chính"}, "parent_source_id": "l10n_vn_group_341", "path": ["Borrowings and financial lease", "Financial leased liabilities"]},
+    {"source_id": "l10n_vn_group_3521", "code_prefix_start": "3521", "code_prefix_end": "3521", "name": "Product warranty provisions", "translations": {"vi": "Dự phòng bảo hành sản phẩm hàng hoá"}, "parent_source_id": "l10n_vn_group_352", "path": ["Provisions payable", "Product warranty provisions"]},
+    {"source_id": "l10n_vn_group_3522", "code_prefix_start": "3522", "code_prefix_end": "3522", "name": "Construction warranty provisions", "translations": {"vi": "Dự phòng bảo hành công trình xây dựng"}, "parent_source_id": "l10n_vn_group_352", "path": ["Provisions payable", "Construction warranty provisions"]},
+    {"source_id": "l10n_vn_group_3523", "code_prefix_start": "3523", "code_prefix_end": "3523", "name": "Enterprise restructuring provisions", "translations": {"vi": "Dự phòng tái cơ cấu doanh nghiệp"}, "parent_source_id": "l10n_vn_group_352", "path": ["Provisions payable", "Enterprise restructuring provisions"]},
+    {"source_id": "l10n_vn_group_3525", "code_prefix_start": "3525", "code_prefix_end": "3525", "name": "Other provisions", "translations": {"vi": "Dự phòng phải trả khác"}, "parent_source_id": "l10n_vn_group_352", "path": ["Provisions payable", "Other provisions"]},
+    {"source_id": "l10n_vn_group_4111", "code_prefix_start": "4111", "code_prefix_end": "4111", "name": "Contributed Capital", "translations": {"vi": "Vốn góp của chủ sở hữu"}, "parent_source_id": "l10n_vn_group_411", "path": ["Owner's equity", "Contributed Capital"]},
+    {"source_id": "l10n_vn_group_8211", "code_prefix_start": "8211", "code_prefix_end": "8211", "name": "Current corporate income tax expenses according to the provisions of the Law on Corporate Income Tax", "translations": {"vi": "Chi phí thuế thu nhập doanh nghiệp hiện hành theo quy định của Luật thuế thu nhập doanh nghiệp"}, "parent_source_id": "l10n_vn_group_821", "path": ["Corporate income tax expenses", "Current corporate income tax expenses according to the provisions of the Law on Corporate Income Tax"]},
+    {"source_id": "l10n_vn_group_21512", "code_prefix_start": "21512", "code_prefix_end": "21512", "name": "Livestock for periodic production that have not yet reached maturity", "translations": {"vi": "Súc vật nuôi cho sản phẩm định kỳ  đạt đến giai đoạn trưởng thành"}, "parent_source_id": "l10n_vn_group_2151", "path": ["Biology Asset", "Livestock for periodic production", "Livestock for periodic production that have not yet reached maturity"]}
+  ],
+  "accounts": [
+    {"source_id": "chart1111", "code": "111", "name": "Cash", "translations": {"vi_VN": "Tiền mặt"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_111", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "chart112", "code": "112", "name": "Demand Deposit", "translations": {"vi_VN": "Tiền gửi không kỳ hạn"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_112", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "chart1121", "code": "1121", "name": "Bank Suspense Account", "translations": {"vi_VN": "Tài khoản tạm thời ngân hàng"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_112", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart1131", "code": "113", "name": "Money in transit", "translations": {"vi_VN": "Tiền đang chuyển"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_113", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "account_journal_payment_debit_account_id", "code": "1131", "name": "Outstanding Receipts", "translations": {"vi_VN": "Biên lai chưa thanh toán"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_113", "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_journal_payment_credit_account_id", "code": "1132", "name": "Outstanding Payments", "translations": {"vi_VN": "Khoản chi chưa thanh toán"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_113", "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart121", "code": "121", "name": "Trading Securities", "translations": {"vi_VN": "Chứng khoán kinh doanh"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_121", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart12811", "code": "12811", "name": "Time deposits - less than 3 months", "translations": {"vi_VN": "Tiền gửi có kỳ hạn - dưới 3 tháng"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1281", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart12812", "code": "12812", "name": "Time deposits - 3-12 months", "translations": {"vi_VN": "Tiền gửi có kỳ hạn - 3-12 tháng"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1281", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart12813", "code": "12813", "name": "Time deposits - long term", "translations": {"vi_VN": "Tiền gửi có kỳ hạn - dài hạn"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1281", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart12822", "code": "12822", "name": "Bonds - 3-12 months", "translations": {"vi_VN": "Trái phiếu - 3-12 tháng"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1282", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart12823", "code": "12823", "name": "Bonds - long term", "translations": {"vi_VN": "Trái phiếu - dài hạn"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1282", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart12831", "code": "12831", "name": "Loans - short term", "translations": {"vi_VN": "Cho vay - ngắn hạn"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1283", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart12832", "code": "12832", "name": "Loans - long term", "translations": {"vi_VN": "Cho vay - dài hạn"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1283", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart12881", "code": "12881", "name": "Other investments held to maturity - less than 3 months", "translations": {"vi_VN": "Các khoản đầu tư khác nắm giữ đến ngày đáo hạn - dưới 3 tháng"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1288", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart12882", "code": "12882", "name": "Other investments held to maturity - 3-12 months", "translations": {"vi_VN": "Các khoản đầu tư khác nắm giữ đến ngày đáo hạn - 3-12 tháng"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1288", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart12883", "code": "12883", "name": "Other investments held to maturity - long term", "translations": {"vi_VN": "Các khoản đầu tư khác nắm giữ đến ngày đáo hạn - dài hạn"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1288", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart1311", "code": "1311", "name": "Trade receivables - short term", "translations": {"vi_VN": "Phải thu của khách hàng - ngắn hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_131", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart1312", "code": "1312", "name": "Trade receivables - long term", "translations": {"vi_VN": "Phải thu của khách hàng - dài hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_131", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart1331", "code": "1331", "name": "Deductible VAT of goods and services", "translations": {"vi_VN": "Thuế GTGT HHDV mua vào"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_133", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart1332", "code": "1332", "name": "Deductible VAT of fixed assets", "translations": {"vi_VN": "Thuế GTGT được khấu trừ của tài sản cố định"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_133", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart1361", "code": "1361", "name": "Working capital provided to sub-units", "translations": {"vi_VN": "Vốn kinh doanh ở các đơn vị trực thuộc"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1361", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart13621", "code": "13621", "name": "Internal receivables on foreign exchange difference - short term", "translations": {"vi_VN": "Phải thu nội bộ về chênh lệch tỷ giá - ngắn hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1362", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart13622", "code": "13622", "name": "Internal receivables on foreign exchange difference - long term", "translations": {"vi_VN": "Phải thu nội bộ về chênh lệch tỷ giá - dài hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1362", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart13631", "code": "13631", "name": "Internal receivables on borrowing costs eligible for capitalization - short term", "translations": {"vi_VN": "Phải thu nội bộ về chi phí đi vay đủ điều kiện được vốn hoá - ngắn hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1363", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart13632", "code": "13632", "name": "Internal receivables on borrowing costs eligible for capitalization - long term", "translations": {"vi_VN": "Phải thu nội bộ về chi phí đi vay đủ điều kiện được vốn hoá - dài hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1363", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart13681", "code": "13681", "name": "Other internal receivables - short term", "translations": {"vi_VN": "Phải thu nội bộ khác - ngắn hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1368", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart13682", "code": "13682", "name": "Other internal receivables - long term", "translations": {"vi_VN": "Phải thu nội bộ khác - dài hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1368", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart13811", "code": "13811", "name": "Shortage of assets awaiting resolution - short term", "translations": {"vi_VN": "Tài sản thiếu chờ xử lý - ngắn hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1381", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart13812", "code": "13812", "name": "Shortage of assets awaiting resolution - long term", "translations": {"vi_VN": "Tài sản thiếu chờ xử lý - dài hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1381", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart13831", "code": "13831", "name": "Special consumption tax of imported goods - short term", "translations": {"vi_VN": "Thuế TTĐB của hàng nhập khẩu - ngắn hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1383", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart13832", "code": "13832", "name": "Special consumption tax of imported goods - long term", "translations": {"vi_VN": "Thuế TTĐB của hàng nhập khẩu - dài hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1383", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart13881", "code": "13881", "name": "Other receivables - short term", "translations": {"vi_VN": "Phải thu khác - ngắn hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1388", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart13882", "code": "13882", "name": "Other receivables - long term", "translations": {"vi_VN": "Phải thu khác - dài hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_1388", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart1411", "code": "1411", "name": "Advances - short term", "translations": {"vi_VN": "Tạm ứng - ngắn hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_141", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart1412", "code": "1412", "name": "Advances - long term", "translations": {"vi_VN": "Tạm ứng - dài hạn"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_141", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "chart151", "code": "151", "name": "Goods in transit", "translations": {"vi_VN": "Hàng mua đang đi đường"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_151", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart152", "code": "152", "name": "Raw materials", "translations": {"vi_VN": "Nguyên liệu, vật liệu"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_152", "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_variation_id": "chart632"}}},
+    {"source_id": "chart1531", "code": "1531", "name": "Tools & supplies - Short term", "translations": {"vi_VN": "Công cụ, dụng cụ - ngắn hạn"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_153", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart1532", "code": "1532", "name": "Tools & supplies - Long term", "translations": {"vi_VN": "Công cụ, dụng cụ - Dài hạn"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_153", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart1541", "code": "1541", "name": "Work in Progress - Short term", "translations": {"vi_VN": "Chi phí sản xuất, kinh doanh dở dang - ngắn hạn"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_154", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart1542", "code": "1542", "name": "Work in Progress - Long term", "translations": {"vi_VN": "Chi phí sản xuất, kinh doanh dở dang - Dài hạn"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_154", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart1551", "code": "155", "name": "Finished Goods", "translations": {"vi_VN": "Sản phẩm"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_155", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart1561", "code": "156", "name": "Goods", "translations": {"vi_VN": "Hàng hoá"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_156", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart157", "code": "157", "name": "Outward goods on consignment", "translations": {"vi_VN": "Hàng gửi đi bán"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_157", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart158", "code": "158", "name": "Goods in bonded warehouse", "translations": {"vi_VN": "Hàng hóa kho bảo thuế"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_158", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart171", "code": "171", "name": "Government bonds purchase-resale", "translations": {"vi_VN": "Giao dịch mua bán lại trái phiếu chính phủ"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_171", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "chart2111", "code": "211", "name": "Tangible fixed assets", "translations": {"vi_VN": "Tài sản cố định hữu hình"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_211", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "chart2121", "code": "212", "name": "Financial leased tangible fixed assets", "translations": {"vi_VN": "Tài sản cố định thuê tài chính"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_212", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "chart2131", "code": "213", "name": "Intangible fixed assets", "translations": {"vi_VN": "Tài sản cố định vô hình"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_213", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "chart2141", "code": "2141", "name": "Depreciation of tangible fixed assets", "translations": {"vi_VN": "Hao mòn TSCĐ hữu hình"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_214", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart2142", "code": "2142", "name": "Depreciation of financial leased assets", "translations": {"vi_VN": "Hao mòn TSCĐ thuê tài chính"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_214", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart2143", "code": "2143", "name": "Depreciation of intangible fixed assets", "translations": {"vi_VN": "Hao mòn TSCĐ vô hình"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_214", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart2147", "code": "2147", "name": "Depreciation of investment properties", "translations": {"vi_VN": "Hao mòn bất động sản đầu tư"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_214", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart21511", "code": "21511", "name": "Livestock for periodic production that have not yet reached maturity", "translations": {"vi_VN": "Súc vật nuôi cho sản phẩm định kỳ chưa đạt đến giai đoạn trưởng thành"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_2151", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart215121", "code": "215121", "name": "Original price", "translations": {"vi_VN": "Nguyên giá"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_21512", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart215122", "code": "215122", "name": "Accumulated Depreciation", "translations": {"vi_VN": "Giá trị khấu hao luỹ kế"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_21512", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart21521", "code": "21521", "name": "Livestock that produces one-time products - Short term", "translations": {"vi_VN": "Súc vật nuôi lấy sản phẩm một lần - Ngắn hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_215", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart21522", "code": "21522", "name": "Livestock that produces one-time products - Long term", "translations": {"vi_VN": "Súc vật nuôi lấy sản phẩm một lần - Dài hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_215", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart21531", "code": "21531", "name": "Seasonal or one-time crop - Short term", "translations": {"vi_VN": "Cây trồng theo mùa vụ hoặc lấy sản phẩm một lần - Ngắn hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_215", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart21532", "code": "21532", "name": "Seasonal or one-time crop - Long term", "translations": {"vi_VN": "Cây trồng theo mùa vụ hoặc lấy sản phẩm một lần - Dài hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_215", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart217", "code": "217", "name": "Investment properties", "translations": {"vi_VN": "Bất động sản đầu tư"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_217", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart221", "code": "221", "name": "Investment in subsidiaries", "translations": {"vi_VN": "Đầu tư vào công ty con"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_221", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart222", "code": "222", "name": "Investment in joint ventures and associates", "translations": {"vi_VN": "Đầu tư vào công ty liên doanh, liên kết"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_222", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart2281", "code": "22811", "name": "Equity investments in other entities - short term", "translations": {"vi_VN": "Đầu tư góp vốn vào đơn vị khác - ngắn hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_228", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22812", "code": "22812", "name": "Equity investments in other entities - long term", "translations": {"vi_VN": "Đầu tư góp vốn vào đơn vị khác - dài hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_228", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22881", "code": "22881", "name": "Other investment - short term", "translations": {"vi_VN": "Đầu tư khác - ngắn hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_228", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22882", "code": "22882", "name": "Other investment - long term", "translations": {"vi_VN": "Đầu tư khác - dài hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_228", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart2291", "code": "2291", "name": "Provision for decline in value of trading securities", "translations": {"vi_VN": "Dự phòng giảm giá chứng khoán kinh doanh"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_229", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22921", "code": "22921", "name": "Provision for investment loss in other entities - short term", "translations": {"vi_VN": "Dự phòng tổn thất đầu tư vào đơn vị khác- ngắn hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_229", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22922", "code": "22922", "name": "Provision for investment loss in BBC contracts - short term", "translations": {"vi_VN": "Dự phòng tổn thất đầu tư vào hợp đồng BBC- ngắn hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_229", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22923", "code": "22923", "name": "Provision for investment loss in other entities - long term", "translations": {"vi_VN": "Dự phòng tổn thất đầu tư vào đơn vị khác- dài hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_229", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22924", "code": "22924", "name": "Provision for investment loss in other entities held to maturity - long term", "translations": {"vi_VN": "Dự phòng tổn thất đầu tư vào đơn vị khác nắm giữ đến ngày đáo hạn - dài hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_229", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22931", "code": "22931", "name": "Provision for doubtful debts - short term", "translations": {"vi_VN": "Dự phòng phải thu khó đòi - ngắn hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_2293", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22932", "code": "22932", "name": "Provision for doubtful debts - long term", "translations": {"vi_VN": "Dự phòng phải thu khó đòi - dài hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_2293", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22941", "code": "22941", "name": "Provision for reserve inventories", "translations": {"vi_VN": "Dự phòng giảm giá hàng tồn kho"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_2294", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22942", "code": "22942", "name": "Provision for reserve inventories - long term work in progress", "translations": {"vi_VN": "Dự phòng giảm giá hàng tồn kho- chi phí sản xuất, kinh doanh dở dang dài hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_2294", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22943", "code": "22943", "name": "Provision for reserve inventories (Equipment and Spare parts)", "translations": {"vi_VN": "Dự phòng giảm giá hàng tồn kho- thiết bị, vật tư, phụ tùng thay thế dài hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_2294", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22951", "code": "22951", "name": "Provision for biology asset loss - Short term", "translations": {"vi_VN": "Dự phòng tổn thất tài sản sinh học - Ngắn hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_229", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart22952", "code": "22952", "name": "Provision for biology asset loss - Long term", "translations": {"vi_VN": "Dự phòng tổn thất tài sản sinh học - Dài hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_229", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart2411", "code": "2411", "name": "Acquisition of fixed assets", "translations": {"vi_VN": "Mua sắm TSCĐ"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_241", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart2412", "code": "2412", "name": "Construction in progress", "translations": {"vi_VN": "Xây dựng cơ bản"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_241", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart2413", "code": "2413", "name": "Periodic repairs and maintenance of fixed assets", "translations": {"vi_VN": "Sửa chữa, bảo dưỡng định kỳ TSCĐ"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_241", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart2414", "code": "2414", "name": "Upgrading, renovating fixed assets", "translations": {"vi_VN": "Nâng cấp, cải tạo TSCĐ"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_241", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart2421", "code": "2421", "name": "Expenses waiting for allocation - short term", "translations": {"vi_VN": "Chi phí chờ phân bổ - ngắn hạn"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_242", "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "chart2422", "code": "2422", "name": "Expenses waiting for allocation - long term", "translations": {"vi_VN": "Chi phí chờ phân bổ - dài hạn"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_242", "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "chart243", "code": "243", "name": "Deferred tax assets", "translations": {"vi_VN": "Tài sản thuế thu nhập hoãn lại"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_243", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart2441", "code": "2441", "name": "Deposits - short term", "translations": {"vi_VN": "Ký quỹ, ký cược - ngắn hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_244", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart2442", "code": "2442", "name": "Deposits - long term", "translations": {"vi_VN": "Ký quỹ, ký cược - dài hạn"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_244", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "chart3311", "code": "3311", "name": "Trade payables - short term", "translations": {"vi_VN": "Phải trả cho người bán - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_331", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart3312", "code": "3312", "name": "Trade payables - long term", "translations": {"vi_VN": "Phải trả cho người bán - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_331", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart332", "code": "332", "name": "Dividend payable", "translations": {"vi_VN": "Phải trả cổ tức, lợi nhuận"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_332", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33311", "code": "33311", "name": "Output VAT", "translations": {"vi_VN": "Thuế GTGT đầu ra"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3331", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33312", "code": "33312", "name": "VAT on imported goods", "translations": {"vi_VN": "Thuế GTGT hàng nhập khẩu"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3331", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33321", "code": "33321", "name": "Special consumption tax- short term", "translations": {"vi_VN": "Thuế tiêu thụ đặc biệt - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33322", "code": "33322", "name": "Special consumption tax - long term", "translations": {"vi_VN": "Thuế tiêu thụ đặc biệt - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33331", "code": "33331", "name": "Import & export tax - short term", "translations": {"vi_VN": "Thuế xuất, nhập khẩu - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33332", "code": "33332", "name": "Import & export tax - long term", "translations": {"vi_VN": "Thuế xuất, nhập khẩu - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33341", "code": "33341", "name": "Corporate income tax - short term", "translations": {"vi_VN": "Thuế thu nhập doanh nghiệp - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33342", "code": "33342", "name": "Corporate income tax - long term", "translations": {"vi_VN": "Thuế thu nhập doanh nghiệp - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33351", "code": "33351", "name": "Personal income tax - short term", "translations": {"vi_VN": "Thuế thu nhập cá nhân - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33352", "code": "33352", "name": "Personal income tax - long term", "translations": {"vi_VN": "Thuế thu nhập cá nhân - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33361", "code": "33361", "name": "Natural resources using tax - short term", "translations": {"vi_VN": "Thuế tài nguyên - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33362", "code": "33362", "name": "Natural resources using tax - long term", "translations": {"vi_VN": "Thuế tài nguyên - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33371", "code": "33371", "name": "Land & housing tax, land rental charges - short term", "translations": {"vi_VN": "Thuế nhà đất, tiền thuê đất - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33372", "code": "33372", "name": "Land & housing tax, land rental charges - long term", "translations": {"vi_VN": "Thuế nhà đất, tiền thuê đất - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33381", "code": "33381", "name": "Environment protection tax", "translations": {"vi_VN": "Thuế bảo vệ môi trường"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3338", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33382", "code": "33382", "name": "Other taxes", "translations": {"vi_VN": "Các loại thuế khác"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3338", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33391", "code": "33391", "name": "Fees & charges & other payables - short term", "translations": {"vi_VN": "Phí, lệ phí và các khoản phải nộp khác - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33392", "code": "33392", "name": "Fees & charges & other payables - long term", "translations": {"vi_VN": "Phí, lệ phí và các khoản phải nộp khác - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_333", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33411", "code": "3341", "name": "Payables to staff - short term", "translations": {"vi_VN": "Phải trả công nhân viên - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_334", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33412", "code": "3342", "name": "Payables to staff - long term", "translations": {"vi_VN": "Phải trả công nhân viên - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_334", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart3351", "code": "3351", "name": "Accrued expenses - short term", "translations": {"vi_VN": "Chi phí phải trả - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_335", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart3352", "code": "3352", "name": "Accrued expenses - long term", "translations": {"vi_VN": "Chi phí phải trả - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_335", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart3361", "code": "3361", "name": "Internal payables for working capital received", "translations": {"vi_VN": "Phải trả nội bộ về vốn kinh doanh"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_336", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33621", "code": "33621", "name": "Internal payables for foreign exchange differences - short term", "translations": {"vi_VN": "Phải trả nội bộ về chênh lệch tỉ giá - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3362", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33622", "code": "33622", "name": "Internal payables for foreign exchange differences - long term", "translations": {"vi_VN": "Phải trả nội bộ về chênh lệch tỉ giá - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3362", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33631", "code": "33631", "name": "Internal payables for borrowing costs eligible for capitalization - short term", "translations": {"vi_VN": "Phải trả nội bộ về chi phí đi vay đủ điều kiện được vốn hoá - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3363", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33632", "code": "33632", "name": "Internal payables for borrowing costs eligible for capitalization - long term", "translations": {"vi_VN": "Phải trả nội bộ về chi phí đi vay đủ điều kiện được vốn hoá - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3363", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33681", "code": "33681", "name": "Other internal payables - short term", "translations": {"vi_VN": "Phải trả nội bộ khác - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3368", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33682", "code": "33682", "name": "Other internal payables - long term", "translations": {"vi_VN": "Phải trả nội bộ khác -  dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3368", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart337", "code": "337", "name": "Progress billings for construction contracts", "translations": {"vi_VN": "Thanh toán theo tiến độ hợp đồng xây dựng"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_337", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33811", "code": "33811", "name": "Surplus of assets awaiting for resolution - short term", "translations": {"vi_VN": "Tài sản thừa chờ giải quyết - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3381", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33812", "code": "33812", "name": "Surplus of assets awaiting for resolution - long term", "translations": {"vi_VN": "Tài sản thừa chờ giải quyết - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3381", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33821", "code": "33821", "name": "Trade union fees - short term", "translations": {"vi_VN": "Kinh phí công đoàn - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3382", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33822", "code": "33822", "name": "Trade union fees - long term", "translations": {"vi_VN": "Kinh phí công đoàn - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3382", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33831", "code": "33831", "name": "Social insurance - short term", "translations": {"vi_VN": "Bảo hiểm xã hội - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3383", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33832", "code": "33832", "name": "Social insurance - long term", "translations": {"vi_VN": "Bảo hiểm xã hội - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3383", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33841", "code": "33841", "name": "Health insurance - short term", "translations": {"vi_VN": "Bảo hiểm y tế - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3384", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33842", "code": "33842", "name": "Health insurance - long term", "translations": {"vi_VN": "Bảo hiểm y tế - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3384", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33861", "code": "33861", "name": "Unemployment insurance - short term", "translations": {"vi_VN": "Bảo hiểm thất nghiệp - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3386", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33862", "code": "33862", "name": "Unemployment insurance - long term", "translations": {"vi_VN": "Bảo hiểm thất nghiệp - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3386", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33871", "code": "33871", "name": "Unearned revenue - short term", "translations": {"vi_VN": "Doanh thu chưa thực hiện - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3387", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33872", "code": "33872", "name": "Unearned revenue - long term", "translations": {"vi_VN": "Doanh thu chưa thực hiện - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3387", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart33881", "code": "33881", "name": "Other payables - short term", "translations": {"vi_VN": "Phải trả, phải nộp khác - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3388", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart33882", "code": "33882", "name": "Other payables - long term", "translations": {"vi_VN": "Phải trả, phải nộp khác - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3388", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart34111", "code": "34111", "name": "Borrowings - short term", "translations": {"vi_VN": "Các khoản đi vay - ngắn hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3411", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart34112", "code": "34112", "name": "Borrowings - long term", "translations": {"vi_VN": "Các khoản đi vay - dài hạn"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3411", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "chart34121", "code": "34121", "name": "Financial leased liabilities - short term", "translations": {"vi_VN": "Nợ thuê tài chính - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3412", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart34122", "code": "34122", "name": "Financial leased liabilities - long term", "translations": {"vi_VN": "Nợ thuê tài chính - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3412", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart34311", "code": "34311", "name": "Ordinary bonds - Short term", "translations": {"vi_VN": "Trái phiếu thường - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_343", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart34312", "code": "34312", "name": "Ordinary bonds - Long term", "translations": {"vi_VN": "Trái phiếu thường - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_343", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart3432", "code": "3432", "name": "Convertible bonds", "translations": {"vi_VN": "Trái phiếu chuyển đổi"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_343", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart3441", "code": "3441", "name": "Deposits received - short term", "translations": {"vi_VN": "Nhận ký quỹ, ký cược - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_344", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart3442", "code": "3442", "name": "Deposits received - long term", "translations": {"vi_VN": "Nhận ký quỹ, ký cược - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_344", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart347", "code": "347", "name": "Deferred tax liabilities", "translations": {"vi_VN": "Thuế thu nhập hoãn lại phải trả"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_347", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart35211", "code": "35211", "name": "Product warranty provisions - short term", "translations": {"vi_VN": "Dự phòng bảo hành sản phẩm hàng hoá - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3521", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart35212", "code": "35212", "name": "Product warranty provisions - long term", "translations": {"vi_VN": "Dự phòng bảo hành sản phẩm hàng hoá - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3521", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart35221", "code": "35221", "name": "Construction warranty provisions - short term", "translations": {"vi_VN": "Dự phòng bảo hành công trình xây dựng - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3522", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart35222", "code": "35222", "name": "Construction warranty provisions - long term", "translations": {"vi_VN": "Dự phòng bảo hành công trình xây dựng - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3522", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart35231", "code": "35231", "name": "Enterprise restructuring provisions - short term", "translations": {"vi_VN": "Dự phòng tái cơ cấu doanh nghiệp - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3523", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart35232", "code": "35232", "name": "Enterprise restructuring provisions - long term", "translations": {"vi_VN": "Dự phòng tái cơ cấu doanh nghiệp - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3523", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart35241", "code": "35251", "name": "Other provisions - short term", "translations": {"vi_VN": "Dự phòng phải trả khác - ngắn hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3525", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart35242", "code": "35252", "name": "Other provisions - long term", "translations": {"vi_VN": "Dự phòng phải trả khác - dài hạn"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_3525", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart3531", "code": "3531", "name": "Bonus fund", "translations": {"vi_VN": "Quỹ khen thưởng"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_353", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart3532", "code": "3532", "name": "Welfare fund", "translations": {"vi_VN": "Quỹ phúc lợi"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_353", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart3533", "code": "3533", "name": "Welfare fund used for fixed asset acquisitions", "translations": {"vi_VN": "Quỹ phúc lợi đã hình thành TSCĐ"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_353", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart3534", "code": "3534", "name": "Management bonus fund", "translations": {"vi_VN": "Quỹ thưởng ban quản lý điều hành công ty"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_353", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart3561", "code": "3561", "name": "Science and technology development fund", "translations": {"vi_VN": "Quỹ phát triển khoa học và công nghệ"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_356", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart3562", "code": "3562", "name": "Science and technology development fund used for fixed asset acquisition", "translations": {"vi_VN": "Quỹ phát triển khoa học và công nghệ đã hình thành TSCĐ"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_356", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart357", "code": "357", "name": "Price stabilization fund", "translations": {"vi_VN": "Quỹ bình ổn giá"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_357", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "chart41111", "code": "41111", "name": "Ordinary shares with voting rights", "translations": {"vi_VN": "Cổ phiếu phổ thông có quyền biểu quyết"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_4111", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart41112", "code": "411121", "name": "Preferred shares - payable", "translations": {"vi_VN": "Cổ phiếu ưu đãi - Nợ phải trả"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_4111", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart411122", "code": "411122", "name": "Preferred shares - owner's equity", "translations": {"vi_VN": "Cổ phiếu ưu đãi - Vốn chủ sở hữu"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_4111", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart4112", "code": "4112", "name": "Capital surplus", "translations": {"vi_VN": "Thặng dư vốn"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_411", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart4113", "code": "4113", "name": "Conversion options on convertible bonds", "translations": {"vi_VN": "Quyền chọn chuyển đổi trái phiếu"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_411", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart4118", "code": "4118", "name": "Other capital", "translations": {"vi_VN": "Vốn khác"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_411", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart412", "code": "412", "name": "Revaluation differences on asset", "translations": {"vi_VN": "Chênh lệch đánh giá lại tài sản"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_412", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart4131", "code": "413", "name": "Exchange rate differences", "translations": {"vi_VN": "Chênh lệch tỷ giá hối đoái"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_413", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart414", "code": "414", "name": "Investment & development fund", "translations": {"vi_VN": "Quỹ đầu tư phát triển"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_414", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart418", "code": "418", "name": "Other equity funds", "translations": {"vi_VN": "Các quỹ khác thuộc vốn chủ sở hữu"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_418", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart419", "code": "419", "name": "Stocks bought from oneself", "translations": {"vi_VN": "Cổ phiếu mua lại của chính mình"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_419", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart4211", "code": "4211", "name": "Undistributed profit after tax of previous year", "translations": {"vi_VN": "Lợi nhuận sau thuế chưa phân phối năm trước"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_421", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart4212", "code": "4212", "name": "Undistributed profit after tax of current year", "translations": {"vi_VN": "Lợi nhuận sau thuế chưa phân phối năm nay"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_421", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "chart5111", "code": "511", "name": "Revenue from sales and services", "translations": {"vi_VN": "Doanh thu bán hàng và cung cấp dịch vụ"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_511", "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "chart515", "code": "515", "name": "Financial income", "translations": {"vi_VN": "Doanh thu hoạt động tài chính"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_515", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "chart5211", "code": "521", "name": "Sales discounts", "translations": {"vi_VN": "Các khoản giảm trừ doanh thu"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_521", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "chart621", "code": "621", "name": "Direct raw material costs", "translations": {"vi_VN": "Chi phí nguyên liệu, vật liệu trực tiếp"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_621", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart622", "code": "622", "name": "Direct labour costs", "translations": {"vi_VN": "Chi phí nhân công trực tiếp"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_622", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart6231", "code": "6231", "name": "Labour costs", "translations": {"vi_VN": "Chi phí nhân công"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart6232", "code": "6232", "name": "Material costs", "translations": {"vi_VN": "Chi phí nguyên, vật liệu"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart6233", "code": "6233", "name": "Tools and instruments", "translations": {"vi_VN": "Chi phí dụng cụ sản xuất"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart6234", "code": "6234", "name": "Equipment depreciation expense", "translations": {"vi_VN": "Chi phí khấu hao máy thi công"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart6237", "code": "6237", "name": "Outside services", "translations": {"vi_VN": "Chi phí dịch vụ mua ngoài"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart6238", "code": "6238", "name": "Other expenses", "translations": {"vi_VN": "Chi phí bằng tiền khác"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart6271", "code": "6271", "name": "Factory staff costs", "translations": {"vi_VN": "Chi phí nhân viên phân xưởng"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_627", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart6272", "code": "6272", "name": "Material costs", "translations": {"vi_VN": "Chi phí nguyên, vật liệu"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_627", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart6273", "code": "6273", "name": "Tools and instruments", "translations": {"vi_VN": "Chi phí dụng cụ sản xuất"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_627", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart6274", "code": "6274", "name": "Fixed asset depreciation", "translations": {"vi_VN": "Chi phí khấu hao TSCĐ"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_627", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "chart6275", "code": "6275", "name": "Taxes, fees and charges", "translations": {"vi_VN": "Thuế, phí, lệ phí"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_627", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart6277", "code": "6277", "name": "Outside services", "translations": {"vi_VN": "Chi phí dịch vụ mua ngoài"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_627", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart6278", "code": "6278", "name": "Other expenses", "translations": {"vi_VN": "Chi phí bằng tiền khác"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_627", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart632", "code": "632", "name": "Costs of goods sold", "translations": {"vi_VN": "Giá vốn hàng bán"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_632", "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "chart635", "code": "635", "name": "Financial expenses", "translations": {"vi_VN": "Chi phí tài chính"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_635", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6351", "code": "6351", "name": "Financial expenses - interest expense", "translations": {"vi_VN": "Chi phí tài chính"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_635", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6411", "code": "6411", "name": "Employees costs", "translations": {"vi_VN": "Chi phí nhân viên"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_641", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6412", "code": "6412", "name": "Materials and packing materials", "translations": {"vi_VN": "Chi phí nguyên vật liệu, bao bì"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_641", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6413", "code": "6413", "name": "Tools and instruments", "translations": {"vi_VN": "Chi phí dụng cụ, đồ dùng"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_641", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6414", "code": "6414", "name": "Fixed asset depreciation", "translations": {"vi_VN": "Chi phí khấu hao TSCĐ"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_641", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "chart6415", "code": "6415", "name": "Taxes, fees and charges", "translations": {"vi_VN": "Thuế, phí, lệ phí"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_641", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6417", "code": "6417", "name": "Outside services", "translations": {"vi_VN": "Chi phí dịch vụ mua ngoài"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_641", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6418", "code": "6418", "name": "Other expenses", "translations": {"vi_VN": "Chi phí bằng tiền khác"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_641", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6421", "code": "6421", "name": "Employees management costs", "translations": {"vi_VN": "Chi phí nhân viên"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_642", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6422", "code": "6422", "name": "Office supply expenses", "translations": {"vi_VN": "Chi phí vật liệu quản lý"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_642", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6423", "code": "6423", "name": "Stationery costs", "translations": {"vi_VN": "Chi phí đồ dùng văn phòng"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_642", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6424", "code": "6424", "name": "Fixed asset depreciation", "translations": {"vi_VN": "Chi phí khấu hao TSCĐ"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_642", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "chart6425", "code": "6425", "name": "Taxes, fees and charges", "translations": {"vi_VN": "Thuế, phí và lệ phí"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_642", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6426", "code": "6426", "name": "Provision expenses", "translations": {"vi_VN": "Chi phí dự phòng"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_642", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6427", "code": "6427", "name": "Outside services", "translations": {"vi_VN": "Chi phí dịch vụ mua ngoài"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_642", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart6428", "code": "6428", "name": "Other expenses", "translations": {"vi_VN": "Chi phí bằng tiền khác"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_642", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart711", "code": "711", "name": "Other Income", "translations": {"vi_VN": "Thu nhập khác"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_711", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "chart811", "code": "811", "name": "Other Expenses", "translations": {"vi_VN": "Chi phí khác"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_811", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart8211", "code": "82111", "name": "Current corporate income tax expenses according to the provisions of the Law on Corporate Income Tax", "translations": {"vi_VN": "Chi phí thuế thu nhập doanh nghiệp hiện hành theo quy định của Luật thuế thu nhập doanh nghiệp"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_8211", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart82112", "code": "82112", "name": "Additional corporate income tax expense under the global minimum tax rules", "translations": {"vi_VN": "Chi phí thuế thu nhập doanh nghiệp bổ sung theo quy định về thuế tối thiểu toàn cầu"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_8211", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart8212", "code": "8212", "name": "Deferred tax expense", "translations": {"vi_VN": "Chi phí thuế thu nhập doanh nghiệp hoãn lại"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_vn_group_821", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "chart911", "code": "911", "name": "Income Summary", "translations": {"vi_VN": "Xác định kết quả kinh doanh"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_vn_group_911", "reconcile": false, "source": {"account_type": "equity_unaffected"}}
+  ]
+}

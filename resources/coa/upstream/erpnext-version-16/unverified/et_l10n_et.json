@@ -1,0 +1,320 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "ae96d8a1ffb826e6af40646ffee1704aee0645ae15e529ee3306a301ff389f3d",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "erpnext-version-16/unverified/et_l10n_et",
+  "country_code": "ET",
+  "country_name": "Ethiopia",
+  "country_basis": "chart file country_code",
+  "name": "Ethiopia - Chart of Accounts",
+  "source": {
+    "system": "erpnext",
+    "repository": "https://github.com/frappe/erpnext",
+    "branch": "version-16",
+    "commit": "4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+    "commit_date": "2026-09-08T13:23:31+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "GPL-3.0-only",
+    "license_basis": "repository license.txt (GNU GPL v3); chart files carry no separate licence header",
+    "attribution": "Frappe Technologies Pvt. Ltd. and Contributors",
+    "upstream_folder": "unverified",
+    "upstream_verified": false,
+    "upstream_disabled": false,
+    "files": [
+      {
+        "path": "erpnext/accounts/doctype/account/chart_of_accounts/unverified/et_l10n_et.json",
+        "sha256": "96e46e9ecd5be766e3fe66a57b060fe57b3676b59989374fe03051f69df0b008",
+        "kind": "json"
+      }
+    ]
+  },
+  "template": {
+    "hierarchy": "nested groups; posting accounts are leaves; source_id is the full ' / ' separated path",
+    "account_numbers_present": false
+  },
+  "role_defaults": {},
+  "type_map": {
+    "Receivable": {
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "Payable": {
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "Bank": {
+      "subtype": "bank",
+      "role_hint": "cash_bank"
+    },
+    "Cash": {
+      "subtype": "cash",
+      "role_hint": "cash_bank"
+    },
+    "Stock": {
+      "subtype": "inventory",
+      "role_hint": null
+    },
+    "Tax": {
+      "subtype": "tax",
+      "role_hint": null
+    },
+    "Cost of Goods Sold": {
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "Fixed Asset": {
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "Accumulated Depreciation": {
+      "subtype": "accumulated_depreciation",
+      "role_hint": null
+    },
+    "Depreciation": {
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "Expense Account": {
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "Income Account": {
+      "subtype": "income",
+      "role_hint": null
+    },
+    "Equity": {
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "Liability": {
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "Chargeable": {
+      "subtype": "chargeable",
+      "role_hint": null
+    },
+    "Stock Received But Not Billed": {
+      "subtype": "stock_received_not_billed",
+      "role_hint": null
+    },
+    "Asset Received But Not Billed": {
+      "subtype": "asset_received_not_billed",
+      "role_hint": null
+    },
+    "Service Received But Not Billed": {
+      "subtype": "service_received_not_billed",
+      "role_hint": null
+    },
+    "Stock Delivered But Not Billed": {
+      "subtype": "stock_delivered_not_billed",
+      "role_hint": null
+    },
+    "Stock Adjustment": {
+      "subtype": "stock_adjustment",
+      "role_hint": null
+    },
+    "Expenses Included In Valuation": {
+      "subtype": "valuation_expense",
+      "role_hint": null
+    },
+    "Expenses Included In Asset Valuation": {
+      "subtype": "asset_valuation_expense",
+      "role_hint": null
+    },
+    "Capital Work in Progress": {
+      "subtype": "capital_work_in_progress",
+      "role_hint": null
+    },
+    "Temporary": {
+      "subtype": "temporary",
+      "role_hint": null
+    },
+    "Round Off": {
+      "subtype": "round_off",
+      "role_hint": null
+    },
+    "Indirect Expense": {
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "Indirect Income": {
+      "subtype": "other_income",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 136,
+    "posting_accounts": 100,
+    "group_accounts": 36,
+    "by_root_type": {
+      "asset": 40,
+      "equity": 4,
+      "expense": 71,
+      "income": 2,
+      "liability": 19
+    },
+    "by_subtype": {
+      "group": 36,
+      "unspecified": 100
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 100,
+    "role_hints": {},
+    "unmapped_account_types": {},
+    "roots_without_root_type": [],
+    "top_level_groups": [
+      "ASSETS",
+      "COST OF GOODS SOLD",
+      "EXPENSES",
+      "LIABILITIES",
+      "NET ASSETS/EQUITY",
+      "REVENUE"
+    ],
+    "max_depth": 4,
+    "account_numbers_present": false
+  },
+  "accounts": [
+    {"source_id": "ASSETS", "code": null, "name": "ASSETS", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Asset"}},
+    {"source_id": "ASSETS / Cash and Cash Equivalents", "code": null, "name": "Cash and Cash Equivalents", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ASSETS", "depth": 2},
+    {"source_id": "ASSETS / Cash and Cash Equivalents / Cash at bank in foreigh currency", "code": null, "name": "Cash at bank in foreigh currency", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Cash and Cash Equivalents", "depth": 3},
+    {"source_id": "ASSETS / Cash and Cash Equivalents / Cash on hand and at bank", "code": null, "name": "Cash on hand and at bank", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Cash and Cash Equivalents", "depth": 3},
+    {"source_id": "ASSETS / Cash and Cash Equivalents / Investments current assets", "code": null, "name": "Investments current assets", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Cash and Cash Equivalents", "depth": 3},
+    {"source_id": "ASSETS / Cash and Cash Equivalents / Letter of Credit restricted account", "code": null, "name": "Letter of Credit restricted account", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Cash and Cash Equivalents", "depth": 3},
+    {"source_id": "ASSETS / Fixed Assets", "code": null, "name": "Fixed Assets", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ASSETS", "depth": 2},
+    {"source_id": "ASSETS / Fixed Assets / Construction in Progress", "code": null, "name": "Construction in Progress", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ASSETS / Fixed Assets", "depth": 3},
+    {"source_id": "ASSETS / Fixed Assets / Construction in Progress / Construction of buildings", "code": null, "name": "Construction of buildings", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Fixed Assets / Construction in Progress", "depth": 4},
+    {"source_id": "ASSETS / Fixed Assets / Construction in Progress / Construction of infrastructure", "code": null, "name": "Construction of infrastructure", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Fixed Assets / Construction in Progress", "depth": 4},
+    {"source_id": "ASSETS / Fixed Assets / Property and Equipment", "code": null, "name": "Property and Equipment", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ASSETS / Fixed Assets", "depth": 3},
+    {"source_id": "ASSETS / Fixed Assets / Property and Equipment / Aircraft, boats, etc", "code": null, "name": "Aircraft, boats, etc", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Fixed Assets / Property and Equipment", "depth": 4},
+    {"source_id": "ASSETS / Fixed Assets / Property and Equipment / Buildings", "code": null, "name": "Buildings", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Fixed Assets / Property and Equipment", "depth": 4},
+    {"source_id": "ASSETS / Fixed Assets / Property and Equipment / Furnishings and fixtures", "code": null, "name": "Furnishings and fixtures", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Fixed Assets / Property and Equipment", "depth": 4},
+    {"source_id": "ASSETS / Fixed Assets / Property and Equipment / Infrastructure", "code": null, "name": "Infrastructure", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Fixed Assets / Property and Equipment", "depth": 4},
+    {"source_id": "ASSETS / Fixed Assets / Property and Equipment / Livestock and tansport animals", "code": null, "name": "Livestock and tansport animals", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Fixed Assets / Property and Equipment", "depth": 4},
+    {"source_id": "ASSETS / Fixed Assets / Property and Equipment / Plant machinery and equipment", "code": null, "name": "Plant machinery and equipment", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Fixed Assets / Property and Equipment", "depth": 4},
+    {"source_id": "ASSETS / Fixed Assets / Property and Equipment / Vehicles and other vehicular transport", "code": null, "name": "Vehicles and other vehicular transport", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Fixed Assets / Property and Equipment", "depth": 4},
+    {"source_id": "ASSETS / Goods in Transit", "code": null, "name": "Goods in Transit", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS", "depth": 2},
+    {"source_id": "ASSETS / Investments", "code": null, "name": "Investments", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS", "depth": 2},
+    {"source_id": "ASSETS / Long Term Loans", "code": null, "name": "Long Term Loans", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS", "depth": 2},
+    {"source_id": "ASSETS / Production Stock", "code": null, "name": "Production Stock", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ASSETS", "depth": 2},
+    {"source_id": "ASSETS / Production Stock / Finished Goods", "code": null, "name": "Finished Goods", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Production Stock", "depth": 3},
+    {"source_id": "ASSETS / Production Stock / Work in Progress", "code": null, "name": "Work in Progress", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Production Stock", "depth": 3},
+    {"source_id": "ASSETS / Receivables", "code": null, "name": "Receivables", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ASSETS", "depth": 2},
+    {"source_id": "ASSETS / Receivables / Accounts Receivable", "code": null, "name": "Accounts Receivable", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ASSETS / Receivables", "depth": 3},
+    {"source_id": "ASSETS / Receivables / Accounts Receivable / Advance to staff", "code": null, "name": "Advance to staff", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Receivables / Accounts Receivable", "depth": 4},
+    {"source_id": "ASSETS / Receivables / Accounts Receivable / Cash Registers", "code": null, "name": "Cash Registers", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Receivables / Accounts Receivable", "depth": 4},
+    {"source_id": "ASSETS / Receivables / Accounts Receivable / Cash shortage", "code": null, "name": "Cash shortage", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Receivables / Accounts Receivable", "depth": 4},
+    {"source_id": "ASSETS / Receivables / Accounts Receivable / Suspense", "code": null, "name": "Suspense", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Receivables / Accounts Receivable", "depth": 4},
+    {"source_id": "ASSETS / Receivables / Accounts Receivable / Trade Debtors", "code": null, "name": "Trade Debtors", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Receivables / Accounts Receivable", "depth": 4},
+    {"source_id": "ASSETS / Receivables / Accounts Receivable / VAT Receivable on Purchases", "code": null, "name": "VAT Receivable on Purchases", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Receivables / Accounts Receivable", "depth": 4},
+    {"source_id": "ASSETS / Receivables / Accounts Receivable / VAT Withholding Receivable on Sales", "code": null, "name": "VAT Withholding Receivable on Sales", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Receivables / Accounts Receivable", "depth": 4},
+    {"source_id": "ASSETS / Receivables / Accounts Receivable / Withholding Receivable on Sales", "code": null, "name": "Withholding Receivable on Sales", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Receivables / Accounts Receivable", "depth": 4},
+    {"source_id": "ASSETS / Receivables / Other Debtors", "code": null, "name": "Other Debtors", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Receivables", "depth": 3},
+    {"source_id": "ASSETS / Receivables / Prepayments", "code": null, "name": "Prepayments", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ASSETS / Receivables", "depth": 3},
+    {"source_id": "ASSETS / Receivables / Prepayments / Advance to consultant", "code": null, "name": "Advance to consultant", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Receivables / Prepayments", "depth": 4},
+    {"source_id": "ASSETS / Receivables / Prepayments / Advance to contractors", "code": null, "name": "Advance to contractors", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Receivables / Prepayments", "depth": 4},
+    {"source_id": "ASSETS / Receivables / Prepayments / Advance to supplier", "code": null, "name": "Advance to supplier", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS / Receivables / Prepayments", "depth": 4},
+    {"source_id": "ASSETS / Stock", "code": null, "name": "Stock", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ASSETS", "depth": 2},
+    {"source_id": "COST OF GOODS SOLD", "code": null, "name": "COST OF GOODS SOLD", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense"}},
+    {"source_id": "COST OF GOODS SOLD / Cost of Goods and Services", "code": null, "name": "Cost of Goods and Services", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "COST OF GOODS SOLD", "depth": 2},
+    {"source_id": "COST OF GOODS SOLD / Inventory Adjustments", "code": null, "name": "Inventory Adjustments", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "COST OF GOODS SOLD", "depth": 2},
+    {"source_id": "COST OF GOODS SOLD / Other", "code": null, "name": "Other", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "COST OF GOODS SOLD", "depth": 2},
+    {"source_id": "COST OF GOODS SOLD / Purchase Returns and Allowances", "code": null, "name": "Purchase Returns and Allowances", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "COST OF GOODS SOLD", "depth": 2},
+    {"source_id": "EXPENSES", "code": null, "name": "EXPENSES", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense"}},
+    {"source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION", "code": null, "name": "FIXED ASSETS AND CONSTRUCTION", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES", "depth": 2},
+    {"source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Construction", "code": null, "name": "Construction", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION", "depth": 3},
+    {"source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Construction / Construction of buildings", "code": null, "name": "Construction of buildings", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Construction", "depth": 4},
+    {"source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Construction / Construction of infrastructure", "code": null, "name": "Construction of infrastructure", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Construction", "depth": 4},
+    {"source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Construction / Pre-construction activities", "code": null, "name": "Pre-construction activities", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Construction", "depth": 4},
+    {"source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Fixed Assets", "code": null, "name": "Fixed Assets", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION", "depth": 3},
+    {"source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Fixed Assets / Depreciation of buildings, furnishings and fixtures", "code": null, "name": "Depreciation of buildings, furnishings and fixtures", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Fixed Assets", "depth": 4},
+    {"source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Fixed Assets / Depreciation of livestock and transport animals", "code": null, "name": "Depreciation of livestock and transport animals", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Fixed Assets", "depth": 4},
+    {"source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Fixed Assets / Depreciation of plant, machinery and equipment", "code": null, "name": "Depreciation of plant, machinery and equipment", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Fixed Assets", "depth": 4},
+    {"source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Fixed Assets / Depreciation of vehicles and other vehicular transport", "code": null, "name": "Depreciation of vehicles and other vehicular transport", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / FIXED ASSETS AND CONSTRUCTION / Fixed Assets", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES", "code": null, "name": "GOODS AND SERVICES", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES", "depth": 2},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services", "code": null, "name": "Contracted Services", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES / GOODS AND SERVICES", "depth": 3},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services / Advertising", "code": null, "name": "Advertising", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services / Contracted professional services", "code": null, "name": "Contracted professional services", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services / Electricity charges", "code": null, "name": "Electricity charges", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services / Fees and charges", "code": null, "name": "Fees and charges", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services / Freight", "code": null, "name": "Freight", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services / Insurance", "code": null, "name": "Insurance", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services / Rent", "code": null, "name": "Rent", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services / Telecommunication charges", "code": null, "name": "Telecommunication charges", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services / Water and other utilities", "code": null, "name": "Water and other utilities", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Contracted Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "code": null, "name": "Goods and Supplies", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES / GOODS AND SERVICES", "depth": 3},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies / Agriculture, forestry and marine inputs", "code": null, "name": "Agriculture, forestry and marine inputs", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies / Educational supplies", "code": null, "name": "Educational supplies", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies / Food", "code": null, "name": "Food", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies / Fuel and lubricants", "code": null, "name": "Fuel and lubricants", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies / Medical supplies", "code": null, "name": "Medical supplies", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies / Miscellaneous equipment", "code": null, "name": "Miscellaneous equipment", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies / Office supplies", "code": null, "name": "Office supplies", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies / Other material and supplies", "code": null, "name": "Other material and supplies", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies / Printing", "code": null, "name": "Printing", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies / Research and development supplies", "code": null, "name": "Research and development supplies", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies / Uniforms, clothing, bedding", "code": null, "name": "Uniforms, clothing, bedding", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies / Veterinary supplies and drugs", "code": null, "name": "Veterinary supplies and drugs", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Goods and Supplies", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Maintenance and Repair Services", "code": null, "name": "Maintenance and Repair Services", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES / GOODS AND SERVICES", "depth": 3},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Maintenance and Repair Services / Maintenance and repair of buildings, furnishings and fixtures", "code": null, "name": "Maintenance and repair of buildings, furnishings and fixtures", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Maintenance and Repair Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Maintenance and Repair Services / Maintenance and repair of infrastructure", "code": null, "name": "Maintenance and repair of infrastructure", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Maintenance and Repair Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Maintenance and Repair Services / Maintenance and repair of plant, machinery, and equipment", "code": null, "name": "Maintenance and repair of plant, machinery, and equipment", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Maintenance and Repair Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Maintenance and Repair Services / Maintenance and repair of vehicles and other transport", "code": null, "name": "Maintenance and repair of vehicles and other transport", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Maintenance and Repair Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Training Services", "code": null, "name": "Training Services", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES / GOODS AND SERVICES", "depth": 3},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Training Services / External training", "code": null, "name": "External training", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Training Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Training Services / Local training", "code": null, "name": "Local training", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Training Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Travelling and Official Entertainment Services", "code": null, "name": "Travelling and Official Entertainment Services", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES / GOODS AND SERVICES", "depth": 3},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Travelling and Official Entertainment Services / Official entertainment", "code": null, "name": "Official entertainment", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Travelling and Official Entertainment Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Travelling and Official Entertainment Services / Per diem", "code": null, "name": "Per diem", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Travelling and Official Entertainment Services", "depth": 4},
+    {"source_id": "EXPENSES / GOODS AND SERVICES / Travelling and Official Entertainment Services / Transport fees", "code": null, "name": "Transport fees", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / GOODS AND SERVICES / Travelling and Official Entertainment Services", "depth": 4},
+    {"source_id": "EXPENSES / OTHER PAYMENTS", "code": null, "name": "OTHER PAYMENTS", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES", "depth": 2},
+    {"source_id": "EXPENSES / OTHER PAYMENTS / Debt Payments", "code": null, "name": "Debt Payments", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES / OTHER PAYMENTS", "depth": 3},
+    {"source_id": "EXPENSES / OTHER PAYMENTS / Debt Payments / Payments of interest and bank charges on foreign debt", "code": null, "name": "Payments of interest and bank charges on foreign debt", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / OTHER PAYMENTS / Debt Payments", "depth": 4},
+    {"source_id": "EXPENSES / OTHER PAYMENTS / Debt Payments / Payments of interest and bank charges on local debt", "code": null, "name": "Payments of interest and bank charges on local debt", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / OTHER PAYMENTS / Debt Payments", "depth": 4},
+    {"source_id": "EXPENSES / OTHER PAYMENTS / Debt Payments / Payments on the principal of foreign debt", "code": null, "name": "Payments on the principal of foreign debt", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / OTHER PAYMENTS / Debt Payments", "depth": 4},
+    {"source_id": "EXPENSES / OTHER PAYMENTS / Debt Payments / Payments on the principal of local debt", "code": null, "name": "Payments on the principal of local debt", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / OTHER PAYMENTS / Debt Payments", "depth": 4},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES", "code": null, "name": "PERSONNEL SERVICES", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES", "depth": 2},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES / Allowances/benefits", "code": null, "name": "Allowances/benefits", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES / PERSONNEL SERVICES", "depth": 3},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES / Allowances/benefits / Allowances to contract staff", "code": null, "name": "Allowances to contract staff", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / PERSONNEL SERVICES / Allowances/benefits", "depth": 4},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES / Allowances/benefits / Allowances to external contract staff", "code": null, "name": "Allowances to external contract staff", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / PERSONNEL SERVICES / Allowances/benefits", "depth": 4},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES / Allowances/benefits / Allowances to permanent staff", "code": null, "name": "Allowances to permanent staff", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / PERSONNEL SERVICES / Allowances/benefits", "depth": 4},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES / Compensation", "code": null, "name": "Compensation", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES / PERSONNEL SERVICES", "depth": 3},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES / Compensation / Miscellaneous payments to staff", "code": null, "name": "Miscellaneous payments to staff", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / PERSONNEL SERVICES / Compensation", "depth": 4},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES / Compensation / Salaries to permanent staff", "code": null, "name": "Salaries to permanent staff", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / PERSONNEL SERVICES / Compensation", "depth": 4},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES / Compensation / Wages to casual staff", "code": null, "name": "Wages to casual staff", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / PERSONNEL SERVICES / Compensation", "depth": 4},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES / Compensation / Wages to contract staff", "code": null, "name": "Wages to contract staff", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / PERSONNEL SERVICES / Compensation", "depth": 4},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES / Compensation / Wages to external contract staff", "code": null, "name": "Wages to external contract staff", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / PERSONNEL SERVICES / Compensation", "depth": 4},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES / Pension Contributions", "code": null, "name": "Pension Contributions", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "EXPENSES / PERSONNEL SERVICES", "depth": 3},
+    {"source_id": "EXPENSES / PERSONNEL SERVICES / Pension Contributions / Contribution to permanent staff pensions", "code": null, "name": "Contribution to permanent staff pensions", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "EXPENSES / PERSONNEL SERVICES / Pension Contributions", "depth": 4},
+    {"source_id": "LIABILITIES", "code": null, "name": "LIABILITIES", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Liability"}},
+    {"source_id": "LIABILITIES / Long-Term Debt", "code": null, "name": "Long-Term Debt", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "LIABILITIES", "depth": 2},
+    {"source_id": "LIABILITIES / Long-Term Debt / Foreign Loans", "code": null, "name": "Foreign Loans", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "LIABILITIES / Long-Term Debt", "depth": 3},
+    {"source_id": "LIABILITIES / Long-Term Debt / Foreign Loans / Commercial Loan", "code": null, "name": "Commercial Loan", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "LIABILITIES / Long-Term Debt / Foreign Loans", "depth": 4},
+    {"source_id": "LIABILITIES / Long-Term Debt / Local Loans", "code": null, "name": "Local Loans", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "LIABILITIES / Long-Term Debt", "depth": 3},
+    {"source_id": "LIABILITIES / Long-Term Debt / Local Loans / Commercial Loan", "code": null, "name": "Commercial Loan", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "LIABILITIES / Long-Term Debt / Local Loans", "depth": 4},
+    {"source_id": "LIABILITIES / Payables", "code": null, "name": "Payables", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "LIABILITIES", "depth": 2},
+    {"source_id": "LIABILITIES / Payables / Accounts Payable", "code": null, "name": "Accounts Payable", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "LIABILITIES / Payables", "depth": 3},
+    {"source_id": "LIABILITIES / Payables / Accounts Payable / Federal Income Tax", "code": null, "name": "Federal Income Tax", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "LIABILITIES / Payables / Accounts Payable", "depth": 4},
+    {"source_id": "LIABILITIES / Payables / Accounts Payable / Grace period payables", "code": null, "name": "Grace period payables", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "LIABILITIES / Payables / Accounts Payable", "depth": 4},
+    {"source_id": "LIABILITIES / Payables / Accounts Payable / Pension contribution payable", "code": null, "name": "Pension contribution payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "LIABILITIES / Payables / Accounts Payable", "depth": 4},
+    {"source_id": "LIABILITIES / Payables / Accounts Payable / Salary payable", "code": null, "name": "Salary payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "LIABILITIES / Payables / Accounts Payable", "depth": 4},
+    {"source_id": "LIABILITIES / Payables / Accounts Payable / Trade Creditors", "code": null, "name": "Trade Creditors", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "LIABILITIES / Payables / Accounts Payable", "depth": 4},
+    {"source_id": "LIABILITIES / Payables / Accounts Payable / VAT Payable", "code": null, "name": "VAT Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "LIABILITIES / Payables / Accounts Payable", "depth": 4},
+    {"source_id": "LIABILITIES / Payables / Accounts Payable / Witholding Payable", "code": null, "name": "Witholding Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "LIABILITIES / Payables / Accounts Payable", "depth": 4},
+    {"source_id": "LIABILITIES / Payables / Deposits", "code": null, "name": "Deposits", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "LIABILITIES / Payables", "depth": 3},
+    {"source_id": "LIABILITIES / Payables / Deposits / Other deposits", "code": null, "name": "Other deposits", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "LIABILITIES / Payables / Deposits", "depth": 4},
+    {"source_id": "LIABILITIES / Payables / Retentions", "code": null, "name": "Retentions", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "LIABILITIES / Payables", "depth": 3},
+    {"source_id": "LIABILITIES / Payables / Retentions / Retention on contract", "code": null, "name": "Retention on contract", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "LIABILITIES / Payables / Retentions", "depth": 4},
+    {"source_id": "NET ASSETS/EQUITY", "code": null, "name": "NET ASSETS/EQUITY", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Equity"}},
+    {"source_id": "NET ASSETS/EQUITY / Profit and loss account", "code": null, "name": "Profit and loss account", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "NET ASSETS/EQUITY", "depth": 2},
+    {"source_id": "NET ASSETS/EQUITY / Reserves", "code": null, "name": "Reserves", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "NET ASSETS/EQUITY", "depth": 2},
+    {"source_id": "NET ASSETS/EQUITY / Share capital / equity", "code": null, "name": "Share capital / equity", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "NET ASSETS/EQUITY", "depth": 2},
+    {"source_id": "REVENUE", "code": null, "name": "REVENUE", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Income"}},
+    {"source_id": "REVENUE / Sales of Goods and Services", "code": null, "name": "Sales of Goods and Services", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "REVENUE", "depth": 2}
+  ]
+}

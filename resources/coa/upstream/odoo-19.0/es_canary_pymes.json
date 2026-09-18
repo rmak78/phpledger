@@ -1,0 +1,356 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "fbddf495605d47294d2f04598d57d5c5dfa61b903636a9f7a8376127c3945d0a",
+  "accounts_identical_to": "odoo-19.0/es_canary_common",
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/es_canary_pymes",
+  "country_code": "ES",
+  "country_name": "Spain",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Canary Islands - SMEs (2008)",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_es' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Spanish Localization Team",
+    "module": "l10n_es",
+    "module_name": "Spain - Accounting (PGCE 2008)",
+    "module_version": "5.4",
+    "contributing_modules": [
+      "l10n_es"
+    ],
+    "template_code": "es_canary_pymes",
+    "template_chain": [
+      "es_common",
+      "es_canary_common",
+      "es_canary_pymes"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": false,
+    "files": [
+      {
+        "path": "addons/l10n_es/data/template/account.account-es_common.csv",
+        "sha256": "218dcfe664b580df2cea473c288487797a4a5b1b6af76e5fff2ad31cf233bfc5",
+        "rows": 598
+      },
+      {
+        "path": "addons/l10n_es/data/template/account.account-es_canary_common.csv",
+        "sha256": "4a1c9049b7689345e152c9cb140cac18676c10748493a8ef0d6be5c6e0436269",
+        "rows": 8
+      },
+      {
+        "path": "addons/l10n_es/data/template/account.group-es_common.csv",
+        "sha256": "c0c38a7c7cab74af7b9cc73d2cb2c79bb4d90b777ae901678e3a27e18679d30c",
+        "rows": 930
+      }
+    ],
+    "python_files": [
+      "addons/l10n_es/models/template_es_canary_common.py",
+      "addons/l10n_es/models/template_es_canary_pymes.py",
+      "addons/l10n_es/models/template_es_common.py"
+    ],
+    "non_literal_python": [
+      "account.account:_get_es_canary_pymes_account_account (parses another template's CSV)"
+    ]
+  },
+  "template": {
+    "code_digits": null,
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "572",
+      "cash": "570",
+      "transfer": "572999"
+    },
+    "default_sale_tax": "account_tax_template_igic_r_7",
+    "default_purchase_tax": "account_tax_template_igic_sop_7",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "account_common_4300",
+        "code": "4300",
+        "name": "Trade receivables (euros)",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "account_common_4100",
+        "code": "4100",
+        "name": "Payables for the rendering of services (euros)",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "account_common_7000",
+        "code": "7000",
+        "name": "Merchandise sold",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "account_common_600",
+        "code": "600",
+        "name": "Merchandise purchased",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "account_common_310",
+        "code": "310",
+        "name": "Raw materials A",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "account_common_4301",
+        "code": "4301",
+        "name": "Trade receivables (euros) (PoS)",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "account_common_572998",
+        "code": "572998",
+        "name": "Transitory account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "account_common_768",
+        "code": "768",
+        "name": "Exchange gains",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "account_common_668",
+        "code": "668",
+        "name": "Exchange losses",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "account_common_778",
+        "code": "778",
+        "name": "Exceptional income",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "account_common_678",
+        "code": "678",
+        "name": "Exceptional expenses",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "account_common_7060",
+        "code": "7060",
+        "name": "Prompt payment discounts on merchandise sold",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "account_common_6060",
+        "code": "6060",
+        "name": "Prompt payment discounts on merchandise purchased",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "account_common_480",
+        "code": "480",
+        "name": "Prepaid expenses",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "account_common_485",
+        "code": "485",
+        "name": "Deferred income",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 606,
+    "posting_accounts": 606,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 217,
+      "equity": 15,
+      "expense": 147,
+      "income": 104,
+      "liability": 123
+    },
+    "by_subtype": {
+      "cash_bank": 6,
+      "current_asset": 93,
+      "current_liability": 60,
+      "depreciation": 3,
+      "equity": 15,
+      "expense": 50,
+      "fixed_asset": 84,
+      "income": 103,
+      "non_current_asset": 3,
+      "non_current_liability": 44,
+      "other_expense": 94,
+      "other_income": 1,
+      "payable": 19,
+      "receivable": 31
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 6,
+      "expense": 1,
+      "income": 1,
+      "payables": 19,
+      "receivables": 31
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "ca",
+      "es"
+    ],
+    "groups": 930
+  },
+  "groups": [],
+  "accounts": []
+}

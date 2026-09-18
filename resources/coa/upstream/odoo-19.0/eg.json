@@ -1,0 +1,524 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "a310465aaa59e489679492e851c2da297d2fa340d9c797e6ac121e1bd01afa4f",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/eg",
+  "country_code": "EG",
+  "country_name": "Egypt",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Egypt - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_eg' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_eg",
+    "module_name": "Egypt - Accounting",
+    "module_version": "1.0",
+    "contributing_modules": [
+      "l10n_eg"
+    ],
+    "template_code": "eg",
+    "template_chain": [
+      "eg"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_eg/data/template/account.account-eg.csv",
+        "sha256": "5ea4aac8023255dcb559bef0063e27588566babe8f842a9acde6a3d0a4e1fcbe",
+        "rows": 205
+      }
+    ],
+    "python_files": [
+      "addons/l10n_eg/models/template_eg.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "101",
+      "cash": "105",
+      "transfer": "100"
+    },
+    "default_sale_tax": "eg_standard_sale_14",
+    "default_purchase_tax": "eg_standard_purchase_14",
+    "tax_calculation_rounding_method": "round_per_line"
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "egy_account_102011",
+        "code": "102011",
+        "name": "Accounts Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "egy_account_201002",
+        "code": "201002",
+        "name": "Payables",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "egy_account_500001",
+        "code": "500001",
+        "name": "Sales Account",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "egy_account_400028",
+        "code": "400028",
+        "name": "Others",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "egy_account_132100",
+        "code": "132100",
+        "name": "Raw Materials Inventory",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "egy_account_102012",
+        "code": "102012",
+        "name": "Accounts Receivable (PoS)",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "egy_account_201001",
+        "code": "201001",
+        "name": "Bank Suspense Account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "egy_account_500011",
+        "code": "500011",
+        "name": "Gain On Difference of Exchange",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "egy_account_400053",
+        "code": "400053",
+        "name": "Loss on Difference on Exchange",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "egy_account_999002",
+        "code": "999002",
+        "name": "Cash Difference Gain",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "egy_account_999001",
+        "code": "999001",
+        "name": "Cash Difference Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "egy_account_500014",
+        "code": "500014",
+        "name": "Cash Discount Gain",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "egy_account_400079",
+        "code": "400079",
+        "name": "Cash Discount Loss",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 205,
+    "posting_accounts": 205,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 59,
+      "equity": 1,
+      "expense": 103,
+      "income": 14,
+      "liability": 28
+    },
+    "by_subtype": {
+      "current_asset": 42,
+      "current_liability": 24,
+      "depreciation": 9,
+      "direct_cost": 2,
+      "expense": 92,
+      "fixed_asset": 14,
+      "income": 13,
+      "non_current_liability": 2,
+      "other_income": 1,
+      "payable": 2,
+      "receivable": 3,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 2,
+      "receivables": 3
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "ar_001"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "egy_account_100101", "code": "100101", "name": "Right of use Asset (IFRS 16)", "translations": {"ar_001": "حق استخدام الأصول (IFRS 16)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "egy_account_100102", "code": "100102", "name": "Accumulated Depreciation right use asset (IFRS 16)", "translations": {"ar_001": "الاستهلاك المتراكم استخدام حق الأصول (IFRS 16)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "egy_account_100103", "code": "100103", "name": "VAT Receivable", "translations": {"ar_001": "ضريبة القيمة المضافة المدينة"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "egy_account_101004", "code": "101004", "name": "Outstanding Receipts", "translations": {"ar_001": "الوصولات المدفوعة"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_101005", "code": "101005", "name": "Main Safe", "translations": {"ar_001": "خزينة رئيسية"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_101006", "code": "101006", "name": "Main Safe - Foreign Currency", "translations": {"ar_001": "خزينة رئيسية - عملات اخرى"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_101007", "code": "101007", "name": "Visa & Master Credit Cards", "translations": {"ar_001": "بطاقات الائتمان فيزا وماستر"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_101008", "code": "101008", "name": "Gateway Credit Cards", "translations": {"ar_001": "بطاقات الائتمان Gateway"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_101009", "code": "101009", "name": "Manual Visa & Master Cards", "translations": {"ar_001": "فيزا وماستر بطاقات"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_101010", "code": "101010", "name": "PayPal Account", "translations": {"ar_001": "Paypal رصيد"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_102011", "code": "102011", "name": "Accounts Receivable", "translations": {"ar_001": "الذمم المدينة"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "egy_account_102012", "code": "102012", "name": "Accounts Receivable (PoS)", "translations": {"ar_001": "ذمم مدينة (PoS)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "egy_account_102013", "code": "102013", "name": "Post Dated Cheques Received", "translations": {"ar_001": "شيكات مؤجلة"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_102014", "code": "102014", "name": "Other Receivable", "translations": {"ar_001": "ذمم مدينة اخرى"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_102015", "code": "102015", "name": "Other Debtors", "translations": {"ar_001": "مدينون اخرون"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_103016", "code": "103016", "name": "Shipment Insurance", "translations": {"ar_001": "تأمين الشحن"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_103017", "code": "103017", "name": "Shipments Documentation Charges", "translations": {"ar_001": "رسوم"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_103018", "code": "103018", "name": "Shipment Other Charges", "translations": {"ar_001": "رسوم شحنات اخرى"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_103019", "code": "103019", "name": "Handling Difference in Inventory", "translations": {"ar_001": "فرق المخزون"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_103020", "code": "103020", "name": "Items Delivered to Customs on temprary Base", "translations": {"ar_001": "بنود في الجمارك"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104021", "code": "104021", "name": "Prepaid Medical Insurance", "translations": {"ar_001": "تأمين طبي مدفوع مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104022", "code": "104022", "name": "Prepaid Life Insurance", "translations": {"ar_001": "تأمين على الحياة مدفوع مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104023", "code": "104023", "name": "Prepaid Office Rent", "translations": {"ar_001": "ايجار مكتب مدفوع مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104024", "code": "104024", "name": "Prepaid Other Insurance", "translations": {"ar_001": "تأمينات اخرى مدفوعة مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104025", "code": "104025", "name": "Prepaid License Fees", "translations": {"ar_001": "رسوم ترخيص مدفوعة مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104026", "code": "104026", "name": "Prepaid Maintenance", "translations": {"ar_001": "رسوم صيانة مدفوعة مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104027", "code": "104027", "name": "Prepaid Site Hosting Fees", "translations": {"ar_001": "رسوم استضافة موقع مدفوعة مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104028", "code": "104028", "name": "Prepaid Employees Housing", "translations": {"ar_001": "بدل سكن للموظفين مدفوع مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104029", "code": "104029", "name": "Prepaid Schooling Fees", "translations": {"ar_001": "بدل رسوم تعليم مدرسي مدفوع مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104030", "code": "104030", "name": "Prepaid Consultancy Fees", "translations": {"ar_001": "رسوم استشارات مدفوعة مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104031", "code": "104031", "name": "Prepaid Legal Fees", "translations": {"ar_001": "الرسوم القانونية مدفوعة مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104033", "code": "104033", "name": "PrePaid Advertisement Expenses", "translations": {"ar_001": "دعاية و الإعلان مدفوعة مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104034", "code": "104034", "name": "Prepaid Bank Guarantee", "translations": {"ar_001": "ضمان بنكي مدفوع مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104035", "code": "104035", "name": "Other Prepayments", "translations": {"ar_001": "دفعات مقدمة أخرى"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104036", "code": "104036", "name": "Prepaid Finance charge for Loans", "translations": {"ar_001": "تكاليف تمويل قروض مدفوعة مسبقا"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104037", "code": "104037", "name": "Deposit - Office Rent", "translations": {"ar_001": "رسوم تأمين - ايجار مكتبي"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104038", "code": "104038", "name": "Deposits - Customs", "translations": {"ar_001": "رسوم تأمين - جمارك"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104040", "code": "104040", "name": "Deposit Others", "translations": {"ar_001": "رسوم تأمين - اخرى"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104041", "code": "104041", "name": "VAT Input", "translations": {"ar_001": "مدخلات ضريبة القيمة المضافة"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_104042", "code": "104042", "name": "WH tax Advance with Customers - On behalf of my company", "translations": {"ar_001": "ضريبة خصم المنبع مدفوعة عن طريق العملاء"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_105003", "code": "105003", "name": "Outstanding Payments", "translations": {"ar_001": "المدفوعات المستحقة"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_106001", "code": "106001", "name": "Leasehold Improvement", "translations": {"ar_001": "تحسين المستأجرات"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_106002", "code": "106002", "name": "Furniture and Equipment", "translations": {"ar_001": "أثاث و معدات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Large expenses related to workplaces", "source": {"account_type": "asset_fixed", "asset_model_ids": ["eg_asset_furniture_material"], "descriptions": {"ar_001": "النفقات الكبيرة المتعلقة بأماكن العمل"}}},
+    {"source_id": "egy_account_106003", "code": "106003", "name": "Computer Hardware & Software", "translations": {"ar_001": "الكمبيوترات و قطع الغيار و البرمجيات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Technological products or services bought for your business", "source": {"account_type": "asset_fixed", "asset_model_ids": ["eg_asset_technology"], "descriptions": {"ar_001": "المنتجات أو الخدمات التكنولوجية التي تم شراؤها لشركتك"}}},
+    {"source_id": "egy_account_106004", "code": "106004", "name": "Motor Vehicles", "translations": {"ar_001": "السيارات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Purchase of a car, including second hand or after-lease contract", "source": {"account_type": "asset_fixed", "asset_model_ids": ["eg_asset_vehicle"], "descriptions": {"ar_001": "شراء سيارة، بما في ذلك عقد الإيجار المستعمل أو ما بعد الإيجار"}}},
+    {"source_id": "egy_account_106006", "code": "106006", "name": "Amortisation on Leasehold Improvement", "translations": {"ar_001": "اطفاء على تحسين المستأجرات"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_106007", "code": "106007", "name": "Accumulated Depreciation of Furniture & Office Equipment", "translations": {"ar_001": "مجمع اهتلاك اثاث و معدات المكتب"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "egy_account_106008", "code": "106008", "name": "Accumulated Depreciation of Computer Hardware & Software", "translations": {"ar_001": "مجمع اهتلاك الكمبيوترات و قطع الغيار و البرمجيات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "egy_account_106009", "code": "106009", "name": "Accumulated Depreciation of Motor Vehicles", "translations": {"ar_001": "مجمع اهتلاك السيارات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "egy_account_106010", "code": "106010", "name": "Registration of Trademarks", "translations": {"ar_001": "تسجيل العلامات التجارية"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_106011", "code": "106011", "name": "Computer Card Renewal", "translations": {"ar_001": "بطاقة تجديد كمبيوتر"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_106012", "code": "106012", "name": "Land", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Purchases of lands without buildings", "source": {"account_type": "asset_fixed", "descriptions": {"ar_001": "شراء الأراضي بدون مباني"}}},
+    {"source_id": "egy_account_106013", "code": "106013", "name": "Construction", "translations": {"ar_001": "أعمال البناء"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Construction of buildings and costs associated to buildings", "source": {"account_type": "asset_fixed", "asset_model_ids": ["eg_asset_construction"], "descriptions": {"ar_001": "تشييد المباني والتكاليف المرتبطة بها"}}},
+    {"source_id": "egy_account_106014", "code": "106014", "name": "Installations", "translations": {"ar_001": "التجهيزات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Purchases of installations related to buildings, like solar panels or heater", "source": {"account_type": "asset_fixed", "asset_model_ids": ["eg_asset_installation"], "descriptions": {"ar_001": "مشتريات التركيبات المتعلقة بالمباني، مثل الألواح الشمسية أو السخانات"}}},
+    {"source_id": "egy_account_106015", "code": "106015", "name": "Machines & Tools", "translations": {"ar_001": "الماكينات والأدوات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Machinery and tools directly related to your business", "source": {"account_type": "asset_fixed", "asset_model_ids": ["eg_asset_machines_tools"], "descriptions": {"ar_001": "الآلات والأدوات المرتبطة مباشرة بعملك"}}},
+    {"source_id": "egy_account_106016", "code": "106016", "name": "Other Property", "translations": {"ar_001": "العقارات الأخرى"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Other type of property, like plants, machinery or various equipment", "source": {"account_type": "asset_fixed", "asset_model_ids": ["eg_asset_other_property"], "descriptions": {"ar_001": "نوع آخر من الممتلكات، مثل المصانع أو الآلات أو المعدات المختلفة"}}},
+    {"source_id": "egy_account_106017", "code": "106017", "name": "Vehicle Accessories", "translations": {"ar_001": "ملحقات المركبة"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All accessories purchases related to your professional vehicle", "source": {"account_type": "asset_fixed", "asset_model_ids": ["eg_asset_vehicle_accessories"], "descriptions": {"ar_001": "جميع مشتريات الملحقات المتعلقة بمركبتك المهنية"}}},
+    {"source_id": "egy_account_132100", "code": "132100", "name": "Raw Materials Inventory", "translations": {"ar_001": "مخزون المواد الخام"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_expense_id": "egy_account_400080", "account_stock_variation_id": "egy_account_400036"}}},
+    {"source_id": "egy_account_201001", "code": "201001", "name": "Bank Suspense Account", "translations": {"ar_001": "حساب البنك المعلق"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "egy_account_201002", "code": "201002", "name": "Payables", "translations": {"ar_001": "الذمم الدائنة"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "egy_account_201003", "code": "201003", "name": "Credit Notes to Customers", "translations": {"ar_001": "اشعار دائن للعملاء"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201004", "code": "201004", "name": "Accrued - Salaries", "translations": {"ar_001": "الرواتب المستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201005", "code": "201005", "name": "Leave Tickets Provision", "translations": {"ar_001": "مخصص تذاكر"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201006", "code": "201006", "name": "Leave Days Provision", "translations": {"ar_001": "مخصص ايام اجازة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201007", "code": "201007", "name": "Accrued - Commissions", "translations": {"ar_001": "عمولة مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201008", "code": "201008", "name": "Accrued Salaries Increment", "translations": {"ar_001": "راتب اضافي مستحق"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201009", "code": "201009", "name": "Accrued-Staff Bonus", "translations": {"ar_001": "مكافأة مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201010", "code": "201010", "name": "Accrued Other Personnel Cost", "translations": {"ar_001": "تكاليف موظفين مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201011", "code": "201011", "name": "Accrued - Utilities", "translations": {"ar_001": "فواتير مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201012", "code": "201012", "name": "Accrued - Telephone", "translations": {"ar_001": "نتكاليف هاتف مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201013", "code": "201013", "name": "Accrued - Sponsorship", "translations": {"ar_001": "تكفل مستحق"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201014", "code": "201014", "name": "Accrued - Audit Fees", "translations": {"ar_001": "اتعاب تدقيق مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201015", "code": "201015", "name": "Accrued - Office Rent", "translations": {"ar_001": "ايجار مكتب مستحق"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201016", "code": "201016", "name": "Accrued Others", "translations": {"ar_001": "اخرى مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201017", "code": "201017", "name": "VAT Output", "translations": {"ar_001": "مخرجات ضريبة القيمة المضافة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201018", "code": "201018", "name": "Deferred income", "translations": {"ar_001": "الإيرادات مؤجلة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201020", "code": "201020", "name": "WHTax Payable - On behalf of suppliers", "translations": {"ar_001": "ضريبة خصم المنبع للدفع عن الموردين"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201021", "code": "201021", "name": "Legal Reserve", "translations": {"ar_001": "احتياطى قانوني"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201022", "code": "201022", "name": "Taxes Provision", "translations": {"ar_001": "مخصص ضرائب ورسوم متنازع عليها"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201023", "code": "201023", "name": "Customer Provision", "translations": {"ar_001": "مخصص الديون المشكوك في تحصيله"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201024", "code": "201024", "name": "Schedule Tax collected & payable", "translations": {"ar_001": "ضريبة جدول دائنة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201025", "code": "201025", "name": "Stamp Tax payable", "translations": {"ar_001": "ضريبة الدمغة دائنة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201026", "code": "201026", "name": "Social Contribution - Payable to authorities", "translations": {"ar_001": "تأمين اجتماعي دائن"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_201027", "code": "201027", "name": "Income Tax payable to Authority - Deducted from employee's salaries", "translations": {"ar_001": "تأمين اجتماعي دائن - مقتطع من الموظفين"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "egy_account_202001", "code": "202001", "name": "End of Service Provision", "translations": {"ar_001": "مخصص نهاية الخدمة"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "egy_account_202002", "code": "202002", "name": "Reservations", "translations": {"ar_001": "احتياطات و حجوزات"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "egy_account_202003", "code": "202003", "name": "VAT Payable", "translations": {"ar_001": "ضريبة القيمة المضافة المستحقة"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "egy_account_400001", "code": "400001", "name": "Cost of Goods Sold in Trading", "translations": {"ar_001": "تكلفة البضاعة المباعة في التجارة"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "egy_account_400002", "code": "400002", "name": "Cost of Goods Sold I/C Sales", "translations": {"ar_001": "تكلفة البضاعة المباعة مع المبيعات"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "egy_account_400003", "code": "400003", "name": "Basic Salary", "translations": {"ar_001": "مصروف الراتب الاساسي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400004", "code": "400004", "name": "Housing Allowance", "translations": {"ar_001": "مصروف بدل سكن"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400005", "code": "400005", "name": "Transportation Allowance", "translations": {"ar_001": "مصروف بدل نقل"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400006", "code": "400006", "name": "Leave Ticket", "translations": {"ar_001": "مصروف تذاكر موظفين"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400007", "code": "400007", "name": "Leave Salary", "translations": {"ar_001": "مصروف اجازة موظفين"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400008", "code": "400008", "name": "End of Service Indemnity", "translations": {"ar_001": "مصروف نهاية الخدمة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400009", "code": "400009", "name": "Medical Insurance", "translations": {"ar_001": "مصروف تأمين طبي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400010", "code": "400010", "name": "Life Insurance", "translations": {"ar_001": "مصروف تأمين على الحياة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400011", "code": "400011", "name": "Sales Commission", "translations": {"ar_001": "مصروف عمولة مبيعات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400012", "code": "400012", "name": "Staff Other Allowances", "translations": {"ar_001": "مصروف بدلات اخرى للموظفين"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Compensation costs for employees and manual workers employed by the company", "source": {"account_type": "expense", "descriptions": {"ar_001": "تكاليف التعويض للموظفين والعمال اليدويين العاملين لدى الشركة"}}},
+    {"source_id": "egy_account_400013", "code": "400013", "name": "Uniform", "translations": {"ar_001": "مصروف زي موحد"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400014", "code": "400014", "name": "Visa Expenses", "translations": {"ar_001": "مصروف تأشيرة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400015", "code": "400015", "name": "Personnel Cost Others", "translations": {"ar_001": "مصروف موظفين - اخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Company's personel costs excluding compensations, contributions and vouchers", "source": {"account_type": "expense", "descriptions": {"ar_001": "تكاليف الموظفين للشركة باستثناء التعويضات والمساهمات والقسائم"}}},
+    {"source_id": "egy_account_400016", "code": "400016", "name": "Office Rent", "translations": {"ar_001": "مصروف اجار مكتب"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Rental fees related to your workplace", "source": {"account_type": "expense", "descriptions": {"ar_001": "رسوم الإيجار المتعلقة بمكان عملك"}}},
+    {"source_id": "egy_account_400017", "code": "400017", "name": "Warehouse Rent", "translations": {"ar_001": "مصروف ايجار مستودع"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400018", "code": "400018", "name": "Water & Electricity", "translations": {"ar_001": "مصروف مياه و كهرباء"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bills from your water and energy suppliers", "source": {"account_type": "expense", "descriptions": {"ar_001": "الفواتير من موردي المياه والطاقة لديك"}}},
+    {"source_id": "egy_account_400019", "code": "400019", "name": "Other Utility Cahrges", "translations": {"ar_001": "مصروف خدمات اخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400020", "code": "400020", "name": "Telephone", "translations": {"ar_001": "مصروف هاتف"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Internet or phone bills incurred", "source": {"account_type": "expense", "descriptions": {"ar_001": "فواتير الإنترنت أو الهاتف المستحقة"}}},
+    {"source_id": "egy_account_400021", "code": "400021", "name": "Courrier", "translations": {"ar_001": "مصروف شحن"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400022", "code": "400022", "name": "Web Site Hosting Fees", "translations": {"ar_001": "رسوم استضافة موقع"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400023", "code": "400023", "name": "Others - Communication", "translations": {"ar_001": "مصاريف اتصالات اخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400024", "code": "400024", "name": "Air tickets", "translations": {"ar_001": "مصاريف تذاكر طيران"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All expenses related to travel by plane", "source": {"account_type": "expense", "descriptions": {"ar_001": "جميع النفقات المتعلقة بالسفر بالطائرة"}}},
+    {"source_id": "egy_account_400025", "code": "400025", "name": "Hotel", "translations": {"ar_001": "مصاريف فندق"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Hotel or B&B bills incurred during business trips", "source": {"account_type": "expense", "descriptions": {"ar_001": "فواتير الفنادق أو المبيت والإفطار المتكبدة أثناء رحلات العمل"}}},
+    {"source_id": "egy_account_400026", "code": "400026", "name": "Meals", "translations": {"ar_001": "مصاريف فندق"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Food or drinks incurred outside of bars or restaurants, like receptions, canteen and food delivery, etc", "source": {"account_type": "expense", "descriptions": {"ar_001": "الأطعمة والمشروبات التي يتم تناولها خارج الحانات أو المطاعم، مثل حفلات الاستقبال والكافتيريا وتوصيل الطعام، وما إلى ذلك"}}},
+    {"source_id": "egy_account_400027", "code": "400027", "name": "Per Diem", "translations": {"ar_001": "مصاريف يومية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400028", "code": "400028", "name": "Others", "translations": {"ar_001": "مصاريف اخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400029", "code": "400029", "name": "Audit Fees", "translations": {"ar_001": "مصروف اتعاب تدقيق"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bills from your accountant or accounting firm", "source": {"account_type": "expense", "descriptions": {"ar_001": "الفواتير من المحاسب الخاص بك أو شركة المحاسبة"}}},
+    {"source_id": "egy_account_400031", "code": "400031", "name": "Legal fees", "translations": {"ar_001": "مصروف رسوم قانونية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bills from lawyers, fees paid to the justice system", "source": {"account_type": "expense", "descriptions": {"ar_001": "فواتير المحامين والرسوم المدفوعة لنظام العدالة"}}},
+    {"source_id": "egy_account_400032", "code": "400032", "name": "Trade License Fees", "translations": {"ar_001": "مصروف رسوم الرخصة التجارية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400033", "code": "400033", "name": "Others - Professional Fees", "translations": {"ar_001": "مصروف أخرى الرسوم الفنية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400034", "code": "400034", "name": "Other - Advertising Expenses", "translations": {"ar_001": "مصروف أخرى مصاريف الإعلان"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Publicity fees for your activity, including promotional material", "source": {"account_type": "expense", "descriptions": {"ar_001": "رسوم الدعاية لنشاطك، بما في ذلك المواد الترويجية"}}},
+    {"source_id": "egy_account_400035", "code": "400035", "name": "Write Off Receivables & Payables", "translations": {"ar_001": "مصروف شطب المدين و الذمم الدائنة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400036", "code": "400036", "name": "Write Off Inventory", "translations": {"ar_001": "مصروف فرق المخزون"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400037", "code": "400037", "name": "Amortisation of Preoperating Expenses", "translations": {"ar_001": "مصروف إطفاء مصاريف"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400038", "code": "400038", "name": "Cash Shortage", "translations": {"ar_001": "مصروف نقص نقدي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400039", "code": "400039", "name": "Others - Provision & Write off", "translations": {"ar_001": "مخصصات و فروقات اخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400040", "code": "400040", "name": "Insurance", "translations": {"ar_001": "مصروف تأمين"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400041", "code": "400041", "name": "Training", "translations": {"ar_001": "مصروف تدريب"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Training fees not including food and drinks", "source": {"account_type": "expense", "descriptions": {"ar_001": "رسوم التدريب لا تشمل الطعام والمشروبات"}}},
+    {"source_id": "egy_account_400042", "code": "400042", "name": "Maintenance", "translations": {"ar_001": "مصروف صيانة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400043", "code": "400043", "name": "Security & Guard", "translations": {"ar_001": "مصروف حراسة و امن"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400044", "code": "400044", "name": "Cleaning", "translations": {"ar_001": "مصروف تنظيف"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400045", "code": "400045", "name": "Subscriptions", "translations": {"ar_001": "مصروف الاشتراكات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400046", "code": "400046", "name": "Gifts & Donations", "translations": {"ar_001": "مصروف هدايا و هبات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Business gifts to clients over 2800+ EGP", "source": {"account_type": "expense", "descriptions": {"ar_001": "هدايا الأعمال للعملاء فوق 2800 جنيه مصري"}}},
+    {"source_id": "egy_account_400047", "code": "400047", "name": "Kitchen and Buffet Expenses", "translations": {"ar_001": "مصروف المطبخ وبوفيه"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400048", "code": "400048", "name": "Vehicle Expenses", "translations": {"ar_001": "مصروف سيارة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Expenses made for the repair and maintenance of a vehicle", "source": {"account_type": "expense", "descriptions": {"ar_001": "النفقات التي تم تكبدها لإصلاح وصيانة المركبة"}}},
+    {"source_id": "egy_account_400049", "code": "400049", "name": "Convoyance Expenses", "translations": {"ar_001": "مصروف نقل اصول"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400050", "code": "400050", "name": "Others - Office Various Expenses", "translations": {"ar_001": "مصاريف مكتب اخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Services related to the maintenance of your worplace, like repair or cleaning fees", "source": {"account_type": "expense", "descriptions": {"ar_001": "الخدمات المتعلقة بصيانة مكان عملك، مثل رسوم الإصلاح أو التنظيف"}}},
+    {"source_id": "egy_account_400051", "code": "400051", "name": "Other Bank Charges", "translations": {"ar_001": "مصروف الرسوم المصرفية الأخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Nasty charges and interests from your bank", "source": {"account_type": "expense", "descriptions": {"ar_001": "رسوم وفوائد باهظة من البنك الخاص بك"}}},
+    {"source_id": "egy_account_400052", "code": "400052", "name": "Loss On Fixed Assets Disposal", "translations": {"ar_001": "مصروف خسارة بيع و تخلص من اصول"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400053", "code": "400053", "name": "Loss on Difference on Exchange", "translations": {"ar_001": "مصروف خسارة على الفرق العملات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400054", "code": "400054", "name": "Disposal of Business Branch", "translations": {"ar_001": "مصروف وقف فرع من الاعمال"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400055", "code": "400055", "name": "Income Tax", "translations": {"ar_001": "مصروف ضريبة الدخل"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400056", "code": "400056", "name": "Previous Year Adjustments Account", "translations": {"ar_001": "مصروف حساب تسويات السنة السابقة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400057", "code": "400057", "name": "Other Non Operating Expenses", "translations": {"ar_001": "المصاريف غير التشغيلية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400058", "code": "400058", "name": "Credit Card Charges", "translations": {"ar_001": "مصروف رسوم بطاقات الائتمان"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400059", "code": "400059", "name": "Bank Finance & Loan Charges", "translations": {"ar_001": "مصروف بنك التمويل والقروض"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400060", "code": "400060", "name": "Air Miles Card Charges", "translations": {"ar_001": "مصروف رسوم بطاقة Air Miles"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400061", "code": "400061", "name": "Credit Card Swipe Charges", "translations": {"ar_001": "مصروف رسوم بطاقات الائتمان"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400062", "code": "400062", "name": "PayPal Charges", "translations": {"ar_001": "Paypal مصروف رسوم"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400063", "code": "400063", "name": "Amortization on Leasehold Improvement", "translations": {"ar_001": "مصروف إطفاء تحسينات المستأجرة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400064", "code": "400064", "name": "Depreciation of Furniture & Office Equipment", "translations": {"ar_001": "مصروف الاستهلاك الأثاث"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "egy_account_400065", "code": "400065", "name": "Depreciation of Computer Hard & Soft", "translations": {"ar_001": "مصروف الاستهلاك اجهزة الكمبيوتر"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "egy_account_400066", "code": "400066", "name": "Depreciation of Motor Vehicles", "translations": {"ar_001": "مصروف استهلاك المركبات"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "egy_account_400067", "code": "400067", "name": "Consultancy Fees", "translations": {"ar_001": "رسوم الاستشارات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400068", "code": "400068", "name": "Provision for Doubtful Debts", "translations": {"ar_001": "مخصص الديون المعدومة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400069", "code": "400069", "name": "Closing Account", "translations": {"ar_001": "حساب ختامي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400070", "code": "400070", "name": "Depreciation on right of use asset (IFRS 16)", "translations": {"ar_001": "الاستهلاك في حق الأصول استخدام (IFRS 16)"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "egy_account_400072", "code": "400072", "name": "Interest Expense", "translations": {"ar_001": "مصروف فائدة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400074", "code": "400074", "name": "Bad Debts", "translations": {"ar_001": "مصروف ديون معدومة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400075", "code": "400075", "name": "Schedule Tax Expense", "translations": {"ar_001": "مصروف ضريبة الجدول"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400076", "code": "400076", "name": "WH Tax Expense", "translations": {"ar_001": "مصروف ضريبة خصم المنبع"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400077", "code": "400077", "name": "Stamp tax expense", "translations": {"ar_001": "مصروف ضريبة الدمغة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400078", "code": "400078", "name": "Social Contibution - Company portion expense", "translations": {"ar_001": "مصروف تأمينات اجتماعية - من الشركة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400079", "code": "400079", "name": "Cash Discount Loss", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_400080", "code": "400080", "name": "Raw Materials", "translations": {"ar_001": "المواد الخام"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All goods purchased as raw materials used by your activity", "source": {"account_type": "expense", "descriptions": {"ar_001": "جميع السلع التي تم شراؤها كمواد خام تستخدمها أنشطتك"}}},
+    {"source_id": "egy_account_400081", "code": "400081", "name": "Consumables", "translations": {"ar_001": "المواد الاستهلاكية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Consumables bought and used in the context of your activity", "source": {"account_type": "expense", "descriptions": {"ar_001": "المواد الاستهلاكية التي تم شراؤها واستخدامها في سياق نشاطك"}}},
+    {"source_id": "egy_account_400082", "code": "400082", "name": "Studies & Works", "translations": {"ar_001": "الدراسات والأعمال"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Compensation and fees paid to other parties", "source": {"account_type": "expense", "descriptions": {"ar_001": "التعويضات والرسوم المدفوعة لأطراف أخرى"}}},
+    {"source_id": "egy_account_400083", "code": "400083", "name": "General Subcontracting", "translations": {"ar_001": "التعاقد من الباطن"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Compensation and fees with other partners that act as subcontractors or consultants for your activity", "source": {"account_type": "expense", "descriptions": {"ar_001": "التعويضات والرسوم مع الشركاء الآخرين الذين يعملون كمقاولين من الباطن أو مستشارين لنشاطك"}}},
+    {"source_id": "egy_account_400084", "code": "400084", "name": "Goods for Resale", "translations": {"ar_001": "البضائع المخصصة لإعادة البيع"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Goods you buy to resale later, as part of your activity", "source": {"account_type": "expense", "descriptions": {"ar_001": "البضائع التي تشتريها لإعادة بيعها لاحقًا، كجزء من نشاطك"}}},
+    {"source_id": "egy_account_400085", "code": "400085", "name": "Vehicle Rent", "translations": {"ar_001": "إيجار المركبة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Rental of cars, including shared services, but excluding leasing", "source": {"account_type": "expense", "descriptions": {"ar_001": "تأجير السيارات، بما في ذلك الخدمات المشتركة، باستثناء التأجير"}}},
+    {"source_id": "egy_account_400086", "code": "400086", "name": "Office Supplies", "translations": {"ar_001": "مستلزمات المكتب"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Various supplies bought for your workplace or office, like pencils, paper etc", "source": {"account_type": "expense", "descriptions": {"ar_001": "لوازم متنوعة تم شراؤها لمكان عملك أو مكتبك، مثل أقلام الرصاص والورق وما إلى ذلك"}}},
+    {"source_id": "egy_account_400087", "code": "400087", "name": "Office Services", "translations": {"ar_001": "الخدمات المكتبية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All expenses made for your office or workplace that are not material goods", "source": {"account_type": "expense", "descriptions": {"ar_001": "جميع النفقات التي تم إنفاقها على مكتبك أو مكان عملك والتي ليست سلعًا مادية"}}},
+    {"source_id": "egy_account_400088", "code": "400088", "name": "Fuel", "translations": {"ar_001": "الوقود"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All fuel expenses for a car", "source": {"account_type": "expense", "descriptions": {"ar_001": "جميع تكاليف الوقود للسيارة"}}},
+    {"source_id": "egy_account_400089", "code": "400089", "name": "Software", "translations": {"ar_001": "النظام البرمجي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Licenses or computer services (like repairs or upgrades)", "source": {"account_type": "expense", "descriptions": {"ar_001": "التراخيص أو خدمات الكمبيوتر (مثل الإصلاحات أو الترقيات)"}}},
+    {"source_id": "egy_account_400090", "code": "400090", "name": "Administration Fees", "translations": {"ar_001": "الرسوم الإدارية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Services incurred for the administration of your business (excluding supplies)", "source": {"account_type": "expense", "descriptions": {"ar_001": "الخدمات المتكبدة لإدارة عملك (باستثناء الإمدادات)"}}},
+    {"source_id": "egy_account_400091", "code": "400091", "name": "Membership Fees", "translations": {"ar_001": "رسوم العضوية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Subscriptions to clubs and associations related to your business", "source": {"account_type": "expense", "descriptions": {"ar_001": "الاشتراكات في الأندية والجمعيات ذات الصلة بعملك"}}},
+    {"source_id": "egy_account_400092", "code": "400092", "name": "Fire Insurance", "translations": {"ar_001": "التأمين ضد الحرائق"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Fees related to insurance to protect your property (building and content) against fire or other natural catastrophies", "source": {"account_type": "expense", "descriptions": {"ar_001": "الرسوم المتعلقة بالتأمين لحماية ممتلكاتك (المبنى والمحتويات) ضد الحرائق أو الكوارث الطبيعية الأخرى"}}},
+    {"source_id": "egy_account_400093", "code": "400093", "name": "Professional Insurance", "translations": {"ar_001": "التأمين المهني"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All fees related to insurance taken in the context of your business", "source": {"account_type": "expense", "descriptions": {"ar_001": "جميع الرسوم المتعلقة بالتأمين المتخذة في سياق عملك"}}},
+    {"source_id": "egy_account_400094", "code": "400094", "name": "Legal Protection Insurance", "translations": {"ar_001": "تأمين الحماية القانونية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Insurance against legal costs incurred in the context of your activity", "source": {"account_type": "expense", "descriptions": {"ar_001": "التأمين ضد التكاليف القانونية المتكبدة في سياق نشاطك"}}},
+    {"source_id": "egy_account_400095", "code": "400095", "name": "Professional Liability Insurance", "translations": {"ar_001": "تأمين المسؤولية المهنية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Insurance for damage caused to third parties", "source": {"account_type": "expense", "descriptions": {"ar_001": "التأمين على الأضرار التي تلحق بأطراف ثالثة"}}},
+    {"source_id": "egy_account_400096", "code": "400096", "name": "Public Transportation", "translations": {"ar_001": "المواصلات العامة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Travel expenses done using public transportation (metro, bus, tramways, ...)", "source": {"account_type": "expense", "descriptions": {"ar_001": "مصاريف السفر التي تتم باستخدام وسائل النقل العام (المترو، الحافلة، الترام، ...)"}}},
+    {"source_id": "egy_account_400097", "code": "400097", "name": "Other Travel Costs", "translations": {"ar_001": "تكاليف السفر الأخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Expenses incurred during business trips (Excluding Flights, Hotels, Daily expenses, public transportation)", "source": {"account_type": "expense", "descriptions": {"ar_001": "النفقات المتكبدة أثناء رحلات العمل (باستثناء الرحلات الجوية والفنادق والنفقات اليومية والمواصلات العامة)"}}},
+    {"source_id": "egy_account_400098", "code": "400098", "name": "Bar & Restaurant", "translations": {"ar_001": "البار والمطعم"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Expenses incurred when eating or drinking at bars or restaurants", "source": {"account_type": "expense", "descriptions": {"ar_001": "النفقات المتكبدة عند تناول الطعام أو الشراب في الحانات أو المطاعم"}}},
+    {"source_id": "egy_account_400099", "code": "400099", "name": "Property Tax", "translations": {"ar_001": "ضريبة العقارات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All fees related to pension plans and social security contributions", "source": {"account_type": "expense", "descriptions": {"ar_001": "الضرائب المحلية التي يجب دفعها بسبب ملكية العقار"}}},
+    {"source_id": "egy_account_400100", "code": "400100", "name": "Import Fees", "translations": {"ar_001": "رسوم الاستيراد"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Customs fees incurred while importing goods from outside of Egypt", "source": {"account_type": "expense", "descriptions": {"ar_001": "الرسوم الجمركية المستحقة عند استيراد البضائع من خارج مصر"}}},
+    {"source_id": "egy_account_400101", "code": "400101", "name": "Depreciation of Construction", "translations": {"ar_001": "إهلاك عمليات البناء"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "egy_account_400102", "code": "400102", "name": "Depreciation of Installations", "translations": {"ar_001": "إهلاك التجهيزات"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "egy_account_400103", "code": "400103", "name": "Depreciation of Machine & Tools", "translations": {"ar_001": "إهلاك الماكينات والأدوات"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "egy_account_400104", "code": "400104", "name": "Depreciation of Other Property", "translations": {"ar_001": "إهلاك الممتلكات الأخرى"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "egy_account_400105", "code": "400105", "name": "Depreciation of Vehicle Accessories", "translations": {"ar_001": "إهلاك ملحقات المركبات"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "egy_account_500001", "code": "500001", "name": "Sales Account", "translations": {"ar_001": "مبيعات"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "egy_account_500002", "code": "500002", "name": "Sales of I/C", "translations": {"ar_001": "مبيعات شركات تابعة"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "egy_account_500003", "code": "500003", "name": "Management Consultancy Fees", "translations": {"ar_001": "مكاسب استشارات ادارية"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "egy_account_500004", "code": "500004", "name": "Sales from Other Region", "translations": {"ar_001": "مبيعات مناطق اخرى"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "egy_account_500005", "code": "500005", "name": "Advertising Income", "translations": {"ar_001": "دخل الإعلانات"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "egy_account_500006", "code": "500006", "name": "Branding Income", "translations": {"ar_001": "دخل علامات تجارية"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "egy_account_500007", "code": "500007", "name": "Space Rental Income", "translations": {"ar_001": "دخل تأجير"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "egy_account_500008", "code": "500008", "name": "Service Income", "translations": {"ar_001": "دخل خدمات"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "egy_account_500009", "code": "500009", "name": "Interest Revenue", "translations": {"ar_001": "ايراد فائدة"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "egy_account_500010", "code": "500010", "name": "Capital Gain", "translations": {"ar_001": "مكاسب رأس المال"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "egy_account_500011", "code": "500011", "name": "Gain On Difference of Exchange", "translations": {"ar_001": "ربح فرق عملات"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "egy_account_500013", "code": "500013", "name": "Other Income", "translations": {"ar_001": "دخول اخرى"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "egy_account_500014", "code": "500014", "name": "Cash Discount Gain", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "egy_account_999001", "code": "999001", "name": "Cash Difference Loss", "translations": {"ar_001": "خسارة الفرق النقدي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "egy_account_999002", "code": "999002", "name": "Cash Difference Gain", "translations": {"ar_001": "مكاسب الفرق النقدي"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "egy_account_999999", "code": "999999", "name": "Undistributed Profits/Losses", "translations": {"ar_001": "ارباح / خسائر غير موزعة"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity_unaffected"}}
+  ]
+}

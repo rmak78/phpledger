@@ -1,0 +1,445 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "57493573f9c62b68e93cc67a7a34e7568d1211807cf7c6be5b9706276e2dbe26",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/jp",
+  "country_code": "JP",
+  "country_name": "Japan",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Japan - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_jp' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Quartile Limited (https://www.quartile.co/)",
+    "module": "l10n_jp",
+    "module_name": "Japan - Accounting",
+    "module_version": "2.3",
+    "contributing_modules": [
+      "l10n_jp"
+    ],
+    "template_code": "jp",
+    "template_chain": [
+      "jp"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_jp/data/template/account.account-jp.csv",
+        "sha256": "213fcd09a7cc60085f40e8ac3ec15b48e4643382863bb759f1cc276e489bffcb",
+        "rows": 128
+      }
+    ],
+    "python_files": [
+      "addons/l10n_jp/models/template_jp.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "1202",
+      "cash": "1201",
+      "transfer": "1236"
+    },
+    "default_sale_tax": "l10n_jp_tax_sale_exc_10",
+    "default_purchase_tax": "l10n_jp_tax_purchase_exc_10",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "l10n_jp_126000",
+        "code": "126000",
+        "name": "Accounts Receivable - Trade",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "l10n_jp_220000",
+        "code": "220000",
+        "name": "Accounts Payable - Trade",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "l10n_jp_410000",
+        "code": "410000",
+        "name": "Net Sales",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "l10n_jp_510000",
+        "code": "510000",
+        "name": "Cost of Goods Sold",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "property_stock_valuation_account_id",
+        "source_id": "l10n_jp_121100",
+        "code": "121100",
+        "name": "Stock Valuation Account",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "l10n_jp_126200",
+        "code": "126200",
+        "name": "Accounts Receivable (PoS)",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "l10n_jp_123900",
+        "code": "123900",
+        "name": "Bank Suspense Account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "l10n_jp_425700",
+        "code": "425700",
+        "name": "Actual Exchange Gain",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "l10n_jp_513500",
+        "code": "513500",
+        "name": "Actual Exchange Loss",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "l10n_jp_999002",
+        "code": "999002",
+        "name": "Cash Difference Gain",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "l10n_jp_510100",
+        "code": "510100",
+        "name": "Cash Difference Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "l10n_jp_425000",
+        "code": "425000",
+        "name": "Cash Discount Gain",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "l10n_jp_510200",
+        "code": "510200",
+        "name": "Cash Discount Loss",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 128,
+    "posting_accounts": 128,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 46,
+      "equity": 7,
+      "expense": 42,
+      "income": 15,
+      "liability": 18
+    },
+    "by_subtype": {
+      "current_asset": 26,
+      "current_liability": 11,
+      "equity": 7,
+      "expense": 42,
+      "fixed_asset": 7,
+      "income": 3,
+      "non_current_asset": 9,
+      "other_income": 12,
+      "payable": 7,
+      "receivable": 4
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 7,
+      "receivables": 4
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "ja_JP"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "l10n_jp_110000", "code": "110000", "name": "Buildings and Structures", "translations": {"ja_JP": "建物及び構築物"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_jp_110100", "code": "110100", "name": "Buildings and Structures - Accumulated Depreciation", "translations": {"ja_JP": "建物及び構築物減償累計額"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_jp_110200", "code": "110200", "name": "Machinery and Equipment", "translations": {"ja_JP": "機械及び装置"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_jp_110300", "code": "110300", "name": "Machinery and Equipment - Accumulated Depreciation", "translations": {"ja_JP": "機械及び装置物減償累計額"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_jp_110400", "code": "110400", "name": "Tools, Furniture and Fixtures", "translations": {"ja_JP": "工具、器具及び備品"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_jp_110500", "code": "110500", "name": "Tools, Furniture and Fixtures - Accumulated Depreciation", "translations": {"ja_JP": "工具、器具及び備品減償累計額"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_jp_110600", "code": "110600", "name": "Land", "translations": {"ja_JP": "土地"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_jp_121000", "code": "121000", "name": "Current Assets", "translations": {"ja_JP": "流動資産"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_121100", "code": "121100", "name": "Stock Valuation Account", "translations": {"ja_JP": "在庫評価"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_121200", "code": "121200", "name": "Stock Interim Account (Received)", "translations": {"ja_JP": "請求待ち入荷"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_121300", "code": "121300", "name": "Stock Interim Account (Delivered)", "translations": {"ja_JP": "請求待ち出荷"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_122000", "code": "122000", "name": "Merchandise", "translations": {"ja_JP": "商品"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_122100", "code": "122100", "name": "Finished Goods", "translations": {"ja_JP": "製品"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_122200", "code": "122200", "name": "Semi-finished Goods", "translations": {"ja_JP": "半製品"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_122300", "code": "122300", "name": "Inventory in Transit", "translations": {"ja_JP": "積送品"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_122400", "code": "122400", "name": "Work in Process", "translations": {"ja_JP": "仕掛品"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_122500", "code": "122500", "name": "Raw Materials", "translations": {"ja_JP": "原材料"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_122600", "code": "122600", "name": "Materials", "translations": {"ja_JP": "資材"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_122700", "code": "122700", "name": "Advance Payments", "translations": {"ja_JP": "前渡金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_122800", "code": "122800", "name": "Prepaid Expenses", "translations": {"ja_JP": "前払費用"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_122900", "code": "122900", "name": "Advances Paid", "translations": {"ja_JP": "立替金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_123000", "code": "123000", "name": "Suspense Payments", "translations": {"ja_JP": "仮払金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_123100", "code": "123100", "name": "Lease/Guarantee Deposits", "translations": {"ja_JP": "敷金・保証金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_123200", "code": "123200", "name": "Consumption Tax - Purchase", "translations": {"ja_JP": "仮払消費税"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_123300", "code": "123300", "name": "Bad Debt Allowance", "translations": {"ja_JP": "貸倒引当金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_123400", "code": "123400", "name": "Accrued Income", "translations": {"ja_JP": "未収収益"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_123500", "code": "123500", "name": "Securities", "translations": {"ja_JP": "有価証券"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_123600", "code": "123600", "name": "Liquidity Transfer", "translations": {"ja_JP": "仮振込"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_123700", "code": "123700", "name": "Outstanding Payments", "translations": {"ja_JP": "確認待ち支払"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_123800", "code": "123800", "name": "Outstanding Receipts", "translations": {"ja_JP": "確認待ち入金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_123900", "code": "123900", "name": "Bank Suspense Account", "translations": {"ja_JP": "銀行仮勘定"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_120003", "code": "124000", "name": "Deposit", "translations": {"ja_JP": "普通預金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_120004", "code": "124100", "name": "Time Deposit", "translations": {"ja_JP": "定期預金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_jp_126000", "code": "126000", "name": "Accounts Receivable - Trade", "translations": {"ja_JP": "売掛金"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_jp_126200", "code": "126200", "name": "Accounts Receivable (PoS)", "translations": {"ja_JP": "売掛金(PoS)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_jp_126300", "code": "126300", "name": "Notes Receivable", "translations": {"ja_JP": "受取手形"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_jp_126400", "code": "126400", "name": "Notes Discount", "translations": {"ja_JP": "割引手形"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_jp_210000", "code": "210000", "name": "Non-current Liabilities", "translations": {"ja_JP": "非流動資産"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_jp_210100", "code": "210100", "name": "Software", "translations": {"ja_JP": "ソフトウェア"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_jp_210200", "code": "210200", "name": "Software in Progress", "translations": {"ja_JP": "ソフトウェア仮勘定"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_jp_210300", "code": "210300", "name": "Other Intangible Asset", "translations": {"ja_JP": "その他無形固定資産"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_jp_210400", "code": "210400", "name": "Investment Securities", "translations": {"ja_JP": "投資有価証券"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_jp_210500", "code": "210500", "name": "Shares of Subsidiaries and Associates", "translations": {"ja_JP": "関係会社株式"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_jp_210600", "code": "210600", "name": "Long-term Loans Receivable", "translations": {"ja_JP": "長期貸付金"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_jp_210700", "code": "210700", "name": "Long-term Prepaid Expenses", "translations": {"ja_JP": "長期前払費用"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_jp_210800", "code": "210800", "name": "Deferred Organization Expenses", "translations": {"ja_JP": "創立費"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_jp_220000", "code": "220000", "name": "Accounts Payable - Trade", "translations": {"ja_JP": "買掛金"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_jp_220200", "code": "220200", "name": "Notes Payable", "translations": {"ja_JP": "支払手形"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_jp_220400", "code": "220400", "name": "Short-term Loans Payable", "translations": {"ja_JP": "短期借入金"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_jp_220500", "code": "220500", "name": "Current Portion of Long-term Loans Payable", "translations": {"ja_JP": "一年以内返済長期借入金"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_jp_220600", "code": "220600", "name": "Accounts Payable - Other", "translations": {"ja_JP": "未払金"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_jp_220700", "code": "220700", "name": "Accounts Payable - Credit Card", "translations": {"ja_JP": "未払金(クレジット)"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_jp_220800", "code": "220800", "name": "Dividends Payable", "translations": {"ja_JP": "未払配当金"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_jp_220900", "code": "220900", "name": "Capital Stock", "translations": {"ja_JP": "資本金"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_jp_221000", "code": "221000", "name": "Legal Capital Surplus", "translations": {"ja_JP": "資本準備金"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_jp_221100", "code": "221100", "name": "Other Capital Surplus", "translations": {"ja_JP": "その他資本剰余金"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_jp_221200", "code": "221200", "name": "Legal Retained Earnings", "translations": {"ja_JP": "利益準備金"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_jp_221300", "code": "221300", "name": "Reserve for Special Depreciation", "translations": {"ja_JP": "特別償却準備金"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_jp_221400", "code": "221400", "name": "Voluntary Retained Earnings", "translations": {"ja_JP": "任意積立金"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_jp_221500", "code": "221500", "name": "Retained Earnings Brought Forward", "translations": {"ja_JP": "繰越利益剰余金"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_jp_330000", "code": "330000", "name": "Current Liabilities", "translations": {"ja_JP": "流動負債"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_jp_330200", "code": "330200", "name": "Accrued Expenses", "translations": {"ja_JP": "未払費用"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_jp_330300", "code": "330300", "name": "Income Taxes Payable", "translations": {"ja_JP": "未払法人税等"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_jp_330400", "code": "330400", "name": "Advances Received", "translations": {"ja_JP": "前受金"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_jp_330500", "code": "330500", "name": "Deposits Received", "translations": {"ja_JP": "預り金"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_jp_330600", "code": "330600", "name": "Suspense Receipt", "translations": {"ja_JP": "仮受金"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_jp_330700", "code": "330700", "name": "Provision for Bonuses", "translations": {"ja_JP": "賞与引当金"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_jp_330800", "code": "330800", "name": "Consumption Tax - Sales", "translations": {"ja_JP": "仮受消費税"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_jp_330900", "code": "330900", "name": "Bonds Payable", "translations": {"ja_JP": "社債"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_jp_331000", "code": "331000", "name": "Long-term Loans Payable", "translations": {"ja_JP": "長期借入金"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_jp_331100", "code": "331100", "name": "Provision for Retirement Benefits", "translations": {"ja_JP": "退職給付引当金"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_jp_410000", "code": "410000", "name": "Net Sales", "translations": {"ja_JP": "売上高"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "l10n_jp_424000", "code": "424000", "name": "Foreign Exchange Gain", "translations": {"ja_JP": "為替差益"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_jp_425000", "code": "425000", "name": "Cash Discount Gain", "translations": {"ja_JP": "割引差益"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_jp_425200", "code": "425200", "name": "Purchase Price Difference", "translations": {"ja_JP": "購買価格差異"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_jp_425300", "code": "425300", "name": "Inventory Adjustment", "translations": {"ja_JP": "棚卸調整"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_jp_425400", "code": "425400", "name": "Interest Income", "translations": {"ja_JP": "受取利息"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_jp_425500", "code": "425500", "name": "Dividend Income", "translations": {"ja_JP": "受取配当金"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_jp_425600", "code": "425600", "name": "Provision of Exchange Gain", "translations": {"ja_JP": "未実現為替差益"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_jp_425700", "code": "425700", "name": "Actual Exchange Gain", "translations": {"ja_JP": "実現為替差益"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_jp_425800", "code": "425800", "name": "Gain on Investment Securities", "translations": {"ja_JP": "投資有価証券売却益(外益)"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_jp_425900", "code": "425900", "name": "Gain on Valuation of Investment Securities", "translations": {"ja_JP": "投資有価証券評価益(外益)"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_jp_426000", "code": "426000", "name": "Miscellaneous Income", "translations": {"ja_JP": "雑収入"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_jp_426100", "code": "426100", "name": "Gain on Non-current Asset", "translations": {"ja_JP": "固定資産売却益"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_jp_426200", "code": "426200", "name": "Gain on Valuation of Non-current Asset", "translations": {"ja_JP": "固定資産評価益"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_jp_510000", "code": "510000", "name": "Cost of Goods Sold", "translations": {"ja_JP": "商品売上原価"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_510100", "code": "510100", "name": "Cash Difference Loss", "translations": {"ja_JP": "現金差損"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_510200", "code": "510200", "name": "Cash Discount Loss", "translations": {"ja_JP": "割引差損"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_510300", "code": "510300", "name": "Provision of Allowance for Doubtful Debt", "translations": {"ja_JP": "貸倒引当金繰入額"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_510400", "code": "510400", "name": "Director's Remuneration", "translations": {"ja_JP": "役員報酬"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_510500", "code": "510500", "name": "Salaries & Allowance", "translations": {"ja_JP": "給料及び手当"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_510600", "code": "510600", "name": "Bonus", "translations": {"ja_JP": "賞与"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_510700", "code": "510700", "name": "Retirement Payment", "translations": {"ja_JP": "退職金"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_510800", "code": "510800", "name": "Provision for Bonuses", "translations": {"ja_JP": "賞与引当金"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_510900", "code": "510900", "name": "Provision for Retirement Benefits", "translations": {"ja_JP": "退職給付引当金"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_511000", "code": "511000", "name": "Legal Welfare Expenses", "translations": {"ja_JP": "法定福利費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_511100", "code": "511100", "name": "Welfare Expenses", "translations": {"ja_JP": "福利厚生費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_511200", "code": "511200", "name": "Insurance Expenses", "translations": {"ja_JP": "保険料"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_511300", "code": "511300", "name": "Subcontract Expenses", "translations": {"ja_JP": "外注費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_511400", "code": "511400", "name": "Packaging Expenses", "translations": {"ja_JP": "荷造運賃"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_511500", "code": "511500", "name": "Inventory Usage Expenses", "translations": {"ja_JP": "棚卸減耗費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_511600", "code": "511600", "name": "Loss on Valuation of Goods", "translations": {"ja_JP": "商品評価損"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_511700", "code": "511700", "name": "Rental Expenses", "translations": {"ja_JP": "地代家賃"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_511800", "code": "511800", "name": "Lease Expenses", "translations": {"ja_JP": "リース料"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_511900", "code": "511900", "name": "Advertisement/Promotion Expenses", "translations": {"ja_JP": "広告宣伝費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_512000", "code": "512000", "name": "Communication Expenses", "translations": {"ja_JP": "通信費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_512100", "code": "512100", "name": "Consumables Expeneses", "translations": {"ja_JP": "消耗品費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_512200", "code": "512200", "name": "Travelling Expenses", "translations": {"ja_JP": "旅費交通費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_512300", "code": "512300", "name": "Entertainment Expenses", "translations": {"ja_JP": "交際費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_512400", "code": "512400", "name": "Commission Expenses", "translations": {"ja_JP": "支払手数料"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_512500", "code": "512500", "name": "Membership Fee", "translations": {"ja_JP": "諸会費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp-512600", "code": "512600", "name": "Newspaper/Book Expenses", "translations": {"ja_JP": "新聞図書費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_512700", "code": "512700", "name": "Tax Expenses", "translations": {"ja_JP": "租税公課"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_512800", "code": "512800", "name": "Utility Bills", "translations": {"ja_JP": "水道光熱費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_512900", "code": "512900", "name": "Meeting Expenses", "translations": {"ja_JP": "会議費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_513000", "code": "513000", "name": "Other Expenses", "translations": {"ja_JP": "雑費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_513100", "code": "513100", "name": "Interest Expenses", "translations": {"ja_JP": "支払利息"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_513200", "code": "513200", "name": "Amortization of Deferred Organization Expenses", "translations": {"ja_JP": "創立費償却"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_513300", "code": "513300", "name": "Depreciation", "translations": {"ja_JP": "減価償却費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_513400", "code": "513400", "name": "Provision of Exchange Loss", "translations": {"ja_JP": "未実現為替差損"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_513500", "code": "513500", "name": "Actual Exchange Loss", "translations": {"ja_JP": "実現為替差損"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_513600", "code": "513600", "name": "Loss on Investment Securities", "translations": {"ja_JP": "投資有価証券売却損(外損)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_513700", "code": "513700", "name": "Loss on Valuation of Investment Securities", "translations": {"ja_JP": "投資有価証券評価損(外損)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_513900", "code": "513900", "name": "Loss on Non-current Asset", "translations": {"ja_JP": "固定資産売却損"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_514000", "code": "514000", "name": "Loss on Valuation of Non-current Asset", "translations": {"ja_JP": "固定資産評価損"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_514300", "code": "514300", "name": "Corporate, Inhabitant, and Enterprise Taxes", "translations": {"ja_JP": "法人税、住民税及び事業税"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_514500", "code": "514500", "name": "Transportation and warehousing expenses", "translations": {"ja_JP": "運送費及び保管費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_jp_999002", "code": "999002", "name": "Cash Difference Gain", "translations": {"ja_JP": "現金差益"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}}
+  ]
+}

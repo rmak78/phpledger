@@ -1,0 +1,337 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "f8318f8ed3e1fad81397fcc5ca8076ba8249aeadb467ed0e989c52414ac89714",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "erpnext-version-16/unverified/cl_cl_chart_template",
+  "country_code": "CL",
+  "country_name": "Chile",
+  "country_basis": "chart file country_code",
+  "name": "Chile - Plan de Cuentas",
+  "source": {
+    "system": "erpnext",
+    "repository": "https://github.com/frappe/erpnext",
+    "branch": "version-16",
+    "commit": "4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+    "commit_date": "2026-09-08T13:23:31+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "GPL-3.0-only",
+    "license_basis": "repository license.txt (GNU GPL v3); chart files carry no separate licence header",
+    "attribution": "Frappe Technologies Pvt. Ltd. and Contributors",
+    "upstream_folder": "unverified",
+    "upstream_verified": false,
+    "upstream_disabled": false,
+    "files": [
+      {
+        "path": "erpnext/accounts/doctype/account/chart_of_accounts/unverified/cl_cl_chart_template.json",
+        "sha256": "f337506cdc1b2bcee5f12999ac1d6a00445792d52fbdba40505c737adf10b7bc",
+        "kind": "json"
+      }
+    ]
+  },
+  "template": {
+    "hierarchy": "nested groups; posting accounts are leaves; source_id is the full ' / ' separated path",
+    "account_numbers_present": false
+  },
+  "role_defaults": {},
+  "type_map": {
+    "Receivable": {
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "Payable": {
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "Bank": {
+      "subtype": "bank",
+      "role_hint": "cash_bank"
+    },
+    "Cash": {
+      "subtype": "cash",
+      "role_hint": "cash_bank"
+    },
+    "Stock": {
+      "subtype": "inventory",
+      "role_hint": null
+    },
+    "Tax": {
+      "subtype": "tax",
+      "role_hint": null
+    },
+    "Cost of Goods Sold": {
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "Fixed Asset": {
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "Accumulated Depreciation": {
+      "subtype": "accumulated_depreciation",
+      "role_hint": null
+    },
+    "Depreciation": {
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "Expense Account": {
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "Income Account": {
+      "subtype": "income",
+      "role_hint": null
+    },
+    "Equity": {
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "Liability": {
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "Chargeable": {
+      "subtype": "chargeable",
+      "role_hint": null
+    },
+    "Stock Received But Not Billed": {
+      "subtype": "stock_received_not_billed",
+      "role_hint": null
+    },
+    "Asset Received But Not Billed": {
+      "subtype": "asset_received_not_billed",
+      "role_hint": null
+    },
+    "Service Received But Not Billed": {
+      "subtype": "service_received_not_billed",
+      "role_hint": null
+    },
+    "Stock Delivered But Not Billed": {
+      "subtype": "stock_delivered_not_billed",
+      "role_hint": null
+    },
+    "Stock Adjustment": {
+      "subtype": "stock_adjustment",
+      "role_hint": null
+    },
+    "Expenses Included In Valuation": {
+      "subtype": "valuation_expense",
+      "role_hint": null
+    },
+    "Expenses Included In Asset Valuation": {
+      "subtype": "asset_valuation_expense",
+      "role_hint": null
+    },
+    "Capital Work in Progress": {
+      "subtype": "capital_work_in_progress",
+      "role_hint": null
+    },
+    "Temporary": {
+      "subtype": "temporary",
+      "role_hint": null
+    },
+    "Round Off": {
+      "subtype": "round_off",
+      "role_hint": null
+    },
+    "Indirect Expense": {
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "Indirect Income": {
+      "subtype": "other_income",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 154,
+    "posting_accounts": 113,
+    "group_accounts": 41,
+    "by_root_type": {
+      "unclassified": 154
+    },
+    "by_subtype": {
+      "group": 41,
+      "unspecified": 113
+    },
+    "unclassified_root_type": 154,
+    "duplicate_codes": [],
+    "missing_codes": 113,
+    "role_hints": {},
+    "unmapped_account_types": {},
+    "roots_without_root_type": [
+      "Cuentas de Movimiento",
+      "Cuentas de Orden",
+      "Cuentas de Resultado",
+      "inventario del Balance General"
+    ],
+    "top_level_groups": [
+      "Cuentas de Movimiento",
+      "Cuentas de Orden",
+      "Cuentas de Resultado",
+      "inventario del Balance General"
+    ],
+    "max_depth": 5,
+    "account_numbers_present": false
+  },
+  "accounts": [
+    {"source_id": "Cuentas de Movimiento", "code": null, "name": "Cuentas de Movimiento", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": null, "depth": 1, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Movimiento / Compras", "code": null, "name": "Compras", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "Cuentas de Movimiento", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Movimiento / Compras / Compras - Categoria de productos 01", "code": null, "name": "Compras - Categoria de productos 01", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Movimiento / Compras", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Movimiento / Costos de Producción", "code": null, "name": "Costos de Producción", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Movimiento", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Movimiento / Gastos de Administración", "code": null, "name": "Gastos de Administración", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Movimiento", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Movimiento / Gastos de Comercialización", "code": null, "name": "Gastos de Comercialización", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Movimiento", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Orden", "code": null, "name": "Cuentas de Orden", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": null, "depth": 1, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Orden / CUENTAS DE ORDEN ACREEDORAS", "code": null, "name": "CUENTAS DE ORDEN ACREEDORAS", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "Cuentas de Orden", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Orden / CUENTAS DE ORDEN ACREEDORAS / Acreedor por Documentos Descontados", "code": null, "name": "Acreedor por Documentos Descontados", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Orden / CUENTAS DE ORDEN ACREEDORAS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Orden / CUENTAS DE ORDEN ACREEDORAS / Acreedor por Garantías Otorgadas", "code": null, "name": "Acreedor por Garantías Otorgadas", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Orden / CUENTAS DE ORDEN ACREEDORAS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Orden / CUENTAS DE ORDEN ACREEDORAS / Comitente por Mercaderias Recibidas en Consignación", "code": null, "name": "Comitente por Mercaderias Recibidas en Consignación", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Orden / CUENTAS DE ORDEN ACREEDORAS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Orden / CUENTAS DE ORDEN DEUDORAS", "code": null, "name": "CUENTAS DE ORDEN DEUDORAS", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "Cuentas de Orden", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Orden / CUENTAS DE ORDEN DEUDORAS / Depósito de Valores Recibos en Garantía", "code": null, "name": "Depósito de Valores Recibos en Garantía", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Orden / CUENTAS DE ORDEN DEUDORAS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Orden / CUENTAS DE ORDEN DEUDORAS / Documentos Descontados", "code": null, "name": "Documentos Descontados", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Orden / CUENTAS DE ORDEN DEUDORAS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Orden / CUENTAS DE ORDEN DEUDORAS / Documentos Endosados", "code": null, "name": "Documentos Endosados", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Orden / CUENTAS DE ORDEN DEUDORAS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Orden / CUENTAS DE ORDEN DEUDORAS / Garantias Otorgadas", "code": null, "name": "Garantias Otorgadas", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Orden / CUENTAS DE ORDEN DEUDORAS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Orden / CUENTAS DE ORDEN DEUDORAS / Mercaderias Recibidas en Consignación", "code": null, "name": "Mercaderias Recibidas en Consignación", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Orden / CUENTAS DE ORDEN DEUDORAS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado", "code": null, "name": "Cuentas de Resultado", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": null, "depth": 1, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA", "code": null, "name": "RESULTADO GANANCIA", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "Cuentas de Resultado", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos Fuera de Explotación", "code": null, "name": "Ingresos Fuera de Explotación", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos Fuera de Explotación / Donaciones obtenidas, ganandas, percibidas", "code": null, "name": "Donaciones obtenidas, ganandas, percibidas", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos Fuera de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos Fuera de Explotación / Ganancia Venta Inversiones Permanentes", "code": null, "name": "Ganancia Venta Inversiones Permanentes", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos Fuera de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos Fuera de Explotación / Ganancia Venta de Activo Fijo", "code": null, "name": "Ganancia Venta de Activo Fijo", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos Fuera de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos Fuera de Explotación / Recupero de Deudores Incobrables", "code": null, "name": "Recupero de Deudores Incobrables", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos Fuera de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos Fuera de Explotación / Recupero de Rezagos", "code": null, "name": "Recupero de Rezagos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos Fuera de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación", "code": null, "name": "Ingresos de Explotación", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación / Alquileres gananados, obtenidos, percibidos", "code": null, "name": "Alquileres gananados, obtenidos, percibidos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación / Comisiones gananados, obtenidos, percibidos", "code": null, "name": "Comisiones gananados, obtenidos, percibidos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación / Descuentos gananados, obtenidos, percibidos", "code": null, "name": "Descuentos gananados, obtenidos, percibidos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación / Ganancia Venta de Acciones", "code": null, "name": "Ganancia Venta de Acciones", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación / Honorarios gananados, obtenidos, percibidos", "code": null, "name": "Honorarios gananados, obtenidos, percibidos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación / Interese sobre Inversiones", "code": null, "name": "Interese sobre Inversiones", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación / Intereses gananados, obtenidos, percibidos", "code": null, "name": "Intereses gananados, obtenidos, percibidos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación / Ventas", "code": null, "name": "Ventas", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación / Ventas / Ventas - Categoria de productos 01", "code": null, "name": "Ventas - Categoria de productos 01", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO GANANCIA / Ingresos de Explotación / Ventas", "depth": 5, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA", "code": null, "name": "RESULTADO PÉRDIDA", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "Cuentas de Resultado", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos Fuera de Explotación", "code": null, "name": "Egresos Fuera de Explotación", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos Fuera de Explotación / Donaciones Cedidas, Otorgadas", "code": null, "name": "Donaciones Cedidas, Otorgadas", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos Fuera de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos Fuera de Explotación / Gastos en Siniestros", "code": null, "name": "Gastos en Siniestros", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos Fuera de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos Fuera de Explotación / Pérdida Venta Activo Fijo", "code": null, "name": "Pérdida Venta Activo Fijo", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos Fuera de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación", "code": null, "name": "Egresos de Explotación", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación / Costo de Mercaderías Vendidas", "code": null, "name": "Costo de Mercaderías Vendidas", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación / Costo de Mercaderías Vendidas / Costo de Mercaderías Vendidas - Categoria de productos 01", "code": null, "name": "Costo de Mercaderías Vendidas - Categoria de productos 01", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación / Costo de Mercaderías Vendidas", "depth": 5, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación / Gastos Bancarios", "code": null, "name": "Gastos Bancarios", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación / Gastos de Publicidad y Propaganda", "code": null, "name": "Gastos de Publicidad y Propaganda", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación / Gastos en Amortización", "code": null, "name": "Gastos en Amortización", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación / Gastos en Cargas Sociales", "code": null, "name": "Gastos en Cargas Sociales", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación / Gastos en Depreciación de Activo Fijo", "code": null, "name": "Gastos en Depreciación de Activo Fijo", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación / Gastos en Impuestos", "code": null, "name": "Gastos en Impuestos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación / Gastos en Servicios Públicos", "code": null, "name": "Gastos en Servicios Públicos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación / Gastos en Sueldos y Jornales", "code": null, "name": "Gastos en Sueldos y Jornales", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "Cuentas de Resultado / RESULTADO PÉRDIDA / Egresos de Explotación", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General", "code": null, "name": "inventario del Balance General", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": null, "depth": 1, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS", "code": null, "name": "ACTIVOS", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Circulante", "code": null, "name": "Activo Circulante", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / ACTIVOS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Bancos", "code": null, "name": "Activo Circulante - Bancos", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Circulante", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Bancos / Activo Circulante.../ BCO. CTA CTE CLP", "code": null, "name": "Activo Circulante.../ BCO. CTA CTE CLP", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Bancos", "depth": 5, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Caja", "code": null, "name": "Activo Circulante - Caja", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Circulante", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Caja / Activo Circulante - Caja / efectivo CLP", "code": null, "name": "Activo Circulante - Caja / efectivo CLP", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Caja", "depth": 5, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Fondos fijos", "code": null, "name": "Activo Circulante - Fondos fijos", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Circulante", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Fondos fijos / Activo Circulante - Fondos fijos / caja chica 01 CLP", "code": null, "name": "Activo Circulante - Fondos fijos / caja chica 01 CLP", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Fondos fijos", "depth": 5, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Moneda Extranjera", "code": null, "name": "Activo Circulante - Moneda Extranjera", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Circulante", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Moneda Extranjera / Activo Circulante - Caja / efectivo USD", "code": null, "name": "Activo Circulante - Caja / efectivo USD", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Moneda Extranjera", "depth": 5, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Recaudaciones a Depositar", "code": null, "name": "Activo Circulante - Recaudaciones a Depositar", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Circulante", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Circulante / Activo Circulante - Valores a Depositar", "code": null, "name": "Activo Circulante - Valores a Depositar", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Circulante", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Fijo", "code": null, "name": "Activo Fijo", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / ACTIVOS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Fijo / Activo Fijo / (-) Depreciación Acumulada", "code": null, "name": "Activo Fijo / (-) Depreciación Acumulada", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Fijo", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Fijo / Activo Fijo / Equipos", "code": null, "name": "Activo Fijo / Equipos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Fijo", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Fijo / Activo Fijo / Inmuebles", "code": null, "name": "Activo Fijo / Inmuebles", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Fijo", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Fijo / Activo Fijo / Maquinaria", "code": null, "name": "Activo Fijo / Maquinaria", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Fijo", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Fijo / Activo Fijo / Material Rodante Motorizado", "code": null, "name": "Activo Fijo / Material Rodante Motorizado", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Fijo", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Intangible", "code": null, "name": "Activo Intangible", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / ACTIVOS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Intangible / Activo Intangible / (-) Amortización Acumulada", "code": null, "name": "Activo Intangible / (-) Amortización Acumulada", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Intangible", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Intangible / Activo Intangible / Concesiones y Franquicias", "code": null, "name": "Activo Intangible / Concesiones y Franquicias", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Intangible", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Intangible / Activo Intangible / Derecho de Llaves", "code": null, "name": "Activo Intangible / Derecho de Llaves", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Intangible", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Activo Intangible / Activo Intangible / Marcas y Patentes de Invención", "code": null, "name": "Activo Intangible / Marcas y Patentes de Invención", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Activo Intangible", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Existencias", "code": null, "name": "Existencias", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / ACTIVOS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Existencias / (-) Previsión para Desvalorización de Existencias", "code": null, "name": "(-) Previsión para Desvalorización de Existencias", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Existencias", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Existencias / Existencias - Mercaderías", "code": null, "name": "Existencias - Mercaderías", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / ACTIVOS / Existencias", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Existencias / Existencias - Mercaderías / Existencias - Mercaderías / Categoria de productos 01", "code": null, "name": "Existencias - Mercaderías / Categoria de productos 01", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Existencias / Existencias - Mercaderías", "depth": 5, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Existencias / Existencias - Mercaderías en Tránsito", "code": null, "name": "Existencias - Mercaderías en Tránsito", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Existencias", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Existencias / Materiales Varios", "code": null, "name": "Materiales Varios", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Existencias", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Existencias / Materias primas", "code": null, "name": "Materias primas", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Existencias", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Existencias / Productos Elaborados", "code": null, "name": "Productos Elaborados", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Existencias", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Existencias / Productos en Curso de Elaboración", "code": null, "name": "Productos en Curso de Elaboración", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Existencias", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Inversiones Financieras", "code": null, "name": "Inversiones Financieras", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / ACTIVOS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Inversiones Financieras / Inversiones / (-) Previsión para Devalorización de Acciones", "code": null, "name": "Inversiones / (-) Previsión para Devalorización de Acciones", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Inversiones Financieras", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Inversiones Financieras / Inversiones / Acciones Permanentes", "code": null, "name": "Inversiones / Acciones Permanentes", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Inversiones Financieras", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Inversiones Financieras / Inversiones / Acciones Transitorias", "code": null, "name": "Inversiones / Acciones Transitorias", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Inversiones Financieras", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / ACTIVOS / Inversiones Financieras / Inversiones / Títulos Públicos", "code": null, "name": "Inversiones / Títulos Públicos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / ACTIVOS / Inversiones Financieras", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Cuentas por Cobrar", "code": null, "name": "Cuentas por Cobrar", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Cuentas por Cobrar / Cuentas por Cobrar / (-) Intereses (+) a Devengar", "code": null, "name": "Cuentas por Cobrar / (-) Intereses (+) a Devengar", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Cuentas por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Cuentas por Cobrar / Cuentas por Cobrar / (-) Previsión para Descuentos", "code": null, "name": "Cuentas por Cobrar / (-) Previsión para Descuentos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Cuentas por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Cuentas por Cobrar / Cuentas por Cobrar / Accionistas", "code": null, "name": "Cuentas por Cobrar / Accionistas", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Cuentas por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Cuentas por Cobrar / Cuentas por Cobrar / Alquileres Pagados por Adelantado", "code": null, "name": "Cuentas por Cobrar / Alquileres Pagados por Adelantado", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Cuentas por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Cuentas por Cobrar / Cuentas por Cobrar / Anticipo al Personal", "code": null, "name": "Cuentas por Cobrar / Anticipo al Personal", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Cuentas por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Cuentas por Cobrar / Cuentas por Cobrar / Anticipo de Impuestos", "code": null, "name": "Cuentas por Cobrar / Anticipo de Impuestos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Cuentas por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Cuentas por Cobrar / Cuentas por Cobrar / Anticipos a Proveedores", "code": null, "name": "Cuentas por Cobrar / Anticipos a Proveedores", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Cuentas por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Cuentas por Cobrar / Cuentas por Cobrar / Intereses Pagados por Adelantado", "code": null, "name": "Cuentas por Cobrar / Intereses Pagados por Adelantado", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Cuentas por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Cuentas por Cobrar / Cuentas por Cobrar / Préstamos otorgados", "code": null, "name": "Cuentas por Cobrar / Préstamos otorgados", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Cuentas por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Documentos por Cobrar", "code": null, "name": "Documentos por Cobrar", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Documentos por Cobrar / Documentos por Cobrar / (-) Previsión para Incobrables", "code": null, "name": "Documentos por Cobrar / (-) Previsión para Incobrables", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Documentos por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Documentos por Cobrar / Documentos por Cobrar / Deudores Morosos", "code": null, "name": "Documentos por Cobrar / Deudores Morosos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Documentos por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Documentos por Cobrar / Documentos por Cobrar / Deudores Varios", "code": null, "name": "Documentos por Cobrar / Deudores Varios", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Documentos por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Documentos por Cobrar / Documentos por Cobrar / Deudores en Gestión Judicial", "code": null, "name": "Documentos por Cobrar / Deudores en Gestión Judicial", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Documentos por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / Documentos por Cobrar / Documentos por Cobrar / Deudores por Ventas", "code": null, "name": "Documentos por Cobrar / Deudores por Ventas", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / Documentos por Cobrar", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS", "code": null, "name": "PASIVOS", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Cuentas por Pagar", "code": null, "name": "Cuentas por Pagar", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / PASIVOS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Cuentas por Pagar / Cuentas por Pagar / (-) Intereses a Devengar por Compras al Crédito", "code": null, "name": "Cuentas por Pagar / (-) Intereses a Devengar por Compras al Crédito", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Cuentas por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Cuentas por Pagar / Cuentas por Pagar / Anticipos de Clientes", "code": null, "name": "Cuentas por Pagar / Anticipos de Clientes", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Cuentas por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Cuentas por Pagar / Cuentas por Pagar / Proveedores", "code": null, "name": "Cuentas por Pagar / Proveedores", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Cuentas por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Impuestos por Pagar", "code": null, "name": "Impuestos por Pagar", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / PASIVOS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Impuestos por Pagar / Impuestos por Pagar / IVA a Pagar", "code": null, "name": "Impuestos por Pagar / IVA a Pagar", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Impuestos por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Impuestos por Pagar / Impuestos por Pagar / Impuesto a la Renta a Pagar", "code": null, "name": "Impuestos por Pagar / Impuesto a la Renta a Pagar", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Impuestos por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Otras Cuentas por Pagar", "code": null, "name": "Otras Cuentas por Pagar", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / PASIVOS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Otras Cuentas por Pagar / Otras Cuentas por Pagar / Acreedores Varios", "code": null, "name": "Otras Cuentas por Pagar / Acreedores Varios", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Otras Cuentas por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Otras Cuentas por Pagar / Otras Cuentas por Pagar / Cobros por Adelantado", "code": null, "name": "Otras Cuentas por Pagar / Cobros por Adelantado", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Otras Cuentas por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Otras Cuentas por Pagar / Otras Cuentas por Pagar / Dividendos a Pagar", "code": null, "name": "Otras Cuentas por Pagar / Dividendos a Pagar", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Otras Cuentas por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Otras Cuentas por Pagar / Otras Cuentas por Pagar / Honorarios Directores y Síndicos a Pagar", "code": null, "name": "Otras Cuentas por Pagar / Honorarios Directores y Síndicos a Pagar", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Otras Cuentas por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Pasivo Circulante", "code": null, "name": "Pasivo Circulante", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / PASIVOS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Pasivo Circulante / Pasivo Circulante / Adelantos en Cuenta Corriente", "code": null, "name": "Pasivo Circulante / Adelantos en Cuenta Corriente", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Pasivo Circulante", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Pasivo Circulante / Pasivo Circulante / Debentures Emitidos", "code": null, "name": "Pasivo Circulante / Debentures Emitidos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Pasivo Circulante", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Pasivo Circulante / Pasivo Circulante / Intereses a Pagar", "code": null, "name": "Pasivo Circulante / Intereses a Pagar", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Pasivo Circulante", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Pasivo Circulante / Pasivo Circulante / Obligaciones a Pagar", "code": null, "name": "Pasivo Circulante / Obligaciones a Pagar", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Pasivo Circulante", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Pasivo Circulante / Pasivo Circulante / Prestamos", "code": null, "name": "Pasivo Circulante / Prestamos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Pasivo Circulante", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Provisiones", "code": null, "name": "Provisiones", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / PASIVOS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Provisiones / Provisiones / Previsión Indemnización por Despidos", "code": null, "name": "Provisiones / Previsión Indemnización por Despidos", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Provisiones", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Provisiones / Provisiones / Previsión para Garantías por Service", "code": null, "name": "Provisiones / Previsión para Garantías por Service", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Provisiones", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Provisiones / Provisiones / Previsión para juicios Pendientes", "code": null, "name": "Provisiones / Previsión para juicios Pendientes", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Provisiones", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Remuneraciones por Pagar", "code": null, "name": "Remuneraciones por Pagar", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / PASIVOS", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Remuneraciones por Pagar / Remuneraciones por Pagar / Cargas Sociales a Pagar", "code": null, "name": "Remuneraciones por Pagar / Cargas Sociales a Pagar", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Remuneraciones por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Remuneraciones por Pagar / Remuneraciones por Pagar / Provisión para Sueldo Anual Complementario", "code": null, "name": "Remuneraciones por Pagar / Provisión para Sueldo Anual Complementario", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Remuneraciones por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Remuneraciones por Pagar / Remuneraciones por Pagar / Retenciones a Depositar", "code": null, "name": "Remuneraciones por Pagar / Retenciones a Depositar", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Remuneraciones por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PASIVOS / Remuneraciones por Pagar / Remuneraciones por Pagar / Sueldos a Pagar", "code": null, "name": "Remuneraciones por Pagar / Sueldos a Pagar", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PASIVOS / Remuneraciones por Pagar", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO", "code": null, "name": "PATRIMONIO", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Ajustes al Patrimonio", "code": null, "name": "Ajustes al Patrimonio", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / PATRIMONIO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Ajustes al Patrimonio / Ajustes al Patrimonio / Revaluo Técnico de Activo Fijo", "code": null, "name": "Ajustes al Patrimonio / Revaluo Técnico de Activo Fijo", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Ajustes al Patrimonio", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Aportes No Capitalizados", "code": null, "name": "Aportes No Capitalizados", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / PATRIMONIO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Aportes No Capitalizados / Aportes No Capitalizados / Aportes Irrevocables Futura Suscripción de Acciones", "code": null, "name": "Aportes No Capitalizados / Aportes Irrevocables Futura Suscripción de Acciones", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Aportes No Capitalizados", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Aportes No Capitalizados / Aportes No Capitalizados / Primas de Emsión", "code": null, "name": "Aportes No Capitalizados / Primas de Emsión", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Aportes No Capitalizados", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Capital", "code": null, "name": "Capital", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / PATRIMONIO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Capital / Capital / (-) Descuento de Emisión de Acciones", "code": null, "name": "Capital / (-) Descuento de Emisión de Acciones", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Capital", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Capital / Capital / Acciones en Circulación", "code": null, "name": "Capital / Acciones en Circulación", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Capital", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Capital / Capital / Capital Propio", "code": null, "name": "Capital / Capital Propio", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Capital", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Capital / Capital / Dividendos a Distribuir en Acciones", "code": null, "name": "Capital / Dividendos a Distribuir en Acciones", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Capital", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Futuras Eventualidades", "code": null, "name": "Futuras Eventualidades", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / PATRIMONIO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Futuras Eventualidades / Reserva Estatutaria", "code": null, "name": "Reserva Estatutaria", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Futuras Eventualidades", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Futuras Eventualidades / Reserva Facultativa", "code": null, "name": "Reserva Facultativa", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Futuras Eventualidades", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Futuras Eventualidades / Reserva Legal", "code": null, "name": "Reserva Legal", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Futuras Eventualidades", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Futuras Eventualidades / Reserva para Renovación de Activo Fijo", "code": null, "name": "Reserva para Renovación de Activo Fijo", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Futuras Eventualidades", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Resultados No Asignados", "code": null, "name": "Resultados No Asignados", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "inventario del Balance General / PATRIMONIO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Resultados No Asignados / Resultado del Ejercicio", "code": null, "name": "Resultado del Ejercicio", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Resultados No Asignados", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Resultados No Asignados / Resultados Acumulados", "code": null, "name": "Resultados Acumulados", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Resultados No Asignados", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Resultados No Asignados / Resultados Acumulados del Ejercicio Anterior", "code": null, "name": "Resultados Acumulados del Ejercicio Anterior", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Resultados No Asignados", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "inventario del Balance General / PATRIMONIO / Resultados No Asignados / Utilidades y Pérdidas del Ejercicio", "code": null, "name": "Utilidades y Pérdidas del Ejercicio", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "inventario del Balance General / PATRIMONIO / Resultados No Asignados", "depth": 4, "flags": ["missing_root_type"]}
+  ]
+}

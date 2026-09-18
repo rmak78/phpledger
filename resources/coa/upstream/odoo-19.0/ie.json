@@ -1,0 +1,458 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "ea5b78b58b9374f221fbbfd17b10e3ae6c70bdab9ebead4f101a69146da81067",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/ie",
+  "country_code": "IE",
+  "country_name": "Ireland",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Ireland - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_ie' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo SA",
+    "module": "l10n_ie",
+    "module_name": "Ireland - Accounting",
+    "module_version": "2.1",
+    "contributing_modules": [
+      "l10n_ie"
+    ],
+    "template_code": "ie",
+    "template_chain": [
+      "ie"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_ie/data/template/account.account-ie.csv",
+        "sha256": "dc76d336a8caa209b66dec4cbfe80e23faa073f3d07aaf170ba5451f0b639fbb",
+        "rows": 145
+      }
+    ],
+    "python_files": [
+      "addons/l10n_ie/models/template_ie.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "230",
+      "cash": "231",
+      "transfer": "232"
+    },
+    "default_sale_tax": "ie_tax_sale_goods_23",
+    "default_purchase_tax": "ie_tax_purchase_goods_23",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "l10n_ie_account_2100",
+        "code": "2100",
+        "name": "Customers due within one year",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "l10n_ie_account_34",
+        "code": "34",
+        "name": "Suppliers due within one year",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "l10n_ie_account_70",
+        "code": "70",
+        "name": "Sales",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "l10n_ie_account_60",
+        "code": "60",
+        "name": "Purchase of Raw materials and consumables",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "l10n_ie_account_2000",
+        "code": "2000",
+        "name": "Inventories of raw materials",
+        "resolved": true
+      },
+      {
+        "source_field": "property_stock_valuation_account_id",
+        "source_id": "l10n_ie_account_630",
+        "code": "630",
+        "name": "Value adjustments in respect of fixed assets",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "l10n_ie_account_2101",
+        "code": "2101",
+        "name": "Customers (PoS) due within one year",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "l10n_ie_account_761",
+        "code": "761",
+        "name": "Foreign currency exchange gains",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "l10n_ie_account_661",
+        "code": "661",
+        "name": "Foreign currency exchange losses",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "l10n_ie_account_731",
+        "code": "731",
+        "name": "Cash Difference Gain",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "l10n_ie_account_641",
+        "code": "641",
+        "name": "Cash Difference Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "l10n_ie_account_730",
+        "code": "730",
+        "name": "Cash Discount Gain",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "l10n_ie_account_640",
+        "code": "640",
+        "name": "Cash Discount Loss",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 145,
+    "posting_accounts": 145,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 54,
+      "equity": 19,
+      "expense": 16,
+      "income": 13,
+      "liability": 43
+    },
+    "by_subtype": {
+      "current_asset": 27,
+      "current_liability": 31,
+      "equity": 18,
+      "expense": 16,
+      "fixed_asset": 24,
+      "income": 13,
+      "non_current_liability": 9,
+      "payable": 3,
+      "receivable": 3,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 3,
+      "receivables": 3
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "l10n_ie_account_100", "code": "100", "name": "Development costs", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_ie.l10n_ie_account_tag_dev_costs"]}},
+    {"source_id": "l10n_ie_account_101", "code": "101", "name": "Concessions, patents, licences, trade marks and similar rights and assets", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_ie.l10n_ie_account_tag_intangible_rights"]}},
+    {"source_id": "l10n_ie_account_102", "code": "102", "name": "Goodwill", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_ie.l10n_ie_account_tag_goodwill"]}},
+    {"source_id": "l10n_ie_account_103", "code": "103", "name": "Payments on account", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_fixed_assets_prepay"]}},
+    {"source_id": "l10n_ie_account_110", "code": "110", "name": "Investment property", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_inv_property"]}},
+    {"source_id": "l10n_ie_account_111", "code": "111", "name": "Land and buildings", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_land_buildings"]}},
+    {"source_id": "l10n_ie_account_112", "code": "112", "name": "Plant and machinery", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_plant_machinery"]}},
+    {"source_id": "l10n_ie_account_113", "code": "113", "name": "Fixtures, fittings, tools and equipment", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_fixtures_equipment"]}},
+    {"source_id": "l10n_ie_account_114", "code": "114", "name": "Payments on account and assets in course of construction", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_assets_under_constr"]}},
+    {"source_id": "l10n_ie_account_120", "code": "120", "name": "Shares in group undertakings", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_group_shares_fixed"]}},
+    {"source_id": "l10n_ie_account_121", "code": "121", "name": "Loans to group undertakings", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_group_loans"]}},
+    {"source_id": "l10n_ie_account_122", "code": "122", "name": "Participating interests", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_part_interests"]}},
+    {"source_id": "l10n_ie_account_123", "code": "123", "name": "Loans to undertakings in which the company has a participating interest", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_part_interest_loans"]}},
+    {"source_id": "l10n_ie_account_1240", "code": "1240", "name": "Listed shares", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_other_investments_except_loan"]}},
+    {"source_id": "l10n_ie_account_1241", "code": "1241", "name": "Unlisted shares", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_other_investments_except_loan"]}},
+    {"source_id": "l10n_ie_account_1242", "code": "1242", "name": "Other securities held as fixed assets (equity right)", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_other_investments_except_loan"]}},
+    {"source_id": "l10n_ie_account_1243", "code": "1243", "name": "Debentures", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_other_investments_except_loan"]}},
+    {"source_id": "l10n_ie_account_1244", "code": "1244", "name": "Other securities held as fixed assets (creditor's right)", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_other_investments_except_loan"]}},
+    {"source_id": "l10n_ie_account_1245", "code": "1245", "name": "Shares of collective investment funds", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_other_investments_except_loan"]}},
+    {"source_id": "l10n_ie_account_1246", "code": "1246", "name": "Other securities held as fixed assets", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_other_investments_except_loan"]}},
+    {"source_id": "l10n_ie_account_1250", "code": "1250", "name": "Loans", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_other_loans"]}},
+    {"source_id": "l10n_ie_account_1251", "code": "1251", "name": "Deposits and guarantees paid", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_other_loans"]}},
+    {"source_id": "l10n_ie_account_1252", "code": "1252", "name": "Long-term receivables", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_loans"]}},
+    {"source_id": "l10n_ie_account_2000", "code": "2000", "name": "Inventories of raw materials", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_raw_materials"], "extra": {"account_stock_variation_id": "l10n_ie_account_60"}}},
+    {"source_id": "l10n_ie_account_2001", "code": "2001", "name": "Inventories of consumable materials and supplies", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_raw_materials"]}},
+    {"source_id": "l10n_ie_account_2002", "code": "2002", "name": "Inventories of packaging", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_raw_materials"]}},
+    {"source_id": "l10n_ie_account_2010", "code": "2010", "name": "Inventories of work in progress", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_work_in_progress"]}},
+    {"source_id": "l10n_ie_account_2011", "code": "2011", "name": "Contracts in progress - goods", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_work_in_progress"]}},
+    {"source_id": "l10n_ie_account_2012", "code": "2012", "name": "Contracts in progress - services", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_work_in_progress"]}},
+    {"source_id": "l10n_ie_account_2013", "code": "2013", "name": "Buildings under construction", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_work_in_progress"]}},
+    {"source_id": "l10n_ie_account_2020", "code": "2020", "name": "Inventories of finished goods", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_finished_goods"]}},
+    {"source_id": "l10n_ie_account_2021", "code": "2021", "name": "Inventories of semi-finished goods", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_finished_goods"]}},
+    {"source_id": "l10n_ie_account_2022", "code": "2022", "name": "Inventories of residual goods (waste, rejected and recuperable material)", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_finished_goods"]}},
+    {"source_id": "l10n_ie_account_2023", "code": "2023", "name": "Inventories of merchandise", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_finished_goods"]}},
+    {"source_id": "l10n_ie_account_2024", "code": "2024", "name": "Inventories of land for resale", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_finished_goods"]}},
+    {"source_id": "l10n_ie_account_2025", "code": "2025", "name": "Inventories of buildings for resale", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_finished_goods"]}},
+    {"source_id": "l10n_ie_account_203", "code": "203", "name": "Payments on account", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_curr_assets_prepay"]}},
+    {"source_id": "l10n_ie_account_2100", "code": "2100", "name": "Customers due within one year", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_ie.l10n_ie_account_tag_trade_debtors"]}},
+    {"source_id": "l10n_ie_account_2101", "code": "2101", "name": "Customers (PoS) due within one year", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_ie.l10n_ie_account_tag_trade_debtors"]}},
+    {"source_id": "l10n_ie_account_2102", "code": "2102", "name": "Customers - Receivable bills of exchange due within one year", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_trade_debtors"]}},
+    {"source_id": "l10n_ie_account_2103", "code": "2103", "name": "Doubtful or disputed customers due within one year", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_trade_debtors"]}},
+    {"source_id": "l10n_ie_account_2104", "code": "2104", "name": "Customers - Unbilled sales due within one year", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_trade_debtors"]}},
+    {"source_id": "l10n_ie_account_2105", "code": "2105", "name": "Customers with a credit balance due within one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_trade_debtors"]}},
+    {"source_id": "l10n_ie_account_2106", "code": "2106", "name": "Value adjustments of receivables due within one year", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_trade_debtors"]}},
+    {"source_id": "l10n_ie_account_211", "code": "211", "name": "Amounts owed by group undertakings", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_group_debtors"]}},
+    {"source_id": "l10n_ie_account_212", "code": "212", "name": "Amounts owed by undertakings in which the company has a participating interest", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_part_interest_debtors"]}},
+    {"source_id": "l10n_ie_account_2130", "code": "2130", "name": "Other debtors", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_debtors"]}},
+    {"source_id": "l10n_ie_account_2131", "code": "2131", "name": "VAT receivable", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_debtors"], "non_trade": true}},
+    {"source_id": "l10n_ie_account_2132", "code": "2132", "name": "VAT paid", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_debtors"]}},
+    {"source_id": "l10n_ie_account_214", "code": "214", "name": "Subscribed capital called but unpaid", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_ie.l10n_ie_account_tag_share_cap_not_paid"]}},
+    {"source_id": "l10n_ie_account_215", "code": "215", "name": "Prepayments", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_prepayments"]}},
+    {"source_id": "l10n_ie_account_2160", "code": "2160", "name": "Accrued income", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_accrued_inc"]}},
+    {"source_id": "l10n_ie_account_2161", "code": "2161", "name": "Deferred expenses", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_prepayments"]}},
+    {"source_id": "l10n_ie_account_220", "code": "220", "name": "Shares in group undertakings", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_group_shares_curr"]}},
+    {"source_id": "l10n_ie_account_221", "code": "221", "name": "Other investments", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_investments"]}},
+    {"source_id": "l10n_ie_account_30", "code": "30", "name": "Debenture loans: due and payable within one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_debentures_short"]}},
+    {"source_id": "l10n_ie_account_31", "code": "31", "name": "Amounts owed to credit institutions: due and payable within one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_bank_loans_short"]}},
+    {"source_id": "l10n_ie_account_32", "code": "32", "name": "Called-up share capital presented as a liability due within one year", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_share_cap_liab_short"]}},
+    {"source_id": "l10n_ie_account_33", "code": "33", "name": "Payments received on account", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_prepaid_revenue_short"]}},
+    {"source_id": "l10n_ie_account_34", "code": "34", "name": "Suppliers due within one year", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["l10n_ie.l10n_ie_account_tag_trade_creditors_short"]}},
+    {"source_id": "l10n_ie_account_35", "code": "35", "name": "Bills of exchange payable within one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_bills_payable_short"]}},
+    {"source_id": "l10n_ie_account_36", "code": "36", "name": "Amounts owed to group undertakings due within one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_group_creditors_short"]}},
+    {"source_id": "l10n_ie_account_37", "code": "37", "name": "Amounts owed to undertakings with which the company is linked by virtue of participating interests due within one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_part_interest_creditors_short"]}},
+    {"source_id": "l10n_ie_account_3800", "code": "3800", "name": "Income tax", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_3801", "code": "3801", "name": "Withholding tax on wages and salaries", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_3802", "code": "3802", "name": "Withholding tax on financial investment income", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_3803", "code": "3803", "name": "VAT received", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_3804", "code": "3804", "name": "VAT payable", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"], "non_trade": true}},
+    {"source_id": "l10n_ie_account_3805", "code": "3805", "name": "Other indirect taxes", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_3806", "code": "3806", "name": "Foreign VAT", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_3807", "code": "3807", "name": "Other foreign taxes", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_381", "code": "381", "name": "Pay Related Social insurance (PRSI)", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_3820", "code": "3820", "name": "Received deposits and guarantees within one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_3821", "code": "3821", "name": "Amounts payable to partners and shareholders (others than from affiliated undertakings) within one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_3822", "code": "3822", "name": "Amounts payable to directors, managers, statutory auditors and similar within one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_3823", "code": "3823", "name": "Amounts payable to staff within one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_3824", "code": "3824", "name": "Other miscellaneous debts within one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_short"]}},
+    {"source_id": "l10n_ie_account_39", "code": "39", "name": "Deferred income to be recognized within one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_deferred_inc_short"]}},
+    {"source_id": "l10n_ie_account_40", "code": "40", "name": "Debenture loans: due and payable after more than one year", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_debentures_long"]}},
+    {"source_id": "l10n_ie_account_41", "code": "41", "name": "Amounts owed to credit institutions: due and payable after more than one year", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_bank_loans_long"]}},
+    {"source_id": "l10n_ie_account_42", "code": "42", "name": "Called-up share capital presented as a liability due after more than one year", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_share_cap_liab_long"]}},
+    {"source_id": "l10n_ie_account_43", "code": "43", "name": "Down payments received after more than one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_prepaid_revenue_long"]}},
+    {"source_id": "l10n_ie_account_44", "code": "44", "name": "Suppliers due after more than one year", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["l10n_ie.l10n_ie_account_tag_trade_creditors_long"]}},
+    {"source_id": "l10n_ie_account_45", "code": "45", "name": "Bills of exchange payable after more than one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_bills_payable_long"]}},
+    {"source_id": "l10n_ie_account_46", "code": "46", "name": "Amounts owed to group undertakings due after more than one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_group_creditors_long"]}},
+    {"source_id": "l10n_ie_account_47", "code": "47", "name": "Amounts owed to undertakings with which the company is linked by virtue of participating interests due after more than one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_part_interest_creditors_long"]}},
+    {"source_id": "l10n_ie_account_480", "code": "480", "name": "Received deposits and guarantees due after more than one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_long"]}},
+    {"source_id": "l10n_ie_account_481", "code": "481", "name": "Amounts payable to partners and shareholders (others than from affiliated undertakings) due after more than one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_other_creditors_long"]}},
+    {"source_id": "l10n_ie_account_482", "code": "482", "name": "Amounts payable to directors, managers, statutory auditors and similar due after more than one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_long"]}},
+    {"source_id": "l10n_ie_account_483", "code": "483", "name": "Amounts payable to staff due after more than one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_long"]}},
+    {"source_id": "l10n_ie_account_484", "code": "484", "name": "Other miscellaneous debts due after more than one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_creditors_long"]}},
+    {"source_id": "l10n_ie_account_49", "code": "49", "name": "Deferred income to be recognized after more than one year", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_deferred_inc_long"]}},
+    {"source_id": "l10n_ie_account_500", "code": "500", "name": "Provisions for pensions and similar obligations", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_ret_benefit_liab"]}},
+    {"source_id": "l10n_ie_account_5010", "code": "5010", "name": "Provisions for taxation", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_tax_liab"]}},
+    {"source_id": "l10n_ie_account_5011", "code": "5011", "name": "Deferred tax provisions", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_tax_liab"]}},
+    {"source_id": "l10n_ie_account_5020", "code": "5020", "name": "Operating provisions", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_provisions"]}},
+    {"source_id": "l10n_ie_account_5021", "code": "5021", "name": "Financial provisions", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_provisions"]}},
+    {"source_id": "l10n_ie_account_5100", "code": "5100", "name": "Called-up capital", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_share_capital"]}},
+    {"source_id": "l10n_ie_account_5101", "code": "5101", "name": "Capital of individual companies, corporate partnerships and similar", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_share_capital"]}},
+    {"source_id": "l10n_ie_account_5110", "code": "5110", "name": "Share premium", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_share_premium"]}},
+    {"source_id": "l10n_ie_account_5111", "code": "5111", "name": "Merger premium", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_share_premium"]}},
+    {"source_id": "l10n_ie_account_5112", "code": "5112", "name": "Contribution premium", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_share_premium"]}},
+    {"source_id": "l10n_ie_account_5113", "code": "5113", "name": "Premiums on conversion of bonds into shares", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_share_premium"]}},
+    {"source_id": "l10n_ie_account_5114", "code": "5114", "name": "Capital contribution without issue of shares", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_share_premium"]}},
+    {"source_id": "l10n_ie_account_5120", "code": "5120", "name": "Reserves in application of the equity method", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_ie.l10n_ie_account_tag_reval_reserve"]}},
+    {"source_id": "l10n_ie_account_5121", "code": "5121", "name": "Temporarily not taxable currency translation adjustments", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_ie.l10n_ie_account_tag_reval_reserve"]}},
+    {"source_id": "l10n_ie_account_5122", "code": "5122", "name": "Other revaluation reserves", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_ie.l10n_ie_account_tag_reval_reserve"]}},
+    {"source_id": "l10n_ie_account_5130", "code": "5130", "name": "Legal reserve", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_capital"]}},
+    {"source_id": "l10n_ie_account_5131", "code": "5131", "name": "Reserves for own shares or own corporate units", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_ie.l10n_ie_account_tag_own_shares_reserve"]}},
+    {"source_id": "l10n_ie_account_5132", "code": "5132", "name": "Reserves provided for by the articles of association", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_ie.l10n_ie_account_tag_constitutional_reserves"]}},
+    {"source_id": "l10n_ie_account_51330", "code": "51330", "name": "Other reserves available for distribution", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_reserves"]}},
+    {"source_id": "l10n_ie_account_51331", "code": "51331", "name": "Reserves in application of fair value", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_reserves"]}},
+    {"source_id": "l10n_ie_account_51332", "code": "51332", "name": "Reserves not available for distribution not mentioned above", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_reserves"]}},
+    {"source_id": "l10n_ie_account_5140", "code": "5140", "name": "Results brought forward in the process of assignment", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_ie.l10n_ie_account_tag_retained_earnings"]}},
+    {"source_id": "l10n_ie_account_5141", "code": "5141", "name": "Results brought forward (assigned)", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_ie.l10n_ie_account_tag_retained_earnings"]}},
+    {"source_id": "l10n_ie_account_515", "code": "515", "name": "Result for the financial year", "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity_unaffected", "tag_ids": ["l10n_ie.l10n_ie_account_tag_retained_earnings"]}},
+    {"source_id": "l10n_ie_account_60", "code": "60", "name": "Purchase of Raw materials and consumables", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_purchase_raw_materials"]}},
+    {"source_id": "l10n_ie_account_61", "code": "61", "name": "Other external expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_external_expenses"]}},
+    {"source_id": "l10n_ie_account_620", "code": "620", "name": "Wages and salaries", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_wages_salaries"]}},
+    {"source_id": "l10n_ie_account_621", "code": "621", "name": "Social insurance costs", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_social_insurance"]}},
+    {"source_id": "l10n_ie_account_622", "code": "622", "name": "Other retirement benefit costs", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_ret_benefit_costs"]}},
+    {"source_id": "l10n_ie_account_623", "code": "623", "name": "Other compensation costs", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_comp_costs"]}},
+    {"source_id": "l10n_ie_account_630", "code": "630", "name": "Value adjustments in respect of fixed assets", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_ie.l10n_ie_account_tag_depreciation_amort"]}},
+    {"source_id": "l10n_ie_account_631", "code": "631", "name": "Extraordinary value adjustments in respect of current assets", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_ie.l10n_ie_account_tag_curr_assets_adj"]}},
+    {"source_id": "l10n_ie_account_640", "code": "640", "name": "Cash Discount Loss", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_other_oper_expenses"]}},
+    {"source_id": "l10n_ie_account_641", "code": "641", "name": "Cash Difference Loss", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_other_oper_expenses"]}},
+    {"source_id": "l10n_ie_account_642", "code": "642", "name": "Other operating expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_other_oper_expenses"]}},
+    {"source_id": "l10n_ie_account_65", "code": "65", "name": "Value adjustments in respect of financial assets and investments held as current assets - Expense", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_ie.l10n_ie_account_tag_fin_assets_adj"]}},
+    {"source_id": "l10n_ie_account_660", "code": "660", "name": "Interest payable and similar expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_financing", "l10n_ie.l10n_ie_account_tag_interest_payable"]}},
+    {"source_id": "l10n_ie_account_661", "code": "661", "name": "Foreign currency exchange losses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_interest_payable"]}},
+    {"source_id": "l10n_ie_account_67", "code": "67", "name": "Tax on profit or loss", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_ie.l10n_ie_account_tag_tax_expense"]}},
+    {"source_id": "l10n_ie_account_68", "code": "68", "name": "Other taxes not shown under the above items", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_ie.l10n_ie_account_tag_other_taxes"]}},
+    {"source_id": "l10n_ie_account_70", "code": "70", "name": "Sales", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_net_turnover"]}},
+    {"source_id": "l10n_ie_account_71", "code": "71", "name": "Variation in stocks of finished goods and in work in progress", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_change_in_stock"]}},
+    {"source_id": "l10n_ie_account_72", "code": "72", "name": "Own work capitalized", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_own_work_capitalised"]}},
+    {"source_id": "l10n_ie_account_730", "code": "730", "name": "Cash Discount Gain", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_other_oper_inc"]}},
+    {"source_id": "l10n_ie_account_731", "code": "731", "name": "Cash Difference Gain", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_other_oper_inc"]}},
+    {"source_id": "l10n_ie_account_732", "code": "732", "name": "Other operating income", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_other_oper_inc"]}},
+    {"source_id": "l10n_ie_account_74", "code": "74", "name": "Income from shares in group undertakings", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_inc_group_shares"]}},
+    {"source_id": "l10n_ie_account_75", "code": "75", "name": "Income from participating interests", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_inc_part_interest"]}},
+    {"source_id": "l10n_ie_account_760", "code": "760", "name": "Income from other financial assets", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_inc_other_fin_assets"]}},
+    {"source_id": "l10n_ie_account_761", "code": "761", "name": "Foreign currency exchange gains", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating", "l10n_ie.l10n_ie_account_tag_inc_other_fin_assets"]}},
+    {"source_id": "l10n_ie_account_762", "code": "762", "name": "Income from other financial assets", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_inc_other_fin_assets"]}},
+    {"source_id": "l10n_ie_account_77", "code": "77", "name": "Other interest receivable and similar income", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_investing", "l10n_ie.l10n_ie_account_tag_interest_receivable"]}},
+    {"source_id": "l10n_ie_account_78", "code": "78", "name": "Value adjustments in respect of financial assets and investments held as current assets - Income", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["l10n_ie.l10n_ie_account_tag_fin_assets_adj"]}}
+  ]
+}

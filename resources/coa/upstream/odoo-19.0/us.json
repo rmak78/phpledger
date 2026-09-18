@@ -1,0 +1,433 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "72f31b9ce06f6d44e8ef6e9f5f42927ca161ff45a4b49747d226b60f78063514",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/us",
+  "country_code": "US",
+  "country_name": "United States",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "United States - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_us_account' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_us_account",
+    "module_name": "United States - Accounting",
+    "module_version": "1.0",
+    "contributing_modules": [
+      "l10n_us_account"
+    ],
+    "template_code": "us",
+    "template_chain": [
+      "us"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_us_account/data/template/account.account-us.csv",
+        "sha256": "a3a20d731f3024ce2ad9d154bec141848c5adc217e2ebef46b30e96f1af0495c",
+        "rows": 101
+      },
+      {
+        "path": "addons/l10n_us_account/data/template/account.group-us.csv",
+        "sha256": "5d867bb7b0c87e58889ded592cff8e530c3ad6afd2391dc6000b3d31b073d4ed",
+        "rows": 14
+      }
+    ],
+    "python_files": [
+      "addons/l10n_us_account/models/template_us.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": null,
+    "anglo_saxon_accounting": true,
+    "account_code_prefixes": {
+      "bank": "1014",
+      "cash": "1015",
+      "transfer": "1017"
+    },
+    "default_sale_tax": null,
+    "default_purchase_tax": null,
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "account_account_us_receivable",
+        "code": "121000",
+        "name": "Accounts Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "account_account_us_payable",
+        "code": "211000",
+        "name": "Accounts Payable",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "account_account_us_income",
+        "code": "400000",
+        "name": "Product Sales",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "account_account_us_expense",
+        "code": "690000",
+        "name": "Miscellaneous Expenses",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "account_account_us_inventory_valuation",
+        "code": "110100",
+        "name": "Inventory Valuation",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "account_account_us_pos_receivable",
+        "code": "101300",
+        "name": "Accounts Receivable (PoS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "account_account_us_income_currency_exchange",
+        "code": "441000",
+        "name": "Foreign Exchange Gain",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "account_account_us_expense_currency_exchange",
+        "code": "703000",
+        "name": "Foreign Exchange Loss",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "account_account_us_cash_diff_income",
+        "code": "442000",
+        "name": "Cash Difference Gain",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "account_account_us_cash_diff_expense",
+        "code": "702000",
+        "name": "Cash Difference Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "account_account_us_cash_discount_gain",
+        "code": "443000",
+        "name": "Cash Discount Gain",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "account_account_us_cash_discount_loss",
+        "code": "701000",
+        "name": "Cash Discount Loss",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 101,
+    "posting_accounts": 101,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 23,
+      "equity": 6,
+      "expense": 56,
+      "income": 5,
+      "liability": 11
+    },
+    "by_subtype": {
+      "credit_card": 1,
+      "current_asset": 7,
+      "current_liability": 7,
+      "direct_cost": 1,
+      "equity": 4,
+      "expense": 45,
+      "fixed_asset": 10,
+      "income": 4,
+      "non_current_asset": 1,
+      "non_current_liability": 1,
+      "other_expense": 10,
+      "other_income": 1,
+      "payable": 2,
+      "prepayment": 1,
+      "receivable": 4,
+      "retained_earnings": 2
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 2,
+      "receivables": 4
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [],
+    "groups": 14
+  },
+  "groups": [
+    {"source_id": "us_group_4", "code_prefix_start": "4", "code_prefix_end": "4", "name": "Revenue", "parent_source_id": null, "path": ["Revenue"]},
+    {"source_id": "us_group_5", "code_prefix_start": "5", "code_prefix_end": "5", "name": "Cost of Goods Sold", "parent_source_id": null, "path": ["Cost of Goods Sold"]},
+    {"source_id": "us_group_6", "code_prefix_start": "6", "code_prefix_end": "6", "name": "Operating Expenses", "parent_source_id": null, "path": ["Operating Expenses"]},
+    {"source_id": "us_group_7", "code_prefix_start": "7", "code_prefix_end": "7", "name": "Other Expenses", "parent_source_id": null, "path": ["Other Expenses"]},
+    {"source_id": "us_group_8", "code_prefix_start": "8", "code_prefix_end": "8", "name": "Taxes", "parent_source_id": null, "path": ["Taxes"]},
+    {"source_id": "us_group_61", "code_prefix_start": "61", "code_prefix_end": "61", "name": "Payroll Expenses", "parent_source_id": "us_group_6", "path": ["Operating Expenses", "Payroll Expenses"]},
+    {"source_id": "us_group_62", "code_prefix_start": "62", "code_prefix_end": "62", "name": "Professional Fees", "parent_source_id": "us_group_6", "path": ["Operating Expenses", "Professional Fees"]},
+    {"source_id": "us_group_64", "code_prefix_start": "64", "code_prefix_end": "64", "name": "Utilities", "parent_source_id": "us_group_6", "path": ["Operating Expenses", "Utilities"]},
+    {"source_id": "us_group_67", "code_prefix_start": "67", "code_prefix_end": "67", "name": "Marketing Expenses", "parent_source_id": "us_group_6", "path": ["Operating Expenses", "Marketing Expenses"]},
+    {"source_id": "us_group_650", "code_prefix_start": "650", "code_prefix_end": "650", "name": "Bank Service Charges", "parent_source_id": "us_group_6", "path": ["Operating Expenses", "Bank Service Charges"]},
+    {"source_id": "us_group_651", "code_prefix_start": "651", "code_prefix_end": "653", "name": "Office Expenses", "parent_source_id": "us_group_6", "path": ["Operating Expenses", "Office Expenses"]},
+    {"source_id": "us_group_655", "code_prefix_start": "655", "code_prefix_end": "655", "name": "Insurance Expenses", "parent_source_id": "us_group_6", "path": ["Operating Expenses", "Insurance Expenses"]},
+    {"source_id": "us_group_661", "code_prefix_start": "661", "code_prefix_end": "664", "name": "Travel Expenses", "parent_source_id": "us_group_6", "path": ["Operating Expenses", "Travel Expenses"]},
+    {"source_id": "us_group_665", "code_prefix_start": "665", "code_prefix_end": "669", "name": "Automobile Expenses", "parent_source_id": "us_group_6", "path": ["Operating Expenses", "Automobile Expenses"]}
+  ],
+  "accounts": [
+    {"source_id": "account_account_us_current_assets", "code": "101000", "name": "Current Assets", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "account_account_us_pos_receivable", "code": "101300", "name": "Accounts Receivable (PoS)", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": false}},
+    {"source_id": "account_account_us_inventory_valuation", "code": "110100", "name": "Inventory Valuation", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false, "extra": {"account_stock_variation_id": "account_account_us_raw_materials"}}},
+    {"source_id": "account_account_us_cost_of_production", "code": "110400", "name": "Cost of Production", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "account_account_us_wip", "code": "110500", "name": "Work in Progress", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "account_account_us_receivable", "code": "121000", "name": "Accounts Receivable", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": false}},
+    {"source_id": "account_account_us_to_receive_rec", "code": "121100", "name": "Products to receive", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "account_account_us_owner_current_account", "code": "122000", "name": "Owner's Current Account", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "account_account_us_prepaid_expenses", "code": "128000", "name": "Prepaid Expenses", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "account_account_us_tax_paid", "code": "131000", "name": "Tax Paid", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "account_account_us_tax_receivable", "code": "132000", "name": "Tax Receivable", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "account_account_us_prepayments", "code": "141000", "name": "Prepayments", "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments", "non_trade": false}},
+    {"source_id": "account_account_us_acc_depreciation", "code": "151000", "name": "Accumulated Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "non_trade": false}},
+    {"source_id": "account_account_us_technology", "code": "152000", "name": "Technology", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Technological products like laptops, desktops, servers, etc.", "source": {"account_type": "asset_fixed", "asset_model_ids": ["account_asset_us_technology"], "non_trade": false}},
+    {"source_id": "account_account_us_land", "code": "152500", "name": "Land (not built)", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Purchases of land without buildings", "source": {"account_type": "asset_fixed", "non_trade": false}},
+    {"source_id": "account_account_us_buildings", "code": "153000", "name": "Buildings", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Construction of buildings and costs associated to buildings", "source": {"account_type": "asset_fixed", "asset_model_ids": ["account_asset_us_buildings"], "non_trade": false}},
+    {"source_id": "account_account_us_improvements", "code": "153500", "name": "Improvements", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Purchases of installations related to buildings, like solar panels or HVAC", "source": {"account_type": "asset_fixed", "asset_model_ids": ["account_asset_us_improvements"], "non_trade": false}},
+    {"source_id": "account_account_us_machines", "code": "154000", "name": "Machines & Tools", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Equipment, machinery and tools directly related to your business", "source": {"account_type": "asset_fixed", "asset_model_ids": ["account_asset_us_machines"], "non_trade": false}},
+    {"source_id": "account_account_us_other_property", "code": "154500", "name": "Other property", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Other type of property, like plants, machinery or various equipment", "source": {"account_type": "asset_fixed", "asset_model_ids": ["account_asset_us_other_property"], "non_trade": false}},
+    {"source_id": "account_account_us_furniture", "code": "155000", "name": "Furniture & Fixtures", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Office desks, chairs, shelving, etc", "source": {"account_type": "asset_fixed", "asset_model_ids": ["account_asset_us_furniture"], "non_trade": false}},
+    {"source_id": "account_account_us_vehicles", "code": "155500", "name": "Vehicles", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Purchase of a car or truck, including second hand or after-lease contract", "source": {"account_type": "asset_fixed", "asset_model_ids": ["account_asset_us_vehicles"], "non_trade": false}},
+    {"source_id": "account_account_us_misc_fixed_assets", "code": "159000", "name": "Miscellaneous Fixed Assets", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "non_trade": false}},
+    {"source_id": "account_account_us_non_current_assets", "code": "191000", "name": "Non-current assets", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "non_trade": false}},
+    {"source_id": "account_account_us_current_liabilities", "code": "201000", "name": "Current Liabilities", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "account_account_us_credit_card", "code": "201100", "name": "Credit Card", "root_type": "liability", "subtype": "credit_card", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_credit_card", "non_trade": false}},
+    {"source_id": "account_account_us_payable", "code": "211000", "name": "Accounts Payable", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": false}},
+    {"source_id": "account_account_us_to_receive_pay", "code": "211100", "name": "Bills to receive", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "account_account_us_deferred_revenue", "code": "212000", "name": "Deferred Revenue", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "account_account_us_salary_payable", "code": "230000", "name": "Salary Payable", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "account_account_us_employee_payroll_taxes", "code": "230100", "name": "Employee Payroll Taxes", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "account_account_us_employer_payroll_taxes", "code": "230200", "name": "Employer Payroll Taxes", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "account_account_us_tax_received", "code": "251000", "name": "Tax Received", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "account_account_us_tax_payable", "code": "252000", "name": "Tax Payable", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "account_account_us_non_current_liabilities", "code": "291000", "name": "Non-current Liabilities", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "non_trade": false}},
+    {"source_id": "account_account_us_capital", "code": "301000", "name": "Capital", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "account_account_us_dividends", "code": "302000", "name": "Dividends", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "account_account_us_common_stock", "code": "303000", "name": "Common Stock", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "account_account_us_distributions", "code": "304000", "name": "Distributions", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "account_account_us_income", "code": "400000", "name": "Product Sales", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "us_group_4", "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "account_account_us_income_currency_exchange", "code": "441000", "name": "Foreign Exchange Gain", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "us_group_4", "reconcile": false, "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "account_account_us_cash_diff_income", "code": "442000", "name": "Cash Difference Gain", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "us_group_4", "reconcile": false, "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "account_account_us_cash_discount_gain", "code": "443000", "name": "Cash Discount Gain", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "us_group_4", "reconcile": false, "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "account_account_us_other_income", "code": "450000", "name": "Other Income", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "us_group_4", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "account_account_us_cost_of_goods_sold", "code": "500000", "name": "Cost of Goods Sold", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_5", "reconcile": false, "source": {"account_type": "expense_direct_cost", "non_trade": false}},
+    {"source_id": "account_account_us_raw_materials", "code": "601000", "name": "Raw Materials", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_6", "reconcile": false, "description": "All goods purchased as raw materials used by your activity", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_salaries", "code": "611000", "name": "Salaries & Wages", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_61", "reconcile": false, "description": "Compensation paid to employees and workers employed by the company", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_commissions", "code": "612000", "name": "Employees Commissions", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_61", "reconcile": false, "description": "Employees commissions and bonuses", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_pension", "code": "613000", "name": "Pension", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_61", "reconcile": false, "description": "Retirement plans costs (401K match)", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_healthcare", "code": "614000", "name": "Healthcare Benefits", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_61", "reconcile": false, "description": "Employees medical, dental, and vision benefits", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_compensation_insurance", "code": "615000", "name": "Workers Compensation Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_61", "reconcile": false, "description": "Insurance premiums that cover medical costs and wage replacement for employees injured on the job", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_payroll_tax", "code": "616000", "name": "Payroll Tax", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_61", "reconcile": false, "description": "Employer's portion of payroll-related taxes (eg. Social Security, Medicare, FUTA/SUTA)", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_other_employees_benefits", "code": "617000", "name": "Other Employees Benefits", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_61", "reconcile": false, "description": "Company's personnel costs excluding compensations, contributions and vouchers", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_social_security", "code": "618000", "name": "Social Security", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_61", "reconcile": false, "description": "All fees related to social security contributions", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_accounting", "code": "621000", "name": "Accounting", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_62", "reconcile": false, "description": "Bills from your bookkeeper or accounting firm", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_legal", "code": "622000", "name": "Legal", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_62", "reconcile": false, "description": "Bills from lawyers, fees paid to the justice system", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_general_subcontracting", "code": "623000", "name": "General Subcontracting", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_62", "reconcile": false, "description": "Compensation to external workers and consultants for services", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_administration_fees", "code": "624000", "name": "Administration Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_62", "reconcile": false, "description": "Services incurred for the administration of your business (excluding supplies)", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_subscriptions", "code": "625000", "name": "Dues & Subscriptions", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_62", "reconcile": false, "description": "Membership fees for industry groups, professional associations, etc", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_office_rent", "code": "631000", "name": "Office Rent", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_6", "reconcile": false, "description": "Rent or lease of buildings", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_internet", "code": "641000", "name": "Telephone & Internet", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_64", "reconcile": false, "description": "Phone and internet bills from your telco provider for business operations", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_utilities", "code": "642000", "name": "Utilities", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_64", "reconcile": false, "description": "Utility bills for water, gas, electricity, heating, etc", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_disposal_fees", "code": "643000", "name": "Disposal Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_64", "reconcile": false, "description": "Costs incurred for removal, disposal, or recycling of waste and obsolete materials", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_bank_fees", "code": "650000", "name": "Bank Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_650", "reconcile": false, "description": "Nasty charges and interests from your bank", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_office_maintenance", "code": "651000", "name": "Office Maintenance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_651", "reconcile": false, "description": "Services related to the maintenance of your worplace, like repair or janitorial", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_office_supplies", "code": "651500", "name": "Office Supplies", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_651", "reconcile": false, "description": "Various supplies bought for your workplace or office, like pencils, paper, consumables, etc", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_postage", "code": "652000", "name": "Postage and Delivery", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_651", "reconcile": false, "description": "Costs for shipping products or materials to customers or receiving inventory.", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_printing_and_reproduction", "code": "652100", "name": "Printing and Reproduction", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_651", "reconcile": false, "description": "Production of printed or digital materials, such as photocopies, brochures, flyers, manuals.", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_equipment", "code": "652500", "name": "Equipment and Furniture", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_651", "reconcile": false, "description": "Cost of office furniture, fixtures, and business equipment", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_computers", "code": "653000", "name": "Computers", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_651", "reconcile": false, "description": "Expenses made for the repair and maintenance of laptops, peripherals, and computing equipment", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_office_services", "code": "653500", "name": "Office Services", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_651", "reconcile": false, "description": "All expenses made for your office or workplace that are not material goods", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_software", "code": "654000", "name": "Software", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_6", "reconcile": false, "description": "Licenses or computer services (like repairs or upgrades)", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_professional_liability_insurance", "code": "655000", "name": "Professional Liability Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_655", "reconcile": false, "description": "Insurance for damage caused to third parties", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_unemployment_insurance", "code": "655100", "name": "Unemployment Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_655", "reconcile": false, "description": "Employer contributions to state (SUI) or federal unemployment insurance programs", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_disability_insurance", "code": "655200", "name": "Disability Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_655", "reconcile": false, "description": "Premiums for short-term or long-term disability coverage provided to employees", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_professional_insurance", "code": "655300", "name": "Professional Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_655", "reconcile": false, "description": "All fees related to insurance taken in the context of your business", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_licenses", "code": "656000", "name": "Licenses and Permits", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_6", "reconcile": false, "description": "Business licenses and permits that your company must pay to operate", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_ground_transportation", "code": "661000", "name": "Ground Transportation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_661", "reconcile": false, "description": "Mileage, taxi and parking", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_public_transportation", "code": "662000", "name": "Public Transportation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_661", "reconcile": false, "description": "Travel expenses done using public transit (metro, bus, tramways, ...)", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_airfare", "code": "663000", "name": "Airfare", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_661", "reconcile": false, "description": "Flights or expenses related to air travel by plane", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_hotels", "code": "664000", "name": "Hotels", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_661", "reconcile": false, "description": "Hotel or accommodation expenses incurred during business trips", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_vehicles_expense", "code": "665000", "name": "Vehicles", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_665", "reconcile": false, "description": "Expenses made for the repair and maintenance of company cars and trucks", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_vehicle_rent", "code": "666000", "name": "Vehicle Rent", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_665", "reconcile": false, "description": "Rental of cars or trucks, including shared services, but excluding leasing", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_fuel", "code": "667000", "name": "Fuel", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_665", "reconcile": false, "description": "All fuel and gas expenses for a car/auto", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_auto_insurance", "code": "668000", "name": "Auto Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_665", "reconcile": false, "description": "Premiums paid for insurance coverage on company-owned or leased vehicles", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_meals", "code": "671000", "name": "Meals & Entertainment", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_67", "reconcile": false, "description": "Expenses incurred when eating or drinking at bars or restaurants", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_food", "code": "672000", "name": "Food: Catering & Delivery", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_67", "reconcile": false, "description": "Food or drinks incurred outside of bars or restaurants, like receptions, canteen and food delivery, etc", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_marketing", "code": "673000", "name": "Advertising & Marketing", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_67", "reconcile": false, "description": "Costs related to promoting the business, such as ads, campaigns, etc", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_training", "code": "681000", "name": "Training and Documentation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_6", "reconcile": false, "description": "Education and training fees not including food and drinks", "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_expense", "code": "690000", "name": "Miscellaneous Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_6", "reconcile": false, "description": "All other uncategorized expenses", "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "account_account_us_cash_discount_loss", "code": "701000", "name": "Cash Discount Loss", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_7", "reconcile": false, "source": {"account_type": "expense_other", "non_trade": false}},
+    {"source_id": "account_account_us_cash_diff_expense", "code": "702000", "name": "Cash Difference Loss", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_7", "reconcile": false, "source": {"account_type": "expense_other", "non_trade": false}},
+    {"source_id": "account_account_us_expense_currency_exchange", "code": "703000", "name": "Foreign Exchange Loss", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_7", "reconcile": false, "source": {"account_type": "expense_other", "non_trade": false}},
+    {"source_id": "account_account_us_loan_interest_expense", "code": "704000", "name": "Loan Interest Expense", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_7", "reconcile": false, "description": "Interest paid on loans or lines of credit", "source": {"account_type": "expense_other", "non_trade": false}},
+    {"source_id": "account_account_us_import_fees", "code": "705000", "name": "Import Fees", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_7", "reconcile": false, "description": "Customs fees incurred while importing goods from outside of the US", "source": {"account_type": "expense_other", "non_trade": false}},
+    {"source_id": "account_account_us_federal_income_tax", "code": "801000", "name": "Federal Income Tax", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_8", "reconcile": false, "description": "Income taxes owed to the U.S. federal government", "source": {"account_type": "expense_other", "non_trade": false}},
+    {"source_id": "account_account_us_state_income_tax", "code": "802000", "name": "State Income Tax", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_8", "reconcile": false, "description": "Income taxes owed to state taxing authorities", "source": {"account_type": "expense_other", "non_trade": false}},
+    {"source_id": "account_account_us_local_tax", "code": "803000", "name": "Local/City Tax", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_8", "reconcile": false, "description": "Business or income taxes owed to local or municipal governments", "source": {"account_type": "expense_other", "non_trade": false}},
+    {"source_id": "account_account_us_property_tax", "code": "804000", "name": "Property Tax", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_8", "reconcile": false, "description": "Local taxes that have to be paid due to the ownership of property", "source": {"account_type": "expense_other", "non_trade": false}},
+    {"source_id": "account_account_us_sales_tax", "code": "805000", "name": "Sales Tax", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "us_group_8", "reconcile": false, "description": "Sales and use tax paid on purchases where not otherwise recoverable", "source": {"account_type": "expense_other", "non_trade": false}},
+    {"source_id": "account_account_us_retained_earnings", "code": "999998", "name": "Accumulated Retained Earnings", "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Cumulative undistributed profits and losses", "source": {"account_type": "equity_unaffected", "non_trade": false}},
+    {"source_id": "account_account_us_profit_or_loss_appropriation", "code": "999999", "name": "Profit or Loss Appropriation", "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Appropriation of the profit or loss", "source": {"account_type": "equity_unaffected", "non_trade": false}}
+  ]
+}

@@ -1,0 +1,299 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "6dae4c7f1b7f80bbe232395c24dc421a23402fe33f560987e15d570bd4c437ea",
+  "accounts_identical_to": "erpnext-version-16/verified/syscohada_plan_comptable_avec_code",
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "erpnext-version-16/verified/ml_plan_comptable_avec_code",
+  "country_code": "ML",
+  "country_name": "Mali",
+  "country_basis": "chart file country_code",
+  "name": "Syscohada - Plan Comptable avec code",
+  "source": {
+    "system": "erpnext",
+    "repository": "https://github.com/frappe/erpnext",
+    "branch": "version-16",
+    "commit": "4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+    "commit_date": "2026-09-08T13:23:31+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "GPL-3.0-only",
+    "license_basis": "repository license.txt (GNU GPL v3); chart files carry no separate licence header",
+    "attribution": "Frappe Technologies Pvt. Ltd. and Contributors",
+    "upstream_folder": "verified",
+    "upstream_verified": true,
+    "upstream_disabled": false,
+    "files": [
+      {
+        "path": "erpnext/accounts/doctype/account/chart_of_accounts/verified/ml_plan_comptable_avec_code.json",
+        "sha256": "f57edc7cef5551df64ac371450627ae1f88bfad1acff9ac8ff94aaf579930925",
+        "kind": "json"
+      }
+    ]
+  },
+  "template": {
+    "hierarchy": "nested groups; posting accounts are leaves; source_id is the full ' / ' separated path",
+    "account_numbers_present": true
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "account_type",
+        "source_id": "4-Comptes de Tiers (ACTIF) / 41-Clients et comptes rattachés (ACTIF) / Clients / Clients",
+        "code": "4111",
+        "name": "Clients",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "4-Comptes de Tiers (ACTIF) / 41-Clients et comptes rattachés (ACTIF) / Clients / Clients groupe",
+        "code": "4112",
+        "name": "Clients groupe",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "4-Comptes de Tiers (ACTIF) / 41-Clients et comptes rattachés (ACTIF) / Clients / Clients, État et Collectivités publiques",
+        "code": "4114",
+        "name": "Clients, État et Collectivités publiques",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "4-Comptes de Tiers (ACTIF) / 41-Clients et comptes rattachés (ACTIF) / Clients / Clients, organismes internationaux",
+        "code": "4115",
+        "name": "Clients, organismes internationaux",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "4-Comptes de Tiers (ACTIF) / 41-Clients et comptes rattachés (ACTIF) / Clients / Clients, réserve de propriété",
+        "code": "4116",
+        "name": "Clients, réserve de propriété",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "account_type",
+        "source_id": "4-Comptes de Tiers (PASSIF) / 40-Fournisseurs et comptes rattachés (PASSIF) / Fournisseurs, dettes en compte / Fournisseurs",
+        "code": "4011",
+        "name": "Fournisseurs",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "4-Comptes de Tiers (PASSIF) / 40-Fournisseurs et comptes rattachés (PASSIF) / Fournisseurs, dettes en compte / Fournisseurs groupe",
+        "code": "4012",
+        "name": "Fournisseurs groupe",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "4-Comptes de Tiers (PASSIF) / 40-Fournisseurs et comptes rattachés (PASSIF) / Fournisseurs, dettes en compte / Fournisseurs sous-traitants",
+        "code": "4013",
+        "name": "Fournisseurs sous-traitants",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "4-Comptes de Tiers (PASSIF) / 40-Fournisseurs et comptes rattachés (PASSIF) / Fournisseurs, dettes en compte / Fournisseurs, réserve de propriété",
+        "code": "4016",
+        "name": "Fournisseurs, réserve de propriété",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "4-Comptes de Tiers (PASSIF) / 40-Fournisseurs et comptes rattachés (PASSIF) / Fournisseurs, dettes en compte / Fournisseur, retenues de garantie",
+        "code": "4017",
+        "name": "Fournisseur, retenues de garantie",
+        "resolved": true
+      }
+    ],
+    "bank": [
+      {
+        "source_field": "account_type",
+        "source_id": "Comptes de trésorerie / Banques / Banques locales / Banques en monnaie nationale",
+        "code": "5211",
+        "name": "Banques en monnaie nationale",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Comptes de trésorerie / Banques / Banques locales / Banques en devises",
+        "code": "5215",
+        "name": "Banques en devises",
+        "resolved": true
+      }
+    ],
+    "temporary": [
+      {
+        "source_field": "account_type",
+        "source_id": "4-Comptes de Tiers (ACTIF) / 47-Débiteurs et créditeurs divers (ACTIF) / 475-Compte transitoire, ajustement spécial lié à la révision du SYSCOHADA / Compte actif",
+        "code": "4751",
+        "name": "Compte actif",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "Receivable": {
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "Payable": {
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "Bank": {
+      "subtype": "bank",
+      "role_hint": "cash_bank"
+    },
+    "Cash": {
+      "subtype": "cash",
+      "role_hint": "cash_bank"
+    },
+    "Stock": {
+      "subtype": "inventory",
+      "role_hint": null
+    },
+    "Tax": {
+      "subtype": "tax",
+      "role_hint": null
+    },
+    "Cost of Goods Sold": {
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "Fixed Asset": {
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "Accumulated Depreciation": {
+      "subtype": "accumulated_depreciation",
+      "role_hint": null
+    },
+    "Depreciation": {
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "Expense Account": {
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "Income Account": {
+      "subtype": "income",
+      "role_hint": null
+    },
+    "Equity": {
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "Liability": {
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "Chargeable": {
+      "subtype": "chargeable",
+      "role_hint": null
+    },
+    "Stock Received But Not Billed": {
+      "subtype": "stock_received_not_billed",
+      "role_hint": null
+    },
+    "Asset Received But Not Billed": {
+      "subtype": "asset_received_not_billed",
+      "role_hint": null
+    },
+    "Service Received But Not Billed": {
+      "subtype": "service_received_not_billed",
+      "role_hint": null
+    },
+    "Stock Delivered But Not Billed": {
+      "subtype": "stock_delivered_not_billed",
+      "role_hint": null
+    },
+    "Stock Adjustment": {
+      "subtype": "stock_adjustment",
+      "role_hint": null
+    },
+    "Expenses Included In Valuation": {
+      "subtype": "valuation_expense",
+      "role_hint": null
+    },
+    "Expenses Included In Asset Valuation": {
+      "subtype": "asset_valuation_expense",
+      "role_hint": null
+    },
+    "Capital Work in Progress": {
+      "subtype": "capital_work_in_progress",
+      "role_hint": null
+    },
+    "Temporary": {
+      "subtype": "temporary",
+      "role_hint": null
+    },
+    "Round Off": {
+      "subtype": "round_off",
+      "role_hint": null
+    },
+    "Indirect Expense": {
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "Indirect Income": {
+      "subtype": "other_income",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 1370,
+    "posting_accounts": 1062,
+    "group_accounts": 308,
+    "by_root_type": {
+      "asset": 628,
+      "equity": 157,
+      "expense": 301,
+      "income": 158,
+      "liability": 126
+    },
+    "by_subtype": {
+      "accumulated_depreciation": 10,
+      "bank": 3,
+      "fixed_asset": 57,
+      "group": 278,
+      "inventory": 1,
+      "payable": 16,
+      "receivable": 31,
+      "stock_received_not_billed": 5,
+      "temporary": 1,
+      "unspecified": 968
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 1,
+    "role_hints": {
+      "cash_bank": 2,
+      "payables": 12,
+      "receivables": 24
+    },
+    "unmapped_account_types": {},
+    "roots_without_root_type": [],
+    "top_level_groups": [
+      "Comptes de ressources durables",
+      "Comptes d’actif immobilisé",
+      "Comptes de Stocks",
+      "4-Comptes de Tiers (ACTIF)",
+      "4-Comptes de Tiers (PASSIF)",
+      "Comptes de trésorerie",
+      "Comptes de charges des activités ordinaires",
+      "Comptes de produits des activités ordinaires",
+      "8-Comptes des autres charges et des autres produits (CHARGES)",
+      "8-Comptes des autres charges et des autres produits (PRODUITS)"
+    ],
+    "max_depth": 4,
+    "account_numbers_present": true
+  },
+  "accounts": []
+}

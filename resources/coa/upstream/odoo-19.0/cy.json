@@ -1,0 +1,449 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "51640c049de1a3456ac80e8dc8e2bac3c9af0ecdf7112d3d04548faa888b1534",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/cy",
+  "country_code": "CY",
+  "country_name": "Cyprus",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Cyprus - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_cy' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_cy",
+    "module_name": "Cyprus - Accounting",
+    "module_version": "1.0",
+    "contributing_modules": [
+      "l10n_cy"
+    ],
+    "template_code": "cy",
+    "template_chain": [
+      "cy"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_cy/data/template/account.account-cy.csv",
+        "sha256": "23aeb4e798e6d799de16437bf82d5b2cb5d97103678098a1fac9b94d6c8c49d4",
+        "rows": 169
+      }
+    ],
+    "python_files": [
+      "addons/l10n_cy/models/template_cy.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "4",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "1200",
+      "cash": "1231",
+      "transfer": "1261"
+    },
+    "default_sale_tax": "VAT_S_IN_CY_19_G",
+    "default_purchase_tax": "VAT_P_IN_CY_19_G",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "cy_1100",
+        "code": "1100",
+        "name": "Accounts receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "cy_2100",
+        "code": "2100",
+        "name": "Accounts payable",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "cy_4000",
+        "code": "4000",
+        "name": "Sales",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "cy_5100",
+        "code": "5100",
+        "name": "Carriage",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "cy_1020",
+        "code": "1020",
+        "name": "Raw materials",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "cy_1100",
+        "code": "1100",
+        "name": "Accounts receivable",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "cy_7910",
+        "code": "7910",
+        "name": "Exchange rate realized gains/losses",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "cy_7910",
+        "code": "7910",
+        "name": "Exchange rate realized gains/losses",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 169,
+    "posting_accounts": 169,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 44,
+      "equity": 5,
+      "expense": 91,
+      "income": 12,
+      "liability": 17
+    },
+    "by_subtype": {
+      "cash_bank": 2,
+      "current_asset": 12,
+      "current_liability": 12,
+      "depreciation": 11,
+      "direct_cost": 2,
+      "equity": 4,
+      "expense": 78,
+      "fixed_asset": 15,
+      "income": 1,
+      "non_current_asset": 10,
+      "non_current_liability": 1,
+      "other_income": 11,
+      "payable": 4,
+      "prepayment": 1,
+      "receivable": 4,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 2,
+      "expense": 1,
+      "income": 1,
+      "payables": 4,
+      "receivables": 4
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "el",
+      "tr"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "cy_0010", "code": "0010", "name": "Patents", "translations": {"tr": "Patentler", "el": "Διπλώματα ευρεσιτεχνίας"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "cy_0020", "code": "0020", "name": "Trademarks", "translations": {"tr": "Ticari markalar", "el": "Εμπορικά σήματα"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "cy_0030", "code": "0030", "name": "Licenses", "translations": {"tr": "Lisanslar", "el": "Άδειες"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "cy_0040", "code": "0040", "name": "Software", "translations": {"tr": "Yazılım", "el": "Λογισμικό"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "cy_0050", "code": "0050", "name": "Accumulated patents amortization", "translations": {"tr": "Birikmiş patent amortismanı", "el": "Σωρευμένες αποσβέσεις διπλωμάτων ευρεσιτεχνίας"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "cy_0051", "code": "0051", "name": "Accumulated trademarks amortization", "translations": {"tr": "Birikmiş ticari marka amortismanı", "el": "Συσσωρευμένη απόσβεση εμπορικών σημάτων"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "cy_0052", "code": "0052", "name": "Accumulated licenses amortization", "translations": {"tr": "Birikmiş lisans amortismanı", "el": "Σωρευμένες αποσβέσεις αδειών"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "cy_0053", "code": "0053", "name": "Accumulated software amortization", "translations": {"tr": "Birikmiş yazılım amortismanı", "el": "Συσσωρευμένη απόσβεση λογισμικού"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "cy_0060", "code": "0060", "name": "Freehold property", "translations": {"tr": "Mülkiyet", "el": "Ελεύθερη ιδιοκτησία"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0070", "code": "0070", "name": "Leasehold property", "translations": {"tr": "Kiralık mülk", "el": "Μίσθωση ακινήτων"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0080", "code": "0080", "name": "Plant and machinery", "translations": {"tr": "Tesis ve makineler", "el": "Εγκαταστάσεις και μηχανήματα"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0090", "code": "0090", "name": "Office equipment", "translations": {"tr": "Ofis malzemesi", "el": "Εξοπλισμός γραφείου"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0100", "code": "0100", "name": "Computers", "translations": {"tr": "Bilgisayarlar", "el": "Υπολογιστές"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0110", "code": "0110", "name": "Furniture and fixtures", "translations": {"tr": "Mobilya ve demirbaşlar", "el": "Έπιπλα και φωτιστικά"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0120", "code": "0120", "name": "Warehouse equipment", "translations": {"tr": "Depo ekipmanları", "el": "Εξοπλισμός αποθήκης"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0130", "code": "0130", "name": "Motor vehicles", "translations": {"tr": "Motorlu Taşıtlar", "el": "Μηχανοκίνητα οχήματα"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0140", "code": "0140", "name": "Accumulated leasehold property depreciation", "translations": {"tr": "Birikmiş özel mülk amortismanı", "el": "Σωρευμένες αποσβέσεις μισθωμένων ακινήτων"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0141", "code": "0141", "name": "Accumulated plant and machinery depreciation", "translations": {"tr": "Birikmiş tesis ve makine amortismanı", "el": "Σωρευμένες αποσβέσεις εγκαταστάσεων και μηχανημάτων"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0142", "code": "0142", "name": "Accumulated office equipment depreciation", "translations": {"tr": "Birikmiş ofis ekipmanı amortismanı", "el": "Σωρευμένες αποσβέσεις εξοπλισμού γραφείου"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0143", "code": "0143", "name": "Accumulated computers depreciation", "translations": {"tr": "Birikmiş bilgisayar amortismanı", "el": "Σωρευμένες αποσβέσεις υπολογιστών"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0144", "code": "0144", "name": "Accumulated furniture and fixtures depreciation", "translations": {"tr": "Birikmiş mobilya ve demirbaş amortismanı", "el": "Σωρευμένες αποσβέσεις επίπλων και ειδών"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0145", "code": "0145", "name": "Accumulated warehouse equipment depreciation", "translations": {"tr": "Birikmiş depo ekipmanı amortismanı", "el": "Σωρευμένες αποσβέσεις εξοπλισμού αποθήκης"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0146", "code": "0146", "name": "Accumulated motor vehicles depreciation", "translations": {"tr": "Birikmiş motorlu taşıt amortismanı", "el": "Σωρευμένες αποσβέσεις μηχανοκίνητων οχημάτων"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "cy_0150", "code": "0150", "name": "Long-term loan", "translations": {"tr": "Uzun vadeli kredi", "el": "Μακροπρόθεσμο δάνειο"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "cy_0160", "code": "0160", "name": "Other long-term investments", "translations": {"tr": "Diğer uzun vadeli yatırımlar", "el": "Άλλες μακροπρόθεσμες επενδύσεις"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "cy_1000", "code": "1000", "name": "Stock", "translations": {"tr": "Stoklamak", "el": "Στοκ"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cy_1010", "code": "1010", "name": "Work in progress", "translations": {"tr": "Çalışma devam ediyor", "el": "Εργασία σε εξέλιξη"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cy_1020", "code": "1020", "name": "Raw materials", "translations": {"tr": "İşlenmemiş içerikler", "el": "Πρώτες ύλες"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_variation_id": "cy_5000"}}},
+    {"source_id": "cy_1090", "code": "1090", "name": "Advance payments", "translations": {"tr": "Peşin ödemeler", "el": "Προκαταβολές"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "cy_1100", "code": "1100", "name": "Accounts receivable", "translations": {"tr": "Alacak hesapları", "el": "Εισπρακτέοι λογαριασμοί"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cy_1110", "code": "1110", "name": "Overpayment", "translations": {"tr": "Fazla ödeme", "el": "Υπερπληρωμή"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cy_1120", "code": "1120", "name": "Other debtors", "translations": {"tr": "Diğer borçlular", "el": "Άλλοι οφειλέτες"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cy_1140", "code": "1140", "name": "Accrued income", "translations": {"tr": "Gelir tahakkukları", "el": "Δεδουλευμένα έσοδα"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cy_1150", "code": "1150", "name": "Employee advances (business expenses)", "translations": {"tr": "Çalışan avansları (iş giderleri)", "el": "Προκαταβολές εργαζομένων (επιχειρηματικά έξοδα)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cy_1160", "code": "1160", "name": "Prepaid expenses", "translations": {"tr": "Önceden ödenmiş giderler", "el": "Προπληρωθέντα έξοδα"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cy_1170", "code": "1170", "name": "Short-term loans", "translations": {"tr": "Kısa vadeli krediler", "el": "Βραχυπρόθεσμα δάνεια"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cy_1180", "code": "1180", "name": "Other short-term investments", "translations": {"tr": "Diğer kısa vadeli yatırımlar", "el": "Άλλες βραχυπρόθεσμες επενδύσεις"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cy_1210", "code": "1210", "name": "Deposit account", "translations": {"tr": "Mevduat hesabı", "el": "Καταθετικός λογαριασμός"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cy_1230", "code": "1230", "name": "Petty cash", "translations": {"tr": "Küçük kasa", "el": "Μικρό ταμείο"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "cy_1240", "code": "1240", "name": "Credit card", "translations": {"tr": "Kredi kartı", "el": "Πιστωτική κάρτα"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "cy_1250", "code": "1250", "name": "In-transit account", "translations": {"tr": "Transit hesap", "el": "Λογαριασμός κατά τη μεταφορά"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cy_1260", "code": "1260", "name": "Suspense account", "translations": {"tr": "Askıya alma hesabı", "el": "Λογαριασμός αναστολής"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cy_2100", "code": "2100", "name": "Accounts payable", "translations": {"tr": "Ödenebilir hesaplar", "el": "Πληρωτέοι λογαριασμοί"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "cy_2120", "code": "2120", "name": "Other creditors", "translations": {"tr": "Diğer alacaklılar", "el": "Άλλοι πιστωτές"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "cy_2130", "code": "2130", "name": "Reimbursable expenses", "translations": {"tr": "Geri ödenebilir giderler", "el": "Επιστρεφόμενα έξοδα"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cy_2140", "code": "2140", "name": "Accruals", "translations": {"tr": "Tahakkuklar", "el": "δεδουλευμένα"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cy_2150", "code": "2150", "name": "Customer overpayment", "translations": {"tr": "Müşteri fazla ödemesi", "el": "Υπερπληρωμή πελάτη"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cy_2160", "code": "2160", "name": "Deposit received", "translations": {"tr": "Alınan depozito", "el": "Λήφθηκε κατάθεση"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cy_2200", "code": "2200", "name": "VAT control account", "translations": {"tr": "KDV kontrol hesabı", "el": "Λογαριασμός ελέγχου ΦΠΑ"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "cy_2201", "code": "2201", "name": "Output VAT (Sales)", "translations": {"tr": "Çıkış KDV'si (Satış)", "el": "ΦΠΑ εκροών (Πωλήσεις)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cy_2202", "code": "2202", "name": "Input VAT (Purchases)", "translations": {"tr": "Girilen KDV (Satın Alma İşlemleri)", "el": "ΦΠΑ εισροών (Αγορές)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cy_2203", "code": "2203", "name": "VAT reverse charge", "translations": {"tr": "KDV ters ücreti", "el": "Αντίστροφη επιβάρυνση ΦΠΑ"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cy_2204", "code": "2204", "name": "Import VAT", "translations": {"tr": "İthalat KDV'si", "el": "ΦΠΑ εισαγωγής"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cy_2209", "code": "2209", "name": "VAT holding account", "translations": {"tr": "KDV saklama hesabı", "el": "Λογαριασμός αποθέματος ΦΠΑ"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cy_2210", "code": "2210", "name": "PAYE/NIC", "translations": {"tr": "ÖDEME/NIC", "el": "PAYE/NIC"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cy_2220", "code": "2220", "name": "Income Tax", "translations": {"tr": "Gelir vergisi", "el": "Φόρος εισοδήματος"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cy_2250", "code": "2250", "name": "Net wages", "translations": {"tr": "Net ücret", "el": "Καθαρός μισθός"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "cy_2260", "code": "2260", "name": "Dividends payable", "translations": {"tr": "Ödenecek borç", "el": "Μερίσματα πληρωτέα"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cy_2270", "code": "2270", "name": "Deferred revenue", "translations": {"tr": "Ertelenmiş gelir", "el": "Αναβαλλόμενα έσοδα"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cy_2280", "code": "2280", "name": "Short-term loans", "translations": {"tr": "Kısa vadeli krediler", "el": "Βραχυπρόθεσμα δάνεια"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cy_2300", "code": "2300", "name": "Long-term loans", "translations": {"tr": "Uzun vadeli krediler", "el": "Μακροπρόθεσμα δάνεια"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "cy_3000", "code": "3000", "name": "Share capital", "translations": {"tr": "Sermaye", "el": "Μετοχικό κεφάλαιο"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "cy_3090", "code": "3090", "name": "Opening balances", "translations": {"tr": "Açılış bakiyeleri", "el": "Ανοιχτά υπόλοιπα"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "cy_3100", "code": "3100", "name": "Reserves", "translations": {"tr": "Rezervler", "el": "Αποθεματικά"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "cy_3200", "code": "3200", "name": "Profit and loss account", "translations": {"tr": "Kar ve zarar hesabı", "el": "Λογαριασμός κερδών και ζημιών"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity_unaffected"}},
+    {"source_id": "cy_3201", "code": "3201", "name": "Net profit/loss current period", "translations": {"tr": "Net kar/zarar cari dönem", "el": "Καθαρά κέρδη/ζημίες τρέχουσα περίοδος"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "cy_4000", "code": "4000", "name": "Sales", "translations": {"tr": "Satış", "el": "Εκπτώσεις"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "cy_4090", "code": "4090", "name": "Discounts allowed", "translations": {"tr": "İndirimlere izin veriliyor", "el": "Εκπτώσεις δοθείσες"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_4200", "code": "4200", "name": "Sales of assets", "translations": {"tr": "Varlık satışı", "el": "Πωλήσεις περιουσιακών στοιχείων"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cy_4900", "code": "4900", "name": "Other sales", "translations": {"tr": "Diğer satışlar", "el": "Άλλες πωλήσεις"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cy_4901", "code": "4901", "name": "Royalties received", "translations": {"tr": "Alınan telif hakları", "el": "Λήφθηκαν δικαιώματα"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cy_4902", "code": "4902", "name": "Commissions received", "translations": {"tr": "Alınan komisyonlar", "el": "Λήφθηκαν προμήθειες"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cy_4903", "code": "4903", "name": "Insurance claims", "translations": {"tr": "Sigorta talepleri", "el": "Ασφαλιστικές απαιτήσεις"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cy_4904", "code": "4904", "name": "Rent income", "translations": {"tr": "Kira geliri", "el": "Έσοδα από ενοίκια"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cy_4905", "code": "4905", "name": "Distribution and carriage", "translations": {"tr": "Dağıtım ve taşıma", "el": "Διανομή και μεταφορά"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cy_4906", "code": "4906", "name": "Bank interest received", "translations": {"tr": "Alınan banka faizi", "el": "Τραπεζικοί τόκοι που εισπράχθηκαν"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cy_5000", "code": "5000", "name": "Cost of goods", "translations": {"tr": "Malların maliyeti", "el": "Κόστος αγαθών"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "cy_5010", "code": "5010", "name": "Stock adjustments", "translations": {"tr": "Stok ayarlamaları", "el": "Προσαρμογές μετοχών"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "cy_5090", "code": "5090", "name": "Discounts taken", "translations": {"tr": "Alınan indirimler", "el": "Πραγματοποιήθηκαν εκπτώσεις"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cy_5100", "code": "5100", "name": "Carriage", "translations": {"tr": "Taşıma", "el": "Μεταφορά"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense"}},
+    {"source_id": "cy_5101", "code": "5101", "name": "Import duty", "translations": {"tr": "İthalat vergisi", "el": "Εισαγωγικός δασμός"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_5102", "code": "5102", "name": "Transport insurance", "translations": {"tr": "Nakliye sigortası", "el": "Ασφάλιση μεταφοράς"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_5103", "code": "5103", "name": "Packaging", "translations": {"tr": "Ambalajlama", "el": "Συσκευασία"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_5104", "code": "5104", "name": "Miscellaneous purchases", "translations": {"tr": "Çeşitli satın almalar", "el": "Διάφορες αγορές"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_6000", "code": "6000", "name": "Productive labour", "translations": {"tr": "Üretken emek", "el": "Παραγωγική εργασία"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_6001", "code": "6001", "name": "Sales labour", "translations": {"tr": "Satış emeği", "el": "Εργασία πωλήσεων"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_6002", "code": "6002", "name": "Sub-contractors", "translations": {"tr": "Taşeronlar", "el": "Υπεργολάβοι"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_6100", "code": "6100", "name": "Sales commissions", "translations": {"tr": "Satış komisyonları", "el": "Προμήθειες πωλήσεων"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_6200", "code": "6200", "name": "Sales promotions", "translations": {"tr": "Satış promosyonu", "el": "Προωθήσεις πωλήσεων"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_6201", "code": "6201", "name": "Advertising", "translations": {"tr": "Reklam", "el": "Διαφήμιση"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_6202", "code": "6202", "name": "Gifts and samples", "translations": {"tr": "Hediyeler ve örnekler", "el": "Δώρα και δείγματα"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_6203", "code": "6203", "name": "PR (literature & brochures)", "translations": {"tr": "Halkla İlişkiler (literatür & broşürler)", "el": "PR (λογοτεχνία & μπροσούρες)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_6900", "code": "6900", "name": "Miscellaneous expenses", "translations": {"tr": "Çeşitli masraflar", "el": "Διάφορα έξοδα"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7000", "code": "7000", "name": "Gross wages", "translations": {"tr": "Brüt ücret", "el": "Ακαθάριστους μισθούς"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7001", "code": "7001", "name": "Directors salaries", "translations": {"tr": "Yönetici maaşları", "el": "Μισθοί διευθυντών"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7002", "code": "7002", "name": "Directors bonus", "translations": {"tr": "Yönetmen bonusu", "el": "Μπόνους σκηνοθέτη"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7003", "code": "7003", "name": "Staff bonus", "translations": {"tr": "Personel bonusu", "el": "Μπόνους προσωπικού"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7005", "code": "7005", "name": "Recruitment fees", "translations": {"tr": "İşe alım ücretleri", "el": "Αμοιβές πρόσληψης"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7006", "code": "7006", "name": "Employers n.i.", "translations": {"tr": "İşverenler", "el": "Εργοδότες n.i."}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7007", "code": "7007", "name": "Employers pensions", "translations": {"tr": "İşveren emekli maaşları", "el": "Συντάξεις εργοδοτών"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7008", "code": "7008", "name": "Employee benefits healthcare", "translations": {"tr": "Çalışan", "el": "Οι εργαζόμενοι επωφελούνται από την υγειονομική περίθαλψη"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7009", "code": "7009", "name": "Employee benefits phi life assurance", "translations": {"tr": "Çalışanlara sağlanan faydalar phi hayat sigortası", "el": "Παροχές εργαζομένων phi ασφάλιση ζωής"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7010", "code": "7010", "name": "SSP reclaimed", "translations": {"tr": "SSP geri alındı", "el": "Το SSP ανακτήθηκε"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7011", "code": "7011", "name": "SMP reclaimed", "translations": {"tr": "SMP geri kazanıldı", "el": "Το SMP ανακτήθηκε"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7012", "code": "7012", "name": "Staff entertainment", "translations": {"tr": "Personel eğlencesi", "el": "Ψυχαγωγία προσωπικού"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7100", "code": "7100", "name": "Rent", "translations": {"tr": "Kira", "el": "Ενοίκιο"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7102", "code": "7102", "name": "Water rates", "translations": {"tr": "Su oranları", "el": "Τιμές νερού"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7103", "code": "7103", "name": "General rates", "translations": {"tr": "Genel oranlar", "el": "Γενικές τιμές"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7104", "code": "7104", "name": "Premises & liability insurance", "translations": {"tr": "Tesis ve sorumluluk sigortası", "el": "Ασφάλιση χώρων & αστικής ευθύνης"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7190", "code": "7190", "name": "Utilities", "translations": {"tr": "Araçlar", "el": "Βοηθητικά προγράμματα"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7200", "code": "7200", "name": "Electricity", "translations": {"tr": "Elektrik", "el": "Ηλεκτρική ενέργεια"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7201", "code": "7201", "name": "Gas", "translations": {"tr": "Gaz", "el": "Αέριο"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7202", "code": "7202", "name": "Oil", "translations": {"tr": "Yağ", "el": "Λάδι"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7203", "code": "7203", "name": "Other heating costs", "translations": {"tr": "Diğer ısıtma maliyetleri", "el": "Άλλα έξοδα θέρμανσης"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7300", "code": "7300", "name": "Car fuel & oil", "translations": {"tr": "Araba yakıtı ve yağı", "el": "Καύσιμα & λάδια αυτοκινήτου"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7301", "code": "7301", "name": "Repairs and servicing", "translations": {"tr": "Onarım ve servis", "el": "Επισκευές και σέρβις"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7302", "code": "7302", "name": "Licenses & mot's", "translations": {"tr": "Lisanslar ve mot'lar", "el": "Άδειες & μηχανήματα"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7303", "code": "7303", "name": "Vehicle insurance", "translations": {"tr": "Araç sigortası", "el": "Ασφάλιση οχήματος"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7304", "code": "7304", "name": "Miscellaneous motor expenses", "translations": {"tr": "Çeşitli motor masrafları", "el": "Διάφορα έξοδα κινητήρα"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7400", "code": "7400", "name": "Traveling", "translations": {"tr": "Seyahat", "el": "Ταξίδια"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7401", "code": "7401", "name": "Car hire", "translations": {"tr": "Araba kiralama", "el": "Ενοικίαση αυτοκινήτων"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7402", "code": "7402", "name": "Hotels", "translations": {"tr": "Oteller", "el": "Ξενοδοχεία"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7403", "code": "7403", "name": "Entertainment", "translations": {"tr": "Eğlence", "el": "Ψυχαγωγία"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7405", "code": "7405", "name": "Overseas traveling", "translations": {"tr": "Yurtdışı seyahati", "el": "Ταξίδια στο εξωτερικό"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7406", "code": "7406", "name": "Subsistence & refreshments", "translations": {"tr": "Harcama ve içecekler", "el": "Διατροφή & αναψυκτικά"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7407", "code": "7407", "name": "Travel insurance", "translations": {"tr": "Seyahat sigortası", "el": "Ταξιδιωτική ασφάλιση"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7490", "code": "7490", "name": "Other operating expenses", "translations": {"tr": "Diğer işletme giderleri", "el": "Λοιπά λειτουργικά έξοδα"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7500", "code": "7500", "name": "Printing", "translations": {"tr": "Baskı", "el": "Εκτύπωση"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7501", "code": "7501", "name": "Postage", "translations": {"tr": "Posta ücreti", "el": "Ταχυδρομικά τέλη"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7502", "code": "7502", "name": "Telephone", "translations": {"tr": "Telefon", "el": "Τηλέφωνο"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7503", "code": "7503", "name": "Internet", "translations": {"tr": "internet", "el": "Διαδίκτυο"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7504", "code": "7504", "name": "Office stationery", "translations": {"tr": "Ofis kırtasiye", "el": "Χαρτικά γραφείου"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7505", "code": "7505", "name": "Books & subscriptions", "translations": {"tr": "Kitaplar ve abonelikler", "el": "Βιβλία και συνδρομές"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7506", "code": "7506", "name": "Training costs", "translations": {"tr": "Eğitim maliyetleri", "el": "Κόστος εκπαίδευσης"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7507", "code": "7507", "name": "Donations", "translations": {"tr": "Bağışlar", "el": "Δωρεές"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7508", "code": "7508", "name": "Computer software", "translations": {"tr": "Bilgisayar yazılımı", "el": "Λογισμικό Ηλεκτρονικών Υπολογιστών"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7600", "code": "7600", "name": "Legal fees", "translations": {"tr": "Yasal ücretler", "el": "Νομικές αμοιβές"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7601", "code": "7601", "name": "Audit and accountancy fees", "translations": {"tr": "Denetim ve muhasebe ücretleri", "el": "Αμοιβές ελέγχου και λογιστικής"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7602", "code": "7602", "name": "Consultancy fees", "translations": {"tr": "Danışmanlık ücretleri", "el": "Συμβουλευτικές αμοιβές"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7603", "code": "7603", "name": "Professional fees", "translations": {"tr": "Profesyonel ücretler", "el": "Επαγγελματικές αμοιβές"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7604", "code": "7604", "name": "Memberships", "translations": {"tr": "Üyelikler", "el": "Συνδρομές"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7700", "code": "7700", "name": "Equipment hire", "translations": {"tr": "Ekipman kiralama", "el": "Ενοικίαση εξοπλισμού"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7701", "code": "7701", "name": "Office machine maintenance", "translations": {"tr": "Ofis makinesi bakımı", "el": "Συντήρηση μηχανών γραφείου"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7800", "code": "7800", "name": "Repairs and renewals", "translations": {"tr": "Onarımlar ve yenilemeler", "el": "Επισκευές και ανανεώσεις"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7810", "code": "7810", "name": "Premises expenses", "translations": {"tr": "Tesis giderleri", "el": "Έξοδα χώρων"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7900", "code": "7900", "name": "Bank interest paid", "translations": {"tr": "Ödenen banka faizi", "el": "Καταβληθέντες τραπεζικοί τόκοι"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7901", "code": "7901", "name": "Bank charges", "translations": {"tr": "banka masrafları", "el": "τραπεζικές χρεώσεις"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7902", "code": "7902", "name": "Currency charges", "translations": {"tr": "Döviz ücretleri", "el": "Χρεώσεις συναλλάγματος"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7903", "code": "7903", "name": "Loan interest paid", "translations": {"tr": "Ödenen kredi faizi", "el": "Πληρωμένοι τόκοι δανείου"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7904", "code": "7904", "name": "H.P. interest", "translations": {"tr": "H.P. faiz", "el": "ΙΠΠΟΔΥΝΑΜΗ. ενδιαφέρον"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7905", "code": "7905", "name": "Credit charges", "translations": {"tr": "Kredi ücretleri", "el": "Πιστωτικές χρεώσεις"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_7910", "code": "7910", "name": "Exchange rate realized gains/losses", "translations": {"tr": "Döviz kurunun gerçekleşen kazançları/zararları", "el": "Συναλλαγματική ισοτιμία πραγματοποιήθηκαν κέρδη/ζημίες"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cy_7911", "code": "7911", "name": "Exchange rate unrealized gains/losses", "translations": {"tr": "Döviz kuru gerçekleşmemiş kar/zarar", "el": "Μη πραγματοποιηθέντα κέρδη/ζημίες συναλλαγματικών ισοτιμιών"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cy_8001", "code": "8001", "name": "Patents amortization", "translations": {"tr": "Patent amortismanı", "el": "Απόσβεση διπλωμάτων ευρεσιτεχνίας"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "cy_8002", "code": "8002", "name": "Trademarks amortization", "translations": {"tr": "Ticari marka amortismanı", "el": "Απόσβεση εμπορικών σημάτων"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "cy_8003", "code": "8003", "name": "Licenses amortization", "translations": {"tr": "Lisans amortismanı", "el": "Απόσβεση αδειών"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "cy_8004", "code": "8004", "name": "Software amortization", "translations": {"tr": "Yazılım amortismanı", "el": "Απόσβεση λογισμικού"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "cy_8006", "code": "8006", "name": "Leasehold property depreciation", "translations": {"tr": "Kiralık mülk amortismanı", "el": "Απόσβεση ακινήτων"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "cy_8007", "code": "8007", "name": "Plant and machinery depreciation", "translations": {"tr": "Tesis ve makine amortismanı", "el": "Απόσβεση φυτών και μηχανημάτων"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "cy_8008", "code": "8008", "name": "Office equipment depreciation", "translations": {"tr": "Ofis ekipmanı amortismanı", "el": "Απόσβεση εξοπλισμού γραφείου"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "cy_8009", "code": "8009", "name": "Computers depreciation", "translations": {"tr": "Bilgisayar amortismanı", "el": "Απόσβεση υπολογιστών"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "cy_8010", "code": "8010", "name": "Furniture and fixtures depreciation", "translations": {"tr": "Mobilya ve demirbaş amortismanı", "el": "Αποσβέσεις επίπλων και φωτιστικών"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "cy_8011", "code": "8011", "name": "Warehouse equipment depreciation", "translations": {"tr": "Depo ekipmanı amortismanı", "el": "Απόσβεση εξοπλισμού αποθήκης"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "cy_8012", "code": "8012", "name": "Motor vehicles depreciation", "translations": {"tr": "Motorlu taşıtların amortismanı", "el": "Απόσβεση μηχανοκίνητων οχημάτων"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "cy_8100", "code": "8100", "name": "Bad debt write off", "translations": {"tr": "Kötü borç siliniyor", "el": "Διαγραφή επισφαλών χρεών"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_8102", "code": "8102", "name": "Bad debt provision", "translations": {"tr": "Şüpheli alacak karşılığı", "el": "Πρόβλεψη για επισφαλείς απαιτήσεις"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_8200", "code": "8200", "name": "Other non-operating income or expenses", "translations": {"tr": "Diğer faaliyet dışı gelir veya giderler", "el": "Άλλα μη λειτουργικά έσοδα ή έξοδα"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_8300", "code": "8300", "name": "Disposals", "translations": {"tr": "Bertaraflar", "el": "Διαθέσεις"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cy_8400", "code": "8400", "name": "Income tax expenses", "translations": {"tr": "Gelir vergisi giderleri", "el": "Έξοδα φόρου εισοδήματος"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}}
+  ]
+}

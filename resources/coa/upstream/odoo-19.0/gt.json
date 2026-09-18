@@ -1,0 +1,357 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "405fb3e10788493c309df840df4a2f434881d62855441ef00552dc9baea7b406",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/gt",
+  "country_code": "GT",
+  "country_name": "Guatemala",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Guatemala - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_gt' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "José Rodrigo Fernández Menegazzo",
+    "module": "l10n_gt",
+    "module_name": "Guatemala - Accounting",
+    "module_version": "3.0",
+    "contributing_modules": [
+      "l10n_gt"
+    ],
+    "template_code": "gt",
+    "template_chain": [
+      "gt"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_gt/data/template/account.account-gt.csv",
+        "sha256": "8dd5d5141a4692c3df19916c41d04383adc4b862d003b19f56ebf7b4f0868203",
+        "rows": 86
+      }
+    ],
+    "python_files": [
+      "addons/l10n_gt/models/template_gt.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "9",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "1.0.01.0",
+      "cash": "1.0.02.0",
+      "transfer": "1.0.03.01"
+    },
+    "default_sale_tax": "impuestos_plantilla_iva_por_pagar",
+    "default_purchase_tax": "impuestos_plantilla_iva_por_cobrar",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "cta110201",
+        "code": "1.1.02.01",
+        "name": "General Accounts Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "cta210101",
+        "code": "2.1.01.01",
+        "name": "Accounts and notes payable",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "cta410101",
+        "code": "4.1.01.01",
+        "name": "Sales",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "cta510101",
+        "code": "5.1.01.01",
+        "name": "Cost of sales",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "cta140101",
+        "code": "1.4.01.01",
+        "name": "Merchandise",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "cta110205",
+        "code": "1.1.02.05",
+        "name": "General Accounts Receivable (PoS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "cta410103",
+        "code": "4.1.01.03",
+        "name": "Earn an account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "cta710101",
+        "code": "7.1.01.01",
+        "name": "Other Financial Expenses",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 86,
+    "posting_accounts": 86,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 24,
+      "equity": 3,
+      "expense": 47,
+      "income": 4,
+      "liability": 8
+    },
+    "by_subtype": {
+      "current_asset": 10,
+      "current_liability": 7,
+      "equity": 3,
+      "expense": 47,
+      "fixed_asset": 9,
+      "income": 3,
+      "other_income": 1,
+      "payable": 1,
+      "receivable": 5
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 1,
+      "receivables": 5
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "es"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "cta110201", "code": "1.1.02.01", "name": "General Accounts Receivable", "translations": {"es": "Cuentas por Cobrar Generales"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cta110202", "code": "1.1.02.02", "name": "Accounts Receivable Affiliated Companies", "translations": {"es": "Cuentas por Cobrar Empresas Afilidas"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cta110203", "code": "1.1.02.03", "name": "Loans to Personnel", "translations": {"es": "Prestamos al Personal"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cta110204", "code": "1.1.02.04", "name": "Other Accounts Receivable", "translations": {"es": "Otras Cuentas por Cobrar"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cta110205", "code": "1.1.02.05", "name": "General Accounts Receivable (PoS)", "translations": {"es": "Cuentas por Cobrar Generales (PoS)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cta110301", "code": "1.1.03.01", "name": "Unpaid VAT", "translations": {"es": "IVA por Cobrar"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta110302", "code": "1.1.03.02", "name": "VAT withholdings received", "translations": {"es": "Retenciones de IVA recibidas"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta120101", "code": "1.2.01.01", "name": "Property, Plant and Equipment", "translations": {"es": "Propiedad, Planta y Equipo"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta120102", "code": "1.2.01.02", "name": "Technology", "translations": {"es": "Equipos tecnológicos y de computación"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Technological products or services bought for your business", "source": {"account_type": "asset_fixed", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "asset_model_ids": ["asset_technology"], "descriptions": {"es": "Productos o servicios tecnológicos adquiridos para tu negocio"}}},
+    {"source_id": "cta120103", "code": "1.2.01.03", "name": "Land", "translations": {"es": "Terrenos"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Purchases of lands without buildings", "source": {"account_type": "asset_fixed", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Compra de terrenos sin construcciones"}}},
+    {"source_id": "cta120104", "code": "1.2.01.04", "name": "Construction", "translations": {"es": "Edificaciones"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Construction of buildings and costs associated to buildings", "source": {"account_type": "asset_fixed", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "asset_model_ids": ["asset_construction"], "descriptions": {"es": "Construcción de edificios y costos asociados a edificaciones"}}},
+    {"source_id": "cta120105", "code": "1.2.01.05", "name": "Installations", "translations": {"es": "Instalaciones"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Purchases of installations related to buildings, like solar panels or heater", "source": {"account_type": "asset_fixed", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "asset_model_ids": ["asset_installations"], "descriptions": {"es": "Compra de instalaciones relacionadas con edificios, como paneles solares o sistemas de calefacción"}}},
+    {"source_id": "cta120106", "code": "1.2.01.06", "name": "Machines & tools", "translations": {"es": "Maquinaria y herramientas"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Machinery and tools directly related to your business", "source": {"account_type": "asset_fixed", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "asset_model_ids": ["asset_machines_tools"], "descriptions": {"es": "Maquinaria y herramientas directamente relacionadas con tu actividad"}}},
+    {"source_id": "cta120107", "code": "1.2.01.07", "name": "Other property", "translations": {"es": "Otros bienes"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Other type of property, like plants, machinery or various equipment", "source": {"account_type": "asset_fixed", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "asset_model_ids": ["asset_other_property"], "descriptions": {"es": "Otros tipos de bienes, como maquinaria, plantas o equipo diverso"}}},
+    {"source_id": "cta120108", "code": "1.2.01.08", "name": "Furniture & material", "translations": {"es": "Mobiliario y equipo"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Large expenses related to workplaces", "source": {"account_type": "asset_fixed", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "asset_model_ids": ["asset_furniture_material"], "descriptions": {"es": "Gastos importantes relacionados con los espacios de trabajo"}}},
+    {"source_id": "cta120109", "code": "1.2.01.09", "name": "Vehicle", "translations": {"es": "Vehículo"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Purchase of a car, including second hand or after-lease contract", "source": {"account_type": "asset_fixed", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "asset_model_ids": ["asset_vehicle"], "descriptions": {"es": "Compra de un vehículo, incluyendo usados o adquiridos al finalizar un contrato de arrendamiento"}}},
+    {"source_id": "cta120110", "code": "1.2.01.10", "name": "Vehicle accessories", "translations": {"es": "Accesorios de vehículo"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All accessories purchases related to your professional vehicle", "source": {"account_type": "asset_fixed", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "asset_model_ids": ["asset_vehicle_accessories"], "descriptions": {"es": "Compras de accesorios relacionados con tu vehículo de trabajo"}}},
+    {"source_id": "cta120201", "code": "1.2.02.01", "name": "Accumulated Depreciation", "translations": {"es": "Depreciaciones Acumuladas"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta130101", "code": "1.3.01.01", "name": "Unamortized Expenses", "translations": {"es": "Gastos por Amortizar"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta130201", "code": "1.3.02.01", "name": "Prepaid Expenses", "translations": {"es": "Gastos Anticipados"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta130501", "code": "1.3.03.01", "name": "Organizational Expenses", "translations": {"es": "Gastos de Organización"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta110303", "code": "1.3.03.03", "name": "Unpaid Fuel Tax", "translations": {"es": "Impuesto al petróleo por cobrar"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta130601", "code": "1.3.04.01", "name": "Other Assets", "translations": {"es": "Otros Activos"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta140101", "code": "1.4.01.01", "name": "Merchandise", "translations": {"es": "Mercaderías"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_expense_id": "cta510101", "account_stock_variation_id": "cta640101"}}},
+    {"source_id": "cta210101", "code": "2.1.01.01", "name": "Accounts and notes payable", "translations": {"es": "Cuentas y Documentos por Pagar"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "cta210201", "code": "2.1.02.01", "name": "VAT Payable", "translations": {"es": "IVA por Pagar"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cta210202", "code": "2.1.02.02", "name": "VAT Withheld on Purchases", "translations": {"es": "IVA retenido en las compras"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cta210203", "code": "2.1.02.03", "name": "ISR Payable Withheld at Source", "translations": {"es": "ISR por Pagar Retenido en la Fuente"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cta210301", "code": "2.1.03.01", "name": "Taxes", "translations": {"es": "Impuestos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cta210302", "code": "2.1.03.02", "name": "Petroleo Tax Payable", "translations": {"es": "Impuesto al petróleo a pagar"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cta220101", "code": "2.2.01.01", "name": "Provision for severance indemnities", "translations": {"es": "Provisión para Indemnizaciones"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cta230101", "code": "2.3.01.01", "name": "Advance payments", "translations": {"es": "Anticipos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cta310101", "code": "3.1.01.01", "name": "Authorized, Subscribed and Paid-in Capital", "translations": {"es": "Capital Autorizado, Suscríto y Pagado"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "cta310102", "code": "3.1.01.02", "name": "Reservations", "translations": {"es": "Reservas"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "cta310103", "code": "3.1.01.03", "name": "Profit and loss", "translations": {"es": "Perdidas y Ganancias"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "cta410101", "code": "4.1.01.01", "name": "Sales", "translations": {"es": "Ventas"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "cta410102", "code": "4.1.01.02", "name": "Sales Discounts", "translations": {"es": "Descuentos Sobre Ventas"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "cta410103", "code": "4.1.01.03", "name": "Earn an account", "translations": {"es": "Ganar cuenta"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cta420101", "code": "4.2.01.01", "name": "Other Income", "translations": {"es": "Otros Ingresos"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "cta510101", "code": "5.1.01.01", "name": "Cost of sales", "translations": {"es": "Costos de Ventas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense"}},
+    {"source_id": "cta510102", "code": "5.1.01.02", "name": "Raw materials", "translations": {"es": "Materia prima"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All goods purchased as raw materials used by your activity", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Bienes adquiridos como materia prima utilizada en tu actividad"}}},
+    {"source_id": "cta510103", "code": "5.1.01.03", "name": "Consumables", "translations": {"es": "Materiales y suministros"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Consumables bought and used in the context of your activity", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Consumibles adquiridos y utilizados en el desarrollo de tu actividad"}}},
+    {"source_id": "cta510104", "code": "5.1.01.04", "name": "Goods for resale", "translations": {"es": "Mercaderías para reventa"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Goods you buy to resale later, as part of your activity", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Bienes que compras para revender como parte de tu actividad"}}},
+    {"source_id": "cta610101", "code": "6.1.01.01", "name": "Expense of sales", "translations": {"es": "Gastos de Ventas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta620101", "code": "6.2.01.01", "name": "Administrative Expenses", "translations": {"es": "Gastos de Administración"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta620102", "code": "6.2.01.02", "name": "Studies & works", "translations": {"es": "Estudios y trabajos profesionales"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Compensation and fees paid to other parties", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Honorarios y compensaciones pagados a terceros"}}},
+    {"source_id": "cta620103", "code": "6.2.01.03", "name": "General subcontracting", "translations": {"es": "Subcontratación general"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Compensation and fees with other partners that act as subcontractors or consultants for your activity", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Honorarios y compensaciones pagados a socios que actúan como subcontratistas o consultores en tu actividad"}}},
+    {"source_id": "cta620104", "code": "6.2.01.04", "name": "Office Rent", "translations": {"es": "Alquiler de oficina"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Rental fees related to your workplace", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Pagos de alquiler relacionados con tu lugar de trabajo"}}},
+    {"source_id": "cta620105", "code": "6.2.01.05", "name": "Vehicle rent", "translations": {"es": "Alquiler de vehículos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Rental of cars, including shared services, but excluding leasing", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Alquiler de vehículos, incluyendo servicios compartidos, pero excluyendo arrendamiento financiero (leasing)"}}},
+    {"source_id": "cta620106", "code": "6.2.01.06", "name": "Office Maintenance services", "translations": {"es": "Servicios de mantenimiento"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Services related to the maintenance of your workplace, like repair or cleaning fees", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Servicios relacionados con el mantenimiento de tu lugar de trabajo, como reparación o limpieza"}}},
+    {"source_id": "cta620107", "code": "6.2.01.07", "name": "Vehicle maintenance", "translations": {"es": "Mantenimiento de vehículos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Expenses made for the repair and maintenance of a vehicle", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Gastos realizados para la reparación y mantenimiento de un vehículo"}}},
+    {"source_id": "cta620108", "code": "6.2.01.08", "name": "Office supplies", "translations": {"es": "Suministros de oficina"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Various supplies bought for your workplace or office, like pencils, paper etc", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Suministros diversos comprados para tu oficina o lugar de trabajo, como lápices, papel, etc."}}},
+    {"source_id": "cta620109", "code": "6.2.01.09", "name": "Office services", "translations": {"es": "Servicios de oficina"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All expenses made for your office or workplace that are not material goods", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Gastos realizados para tu oficina o lugar de trabajo que no corresponden a bienes materiales"}}},
+    {"source_id": "cta620110", "code": "6.2.01.10", "name": "Water, electricity, gas", "translations": {"es": "Servicios básicos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bills from your water and energy suppliers", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Facturas de tus proveedores de agua y energía"}}},
+    {"source_id": "cta620111", "code": "6.2.01.11", "name": "Fuel", "translations": {"es": "Combustible"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All fuel expenses for a car", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Todos los gastos de combustible para un vehículo"}}},
+    {"source_id": "cta620112", "code": "6.2.01.12", "name": "Accounting", "translations": {"es": "Servicios contables"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bills from your accountant or accounting firm", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Facturas de tu contador o firma contable"}}},
+    {"source_id": "cta620113", "code": "6.2.01.13", "name": "Legal expenses", "translations": {"es": "Servicios legales"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bills from lawyers, fees paid to the justice system", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Facturas de abogados y pagos realizados al sistema judicial"}}},
+    {"source_id": "cta620114", "code": "6.2.01.14", "name": "Software", "translations": {"es": "Software y servicios informáticos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Licenses or computer services (like repairs or upgrades)", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Licencias o servicios informáticos (como reparaciones o actualizaciones)"}}},
+    {"source_id": "cta620115", "code": "6.2.01.15", "name": "Administration fees", "translations": {"es": "Servicios administrativos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Services incurred for the administration of your business (excluding supplies)", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Servicios incurridos para la administración de tu negocio (excluye suministros)"}}},
+    {"source_id": "cta620116", "code": "6.2.01.16", "name": "Membership fees", "translations": {"es": "Membresías profesionales"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Subscriptions to clubs and associations related to your business", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Suscripciones a clubes y asociaciones relacionadas con tu actividad"}}},
+    {"source_id": "cta620117", "code": "6.2.01.17", "name": "Fire insurance", "translations": {"es": "Seguro contra incendios"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Fees related to insurance to protect your property (building and content) against fire or other natural catastrophies", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Pagos de seguros para proteger tus bienes (edificios y contenido) contra incendios u otras catástrofes naturales"}}},
+    {"source_id": "cta620118", "code": "6.2.01.18", "name": "Professional insurance", "translations": {"es": "Seguro profesional"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All fees related to insurance taken in the context of your business", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Pagos de seguros contratados en el contexto de tu actividad empresarial"}}},
+    {"source_id": "cta620119", "code": "6.2.01.19", "name": "Legal protection insurance", "translations": {"es": "Seguro de protección legal"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Insurance against legal costs incurred in the context of your activity", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Seguro contra costos legales incurridos en tu actividad"}}},
+    {"source_id": "cta620120", "code": "6.2.01.20", "name": "Professional Liability Insurance", "translations": {"es": "Seguro de responsabilidad civil"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Insurance for damage caused to third parties", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Seguro por daños causados a terceros"}}},
+    {"source_id": "cta620121", "code": "6.2.01.21", "name": "Phone & internet", "translations": {"es": "Telefonía e internet"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Internet or phone bills incurred", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Facturas de servicios de internet o telefonía"}}},
+    {"source_id": "cta620122", "code": "6.2.01.22", "name": "Flights", "translations": {"es": "Pasajes aéreos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All expenses related to travel by plane", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Todos los gastos relacionados con viajes en avión"}}},
+    {"source_id": "cta620123", "code": "6.2.01.23", "name": "Hotels", "translations": {"es": "Hospedaje"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Hotel or B&B bills incurred during business trips", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Facturas de hotel o alojamiento durante viajes de trabajo"}}},
+    {"source_id": "cta620124", "code": "6.2.01.24", "name": "Public Transportation", "translations": {"es": "Transporte público"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Travel expenses done using public transportation (metro, bus, tramways, ...)", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Gastos de viaje realizados mediante transporte público (metro, bus, tranvía, etc.)"}}},
+    {"source_id": "cta620125", "code": "6.2.01.25", "name": "Other travel costs", "translations": {"es": "Otros gastos de viaje"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Expenses incurred during business trips (Excluding Flights, Hotels, Daily expenses, public transportation)", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Gastos incurridos durante viajes de trabajo (excluye vuelos, hoteles, gastos diarios y transporte público)"}}},
+    {"source_id": "cta620126", "code": "6.2.01.26", "name": "Advertising", "translations": {"es": "Publicidad"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Publicity fees for your activity, including promotional material", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Gastos de publicidad para tu actividad, incluyendo material promocional"}}},
+    {"source_id": "cta620127", "code": "6.2.01.27", "name": "Business gift", "translations": {"es": "Regalos corporativos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Business gifts to clients over 400GTQ", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Regalos corporativos a clientes con valor superior a 400GTQ"}}},
+    {"source_id": "cta620128", "code": "6.2.01.28", "name": "Employees compensation", "translations": {"es": "Compensación a empleados"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Compensation costs for employees and manual workers employed by the company", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Costos de compensación para empleados y trabajadores contratados por la empresa"}}},
+    {"source_id": "cta620129", "code": "6.2.01.29", "name": "Other personel costs", "translations": {"es": "Otros costos de personal"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Company's personel costs excluding compensations, contributions and vouchers", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Costos de personal de la empresa, excluyendo compensaciones, aportes y vales"}}},
+    {"source_id": "cta620130", "code": "6.2.01.30", "name": "Bar & Restaurant", "translations": {"es": "Restaurantes y bares"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Expenses incurred when eating or drinking at bars or restaurants", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Gastos incurridos en consumo de alimentos o bebidas en bares o restaurantes"}}},
+    {"source_id": "cta620131", "code": "6.2.01.31", "name": "Food: Reception & delivery", "translations": {"es": "Alimentación y delivery"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Food or drinks incurred outside of bars or restaurants, like receptions, canteen and food delivery, etc", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Gastos de alimentos o bebidas fuera de bares o restaurantes, como recepciones, comedor o servicios de entrega"}}},
+    {"source_id": "cta620132", "code": "6.2.01.32", "name": "Training and documentation", "translations": {"es": "Capacitación y documentación"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Training fees not including food and drinks", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Gastos de capacitación que no incluyen alimentos ni bebidas"}}},
+    {"source_id": "cta620133", "code": "6.2.01.33", "name": "Social Security", "translations": {"es": "Seguridad social"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All fees related to pension plans and social security contributions", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Pagos relacionados con planes de pensión y contribuciones a la seguridad social"}}},
+    {"source_id": "cta620134", "code": "6.2.01.34", "name": "Property tax", "translations": {"es": "Impuesto inmobiliario"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Local taxes that have to paid due to the ownership of property", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Impuestos locales que deben pagarse por la propiedad de bienes inmuebles"}}},
+    {"source_id": "cta620135", "code": "6.2.01.35", "name": "Import fees", "translations": {"es": "Derechos de importación"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Customs fees incurred while importing goods", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Gastos de aduana incurridos al importar bienes"}}},
+    {"source_id": "cta620136", "code": "6.2.01.36", "name": "Bank fees", "translations": {"es": "Gastos bancarios"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Nasty charges and interests from your bank", "source": {"account_type": "expense", "tax_ids": ["impuestos_plantilla_iva_por_cobrar"], "descriptions": {"es": "Cargos e intereses bancarios no deseados del banco"}}},
+    {"source_id": "cta620201", "code": "6.2.02.01", "name": "Other Operating Expenses", "translations": {"es": "Otros Gastos de Operación"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta630101", "code": "6.3.01.01", "name": "Non-Deductible Expenses", "translations": {"es": "Gastos no Deducibles"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta640101", "code": "6.4.01.01", "name": "Stock Variation", "translations": {"es": "Variación de Existencias"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta680101", "code": "6.8.01.01", "name": "Depreciation Expenses", "translations": {"es": "Gastos de Depreciación"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta710101", "code": "7.1.01.01", "name": "Other Financial Expenses", "translations": {"es": "Otros Gastos Financieros"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta710102", "code": "7.1.01.02", "name": "Interests", "translations": {"es": "Intereses"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}}
+  ]
+}

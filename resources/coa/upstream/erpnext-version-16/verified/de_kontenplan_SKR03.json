@@ -1,0 +1,442 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "73d189481bf51458c14bb97c7595e7b536e20bafc6e1494f20de32eb7284f78a",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "erpnext-version-16/verified/de_kontenplan_SKR03",
+  "country_code": "DE",
+  "country_name": "Germany",
+  "country_basis": "chart file country_code",
+  "name": "SKR03 mit Kontonummern",
+  "source": {
+    "system": "erpnext",
+    "repository": "https://github.com/frappe/erpnext",
+    "branch": "version-16",
+    "commit": "4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+    "commit_date": "2026-09-08T13:23:31+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "GPL-3.0-only",
+    "license_basis": "repository license.txt (GNU GPL v3); chart files carry no separate licence header",
+    "attribution": "Frappe Technologies Pvt. Ltd. and Contributors",
+    "upstream_folder": "verified",
+    "upstream_verified": true,
+    "upstream_disabled": false,
+    "files": [
+      {
+        "path": "erpnext/accounts/doctype/account/chart_of_accounts/verified/de_kontenplan_SKR03.json",
+        "sha256": "689ab1d9ffb4ae998deb54f7d466c49088b62cadef87a2ba53e9c1b93d03c420",
+        "kind": "json"
+      }
+    ]
+  },
+  "template": {
+    "hierarchy": "nested groups; posting accounts are leaves; source_id is the full ' / ' separated path",
+    "account_numbers_present": true
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände / Forderungen aus Lieferungen und Leistungen ohne Kontokorrent",
+        "code": "1410",
+        "name": "Forderungen aus Lieferungen und Leistungen ohne Kontokorrent",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "account_type",
+        "source_id": "Passiva / C. Verbindlichkeiten / IV. Verbindlichkeiten aus Lieferungen und Leistungen / Verbindlichkeiten aus Lieferungen und Leistungen ohne Kontokorrent",
+        "code": "1610",
+        "name": "Verbindlichkeiten aus Lieferungen und Leistungen ohne Kontokorrent",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Verbindlichkeiten aus Lohn und Gehalt",
+        "code": "1740",
+        "name": "Verbindlichkeiten aus Lohn und Gehalt",
+        "resolved": true
+      }
+    ],
+    "cash": [
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks. / Kasse / Kasse",
+        "code": "1000",
+        "name": "Kasse",
+        "resolved": true
+      }
+    ],
+    "bank": [
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks. / Bank / Postbank",
+        "code": "1100",
+        "name": "Postbank",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks. / Bank / Bankkonto",
+        "code": "1200",
+        "name": "Bankkonto",
+        "resolved": true
+      }
+    ],
+    "inventory": [
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / B - Umlaufvermögen / I. Vorräte / Roh-, Hilfs- und Betriebsstoffe (Bestand)",
+        "code": "3970",
+        "name": "Roh-, Hilfs- und Betriebsstoffe (Bestand)",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / B - Umlaufvermögen / I. Vorräte / Waren (Bestand)",
+        "code": "3980",
+        "name": "Waren (Bestand)",
+        "resolved": true
+      }
+    ],
+    "direct_cost": [
+      {
+        "source_field": "account_type",
+        "source_id": "Aufwendungen 2/4 / Herstellungskosten",
+        "code": "4996",
+        "name": "Herstellungskosten",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "Receivable": {
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "Payable": {
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "Bank": {
+      "subtype": "bank",
+      "role_hint": "cash_bank"
+    },
+    "Cash": {
+      "subtype": "cash",
+      "role_hint": "cash_bank"
+    },
+    "Stock": {
+      "subtype": "inventory",
+      "role_hint": null
+    },
+    "Tax": {
+      "subtype": "tax",
+      "role_hint": null
+    },
+    "Cost of Goods Sold": {
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "Fixed Asset": {
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "Accumulated Depreciation": {
+      "subtype": "accumulated_depreciation",
+      "role_hint": null
+    },
+    "Depreciation": {
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "Expense Account": {
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "Income Account": {
+      "subtype": "income",
+      "role_hint": null
+    },
+    "Equity": {
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "Liability": {
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "Chargeable": {
+      "subtype": "chargeable",
+      "role_hint": null
+    },
+    "Stock Received But Not Billed": {
+      "subtype": "stock_received_not_billed",
+      "role_hint": null
+    },
+    "Asset Received But Not Billed": {
+      "subtype": "asset_received_not_billed",
+      "role_hint": null
+    },
+    "Service Received But Not Billed": {
+      "subtype": "service_received_not_billed",
+      "role_hint": null
+    },
+    "Stock Delivered But Not Billed": {
+      "subtype": "stock_delivered_not_billed",
+      "role_hint": null
+    },
+    "Stock Adjustment": {
+      "subtype": "stock_adjustment",
+      "role_hint": null
+    },
+    "Expenses Included In Valuation": {
+      "subtype": "valuation_expense",
+      "role_hint": null
+    },
+    "Expenses Included In Asset Valuation": {
+      "subtype": "asset_valuation_expense",
+      "role_hint": null
+    },
+    "Capital Work in Progress": {
+      "subtype": "capital_work_in_progress",
+      "role_hint": null
+    },
+    "Temporary": {
+      "subtype": "temporary",
+      "role_hint": null
+    },
+    "Round Off": {
+      "subtype": "round_off",
+      "role_hint": null
+    },
+    "Indirect Expense": {
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "Indirect Income": {
+      "subtype": "other_income",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 160,
+    "posting_accounts": 104,
+    "group_accounts": 56,
+    "by_root_type": {
+      "asset": 40,
+      "equity": 13,
+      "expense": 62,
+      "income": 9,
+      "liability": 36
+    },
+    "by_subtype": {
+      "accumulated_depreciation": 1,
+      "asset_received_not_billed": 1,
+      "asset_valuation_expense": 1,
+      "bank": 3,
+      "capital_work_in_progress": 1,
+      "cash": 2,
+      "depreciation": 3,
+      "direct_cost": 1,
+      "expense": 42,
+      "fixed_asset": 6,
+      "group": 52,
+      "income": 6,
+      "inventory": 2,
+      "payable": 3,
+      "receivable": 2,
+      "stock_adjustment": 1,
+      "stock_received_not_billed": 1,
+      "tax": 7,
+      "unspecified": 23,
+      "valuation_expense": 2
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 1,
+    "role_hints": {
+      "cash_bank": 3,
+      "payables": 2,
+      "receivables": 1
+    },
+    "unmapped_account_types": {},
+    "roots_without_root_type": [],
+    "top_level_groups": [
+      "Aktiva",
+      "Passiva",
+      "Erlöse u. Erträge 2/8",
+      "Aufwendungen 2/4",
+      "Anfangsbestand 9",
+      "Privatkonten 1"
+    ],
+    "max_depth": 5,
+    "account_numbers_present": true
+  },
+  "accounts": [
+    {"source_id": "Aktiva", "code": null, "name": "Aktiva", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Aktiva / A - Anlagevermögen", "code": null, "name": "A - Anlagevermögen", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / A - Anlagevermögen / EDV-Software", "code": "0027", "name": "EDV-Software", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / A - Anlagevermögen", "depth": 3, "source": {"account_type": "Fixed Asset"}},
+    {"source_id": "Aktiva / A - Anlagevermögen / Geschäftsausstattung", "code": "0410", "name": "Geschäftsausstattung", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / A - Anlagevermögen", "depth": 3, "source": {"account_type": "Fixed Asset"}},
+    {"source_id": "Aktiva / A - Anlagevermögen / Büroeinrichtung", "code": "0420", "name": "Büroeinrichtung", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / A - Anlagevermögen", "depth": 3, "source": {"account_type": "Fixed Asset"}},
+    {"source_id": "Aktiva / A - Anlagevermögen / Darlehen", "code": "0565", "name": "Darlehen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / A - Anlagevermögen", "depth": 3},
+    {"source_id": "Aktiva / A - Anlagevermögen / Maschinen", "code": "0210", "name": "Maschinen", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / A - Anlagevermögen", "depth": 3, "source": {"account_type": "Fixed Asset"}},
+    {"source_id": "Aktiva / A - Anlagevermögen / Betriebsausstattung", "code": "0400", "name": "Betriebsausstattung", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / A - Anlagevermögen", "depth": 3, "source": {"account_type": "Fixed Asset"}},
+    {"source_id": "Aktiva / A - Anlagevermögen / Ladeneinrichtung", "code": "0430", "name": "Ladeneinrichtung", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / A - Anlagevermögen", "depth": 3, "source": {"account_type": "Fixed Asset"}},
+    {"source_id": "Aktiva / A - Anlagevermögen / Anlagen im Bau", "code": null, "name": "Anlagen im Bau", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / A - Anlagevermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / A - Anlagevermögen / Anlagen im Bau / Andere Anlagen, Betriebs- und Geschäftsausstattung im Bau", "code": "0498", "name": "Andere Anlagen, Betriebs- und Geschäftsausstattung im Bau", "root_type": "asset", "subtype": "capital_work_in_progress", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / A - Anlagevermögen / Anlagen im Bau", "depth": 4, "source": {"account_type": "Capital Work in Progress"}},
+    {"source_id": "Aktiva / A - Anlagevermögen / Accumulated Depreciation", "code": null, "name": "Accumulated Depreciation", "root_type": "asset", "subtype": "accumulated_depreciation", "normal_balance": "credit", "is_group": false, "parent_source_id": "Aktiva / A - Anlagevermögen", "depth": 3, "flags": ["missing_code", "contra"], "source": {"account_type": "Accumulated Depreciation"}},
+    {"source_id": "Aktiva / B - Umlaufvermögen", "code": null, "name": "B - Umlaufvermögen", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / I. Vorräte", "code": null, "name": "I. Vorräte", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / B - Umlaufvermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / I. Vorräte / Roh-, Hilfs- und Betriebsstoffe (Bestand)", "code": "3970", "name": "Roh-, Hilfs- und Betriebsstoffe (Bestand)", "root_type": "asset", "subtype": "inventory", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / I. Vorräte", "depth": 4, "source": {"account_type": "Stock"}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / I. Vorräte / Waren (Bestand)", "code": "3980", "name": "Waren (Bestand)", "root_type": "asset", "subtype": "inventory", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / I. Vorräte", "depth": 4, "source": {"account_type": "Stock"}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände", "code": null, "name": "II. Forderungen und sonstige Vermögensgegenstände", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / B - Umlaufvermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände / Forderungen aus Lieferungen und Leistungen mit Kontokorrent", "code": "1400", "name": "Forderungen aus Lieferungen und Leistungen mit Kontokorrent", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände", "depth": 4, "source": {"account_type": "Receivable", "is_group": 1}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände / Forderungen aus Lieferungen und Leistungen ohne Kontokorrent", "code": "1410", "name": "Forderungen aus Lieferungen und Leistungen ohne Kontokorrent", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände", "depth": 4, "role_hint": "receivables", "source": {"account_type": "Receivable"}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände / Durchlaufende Posten", "code": "1590", "name": "Durchlaufende Posten", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände", "depth": 4},
+    {"source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände / Verrechnungskonto Gewinnermittlung § 4 Abs. 3 EStG, nicht ergebniswirksam", "code": "1371", "name": "Verrechnungskonto Gewinnermittlung § 4 Abs. 3 EStG, nicht ergebniswirksam", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände", "depth": 4},
+    {"source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände / Abziehbare Vorsteuer", "code": null, "name": "Abziehbare Vorsteuer", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände", "depth": 4, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände / Abziehbare Vorsteuer / Abziehbare Vorsteuer 7 %", "code": "1571", "name": "Abziehbare Vorsteuer 7 %", "root_type": "asset", "subtype": "tax", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände / Abziehbare Vorsteuer", "depth": 5, "source": {"account_type": "Tax", "tax_rate": 7.0}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände / Abziehbare Vorsteuer / Abziehbare Vorsteuer 19 %", "code": "1576", "name": "Abziehbare Vorsteuer 19 %", "root_type": "asset", "subtype": "tax", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände / Abziehbare Vorsteuer", "depth": 5, "source": {"account_type": "Tax", "tax_rate": 19.0}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände / Abziehbare Vorsteuer / Abziehbare Vorsteuer nach § 13b UStG 19 %", "code": "1577", "name": "Abziehbare Vorsteuer nach § 13b UStG 19 %", "root_type": "asset", "subtype": "tax", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / II. Forderungen und sonstige Vermögensgegenstände / Abziehbare Vorsteuer", "depth": 5, "source": {"account_type": "Tax", "tax_rate": 19.0}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / III. Wertpapiere", "code": null, "name": "III. Wertpapiere", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / B - Umlaufvermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / III. Wertpapiere / Anteile an verbundenen Unternehmen (Umlaufvermögen)", "code": "1340", "name": "Anteile an verbundenen Unternehmen (Umlaufvermögen)", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / III. Wertpapiere", "depth": 4},
+    {"source_id": "Aktiva / B - Umlaufvermögen / III. Wertpapiere / Anteile an herrschender oder mit Mehrheit beteiligter Gesellschaft", "code": "1344", "name": "Anteile an herrschender oder mit Mehrheit beteiligter Gesellschaft", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / III. Wertpapiere", "depth": 4},
+    {"source_id": "Aktiva / B - Umlaufvermögen / III. Wertpapiere / Sonstige Wertpapiere", "code": "1348", "name": "Sonstige Wertpapiere", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / III. Wertpapiere", "depth": 4},
+    {"source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks.", "code": null, "name": "IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks.", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / B - Umlaufvermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks. / Kasse", "code": null, "name": "Kasse", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks.", "depth": 4, "source": {"account_type": "Cash", "is_group": 1}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks. / Kasse / Kasse", "code": "1000", "name": "Kasse", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks. / Kasse", "depth": 5, "role_hint": "cash_bank", "source": {"account_type": "Cash"}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks. / Bank", "code": null, "name": "Bank", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks.", "depth": 4, "source": {"account_type": "Bank", "is_group": 1}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks. / Bank / Postbank", "code": "1100", "name": "Postbank", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks. / Bank", "depth": 5, "role_hint": "cash_bank", "source": {"account_type": "Bank"}},
+    {"source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks. / Bank / Bankkonto", "code": "1200", "name": "Bankkonto", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / B - Umlaufvermögen / IV. Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks. / Bank", "depth": 5, "role_hint": "cash_bank", "source": {"account_type": "Bank"}},
+    {"source_id": "Aktiva / C - Rechnungsabgrenzungsposten", "code": null, "name": "C - Rechnungsabgrenzungsposten", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / C - Rechnungsabgrenzungsposten / Aktive Rechnungsabgrenzung", "code": "0980", "name": "Aktive Rechnungsabgrenzung", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / C - Rechnungsabgrenzungsposten", "depth": 3},
+    {"source_id": "Aktiva / D - Aktive latente Steuern", "code": null, "name": "D - Aktive latente Steuern", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / D - Aktive latente Steuern / Aktive latente Steuern", "code": "0983", "name": "Aktive latente Steuern", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / D - Aktive latente Steuern", "depth": 3},
+    {"source_id": "Aktiva / E - Aktiver Unterschiedsbetrag aus der Vermögensverrechnung", "code": null, "name": "E - Aktiver Unterschiedsbetrag aus der Vermögensverrechnung", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Passiva", "code": null, "name": "Passiva", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Passiva / A. Eigenkapital", "code": null, "name": "A. Eigenkapital", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Passiva / A. Eigenkapital / I. Gezeichnetes Kapital", "code": null, "name": "I. Gezeichnetes Kapital", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / A. Eigenkapital", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / A. Eigenkapital / II. Kapitalrücklage", "code": null, "name": "II. Kapitalrücklage", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / A. Eigenkapital", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / A. Eigenkapital / III. Gewinnrücklagen", "code": null, "name": "III. Gewinnrücklagen", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / A. Eigenkapital", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / A. Eigenkapital / IV. Gewinnvortrag/Verlustvortrag", "code": null, "name": "IV. Gewinnvortrag/Verlustvortrag", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / A. Eigenkapital", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / A. Eigenkapital / V. Jahresüberschuß/Jahresfehlbetrag", "code": null, "name": "V. Jahresüberschuß/Jahresfehlbetrag", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / A. Eigenkapital", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / B. Rückstellungen", "code": null, "name": "B. Rückstellungen", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Passiva / B. Rückstellungen / I. Rückstellungen für Pensionen und ähnliche Verpflichtungen", "code": null, "name": "I. Rückstellungen für Pensionen und ähnliche Verpflichtungen", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / B. Rückstellungen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / B. Rückstellungen / II. Steuerrückstellungen", "code": null, "name": "II. Steuerrückstellungen", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / B. Rückstellungen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / B. Rückstellungen / III. sonstige Rückstellungen", "code": null, "name": "III. sonstige Rückstellungen", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / B. Rückstellungen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / C. Verbindlichkeiten", "code": null, "name": "C. Verbindlichkeiten", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / I. Anleihen", "code": null, "name": "I. Anleihen", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / C. Verbindlichkeiten", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / II. Verbindlichkeiten gegenüber Kreditinstituten", "code": null, "name": "II. Verbindlichkeiten gegenüber Kreditinstituten", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / C. Verbindlichkeiten", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / III. Erhaltene Anzahlungen auf Bestellungen", "code": null, "name": "III. Erhaltene Anzahlungen auf Bestellungen", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / C. Verbindlichkeiten", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / IV. Verbindlichkeiten aus Lieferungen und Leistungen", "code": null, "name": "IV. Verbindlichkeiten aus Lieferungen und Leistungen", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / C. Verbindlichkeiten", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / IV. Verbindlichkeiten aus Lieferungen und Leistungen / Verbindlichkeiten aus Lieferungen und Leistungen mit Kontokorrent", "code": "1600", "name": "Verbindlichkeiten aus Lieferungen und Leistungen mit Kontokorrent", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / C. Verbindlichkeiten / IV. Verbindlichkeiten aus Lieferungen und Leistungen", "depth": 4, "source": {"account_type": "Payable", "is_group": 1}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / IV. Verbindlichkeiten aus Lieferungen und Leistungen / Verbindlichkeiten aus Lieferungen und Leistungen ohne Kontokorrent", "code": "1610", "name": "Verbindlichkeiten aus Lieferungen und Leistungen ohne Kontokorrent", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / C. Verbindlichkeiten / IV. Verbindlichkeiten aus Lieferungen und Leistungen", "depth": 4, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / V. Verbindlichkeiten aus der Annahme gezogener Wechsel und der Ausstellung eigener Wechsel", "code": null, "name": "V. Verbindlichkeiten aus der Annahme gezogener Wechsel und der Ausstellung eigener Wechsel", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / C. Verbindlichkeiten", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VI. Verbindlichkeiten gegenüber verbundenen Unternehmen", "code": null, "name": "VI. Verbindlichkeiten gegenüber verbundenen Unternehmen", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / C. Verbindlichkeiten", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VII. Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht", "code": null, "name": "VII. Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / C. Verbindlichkeiten", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten", "code": null, "name": "VIII. sonstige Verbindlichkeiten", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / C. Verbindlichkeiten", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Sonstige Verbindlichkeiten", "code": "1700", "name": "Sonstige Verbindlichkeiten", "root_type": "liability", "subtype": "asset_received_not_billed", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten", "depth": 4, "source": {"account_type": "Asset Received But Not Billed"}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Sonstige Verbindlichkeiten (1 bis 5 Jahre)", "code": "1702", "name": "Sonstige Verbindlichkeiten (1 bis 5 Jahre)", "root_type": "liability", "subtype": "stock_received_not_billed", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten", "depth": 4, "source": {"account_type": "Stock Received But Not Billed"}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Verbindlichkeiten aus Lohn und Gehalt", "code": "1740", "name": "Verbindlichkeiten aus Lohn und Gehalt", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten", "depth": 4, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer", "code": null, "name": "Umsatzsteuer", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten", "depth": 4, "source": {"is_group": 1}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer / Umsatzsteuer 7 %", "code": "1771", "name": "Umsatzsteuer 7 %", "root_type": "liability", "subtype": "tax", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer", "depth": 5, "source": {"account_type": "Tax", "tax_rate": 7.0}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer / Umsatzsteuer 19 %", "code": "1776", "name": "Umsatzsteuer 19 %", "root_type": "liability", "subtype": "tax", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer", "depth": 5, "source": {"account_type": "Tax", "tax_rate": 19.0}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer / Umsatzsteuer-Vorauszahlung", "code": "1780", "name": "Umsatzsteuer-Vorauszahlung", "root_type": "liability", "subtype": "tax", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer", "depth": 5, "source": {"account_type": "Tax"}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer / Umsatzsteuer-Vorauszahlung 1/11", "code": "1781", "name": "Umsatzsteuer-Vorauszahlung 1/11", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer", "depth": 5},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer / Umsatzsteuer nach § 13b UStG 19 %", "code": "1787", "name": "Umsatzsteuer nach § 13b UStG 19 %", "root_type": "liability", "subtype": "tax", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer", "depth": 5, "source": {"account_type": "Tax", "tax_rate": 19.0}},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer / Umsatzsteuer Vorjahr", "code": "1790", "name": "Umsatzsteuer Vorjahr", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer", "depth": 5},
+    {"source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer / Umsatzsteuer frühere Jahre", "code": "1791", "name": "Umsatzsteuer frühere Jahre", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / C. Verbindlichkeiten / VIII. sonstige Verbindlichkeiten / Umsatzsteuer", "depth": 5},
+    {"source_id": "Passiva / D. Rechnungsabgrenzungsposten", "code": null, "name": "D. Rechnungsabgrenzungsposten", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Passiva / D. Rechnungsabgrenzungsposten / Passive Rechnungsabgrenzung", "code": "0990", "name": "Passive Rechnungsabgrenzung", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / D. Rechnungsabgrenzungsposten", "depth": 3},
+    {"source_id": "Passiva / E. Passive latente Steuern", "code": null, "name": "E. Passive latente Steuern", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Erlöse u. Erträge 2/8", "code": null, "name": "Erlöse u. Erträge 2/8", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Income", "is_group": 1}},
+    {"source_id": "Erlöse u. Erträge 2/8 / Erlöskonten 8", "code": null, "name": "Erlöskonten 8", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Erlöse u. Erträge 2/8", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Erlöse u. Erträge 2/8 / Erlöskonten 8 / Erlöse", "code": "8200", "name": "Erlöse", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Erlöse u. Erträge 2/8 / Erlöskonten 8", "depth": 3, "source": {"account_type": "Income Account"}},
+    {"source_id": "Erlöse u. Erträge 2/8 / Erlöskonten 8 / Erlöse USt. 19 %", "code": "8400", "name": "Erlöse USt. 19 %", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Erlöse u. Erträge 2/8 / Erlöskonten 8", "depth": 3, "source": {"account_type": "Income Account"}},
+    {"source_id": "Erlöse u. Erträge 2/8 / Erlöskonten 8 / Erlöse USt. 7 %", "code": "8300", "name": "Erlöse USt. 7 %", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Erlöse u. Erträge 2/8 / Erlöskonten 8", "depth": 3, "source": {"account_type": "Income Account"}},
+    {"source_id": "Erlöse u. Erträge 2/8 / Ertragskonten 2", "code": null, "name": "Ertragskonten 2", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Erlöse u. Erträge 2/8", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Erlöse u. Erträge 2/8 / Ertragskonten 2 / sonstige Zinsen und ähnliche Erträge", "code": "2650", "name": "sonstige Zinsen und ähnliche Erträge", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Erlöse u. Erträge 2/8 / Ertragskonten 2", "depth": 3, "source": {"account_type": "Income Account"}},
+    {"source_id": "Erlöse u. Erträge 2/8 / Ertragskonten 2 / Außerordentliche Erträge", "code": "2500", "name": "Außerordentliche Erträge", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Erlöse u. Erträge 2/8 / Ertragskonten 2", "depth": 3, "source": {"account_type": "Income Account"}},
+    {"source_id": "Erlöse u. Erträge 2/8 / Ertragskonten 2 / Sonstige Erträge", "code": "2700", "name": "Sonstige Erträge", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Erlöse u. Erträge 2/8 / Ertragskonten 2", "depth": 3, "source": {"account_type": "Income Account"}},
+    {"source_id": "Aufwendungen 2/4", "code": null, "name": "Aufwendungen 2/4", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense", "is_group": 1}},
+    {"source_id": "Aufwendungen 2/4 / Fremdleistungen", "code": "3100", "name": "Fremdleistungen", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Fremdleistungen ohne Vorsteuer", "code": "3109", "name": "Fremdleistungen ohne Vorsteuer", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Bauleistungen eines im Inland ansässigen Unternehmers 19 % Vorsteuer und 19 % Umsatzsteuer", "code": "3120", "name": "Bauleistungen eines im Inland ansässigen Unternehmers 19 % Vorsteuer und 19 % Umsatzsteuer", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Wareneingang", "code": "3200", "name": "Wareneingang", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4", "depth": 2},
+    {"source_id": "Aufwendungen 2/4 / Bezugsnebenkosten", "code": "3800", "name": "Bezugsnebenkosten", "root_type": "expense", "subtype": "asset_valuation_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"account_type": "Expenses Included In Asset Valuation"}},
+    {"source_id": "Aufwendungen 2/4 / Bestandsveränderungen Roh-, Hilfs- und Betriebsstoffe sowie bezogene Waren", "code": "3960", "name": "Bestandsveränderungen Roh-, Hilfs- und Betriebsstoffe sowie bezogene Waren", "root_type": "expense", "subtype": "stock_adjustment", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"account_type": "Stock Adjustment"}},
+    {"source_id": "Aufwendungen 2/4 / Herstellungskosten", "code": "4996", "name": "Herstellungskosten", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"account_type": "Cost of Goods Sold"}},
+    {"source_id": "Aufwendungen 2/4 / Anlagenabgänge Sachanlagen (Restbuchwert bei Buchverlust)", "code": "2310", "name": "Anlagenabgänge Sachanlagen (Restbuchwert bei Buchverlust)", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Verluste aus dem Abgang von Gegenständen des Anlagevermögens", "code": "2320", "name": "Verluste aus dem Abgang von Gegenständen des Anlagevermögens", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Verwaltungskosten", "code": "4997", "name": "Verwaltungskosten", "root_type": "expense", "subtype": "valuation_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"account_type": "Expenses Included In Valuation"}},
+    {"source_id": "Aufwendungen 2/4 / Vertriebskosten", "code": "4998", "name": "Vertriebskosten", "root_type": "expense", "subtype": "valuation_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"account_type": "Expenses Included In Valuation"}},
+    {"source_id": "Aufwendungen 2/4 / Gegenkonto 4996-4998", "code": "4999", "name": "Gegenkonto 4996-4998", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4", "depth": 2},
+    {"source_id": "Aufwendungen 2/4 / Abschreibungen", "code": null, "name": "Abschreibungen", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aufwendungen 2/4 / Abschreibungen / Abschreibungen auf Sachanlagen (ohne AfA auf Kfz und Gebäude)", "code": "4830", "name": "Abschreibungen auf Sachanlagen (ohne AfA auf Kfz und Gebäude)", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Abschreibungen", "depth": 3, "source": {"account_type": "Depreciation"}},
+    {"source_id": "Aufwendungen 2/4 / Abschreibungen / Abschreibungen auf Gebäude", "code": "4831", "name": "Abschreibungen auf Gebäude", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Abschreibungen", "depth": 3, "source": {"account_type": "Depreciation"}},
+    {"source_id": "Aufwendungen 2/4 / Abschreibungen / Abschreibungen auf Kfz", "code": "4832", "name": "Abschreibungen auf Kfz", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Abschreibungen", "depth": 3, "source": {"account_type": "Depreciation"}},
+    {"source_id": "Aufwendungen 2/4 / Abschreibungen / Sofortabschreibung GWG", "code": "4855", "name": "Sofortabschreibung GWG", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Abschreibungen", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Kfz-Kosten", "code": null, "name": "Kfz-Kosten", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aufwendungen 2/4 / Kfz-Kosten / Kfz-Steuer", "code": "4510", "name": "Kfz-Steuer", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Kfz-Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Kfz-Kosten / Kfz-Versicherungen", "code": "4520", "name": "Kfz-Versicherungen", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Kfz-Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Kfz-Kosten / laufende Kfz-Betriebskosten", "code": "4530", "name": "laufende Kfz-Betriebskosten", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Kfz-Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Kfz-Kosten / Kfz-Reparaturen", "code": "4540", "name": "Kfz-Reparaturen", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Kfz-Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Kfz-Kosten / Fremdfahrzeuge", "code": "4570", "name": "Fremdfahrzeuge", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Kfz-Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Kfz-Kosten / sonstige Kfz-Kosten", "code": "4580", "name": "sonstige Kfz-Kosten", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Kfz-Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Personalkosten", "code": null, "name": "Personalkosten", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aufwendungen 2/4 / Personalkosten / Gehälter", "code": "4120", "name": "Gehälter", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Personalkosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Personalkosten / gesetzliche soziale Aufwendungen", "code": "4130", "name": "gesetzliche soziale Aufwendungen", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Personalkosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Personalkosten / Aufwendungen für Altersvorsorge", "code": "4165", "name": "Aufwendungen für Altersvorsorge", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Personalkosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Personalkosten / Vermögenswirksame Leistungen", "code": "4170", "name": "Vermögenswirksame Leistungen", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Personalkosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Personalkosten / Aushilfslöhne", "code": "4190", "name": "Aushilfslöhne", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Personalkosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Raumkosten", "code": null, "name": "Raumkosten", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aufwendungen 2/4 / Raumkosten / Miete und Nebenkosten", "code": "4210", "name": "Miete und Nebenkosten", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Raumkosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Raumkosten / Gas, Wasser, Strom (Verwaltung, Vertrieb)", "code": "4240", "name": "Gas, Wasser, Strom (Verwaltung, Vertrieb)", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Raumkosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Raumkosten / Reinigung", "code": "4250", "name": "Reinigung", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Raumkosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Reparatur/Instandhaltung", "code": null, "name": "Reparatur/Instandhaltung", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aufwendungen 2/4 / Reparatur/Instandhaltung / Reparaturen und Instandhaltungen von anderen Anlagen und Betriebs- und Geschäftsausstattung", "code": "4805", "name": "Reparaturen und Instandhaltungen von anderen Anlagen und Betriebs- und Geschäftsausstattung", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Reparatur/Instandhaltung", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Versicherungsbeiträge", "code": null, "name": "Versicherungsbeiträge", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aufwendungen 2/4 / Versicherungsbeiträge / Versicherungen", "code": "4360", "name": "Versicherungen", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Versicherungsbeiträge", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Versicherungsbeiträge / Beiträge", "code": "4380", "name": "Beiträge", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Versicherungsbeiträge", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Versicherungsbeiträge / sonstige Ausgaben", "code": "4390", "name": "sonstige Ausgaben", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Versicherungsbeiträge", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Versicherungsbeiträge / steuerlich abzugsfähige Verspätungszuschläge und Zwangsgelder", "code": "4396", "name": "steuerlich abzugsfähige Verspätungszuschläge und Zwangsgelder", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Versicherungsbeiträge", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Werbe-/Reisekosten", "code": null, "name": "Werbe-/Reisekosten", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aufwendungen 2/4 / Werbe-/Reisekosten / Werbekosten", "code": "4610", "name": "Werbekosten", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Werbe-/Reisekosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Werbe-/Reisekosten / Aufmerksamkeiten", "code": "4653", "name": "Aufmerksamkeiten", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Werbe-/Reisekosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Werbe-/Reisekosten / nicht abzugsfähige Betriebsausg. aus Werbe-, Repräs.- u. Reisekosten", "code": "4665", "name": "nicht abzugsfähige Betriebsausg. aus Werbe-, Repräs.- u. Reisekosten", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Werbe-/Reisekosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Werbe-/Reisekosten / Reisekosten Unternehmer", "code": "4670", "name": "Reisekosten Unternehmer", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Werbe-/Reisekosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / verschiedene Kosten", "code": null, "name": "verschiedene Kosten", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aufwendungen 2/4 / verschiedene Kosten / Porto", "code": "4910", "name": "Porto", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / verschiedene Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / verschiedene Kosten / Telekom", "code": "4920", "name": "Telekom", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / verschiedene Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / verschiedene Kosten / Mobilfunk D2", "code": "4921", "name": "Mobilfunk D2", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / verschiedene Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / verschiedene Kosten / Internet", "code": "4922", "name": "Internet", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / verschiedene Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / verschiedene Kosten / Bürobedarf", "code": "4930", "name": "Bürobedarf", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / verschiedene Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / verschiedene Kosten / Zeitschriften, Bücher", "code": "4940", "name": "Zeitschriften, Bücher", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / verschiedene Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / verschiedene Kosten / Fortbildungskosten", "code": "4945", "name": "Fortbildungskosten", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / verschiedene Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / verschiedene Kosten / Buchführungskosten", "code": "4955", "name": "Buchführungskosten", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / verschiedene Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / verschiedene Kosten / Abschluß- u. Prüfungskosten", "code": "4957", "name": "Abschluß- u. Prüfungskosten", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / verschiedene Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / verschiedene Kosten / Nebenkosten des Geldverkehrs", "code": "4970", "name": "Nebenkosten des Geldverkehrs", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / verschiedene Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / verschiedene Kosten / Werkzeuge und Kleingeräte", "code": "4985", "name": "Werkzeuge und Kleingeräte", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / verschiedene Kosten", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Zinsaufwendungen", "code": null, "name": "Zinsaufwendungen", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aufwendungen 2/4", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aufwendungen 2/4 / Zinsaufwendungen / Zinsaufwendungen für kurzfristige Verbindlichkeiten", "code": "2110", "name": "Zinsaufwendungen für kurzfristige Verbindlichkeiten", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Zinsaufwendungen", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Aufwendungen 2/4 / Zinsaufwendungen / Zinsaufwendungen für KFZ Finanzierung", "code": "2121", "name": "Zinsaufwendungen für KFZ Finanzierung", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwendungen 2/4 / Zinsaufwendungen", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Anfangsbestand 9", "code": null, "name": "Anfangsbestand 9", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Equity", "is_group": 1}},
+    {"source_id": "Anfangsbestand 9 / Saldenvortragskonten", "code": null, "name": "Saldenvortragskonten", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Anfangsbestand 9", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Anfangsbestand 9 / Saldenvortragskonten / Saldenvortrag Sachkonten", "code": "9000", "name": "Saldenvortrag Sachkonten", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Anfangsbestand 9 / Saldenvortragskonten", "depth": 3},
+    {"source_id": "Anfangsbestand 9 / Saldenvortragskonten / Saldenvorträge Debitoren", "code": "9008", "name": "Saldenvorträge Debitoren", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Anfangsbestand 9 / Saldenvortragskonten", "depth": 3},
+    {"source_id": "Anfangsbestand 9 / Saldenvortragskonten / Saldenvorträge Kreditoren", "code": "9009", "name": "Saldenvorträge Kreditoren", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Anfangsbestand 9 / Saldenvortragskonten", "depth": 3},
+    {"source_id": "Privatkonten 1", "code": null, "name": "Privatkonten 1", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Equity", "is_group": 1}},
+    {"source_id": "Privatkonten 1 / Privatentnahmen/-einlagen", "code": null, "name": "Privatentnahmen/-einlagen", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Privatkonten 1", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Privatkonten 1 / Privatentnahmen/-einlagen / Privatentnahme allgemein", "code": "1800", "name": "Privatentnahme allgemein", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Privatkonten 1 / Privatentnahmen/-einlagen", "depth": 3},
+    {"source_id": "Privatkonten 1 / Privatentnahmen/-einlagen / Privatsteuern", "code": "1810", "name": "Privatsteuern", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Privatkonten 1 / Privatentnahmen/-einlagen", "depth": 3},
+    {"source_id": "Privatkonten 1 / Privatentnahmen/-einlagen / Sonderausgaben beschränkt abzugsfähig", "code": "1820", "name": "Sonderausgaben beschränkt abzugsfähig", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Privatkonten 1 / Privatentnahmen/-einlagen", "depth": 3},
+    {"source_id": "Privatkonten 1 / Privatentnahmen/-einlagen / Sonderausgaben unbeschränkt abzugsfähig", "code": "1830", "name": "Sonderausgaben unbeschränkt abzugsfähig", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Privatkonten 1 / Privatentnahmen/-einlagen", "depth": 3},
+    {"source_id": "Privatkonten 1 / Privatentnahmen/-einlagen / Außergewöhnliche Belastungen", "code": "1850", "name": "Außergewöhnliche Belastungen", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Privatkonten 1 / Privatentnahmen/-einlagen", "depth": 3},
+    {"source_id": "Privatkonten 1 / Privatentnahmen/-einlagen / Privateinlagen", "code": "1890", "name": "Privateinlagen", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Privatkonten 1 / Privatentnahmen/-einlagen", "depth": 3}
+  ]
+}

@@ -1,0 +1,406 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "ceb4a3761538da78e854b237a3c4d8d41784ce16e37746eb458cffdf1e08f354",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/uk",
+  "country_code": "GB",
+  "country_name": "United Kingdom",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "United Kingdom - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_uk' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "SmartMode LTD",
+    "module": "l10n_uk",
+    "module_name": "United Kingdom - Accounting",
+    "module_version": "1.1",
+    "contributing_modules": [
+      "l10n_uk"
+    ],
+    "template_code": "uk",
+    "template_chain": [
+      "uk"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_uk/data/template/account.account-uk.csv",
+        "sha256": "0c925e4558c988eeb39744eb6fc2c7ff9a3a8d5c00c5d7450fdf27a77bf8863f",
+        "rows": 118
+      }
+    ],
+    "python_files": [
+      "addons/l10n_uk/models/template_uk.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": true,
+    "account_code_prefixes": {
+      "bank": "1200",
+      "cash": "1210",
+      "transfer": "1220"
+    },
+    "default_sale_tax": "ST11",
+    "default_purchase_tax": "PT_20_G",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "110000",
+        "code": "110000",
+        "name": "Debtors Control Account",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "210000",
+        "code": "210000",
+        "name": "Creditors Control Account",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "400000",
+        "code": "400000",
+        "name": "Sales category 1",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "500000",
+        "code": "500000",
+        "name": "Cost of sales 1",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "100100",
+        "code": "100100",
+        "name": "Stock",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "110400",
+        "code": "110400",
+        "name": "Debtors Control Account (PoS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "770000",
+        "code": "770000",
+        "name": "Exchange gains/losses",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "770000",
+        "code": "770000",
+        "name": "Exchange gains/losses",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "110300",
+        "code": "110300",
+        "name": "Prepayments",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "210900",
+        "code": "210900",
+        "name": "Accruals",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 118,
+    "posting_accounts": 118,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 30,
+      "equity": 5,
+      "expense": 61,
+      "income": 7,
+      "liability": 15
+    },
+    "by_subtype": {
+      "current_asset": 7,
+      "current_liability": 9,
+      "direct_cost": 4,
+      "equity": 4,
+      "expense": 57,
+      "fixed_asset": 20,
+      "income": 7,
+      "payable": 6,
+      "receivable": 3,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 6,
+      "receivables": 3
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "001000", "code": "001000", "name": "Technology", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Technological products or services bought for your business", "source": {"account_type": "asset_fixed", "tax_ids": ["PT_20_S"], "asset_model_ids": ["asset_technology"], "active": true}},
+    {"source_id": "001100", "code": "001100", "name": "Technology Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "active": true}},
+    {"source_id": "002000", "code": "002000", "name": "Patents & Trademarks", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Registered patents and trademarks owned by the business", "source": {"account_type": "asset_fixed", "asset_model_ids": ["asset_patents"], "active": true}},
+    {"source_id": "002100", "code": "002100", "name": "Patents & Trademarks Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "active": true}},
+    {"source_id": "003000", "code": "003000", "name": "Installations", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Purchases of fixtures, fittings and installations related to buildings, like solar panels or heater", "source": {"account_type": "asset_fixed", "tax_ids": ["PT_20_S"], "asset_model_ids": ["asset_installations"], "active": true}},
+    {"source_id": "003100", "code": "003100", "name": "Installations Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "active": true}},
+    {"source_id": "004000", "code": "004000", "name": "Land", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Purchases of lands without buildings", "source": {"account_type": "asset_fixed", "tax_ids": ["PT2"], "active": true}},
+    {"source_id": "004001", "code": "004001", "name": "Buildings", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Construction of buildings and costs associated to buildings", "source": {"account_type": "asset_fixed", "tax_ids": ["PT_20_S"], "asset_model_ids": ["asset_buildings"], "active": true}},
+    {"source_id": "004100", "code": "004100", "name": "Land Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "active": true}},
+    {"source_id": "004101", "code": "004101", "name": "Buildings Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "active": true}},
+    {"source_id": "005000", "code": "005000", "name": "Vehicles", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Purchase of a car, including second hand or after-lease contract", "source": {"account_type": "asset_fixed", "tax_ids": ["PT_20_S"], "asset_model_ids": ["asset_vehicles"], "active": true}},
+    {"source_id": "005100", "code": "005100", "name": "Vehicles Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "active": true}},
+    {"source_id": "006000", "code": "006000", "name": "Furniture & material", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Large expenses related to workplaces", "source": {"account_type": "asset_fixed", "tax_ids": ["PT_20_S"], "asset_model_ids": ["asset_furniture"], "active": true}},
+    {"source_id": "006100", "code": "006100", "name": "Furniture & material Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "active": true}},
+    {"source_id": "007000", "code": "007000", "name": "Plant and machinery", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Machinery and tools directly related to your business", "source": {"account_type": "asset_fixed", "tax_ids": ["PT_20_S"], "asset_model_ids": ["asset_plant_machinery"], "active": true}},
+    {"source_id": "007100", "code": "007100", "name": "Plant and machinery Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "active": true}},
+    {"source_id": "008000", "code": "008000", "name": "Other property", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Other type of property, like plants, machinery or various equipment", "source": {"account_type": "asset_fixed", "asset_model_ids": ["asset_other_property"], "active": true}},
+    {"source_id": "008100", "code": "008100", "name": "Other property Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "active": true}},
+    {"source_id": "009000", "code": "009000", "name": "Vehicle accessories", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All accessories purchases related to your professional vehicle", "source": {"account_type": "asset_fixed", "tax_ids": ["PT_20_S"], "asset_model_ids": ["asset_vehicle_accessories"], "active": true}},
+    {"source_id": "009100", "code": "009100", "name": "Vehicle accessories Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "active": true}},
+    {"source_id": "100100", "code": "100100", "name": "Stock", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "active": true, "extra": {"account_stock_variation_id": "630000"}}},
+    {"source_id": "100200", "code": "100200", "name": "Work in Progress", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "active": true}},
+    {"source_id": "100300", "code": "100300", "name": "Finished Goods", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "active": true}},
+    {"source_id": "110000", "code": "110000", "name": "Debtors Control Account", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "active": true}},
+    {"source_id": "110100", "code": "110100", "name": "Sundry Debtors", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "active": true}},
+    {"source_id": "110200", "code": "110200", "name": "Other Debtors", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "active": true}},
+    {"source_id": "110300", "code": "110300", "name": "Prepayments", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "active": true}},
+    {"source_id": "110400", "code": "110400", "name": "Debtors Control Account (PoS)", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "active": true}},
+    {"source_id": "124000", "code": "124000", "name": "Company Credit Card", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "active": true}},
+    {"source_id": "210000", "code": "210000", "name": "Creditors Control Account", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "active": true}},
+    {"source_id": "210100", "code": "210100", "name": "Sundry Creditors", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "active": true}},
+    {"source_id": "210200", "code": "210200", "name": "Other Creditors", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "active": true}},
+    {"source_id": "210900", "code": "210900", "name": "Accruals", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "active": true}},
+    {"source_id": "215000", "code": "215000", "name": "Bad debt provision", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "active": true}},
+    {"source_id": "220000", "code": "220000", "name": "Sales Tax Control Account", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "active": true}},
+    {"source_id": "220100", "code": "220100", "name": "Purchase Tax Control Account", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "active": true}},
+    {"source_id": "220200", "code": "220200", "name": "HMRC - VAT Account", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true, "active": true}},
+    {"source_id": "220400", "code": "220400", "name": "Manual Adjustments ﾖ VAT", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "active": true}},
+    {"source_id": "221000", "code": "221000", "name": "P.A.Y.E. & NI", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "active": true}},
+    {"source_id": "222000", "code": "222000", "name": "Net Wages", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "active": true}},
+    {"source_id": "223000", "code": "223000", "name": "Pension Fund", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "active": true}},
+    {"source_id": "230000", "code": "230000", "name": "Loans", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "active": true}},
+    {"source_id": "231000", "code": "231000", "name": "Hire Purchase", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "active": true}},
+    {"source_id": "232000", "code": "232000", "name": "Corporation Tax", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "active": true}},
+    {"source_id": "233000", "code": "233000", "name": "Mortgages", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "active": true}},
+    {"source_id": "300000", "code": "300000", "name": "Called up share capital", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "active": true}},
+    {"source_id": "301000", "code": "301000", "name": "Share premium account", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "active": true}},
+    {"source_id": "302000", "code": "302000", "name": "Revaluation reserve", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "active": true}},
+    {"source_id": "303000", "code": "303000", "name": "Other reserves", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "active": true}},
+    {"source_id": "400000", "code": "400000", "name": "Sales category 1", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income", "active": true}},
+    {"source_id": "400100", "code": "400100", "name": "Sales category 2", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "active": true}},
+    {"source_id": "400200", "code": "400200", "name": "Sales category 3", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "active": true}},
+    {"source_id": "400300", "code": "400300", "name": "Sales category 4", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "active": true}},
+    {"source_id": "490000", "code": "490000", "name": "Bank Interest received", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "active": true}},
+    {"source_id": "491000", "code": "491000", "name": "Investment Interest received", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "active": true}},
+    {"source_id": "500000", "code": "500000", "name": "Cost of sales 1", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense_direct_cost", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "500100", "code": "500100", "name": "Cost of sales 2", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "500200", "code": "500200", "name": "Cost of sales 3", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "500300", "code": "500300", "name": "Cost of sales 4", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "600000", "code": "600000", "name": "Advertising", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Publicity fees for your activity, including promotional material, marketing and POS", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "600100", "code": "600100", "name": "Exhibitions and events", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Costs for attending or hosting trade shows and events", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "600200", "code": "600200", "name": "PR", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Expenses for public relations and media activities", "flags": ["inactive_in_source"], "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": false}},
+    {"source_id": "603000", "code": "603000", "name": "Shipping", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Costs of transporting goods to customers, including postage and courier services", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "610000", "code": "610000", "name": "Business gifts", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Under 50£ Business gifts to clients", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "620000", "code": "620000", "name": "Membership fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Subscriptions to clubs and associations related to your business", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "630000", "code": "630000", "name": "Raw materials", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All goods purchased as raw materials used by your activity", "source": {"account_type": "expense", "tax_ids": ["PT_20_G"], "active": true}},
+    {"source_id": "640000", "code": "640000", "name": "Consumables", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Consumables bought and used in the context of your activity", "source": {"account_type": "expense", "tax_ids": ["PT_20_G"], "active": true}},
+    {"source_id": "650000", "code": "650000", "name": "Studies & works", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Compensation and fees paid to other parties", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "660000", "code": "660000", "name": "Goods for resale", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Goods you buy to resale later, as part of your activity", "source": {"account_type": "expense", "tax_ids": ["PT_20_G"], "active": true}},
+    {"source_id": "670000", "code": "670000", "name": "Social Security", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All fees related to pension plans and social security contributions", "source": {"account_type": "expense", "tax_ids": ["PT2"], "active": true}},
+    {"source_id": "680000", "code": "680000", "name": "Property tax", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Local taxes that have to paid due to the ownership of property", "source": {"account_type": "expense", "tax_ids": ["PT2"], "active": true}},
+    {"source_id": "690000", "code": "690000", "name": "Import fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Customs fees incurred while importing goods from outside of the European Union", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "700000", "code": "700000", "name": "Directors pension", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "flags": ["inactive_in_source"], "source": {"account_type": "expense", "active": false}},
+    {"source_id": "700100", "code": "700100", "name": "Employees compensation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Compensation costs for employees and manual workers employed by the company", "source": {"account_type": "expense", "active": true}},
+    {"source_id": "701000", "code": "701000", "name": "Admin gross salaries", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "flags": ["inactive_in_source"], "source": {"account_type": "expense", "active": false}},
+    {"source_id": "701100", "code": "701100", "name": "Management gross salaries", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "flags": ["inactive_in_source"], "source": {"account_type": "expense", "active": false}},
+    {"source_id": "701200", "code": "701200", "name": "Employers NIC", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Employer’s National Insurance contributions payable to HMRC as part of staff payroll costs", "flags": ["inactive_in_source"], "source": {"account_type": "expense", "active": false}},
+    {"source_id": "702000", "code": "702000", "name": "General subcontracting", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Compensation and fees with other partners that act as subcontractors or consultants for your activity", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "703000", "code": "703000", "name": "Other personel costs", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Company's personel costs excluding compensations, contributions and vouchers", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "710000", "code": "710000", "name": "Office Rent", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Rental fees related to your workplace", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "711000", "code": "711000", "name": "Water, electricity, gas", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bills from your water and energy suppliers (light, heat and power)", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "712000", "code": "712000", "name": "Office Maintenance services", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Services related to the maintenance of your worplace, like repair or cleaning fees", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "720000", "code": "720000", "name": "Public transportation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Travel expenses done using public transportation (metro, bus, tramways, ...)", "source": {"account_type": "expense", "tax_ids": ["PT2"], "active": true}},
+    {"source_id": "730000", "code": "730000", "name": "Car rent", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Rental of vehicle, including shared services, but excluding leasing", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "730100", "code": "730100", "name": "Fuel", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All fuel expenses for a car", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "730200", "code": "730200", "name": "Car maintenance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Expenses made for the repair and maintenance of a vehicle", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "740000", "code": "740000", "name": "Flights", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All expenses related to travel by plane", "source": {"account_type": "expense", "tax_ids": ["PT2"], "active": true}},
+    {"source_id": "750200", "code": "750200", "name": "Telephone", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Phone bills incurred", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "750300", "code": "750300", "name": "Internet", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Internet or hosting bills incurred", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "750600", "code": "750600", "name": "Office supplies", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Various supplies and consumables bought for your workplace or office, like pencils, paper etc", "source": {"account_type": "expense", "tax_ids": ["PT_20_G"], "active": true}},
+    {"source_id": "750601", "code": "750601", "name": "Office services", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "All expenses made for your office or workplace that are not material goods", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "750700", "code": "750700", "name": "Postage and Carriage", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Costs of sending mail and small parcels", "flags": ["inactive_in_source"], "source": {"account_type": "expense", "tax_ids": ["PT2"], "active": false}},
+    {"source_id": "750800", "code": "750800", "name": "Books", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Expenses for books, manuals, and reference materials", "flags": ["inactive_in_source"], "source": {"account_type": "expense", "tax_ids": ["PT_20_G"], "active": false}},
+    {"source_id": "751000", "code": "751000", "name": "Software", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Licenses or computer services (like repairs or upgrades)", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "751200", "code": "751200", "name": "Recruitment fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Costs for hiring staff, including agency or advertising fees", "flags": ["inactive_in_source"], "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": false}},
+    {"source_id": "751300", "code": "751300", "name": "Administration fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Services incurred for the administration of your business (excluding supplies)", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "760100", "code": "760100", "name": "Accounting", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bills from your accountant or accounting firm", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "760200", "code": "760200", "name": "Auditing", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bills from your auditor or auditing firm", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "761000", "code": "761000", "name": "Consultancy", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bills from your consultant or consulting firm", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "762000", "code": "762000", "name": "Legal expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bills from lawyers, fees paid to the justice system", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "770000", "code": "770000", "name": "Exchange gains/losses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Profits or losses from currency exchange fluctuations", "source": {"account_type": "expense", "active": true}},
+    {"source_id": "771000", "code": "771000", "name": "Sundry expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Miscellaneous minor expenses", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "785000", "code": "785000", "name": "Bad debts", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Unrecoverable amounts owed by customers", "source": {"account_type": "expense", "active": true}},
+    {"source_id": "790000", "code": "790000", "name": "Interest paid", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Costs of interest on loans and borrowings", "source": {"account_type": "expense", "tax_ids": ["PT2"], "active": true}},
+    {"source_id": "791000", "code": "791000", "name": "Bank fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Nasty bank, credit card and other financial charges", "source": {"account_type": "expense", "tax_ids": ["PT2"], "active": true}},
+    {"source_id": "800000", "code": "800000", "name": "Intangible assets depreciation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Depreciation of non-physical assets like software or patents", "source": {"account_type": "expense", "active": true}},
+    {"source_id": "800100", "code": "800100", "name": "Tangible assets depreciation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Depreciation of physical assets like equipment or vehicles", "source": {"account_type": "expense", "active": true}},
+    {"source_id": "810000", "code": "810000", "name": "Training and documentation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Training fees not including food and drinks", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "820000", "code": "820000", "name": "Donations", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Charitable contributions made by the business", "flags": ["inactive_in_source"], "source": {"account_type": "expense", "tax_ids": ["PT2"], "active": false}},
+    {"source_id": "830000", "code": "830000", "name": "Entertaining", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Costs of meals or events for clients, suppliers, or staff", "flags": ["inactive_in_source"], "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": false}},
+    {"source_id": "840000", "code": "840000", "name": "Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Business-related insurance fees for property (fire insurance), legal costs, and third-party liability", "source": {"account_type": "expense", "tax_ids": ["PT2"], "active": true}},
+    {"source_id": "850000", "code": "850000", "name": "Other travel costs", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Expenses incurred during business trips (Excluding Flights, Hotels, Daily expenses, public transportation)", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "860000", "code": "860000", "name": "Hotels", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Hotel or B&B bills incurred during business trips", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "870000", "code": "870000", "name": "Bar & Restaurant", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Expenses incurred when eating or drinking at bars or restaurants", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "870001", "code": "870001", "name": "Food: Reception & delivery", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Food or drinks incurred outside of bars or restaurants, like receptions, canteen and food delivery, etc", "source": {"account_type": "expense", "tax_ids": ["PT_20_S"], "active": true}},
+    {"source_id": "880000", "code": "880000", "name": "Corporation tax", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Estimated tax due on company profits", "flags": ["inactive_in_source"], "source": {"account_type": "expense", "active": false}},
+    {"source_id": "900000", "code": "900000", "name": "Profits/Losses on disposals of assets", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "active": true}},
+    {"source_id": "999999", "code": "999999", "name": "Undistributed Profits/Losses", "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity_unaffected", "active": true}}
+  ]
+}

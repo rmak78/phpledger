@@ -1,0 +1,386 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "501b9871ab74dc91ec0f704aa37bd9da585fe7abf23273059770c9c61f3175cf",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/il",
+  "country_code": "IL",
+  "country_name": "Israel",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Israel - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_il' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_il",
+    "module_name": "Israel - Accounting",
+    "module_version": "1.1",
+    "contributing_modules": [
+      "l10n_il"
+    ],
+    "template_code": "il",
+    "template_chain": [
+      "il"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_il/data/template/account.account-il.csv",
+        "sha256": "e5f029d7b275771c04f8c5561d4c599a74b4d9eeebab4c4a357c7b89a4ef9bed",
+        "rows": 86
+      },
+      {
+        "path": "addons/l10n_il/data/template/account.group-il.csv",
+        "sha256": "c284954832ce3a30e02e1ab0b947eb05cc8315689c109bb1b7c1bd78be6bbc0b",
+        "rows": 10
+      }
+    ],
+    "python_files": [
+      "addons/l10n_il/models/template_il.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "1014",
+      "cash": "1015",
+      "transfer": "1017"
+    },
+    "default_sale_tax": "il_vat_sales_18",
+    "default_purchase_tax": "il_vat_inputs_18",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "il_account_101200",
+        "code": "101200",
+        "name": "Account Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "il_account_111100",
+        "code": "111100",
+        "name": "Account Payable",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "il_account_200000",
+        "code": "200000",
+        "name": "Product Sales",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "il_account_212200",
+        "code": "212200",
+        "name": "Purchase of Equipment",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "il_account_101140",
+        "code": "101140",
+        "name": "Inventory - Raw materials",
+        "resolved": true
+      },
+      {
+        "source_field": "property_stock_valuation_account_id",
+        "source_id": "il_account_101110",
+        "code": "101110",
+        "name": "Stock Valuation",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "il_account_101201",
+        "code": "101201",
+        "name": "Account Receivable(POS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "il_account_201000",
+        "code": "201000",
+        "name": "Cost of Goods Sold",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "il_account_202100",
+        "code": "202100",
+        "name": "Foreign Exchange Gain&Loss",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 86,
+    "posting_accounts": 86,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 28,
+      "equity": 6,
+      "expense": 25,
+      "income": 4,
+      "liability": 23
+    },
+    "by_subtype": {
+      "cash_bank": 4,
+      "current_asset": 13,
+      "current_liability": 18,
+      "direct_cost": 7,
+      "equity": 5,
+      "expense": 18,
+      "fixed_asset": 4,
+      "income": 2,
+      "non_current_asset": 5,
+      "non_current_liability": 4,
+      "other_income": 2,
+      "payable": 1,
+      "receivable": 2,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 4,
+      "expense": 1,
+      "income": 1,
+      "payables": 1,
+      "receivables": 2
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "he_IL"
+    ],
+    "groups": 10
+  },
+  "groups": [
+    {"source_id": "il_group_100100", "code_prefix_start": "100100", "code_prefix_end": "100499", "name": "Fixed Assets", "translations": {"he_IL": "רכוש קבוע"}, "parent_source_id": null, "path": ["Fixed Assets"]},
+    {"source_id": "il_group_101110", "code_prefix_start": "101110", "code_prefix_end": "101400", "name": "Current Assets", "translations": {"he_IL": "רכוש שוטף"}, "parent_source_id": null, "path": ["Current Assets"]},
+    {"source_id": "il_group_101401", "code_prefix_start": "101401", "code_prefix_end": "101799", "name": "Bank And Cash", "translations": {"he_IL": "בנק ומזומנים"}, "parent_source_id": null, "path": ["Bank And Cash"]},
+    {"source_id": "il_group_111000", "code_prefix_start": "111000", "code_prefix_end": "111999", "name": "Current Liabilities", "translations": {"he_IL": "התחייבויות שוטפות"}, "parent_source_id": null, "path": ["Current Liabilities"]},
+    {"source_id": "il_group_112000", "code_prefix_start": "112000", "code_prefix_end": "112210", "name": "Non-current Liabilities", "translations": {"he_IL": "התחייבויות לא שוטפות"}, "parent_source_id": null, "path": ["Non-current Liabilities"]},
+    {"source_id": "il_group_200000", "code_prefix_start": "200000", "code_prefix_end": "200199", "name": "Sales Income", "translations": {"he_IL": "הכנסות ממכירות"}, "parent_source_id": null, "path": ["Sales Income"]},
+    {"source_id": "il_group_200200", "code_prefix_start": "200200", "code_prefix_end": "200300", "name": "Other Income", "translations": {"he_IL": "הכנסות אחרות"}, "parent_source_id": null, "path": ["Other Income"]},
+    {"source_id": "il_group_201000", "code_prefix_start": "201000", "code_prefix_end": "201299", "name": "Cost of Goods", "translations": {"he_IL": "עלות המכר"}, "parent_source_id": null, "path": ["Cost of Goods"]},
+    {"source_id": "il_group_202000", "code_prefix_start": "202000", "code_prefix_end": "220900", "name": "Expenses", "translations": {"he_IL": "הוצאות"}, "parent_source_id": null, "path": ["Expenses"]},
+    {"source_id": "il_group_300000", "code_prefix_start": "300000", "code_prefix_end": "399999", "name": "Capital And Shares", "translations": {"he_IL": "הון ומניות"}, "parent_source_id": null, "path": ["Capital And Shares"]}
+  ],
+  "accounts": [
+    {"source_id": "il_account_100100", "code": "100100", "name": "Land and buildings", "translations": {"he_IL": "קרקע ומבנים"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_100100", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "il_account_100110", "code": "100110", "name": "Land and buildings depreciation", "translations": {"he_IL": "הוצאות פחת קרקע ומבנים"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_100100", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "il_account_100200", "code": "100200", "name": "Machinery and equipment", "translations": {"he_IL": "מכונות"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_100100", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "il_account_100210", "code": "100210", "name": "Machinery and equipment depreciation", "translations": {"he_IL": "הוצאות פחת מכונות"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_100100", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "il_account_100300", "code": "100300", "name": "Vehicles", "translations": {"he_IL": "כלי רכב"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_100100", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "il_account_100310", "code": "100310", "name": "Vehicles depreciation", "translations": {"he_IL": "הוצאות פחת מכוניות"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_100100", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "il_account_100400", "code": "100400", "name": "Other property", "translations": {"he_IL": "נכסים אחרים"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_100100", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "il_account_100410", "code": "100410", "name": "Other property depreciation", "translations": {"he_IL": "הוצאות פחת נכסים אחרים"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_100100", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "il_account_100420", "code": "100420", "name": "Intangible Assets", "translations": {"he_IL": "נכסים בלתי מוחשיים"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_100100", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "il_account_101110", "code": "101110", "name": "Stock Valuation", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "il_account_101120", "code": "101120", "name": "Stock Interim Account (Received)", "translations": {"he_IL": "חשבון זמני - מלאי שהתקבל"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "il_account_101130", "code": "101130", "name": "Stock Interim Account (Delivered)", "translations": {"he_IL": "חשבון זמני - מלאי שנשלח"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "il_account_101140", "code": "101140", "name": "Inventory - Raw materials", "translations": {"he_IL": "מלאי- חומרי גלם"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_variation_id": "il_account_201000"}}},
+    {"source_id": "il_account_101150", "code": "101150", "name": "Inventory - Work in progress", "translations": {"he_IL": "מלאי- עבודה בתהליך"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "il_account_101160", "code": "101160", "name": "Inventory - Finished goods", "translations": {"he_IL": "מלאי- מוצרים מוגמרים"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "il_account_101200", "code": "101200", "name": "Account Receivable", "translations": {"he_IL": "חשבון לקוחות"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "il_account_101201", "code": "101201", "name": "Account Receivable(POS)", "translations": {"he_IL": "חשבון לקוחות (קופה)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "il_account_101250", "code": "101250", "name": "Allowance for credit losses", "translations": {"he_IL": "הפרשה לחובות מסופקים"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "il_account_101310", "code": "101310", "name": "VAT - Inputs", "translations": {"he_IL": "מע\"מ תשומות"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "il_account_101320", "code": "101320", "name": "VAT - Fixed Assets", "translations": {"he_IL": "מע\"מ תשומות (רכוש קבוע)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "il_account_101330", "code": "101330", "name": "VAT - Import Transactions", "translations": {"he_IL": "מע\"מ - ייבוא"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "il_account_101340", "code": "101340", "name": "VAT - PA Import Transactions", "translations": {"he_IL": "מע\"מ - ייבוא מפלסטין"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "il_account_101350", "code": "101350", "name": "Prepayments", "translations": {"he_IL": "הוצאות מראש"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101110", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "il_account_101410", "code": "101410", "name": "Bank Deposit", "translations": {"he_IL": "פקדונות"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101401", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "il_account_101420", "code": "101420", "name": "Cheques", "translations": {"he_IL": "קופת שיקים"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101401", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "il_account_101430", "code": "101430", "name": "Financial Assets", "translations": {"he_IL": "נכסים פיננסיים"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101401", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "il_account_101440", "code": "101440", "name": "Petty Cash", "translations": {"he_IL": "קופה קטנה"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_101401", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "il_account_101840", "code": "101840", "name": "VAT - Inputs import line", "translations": {"he_IL": "מע\"מ - תשומות ייבוא"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "il_account_111000", "code": "111000", "name": "Current Liabilities", "translations": {"he_IL": "התחייבויות שוטפות"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111100", "code": "111100", "name": "Account Payable", "translations": {"he_IL": "חשבון ספקים"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "il_account_111110", "code": "111110", "name": "VAT Sales", "translations": {"he_IL": "מע\"מ עסקאות"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111120", "code": "111120", "name": "VAT PA Sales", "translations": {"he_IL": "מע\"מ עסקאות- פלסטין"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111200", "code": "111200", "name": "Income tax withheld - vendors", "translations": {"he_IL": "ניכוי מס במקור- ספקים"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_il.account_tag_retention_tax_vendor_account"]}},
+    {"source_id": "il_account_111210", "code": "111210", "name": "Income tax withheld - employees", "translations": {"he_IL": "ניכוי מס במקור- עובדים"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_il.account_tag_retention_tax_employees_account"]}},
+    {"source_id": "il_account_111220", "code": "111220", "name": "Income tax withheld - dividends", "translations": {"he_IL": "ניכוי מס במקור- דיבידנד"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_il.account_tag_retention_tax_dividend_account"]}},
+    {"source_id": "il_account_111230", "code": "111230", "name": "Income tax withheld - customers", "translations": {"he_IL": "ניכוי מס במקור- לקוחות"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_il.account_tag_retention_tax_customers_account"]}},
+    {"source_id": "il_account_111400", "code": "111400", "name": "Credit cards", "translations": {"he_IL": "כרטיסי אשראי"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111450", "code": "111450", "name": "Short term loans", "translations": {"he_IL": "הלוואות לזמן קצר"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111460", "code": "111460", "name": "Interest Payable", "translations": {"he_IL": "ריבית לשלם"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111500", "code": "111500", "name": "Employees wages", "translations": {"he_IL": "משכורות עובדים"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111550", "code": "111550", "name": "Employees Benefits", "translations": {"he_IL": "הטבות לעובדים"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111650", "code": "111650", "name": "Advances", "translations": {"he_IL": "מקדמות מלקוחות"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111660", "code": "111660", "name": "Other Payable", "translations": {"he_IL": "הוצאות לשלם"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111700", "code": "111700", "name": "Income Tax", "translations": {"he_IL": "מס הכנסה"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111710", "code": "111710", "name": "National Insurance", "translations": {"he_IL": "ביטוח לאומי"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111720", "code": "111720", "name": "VAT due", "translations": {"he_IL": "מע\"מ לתשלום"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_111730", "code": "111730", "name": "Deferred Taxes", "translations": {"he_IL": "מיסים נדחים"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_111000", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "il_account_112000", "code": "112000", "name": "Non-current Liabilities", "translations": {"he_IL": "התחייבויות לא שוטפות"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_112000", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "il_account_112100", "code": "112100", "name": "Long Term loans", "translations": {"he_IL": "הלוואות לטווח ארוך"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_112000", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "il_account_112150", "code": "112150", "name": "Provisions", "translations": {"he_IL": "הפרשות"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_112000", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "il_account_112210", "code": "112210", "name": "Deferred Revenue", "translations": {"he_IL": "הכנסות נדחות"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_112000", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "il_account_200000", "code": "200000", "name": "Product Sales", "translations": {"he_IL": "מכירות"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_200000", "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_200100", "code": "200100", "name": "Services Sales", "translations": {"he_IL": "מכירות שירות"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_200000", "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_200200", "code": "200200", "name": "Other Income", "translations": {"he_IL": "הכנסות אחרות"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_200200", "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_200300", "code": "200300", "name": "Interest Income", "translations": {"he_IL": "הכנסות מריבית"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_200200", "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_201000", "code": "201000", "name": "Cost of Goods Sold", "translations": {"he_IL": "רווח ממטבע חוץ"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_201000", "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_202000", "code": "202000", "name": "Other Expenses", "translations": {"he_IL": "הכנסות אחרות"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_202100", "code": "202100", "name": "Foreign Exchange Gain&Loss", "translations": {"he_IL": "הפסד ממטבע חוץ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "il_account_202200", "code": "202200", "name": "Interest Expenses", "translations": {"he_IL": "הוצאות ריבית"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "il_account_202300", "code": "202300", "name": "Donations", "translations": {"he_IL": "תרומות"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "il_account_202400", "code": "202400", "name": "Fines", "translations": {"he_IL": "קנסות"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "il_account_211000", "code": "211000", "name": "Cost of Services Sold", "translations": {"he_IL": "עלות המכר - שרותים שנמכרו"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_212000", "code": "212000", "name": "Customer discounts", "translations": {"he_IL": "הנחות לקוח"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_212100", "code": "212100", "name": "Salary Expenses", "translations": {"he_IL": "הוצאות משכורת"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_212200", "code": "212200", "name": "Purchase of Equipment", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "il_account_212300", "code": "212300", "name": "Bank Fees", "translations": {"he_IL": "עמלות בנקים"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "il_account_213000", "code": "213000", "name": "Customer returns", "translations": {"he_IL": "החזרות מלקוחות"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_214000", "code": "214000", "name": "Vendor returns", "translations": {"he_IL": "החזרות לספקים"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_215000", "code": "215000", "name": "Vendor discounts", "translations": {"he_IL": "הנחות מספקים"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_216000", "code": "216000", "name": "Good's Shrinkage", "translations": {"he_IL": "התכווצות סחורה"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_217000", "code": "217000", "name": "Lost goods", "translations": {"he_IL": "איבוד סחורה"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_220000", "code": "220000", "name": "G&A Expenses", "translations": {"he_IL": "הוצאות הנהלה וכלליות"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_220100", "code": "220100", "name": "Rent Expenses", "translations": {"he_IL": "הוצאות שכירות"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_220200", "code": "220200", "name": "Communication expenses", "translations": {"he_IL": "הוצאות תקשורת"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_220300", "code": "220300", "name": "Transportation expenses", "translations": {"he_IL": "הוצאות תחבורה"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_220400", "code": "220400", "name": "Depretiation expenses", "translations": {"he_IL": "הוצאות פחת"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_220500", "code": "220500", "name": "Credit provision expenses", "translations": {"he_IL": "הוצאות הפרשות אשראי"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_220600", "code": "220600", "name": "Sales and marketing expenses", "translations": {"he_IL": "הוצאות מכירות ושיווק"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_220700", "code": "220700", "name": "Other non-operating expenses", "translations": {"he_IL": "הוצאות אחרות שאינן תפעוליות"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_220800", "code": "220800", "name": "Bad debts expense", "translations": {"he_IL": "חובות מסופקים"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "il_group_202000", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "il_account_300100", "code": "300100", "name": "Capital", "translations": {"he_IL": "הון"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_300000", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "il_account_300110", "code": "300110", "name": "Ordinary Shares", "translations": {"he_IL": "מניות רגילות"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_300000", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "il_account_300120", "code": "300120", "name": "Preferred Shares", "translations": {"he_IL": "מניות מועדפות"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_300000", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "il_account_300130", "code": "300130", "name": "Shares Premium", "translations": {"he_IL": "מניות פרימיום"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_300000", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "il_account_300270", "code": "300270", "name": "current year earnings", "translations": {"he_IL": "עודפים מהשנה הנוכחית"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_300000", "reconcile": false, "source": {"account_type": "equity_unaffected"}},
+    {"source_id": "il_account_300300", "code": "300300", "name": "Reserve and Profit/Loss", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "il_group_300000", "reconcile": false, "source": {"account_type": "equity"}}
+  ]
+}

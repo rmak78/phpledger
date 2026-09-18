@@ -1,0 +1,364 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "0de48ba7a55b87f16be896b6874f0960360c3f740ee25e761da680318dc9a296",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "erpnext-version-16/unverified/cr_account_chart_template_0",
+  "country_code": "CR",
+  "country_name": "Costa Rica",
+  "country_basis": "chart file country_code",
+  "name": "Costa Rica - Chart of Accounts 1",
+  "source": {
+    "system": "erpnext",
+    "repository": "https://github.com/frappe/erpnext",
+    "branch": "version-16",
+    "commit": "4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+    "commit_date": "2026-09-08T13:23:31+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "GPL-3.0-only",
+    "license_basis": "repository license.txt (GNU GPL v3); chart files carry no separate licence header",
+    "attribution": "Frappe Technologies Pvt. Ltd. and Contributors",
+    "upstream_folder": "unverified",
+    "upstream_verified": false,
+    "upstream_disabled": false,
+    "files": [
+      {
+        "path": "erpnext/accounts/doctype/account/chart_of_accounts/unverified/cr_account_chart_template_0.json",
+        "sha256": "dfc0c64374f8235920f3bacd9dd12cf656bbdfc870ca3cf9f69b6d5e36776e59",
+        "kind": "json"
+      }
+    ]
+  },
+  "template": {
+    "hierarchy": "nested groups; posting accounts are leaves; source_id is the full ' / ' separated path",
+    "account_numbers_present": false
+  },
+  "role_defaults": {},
+  "type_map": {
+    "Receivable": {
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "Payable": {
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "Bank": {
+      "subtype": "bank",
+      "role_hint": "cash_bank"
+    },
+    "Cash": {
+      "subtype": "cash",
+      "role_hint": "cash_bank"
+    },
+    "Stock": {
+      "subtype": "inventory",
+      "role_hint": null
+    },
+    "Tax": {
+      "subtype": "tax",
+      "role_hint": null
+    },
+    "Cost of Goods Sold": {
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "Fixed Asset": {
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "Accumulated Depreciation": {
+      "subtype": "accumulated_depreciation",
+      "role_hint": null
+    },
+    "Depreciation": {
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "Expense Account": {
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "Income Account": {
+      "subtype": "income",
+      "role_hint": null
+    },
+    "Equity": {
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "Liability": {
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "Chargeable": {
+      "subtype": "chargeable",
+      "role_hint": null
+    },
+    "Stock Received But Not Billed": {
+      "subtype": "stock_received_not_billed",
+      "role_hint": null
+    },
+    "Asset Received But Not Billed": {
+      "subtype": "asset_received_not_billed",
+      "role_hint": null
+    },
+    "Service Received But Not Billed": {
+      "subtype": "service_received_not_billed",
+      "role_hint": null
+    },
+    "Stock Delivered But Not Billed": {
+      "subtype": "stock_delivered_not_billed",
+      "role_hint": null
+    },
+    "Stock Adjustment": {
+      "subtype": "stock_adjustment",
+      "role_hint": null
+    },
+    "Expenses Included In Valuation": {
+      "subtype": "valuation_expense",
+      "role_hint": null
+    },
+    "Expenses Included In Asset Valuation": {
+      "subtype": "asset_valuation_expense",
+      "role_hint": null
+    },
+    "Capital Work in Progress": {
+      "subtype": "capital_work_in_progress",
+      "role_hint": null
+    },
+    "Temporary": {
+      "subtype": "temporary",
+      "role_hint": null
+    },
+    "Round Off": {
+      "subtype": "round_off",
+      "role_hint": null
+    },
+    "Indirect Expense": {
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "Indirect Income": {
+      "subtype": "other_income",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 182,
+    "posting_accounts": 102,
+    "group_accounts": 80,
+    "by_root_type": {
+      "asset": 99,
+      "expense": 57,
+      "income": 11,
+      "liability": 15
+    },
+    "by_subtype": {
+      "group": 80,
+      "unspecified": 102
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 102,
+    "role_hints": {},
+    "unmapped_account_types": {},
+    "roots_without_root_type": [],
+    "top_level_groups": [
+      "0-Activo",
+      "0-Gastos",
+      "0-Ingresos",
+      "0-Pasivo",
+      "0-Patrimonio"
+    ],
+    "max_depth": 6,
+    "account_numbers_present": false
+  },
+  "accounts": [
+    {"source_id": "0-Activo", "code": null, "name": "0-Activo", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Asset"}},
+    {"source_id": "0-Activo / 0-Activo circulante", "code": null, "name": "0-Activo circulante", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo", "depth": 2},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible", "code": null, "name": "0-Activo circulante disponible", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante", "depth": 3},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Bancos", "code": null, "name": "0-Bancos", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Bancos / 0-Cuentas corrientes CRC", "code": null, "name": "0-Cuentas corrientes CRC", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Bancos", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Bancos / 0-Cuentas corrientes CRC / 0-Cuenta en CRC 1", "code": null, "name": "0-Cuenta en CRC 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Bancos / 0-Cuentas corrientes CRC", "depth": 6},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Bancos / 0-Cuentas corrientes USD", "code": null, "name": "0-Cuentas corrientes USD", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Bancos", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Bancos / 0-Cuentas corrientes USD / 0-Cuenta en USD 1", "code": null, "name": "0-Cuenta en USD 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Bancos / 0-Cuentas corrientes USD", "depth": 6},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos de caja", "code": null, "name": "0-Fondos de caja", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos de caja / 0-Fondos de caja CRC", "code": null, "name": "0-Fondos de caja CRC", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos de caja", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos de caja / 0-Fondos de caja CRC / 0-Fondo de caja oficinas centrales CRC", "code": null, "name": "0-Fondo de caja oficinas centrales CRC", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos de caja / 0-Fondos de caja CRC", "depth": 6},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos de caja / 0-Fondos de caja USD", "code": null, "name": "0-Fondos de caja USD", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos de caja", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos de caja / 0-Fondos de caja USD / 0-Fondo de caja oficinas centrales USD", "code": null, "name": "0-Fondo de caja oficinas centrales USD", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos de caja / 0-Fondos de caja USD", "depth": 6},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos en tránsito", "code": null, "name": "0-Fondos en tránsito", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos en tránsito / 0-Fondos en tránsito de PayPal a Bancos", "code": null, "name": "0-Fondos en tránsito de PayPal a Bancos", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos en tránsito", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos en tránsito / 0-Fondos en tránsito en bancos", "code": null, "name": "0-Fondos en tránsito en bancos", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos en tránsito", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos en tránsito / 0-Fondos en tránsito en tesorería", "code": null, "name": "0-Fondos en tránsito en tesorería", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Fondos en tránsito", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Inversiones a la vista", "code": null, "name": "0-Inversiones a la vista", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Inversiones a la vista / 0-Inversión 1", "code": null, "name": "0-Inversión 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-Inversiones a la vista", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-PayPal", "code": null, "name": "0-PayPal", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-PayPal / 0-Cuenta PayPal 1", "code": null, "name": "0-Cuenta PayPal 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante disponible / 0-PayPal", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante exigible", "code": null, "name": "0-Activo circulante exigible", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante", "depth": 3},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante exigible / 0-Cuentas por cobrar a compañías relacionadas", "code": null, "name": "0-Cuentas por cobrar a compañías relacionadas", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante exigible", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante exigible / 0-Cuentas por cobrar a empleados", "code": null, "name": "0-Cuentas por cobrar a empleados", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante exigible", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante exigible / 0-Cuentas por cobrar comerciales", "code": null, "name": "0-Cuentas por cobrar comerciales", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante exigible", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante exigible / 0-Inversiones de corto plazo", "code": null, "name": "0-Inversiones de corto plazo", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante exigible", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante exigible / 0-Otras cuentas por cobrar", "code": null, "name": "0-Otras cuentas por cobrar", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante exigible", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante realizable", "code": null, "name": "0-Activo circulante realizable", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante", "depth": 3},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante realizable / 0-Inventarios", "code": null, "name": "0-Inventarios", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante realizable", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante realizable / 0-Inventarios / 0-Inventario de consumibles", "code": null, "name": "0-Inventario de consumibles", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante realizable / 0-Inventarios", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante realizable / 0-Inventarios / 0-Inventario de producto para la venta", "code": null, "name": "0-Inventario de producto para la venta", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo circulante / 0-Activo circulante realizable / 0-Inventarios", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo fijo", "code": null, "name": "0-Activo fijo", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo", "depth": 2},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable", "code": null, "name": "0-Activo fijo depreciable", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo fijo", "depth": 3},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Activos depreciables móviles", "code": null, "name": "0-Activos depreciables móviles", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Activos depreciables móviles / 0-Equipo de cómputo", "code": null, "name": "0-Equipo de cómputo", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Activos depreciables móviles", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Activos depreciables móviles / 0-Herramientas mayores", "code": null, "name": "0-Herramientas mayores", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Activos depreciables móviles", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Activos depreciables móviles / 0-Maquinaria y equipo de edificios", "code": null, "name": "0-Maquinaria y equipo de edificios", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Activos depreciables móviles", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Activos depreciables móviles / 0-Moibliario y equipo de oficina", "code": null, "name": "0-Moibliario y equipo de oficina", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Activos depreciables móviles", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Activos depreciables móviles / 0-Vehículos", "code": null, "name": "0-Vehículos", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Activos depreciables móviles", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Edificios", "code": null, "name": "0-Edificios", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Edificios / 0-Edificios – Revaluaciones", "code": null, "name": "0-Edificios – Revaluaciones", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Edificios", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Edificios / 0-Edificios – Revaluaciones / 0-Edificio 1", "code": null, "name": "0-Edificio 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Edificios / 0-Edificios – Revaluaciones", "depth": 6},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Edificios / 0-Edificios – Valores originales", "code": null, "name": "0-Edificios – Valores originales", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Edificios", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Edificios / 0-Edificios – Valores originales / 0-Edificio 1", "code": null, "name": "0-Edificio 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Edificios / 0-Edificios – Valores originales", "depth": 6},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Mejoras a edificios", "code": null, "name": "0-Mejoras a edificios", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Mejoras a edificios / 0-Mejoras a edificios – Revaluaciones", "code": null, "name": "0-Mejoras a edificios – Revaluaciones", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Mejoras a edificios", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Mejoras a edificios / 0-Mejoras a edificios – Revaluaciones / 0-Edificio 1", "code": null, "name": "0-Edificio 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Mejoras a edificios / 0-Mejoras a edificios – Revaluaciones", "depth": 6},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Mejoras a edificios / 0-Mejoras a edificios – Valores originales", "code": null, "name": "0-Mejoras a edificios – Valores originales", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Mejoras a edificios", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Mejoras a edificios / 0-Mejoras a edificios – Valores originales / 0-Edificio 1", "code": null, "name": "0-Edificio 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo depreciable / 0-Mejoras a edificios / 0-Mejoras a edificios – Valores originales", "depth": 6},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo no depreciable", "code": null, "name": "0-Activo fijo no depreciable", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo fijo", "depth": 3},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo no depreciable / 0-Terrenos", "code": null, "name": "0-Terrenos", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo no depreciable", "depth": 4},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo no depreciable / 0-Terrenos / 0-Revaluaciones", "code": null, "name": "0-Revaluaciones", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo no depreciable / 0-Terrenos", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo no depreciable / 0-Terrenos / 0-Revaluaciones / 0-Terreno 1", "code": null, "name": "0-Terreno 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo no depreciable / 0-Terrenos / 0-Revaluaciones", "depth": 6},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo no depreciable / 0-Terrenos / 0-Valores originales", "code": null, "name": "0-Valores originales", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo no depreciable / 0-Terrenos", "depth": 5},
+    {"source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo no depreciable / 0-Terrenos / 0-Valores originales / 0-Terreno 1", "code": null, "name": "0-Terreno 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Activo fijo / 0-Activo fijo no depreciable / 0-Terrenos / 0-Valores originales", "depth": 6},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable", "code": null, "name": "0-Depreciaciones acumuladas sobre activo fijo depreciable", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo", "depth": 2},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de activos depreciables móviles", "code": null, "name": "0-Dep. ac. de activos depreciables móviles", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable", "depth": 3},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de activos depreciables móviles / 0-Dep. ac. de equipo de cómputo", "code": null, "name": "0-Dep. ac. de equipo de cómputo", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de activos depreciables móviles", "depth": 4},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de activos depreciables móviles / 0-Dep. ac. de herramientas mayores", "code": null, "name": "0-Dep. ac. de herramientas mayores", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de activos depreciables móviles", "depth": 4},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de activos depreciables móviles / 0-Dep. ac. de maquinaria y equipo de edificios", "code": null, "name": "0-Dep. ac. de maquinaria y equipo de edificios", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de activos depreciables móviles", "depth": 4},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de activos depreciables móviles / 0-Dep. ac. de mobiliario y equipo de oficina", "code": null, "name": "0-Dep. ac. de mobiliario y equipo de oficina", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de activos depreciables móviles", "depth": 4},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de activos depreciables móviles / 0-Dep. ac. de vehículos", "code": null, "name": "0-Dep. ac. de vehículos", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de activos depreciables móviles", "depth": 4},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de edificios", "code": null, "name": "0-Dep. ac. de edificios", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable", "depth": 3},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de edificios / 0-Dep. ac. de edificios – Revaluaciones", "code": null, "name": "0-Dep. ac. de edificios – Revaluaciones", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de edificios", "depth": 4},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de edificios / 0-Dep. ac. de edificios – Revaluaciones / 0-Edificio 1", "code": null, "name": "0-Edificio 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de edificios / 0-Dep. ac. de edificios – Revaluaciones", "depth": 5},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de edificios / 0-Dep. ac. de edificios – Valores originales", "code": null, "name": "0-Dep. ac. de edificios – Valores originales", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de edificios", "depth": 4},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de edificios / 0-Dep. ac. de edificios – Valores originales / 0-Edificio 1", "code": null, "name": "0-Edificio 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de edificios / 0-Dep. ac. de edificios – Valores originales", "depth": 5},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de mejoras a edificios", "code": null, "name": "0-Dep. ac. de mejoras a edificios", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable", "depth": 3},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de mejoras a edificios / 0-Dep. ac. de mejoras a edificios – Revaluaciones", "code": null, "name": "0-Dep. ac. de mejoras a edificios – Revaluaciones", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de mejoras a edificios", "depth": 4},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de mejoras a edificios / 0-Dep. ac. de mejoras a edificios – Revaluaciones / 0-Edificio 1", "code": null, "name": "0-Edificio 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de mejoras a edificios / 0-Dep. ac. de mejoras a edificios – Revaluaciones", "depth": 5},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de mejoras a edificios / 0-Dep. ac. de mejoras a edificios – Valores originales", "code": null, "name": "0-Dep. ac. de mejoras a edificios – Valores originales", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de mejoras a edificios", "depth": 4},
+    {"source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de mejoras a edificios / 0-Dep. ac. de mejoras a edificios – Valores originales / 0-Edificio 1", "code": null, "name": "0-Edificio 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Depreciaciones acumuladas sobre activo fijo depreciable / 0-Dep. ac. de mejoras a edificios / 0-Dep. ac. de mejoras a edificios – Valores originales", "depth": 5},
+    {"source_id": "0-Activo / 0-Otros activos", "code": null, "name": "0-Otros activos", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo", "depth": 2},
+    {"source_id": "0-Activo / 0-Otros activos / 0-Depósitos de garantía", "code": null, "name": "0-Depósitos de garantía", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Otros activos", "depth": 3},
+    {"source_id": "0-Activo / 0-Otros activos / 0-Depósitos de garantía / 0-Depósitos sobre conexiones de Internet", "code": null, "name": "0-Depósitos sobre conexiones de Internet", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Otros activos / 0-Depósitos de garantía", "depth": 4},
+    {"source_id": "0-Activo / 0-Otros activos / 0-Depósitos de garantía / 0-Depósitos sobre derechos telefónicos", "code": null, "name": "0-Depósitos sobre derechos telefónicos", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Otros activos / 0-Depósitos de garantía", "depth": 4},
+    {"source_id": "0-Activo / 0-Otros activos / 0-Depósitos de garantía / 0-Depósitos sobre locales en alquiler", "code": null, "name": "0-Depósitos sobre locales en alquiler", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Otros activos / 0-Depósitos de garantía", "depth": 4},
+    {"source_id": "0-Activo / 0-Otros activos / 0-Gastos pagados por anticipado", "code": null, "name": "0-Gastos pagados por anticipado", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Activo / 0-Otros activos", "depth": 3},
+    {"source_id": "0-Activo / 0-Otros activos / 0-Gastos pagados por anticipado / 0-Pólizas de seguros prepagadas", "code": null, "name": "0-Pólizas de seguros prepagadas", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Activo / 0-Otros activos / 0-Gastos pagados por anticipado", "depth": 4},
+    {"source_id": "0-Gastos", "code": null, "name": "0-Gastos", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense"}},
+    {"source_id": "0-Gastos / 0-Gastos no deducibles", "code": null, "name": "0-Gastos no deducibles", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos", "depth": 2},
+    {"source_id": "0-Gastos / 0-Gastos no deducibles / 0-Diferencial cambiario", "code": null, "name": "0-Diferencial cambiario", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos no deducibles", "depth": 3},
+    {"source_id": "0-Gastos / 0-Gastos no deducibles / 0-Donaciones no deducibles", "code": null, "name": "0-Donaciones no deducibles", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos no deducibles", "depth": 3},
+    {"source_id": "0-Gastos / 0-Gastos no deducibles / 0-Gastos de presidencia", "code": null, "name": "0-Gastos de presidencia", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos no deducibles", "depth": 3},
+    {"source_id": "0-Gastos / 0-Gastos no deducibles / 0-Multas", "code": null, "name": "0-Multas", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos no deducibles", "depth": 3},
+    {"source_id": "0-Gastos / 0-Gastos principales", "code": null, "name": "0-Gastos principales", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos", "depth": 2},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos", "code": null, "name": "0-Gastos administrativos", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales", "depth": 3},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Alquiler", "code": null, "name": "0-Alquiler", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos", "depth": 4},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Alquiler / 0-Oficina 1", "code": null, "name": "0-Oficina 1", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Alquiler", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Cuota por administración", "code": null, "name": "0-Cuota por administración", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos", "depth": 4},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Cuota por administración / 0-Compañía administradora 1", "code": null, "name": "0-Compañía administradora 1", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Cuota por administración", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Equipo de cómputo y comunicación", "code": null, "name": "0-Equipo de cómputo y comunicación", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos", "depth": 4},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Equipo de cómputo y comunicación / 0-Departamento 1", "code": null, "name": "0-Departamento 1", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Equipo de cómputo y comunicación", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos", "code": null, "name": "0-Servicios públicos", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos", "depth": 4},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos / 0-Agua", "code": null, "name": "0-Agua", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos / 0-Agua / 0-Medidor 1", "code": null, "name": "0-Medidor 1", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos / 0-Agua", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos / 0-Internet", "code": null, "name": "0-Internet", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos / 0-Internet / 0-Contrato 1", "code": null, "name": "0-Contrato 1", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos / 0-Internet", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos / 0-Luz", "code": null, "name": "0-Luz", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos / 0-Luz / 0-Medidor 1", "code": null, "name": "0-Medidor 1", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos / 0-Luz", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos / 0-Teléfono", "code": null, "name": "0-Teléfono", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos / 0-Teléfono / 0-Teléfono 1", "code": null, "name": "0-Teléfono 1", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Servicios públicos / 0-Teléfono", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Suministros de oficina", "code": null, "name": "0-Suministros de oficina", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos", "depth": 4},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Suministros de oficina / 0-Departamento 1", "code": null, "name": "0-Departamento 1", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos administrativos / 0-Suministros de oficina", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos", "code": null, "name": "0-Gastos operativos", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales", "depth": 3},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Costo de venta de producto", "code": null, "name": "0-Costo de venta de producto", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos", "depth": 4},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Costo de venta de producto / 0-Costo de almacenamiento", "code": null, "name": "0-Costo de almacenamiento", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Costo de venta de producto", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Costo de venta de producto / 0-Costo de distribución", "code": null, "name": "0-Costo de distribución", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Costo de venta de producto", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Costo de venta de producto / 0-Costo de materia prima", "code": null, "name": "0-Costo de materia prima", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Costo de venta de producto", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Costo de venta de producto / 0-Costo de producción", "code": null, "name": "0-Costo de producción", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Costo de venta de producto", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Costo de venta de producto / 0-Costo de producto", "code": null, "name": "0-Costo de producto", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Costo de venta de producto", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de mercadeo", "code": null, "name": "0-Gastos de mercadeo", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos", "depth": 4},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de mercadeo / 0-Campañas publicitarias", "code": null, "name": "0-Campañas publicitarias", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de mercadeo", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de mercadeo / 0-Diseño de imagen", "code": null, "name": "0-Diseño de imagen", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de mercadeo", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal", "code": null, "name": "0-Gastos de personal", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos", "depth": 4},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones", "code": null, "name": "0-Salarios y deducciones", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones / 0-Aguinaldo", "code": null, "name": "0-Aguinaldo", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones / 0-Bonificaciones", "code": null, "name": "0-Bonificaciones", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones / 0-Cargas patronales", "code": null, "name": "0-Cargas patronales", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones / 0-Cesantía", "code": null, "name": "0-Cesantía", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones / 0-Comisiones", "code": null, "name": "0-Comisiones", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones / 0-Extras", "code": null, "name": "0-Extras", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones / 0-Preaviso", "code": null, "name": "0-Preaviso", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones / 0-Salarios", "code": null, "name": "0-Salarios", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Salarios y deducciones", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Viáticos", "code": null, "name": "0-Viáticos", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal", "depth": 5},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Viáticos / 0-Alimentación", "code": null, "name": "0-Alimentación", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Viáticos", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Viáticos / 0-Hospedaje", "code": null, "name": "0-Hospedaje", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Viáticos", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Viáticos / 0-Transporte", "code": null, "name": "0-Transporte", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Gastos de personal / 0-Viáticos", "depth": 6},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Servicios profesionales", "code": null, "name": "0-Servicios profesionales", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos", "depth": 4},
+    {"source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Servicios profesionales / 0-Categoría 1", "code": null, "name": "0-Categoría 1", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Gastos principales / 0-Gastos operativos / 0-Servicios profesionales", "depth": 5},
+    {"source_id": "0-Gastos / 0-Otros gastos", "code": null, "name": "0-Otros gastos", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Gastos", "depth": 2},
+    {"source_id": "0-Gastos / 0-Otros gastos / 0-Ajustes", "code": null, "name": "0-Ajustes", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Otros gastos", "depth": 3},
+    {"source_id": "0-Gastos / 0-Otros gastos / 0-Depreciación de activo fijo", "code": null, "name": "0-Depreciación de activo fijo", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Otros gastos", "depth": 3},
+    {"source_id": "0-Gastos / 0-Otros gastos / 0-Donaciones deducibles", "code": null, "name": "0-Donaciones deducibles", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Otros gastos", "depth": 3},
+    {"source_id": "0-Gastos / 0-Otros gastos / 0-Gastos Financieros", "code": null, "name": "0-Gastos Financieros", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Otros gastos", "depth": 3},
+    {"source_id": "0-Gastos / 0-Otros gastos / 0-Perdida por robo", "code": null, "name": "0-Perdida por robo", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Gastos / 0-Otros gastos", "depth": 3},
+    {"source_id": "0-Ingresos", "code": null, "name": "0-Ingresos", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Income"}},
+    {"source_id": "0-Ingresos / 0-Ingresos financieros", "code": null, "name": "0-Ingresos financieros", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "0-Ingresos", "depth": 2},
+    {"source_id": "0-Ingresos / 0-Ingresos financieros / 0-Intereses ganados sobre cuentas corrientes", "code": null, "name": "0-Intereses ganados sobre cuentas corrientes", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Ingresos / 0-Ingresos financieros", "depth": 3},
+    {"source_id": "0-Ingresos / 0-Ingresos no gravables", "code": null, "name": "0-Ingresos no gravables", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "0-Ingresos", "depth": 2},
+    {"source_id": "0-Ingresos / 0-Ingresos no gravables / 0-Diferencial cambiario", "code": null, "name": "0-Diferencial cambiario", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Ingresos / 0-Ingresos no gravables", "depth": 3},
+    {"source_id": "0-Ingresos / 0-Ingresos por administración", "code": null, "name": "0-Ingresos por administración", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "0-Ingresos", "depth": 2},
+    {"source_id": "0-Ingresos / 0-Ingresos por administración / 0-Cuota por administración", "code": null, "name": "0-Cuota por administración", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Ingresos / 0-Ingresos por administración", "depth": 3},
+    {"source_id": "0-Ingresos / 0-Ingresos por ventas", "code": null, "name": "0-Ingresos por ventas", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Ingresos", "depth": 2},
+    {"source_id": "0-Ingresos / 0-Otros ingresos", "code": null, "name": "0-Otros ingresos", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "0-Ingresos", "depth": 2},
+    {"source_id": "0-Ingresos / 0-Otros ingresos / 0-Ajustes", "code": null, "name": "0-Ajustes", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Ingresos / 0-Otros ingresos", "depth": 3},
+    {"source_id": "0-Ingresos / 0-Otros ingresos / 0-Donaciones", "code": null, "name": "0-Donaciones", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Ingresos / 0-Otros ingresos", "depth": 3},
+    {"source_id": "0-Pasivo", "code": null, "name": "0-Pasivo", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Liability"}},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante", "code": null, "name": "0-Pasivo circulante", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "0-Pasivo", "depth": 2},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Cuentas por pagar", "code": null, "name": "0-Cuentas por pagar", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "0-Pasivo / 0-Pasivo circulante", "depth": 3},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Cuentas por pagar / 0-Cuentas por pagar a compañías relacionadas", "code": null, "name": "0-Cuentas por pagar a compañías relacionadas", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Pasivo / 0-Pasivo circulante / 0-Cuentas por pagar", "depth": 4},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Cuentas por pagar / 0-Cuentas por pagar a empleados", "code": null, "name": "0-Cuentas por pagar a empleados", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Pasivo / 0-Pasivo circulante / 0-Cuentas por pagar", "depth": 4},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Cuentas por pagar / 0-Cuentas por pagar a proveedores", "code": null, "name": "0-Cuentas por pagar a proveedores", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Pasivo / 0-Pasivo circulante / 0-Cuentas por pagar", "depth": 4},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Cuentas por pagar / 0-Cuentas por pagar de provisiones", "code": null, "name": "0-Cuentas por pagar de provisiones", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Pasivo / 0-Pasivo circulante / 0-Cuentas por pagar", "depth": 4},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos", "code": null, "name": "0-Impuestos", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "0-Pasivo / 0-Pasivo circulante", "depth": 3},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos / 0-Impuesto de renta", "code": null, "name": "0-Impuesto de renta", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos", "depth": 4},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos / 0-Impuesto de renta / 0-Adelantos de impuesto de renta", "code": null, "name": "0-Adelantos de impuesto de renta", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos / 0-Impuesto de renta", "depth": 5},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos / 0-Impuesto de renta / 0-Impuesto de renta por pagar", "code": null, "name": "0-Impuesto de renta por pagar", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos / 0-Impuesto de renta", "depth": 5},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos / 0-Impuesto de renta / 0-Retenciones de impuesto de renta", "code": null, "name": "0-Retenciones de impuesto de renta", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos / 0-Impuesto de renta", "depth": 5},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos / 0-Impuesto de ventas", "code": null, "name": "0-Impuesto de ventas", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos", "depth": 4},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos / 0-Impuesto de ventas / 0-Impuesto de ventas pagado", "code": null, "name": "0-Impuesto de ventas pagado", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos / 0-Impuesto de ventas", "depth": 5},
+    {"source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos / 0-Impuesto de ventas / 0-Impuesto de ventas por pagar", "code": null, "name": "0-Impuesto de ventas por pagar", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "0-Pasivo / 0-Pasivo circulante / 0-Impuestos / 0-Impuesto de ventas", "depth": 5},
+    {"source_id": "0-Patrimonio", "code": null, "name": "0-Patrimonio", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Asset"}},
+    {"source_id": "0-Patrimonio / 0-Aportes de capital", "code": null, "name": "0-Aportes de capital", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Patrimonio", "depth": 2},
+    {"source_id": "0-Patrimonio / 0-Aportes de capital / 0-Socio 1", "code": null, "name": "0-Socio 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Patrimonio / 0-Aportes de capital", "depth": 3},
+    {"source_id": "0-Patrimonio / 0-Balance inicial", "code": null, "name": "0-Balance inicial", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Patrimonio", "depth": 2},
+    {"source_id": "0-Patrimonio / 0-Balance inicial / 0-Balance inicial", "code": null, "name": "0-Balance inicial", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Patrimonio / 0-Balance inicial", "depth": 3},
+    {"source_id": "0-Patrimonio / 0-Capital social", "code": null, "name": "0-Capital social", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Patrimonio", "depth": 2},
+    {"source_id": "0-Patrimonio / 0-Capital social / 0-Socio 1", "code": null, "name": "0-Socio 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Patrimonio / 0-Capital social", "depth": 3},
+    {"source_id": "0-Patrimonio / 0-Cuentas de superávit", "code": null, "name": "0-Cuentas de superávit", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Patrimonio", "depth": 2},
+    {"source_id": "0-Patrimonio / 0-Cuentas de superávit / 0-Superavit ganado", "code": null, "name": "0-Superavit ganado", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Patrimonio / 0-Cuentas de superávit", "depth": 3},
+    {"source_id": "0-Patrimonio / 0-Cuentas de superávit / 0-Superavit por revaluación de activos", "code": null, "name": "0-Superavit por revaluación de activos", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Patrimonio / 0-Cuentas de superávit", "depth": 3},
+    {"source_id": "0-Patrimonio / 0-Cuentas de superávit / 0-Superávit de capital", "code": null, "name": "0-Superávit de capital", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Patrimonio / 0-Cuentas de superávit", "depth": 3},
+    {"source_id": "0-Patrimonio / 0-Otras reservas", "code": null, "name": "0-Otras reservas", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Patrimonio", "depth": 2},
+    {"source_id": "0-Patrimonio / 0-Otras reservas / 0-Reserva para mejoras", "code": null, "name": "0-Reserva para mejoras", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Patrimonio / 0-Otras reservas", "depth": 3},
+    {"source_id": "0-Patrimonio / 0-Otras reservas / 0-Reserva para proyectos", "code": null, "name": "0-Reserva para proyectos", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Patrimonio / 0-Otras reservas", "depth": 3},
+    {"source_id": "0-Patrimonio / 0-Reserva legal", "code": null, "name": "0-Reserva legal", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Patrimonio", "depth": 2},
+    {"source_id": "0-Patrimonio / 0-Reserva legal / 0-Reserva legal", "code": null, "name": "0-Reserva legal", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Patrimonio / 0-Reserva legal", "depth": 3},
+    {"source_id": "0-Patrimonio / 0-Utilidad o pérdida acumulada de periodos anteriores", "code": null, "name": "0-Utilidad o pérdida acumulada de periodos anteriores", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Patrimonio", "depth": 2},
+    {"source_id": "0-Patrimonio / 0-Utilidad o pérdida acumulada de periodos anteriores / 0-Periodo 1", "code": null, "name": "0-Periodo 1", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Patrimonio / 0-Utilidad o pérdida acumulada de periodos anteriores", "depth": 3},
+    {"source_id": "0-Patrimonio / 0-Utilidad o pérdida del período actual", "code": null, "name": "0-Utilidad o pérdida del período actual", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "0-Patrimonio", "depth": 2},
+    {"source_id": "0-Patrimonio / 0-Utilidad o pérdida del período actual / 0-Utilidad o pérdida del período actual", "code": null, "name": "0-Utilidad o pérdida del período actual", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "0-Patrimonio / 0-Utilidad o pérdida del período actual", "depth": 3}
+  ]
+}

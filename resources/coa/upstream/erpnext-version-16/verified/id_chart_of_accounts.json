@@ -1,0 +1,557 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "89e7244548fd85855a3ee27a296c2d406a53712b9fe7693c957468b35ce145dd",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "erpnext-version-16/verified/id_chart_of_accounts",
+  "country_code": "ID",
+  "country_name": "Indonesia",
+  "country_basis": "chart file country_code",
+  "name": "Indonesia - Chart of Accounts",
+  "source": {
+    "system": "erpnext",
+    "repository": "https://github.com/frappe/erpnext",
+    "branch": "version-16",
+    "commit": "4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+    "commit_date": "2026-09-08T13:23:31+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "GPL-3.0-only",
+    "license_basis": "repository license.txt (GNU GPL v3); chart files carry no separate licence header",
+    "attribution": "Frappe Technologies Pvt. Ltd. and Contributors",
+    "upstream_folder": "verified",
+    "upstream_verified": true,
+    "upstream_disabled": false,
+    "files": [
+      {
+        "path": "erpnext/accounts/doctype/account/chart_of_accounts/verified/id_chart_of_accounts.json",
+        "sha256": "fbc4f7bb8fc55cd20c6a2a6c25bf8d870f80964610a565fbaac304b2b8c5c4af",
+        "kind": "json"
+      }
+    ]
+  },
+  "template": {
+    "hierarchy": "nested groups; posting accounts are leaves; source_id is the full ' / ' separated path",
+    "account_numbers_present": true
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / Aktiva Lancar / Piutang / Piutang Dagang / Piutang Dagang",
+        "code": "1131.0010",
+        "name": "Piutang Dagang",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / Aktiva Lancar / Piutang / Piutang Lain lain / Piutang Lain-lain 1",
+        "code": "1132.001",
+        "name": "Piutang Lain-lain 1",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "account_type",
+        "source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency / Hutang Dagang Biaya Kirim Dalam Negeri",
+        "code": "2112.005",
+        "name": "Hutang Dagang Biaya Kirim Dalam Negeri",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency / Hutang Dagang Biaya Kirim Luar Negeri (SGD)",
+        "code": "2112.004",
+        "name": "Hutang Dagang Biaya Kirim Luar Negeri (SGD)",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency / Hutang Dagang Biaya Kirim Luar Negeri (USD)",
+        "code": "2112.003",
+        "name": "Hutang Dagang Biaya Kirim Luar Negeri (USD)",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency / Hutang Dagang Luar Negeri (SGD)",
+        "code": "2112.002",
+        "name": "Hutang Dagang Luar Negeri (SGD)",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency / Hutang Dagang Luar Negeri (USD)",
+        "code": "2112.001",
+        "name": "Hutang Dagang Luar Negeri (USD)",
+        "resolved": true
+      }
+    ],
+    "cash": [
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / Aktiva Lancar / Kas / Kas Mata Uang Lain / Kas USD",
+        "code": "1112.001",
+        "name": "Kas USD",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / Aktiva Lancar / Kas / Kas Rupiah / Kas Besar",
+        "code": "1111.002",
+        "name": "Kas Besar",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / Aktiva Lancar / Kas / Kas Rupiah / Kas Kecil",
+        "code": "1111.001",
+        "name": "Kas Kecil",
+        "resolved": true
+      }
+    ],
+    "bank": [
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / Aktiva Lancar / Persediaan Barang / Uang Muka Pembelian / Uang Muka Pembelian",
+        "code": "1142.001",
+        "name": "Uang Muka Pembelian",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Passiva / Pasiva Lancar / Pendapatan di Terima di Muka / Pendapatan di Terima di Muka / Dp Penjualan",
+        "code": "2121.001",
+        "name": "Dp Penjualan",
+        "resolved": true
+      }
+    ],
+    "inventory": [
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / Aktiva Lancar / Persediaan Barang / Persediaan Barang",
+        "code": "1141.000",
+        "name": "Persediaan Barang",
+        "resolved": true
+      }
+    ],
+    "direct_cost": [
+      {
+        "source_field": "account_type",
+        "source_id": "Penjualan / Harga Pokok Pembelian / HPP Pembelian",
+        "code": "4210.000",
+        "name": "HPP Pembelian",
+        "resolved": true
+      }
+    ],
+    "round_off": [
+      {
+        "source_field": "account_type",
+        "source_id": "Beban / Beban Lain lain / Beban Lain lain / Selisih Kurs",
+        "code": "5510.010",
+        "name": "Selisih Kurs",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Beban / Beban Lain lain / Beban Lain lain / Selisih Pembayaran Customer",
+        "code": "5510.009",
+        "name": "Selisih Pembayaran Customer",
+        "resolved": true
+      }
+    ],
+    "temporary": [
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiva / Aktiva Lancar / Akun sementara / Pembukaan sementara",
+        "code": "1171.000",
+        "name": "Pembukaan sementara",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "Receivable": {
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "Payable": {
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "Bank": {
+      "subtype": "bank",
+      "role_hint": "cash_bank"
+    },
+    "Cash": {
+      "subtype": "cash",
+      "role_hint": "cash_bank"
+    },
+    "Stock": {
+      "subtype": "inventory",
+      "role_hint": null
+    },
+    "Tax": {
+      "subtype": "tax",
+      "role_hint": null
+    },
+    "Cost of Goods Sold": {
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "Fixed Asset": {
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "Accumulated Depreciation": {
+      "subtype": "accumulated_depreciation",
+      "role_hint": null
+    },
+    "Depreciation": {
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "Expense Account": {
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "Income Account": {
+      "subtype": "income",
+      "role_hint": null
+    },
+    "Equity": {
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "Liability": {
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "Chargeable": {
+      "subtype": "chargeable",
+      "role_hint": null
+    },
+    "Stock Received But Not Billed": {
+      "subtype": "stock_received_not_billed",
+      "role_hint": null
+    },
+    "Asset Received But Not Billed": {
+      "subtype": "asset_received_not_billed",
+      "role_hint": null
+    },
+    "Service Received But Not Billed": {
+      "subtype": "service_received_not_billed",
+      "role_hint": null
+    },
+    "Stock Delivered But Not Billed": {
+      "subtype": "stock_delivered_not_billed",
+      "role_hint": null
+    },
+    "Stock Adjustment": {
+      "subtype": "stock_adjustment",
+      "role_hint": null
+    },
+    "Expenses Included In Valuation": {
+      "subtype": "valuation_expense",
+      "role_hint": null
+    },
+    "Expenses Included In Asset Valuation": {
+      "subtype": "asset_valuation_expense",
+      "role_hint": null
+    },
+    "Capital Work in Progress": {
+      "subtype": "capital_work_in_progress",
+      "role_hint": null
+    },
+    "Temporary": {
+      "subtype": "temporary",
+      "role_hint": null
+    },
+    "Round Off": {
+      "subtype": "round_off",
+      "role_hint": null
+    },
+    "Indirect Expense": {
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "Indirect Income": {
+      "subtype": "other_income",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 218,
+    "posting_accounts": 145,
+    "group_accounts": 73,
+    "by_root_type": {
+      "asset": 45,
+      "equity": 9,
+      "expense": 103,
+      "income": 18,
+      "liability": 43
+    },
+    "by_subtype": {
+      "accumulated_depreciation": 1,
+      "bank": 3,
+      "cash": 4,
+      "depreciation": 1,
+      "direct_cost": 1,
+      "fixed_asset": 1,
+      "group": 71,
+      "income": 1,
+      "inventory": 1,
+      "payable": 10,
+      "receivable": 2,
+      "round_off": 2,
+      "stock_adjustment": 1,
+      "stock_received_not_billed": 1,
+      "tax": 3,
+      "temporary": 1,
+      "unspecified": 113,
+      "valuation_expense": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 5,
+      "payables": 10,
+      "receivables": 2
+    },
+    "unmapped_account_types": {},
+    "roots_without_root_type": [],
+    "top_level_groups": [
+      "Aktiva",
+      "Beban",
+      "Modal",
+      "Passiva",
+      "Penjualan"
+    ],
+    "max_depth": 6,
+    "account_numbers_present": true
+  },
+  "accounts": [
+    {"source_id": "Aktiva", "code": "1000.000", "name": "Aktiva", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Asset"}},
+    {"source_id": "Aktiva / Aktiva Lancar", "code": "1100.000", "name": "Aktiva Lancar", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva", "depth": 2},
+    {"source_id": "Aktiva / Aktiva Lancar / Akun sementara", "code": "1170.000", "name": "Akun sementara", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar", "depth": 3},
+    {"source_id": "Aktiva / Aktiva Lancar / Akun sementara / Pembukaan sementara", "code": "1171.000", "name": "Pembukaan sementara", "root_type": "asset", "subtype": "temporary", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Lancar / Akun sementara", "depth": 4, "source": {"account_type": "Temporary"}},
+    {"source_id": "Aktiva / Aktiva Lancar / Bank", "code": "1120.000", "name": "Bank", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar", "depth": 3, "source": {"account_type": "Bank"}},
+    {"source_id": "Aktiva / Aktiva Lancar / Bank / Bank Other Currency", "code": "1122.000", "name": "Bank Other Currency", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar / Bank", "depth": 4, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / Aktiva Lancar / Bank / Bank Rupiah", "code": "1121.000", "name": "Bank Rupiah", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar / Bank", "depth": 4, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka", "code": "1150.000", "name": "Biaya di Bayar di Muka", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar", "depth": 3},
+    {"source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka / Biaya di Bayar di Muka", "code": "1151.000", "name": "Biaya di Bayar di Muka", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka", "depth": 4},
+    {"source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka / Biaya di Bayar di Muka / Biaya di Bayar di Muka", "code": "1151.001", "name": "Biaya di Bayar di Muka", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka / Biaya di Bayar di Muka", "depth": 5},
+    {"source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka / Biaya di Bayar di Muka / Biaya di Bayar di Muka / Biaya d Bayar di Muka", "code": "1151.00111", "name": "Biaya d Bayar di Muka", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka / Biaya di Bayar di Muka / Biaya di Bayar di Muka", "depth": 6},
+    {"source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka / Pajak Dibayar di Muka", "code": "1152.000", "name": "Pajak Dibayar di Muka", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka", "depth": 4},
+    {"source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka / Pajak Dibayar di Muka / PPN Masukan", "code": "1152.001", "name": "PPN Masukan", "root_type": "asset", "subtype": "tax", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka / Pajak Dibayar di Muka", "depth": 5, "source": {"account_type": "Tax"}},
+    {"source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka / Pajak Dibayar di Muka / PPh 23 Dibayar di Muka", "code": "1152.002", "name": "PPh 23 Dibayar di Muka", "root_type": "asset", "subtype": "tax", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Lancar / Biaya di Bayar di Muka / Pajak Dibayar di Muka", "depth": 5, "source": {"account_type": "Tax"}},
+    {"source_id": "Aktiva / Aktiva Lancar / Kas", "code": "1110.000", "name": "Kas", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar", "depth": 3},
+    {"source_id": "Aktiva / Aktiva Lancar / Kas / Kas Mata Uang Lain", "code": "1112.000", "name": "Kas Mata Uang Lain", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar / Kas", "depth": 4},
+    {"source_id": "Aktiva / Aktiva Lancar / Kas / Kas Mata Uang Lain / Kas USD", "code": "1112.001", "name": "Kas USD", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Lancar / Kas / Kas Mata Uang Lain", "depth": 5, "role_hint": "cash_bank", "source": {"account_type": "Cash"}},
+    {"source_id": "Aktiva / Aktiva Lancar / Kas / Kas Rupiah", "code": "1111.000", "name": "Kas Rupiah", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar / Kas", "depth": 4, "source": {"account_type": "Cash"}},
+    {"source_id": "Aktiva / Aktiva Lancar / Kas / Kas Rupiah / Kas Besar", "code": "1111.002", "name": "Kas Besar", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Lancar / Kas / Kas Rupiah", "depth": 5, "role_hint": "cash_bank", "source": {"account_type": "Cash"}},
+    {"source_id": "Aktiva / Aktiva Lancar / Kas / Kas Rupiah / Kas Kecil", "code": "1111.001", "name": "Kas Kecil", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Lancar / Kas / Kas Rupiah", "depth": 5, "role_hint": "cash_bank", "source": {"account_type": "Cash"}},
+    {"source_id": "Aktiva / Aktiva Lancar / Pendapatan Yang Akan di Terima", "code": "1160.000", "name": "Pendapatan Yang Akan di Terima", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar", "depth": 3},
+    {"source_id": "Aktiva / Aktiva Lancar / Pendapatan Yang Akan di Terima / Pendapatan Yang di Terima", "code": "1161.000", "name": "Pendapatan Yang di Terima", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar / Pendapatan Yang Akan di Terima", "depth": 4},
+    {"source_id": "Aktiva / Aktiva Lancar / Pendapatan Yang Akan di Terima / Pendapatan Yang di Terima / Pendapatan Yang Akan di Terima", "code": "1161.001", "name": "Pendapatan Yang Akan di Terima", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Lancar / Pendapatan Yang Akan di Terima / Pendapatan Yang di Terima", "depth": 5},
+    {"source_id": "Aktiva / Aktiva Lancar / Persediaan Barang", "code": "1140.000", "name": "Persediaan Barang", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar", "depth": 3},
+    {"source_id": "Aktiva / Aktiva Lancar / Persediaan Barang / Persediaan Barang", "code": "1141.000", "name": "Persediaan Barang", "root_type": "asset", "subtype": "inventory", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Lancar / Persediaan Barang", "depth": 4, "source": {"account_type": "Stock"}},
+    {"source_id": "Aktiva / Aktiva Lancar / Persediaan Barang / Uang Muka Pembelian", "code": "1142.000", "name": "Uang Muka Pembelian", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar / Persediaan Barang", "depth": 4},
+    {"source_id": "Aktiva / Aktiva Lancar / Persediaan Barang / Uang Muka Pembelian / Uang Muka Pembelian", "code": "1142.001", "name": "Uang Muka Pembelian", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Lancar / Persediaan Barang / Uang Muka Pembelian", "depth": 5, "role_hint": "cash_bank", "source": {"account_type": "Bank"}},
+    {"source_id": "Aktiva / Aktiva Lancar / Piutang", "code": "1130.000", "name": "Piutang", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar", "depth": 3},
+    {"source_id": "Aktiva / Aktiva Lancar / Piutang / Piutang Dagang", "code": "1131.000", "name": "Piutang Dagang", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar / Piutang", "depth": 4},
+    {"source_id": "Aktiva / Aktiva Lancar / Piutang / Piutang Dagang / Piutang Dagang", "code": "1131.0010", "name": "Piutang Dagang", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Lancar / Piutang / Piutang Dagang", "depth": 5, "role_hint": "receivables", "source": {"account_type": "Receivable"}},
+    {"source_id": "Aktiva / Aktiva Lancar / Piutang / Piutang Lain lain", "code": "1132.000", "name": "Piutang Lain lain", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Lancar / Piutang", "depth": 4},
+    {"source_id": "Aktiva / Aktiva Lancar / Piutang / Piutang Lain lain / Piutang Lain-lain 1", "code": "1132.001", "name": "Piutang Lain-lain 1", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Lancar / Piutang / Piutang Lain lain", "depth": 5, "role_hint": "receivables", "source": {"account_type": "Receivable"}},
+    {"source_id": "Aktiva / Aktiva Tetap", "code": "1200.000", "name": "Aktiva Tetap", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva", "depth": 2},
+    {"source_id": "Aktiva / Aktiva Tetap / Aktiva", "code": "1210.000", "name": "Aktiva", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Tetap", "depth": 3},
+    {"source_id": "Aktiva / Aktiva Tetap / Aktiva / Aktiva", "code": "1211.000", "name": "Aktiva", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Tetap / Aktiva", "depth": 4},
+    {"source_id": "Aktiva / Aktiva Tetap / Aktiva / Aktiva / Aktiva", "code": "1211.001", "name": "Aktiva", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Tetap / Aktiva / Aktiva", "depth": 5, "source": {"account_type": "Fixed Asset"}},
+    {"source_id": "Aktiva / Aktiva Tetap / Aktiva / Akumulasi Penyusutan Aktiva", "code": "1212.000", "name": "Akumulasi Penyusutan Aktiva", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Tetap / Aktiva", "depth": 4},
+    {"source_id": "Aktiva / Aktiva Tetap / Aktiva / Akumulasi Penyusutan Aktiva / Akumulasi Penyusutan Aktiva", "code": "1212.001", "name": "Akumulasi Penyusutan Aktiva", "root_type": "asset", "subtype": "accumulated_depreciation", "normal_balance": "credit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Tetap / Aktiva / Akumulasi Penyusutan Aktiva", "depth": 5, "flags": ["contra"], "source": {"account_type": "Accumulated Depreciation"}},
+    {"source_id": "Aktiva / Aktiva Tetap / Investasi", "code": "1230.000", "name": "Investasi", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Tetap", "depth": 3},
+    {"source_id": "Aktiva / Aktiva Tetap / Investasi / Investasi", "code": "1231.000", "name": "Investasi", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Tetap / Investasi", "depth": 4},
+    {"source_id": "Aktiva / Aktiva Tetap / Investasi / Investasi / Deposito", "code": "1231.300", "name": "Deposito", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Tetap / Investasi / Investasi", "depth": 5, "source": {"is_group": 1}},
+    {"source_id": "Aktiva / Aktiva Tetap / Investasi / Investasi / Investasi Saham", "code": "1231.100", "name": "Investasi Saham", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Tetap / Investasi / Investasi", "depth": 5},
+    {"source_id": "Aktiva / Aktiva Tetap / Investasi / Investasi / Investasi Saham / Investasi Saham", "code": "1231.101", "name": "Investasi Saham", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Tetap / Investasi / Investasi / Investasi Saham", "depth": 6},
+    {"source_id": "Aktiva / Aktiva Tetap / Investasi / Investasi / Investasi Perumahan", "code": "1231.200", "name": "Investasi Perumahan", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiva / Aktiva Tetap / Investasi / Investasi", "depth": 5},
+    {"source_id": "Aktiva / Aktiva Tetap / Investasi / Investasi / Investasi Perumahan / Investasi Perumahan", "code": "1231.201", "name": "Investasi Perumahan", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiva / Aktiva Tetap / Investasi / Investasi / Investasi Perumahan", "depth": 6},
+    {"source_id": "Beban", "code": "5000.000", "name": "Beban", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense"}},
+    {"source_id": "Beban / Beban Lain lain", "code": "5500.000", "name": "Beban Lain lain", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban", "depth": 2},
+    {"source_id": "Beban / Beban Lain lain / Beban Lain lain", "code": "5510.000", "name": "Beban Lain lain", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban / Beban Lain lain", "depth": 3},
+    {"source_id": "Beban / Beban Lain lain / Beban Lain lain / Beban Adm Bank", "code": "5510.001", "name": "Beban Adm Bank", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Lain lain / Beban Lain lain", "depth": 4},
+    {"source_id": "Beban / Beban Lain lain / Beban Lain lain / Beban Bunga Kredit Rekening Koran Bank", "code": "5510.004", "name": "Beban Bunga Kredit Rekening Koran Bank", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Lain lain / Beban Lain lain", "depth": 4},
+    {"source_id": "Beban / Beban Lain lain / Beban Lain lain / Beban Bunga Pinjaman Pada Pihak Ke 3", "code": "5510.005", "name": "Beban Bunga Pinjaman Pada Pihak Ke 3", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Lain lain / Beban Lain lain", "depth": 4},
+    {"source_id": "Beban / Beban Lain lain / Beban Lain lain / Beban Notaris Dan ADM Kredit Bank", "code": "5510.003", "name": "Beban Notaris Dan ADM Kredit Bank", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Lain lain / Beban Lain lain", "depth": 4},
+    {"source_id": "Beban / Beban Lain lain / Beban Lain lain / Beban Pajak Bumi & Bangunan", "code": "5510.006", "name": "Beban Pajak Bumi & Bangunan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Lain lain / Beban Lain lain", "depth": 4},
+    {"source_id": "Beban / Beban Lain lain / Beban Lain lain / Beban Pajak PPN", "code": "5510.008", "name": "Beban Pajak PPN", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Lain lain / Beban Lain lain", "depth": 4},
+    {"source_id": "Beban / Beban Lain lain / Beban Lain lain / Beban Pajak Penghasilan", "code": "5510.007", "name": "Beban Pajak Penghasilan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Lain lain / Beban Lain lain", "depth": 4},
+    {"source_id": "Beban / Beban Lain lain / Beban Lain lain / Beban Provisi Pinjaman Bank", "code": "5510.002", "name": "Beban Provisi Pinjaman Bank", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Lain lain / Beban Lain lain", "depth": 4},
+    {"source_id": "Beban / Beban Lain lain / Beban Lain lain / Selisih Kurs", "code": "5510.010", "name": "Selisih Kurs", "root_type": "expense", "subtype": "round_off", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Lain lain / Beban Lain lain", "depth": 4, "source": {"account_type": "Round Off"}},
+    {"source_id": "Beban / Beban Lain lain / Beban Lain lain / Selisih Pembayaran Customer", "code": "5510.009", "name": "Selisih Pembayaran Customer", "root_type": "expense", "subtype": "round_off", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Lain lain / Beban Lain lain", "depth": 4, "source": {"account_type": "Round Off"}},
+    {"source_id": "Beban / Beban Langsung", "code": "5100.000", "name": "Beban Langsung", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban", "depth": 2},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan", "code": "5110.000", "name": "Beban Penjualan", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban / Beban Langsung", "depth": 3},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Asuransi Kendaraan Operasional", "code": "5110.009", "name": "Biaya Asuransi Kendaraan Operasional", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya BBM", "code": "5110.001", "name": "Biaya BBM", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Barang Rusak", "code": "5110.007", "name": "Biaya Barang Rusak", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Bonus, Hadiah, dan Sampel", "code": "5110.013", "name": "Biaya Bonus, Hadiah, dan Sampel", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Entertainment dan Pergaulan", "code": "5110.014", "name": "Biaya Entertainment dan Pergaulan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Kebutuhan Penjualan", "code": "5110.011", "name": "Biaya Kebutuhan Penjualan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Kuli", "code": "5110.005", "name": "Biaya Kuli", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Leasing Kendaraan Operasional", "code": "5110.010", "name": "Biaya Leasing Kendaraan Operasional", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Parkir", "code": "5110.003", "name": "Biaya Parkir", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Penjualan Lain Lain", "code": "5110.019", "name": "Biaya Penjualan Lain Lain", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Perbaikan Kendaraan Operasional", "code": "5110.008", "name": "Biaya Perbaikan Kendaraan Operasional", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Perjalanan Dinas", "code": "5110.006", "name": "Biaya Perjalanan Dinas", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Piutang Tak Tertagih", "code": "5110.017", "name": "Biaya Piutang Tak Tertagih", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Sample", "code": "5110.012", "name": "Biaya Sample", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Sewa Gudang", "code": "5110.015", "name": "Biaya Sewa Gudang", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Sewa Peralatan Gudang", "code": "5110.016", "name": "Biaya Sewa Peralatan Gudang", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Susut Barang", "code": "5110.021", "name": "Biaya Susut Barang", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Tol", "code": "5110.002", "name": "Biaya Tol", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Biaya Upah Angkat/Turun Barang", "code": "5110.004", "name": "Biaya Upah Angkat/Turun Barang", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Penyesuaian Stock", "code": "5110.020", "name": "Penyesuaian Stock", "root_type": "expense", "subtype": "stock_adjustment", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4, "source": {"account_type": "Stock Adjustment"}},
+    {"source_id": "Beban / Beban Langsung / Beban Penjualan / Potongan Supplier", "code": "5110.018", "name": "Potongan Supplier", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Beban Penjualan", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai", "code": "5120.000", "name": "Biaya Gaji & Kesejahteraan Pegawai", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban / Beban Langsung", "depth": 3},
+    {"source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai / Biaya Asuransi Kesehatan Pegawai", "code": "5120.004", "name": "Biaya Asuransi Kesehatan Pegawai", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai / Biaya Gaji & Kesejahteraan Lainnya", "code": "5120.007", "name": "Biaya Gaji & Kesejahteraan Lainnya", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai / Biaya Gaji Karyawan Harian", "code": "5120.002", "name": "Biaya Gaji Karyawan Harian", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai / Biaya Gaji Staff & Karyawan Tetap", "code": "5120.001", "name": "Biaya Gaji Staff & Karyawan Tetap", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai / Biaya Konsumsi", "code": "5120.006", "name": "Biaya Konsumsi", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai / Biaya Pengobatan", "code": "5120.003", "name": "Biaya Pengobatan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai / Biaya THR, Bonus, dan Komisi", "code": "5120.005", "name": "Biaya THR, Bonus, dan Komisi", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Gaji & Kesejahteraan Pegawai", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "code": "5130.000", "name": "Biaya Kantor & Gudang", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban / Beban Langsung", "depth": 3},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Alat Tulis Kantor", "code": "5130.005", "name": "Biaya Alat Tulis Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Asuransi Bangunan", "code": "5130.014", "name": "Biaya Asuransi Bangunan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Fotocopy, Photo, Print Out", "code": "5130.004", "name": "Biaya Fotocopy, Photo, Print Out", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Humas & Pergaulan", "code": "5130.009", "name": "Biaya Humas & Pergaulan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya KTR & GDG Lain Lain", "code": "5130.018", "name": "Biaya KTR & GDG Lain Lain", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya PAM Gudang & Kantor", "code": "5130.002", "name": "Biaya PAM Gudang & Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya PLN Gudang & Kantor", "code": "5130.001", "name": "Biaya PLN Gudang & Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Pemeliharaan Bgn Gudang", "code": "5130.008", "name": "Biaya Pemeliharaan Bgn Gudang", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Perizinan Kendaraan Operasional", "code": "5130.017", "name": "Biaya Perizinan Kendaraan Operasional", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Perizinan Usaha dan Bangunan", "code": "5130.016", "name": "Biaya Perizinan Usaha dan Bangunan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Perlengkapan Gudang", "code": "5130.010", "name": "Biaya Perlengkapan Gudang", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Serba Serbi", "code": "5130.012", "name": "Biaya Serba Serbi", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Servis Peralatan Gudang", "code": "5130.007", "name": "Biaya Servis Peralatan Gudang", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Sewa Kantor", "code": "5130.013", "name": "Biaya Sewa Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Stamp Duty & Pos", "code": "5130.006", "name": "Biaya Stamp Duty & Pos", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya Sumbangan", "code": "5130.015", "name": "Biaya Sumbangan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Biaya TLP Gudang & Kantor", "code": "5130.003", "name": "Biaya TLP Gudang & Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang / Iuran Bulanan", "code": "5130.011", "name": "Iuran Bulanan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Langsung / Biaya Kantor & Gudang", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung", "code": "5200.000", "name": "Beban Tidak Langsung", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban", "depth": 2},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Gaji & Kesejahteraan Pegawai Indirect", "code": "5210.000", "name": "Biaya Gaji & Kesejahteraan Pegawai Indirect", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban / Beban Tidak Langsung", "depth": 3},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Gaji & Kesejahteraan Pegawai Indirect / Biaya Gaji Lain Lain", "code": "5210.005", "name": "Biaya Gaji Lain Lain", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Gaji & Kesejahteraan Pegawai Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Gaji & Kesejahteraan Pegawai Indirect / Biaya Gaji Staff", "code": "5210.001", "name": "Biaya Gaji Staff", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Gaji & Kesejahteraan Pegawai Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Gaji & Kesejahteraan Pegawai Indirect / Biaya Konsumsi", "code": "5210.004", "name": "Biaya Konsumsi", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Gaji & Kesejahteraan Pegawai Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Gaji & Kesejahteraan Pegawai Indirect / Biaya Pengobatan & Kesehatan", "code": "5210.003", "name": "Biaya Pengobatan & Kesehatan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Gaji & Kesejahteraan Pegawai Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Gaji & Kesejahteraan Pegawai Indirect / Biaya THR dan Bonus Staff", "code": "5210.002", "name": "Biaya THR dan Bonus Staff", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Gaji & Kesejahteraan Pegawai Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "code": "5230.000", "name": "Biaya Kantor Indirect", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban / Beban Tidak Langsung", "depth": 3},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya Alat Tulis Kantor", "code": "5230.006", "name": "Biaya Alat Tulis Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya Asuransi Bangunan", "code": "5230.005", "name": "Biaya Asuransi Bangunan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya Fotocopy, Photo, Print Out", "code": "5230.007", "name": "Biaya Fotocopy, Photo, Print Out", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya Iuran Bulanan", "code": "5230.012", "name": "Biaya Iuran Bulanan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya KTR Lain Lain", "code": "5230.016", "name": "Biaya KTR Lain Lain", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya Kirim Dokumen", "code": "5230.008", "name": "Biaya Kirim Dokumen", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya PAM Kantor", "code": "5230.002", "name": "Biaya PAM Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya PLN Kantor", "code": "5230.001", "name": "Biaya PLN Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya Pemeliharaan Bangunan Kantor", "code": "5230.011", "name": "Biaya Pemeliharaan Bangunan Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya Perizinan Bangunan", "code": "5230.014", "name": "Biaya Perizinan Bangunan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya Perizinan Kendaraan Dinas", "code": "5230.015", "name": "Biaya Perizinan Kendaraan Dinas", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya Perlengkapan & Peralatan Kantor", "code": "5230.009", "name": "Biaya Perlengkapan & Peralatan Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya Sewa Kantor", "code": "5230.004", "name": "Biaya Sewa Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya Stamp Duty & Pos", "code": "5230.017", "name": "Biaya Stamp Duty & Pos", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya Sumbangan", "code": "5230.013", "name": "Biaya Sumbangan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Biaya TLP Kantor", "code": "5230.003", "name": "Biaya TLP Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect / Service Peralatan Kantor", "code": "5230.010", "name": "Service Peralatan Kantor", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Kantor Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect", "code": "5220.000", "name": "Biaya Operational Indirect", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban / Beban Tidak Langsung", "depth": 3},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect / Biaya Asuransi Kendaraan Dinas", "code": "5220.006", "name": "Biaya Asuransi Kendaraan Dinas", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect / Biaya BBM", "code": "5220.001", "name": "Biaya BBM", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect / Biaya Entertainment dan Pergaulan", "code": "5220.008", "name": "Biaya Entertainment dan Pergaulan", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect / Biaya Hadiah dan Bonus", "code": "5220.009", "name": "Biaya Hadiah dan Bonus", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect / Biaya Leasing Kendaraan Dinas", "code": "5220.007", "name": "Biaya Leasing Kendaraan Dinas", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect / Biaya Perbaikan Kendaraan Dinas", "code": "5220.005", "name": "Biaya Perbaikan Kendaraan Dinas", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect / Biaya Perjalanan Dinas", "code": "5220.004", "name": "Biaya Perjalanan Dinas", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect / Biaya TLP & HP", "code": "5220.003", "name": "Biaya TLP & HP", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect", "depth": 4},
+    {"source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect / Biaya Tol & Parkir", "code": "5220.002", "name": "Biaya Tol & Parkir", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Beban Tidak Langsung / Biaya Operational Indirect", "depth": 4},
+    {"source_id": "Beban / Biaya Amortisasi", "code": "5400.000", "name": "Biaya Amortisasi", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban", "depth": 2},
+    {"source_id": "Beban / Biaya Amortisasi / Biaya Amortisasi", "code": "5410.000", "name": "Biaya Amortisasi", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Biaya Amortisasi", "depth": 3},
+    {"source_id": "Beban / Biaya Penyusutan", "code": "5300.000", "name": "Biaya Penyusutan", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban", "depth": 2},
+    {"source_id": "Beban / Biaya Penyusutan / Biaya Penyusutan", "code": "5310.000", "name": "Biaya Penyusutan", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Beban / Biaya Penyusutan", "depth": 3},
+    {"source_id": "Beban / Biaya Penyusutan / Biaya Penyusutan / By Peny Aktiva", "code": "5310.001", "name": "By Peny Aktiva", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "Beban / Biaya Penyusutan / Biaya Penyusutan", "depth": 4, "source": {"account_type": "Depreciation"}},
+    {"source_id": "Modal", "code": "3000.000", "name": "Modal", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Equity"}},
+    {"source_id": "Modal / Laba", "code": "3200.000", "name": "Laba", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Modal", "depth": 2},
+    {"source_id": "Modal / Laba / Laba Periode Berjalan", "code": "3230.000", "name": "Laba Periode Berjalan", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Modal / Laba", "depth": 3},
+    {"source_id": "Modal / Laba / Laba Tahun Berjalan", "code": "3220.000", "name": "Laba Tahun Berjalan", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Modal / Laba", "depth": 3},
+    {"source_id": "Modal / Laba / Laba di Tahan", "code": "3210.000", "name": "Laba di Tahan", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Modal / Laba", "depth": 3},
+    {"source_id": "Modal / Modal", "code": "3100.000", "name": "Modal", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Modal", "depth": 2},
+    {"source_id": "Modal / Modal / Modal di Setor", "code": "3110.000", "name": "Modal di Setor", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Modal / Modal", "depth": 3},
+    {"source_id": "Modal / Modal / Prive P.Saham", "code": "3120.000", "name": "Prive P.Saham", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Modal / Modal", "depth": 3},
+    {"source_id": "Modal / Modal / Saldo pembukaan Equity", "code": "3130.000", "name": "Saldo pembukaan Equity", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Modal / Modal", "depth": 3},
+    {"source_id": "Passiva", "code": "2000.000", "name": "Passiva", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Liability"}},
+    {"source_id": "Passiva / Pasiva Lancar", "code": "2100.000", "name": "Pasiva Lancar", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva", "depth": 2},
+    {"source_id": "Passiva / Pasiva Lancar / Biaya Yang Akan di Bayar", "code": "2130.000", "name": "Biaya Yang Akan di Bayar", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Pasiva Lancar", "depth": 3},
+    {"source_id": "Passiva / Pasiva Lancar / Biaya Yang Akan di Bayar / Biaya Yang Akan di Bayar", "code": "2131.000", "name": "Biaya Yang Akan di Bayar", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Pasiva Lancar / Biaya Yang Akan di Bayar", "depth": 4},
+    {"source_id": "Passiva / Pasiva Lancar / Biaya Yang Akan di Bayar / Biaya Yang Akan di Bayar / Biaya Yang Akan di Bayar", "code": "2131.001", "name": "Biaya Yang Akan di Bayar", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Biaya Yang Akan di Bayar / Biaya Yang Akan di Bayar", "depth": 5},
+    {"source_id": "Passiva / Pasiva Lancar / Biaya Yang Akan di Bayar / Biaya Yang Akan di Bayar - Freight", "code": "2132.000", "name": "Biaya Yang Akan di Bayar - Freight", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Pasiva Lancar / Biaya Yang Akan di Bayar", "depth": 4},
+    {"source_id": "Passiva / Pasiva Lancar / Biaya Yang Akan di Bayar / Biaya Yang Akan di Bayar - Freight / Biaya Yang Akan di Bayar - Freight", "code": "2132.001", "name": "Biaya Yang Akan di Bayar - Freight", "root_type": "liability", "subtype": "valuation_expense", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Biaya Yang Akan di Bayar / Biaya Yang Akan di Bayar - Freight", "depth": 5, "source": {"account_type": "Expenses Included In Valuation"}},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang", "code": "2110.000", "name": "Hutang Dagang", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Pasiva Lancar", "depth": 3},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency", "code": "2112.000", "name": "Hutang Dagang Other Currency", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Dagang", "depth": 4},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency / Hutang Dagang Biaya Kirim Dalam Negeri", "code": "2112.005", "name": "Hutang Dagang Biaya Kirim Dalam Negeri", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency", "depth": 5, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency / Hutang Dagang Biaya Kirim Luar Negeri (SGD)", "code": "2112.004", "name": "Hutang Dagang Biaya Kirim Luar Negeri (SGD)", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency", "depth": 5, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency / Hutang Dagang Biaya Kirim Luar Negeri (USD)", "code": "2112.003", "name": "Hutang Dagang Biaya Kirim Luar Negeri (USD)", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency", "depth": 5, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency / Hutang Dagang Luar Negeri (SGD)", "code": "2112.002", "name": "Hutang Dagang Luar Negeri (SGD)", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency", "depth": 5, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency / Hutang Dagang Luar Negeri (USD)", "code": "2112.001", "name": "Hutang Dagang Luar Negeri (USD)", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Other Currency", "depth": 5, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Rupiah", "code": "2111.000", "name": "Hutang Dagang Rupiah", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Dagang", "depth": 4},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Rupiah / HUtang Dagang Biaya Kirim Luar Negeri", "code": "2111.004", "name": "HUtang Dagang Biaya Kirim Luar Negeri", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Rupiah", "depth": 5, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Rupiah / Hutang Dagang Biaya Kirim Dalam Negeri", "code": "2111.003", "name": "Hutang Dagang Biaya Kirim Dalam Negeri", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Rupiah", "depth": 5, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Rupiah / Hutang Dagang Dalam Negeri", "code": "2111.001", "name": "Hutang Dagang Dalam Negeri", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Rupiah", "depth": 5, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Rupiah / Hutang Dagang Luar Negeri", "code": "2111.002", "name": "Hutang Dagang Luar Negeri", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Hutang Dagang Rupiah", "depth": 5, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Dagang / Stock Diterima Tapi Tidak Ditagih", "code": "2115.000", "name": "Stock Diterima Tapi Tidak Ditagih", "root_type": "liability", "subtype": "stock_received_not_billed", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Dagang", "depth": 4, "source": {"account_type": "Stock Received But Not Billed"}},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Pajak", "code": "2140.000", "name": "Hutang Pajak", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Pasiva Lancar", "depth": 3},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Pajak / Hutang Pajak", "code": "2141.000", "name": "Hutang Pajak", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Pajak", "depth": 4, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Passiva / Pasiva Lancar / Hutang Pajak / PPN Keluaran", "code": "2142.000", "name": "PPN Keluaran", "root_type": "liability", "subtype": "tax", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Hutang Pajak", "depth": 4, "source": {"account_type": "Tax"}},
+    {"source_id": "Passiva / Pasiva Lancar / Pendapatan di Terima di Muka", "code": "2120.000", "name": "Pendapatan di Terima di Muka", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Pasiva Lancar", "depth": 3},
+    {"source_id": "Passiva / Pasiva Lancar / Pendapatan di Terima di Muka / Pendapatan di Terima di Muka", "code": "2121.000", "name": "Pendapatan di Terima di Muka", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Pasiva Lancar / Pendapatan di Terima di Muka", "depth": 4},
+    {"source_id": "Passiva / Pasiva Lancar / Pendapatan di Terima di Muka / Pendapatan di Terima di Muka / Dp Penjualan", "code": "2121.001", "name": "Dp Penjualan", "root_type": "liability", "subtype": "bank", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Pasiva Lancar / Pendapatan di Terima di Muka / Pendapatan di Terima di Muka", "depth": 5, "role_hint": "cash_bank", "source": {"account_type": "Bank"}},
+    {"source_id": "Passiva / Passiva Tetap", "code": "2200.000", "name": "Passiva Tetap", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva", "depth": 2},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Lain Lain", "code": "2240.000", "name": "Hutang Lain Lain", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Passiva Tetap", "depth": 3},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Lain Lain / Hutang Lain Lain", "code": "2241.000", "name": "Hutang Lain Lain", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Passiva Tetap / Hutang Lain Lain", "depth": 4},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Lain Lain / Hutang Lain Lain / Hutang", "code": "2241.001", "name": "Hutang", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Passiva Tetap / Hutang Lain Lain / Hutang Lain Lain", "depth": 5},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Leasing Kendaraan", "code": "2230.000", "name": "Hutang Leasing Kendaraan", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Passiva Tetap", "depth": 3},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Leasing Kendaraan / Hutang Leasing Kendaraan", "code": "2231.000", "name": "Hutang Leasing Kendaraan", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Passiva Tetap / Hutang Leasing Kendaraan", "depth": 4},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Leasing Kendaraan / Hutang Leasing Kendaraan / Hutang Leasing Kendaraan", "code": "2231.001", "name": "Hutang Leasing Kendaraan", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Passiva Tetap / Hutang Leasing Kendaraan / Hutang Leasing Kendaraan", "depth": 5},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Pada Bank", "code": "2220.000", "name": "Hutang Pada Bank", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Passiva Tetap", "depth": 3},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Pada Bank / Hutang Bank", "code": "2221.000", "name": "Hutang Bank", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Passiva Tetap / Hutang Pada Bank", "depth": 4},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Pada Bank / Hutang Bank / Hutang", "code": "2221.001", "name": "Hutang", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Passiva Tetap / Hutang Pada Bank / Hutang Bank", "depth": 5},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3", "code": "2210.000", "name": "Hutang Pada Pihak ke 3", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Passiva Tetap", "depth": 3},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3 / Hutang Bunga Pinjaman Pihak Ke 3 Tidak Rutin", "code": "2213.000", "name": "Hutang Bunga Pinjaman Pihak Ke 3 Tidak Rutin", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3", "depth": 4},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3 / Hutang Bunga Pinjaman Pihak Ke 3 Tidak Rutin / Hutang Bunga", "code": "2213.001", "name": "Hutang Bunga", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3 / Hutang Bunga Pinjaman Pihak Ke 3 Tidak Rutin", "depth": 5},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3 / Pinjaman Pihak ke 3 Rutin", "code": "2211.000", "name": "Pinjaman Pihak ke 3 Rutin", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3", "depth": 4},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3 / Pinjaman Pihak ke 3 Rutin / Hutang", "code": "2211.001", "name": "Hutang", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3 / Pinjaman Pihak ke 3 Rutin", "depth": 5},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3 / Pinjaman Pihak ke 3 Tidak Rutin", "code": "2212.000", "name": "Pinjaman Pihak ke 3 Tidak Rutin", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3", "depth": 4},
+    {"source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3 / Pinjaman Pihak ke 3 Tidak Rutin / Hutang", "code": "2212.001", "name": "Hutang", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiva / Passiva Tetap / Hutang Pada Pihak ke 3 / Pinjaman Pihak ke 3 Tidak Rutin", "depth": 5},
+    {"source_id": "Penjualan", "code": "4000.000", "name": "Penjualan", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Income"}},
+    {"source_id": "Penjualan / Harga Pokok Pembelian", "code": "4200.000", "name": "Harga Pokok Pembelian", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Penjualan", "depth": 2},
+    {"source_id": "Penjualan / Harga Pokok Pembelian / HPP Pembelian", "code": "4210.000", "name": "HPP Pembelian", "root_type": "income", "subtype": "direct_cost", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Harga Pokok Pembelian", "depth": 3, "source": {"account_type": "Cost of Goods Sold"}},
+    {"source_id": "Penjualan / Pendapatan Lain lain", "code": "4400.000", "name": "Pendapatan Lain lain", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Penjualan", "depth": 2},
+    {"source_id": "Penjualan / Pendapatan Lain lain / Pendapatan Bunga Bank", "code": "4410.000", "name": "Pendapatan Bunga Bank", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Pendapatan Lain lain", "depth": 3},
+    {"source_id": "Penjualan / Pendapatan Lain lain / Pendapatan Bunga Dari Pihak Ke 3", "code": "4420.000", "name": "Pendapatan Bunga Dari Pihak Ke 3", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Pendapatan Lain lain", "depth": 3},
+    {"source_id": "Penjualan / Pendapatan Lain lain / Pendapatan Keuntungan Penjualan Aktiva", "code": "4430.000", "name": "Pendapatan Keuntungan Penjualan Aktiva", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Pendapatan Lain lain", "depth": 3},
+    {"source_id": "Penjualan / Pendapatan Lain lain / Pendapatan Komisi", "code": "4440.000", "name": "Pendapatan Komisi", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Pendapatan Lain lain", "depth": 3},
+    {"source_id": "Penjualan / Pendapatan Lain lain / Pendapatan Lain lain", "code": "4480.000", "name": "Pendapatan Lain lain", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Pendapatan Lain lain", "depth": 3},
+    {"source_id": "Penjualan / Pendapatan Lain lain / Pendapatan Penjualan Barang BS", "code": "4470.000", "name": "Pendapatan Penjualan Barang BS", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Pendapatan Lain lain", "depth": 3},
+    {"source_id": "Penjualan / Pendapatan Lain lain / Pendapatan Sewa Gudang", "code": "4450.000", "name": "Pendapatan Sewa Gudang", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Pendapatan Lain lain", "depth": 3},
+    {"source_id": "Penjualan / Pendapatan Lain lain / Pendapatan Sewa Lain lain", "code": "4460.000", "name": "Pendapatan Sewa Lain lain", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Pendapatan Lain lain", "depth": 3},
+    {"source_id": "Penjualan / Pendapatan Service/Jasa", "code": "4300.000", "name": "Pendapatan Service/Jasa", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Penjualan", "depth": 2},
+    {"source_id": "Penjualan / Pendapatan Service/Jasa / Pendapatan Service", "code": "4310.000", "name": "Pendapatan Service", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Pendapatan Service/Jasa", "depth": 3},
+    {"source_id": "Penjualan / Penjualan Barang Dagangan", "code": "4100.000", "name": "Penjualan Barang Dagangan", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Penjualan", "depth": 2},
+    {"source_id": "Penjualan / Penjualan Barang Dagangan / Penjualan", "code": "4110.000", "name": "Penjualan", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Penjualan Barang Dagangan", "depth": 3, "source": {"account_type": "Income Account"}},
+    {"source_id": "Penjualan / Penjualan Barang Dagangan / Potongan Penjualan", "code": "4130.000", "name": "Potongan Penjualan", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Penjualan Barang Dagangan", "depth": 3},
+    {"source_id": "Penjualan / Penjualan Barang Dagangan / Retur Penjualan", "code": "4120.000", "name": "Retur Penjualan", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Penjualan / Penjualan Barang Dagangan", "depth": 3}
+  ]
+}

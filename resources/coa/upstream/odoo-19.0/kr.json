@@ -1,0 +1,614 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "d214c606992d048e1f85ded56e8c970dfd58956fea63fb46019ff1d9024d0550",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/kr",
+  "country_code": "KR",
+  "country_name": "South Korea",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Republic of Korea - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_kr' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_kr",
+    "module_name": "Republic of Korea - Accounting",
+    "module_version": "1.0",
+    "contributing_modules": [
+      "l10n_kr"
+    ],
+    "template_code": "kr",
+    "template_chain": [
+      "kr"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_kr/data/template/account.account-kr.csv",
+        "sha256": "38260a8beafe81cbcf4e974167726814ff3a7e7050da7fc552b184154d413855",
+        "rows": 181
+      },
+      {
+        "path": "addons/l10n_kr/data/template/account.group-kr.csv",
+        "sha256": "c0b69f6adff634edc1fdd810beb04cd3bb0479836d8162429e42c2d725eabb55",
+        "rows": 69
+      }
+    ],
+    "python_files": [
+      "addons/l10n_kr/models/template_kr.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "1111",
+      "transfer": "1116"
+    },
+    "default_sale_tax": "l10n_kr_sale_10",
+    "default_purchase_tax": "l10n_kr_purchase_10",
+    "tax_calculation_rounding_method": "round_per_line"
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "l10n_kr_111301",
+        "code": "111301",
+        "name": "Accounts Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "l10n_kr_212001",
+        "code": "212001",
+        "name": "Accounts Payable",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "l10n_kr_410001",
+        "code": "410001",
+        "name": "Sales Income - Goods",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "l10n_kr_510001",
+        "code": "510001",
+        "name": "Cost of Revenue - Goods",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "property_stock_valuation_account_id",
+        "source_id": "l10n_kr_112101",
+        "code": "112101",
+        "name": "Merchandise",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "l10n_kr_111303",
+        "code": "111303",
+        "name": "Account Receivable (POS)",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "l10n_kr_111610",
+        "code": "111610",
+        "name": "Bank Suspense Account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "l10n_kr_420007",
+        "code": "420007",
+        "name": "Gain from Foreign Exchange Differences on Translation",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "l10n_kr_620007",
+        "code": "620007",
+        "name": "Loss from Foreign Exchange Differences on Translation",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "l10n_kr_420013",
+        "code": "420013",
+        "name": "Miscellaneous Income",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "l10n_kr_620014",
+        "code": "620014",
+        "name": "Miscellaneous Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "l10n_kr_410003",
+        "code": "410003",
+        "name": "Sales Discounts - Goods",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "l10n_kr_410008",
+        "code": "410008",
+        "name": "Sales Discounts - Products",
+        "resolved": true
+      }
+    ],
+    "production_wip": [
+      {
+        "source_field": "account_production_wip_account_id",
+        "source_id": "l10n_kr_112401",
+        "code": "112401",
+        "name": "Work In Progress",
+        "resolved": true
+      }
+    ],
+    "production_overhead": [
+      {
+        "source_field": "account_production_wip_overhead_account_id",
+        "source_id": "l10n_kr_610013",
+        "code": "610013",
+        "name": "Work in Progress Overhead",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "l10n_kr_111401",
+        "code": "111401",
+        "name": "Prepaid Expenses",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "l10n_kr_216005",
+        "code": "216005",
+        "name": "Unearned Revenues",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 181,
+    "posting_accounts": 181,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 88,
+      "equity": 18,
+      "expense": 31,
+      "income": 21,
+      "liability": 23
+    },
+    "by_subtype": {
+      "cash_bank": 3,
+      "current_asset": 31,
+      "current_liability": 12,
+      "depreciation": 1,
+      "direct_cost": 2,
+      "equity": 17,
+      "expense": 28,
+      "fixed_asset": 36,
+      "income": 21,
+      "non_current_asset": 11,
+      "non_current_liability": 8,
+      "payable": 3,
+      "prepayment": 1,
+      "receivable": 6,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 3,
+      "expense": 1,
+      "income": 1,
+      "payables": 3,
+      "receivables": 6
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "ko_KR"
+    ],
+    "groups": 69
+  },
+  "groups": [
+    {"source_id": "account_group_assets", "code_prefix_start": "1", "code_prefix_end": "1", "name": "Assets", "translations": {"ko_kr": "자산"}, "parent_source_id": null, "path": ["Assets"]},
+    {"source_id": "account_group_liabilities", "code_prefix_start": "2", "code_prefix_end": "2", "name": "Liabilities", "translations": {"ko_kr": "부채"}, "parent_source_id": null, "path": ["Liabilities"]},
+    {"source_id": "account_group_equity", "code_prefix_start": "3", "code_prefix_end": "3", "name": "Equity", "translations": {"ko_kr": "자본"}, "parent_source_id": null, "path": ["Equity"]},
+    {"source_id": "account_group_current_assets", "code_prefix_start": "11", "code_prefix_end": "11", "name": "Current Assets", "translations": {"ko_kr": "유동자산"}, "parent_source_id": "account_group_assets", "path": ["Assets", "Current Assets"]},
+    {"source_id": "account_group_non_current_assets", "code_prefix_start": "12", "code_prefix_end": "12", "name": "Non-current assets", "translations": {"ko_kr": "비유동자산"}, "parent_source_id": "account_group_assets", "path": ["Assets", "Non-current assets"]},
+    {"source_id": "account_group_current_liabilities", "code_prefix_start": "21", "code_prefix_end": "21", "name": "Current Liabilities", "translations": {"ko_kr": "유동부채"}, "parent_source_id": "account_group_liabilities", "path": ["Liabilities", "Current Liabilities"]},
+    {"source_id": "account_group_non_current_liabilities", "code_prefix_start": "22", "code_prefix_end": "22", "name": "Non-Current Liabilities", "translations": {"ko_kr": "비유동부채"}, "parent_source_id": "account_group_liabilities", "path": ["Liabilities", "Non-Current Liabilities"]},
+    {"source_id": "account_group_share_capital", "code_prefix_start": "31", "code_prefix_end": "31", "name": "Share Capital", "translations": {"ko_kr": "자본금"}, "parent_source_id": "account_group_equity", "path": ["Equity", "Share Capital"]},
+    {"source_id": "account_group_capital_surplus", "code_prefix_start": "32", "code_prefix_end": "32", "name": "Capital Surplus", "translations": {"ko_kr": "자본잉여금"}, "parent_source_id": "account_group_equity", "path": ["Equity", "Capital Surplus"]},
+    {"source_id": "account_group_capital_adjustments", "code_prefix_start": "33", "code_prefix_end": "33", "name": "Capital Adjustments", "translations": {"ko_kr": "자본조정"}, "parent_source_id": "account_group_equity", "path": ["Equity", "Capital Adjustments"]},
+    {"source_id": "account_group_accumulated_other_comprehensive_income", "code_prefix_start": "34", "code_prefix_end": "34", "name": "Accumulated Other Comprehensive Income", "translations": {"ko_kr": "기타포괄손익누계액"}, "parent_source_id": "account_group_equity", "path": ["Equity", "Accumulated Other Comprehensive Income"]},
+    {"source_id": "account_group_retained_earnings", "code_prefix_start": "35", "code_prefix_end": "35", "name": "Retained Earnings", "translations": {"ko_kr": "이익잉여금"}, "parent_source_id": "account_group_equity", "path": ["Equity", "Retained Earnings"]},
+    {"source_id": "account_group_revenue", "code_prefix_start": "41", "code_prefix_end": "41", "name": "Revenue", "translations": {"ko_kr": "매출액"}, "parent_source_id": null, "path": ["Revenue"]},
+    {"source_id": "account_group_non_operating_income", "code_prefix_start": "42", "code_prefix_end": "42", "name": "Non-operating Income", "translations": {"ko_kr": "영업외수익"}, "parent_source_id": null, "path": ["Non-operating Income"]},
+    {"source_id": "account_group_cost_of_sales", "code_prefix_start": "51", "code_prefix_end": "51", "name": "Cost of Sales", "translations": {"ko_kr": "매출원가"}, "parent_source_id": null, "path": ["Cost of Sales"]},
+    {"source_id": "account_group_selling_and_administrative_expenses", "code_prefix_start": "61", "code_prefix_end": "61", "name": "Selling and Administrative Expenses", "translations": {"ko_kr": "판매비와관리비"}, "parent_source_id": null, "path": ["Selling and Administrative Expenses"]},
+    {"source_id": "account_group_non_operating_expenses", "code_prefix_start": "62", "code_prefix_end": "62", "name": "Non-operating Expenses", "translations": {"ko_kr": "영업외비용"}, "parent_source_id": null, "path": ["Non-operating Expenses"]},
+    {"source_id": "account_group_corporate_income_tax_and_others", "code_prefix_start": "63", "code_prefix_end": "63", "name": "Corporate Income Tax and others", "translations": {"ko_kr": "법인세등"}, "parent_source_id": null, "path": ["Corporate Income Tax and others"]},
+    {"source_id": "account_group_quick_assets", "code_prefix_start": "111", "code_prefix_end": "111", "name": "Quick Assets", "translations": {"ko_kr": "당좌자산"}, "parent_source_id": "account_group_current_assets", "path": ["Assets", "Current Assets", "Quick Assets"]},
+    {"source_id": "account_group_inventories", "code_prefix_start": "112", "code_prefix_end": "112", "name": "Inventories", "translations": {"ko_kr": "재고자산"}, "parent_source_id": "account_group_current_assets", "path": ["Assets", "Current Assets", "Inventories"]},
+    {"source_id": "account_group_investments", "code_prefix_start": "121", "code_prefix_end": "121", "name": "Investments", "translations": {"ko_kr": "투자자산"}, "parent_source_id": "account_group_non_current_assets", "path": ["Assets", "Non-current assets", "Investments"]},
+    {"source_id": "account_group_property_plant_and_equipment", "code_prefix_start": "122", "code_prefix_end": "122", "name": "Property, plant and equipment", "translations": {"ko_kr": "유형자산"}, "parent_source_id": "account_group_non_current_assets", "path": ["Assets", "Non-current assets", "Property, plant and equipment"]},
+    {"source_id": "account_group_intangible_assets", "code_prefix_start": "123", "code_prefix_end": "123", "name": "Intangible Assets", "translations": {"ko_kr": "무형자산"}, "parent_source_id": "account_group_non_current_assets", "path": ["Assets", "Non-current assets", "Intangible Assets"]},
+    {"source_id": "account_group_other_non_current_assets", "code_prefix_start": "124", "code_prefix_end": "124", "name": "Other non-current Assets", "translations": {"ko_kr": "기타비유동자산"}, "parent_source_id": "account_group_non_current_assets", "path": ["Assets", "Non-current assets", "Other non-current Assets"]},
+    {"source_id": "account_group_short_term_borrowings", "code_prefix_start": "211", "code_prefix_end": "211", "name": "Short-term borrowings", "translations": {"ko_kr": "단기차입금"}, "parent_source_id": "account_group_current_liabilities", "path": ["Liabilities", "Current Liabilities", "Short-term borrowings"]},
+    {"source_id": "account_group_trade_payables", "code_prefix_start": "212", "code_prefix_end": "212", "name": "Trade Payables", "translations": {"ko_kr": "매입채무"}, "parent_source_id": "account_group_current_liabilities", "path": ["Liabilities", "Current Liabilities", "Trade Payables"]},
+    {"source_id": "account_group_current_tax_liabilities", "code_prefix_start": "213", "code_prefix_end": "213", "name": "Current Tax Liabilities", "translations": {"ko_kr": "당기법인세부채"}, "parent_source_id": "account_group_current_liabilities", "path": ["Liabilities", "Current Liabilities", "Current Tax Liabilities"]},
+    {"source_id": "account_group_accruals", "code_prefix_start": "214", "code_prefix_end": "214", "name": "Accruals", "translations": {"ko_kr": "미지급비용"}, "parent_source_id": "account_group_current_liabilities", "path": ["Liabilities", "Current Liabilities", "Accruals"]},
+    {"source_id": "account_group_deferred_tax_liabilities", "code_prefix_start": "215", "code_prefix_end": "215", "name": "Deferred Tax Liabilities", "translations": {"ko_kr": "이연법인세부채"}, "parent_source_id": "account_group_current_liabilities", "path": ["Liabilities", "Current Liabilities", "Deferred Tax Liabilities"]},
+    {"source_id": "account_group_other_current_liabilities", "code_prefix_start": "216", "code_prefix_end": "216", "name": "Other Current Liabilities", "translations": {"ko_kr": "기타유동부채"}, "parent_source_id": "account_group_current_liabilities", "path": ["Liabilities", "Current Liabilities", "Other Current Liabilities"]},
+    {"source_id": "account_group_bonds", "code_prefix_start": "221", "code_prefix_end": "221", "name": "Bonds", "translations": {"ko_kr": "사채"}, "parent_source_id": "account_group_non_current_liabilities", "path": ["Liabilities", "Non-Current Liabilities", "Bonds"]},
+    {"source_id": "account_group_bonds_with_warrants", "code_prefix_start": "222", "code_prefix_end": "222", "name": "Bonds With Warrants", "translations": {"ko_kr": "신주인수권부사채"}, "parent_source_id": "account_group_non_current_liabilities", "path": ["Liabilities", "Non-Current Liabilities", "Bonds With Warrants"]},
+    {"source_id": "account_group_convertible_bond", "code_prefix_start": "223", "code_prefix_end": "223", "name": "Convertible Bond", "translations": {"ko_kr": "전환사채"}, "parent_source_id": "account_group_non_current_liabilities", "path": ["Liabilities", "Non-Current Liabilities", "Convertible Bond"]},
+    {"source_id": "account_group_non_current_borrowings", "code_prefix_start": "224", "code_prefix_end": "224", "name": "Non-Current Borrowings", "translations": {"ko_kr": "장기차입금"}, "parent_source_id": "account_group_non_current_liabilities", "path": ["Liabilities", "Non-Current Liabilities", "Non-Current Borrowings"]},
+    {"source_id": "account_group_post_employment_benefit_obligations", "code_prefix_start": "225", "code_prefix_end": "225", "name": "Post-Employment Benefit Obligations", "translations": {"ko_kr": "퇴직급여충당부채"}, "parent_source_id": "account_group_non_current_liabilities", "path": ["Liabilities", "Non-Current Liabilities", "Post-Employment Benefit Obligations"]},
+    {"source_id": "account_group_long_term_warranty_provision", "code_prefix_start": "226", "code_prefix_end": "226", "name": "Long-term Warranty Provision", "translations": {"ko_kr": "장기제품보증충당부채"}, "parent_source_id": "account_group_non_current_liabilities", "path": ["Liabilities", "Non-Current Liabilities", "Long-term Warranty Provision"]},
+    {"source_id": "account_group_deferred_tax_liabilities_2", "code_prefix_start": "227", "code_prefix_end": "227", "name": "Deferred Tax Liabilities", "translations": {"ko_kr": "이연법인세부채"}, "parent_source_id": "account_group_non_current_liabilities", "path": ["Liabilities", "Non-Current Liabilities", "Deferred Tax Liabilities"]},
+    {"source_id": "account_group_other_non_current_liabilities", "code_prefix_start": "228", "code_prefix_end": "228", "name": "Other Non-Current Liabilities", "translations": {"ko_kr": "기타비유동부채"}, "parent_source_id": "account_group_non_current_liabilities", "path": ["Liabilities", "Non-Current Liabilities", "Other Non-Current Liabilities"]},
+    {"source_id": "account_group_legal_reserve", "code_prefix_start": "351", "code_prefix_end": "351", "name": "Legal Reserve", "translations": {"ko_kr": "법정적립금"}, "parent_source_id": "account_group_retained_earnings", "path": ["Equity", "Retained Earnings", "Legal Reserve"]},
+    {"source_id": "account_group_voluntary_reserve", "code_prefix_start": "352", "code_prefix_end": "352", "name": "Voluntary Reserve", "translations": {"ko_kr": "임의적립금"}, "parent_source_id": "account_group_retained_earnings", "path": ["Equity", "Retained Earnings", "Voluntary Reserve"]},
+    {"source_id": "account_group_unappropriated_retained_earnings", "code_prefix_start": "353", "code_prefix_end": "353", "name": "Unappropriated Retained Earnings", "translations": {"ko_kr": "미처분이익잉여금"}, "parent_source_id": "account_group_retained_earnings", "path": ["Equity", "Retained Earnings", "Unappropriated Retained Earnings"]},
+    {"source_id": "account_group_cash_and_cash_equivalents", "code_prefix_start": "1111", "code_prefix_end": "1111", "name": "Cash and Cash Equivalents", "translations": {"ko_kr": "현금및현금성자산"}, "parent_source_id": "account_group_quick_assets", "path": ["Assets", "Current Assets", "Quick Assets", "Cash and Cash Equivalents"]},
+    {"source_id": "account_group_short_term_investments", "code_prefix_start": "1112", "code_prefix_end": "1112", "name": "Short-term Investments", "translations": {"ko_kr": "단기투자자산"}, "parent_source_id": "account_group_quick_assets", "path": ["Assets", "Current Assets", "Quick Assets", "Short-term Investments"]},
+    {"source_id": "account_group_trade_receivables", "code_prefix_start": "1113", "code_prefix_end": "1113", "name": "Trade Receivables", "translations": {"ko_kr": "매출채권"}, "parent_source_id": "account_group_quick_assets", "path": ["Assets", "Current Assets", "Quick Assets", "Trade Receivables"]},
+    {"source_id": "account_group_prepaid_expenses", "code_prefix_start": "1114", "code_prefix_end": "1114", "name": "Prepaid Expenses", "translations": {"ko_kr": "선급비용"}, "parent_source_id": "account_group_quick_assets", "path": ["Assets", "Current Assets", "Quick Assets", "Prepaid Expenses"]},
+    {"source_id": "account_group_deferred_tax_assets_current_asset", "code_prefix_start": "1115", "code_prefix_end": "1115", "name": "Deferred tax assets (Current Asset)", "translations": {"ko_kr": "이연법인세자산"}, "parent_source_id": "account_group_quick_assets", "path": ["Assets", "Current Assets", "Quick Assets", "Deferred tax assets (Current Asset)"]},
+    {"source_id": "account_group_other_cash_and_cash_equivalents", "code_prefix_start": "1116", "code_prefix_end": "1116", "name": "Other Cash and Cash Equivalents", "translations": {"ko_kr": "기타현금및현금성자산"}, "parent_source_id": "account_group_quick_assets", "path": ["Assets", "Current Assets", "Quick Assets", "Other Cash and Cash Equivalents"]},
+    {"source_id": "account_group_merchandise", "code_prefix_start": "1121", "code_prefix_end": "1121", "name": "Merchandise", "translations": {"ko_kr": "상품"}, "parent_source_id": "account_group_inventories", "path": ["Assets", "Current Assets", "Inventories", "Merchandise"]},
+    {"source_id": "account_group_finished_goods", "code_prefix_start": "1122", "code_prefix_end": "1122", "name": "Finished Goods", "translations": {"ko_kr": "제품"}, "parent_source_id": "account_group_inventories", "path": ["Assets", "Current Assets", "Inventories", "Finished Goods"]},
+    {"source_id": "account_group_semi_finished_goods", "code_prefix_start": "1123", "code_prefix_end": "1123", "name": "Semi-Finished Goods", "translations": {"ko_kr": "반제품"}, "parent_source_id": "account_group_inventories", "path": ["Assets", "Current Assets", "Inventories", "Semi-Finished Goods"]},
+    {"source_id": "account_group_work_in_progress", "code_prefix_start": "1124", "code_prefix_end": "1124", "name": "Work In Progress", "translations": {"ko_kr": "재공품"}, "parent_source_id": "account_group_inventories", "path": ["Assets", "Current Assets", "Inventories", "Work In Progress"]},
+    {"source_id": "account_group_raw_materials", "code_prefix_start": "1125", "code_prefix_end": "1125", "name": "Raw Materials", "translations": {"ko_kr": "원재료"}, "parent_source_id": "account_group_inventories", "path": ["Assets", "Current Assets", "Inventories", "Raw Materials"]},
+    {"source_id": "account_group_supplies", "code_prefix_start": "1126", "code_prefix_end": "1126", "name": "Supplies", "translations": {"ko_kr": "저장품"}, "parent_source_id": "account_group_inventories", "path": ["Assets", "Current Assets", "Inventories", "Supplies"]},
+    {"source_id": "account_group_other_inventories", "code_prefix_start": "1127", "code_prefix_end": "1127", "name": "Other Inventories", "translations": {"ko_kr": "기타재고자산"}, "parent_source_id": "account_group_inventories", "path": ["Assets", "Current Assets", "Inventories", "Other Inventories"]},
+    {"source_id": "account_group_investment_property", "code_prefix_start": "1211", "code_prefix_end": "1211", "name": "Investment property", "translations": {"ko_kr": "투자부동산"}, "parent_source_id": "account_group_investments", "path": ["Assets", "Non-current assets", "Investments", "Investment property"]},
+    {"source_id": "account_group_long_term_securities", "code_prefix_start": "1212", "code_prefix_end": "1212", "name": "Long-term securities", "translations": {"ko_kr": "장기투자증권"}, "parent_source_id": "account_group_investments", "path": ["Assets", "Non-current assets", "Investments", "Long-term securities"]},
+    {"source_id": "account_group_investments_accounted_for_using_equity_method", "code_prefix_start": "1213", "code_prefix_end": "1213", "name": "Investments accounted for using equity method", "translations": {"ko_kr": "지분법적용투자주식"}, "parent_source_id": "account_group_investments", "path": ["Assets", "Non-current assets", "Investments", "Investments accounted for using equity method"]},
+    {"source_id": "account_group_long_term_loans", "code_prefix_start": "1214", "code_prefix_end": "1214", "name": "Long-term Loans", "translations": {"ko_kr": "장기대여금"}, "parent_source_id": "account_group_investments", "path": ["Assets", "Non-current assets", "Investments", "Long-term Loans"]},
+    {"source_id": "account_group_other_investments", "code_prefix_start": "1215", "code_prefix_end": "1215", "name": "Other Investments", "translations": {"ko_kr": "기타투자자산"}, "parent_source_id": "account_group_investments", "path": ["Assets", "Non-current assets", "Investments", "Other Investments"]},
+    {"source_id": "account_group_land", "code_prefix_start": "1221", "code_prefix_end": "1221", "name": "Land", "translations": {"ko_kr": "토지"}, "parent_source_id": "account_group_property_plant_and_equipment", "path": ["Assets", "Non-current assets", "Property, plant and equipment", "Land"]},
+    {"source_id": "account_group_tangible_assets", "code_prefix_start": "1222", "code_prefix_end": "1222", "name": "Tangible Assets", "translations": {"ko_kr": "설비자산"}, "parent_source_id": "account_group_property_plant_and_equipment", "path": ["Assets", "Non-current assets", "Property, plant and equipment", "Tangible Assets"]},
+    {"source_id": "account_group_construction_in_progress", "code_prefix_start": "1223", "code_prefix_end": "1223", "name": "Construction in progress", "translations": {"ko_kr": "건설중인자산"}, "parent_source_id": "account_group_property_plant_and_equipment", "path": ["Assets", "Non-current assets", "Property, plant and equipment", "Construction in progress"]},
+    {"source_id": "account_group_other_tangible_assets", "code_prefix_start": "1224", "code_prefix_end": "1224", "name": "Other Tangible Assets", "translations": {"ko_kr": "기타유형자산"}, "parent_source_id": "account_group_property_plant_and_equipment", "path": ["Assets", "Non-current assets", "Property, plant and equipment", "Other Tangible Assets"]},
+    {"source_id": "account_group_goodwill", "code_prefix_start": "1231", "code_prefix_end": "1231", "name": "Goodwill", "translations": {"ko_kr": "영업권"}, "parent_source_id": "account_group_intangible_assets", "path": ["Assets", "Non-current assets", "Intangible Assets", "Goodwill"]},
+    {"source_id": "account_group_industrial_property_rights", "code_prefix_start": "1232", "code_prefix_end": "1232", "name": "Industrial property rights", "translations": {"ko_kr": "산업재산권"}, "parent_source_id": "account_group_intangible_assets", "path": ["Assets", "Non-current assets", "Intangible Assets", "Industrial property rights"]},
+    {"source_id": "account_group_development_cost", "code_prefix_start": "1233", "code_prefix_end": "1233", "name": "Development Cost", "translations": {"ko_kr": "개발비"}, "parent_source_id": "account_group_intangible_assets", "path": ["Assets", "Non-current assets", "Intangible Assets", "Development Cost"]},
+    {"source_id": "account_group_other_intangible_assets", "code_prefix_start": "1234", "code_prefix_end": "1234", "name": "Other Intangible Assets", "translations": {"ko_kr": "기타무형자산"}, "parent_source_id": "account_group_intangible_assets", "path": ["Assets", "Non-current assets", "Intangible Assets", "Other Intangible Assets"]},
+    {"source_id": "account_group_deferred_tax_assets_non_current", "code_prefix_start": "1241", "code_prefix_end": "1241", "name": "Deferred tax assets (Non Current)", "translations": {"ko_kr": "이연법인세자산"}, "parent_source_id": "account_group_other_non_current_assets", "path": ["Assets", "Non-current assets", "Other non-current Assets", "Deferred tax assets (Non Current)"]},
+    {"source_id": "account_group_other_non_current_assets_2", "code_prefix_start": "1242", "code_prefix_end": "1242", "name": "Other non-current Assets", "translations": {"ko_kr": "기타"}, "parent_source_id": "account_group_other_non_current_assets", "path": ["Assets", "Non-current assets", "Other non-current Assets", "Other non-current Assets"]}
+  ],
+  "accounts": [
+    {"source_id": "l10n_kr_111101", "code": "111101", "name": "Cash", "translations": {"ko_KR": "현금"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_cash_and_cash_equivalents", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_kr_111102", "code": "111102", "name": "Current Deposit", "translations": {"ko_KR": "당좌예금"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_cash_and_cash_equivalents", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_kr_111103", "code": "111103", "name": "Ordinary Deposit", "translations": {"ko_KR": "보통예금"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_cash_and_cash_equivalents", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_kr_111201", "code": "111201", "name": "Trading Securities", "translations": {"ko_KR": "정기예.적금"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_short_term_investments", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111202", "code": "111202", "name": "Other short-term Financial Instruments", "translations": {"ko_KR": "기타단기금융상품"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_short_term_investments", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111203", "code": "111203", "name": "Short-term Deposit", "translations": {"ko_KR": "단기예금"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_short_term_investments", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111204", "code": "111204", "name": "Short-term Trading Securities", "translations": {"ko_KR": "단기매매증권"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_short_term_investments", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111205", "code": "111205", "name": "Marketable Securities", "translations": {"ko_KR": "매도가능증권"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_short_term_investments", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111206", "code": "111206", "name": "Held-to-Maturity Securities", "translations": {"ko_KR": "만기보유증권"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_short_term_investments", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111301", "code": "111301", "name": "Accounts Receivable", "translations": {"ko_KR": "외상매출금"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_trade_receivables", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_kr_111302", "code": "111302", "name": "Allowance for Bad Debts - A／R", "translations": {"ko_KR": "외상매출금대손충당금"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_trade_receivables", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_kr_111303", "code": "111303", "name": "Account Receivable (POS)", "translations": {"ko_KR": "PoS 외상매출금"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_trade_receivables", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_kr_111304", "code": "111304", "name": "Allowance for Bad Debts - A／R (POS)", "translations": {"ko_KR": "PoS 외상매출금대손충당금"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_trade_receivables", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_kr_111305", "code": "111305", "name": "Notes Receivable", "translations": {"ko_KR": "받을어음"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_trade_receivables", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_kr_111306", "code": "111306", "name": "Allowance for Bad Debts - N／R", "translations": {"ko_KR": "받을어음대손충당금"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_trade_receivables", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_kr_111401", "code": "111401", "name": "Prepaid Expenses", "translations": {"ko_KR": "선급비용"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_prepaid_expenses", "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "l10n_kr_111501", "code": "111501", "name": "Deferred tax assets (Current)", "translations": {"ko_KR": "이연법인세자산"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_deferred_tax_assets_current_asset", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111601", "code": "111601", "name": "Accrued revenue", "translations": {"ko_KR": "미수수익"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_cash_and_cash_equivalents", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111602", "code": "111602", "name": "Short-term Loans", "translations": {"ko_KR": "단기대여금"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_cash_and_cash_equivalents", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111603", "code": "111603", "name": "Receivables", "translations": {"ko_KR": "미수금"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_cash_and_cash_equivalents", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111604", "code": "111604", "name": "Advances to Vendors", "translations": {"ko_KR": "선급금"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_cash_and_cash_equivalents", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111605", "code": "111605", "name": "Advances to Employees", "translations": {"ko_KR": "가지급금"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_cash_and_cash_equivalents", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111606", "code": "111606", "name": "VAT Receivable/Refund", "translations": {"ko_KR": "부가세대급금"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_cash_and_cash_equivalents", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111607", "code": "111607", "name": "Prepaid Taxes", "translations": {"ko_KR": "선납세금"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_cash_and_cash_equivalents", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111608", "code": "111608", "name": "Outstanding Receipts", "translations": {"ko_KR": "미결제수금"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_cash_and_cash_equivalents", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111609", "code": "111609", "name": "Outstanding Payments", "translations": {"ko_KR": "미결제지급"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_cash_and_cash_equivalents", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111610", "code": "111610", "name": "Bank Suspense Account", "translations": {"ko_KR": "은행가계정"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_cash_and_cash_equivalents", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_111611", "code": "111611", "name": "Liquidity Transfer", "translations": {"ko_KR": "유동성 이전"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_cash_and_cash_equivalents", "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112101", "code": "112101", "name": "Merchandise", "translations": {"ko_KR": "상품"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_merchandise", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112102", "code": "112102", "name": "Merchandise Custom Duties Reimbursed", "translations": {"ko_KR": "상품관세환급금"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_merchandise", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112201", "code": "112201", "name": "Finished Goods", "translations": {"ko_KR": "제품"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_finished_goods", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112202", "code": "112202", "name": "Finished Goods Custom Duties Reimbursed", "translations": {"ko_KR": "제품관세환급금"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_finished_goods", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112301", "code": "112301", "name": "Semi-Finished Goods", "translations": {"ko_KR": "반제품"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_semi_finished_goods", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112401", "code": "112401", "name": "Work In Progress", "translations": {"ko_KR": "재공품"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_work_in_progress", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112501", "code": "112501", "name": "Raw Materials", "translations": {"ko_KR": "원재료"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_raw_materials", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112502", "code": "112502", "name": "Raw Materials (Sub-Materials)", "translations": {"ko_KR": "부재료"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_raw_materials", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112602", "code": "112602", "name": "Supplies", "translations": {"ko_KR": "저장품"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_supplies", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112701", "code": "112701", "name": "Goods in transit", "translations": {"ko_KR": "미착품"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_inventories", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112702", "code": "112702", "name": "Stock Interim (Received)", "translations": {"ko_KR": "재고 중간(입고)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_inventories", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112703", "code": "112703", "name": "Stock Interim (Delivered)", "translations": {"ko_KR": "재고 중간(출고)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_inventories", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_112704", "code": "112704", "name": "Cost of Production", "translations": {"ko_KR": "재고 중간(제조)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_inventories", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_kr_121101", "code": "121101", "name": "Investment property", "translations": {"ko_KR": "투자부동산"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_investment_property", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_kr_121201", "code": "121201", "name": "Long-term Financial Instruments", "translations": {"ko_KR": "장기금융상품"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_long_term_securities", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_kr_121202", "code": "121202", "name": "Restricted Bank and Cash", "translations": {"ko_KR": "특정현금과예금"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_long_term_securities", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_kr_121301", "code": "121301", "name": "Investments accounted for using equity method", "translations": {"ko_KR": "지분법적용투자주식"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_investments_accounted_for_using_equity_method", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_kr_121401", "code": "121401", "name": "Long-term Loans", "translations": {"ko_KR": "장기대여금"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_long_term_loans", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_kr_121402", "code": "121402", "name": "Long-term Receivables", "translations": {"ko_KR": "장기대여금대손충당금"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_long_term_loans", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_kr_121501", "code": "121501", "name": "Long-term Trade Receivables", "translations": {"ko_KR": "장기성매출채권"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_investments", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_kr_121502", "code": "121502", "name": "Present Value Discount", "translations": {"ko_KR": "현재가치할인차금"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_investments", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_kr_121503", "code": "121503", "name": "Allowance for Long-term Accounts Receivable Loan Loss", "translations": {"ko_KR": "장기성매출채권대손충당금"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_investments", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_kr_121504", "code": "121504", "name": "dishonored bills and checks", "translations": {"ko_KR": "부도어음과수표"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_investments", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_kr_121505", "code": "121505", "name": "Allowance for bad debts and checks", "translations": {"ko_KR": "부도어음과수표대손충당금"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_investments", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_kr_122101", "code": "122101", "name": "Land", "translations": {"ko_KR": "토지"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_land", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122201", "code": "122201", "name": "Buildings", "translations": {"ko_KR": "건물"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122202", "code": "122202", "name": "Accu. Depreciation - Buildings", "translations": {"ko_KR": "건물감가상각누계액"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122203", "code": "122203", "name": "Construct", "translations": {"ko_KR": "구축물"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122204", "code": "122204", "name": "Accu. Depreciation - Construct", "translations": {"ko_KR": "구축물감가상각누계액"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122205", "code": "122205", "name": "Machinery", "translations": {"ko_KR": "기계장치"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122206", "code": "122206", "name": "Accu. Depreciation - Machinery", "translations": {"ko_KR": "기계장치감가상각누계액"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122207", "code": "122207", "name": "Vehicle", "translations": {"ko_KR": "차량운반구"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122208", "code": "122208", "name": "Accu. Depreciation - Vehicle", "translations": {"ko_KR": "차량운반구감가상각누계액"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122209", "code": "122209", "name": "Tools and Utensils", "translations": {"ko_KR": "공구와기구"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122210", "code": "122210", "name": "Accu. Depreciation - Tools and Utensils", "translations": {"ko_KR": "공구와기구감가상각누계액"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122211", "code": "122211", "name": "Office Supplies", "translations": {"ko_KR": "비품"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122212", "code": "122212", "name": "Accu. Depreciation - Office Supplies", "translations": {"ko_KR": "비품감가상각누계액"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122213", "code": "122213", "name": "Facility Equipment", "translations": {"ko_KR": "시설장치"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122214", "code": "122214", "name": "Accu. Depreciation - Facility Equipment", "translations": {"ko_KR": "시설장치감가상각누계액"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122215", "code": "122215", "name": "Facility", "translations": {"ko_KR": "설비자산"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122216", "code": "122216", "name": "Accu. Depreciation - Facility", "translations": {"ko_KR": "설비자산감가상각누계액"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122301", "code": "122301", "name": "Construction in progress", "translations": {"ko_KR": "건설중인자산"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_construction_in_progress", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122401", "code": "122401", "name": "Other Tangible Assets", "translations": {"ko_KR": "기타유형자산"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_122402", "code": "122402", "name": "Accu. Depreciation - Other Assets", "translations": {"ko_KR": "기타유형자산감가상각누계액"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_tangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_123101", "code": "123101", "name": "Goodwill", "translations": {"ko_KR": "영업권"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_goodwill", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_123201", "code": "123201", "name": "Patents", "translations": {"ko_KR": "특허권"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_industrial_property_rights", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_123301", "code": "123301", "name": "Development Cost", "translations": {"ko_KR": "개발비"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_development_cost", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_123401", "code": "123401", "name": "License", "translations": {"ko_KR": "라이선스"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_intangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_123402", "code": "123402", "name": "Copyright", "translations": {"ko_KR": "저작권"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_intangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_123403", "code": "123403", "name": "Software", "translations": {"ko_KR": "컴퓨터소프트웨어"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_intangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_123404", "code": "123404", "name": "Rental Interest Fee", "translations": {"ko_KR": "임차권리금"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_intangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_123405", "code": "123405", "name": "Mining Rights", "translations": {"ko_KR": "광업권"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_intangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_123406", "code": "123406", "name": "Fishing Rights", "translations": {"ko_KR": "어업권"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_intangible_assets", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_124101", "code": "124101", "name": "Deferred tax assets (Non Current)", "translations": {"ko_KR": "이연법인세자산"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_deferred_tax_assets_non_current", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_124201", "code": "124201", "name": "Long-term Trade Receivables", "translations": {"ko_KR": "장기매출채권"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_non_current_assets_2", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_124202", "code": "124202", "name": "Long-term Prepayment Cost", "translations": {"ko_KR": "장기선급비용"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_non_current_assets_2", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_124203", "code": "124203", "name": "Long-term Advance Payment", "translations": {"ko_KR": "장기선급금"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_non_current_assets_2", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_124204", "code": "124204", "name": "Long-term Receivables", "translations": {"ko_KR": "장기미수금"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_non_current_assets_2", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_124205", "code": "124205", "name": "Rent Deposit", "translations": {"ko_KR": "임차보증금"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_non_current_assets_2", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_124206", "code": "124206", "name": "Other Deposits", "translations": {"ko_KR": "기타보증금"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_other_non_current_assets_2", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_kr_211001", "code": "211001", "name": "Short-term borrowings", "translations": {"ko_KR": "단기차입금"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_short_term_borrowings", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_kr_211002", "code": "211002", "name": "Bank overdrafts", "translations": {"ko_KR": "당좌차월"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_short_term_borrowings", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_kr_212001", "code": "212001", "name": "Accounts Payable", "translations": {"ko_KR": "외상매입금"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_trade_payables", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_kr_212002", "code": "212002", "name": "Notes Payable", "translations": {"ko_KR": "지급어음"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_trade_payables", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_kr_213001", "code": "213001", "name": "Current Tax Liabilities", "translations": {"ko_KR": "당기법인세부채"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_current_tax_liabilities", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "l10n_kr_214001", "code": "214001", "name": "Accruals", "translations": {"ko_KR": "미지급비용"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_accruals", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_kr_214002", "code": "214002", "name": "Salary Payable", "translations": {"ko_KR": "미지급 급여"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_accruals", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_kr_215001", "code": "215001", "name": "Deferred Tax Liabilities", "translations": {"ko_KR": "이연법인세부채"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_deferred_tax_liabilities", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_kr_216001", "code": "216001", "name": "Advance Payment Received", "translations": {"ko_KR": "선수금"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_other_current_liabilities", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_kr_216002", "code": "216002", "name": "Withholdings", "translations": {"ko_KR": "예수금"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_other_current_liabilities", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_kr_216003", "code": "216003", "name": "Guarantee deposits received", "translations": {"ko_KR": "예수보증금"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_other_current_liabilities", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_kr_216004", "code": "216004", "name": "VAT Payable", "translations": {"ko_KR": "부가세예수금"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_other_current_liabilities", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_kr_216005", "code": "216005", "name": "Unearned Revenues", "translations": {"ko_KR": "선수수익"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_other_current_liabilities", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_kr_216006", "code": "216006", "name": "Non-trade Payable", "translations": {"ko_KR": "미지급금"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_other_current_liabilities", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_kr_216007", "code": "216007", "name": "Suspense Receipts", "translations": {"ko_KR": "가수금"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_other_current_liabilities", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_kr_221001", "code": "221001", "name": "Bonds", "translations": {"ko_KR": "사채"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_bonds", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_kr_222001", "code": "222001", "name": "Bonds With Warrants", "translations": {"ko_KR": "신주인수권부사채"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_bonds_with_warrants", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_kr_223001", "code": "223001", "name": "Convertible Bond", "translations": {"ko_KR": "전환사채"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_convertible_bond", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_kr_224001", "code": "224001", "name": "Non-Current Borrowings", "translations": {"ko_KR": "장기차입금"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_current_borrowings", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_kr_225001", "code": "225001", "name": "Post-Employment Benefit Obligations", "translations": {"ko_KR": "퇴직급여충당부채"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_post_employment_benefit_obligations", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_kr_226001", "code": "226001", "name": "Long-term Warranty Provision", "translations": {"ko_KR": "장기제품보증충당부채"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_long_term_warranty_provision", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_kr_227001", "code": "227001", "name": "Deferred Tax Liabilities", "translations": {"ko_KR": "이연법인세부채"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_deferred_tax_liabilities_2", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_kr_228001", "code": "228001", "name": "Rental Deposit", "translations": {"ko_KR": "임대보증금"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_other_non_current_liabilities", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_kr_310001", "code": "310001", "name": "Ordinary Shares", "translations": {"ko_KR": "보통주자본금"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_share_capital", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_310002", "code": "310002", "name": "Preference Shares", "translations": {"ko_KR": "우선주자본금"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_share_capital", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_320001", "code": "320001", "name": "Share Premium", "translations": {"ko_KR": "주식발행초과금"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_capital_surplus", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_320002", "code": "320002", "name": "Gain on Disposition Of Treasury Shares", "translations": {"ko_KR": "자기주식처분이익"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_capital_surplus", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_320003", "code": "320003", "name": "Gain on Capital Reduction", "translations": {"ko_KR": "감자차익"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_capital_surplus", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_330001", "code": "330001", "name": "Treasury Shares", "translations": {"ko_KR": "자기주식"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_capital_adjustments", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_330002", "code": "330002", "name": "Discount on Share Issuance", "translations": {"ko_KR": "주식할인발행차금"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_capital_adjustments", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_330003", "code": "330003", "name": "Share Options", "translations": {"ko_KR": "주식매입선택권"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_capital_adjustments", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_330004", "code": "330004", "name": "Debt-To-Equity Conversion", "translations": {"ko_KR": "출자전환채무"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_capital_adjustments", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_330005", "code": "330005", "name": "Losses From Capital Reduction", "translations": {"ko_KR": "감자차손"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_capital_adjustments", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_340001", "code": "340001", "name": "Gain(loss) On Remeasurement Of Available-for-sale Securities", "translations": {"ko_KR": "매도가능증권평가손익"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_accumulated_other_comprehensive_income", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_340002", "code": "340002", "name": "Exchange Differences on Translating Foreign Operations", "translations": {"ko_KR": "해외사업환산손익"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_accumulated_other_comprehensive_income", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_340003", "code": "340003", "name": "Gain(loss) On Remeasurement Of Derivates For Cash Flow Hedges", "translations": {"ko_KR": "현금흐름위험회피파생상품평가손익"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_accumulated_other_comprehensive_income", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_351001", "code": "351001", "name": "Legal Reserve", "translations": {"ko_KR": "법정적립금"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_legal_reserve", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_351002", "code": "351002", "name": "Other Legal Reserve", "translations": {"ko_KR": "기타법정적립금"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_legal_reserve", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_352001", "code": "352001", "name": "Other Voluntary Reserve", "translations": {"ko_KR": "기타임의적립금"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_voluntary_reserve", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_353001", "code": "353001", "name": "Previous Years Unappropriated Retained Earnings", "translations": {"ko_KR": "전기이월미처분이익잉여금"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_unappropriated_retained_earnings", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_kr_410001", "code": "410001", "name": "Sales Income - Goods", "translations": {"ko_KR": "상품매출"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_revenue", "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_410002", "code": "410002", "name": "Sales Allowance and Return - Goods", "translations": {"ko_KR": "상품매출환입및에누리"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_revenue", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_410003", "code": "410003", "name": "Sales Discounts - Goods", "translations": {"ko_KR": "상품매출할인"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_revenue", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_410004", "code": "410004", "name": "Cash Discount Gain/Loss", "translations": {"ko_KR": "상품매출현금할인수익/손실"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_revenue", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_410006", "code": "410006", "name": "Sales Income - Products", "translations": {"ko_KR": "제품매출"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_revenue", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_410007", "code": "410007", "name": "Sales Allowance and Return - Products", "translations": {"ko_KR": "제품매출환입및에누리"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_revenue", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_410008", "code": "410008", "name": "Sales Discounts - Products", "translations": {"ko_KR": "제품매출할인"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_revenue", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420001", "code": "420001", "name": "Interest Income", "translations": {"ko_KR": "이자수익"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420002", "code": "420002", "name": "Dividend Income", "translations": {"ko_KR": "배당금수익"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420003", "code": "420003", "name": "Rental Income", "translations": {"ko_KR": "임대료"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420004", "code": "420004", "name": "Gain on Disposal of Short-term Investments", "translations": {"ko_KR": "단기투자자산처분이익"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420005", "code": "420005", "name": "Gain on Remeasurement of Short-term Investments", "translations": {"ko_KR": "단기투자자산평가이익"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420006", "code": "420006", "name": "Gain from Foreign Exchange Differences on Settlement", "translations": {"ko_KR": "외환차익"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420007", "code": "420007", "name": "Gain from Foreign Exchange Differences on Translation", "translations": {"ko_KR": "외화환산이익"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420008", "code": "420008", "name": "Gain on Investments Accounted for Using Equity Method", "translations": {"ko_KR": "지분법이익"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420009", "code": "420009", "name": "Reversal of Impairment Loss on Long-term Securities", "translations": {"ko_KR": "장기투자증권손상차손환입"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420010", "code": "420010", "name": "Gain on disposal of Property, Plant and Equipment", "translations": {"ko_KR": "유형자산처분이익"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420011", "code": "420011", "name": "Gain on Redemption of Bonds", "translations": {"ko_KR": "사채상환이익"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420012", "code": "420012", "name": "Gain on Prior Period Error Corrections", "translations": {"ko_KR": "전기오류수정이익"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420013", "code": "420013", "name": "Miscellaneous Income", "translations": {"ko_KR": "잡이익"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_420014", "code": "420014", "name": "Corporate Income Tax Refund", "translations": {"ko_KR": "법인세환급액"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "account_group_non_operating_income", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_kr_510001", "code": "510001", "name": "Cost of Revenue - Goods", "translations": {"ko_KR": "상품매출원가"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_cost_of_sales", "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_kr_510002", "code": "510002", "name": "Cost of Revenue - Products", "translations": {"ko_KR": "제품매출원가"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_cost_of_sales", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_kr_610001", "code": "610001", "name": "Salaries", "translations": {"ko_KR": "급여"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_610002", "code": "610002", "name": "Post-employment Benefits", "translations": {"ko_KR": "퇴직급여"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_610003", "code": "610003", "name": "Fringe Benefits", "translations": {"ko_KR": "복리후생비"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_610004", "code": "610004", "name": "Rent Expense", "translations": {"ko_KR": "임차료"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_610005", "code": "610005", "name": "Entertainment Expense", "translations": {"ko_KR": "접대비"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_610006", "code": "610006", "name": "Depreciation", "translations": {"ko_KR": "감가상각비"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_kr_610007", "code": "610007", "name": "Amortization", "translations": {"ko_KR": "무형자산상각비"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_610008", "code": "610008", "name": "Taxes and Dues", "translations": {"ko_KR": "세금과공과"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_610009", "code": "610009", "name": "Advertising", "translations": {"ko_KR": "광고선전비"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_610010", "code": "610010", "name": "Research", "translations": {"ko_KR": "연구비"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_610011", "code": "610011", "name": "Ordinary Development", "translations": {"ko_KR": "경상개발비"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_610012", "code": "610012", "name": "Bad Debt Expense", "translations": {"ko_KR": "대손상각비"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_610013", "code": "610013", "name": "Work in Progress Overhead", "translations": {"ko_KR": "재공품 오버 헤드비"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_selling_and_administrative_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620001", "code": "620001", "name": "Interest Expense", "translations": {"ko_KR": "이자비용"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620002", "code": "620002", "name": "Other Bad Debt Expense", "translations": {"ko_KR": "기타의대손상각비"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620003", "code": "620003", "name": "Loss on Disposal of Short-term Investments", "translations": {"ko_KR": "단기투자자산처분손실"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620004", "code": "620004", "name": "Loss on Remeasurement of Short-term Investments", "translations": {"ko_KR": "단기투자자산평가손실"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620005", "code": "620005", "name": "Inventory Loss", "translations": {"ko_KR": "재고자산감모손실"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620006", "code": "620006", "name": "Loss from Foreign Exchange Differences on Settlement", "translations": {"ko_KR": "외환차손"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620007", "code": "620007", "name": "Loss from Foreign Exchange Differences on Translation", "translations": {"ko_KR": "외화환산손실"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620008", "code": "620008", "name": "Donations", "translations": {"ko_KR": "기부금"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620009", "code": "620009", "name": "Loss on Investments Accounted for Using Equity Method", "translations": {"ko_KR": "지분법손실"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620010", "code": "620010", "name": "Impairment Loss on Long-term Securities", "translations": {"ko_KR": "장기투자증권손상차손"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620011", "code": "620011", "name": "Loss on Disposal of Property, Plant and Equipment", "translations": {"ko_KR": "유형자산처분손실"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620012", "code": "620012", "name": "Loss on Redemption of Bonds", "translations": {"ko_KR": "사채상환손실"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620013", "code": "620013", "name": "Loss on Prior Period Error Corrections", "translations": {"ko_KR": "전기오류수정손실"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620014", "code": "620014", "name": "Miscellaneous Loss", "translations": {"ko_KR": "잡손실"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_620015", "code": "620015", "name": "Corporate Income Tax Paid in Advance", "translations": {"ko_KR": "법인세추납액"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_non_operating_expenses", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_630001", "code": "630001", "name": "Tax Expense(income)", "translations": {"ko_KR": "법인세등"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "account_group_corporate_income_tax_and_others", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_kr_999999", "code": "999999", "name": "Undistributed Profits/Losses", "translations": {"ko_KR": "미배분이익(또는 미배분손실)"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity_unaffected"}}
+  ]
+}

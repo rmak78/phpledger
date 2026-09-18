@@ -1,0 +1,450 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "a72234ed9d103e09d066e9a47bc2d20e37d331194cdb18a9273f89be2496217e",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "erpnext-version-16/verified/philippines",
+  "country_code": "PH",
+  "country_name": "Philippines",
+  "country_basis": "chart file country name 'Philippines'",
+  "name": "Philippines",
+  "source": {
+    "system": "erpnext",
+    "repository": "https://github.com/frappe/erpnext",
+    "branch": "version-16",
+    "commit": "4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+    "commit_date": "2026-09-08T13:23:31+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "GPL-3.0-only",
+    "license_basis": "repository license.txt (GNU GPL v3); chart files carry no separate licence header",
+    "attribution": "Frappe Technologies Pvt. Ltd. and Contributors",
+    "upstream_folder": "verified",
+    "upstream_verified": true,
+    "upstream_disabled": false,
+    "files": [
+      {
+        "path": "erpnext/accounts/doctype/account/chart_of_accounts/verified/philippines.json",
+        "sha256": "965114bee865ec707b91644048868105e1b7a8fbb6c256f225519bc791b0a38d",
+        "kind": "json"
+      }
+    ]
+  },
+  "template": {
+    "hierarchy": "nested groups; posting accounts are leaves; source_id is the full ' / ' separated path",
+    "account_numbers_present": true
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "account_type",
+        "source_id": "Asset / Current Assets / Accounts Receivable Trade / Accounts Receivable - Trade",
+        "code": "1301",
+        "name": "Accounts Receivable - Trade",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "account_type",
+        "source_id": "Liability / Current Liabilities / Accounts Payable Trade / Accounts Payable - Trade",
+        "code": "2101",
+        "name": "Accounts Payable - Trade",
+        "resolved": true
+      }
+    ],
+    "cash": [
+      {
+        "source_field": "account_type",
+        "source_id": "Asset / Current Assets / Cash / Cash on Hand",
+        "code": "1101",
+        "name": "Cash on Hand",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Asset / Current Assets / Cash / Petty Cash Fund / Petty Cash Fund",
+        "code": "1111",
+        "name": "Petty Cash Fund",
+        "resolved": true
+      }
+    ],
+    "bank": [
+      {
+        "source_field": "account_type",
+        "source_id": "Asset / Current Assets / Bank Accounts / Cash in Bank - Checking Account",
+        "code": "1201",
+        "name": "Cash in Bank - Checking Account",
+        "resolved": true
+      }
+    ],
+    "inventory": [
+      {
+        "source_field": "account_type",
+        "source_id": "Asset / Current Assets / Finished Goods / Finished Goods Inventory",
+        "code": "1541",
+        "name": "Finished Goods Inventory",
+        "resolved": true
+      }
+    ],
+    "direct_cost": [
+      {
+        "source_field": "account_type",
+        "source_id": "Expense / Cost of Goods Sold / Cost of Goods Sold",
+        "code": "5002",
+        "name": "Cost of Goods Sold",
+        "resolved": true
+      }
+    ],
+    "round_off": [
+      {
+        "source_field": "account_type",
+        "source_id": "Expense / Round Off",
+        "code": "5500",
+        "name": "Round Off",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "Receivable": {
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "Payable": {
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "Bank": {
+      "subtype": "bank",
+      "role_hint": "cash_bank"
+    },
+    "Cash": {
+      "subtype": "cash",
+      "role_hint": "cash_bank"
+    },
+    "Stock": {
+      "subtype": "inventory",
+      "role_hint": null
+    },
+    "Tax": {
+      "subtype": "tax",
+      "role_hint": null
+    },
+    "Cost of Goods Sold": {
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "Fixed Asset": {
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "Accumulated Depreciation": {
+      "subtype": "accumulated_depreciation",
+      "role_hint": null
+    },
+    "Depreciation": {
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "Expense Account": {
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "Income Account": {
+      "subtype": "income",
+      "role_hint": null
+    },
+    "Equity": {
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "Liability": {
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "Chargeable": {
+      "subtype": "chargeable",
+      "role_hint": null
+    },
+    "Stock Received But Not Billed": {
+      "subtype": "stock_received_not_billed",
+      "role_hint": null
+    },
+    "Asset Received But Not Billed": {
+      "subtype": "asset_received_not_billed",
+      "role_hint": null
+    },
+    "Service Received But Not Billed": {
+      "subtype": "service_received_not_billed",
+      "role_hint": null
+    },
+    "Stock Delivered But Not Billed": {
+      "subtype": "stock_delivered_not_billed",
+      "role_hint": null
+    },
+    "Stock Adjustment": {
+      "subtype": "stock_adjustment",
+      "role_hint": null
+    },
+    "Expenses Included In Valuation": {
+      "subtype": "valuation_expense",
+      "role_hint": null
+    },
+    "Expenses Included In Asset Valuation": {
+      "subtype": "asset_valuation_expense",
+      "role_hint": null
+    },
+    "Capital Work in Progress": {
+      "subtype": "capital_work_in_progress",
+      "role_hint": null
+    },
+    "Temporary": {
+      "subtype": "temporary",
+      "role_hint": null
+    },
+    "Round Off": {
+      "subtype": "round_off",
+      "role_hint": null
+    },
+    "Indirect Expense": {
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "Indirect Income": {
+      "subtype": "other_income",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 176,
+    "posting_accounts": 120,
+    "group_accounts": 56,
+    "by_root_type": {
+      "asset": 54,
+      "equity": 11,
+      "expense": 62,
+      "income": 16,
+      "liability": 33
+    },
+    "by_subtype": {
+      "accumulated_depreciation": 5,
+      "bank": 2,
+      "cash": 4,
+      "depreciation": 1,
+      "direct_cost": 1,
+      "fixed_asset": 5,
+      "group": 53,
+      "inventory": 1,
+      "other_expense": 5,
+      "other_income": 2,
+      "payable": 1,
+      "receivable": 1,
+      "round_off": 1,
+      "stock_adjustment": 2,
+      "stock_received_not_billed": 1,
+      "tax": 6,
+      "unspecified": 84,
+      "valuation_expense": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 3,
+      "payables": 1,
+      "receivables": 1
+    },
+    "unmapped_account_types": {},
+    "roots_without_root_type": [],
+    "top_level_groups": [
+      "Asset",
+      "Liability",
+      "Equity",
+      "Income",
+      "Expense"
+    ],
+    "max_depth": 5,
+    "account_numbers_present": true
+  },
+  "accounts": [
+    {"source_id": "Asset", "code": "1000", "name": "Asset", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Current Assets", "code": "1001", "name": "Current Assets", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset", "depth": 2, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / Cash", "code": "1100", "name": "Cash", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Current Assets", "depth": 3, "source": {"root_type": "Asset", "account_type": "Cash", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / Cash / Cash on Hand", "code": "1101", "name": "Cash on Hand", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Cash", "depth": 4, "role_hint": "cash_bank", "source": {"root_type": "Asset", "account_type": "Cash", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Cash / Petty Cash Fund", "code": "1110", "name": "Petty Cash Fund", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Current Assets / Cash", "depth": 4, "source": {"root_type": "Asset", "account_type": "Cash", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / Cash / Petty Cash Fund / Petty Cash Fund", "code": "1111", "name": "Petty Cash Fund", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Cash / Petty Cash Fund", "depth": 5, "role_hint": "cash_bank", "source": {"root_type": "Asset", "account_type": "Cash", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Bank Accounts", "code": "1200", "name": "Bank Accounts", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Current Assets", "depth": 3, "source": {"root_type": "Asset", "account_type": "Bank", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / Bank Accounts / Cash in Bank - Checking Account", "code": "1201", "name": "Cash in Bank - Checking Account", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Bank Accounts", "depth": 4, "role_hint": "cash_bank", "source": {"root_type": "Asset", "account_type": "Bank", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Advances to Officers & Employees", "code": "1290", "name": "Advances to Officers & Employees", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Current Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / Advances to Officers & Employees / Advances to Officers & Employees", "code": "1291", "name": "Advances to Officers & Employees", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Advances to Officers & Employees", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Accounts Receivable Trade", "code": "1300", "name": "Accounts Receivable Trade", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Current Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / Accounts Receivable Trade / Accounts Receivable - Trade", "code": "1301", "name": "Accounts Receivable - Trade", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Accounts Receivable Trade", "depth": 4, "role_hint": "receivables", "source": {"root_type": "Asset", "account_type": "Receivable", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Accounts Receivable - Affiliates", "code": "1310", "name": "Accounts Receivable - Affiliates", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Current Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / Accounts Receivable - Affiliates / Due from Company", "code": "1311", "name": "Due from Company", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Accounts Receivable - Affiliates", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Accounts Receivable - Others", "code": "1400", "name": "Accounts Receivable - Others", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Current Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / Accounts Receivable - Others / Accounts Receivable - Others", "code": "1401", "name": "Accounts Receivable - Others", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Accounts Receivable - Others", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Parts, Materials and Supplies", "code": "1500", "name": "Parts, Materials and Supplies", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Current Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / Parts, Materials and Supplies / Parts, Materials and Supplies", "code": "1501", "name": "Parts, Materials and Supplies", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Parts, Materials and Supplies", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Parts, Materials and Supplies / Raw Materials - Demo", "code": "1502", "name": "Raw Materials - Demo", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Parts, Materials and Supplies", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Project in Progress", "code": "1510", "name": "Project in Progress", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Current Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / Project in Progress / Project in Progress", "code": "1511", "name": "Project in Progress", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Project in Progress", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Finished Goods", "code": "1540", "name": "Finished Goods", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Current Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / Finished Goods / Finished Goods Inventory", "code": "1541", "name": "Finished Goods Inventory", "root_type": "asset", "subtype": "inventory", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Finished Goods", "depth": 4, "source": {"root_type": "Asset", "account_type": "Stock", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Finished Goods / Inventory in Transit", "code": "1542", "name": "Inventory in Transit", "root_type": "asset", "subtype": "stock_adjustment", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Finished Goods", "depth": 4, "source": {"root_type": "Asset", "account_type": "Stock Adjustment", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Prepayments", "code": "1600", "name": "Prepayments", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Current Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / Prepayments / Prepaid Insurance & Bonds", "code": "1601", "name": "Prepaid Insurance & Bonds", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Prepayments", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / Prepayments / Prepaid Rent", "code": "1602", "name": "Prepaid Rent", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / Prepayments", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Current Assets / VAT Input Tax", "code": "1610", "name": "VAT Input Tax", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Current Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Current Assets / VAT Input Tax / VAT Input Tax - Goods", "code": "1611", "name": "VAT Input Tax - Goods", "root_type": "asset", "subtype": "tax", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Current Assets / VAT Input Tax", "depth": 4, "source": {"root_type": "Asset", "account_type": "Tax", "is_group": 0}},
+    {"source_id": "Asset / Non - Current Assets", "code": "1002", "name": "Non - Current Assets", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset", "depth": 2, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Non - Current Assets / Property, Plants And Equipments", "code": "1700", "name": "Property, Plants And Equipments", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Non - Current Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Non - Current Assets / Property, Plants And Equipments / Land", "code": "1701", "name": "Land", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Non - Current Assets / Property, Plants And Equipments", "depth": 4, "source": {"root_type": "Asset", "account_type": "Fixed Asset", "is_group": 0}},
+    {"source_id": "Asset / Non - Current Assets / Property, Plants And Equipments / Buildings & Improvements", "code": "1702", "name": "Buildings & Improvements", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Non - Current Assets / Property, Plants And Equipments", "depth": 4, "source": {"root_type": "Asset", "account_type": "Fixed Asset", "is_group": 0}},
+    {"source_id": "Asset / Non - Current Assets / Property, Plants And Equipments / Delivery & Trans Equipment", "code": "1703", "name": "Delivery & Trans Equipment", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Non - Current Assets / Property, Plants And Equipments", "depth": 4, "source": {"root_type": "Asset", "account_type": "Fixed Asset", "is_group": 0}},
+    {"source_id": "Asset / Non - Current Assets / Property, Plants And Equipments / Furniture & Fixtures", "code": "1704", "name": "Furniture & Fixtures", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Non - Current Assets / Property, Plants And Equipments", "depth": 4, "source": {"root_type": "Asset", "account_type": "Fixed Asset", "is_group": 0}},
+    {"source_id": "Asset / Non - Current Assets / Property, Plants And Equipments / Machinery & Equipment", "code": "1705", "name": "Machinery & Equipment", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Non - Current Assets / Property, Plants And Equipments", "depth": 4, "source": {"root_type": "Asset", "account_type": "Fixed Asset", "is_group": 0}},
+    {"source_id": "Asset / Non - Current Assets / Accum Depr. - Property, Plants and Equipment", "code": "1800", "name": "Accum Depr. - Property, Plants and Equipment", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Non - Current Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Non - Current Assets / Accum Depr. - Property, Plants and Equipment / Accumulated Dep Bdgs & Improv", "code": "1801", "name": "Accumulated Dep Bdgs & Improv", "root_type": "asset", "subtype": "accumulated_depreciation", "normal_balance": "credit", "is_group": false, "parent_source_id": "Asset / Non - Current Assets / Accum Depr. - Property, Plants and Equipment", "depth": 4, "flags": ["contra"], "source": {"root_type": "Asset", "account_type": "Accumulated Depreciation", "is_group": 0}},
+    {"source_id": "Asset / Non - Current Assets / Accum Depr. - Property, Plants and Equipment / Accumulated Dep Delivery & Trans", "code": "1802", "name": "Accumulated Dep Delivery & Trans", "root_type": "asset", "subtype": "accumulated_depreciation", "normal_balance": "credit", "is_group": false, "parent_source_id": "Asset / Non - Current Assets / Accum Depr. - Property, Plants and Equipment", "depth": 4, "flags": ["contra"], "source": {"root_type": "Asset", "account_type": "Accumulated Depreciation", "is_group": 0}},
+    {"source_id": "Asset / Non - Current Assets / Accum Depr. - Property, Plants and Equipment / Accumulated Dep Furniture & Fixture", "code": "1803", "name": "Accumulated Dep Furniture & Fixture", "root_type": "asset", "subtype": "accumulated_depreciation", "normal_balance": "credit", "is_group": false, "parent_source_id": "Asset / Non - Current Assets / Accum Depr. - Property, Plants and Equipment", "depth": 4, "flags": ["contra"], "source": {"root_type": "Asset", "account_type": "Accumulated Depreciation", "is_group": 0}},
+    {"source_id": "Asset / Non - Current Assets / Accum Depr. - Property, Plants and Equipment / Accumulated Depreciation - Machinery & Equipment", "code": "1804", "name": "Accumulated Depreciation - Machinery & Equipment", "root_type": "asset", "subtype": "accumulated_depreciation", "normal_balance": "credit", "is_group": false, "parent_source_id": "Asset / Non - Current Assets / Accum Depr. - Property, Plants and Equipment", "depth": 4, "flags": ["contra"], "source": {"root_type": "Asset", "account_type": "Accumulated Depreciation", "is_group": 0}},
+    {"source_id": "Asset / Other Assets", "code": "1003", "name": "Other Assets", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset", "depth": 2, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Other Assets / Advances To Supplier", "code": "1900", "name": "Advances To Supplier", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Other Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Other Assets / Advances To Supplier / Advances To Supplier", "code": "1901", "name": "Advances To Supplier", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Other Assets / Advances To Supplier", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Other Assets / Miscellaneous Deposits", "code": "1910", "name": "Miscellaneous Deposits", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Other Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Other Assets / Miscellaneous Deposits / Miscellaneous Deposits", "code": "1911", "name": "Miscellaneous Deposits", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Other Assets / Miscellaneous Deposits", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Other Assets / Retirement Fund", "code": "1920", "name": "Retirement Fund", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Other Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Other Assets / Retirement Fund / Retirement Fund", "code": "1921", "name": "Retirement Fund", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Other Assets / Retirement Fund", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Other Assets / Investment", "code": "1930", "name": "Investment", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Other Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Other Assets / Investment / Investment", "code": "1931", "name": "Investment", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Other Assets / Investment", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Other Assets / Intangible Assets", "code": "1940", "name": "Intangible Assets", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Other Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Other Assets / Intangible Assets / System Development", "code": "1941", "name": "System Development", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Asset / Other Assets / Intangible Assets", "depth": 4, "source": {"root_type": "Asset", "is_group": 0}},
+    {"source_id": "Asset / Other Assets / Accumulated Amortization - Intangible Assets", "code": "1950", "name": "Accumulated Amortization - Intangible Assets", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Asset / Other Assets", "depth": 3, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Asset / Other Assets / Accumulated Amortization - Intangible Assets / Accum Amortization - System Development", "code": "1951", "name": "Accum Amortization - System Development", "root_type": "asset", "subtype": "accumulated_depreciation", "normal_balance": "credit", "is_group": false, "parent_source_id": "Asset / Other Assets / Accumulated Amortization - Intangible Assets", "depth": 4, "flags": ["contra"], "source": {"root_type": "Asset", "account_type": "Accumulated Depreciation", "is_group": 0}},
+    {"source_id": "Liability", "code": "2000", "name": "Liability", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Current Liabilities", "code": "2001", "name": "Current Liabilities", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Liability", "depth": 2, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Current Liabilities / Accounts Payable Trade", "code": "2100", "name": "Accounts Payable Trade", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Liability / Current Liabilities", "depth": 3, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Current Liabilities / Accounts Payable Trade / Accounts Payable - Trade", "code": "2101", "name": "Accounts Payable - Trade", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Accounts Payable Trade", "depth": 4, "role_hint": "payables", "source": {"root_type": "Liability", "account_type": "Payable", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Accounts Payable Others", "code": "2110", "name": "Accounts Payable Others", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Liability / Current Liabilities", "depth": 3, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Current Liabilities / Accounts Payable Others / Accounts Payable - Payroll", "code": "2111", "name": "Accounts Payable - Payroll", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Accounts Payable Others", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / VAT Output Tax", "code": "2200", "name": "VAT Output Tax", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Liability / Current Liabilities", "depth": 3, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Current Liabilities / VAT Output Tax / VAT Output Tax", "code": "2201", "name": "VAT Output Tax", "root_type": "liability", "subtype": "tax", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / VAT Output Tax", "depth": 4, "source": {"root_type": "Liability", "account_type": "Tax", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Withholding Taxes Payable Wages", "code": "2210", "name": "Withholding Taxes Payable Wages", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Liability / Current Liabilities", "depth": 3, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Current Liabilities / Withholding Taxes Payable Wages / Withholding Taxes Payable Wages", "code": "2211", "name": "Withholding Taxes Payable Wages", "root_type": "liability", "subtype": "tax", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Withholding Taxes Payable Wages", "depth": 4, "source": {"root_type": "Liability", "account_type": "Tax", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Withholding Taxes Payable Expanded", "code": "2220", "name": "Withholding Taxes Payable Expanded", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Liability / Current Liabilities", "depth": 3, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Current Liabilities / Withholding Taxes Payable Expanded / Withholding Taxes Payable Expanded", "code": "2221", "name": "Withholding Taxes Payable Expanded", "root_type": "liability", "subtype": "tax", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Withholding Taxes Payable Expanded", "depth": 4, "source": {"root_type": "Liability", "account_type": "Tax", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Accruals And Other Current Payables", "code": "2300", "name": "Accruals And Other Current Payables", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Liability / Current Liabilities", "depth": 3, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Current Liabilities / Accruals And Other Current Payables / Stock Received But Not Billed", "code": "2301", "name": "Stock Received But Not Billed", "root_type": "liability", "subtype": "stock_received_not_billed", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Accruals And Other Current Payables", "depth": 4, "source": {"root_type": "Liability", "account_type": "Stock Received But Not Billed", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions", "code": "2400", "name": "Payable to Government and Other Institutions", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Liability / Current Liabilities", "depth": 3, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions / SSS Premium Payable", "code": "2401", "name": "SSS Premium Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions / SSS Salary Loan Payable", "code": "2402", "name": "SSS Salary Loan Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions / PhilHealth Premium", "code": "2403", "name": "PhilHealth Premium", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions / Pag-ibig Loan Payable", "code": "2404", "name": "Pag-ibig Loan Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions / Coop Loans", "code": "2405", "name": "Coop Loans", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions / Coop Contributions", "code": "2406", "name": "Coop Contributions", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions / Canteen", "code": "2407", "name": "Canteen", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions / AUB Loan Payable", "code": "2408", "name": "AUB Loan Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions / HSBC Loan Payable", "code": "2409", "name": "HSBC Loan Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities / Payable to Government and Other Institutions", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Current Liabilities / Customer Deposits", "code": "2500", "name": "Customer Deposits", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Current Liabilities", "depth": 3, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Non Current Liabilities", "code": "2002", "name": "Non Current Liabilities", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Liability", "depth": 2, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Non Current Liabilities / Due To Associated Company", "code": "2600", "name": "Due To Associated Company", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Liability / Non Current Liabilities", "depth": 3, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Non Current Liabilities / Due To Associated Company / Due To Associated Company", "code": "2601", "name": "Due To Associated Company", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Non Current Liabilities / Due To Associated Company", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Non Current Liabilities / Deferred Income", "code": "2700", "name": "Deferred Income", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Liability / Non Current Liabilities", "depth": 3, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Non Current Liabilities / Deferred Income / Deferred Income", "code": "2701", "name": "Deferred Income", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Non Current Liabilities / Deferred Income", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Non Current Liabilities / Notes Payable", "code": "2800", "name": "Notes Payable", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Liability / Non Current Liabilities", "depth": 3, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Liability / Non Current Liabilities / Notes Payable / Notes Payable", "code": "2801", "name": "Notes Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Non Current Liabilities / Notes Payable", "depth": 4, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Liability / Non Current Liabilities / Dividends Payable", "code": "2900", "name": "Dividends Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Liability / Non Current Liabilities", "depth": 3, "source": {"root_type": "Liability", "is_group": 0}},
+    {"source_id": "Equity", "code": "3000", "name": "Equity", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Equity", "is_group": 1}},
+    {"source_id": "Equity / STOCKHOLDER'S EQUITY", "code": "3001", "name": "STOCKHOLDER'S EQUITY", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Equity", "depth": 2, "source": {"root_type": "Equity", "is_group": 1}},
+    {"source_id": "Equity / STOCKHOLDER'S EQUITY / Capital Stocks", "code": "3100", "name": "Capital Stocks", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Equity / STOCKHOLDER'S EQUITY", "depth": 3, "source": {"root_type": "Equity", "is_group": 1}},
+    {"source_id": "Equity / STOCKHOLDER'S EQUITY / Capital Stocks / Capital Stocks", "code": "3101", "name": "Capital Stocks", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Equity / STOCKHOLDER'S EQUITY / Capital Stocks", "depth": 4, "source": {"root_type": "Equity", "is_group": 0}},
+    {"source_id": "Equity / STOCKHOLDER'S EQUITY / Subscription Receivable", "code": "3200", "name": "Subscription Receivable", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Equity / STOCKHOLDER'S EQUITY", "depth": 3, "source": {"root_type": "Equity", "is_group": 1}},
+    {"source_id": "Equity / STOCKHOLDER'S EQUITY / Subscription Receivable / Subscription Receivable", "code": "3201", "name": "Subscription Receivable", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Equity / STOCKHOLDER'S EQUITY / Subscription Receivable", "depth": 4, "source": {"root_type": "Equity", "is_group": 0}},
+    {"source_id": "Equity / STOCKHOLDER'S EQUITY / Retained Earnings", "code": "3300", "name": "Retained Earnings", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Equity / STOCKHOLDER'S EQUITY", "depth": 3, "source": {"root_type": "Equity", "is_group": 1}},
+    {"source_id": "Equity / STOCKHOLDER'S EQUITY / Retained Earnings / Retained Earnings", "code": "3301", "name": "Retained Earnings", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Equity / STOCKHOLDER'S EQUITY / Retained Earnings", "depth": 4, "source": {"root_type": "Equity", "is_group": 0}},
+    {"source_id": "Equity / STOCKHOLDER'S EQUITY / Current Year (Profit/Loss)", "code": "3400", "name": "Current Year (Profit/Loss)", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Equity / STOCKHOLDER'S EQUITY", "depth": 3, "source": {"root_type": "Equity", "is_group": 0}},
+    {"source_id": "Equity / STOCKHOLDER'S EQUITY / Drawings", "code": "3500", "name": "Drawings", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Equity / STOCKHOLDER'S EQUITY", "depth": 3, "source": {"root_type": "Equity", "is_group": 1}},
+    {"source_id": "Equity / STOCKHOLDER'S EQUITY / Drawings / Drawings", "code": "3501", "name": "Drawings", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Equity / STOCKHOLDER'S EQUITY / Drawings", "depth": 4, "source": {"root_type": "Equity", "is_group": 0}},
+    {"source_id": "Income", "code": "4000", "name": "Income", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Income", "is_group": 1}},
+    {"source_id": "Income / Gross Sales", "code": "4100", "name": "Gross Sales", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Income", "depth": 2, "source": {"root_type": "Income", "is_group": 1}},
+    {"source_id": "Income / Gross Sales / Sales", "code": "4101", "name": "Sales", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Income / Gross Sales", "depth": 3, "source": {"root_type": "Income", "is_group": 0}},
+    {"source_id": "Income / Sales Adjustment", "code": "4200", "name": "Sales Adjustment", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Income", "depth": 2, "source": {"root_type": "Income", "is_group": 1}},
+    {"source_id": "Income / Sales Adjustment / Sales Return And Allowance", "code": "4201", "name": "Sales Return And Allowance", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Income / Sales Adjustment", "depth": 3, "source": {"root_type": "Income", "is_group": 0}},
+    {"source_id": "Income / Sales Discount", "code": "4300", "name": "Sales Discount", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Income", "depth": 2, "source": {"root_type": "Income", "is_group": 1}},
+    {"source_id": "Income / Sales Discount / Sales Discount", "code": "4301", "name": "Sales Discount", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Income / Sales Discount", "depth": 3, "source": {"root_type": "Income", "is_group": 0}},
+    {"source_id": "Income / Other Income", "code": "6000", "name": "Other Income", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Income", "depth": 2, "source": {"root_type": "Income", "is_group": 1}},
+    {"source_id": "Income / Other Income / Interest Income Bank", "code": "6010", "name": "Interest Income Bank", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Income / Other Income", "depth": 3, "source": {"root_type": "Income", "is_group": 1}},
+    {"source_id": "Income / Other Income / Interest Income Bank / Interest Income Bank", "code": "6011", "name": "Interest Income Bank", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Income / Other Income / Interest Income Bank", "depth": 4, "source": {"root_type": "Income", "is_group": 0}},
+    {"source_id": "Income / Other Income / Dividend Income", "code": "6020", "name": "Dividend Income", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Income / Other Income", "depth": 3, "source": {"root_type": "Income", "is_group": 1}},
+    {"source_id": "Income / Other Income / Dividend Income / Dividend Income", "code": "6021", "name": "Dividend Income", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Income / Other Income / Dividend Income", "depth": 4, "source": {"root_type": "Income", "is_group": 0}},
+    {"source_id": "Income / Other Income / Exchange Gain", "code": "6030", "name": "Exchange Gain", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Income / Other Income", "depth": 3, "source": {"root_type": "Income", "is_group": 1}},
+    {"source_id": "Income / Other Income / Exchange Gain / Exchange Gain - Detail", "code": "6031", "name": "Exchange Gain - Detail", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Income / Other Income / Exchange Gain", "depth": 4, "source": {"root_type": "Income", "account_type": "Indirect Income", "is_group": 0}},
+    {"source_id": "Income / Other Income / Gain on Asset Disposal", "code": "6040", "name": "Gain on Asset Disposal", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Income / Other Income", "depth": 3, "source": {"root_type": "Income", "is_group": 1}},
+    {"source_id": "Income / Other Income / Gain on Asset Disposal / Gain on Asset Disposal - Detail", "code": "6041", "name": "Gain on Asset Disposal - Detail", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Income / Other Income / Gain on Asset Disposal", "depth": 4, "source": {"root_type": "Income", "account_type": "Indirect Income", "is_group": 0}},
+    {"source_id": "Expense", "code": "5000", "name": "Expense", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense", "is_group": 1}},
+    {"source_id": "Expense / Cost of Goods Sold", "code": "5001", "name": "Cost of Goods Sold", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Expense", "depth": 2, "source": {"root_type": "Expense", "is_group": 1}},
+    {"source_id": "Expense / Cost of Goods Sold / Cost of Goods Sold", "code": "5002", "name": "Cost of Goods Sold", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Cost of Goods Sold", "depth": 3, "source": {"root_type": "Expense", "account_type": "Cost of Goods Sold", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses", "code": "5100", "name": "Operating Expenses", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Expense", "depth": 2, "source": {"root_type": "Expense", "is_group": 1}},
+    {"source_id": "Expense / Operating Expenses / Salaries, Wages", "code": "5101", "name": "Salaries, Wages", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / 13th Month Pay & Bonus", "code": "5102", "name": "13th Month Pay & Bonus", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Overtime & Night Diff", "code": "5103", "name": "Overtime & Night Diff", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Incentive/Performance Bonus", "code": "5104", "name": "Incentive/Performance Bonus", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Employees Benefits", "code": "5105", "name": "Employees Benefits", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Advertising & Promotions", "code": "5106", "name": "Advertising & Promotions", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Amortization of Leasehold Improvement", "code": "5107", "name": "Amortization of Leasehold Improvement", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Amortization of Pre-Operating", "code": "5108", "name": "Amortization of Pre-Operating", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Amortization of System Development", "code": "5109", "name": "Amortization of System Development", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Audit & Legal Fee", "code": "5110", "name": "Audit & Legal Fee", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Bad Debts Expenses", "code": "5111", "name": "Bad Debts Expenses", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Client Service & Maintenance", "code": "5112", "name": "Client Service & Maintenance", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Commission Expenses", "code": "5113", "name": "Commission Expenses", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Communications", "code": "5114", "name": "Communications", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Contractual Services", "code": "5115", "name": "Contractual Services", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Depreciation Expenses", "code": "5116", "name": "Depreciation Expenses", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "account_type": "Depreciation", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Donation & Contribution", "code": "5117", "name": "Donation & Contribution", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Dues & Subscription", "code": "5118", "name": "Dues & Subscription", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Employee Med/Dental/Hosp Expenses", "code": "5119", "name": "Employee Med/Dental/Hosp Expenses", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Employee Uniforms", "code": "5120", "name": "Employee Uniforms", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Equipage", "code": "5121", "name": "Equipage", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Expenses for Reclassification", "code": "5122", "name": "Expenses for Reclassification", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Gas & Oil", "code": "5123", "name": "Gas & Oil", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Insurance Expenses", "code": "5124", "name": "Insurance Expenses", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Light & Water", "code": "5125", "name": "Light & Water", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Local/Overseas Travel", "code": "5126", "name": "Local/Overseas Travel", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Meals & Transportation Expenses", "code": "5127", "name": "Meals & Transportation Expenses", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Meeting & Conferences", "code": "5128", "name": "Meeting & Conferences", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Miscellaneous Expenses", "code": "5129", "name": "Miscellaneous Expenses", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Mockup Expenses", "code": "5130", "name": "Mockup Expenses", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Obsolescence Expenses", "code": "5131", "name": "Obsolescence Expenses", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Other Support Cost", "code": "5132", "name": "Other Support Cost", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Pag-ibig Contribution", "code": "5133", "name": "Pag-ibig Contribution", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Performance Bonds", "code": "5134", "name": "Performance Bonds", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Pre Employment Expenses", "code": "5135", "name": "Pre Employment Expenses", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Professional Fees", "code": "5136", "name": "Professional Fees", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Recruitment & Employment", "code": "5137", "name": "Recruitment & Employment", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Rent Expenses", "code": "5138", "name": "Rent Expenses", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Rent Expenses Others", "code": "5139", "name": "Rent Expenses Others", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Repairs & Maintenance", "code": "5140", "name": "Repairs & Maintenance", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Representation Expenses", "code": "5141", "name": "Representation Expenses", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Research & Development", "code": "5142", "name": "Research & Development", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Security Expenses", "code": "5143", "name": "Security Expenses", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Shared Services Fee", "code": "5144", "name": "Shared Services Fee", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / SSS/Medicare/EC Contributions", "code": "5145", "name": "SSS/Medicare/EC Contributions", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Stationery & Supplies", "code": "5146", "name": "Stationery & Supplies", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Taxes & Licenses", "code": "5147", "name": "Taxes & Licenses", "root_type": "expense", "subtype": "tax", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "account_type": "Tax", "is_group": 0}},
+    {"source_id": "Expense / Operating Expenses / Training & Seminar", "code": "5148", "name": "Training & Seminar", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Operating Expenses", "depth": 3, "source": {"root_type": "Expense", "is_group": 0}},
+    {"source_id": "Expense / Other Expenses", "code": "5200", "name": "Other Expenses", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Expense", "depth": 2, "source": {"root_type": "Expense", "is_group": 1}},
+    {"source_id": "Expense / Other Expenses / Bank Charges", "code": "5201", "name": "Bank Charges", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Other Expenses", "depth": 3, "source": {"root_type": "Expense", "account_type": "Indirect Expense", "is_group": 0}},
+    {"source_id": "Expense / Other Expenses / Interest Expenses Bank", "code": "5202", "name": "Interest Expenses Bank", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Other Expenses", "depth": 3, "source": {"root_type": "Expense", "account_type": "Indirect Expense", "is_group": 0}},
+    {"source_id": "Expense / Other Expenses / Write Off", "code": "5203", "name": "Write Off", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Other Expenses", "depth": 3, "source": {"root_type": "Expense", "account_type": "Indirect Expense", "is_group": 0}},
+    {"source_id": "Expense / Other Expenses / Exchange Loss", "code": "5204", "name": "Exchange Loss", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Other Expenses", "depth": 3, "source": {"root_type": "Expense", "account_type": "Indirect Expense", "is_group": 0}},
+    {"source_id": "Expense / Other Expenses / Loss on Asset Disposal", "code": "5205", "name": "Loss on Asset Disposal", "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense / Other Expenses", "depth": 3, "source": {"root_type": "Expense", "account_type": "Indirect Expense", "is_group": 0}},
+    {"source_id": "Expense / Provision For Income Tax", "code": "5300", "name": "Provision For Income Tax", "root_type": "expense", "subtype": "tax", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense", "depth": 2, "source": {"root_type": "Expense", "account_type": "Tax", "is_group": 0}},
+    {"source_id": "Expense / Stock Adjustment", "code": "5400", "name": "Stock Adjustment", "root_type": "expense", "subtype": "stock_adjustment", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense", "depth": 2, "source": {"root_type": "Expense", "account_type": "Stock Adjustment", "is_group": 0}},
+    {"source_id": "Expense / Round Off", "code": "5500", "name": "Round Off", "root_type": "expense", "subtype": "round_off", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense", "depth": 2, "source": {"root_type": "Expense", "account_type": "Round Off", "is_group": 0}},
+    {"source_id": "Expense / Expenses Included In Valuation", "code": "5600", "name": "Expenses Included In Valuation", "root_type": "expense", "subtype": "valuation_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expense", "depth": 2, "source": {"root_type": "Expense", "account_type": "Expenses Included In Valuation", "is_group": 0}}
+  ]
+}

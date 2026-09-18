@@ -1,0 +1,535 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "3ab22a5d7bb42169cd8d34ae71cd5f679a5fbc44a9c0c526d8d2d72c59b14677",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/ch",
+  "country_code": "CH",
+  "country_name": "Switzerland",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Switzerland - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_ch' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_ch",
+    "module_name": "Switzerland - Accounting",
+    "module_version": "11.3",
+    "contributing_modules": [
+      "l10n_ch"
+    ],
+    "template_code": "ch",
+    "template_chain": [
+      "ch"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_ch/data/template/account.account-ch.csv",
+        "sha256": "787632e14e0c7740899aa39b869490078e61410942351ac1d09e0758aab96f4d",
+        "rows": 209
+      }
+    ],
+    "python_files": [
+      "addons/l10n_ch/models/template_ch.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "4",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "102",
+      "cash": "100",
+      "transfer": "1090"
+    },
+    "default_sale_tax": "vat_sale_81",
+    "default_purchase_tax": "vat_purchase_81",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "ch_coa_1100",
+        "code": "1100",
+        "name": "Accounts receivable from goods and services (Debtors)",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "ch_coa_2000",
+        "code": "2000",
+        "name": "Accounts payable from goods and services (Creditors)",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "ch_coa_3200",
+        "code": "3200",
+        "name": "Sales of goods (Trade)",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "ch_coa_4200",
+        "code": "4200",
+        "name": "Cost of materials (Trade)",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "ch_coa_1210",
+        "code": "1210",
+        "name": "Raw materials",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "ch_coa_1101",
+        "code": "1101",
+        "name": "Receivable (PoS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "ch_coa_3806",
+        "code": "3806",
+        "name": "Exchange rate differences",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "ch_coa_4906",
+        "code": "4906",
+        "name": "Exchange rate differences",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "ch_coa_4992",
+        "code": "4992",
+        "name": "Cash Difference Gain",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "ch_coa_4991",
+        "code": "4991",
+        "name": "Cash Difference Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "ch_coa_3800",
+        "code": "3800",
+        "name": "Financial discount",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "ch_coa_4900",
+        "code": "4900",
+        "name": "Financial Discounts",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "ch_coa_1300",
+        "code": "1300",
+        "name": "Accrued revenue and deferred expense (Accounts paid in advance)",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "ch_coa_2301",
+        "code": "2301",
+        "name": "Deferred revenue (Accounts Received in Advance)",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 209,
+    "posting_accounts": 209,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 69,
+      "equity": 8,
+      "expense": 78,
+      "income": 23,
+      "liability": 31
+    },
+    "by_subtype": {
+      "current_asset": 66,
+      "current_liability": 29,
+      "equity": 8,
+      "expense": 78,
+      "income": 22,
+      "other_income": 1,
+      "payable": 2,
+      "receivable": 3
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 2,
+      "receivables": 3
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "de",
+      "fr",
+      "it"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "ch_coa_1060", "code": "1060", "name": "Securities (with stock exchange price)", "translations": {"de": "Wertpapiere (mit Börsenkurs)", "it": "Titoli", "fr": "Titres"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1069", "code": "1069", "name": "Accumulated depreciation on securities", "translations": {"de": "Kumulierte Abschreibungen auf Wertpapiere", "it": "Rettifica valore titoli", "fr": "Ajustement de la valeur des titres"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1090", "code": "1090", "name": "Salary-Pass-Through Account", "translations": {"de": "Gehaltsdurchlaufkonto", "it": "Conto di trasferimento dello stipendio", "fr": "Compte de transfert de salaire"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1091", "code": "1091", "name": "Transfer account: Salaries", "translations": {"de": "Transferkonto: Gehälter", "it": "Conto d'attesa - Salari", "fr": "Compte d'attente pour salaires"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1099", "code": "1099", "name": "Transfer account: miscellaneous", "translations": {"de": "Transferkonto: Verschiedenes", "it": "Conto d'attesa - Altro", "fr": "Compte d'attente autre"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1100", "code": "1100", "name": "Accounts receivable from goods and services (Debtors)", "translations": {"de": "Forderungen aus Lieferungen und Leistungen (Debitoren)", "it": "Crediti da forniture e prestazioni (debitori)", "fr": "Débiteurs"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ch_coa_1101", "code": "1101", "name": "Receivable (PoS)", "translations": {"de": "Forderungen (PoS)", "it": "Crediti (Punti vendita)", "fr": "Débiteurs (PoS)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ch_coa_1109", "code": "1109", "name": "Del credere (Acc. depr. on debtors)", "translations": {"de": "Delkredere (Akontoabzug für Schuldner)", "it": "Del credere", "fr": "Ducroire"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1140", "code": "1140", "name": "Advances and loans", "translations": {"de": "Vorschüsse und Darlehen", "it": "Anticipi e prestiti", "fr": "Avances et prêts"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1149", "code": "1149", "name": "Advances and loans adjustments", "translations": {"de": "Anpassungen von Vorschüssen und Darlehen", "it": "Rettifica valore anticipi e prestiti", "fr": "Ajustement de la valeur des avances et des prêts"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1170", "code": "1170", "name": "Input Tax (VAT) receivable on material, goods, services, energy", "translations": {"de": "Vorsteuer (MwSt.) auf Material, Waren, Dienstleistungen, Energie", "it": "IVA, imposta precedente su materiale, merce, servizi ed energia", "fr": "Impôt préalable: TVA s/matériel, marchandises, prestations et énergie"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1171", "code": "1171", "name": "Input Tax (VAT) receivable on investments, other operating expenses", "translations": {"de": "Vorsteuer (MwSt.) auf Investitionen, sonstige betriebliche Aufwendungen", "it": "IVA, imposta precedente su investimenti e altri costi d’esercizio", "fr": "Impôt préalable: TVA s/investissements et autres charges d’exploitation"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1176", "code": "1176", "name": "Withholding Tax (WT) receivable", "translations": {"de": "Forderungen Quellensteuer", "it": "Imposta preventiva", "fr": "Impôt anticipé"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "ch_coa_1180", "code": "1180", "name": "Receivables from social insurances and social security institutions", "translations": {"de": "Forderungen gegenüber Sozialversicherungen und Vorsorgeeinrichtungen", "it": "Crediti da assicurazioni sociali e istituti di previdenza", "fr": "Créances envers les assurances sociales et institutions de prévoyance"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1189", "code": "1189", "name": "Withholding tax", "translations": {"de": "Quellensteuer", "it": "Imposta alla fonte", "fr": "Impôt à la source"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1190", "code": "1190", "name": "Other short-term receivables", "translations": {"de": "Sonstige kurzfristige Forderungen", "it": "Altri crediti a breve termine", "fr": "Autres créances à court terme"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1199", "code": "1199", "name": "Accumulated depreciation on short-terms receivables", "translations": {"de": "Kumulierte Abschreibungen auf kurzfristige Forderungen", "it": "Rettifica valore crediti diversi a breve termine", "fr": "Ajustement de la valeur des créances à court terme"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1200", "code": "1200", "name": "Goods / Merchandise (Trade)", "translations": {"de": "Waren / Güter (Handel)", "it": "Merce di rivendita", "fr": "Marchandises commerciales"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1207", "code": "1207", "name": "Accumulated depreciation on Goods / Merchandise (Trade)", "translations": {"de": "Kumulierte Abschreibungen auf Waren / Handelswaren (Handel)", "it": "Variazione delle rimanenze di merci", "fr": "Variation des stocks de marchandises"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1208", "code": "1208", "name": "Downpayment on Goods / Merchandise (Trade)", "translations": {"de": "Akonto auf Güter / Handelswaren (Handel)", "it": "Acconti su beni commerciali", "fr": "Acomptes sur les marchandises commerciales"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1209", "code": "1209", "name": "Correction on Goods / Merchandise (Trade)", "translations": {"de": "Wertberichtigung Handelswaren", "it": "Rettifiche di valore delle scorte di beni", "fr": "Corrections de la valeur des stocks de marchandises"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1210", "code": "1210", "name": "Raw materials", "translations": {"de": "Rohstoffe", "it": "Materie prime", "fr": "Matières premières"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_expense_id": "ch_coa_4000", "account_stock_variation_id": "ch_coa_4801"}}},
+    {"source_id": "ch_coa_1217", "code": "1217", "name": "Accumulated depreciation on raw material", "translations": {"de": "Kumulierte Abschreibung von Rohstoffen", "it": "Variazione delle rimanenze di materie prime", "fr": "Variation des stocks des matières premières"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1218", "code": "1218", "name": "Downpayment on raw material", "translations": {"de": "Anzahlung auf Rohmaterial", "it": "Acconti su materie prime", "fr": "Acomptes sur matières premières"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1219", "code": "1219", "name": "Correction on raw material", "translations": {"de": "Berichtigung Rohmaterial", "it": "Rettifiche di valore su materie prime", "fr": "Corrections de la valeur sur matières premières"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1220", "code": "1220", "name": "Auxiliary material", "translations": {"de": "Hilfsmaterial", "it": "Materiali ausiliari", "fr": "Matières auxiliaires"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1230", "code": "1230", "name": "Consumables", "translations": {"de": "Verbrauchsgüter", "it": "Materiale di consumo", "fr": "Matières consommables"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1250", "code": "1250", "name": "Consignments Goods", "translations": {"de": "Handelswaren in Konsignation", "it": "Beni in conto deposito", "fr": "Marchandises en consignation"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1260", "code": "1260", "name": "Finished products", "translations": {"de": "Fertige Erzeugnisse", "it": "Prodotti finiti", "fr": "Stocks de produits finis"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1267", "code": "1267", "name": "Accumulated depreciation on Finished products", "translations": {"de": "Bestandesänderungen fertige Erzeugnisse", "it": "Variazione delle scorte di prodotti finiti", "fr": "Variation de stocks de produits finis"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1269", "code": "1269", "name": "Correction on Finished products", "translations": {"de": "Wertberichtigungen fertige Erzeugnisse", "it": "Correzione del valore delle rimanenze di prodotti finiti", "fr": "Correction de la valeur de stocks de produits finis"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1270", "code": "1270", "name": "Products in process / Unfinished products", "translations": {"de": "Unfertige Erzeugnisse", "it": "Scorte di semilavorati", "fr": "Stocks de produits semi-ouvrés"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1277", "code": "1277", "name": "Accumulated depreciation on Products in process / Unfinished products", "translations": {"de": "Kumulierte Abschreibungen auf Waren in Arbeit / Unfertige Erzeugnisse", "it": "Variazione delle scorte di prodotti semilavorati", "fr": "Variation de stock produits semi-ouvrés"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1279", "code": "1279", "name": "Correction on Products in process / Unfinished products", "translations": {"de": "Berichtigung für Unfertige Erzeugnisse", "it": "Correzioni del valore delle rimanenze di semilavorati", "fr": "Corrections de la valeur des stock produits semi-ouvrés"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1280", "code": "1280", "name": "Work in progress", "translations": {"de": "Nicht fakturierte Dienstleistungen", "it": "Prodotti in corso di fabbricazione", "fr": "Travaux en cours"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1287", "code": "1287", "name": "Accumulated depreciation on work in progress", "translations": {"de": "Kumulierte Abschreibungen auf laufende Aufträge", "it": "Variazione di valore dei lavori in corso", "fr": "Variation de la valeur des travaux en cours"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1289", "code": "1289", "name": "Correction on work in progress", "translations": {"de": "Korrekturen laufende Projekte", "it": "Correzioni di valore di lavori in corso", "fr": "Corrections de la valeur des travaux en cours"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1300", "code": "1300", "name": "Accrued revenue and deferred expense (Accounts paid in advance)", "translations": {"de": "Rechnungsabgrenzungsposten (im Voraus gezahlte Rechnungen)", "it": "Costi anticipati", "fr": "Charges payées d‘avance"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1301", "code": "1301", "name": "Deferred expense (Accounts paid in advance)", "translations": {"de": "Noch nicht erhaltener Ertrag", "it": "Ricavi da incassare", "fr": "Produits à recevoir"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1400", "code": "1400", "name": "Long-term securities", "translations": {"de": "Langfristige Wertpapiere", "it": "Titoli a lungo termine", "fr": "Titres à long terme"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1409", "code": "1409", "name": "Accumulated depreciation on long-term securities", "translations": {"de": "Kumulierte Abschreibungen auf langfristige Wertpapiere", "it": "Rettifica valore titoli", "fr": "Ajustement de la valeur des titres"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1440", "code": "1440", "name": "Loan (Asset)", "translations": {"de": "Darlehen (Vermögenswert)", "it": "Prestiti", "fr": "Prêts"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1441", "code": "1441", "name": "Mortgages", "translations": {"de": "Hypotheken", "it": "Prestiti ipotecari", "fr": "Hypothèques"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1449", "code": "1449", "name": "Accumulated depreciation on long term receivables", "translations": {"de": "Kumulierte Abschreibungen auf langfristige Forderungen", "it": "Rettifica valore crediti a lungo termine", "fr": "Ajustement de la valeur des créances à long terme"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1480", "code": "1480", "name": "Participations", "translations": {"de": "Beteiligungen", "it": "Partecipazioni", "fr": "Participations"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1489", "code": "1489", "name": "Accumulated depreciation on participations", "translations": {"de": "Kumulierte Abschreibungen auf Beteiligungen", "it": "Rettifica valore partecipazioni", "fr": "Ajustement de la valeur des participations"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1500", "code": "1500", "name": "Machinery", "translations": {"de": "Maschinen", "it": "Macchine e attrezzature", "fr": "Machines et appareils"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1509", "code": "1509", "name": "Accumulated depreciation on machinery", "translations": {"de": "Kumulierte Abschreibungen auf Maschinen", "it": "Ammortamenti su macchinari e attrezzature", "fr": "Amortissements sur les machines et appareils"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1510", "code": "1510", "name": "Equipment", "translations": {"de": "Ausrüstung", "it": "Mobilio e installazioni", "fr": "Mobilier et installations"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1519", "code": "1519", "name": "Accumulated depreciation on equipment", "translations": {"de": "Kumulierte Abschreibungen auf Ausrüstungen", "it": "Ammortamenti su mobili e arredi", "fr": "Amortissements sur le mobilier et les installations"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1520", "code": "1520", "name": "Office Equipment (including Information & Communication Technology)", "translations": {"de": "Büroausstattung (einschließlich Informations- und Kommunikationstechnologie)", "it": "Macchine ufficio, informatica e tecnologia della comunicazione", "fr": "Machines de bureau, informatique, systèmes de communication"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1529", "code": "1529", "name": "Accumulated depreciation on office equipment (incl. ICT)", "translations": {"de": "Kumulierte Abschreibungen auf Büroausstattung (einschließlich ICT)", "it": "Ammortamenti su macchine da ufficio, inf. e sistemi di comunicazione", "fr": "Amortissements sur les machines de bureau, inf. et syst. comm."}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1530", "code": "1530", "name": "Vehicles", "translations": {"de": "Fahrzeuge", "it": "Veicoli", "fr": "Véhicules"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1539", "code": "1539", "name": "Accumulated depreciation on vehicles", "translations": {"de": "Kumulierte Abschreibungen auf Fahrzeuge", "it": "Ammortamenti su veicoli", "fr": "Amortissements sur les véhicules"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1540", "code": "1540", "name": "Tools", "translations": {"de": "Werkzeuge", "it": "Utensili e apparecchiature", "fr": "Outillages et appareils"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1549", "code": "1549", "name": "Accumulated depreciation on tools", "translations": {"de": "Kumulierte Abschreibungen auf Werkzeuge", "it": "Ammortamenti su utensili e attrezzature", "fr": "Amortissements sur les outillages et appareils"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1550", "code": "1550", "name": "Warehouse", "translations": {"de": "Lager", "it": "Strutture per il deposito", "fr": "Installations de stockage"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1559", "code": "1559", "name": "Accumulated depreciation on warehouse", "translations": {"de": "Kumulierte Abschreibungen auf Lagerhäuser", "it": "Ammortamenti sui magazzini", "fr": "Amortissements sur les installations de stockage"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1570", "code": "1570", "name": "Equipment and Facilities", "translations": {"de": "Feste Einrichtungen und Installationen", "it": "Attrezzature e infrastrutture", "fr": "Équipements et installations"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1579", "code": "1579", "name": "Accumulated depreciation on Equipment and Facilities", "translations": {"de": "Abschreibungen feste Einrichtungen und Installationen", "it": "Ammortamenti su attrezzature e infrastrutture", "fr": "Amortissements cumulés sur les équipements et installations"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1590", "code": "1590", "name": "Other movable tangible assets", "translations": {"de": "Sonstige bewegliche Sachanlagen", "it": "Altre immobilizzazioni materiali", "fr": "Autres immobilisations corporelles meubles"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1599", "code": "1599", "name": "Accumulated depreciation on Other movable tangible assets", "translations": {"de": "Kumulierte Abschreibungen auf Sonstige bewegliche Sachanlagen", "it": "Ammortamenti su altre immobilizzazioni materiali mobiliari", "fr": "Amortissements sur les autres immobilisations corporelles meubles"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1600", "code": "1600", "name": "Real Estate", "translations": {"de": "Liegenschaften", "it": "Immobili aziendali", "fr": "Immeubles d’exploitation"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1609", "code": "1609", "name": "Accumulated depreciation on real estate", "translations": {"de": "Kumulierte Abschreibungen auf Immobilien", "it": "Ammortamenti su immobili in esercizio", "fr": "Amortissements sur les immeubles d’exploitation"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1700", "code": "1700", "name": "Patents, Licences", "translations": {"de": "Patente, Lizenzen", "it": "Patenti, know-how, licenze, diritti e sviluppo", "fr": "Brevets, know-how, licences, droits, développement"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1709", "code": "1709", "name": "Accumulated depreciation on Patents, Licences", "translations": {"de": "Kumulierte Abschreibungen auf Patente, Lizenzen", "it": "Ammortamento di brevetti, know-how, licenze, diritti, dev.", "fr": "Amortissements sur les brevets, know-how, licences, droits, dév."}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1770", "code": "1770", "name": "Goodwill", "translations": {"de": "Geschäftswert", "it": "Avviamento", "fr": "Goodwill"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1779", "code": "1779", "name": "Accumulated depreciation on goodwill", "translations": {"de": "Kumulierte Abschreibungen auf den Geschäftswert", "it": "Rettifica valore avviamento", "fr": "Ajustement de la valeur des goodwill"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_1850", "code": "1850", "name": "Non-paid-in share capital", "translations": {"de": "Nicht eingezahltes Grundkapital", "it": "Capitale azionario, capitale sociale, diritti di partecipazione o capitale della fondazione non versati", "fr": "Capital actions, capital social, droits de participations ou capital de fondation non versés"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ch_coa_2000", "code": "2000", "name": "Accounts payable from goods and services (Creditors)", "translations": {"de": "Verbindlichkeiten aus Lieferungen und Leistungen (Gläubiger)", "it": "Debiti per forniture e prestazioni (creditori)", "fr": "Créanciers"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ch_coa_2030", "code": "2030", "name": "Prepayments received", "translations": {"de": "Erhaltene Anzahlungen", "it": "Acconti ricevuti", "fr": "Acomptes de clients"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2100", "code": "2100", "name": "Bank Overdraft (Bank)", "translations": {"de": "Überziehungskredit (Bank)", "it": "Debiti bancari", "fr": "Dettes bancaires"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2120", "code": "2120", "name": "Leasing bondings", "translations": {"de": "Leasing Anleihen", "it": "Impegni leasing finanziari", "fr": "Engagements de financement par leasing"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2140", "code": "2140", "name": "Other interest-bearing short terms liabilities", "translations": {"de": "Sonstige verzinsliche kurzfristige Verbindlichkeiten", "it": "Altri debiti a breve termine onerosi", "fr": "Autres dettes à court terme rémunérées"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2160", "code": "2160", "name": "Dettes envers l'actionnaire", "translations": {"de": "Verbindlichkeiten gegenüber dem Aktionär", "it": "Debiti verso l'azionista", "fr": "Dettes envers l'actionnaire"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2200", "code": "2200", "name": "Sales Tax (VAT) owed", "translations": {"de": "Geschuldete MwSt. (Umsatzsteuer)", "it": "IVA dovuta", "fr": "TVA due"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2201", "code": "2201", "name": "VAT payable", "translations": {"de": "Zu zahlende MwSt.", "it": "IVA, rendiconto", "fr": "Décompte TVA"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "ch_coa_2206", "code": "2206", "name": "Withholding Tax (WT) owed", "translations": {"de": "Geschuldete Quellensteuer", "it": "Imposta preventiva", "fr": "Impôt anticipé dû"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2208", "code": "2208", "name": "Direct Taxes", "translations": {"de": "Direkte Steuern", "it": "Imposte dirette", "fr": "Impôts directs"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2210", "code": "2210", "name": "Others short term liabilities", "translations": {"de": "Sonstige kurzfristige Verbindlichkeiten", "it": "Altri debiti a breve termine", "fr": "Autres dettes à court terme"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2261", "code": "2261", "name": "Dividend payouts resolved (Dividends)", "translations": {"de": "Beschlossene Dividendenausschüttungen (Dividende)", "it": "Dividendi", "fr": "Dividendes"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2270", "code": "2270", "name": "Social insurances owed", "translations": {"de": "Geschuldete Sozialversicherungen", "it": "Assicurazioni sociali e istituti di previdenza", "fr": "Assurances sociales et institutions de prévoyance"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2271", "code": "2271", "name": "Retirement Provision", "translations": {"de": "Altersvorsorge", "it": "Previdenza pensionistica", "fr": "Prévoyance vieillesse"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2272", "code": "2272", "name": "Social Insurance CAF/FAK", "translations": {"de": "Sozialversicherung FAK", "it": "Assicurazione sociale FAK", "fr": "Assurances sociales CAF"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2273", "code": "2273", "name": "Accident Insurance", "translations": {"de": "Unfallversicherung", "it": "Assicurazione contro gli infortuni", "fr": "Assurance Accident"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2274", "code": "2274", "name": "Daily Sickness Insurance", "translations": {"de": "Krankentagegeldversicherung", "it": "Assicurazione malattia giornaliera", "fr": "Assurance maladie journalière"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2279", "code": "2279", "name": "Withholding taxes", "translations": {"de": "Quellensteuer", "it": "Imposte alla fonte", "fr": "Impôt à la source"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2300", "code": "2300", "name": "Deferred revenue and accrued expenses (Accounts received in advance)", "translations": {"de": "Rechnungsabgrenzungsposten (im Voraus erhaltene Rechnungen)", "it": "Costi da pagare", "fr": "Charges à payer"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2301", "code": "2301", "name": "Deferred revenue (Accounts Received in Advance)", "translations": {"de": "Umsatzabgrenzungsposten (im Voraus erhaltene Rechnungen)", "it": "Ricavi incassati dell’anno seguente", "fr": "Produits encaissés d’avance"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2330", "code": "2330", "name": "Short-term provisions", "translations": {"de": "Kurzfristige Rückstellungen", "it": "Accantonamenti a breve termine", "fr": "Provisions à court terme"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2350", "code": "2350", "name": "13th Month Provision", "translations": {"de": "13. Monatsgehalt", "it": "Accantonamento 13° mese", "fr": "Provision du 13e mois"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2351", "code": "2351", "name": "14th Month Provision", "translations": {"de": "14. Monatsgehalt", "it": "Accantonamento 14° mese", "fr": "Provision du 14e mois"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2400", "code": "2400", "name": "Bank debts", "translations": {"de": "Bankschulden", "it": "Debiti bancari", "fr": "Dettes bancaires"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2420", "code": "2420", "name": "Finance lease commitments", "translations": {"de": "Verpflichtungen aus Finanzierungsleasing", "it": "Impegni leasing finanziari", "fr": "Engagements de financement par leasing"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2430", "code": "2430", "name": "Debentures", "translations": {"de": "Schuldverschreibungen", "it": "Prestiti obbligazionari", "fr": "Emprunts obligataires"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2450", "code": "2450", "name": "Loans", "translations": {"de": "Darlehen", "it": "Prestiti", "fr": "Emprunts"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2451", "code": "2451", "name": "Mortgages", "translations": {"de": "Hypotheken", "it": "Prestiti ipotecari", "fr": "Hypothèques"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2500", "code": "2500", "name": "Other long term liabilities", "translations": {"de": "Sonstige langfristige Verbindlichkeiten", "it": "Altri debiti a lungo termine", "fr": "Autres dettes à long terme"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2600", "code": "2600", "name": "Long-term provisions", "translations": {"de": "Langfristige Rückstellungen", "it": "Accantonamenti", "fr": "Provisions"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_2800", "code": "2800", "name": "Share capital", "translations": {"de": "Grundkapital", "it": "Capitale azionario, capitale sociale, diritti di partecipazione o capitale della fondazione", "fr": "Capital-actions, capital social, capital de fondation"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ch_coa_2900", "code": "2900", "name": "Legal capital reserves", "translations": {"de": "Gesetzliche Kapitalrücklagen", "it": "Riserva legale da capitale", "fr": "Réserves légales issues du capital"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ch_coa_2940", "code": "2940", "name": "Valuation Reserves", "translations": {"de": "Bewertungsreserven", "it": "Riserve da rivalutazioni", "fr": "Réserves d‘évaluation"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ch_coa_2950", "code": "2950", "name": "Legal retained earnings (Reserves)", "translations": {"de": "Gesetzliche Gewinnrücklagen (Reserven)", "it": "Riserva legale da utili", "fr": "Réserves légales issues du bénéfice"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ch_coa_2960", "code": "2960", "name": "Voluntary retained earnings", "translations": {"de": "Freiwillige Gewinnrücklagen", "it": "Riserve facoltative da utili", "fr": "Réserves libres"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ch_coa_2970", "code": "2970", "name": "Profits brought forward / Losses brought forward", "translations": {"de": "Gewinnvortrag / Verlustvortrag", "it": "Utile/perdita riportata", "fr": "Bénéfice / perte reporté"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ch_coa_2979", "code": "2979", "name": "Annual profit or annual loss", "translations": {"de": "Jahresgewinn oder Jahresverlust", "it": "Utile/perdita annuale", "fr": "Bénéfice / perte de l’exercice"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ch_coa_2980", "code": "2980", "name": "Treasury stock, shares, participation rights (negative item)", "translations": {"de": "Eigene Aktien, Stammanteile (Minusposten)", "it": "Quote proprie, azioni, diritti di partecipazione (voce negativa)", "fr": "Actions propres, parts, droits de participation (poste négatif)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ch_coa_3000", "code": "3000", "name": "Sales of products (Manufacturing)", "translations": {"de": "Verkauf von Produkten (Herstellung)", "it": "Ricavi prodotti fabbricati", "fr": "Ventes de produits fabriqués"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3009", "code": "3009", "name": "Deductions on sales", "translations": {"de": "Abzüge bei Verkäufen", "it": "Diminuzione di ricavi", "fr": "Déductions sur ventes"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3200", "code": "3200", "name": "Sales of goods (Trade)", "translations": {"de": "Warenverkauf (Handel)", "it": "Ricavi merci di rivendita", "fr": "Ventes de marchandises"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3400", "code": "3400", "name": "Revenues from services", "translations": {"de": "Erlöse aus Dienstleistungen", "it": "Ricavi prestazioni di servizi", "fr": "Ventes de prestations"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3600", "code": "3600", "name": "Other revenues", "translations": {"de": "Sonstige Einnahmen", "it": "Altri ricavi e prestazioni di servizi", "fr": "Autres ventes et prestations de services"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3700", "code": "3700", "name": "Own services", "translations": {"de": "Eigene Leistungen", "it": "Lavori interni", "fr": "Prestations propres"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3710", "code": "3710", "name": "Own consumption", "translations": {"de": "Eigenverbrauch", "it": "Consumo proprio", "fr": "Consommations propres"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3800", "code": "3800", "name": "Financial discount", "translations": {"de": "Erlösminderung", "it": "Sconti", "fr": "Escomptes"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3801", "code": "3801", "name": "Discounts and price reduction", "translations": {"de": "Rabatte und Preisnachlässe", "it": "Sconti e riduzioni di prezzo", "fr": "Rabais et réduction de prix"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3802", "code": "3802", "name": "Rebates", "translations": {"de": "Nachlässe", "it": "Sconti", "fr": "Ristournes"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3803", "code": "3803", "name": "Third-party commissions", "translations": {"de": "Provisionen Dritter", "it": "Commissioni di terzi", "fr": "Commissions de tiers"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3804", "code": "3804", "name": "Collection fees", "translations": {"de": "Inkassogebühren", "it": "Tasse di riscossione", "fr": "Frais d'encaissement"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3805", "code": "3805", "name": "Losses from bad debts", "translations": {"de": "Verluste aus Forderungsausfällen", "it": "Perdite su crediti commerciali, variazione del fondo svalutazione crediti", "fr": "Pertes sur créances clients, variation ducroire"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3806", "code": "3806", "name": "Exchange rate differences", "translations": {"de": "Wechselkursdifferenzen", "it": "Differenze di cambio", "fr": "Différences de change"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3807", "code": "3807", "name": "Shipping & Returns", "translations": {"de": "Versand und Rücksendung", "it": "Costi di spedizione", "fr": "Frais d'expédition"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3900", "code": "3900", "name": "Changes in inventories of unfinished and finished products", "translations": {"de": "Veränderung des Bestandes unfertiger und fertiger Erzeugnisse", "it": "Variazione delle scorte di prodotti in corso di fabbricazione", "fr": "Variation des stocks de produits semi-finis"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3901", "code": "3901", "name": "Change in inventories of finished goods", "translations": {"de": "Veränderung des Bestandes an Fertigerzeugnissen", "it": "Variazione delle scorte di prodotti finiti", "fr": "Variation des stocks de produits finis"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_3940", "code": "3940", "name": "Change in the value of unbilled services", "translations": {"de": "Bestandesänderungen nicht fakturierte Dienstleistungen", "it": "Variazione prestazioni di servizi non fatturate", "fr": "Variation de la valeur des prestations non facturées"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_4000", "code": "4000", "name": "Cost of raw materials (Manufacturing)", "translations": {"de": "Materialaufwand Produktion", "it": "Costi materiale per la fabbricazione", "fr": "Charges de matériel de l‘atelier"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4008", "code": "4008", "name": "Inventory changes", "translations": {"de": "Bestandsänderungen", "it": "Variazioni delle rimanenze", "fr": "Variations de stocks"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4009", "code": "4009", "name": "Deductions obtained on purchases", "translations": {"de": "Bei Käufen erzielte Abzüge", "it": "Deduzioni ottenute sugli acquisti", "fr": "Déductions obtenues sur achats"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4070", "code": "4070", "name": "Purchase Loans", "translations": {"de": "Frachtkosten", "it": "Acquisto di prestiti", "fr": "Frêts à l'achat"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4071", "code": "4071", "name": "Customs duties on importation", "translations": {"de": "Einfuhrzölle", "it": "Dazi doganali all'importazione", "fr": "Droits de douanes à l'importation"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4072", "code": "4072", "name": "Transport costs at purchase", "translations": {"de": "Transportkosten beim Erwerb", "it": "Costi di trasporto all'acquisto", "fr": "Frais de transport à l'achat"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4080", "code": "4080", "name": "Inventory changes", "translations": {"de": "Bestandsänderungen", "it": "Variazioni delle rimanenze", "fr": "Variations de stocks"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4086", "code": "4086", "name": "Loss of material", "translations": {"de": "Materialverlust", "it": "Perdita di materiale", "fr": "Pertes de matières"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4200", "code": "4200", "name": "Cost of materials (Trade)", "translations": {"de": "Materialkosten (Handel)", "it": "Acquisti di beni destinati alla rivendita", "fr": "Achats de marchandises destinées à la revente"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4400", "code": "4400", "name": "Cost of purchased services", "translations": {"de": "Aufwand für bezogene Dienstleistungen", "it": "Lavori di terzi/prestazioni di subappaltanti", "fr": "Prestations / travaux de tiers"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4500", "code": "4500", "name": "Electricity", "translations": {"de": "Elektrizität", "it": "Elettricità", "fr": "Electricité"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4510", "code": "4510", "name": "Gas", "translations": {"de": "Gas", "it": "Gas", "fr": "Gaz"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4520", "code": "4520", "name": "Fuel oil", "translations": {"de": "Heizöl", "it": "Olio combustibile", "fr": "Mazout"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4521", "code": "4521", "name": "Coal, briquettes, wood", "translations": {"de": "Kohle, Briketts, Holz", "it": "Carbone, bricchette, legno", "fr": "Charbon, briquettes, bois"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4530", "code": "4530", "name": "Petrol", "translations": {"de": "Benzin", "it": "Carburante", "fr": "Essence"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4540", "code": "4540", "name": "Water", "translations": {"de": "Wasser", "it": "Acqua", "fr": "Eau"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4800", "code": "4800", "name": "Change in inventories of goods", "translations": {"de": "Veränderung der Warenvorräte", "it": "Variazione delle rimanenze di merci", "fr": "Variation des stocks de marchandises"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4801", "code": "4801", "name": "Change in raw material inventories", "translations": {"de": "Änderung der Rohstoffvorräte", "it": "Variazione delle rimanenze di materie prime", "fr": "Variation des stocks de matières premières"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4900", "code": "4900", "name": "Financial Discounts", "translations": {"de": "Finanzielle Ermäßigungen", "it": "Sconti", "fr": "Escomptes"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4901", "code": "4901", "name": "Discounts and price reductions", "translations": {"de": "Rabatte und Preisnachlässe", "it": "Sconti e riduzioni di prezzo", "fr": "Rabais et réductions de prix"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4092", "code": "4902", "name": "Rebates", "translations": {"de": "Nachlässe", "it": "Sconti", "fr": "Ristournes"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4903", "code": "4903", "name": "Commissions on purchases", "translations": {"de": "Provisionen auf Käufe", "it": "Commissioni sugli acquisti", "fr": "Commissions obtenues sur achats"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4906", "code": "4906", "name": "Exchange rate differences", "translations": {"de": "Wechselkursdifferenzen", "it": "Differenze di cambio", "fr": "Différences de change"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4991", "code": "4991", "name": "Cash Difference Loss", "translations": {"de": "Bardifferenzverlust", "it": "Perdita per differenza di cassa", "fr": "Perte de Différence de change"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_4992", "code": "4992", "name": "Cash Difference Gain", "translations": {"de": "Bardifferenzgewinn", "it": "Utile da differenza di cassa", "fr": "Gain de différence de change"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "ch_coa_5000", "code": "5000", "name": "Wages and salaries", "translations": {"de": "Löhne und Gehälter", "it": "Salari", "fr": "Salaires"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5001", "code": "5001", "name": "Social Insurance Payments", "translations": {"de": "Sozialversicherungsbeiträge", "it": "Pagamenti dell'assicurazione sociale", "fr": "Paiements d'assurance sociale"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5002", "code": "5002", "name": "Profit Sharing", "translations": {"de": "Gewinnbeteiligung", "it": "Partecipazione agli utili", "fr": "Participation aux bénéfices"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5003", "code": "5003", "name": "Salary Advance", "translations": {"de": "Lohnvorschuss", "it": "Anticipo sul salario", "fr": "Avance sur salaire"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5004", "code": "5004", "name": "Holidays payment after departure", "translations": {"de": "Ferienentschädigung nach Austritt", "it": "Pagamento vacanze dopo partenza", "fr": "Indemnité de vacances après départ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5005", "code": "5005", "name": "13th Month", "translations": {"de": "13. Monat", "it": "13esima", "fr": "13ᵉ salaire"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5006", "code": "5006", "name": "Gratification", "translations": {"de": "Gratifikation", "it": "Gratificazione", "fr": "Gratification"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5007", "code": "5007", "name": "Bonus", "translations": {"de": "Prämien", "it": "Bonus", "fr": "Bonus"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5009", "code": "5009", "name": "Jubilee Gift", "translations": {"de": "Jubiläumsgeschenk", "it": "Regalo giubileo", "fr": "Cadeau de jubilé"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5010", "code": "5010", "name": "Commissions", "translations": {"de": "Provisionen", "it": "Commissioni", "fr": "Commissions"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5011", "code": "5011", "name": "14th Month", "translations": {"de": "14. Monat", "it": "14esima", "fr": "14ᵉ salaire"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5030", "code": "5030", "name": "Travelling Expenses", "translations": {"de": "Reisekosten", "it": "Spese di viaggio", "fr": "Frais de déplacement"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5031", "code": "5031", "name": "Company Car Correction", "translations": {"de": "Korrektur Firmenfahrzeug", "it": "Correzione auto aziendale", "fr": "Correction pour véhicule de fonction"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5040", "code": "5040", "name": "Salary Allowances", "translations": {"de": "Familien- und Kinderzulagen", "it": "Indennità salariali", "fr": "Allocations salariales"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5601", "code": "5601", "name": "CA Fees", "translations": {"de": "Honorare Verwaltungsrat", "it": "Provvigioni agenti", "fr": "Frais du CA"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5700", "code": "5700", "name": "Social benefits", "translations": {"de": "Sozialleistungen", "it": "Oneri sociali", "fr": "Charges sociales"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5701", "code": "5701", "name": "Social benefits AC", "translations": {"de": "ALV-Beiträge", "it": "Oneri sociali AC", "fr": "Prestations sociales AC"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5710", "code": "5710", "name": "Family compensation fund", "translations": {"de": "Familienausgleichskasse", "it": "Fondo di compensazione familiare", "fr": "Caisse de compensation familiale"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5720", "code": "5720", "name": "Social Benefits LPP", "translations": {"de": "BVG-Beiträge", "it": "Prestazioni sociali LPP", "fr": "Prestations sociales LPP"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5721", "code": "5721", "name": "Social Benefits LPP Redemption", "translations": {"de": "Rückkauf von BVG-Beiträgen", "it": "Riscatto prestazioni sociali LPP", "fr": "Rachat prestations sociales LPP"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5730", "code": "5730", "name": "Social Benefits AANP", "translations": {"de": "NBUV-Beiträge", "it": "Prestazioni sociali AANP", "fr": "Prestations sociales AANP"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5731", "code": "5731", "name": "Social Benefits Optional LAAC Redemption", "translations": {"de": "Freiwilliger Einkauf von UVG-Sozialleistungen", "it": "Riscatto facoltativo prestazioni sociali LAAC", "fr": "Rachat optionnel prestations sociales LAAC"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5740", "code": "5740", "name": "Social Benefits IJM/CM", "translations": {"de": "KTG-Beiträge", "it": "Prestazioni sociali IGM/CM", "fr": "Prestations sociales IJM/CM"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5790", "code": "5790", "name": "Withholding Taxes IS", "translations": {"de": "IS-Quellensteuer", "it": "Imposte alla fonte IS", "fr": "Impôts à la source IS"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ch_coa_5800", "code": "5800", "name": "Other staff cost", "translations": {"de": "Sonstige Personalkosten", "it": "Altri costi del personale", "fr": "Autres charges du personnel"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5810", "code": "5810", "name": "Professional Training", "translations": {"de": "Berufsausbildung", "it": "Formazione professionale", "fr": "Formation Professionnelle"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5820", "code": "5820", "name": "Travel Expenses", "translations": {"de": "Reisespesen", "it": "Spese di viaggio", "fr": "Frais de voyage"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5821", "code": "5821", "name": "Lunch Expenses", "translations": {"de": "Verpflegungsspesen", "it": "Spese pasti", "fr": "Frais de repas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5822", "code": "5822", "name": "Nightly Expenses", "translations": {"de": "Übernachtungsspesen", "it": "Spese trasferta notturna", "fr": "Frais de nuitée"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5830", "code": "5830", "name": "Representation Fees", "translations": {"de": "Repräsentationsspesen", "it": "Costi di rappresentanza", "fr": "Frais de représentation"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5831", "code": "5831", "name": "Car Fees", "translations": {"de": "Autospesen", "it": "Costi auto", "fr": "Frais de voiture"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5832", "code": "5832", "name": "Other Fees", "translations": {"de": "Andere Spesen", "it": "Altri costi", "fr": "Autres frais"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5840", "code": "5840", "name": "Indemnities", "translations": {"de": "Entschädigungen", "it": "Indennità", "fr": "Indemnités"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5890", "code": "5890", "name": "Rate of personal use", "translations": {"de": "Anteil der privaten Nutzung", "it": "Tasso uso personale", "fr": "Taux d’utilisation personnelle"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5891", "code": "5891", "name": "Compensation company car use", "translations": {"de": "Entschädigung für die Nutzung des Firmenfahrzeugs", "it": "Compensazione uso veicolo aziendale", "fr": "Compensation pour l’usage du véhicule de société"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_5900", "code": "5900", "name": "Temporary staff expenditures", "translations": {"de": "Leistungen DritterAusgaben für Zeitarbeitskräfte", "it": "Spese per il personale temporaneo", "fr": "Charges de personnels temporaires"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6000", "code": "6000", "name": "Rent", "translations": {"de": "Miete", "it": "Costi dei locali", "fr": "Charges de locaux"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6100", "code": "6100", "name": "Maintenance & repair expenses", "translations": {"de": "Kosten für Wartung und Reparatur", "it": "Manutenzioni, riparazioni e sostituzione immobilizzazioni mobiliari", "fr": "Entretien, réparations et remplacement des inst. servant à l’exploitation"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6105", "code": "6105", "name": "Leasing movable tangible fixed assets", "translations": {"de": "Leasing von beweglichen Sachanlagen", "it": "Leasing di immobilizzazioni materiali mobiliari", "fr": "Leasing immobilisations corporelles meubles"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6200", "code": "6200", "name": "Vehicle expenses", "translations": {"de": "Fahrzeugkosten", "it": "Costi auto e di trasporto", "fr": "Charges de véhicules et de transport"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6260", "code": "6260", "name": "Vehicules leasing and renting", "translations": {"de": "Fahrzeugleasing und -vermietung", "it": "Leasing e noleggio auto", "fr": "Leasing et location de véhicules"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6300", "code": "6300", "name": "Insurance premiums", "translations": {"de": "Versicherungsprämien", "it": "Assicurazioni - Dazi, tasse, autorizzazioni", "fr": "Assurances-choses, droits, taxes, autorisations"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6400", "code": "6400", "name": "Energy expenses & disposal expenses", "translations": {"de": "Energie- und Entsorgungsaufwand", "it": "Costi energia e smaltimento", "fr": "Charges d’énergie et évacuation des déchets"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6500", "code": "6500", "name": "Administration expenses", "translations": {"de": "Verwaltungskosten", "it": "Costi amministrativi", "fr": "Charges d‘administration"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6570", "code": "6570", "name": "IT leasing", "translations": {"de": "IT Leasing", "it": "Costi informatici incluso leasing", "fr": "Charges et leasing d’informatique"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6600", "code": "6600", "name": "Promotion and advertising expenses", "translations": {"de": "Werbeaufwand", "it": "Costi pubblicitari", "fr": "Publicité"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6700", "code": "6700", "name": "Other operating expenses", "translations": {"de": "Sonstige betriebliche Aufwendungen", "it": "Altri costi d’esercizio", "fr": "Autres charges d‘exploitation"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6800", "code": "6800", "name": "Depreciations", "translations": {"de": "Abschreibung", "it": "Ammortamenti e rettifiche di valore dell’attivo fisso", "fr": "Amortissements et ajustements de valeur des postes sur immobilisations corporelles"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6900", "code": "6900", "name": "Financial expenses (Interest expenses, Securities expenses, Participations expenses)", "translations": {"de": "Finanzaufwand (Zinsaufwand, Wertpapieraufwand, Beteiligungsaufwand)", "it": "Costi finanziari", "fr": "Charges financières"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_6950", "code": "6950", "name": "Financial revenues (Interest revenues, Securities revenues, Participations revenues)", "translations": {"de": "Finanzerträge (Zinserträge, Wertpapiererträge, Beteiligungserträge)", "it": "Ricavi finanziari", "fr": "Produits financiers"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_7000", "code": "7000", "name": "Non-core business revenues", "translations": {"de": "Erträge aus Nicht-Kerngeschäft", "it": "Ricavi attività accessoria", "fr": "Produits accessoires"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_7010", "code": "7010", "name": "Non-core business expenses", "translations": {"de": "Nicht zum Kerngeschäft gehörende Ausgaben", "it": "Costi attività accessoria", "fr": "Charges accessoires"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_7500", "code": "7500", "name": "Revenues from operational real estate", "translations": {"de": "Erlöse aus betrieblichen Liegenschaften", "it": "Ricavi immobili aziendali", "fr": "Produits des immeubles d‘exploitation"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_7510", "code": "7510", "name": "Expenses from operational real estate", "translations": {"de": "Aufwand betriebliche Liegenschaft", "it": "Costi immobili aziendali", "fr": "Charges des immeubles d‘exploitation"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_8000", "code": "8000", "name": "Non-operational expenses", "translations": {"de": "Nichtbetriebliche Aufwendungen", "it": "Costi estranei", "fr": "Charges hors exploitation"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_8100", "code": "8100", "name": "Non-operational revenues", "translations": {"de": "Betriebsfremde Erträge", "it": "Ricavi estranei", "fr": "Produits hors exploitation"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_8500", "code": "8500", "name": "Extraordinary expenses", "translations": {"de": "Außerordentliche Ausgaben", "it": "Costi straordinari, unici o relativi ad altri periodi contabili", "fr": "Charges extraordinaires, exceptionnelles ou hors période"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ch_coa_8510", "code": "8510", "name": "Extraordinary revenues", "translations": {"de": "Außerordentliche Ausgaben", "it": "Ricavi straordinari, unici o relativi ad altri periodi contabili", "fr": "Produits extraordinaires, exceptionnels ou hors période"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ch_coa_8900", "code": "8900", "name": "Direct Taxes", "translations": {"de": "Direkte Steuern", "it": "Imposte dirette", "fr": "Impôts directs"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}}
+  ]
+}

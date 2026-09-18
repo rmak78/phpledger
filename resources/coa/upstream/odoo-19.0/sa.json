@@ -1,0 +1,462 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "9477ddd2c3cbd508b078eb6e10eb8aa61b195c9e877a58a983016c4de52261d3",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/sa",
+  "country_code": "SA",
+  "country_name": "Saudi Arabia",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Saudi Arabia - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_sa' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_sa",
+    "module_name": "Saudi Arabia - Accounting",
+    "module_version": "2.3",
+    "contributing_modules": [
+      "l10n_sa"
+    ],
+    "template_code": "sa",
+    "template_chain": [
+      "sa"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_sa/data/template/account.account-sa.csv",
+        "sha256": "c746dccb157690945ce3d7668c9db9c772ad6e8eee4e76f203c8b2140feba55f",
+        "rows": 169
+      }
+    ],
+    "python_files": [
+      "addons/l10n_sa/models/template_sa.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "101",
+      "cash": "105",
+      "transfer": "100"
+    },
+    "default_sale_tax": "sa_sales_tax_15",
+    "default_purchase_tax": "sa_purchase_tax_15",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "sa_account_102011",
+        "code": "102011",
+        "name": "Accounts Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "sa_account_201002",
+        "code": "201002",
+        "name": "Payables",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "sa_account_500001",
+        "code": "500001",
+        "name": "Sales Account",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "sa_account_400001",
+        "code": "400001",
+        "name": "Cost of Goods Sold in Trading",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "sa_account_131100",
+        "code": "131100",
+        "name": "Inventory - Raw Materials",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "sa_account_102012",
+        "code": "102012",
+        "name": "Accounts Receivable (PoS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "sa_account_500011",
+        "code": "500011",
+        "name": "Gain On Difference Of Exchange",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "sa_account_400053",
+        "code": "400053",
+        "name": "Loss on Difference on Exchange",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "sa_account_104020",
+        "code": "104020",
+        "name": "Prepaid Expense",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "sa_account_201018",
+        "code": "201018",
+        "name": "Deferred income",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 169,
+    "posting_accounts": 169,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 53,
+      "equity": 1,
+      "expense": 73,
+      "income": 12,
+      "liability": 30
+    },
+    "by_subtype": {
+      "credit_card": 4,
+      "current_asset": 23,
+      "current_liability": 20,
+      "depreciation": 3,
+      "direct_cost": 2,
+      "expense": 68,
+      "fixed_asset": 9,
+      "income": 12,
+      "non_current_liability": 2,
+      "payable": 4,
+      "prepayment": 17,
+      "receivable": 4,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 4,
+      "receivables": 4
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "ar"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "sa_account_100101", "code": "100101", "name": "Right of use Asset (IFRS 16)", "translations": {"ar": "حق استخدام الأصول (IFRS 16)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "sa_account_100102", "code": "100102", "name": "Accumulated Depreciation on Right of use asset (IFRS 16)", "translations": {"ar": "الاستهلاك المتراكم استخدام حق الأصول (IFRS 16)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "sa_account_100103", "code": "100103", "name": "VAT Receivable", "translations": {"ar": "ضريبة القيمة المضافة المدينة"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "sa_account_100104", "code": "100104", "name": "Withholding Receivable", "translations": {"ar": "ضريبة مستقطعة المدينة"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "sa_account_101005", "code": "101005", "name": "Main Safe", "translations": {"ar": "خزينة رئيسية"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_101006", "code": "101006", "name": "Main Safe - Foreign Currency", "translations": {"ar": "خزينة رئيسية - عملات اخرى"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_101060", "code": "101060", "name": "VAT Paid to Customs", "translations": {"ar": "ضريبة القيمة المضافة المدفوعة للجمارك"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_102011", "code": "102011", "name": "Accounts Receivable", "translations": {"ar": "الذمم المدينة"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "sa_account_102012", "code": "102012", "name": "Accounts Receivable (PoS)", "translations": {"ar": "ذمم مدينة (PoS)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "sa_account_102013", "code": "102013", "name": "Post Dated Cheques Received", "translations": {"ar": "شيكات مؤجلة"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_102014", "code": "102014", "name": "Other Receivable", "translations": {"ar": "ذمم مدينة اخرى"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_102015", "code": "102015", "name": "Other Debtors", "translations": {"ar": "مدينون اخرون"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_103016", "code": "103016", "name": "Shipment Insurance", "translations": {"ar": "تأمين الشحن"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_103017", "code": "103017", "name": "Shipment Documentation Charges", "translations": {"ar": "رسوم"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_103018", "code": "103018", "name": "Shipment Other Charges", "translations": {"ar": "رسوم شحنات اخرى"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_103019", "code": "103019", "name": "Handling Difference in Inventory", "translations": {"ar": "فرق المخزون"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_103020", "code": "103020", "name": "Items Delivered to Customs", "translations": {"ar": "بنود في الجمرك"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_104020", "code": "104020", "name": "Prepaid Expense", "translations": {"ar": "المصروفات المدفوعة مقدماً"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104021", "code": "104021", "name": "Prepaid Medical Insurance", "translations": {"ar": "تأمين طبي مدفوع مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104022", "code": "104022", "name": "Prepaid Life Insurance", "translations": {"ar": "تأمين على الحياة مدفوع مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104023", "code": "104023", "name": "Prepaid Office Rent", "translations": {"ar": "ايجار مكتب مدفوع مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104024", "code": "104024", "name": "Prepaid Other Insurance", "translations": {"ar": "تأمينات اخرى مدفوعة مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104025", "code": "104025", "name": "Prepaid License Fees", "translations": {"ar": "رسوم ترخيص مدفوعة مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104026", "code": "104026", "name": "Prepaid Maintenance", "translations": {"ar": "رسوم صيانة مدفوعة مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104027", "code": "104027", "name": "Prepaid Site Hosting Fees", "translations": {"ar": "رسوم استضافة موقع مدفوعة مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104028", "code": "104028", "name": "Prepaid Employees Housing", "translations": {"ar": "بدل سكن للموظفين مدفوع مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104029", "code": "104029", "name": "Prepaid Schooling Fees", "translations": {"ar": "بدل رسوم تعليم مدرسي مدفوع مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104030", "code": "104030", "name": "Prepaid Consultancy Fees", "translations": {"ar": "رسوم استشارات مدفوعة مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104031", "code": "104031", "name": "Prepaid Legal Fees", "translations": {"ar": "الرسوم القانونية مدفوعة مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104032", "code": "104032", "name": "Prepaid Sponsorship Fees", "translations": {"ar": "رسوم كفالة مدفوعة مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104033", "code": "104033", "name": "Prepaid Advertisement Expenses", "translations": {"ar": "دعاية و الإعلان مدفوعة مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104034", "code": "104034", "name": "Prepaid Bank Guarantee", "translations": {"ar": "ضمان بنكي مدفوع مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104035", "code": "104035", "name": "Other Prepayments", "translations": {"ar": "دفعات مقدمة أخرى"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104036", "code": "104036", "name": "Prepaid Finance charge for Loans", "translations": {"ar": "تكاليف تمويل قروض مدفوعة مسبقا"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "sa_account_104037", "code": "104037", "name": "Deposit - Office Rent", "translations": {"ar": "رسوم تأمين - ايجار مكتبي"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_104038", "code": "104038", "name": "Deposits - Customs", "translations": {"ar": "رسوم تأمين - جمارك"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_104039", "code": "104039", "name": "Deposit to Immigration (Visa)", "translations": {"ar": "رسوم تأمين - شؤون الهجرة"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_104040", "code": "104040", "name": "Deposit Others", "translations": {"ar": "رسوم تأمين - اخرى"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_104041", "code": "104041", "name": "VAT Input", "translations": {"ar": "مدخلات ضريبة القيمة المضافة"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_104043", "code": "104043", "name": "Recoverable VAT Input - Reverse Charge", "translations": {"ar": "مدخلات ضريبة القيمة المضافة"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_106001", "code": "106001", "name": "Leasehold Improvement", "translations": {"ar": "تحسين المستأجرات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "sa_account_106002", "code": "106002", "name": "Furniture and Equipment", "translations": {"ar": "أثاث و معدات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "sa_account_106003", "code": "106003", "name": "Computer Hardware & Software", "translations": {"ar": "الكمبيوترات و قطع الغيار و البرمجيات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "sa_account_106004", "code": "106004", "name": "Motor Vehicles", "translations": {"ar": "السيارات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "sa_account_106005", "code": "106005", "name": "Work In Progress", "translations": {"ar": "عمل جاري"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_106006", "code": "106006", "name": "Amortisation on Leasehold Improvement", "translations": {"ar": "اطفاء على تحسين المستأجرات"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_106007", "code": "106007", "name": "Accumulated Depreciation of Furniture & Office Equipment", "translations": {"ar": "مجمع اهتلاك اثاث و معدات المكتب"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "sa_account_106008", "code": "106008", "name": "Accumulated Depreciation of Computer Hardware & Software", "translations": {"ar": "مجمع اهتلاك الكمبيوترات و قطع الغيار و البرمجيات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "sa_account_106009", "code": "106009", "name": "Accumulated Depreciation of Motor Vehicles", "translations": {"ar": "مجمع اهتلاك السيارات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "sa_account_106010", "code": "106010", "name": "Registration of Trademarks", "translations": {"ar": "تسجيل العلامات التجارية"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_106011", "code": "106011", "name": "Computer Card Renewal", "translations": {"ar": "بطاقة تجديد كمبيوتر"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_106012", "code": "106012", "name": "Prepaid Employee Expenses", "translations": {"ar": "مصروفات الموظفين المدفوعة مقدما"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "sa_account_131100", "code": "131100", "name": "Inventory - Raw Materials", "translations": {"ar": "مخزون المواد الخام"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_variation_id": "sa_account_400001"}}},
+    {"source_id": "sa_account_201002", "code": "201002", "name": "Payables", "translations": {"ar": "الذمم الدائنة"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "sa_account_201003", "code": "201003", "name": "Credit Notes to Customers", "translations": {"ar": "اشعار دائن للعملاء"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201004", "code": "201004", "name": "Accrued - Salaries", "translations": {"ar": "الرواتب المستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201005", "code": "201005", "name": "Leave Tickets Provision", "translations": {"ar": "مخصص تذاكر"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201006", "code": "201006", "name": "Leave Days Provision", "translations": {"ar": "مخصص ايام اجازة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201007", "code": "201007", "name": "Accrued - Commissions", "translations": {"ar": "عمولة مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201008", "code": "201008", "name": "Accrued Salaries Increment", "translations": {"ar": "راتب اضافي مستحق"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201009", "code": "201009", "name": "Accrued - Staff Bonus", "translations": {"ar": "مكافأة مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201010", "code": "201010", "name": "Accrued Other Personnel Cost", "translations": {"ar": "تكاليف موظفين مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201011", "code": "201011", "name": "Accrued - Utilities", "translations": {"ar": "فواتير مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201012", "code": "201012", "name": "Accrued - Telephone", "translations": {"ar": "نتكاليف هاتف مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201013", "code": "201013", "name": "Accrued - Sponsorship", "translations": {"ar": "تكفل مستحق"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201014", "code": "201014", "name": "Accrued - Audit Fees", "translations": {"ar": "اتعاب تدقيق مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201015", "code": "201015", "name": "Accrued - Office Rent", "translations": {"ar": "ايجار مكتب مستحق"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201016", "code": "201016", "name": "Accrued Others", "translations": {"ar": "اخرى مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201017", "code": "201017", "name": "VAT Output", "translations": {"ar": "مخرجات ضريبة القيمة المضافة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201018", "code": "201018", "name": "Deferred income", "translations": {"ar": "الإيرادات مؤجلة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201019", "code": "201019", "name": "ZAKAT Provision", "translations": {"ar": "مخصص الزكاة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201020", "code": "201020", "name": "Withholding Tax Payable", "translations": {"ar": "ضريبة مستقطعة مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201022", "code": "201022", "name": "GOSI Employee Payable", "translations": {"ar": "القيمة المستحقة للتأمينات الإجتماعية"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "sa_account_201030", "code": "201030", "name": "Base Tax Received", "translations": {"ar": "ضريبة القيمة المضافة المستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "sa_account_201031", "code": "201031", "name": "Visa & Master Credit Cards", "translations": {"ar": "بطاقات الائتمان فيزا وماستر"}, "root_type": "liability", "subtype": "credit_card", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_credit_card"}},
+    {"source_id": "sa_account_201032", "code": "201032", "name": "Gateway Credit Cards", "translations": {"ar": "بطاقات الائتمان Gateway"}, "root_type": "liability", "subtype": "credit_card", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_credit_card"}},
+    {"source_id": "sa_account_201033", "code": "201033", "name": "Manual Visa & Master Cards", "translations": {"ar": "فيزا وماستر بطاقات"}, "root_type": "liability", "subtype": "credit_card", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_credit_card"}},
+    {"source_id": "sa_account_201034", "code": "201034", "name": "PayPal Account", "translations": {"ar": "Paypal رصيد"}, "root_type": "liability", "subtype": "credit_card", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_credit_card"}},
+    {"source_id": "sa_account_201035", "code": "201035", "name": "Outstanding Withholding", "translations": {"ar": "ضريبة مستقطعة مستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "sa_account_202001", "code": "202001", "name": "End of Service Provision", "translations": {"ar": "مخصص نهاية الخدمة"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "sa_account_202002", "code": "202002", "name": "Reservations", "translations": {"ar": "احتياطات و حجوزات"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "sa_account_202003", "code": "202003", "name": "VAT Payable", "translations": {"ar": "ضريبة القيمة المضافة المستحقة"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "sa_account_202004", "code": "202004", "name": "Withholding Tax Payable", "translations": {"ar": "ضريبة مستقطعة مستحقة"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "sa_account_400001", "code": "400001", "name": "Cost of Goods Sold in Trading", "translations": {"ar": "تكلفة البضاعة المباعة في التجارة"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "sa_account_400002", "code": "400002", "name": "Cost Of Goods Sold I/C Sales", "translations": {"ar": "تكلفة البضاعة المباعة مع المبيعات"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "sa_account_400003", "code": "400003", "name": "Basic Salary", "translations": {"ar": "مصروف الراتب الاساسي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400004", "code": "400004", "name": "Housing Allowance", "translations": {"ar": "مصروف بدل سكن"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400005", "code": "400005", "name": "Transportation Allowance", "translations": {"ar": "مصروف بدل نقل"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400006", "code": "400006", "name": "Leave Ticket", "translations": {"ar": "مصروف تذاكر موظفين"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400007", "code": "400007", "name": "Leave Salary", "translations": {"ar": "مصروف اجازة موظفين"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400008", "code": "400008", "name": "End Of Service Indemnity", "translations": {"ar": "مصروف نهاية الخدمة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400009", "code": "400009", "name": "Medical Insurance", "translations": {"ar": "مصروف تأمين طبي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400010", "code": "400010", "name": "Life Insurance", "translations": {"ar": "مصروف تأمين على الحياة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400011", "code": "400011", "name": "Sales Commission", "translations": {"ar": "مصروف عمولة مبيعات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400012", "code": "400012", "name": "Staff Other Allowances", "translations": {"ar": "مصروف بدلات اخرى للموظفين"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400013", "code": "400013", "name": "Uniform", "translations": {"ar": "مصروف زي موحد"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400014", "code": "400014", "name": "Visa Expenses", "translations": {"ar": "مصروف تأشيرة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400015", "code": "400015", "name": "Personnel Cost Others", "translations": {"ar": "مصروف موظفين - اخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400016", "code": "400016", "name": "Office Rent", "translations": {"ar": "مصروف اجار مكتب"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400017", "code": "400017", "name": "Warehouse Rent", "translations": {"ar": "مصروف ايجار مستودع"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400018", "code": "400018", "name": "Water & Electricity", "translations": {"ar": "مصروف مياه و كهرباء"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400019", "code": "400019", "name": "Other Utility Cahrges", "translations": {"ar": "مصروف خدمات اخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400020", "code": "400020", "name": "Telephone", "translations": {"ar": "مصروف هاتف"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400021", "code": "400021", "name": "Courrier", "translations": {"ar": "مصروف شحن"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400022", "code": "400022", "name": "Website Hosting Fees", "translations": {"ar": "رسوم استضافة موقع"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400023", "code": "400023", "name": "Others - Communication", "translations": {"ar": "مصاريف اتصالات اخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400024", "code": "400024", "name": "Air tickets", "translations": {"ar": "مصاريف تذاكر طيران"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400025", "code": "400025", "name": "Hotel", "translations": {"ar": "مصاريف فندق"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400026", "code": "400026", "name": "Meals", "translations": {"ar": "مصاريف وجبات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400027", "code": "400027", "name": "Per Diem", "translations": {"ar": "مصاريف يومية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400028", "code": "400028", "name": "Others", "translations": {"ar": "مصاريف اخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400029", "code": "400029", "name": "Audit Fees", "translations": {"ar": "مصروف اتعاب تدقيق"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400030", "code": "400030", "name": "Sponsorship Fees", "translations": {"ar": "مصروف رسوم كفالة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400031", "code": "400031", "name": "Legal fees", "translations": {"ar": "مصروف رسوم قانونية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400032", "code": "400032", "name": "Trade License Fees", "translations": {"ar": "مصروف رسوم الرخصة التجارية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400033", "code": "400033", "name": "Others - Professional Fees", "translations": {"ar": "مصروف أخرى الرسوم الفنية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400034", "code": "400034", "name": "Other - Advertising Expenses", "translations": {"ar": "مصروف أخرى مصاريف الإعلان"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400035", "code": "400035", "name": "Write Off Receivables & Payables", "translations": {"ar": "مصروف شطب الذمم الدائنة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400036", "code": "400036", "name": "Write Off Inventory", "translations": {"ar": "مصروف فرق المخزون"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400037", "code": "400037", "name": "Amortisation of Pre-operating Expenses", "translations": {"ar": "مصروف إطفاء مصاريف"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400038", "code": "400038", "name": "Cash Shortage", "translations": {"ar": "مصروف نقص نقدي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400039", "code": "400039", "name": "Others - Provision & Write-off", "translations": {"ar": "مخصصات و فروقات اخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400040", "code": "400040", "name": "Insurance", "translations": {"ar": "مصروف تأمين"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400041", "code": "400041", "name": "Training", "translations": {"ar": "مصروف تدريب"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400042", "code": "400042", "name": "Maintenance", "translations": {"ar": "مصروف صيانة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400043", "code": "400043", "name": "Security & Guard", "translations": {"ar": "مصروف حراسة و امن"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400044", "code": "400044", "name": "Cleaning", "translations": {"ar": "مصروف تنظيف"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400045", "code": "400045", "name": "Subscriptions", "translations": {"ar": "مصروف الاشتراكات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400046", "code": "400046", "name": "Gifts & Donations", "translations": {"ar": "مصروف هدايا و هبات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400047", "code": "400047", "name": "Kitchen and Buffet Expenses", "translations": {"ar": "مصروف المطبخ وبوفيه"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400048", "code": "400048", "name": "Vehicle Expenses", "translations": {"ar": "مصروف سيارة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400049", "code": "400049", "name": "Convoyance Expenses", "translations": {"ar": "مصروف نقل اصول"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400050", "code": "400050", "name": "Others - Office Various Expenses", "translations": {"ar": "مصاريف مكتب اخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400051", "code": "400051", "name": "Other Bank Charges", "translations": {"ar": "مصروف الرسوم المصرفية الأخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400052", "code": "400052", "name": "Loss On Fixed Assets Disposal", "translations": {"ar": "مصروف خسارة بيع و تخلص من اصول"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400053", "code": "400053", "name": "Loss on Difference on Exchange", "translations": {"ar": "مصروف خسارة على الفرق العملات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400054", "code": "400054", "name": "Disposal of Business Branch", "translations": {"ar": "مصروف وقف فرع من الاعمال"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400055", "code": "400055", "name": "Income Tax", "translations": {"ar": "مصروف ضريبة الدخل"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400056", "code": "400056", "name": "Previous Year Adjustments Account", "translations": {"ar": "مصروف حساب تسويات السنة السابقة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400057", "code": "400057", "name": "Other Non Operating Expenses", "translations": {"ar": "المصاريف غير التشغيلية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400058", "code": "400058", "name": "Credit Card Charges", "translations": {"ar": "مصروف رسوم بطاقات الائتمان"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400059", "code": "400059", "name": "Bank Finance & Loan Charges", "translations": {"ar": "مصروف بنك التمويل والقروض"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400060", "code": "400060", "name": "Air Miles Card Charges", "translations": {"ar": "مصروف رسوم بطاقة Air Miles"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400062", "code": "400062", "name": "PayPal Charges", "translations": {"ar": "Paypal مصروف رسوم"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400063", "code": "400063", "name": "Amortization on Leasehold Improvement", "translations": {"ar": "مصروف إطفاء تحسينات المستأجرة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400064", "code": "400064", "name": "Depreciation Of Furniture & Office Equipment", "translations": {"ar": "مصروف الاستهلاك  الأثاث"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "sa_account_400065", "code": "400065", "name": "Depreciation Of Computer Hard & Soft", "translations": {"ar": "مصروف الاستهلاك اجهزة الكمبيوتر"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "sa_account_400066", "code": "400066", "name": "Depreciation Of Motor Vehicles", "translations": {"ar": "مصروف استهلاك المركبات"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "sa_account_400067", "code": "400067", "name": "Consultancy Fees", "translations": {"ar": "رسوم الاستشارات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400068", "code": "400068", "name": "Provision for Doubtful Debts", "translations": {"ar": "مخصص الديون المعدومة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400069", "code": "400069", "name": "Closing Account", "translations": {"ar": "حساب ختامي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400070", "code": "400070", "name": "Depreciation on Right of use asset (IFRS 16)", "translations": {"ar": "الاستهلاك في حق الأصول استخدام (IFRS 16)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400072", "code": "400072", "name": "ZAKAT Expense", "translations": {"ar": "مصاريف الزكاة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400073", "code": "400073", "name": "Withholding Tax Expense", "translations": {"ar": "مصروف ضريبة مستقطعة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400074", "code": "400074", "name": "Salary Deductions", "translations": {"ar": "خصومات الرواتب"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_400075", "code": "400075", "name": "Other Employee Expenses", "translations": {"ar": "مصروفات الموظفين الأخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "sa_account_500001", "code": "500001", "name": "Sales Account", "translations": {"ar": "مبيعات"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "sa_account_500002", "code": "500002", "name": "Sales of I/C", "translations": {"ar": "مبيعات شركات تابعة"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "sa_account_500003", "code": "500003", "name": "Management Consultancy Fees", "translations": {"ar": "مكاسب استشارات ادارية"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "sa_account_500004", "code": "500004", "name": "Sales from Other Region", "translations": {"ar": "مبيعات مناطق اخرى"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "sa_account_500005", "code": "500005", "name": "Advertising Income", "translations": {"ar": "دخل الإعلانات"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "sa_account_500006", "code": "500006", "name": "Branding Income", "translations": {"ar": "دخل علامات تجارية"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "sa_account_500007", "code": "500007", "name": "Space Rental Income", "translations": {"ar": "دخل تأجير"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "sa_account_500008", "code": "500008", "name": "Service Income", "translations": {"ar": "دخل خدمات"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "sa_account_500009", "code": "500009", "name": "Interest Revenue", "translations": {"ar": "ايراد فائدة"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "sa_account_500010", "code": "500010", "name": "Capital Gain", "translations": {"ar": "مكاسب رأس المال"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "sa_account_500011", "code": "500011", "name": "Gain On Difference Of Exchange", "translations": {"ar": "ربح فرق عملات"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "sa_account_500013", "code": "500013", "name": "Other Income", "translations": {"ar": "دخول اخرى"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "sa_account_999999", "code": "999999", "name": "Undistributed Profits/Losses", "translations": {"ar": "ارباح / خسائر غير موزعة"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity_unaffected"}}
+  ]
+}

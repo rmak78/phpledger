@@ -1,0 +1,616 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "08b23a422a9389d8b9154d72405a517190e4e44629cccb5c8a050dda1e21778d",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/lv",
+  "country_code": "LV",
+  "country_name": "Latvia",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Latvia - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_lv' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Allegro IT, Chick.Farm",
+    "module": "l10n_lv",
+    "module_name": "Latvia - Accounting",
+    "module_version": "1.0.0",
+    "contributing_modules": [
+      "l10n_lv"
+    ],
+    "template_code": "lv",
+    "template_chain": [
+      "lv"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_lv/data/template/account.account-lv.csv",
+        "sha256": "21f62c2905a9bd9fe18efa5bd6ff41ab9e47579d588472ddf9cf67856942cfc1",
+        "rows": 242
+      },
+      {
+        "path": "addons/l10n_lv/data/template/account.group-lv.csv",
+        "sha256": "dd4ceebdbf6f491e6179d6aab01755db4705f51513b7cf09586c642e9eebc872",
+        "rows": 55
+      }
+    ],
+    "python_files": [
+      "addons/l10n_lv/models/template_lv.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "4",
+    "anglo_saxon_accounting": true,
+    "account_code_prefixes": {
+      "bank": "2620",
+      "cash": "2610",
+      "transfer": "2700"
+    },
+    "default_sale_tax": "VAT_S_G_21_LV",
+    "default_purchase_tax": "VAT_P_G_21_LV",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "a2310",
+        "code": "2310",
+        "name": "Accounts receivable – trade",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "a5310",
+        "code": "5310",
+        "name": "Accounts payable – trade",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "a6110",
+        "code": "6110",
+        "name": "Sales from operating activities subject, VAT 21%",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "a7550",
+        "code": "7550",
+        "name": "Other operating expenses",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "a2613",
+        "code": "2613",
+        "name": "ECR (retail) cash register",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "a26291",
+        "code": "26291",
+        "name": "Bank Suspense Account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "a8150",
+        "code": "8150",
+        "name": "Income from exchange rate appreciation",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "a8250",
+        "code": "8250",
+        "name": "Losses from currency depreciation",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "a8199",
+        "code": "8199",
+        "name": "Money difference income",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "a8299",
+        "code": "8299",
+        "name": "Money difference losses",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "a8199",
+        "code": "8199",
+        "name": "Money difference income",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "a8299",
+        "code": "8299",
+        "name": "Money difference losses",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 242,
+    "posting_accounts": 242,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 67,
+      "equity": 13,
+      "expense": 68,
+      "income": 45,
+      "liability": 49
+    },
+    "by_subtype": {
+      "cash_bank": 7,
+      "current_asset": 25,
+      "current_liability": 36,
+      "equity": 12,
+      "expense": 68,
+      "fixed_asset": 15,
+      "income": 13,
+      "non_current_asset": 8,
+      "non_current_liability": 11,
+      "other_income": 32,
+      "payable": 2,
+      "prepayment": 3,
+      "receivable": 9,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 7,
+      "expense": 1,
+      "income": 1,
+      "payables": 2,
+      "receivables": 9
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "lv"
+    ],
+    "groups": 55
+  },
+  "groups": [
+    {"source_id": "l10n_lv_group_1", "code_prefix_start": "1", "code_prefix_end": "1", "name": "Long-term investments", "translations": {"lv": "Ilgtermiņa ieguldījumi"}, "parent_source_id": null, "path": ["Long-term investments"]},
+    {"source_id": "l10n_lv_group_2", "code_prefix_start": "2", "code_prefix_end": "2", "name": "Current assets", "translations": {"lv": "Apgrozāmie līdzekļi"}, "parent_source_id": null, "path": ["Current assets"]},
+    {"source_id": "l10n_lv_group_3", "code_prefix_start": "3", "code_prefix_end": "3", "name": "Equity", "translations": {"lv": "Pašu kapitāls"}, "parent_source_id": null, "path": ["Equity"]},
+    {"source_id": "l10n_lv_group_4", "code_prefix_start": "4", "code_prefix_end": "4", "name": "Accruals", "translations": {"lv": "Uzkrājumi"}, "parent_source_id": null, "path": ["Accruals"]},
+    {"source_id": "l10n_lv_group_5", "code_prefix_start": "5", "code_prefix_end": "5", "name": "Creditors", "translations": {"lv": "Kreditori"}, "parent_source_id": null, "path": ["Creditors"]},
+    {"source_id": "l10n_lv_group_6", "code_prefix_start": "6", "code_prefix_end": "6", "name": "Revenue from business activities", "translations": {"lv": "Ieņēmumi no uzņēmuma saimnieciskās darbības"}, "parent_source_id": null, "path": ["Revenue from business activities"]},
+    {"source_id": "l10n_lv_group_7", "code_prefix_start": "7", "code_prefix_end": "7", "name": "Cost of economic activity", "translations": {"lv": "Saimnieciskās darbības izdevumi"}, "parent_source_id": null, "path": ["Cost of economic activity"]},
+    {"source_id": "l10n_lv_group_8", "code_prefix_start": "8", "code_prefix_end": "8", "name": "Miscellaneous income and expenses, profit and loss", "translations": {"lv": "Dažādi ieņēmumi un izmaksas, peļņa un zaudējumi"}, "parent_source_id": null, "path": ["Miscellaneous income and expenses, profit and loss"]},
+    {"source_id": "l10n_lv_group_11", "code_prefix_start": "11", "code_prefix_end": "11", "name": "Intangible assets", "translations": {"lv": "Nemateriālie ieguldījumi"}, "parent_source_id": "l10n_lv_group_1", "path": ["Long-term investments", "Intangible assets"]},
+    {"source_id": "l10n_lv_group_12", "code_prefix_start": "12", "code_prefix_end": "12", "name": "Fixed assets (property, plant and equipment, investment property and biological assets)", "translations": {"lv": "Pamatlīdzekļi (pamatlīdzekļi, ieguldījuma īpašumi un bioloģiskie aktīvi)"}, "parent_source_id": "l10n_lv_group_1", "path": ["Long-term investments", "Fixed assets (property, plant and equipment, investment property and biological assets)"]},
+    {"source_id": "l10n_lv_group_13", "code_prefix_start": "13", "code_prefix_end": "13", "name": "Long-term financial investment", "translations": {"lv": "Ilgtermiņa finanšu ieguldījumi"}, "parent_source_id": "l10n_lv_group_1", "path": ["Long-term investments", "Long-term financial investment"]},
+    {"source_id": "l10n_lv_group_21", "code_prefix_start": "21", "code_prefix_end": "21", "name": "Inventory", "translations": {"lv": "Krājumi"}, "parent_source_id": "l10n_lv_group_2", "path": ["Current assets", "Inventory"]},
+    {"source_id": "l10n_lv_group_22", "code_prefix_start": "22", "code_prefix_end": "22", "name": "Productive and working animals", "translations": {"lv": "Dzīvnieki un augi"}, "parent_source_id": "l10n_lv_group_2", "path": ["Current assets", "Productive and working animals"]},
+    {"source_id": "l10n_lv_group_23", "code_prefix_start": "23", "code_prefix_end": "23", "name": "Accounts receivable", "translations": {"lv": "Norēķini par prasībām (ar debitoriem)"}, "parent_source_id": "l10n_lv_group_2", "path": ["Current assets", "Accounts receivable"]},
+    {"source_id": "l10n_lv_group_24", "code_prefix_start": "24", "code_prefix_end": "24", "name": "Expenses for future periods", "translations": {"lv": "Nākamo periodu izmaksas"}, "parent_source_id": "l10n_lv_group_2", "path": ["Current assets", "Expenses for future periods"]},
+    {"source_id": "l10n_lv_group_25", "code_prefix_start": "25", "code_prefix_end": "25", "name": "Securities as part of current assets and short-term participation in capital", "translations": {"lv": "Īstermiņa finanšu ieguldījumi"}, "parent_source_id": "l10n_lv_group_2", "path": ["Current assets", "Securities as part of current assets and short-term participation in capital"]},
+    {"source_id": "l10n_lv_group_26", "code_prefix_start": "26", "code_prefix_end": "26", "name": "Cash at bank and in hand", "translations": {"lv": "Naudas līdzekļi"}, "parent_source_id": "l10n_lv_group_2", "path": ["Current assets", "Cash at bank and in hand"]},
+    {"source_id": "l10n_lv_group_31", "code_prefix_start": "31", "code_prefix_end": "31", "name": "Share capital or participation capital, revaluation reserve for long-term investments", "translations": {"lv": "Pamatkapitāls vai līdzdalības kapitāls, ilgtermiņa ieguldījumu pārvērtēšanas rezerve"}, "parent_source_id": "l10n_lv_group_3", "path": ["Equity", "Share capital or participation capital, revaluation reserve for long-term investments"]},
+    {"source_id": "l10n_lv_group_32", "code_prefix_start": "32", "code_prefix_end": "32", "name": "Private accounts (private investment and consumption of money)", "translations": {"lv": "Privātkonti (privātie ieguldījumi un naudas līdzekļu patēriņš)"}, "parent_source_id": "l10n_lv_group_3", "path": ["Equity", "Private accounts (private investment and consumption of money)"]},
+    {"source_id": "l10n_lv_group_33", "code_prefix_start": "33", "code_prefix_end": "33", "name": "Reserves", "translations": {"lv": "Rezerves"}, "parent_source_id": "l10n_lv_group_3", "path": ["Equity", "Reserves"]},
+    {"source_id": "l10n_lv_group_34", "code_prefix_start": "34", "code_prefix_end": "34", "name": "Retained earnings or uncovered losses", "translations": {"lv": "Nesadalītā peļņa vai nesegtie zaudējumi"}, "parent_source_id": "l10n_lv_group_3", "path": ["Equity", "Retained earnings or uncovered losses"]},
+    {"source_id": "l10n_lv_group_41", "code_prefix_start": "41", "code_prefix_end": "41", "name": "Provisions for pensions and similar liabilities", "translations": {"lv": "Uzkrājumi pensijām un tamlīdzīgām saistībām"}, "parent_source_id": "l10n_lv_group_4", "path": ["Accruals", "Provisions for pensions and similar liabilities"]},
+    {"source_id": "l10n_lv_group_42", "code_prefix_start": "42", "code_prefix_end": "42", "name": "Provisions for estimated taxes", "translations": {"lv": "Uzkrājumi paredzamiem nodokļiem"}, "parent_source_id": "l10n_lv_group_4", "path": ["Accruals", "Provisions for estimated taxes"]},
+    {"source_id": "l10n_lv_group_43", "code_prefix_start": "43", "code_prefix_end": "43", "name": "Other provisions", "translations": {"lv": "Citi uzkrājumi"}, "parent_source_id": "l10n_lv_group_4", "path": ["Accruals", "Other provisions"]},
+    {"source_id": "l10n_lv_group_51", "code_prefix_start": "51", "code_prefix_end": "51", "name": "Settlement of loans", "translations": {"lv": "Norēķini par aizņēmumiem"}, "parent_source_id": "l10n_lv_group_5", "path": ["Creditors", "Settlement of loans"]},
+    {"source_id": "l10n_lv_group_52", "code_prefix_start": "52", "code_prefix_end": "52", "name": "Settlement of advances received from customers", "translations": {"lv": "Norēķini par saņemtajiem avansiem no pircējiem"}, "parent_source_id": "l10n_lv_group_5", "path": ["Creditors", "Settlement of advances received from customers"]},
+    {"source_id": "l10n_lv_group_53", "code_prefix_start": "53", "code_prefix_end": "53", "name": "Settlements with suppliers and contractors", "translations": {"lv": "Norēķini ar piegādātājiem un darbuzņēmējiem"}, "parent_source_id": "l10n_lv_group_5", "path": ["Creditors", "Settlements with suppliers and contractors"]},
+    {"source_id": "l10n_lv_group_54", "code_prefix_start": "54", "code_prefix_end": "54", "name": "Promissory notes payable", "translations": {"lv": "Maksājamie vekseļi"}, "parent_source_id": "l10n_lv_group_5", "path": ["Creditors", "Promissory notes payable"]},
+    {"source_id": "l10n_lv_group_55", "code_prefix_start": "55", "code_prefix_end": "55", "name": "Settlements with companies, members and staff", "translations": {"lv": "Norēķini ar uzņēmumiem, dalībniekiem un personālu"}, "parent_source_id": "l10n_lv_group_5", "path": ["Creditors", "Settlements with companies, members and staff"]},
+    {"source_id": "l10n_lv_group_56", "code_prefix_start": "56", "code_prefix_end": "56", "name": "Settlement of wages and deductions (excluding taxes)", "translations": {"lv": "Norēķini par darba samaksu un ieturējumiem (izņemot nodokļus)"}, "parent_source_id": "l10n_lv_group_5", "path": ["Creditors", "Settlement of wages and deductions (excluding taxes)"]},
+    {"source_id": "l10n_lv_group_57", "code_prefix_start": "57", "code_prefix_end": "57", "name": "Tax settlements", "translations": {"lv": "Norēķini par nodokļiem"}, "parent_source_id": "l10n_lv_group_5", "path": ["Creditors", "Tax settlements"]},
+    {"source_id": "l10n_lv_group_58", "code_prefix_start": "58", "code_prefix_end": "58", "name": "Dividends settlements", "translations": {"lv": "Norēķini par dividendēm"}, "parent_source_id": "l10n_lv_group_5", "path": ["Creditors", "Dividends settlements"]},
+    {"source_id": "l10n_lv_group_59", "code_prefix_start": "59", "code_prefix_end": "59", "name": "Deferred income", "translations": {"lv": "Nākamo periodu ieņēmumi"}, "parent_source_id": "l10n_lv_group_5", "path": ["Creditors", "Deferred income"]},
+    {"source_id": "l10n_lv_group_61", "code_prefix_start": "61", "code_prefix_end": "61", "name": "Business income subject to general taxation", "translations": {"lv": "Saimnieciskās darbības ieņēmumi, kas apliekami ar nodokļiem vispārējā kārtībā"}, "parent_source_id": "l10n_lv_group_6", "path": ["Revenue from business activities", "Business income subject to general taxation"]},
+    {"source_id": "l10n_lv_group_62", "code_prefix_start": "62", "code_prefix_end": "62", "name": "Revenue from sales subject to reduced taxation", "translations": {"lv": "Ieņēmumi no pārdošanas, apliekami ar reducētiem (samazinātiem) nodokļiem"}, "parent_source_id": "l10n_lv_group_6", "path": ["Revenue from business activities", "Revenue from sales subject to reduced taxation"]},
+    {"source_id": "l10n_lv_group_63", "code_prefix_start": "63", "code_prefix_end": "63", "name": "Commission, brokerage and other income", "translations": {"lv": "Komisijas, starpniecības un citi ieņēmumi"}, "parent_source_id": "l10n_lv_group_6", "path": ["Revenue from business activities", "Commission, brokerage and other income"]},
+    {"source_id": "l10n_lv_group_64", "code_prefix_start": "64", "code_prefix_end": "64", "name": "Revenue-reducing discounts", "translations": {"lv": "Ieņēmumus samazinošas atlaides"}, "parent_source_id": "l10n_lv_group_6", "path": ["Revenue from business activities", "Revenue-reducing discounts"]},
+    {"source_id": "l10n_lv_group_65", "code_prefix_start": "65", "code_prefix_end": "65", "name": "Other operating revenue", "translations": {"lv": "Pārējie saimnieciskās darbības ieņēmumi"}, "parent_source_id": "l10n_lv_group_6", "path": ["Revenue from business activities", "Other operating revenue"]},
+    {"source_id": "l10n_lv_group_66", "code_prefix_start": "66", "code_prefix_end": "66", "name": "Changes in stocks and value of finished products and work in progress", "translations": {"lv": "Gatavās produkcijas un nepabeigto ražojumu krājumu un vērtības izmaiņas"}, "parent_source_id": "l10n_lv_group_6", "path": ["Revenue from business activities", "Changes in stocks and value of finished products and work in progress"]},
+    {"source_id": "l10n_lv_group_67", "code_prefix_start": "67", "code_prefix_end": "67", "name": "Revenues of other periods relating to the reporting period", "translations": {"lv": "Citu periodu ieņēmumi, kas attiecas uz pārskata periodu"}, "parent_source_id": "l10n_lv_group_6", "path": ["Revenue from business activities", "Revenues of other periods relating to the reporting period"]},
+    {"source_id": "l10n_lv_group_69", "code_prefix_start": "69", "code_prefix_end": "69", "name": "Revenue from social infrastructure", "translations": {"lv": "Ieņēmumi no sociālās infrastruktūras objektiem"}, "parent_source_id": "l10n_lv_group_6", "path": ["Revenue from business activities", "Revenue from social infrastructure"]},
+    {"source_id": "l10n_lv_group_71", "code_prefix_start": "71", "code_prefix_end": "71", "name": "Costs of raw materials, supplies and goods", "translations": {"lv": "Izejvielu, materiālu un preču iepirkšanai izmaksas"}, "parent_source_id": "l10n_lv_group_7", "path": ["Cost of economic activity", "Costs of raw materials, supplies and goods"]},
+    {"source_id": "l10n_lv_group_72", "code_prefix_start": "72", "code_prefix_end": "72", "name": "Personnel costs", "translations": {"lv": "Personāla izmaksas"}, "parent_source_id": "l10n_lv_group_7", "path": ["Cost of economic activity", "Personnel costs"]},
+    {"source_id": "l10n_lv_group_73", "code_prefix_start": "73", "code_prefix_end": "73", "name": "Social charges and cost", "translations": {"lv": "Sociālās izmaksas un nodevas"}, "parent_source_id": "l10n_lv_group_7", "path": ["Cost of economic activity", "Social charges and cost"]},
+    {"source_id": "l10n_lv_group_74", "code_prefix_start": "74", "code_prefix_end": "74", "name": "Depreciation of fixed assets and write-offs of the value of other investments", "translations": {"lv": "Pamatlīdzekļu nolietojums un citu ieguldījumu vērtības norakstījumi"}, "parent_source_id": "l10n_lv_group_7", "path": ["Cost of economic activity", "Depreciation of fixed assets and write-offs of the value of other investments"]},
+    {"source_id": "l10n_lv_group_75", "code_prefix_start": "75", "code_prefix_end": "75", "name": "Other economic activity costs", "translations": {"lv": "Pārējās saimnieciskās darbības izmaksas"}, "parent_source_id": "l10n_lv_group_7", "path": ["Cost of economic activity", "Other economic activity costs"]},
+    {"source_id": "l10n_lv_group_76", "code_prefix_start": "76", "code_prefix_end": "76", "name": "Cost of selling goods", "translations": {"lv": "Preču pārdošanas izmaksas"}, "parent_source_id": "l10n_lv_group_7", "path": ["Cost of economic activity", "Cost of selling goods"]},
+    {"source_id": "l10n_lv_group_77", "code_prefix_start": "77", "code_prefix_end": "77", "name": "Administration costs", "translations": {"lv": "Administrācijas izmaksas"}, "parent_source_id": "l10n_lv_group_7", "path": ["Cost of economic activity", "Administration costs"]},
+    {"source_id": "l10n_lv_group_78", "code_prefix_start": "78", "code_prefix_end": "78", "name": "Expenses of previous periods to be included in the reporting period", "translations": {"lv": "Pārskata periodā iekļaujamās iepriekšējo periodu izmaksas"}, "parent_source_id": "l10n_lv_group_7", "path": ["Cost of economic activity", "Expenses of previous periods to be included in the reporting period"]},
+    {"source_id": "l10n_lv_group_79", "code_prefix_start": "79", "code_prefix_end": "79", "name": "Social infrastructure maintenance costs", "translations": {"lv": "Sociālās infrastruktūras uzturēšanas izmaksas"}, "parent_source_id": "l10n_lv_group_7", "path": ["Cost of economic activity", "Social infrastructure maintenance costs"]},
+    {"source_id": "l10n_lv_group_81", "code_prefix_start": "81", "code_prefix_end": "81", "name": "Miscellaneous revenues", "translations": {"lv": "Dažādi ieņēmumi"}, "parent_source_id": "l10n_lv_group_8", "path": ["Miscellaneous income and expenses, profit and loss", "Miscellaneous revenues"]},
+    {"source_id": "l10n_lv_group_82", "code_prefix_start": "82", "code_prefix_end": "82", "name": "DMiscellaneous expenses", "translations": {"lv": "Dažādas izmaksas"}, "parent_source_id": "l10n_lv_group_8", "path": ["Miscellaneous income and expenses, profit and loss", "DMiscellaneous expenses"]},
+    {"source_id": "l10n_lv_group_83", "code_prefix_start": "83", "code_prefix_end": "83", "name": "Extraordinary income", "translations": {"lv": "Ārkārtas ieņēmumi"}, "parent_source_id": "l10n_lv_group_8", "path": ["Miscellaneous income and expenses, profit and loss", "Extraordinary income"]},
+    {"source_id": "l10n_lv_group_84", "code_prefix_start": "84", "code_prefix_end": "84", "name": "Extraordinary expenses", "translations": {"lv": "Ārkārtas izmaksas"}, "parent_source_id": "l10n_lv_group_8", "path": ["Miscellaneous income and expenses, profit and loss", "Extraordinary expenses"]},
+    {"source_id": "l10n_lv_group_88", "code_prefix_start": "88", "code_prefix_end": "88", "name": "Taxes on profits and other taxes not included in operating expenses", "translations": {"lv": "Nodokļi no peļņas un citi saimnieciskās darbības izdevumos neiekļaujamie nodokļi"}, "parent_source_id": "l10n_lv_group_8", "path": ["Miscellaneous income and expenses, profit and loss", "Taxes on profits and other taxes not included in operating expenses"]}
+  ],
+  "accounts": [
+    {"source_id": "a1110", "code": "1110", "name": "Research and company development costs", "translations": {"lv": "Pētniecības un uzņēmuma attīstības izmaksas"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_11", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "a1120", "code": "1120", "name": "Concessions, patents, licenses, trademarks and similar rights", "translations": {"lv": "Koncesijas, patenti, licences, preču zīmes un tamlīdzīgas tiesības"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_11", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "a1130", "code": "1130", "name": "Other intangible assets", "translations": {"lv": "Citi nemateriālie ieguldījumi"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_11", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "a1140", "code": "1140", "name": "Goodwill", "translations": {"lv": "Nemateriālā vērtība"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_11", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "a1180", "code": "1180", "name": "Advance payments for intangible assets", "translations": {"lv": "Avansa maksājumi par nemateriālajiem ieguldījumiem"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_11", "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "a1191", "code": "1191", "name": "Amortization on portion of development costs", "translations": {"lv": "Attīstības izmaksu norakstītā daļa (pasīvā)"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_11", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "a1192", "code": "1192", "name": "Amortization of concessions, patents, licenses, trademarks and similar rights", "translations": {"lv": "Koncesiju, patentu, licenču, preču zīmju un tamlīdzīgu tiesību norakstītā daļa (pasīvā)"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_11", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "a1193", "code": "1193", "name": "Amortization on part of the value of other intangible investments", "translations": {"lv": "Citu nemateriālo ieguldījumu vērtības norakstītā daļa (pasīvā)"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_11", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "a1195", "code": "1195", "name": "Amortization of other intangible investments", "translations": {"lv": "Citu nemateriālo ieguldījumi norakstītā daļa"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_11", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "a1210", "code": "1210", "name": "Land plots, buildings, constructions, perennial plantations and other real estate objects", "translations": {"lv": "Zemes gabali, ēkas, būves, ilggadīgie stādījumi un citi nekustamā īpašuma objekti"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_12", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1220", "code": "1220", "name": "Technological equipment and machinery", "translations": {"lv": "Tehnoloģiskās iekārtas un mašīnas"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_12", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1230", "code": "1230", "name": "Other fixed assets and inventory", "translations": {"lv": "Pārējie pamatlīdzekļi un inventārs"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_12", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1240", "code": "1240", "name": "Costs of fixed asset creation and unfinished object construction", "translations": {"lv": "Pamatlīdzekļu izveidošanas un nepabeigto celtniecības objektu izmaksas"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_12", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1280", "code": "1280", "name": "Advance payments for fixed assets", "translations": {"lv": "Avansa maksājumi par pamatlīdzekļiem"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_12", "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "a1291", "code": "1291", "name": "Accumulated depreciation for Land, buildings, perennial plantings", "translations": {"lv": "Zemes gabalu, ēku un būvju un ilggadīgo stādījumu nolietojums (pasīvā)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_12", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1292", "code": "1292", "name": "Accumulated depreciation on equipment and machinery", "translations": {"lv": "Iekārtu un mašīnu nolietojums (pasīvā)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_12", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1293", "code": "1293", "name": "Accumulated depreciation for other fixed assets", "translations": {"lv": "Pārējo pamatlīdzekļu uzkrātais nolietojums"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_12", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1310", "code": "1310", "name": "Participation in the capital of subsidiaries", "translations": {"lv": "Līdzdalība meitas uzņēmumu kapitālā"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_13", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1320", "code": "1320", "name": "Loans to a subsidiary", "translations": {"lv": "Aizdevumi meitas uzņēmumam"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_13", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1330", "code": "1330", "name": "Participations in the capital of related companies", "translations": {"lv": "Līdzdalības saistīto uzņēmumu kapitālā"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_13", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1340", "code": "1340", "name": "Loans to affiliates", "translations": {"lv": "Aizdevumi saistītajiem uzņēmumiem"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_13", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1350", "code": "1350", "name": "Other securities and investments", "translations": {"lv": "Pārējie vērtspapīri un ieguldījumi"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_13", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1360", "code": "1360", "name": "Other loans and other long-term debtors", "translations": {"lv": "Pārējie aizdevumi un citi ilgtermiņa debitori"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_13", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1370", "code": "1370", "name": "Own shares", "translations": {"lv": "Pašu akcijas un daļas"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_13", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a1380", "code": "1380", "name": "Loans to company members and the board", "translations": {"lv": "Aizdevumi akcionāriem vai dalībniekiem un vadībai"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_13", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "a2110", "code": "2110", "name": "Raw materials, basic materials and auxiliary materials", "translations": {"lv": "Izejvielas, pamatmateriāli un palīgmateriāli"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_21", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2120", "code": "2120", "name": "Unfinished production / Work in progress", "translations": {"lv": "Nepabeigtie ražojumi"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_21", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2130", "code": "2130", "name": "Finished products and goods for sale", "translations": {"lv": "Gatavie ražojumi un preces pārdošanai"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_21", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2140", "code": "2140", "name": "Uncompleted orders", "translations": {"lv": "Nepabeigtie pasūtījumi"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_21", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2190", "code": "2190", "name": "Advance payments for goods", "translations": {"lv": "Avansa maksājumi par precēm"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_21", "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "a2210", "code": "2210", "name": "Adult productive livestock", "translations": {"lv": "Pieaugušie produktīvie lopi"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_22", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2220", "code": "2220", "name": "Young and small animals", "translations": {"lv": "Jaunlopi un sīkie dzīvnieki"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_22", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2230", "code": "2230", "name": "Working cattle", "translations": {"lv": "Darba lopi"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_22", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2290", "code": "2290", "name": "Depreciated value of working livestock", "translations": {"lv": "Darba lopu norakstītā vērtība"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_22", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2310", "code": "2310", "name": "Accounts receivable – trade", "translations": {"lv": "Norēķini ar pircējiem un pasūtītājiem"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "a2318", "code": "2318", "name": "Settlement of doubtful debtors", "translations": {"lv": "Norēķini ar šaubīgiem debitoriem"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "a2320", "code": "2320", "name": "Bills of exchange received for deliveries and customers", "translations": {"lv": "Par piegādēm un pasūtījumiem saņemtie vekseļi"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "a2330", "code": "2330", "name": "Debts of subsidiaries", "translations": {"lv": "Meitas uzņēmumu parādi"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "a2340", "code": "2340", "name": "Debts of related companies", "translations": {"lv": "Saistīto uzņēmumu parādi"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "a2350", "code": "2350", "name": "Settlements with other debtors", "translations": {"lv": "Norēķini ar citiem debitoriem"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "a2360", "code": "2360", "name": "Settlement of unpaid amounts of the company's capital", "translations": {"lv": "Norēķini par sabiedrības kapitāla neiemaksātām summām"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "a2370", "code": "2370", "name": "Short-term loans for company shareholder and management", "translations": {"lv": "Īstermiņa aizdevumi sabiedrības dalībniekiem un valdei"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "a2380", "code": "2380", "name": "Settlements of claims against personnel and short-term loans to personnel", "translations": {"lv": "Norēķini par prasībām pret personālu un īstermiņa aizdevumi personālam"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "a2388", "code": "2388", "name": "Accrued revenue", "translations": {"lv": "Uzkrātie ieņēmumi"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2390", "code": "2390", "name": "Tax overpayments, taxes paid in advance", "translations": {"lv": "Pārmaksātie nodokļi, iepriekš samaksātie nodokļi"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2391", "code": "2391", "name": "Tax and fee cancellation (tax account)", "translations": {"lv": "Nodokļu un nodevu dzēšana (nodokļu konts)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2392", "code": "2392", "name": "Frozen recoverable VAT", "translations": {"lv": "Iesaldēts atgūstams PVN"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2399", "code": "2399", "name": "VAT charged but not deducted", "translations": {"lv": "Aprēķināts, bet neatskaitīts PVN"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_23", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2410", "code": "2410", "name": "Deferred expenses", "translations": {"lv": "Nākamo periodu izmaksas"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_24", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2420", "code": "2420", "name": "Share issue valuation", "translations": {"lv": "Akciju emisijas nocenojums"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_24", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2510", "code": "2510", "name": "Shares of the subsidiary company", "translations": {"lv": "Meitas uzņēmuma akcijas un daļas"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_25", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2520", "code": "2520", "name": "Shares of related companies", "translations": {"lv": "Saistīto uzņēmumu akcijas un daļas"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_25", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2530", "code": "2530", "name": "Shares of own company", "translations": {"lv": "Pašu uzņēmuma akcijas un daļas"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_25", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2540", "code": "2540", "name": "Other securities and participations in equity", "translations": {"lv": "Pārējie vērtspapīri un līdzdalība kapitālos"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_25", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2550", "code": "2550", "name": "Derivative financial instruments", "translations": {"lv": "Atvasinātie finanšu instrumenti"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_25", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2610", "code": "2610", "name": "Cash", "translations": {"lv": "Skaidras naudas kase"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_26", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "a2613", "code": "2613", "name": "ECR (retail) cash register", "translations": {"lv": "EKA (mazumtirdzniecības) kase"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_26", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "a2620", "code": "2620", "name": "Bank account", "translations": {"lv": "Bankas konts"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_26", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "a26291", "code": "26291", "name": "Bank Suspense Account", "translations": {"lv": "Bankas pagaidu konts"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_26", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a26292", "code": "26292", "name": "Outstanding Receipts", "translations": {"lv": "Nonoslēgtie ieņēmumi"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_26", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a26293", "code": "26293", "name": "Outstanding Payments", "translations": {"lv": "Nonoslēgtie izdevumi"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_26", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2640", "code": "2640", "name": "Credit notes, checks and special forms of payment accounts", "translations": {"lv": "Akreditīvi, čeki un īpašu formu konti"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_26", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "a2650", "code": "2650", "name": "Other bank accounts", "translations": {"lv": "Citi konti bankās"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_26", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "a2670", "code": "2670", "name": "Other funds", "translations": {"lv": "Pārējie naudas līdzekļi"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_26", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "a2671", "code": "2671", "name": "POS or payment system settlements", "translations": {"lv": "POS vai maksājumu sistēmu norēķini"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_26", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "a2696", "code": "2696", "name": "Clearing of payments", "translations": {"lv": "Maksājumu ieskaite"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_26", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a2698", "code": "2698", "name": "Currency exchange account", "translations": {"lv": "Valūtas konvertācijas konts"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_26", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "a3110", "code": "3110", "name": "Share capital or participation capital", "translations": {"lv": "Pamatkapitāls vai līdzdalības kapitāls"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_31", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "a3111", "code": "3111", "name": "Unregistered share capital", "translations": {"lv": "Nereģistrēts pamatkapitāls"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_31", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "a3120", "code": "3120", "name": "Share issue premium", "translations": {"lv": "Akciju emisijas uzcenojums"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_31", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "a3130", "code": "3130", "name": "Revaluation reserve for long-term investments", "translations": {"lv": "Ilgtermiņa ieguldījumu pārvērtēšanas rezerve"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_31", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "a3140", "code": "3140", "name": "Revaluation reserve for financial instruments", "translations": {"lv": "Finanšu instrumentu pārvērtēšanas rezerve"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_31", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "a3210", "code": "3210", "name": "Funds withdrawn for private purposes", "translations": {"lv": "Privātiem nolūkiem izņemtie līdzekļi"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_32", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "a3220", "code": "3220", "name": "Private investment", "translations": {"lv": "Privātie ieguldījumi"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_32", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "a3310", "code": "3310", "name": "Statutory reserves", "translations": {"lv": "Likumā noteiktās rezerves"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_33", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "a3320", "code": "3320", "name": "Reserves for own shares or parts", "translations": {"lv": "Rezerve pašu akcijām un daļām"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_33", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "a3330", "code": "3330", "name": "Reserves specified in the company's articles of association", "translations": {"lv": "Sabiedrības statūtos noteiktās rezerves"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_33", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "a3340", "code": "3340", "name": "Reserves earmarked for development", "translations": {"lv": "Rezerves, kas novirzītas attīstībai"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_33", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "a3350", "code": "3350", "name": "Foreign currency conversion reserve", "translations": {"lv": "Ārvalstu valūtu pārrēķināšanas rezerve"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_33", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "a3360", "code": "3360", "name": "Other reserves", "translations": {"lv": "Pārējās rezerves"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_33", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "a3410", "code": "3410", "name": "Retained earnings of the reporting year", "translations": {"lv": "Pārskata gada nesadalīta peļņa"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_34", "reconcile": false, "source": {"account_type": "equity_unaffected"}},
+    {"source_id": "a3420", "code": "3420", "name": "Retained earnings of previous years", "translations": {"lv": "Iepriekšējo gadu nesadalītā peļņa"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_34", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "a4110", "code": "4110", "name": "Savings for pensions and similar liabilities", "translations": {"lv": "Uzkrājumi pensijām pielīdzinātām saistībām"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_41", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "a4210", "code": "4210", "name": "Provisions for estimated taxes", "translations": {"lv": "Uzkrājumi paredzamiem nodokļiem"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_42", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "a4310", "code": "4310", "name": "Other savings", "translations": {"lv": "Citi uzkrājumi"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_43", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "a4319", "code": "4319", "name": "Provisions for doubtful debtors", "translations": {"lv": "Uzkrājumi šaubīgiem debitoriem"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_43", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "a5110", "code": "5110", "name": "Loans for bonds", "translations": {"lv": "Aizņēmumi par obligācijām"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_51", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "a5120", "code": "5120", "name": "Loans convertible into shares", "translations": {"lv": "Akcijās pārvēršamie aizņēmumi"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_51", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "a5130", "code": "5130", "name": "Loans with profit participation", "translations": {"lv": "Aizņēmumi ar līdzdalību peļņā"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_51", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "a5140", "code": "5140", "name": "Other loans", "translations": {"lv": "Citi aizņēmumi"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_51", "reconcile": true, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "a5141", "code": "5141", "name": "Loans from shareholders", "translations": {"lv": "Aizņēmumi no dalībniekiem"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_51", "reconcile": true, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "a5150", "code": "5150", "name": "Short-term loans from credit institutions", "translations": {"lv": "Īstermiņa aizņēmumi no kredītiestādēm"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_51", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5160", "code": "5160", "name": "Long-term loans from credit institutions", "translations": {"lv": "Ilgtermiņa aizņēmumi no kredītiestādēm"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_51", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "a5170", "code": "5170", "name": "Loans without term", "translations": {"lv": "Aizņēmumi bez norādītā termiņa"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_51", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "a5210", "code": "5210", "name": "Advances received from customers", "translations": {"lv": "Norēķini par no pircējiem saņemtiem avansiem"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_52", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5299", "code": "5299", "name": "VAT calculated and deducted", "translations": {"lv": "Aprēķināts un atskaitīts PVN"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_52", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5310", "code": "5310", "name": "Accounts payable – trade", "translations": {"lv": "Tekošie kreditoru parādi no saimnieciskās darbības (tirdzniecības)"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_53", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "a5319", "code": "5319", "name": "Accrued liabilities to creditors", "translations": {"lv": "Uzkrātas kreditoru saistības"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_53", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5410", "code": "5410", "name": "Settlement of self-issued promissory notes", "translations": {"lv": "Norēķini par pašu izdotajiem vekseļiem"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_54", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5510", "code": "5510", "name": "Settlement of debts owed to subsidiaries", "translations": {"lv": "Norēķini par parādiem meitas uzņēmumiem"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_55", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "a5520", "code": "5520", "name": "Settlement of debts owed to related companies", "translations": {"lv": "Norēķini par parādiem saistītajiem uzņēmumiem"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_55", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5530", "code": "5530", "name": "Settlement of debts with companies under participation agreements", "translations": {"lv": "Norēķini par parādiem ar uzņēmumiem, saskaņā ar līgumiem par līdzdalību"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_55", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5540", "code": "5540", "name": "Settlement of debts with other companies", "translations": {"lv": "Norēķini par parādiem ar citiem uzņēmumiem"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_55", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5550", "code": "5550", "name": "Settlement of debts with staff", "translations": {"lv": "Norēķini par parādiem ar personālu"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_55", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5610", "code": "5610", "name": "Wage settlements", "translations": {"lv": "Norēķini par darba algu"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_56", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5611", "code": "5611", "name": "Settlement of wage advances", "translations": {"lv": "Norēķini par darba algas avansiem"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_56", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5612", "code": "5612", "name": "Holiday allowance paid", "translations": {"lv": "Izmaksāta atvaļinājuma nauda"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_56", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5613", "code": "5613", "name": "Expenses and benefits included in salary", "translations": {"lv": "Pie darbas algas pieskaitāmie izdevumi un gūtie labumi"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_56", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5619", "code": "5619", "name": "Allowances payable", "translations": {"lv": "Izmaksājamie pabalsti"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_56", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5620", "code": "5620", "name": "Settlement of deductions from wages", "translations": {"lv": "Norēķini par ieturējumiem no darba algas"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_56", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5621", "code": "5621", "name": "Deductions imposed by bailiffs - first-order deductions", "translations": {"lv": "Tiesas izpildītāju uzliktie ieturējumi - pirmās kārtās ieturējumi"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_56", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5630", "code": "5630", "name": "Other settlements with employees", "translations": {"lv": "Citi norēķini ar darbiniekiem"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_56", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5650", "code": "5650", "name": "Settlement of payables to staff", "translations": {"lv": "Norēķini par parādiem personālam"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_56", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5710", "code": "5710", "name": "Settlement of corporate income taxes", "translations": {"lv": "Norēķini par uzņēmuma ienākuma nodokļi (UIN)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_57", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5711", "code": "5711", "name": "Settlement of foreign corporate income taxes", "translations": {"lv": "Norēķini par ārvalstu uzņēmuma ienākuma nodokļi"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_57", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5721", "code": "5721", "name": "Settlement of value added taxes (VAT)", "translations": {"lv": "Norēķini par pievienotās vērtības nodokļi (PVN)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_57", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5722", "code": "5722", "name": "Settlement of personal income tax", "translations": {"lv": "Norēķini par Iedzīvotāju ienākuma nodokļi (IIN)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_57", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5723", "code": "5723", "name": "Settlement of social security contributions (SSI)", "translations": {"lv": "Norēķini par sociālās apdrošināšanas maksājumiem (VSAOI)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_57", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5724", "code": "5724", "name": "Settlements for business risk state fees", "translations": {"lv": "Norēķini par Valsts darba dēvēja riska nodevu (VDRN)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_57", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5725", "code": "5725", "name": "Real estate tax settlement", "translations": {"lv": "Norēķini par nekustamā īpašuma nodokli (NIN)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_57", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5726", "code": "5726", "name": "VAT settlement for OSS goods and services", "translations": {"lv": "Norēķini par PVN OSS precēm un pakalpojumiem"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_57", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5727", "code": "5727", "name": "Natural resource tax (NRT) settlement", "translations": {"lv": "Norēķini par dabas resursa nodokli (DRN)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_57", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5728", "code": "5728", "name": "Settlement of company car tax", "translations": {"lv": "Norēķini par uzņēmumu vieglo transportlīdzekļu nodokli (UVTN)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_57", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5729", "code": "5729", "name": "Settlement of import duties", "translations": {"lv": "Norēķini par Ievedmuitas nodokļi"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_57", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5810", "code": "5810", "name": "Settlement for the dividends of the reporting year", "translations": {"lv": "Norēķini par pārskata gada dividendēm"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_58", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5820", "code": "5820", "name": "Settlements for unpaid dividends of previous years", "translations": {"lv": "Norēķini par iepriekšējo gadu neizmaksātajām dividendēm"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_58", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5910", "code": "5910", "name": "Deferred income", "translations": {"lv": "Nākamo periodu ieņēmumi"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_59", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5920", "code": "5920", "name": "Accrued liabilities", "translations": {"lv": "Uzkrātās saistības"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_59", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a5930", "code": "5930", "name": "Derivative financial instruments", "translations": {"lv": "Atvasinātie finanšu instrumenti"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_59", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "a6110", "code": "6110", "name": "Sales from operating activities subject, VAT 21%", "translations": {"lv": "Ar PVN 21% pamatlikmi apliekamie ieņēmumi no pamatdarbības"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_61", "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "a6120", "code": "6120", "name": "Sales from operating activities subject, VAT reduced rate 12%", "translations": {"lv": "Ar PVN 12% samazināto likmi apliekamie pārdošanas ieņēmumi no pamatdarbības"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_61", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "a6130", "code": "6130", "name": "Sales from operating activities subject, VAT reduced rate 5%", "translations": {"lv": "Ar PVN 5% samazināto likmi apliekamie pārdošanas ieņēmumi no pamatdarbības"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_61", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "a6140", "code": "6140", "name": "Sales from operating activities,VAT 0%", "translations": {"lv": "Ar PVN 0 % likmi apliekamie pārdošanas ieņēmumi no pamatdarbības"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_61", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "a6210", "code": "6210", "name": "Non-taxable sales revenues", "translations": {"lv": "Ar nodokļiem neapliekamie pārdošanas ieņēmumi"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_62", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "a6220", "code": "6220", "name": "Sales revenue subject to special taxes", "translations": {"lv": "Ar īpašiem nodokļiem apliekamie pārdošanas ieņēmumi"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_62", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "a6310", "code": "6310", "name": "Commission and brokerage income", "translations": {"lv": "Komisijas un starpniecības ieņēmumi"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_63", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "a6320", "code": "6320", "name": "Revenues from waste processing and sale", "translations": {"lv": "Ieņēmumi no atkritumu pārstrādes un realizācijas"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_63", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "a6330", "code": "6330", "name": "Revenues from the sale of containers", "translations": {"lv": "Ieņēmumi no taras realizācijas"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_63", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "a6340", "code": "6340", "name": "Non-taxable income", "translations": {"lv": "Ar nodokļiem neapliekamie ieņēmumi"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_63", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "a6410", "code": "6410", "name": "Discounts granted", "translations": {"lv": "Piešķirtās skonto atlaides"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_64", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "a6420", "code": "6420", "name": "Bonuses granted", "translations": {"lv": "Piešķirtie bonusi"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_64", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "a6430", "code": "6430", "name": "Granted rebates and other trade discounts", "translations": {"lv": "Piešķirtie rabati un citas tirdzniecības atlaides"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_64", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "a6510", "code": "6510", "name": "Income from the increase in the price of securities", "translations": {"lv": "Ieņēmumi no vērtspapīru kursa paaugstināšanās"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_65", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6520", "code": "6520", "name": "Income from the sale of fixed assets", "translations": {"lv": "Ieņēmumi no pamatlīdzekļu pārdošanas"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_65", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6530", "code": "6530", "name": "Income from the rental of plots of land", "translations": {"lv": "Ieņēmumi no zemes gabalu iznomāšanas"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_65", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6540", "code": "6540", "name": "Revenues from the sale of current assets", "translations": {"lv": "Ieņēmumi no apgrozāmo līdzekļu pārdošanas"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_65", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6550", "code": "6550", "name": "Income from leasing of fixed assets", "translations": {"lv": "Ieņēmumi no pamatlīdzekļu iznomāšanas"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_65", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6560", "code": "6560", "name": "Decrease in reserves and provisions transferred to revenue", "translations": {"lv": "Ieņēmumos pārskaitītais  rezervju un uzkrājumu samazinājums"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_65", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6570", "code": "6570", "name": "Tax reduction of previous years", "translations": {"lv": "Iepriekšējo gadu nodokļa samazinājums"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_65", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6580", "code": "6580", "name": "Additional investments and other income", "translations": {"lv": "Papildus ieguldījumi un citi ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_65", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6590", "code": "6590", "name": "Works performed for the company's own capital investments", "translations": {"lv": "Pašu ilgtermiņa ieguldījumiem izpildītie darbi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_65", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6610", "code": "6610", "name": "Changes in inventories and value of finished goods", "translations": {"lv": "Gatavas produkcijas krājumu un vērtības izmaiņas"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_66", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6620", "code": "6620", "name": "Changes in inventories and value of work-in-progress", "translations": {"lv": "Nepabeigto ražojumu vērtības izmaiņas"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_66", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6630", "code": "6630", "name": "Changes in backorder balances and value", "translations": {"lv": "Nepabeigto pasūtījumu atlikumu un vērtības izmaiņas"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_66", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6640", "code": "6640", "name": "Changes in the herd value of productive and working animals", "translations": {"lv": "Produktīvo un darba dzīvnieku ganāmpulka vērtības izmaiņas"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_66", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6710", "code": "6710", "name": "Revenues of other periods relating to the reporting period", "translations": {"lv": "Citu periodu ieņēmumi, kas attiecas uz pārskata periodu"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_67", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6910", "code": "6910", "name": "Income from apartment management", "translations": {"lv": "Dzīvokļu saimniecības ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_69", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6920", "code": "6920", "name": "Utility income", "translations": {"lv": "Komunālas saimniecības ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_69", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6930", "code": "6930", "name": "Revenue from domestic services", "translations": {"lv": "Sadzīves pakalpojumu ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_69", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6940", "code": "6940", "name": "Catering revenue", "translations": {"lv": "Sabiedriskās ēdināšanas ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_69", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6950", "code": "6950", "name": "Income of educational institutions", "translations": {"lv": "Izglītības iestāžu ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_69", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6960", "code": "6960", "name": "Medical service revenue", "translations": {"lv": "Medicīniskās apkalpošanas ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_69", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6970", "code": "6970", "name": "Revenues of sports institutions and from culture events", "translations": {"lv": "Kultūras un sporta iestāžu un pasākumu ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_69", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a6980", "code": "6980", "name": "Other revenues of social infrastructure institutions and events", "translations": {"lv": "Pārējie sociālās infrastruktūras iestāžu un pasākumu ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_69", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a7110", "code": "7110", "name": "Cost of raw materials and delivery expenses", "translations": {"lv": "Izejvielu un materiālu iepirkšanas un piegādes izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_71", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7120", "code": "7120", "name": "Cost of goods sold and delivery expenses", "translations": {"lv": "Preču iepirkšanas un piegādes izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_71", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7130", "code": "7130", "name": "Discounts received", "translations": {"lv": "Saņemtās atlaides"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_71", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7140", "code": "7140", "name": "Cost of packaging", "translations": {"lv": "Taras izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_71", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7150", "code": "7150", "name": "Customs and import duties", "translations": {"lv": "Muitas un ievednodevas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_71", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7160", "code": "7160", "name": "Other external expenses", "translations": {"lv": "Pārējie ārējie izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_71", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7170", "code": "7170", "name": "Cost of external work and services", "translations": {"lv": "Samaksa par darbiem un pakalpojumiem no ārienes"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_71", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7180", "code": "7180", "name": "Other material expenses (tax on the use of natural resources, stumpage money, etc.)", "translations": {"lv": "Pārējie materiālie izdevumi (nodoklis par dabas resursu izmantošanu, celmu nauda u.c.)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_71", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7190", "code": "7190", "name": "Changes in inventory and value of purchased materials and goods", "translations": {"lv": "Pirkto materiālu un preču krājumu un vērtības izmaiņas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_71", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7210", "code": "7210", "name": "Employee salaries", "translations": {"lv": "Strādnieku algas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7220", "code": "7220", "name": "Salaries of management and administrative staff", "translations": {"lv": "Pārvaldes personāla un administratīvā personāla algas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7230", "code": "7230", "name": "Salaries of employees of social infrastructure institutions and events", "translations": {"lv": "Sociālās infrastruktūras iestāžu un pasākumu darbinieku algas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7240", "code": "7240", "name": "Other personnel costs", "translations": {"lv": "Pārējās personāla izmaksas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7310", "code": "7310", "name": "Social tax", "translations": {"lv": "Sociālais nodoklis"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7320", "code": "7320", "name": "Other social costs", "translations": {"lv": "Pārējās sociālās izmaksas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7330", "code": "7330", "name": "Social costs of social infrastructure facilities and activities", "translations": {"lv": "Sociālās infrastruktūras iestāžu un pasākumu sociālās izmaksas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7340", "code": "7340", "name": "Business risk state fees", "translations": {"lv": "Risku nodeva"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7410", "code": "7410", "name": "Write-off of value of intangible assets", "translations": {"lv": "Nemateriālo ieguldījumu vērtības norakstīšana"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7420", "code": "7420", "name": "Depreciation of fixed assets", "translations": {"lv": "Pamatlīdzekļu nolietojums"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7430", "code": "7430", "name": "Regulatory stock losses", "translations": {"lv": "Krājumu normatīvie zudumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7440", "code": "7440", "name": "Accumulated depreciation on the value of current asset", "translations": {"lv": "Apgrozāmo līdzekļu vērtības norakstīšana"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7450", "code": "7450", "name": "Over-normal stock losses", "translations": {"lv": "Krājumu virsnormatīvie zudumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7460", "code": "7460", "name": "Stock-outs", "translations": {"lv": "Krājumu iztrūkumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7470", "code": "7470", "name": "Asset impairment charge", "translations": {"lv": "Izmaksas no aktīvu vērtības samazinājuma"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7510", "code": "7510", "name": "Nature conservation expenses", "translations": {"lv": "Dabas aizsardzības izmaksas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_75", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7520", "code": "7520", "name": "Undepreciated value (residual value) of fixed assets excluded", "translations": {"lv": "Izslēgto pamatlīdzekļu nenoamortizētā vērtība (atlikusī vērtība)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_75", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7530", "code": "7530", "name": "Fees for plots of land used in production", "translations": {"lv": "Nodevas par ražošanā izmantotiem zemes gabaliem"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_75", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7540", "code": "7540", "name": "Insurance payments (except employee insurance)", "translations": {"lv": "Apdrošināšanas maksājumi (izņemot darbinieku apdrošināšanu)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_75", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7550", "code": "7550", "name": "Other operating expenses", "translations": {"lv": "Pārējās saimnieciskās darbības izmaksas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_75", "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense"}},
+    {"source_id": "a7560", "code": "7560", "name": "Recruitment and training expenses", "translations": {"lv": "Strādnieku vervēšanas un apmācības izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_75", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7570", "code": "7570", "name": "Business trip expenses", "translations": {"lv": "Komandējumu izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_75", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7580", "code": "7580", "name": "Non-deductible VAT (to be included in costs)", "translations": {"lv": "Neatskaitāmais PVN (iekļaujams izmaksās)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_75", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7590", "code": "7590", "name": "Real estate tax for the year under review", "translations": {"lv": "Nekustamā īpašuma nodoklis par pārskata gadu"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_75", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7610", "code": "7610", "name": "Costs of packaging material and containers, tare", "translations": {"lv": "Iesaiņojamais materiāls, tara"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_76", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7620", "code": "7620", "name": "Cost of goods transportation", "translations": {"lv": "Preču transporta izmaksas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_76", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7630", "code": "7630", "name": "Insurance of goods transportation", "translations": {"lv": "Preču transporta apdrošināšana"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_76", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7640", "code": "7640", "name": "Commissions paid", "translations": {"lv": "Samaksātās komisijas naudas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_76", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7650", "code": "7650", "name": "Other sales expenses", "translations": {"lv": "Citas pārdošanas izmaksas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_76", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7710", "code": "7710", "name": "Communication expenses", "translations": {"lv": "Sakaru izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_77", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7720", "code": "7720", "name": "Office expenses", "translations": {"lv": "Kantora (biroja) izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_77", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7730", "code": "7730", "name": "Cost of legal services", "translations": {"lv": "Juristu pakalpojumu izmaksas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_77", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7740", "code": "7740", "name": "Annual report and audit expenses", "translations": {"lv": "Gada pārskata un revīzijas izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_77", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7750", "code": "7750", "name": "Expenses of cash circulation", "translations": {"lv": "Naudas apgrozījuma blakus izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_77", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7760", "code": "7760", "name": "Transportation expenses for administration purposes", "translations": {"lv": "Transporta izdevumi administrācijas vajadzībām"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_77", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7770", "code": "7770", "name": "Other management and administration expenses", "translations": {"lv": "Citi vadīšanas un administrācijas izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_77", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7780", "code": "7780", "name": "Representation expenses", "translations": {"lv": "Reprezentācijas izmaksas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_77", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7810", "code": "7810", "name": "Expenses of previous periods to be included in the reporting period", "translations": {"lv": "Pārskata periodā iekļaujamie iepriekšējo periodu izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_78", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7910", "code": "7910", "name": "Apartment management expenses", "translations": {"lv": "Dzīvokļu saimniecības izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_79", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7920", "code": "7920", "name": "Utility expenses", "translations": {"lv": "Komunālās saimniecības izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_79", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7930", "code": "7930", "name": "Household service expenses", "translations": {"lv": "Sadzīves pakalpojumu izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_79", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7940", "code": "7940", "name": "Catering expenses", "translations": {"lv": "Sabiedriskās ēdināšanas izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_79", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7950", "code": "7950", "name": "Expenses of educational institutions", "translations": {"lv": "Izglītības iestāžu izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_79", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7960", "code": "7960", "name": "Medical service expenses", "translations": {"lv": "Medicīniskās apkalpošanas izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_79", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7970", "code": "7970", "name": "Expenses of cultural and sports institutions and events", "translations": {"lv": "Kultūras un sporta iestāžu un pasākumu izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_79", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a7980", "code": "7980", "name": "Other social infrastructure maintenance expenses", "translations": {"lv": "Pārējie sociālās infrastruktūras uzturēšanas izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_79", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8110", "code": "8110", "name": "Income from participations, securities and loans", "translations": {"lv": "Ieņēmumi no līdzdalības, vērtspapīriem un aizdevumiem"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a8120", "code": "8120", "name": "Other income from interest and similar income", "translations": {"lv": "Pārējie ieņēmumi no procentiem un tiem pielīdzināmi ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a8130", "code": "8130", "name": "Bill discount income", "translations": {"lv": "Vekseļu diskonta ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a8140", "code": "8140", "name": "Donations and other similar income", "translations": {"lv": "Ziedojumi un citi tiem pielīdzināmi ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a8150", "code": "8150", "name": "Income from exchange rate appreciation", "translations": {"lv": "Ienākumi no valūtu kursa paaugstināšanās"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a8160", "code": "8160", "name": "Income from fines and contractual penalties received", "translations": {"lv": "Saņemtas soda naudas un līgumsodi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a8170", "code": "8170", "name": "Profit from the sale or purchase of foreign currency", "translations": {"lv": "Peļņa no ārzemju valūtas pārdošanas vai pirkšanas"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a8190", "code": "8190", "name": "Other income", "translations": {"lv": "Citi ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a8199", "code": "8199", "name": "Money difference income", "translations": {"lv": "Naudas starpības ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a8210", "code": "8210", "name": "Write-off of the value of short-term financial investments", "translations": {"lv": "Īstermiņa finanšu ieguldījumu vērtības norakstīšana"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_82", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8220", "code": "8220", "name": "Interest paid and related expenses", "translations": {"lv": "Samaksātie procenti un tiem pielīdzināmie izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_82", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8230", "code": "8230", "name": "Costs of promissory notes discounts", "translations": {"lv": "Vekseļu diskonta izmaksas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_82", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8240", "code": "8240", "name": "Payment of interest on long-term loans", "translations": {"lv": "Ilgtermiņa aizdevumu procentu samaksa"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_82", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8250", "code": "8250", "name": "Losses from currency depreciation", "translations": {"lv": "Zaudējumi no valūtu kursu pazemināšanas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_82", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8260", "code": "8260", "name": "Paid fines and liquidated damages", "translations": {"lv": "Samaksātās soda naudas un līgumsodi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_82", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8270", "code": "8270", "name": "Losses from buying or selling foreign currency", "translations": {"lv": "Zaudējumi no ārzemju valūtu pirkšanas vai pārdošanas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_82", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8290", "code": "8290", "name": "Other expenses", "translations": {"lv": "Citi izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_82", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8299", "code": "8299", "name": "Money difference losses", "translations": {"lv": "Naudas starpības zaudējumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_82", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8310", "code": "8310", "name": "Extraordinary income", "translations": {"lv": "Ārkārtas ieņēmumi"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_lv_group_83", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "a8410", "code": "8410", "name": "Extraordinary expenses", "translations": {"lv": "Ārkārtas izdevumi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_84", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8810", "code": "8810", "name": "Corporate income tax", "translations": {"lv": "Nodoklis no peļņas(Uzņēmumu ienākuma nodoklis)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_88", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8820", "code": "8820", "name": "Tax on the exploitation of natural resources", "translations": {"lv": "Nodoklis no dabas resursu izmantošanas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_88", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "a8840", "code": "8840", "name": "Other taxes not included in the operating expenses", "translations": {"lv": "Citi saimnieciskās darbības izmaksās neiekļauti nodokļi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_lv_group_88", "reconcile": false, "source": {"account_type": "expense"}}
+  ]
+}
