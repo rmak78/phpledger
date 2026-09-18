@@ -6,6 +6,8 @@ Country-neutral, open-source bookkeeping for small businesses, built with PHP an
 
 Source revision: `{{SOURCE_COMMIT}}`
 
+The interface uses compiled local CSS and server-side paged lists. No Node installation is required. See RELEASE-NOTES.md for interface changes and the outstanding visual/accessibility, field-error and nested-return limitations.
+
 ## Start here
 
 1. Read [INSTALL.md](INSTALL.md) for hosting requirements, private configuration and the three setup commands.
@@ -16,7 +18,7 @@ Source revision: `{{SOURCE_COMMIT}}`
 
 The package needs PHP **8.2+ (8.3 recommended)**, MySQL **8.4**, HTTPS and command-line access. Production Composer dependencies are included. Keep the supplied directory layout: only `www/phpledger/public` is the web document root. Do not serve the package root.
 
-## Included in the 0.5.0-preview candidate
+## Included in 0.6.0-preview
 
 - Eleven synthetic businesses with closed 2024–2025 histories, open 2026 practice, three editable drafts per company and private reporting walkthroughs. The public website carries three illustrated guide articles. Only the selected sample is provisioned for a visitor. See [demo packs](resources/demo-packs/README.md).
 

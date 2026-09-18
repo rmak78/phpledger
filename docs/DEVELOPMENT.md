@@ -1,15 +1,13 @@
 # Local revival development
 
-## 0.6 interface branch: local development only
+## 0.6 interface development
 
-The approved interface is being implemented on `codex/ui-redesign-0.6`. It is not
-the published release. The source stylesheet is `resources/ui/app.css`; run
+The approved interface is maintained on `codex/ui-redesign-0.6` for the preview release. The source stylesheet is `resources/ui/app.css`; run
 `npm ci` then `npm run build:css` and commit the generated
 `www/phpledger/public/assets/app.css`. Tailwind 4.3.3 is development-only.
 Packages include compiled CSS, the existing local Inter font and the Tailwind
 licence, and exclude npm dependencies, Tailwind sources and prototype files.
-`resources/ui/legacy.css` temporarily retains styling for screens awaiting their
-individual rebuild. Its presence is not acceptance of those screens.
+The legacy stylesheet has been removed. Remaining acceptance gaps are tracked in the redesign audit closure checklist.
 
 Shared presentation functions live in `templates/partials/ui/components.php`,
 with the workspace shell in `templates/partials/ui/shell.php`. All rendering

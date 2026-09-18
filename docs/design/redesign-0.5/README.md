@@ -1,5 +1,9 @@
 # PHP Ledger 0.5 interface redesign: prototype
 
+## 0.6.0-preview status
+
+The approved design is implemented in the 0.6.0-preview candidate. Runtime evidence is in evidence-0.6.0/index.json; AUDIT-CLOSURE.md records remaining visual/accessibility, validation and return-chain gaps. Implementation is not full prototype-state acceptance.
+
 **Status: owner-approved prototype, implementation in progress, 17 Sep 2026.**
 The owner approved all fourteen improvements, including the service changes,
 DataTables removal and publication after verification. This folder replaces the
