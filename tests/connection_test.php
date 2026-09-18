@@ -87,6 +87,32 @@ test('personal credentials are hashed scoped revocable and independent of browse
     assert_throws(fn () => pl_connection_authenticate(connection_request('/mcp', 'POST', $f['token'])), UnexpectedValueException::class);
 });
 
+test('report-only personal and OAuth grants enforce the same API and MCP operation boundary', function (): void {
+    $f = connection_fixture(); $scope = ['company_id'=>$f['company_id'], 'book_id'=>$f['book_id']];
+    $limited = pl_create_personal_token($f['actor_id'], 'Summary reports', [$scope], 'reports');
+    $oauth = connection_oauth_code($f);
+    DB::update('pl_connections', ['access_mode'=>'reports'], 'id=%s', $oauth['connection']['id']);
+    $tokens = connection_exchange($oauth);
+    foreach ([$limited['token'], $tokens['access_token']] as $token) {
+        $response = pl_integration_response('/api/v1/trial-balance', connection_request('/api/v1/trial-balance', 'GET', $token, $scope + ['as_of'=>'2026-09-17']));
+        assert_same(200, $response->getStatusCode());
+        foreach (['accounts','transactions','general-journals'] as $operation) {
+            assert_throws(fn()=>pl_integration_response('/api/v1/'.$operation, connection_request('/api/v1/'.$operation,'GET',$token,$scope)), DomainException::class, 'summary reports only');
+        }
+        $meta = ['io.modelcontextprotocol/protocolVersion'=>'2026-07-28','io.modelcontextprotocol/clientCapabilities'=>new stdClass(),'io.modelcontextprotocol/clientInfo'=>['name'=>'Synthetic scope verifier','version'=>'1']];
+        $message = ['jsonrpc'=>'2.0','id'=>1,'method'=>'tools/call','params'=>['_meta'=>$meta,'name'=>'ledger_accounts','arguments'=>$scope]];
+        $request = connection_request('/mcp','POST',$token,[],json_encode($message))->withHeader('MCP-Protocol-Version','2026-07-28')->withHeader('Mcp-Method','tools/call')->withHeader('Mcp-Name','ledger_accounts');
+        $body = json_decode((string)pl_integration_response('/mcp',$request)->getBody(),true);
+        assert_true(isset($body['error']) || ($body['result']['isError'] ?? false), 'MCP accepted a record read for report-only access.');
+    }
+    $capabilities = pl_read_operation($limited['connection']['id'],'capabilities',$scope)['data']['read_operations'];
+    assert_true(!in_array('accounts',$capabilities,true) && in_array('profit_loss',$capabilities,true));
+    // A cached full-access connection object cannot bypass the current database grant.
+    DB::update('pl_connections',['access_mode'=>'reports'],'id=%s',$f['connection']['id']);
+    assert_throws(fn()=>pl_read_operation($f['connection']['id'],'accounts',$scope),DomainException::class);
+    assert_throws(fn()=>pl_create_personal_token($f['actor_id'],'Invalid',[$scope],'write'),DomainException::class);
+});
+
 test('every advertised business operation returns an authorized source or report', function (): void {
     $f = connection_fixture();
     $scope = ['company_id' => $f['company_id'], 'book_id' => $f['book_id']];

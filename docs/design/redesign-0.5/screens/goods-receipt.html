@@ -1,0 +1,97 @@
+<!--meta {"id":"goods-receipt","title":"Receive goods · PO-000017","route":"/purchasing?id=17","group":"Purchases","nav":"purchase-orders","crumbs":[["Purchases","#/purchase-orders-list"],["Purchase orders","#/purchase-orders-list"],["Receive goods"]],"pattern":"document-editor","layout":"app","state":"Receiving 500 of 800 kg remaining"} -->
+<div class="py-5">
+  <div class="flex flex-col rounded-panel border border-border bg-surface">
+    <header class="doc-header" data-fold="doc header">
+      <div class="doc-heading">
+        <span class="doc-type">Goods receipt</span>
+        <h1 class="doc-number">PO-000017</h1>
+        <span class="badge badge-partially-paid"><i class="badge-dot"></i>Partially received</span>
+      </div>
+      <div class="doc-actions">
+        <a class="btn btn-ghost" href="#/purchase-orders-list">Cancel</a>
+        <button type="button" class="btn btn-primary" data-fold="primary action"><i data-icon="truck-delivery" class="icon"></i>Record goods receipt</button>
+      </div>
+    </header>
+
+    <div class="doc-body">
+      <p class="mb-4 text-xs text-ink-muted">Enter only the quantity received now. Purchase order prices are tax-exclusive; receipt value uses the net order price and the selected rate.</p>
+      <section>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
+          <div class="field">
+            <label class="field-label" for="gr-date">Receipt date</label>
+            <span class="input-affix"><input class="input" id="gr-date" type="text" value="17 Sep 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+          </div>
+          <div class="field">
+            <label class="field-label" for="gr-grni">Received-but-unbilled liability account</label>
+            <select class="select" id="gr-grni"><option selected>2050 &middot; Goods received awaiting bills</option></select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="gr-rate">Manual rate to PKR</label>
+            <input class="input input-amount" id="gr-rate" type="text" value="1">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title mb-2">Order line</h2>
+        <div class="table-wrap">
+          <table class="table gr-lines-table">
+            <thead>
+              <tr>
+                <th class="w-[15rem]">Goods</th>
+                <th class="num w-[7rem]">Ordered</th>
+                <th class="num w-[7rem]">Received</th>
+                <th class="num w-[7rem]">Remaining</th>
+                <th class="num w-[9rem]">Receive now</th>
+                <th class="w-[7.5rem]" data-proposed title="Proposed: an always-visible stock/GRNI effect per line, computed from qty × unit price × rate. Today's form shows only a plain quantity input with no preview.">Effect</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cotton yarn 20s <span class="row-sub">210.0000 PKR/kg</span></td>
+                <td class="num">2,000.0000</td>
+                <td class="num">1,200.0000</td>
+                <td class="num">800.0000</td>
+                <td class="num"><input class="input input-amount alloc-input" type="text" value="500.0000" max="800"></td>
+                <td class="num" data-proposed>105,000.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-2 text-xs text-ink-muted">Cannot exceed 800.0000 kg remaining on this order line &mdash; prevents receiving more than was ordered.</p>
+        <div class="mt-3 flex justify-end">
+          <div class="doc-totals" data-fold="document total">
+            <div class="doc-totals-row"><span>Remaining after this receipt</span><span class="amount">300.0000 kg</span></div>
+            <div class="doc-totals-row is-grand"><span>Receipt value</span><span class="amount">PKR 105,000.00</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <details class="w-full rounded-panel border border-border" open>
+          <summary class="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-semibold text-ink"><span class="flex items-center gap-2"><i data-icon="chevron-right" class="icon"></i>Stock &amp; GRNI effect</span><span class="balanced-label"><i data-icon="check" class="icon"></i>Balanced</span></summary>
+          <div class="border-t border-border px-4 py-3">
+            <div class="table-wrap">
+              <table class="table journal-table">
+                <thead><tr><th>Account</th><th class="num">Debit (PKR)</th><th class="num">Credit (PKR)</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="row-title">1310</span><span class="row-sub">Raw materials on hand</span></td><td class="num">105,000.00</td><td class="num">0.00</td></tr>
+                  <tr><td><span class="row-title">2050</span><span class="row-sub">Goods received awaiting bills</span></td><td class="num">0.00</td><td class="num">105,000.00</td></tr>
+                </tbody>
+                <tfoot><tr class="table-totals"><td>Total</td><td class="num">105,000.00</td><td class="num">105,000.00</td></tr></tfoot>
+              </table>
+            </div>
+            <p class="mt-2 text-xs text-ink-muted">Recording this receipt increases stock on hand and the received-but-unbilled liability. Matching a supplier bill later relieves that liability.</p>
+          </div>
+        </details>
+      </section>
+
+      <section>
+        <label class="inline-flex items-start gap-2 text-sm text-ink">
+          <input type="checkbox" class="mt-0.5" required>
+          I checked the physical quantity, receipt date, price and rate.
+        </label>
+      </section>
+    </div>
+  </div>
+</div>

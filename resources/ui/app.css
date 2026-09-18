@@ -1,0 +1,1458 @@
+/* PHP Ledger 0.5 — design foundation (Tailwind v4 + component layer)
+   =====================================================================
+   Read COMPONENTS.md before building a screen. Conventions:
+   - Layout (grids, flex, spacing, gaps) → Tailwind utility classes, in the markup.
+   - Repeated UI pieces (buttons, badges, tables, panels...) → the named classes below.
+   - Colors/radii/shadows/type sizes are CSS variables on :root, re-exposed as Tailwind
+     utilities through @theme (bg-canvas, text-ink, border-border, rounded-panel...).
+     A future dark theme only redefines the :root variables — @theme itself never changes.
+   - Logical properties only (ms-/me-/ps-/pe-/start-/end-/text-start/text-end/border-s/border-e).
+     Never ml-/mr-/pl-/pr-/left-/right-/text-left/text-right. */
+
+@layer theme, base, components, utilities;
+@import "tailwindcss" source(none);
+
+@source "../../www/phpledger/templates";
+@source "../../www/phpledger/includes/functions";
+@import "./ext/setup.css";
+@import "./ext/daily.css";
+@import "./ext/sales.css";
+@import "./ext/reports.css";
+@import "./ext/records.css";
+
+@font-face {
+  font-family: "Inter Variable";
+  src: url("./fonts/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------------------------
+   1. Tokens — raw values live here. Dark mode (later) redefines only this
+      block, under :root[data-theme="dark"] / prefers-color-scheme.
+   --------------------------------------------------------------------- */
+:root {
+  /* Canvas & surfaces */
+  --canvas: #FAF9F7;
+  --surface: #FFFFFF;
+  --surface-subtle: #F4F3F0;
+  --border: #E8E6E1;
+  --border-strong: #8C8880;
+
+  /* Text */
+  --ink: #1F1E1C;
+  --ink-muted: #6B6862;
+  --ink-faint: #706D66;
+
+  /* Brand */
+  --brand-navy: #0C2052;
+  --brand-navy-hover: #16296B;
+  --brand-blue: #4656E8;
+  --brand-blue-hover: #3646D6;
+  --brand-selected: #EEF0FF;
+  --brand-charcoal: #424242;
+
+  /* Semantic (separate from brand) */
+  --success: #1F7A4D;
+  --success-bg: #E8F4EE;
+  --warning: #9A6200;
+  --warning-bg: #FBF1DE;
+  --danger: #B42318;
+  --danger-bg: #FDECEA;
+  --danger-hover: #96190F;
+  --info: #2F5BD3;
+  --info-bg: #EEF2FD;
+  --neutral: #6B6862;
+  --neutral-bg: #F4F3F0;
+
+  /* Shape */
+  --radius-control: 6px;
+  --radius-panel: 10px;
+
+  /* Elevation — hairlines everywhere; this is the ONE soft shadow, for popovers/dialogs only */
+  --shadow-popover: 0 12px 28px -6px rgb(12 32 82 / 0.16), 0 2px 8px -2px rgb(12 32 82 / 0.08);
+
+  /* Density */
+  --control-h: 34px;
+  --control-h-lg: 36px;
+  --table-row-h: 40px;
+  --sidebar-item-h: 32px;
+  --topbar-h: 48px;
+
+  /* Shell geometry (read by proto.js / responsive rules below) */
+  --sidebar-w: 240px;
+  --sidebar-w-rail: 56px;
+}
+
+/* Dark-theme hook (not implemented in the 0.5 prototype — light only).
+   When dark ships, redefine the variables above under these two selectors;
+   nothing in @theme or the component layer below needs to change. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* intentionally empty — prototype is light-only */
+  }
+}
+:root[data-theme="dark"] {
+  /* intentionally empty — prototype is light-only */
+}
+
+/* ---------------------------------------------------------------------
+   2. Theme mapping — turns the tokens above into Tailwind utilities:
+      bg-canvas / text-ink / text-ink-muted / border-border / border-border-strong /
+      bg-brand / text-brand / bg-accent / text-accent / border-accent / bg-selected /
+      bg-success-bg / text-success / … / rounded-control / rounded-panel / shadow-popover
+   --------------------------------------------------------------------- */
+@theme {
+  --font-sans: "Inter Variable", Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+
+  --color-brand: var(--brand-navy);
+  --color-brand-hover: var(--brand-navy-hover);
+  --color-accent: var(--brand-blue);
+  --color-accent-hover: var(--brand-blue-hover);
+  --color-selected: var(--brand-selected);
+  --color-charcoal: var(--brand-charcoal);
+
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+  --color-neutral: var(--neutral);
+  --color-neutral-bg: var(--neutral-bg);
+
+  --radius-control: var(--radius-control);
+  --radius-panel: var(--radius-panel);
+
+  --shadow-popover: var(--shadow-popover);
+
+  /* Semantic type scale, additive to Tailwind's default text-xs…text-2xl */
+  --text-eyebrow: 11px;
+  --text-eyebrow--line-height: 16px;
+  --text-small: 12.5px;
+  --text-small--line-height: 18px;
+  --text-body: 14px;
+  --text-body--line-height: 20px;
+  --text-title: 20px;
+  --text-title--line-height: 27px;
+  --text-section: 15px;
+  --text-section--line-height: 21px;
+  --text-money: 22px;
+  --text-money--line-height: 27px;
+  --text-money-lg: 27px;
+  --text-money-lg--line-height: 32px;
+}
+
+/* ---------------------------------------------------------------------
+   3. Base — wrapped in @layer base so @layer components (below) can always
+      override it. Cascade layers ignore selector specificity: an unlayered
+      rule beats a layered one no matter what, so these MUST stay layered
+      (an earlier draft left `a { color: inherit }` unlayered and it silently
+      beat every anchor-based .btn/.link/.nav-item color in @layer components).
+   --------------------------------------------------------------------- */
+@layer base {
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-variant-numeric: lining-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a {
+  color: inherit;
+}
+:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+::selection {
+  background: var(--brand-selected);
+  color: var(--brand-navy);
+}
+.tabular-nums,
+.amount,
+.num {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.skip-link {
+  position: fixed;
+  inset-block-start: -100%;
+  inset-inline-start: .5rem;
+  z-index: 100;
+  background: var(--brand-navy);
+  color: #fff;
+  padding: .5rem .875rem;
+  border-radius: var(--radius-control);
+  font-size: .8125rem;
+  font-weight: 600;
+}
+.skip-link:focus {
+  inset-block-start: .5rem;
+}
+[data-icon] {
+  display: inline-block;
+}
+.icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.9;
+  flex: none;
+  vertical-align: -3px;
+}
+.icon-missing {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  color: var(--danger);
+  border: 1px dashed var(--danger);
+  padding-inline: 2px;
+}
+} /* /@layer base */
+
+/* =======================================================================
+   4. Component layer
+   ======================================================================= */
+@layer components {
+
+  body { margin: 0; background: var(--canvas); color: var(--ink); font-family: var(--font-sans); font-size: 14px; line-height: 20px; }
+  [hidden] { display: none !important; }
+  .btn-primary > img.icon { filter: brightness(0) invert(1); }
+  .auth-panel .page-header { position: static; background: transparent; padding-block: 0 .75rem; }
+  .grid > .panel { margin-block: 0; }
+  .view-home .empty-state { padding-block: 1.25rem; }
+  .view-connections .panel, .view-modules .panel { margin-block: 0; padding: 1rem; }
+  .view-connections .panel p, .view-modules .panel p { margin-block: .375rem; font-size: .8125rem; line-height: 1.4; }
+  .view-connections .panel form, .view-modules .panel form { display: flex; flex-direction: column; align-items: start; gap: .5rem; }
+  .view-connections .panel .field, .view-modules .panel .field { inline-size: 100%; margin: 0; }
+  .view-connections .panel .field-hint { margin: 0; }
+  .confirmation { inline-size: fit-content; }
+  .confirmation > [data-confirmation-body] { padding: .75rem; border: 1px solid var(--border); margin-block-start: .5rem; background: var(--surface); }
+  .confirmation .dialog-body { padding: 1.25rem; white-space: normal; }
+  .transaction-detail.split-view-detail { padding: 1rem; min-inline-size: 0; max-block-size: calc(100dvh - 14rem); }
+  .transaction-detail.split-view-detail > * { flex-shrink: 0; }
+  .transaction-detail .detail-heading { flex-wrap: wrap; gap: .5rem; margin-block-end: .75rem; }
+  .transaction-detail .detail-heading h2 { font-size: 1.0625rem; }
+  .transaction-detail .detail-heading h3 { font-size: .875rem; }
+  .transaction-detail .detail-amount { font-size: .75rem; }
+  .transaction-detail .detail-amount strong { font-size: 1.375rem; }
+  .transaction-detail .record-details { grid-template-columns: minmax(0, 1fr); gap: .625rem; margin-block: .75rem; }
+  .transaction-detail .record-details > div { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: .5rem; }
+  .transaction-detail .record-details dt, .transaction-detail .record-details dd { font-size: .8125rem; }
+  .transaction-detail .panel-actions { margin-block-start: 1rem; padding-inline: 0; }
+  .split-view.transaction-record-view { grid-template-columns: minmax(0, 1fr); }
+  .transaction-record-view > .split-view-list { display: none; }
+  .transaction-record-view .split-view-back { display: inline-flex; }
+  @media (max-width: 899px) { .split-view-list:not(.has-detail) + .split-view-detail { display: none; } }
+  .core-journal-form { padding: 1rem; }
+  .core-journal-meta { grid-template-columns: repeat(3, minmax(0, 1fr)); max-inline-size: none; margin-block-end: 1rem; gap: .75rem; }
+  .core-journal-meta .journal-description { min-block-size: var(--control-h); block-size: var(--control-h); padding-block: .375rem; }
+  .core-lines-wrap { max-block-size: 18rem; overflow: auto; margin-block-start: .75rem; }
+  .core-line-editor.doc-lines-table { min-inline-size: 0; }
+  .core-line-editor .input, .core-line-editor .select { min-block-size: var(--control-h); padding-block: 0; }
+  .core-draft-totals { margin-block-start: .75rem; padding: .75rem; gap: .5rem 1rem; }
+  @media (max-width: 767px) { .core-journal-meta { grid-template-columns: minmax(0, 1fr); } }
+  .input, .select { min-height: var(--control-h); height: var(--control-h); }
+  .auth-panel h1 { margin: 0; }
+  .auth-panel p { line-height: inherit; }
+  #main.shell-main { width: auto; max-width: none; margin: 0; padding: 0; }
+  .auth-shell #main { width: 100%; max-width: none; margin: 0; padding: 0; }
+  .auth-card.auth-card-wide { max-width: 1080px; }
+  .ui-wizard-grid { display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 1.75rem; }
+  .auth-panel .page-heading { margin-block-end: 1.25rem; padding: 0; }
+  .auth-panel .page-heading h1 { font-size: 20px; }
+  .ui-wizard-grid .setup-step-panel { max-width: none; margin: 0; padding: 0; }
+  .ui-wizard-grid .setup-preview-panel, .ui-wizard-grid .setup-chart-panel { margin-block-end: 1rem; }
+  .ui-wizard-grid .setup-summary { gap: .5rem 1rem; }
+  .ui-role-mappings { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .sample-guide .sample-journeys { display: flex; flex-direction: column; gap: .625rem; }
+  .sample-guide .sample-exercise { margin-block: 0; padding: 1rem; }
+  .sample-exercise > summary { cursor: pointer; }
+  .ui-wizard-grid .setup-summary dd { font-size: .8125rem; }
+  .ui-wizard-grid .panel-actions { padding-inline: 0; }
+  .ui-wizard-grid .setup-option { padding: .625rem; margin-block: .25rem; }
+  .ui-wizard-grid p { font-size: .8125rem; }
+  @media (max-width: 767px) {
+    .ui-wizard-grid { grid-template-columns: minmax(0, 1fr); }
+    .ui-role-mappings { grid-template-columns: minmax(0, 1fr); }
+    .ui-wizard-grid > aside { overflow-x: auto; }
+    .ui-wizard-grid .stepper { flex-direction: row; gap: .75rem; }
+  }
+  .shell-main-inner > .page-wrap { padding-inline: 0; }
+  .shell-main-inner .page-heading { margin-block: 1.25rem; }
+  .shell-main-inner .page-heading h1 { font-size: 20px; }
+  .shell-sidebar a { text-decoration: none; }
+  .shell-sidebar .icon { width: 18px; height: 18px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  }
+  .shell-topbar details { position: relative; }
+  html:not([data-ui-ready]) .shell-sidebar { position: static; }
+  @media (max-width: 899px) {
+    html:not([data-ui-ready]) [data-shell] { flex-direction: column; }
+    html:not([data-ui-ready]) .shell-sidebar { height: auto; width: 100%; }
+    html:not([data-ui-ready]) .shell-nav { max-height: 15rem; }
+    .topbar-search .search-trigger > span { display: none; }
+    .shell-main-inner { padding-inline: .75rem; }
+  }
+
+  /* Typography helpers ------------------------------------------------ */
+  .eyebrow {
+    font-size: var(--text-eyebrow);
+    line-height: var(--text-eyebrow--line-height);
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .page-title {
+    font-size: var(--text-title);
+    line-height: var(--text-title--line-height);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -.01em;
+  }
+  .section-title {
+    font-size: var(--text-section);
+    line-height: var(--text-section--line-height);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .amount-lg {
+    font-size: var(--text-money);
+    line-height: var(--text-money--line-height);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums lining-nums;
+    color: var(--ink);
+  }
+  .amount-xl {
+    font-size: var(--text-money-lg);
+    line-height: var(--text-money-lg--line-height);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums lining-nums;
+    color: var(--ink);
+  }
+  /* Standalone UI links (nav-style "Review invoices", "Back to list"...) are never underlined at
+     rest — underline is a hover/focus affordance only. Inline prose links (a sentence inside an
+     .alert/.strip, or body copy) are a different case and stay always-underlined via their own
+     rule (see .strip a / .alert a below) since scanability inside a paragraph needs the underline
+     even at rest. */
+  .link {
+    color: var(--brand-blue);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .link:hover, .link:focus-visible {
+    color: var(--brand-navy);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: color-mix(in oklab, var(--brand-navy) 40%, transparent);
+  }
+
+  /* Buttons ------------------------------------------------------------ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .375rem;
+    height: var(--control-h);
+    padding-inline: .875rem;
+    border-radius: var(--radius-control);
+    font-size: .8125rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: background-color .12s ease, border-color .12s ease, color .12s ease;
+  }
+  .btn .icon { width: 16px; height: 16px; }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+  .btn-primary { background: var(--brand-navy); color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: var(--brand-navy-hover); }
+  .btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--border-strong); }
+  .btn-secondary:hover:not(:disabled) { background: var(--surface-subtle); }
+  .btn-ghost { background: transparent; color: var(--ink); }
+  .btn-ghost:hover:not(:disabled) { background: var(--surface-subtle); }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:hover:not(:disabled) { background: var(--danger-hover); }
+  .btn-sm { height: 1.75rem; padding-inline: .625rem; font-size: .75rem; gap: .3rem; }
+  .btn-sm .icon { width: 14px; height: 14px; }
+  .btn-icon { width: var(--control-h); padding-inline: 0; }
+  .btn-icon.btn-sm { width: 1.75rem; }
+  @media (min-width: 900px) and (max-width: 1180px) {
+    .btn { height: var(--control-h-lg); }
+  }
+
+  /* Inputs / fields ------------------------------------------------------ */
+  .input, .select, .textarea {
+    display: block;
+    width: 100%;
+    height: var(--control-h);
+    padding-inline: .625rem;
+    padding-block: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-control);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: .8125rem;
+    font-family: var(--font-sans);
+  }
+  .select {
+    padding-inline-end: 1.75rem;
+    /* Native affordance respects direction and the existing self-only CSP. */
+    appearance: auto;
+  }
+  .textarea { height: auto; min-height: calc(var(--control-h) * 2); padding-block: .5rem; resize: vertical; }
+  .input::placeholder, .textarea::placeholder { color: var(--ink-faint); }
+  .input:focus, .select:focus, .textarea:focus {
+    outline: 2px solid var(--brand-blue);
+    outline-offset: 1px;
+    border-color: var(--brand-blue);
+  }
+  .input:disabled, .select:disabled, .textarea:disabled {
+    background: var(--surface-subtle);
+    color: var(--ink-faint);
+    cursor: not-allowed;
+  }
+  .input-amount { text-align: end; font-variant-numeric: tabular-nums lining-nums; }
+  /* Date field: a native type="date" renders in the OS/browser locale (mm/dd/yyyy on this
+     machine), which fights the app's own date format everywhere else. Use type="text" with a
+     pre-formatted value ("15 Sep 2026") plus this icon affordance instead — same visual contract,
+     consistent format regardless of viewer locale. Swap for a real date-picker at build time. */
+  .input-affix { position: relative; display: block; }
+  .input-affix .input { padding-inline-end: 2.25rem; }
+  .input-affix-icon {
+    position: absolute;
+    inset-inline-end: .625rem;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-faint);
+    pointer-events: none;
+  }
+  input[type="checkbox"], input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--brand-blue);
+  }
+
+  .field { display: flex; flex-direction: column; }
+  .field-label {
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-block-end: .3rem;
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+  }
+  .field-label .optional { font-weight: 400; color: var(--ink-faint); }
+  .field-hint { font-size: .75rem; color: var(--ink-muted); margin-block-start: .3rem; }
+  .field-error .input, .field-error .select, .field-error .textarea { border-color: var(--danger); }
+  .field-error-text { font-size: .75rem; color: var(--danger); margin-block-start: .3rem; font-weight: 500; }
+
+  .search-field {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    height: var(--control-h);
+    padding-inline: .625rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-control);
+    background: var(--surface);
+  }
+  .search-field .icon { color: var(--ink-faint); }
+  .search-field input {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    flex: 1;
+    min-width: 0;
+    font-size: .8125rem;
+    color: var(--ink);
+    height: 100%;
+  }
+
+  /* Badges / status pills ------------------------------------------------ */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .3125rem;
+    height: 1.375rem;
+    padding-inline: .5rem;
+    border-radius: 999px;
+    font-size: .6875rem;
+    font-weight: 600;
+    letter-spacing: .01em;
+    white-space: nowrap;
+    line-height: 1;
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 999px; background: currentColor; flex: none; }
+  .badge-draft, .badge-unpaid, .badge-reversed { background: var(--surface-subtle); color: var(--ink-muted); }
+  .badge-posted, .badge-paid { background: var(--success-bg); color: var(--success); }
+  .badge-partially-paid, .badge-due-soon { background: var(--warning-bg); color: var(--warning); }
+  .badge-overdue { background: var(--danger-bg); color: var(--danger); }
+  .badge-sample { background: var(--brand-selected); color: var(--brand-navy); }
+  .badge-info { background: var(--info-bg); color: var(--info); }
+  .badge-on-brand { background: rgb(255 255 255 / .16); color: #fff; }
+
+  /* Tabs ------------------------------------------------------------------ */
+  .tabs-seg {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    background: var(--surface-subtle);
+    border-radius: calc(var(--radius-control) + 2px);
+    border: 1px solid var(--border);
+  }
+  .tabs-seg-item {
+    display: inline-flex;
+    align-items: center;
+    height: 1.75rem;
+    padding-inline: .75rem;
+    border-radius: var(--radius-control);
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--ink-muted);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .tabs-seg-item[aria-selected="true"], .tabs-seg-item[aria-current="page"] {
+    background: var(--surface);
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgb(31 30 28 / 0.08);
+    border: 1px solid var(--border);
+  }
+  .tabs-seg-item:hover:not([aria-selected="true"]):not([aria-current="page"]) { color: var(--ink); }
+
+  .tabs-underline {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    border-block-end: 1px solid var(--border);
+  }
+  .tabs-underline-item {
+    position: relative;
+    padding-block: .5rem;
+    font-size: .8125rem;
+    font-weight: 600;
+    color: var(--ink-muted);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    margin-block-end: -1px;
+  }
+  .tabs-underline-item[aria-selected="true"] {
+    color: var(--brand-navy);
+  }
+  .tabs-underline-item[aria-selected="true"]::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: -1px;
+    height: 2px;
+    background: var(--brand-blue);
+    border-radius: 2px 2px 0 0;
+  }
+  .tab-panel[hidden] { display: none; }
+
+  /* Table ------------------------------------------------------------------ */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+    background: var(--surface);
+  }
+  .table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: .8125rem; }
+  .table thead th {
+    position: sticky;
+    inset-block-start: 0;
+    background: var(--surface-subtle);
+    text-align: start;
+    font-size: .6875rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding-block: .5rem;
+    padding-inline: .75rem;
+    border-block-end: 1px solid var(--border);
+    white-space: nowrap;
+    z-index: 1;
+  }
+  .table th.num, .table td.num { text-align: end; }
+  .table td, .table tbody th, .table tfoot th {
+    padding-block: .5rem;
+    padding-inline: .75rem;
+    border-block-end: 1px solid var(--border);
+    vertical-align: middle;
+    color: var(--ink);
+    height: var(--table-row-h);
+  }
+  .table tbody th, .table tfoot th { text-align: start; font-weight: 500; }
+  .table a { color: var(--brand-blue); }
+  .table tbody tr:last-child td, .table tbody tr:last-child th { border-block-end: none; }
+  .table tbody tr:hover { background: var(--surface-subtle); }
+  .table tbody tr[data-href] { cursor: pointer; }
+  .table tbody tr[aria-selected="true"] { background: var(--selected, var(--brand-selected)); }
+  .table tbody tr[aria-selected="true"] td { position: relative; }
+  .table tbody tr[aria-selected="true"] td:first-child::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 2px;
+    background: var(--brand-blue);
+  }
+  .table .row-title { font-weight: 600; color: var(--ink); display: block; }
+  .table .row-sub { display: block; color: var(--ink-muted); font-size: .75rem; margin-block-start: 1px; }
+  .table tfoot td, .table tfoot th, .table-totals td, .table-totals th {
+    font-weight: 700;
+    background: var(--surface-subtle);
+    border-block-start: 1px solid var(--border-strong);
+    border-block-end: none;
+  }
+  .table-dense td, .table-dense th { padding-block: .375rem; }
+
+  /* Definition grid -------------------------------------------------------- */
+  .dgrid { display: flex; flex-direction: column; }
+  .dgrid-row {
+    display: flex;
+    gap: 1rem;
+    padding-block: .55rem;
+    border-block-end: 1px solid var(--border);
+  }
+  .dgrid-row:last-child { border-block-end: none; }
+  .dgrid-row dt { flex: 0 0 38%; color: var(--ink-muted); font-size: .75rem; }
+  .dgrid-row dd { flex: 1; min-width: 0; color: var(--ink); font-size: .8125rem; font-weight: 500; }
+
+  /* Card / panel ------------------------------------------------------------ */
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+    padding: 1.25rem;
+  }
+  .panel-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-block-end: 1rem; }
+
+  /* Alerts & context strips -------------------------------------------------- */
+  .strip {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    min-height: 32px;
+    padding-inline: 1.25rem;
+    padding-block: .375rem;
+    font-size: .75rem;
+    font-weight: 500;
+    border-block-end: 1px solid var(--border);
+  }
+  .strip .icon { width: 15px; height: 15px; flex: none; }
+  .strip p { flex: 1; margin: 0; min-width: 0; }
+  .strip a { color: inherit; text-decoration: underline; font-weight: 600; text-underline-offset: 2px; }
+  .strip-info { background: var(--info-bg); color: var(--info); }
+  .strip-warning { background: var(--warning-bg); color: var(--warning); }
+  .strip-sample { background: var(--brand-selected); color: var(--brand-navy); }
+  .strip-dismiss {
+    flex: none;
+    display: inline-flex;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    padding: .25rem;
+    border-radius: 4px;
+    opacity: .75;
+  }
+  .strip-dismiss:hover { background: rgb(0 0 0 / .08); opacity: 1; }
+  [data-dismissible][hidden] { display: none; }
+
+  .alert {
+    display: flex;
+    gap: .625rem;
+    align-items: flex-start;
+    padding: .75rem 1rem;
+    border-radius: var(--radius-control);
+    border: 1px solid;
+    font-size: .8125rem;
+  }
+  .alert .icon { margin-block-start: .0625rem; }
+  .alert-title { font-weight: 600; display: block; margin-block-end: .125rem; }
+  .alert-danger { background: var(--danger-bg); border-color: color-mix(in oklab, var(--danger) 28%, transparent); color: var(--danger); }
+  .alert-info { background: var(--info-bg); border-color: color-mix(in oklab, var(--info) 28%, transparent); color: var(--info); }
+  .alert-warning { background: var(--warning-bg); border-color: color-mix(in oklab, var(--warning) 28%, transparent); color: var(--warning); }
+  .alert p { color: var(--ink); font-weight: 400; }
+  .alert a { text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Menus / popovers (native <details>, closed on outside click/Escape by proto.js) */
+  .menu { position: relative; }
+  .menu > summary { list-style: none; cursor: pointer; }
+  .menu > summary::-webkit-details-marker { display: none; }
+  .menu-panel {
+    position: absolute;
+    inset-block-start: calc(100% + 6px);
+    inset-inline-start: 0;
+    min-width: 230px;
+    max-width: 320px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-popover);
+    padding: .375rem;
+    z-index: 40;
+  }
+  .menu-panel-end { inset-inline-start: auto; inset-inline-end: 0; }
+  .menu-panel-wide { min-width: 280px; }
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    width: 100%;
+    padding: .5rem .625rem;
+    border-radius: calc(var(--radius-control) - 1px);
+    font-size: .8125rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    text-align: start;
+    cursor: pointer;
+  }
+  .menu-item .icon { color: var(--ink-faint); flex: none; }
+  .menu-item:hover { background: var(--surface-subtle); }
+  .menu-item-static { padding: 0 .625rem; font-size: .75rem; color: var(--ink-muted); }
+  .menu-label {
+    padding: .375rem .625rem 0;
+    font-size: .6875rem;
+    font-weight: 600;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .menu-divider { height: 1px; background: var(--border); margin: .375rem -.375rem; }
+
+  /* Dialog / sheet ------------------------------------------------------------ */
+  dialog.dialog {
+    margin: auto;
+    max-block-size: 90dvh;
+    border: 0;
+    border-radius: var(--radius-panel);
+    padding: 0;
+    background: var(--surface);
+    box-shadow: var(--shadow-popover);
+    width: min(560px, 92vw);
+    color: var(--ink);
+  }
+  dialog.dialog::backdrop { background: rgb(31 30 28 / .38); }
+  .dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .875rem 1.125rem;
+    border-block-end: 1px solid var(--border);
+  }
+  .dialog-body { padding: .625rem; max-height: min(60vh, 420px); overflow-y: auto; }
+  .dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: .5rem;
+    padding: .875rem 1.125rem;
+    border-block-start: 1px solid var(--border);
+  }
+  .command-palette { width: min(560px, 92vw); }
+  .command-palette-search { border: 0; border-radius: 0; height: 2.75rem; }
+  .command-palette-search input { font-size: .875rem; }
+  .command-palette-list { display: flex; flex-direction: column; gap: 1px; max-height: min(52vh, 400px); overflow-y: auto; }
+  .command-palette-item { justify-content: space-between; }
+  .command-palette-item.is-active, .command-palette-item:hover { background: var(--surface-subtle); }
+  .command-palette-route { color: var(--ink-faint); font-size: .75rem; flex: none; }
+  .command-palette-empty { padding: 1.75rem 1rem; text-align: center; color: var(--ink-muted); font-size: .8125rem; }
+  .command-palette-footer { display: flex; align-items: center; gap: .375rem; justify-content: flex-start; }
+  .command-palette-hint { font-size: .75rem; color: var(--ink-faint); margin-inline-end: .75rem; }
+  .sheet {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-end: 0;
+    width: min(420px, 100vw);
+    background: var(--surface);
+    border-inline-start: 1px solid var(--border);
+    box-shadow: var(--shadow-popover);
+    z-index: 50;
+    overflow-y: auto;
+  }
+  dialog.dialog.sheet {
+    inset-inline-start: auto;
+    margin: 0;
+    inline-size: min(480px, 100vw);
+    block-size: 100dvh;
+    max-block-size: 100dvh;
+    max-inline-size: 100vw;
+    border-radius: 0;
+  }
+  dialog.sheet .dialog-body { max-block-size: none; padding: 1.25rem; overflow: visible; }
+
+  /* kbd -------------------------------------------------------------------- */
+  .kbd-group { display: inline-flex; align-items: center; gap: .1875rem; }
+  .kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    padding-inline: .3rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--ink-muted);
+    font-size: .6875rem;
+    font-family: ui-monospace, "SF Mono", monospace;
+    line-height: 1;
+  }
+
+  /* Empty state --------------------------------------------------------------- */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: .625rem;
+    padding-block: 3rem 2.5rem;
+    padding-inline: 1.5rem;
+  }
+  .empty-state-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: var(--surface-subtle);
+    color: var(--ink-muted);
+    margin-block-end: .25rem;
+  }
+  .empty-state h2 { font-size: .9375rem; font-weight: 600; color: var(--ink); }
+  .empty-state p { font-size: .8125rem; color: var(--ink-muted); max-width: 36ch; }
+
+  /* Stepper --------------------------------------------------------------- */
+  .stepper { display: flex; flex-direction: column; gap: 0; }
+  .stepper-step {
+    display: flex;
+    align-items: flex-start;
+    gap: .625rem;
+    padding-block: .625rem;
+    position: relative;
+  }
+  .stepper-step:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 11px;
+    inset-block-start: 30px;
+    inset-block-end: -4px;
+    width: 1px;
+    background: var(--border);
+  }
+  .stepper-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    color: var(--ink-muted);
+    font-size: .6875rem;
+    font-weight: 700;
+    flex: none;
+  }
+  .stepper-step.is-current .stepper-index { background: var(--brand-navy); border-color: var(--brand-navy); color: #fff; }
+  .stepper-step.is-done .stepper-index { background: var(--success-bg); border-color: var(--success); color: var(--success); }
+  .stepper-step.is-done .stepper-index .icon { width: 12px; height: 12px; }
+  .stepper-label { font-size: .8125rem; font-weight: 600; color: var(--ink-muted); padding-block-start: .1875rem; }
+  .stepper-step.is-current .stepper-label { color: var(--ink); }
+  .stepper-hint { display: block; font-size: .75rem; font-weight: 400; color: var(--ink-faint); margin-block-start: .125rem; }
+  .wizard-footer {
+    position: sticky;
+    inset-block-end: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: .875rem;
+    padding-inline: 1.5rem;
+    background: var(--surface);
+    border-block-start: 1px solid var(--border);
+  }
+
+  /* Page header ------------------------------------------------------------- */
+  .page-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 10;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--canvas);
+    padding-block: 1.25rem 1rem;
+  }
+  .page-header-count { color: var(--ink-faint); font-weight: 400; }
+  .page-header-actions { display: flex; align-items: center; gap: .5rem; flex: none; }
+
+  /* Filter bar --------------------------------------------------------------- */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+    padding-block: .75rem;
+  }
+  .filter-bar .search-field { flex: 1 1 140px; min-width: 110px; }
+  .date-range-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: .375rem;
+    height: var(--control-h);
+    padding-inline: .75rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-control);
+    background: var(--surface);
+    font-size: .8125rem;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  /* Pagination ----------------------------------------------------------------- */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: .75rem;
+    font-size: .75rem;
+    color: var(--ink-muted);
+  }
+  .pagination-controls { display: flex; align-items: center; gap: .25rem; }
+  .pagination-page { font-size: .75rem; color: var(--ink-muted); padding-inline: .25rem; }
+
+  /* Avatar ----------------------------------------------------------------------- */
+  .avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--brand-navy);
+    color: #fff;
+    font-size: .6875rem;
+    font-weight: 700;
+    flex: none;
+    letter-spacing: .01em;
+  }
+  .avatar-sm { width: 22px; height: 22px; font-size: .625rem; }
+
+  /* Split view layout -------------------------------------------------------------- */
+  .split-view {
+    display: grid;
+    grid-template-columns: 1fr 440px;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  /* min-width:0 is required on every grid item that must be allowed to shrink below its
+     content's automatic minimum size. Without it, a wide table (e.g. a 6-column list with
+     several un-wrappable numeric headers) pushes this column past its 1fr share at narrower
+     widths and forces the fixed detail column off the viewport, even though .table-wrap itself
+     has overflow-x:auto — the overflow never gets a chance to kick in because the grid track
+     itself refuses to shrink first. */
+  .split-view-list { min-width: 0; }
+  .split-view-detail {
+    position: sticky;
+    inset-block-start: calc(var(--topbar-h) + .01px);
+    max-height: calc(100dvh - var(--topbar-h) - 2rem);
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+    display: flex;
+    flex-direction: column;
+  }
+  /* display:none is deliberately the ONLY thing set here at rest — carries its own flex/gap/margin
+     too (rather than leaving those to utility classes on the element) so nothing on the element
+     can out-rank this at the utilities layer and make the link permanently visible on desktop. */
+  .split-view-back {
+    display: none;
+    align-items: center;
+    gap: .25rem;
+    margin: 1rem 1.25rem 0;
+    align-self: flex-start;
+    font-size: .8125rem;
+  }
+  @media (max-width: 1180px) {
+    .split-view { grid-template-columns: 1fr 380px; gap: 1.25rem; }
+  }
+  @media (max-width: 899px) {
+    .split-view { grid-template-columns: 1fr; }
+    .split-view-list.has-detail { display: none; }
+    .split-view-detail { position: static; max-height: none; }
+    .split-view-back { display: inline-flex; }
+  }
+
+  /* Document editor layout ------------------------------------------------------------ */
+  .doc-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    background: var(--surface);
+    border-block-end: 1px solid var(--border);
+    padding-block: .75rem;
+    padding-inline: 1.25rem;
+    border-start-start-radius: var(--radius-panel);
+    border-start-end-radius: var(--radius-panel);
+  }
+  .doc-heading { display: flex; align-items: center; gap: .625rem; flex-wrap: wrap; }
+  .doc-type { font-size: .75rem; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .03em; }
+  .doc-number { font-size: 1.0625rem; font-weight: 600; letter-spacing: normal; color: var(--ink); }
+  .doc-savestate { font-size: .75rem; color: var(--ink-faint); }
+  .doc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; flex: none; max-inline-size: 100%; }
+  .doc-body { padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  /* table-layout:fixed makes each <th>'s width class authoritative — with the default `auto`
+     layout, a <select>'s widest *option* (not just its selected value) can inflate that
+     column's min-content and starve the widths this component sets, even though nothing
+     overflows. Fixed layout is the standard fix for dense editable/spreadsheet-style tables.
+     Every column gets an explicit width (none left to "auto"); the exact rem values only encode
+     each column's PROPORTION relative to the others (description ~26%, product/account ~16%
+     each, qty/unit price/tax code/amount fixed-ish, delete narrow) — see COMPONENTS.md's table
+     for the tuned split. Deliberately NO min-width/fixed width on the table itself: `.table`
+     already sets width:100%, so the fixed layout always scales every column by the same factor
+     to fill exactly the available space, at any viewport. At >=1366px doc-body width that factor
+     is ~1 (columns render at ~their tuned widths); at 1024px content width (~920px with the rail
+     sidebar) it's ~0.86, so every column — including Amount and the delete button, the two that
+     must never be lost — shrinks a little instead of the table forcing a hidden horizontal
+     scrollbar the way a hardcoded min-width used to. `.doc-lines-table td`'s overflow:hidden
+     below keeps a long value truncating cleanly at any scale rather than breaking the row. */
+  .doc-lines-table { table-layout: fixed; }
+  /* Tighter cell + control padding than a plain .table: at 1024px content width the narrowest
+     columns (Qty, delete) are ~40-60px, and .table td's normal .75rem inline padding plus the
+     input's own .625rem would eat most of that before a single digit renders. Halving both here
+     keeps every column's actual text content (not just the column itself) inside the visible
+     width without changing the column proportions above. */
+  .doc-lines-table td { overflow: hidden; padding-inline: .375rem; }
+  .doc-lines-table input, .doc-lines-table select { height: 1.875rem; font-size: .75rem; padding-inline: .375rem; }
+  .doc-lines-table .select { padding-inline-end: 1.25rem; }
+  /* The fluid percentage scaling above is tuned for the two supported desktop widths (1024px and
+     1366px content width) and is deliberately unbounded above them. Below 1024px it runs out of
+     room for legible digits before it runs out of columns — a 4-decimal unit price or a six-figure
+     amount starts truncating mid-number instead of the table ever scrolling. Below that point we
+     give the table back a sane minimum width and let `.table-wrap`'s own overflow-x:auto (already
+     set, further up this file) take over: every value stays fully legible and you scroll the
+     table sideways to reach Amount/Delete, rather than reading a silently clipped number. This
+     only engages under 1024px, so the fix above for 1024×768 itself is untouched. */
+  @media (max-width: 1023px) {
+    .doc-lines-table { min-width: 46rem; }
+  }
+  .doc-totals {
+    border-block-start: 1px solid var(--border-strong);
+    padding-block-start: .875rem;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    align-items: flex-end;
+    flex: none;
+    min-width: 220px;
+    max-width: 300px;
+  }
+  .doc-totals-row { display: flex; justify-content: space-between; gap: 1.5rem; width: 100%; font-size: .8125rem; color: var(--ink-muted); }
+  .doc-totals-row .amount { color: var(--ink); font-weight: 600; }
+  .doc-totals-row.is-grand {
+    padding-block-start: .5rem;
+    margin-block-start: .125rem;
+    border-block-start: 1px solid var(--border);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .doc-totals-row.is-grand .amount { font-size: var(--text-money); color: var(--brand-navy); }
+  /* Sticky footer action bar — reused at the bottom of a split-view detail panel and a
+     document editor. Add justify-end/justify-between with Tailwind as the case needs. */
+  .panel-actions {
+    position: sticky;
+    inset-block-end: 0;
+    background: var(--surface);
+    border-block-start: 1px solid var(--border);
+    padding-block: .75rem;
+    padding-inline: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .625rem;
+    flex-wrap: wrap;
+    border-end-start-radius: var(--radius-panel);
+    border-end-end-radius: var(--radius-panel);
+    margin-block-start: auto;
+  }
+  /* Always its own full-width row above the action buttons (flex-basis:100% forces every item
+     after it in this flex-wrap row onto a fresh line). Previously this was flex:1 with
+     min-width:0, which let it share a row with the buttons when there was room — but that meant
+     a longer note next to two buttons had nowhere to shrink to once space got tight (min-width:0
+     allows shrinking past the text's own automatic minimum), collapsing it to a sliver that
+     wrapped character-by-character instead of word-by-word. A fixed full row is simpler, never
+     depends on how long the note text happens to be, and reads as one consistent footer pattern
+     (note on its own line, actions below) across every list-detail panel. */
+  .panel-actions-note { font-size: .75rem; color: var(--ink-muted); flex: 1 1 100%; }
+
+  /* Posting preview (journal effect) ------------------------------------------------------ */
+  .posting-preview-head { display: flex; align-items: center; justify-content: space-between; margin-block-end: .625rem; }
+  .balanced-label { display: inline-flex; align-items: center; gap: .3rem; font-size: .75rem; font-weight: 600; color: var(--success); }
+  .balanced-label .icon { width: 14px; height: 14px; }
+  .journal-table th, .journal-table td { font-size: .75rem; }
+
+  /* Report statement table ------------------------------------------------------------------ */
+  .stmt-table { width: 100%; border-collapse: collapse; font-size: .8125rem; }
+  .stmt-table th {
+    text-align: start;
+    font-size: .6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    color: var(--ink-muted);
+    padding-block: .5rem;
+    border-block-end: 1px solid var(--border);
+  }
+  .stmt-table th.num, .stmt-table td.num { text-align: end; font-variant-numeric: tabular-nums lining-nums; }
+  .stmt-table tbody th { font-size: inherit; font-weight: inherit; text-transform: none; letter-spacing: normal; color: var(--ink); }
+  .stmt-row th { padding-block: .375rem; padding-inline: calc(.125rem + var(--indent, 0) * 1.25rem) .5rem; border-block-end: 1px solid var(--border); }
+  .stmt-table .stmt-subtotal th { font-weight: 600; border-block-start: 1px solid var(--border); background: var(--surface-subtle); }
+  .stmt-table .stmt-total th { font-weight: 700; border-block-start: 2px solid var(--border-strong); color: var(--brand-navy); font-size: .9375rem; }
+  .stmt-row td { padding-block: .375rem; padding-inline-end: .5rem; border-block-end: 1px solid var(--border); color: var(--ink); }
+  .stmt-row td:first-child { padding-inline-start: calc(.125rem + var(--indent, 0) * 1.25rem); }
+  .stmt-indent-1 { --indent: 1; }
+  .stmt-indent-2 { --indent: 2; }
+  .stmt-group-label { font-weight: 600; color: var(--ink); }
+  .stmt-subtotal td { font-weight: 600; border-block-start: 1px solid var(--border); background: var(--surface-subtle); }
+  .stmt-total td { font-weight: 700; border-block-start: 2px solid var(--border-strong); color: var(--brand-navy); font-size: .9375rem; }
+  .stmt-table tbody tr:last-child td { border-block-end: none; }
+
+  /* Shell: sidebar -------------------------------------------------------------------------- */
+  /* Light sidebar: navy is used as the ACTIVE-STATE text/icon color, not a fill (per brief:
+     "Brand navy: primary buttons, active nav text, headings accent"). */
+  [data-shell] {
+    display: flex;
+    min-height: 100dvh;
+    background: var(--canvas);
+    color: var(--ink);
+  }
+  .shell-sidebar {
+    flex: none;
+    width: var(--sidebar-w);
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    position: sticky;
+    inset-block-start: 0;
+    background: var(--surface);
+    color: var(--ink);
+    border-inline-end: 1px solid var(--border);
+    transition: width .15s ease;
+    /* NOT overflow:hidden — the collapse-to-rail transition doesn't need it (every child that
+       differs between expanded/rail state, e.g. .nav-item span / .company-switcher-info, is
+       swapped with display:none at the breakpoint, not animated, so nothing is ever exposed
+       mid-transition) and it would clip the company-switcher's dropdown panel, which is wider
+       than the sidebar itself. */
+  }
+  .shell-brand { flex: none; height: 56px; display: flex; align-items: center; padding-inline: 1rem; border-block-end: 1px solid var(--border); }
+  .shell-brand-link { display: inline-flex; align-items: center; }
+  /* Left edge matches the company-switcher's mark below it: shell-brand's 1rem padding here,
+     company-switcher's .5rem padding + trigger's .5rem padding beneath (see .company-switcher). */
+  .shell-logo { height: 30px; width: auto; display: block; image-rendering: -webkit-optimize-contrast; }
+  .shell-logo-compact {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--brand-navy);
+    color: #fff;
+    font-weight: 700;
+    font-size: .875rem;
+  }
+  @media (min-width: 1181px) {
+    [data-shell][data-collapsed="true"] .shell-sidebar { width: var(--sidebar-w-rail); }
+  }
+  @media (max-width: 1180px) {
+    .shell-sidebar { width: var(--sidebar-w-rail); }
+    [data-shell][data-collapsed="false"] .shell-sidebar { width: var(--sidebar-w); }
+  }
+  @media (max-width: 899px) {
+    .shell-sidebar {
+      position: fixed;
+      inset-block: 0;
+      inset-inline-start: -240px;
+      width: 240px;
+      z-index: 50;
+      transition: inset-inline-start .18s ease;
+      box-shadow: var(--shadow-popover);
+    }
+    [data-shell][data-drawer-open="true"] .shell-sidebar { inset-inline-start: 0; }
+  }
+  .shell-overlay { display: none; }
+  @media (max-width: 899px) {
+    [data-shell][data-drawer-open="true"] .shell-overlay {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgb(15 17 26 / .42);
+      z-index: 45;
+    }
+  }
+
+  /* position:relative is required here (not just on .menu-panel) — .shell-sidebar is itself a
+     positioned ancestor (position:sticky), so without this the panel's `inset-block-start: 100%`
+     resolves against the SIDEBAR's height instead of the trigger, landing near the sidebar's
+     bottom edge instead of just below the button. */
+  /* .5rem here + the trigger's own .5rem padding = 1rem (16px) total inset for the "R" mark,
+     matching .shell-brand's 1rem padding so the logo and the switcher's mark share a left edge. */
+  .company-switcher { position: relative; border-block-end: 1px solid var(--border); flex: none; padding: .5rem; }
+  .company-switcher-trigger {
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+    width: 100%;
+    padding: .5rem;
+    border-radius: var(--radius-control);
+    cursor: pointer;
+  }
+  .company-switcher-trigger:hover { background: var(--surface-subtle); }
+  .company-switcher-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--brand-navy);
+    color: #fff;
+    font-weight: 700;
+    font-size: .8125rem;
+    flex: none;
+  }
+  .company-switcher-info { display: flex; flex-direction: column; min-width: 0; flex: 1; text-align: start; }
+  .company-switcher-info strong { font-size: .8125rem; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* flex-wrap (not nowrap) lets the "Sample" badge drop to its own line instead of overflowing
+     past the info column and overlapping the caret when "Primary book · PKR" + the badge don't
+     both fit on one line in the sidebar's fixed width. */
+  .company-switcher-info span { font-size: .6875rem; color: var(--ink-muted); display: flex; flex-wrap: wrap; align-items: center; gap: .3rem; row-gap: .2rem; }
+  /* flex:none keeps its own size fixed; align-self:center (redundant with the trigger's own
+     align-items:center, kept explicit) keeps it vertically centered against the row even once the
+     info column above grows to two lines from the badge wrapping. */
+  .company-switcher-caret { color: var(--ink-faint); flex: none; align-self: center; width: 15px; height: 15px; }
+  .company-switcher-panel { color: var(--ink); inset-inline-start: .625rem; inset-block-start: calc(100% - 4px); min-width: 260px; }
+
+  .shell-nav { flex: 1; min-height: 0; overflow-y: auto; padding: .625rem; scrollbar-width: thin; }
+  .nav-group-label {
+    font-size: .6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--ink-faint);
+    padding: .875rem .625rem .3rem;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+    height: var(--sidebar-item-h);
+    padding-inline: .625rem;
+    border-radius: var(--radius-control);
+    font-size: .8125rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .nav-item .icon { flex: none; width: 17px; height: 17px; color: var(--ink-faint); }
+  .nav-item span { overflow: hidden; text-overflow: ellipsis; }
+  .nav-item:hover { background: var(--surface-subtle); color: var(--ink); }
+  .nav-item[aria-current="page"] { background: var(--brand-selected); color: var(--brand-navy); font-weight: 600; }
+  .nav-item[aria-current="page"] .icon { color: var(--brand-navy); }
+  .nav-group-collapsible { margin-block-start: .25rem; }
+  .nav-group-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    cursor: pointer;
+    padding: .5rem .625rem;
+    border-radius: var(--radius-control);
+    font-size: .6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--ink-faint);
+  }
+  .nav-group-summary:hover { background: var(--surface-subtle); }
+  .nav-group-summary::-webkit-details-marker { display: none; }
+  .nav-group-summary .icon { width: 14px; height: 14px; transition: transform .12s ease; color: var(--ink-faint); }
+  details[open] > .nav-group-summary .icon { transform: rotate(180deg); }
+  .nav-group-body { display: flex; flex-direction: column; gap: 1px; }
+
+  .shell-sidebar-footer { flex: none; padding: .625rem; border-block-start: 1px solid var(--border); }
+  .shell-version { font-size: .6875rem; color: var(--ink-faint); padding: .5rem .625rem 0; }
+
+  /* Rail (collapsed) mode: icons only, tooltips via title="". Scoped to .company-switcher-trigger
+     (not the bare .company-switcher-info/-caret classes) because the dropdown panel reuses the
+     same .company-switcher-info class for its own "switch business" rows, which must stay visible
+     even while the sidebar itself is collapsed. */
+  [data-shell][data-collapsed="true"] .company-switcher-trigger .company-switcher-info,
+  [data-shell][data-collapsed="true"] .company-switcher-trigger .company-switcher-caret,
+  [data-shell][data-collapsed="true"] .nav-group-label,
+  [data-shell][data-collapsed="true"] .nav-item span,
+  [data-shell][data-collapsed="true"] .nav-group-summary span,
+  [data-shell][data-collapsed="true"] .nav-group-summary .icon,
+  [data-shell][data-collapsed="true"] .shell-version,
+  [data-shell][data-collapsed="true"] .shell-logo {
+    display: none;
+  }
+  [data-shell][data-collapsed="true"] .shell-logo-compact { display: inline-flex; }
+  [data-shell][data-collapsed="true"] .shell-brand { justify-content: center; padding-inline: 0; }
+  [data-shell][data-collapsed="true"] .nav-item,
+  [data-shell][data-collapsed="true"] .nav-group-summary,
+  [data-shell][data-collapsed="true"] .company-switcher-trigger {
+    justify-content: center;
+    padding-inline: 0;
+  }
+  [data-shell][data-collapsed="true"] .nav-group-body { display: flex !important; }
+  @media (min-width: 900px) and (max-width: 1180px) {
+    /* Same scoping note as the manual-collapse block above — must not hide the dropdown's own
+       .company-switcher-info rows. */
+    [data-shell]:not([data-collapsed="false"]) .company-switcher-trigger .company-switcher-info,
+    [data-shell]:not([data-collapsed="false"]) .company-switcher-trigger .company-switcher-caret,
+    [data-shell]:not([data-collapsed="false"]) .nav-group-label,
+    [data-shell]:not([data-collapsed="false"]) .nav-item span,
+    [data-shell]:not([data-collapsed="false"]) .nav-group-summary span,
+    [data-shell]:not([data-collapsed="false"]) .nav-group-summary .icon,
+    [data-shell]:not([data-collapsed="false"]) .shell-version,
+    [data-shell]:not([data-collapsed="false"]) .shell-logo { display: none; }
+    [data-shell]:not([data-collapsed="false"]) .shell-logo-compact { display: inline-flex; }
+    [data-shell]:not([data-collapsed="false"]) .shell-brand { justify-content: center; padding-inline: 0; }
+    [data-shell]:not([data-collapsed="false"]) .nav-item,
+    [data-shell]:not([data-collapsed="false"]) .nav-group-summary,
+    [data-shell]:not([data-collapsed="false"]) .company-switcher-trigger { justify-content: center; padding-inline: 0; }
+    [data-shell]:not([data-collapsed="false"]) .nav-group-body { display: flex !important; }
+  }
+  @media (max-width: 899px) {
+    [data-shell] .company-switcher-info,
+    [data-shell] .company-switcher-caret,
+    [data-shell] .nav-group-label,
+    [data-shell] .nav-item span,
+    [data-shell] .nav-group-summary span,
+    [data-shell] .nav-group-summary .icon,
+    [data-shell] .shell-version,
+    [data-shell] .shell-logo { display: flex !important; }
+    [data-shell] .shell-logo-compact { display: none !important; }
+    [data-shell] .shell-brand { justify-content: flex-start; padding-inline: 1rem; }
+    [data-shell] .nav-group-summary span { display: inline !important; }
+    [data-shell] .nav-item, [data-shell] .nav-group-summary, [data-shell] .company-switcher-trigger { justify-content: flex-start; padding-inline: .625rem; }
+    [data-shell] .nav-group-body { display: none; }
+    [data-shell] details[open] > .nav-group-body { display: flex !important; }
+  }
+
+  /* Shell: topbar & body ------------------------------------------------------------------------ */
+  .shell-body { flex: 1; min-width: 0; display: flex; flex-direction: column; height: 100dvh; }
+  .shell-topbar {
+    flex: none;
+    height: var(--topbar-h);
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding-inline: 1rem;
+    background: var(--surface);
+    border-block-end: 1px solid var(--border);
+  }
+  .crumbs { display: flex; align-items: center; gap: .375rem; list-style: none; padding: 0; margin: 0; font-size: .75rem; color: var(--ink-muted); min-width: 0; overflow: hidden; }
+  .crumb { display: flex; align-items: center; gap: .375rem; white-space: nowrap; }
+  .crumb:not(:last-child)::after { content: "/"; color: var(--ink-faint); }
+  .crumb a { color: var(--ink-muted); text-decoration: none; }
+  .crumb a:hover { color: var(--brand-blue); }
+  .crumb [aria-current] { color: var(--ink); font-weight: 600; }
+  .topbar-search { flex: 1; min-width: 0; display: flex; justify-content: center; }
+  .search-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    height: 30px;
+    padding-inline: .625rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+    background: var(--surface-subtle);
+    color: var(--ink-muted);
+    font-size: .75rem;
+    width: 100%;
+    max-width: 360px;
+    cursor: pointer;
+  }
+  .search-trigger:hover { border-color: var(--border-strong); }
+  .search-trigger .icon { width: 15px; height: 15px; flex: none; }
+  .topbar-actions { display: flex; align-items: center; gap: .5rem; flex: none; }
+  .sample-guide-link { display: inline-flex; align-items: center; gap: .3rem; font-size: .75rem; font-weight: 600; color: var(--brand-blue); text-decoration: none; white-space: nowrap; }
+  .sample-guide-link:hover { color: var(--brand-navy); }
+  .sample-guide-link .icon { width: 14px; height: 14px; }
+  .user-menu-trigger { display: flex; align-items: center; gap: .3rem; cursor: pointer; padding: .25rem; border-radius: 999px; }
+  .user-menu-trigger:hover { background: var(--surface-subtle); }
+  .user-menu-trigger .icon { width: 15px; height: 15px; color: var(--ink-muted); }
+
+  .shell-strips { flex: none; }
+  .shell-main { flex: 1; min-height: 0; overflow-y: auto; }
+  .shell-main-inner { max-width: 1180px; margin-inline: auto; padding-inline: 1.5rem; padding-block-end: 2.5rem; }
+  .shell-main-inner-wide { max-width: none; margin-inline: 0; }
+
+  /* Auth layout -------------------------------------------------------------------------------- */
+  .auth-shell {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--canvas);
+    padding: 2rem 1.25rem;
+  }
+  .auth-card { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+  .auth-logo { height: 28px; width: auto; }
+  .auth-panel { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-panel); padding: 1.75rem; }
+
+  /* Sample data notice ------------------------------------------------------------------------- */
+  .sample-note { display: flex; align-items: center; gap: .375rem; font-size: .75rem; color: var(--ink-muted); }
+  .sample-note .icon { width: 14px; height: 14px; color: var(--ink-faint); }
+}

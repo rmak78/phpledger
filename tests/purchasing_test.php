@@ -1,5 +1,27 @@
 <?php
 declare(strict_types=1);
+require_once dirname(__DIR__).'/www/phpledger/includes/functions/web_functions.php';
+
+test('purchase order list pages exact totals and derives receipt progress without changing order state',function(): void {
+    $f=purchasing_fixture(); $args=[$f['actor_id'],$f['company_id'],$f['book_id']]; $first=null;
+    for ($i=0;$i<26;$i++) {
+        $row=pl_save_purchase_order(...array_merge($args,[['party_id'=>$f['party_id'],'date'=>'2026-01-05','currency'=>'USD','reference'=>'Paged order '.$i,'creation_key'=>bin2hex(random_bytes(16)),
+            'lines'=>[['product_id'=>$f['product_id'],'description'=>'Synthetic goods','quantity'=>'3','unit_price'=>(string)($i+1)]]]]));
+        $first??=$row;
+    }
+    $run=fn(array $q):array=>pl_list_query(...array_merge($args,['purchasing',$q]));
+    $firstPage=$run(['sort'=>'amount','dir'=>'asc']); $last=$run(['sort'=>'amount','dir'=>'asc','page'=>'999']);
+    assert_same(26,$firstPage['total']); assert_same(25,count($firstPage['orders'])); assert_same(2,$last['page']); assert_same('78.0000',$last['orders'][0]['total']);
+    $order=pl_confirm_purchase_order(...array_merge($args,[$first['id'],$first['revision'],bin2hex(random_bytes(16))]));
+    assert_same(1,$run(['status'=>'ordered'])['total']);
+    pl_receive_purchase_order(...array_merge($args,[$order['id'],purchasing_receipt_input($f,$order,'1')]));
+    $partial=$run(['status'=>'partial']); assert_same(1,$partial['total']); assert_same('confirmed',$partial['orders'][0]['status']); assert_same('partial',pl_purchase_order_progress($partial['orders'][0]));
+    pl_receive_purchase_order(...array_merge($args,[$order['id'],purchasing_receipt_input($f,$order,'2')]));
+    assert_same(1,$run(['status'=>'received'])['total']); assert_same(0,$run(['status'=>'partial'])['total']);
+    assert_same(25,$run(['status'=>'draft'])['total']); assert_same(1,$run(['q'=>$order['number']])['total']); assert_same(0,$run(['q'=>'%'])['total']);
+    foreach ([['sort'=>'amount DESC'],['status'=>'posted'],['dir'=>'invalid']] as $bad) { assert_throws(fn()=>$run($bad),DomainException::class); }
+    $other=ledger_fixture(); assert_throws(fn()=>pl_page_purchase_orders($other['actor_id'],$f['company_id'],$f['book_id'],[]),DomainException::class);
+});
 
 function purchasing_fixture(): array
 {
@@ -45,6 +67,25 @@ test('purchasing partial order receipts and later AP bills reconcile independent
     pl_settle_ar_document($f['actor_id'], $f['company_id'], $f['book_id'], $billed['bill_document_id'], ar_ap_payment($f, '40', '2026-01-10'));
     assert_same('60.0000', pl_ar_ap_open_items($f['actor_id'], $f['company_id'], $f['book_id'], 'payable', '2026-01-10')['total_base']);
     assert_same('100.0000', pl_purchase_received_unbilled($f['actor_id'], $f['company_id'], $f['book_id'], '2026-01-07')['accounts'][0]['unbilled_base']);
+});
+
+test('supplier document sources retain multiple receipt links and reject another book', function (): void {
+    $f=purchasing_fixture(); $order=purchasing_order($f);
+    $a=pl_receive_purchase_order($f['actor_id'],$f['company_id'],$f['book_id'],$order['id'],purchasing_receipt_input($f,$order,'6'));
+    $b=pl_receive_purchase_order($f['actor_id'],$f['company_id'],$f['book_id'],$order['id'],purchasing_receipt_input($f,$order,'4'));
+    $input=purchasing_bill_input($f,$a,'6');
+    $input['lines'][]=['receipt_line_id'=>$b['lines'][0]['id'],'quantity'=>'4','unit_price'=>'10'];
+    $bill=pl_bill_purchase_receipts($f['actor_id'],$f['company_id'],$f['book_id'],$input);
+    $sources=pl_purchase_document_sources($f['actor_id'],$f['company_id'],$f['book_id'],$bill['bill_document_id']);
+    assert_same(2,count($sources));
+    assert_same([$a['receipt_id'],$b['receipt_id']],array_map('intval',array_column($sources,'receipt_id')));
+    assert_same([$order['id'],$order['id']],array_map('intval',array_column($sources,'order_id')));
+    $return=pl_return_purchase_receipt($f['actor_id'],$f['company_id'],$f['book_id'],['receipt_line_id'=>$a['lines'][0]['id'],'match_id'=>$bill['match_ids'][0],'quantity'=>'1','date'=>'2026-01-10','reason'=>'Synthetic return source','idempotency_key'=>bin2hex(random_bytes(16))]);
+    $creditSources=pl_purchase_document_sources($f['actor_id'],$f['company_id'],$f['book_id'],$return['credit_document_id']);
+    assert_same([1,0],array_map('intval',array_column($creditSources,'returned_by_credit')));
+    $other=purchasing_fixture();
+    assert_throws(fn()=>pl_purchase_document_sources($other['actor_id'],$other['company_id'],$other['book_id'],$bill['bill_document_id']),DomainException::class);
+    assert_throws(fn()=>pl_purchase_document_sources($other['actor_id'],$f['company_id'],$f['book_id'],$bill['bill_document_id']),DomainException::class);
 });
 
 test('purchasing rejects excess receipt duplicate billing and cross-company references atomically', function (): void {

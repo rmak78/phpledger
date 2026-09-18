@@ -1,6 +1,24 @@
 <?php
 declare(strict_types=1);
 
+/** Read the purchasing trail for a bill or supplier credit within its owning book. */
+function pl_purchase_document_sources(int $actorId, int $companyId, int $bookId, int $documentId): array
+{
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$documentId): array {
+        $document=pl_get_ar_document($actorId,$companyId,$bookId,$documentId);
+        if (!in_array($document['kind'],['bill','supplier_credit'],true)) { return []; }
+        $billId=$document['kind']==='supplier_credit'?(int)$document['original_document_id']:$documentId;
+        return DB::query('SELECT m.id AS match_id,m.bill_line_number,m.quantity,l.id AS receipt_line_id,r.id AS receipt_id,r.document_date,r.order_id,o.reference AS order_reference,
+            EXISTS(SELECT 1 FROM pl_purchase_returns pr WHERE pr.company_id=m.company_id AND pr.book_id=m.book_id AND pr.match_id=m.id AND pr.credit_document_id=%i) AS returned_by_credit
+            FROM pl_purchase_bill_matches m
+            JOIN pl_purchase_receipt_lines l ON l.id=m.receipt_line_id AND l.company_id=m.company_id AND l.book_id=m.book_id
+            JOIN pl_purchase_receipts r ON r.id=l.receipt_id AND r.company_id=l.company_id AND r.book_id=l.book_id
+            JOIN pl_purchase_orders o ON o.id=r.order_id AND o.company_id=r.company_id AND o.book_id=r.book_id
+            WHERE m.company_id=%i AND m.book_id=%i AND m.bill_document_id=%i ORDER BY r.id,l.id,m.id',
+            $documentId,$companyId,$bookId,$billId);
+    });
+}
+
 /** Purchasing owns commitments and matching, while Inventory and AP own their ledgers. */
 function pl_purchase_command(int $actorId, int $companyId, int $bookId, string $action, string $key, array $payload, callable $work): array
 {
@@ -81,6 +99,48 @@ function pl_list_purchase_orders(int $actorId, int $companyId, int $bookId): arr
     return array_map(static fn(array $row): array => pl_get_purchase_order($actorId, $companyId, $bookId, (int) $row['id']), $ids);
 }
 
+/** Receipt progress is a display state; the stored draft/confirmed/cancelled state is unchanged. */
+function pl_purchase_order_progress(array $order): string
+{
+    if ($order['status']!=='confirmed') { return $order['status']; }
+    $received=false; $remaining=false;
+    foreach ($order['lines'] as $line) {
+        $received=$received || bccomp($line['received_quantity'],'0',4)>0;
+        $remaining=$remaining || bccomp($line['remaining_quantity'],'0',4)>0;
+    }
+    return !$remaining?'received':($received?'partial':'ordered');
+}
+
+function pl_page_purchase_orders(int $actorId,int $companyId,int $bookId,array $filters): array
+{
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$filters): array {
+        pl_require_company_access($actorId,$companyId); pl_ledger_book($companyId,$bookId);
+        $orders=['date'=>['asc'=>'q.document_date ASC,q.id ASC','desc'=>'q.document_date DESC,q.id DESC'],'name'=>['asc'=>'q.party_name ASC,q.id DESC','desc'=>'q.party_name DESC,q.id DESC'],'amount'=>['asc'=>'q.total ASC,q.id DESC','desc'=>'q.total DESC,q.id DESC']];
+        $sort=$filters['sort']??'date'; $dir=$filters['dir']??'desc'; $status=$filters['status']??'all';
+        if (!is_string($sort) || !is_string($dir) || !isset($orders[$sort][$dir]) || !in_array($status,['all','draft','ordered','partial','received','cancelled'],true)) { throw new DomainException('Unsupported purchase order filter.'); }
+        $size=pl_table_size($filters['per_page']??25); $search=pl_ledger_text($filters['q']??'','Search',160,false);
+        $cte=<<<'SQL'
+WITH orders AS (
+ SELECT o.*,p.legal_name AS party_name,
+ (SELECT COALESCE(SUM(ROUND(l.quantity*l.unit_price,4)),0) FROM pl_purchase_order_lines l WHERE l.order_id=o.id) AS total,
+ EXISTS(SELECT 1 FROM pl_purchase_order_lines l JOIN pl_purchase_receipt_lines r ON r.order_line_id=l.id WHERE l.order_id=o.id) AS any_received,
+ EXISTS(SELECT 1 FROM pl_purchase_order_lines l WHERE l.order_id=o.id AND l.quantity>(SELECT COALESCE(SUM(r.quantity),0) FROM pl_purchase_receipt_lines r WHERE r.order_line_id=l.id)) AS has_remaining
+ FROM pl_purchase_orders o JOIN pl_parties p ON p.id=o.party_id AND p.company_id=o.company_id WHERE o.company_id=%i AND o.book_id=%i
+)
+SQL;
+        $where=<<<'SQL'
+ FROM orders q WHERE (%s='' OR LOCATE(%s,q.party_name)>0 OR LOCATE(%s,q.reference)>0 OR LOCATE(%s,CONCAT('PO-',LPAD(q.id,6,'0')))>0)
+ AND (%s='all' OR (%s='draft' AND q.status='draft') OR (%s='cancelled' AND q.status='cancelled')
+ OR (q.status='confirmed' AND ((%s='ordered' AND q.any_received=0) OR (%s='partial' AND q.any_received=1 AND q.has_remaining=1) OR (%s='received' AND q.has_remaining=0))))
+SQL;
+        $args=[$companyId,$bookId,$search,$search,$search,strtoupper($search),$status,$status,$status,$status,$status,$status];
+        $total=(int)DB::queryFirstField($cte.' SELECT COUNT(*)'.$where,...$args); $pages=max(1,(int)ceil($total/$size)); $page=min($pages,max(1,(int)($filters['page']??1)));
+        $ids=DB::queryFirstColumn($cte.' SELECT q.id'.$where.' ORDER BY '.$orders[$sort][$dir].' LIMIT %i OFFSET %i',...array_merge($args,[$size,($page-1)*$size]));
+        $rows=array_map(static fn($id):array=>pl_get_purchase_order($actorId,$companyId,$bookId,(int)$id),$ids);
+        return ['orders'=>$rows,'total'=>$total,'page'=>$page,'pages'=>$pages];
+    });
+}
+
 function pl_save_purchase_order(int $actorId, int $companyId, int $bookId, array $input, ?int $id = null, ?int $expectedRevision = null): array
 {
     $data = ['party_id' => pl_oi_id($input, 'party_id'), 'document_date' => pl_ledger_date(pl_ledger_text($input['date'] ?? null, 'Order date', 10)), 'currency' => pl_currency_code(pl_ledger_text($input['currency'] ?? null, 'Currency', 3)), 'reference' => pl_ledger_text($input['reference'] ?? '', 'Reference', 120, false), 'notes' => pl_ledger_text($input['notes'] ?? '', 'Notes', 2000, false)];
@@ -132,6 +192,17 @@ function pl_confirm_purchase_order(int $actorId, int $companyId, int $bookId, in
     });
 }
 
+/** Confirm exactly the editor values in one transaction, with a durable retry receipt. */
+function pl_save_and_confirm_purchase_order(int $actorId,int $companyId,int $bookId,array $input,?int $id=null,?int $revision=null): array
+{
+    $key=pl_ledger_text($input['creation_key']??null,'Order request identity',128);
+    return pl_purchase_command($actorId,$companyId,$bookId,'editor_confirm','editor-confirm:'.hash('sha256',$key),[$id,$revision,$input],
+        function () use ($actorId,$companyId,$bookId,$input,$id,$revision,$key): array {
+            $draft=pl_save_purchase_order($actorId,$companyId,$bookId,$input,$id,$revision);
+            return pl_confirm_purchase_order($actorId,$companyId,$bookId,$draft['id'],$draft['revision'],'editor-confirm-order:'.hash('sha256',$key));
+        });
+}
+
 function pl_cancel_purchase_order(int $actorId, int $companyId, int $bookId, int $id, int $revision, string $reason, string $key): array
 {
     $reason = pl_ledger_text($reason, 'Cancellation reason', 500);
@@ -143,31 +214,75 @@ function pl_cancel_purchase_order(int $actorId, int $companyId, int $bookId, int
     });
 }
 
+/** Shared read-only receipt quantities and valuation; callers hold the book lock. */
+function pl_purchase_receipt_plan(int $actorId, int $companyId, int $bookId, int $orderId, array $input): array
+{
+    $date=pl_ledger_date(pl_ledger_text($input['date']??null,'Receipt date',10));
+    $grni=pl_oi_id($input,'grni_account_id'); $rows=pl_purchase_rows($input['lines']??null);
+    $order=pl_get_purchase_order($actorId,$companyId,$bookId,$orderId);
+    if ($order['status']!=='confirmed' || $date<$order['document_date']) { throw new DomainException('Receive a confirmed purchase order on or after its order date.'); }
+    pl_purchase_account($companyId,$bookId,$grni);
+    $snapshot=pl_oi_rate($actorId,$companyId,$bookId,$order['currency'],$date,$input['rate']??null,null,'spot');
+    $byId=[]; foreach ($order['lines'] as $line) { $byId[$line['id']]=$line; }
+    $lines=[]; $seen=[]; $total='0.0000';
+    foreach ($rows as $row) {
+        $lineId=pl_oi_id($row,'order_line_id'); $quantity=pl_purchase_positive($row['quantity']??null,'Received quantity');
+        if (!isset($byId[$lineId]) || isset($seen[$lineId])) { throw new DomainException('Select each order line once from this order.'); }
+        $seen[$lineId]=true; $line=$byId[$lineId];
+        if (bccomp($quantity,$line['remaining_quantity'],4)>0) { throw new DomainException('Received quantity exceeds the unreceived order quantity.'); }
+        $fc=pl_fx_convert($quantity,$line['unit_price']); $base=pl_fx_convert($fc,$snapshot['rate']);
+        $lines[]=['order_line_id'=>$lineId,'product_id'=>$line['product_id'],'description'=>$line['description'],'quantity'=>$quantity,
+            'ordered_quantity'=>$line['quantity'],'received_quantity'=>$line['received_quantity'],'remaining_quantity'=>$line['remaining_quantity'],
+            'remaining_after'=>bcsub($line['remaining_quantity'],$quantity,4),'unit_price'=>$line['unit_price'],'amount_fc'=>$fc,'amount_base'=>$base];
+        $total=bcadd($total,$base,4);
+    }
+    return ['order'=>$order,'date'=>$date,'grni_account_id'=>$grni,'rate_snapshot'=>$snapshot,'lines'=>$lines,'total_base'=>$total];
+}
+
 function pl_receive_purchase_order(int $actorId, int $companyId, int $bookId, int $orderId, array $input): array
 {
-    $date = pl_ledger_date(pl_ledger_text($input['date'] ?? null, 'Receipt date', 10));
-    $grni = pl_oi_id($input, 'grni_account_id');
-    $rows = pl_purchase_rows($input['lines'] ?? null);
-    $key = pl_ledger_text($input['idempotency_key'] ?? null, 'Receipt key', 128);
-    return pl_purchase_command($actorId, $companyId, $bookId, 'receive', $key, [$orderId, $input], function (string $command) use ($actorId, $companyId, $bookId, $orderId, $input, $date, $grni, $rows): array {
-        $order = pl_get_purchase_order($actorId, $companyId, $bookId, $orderId);
-        if ($order['status'] !== 'confirmed' || $date < $order['document_date']) { throw new DomainException('Receive a confirmed purchase order on or after its order date.'); }
-        pl_purchase_account($companyId, $bookId, $grni);
-        $snapshot = pl_oi_rate($actorId, $companyId, $bookId, $order['currency'], $date, $input['rate'] ?? null, null, 'spot');
-        $byId = []; foreach ($order['lines'] as $line) { $byId[$line['id']] = $line; }
-        DB::insert('pl_purchase_receipts', ['company_id' => $companyId, 'book_id' => $bookId, 'order_id' => $orderId, 'document_date' => $date, 'grni_account_id' => $grni, 'currency' => $order['currency'], 'rate' => $snapshot['rate'], 'rate_snapshot' => json_encode($snapshot, JSON_THROW_ON_ERROR), 'actor_id' => $actorId]);
-        $receiptId = (int) DB::insertId(); $receiptLines = []; $seen = [];
-        foreach ($rows as $row) {
-            $lineId = pl_oi_id($row, 'order_line_id'); $quantity = pl_purchase_positive($row['quantity'] ?? null, 'Received quantity');
-            if (!isset($byId[$lineId]) || isset($seen[$lineId])) { throw new DomainException('Select each order line once from this order.'); }
-            $seen[$lineId] = true; $line = $byId[$lineId];
-            if (bccomp($quantity, $line['remaining_quantity'], 4) > 0) { throw new DomainException('Received quantity exceeds the unreceived order quantity.'); }
-            $fc = pl_fx_convert($quantity, $line['unit_price']); $base = pl_fx_convert($fc, $snapshot['rate']);
-            $movement = pl_inventory_receive($actorId, $companyId, $bookId, ['product_id' => $line['product_id'], 'quantity' => $quantity, 'amount_base' => $base, 'date' => $date, 'offset_account_id' => $grni, 'source_type' => 'purchase_receipt', 'source_reference' => 'purchase-receipt:' . $receiptId . ':' . $lineId, 'idempotency_key' => $command . ':line:' . $lineId, 'reason' => 'Goods received against ' . $order['number']]);
-            DB::insert('pl_purchase_receipt_lines', ['company_id' => $companyId, 'book_id' => $bookId, 'receipt_id' => $receiptId, 'order_line_id' => $lineId, 'movement_id' => $movement['movement_id'], 'journal_id' => $movement['journal_id'], 'quantity' => $quantity, 'amount_fc' => $fc, 'amount_base' => $base]);
-            $receiptLines[] = ['id' => (int) DB::insertId(), 'order_line_id' => $lineId, 'quantity' => $quantity, 'amount_base' => $base, 'movement_id' => $movement['movement_id'], 'journal_id' => $movement['journal_id']];
+    $key=pl_ledger_text($input['idempotency_key']??null,'Receipt key',128);
+    return pl_purchase_command($actorId,$companyId,$bookId,'receive',$key,[$orderId,$input],function (string $command) use ($actorId,$companyId,$bookId,$orderId,$input): array {
+        $plan=pl_purchase_receipt_plan($actorId,$companyId,$bookId,$orderId,$input);
+        $order=$plan['order']; $date=$plan['date']; $grni=$plan['grni_account_id']; $snapshot=$plan['rate_snapshot'];
+        DB::insert('pl_purchase_receipts',['company_id'=>$companyId,'book_id'=>$bookId,'order_id'=>$orderId,'document_date'=>$date,'grni_account_id'=>$grni,'currency'=>$order['currency'],'rate'=>$snapshot['rate'],'rate_snapshot'=>json_encode($snapshot,JSON_THROW_ON_ERROR),'actor_id'=>$actorId]);
+        $receiptId=(int)DB::insertId(); $receiptLines=[];
+        foreach ($plan['lines'] as $line) {
+            $lineId=$line['order_line_id']; $quantity=$line['quantity']; $base=$line['amount_base'];
+            $movement=pl_inventory_receive($actorId,$companyId,$bookId,['product_id'=>$line['product_id'],'quantity'=>$quantity,'amount_base'=>$base,'date'=>$date,'offset_account_id'=>$grni,'source_type'=>'purchase_receipt','source_reference'=>'purchase-receipt:'.$receiptId.':'.$lineId,'idempotency_key'=>$command.':line:'.$lineId,'reason'=>'Goods received against '.$order['number']]);
+            DB::insert('pl_purchase_receipt_lines',['company_id'=>$companyId,'book_id'=>$bookId,'receipt_id'=>$receiptId,'order_line_id'=>$lineId,'movement_id'=>$movement['movement_id'],'journal_id'=>$movement['journal_id'],'quantity'=>$quantity,'amount_fc'=>$line['amount_fc'],'amount_base'=>$base]);
+            $receiptLines[]=['id'=>(int)DB::insertId(),'order_line_id'=>$lineId,'quantity'=>$quantity,'amount_base'=>$base,'movement_id'=>$movement['movement_id'],'journal_id'=>$movement['journal_id']];
         }
-        return ['receipt_id' => $receiptId, 'order_id' => $orderId, 'lines' => $receiptLines];
+        return ['receipt_id'=>$receiptId,'order_id'=>$orderId,'lines'=>$receiptLines];
+    });
+}
+
+function pl_preview_purchase_receipt(int $actorId, int $companyId, int $bookId, int $orderId, array $input): array
+{
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$orderId,$input): array {
+        pl_require_company_access($actorId,$companyId,true); pl_ledger_book($companyId,$bookId,true);
+        pl_require_module($actorId,$companyId,$bookId,'purchasing');
+        $plan=pl_purchase_receipt_plan($actorId,$companyId,$bookId,$orderId,$input);
+        foreach ($plan['lines'] as &$line) {
+            if (bccomp($line['amount_base'],'0',4)<=0) { throw new DomainException('A receipt needs positive quantity and carrying value.'); }
+            $data=pl_inventory_movement_input(['product_id'=>$line['product_id'],'date'=>$plan['date'],'offset_account_id'=>$plan['grni_account_id'],
+                'source_type'=>'purchase_receipt','source_reference'=>'receipt-preview:'.$orderId.':'.$line['order_line_id'],'reason'=>'Goods received against '.$plan['order']['number']]);
+            $line['stock']=pl_inventory_movement_plan($actorId,$companyId,$bookId,$data,$line['quantity'],$line['amount_base']);
+        } unset($line);
+        return $plan;
+    });
+}
+
+function pl_confirm_purchase_receipt(int $actorId, int $companyId, int $bookId, int $orderId, array $input, string $expectedHash): array
+{
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$orderId,$input,$expectedHash): array {
+        pl_require_company_access($actorId,$companyId,true); pl_ledger_book($companyId,$bookId,true);
+        $key=pl_request_key(pl_ledger_text($input['idempotency_key']??null,'Receipt key',128));
+        if (!DB::queryFirstField('SELECT request_key FROM pl_purchase_commands WHERE company_id=%i AND book_id=%i AND request_key=%s',$companyId,$bookId,$key)) {
+            $plan=pl_preview_purchase_receipt($actorId,$companyId,$bookId,$orderId,$input);
+            if (!hash_equals($expectedHash,hash('sha256',json_encode($plan,JSON_THROW_ON_ERROR)))) { throw new DomainException('The receipt or its order/stock balances changed. Update the preview before confirming.'); }
+        }
+        return pl_receive_purchase_order($actorId,$companyId,$bookId,$orderId,$input);
     });
 }
 

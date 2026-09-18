@@ -4,6 +4,10 @@ Source revision: `{{SOURCE_COMMIT}}`.
 
 This package adds the accounting starter to the modern foundation: required AR/AP workflows and manual core tax, optional Purchasing/Inventory, and reviewed opening conversions. Preserve the complete supplied migration chain and all existing checksums. Recognized older modern schemas apply their missing migrations in order. The repository includes disposable verification for the published 0.3.0 baseline through migration 016; your exact package and backup still require a restoration rehearsal. No automatic upgrade from the historical application, an unpublished quote worktree or a customized schema is supported.
 
+## From 0.5.0-preview to 0.6.0-preview
+
+Keep the installed chain through 028 unchanged. This release adds 029-031 for cost-of-sales presentation, connection read scopes and list-source indexes. Existing chart classifications retain prior net-profit behavior; existing connections retain their previous access. The interface change does not require Node on the host. Use the backup/maintenance procedure below and run migrations before reopening traffic. Restore both matching code and database if rollback is needed; copying old PHP over an upgraded database is not a tested rollback.
+
 ## Before changing an installation
 
 Arrange a maintenance window at the web server or reverse proxy, blocking customer access and writes while keeping operator access. There is no customer maintenance-mode switch in this preview. Stop any locally added workers or integrations, and prevent concurrent schema changes. Record the installed package version, manifest, PHP/MySQL versions and migration state.

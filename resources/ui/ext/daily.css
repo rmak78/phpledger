@@ -1,0 +1,175 @@
+/* Extra components for the daily screens. Use @layer components; tokens only. */
+@layer components {
+  .pos-grid, .pos-review-grid { display: grid; align-items: start; }
+  .pos-products { display: grid; gap: .75rem; }
+  .pos-products > .panel { margin: 0; }
+  .pos-section-heading, .pos-product-top { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
+  .pos-search { margin-block-start: .75rem; }
+  .pos-categories { display: flex; flex-wrap: wrap; gap: .375rem; margin-block: .75rem; }
+  .pos-categories [aria-pressed=true] { background: var(--brand-navy); color: var(--surface); border-color: var(--brand-navy); }
+  .pos-product-pick { display: flex; flex: 1; flex-direction: column; inline-size: 100%; border: 0; border-radius: inherit; color: var(--ink); cursor: pointer; }
+  .pos-product-top { inline-size: 100%; }
+  .pos-product.is-selected { border-color: var(--brand-blue); box-shadow: inset 0 0 0 1px var(--brand-blue); }
+  .pos-product-pick:focus-visible { outline-offset: -3px; }
+  .pos-selected { display: grid; place-items: center; min-inline-size: 1.5rem; block-size: 1.5rem; border: 1px solid var(--border-strong); border-radius: 50%; padding-inline: .25rem; }
+  .is-selected .pos-selected { background: var(--brand-blue); color: var(--surface); }
+  .pos-product-name { font-weight: 600; }
+  .pos-sku { display: block; color: var(--ink-muted); font-size: .6875rem; font-weight: 400; }
+  .pos-price { margin-block-start: auto; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .pos-fallback-quantity { padding: .75rem; }
+  .pos-cart, .pos-payment { position: sticky; }
+  .pos-cart-empty { padding: 2rem .75rem; text-align: center; color: var(--ink-muted); }
+  .pos-cart-row { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: .625rem; border-block-end: 1px solid var(--border); }
+  .pos-cart-row small, .pos-review-line small { display: block; color: var(--ink-muted); font-size: .75rem; }
+  .pos-quantity-controls { display: flex; align-items: center; }
+  .pos-quantity-controls button, .pos-quantity-controls input { inline-size: 2.5rem; block-size: 2.5rem; min-inline-size: 0; min-block-size: 0; padding: 0; text-align: center; border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink); }
+  .pos-cart-remove { background: transparent; border: 0; color: var(--ink-muted); font-size: .75rem; text-align: end; padding-block: .5rem; cursor: pointer; }
+  .pos-cart-remove:hover { color: var(--danger); text-decoration: underline; }
+  .pos-total, .pos-review-line { display: flex; align-items: center; justify-content: space-between; gap: .75rem; border-block-start: 1px solid var(--border); }
+  .pos-due { font-size: 2rem; font-weight: 600; line-height: 1.25; margin-block: .75rem; }
+  .pos-due span { display: block; color: var(--ink-muted); font-size: .8125rem; font-weight: 400; }
+  .pos-payment input[data-pos-cash] { font-size: 1.5rem; min-block-size: 3rem; }
+  .pos-change { font-variant-numeric: tabular-nums; font-weight: 600; border-block-start: 1px solid var(--border); padding-block: .75rem; margin-block-start: .75rem; }
+  .pos-mobile-cart { display: none; }
+  .pos-receipt .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-block-start: 1rem; }
+  @media print {
+    .view-pos .strip { display: none !important; }
+    .view-pos .pos-workspace { padding: 0; }
+    .view-pos .pos-workspace .pos-receipt { max-inline-size: 80mm; margin: 0; padding: 0; font-size: 10pt; }
+    .view-pos .pos-receipt .data-table { min-inline-size: 0; font-size: 9pt; }
+    .view-pos .pos-receipt .data-table th, .view-pos .pos-receipt .data-table td { padding: 4px 2px; }
+  }
+  .pos-topbar { display: flex; align-items: center; gap: 1rem; min-block-size: 48px; padding: .4rem 1rem; border-block-end: 1px solid var(--border); background: var(--surface); font-size: .8125rem; }
+  .pos-progress { display: flex; gap: 1rem; list-style: none; padding: 0; margin: 0; color: var(--ink-muted); font-size: .75rem; }
+  .pos-progress li { display: flex; align-items: center; gap: .35rem; }
+  .pos-progress li span { display: grid; place-items: center; inline-size: 20px; block-size: 20px; border: 1px solid var(--border-strong); border-radius: 50%; }
+  .pos-progress [aria-current] { color: var(--ink); font-weight: 600; }
+  .pos-progress [aria-current] span { color: var(--surface); background: var(--brand-navy); }
+  .pos-cashier { margin-inline-start: auto; font-size: .75rem; color: var(--ink-muted); }
+  .view-pos .pos-workspace { max-inline-size: none; margin: 0; padding: 1rem; }
+  .view-pos .pos-heading { margin-block-end: .75rem; }
+  .view-pos .pos-heading h1 { font-size: 1.25rem; }
+  .view-pos .pos-scope { margin-block-end: .75rem; }
+  .view-pos .pos-grid, .view-pos .pos-review-grid { grid-template-columns: minmax(0,1fr) 360px; gap: 1rem; }
+  .view-pos .pos-product { padding: 0; align-items: stretch; }
+  .view-pos .pos-products { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .view-pos .pos-enhanced .pos-fallback-quantity { display: none; }
+  .view-pos .pos-product-pick { padding: .75rem; text-align: start; background: var(--surface); }
+  .view-pos .pos-product-top { margin-block-end: .5rem; }
+  .view-pos .pos-product-name { font-size: .875rem; }
+  .view-pos .pos-price { padding-block-start: .5rem; font-size: 1rem; }
+  .view-pos .pos-cart, .view-pos .pos-payment, .view-pos .pos-review-lines { padding: 1rem; inset-block-start: 1rem; }
+  .view-pos .pos-cart-row, .view-pos .pos-review-line { padding-block: .625rem; }
+  .view-pos .pos-cart [data-pos-cart] { max-block-size: 270px; overflow-y: auto; }
+  .view-pos .pos-cart > .field, .view-pos .pos-payment > .field { margin-block: .75rem; }
+  .view-pos .pos-cart > .btn, .view-pos [data-pos-checkout] { inline-size: 100%; margin-block-start: .75rem; }
+  .view-pos .pos-total { margin-block-start: .75rem; padding-block-start: .75rem; }
+  .view-pos .pos-total strong { font-size: 1.25rem; }
+  .view-pos .pos-small { margin-block-start: .5rem; font-size: .75rem; }
+  .view-pos .pos-receipt { max-inline-size: 480px; margin-inline: auto; padding: 1.25rem; }
+  .view-pos .pos-section-heading h2 { font-size: 1rem; }
+  @media (max-width: 899px) {
+    .pos-topbar { flex-wrap: wrap; }
+    .pos-progress { order: 3; flex-basis: 100%; }
+    .view-pos .pos-grid, .view-pos .pos-review-grid { grid-template-columns: minmax(0,1fr); }
+    .view-pos .pos-cart, .view-pos .pos-payment { position: static; }
+    .view-pos .pos-products { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  }
+  /* Danger counterpart to app.css's .balanced-label, for an out-of-balance journal draft. */
+  .balance-label-danger {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--danger);
+  }
+  .balance-label-danger .icon { width: 14px; height: 14px; }
+
+  /* POS: product tiles (pos.html). Plain <button>s styled as small selectable cards — a repeated
+     piece (six per screen), so named here rather than repeating utility soup per tile. */
+  .pos-product {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .1875rem;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+    background: var(--surface);
+    padding: .75rem .875rem;
+    text-align: start;
+    cursor: pointer;
+    transition: border-color .12s ease, background-color .12s ease;
+  }
+  .pos-product:hover { border-color: var(--border-strong); background: var(--surface-subtle); }
+  .pos-product.is-in-cart { border-color: var(--brand-blue); background: var(--brand-selected); }
+  .pos-product-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--brand-navy);
+    color: #fff;
+    font-weight: 700;
+    font-size: .6875rem;
+    flex: none;
+    margin-block-end: .1875rem;
+  }
+  .pos-product-qty-badge {
+    position: absolute;
+    inset-block-start: .5rem;
+    inset-inline-end: .5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding-inline: .3rem;
+    border-radius: 999px;
+    background: var(--brand-navy);
+    color: #fff;
+    font-size: .6875rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* POS: cart line + qty stepper (pos.html cart, pos-review read-only variant reuses .table). */
+  .pos-cart-line {
+    display: flex;
+    flex-direction: column;
+    gap: .375rem;
+    padding-block: .625rem;
+    border-block-end: 1px solid var(--border);
+  }
+  .pos-cart-line:last-child { border-block-end: none; }
+  .pos-qty-stepper { display: inline-flex; align-items: center; gap: .5rem; }
+  .pos-qty-stepper button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .pos-qty-stepper button:hover { background: var(--surface-subtle); }
+  .pos-qty-stepper span {
+    min-width: 1.125rem;
+    text-align: center;
+    font-size: .8125rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* POS: narrow printed-receipt preview (pos-receipt.html) — dashed rules stand in for a
+     perforated paper edge without switching the whole app's type to monospace. */
+  .receipt-paper { width: 100%; }
+  .receipt-rule { border-block-start: 1px dashed var(--border-strong); margin-block: .75rem; }
+}

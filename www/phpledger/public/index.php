@@ -40,7 +40,7 @@ header('Content-Type: text/html; charset=utf-8');
 header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'");
 $routes = [
     '/tax' => ['GET','POST'], '/ar' => ['GET','POST'], '/ap' => ['GET','POST'], '/parties' => ['GET','POST'], '/inventory' => ['GET','POST'], '/purchasing' => ['GET','POST'], '/opening-conversion' => ['GET','POST'],
-    '/' => ['GET'], '/login' => ['GET', 'POST'], '/logout' => ['POST'], '/start' => ['POST'],
+    '/' => ['GET'], '/home' => ['GET'], '/login' => ['GET', 'POST'], '/logout' => ['POST'], '/start' => ['POST'],
     '/companies' => ['GET'], '/company/select' => ['POST'], '/sample-chooser' => ['GET', 'POST'], '/onboarding' => ['GET', 'POST'],
     '/setup/review' => ['GET', 'POST'], '/transactions' => ['GET'], '/transactions/detail' => ['GET'],
     '/opening-balances' => ['GET', 'POST'], '/periods' => ['GET', 'POST'], '/bank-reconciliation' => ['GET', 'POST'],
@@ -48,6 +48,7 @@ $routes = [
     '/transactions/post' => ['POST'], '/transactions/reverse' => ['POST'],
     '/reports/trial-balance' => ['GET'], '/reports/account' => ['GET'], '/journals/detail' => ['GET'], '/reports/export' => ['GET'],
     '/reports' => ['GET'], '/reports/balance-sheet' => ['GET'], '/reports/profit-loss' => ['GET'], '/reports/cash-forecast' => ['GET', 'POST'],
+    '/reports/ageing' => ['GET'],
     '/pos' => ['GET'], '/pos/review' => ['GET', 'POST'], '/pos/edit' => ['POST'], '/pos/checkout' => ['POST'], '/pos/retry' => ['POST'], '/pos/receipt' => ['GET'],
     '/sample-guide' => ['GET'], '/help' => ['GET'], '/modules' => ['GET', 'POST'], '/connections' => ['GET','POST'], '/oauth/authorize' => ['GET','POST'], '/tables' => ['GET'],
     '/accounts' => ['GET'], '/accounts/save' => ['POST'],
@@ -59,9 +60,7 @@ if (!isset($routes[$path]) || !in_array($method, $routes[$path], true)) {
     if (isset($routes[$path])) {
         header('Allow: ' . implode(', ', $routes[$path]));
     }
-    echo '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PHP Ledger</title><link rel="stylesheet" href="' . htmlspecialchars(pl_url('/assets/app.css'), ENT_QUOTES, 'UTF-8') . '"><main class="standalone"><h1>'
-        . (isset($routes[$path]) ? 'That action needs a different request.' : 'Page not found.')
-        . '</h1><p><a href="' . htmlspecialchars(pl_url('/'), ENT_QUOTES, 'UTF-8') . '">Return to PHP Ledger</a></p></main></html>';
+    pl_web_unavailable_page(isset($routes[$path]) ? 405 : 404);
     exit;
 }
 
@@ -77,7 +76,7 @@ try {
     $actorId = pl_current_user_id();
     $user = $actorId ? DB::queryFirstRow('SELECT id, display_name, email FROM pl_users WHERE id = %i', $actorId) : null;
     if ($path === '/') {
-        pl_redirect($actorId ? (pl_demo_enabled() ? '/transactions' : '/companies') : '/login');
+        pl_redirect($actorId ? (!empty($_SESSION['company_id']) ? '/home' : '/companies') : '/login');
     }
     if ($method === 'POST') {
         pl_require_post();
@@ -130,7 +129,7 @@ try {
     if ($path === '/company/select') {
         $selected = pl_company_context($actorId, pl_web_id($_POST, 'company_id'));
         $_SESSION['company_id'] = (int) $selected['id'];
-        pl_redirect('/transactions');
+        pl_redirect('/home');
     }
     if ($path === '/companies') {
         if (pl_demo_enabled()) {
@@ -318,11 +317,20 @@ try {
         pl_render('onboarding', ['title' => $preview ? 'Preview your setup' : 'Set up a business', 'user' => $user, 'template' => $template, 'preview' => $preview, 'wizard_step' => $wizardStep, 'form' => $form, 'input' => $input]);
     }
     if ($path === '/help') {
-        pl_render('help', ['title' => 'Getting started', 'user' => $user]);
+        $helpCompany = null;
+        if (!empty($_SESSION['company_id'])) {
+            try { $helpCompany = pl_company_context($actorId, (int) $_SESSION['company_id']); }
+            catch (DomainException) { /* Help remains available if prior company access was revoked. */ }
+        }
+        pl_render('help', ['title' => 'Getting started', 'user' => $user, 'company' => $helpCompany]);
     }
     $company = pl_web_context($actorId);
     $companyId = (int) $company['id'];
     $bookId = (int) $company['book_id'];
+    if ($path === '/home') {
+        $overview = pl_home_overview($actorId, $companyId, $bookId, gmdate('Y-m-d'));
+        pl_render('home', ['title' => 'Home', 'user' => $user, 'company' => $company, 'overview' => $overview]);
+    }
     if ($path === '/sample-guide') {
         $pack = pl_company_demo_pack($actorId, $companyId, $bookId);
         if ($pack === null) { throw new DomainException('This guide belongs to a selected sample. Your existing company has not been changed.'); }
@@ -372,36 +380,56 @@ try {
     }
     if ($path === '/accounts/save') {
         $id = pl_web_id($_POST, 'id');
-        $return = pl_url('/accounts', $id ? ['id' => $id] : ['new' => '1']);
+        $chartFilters=pl_return_list_filters($_POST,'accounts');
+        $return = pl_url('/accounts', ($id ? ['id' => $id] : ['new' => '1'])+['return_filters'=>$chartFilters]);
         try {
             pl_web_assert_scope($company, $_POST);
             $account = pl_save_account($actorId, $companyId, $bookId, [
                 'name' => pl_web_text($_POST, 'name'), 'code' => pl_web_text($_POST, 'code'),
                 'type' => pl_web_text($_POST, 'type'), 'role' => pl_web_text($_POST, 'role') ?: null,
+                'report_classification' => pl_web_text($_POST, 'report_classification') ?: null,
                 'is_active' => pl_web_text($_POST, 'is_active') === '1', 'reason' => pl_web_text($_POST, 'reason'),
                 'creation_key' => pl_web_text($_POST, 'creation_key'),
             ], $id ?: null, $id ? pl_web_id($_POST, 'revision') : null);
             pl_notice('Account saved. Posted journal history is preserved.');
-            pl_redirect(pl_url('/accounts', ['id' => $account['id']]));
+            pl_redirect(pl_url('/accounts', ['id' => $account['id'],'return_filters'=>$chartFilters]));
         } catch (DomainException $error) { pl_form_failure($return, $_POST, $error->getMessage()); }
     }
     if ($path === '/accounts') {
+        $chartFilters=isset($_GET['return_filters'])?pl_return_list_filters($_GET,'accounts'):pl_list_filters($_GET,'accounts');
         $id = pl_web_id($_GET, 'id');
         $isNew = pl_web_text($_GET, 'new') === '1';
         $account = $id ? pl_get_account($actorId, $companyId, $bookId, $id) : null;
-        $form = pl_form_state(pl_url('/accounts', $id ? ['id' => $id] : ($isNew ? ['new' => '1'] : [])));
+        $operationalWarning = $account !== null && (in_array($account['role'], ['cash_bank','receivables','payables'], true)
+            || DB::queryFirstField('SELECT id FROM pl_tax_codes WHERE company_id=%i AND book_id=%i AND (sales_account_id=%i OR purchase_account_id=%i) LIMIT 1',$companyId,$bookId,$id,$id) !== null);
+        $form = pl_form_state(pl_url('/accounts', ($id ? ['id' => $id] : ($isNew ? ['new' => '1'] : []))+(isset($_GET['return_filters'])?['return_filters'=>$chartFilters]:[])));
         $input = $form['input'] ?: ($account ?? ['code' => '', 'name' => '', 'type' => 'expense', 'role' => 'expense', 'is_active' => true, 'creation_key' => bin2hex(random_bytes(24))]);
-        pl_render('accounts', ['title' => 'Chart of accounts', 'user' => $user, 'company' => $company, 'account' => $account, 'isNew' => $isNew, 'input' => $input, 'form' => $form, 'history' => $id ? pl_core_history($actorId, $companyId, $bookId, 'account', $id) : []]);
+        $balanceDate = gmdate('Y-m-d'); $balances = [];
+        foreach (pl_trial_balance($actorId, $companyId, $bookId, $balanceDate)['accounts'] as $balanceRow) {
+            $balances[$balanceRow['id']] = in_array($balanceRow['type'], ['asset', 'expense'], true)
+                ? $balanceRow['balance'] : bcsub('0', $balanceRow['balance'], 4);
+        }
+        pl_render('accounts', ['title' => 'Chart of accounts', 'user' => $user, 'company' => $company, 'account' => $account, 'accountList'=>pl_list_query($actorId,$companyId,$bookId,'accounts',$chartFilters),'chartFilters'=>$chartFilters, 'isNew' => $isNew, 'input' => $input, 'form' => $form, 'balances' => $balances, 'balanceDate' => $balanceDate, 'operationalWarning'=>$operationalWarning, 'history' => $id ? pl_core_history($actorId, $companyId, $bookId, 'account', $id) : []]);
     }
     if (str_starts_with($path, '/general-journals')) {
         $id = pl_web_id($method === 'POST' ? $_POST : $_GET, 'id');
+        $journalFilters = $method==='POST' || isset($_GET['return_filters']) ? pl_return_list_filters($method==='POST'?$_POST:$_GET,'general-journals') : pl_list_filters($_GET,'general-journals');
         if ($method === 'POST') {
             $return = $path === '/general-journals/save'
-                ? ($id ? pl_url('/general-journals/edit', ['id' => $id]) : pl_url('/general-journals/new'))
-                : pl_url('/general-journals/detail', ['id' => $id]);
+                ? ($id ? pl_url('/general-journals/edit', ['id' => $id,'return_filters'=>$journalFilters]) : pl_url('/general-journals/new',['return_filters'=>$journalFilters]))
+                : pl_url('/general-journals/detail', ['id' => $id,'return_filters'=>$journalFilters]);
             try {
                 pl_web_assert_scope($company, $_POST);
                 if ($path === '/general-journals/save') {
+                    if (pl_web_text($_POST, 'editor_action') === 'add_line' || isset($_POST['remove_line'])) {
+                        if (!pl_can_write($company)) { throw new DomainException('Your role can read journals but cannot edit them.'); }
+                        pl_form_failure($return, pl_web_journal_line_action($_POST), '', 200);
+                    }
+                    if (pl_web_text($_POST, 'editor_action') === 'post_reviewed_journal') {
+                        $draft = pl_save_and_post_general_draft($actorId, $companyId, $bookId, pl_web_general_input($_POST), $id ?: null, $id ? pl_web_id($_POST, 'revision') : null);
+                        pl_notice('General journal posted. Your account statements are updated.');
+                        pl_redirect(pl_url('/general-journals/detail', ['id' => $draft['id'],'return_filters'=>$journalFilters]));
+                    }
                     $draft = pl_save_general_draft($actorId, $companyId, $bookId, pl_web_general_input($_POST), $id ?: null, $id ? pl_web_id($_POST, 'revision') : null);
                     pl_notice('Draft saved. Review the journal before posting.');
                 } elseif ($path === '/general-journals/post') {
@@ -412,22 +440,22 @@ try {
                     $draft = pl_reverse_general_draft($actorId, $companyId, $bookId, $id, pl_web_text($_POST, 'date'), pl_web_text($_POST, 'reason'));
                     pl_notice('Linked reversal posted. The original journal is preserved.');
                 }
-                pl_redirect(pl_url('/general-journals/detail', ['id' => $draft['id']]));
+                pl_redirect(pl_url('/general-journals/detail', ['id' => $draft['id'],'return_filters'=>$journalFilters]));
             } catch (DomainException $error) { pl_form_failure($return, $_POST, $error->getMessage()); }
         }
         if ($path === '/general-journals') {
-            pl_render('general-journals', ['title' => 'General journals', 'user' => $user, 'company' => $company, 'list' => pl_list_general_drafts($actorId, $companyId, $bookId, pl_web_id($_GET, 'page', 1))]);
+            pl_render('general-journals', ['title' => 'General journals', 'user' => $user, 'company' => $company, 'selection'=>pl_web_id($_GET,'select')?pl_get_general_draft($actorId,$companyId,$bookId,pl_web_id($_GET,'select')):null,'filters' => $journalFilters, 'list' => pl_list_query($actorId, $companyId, $bookId, 'general-journals', $_GET)]);
         }
         $draft = $id ? pl_get_general_draft($actorId, $companyId, $bookId, $id) : null;
         if ($path === '/general-journals/detail') {
             if (!$draft) { throw new DomainException('Choose a saved general journal.'); }
-            pl_render('general-detail', ['title' => $draft['number'], 'user' => $user, 'company' => $company, 'draft' => $draft, 'form' => pl_form_state(pl_url('/general-journals/detail', ['id' => $id])), 'history' => pl_core_history($actorId, $companyId, $bookId, 'general_journal', $id)]);
+            pl_render('general-detail', ['title' => $draft['number'], 'user' => $user, 'company' => $company, 'draft' => $draft, 'filters'=>$journalFilters, 'form' => pl_form_state(pl_url('/general-journals/detail', ['id' => $id,'return_filters'=>$journalFilters])), 'history' => pl_core_history($actorId, $companyId, $bookId, 'general_journal', $id)]);
         }
         if (!pl_can_write($company)) { throw new DomainException('Your role can read journals but cannot edit them.'); }
-        if ($draft && $draft['status'] !== 'draft') { pl_redirect(pl_url('/general-journals/detail', ['id' => $id])); }
-        $form = pl_form_state($id ? pl_url('/general-journals/edit', ['id' => $id]) : pl_url('/general-journals/new'));
+        if ($draft && $draft['status'] !== 'draft') { pl_redirect(pl_url('/general-journals/detail', ['id' => $id,'return_filters'=>$journalFilters])); }
+        $form = pl_form_state($id ? pl_url('/general-journals/edit', ['id' => $id,'return_filters'=>$journalFilters]) : pl_url('/general-journals/new',['return_filters'=>$journalFilters]));
         $input = $form['input'] ?: ($draft ? $draft + ['date' => $draft['document_date']] : ['date' => gmdate('Y-m-d'), 'reference' => '', 'description' => '', 'lines' => [], 'creation_key' => bin2hex(random_bytes(24))]);
-        pl_render('general-editor', ['title' => $id ? 'Edit general journal' : 'New general journal', 'user' => $user, 'company' => $company, 'draft' => $draft, 'input' => $input, 'form' => $form]);
+        pl_render('general-editor', ['title' => $id ? 'Edit general journal' : 'New general journal', 'user' => $user, 'company' => $company, 'draft' => $draft, 'filters'=>$journalFilters, 'input' => $input, 'form' => $form]);
     }
     if (in_array($path, ['/pos', '/pos/review', '/pos/edit', '/pos/checkout', '/pos/retry', '/pos/receipt'], true)) {
         require_once dirname(__DIR__) . '/includes/functions/pos_functions.php';
@@ -547,8 +575,14 @@ try {
         $periodFrom = min($company['start_date'], $today);
         $profit = pl_profit_loss($actorId, $companyId, $bookId, $periodFrom, $today);
         $balance = pl_balance_sheet($actorId, $companyId, $bookId, $today);
-        $overview = ['as_of' => $today, 'period_from' => $periodFrom, 'cash' => pl_cash_balance($actorId, $companyId, $bookId, $today), 'income' => $profit['total_income'], 'expenses' => $profit['total_expenses'], 'profit' => $profit['net_profit'], 'assets' => $balance['total_assets'], 'liabilities' => $balance['total_liabilities'], 'equity' => $balance['total_equity']];
+        $overview = ['as_of' => $today, 'period_from' => $periodFrom, 'cash' => pl_cash_balance($actorId, $companyId, $bookId, $today), 'income' => $profit['total_income'], 'expenses' => bcadd($profit['total_cost_of_sales'], $profit['total_expenses'], 4), 'profit' => $profit['net_profit'], 'assets' => $balance['total_assets'], 'liabilities' => $balance['total_liabilities'], 'equity' => $balance['total_equity']];
         pl_render('reports', ['title' => 'Your business in numbers', 'user' => $user, 'company' => $company, 'overview' => $overview]);
+    }
+    if ($path === '/reports/ageing') {
+        $direction = pl_web_text($_GET, 'direction', 'receivable');
+        $asOf = pl_web_text($_GET, 'as_of', gmdate('Y-m-d'));
+        $report = pl_ar_ap_open_items($actorId, $companyId, $bookId, $direction, $asOf);
+        pl_render('ageing', ['title'=>'Receivables & payables ageing','user'=>$user,'company'=>$company,'report'=>$report]);
     }
     if ($path === '/reports/balance-sheet') {
         $asOf = pl_web_text($_GET, 'as_of', gmdate('Y-m-d'));
@@ -556,10 +590,12 @@ try {
         pl_render('balance-sheet', ['title' => 'Balance sheet', 'user' => $user, 'company' => $company, 'report' => $report, 'asOf' => $asOf]);
     }
     if ($path === '/reports/profit-loss') {
-        $to = pl_web_text($_GET, 'to', gmdate('Y-m-d'));
-        $from = pl_web_text($_GET, 'from', $company['start_date']);
+        $preset = pl_web_text($_GET, 'preset', 'custom');
+        $period = pl_report_period($preset, gmdate('Y-m-d'));
+        $to = $period['to'] ?? pl_web_text($_GET, 'to', gmdate('Y-m-d'));
+        $from = $period['from'] ?? pl_web_text($_GET, 'from', $company['start_date']);
         $report = pl_profit_loss($actorId, $companyId, $bookId, $from, $to);
-        pl_render('profit-loss', ['title' => 'Profit & loss', 'user' => $user, 'company' => $company, 'report' => $report, 'from' => $from, 'to' => $to]);
+        pl_render('profit-loss', ['title' => 'Profit & loss', 'user' => $user, 'company' => $company, 'report' => $report, 'from' => $from, 'to' => $to, 'preset'=>$preset]);
     }
     if ($path === '/reports/cash-forecast') {
         $asOf = gmdate('Y-m-d');
@@ -602,26 +638,27 @@ try {
     }
     if ($path === '/transactions/save') {
         $documentId = pl_web_id($_POST, 'id');
+        $returnFilters = pl_return_list_filters($_POST, 'transactions');
         $return = $documentId ? pl_url('/transactions/edit', ['id' => $documentId]) : '/transactions/new';
         try {
             pl_web_assert_scope($company, $_POST);
-            $input = [
-                'kind' => pl_web_text($_POST, 'kind'), 'date' => pl_web_text($_POST, 'date'),
-                'amount' => pl_web_text($_POST, 'amount'), 'money_account_id' => pl_web_id($_POST, 'money_account_id'),
-                'category_account_id' => pl_web_id($_POST, 'category_account_id'), 'counterparty' => pl_web_text($_POST, 'counterparty'),
-                'reference' => pl_web_text($_POST, 'reference'), 'memo' => pl_web_text($_POST, 'memo'),
-                'creation_key' => pl_web_text($_POST, 'creation_key'),
-            ];
+            $input = pl_web_document_input($_POST);
+            if (pl_web_text($_POST, 'editor_action') === 'preview') {
+                if (!pl_can_write($company)) { throw new DomainException('Your role can read transactions but cannot edit them.'); }
+                pl_preview_document($actorId, $companyId, $bookId, $input);
+                pl_form_failure($return, $_POST, '', 200);
+            }
             $saved = pl_save_document($actorId, $companyId, $bookId, $input, $documentId ?: null, $documentId ? pl_web_id($_POST, 'revision') : null);
             pl_notice('Draft saved. Your accounts have not changed.');
-            pl_redirect(pl_url('/transactions', ['id' => $saved['id'], 'status' => 'draft']));
+            pl_redirect(pl_url('/transactions', ['id' => $saved['id']] + $returnFilters));
         } catch (DomainException $error) {
             pl_form_failure($return, $_POST, $error->getMessage());
         }
     }
     if ($path === '/transactions/post' || $path === '/transactions/reverse') {
         $id = pl_web_id($_POST, 'id');
-        $return = pl_url('/transactions/detail', ['id' => $id]);
+        $returnFilters = pl_return_list_filters($_POST, 'transactions');
+        $return = pl_url('/transactions/detail', ['id' => $id] + $returnFilters);
         try {
             pl_web_assert_scope($company, $_POST);
             if ($path === '/transactions/post') {
@@ -631,7 +668,7 @@ try {
                 $saved = pl_reverse_document($actorId, $companyId, $bookId, $id, pl_web_text($_POST, 'date'), pl_web_text($_POST, 'reason'));
                 pl_notice('Reversal posted. The original transaction and its history are preserved.');
             }
-            pl_redirect(pl_url('/transactions', ['id' => $id, 'status' => $saved['status']]));
+            pl_redirect(pl_url('/transactions', ['id' => $id] + $returnFilters));
         } catch (DomainException $error) {
             pl_form_failure($return, $_POST, $error->getMessage());
         }
@@ -647,17 +684,23 @@ try {
         }
         $form = pl_form_state($document ? pl_url('/transactions/edit', ['id' => $id]) : '/transactions/new');
         $input = $form['input'] ?: ($document ?? ['kind' => pl_web_text($_GET, 'kind', 'expense'), 'date' => gmdate('Y-m-d'), 'creation_key' => bin2hex(random_bytes(24))]);
-        pl_render('editor', ['title' => $document ? 'Edit draft' : 'New transaction', 'user' => $user, 'company' => $company, 'document' => $document, 'input' => $input, 'form' => $form]);
+        $preview = null;
+        if (pl_web_text($input, 'editor_action') === 'preview') {
+            try { $preview = pl_preview_document($actorId, $companyId, $bookId, pl_web_document_input($input)); }
+            catch (DomainException $error) { $form['message'] = $error->getMessage(); }
+        }
+        $returnFilters = pl_return_list_filters($form['input'] ?: $_GET, 'transactions');
+        pl_render('editor', ['title' => $document ? 'Edit draft' : 'New transaction', 'user' => $user, 'company' => $company, 'document' => $document, 'input' => $input, 'form' => $form, 'preview'=>$preview, 'returnFilters'=>$returnFilters]);
     }
     if ($path === '/transactions' || $path === '/transactions/detail') {
-        $filters = pl_filters($_GET);
-        $list = pl_list_documents($actorId, $companyId, $bookId, $filters);
+        $filters = pl_list_filters($_GET, 'transactions');
+        $list = pl_list_query($actorId, $companyId, $bookId, 'transactions', $_GET);
         $id = pl_web_id($_GET, 'id');
         if (!$id && $list['documents']) {
             $id = (int) $list['documents'][0]['id'];
         }
         $document = $id ? pl_get_document($actorId, $companyId, $bookId, $id) : null;
-        $form = $id ? pl_form_state(pl_url('/transactions/detail', ['id' => $id])) : ['message' => '', 'input' => []];
+        $form = $id ? pl_form_state(pl_url('/transactions/detail', ['id' => $id] + $filters)) : ['message' => '', 'input' => []];
         pl_render('transactions', ['title' => 'Transactions', 'user' => $user, 'company' => $company, 'list' => $list, 'filters' => $filters, 'document' => $document, 'form' => $form, 'detailOnly' => $path === '/transactions/detail']);
     }
     if ($path === '/reports/trial-balance') {
@@ -671,8 +714,8 @@ try {
         pl_ledger_date($asOf);
         if ($from !== null && (pl_ledger_date($from) > $asOf)) { throw new DomainException('The activity start date must be on or before its end date.'); }
         $accountId = pl_web_id($_GET, 'id');
-        $activity = $accountId ? pl_account_activity($actorId, $companyId, $bookId, $accountId, $asOf, max(1, pl_web_id($_GET, 'page', 1)), $from) : null;
-        pl_render('account', ['title' => $activity ? 'Account statement' : 'Account ledger', 'user' => $user, 'company' => $company, 'activity' => $activity, 'asOf' => $asOf, 'from' => $from]);
+        $activity = $accountId ? pl_list_query($actorId, $companyId, $bookId, 'account', $_GET) : null;
+        pl_render('account', ['title' => $activity ? 'Account statement' : 'Account ledger', 'user' => $user, 'company' => $company, 'activity' => $activity, 'asOf' => $asOf, 'from' => $from, 'filters' => pl_list_filters($_GET, 'account') + ['id' => $accountId, 'as_of' => $asOf, 'from' => $from]]);
     }
     // The remaining method-checked route is /journals/detail.
     $journal = pl_get_journal($actorId, $companyId, $bookId, pl_web_id($_GET, 'id'));
@@ -680,12 +723,12 @@ try {
 } catch (PlDemoUnavailable $error) {
     http_response_code(503);
     header('Retry-After: 10');
-    pl_render('error', ['title' => 'Your sample will be ready shortly', 'message' => $error->getMessage(), 'user' => null]);
+    pl_render('error', ['title' => 'Your sample will be ready shortly', 'message' => $error->getMessage(), 'user' => null, 'errorContext' => 'demo']);
 } catch (DomainException $error) {
     http_response_code(403);
-    pl_render('error', ['title' => 'This action is unavailable', 'message' => $error->getMessage(), 'user' => $user ?? null]);
+    pl_render('error', ['title' => $path === '/oauth/authorize' ? 'The connection request could not be completed' : 'This action is unavailable', 'message' => $error->getMessage(), 'user' => $user ?? null, 'errorContext' => $path === '/oauth/authorize' ? 'oauth' : 'general']);
 } catch (Throwable $error) {
     http_response_code(503);
     error_log('PHP Ledger request unavailable (' . get_class($error) . ').');
-    echo '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PHP Ledger unavailable</title><link rel="stylesheet" href="' . htmlspecialchars(pl_url('/assets/app.css'), ENT_QUOTES, 'UTF-8') . '"><main class="standalone"><h1>PHP Ledger is temporarily unavailable.</h1><p>Your request could not be completed. Please try again. If this is a new installation, check its setup and migration status.</p><a href="' . htmlspecialchars(pl_url('/'), ENT_QUOTES, 'UTF-8') . '">Try again</a></main></html>';
+    pl_web_unavailable_page(503);
 }

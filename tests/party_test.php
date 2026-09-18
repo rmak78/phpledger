@@ -2,6 +2,25 @@
 declare(strict_types=1);
 
 require_once __DIR__.'/party_outbound_race.php';
+require_once dirname(__DIR__).'/www/phpledger/includes/functions/web_functions.php';
+
+test('party list pages scoped records with literal search and role filters',function(): void {
+    $f=ledger_fixture();
+    for ($i=0;$i<26;$i++) {
+        $input=party_input(); unset($input['identifiers']);
+        $input['legal_name']='List party '.str_pad((string)$i,2,'0',STR_PAD_LEFT);
+        $input['trading_name']=$i===25?'Literal % match':'Trading'; $input['is_vendor']=$i%2===0;
+        pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],$input);
+    }
+    $run=fn(array $q):array=>pl_list_query($f['actor_id'],$f['company_id'],$f['book_id'],'parties',$q);
+    $first=$run([]); $last=$run(['page'=>'999']);
+    assert_same(26,$first['total']); assert_same(25,count($first['rows'])); assert_same(2,$last['page']); assert_same(1,count($last['rows']));
+    assert_same('List party 25',$last['rows'][0]['legal_name']);
+    assert_same(13,$run(['role'=>'vendor'])['total']); assert_same(26,$run(['role'=>'customer'])['total']);
+    assert_same(1,$run(['q'=>'%'])['total']); assert_same('List party 25',$run(['dir'=>'desc'])['rows'][0]['legal_name']);
+    foreach ([['sort'=>'name DESC'],['dir'=>'invalid'],['role'=>'owner']] as $bad) { assert_throws(fn()=>$run($bad),DomainException::class); }
+    $other=ledger_fixture(); assert_throws(fn()=>pl_list_query($other['actor_id'],$f['company_id'],$f['book_id'],'parties',[]),DomainException::class);
+});
 
 function party_input(string $country='PK'): array
 {

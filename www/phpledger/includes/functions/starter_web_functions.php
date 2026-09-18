@@ -37,15 +37,19 @@ function pl_starter_parties(int $actorId,int $companyId,int $bookId): array
 function pl_starter_field(string $label,string $name,mixed $value='',string $type='text',bool $required=true): void
 {
     static $sequence=0; $id='starter-field-'.++$sequence;
-    echo '<label class="field" for="'.pl_e($id).'">'.pl_e($label).'<input id="'.pl_e($id).'" name="'.pl_e($name).'" type="'.pl_e($type).'" value="'.pl_e((string)($value??'')).'"'.($required?' required':'').($type==='text'?' maxlength="500"':'').'></label>';
+    pl_ui_field($id, $label, static function () use ($id, $name, $type, $value, $required): void {
+        echo '<input class="input" id="'.pl_e($id).'" name="'.pl_e($name).'" type="'.pl_e($type).'" value="'.pl_e((string)($value??'')).'"'.($required?' required':'').($type==='text'?' maxlength="500"':'').'>';
+    });
 }
 
 function pl_starter_select(string $label,string $name,array $options,mixed $value='',bool $required=true): void
 {
     static $sequence=0; $id='starter-select-'.++$sequence;
-    echo '<label class="field" for="'.pl_e($id).'">'.pl_e($label).'<select id="'.pl_e($id).'" name="'.pl_e($name).'"'.($required?' required':'').'><option value="">Choose…</option>';
-    foreach ($options as $key=>$text) { echo '<option value="'.pl_e((string)$key).'"'.((string)$value===(string)$key?' selected':'').'>'.pl_e((string)$text).'</option>'; }
-    echo '</select></label>';
+    pl_ui_field($id, $label, static function () use ($id, $name, $required, $options, $value): void {
+        echo '<select class="select" id="'.pl_e($id).'" name="'.pl_e($name).'"'.($required?' required':'').'><option value="">Choose…</option>';
+        foreach ($options as $key=>$text) { echo '<option value="'.pl_e((string)$key).'"'.((string)$value===(string)$key?' selected':'').'>'.pl_e((string)$text).'</option>'; }
+        echo '</select>';
+    });
 }
 
 function pl_starter_hidden(string $name,mixed $value): void
@@ -78,16 +82,6 @@ function pl_starter_lines(array $input): array
 
 function pl_starter_header(string $title,string $description,array $form,array $company=[]): void
 {
-    echo '<div class="page-heading"><div><p class="eyebrow">Accounting starter</p><h1>'.pl_e($title).'</h1><p class="muted">'.pl_e($description).'</p></div></div>';
-    echo '<nav class="starter-tabs" aria-label="Accounting modules">';
-    $actor=pl_current_user_id();
-    $visibility=$actor && isset($company['id']) ? pl_company_visibility($actor,(int)$company['id']) : ['show_ar'=>true,'show_ap'=>true];
-    foreach (['/ar'=>'Receivables','/ap'=>'Payables','/purchasing'=>'Purchasing','/inventory'=>'Inventory','/parties'=>'Parties','/opening-conversion'=>'Opening debts','/tax'=>'Tax codes'] as $url=>$label) {
-        if (($url==='/ar'&&!$visibility['show_ar']) || ($url==='/ap'&&!$visibility['show_ap'])) { continue; }
-        if ($actor && isset($company['id'],$company['book_id']) && in_array($url,['/inventory','/purchasing'],true)
-            && !pl_module_available($actor,(int)$company['id'],(int)$company['book_id'],substr($url,1))) { continue; }
-        echo '<a href="'.pl_e(pl_url($url)).'">'.pl_e($label).'</a>';
-    }
-    echo '</nav>';
-    if ($form['message']!=='') { echo '<div class="alert" role="alert" tabindex="-1" data-form-error>'.pl_e($form['message']).'</div>'; }
+    pl_ui_page_header($title, $description);
+    if ($form['message']!=='') { echo '<div class="alert alert-danger" role="alert" tabindex="-1" data-form-error>'.pl_e($form['message']).'</div>'; }
 }

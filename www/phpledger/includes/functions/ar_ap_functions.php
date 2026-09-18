@@ -173,6 +173,42 @@ function pl_ar_validate_source(int $actorId, int $companyId, int $bookId, array 
 }
 
 /** Freeze calculated taxes during review; credits reuse original line rates and exact residuals. */
+/** Posted, unreversed credit consumption for the current original revision. */
+function pl_ar_credit_used(int $companyId,int $bookId,array $original,?int $excludeCreditId=null): array
+{
+    $used=[];
+    $prior=DB::query("SELECT r.source_snapshot,d.id FROM pl_ar_documents d JOIN pl_ar_document_revisions r ON r.document_id=d.id WHERE d.company_id=%i AND d.book_id=%i AND d.original_document_id=%i AND d.id<>%i AND NOT EXISTS (SELECT 1 FROM pl_ar_document_revisions n WHERE n.document_id=r.document_id AND n.revision>r.revision) AND NOT EXISTS (SELECT 1 FROM pl_journals j WHERE j.reversal_of_id=r.journal_id) FOR SHARE",$companyId,$bookId,$original['id'],$excludeCreditId??0);
+    foreach ($prior as $previous) {
+        $snapshot=json_decode($previous['source_snapshot'],true,512,JSON_THROW_ON_ERROR);
+        if (($snapshot['original_revision']??null)!==$original['revision']) { continue; }
+        foreach ($snapshot['lines'] as $line) {
+            if (($line['original_line_number']??null)===null) { continue; }
+            $number=$line['original_line_number']; $used[$number]??=['net'=>'0.0000','tax'=>'0.0000'];
+            $used[$number]['net']=bcadd($used[$number]['net'],$line['line_total'],4);
+            $used[$number]['tax']=bcadd($used[$number]['tax'],$line['tax_amount'],4);
+        }
+    }
+    return $used;
+}
+
+/** Safe display inputs only; the pricing service still validates and recomputes on save. */
+function pl_ar_editor_tax_context(int $actorId,int $companyId,int $bookId,?array $original=null,?int $excludeCreditId=null): array
+{
+    pl_require_company_access($actorId,$companyId); pl_ledger_book($companyId,$bookId);
+    $rates=DB::query('SELECT tax_code_id,effective_from,revision,percentage FROM pl_tax_rates WHERE company_id=%i AND book_id=%i ORDER BY effective_from DESC,revision DESC',$companyId,$bookId);
+    $sources=[]; $requiresLine=false;
+    if ($original!==null) {
+        $original=pl_get_ar_document($actorId,$companyId,$bookId,(int)$original['id']);
+        $used=pl_ar_credit_used($companyId,$bookId,$original,$excludeCreditId);
+        foreach ($original['lines'] as $line) {
+            $number=$line['line_number'];
+            $sources[$number]=['net'=>bcsub($line['line_total'],$used[$number]['net']??'0',4),'tax'=>bcsub($line['tax_amount'],$used[$number]['tax']??'0',4),'tax_code_id'=>$line['tax_code_id']];
+            $requiresLine=$requiresLine || $line['tax_code_id']!==null;
+        }
+    }
+    return ['rates'=>$rates,'credit'=>$original!==null,'requires_line'=>$requiresLine,'sources'=>$sources];
+}
+
 function pl_ar_price_document(int $actorId, int $companyId, int $bookId, array $data, ?int $excludeCreditId = null): array
 {
     $credit = in_array($data['kind'], ['customer_credit','supplier_credit'], true);
@@ -180,20 +216,7 @@ function pl_ar_price_document(int $actorId, int $companyId, int $bookId, array $
     $data['original_revision'] = $original === null ? null : $original['revision'];
     if ($original !== null && ($data['price_mode'] ?? null) !== null && $data['price_mode'] !== $original['price_mode']) { throw new DomainException('A credit retains the original document price mode.'); }
     $data['price_mode'] = $original['price_mode'] ?? $data['price_mode'] ?? pl_tax_price_mode($actorId,$companyId,$bookId);
-    $used = [];
-    if ($original !== null) {
-        $prior = DB::query("SELECT r.source_snapshot,d.id FROM pl_ar_documents d JOIN pl_ar_document_revisions r ON r.document_id=d.id WHERE d.company_id=%i AND d.book_id=%i AND d.original_document_id=%i AND d.id<>%i AND NOT EXISTS (SELECT 1 FROM pl_ar_document_revisions n WHERE n.document_id=r.document_id AND n.revision>r.revision) AND NOT EXISTS (SELECT 1 FROM pl_journals j WHERE j.reversal_of_id=r.journal_id) FOR SHARE", $companyId,$bookId,$original['id'],$excludeCreditId ?? 0);
-        foreach ($prior as $previous) {
-            $snapshot = json_decode($previous['source_snapshot'], true, 512, JSON_THROW_ON_ERROR);
-            if (($snapshot['original_revision'] ?? null) !== $original['revision']) { continue; }
-            foreach ($snapshot['lines'] as $line) {
-                if (($line['original_line_number'] ?? null) === null) { continue; }
-                $number = $line['original_line_number']; $used[$number] ??= ['net'=>'0.0000','tax'=>'0.0000'];
-                $used[$number]['net'] = bcadd($used[$number]['net'], $line['line_total'], 4);
-                $used[$number]['tax'] = bcadd($used[$number]['tax'], $line['tax_amount'], 4);
-            }
-        }
-    }
+    $used=$original===null?[]:pl_ar_credit_used($companyId,$bookId,$original,$excludeCreditId);
     $taxTotal = '0.0000'; $subtotal = '0.0000';
     foreach ($data['lines'] as &$line) {
         $rawAmount = pl_ar_line_amount($line['quantity'], $line['unit_price']);
@@ -267,7 +290,7 @@ function pl_ar_document_row(array $row, int $actorId): array
 }
 
 /** Only unused controls may be automatically activated by an owner. Existing books require reviewed conversion. */
-function pl_ar_control(int $actorId, int $companyId, int $bookId, array $document): int
+function pl_ar_control(int $actorId, int $companyId, int $bookId, array $document, bool $activate = true): int
 {
     $payable = in_array($document['kind'], ['bill','supplier_credit'], true);
     $role = $payable ? 'payables' : 'receivables';
@@ -281,7 +304,8 @@ function pl_ar_control(int $actorId, int $companyId, int $bookId, array $documen
         throw new DomainException('Choose a matching active customer or supplier control account.');
     }
     if (!DB::queryFirstField('SELECT account_id FROM pl_open_item_accounts WHERE account_id=%i FOR SHARE', $control)) {
-        pl_activate_open_item_account($actorId, $companyId, $bookId, (int) $control, 'Explicit posting of the first customer/vendor document to an unused control');
+        if ($activate) { pl_activate_open_item_account($actorId, $companyId, $bookId, (int) $control, 'Explicit posting of the first customer/vendor document to an unused control'); }
+        else { pl_open_item_activation_check($actorId,$companyId,$bookId,(int)$control); }
     }
     return (int) $control;
 }
@@ -295,7 +319,8 @@ function pl_ar_snapshot(array $line): array
 }
 
 /** Internal work under the document command and book lock. No independent balance is stored. */
-function pl_ar_post_version(int $actorId, int $companyId, int $bookId, array $document, ?int $offsetAccountId, ?string $rate, string $key): array
+/** Shared financial posting plan; preview does not activate a control or create an item. */
+function pl_ar_posting_plan(int $actorId, int $companyId, int $bookId, array $document, ?int $offsetAccountId, ?string $rate, bool $activateControl, ?array $creditRestoration = null): array
 {
     pl_require_module($actorId, $companyId, $bookId, in_array($document['kind'], ['bill','supplier_credit'], true) ? 'ap' : 'ar');
     pl_require_book_ready($companyId); pl_ar_validate_source($actorId, $companyId, $bookId, $document);
@@ -313,18 +338,22 @@ function pl_ar_post_version(int $actorId, int $companyId, int $bookId, array $do
     if ($credit) {
         $original = pl_get_ar_document($actorId, $companyId, $bookId, $document['original_document_id']);
         $item = pl_open_item_state($companyId, $bookId, $original['open_item_id']);
+        if ($creditRestoration!==null) {
+            $item['remaining_fc']=bcadd($item['remaining_fc'],$creditRestoration['amount_fc'],4);
+            $item['remaining_base']=bcadd($item['remaining_base'],$creditRestoration['amount_base'],4);
+            $item['latest_activity_date']=max($item['latest_activity_date'],$creditRestoration['date']);
+        }
         $control = (int) $item['control_account_id']; $itemId = (int) $item['id'];
         $base = pl_oi_allocated_base($item, $document['total']);
         if ($document['document_date'] < $item['latest_activity_date']) { throw new DomainException('A credit cannot precede the latest open-item activity.'); }
         $snapshot = pl_ar_snapshot($item['recognition']);
         if ($rate !== null && pl_fx_rate($rate) !== $snapshot['rate']) { throw new DomainException('Credits retain the original transaction rate and carrying value.'); }
     } else {
-        $control = pl_ar_control($actorId, $companyId, $bookId, $document);
+        $control = pl_ar_control($actorId, $companyId, $bookId, $document, $activateControl);
         $snapshot = pl_oi_rate($actorId, $companyId, $bookId, $document['currency'], $document['document_date'], $rate, null, 'spot');
         if (($document['party']['linked_entity_id'] ?? null) !== null) { $snapshot['ic_counterparty_entity_id'] = (int) $document['party']['linked_entity_id']; }
         $base = pl_fx_convert($document['total'], $snapshot['rate']);
-        DB::insert('pl_open_items', ['company_id'=>$companyId,'book_id'=>$bookId,'party_id'=>$document['party_id'],'control_account_id'=>$control,'direction'=>$receivable ? 'receivable' : 'payable','currency'=>$document['currency'],'source_reference'=>'ar-document:' . $document['id'] . ':revision:' . $document['revision'],'created_by'=>$actorId]);
-        $itemId = (int) DB::insertId();
+        $itemId = null;
     }
     $description = $document['number'] . ' - ' . $document['party']['legal_name'];
     $controlDebit = $receivable !== $credit;
@@ -355,6 +384,19 @@ function pl_ar_post_version(int $actorId, int $companyId, int $bookId, array $do
         $domestic = pl_oi_rate($actorId, $companyId, $bookId, $book['currency'], $document['document_date'], null, null, 'spot');
         $lines[] = pl_oi_line($roundingId, $magnitude, $magnitude, bccomp($difference, '0', 4) > 0 ? !$controlDebit : $controlDebit, $domestic, 'Explicit currency rounding');
     }
+    return ['document'=>$document,'original'=>$original,'currency'=>$book['currency'],'credit'=>$credit,'receivable'=>$receivable,'control'=>$control,'item_id'=>$itemId,'description'=>$description,'lines'=>$lines];
+}
+
+function pl_ar_post_version(int $actorId, int $companyId, int $bookId, array $document, ?int $offsetAccountId, ?string $rate, string $key): array
+{
+    $plan=pl_ar_posting_plan($actorId,$companyId,$bookId,$document,$offsetAccountId,$rate,true);
+    $document=$plan['document']; $original=$plan['original']; $credit=$plan['credit']; $receivable=$plan['receivable'];
+    $control=$plan['control']; $itemId=$plan['item_id']; $lines=$plan['lines']; $description=$plan['description'];
+    $book=['currency'=>$plan['currency']];
+    if ($itemId===null) {
+        DB::insert('pl_open_items', ['company_id'=>$companyId,'book_id'=>$bookId,'party_id'=>$document['party_id'],'control_account_id'=>$control,'direction'=>$receivable ? 'receivable' : 'payable','currency'=>$document['currency'],'source_reference'=>'ar-document:' . $document['id'] . ':revision:' . $document['revision'],'created_by'=>$actorId]);
+        $itemId = (int) DB::insertId();
+    }
     $journal = pl_post_journal_locked($actorId, $companyId, $bookId, ['date'=>$document['document_date'],'currency'=>$book['currency'],'source_type'=>$credit ? 'open_item_settlement' : 'open_item_recognition','source_reference'=>'open-item:' . $itemId,'idempotency_key'=>$key,'description'=>$description,'lines'=>$lines], null, $credit ? $itemId : null);
     $document['journal_id'] = (int) $journal['id']; $document['open_item_id'] = $itemId; $document['status'] = 'posted';
     if ($document['kind'] === 'invoice') { pl_inventory_issue_ar_document($actorId, $companyId, $bookId, $document, (int) $journal['id'], $key . ':stock'); }
@@ -366,6 +408,38 @@ function pl_ar_record_version(int $actorId, array $document, string $reason): vo
 {
     $snapshot = array_intersect_key($document, array_flip(['kind','party_id','document_date','due_date','currency','subtotal','tax_total','total','price_mode','reference','terms','notes','lines','original_document_id','original_revision','rounding_account_id']));
     DB::insert('pl_ar_document_revisions', ['document_id'=>$document['id'],'company_id'=>$document['company_id'],'book_id'=>$document['book_id'],'revision'=>$document['revision'],'journal_id'=>$document['journal_id'],'open_item_id'=>$document['open_item_id'],'source_snapshot'=>json_encode($snapshot, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE),'actor_id'=>$actorId,'reason'=>$reason]);
+}
+
+/** Preview current editor values without saving a draft, activating controls or posting. */
+function pl_preview_ar_document(int $actorId,int $companyId,int $bookId,array $input,?int $documentId=null,?int $revision=null,?string $rate=null): array
+{
+    $data=pl_normalize_ar_document($input);
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$data,$documentId,$revision,$rate): array {
+        pl_require_company_access($actorId,$companyId,true); pl_ledger_book($companyId,$bookId,true);
+        if ($documentId!==null) {
+            $current=pl_get_ar_document($actorId,$companyId,$bookId,$documentId);
+            if ($current['status']!=='draft' || $current['revision']!==$revision || $current['kind']!==$data['kind']) { throw new DomainException('Review the current draft before previewing these changes.'); }
+        }
+        $document=pl_ar_price_document($actorId,$companyId,$bookId,$data,$documentId);
+        $document+=['id'=>$documentId??0,'revision'=>$revision??0,'number'=>$documentId===null?'New '.str_replace('_',' ',$data['kind']):pl_ar_document_number($documentId,$data['kind']),
+            'party'=>pl_ar_document_party($actorId,$companyId,$bookId,$data['party_id'],$data['kind'])];
+        $plan=pl_ar_posting_plan($actorId,$companyId,$bookId,$document,null,$rate,false);
+        $plan['stock']=pl_inventory_ar_preview($actorId,$companyId,$bookId,$plan['document'],$plan['original']);
+        return $plan;
+    });
+}
+
+/** Posting from an editor is one atomic save/review/post operation with stable retries. */
+function pl_save_and_post_ar_document(int $actorId,int $companyId,int $bookId,array $input,string $expectedHash,?int $documentId=null,?int $revision=null,?string $rate=null): array
+{
+    $key=pl_ledger_text($input['creation_key']??null,'Document identity',128);
+    return pl_ar_action($actorId,$companyId,$bookId,$documentId,'editor_post','ar-editor:'.hash('sha256',$key),[$input,$revision,$rate],
+        function () use ($actorId,$companyId,$bookId,$input,$expectedHash,$documentId,$revision,$rate): array {
+            $plan=pl_preview_ar_document($actorId,$companyId,$bookId,$input,$documentId,$revision,$rate);
+            if (!hash_equals($expectedHash,hash('sha256',json_encode($plan,JSON_THROW_ON_ERROR)))) { throw new DomainException('The document or its posting basis changed. Update the preview before posting.'); }
+            $draft=pl_save_ar_document($actorId,$companyId,$bookId,$input,$documentId,$revision);
+            return pl_post_ar_document($actorId,$companyId,$bookId,$draft['id'],$draft['revision'],null,$rate);
+        });
 }
 
 function pl_post_ar_document(int $actorId, int $companyId, int $bookId, int $documentId, int $expectedRevision, ?int $offsetAccountId = null, ?string $rate = null): array
@@ -406,10 +480,55 @@ function pl_reverse_ar_document(int $actorId, int $companyId, int $bookId, int $
     });
 }
 
-function pl_correct_ar_document(int $actorId, int $companyId, int $bookId, int $documentId, array $input, int $expectedRevision, string $key, string $reason, ?string $reversalDate = null, ?string $rate = null): array
+/** Read-only reversal and replacement effects, including stock restored before re-issue. */
+function pl_preview_ar_correction(int $actorId,int $companyId,int $bookId,int $documentId,array $input,int $expectedRevision,string $reason,?string $reversalDate=null,?string $rate=null): array
+{
+    $data=pl_normalize_ar_document($input); $reason=pl_ledger_text($reason,'Correction reason',400);
+    $date=pl_ledger_date($reversalDate??gmdate('Y-m-d'));
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$documentId,$data,$expectedRevision,$reason,$date,$rate): array {
+        $member=pl_require_company_access($actorId,$companyId,true); pl_ledger_book($companyId,$bookId,true);
+        $document=pl_get_ar_document($actorId,$companyId,$bookId,$documentId);
+        if ($document['journal_id']===null || $document['revision']!==$expectedRevision || $document['payment_status']==='reversed') { throw new DomainException('Review the current posted revision before correction.'); }
+        if ($document['kind']!==$data['kind'] || $document['reference']!==$data['reference'] || $document['original_document_id']!==$data['original_document_id']) { throw new DomainException('A correction retains the same document identity, kind, reference and original credit link.'); }
+        $journal=pl_get_journal($actorId,$companyId,$bookId,$document['journal_id']);
+        if ($date<$journal['journal_date'] || $data['document_date']<$date) { throw new DomainException('Date the reversal on or after its original posting, and the replacement on or after the reversal.'); }
+        if ($date<gmdate('Y-m-d') && ($member['role']!=='owner' || $date!==$journal['journal_date'])) { throw new DomainException('Backdated reversals require an owner, the original posting date and an open period.'); }
+        pl_open_item_assert_correction_allowed($companyId,$bookId,$document['journal_id']);
+        pl_purchasing_assert_reversal_allowed($companyId,$bookId,$document['journal_id']);
+        $reversal=[];
+        foreach ($journal['lines'] as $line) { $reversal[]=['account_id'=>(int)$line['account_id'],'debit'=>$line['credit'],'credit'=>$line['debit']]; }
+        $restoration=null;
+        if ($document['is_credit']) {
+            $control=(int)$document['open_item']['control_account_id'];
+            $allocated=array_values(array_filter($journal['lines'],static fn(array $line):bool=>(int)$line['account_id']===$control));
+            if (count($allocated)!==1) { throw new DomainException('Review the credit control allocation before correction.'); }
+            $restoration=['amount_fc'=>$allocated[0]['amount_fc'],'amount_base'=>$allocated[0]['amount_base'],'date'=>$date];
+        }
+        $updated=array_replace($document,$data,['revision'=>$expectedRevision+1,'journal_id'=>null,'open_item_id'=>null,'status'=>'draft']);
+        $updated['party']=pl_ar_document_party($actorId,$companyId,$bookId,$updated['party_id'],$updated['kind']);
+        $updated=pl_ar_price_document($actorId,$companyId,$bookId,$updated,$document['is_credit']?$documentId:null);
+        $plan=pl_ar_posting_plan($actorId,$companyId,$bookId,$updated,null,$rate,false,$restoration);
+        foreach ([['date'=>$date,'lines'=>$reversal],['date'=>$data['document_date'],'lines'=>$plan['lines']]] as $posting) {
+            $periods=DB::query('SELECT status FROM pl_periods WHERE company_id=%i AND book_id=%i AND start_date<=%s AND end_date>=%s FOR SHARE',$companyId,$bookId,$posting['date'],$posting['date']);
+            if (count($periods)!==1 || $periods[0]['status']!=='open') { throw new DomainException('Both correction dates must fall within open accounting periods.'); }
+            pl_reconciliation_assert_posting_allowed($companyId,$bookId,$posting);
+        }
+        $stock=pl_inventory_ar_correction_basis($actorId,$companyId,$bookId,$document,$date);
+        $plan['stock']=pl_inventory_ar_preview($actorId,$companyId,$bookId,$plan['document'],$plan['original'],$stock['balances'],$stock['restored']);
+        $plan['stock_reversal']=$stock['plans'];
+        $plan['reversal']=['journal_id'=>$document['journal_id'],'date'=>$date,'reason'=>$reason,'lines'=>$reversal];
+        return $plan;
+    });
+}
+
+function pl_correct_ar_document(int $actorId, int $companyId, int $bookId, int $documentId, array $input, int $expectedRevision, string $key, string $reason, ?string $reversalDate = null, ?string $rate = null, ?string $expectedHash = null): array
 {
     $data = pl_normalize_ar_document($input); $reason = pl_ledger_text($reason, 'Correction reason', 500);
-    return pl_ar_action($actorId, $companyId, $bookId, $documentId, 'correct', $key, compact('data','expectedRevision','reason','reversalDate','rate'), function () use ($actorId,$companyId,$bookId,$documentId,$data,$expectedRevision,$key,$reason,$reversalDate,$rate): array {
+    return pl_ar_action($actorId, $companyId, $bookId, $documentId, 'correct', $key, compact('data','expectedRevision','reason','reversalDate','rate'), function () use ($actorId,$companyId,$bookId,$documentId,$input,$data,$expectedRevision,$key,$reason,$reversalDate,$rate,$expectedHash): array {
+        if ($expectedHash!==null) {
+            $plan=pl_preview_ar_correction($actorId,$companyId,$bookId,$documentId,$input,$expectedRevision,$reason,$reversalDate,$rate);
+            if (!hash_equals($expectedHash,hash('sha256',json_encode($plan,JSON_THROW_ON_ERROR)))) { throw new DomainException('The correction or its posting basis changed. Update the preview before posting.'); }
+        }
         $document = pl_get_ar_document($actorId, $companyId, $bookId, $documentId);
         if ($document['journal_id'] === null || $document['revision'] !== $expectedRevision || $document['payment_status'] === 'reversed') { throw new DomainException('Review the current posted revision before correction.'); }
         if ($document['kind'] !== $data['kind'] || $document['reference'] !== $data['reference'] || $document['original_document_id'] !== $data['original_document_id']) { throw new DomainException('A correction retains the same document identity, kind, reference and original credit link.'); }
@@ -440,6 +559,67 @@ function pl_list_ar_documents(int $actorId, int $companyId, int $bookId, array $
         }
         usort($documents, static fn(array $a, array $b): int => [$b['document_date'],$b['id']] <=> [$a['document_date'],$a['id']]);
         return ['documents'=>$documents,'total'=>count($documents)];
+    });
+}
+
+/** Page the current revision, including corrections, before hydrating document detail. */
+function pl_page_ar_documents(int $actorId,int $companyId,int $bookId,string $side,array $filters): array
+{
+    if (!in_array($side,['ar','ap'],true)) { throw new DomainException('Choose customer or supplier documents.'); }
+    $orders=[
+        'date'=>['asc'=>'q.effective_date ASC, q.id ASC','desc'=>'q.effective_date DESC, q.id DESC'],
+        'name'=>['asc'=>'p.legal_name ASC, q.id ASC','desc'=>'p.legal_name DESC, q.id DESC'],
+        'amount'=>['asc'=>'q.current_total ASC, q.id ASC','desc'=>'q.current_total DESC, q.id DESC'],
+        'due'=>['asc'=>'q.current_due ASC, q.id ASC','desc'=>'q.current_due DESC, q.id DESC'],
+    ];
+    $sort=$filters['sort']??'date'; $dir=$filters['dir']??'desc';
+    if (!is_string($sort) || !is_string($dir) || !isset($orders[$sort][$dir])) { throw new DomainException('Unsupported document order.'); }
+    $order=$orders[$sort][$dir]; $size=pl_table_size($filters['per_page']??25);
+    $status=$filters['status']??'all';
+    if (!in_array($status,['all','draft','unpaid','overdue','paid','reversed'],true)) { throw new DomainException('Choose a valid document status.'); }
+    $search=pl_ledger_text($filters['q']??'','Search',160,false);
+    $from=($filters['from']??'')===''?'':pl_ledger_date($filters['from']); $to=($filters['to']??'')===''?'':pl_ledger_date($filters['to']);
+    if ($from!=='' && $to!=='' && $from>$to) { throw new DomainException('The beginning of the date range must be on or before its end.'); }
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$side,$filters,$order,$size,$status,$search,$from,$to): array {
+        pl_require_company_access($actorId,$companyId); pl_ledger_book($companyId,$bookId);
+        // Complete fixed order clauses above; no browser column or direction is SQL text.
+        $cte=<<<'SQL'
+WITH effective AS (
+ SELECT d.id,d.kind,d.reference,
+ COALESCE(r.journal_id,d.journal_id) AS current_journal,
+ COALESCE(r.open_item_id,d.open_item_id) AS current_item,
+ IF(r.id IS NULL,d.party_id,CAST(JSON_UNQUOTE(JSON_EXTRACT(r.source_snapshot,'$.party_id')) AS UNSIGNED)) AS current_party,
+ IF(r.id IS NULL,d.document_date,JSON_UNQUOTE(JSON_EXTRACT(r.source_snapshot,'$.document_date'))) AS effective_date,
+ IF(r.id IS NULL,d.due_date,JSON_UNQUOTE(JSON_EXTRACT(r.source_snapshot,'$.due_date'))) AS current_due,
+ CAST(IF(r.id IS NULL,d.total,JSON_UNQUOTE(JSON_EXTRACT(r.source_snapshot,'$.total'))) AS DECIMAL(20,4)) AS current_total
+ FROM pl_ar_documents d
+ LEFT JOIN pl_ar_document_revisions r ON r.document_id=d.id AND r.company_id=d.company_id AND r.book_id=d.book_id
+ AND r.revision=(SELECT MAX(n.revision) FROM pl_ar_document_revisions n WHERE n.document_id=d.id)
+ WHERE d.company_id=%i AND d.book_id=%i AND d.kind IN %ls
+), registry AS (
+ SELECT effective.*,v.id AS reversed,
+ (SELECT COALESCE(SUM(CASE WHEN e.kind IN ('recognition','allocation_reversal') THEN COALESCE(e.allocated_amount_fc,l.amount_fc) ELSE -COALESCE(e.allocated_amount_fc,l.amount_fc) END),0)
+ FROM pl_open_item_entries e JOIN pl_journal_lines l ON l.id=e.journal_line_id AND l.company_id=e.company_id AND l.book_id=e.book_id
+ WHERE e.company_id=%i AND e.book_id=%i AND e.item_id=effective.current_item) AS remaining
+ FROM effective LEFT JOIN pl_journals v ON v.reversal_of_id=effective.current_journal
+)
+SQL;
+        $join=<<<'SQL'
+ FROM registry q JOIN pl_parties p ON p.id=q.current_party AND p.company_id=%i
+ WHERE (%s='' OR q.effective_date>=%s) AND (%s='' OR q.effective_date<=%s)
+ AND (%s='' OR LOCATE(%s,p.legal_name)>0 OR LOCATE(%s,q.reference)>0 OR LOCATE(%s,CONCAT(CASE q.kind WHEN 'invoice' THEN 'INV-' WHEN 'bill' THEN 'BILL-' WHEN 'customer_credit' THEN 'CR-' ELSE 'SC-' END,LPAD(q.id,6,'0')))>0)
+ AND (%s='all' OR (%s='draft' AND q.current_journal IS NULL)
+ OR (%s='reversed' AND q.reversed IS NOT NULL)
+ OR (%s='paid' AND q.current_journal IS NOT NULL AND q.reversed IS NULL AND q.kind IN ('invoice','bill') AND q.remaining=0)
+ OR (%s='unpaid' AND q.current_journal IS NOT NULL AND q.reversed IS NULL AND q.kind IN ('invoice','bill') AND q.remaining>0)
+ OR (%s='overdue' AND q.current_journal IS NOT NULL AND q.reversed IS NULL AND q.kind IN ('invoice','bill') AND q.remaining>0 AND q.current_due<%s))
+SQL;
+        $args=[$companyId,$bookId,$side==='ar'?['invoice','customer_credit']:['bill','supplier_credit'],$companyId,$bookId,$companyId,$from,$from,$to,$to,$search,$search,$search,strtoupper($search),$status,$status,$status,$status,$status,$status,gmdate('Y-m-d')];
+        $total=(int)DB::queryFirstField($cte.' SELECT COUNT(*)'.$join,...$args);
+        $pages=max(1,(int)ceil($total/$size)); $page=min($pages,max(1,(int)($filters['page']??1)));
+        $ids=DB::queryFirstColumn($cte.' SELECT q.id'.$join.' ORDER BY '.$order.' LIMIT %i OFFSET %i',...array_merge($args,[$size,($page-1)*$size]));
+        $documents=array_map(static fn($id): array=>pl_get_ar_document($actorId,$companyId,$bookId,(int)$id),$ids);
+        return ['documents'=>$documents,'total'=>$total,'page'=>$page,'pages'=>$pages];
     });
 }
 

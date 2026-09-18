@@ -18,11 +18,29 @@ function pl_core_history(int $actorId, int $companyId, int $bookId, string $enti
     return DB::query('SELECT a.id, a.action, a.reason, a.recorded_at, u.display_name FROM pl_core_audit a JOIN pl_users u ON u.id = a.actor_id WHERE a.company_id = %i AND a.book_id = %i AND a.entity_type = %s AND a.entity_id = %i ORDER BY a.id DESC LIMIT 50', $companyId, $bookId, $entity, $id);
 }
 
+/** Page the chart within fixed accounting groups; filtering never changes report balances. */
+function pl_page_accounts(int $actorId,int $companyId,int $bookId,array $filters): array
+{
+    $orders=['code'=>['asc'=>'code ASC,id ASC','desc'=>'code DESC,id DESC'],'name'=>['asc'=>'name ASC,id ASC','desc'=>'name DESC,id DESC']];
+    $sort=$filters['sort']??'code'; $dir=$filters['dir']??'asc'; $type=$filters['type']??'all'; $status=$filters['status']??'all';
+    if (!is_string($sort) || !is_string($dir) || !isset($orders[$sort][$dir]) || !in_array($type,['all','asset','liability','equity','income','expense'],true) || !in_array($status,['all','active','inactive'],true)) { throw new DomainException('Choose valid account filters.'); }
+    $order=$orders[$sort][$dir]; $q=pl_ledger_text($filters['q']??'','Search',160,false); $size=pl_table_size($filters['per_page']??25);
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$filters,$order,$type,$status,$q,$size):array {
+        pl_require_company_access($actorId,$companyId); pl_ledger_book($companyId,$bookId);
+        $where='company_id=%i AND book_id=%i AND (%s=%s OR type=%s) AND (%s=%s OR is_active=%i) AND (%s=%s OR LOCATE(%s,code)>0 OR LOCATE(%s,name)>0)';
+        $args=[$companyId,$bookId,$type,'all',$type,$status,'all',$status==='active'?1:0,$q,'',$q,$q];
+        $total=(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_accounts WHERE '.$where,...$args);
+        $pages=max(1,(int)ceil($total/$size)); $page=min($pages,max(1,(int)($filters['page']??1)));
+        $rows=DB::query('SELECT id,code,name,type,role,is_active FROM pl_accounts WHERE '.$where." ORDER BY FIELD(type,'asset','liability','equity','income','expense'), ".$order.' LIMIT %i OFFSET %i',...array_merge($args,[$size,($page-1)*$size]));
+        return ['rows'=>$rows,'total'=>$total,'page'=>$page,'pages'=>$pages];
+    });
+}
+
 function pl_get_account(int $actorId, int $companyId, int $bookId, int $id): array
 {
     pl_require_company_access($actorId, $companyId);
     pl_ledger_book($companyId, $bookId);
-    $row = DB::queryFirstRow('SELECT id, code, name, type, role, semantic_key, is_active, revision, currency, is_monetary, revaluation_account_id, group_account_id FROM pl_accounts WHERE id = %i AND company_id = %i AND book_id = %i FOR SHARE', $id, $companyId, $bookId);
+    $row = DB::queryFirstRow('SELECT id, code, name, type, role, report_classification, semantic_key, is_active, revision, currency, is_monetary, revaluation_account_id, group_account_id FROM pl_accounts WHERE id = %i AND company_id = %i AND book_id = %i FOR SHARE', $id, $companyId, $bookId);
     if (!$row) { throw new DomainException('This account is not available in the selected company and book.'); }
     $row['id'] = (int) $row['id'];
     $row['revision'] = (int) $row['revision'];
@@ -50,9 +68,14 @@ function pl_save_account(int $actorId, int $companyId, int $bookId, array $input
         throw new DomainException('The account purpose must match its classification.');
     }
     $data = ['code' => $code, 'name' => $name, 'type' => $type, 'role' => $role, 'is_active' => $active];
+    $reportClassification = $input['report_classification'] ?? null;
+    if ($reportClassification !== null && ($reportClassification !== 'cost_of_sales' || $type !== 'expense')) {
+        throw new DomainException('Cost of sales is available only for expense accounts.');
+    }
     $legacyHash = hash('sha256', json_encode($data, JSON_THROW_ON_ERROR));
     $currencyInput = $input;
     if ($id === null) { $data += pl_currency_account_properties($input); }
+    if ($reportClassification !== null) { $data['report_classification'] = $reportClassification; }
     $hash = hash('sha256', json_encode($data, JSON_THROW_ON_ERROR));
     $key = $id === null ? pl_request_key(pl_ledger_text($input['creation_key'] ?? null, 'Request identity', 128)) : null;
     return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $id, $revision, $reason, $data, $key, $hash, $currencyInput, $legacyHash): array {
@@ -62,7 +85,7 @@ function pl_save_account(int $actorId, int $companyId, int $bookId, array $input
             pl_currency_validate_account_links($companyId, $bookId, $data);
             $prior = DB::queryFirstRow('SELECT id, creation_hash FROM pl_accounts WHERE book_id = %i AND company_id = %i AND creation_key = %s FOR UPDATE', $bookId, $companyId, $key);
             if ($prior) {
-                if (!hash_equals((string) $prior['creation_hash'], $hash) && !(array_intersect_key($currencyInput, array_flip(['currency','is_monetary','revaluation_account_id','group_account_id'])) === [] && hash_equals((string) $prior['creation_hash'], $legacyHash))) { throw new DomainException('This request already created a different account. Open the existing account.'); }
+                if (!hash_equals((string) $prior['creation_hash'], $hash) && !(array_intersect_key($currencyInput, array_flip(['currency','is_monetary','revaluation_account_id','group_account_id','report_classification'])) === [] && hash_equals((string) $prior['creation_hash'], $legacyHash))) { throw new DomainException('This request already created a different account. Open the existing account.'); }
                 return pl_get_account($actorId, $companyId, $bookId, (int) $prior['id']);
             }
             if (DB::queryFirstField('SELECT id FROM pl_accounts WHERE book_id = %i AND code = %s FOR SHARE', $bookId, $data['code'])) {
@@ -83,7 +106,7 @@ function pl_save_account(int $actorId, int $companyId, int $bookId, array $input
                 && DB::queryFirstField('SELECT journal_id FROM pl_journal_lines WHERE account_id=%i AND company_id=%i AND book_id=%i LIMIT 1 FOR SHARE', $id, $companyId, $bookId)) {
                 throw new DomainException('Currency and monetary classification are fixed once this account has postings.');
             }
-            DB::update('pl_accounts', $properties + ['name' => $data['name'], 'is_active' => $data['is_active'], 'revision' => $before['revision'] + 1], 'id = %i AND company_id = %i AND book_id = %i', $id, $companyId, $bookId);
+            DB::update('pl_accounts', $properties + ['name' => $data['name'], 'is_active' => $data['is_active'], 'report_classification'=>array_key_exists('report_classification',$currencyInput) ? $currencyInput['report_classification'] : $before['report_classification'], 'revision' => $before['revision'] + 1], 'id = %i AND company_id = %i AND book_id = %i', $id, $companyId, $bookId);
         }
         $account = pl_get_account($actorId, $companyId, $bookId, $id);
         pl_core_audit($actorId, $companyId, $bookId, 'account', $id, $before === null ? 'created' : 'updated', $reason, $before, $account);
@@ -200,6 +223,15 @@ function pl_save_general_draft(int $actorId, int $companyId, int $bookId, array 
     });
 }
 
+/** Save the reviewed editor values and post atomically through the existing funnel. */
+function pl_save_and_post_general_draft(int $actorId, int $companyId, int $bookId, array $input, ?int $id = null, ?int $revision = null): array
+{
+    return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $input, $id, $revision): array {
+        $draft = pl_save_general_draft($actorId, $companyId, $bookId, $input, $id, $revision);
+        return pl_post_general_draft($actorId, $companyId, $bookId, $draft['id'], $draft['revision']);
+    });
+}
+
 function pl_post_general_draft(int $actorId, int $companyId, int $bookId, int $id, int $revision): array
 {
     return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $id, $revision): array {
@@ -245,14 +277,19 @@ function pl_list_general_drafts(int $actorId, int $companyId, int $bookId, int $
     $search = pl_ledger_text($options['search'] ?? '', 'Search', 160, false);
     $where = ' FROM pl_effective_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = %i AND d.book_id = %i';
     $args = [$companyId, $bookId];
+    $status = $options['status'] ?? 'all';
+    if (!in_array($status, ['all','draft','posted','reversed'], true)) { throw new DomainException('Choose a valid journal status.'); }
+    if ($status === 'draft') { $where .= ' AND d.journal_id IS NULL'; }
+    elseif ($status === 'posted') { $where .= ' AND d.journal_id IS NOT NULL AND r.id IS NULL'; }
+    elseif ($status === 'reversed') { $where .= ' AND r.id IS NOT NULL'; }
     if ($search !== '') {
         $where .= ' AND (LOCATE(%s, d.description) > 0 OR LOCATE(%s, d.reference) > 0 OR LOCATE(%s, CONCAT(\'GJ-\', LPAD(d.id, 6, \'0\'))) > 0)';
         array_push($args, $search, $search, strtoupper($search));
     }
-    $filtered = $search === '' ? $total : (int) DB::queryFirstField('SELECT COUNT(*)' . $where, ...$args);
+    $filtered = $search === '' && $status === 'all' ? $total : (int) DB::queryFirstField('SELECT COUNT(*)' . $where, ...$args);
     $pages = max(1, (int) ceil($filtered / $size));
     $page = min($pages, max(1, $page));
-    $order = pl_table_order($options, ['date' => 'd.document_date', 'description' => 'd.description', 'status' => "CASE WHEN d.journal_id IS NULL THEN 'draft' WHEN r.id IS NOT NULL THEN 'reversed' ELSE 'posted' END"], 'd.document_date DESC, d.id DESC', 'd.id DESC');
+    $order = pl_table_order($options, 'general-journals');
     $rows = DB::query('SELECT d.*, r.id AS reversal_journal_id' . $where . ' ORDER BY ' . $order . ' LIMIT %i OFFSET %i', ...array_merge($args, [$size, ($page - 1) * $size]));
     return ['rows' => array_map('pl_general_draft_view', $rows), 'total' => $filtered, 'records_total' => $total, 'page' => $page, 'pages' => $pages];
 }

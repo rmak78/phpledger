@@ -1,66 +1,46 @@
-<?php declare(strict_types=1); ?>
+<?php
+declare(strict_types=1);
+require_once __DIR__ . '/partials/ui/components.php';
+$posLayout = $user !== null && $company !== null && $view === 'pos';
+$workspace = $user !== null && $company !== null && !in_array($view, ['oauth-consent', 'pos'], true);
+?>
 <!doctype html>
-<html lang="en">
+<html lang="en" data-screen="<?= pl_e($view) ?>">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
+    <link rel="icon" href="<?= pl_e(pl_url('/assets/brand/phpledger-horizontal.png')) ?>" type="image/png">
     <title><?= pl_e($title) ?> · PHP Ledger</title>
     <link rel="preload" href="<?= pl_e(pl_url('/assets/fonts/InterVariable.woff2')) ?>" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/app.css', ['v' => '20260915-report-fit'])) ?>">
-    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/core.css', ['v' => '0.1.2'])) ?>">
-    <?php if ($view === 'general-editor'): ?><script src="<?= pl_e(pl_url('/assets/core-journal.js', ['v' => '0.1.2'])) ?>" defer></script><?php endif; ?>
-    <?php if ($view === 'pos'): ?><link rel="stylesheet" href="<?= pl_e(pl_url('/assets/pos.css')) ?>"><script src="<?= pl_e(pl_url('/assets/pos.js')) ?>" defer></script><?php endif; ?>
-    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/sample-guide.css')) ?>">
-    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/starter.css', ['v' => '20260916-starter-4'])) ?>">
+    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/app.css', ['v' => 'redesign-foundation'])) ?>">
+
     <script src="<?= pl_e(pl_url('/assets/app.js', ['v' => '20260916-setup'])) ?>" defer></script>
-    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/ledger-tables.css')) ?>">
-    <?php if (in_array($view, ['transactions','general-journals','account','bank-reconciliation'], true)): ?>
-    <link rel="stylesheet" href="<?= pl_e(pl_url('/assets/vendor/datatables-3.0.4/dataTables.min.css')) ?>">
-    <script src="<?= pl_e(pl_url('/assets/vendor/datatables-3.0.4/dataTables.min.js')) ?>" defer></script>
-    <script src="<?= pl_e(pl_url('/assets/ledger-tables.js')) ?>" defer></script>
-    <?php endif; ?>
+
+
 </head>
-<body class="view-<?= pl_e($view) ?><?= $user ? ' has-app-shell' : '' ?>" <?php if ($company): ?>data-company-id="<?= (int) $company['id'] ?>" data-book-id="<?= (int) $company['book_id'] ?>" data-table-url="<?= pl_e(pl_url('/tables')) ?>"<?php endif; ?>>
+<body class="view-<?= pl_e($view) ?>">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="app-header">
-    <a class="brand" href="<?= pl_e(pl_url($user ? '/companies' : '/login')) ?>" aria-label="PHP Ledger home"><span class="brand-frame"><img src="<?= pl_e(pl_url('/assets/brand/phpledger-horizontal.png')) ?>" alt="PHP Ledger" width="2172" height="724"><span class="brand-version"><?= pl_e(pl_app_version()) ?></span></span></a>
-    <?php if ($user): ?>
-    <nav class="primary-nav app-sidebar" aria-label="Main navigation">
-        <?php if ($company): ?>
-        <?php $visibility = pl_company_visibility((int)$user['id'],(int)$company['id']); $workActive = in_array($view, ['transactions', 'editor', 'pos'], true); $reviewActive = in_array($view, ['ar', 'ap', 'general-journals', 'general-editor', 'general-detail', 'reports', 'balance-sheet', 'profit-loss', 'cash-forecast', 'trial-balance', 'account', 'journal'], true); $manageActive = in_array($view, ['accounts', 'purchasing', 'inventory', 'connections', 'opening-balances', 'periods', 'bank-reconciliation', 'modules'], true); ?>
-        <div class="app-sidebar-heading"><span class="eyebrow">Workspace</span><strong>Navigate this book</strong></div>
-        <details class="nav-menu"><summary class="nav-menu-trigger<?= $workActive ? ' is-active' : '' ?>"><?= pl_icon('list') ?><span>Work</span><?= pl_icon('chevron-down') ?></summary><div class="nav-menu-panel"><a href="<?= pl_e(pl_url('/transactions')) ?>" <?= in_array($view, ['transactions', 'editor'], true) ? 'aria-current="page"' : '' ?>>Transactions</a><?php if (pl_module_available((int) $user['id'], (int) $company['id'], (int) $company['book_id'], 'pos-showcase')): ?><a href="<?= pl_e(pl_url('/pos')) ?>" <?= $view === 'pos' ? 'aria-current="page"' : '' ?>>Point of sale</a><?php endif; ?></div></details>
-        <details class="nav-menu"><summary class="nav-menu-trigger<?= $reviewActive ? ' is-active' : '' ?>"><?= pl_icon('book') ?><span>Review</span><?= pl_icon('chevron-down') ?></summary><div class="nav-menu-panel"><?php if ($visibility['show_ar']): ?><a href="<?= pl_e(pl_url('/ar')) ?>" <?= $view === 'ar' ? 'aria-current="page"' : '' ?>>Receivables</a><?php endif; ?><?php if ($visibility['show_ap']): ?><a href="<?= pl_e(pl_url('/ap')) ?>" <?= $view === 'ap' ? 'aria-current="page"' : '' ?>>Payables</a><?php endif; ?><a href="<?= pl_e(pl_url('/general-journals')) ?>" <?= in_array($view, ['general-journals', 'general-editor', 'general-detail'], true) ? 'aria-current="page"' : '' ?>>Journals</a><a href="<?= pl_e(pl_url('/reports')) ?>" <?= in_array($view, ['reports', 'balance-sheet', 'profit-loss', 'cash-forecast', 'trial-balance', 'account', 'journal'], true) ? 'aria-current="page"' : '' ?>>Reports</a></div></details>
-        <details class="nav-menu"><summary class="nav-menu-trigger<?= $manageActive ? ' is-active' : '' ?>"><?= pl_icon('adjustments-horizontal') ?><span>Manage</span><?= pl_icon('chevron-down') ?></summary><div class="nav-menu-panel"><a href="<?= pl_e(pl_url('/accounts')) ?>" <?= $view === 'accounts' ? 'aria-current="page"' : '' ?>>Accounts</a><?php foreach (['purchasing'=>'Purchasing','inventory'=>'Inventory'] as $moduleId=>$moduleLabel): ?><?php if (pl_module_available((int)$user['id'],(int)$company['id'],(int)$company['book_id'],$moduleId)): ?><a href="<?= pl_e(pl_url('/'.$moduleId)) ?>" <?= $view === $moduleId ? 'aria-current="page"' : '' ?>><?= pl_e($moduleLabel) ?></a><?php endif; ?><?php endforeach; ?><?php if (!pl_demo_enabled()): ?><a href="<?= pl_e(pl_url('/opening-balances')) ?>" <?= $view === 'opening-balances' ? 'aria-current="page"' : '' ?>>Opening balances</a><a href="<?= pl_e(pl_url('/periods')) ?>" <?= $view === 'periods' ? 'aria-current="page"' : '' ?>>Periods</a><a href="<?= pl_e(pl_url('/bank-reconciliation')) ?>" <?= $view === 'bank-reconciliation' ? 'aria-current="page"' : '' ?>>Bank reconciliation</a><a href="<?= pl_e(pl_url('/modules')) ?>" <?= $view === 'modules' ? 'aria-current="page"' : '' ?>>Modules</a><?php endif; ?><a href="<?= pl_e(pl_url('/connections')) ?>" <?= $view === 'connections' ? 'aria-current="page"' : '' ?>>Connections</a></div></details>
-        <?php else: ?><a href="<?= pl_e(pl_url('/companies')) ?>" <?= $view === 'companies' ? 'aria-current="page"' : '' ?>>Your businesses</a><?php endif; ?>
-        <a href="<?= pl_e(pl_url('/help')) ?>" <?= $view === 'help' ? 'aria-current="page"' : '' ?>>Help</a>
-    </nav>
-    <details class="user-menu"><summary><span class="avatar"><?= pl_e(mb_strtoupper(mb_substr($user['display_name'], 0, 1))) ?></span><span class="user-name"><?= pl_e($user['display_name']) ?></span><?= pl_icon('chevron-down') ?></summary>
-        <div class="user-menu-panel"><?php if (!pl_demo_enabled()): ?><p class="muted"><?= pl_e($user['email']) ?></p><a href="<?= pl_e(pl_url('/companies')) ?>">Switch business</a><?php else: ?><p class="muted">Your own temporary sample books</p><?php endif; ?><form action="<?= pl_e(pl_url('/logout')) ?>" method="post"><?= pl_csrf_field() ?><button type="submit" class="text-button"><?= pl_icon('logout') ?> <?= pl_demo_enabled() ? 'Leave demo' : 'Sign out' ?></button></form></div>
-    </details>
-    <?php else: ?><span class="header-note">Your business. Clearly accounted for.</span><?php endif; ?>
-</header>
-<?php if (pl_demo_enabled() && $view !== 'error'): $demoState = DB::queryFirstRow('SELECT next_reset_at FROM pl_demo_state WHERE id = 1'); ?>
-<div class="demo-banner"><span><strong>Public demo</strong> · Separate synthetic data for each visitor. Destructive actions are disabled.</span><span>Resets <time data-local-time datetime="<?= pl_e(str_replace(' ', 'T', $demoState['next_reset_at']) . 'Z') ?>"><?= pl_e($demoState['next_reset_at']) ?> UTC</time> · <span data-demo-expiry="<?= pl_e(str_replace(' ', 'T', $demoState['next_reset_at']) . 'Z') ?>"><?= max(0, (int) ceil((strtotime($demoState['next_reset_at'] . ' UTC') - time()) / 60)) ?> minutes remaining</span></span></div>
-<?php endif; ?>
-<?php if ($company): ?>
-<div class="company-bar"><a href="<?= pl_e(pl_url('/companies')) ?>" class="company-switch"><?= pl_icon('building') ?><strong><?= pl_e($company['name']) ?></strong><?= pl_icon('chevron-down') ?></a>
-    <?php if ($company['is_sample']): ?><span class="badge sample">Sample company</span><?php endif; ?>
-    <span class="context-item"><?= pl_e($company['book_name']) ?></span><span class="context-item"><?= pl_e($company['currency']) ?></span>
-    <span class="company-role"><?= pl_e(ucfirst($company['role'])) ?></span>
+<?php if ($workspace):
+    // Keep navigation iteration variables out of the view's extracted data.
+    (static function (array $user, array $company, string $view, string $title): void {
+        require __DIR__ . '/partials/ui/shell.php';
+    })($user, $company, $view === 'settlement' ? (($direction ?? '') === 'receivable' ? 'ar' : 'ap') : $view, $title);
+?>
+<div class="shell-strips">
+<?php require __DIR__ . '/partials/ui/context-strips.php'; ?>
 </div>
-<?php if ($company['is_sample'] && pl_company_demo_pack((int) $user['id'], (int) $company['id'], (int) $company['book_id']) !== null): ?><a class="sample-guide-link" href="<?= pl_e(pl_url('/sample-guide')) ?>">Sample guide: Explore your business <?= pl_icon('arrow-right') ?></a><?php endif; ?>
-<?php if ($company['setup_status'] !== 'ready'): ?>
-<div class="readiness-banner"><?= pl_icon('info-circle') ?><div><strong><?= $company['setup_status'] === 'opening_required' ? 'Opening balances required.' : 'Review your existing setup.' ?></strong> <?= $company['setup_status'] === 'opening_required' ? 'Reconcile opening balances and unpaid documents before recording or posting transactions.' : 'Confirm account mappings and opening balances before posting new documents.' ?> <?php if (pl_can_write($company)): ?><a href="<?= pl_e(pl_url($company['setup_status'] === 'opening_required' ? '/opening-balances' : '/setup/review')) ?>">Review setup</a><?php endif; ?></div></div>
-<?php endif; ?>
-<?php endif; ?>
-<?php if ($notice): ?><div class="notice" role="status"><?= pl_icon('check') ?><span><?= pl_e($notice) ?></span><button type="button" class="icon-button" data-dismiss aria-label="Dismiss notification"><?= pl_icon('x') ?></button></div><?php endif; ?>
+<main id="main" class="shell-main" tabindex="-1"><div class="shell-main-inner">
+<?php elseif ($posLayout): ?>
 <main id="main" tabindex="-1">
-<?php if ($view === 'login'): ?>
-<div class="signin-layout"><aside class="signin-story"><p class="eyebrow">Your business, clearly accounted for</p><h2>A day's work.<br>A clearer picture.</h2><p>Keep the everyday details connected to the bigger picture.</p><div class="signin-journey"><div><?= pl_icon('receipt') ?><span><strong>Capture the details</strong>Receipts and expenses, in one place.</span></div><div><?= pl_icon('book') ?><span><strong>Follow every entry</strong>From source document to balanced books.</span></div><div><?= pl_icon('file-text') ?><span><strong>Understand your business</strong>Readable reports with a path to the numbers.</span></div></div><p class="signin-footnote">PHP Ledger · Built for owners and bookkeepers</p></aside><div class="signin-form"><?php require __DIR__ . '/views/login.php'; ?></div></div>
-<?php else: require __DIR__ . '/views/' . $view . '.php'; endif; ?>
-</main>
-<footer class="app-footer"><span>PHP Ledger <strong class="footer-version"><?= pl_e(pl_app_version()) ?></strong> · Development preview · <a href="https://github.com/rmak78/phpledger">Source code · AGPL-3.0+</a></span><span>English · <span data-timezone>UTC</span> <span class="muted">event times</span></span></footer>
+<?php else: ?>
+<div class="auth-shell"><div class="auth-card<?= in_array($view, ['login','oauth-consent','error'], true) ? '' : ' auth-card-wide' ?>">
+<a href="<?= pl_e(pl_url('/')) ?>" aria-label="PHP Ledger home"><img class="auth-logo" src="<?= pl_e(pl_url('/assets/brand/phpledger-horizontal.png')) ?>" alt="PHP Ledger" width="2172" height="724"></a>
+<main id="main" tabindex="-1">
+<?php endif; ?>
+<?php if ($notice): ?><div class="strip strip-info" role="status" data-dismissible><p><?= pl_e($notice) ?></p><button type="button" class="strip-dismiss" data-dismiss aria-label="Dismiss notification"><?= pl_icon('x') ?></button></div><?php endif; ?>
+<?php if (!empty($accountReturn)): ?><a class="btn btn-ghost my-3" href="<?= pl_e(pl_url('/reports/account',$accountReturn)) ?>"><?= pl_icon('arrow-left') ?> Back to account statement</a><?php endif; ?>
+<?php require __DIR__ . '/views/' . $view . '.php'; ?>
+<?php if ($workspace): ?></div></main></div></div><?php elseif ($posLayout): ?></main><?php else: ?></main><p class="text-xs text-ink-muted">PHP Ledger <?= pl_e(pl_app_version()) ?> · Development preview</p></div></div><?php endif; ?>
 </body>
 </html>

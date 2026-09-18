@@ -129,6 +129,22 @@ function pl_save_document(int $actorId, int $companyId, int $bookId, array $inpu
 }
 
 /** The browser never supplies financial journal lines or a posting identity. */
+function pl_preview_document(int $actorId, int $companyId, int $bookId, array $input): array
+{
+    pl_require_company_access($actorId, $companyId);
+    $book = pl_ledger_book($companyId, $bookId);
+    $document = pl_normalize_document($input);
+    pl_validate_document_accounts($companyId, $bookId, $document);
+    $payload = pl_document_posting_payload($document + ['id'=>0], $book['currency']);
+    foreach ($payload['lines'] as &$line) {
+        $account = pl_get_account($actorId, $companyId, $bookId, $line['account_id']);
+        $line['code'] = $account['code']; $line['name'] = $account['name'];
+    }
+    unset($line);
+    return ['date'=>$payload['date'], 'currency'=>$payload['currency'], 'lines'=>$payload['lines']];
+}
+
+/** The browser never supplies financial journal lines or a posting identity. */
 function pl_document_posting_payload(array $document, string $currency): array
 {
     $money = ['account_id' => (int) $document['money_account_id'], 'debit' => '0.0000', 'credit' => '0.0000', 'description' => (string) $document['counterparty']];
@@ -230,7 +246,7 @@ function pl_list_documents(int $actorId, int $companyId, int $bookId, array $fil
     $size = pl_table_size($filters['page_size'] ?? 50);
     $pages = max(1, (int) ceil($total / $size));
     $page = min($pages, max(1, (int) ($filters['page'] ?? 1)));
-    $order = pl_table_order($filters, ['date' => 'd.document_date', 'name' => 'd.counterparty', 'amount' => 'd.amount', 'status' => "CASE WHEN d.journal_id IS NULL THEN 'draft' WHEN r.id IS NOT NULL THEN 'reversed' ELSE 'posted' END"], 'd.document_date DESC, d.id ASC', 'd.id ASC');
+    $order = pl_table_order($filters, 'transactions');
     $rows = DB::query('SELECT d.*, r.id AS reversal_journal_id' . $join . ' ORDER BY ' . $order . ' LIMIT %i OFFSET %i', ...array_merge($args, [$size, ($page - 1) * $size]));
     return ['documents' => array_map('pl_document_row', $rows), 'total' => $total, 'records_total' => $recordsTotal, 'total_amount' => bcadd((string) $totals['total_amount'], '0', 4), 'page' => $page, 'pages' => $pages];
 }
@@ -246,7 +262,7 @@ function pl_account_activity(int $actorId, int $companyId, int $bookId, int $acc
     }
     $size = pl_table_size($options['page_size'] ?? 50);
     $search = pl_ledger_text($options['search'] ?? '', 'Search', 160, false);
-    $order = pl_table_order($options, ['date' => 'q.date', 'journal' => 'q.journal_id', 'description' => 'q.description', 'source' => 'q.source_reference', 'debit' => 'q.debit', 'credit' => 'q.credit', 'balance' => 'q.running_movement'], 'q.date, q.journal_id, q.line_number', 'q.date, q.journal_id, q.line_number');
+    $order = pl_table_order($options, 'account');
     return pl_ledger_transaction(function () use ($actorId, $companyId, $bookId, $accountId, $date, $asOf, $from, $page, $size, $search, $order): array {
         pl_require_company_access($actorId, $companyId);
         // Hold the shared book lock for all statement reads; posting takes its exclusive lock.

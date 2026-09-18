@@ -1,0 +1,93 @@
+<!--meta {"id":"modules","title":"Modules","route":"/modules","group":"Setup","nav":"modules","crumbs":[["Setup"],["Modules"]],"pattern":"settings-list","layout":"app","state":"Inventory + Purchasing enabled · POS disabled"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Modules</h1>
+      <p class="mt-1 text-sm text-ink-muted">Choose the optional tools for Ravi Textile Traders.</p>
+    </div>
+  </header>
+  <p class="-mt-2 text-sm text-ink-muted">The accounting core, Accounts Receivable and Accounts Payable are bundled and always available. Purchasing and Inventory can be enabled below.</p>
+
+  <section class="panel">
+    <h2 class="section-title">Keep your navigation simple</h2>
+    <p class="mt-1 text-sm text-ink-muted">Hide areas you do not use in the sidebar. Financial totals, existing records and authorised services are unaffected — this never disables a service.</p>
+    <div class="mt-3 flex flex-col gap-2">
+      <label class="flex items-center gap-2 text-sm text-ink"><input type="checkbox" checked> Show receivables</label>
+      <label class="flex items-center gap-2 text-sm text-ink"><input type="checkbox" checked> Show payables</label>
+    </div>
+    <div class="field mt-3 max-w-sm"><label class="field-label" for="nav-reason">Reason</label><input class="input" id="nav-reason" type="text" placeholder="Required to save a change"></div>
+    <div class="mt-3 flex flex-wrap items-center gap-3">
+      <button type="button" class="btn btn-secondary">Save navigation</button>
+      <a class="link text-xs" href="#/ar-list">Open receivables</a>
+      <span class="text-ink-faint">·</span>
+      <a class="link text-xs" href="#/ap-list">Open payables</a>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="module-inventory" data-fold="first module">
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex size-9 flex-none items-center justify-center rounded-full bg-surface-subtle text-ink-muted"><i data-icon="package" class="icon"></i></span>
+        <div><h2 id="module-inventory" class="text-sm font-semibold text-ink">Inventory</h2><p class="text-xs text-ink-muted">Installed version 1.0.0</p></div>
+      </div>
+      <span class="badge badge-posted"><i class="badge-dot"></i>Enabled</span>
+    </div>
+    <p class="mt-3 text-sm text-ink-muted">One stock location, product catalogue, stock movements, weighted-average cost and valuation. Enable this before Purchasing.</p>
+    <p class="mt-2 text-xs text-ink-muted">Historical documents and reports remain available to authorised readers. New operations require the current enabled module.</p>
+    <p class="mt-2 flex items-center gap-1.5 text-xs text-warning"><i data-icon="git-branch" class="icon size-3.5"></i>Required by Purchasing, which is currently enabled.</p>
+    <a class="link mt-2 inline-block text-xs" href="#/products-list">Open module records and reports</a>
+    <div class="mt-3 flex flex-wrap items-end justify-between gap-3 border-t border-border pt-3">
+      <div class="field max-w-sm flex-1"><label class="field-label" for="inv-reason">Reason for this change</label><input class="input" id="inv-reason" type="text" placeholder="Required to save a change"></div>
+      <button type="button" class="btn btn-secondary" disabled title="Disable Purchasing first — it requires Inventory">Disable module</button>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="module-purchasing">
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex size-9 flex-none items-center justify-center rounded-full bg-surface-subtle text-ink-muted"><i data-icon="clipboard-list" class="icon"></i></span>
+        <div><h2 id="module-purchasing" class="text-sm font-semibold text-ink">Purchasing</h2><p class="text-xs text-ink-muted">Installed version 1.0.0</p></div>
+      </div>
+      <span class="badge badge-posted"><i class="badge-dot"></i>Enabled</span>
+    </div>
+    <p class="mt-3 text-sm text-ink-muted">Purchase orders, partial receipts, later supplier bills and received-but-unbilled reconciliation. Requires Inventory and Accounts Payable.</p>
+    <p class="mt-2 text-xs text-ink-muted">Historical documents and reports remain available to authorised readers. New operations require the current enabled module.</p>
+    <p class="mt-2 flex items-center gap-1.5 text-xs text-ink-muted"><i data-icon="git-branch" class="icon size-3.5"></i>Requires Inventory · <span class="text-success">enabled</span></p>
+    <a class="link mt-2 inline-block text-xs" href="#/purchase-orders-list">Open module records and reports</a>
+    <div class="mt-3 flex flex-wrap items-end justify-between gap-3 border-t border-border pt-3">
+      <div class="field max-w-sm flex-1"><label class="field-label" for="pur-reason">Reason for this change</label><input class="input" id="pur-reason" type="text" placeholder="Required to save a change"></div>
+      <button type="button" class="btn btn-secondary" data-dialog-open="disable-purchasing" data-proposed title="Proposed: a confirmation step before disabling a module. Today the form submits immediately.">Disable module</button>
+    </div>
+  </section>
+  <dialog id="disable-purchasing" class="dialog">
+    <div class="dialog-header"><h2 class="text-sm font-semibold">Disable Purchasing?</h2><form method="dialog"><button class="btn btn-ghost btn-icon" aria-label="Close"><i data-icon="x" class="icon"></i></button></form></div>
+    <div class="dialog-body"><p class="text-sm text-ink-muted">Existing purchase orders, receipts and bills stay available to read. New purchasing operations stop until it's re-enabled. This does not remove Inventory or any posted financial totals.</p></div>
+    <div class="dialog-footer"><form method="dialog"><button class="btn btn-ghost">Cancel</button></form><button type="button" class="btn btn-danger">Disable Purchasing</button></div>
+  </dialog>
+
+  <section class="panel" aria-labelledby="module-pos">
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex size-9 flex-none items-center justify-center rounded-full bg-surface-subtle text-ink-muted"><i data-icon="cash-register" class="icon"></i></span>
+        <div><h2 id="module-pos" class="text-sm font-semibold text-ink">Point of sale</h2><p class="text-xs text-ink-muted">Installed version 1.0.0</p></div>
+      </div>
+      <span class="badge badge-draft"><i class="badge-dot"></i>Disabled</span>
+    </div>
+    <p class="mt-3 text-sm text-ink-muted">A six-product cash checkout showcase. Its sample products do not use the Inventory module.</p>
+    <p class="mt-2 text-xs text-ink-muted">Disabling stops new checkout and review. Existing receipts, source documents and linked reversals remain available through accounting.</p>
+    <div class="mt-3 flex flex-wrap items-end justify-between gap-3 border-t border-border pt-3">
+      <div class="field max-w-sm flex-1"><label class="field-label" for="pos-reason">Reason for this change</label><input class="input" id="pos-reason" type="text" placeholder="Required to save a change"></div>
+      <button type="button" class="btn btn-primary">Enable module</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title mb-2">Recent changes</h2>
+    <div class="panel">
+      <ol class="flex flex-col gap-3 border-s border-border ps-3">
+        <li><div class="flex items-center gap-2"><span class="badge badge-posted"><i class="badge-dot"></i>Enabled</span><p class="text-sm font-medium text-ink">Purchasing</p></div><p class="mt-1 text-xs text-ink-muted">Started raising purchase orders against Faisalabad Yarn Mills.</p><p class="mt-0.5 text-xs text-ink-faint">14 Feb 2026, 10:05 · Ayesha Khan</p></li>
+        <li><div class="flex items-center gap-2"><span class="badge badge-posted"><i class="badge-dot"></i>Enabled</span><p class="text-sm font-medium text-ink">Inventory</p></div><p class="mt-1 text-xs text-ink-muted">Onboarded fabric stock ahead of enabling Purchasing.</p><p class="mt-0.5 text-xs text-ink-faint">10 Feb 2026, 16:40 · Ayesha Khan</p></li>
+      </ol>
+    </div>
+  </section>
+</div>

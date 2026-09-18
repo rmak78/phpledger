@@ -1,0 +1,78 @@
+<!--meta {"id":"setup-review","title":"Review your existing books","route":"/setup/review","group":"Setup & access","nav":"accounts","crumbs":[["Review setup"]],"layout":"app","pattern":"wizard","state":"Owner mapping existing accounts to roles"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Review your existing books</h1>
+      <p class="mt-1 text-sm text-ink-muted">Noor Surgical Instruments (Pvt) Ltd · PKR</p>
+    </div>
+    <div class="page-header-actions">
+      <a class="btn btn-ghost" href="#/transactions-list">Back to transactions</a>
+    </div>
+  </header>
+
+  <section class="panel !p-3.5">
+    <h2 class="text-sm font-semibold text-ink">Keep your existing records intact</h2>
+    <p class="mt-1.5 text-sm text-ink-muted">Choose which existing account serves each purpose below. This records account roles without replacing account names, balances, or posted journals. Each purpose needs a separate active account of the matching type.</p>
+    <p class="mt-1.5 text-xs text-ink-muted">Neutral starter chart, version 2026.1. Read-only reference — your accounts below are unchanged.</p>
+    <a class="link mt-1.5 inline-block text-xs font-semibold" href="#/trial-balance">Review the current trial balance</a>
+  </section>
+
+  <form class="flex flex-col gap-4 rounded-panel border border-border bg-surface p-4">
+    <div class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2 lg:grid-cols-3" data-fold="role mappings">
+      <div class="field">
+        <label class="field-label" for="role-cash">Cash and bank <span class="optional">(asset)</span></label>
+        <select class="select" id="role-cash">
+          <option>Choose an existing account…</option>
+          <option selected>1010 — Cash in hand</option>
+          <option>1020 — Meezan Bank – Current</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="role-ar">Accounts receivable <span class="optional">(asset)</span></label>
+        <select class="select" id="role-ar">
+          <option>Choose an existing account…</option>
+          <option selected>1100 — Trade debtors</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="role-ap">Accounts payable <span class="optional">(liability)</span></label>
+        <select class="select" id="role-ap">
+          <option>Choose an existing account…</option>
+          <option selected>2010 — Trade creditors</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="role-equity">Owner equity <span class="optional">(equity)</span></label>
+        <select class="select" id="role-equity">
+          <option>Choose an existing account…</option>
+          <option selected>3000 — Proprietor's capital</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="role-income">Sales and service income <span class="optional">(income)</span></label>
+        <select class="select" id="role-income">
+          <option>Choose an existing account…</option>
+          <option selected>4000 — Instrument sales</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="role-expense">General expenses <span class="optional">(expense)</span></label>
+        <select class="select" id="role-expense">
+          <option>Choose an existing account…</option>
+          <option selected>5300 — Office &amp; general expenses</option>
+        </select>
+      </div>
+    </div>
+
+    <label class="flex items-start gap-2 border-t border-border pt-4 text-sm text-ink">
+      <input type="checkbox" class="mt-0.5" checked>
+      <span>I have reviewed the existing accounts and opening balances, including any unpaid invoices and bills.</span>
+    </label>
+    <p class="field-hint ms-6 -mt-3">This confirms a review of records already in these books. It does not import missing history or confirm tax compliance.</p>
+
+    <div class="flex items-center justify-end gap-2 border-t border-border pt-4">
+      <a class="btn btn-ghost" href="#/transactions-list">Cancel</a>
+      <button type="button" class="btn btn-primary" data-fold="primary action">Confirm reviewed setup</button>
+    </div>
+  </form>
+</div>

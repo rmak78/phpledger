@@ -1,0 +1,72 @@
+<!--meta {"id":"cash-forecast","title":"Cash forecast","route":"/reports/cash-forecast","group":"Reports","nav":"cash-forecast","crumbs":[["Reports","#/reports"],["Cash forecast"]],"pattern":"report","layout":"app","state":"10-week scenario · stays positive"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Cash forecast</h1>
+      <p class="mt-1 text-sm text-ink-muted">A simple cash scenario for Ravi Textile Traders.</p>
+    </div>
+    <div class="page-header-actions"><span class="badge badge-info"><i class="badge-dot"></i>Planning scenario · Not actuals</span></div>
+  </header>
+
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-[320px_1fr]" data-fold="filter bar">
+    <form class="panel flex flex-col gap-3">
+      <div><p class="eyebrow">Your assumptions</p><h2 class="section-title">What might change?</h2></div>
+      <p class="text-xs text-ink-muted">Starting cash is PKR 1,842,650.00 from posted cash/bank accounts through 17 Sep 2026.</p>
+      <div class="field">
+        <label class="field-label" for="cf-in">Expected money in each week</label>
+        <input class="input input-amount" id="cf-in" type="text" inputmode="decimal" value="145,000.00">
+      </div>
+      <div class="field">
+        <label class="field-label" for="cf-out">Expected money out each week</label>
+        <input class="input input-amount" id="cf-out" type="text" inputmode="decimal" value="98,500.00">
+      </div>
+      <div class="field">
+        <label class="field-label" for="cf-weeks">Number of weeks</label>
+        <input class="input input-amount" id="cf-weeks" type="text" inputmode="numeric" value="10">
+      </div>
+      <button type="button" class="btn btn-primary justify-center">Update scenario</button>
+      <p class="text-xs text-ink-muted">Use plain numbers, no separators needed. These starting assumptions are illustrative sample amounts. This does not post entries or change your books.</p>
+    </form>
+
+    <div class="flex flex-col gap-3">
+      <div class="panel">
+        <div class="flex items-center justify-between">
+          <p class="eyebrow">After 10 weeks</p>
+          <span class="badge badge-info"><i class="badge-dot"></i>Scenario, not posted</span>
+        </div>
+        <p class="amount-xl mt-1 text-brand">PKR 2,307,650.00</p>
+        <p class="mt-1 text-sm text-ink-muted">Cash stays at or above zero under these assumptions.</p>
+      </div>
+      <div class="panel">
+        <svg viewBox="0 0 400 110" class="h-[110px] w-full" role="img" aria-label="Projected cash balance rising steadily from PKR 1,842,650 to PKR 2,307,650 across 10 weeks, staying well above zero.">
+          <line x1="0" y1="100" x2="400" y2="100" stroke="var(--border)" stroke-width="1"/>
+          <polyline points="0,90 40,83 80,76 120,69 160,62 200,55 240,48 280,41 320,34 360,27 400,20" fill="none" stroke="var(--brand-blue)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+          <polygon points="0,90 40,83 80,76 120,69 160,62 200,55 240,48 280,41 320,34 360,27 400,20 400,100 0,100" fill="var(--brand-selected)"/>
+        </svg>
+        <div class="mt-1 flex items-center justify-between text-xs text-ink-faint"><span>Today · 1,842,650.00</span><span>Week 10 · 2,307,650.00</span></div>
+      </div>
+      <p class="text-xs text-ink-muted">Opening cash + assumed inflows − assumed outflows. No receivables timing, seasonality, taxes or unrecorded commitments are automatically included.</p>
+    </div>
+  </div>
+
+  <section>
+    <h2 class="section-title mb-2">Week-by-week cash plan</h2>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Week</th><th class="num">Opening</th><th class="num">Money in</th><th class="num">Money out</th><th class="num">Closing</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td class="num">1,842,650.00</td><td class="num">145,000.00</td><td class="num">98,500.00</td><td class="num font-semibold">1,889,150.00</td></tr>
+          <tr><td>2</td><td class="num">1,889,150.00</td><td class="num">145,000.00</td><td class="num">98,500.00</td><td class="num font-semibold">1,935,650.00</td></tr>
+          <tr><td>3</td><td class="num">1,935,650.00</td><td class="num">145,000.00</td><td class="num">98,500.00</td><td class="num font-semibold">1,982,150.00</td></tr>
+          <tr><td>4</td><td class="num">1,982,150.00</td><td class="num">145,000.00</td><td class="num">98,500.00</td><td class="num font-semibold">2,028,650.00</td></tr>
+          <tr><td>5</td><td class="num">2,028,650.00</td><td class="num">145,000.00</td><td class="num">98,500.00</td><td class="num font-semibold">2,075,150.00</td></tr>
+          <tr><td>6</td><td class="num">2,075,150.00</td><td class="num">145,000.00</td><td class="num">98,500.00</td><td class="num font-semibold">2,121,650.00</td></tr>
+          <tr><td>7</td><td class="num">2,121,650.00</td><td class="num">145,000.00</td><td class="num">98,500.00</td><td class="num font-semibold">2,168,150.00</td></tr>
+          <tr><td>8</td><td class="num">2,168,150.00</td><td class="num">145,000.00</td><td class="num">98,500.00</td><td class="num font-semibold">2,214,650.00</td></tr>
+          <tr><td>9</td><td class="num">2,214,650.00</td><td class="num">145,000.00</td><td class="num">98,500.00</td><td class="num font-semibold">2,261,150.00</td></tr>
+          <tr><td>10</td><td class="num">2,261,150.00</td><td class="num">145,000.00</td><td class="num">98,500.00</td><td class="num font-semibold text-brand">2,307,650.00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

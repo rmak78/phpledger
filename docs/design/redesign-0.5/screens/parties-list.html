@@ -1,0 +1,110 @@
+<!--meta {"id":"parties-list","title":"Customers & suppliers","route":"/parties","group":"Sales","nav":"customers","crumbs":[["Sales","#/parties-list"],["Customers"]],"pattern":"list-detail","layout":"app","state":"All · Bismillah Garments selected"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Customers &amp; suppliers</h1>
+      <p class="mt-1 text-sm text-ink-muted">7 parties &middot; one shared record can be both a customer and a supplier</p>
+    </div>
+    <div class="page-header-actions">
+      <a class="btn btn-primary" href="#/party-form" data-fold="new party button"><i data-icon="plus" class="icon"></i>New party</a>
+    </div>
+  </header>
+
+  <div class="split-view">
+    <section class="split-view-list has-detail" aria-label="Party list">
+     <div class="flex flex-col gap-3">
+      <div class="filter-bar" data-fold="filter bar">
+        <div class="tabs-seg" role="tablist" aria-label="Party type">
+          <button type="button" class="tabs-seg-item" aria-selected="true">All</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Customers</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Suppliers</button>
+        </div>
+        <label class="search-field"><i data-icon="search" class="icon"></i><input type="search" placeholder="Legal or trading name" aria-label="Search parties"></label>
+        <button type="button" class="btn btn-secondary btn-icon" aria-label="Export list"><i data-icon="download" class="icon"></i></button>
+      </div>
+
+      <div class="table-wrap" data-fold="first rows">
+        <table class="table">
+          <thead><tr><th>Legal name</th><th>Role</th><th class="num">Receivable</th><th class="num">Payable</th></tr></thead>
+          <tbody>
+            <tr data-href="#/parties-list" aria-selected="true"><td><span class="row-title">Bismillah Garments</span><span class="row-sub">Lahore, PK</span></td><td><span class="role-tag">Customer</span></td><td class="num">26,800.00</td><td class="num text-ink-faint">&mdash;</td></tr>
+            <tr data-href="#/parties-list"><td><span class="row-title">Lahore Fabric House</span><span class="row-sub">Lahore, PK</span></td><td><span class="role-tag">Customer</span></td><td class="num">67,144.00</td><td class="num text-ink-faint">&mdash;</td></tr>
+            <tr data-href="#/parties-list"><td><span class="row-title">Karachi Linen Co.</span><span class="row-sub">Karachi, PK</span></td><td><span class="role-tag">Customer</span></td><td class="num">218,456.00</td><td class="num text-ink-faint">&mdash;</td></tr>
+            <tr data-href="#/parties-list"><td><span class="row-title">Faisalabad Yarn Mills</span><span class="row-sub">Faisalabad, PK</span></td><td><span class="role-tag">Supplier</span></td><td class="num text-ink-faint">&mdash;</td><td class="num">173,460.00</td></tr>
+            <tr data-href="#/parties-list"><td><span class="row-title">Sialkot Packaging</span><span class="row-sub">Sialkot, PK</span></td><td><span class="role-tag">Supplier</span></td><td class="num text-ink-faint">&mdash;</td><td class="num">19,800.00</td></tr>
+            <tr data-href="#/parties-list"><td><span class="row-title">K-Electric</span><span class="row-sub">Karachi, PK</span></td><td><span class="role-tag">Supplier</span></td><td class="num text-ink-faint">&mdash;</td><td class="num">22,150.00</td></tr>
+            <tr data-href="#/parties-list"><td><span class="row-title">PTCL</span><span class="row-sub">Islamabad, PK</span></td><td><span class="role-tag">Supplier</span></td><td class="num text-ink-faint">&mdash;</td><td class="num">4,200.00</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span class="pagination-summary">7 records</span>
+        <div class="pagination-controls">
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" disabled aria-label="Previous page"><i data-icon="chevron-left" class="icon"></i></button>
+          <span class="pagination-page">Page 1 of 1</span>
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" disabled aria-label="Next page"><i data-icon="chevron-right" class="icon"></i></button>
+        </div>
+      </div>
+      <p class="sample-note"><i data-icon="info-circle" class="icon"></i>These are synthetic records in a separate sample company.</p>
+     </div>
+    </section>
+
+    <section class="split-view-detail" aria-label="Party details">
+      <a class="split-view-back link" href="#/parties-list"><i data-icon="arrow-left" class="icon"></i>Back to list</a>
+      <div class="border-b border-border px-5 pb-4 pt-4">
+        <div class="mb-1.5 flex flex-wrap items-center gap-2">
+          <h2 class="text-[1.0625rem] font-semibold text-ink">Bismillah Garments</h2>
+          <span class="role-tag">Customer</span>
+        </div>
+        <div class="flex items-end justify-between gap-3">
+          <h3 class="text-sm text-ink-muted">Receivable balance</h3>
+          <p class="amount-lg whitespace-nowrap" data-fold="document total"><span class="text-xs font-normal text-ink-muted">PKR</span> 26,800.00</p>
+        </div>
+      </div>
+
+      <div class="flex min-h-0 flex-1 flex-col overflow-y-auto px-5 pt-4">
+        <div class="tabs-underline" data-tabs role="tablist" aria-label="Record sections">
+          <button type="button" class="tabs-underline-item" data-tab="details" aria-selected="true">Details</button>
+          <button type="button" class="tabs-underline-item" data-tab="contacts" aria-selected="false">Contacts</button>
+          <button type="button" class="tabs-underline-item" data-tab="activity" aria-selected="false">Activity</button>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="details">
+          <dl class="dgrid">
+            <div class="dgrid-row"><dt>Trading name</dt><dd>Bismillah Garments Pvt. Ltd.</dd></div>
+            <div class="dgrid-row"><dt>Entity type</dt><dd>Business</dd></div>
+            <div class="dgrid-row"><dt>Country</dt><dd>PK</dd></div>
+            <div class="dgrid-row"><dt>Currency</dt><dd>PKR</dd></div>
+            <div class="dgrid-row"><dt>Payment terms</dt><dd>Net 30</dd></div>
+            <div class="dgrid-row"><dt>Receivables account</dt><dd>Company default</dd></div>
+          </dl>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="contacts" hidden>
+          <ul class="flex flex-col gap-3">
+            <li class="border-b border-border pb-3">
+              <p class="text-sm font-semibold text-ink">Nasir Mahmood <span class="role-tag ms-1">Primary</span></p>
+              <p class="text-xs text-ink-muted">Billing</p>
+              <p class="mt-1 text-xs text-ink-muted">nasir@bismillahgarments.example &middot; +92 300 1234567</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="activity" hidden>
+          <dl class="dgrid">
+            <div class="dgrid-row"><dt>INV-000194</dt><dd>Draft &middot; 185,496.00</dd></div>
+            <div class="dgrid-row"><dt>INV-000188</dt><dd>Overdue &middot; 26,800.00</dd></div>
+            <div class="dgrid-row"><dt>CR-000015</dt><dd>Draft credit &middot; 9,440.00</dd></div>
+            <div class="dgrid-row"><dt>INV-000176</dt><dd>Paid &middot; 92,300.00</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="panel-actions">
+        <p class="panel-actions-note">One shared record for both roles.</p>
+        <a class="btn btn-secondary" href="#/party-form"><i data-icon="pencil" class="icon"></i>Edit party</a>
+      </div>
+    </section>
+  </div>
+</div>

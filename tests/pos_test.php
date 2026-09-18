@@ -41,6 +41,10 @@ test('POS review prices the cart exactly without posting and matches the confirm
     assert_same($quote['total'], $sale['total']);
     assert_same($quote['catalog_id'], $sale['catalog_id']);
     assert_same($quote['catalog_version'], $sale['catalog_version']);
+    assert_same($f['actor_id'], $sale['created_by']);
+    assert_same('Synthetic ledger tester', $sale['cashier_name']);
+    assert_same('document:' . $sale['document_id'], $sale['document']['journal']['source_reference']);
+    assert_same($f['actor_id'], (int) DB::queryFirstField('SELECT created_by FROM pl_documents WHERE id = %i', $sale['document_id']));
 });
 
 test('POS review rejects stale catalog forged financial fields and invalid cart without writes', function (): void {
@@ -163,6 +167,8 @@ test('POS enforces reader writer company book and opening-readiness boundaries',
     assert_throws(fn () => pl_get_pos_receipt($other['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id']), DomainException::class);
     assert_throws(fn () => pl_checkout_pos($f['actor_id'], $f['company_id'], $other['book_id'], pos_input()), DomainException::class);
     DB::insert('pl_company_members', ['company_id' => $f['company_id'], 'user_id' => $other['actor_id'], 'role' => 'viewer']);
+    DB::update('pl_users', ['display_name'=>'Another receipt viewer'], 'id = %i', $other['actor_id']);
+    assert_same('Synthetic ledger tester', pl_get_pos_receipt($other['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id'])['cashier_name']);
     assert_same($sale['document_id'], pl_get_pos_receipt($other['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id'])['document_id']);
     assert_throws(fn () => pl_checkout_pos($other['actor_id'], $f['company_id'], $f['book_id'], $input), DomainException::class);
     DB::update('pl_companies', ['setup_status' => 'opening_required'], 'id = %i', $other['company_id']);

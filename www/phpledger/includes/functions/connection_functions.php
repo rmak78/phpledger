@@ -61,9 +61,10 @@ function pl_connection_demo_context(int $actor, int $company): ?array
 }
 
 /** Grants are explicit pairs of existing company/book IDs, never a wildcard. */
-function pl_create_connection(int $actor, string $client, string $name, array $books, string $kind = 'personal', string $oauthScopes = 'ledger.read'): array
+function pl_create_connection(int $actor, string $client, string $name, array $books, string $kind = 'personal', string $oauthScopes = 'ledger.read', string $accessMode = 'full'): array
 {
-    return pl_ledger_transaction(function () use ($actor, $client, $name, $books, $kind, $oauthScopes): array {
+    return pl_ledger_transaction(function () use ($actor, $client, $name, $books, $kind, $oauthScopes, $accessMode): array {
+        if (!in_array($accessMode, ['reports', 'full'], true)) { throw new DomainException('Choose report-only or full read access.'); }
         $name = pl_ledger_text($name, 'Connection name', 120);
         if (!in_array($kind, ['personal', 'oauth'], true) || !in_array($oauthScopes, ['ledger.read', 'ledger.read offline_access'], true) || count($books) < 1 || count($books) > 20) {
             throw new DomainException('Choose one to twenty authorized company/book pairs and read access.');
@@ -101,7 +102,7 @@ function pl_create_connection(int $actor, string $client, string $name, array $b
             $pairs[$pair['company_id'] . ':' . $pair['book_id']] = $pair;
         }
         $id = bin2hex(random_bytes(16));
-        DB::insert('pl_connections', ['id' => $id, 'actor_id' => $actor, 'client_id' => $client, 'name' => $name, 'kind' => $kind, 'oauth_scopes' => $oauthScopes, 'resource' => pl_connection_resource(), 'demo_generation' => $generation, 'expires_at' => $expiry]);
+        DB::insert('pl_connections', ['id' => $id, 'actor_id' => $actor, 'client_id' => $client, 'name' => $name, 'kind' => $kind, 'oauth_scopes' => $oauthScopes, 'access_mode' => $accessMode, 'resource' => pl_connection_resource(), 'demo_generation' => $generation, 'expires_at' => $expiry]);
         foreach ($pairs as $pair) {
             DB::insert('pl_connection_books', ['connection_id' => $id] + $pair);
         }
@@ -148,10 +149,10 @@ function pl_connection_scope(array $connection, int $company, int $book): void
 }
 
 /** Return the raw personal token once to the caller; persist only SHA-256 of 256 random bits. */
-function pl_create_personal_token(int $actor, string $name, array $books): array
+function pl_create_personal_token(int $actor, string $name, array $books, string $accessMode = 'full'): array
 {
-    return pl_ledger_transaction(function () use ($actor, $name, $books): array {
-        $connection = pl_create_connection($actor, 'personal', $name, $books);
+    return pl_ledger_transaction(function () use ($actor, $name, $books, $accessMode): array {
+        $connection = pl_create_connection($actor, 'personal', $name, $books, 'personal', 'ledger.read', $accessMode);
         $token = 'plp_' . bin2hex(random_bytes(32));
         pl_connection_save_token($token, $connection, 'personal', $connection['expires_at']);
         return ['connection' => $connection, 'token' => $token];
@@ -200,5 +201,5 @@ function pl_list_connections(int $actor, int $company, int $book): array
 {
     $member = pl_require_company_access($actor, $company);
     pl_ledger_book($company, $book);
-    return DB::query('SELECT c.id, c.name, c.kind, c.client_id, c.actor_id, c.created_at, c.expires_at, c.revoked_at FROM pl_connections c JOIN pl_connection_books b ON b.connection_id = c.id WHERE b.company_id = %i AND b.book_id = %i AND (c.actor_id = %i OR %i = 1) ORDER BY c.created_at DESC, c.id LIMIT 100', $company, $book, $actor, $member['role'] === 'owner' ? 1 : 0);
+    return DB::query('SELECT c.id, c.name, c.kind, c.access_mode, c.client_id, c.actor_id, c.created_at, c.expires_at, c.revoked_at FROM pl_connections c JOIN pl_connection_books b ON b.connection_id = c.id WHERE b.company_id = %i AND b.book_id = %i AND (c.actor_id = %i OR %i = 1) ORDER BY c.created_at DESC, c.id LIMIT 100', $company, $book, $actor, $member['role'] === 'owner' ? 1 : 0);
 }

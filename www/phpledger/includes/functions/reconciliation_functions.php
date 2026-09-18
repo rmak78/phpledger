@@ -1,6 +1,14 @@
 <?php
 declare(strict_types=1);
 
+/** Count the same unmatched statement rows shown by reconciliation, across draft statements. */
+function pl_bank_pending_review_count(int $actorId, int $companyId, int $bookId): int
+{
+    pl_require_company_access($actorId, $companyId);
+    pl_ledger_book($companyId, $bookId);
+    return (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_bank_statement_rows r JOIN pl_bank_statements s ON s.id=r.statement_id AND s.company_id=r.company_id AND s.book_id=r.book_id LEFT JOIN pl_bank_matches m ON m.row_id=r.id WHERE s.company_id=%i AND s.book_id=%i AND s.status=%s AND m.journal_line_id IS NULL', $companyId, $bookId, 'draft');
+}
+
 /** A statement balance may be overdrawn; transaction columns remain unsigned. */
 function pl_bank_signed_amount(string $value): string
 {
@@ -238,9 +246,11 @@ function pl_bank_get_statement(int $actorId, int $companyId, int $bookId, int $s
             array_push($args, $search, $search);
         }
         $statement['filtered_total'] = $search === '' ? $statement['records_total'] : (int) DB::queryFirstField('SELECT COUNT(*)' . $where, ...$args);
-        $order = pl_table_order($options, ['date' => 'r.transaction_date', 'reference' => 'r.reference', 'money_in' => 'r.money_in', 'money_out' => 'r.money_out', 'match' => 'm.journal_line_id'], 'r.line_number', 'r.line_number');
+        $order = pl_table_order($options, 'bank');
         $limit = ' LIMIT %i OFFSET %i';
-        array_push($args, $size, (max(1, (int) ($options['page'] ?? 1)) - 1) * $size);
+        $statement['pages'] = max(1, (int)ceil($statement['filtered_total'] / $size));
+        $statement['page'] = min($statement['pages'], max(1, (int)($options['page'] ?? 1)));
+        array_push($args, $size, ($statement['page'] - 1) * $size);
     }
     $statement['rows'] = DB::query('SELECT r.*, m.journal_line_id, m.matched_at, m.matched_by, l.journal_id, j.journal_date' . $where . ' ORDER BY ' . $order . $limit . ' FOR SHARE', ...$args);
     return $statement;
@@ -313,7 +323,7 @@ function pl_bank_reconciliation_summary(int $actorId, int $companyId, int $bookI
     $unmatched = count(array_filter($statement['rows'], static fn(array $row): bool => $row['journal_line_id'] === null));
     $adjusted = bcadd((string) $statement['closing_balance'], (string) $outstanding['amount'], 4);
     $difference = bcsub($ledger, $adjusted, 4);
-    return ['ledger_balance' => $ledger, 'outstanding_balance' => bcadd((string) $outstanding['amount'], '0', 4), 'outstanding_count' => (int) $outstanding['count'], 'adjusted_statement_balance' => $adjusted, 'difference' => $difference, 'unmatched_count' => $unmatched, 'baseline_unchanged' => bccomp($baseline, (string) $statement['baseline_balance'], 4) === 0, 'ready' => $unmatched === 0 && bccomp($difference, '0', 4) === 0 && bccomp($baseline, (string) $statement['baseline_balance'], 4) === 0];
+    return ['ledger_balance' => $ledger, 'outstanding_balance' => bcadd((string) $outstanding['amount'], '0', 4), 'outstanding_count' => (int) $outstanding['count'], 'adjusted_statement_balance' => $adjusted, 'difference' => $difference, 'unmatched_count' => $unmatched, 'row_count'=>count($statement['rows']), 'baseline_unchanged' => bccomp($baseline, (string) $statement['baseline_balance'], 4) === 0, 'ready' => $unmatched === 0 && bccomp($difference, '0', 4) === 0 && bccomp($baseline, (string) $statement['baseline_balance'], 4) === 0];
 }
 
 function pl_bank_complete_statement(int $actorId, int $companyId, int $bookId, int $statementId, int $expectedRevision, string $key): array

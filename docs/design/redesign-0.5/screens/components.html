@@ -1,0 +1,345 @@
+<!--meta {"id":"components","title":"Components","route":"(prototype only)","group":"Prototype","nav":"","crumbs":[["Prototype","#/index"],["Components"]],"pattern":"reference","layout":"app","state":"Living component sheet"} -->
+<div class="flex flex-col gap-10 py-6">
+  <header class="border-b border-border pb-5">
+    <p class="eyebrow mb-1.5">Foundation reference</p>
+    <h1 class="page-title">Component sheet</h1>
+    <p class="mt-2 max-w-2xl text-sm text-ink-muted">Every reusable piece from <code class="rounded bg-surface-subtle px-1 py-0.5 text-[12px]">src/app.css</code>, with the exact class names to copy. Layout (grids, gaps, spacing) stays Tailwind utilities in your markup — only the pieces below are named components. See <code class="rounded bg-surface-subtle px-1 py-0.5 text-[12px]">COMPONENTS.md</code> for full layout recipes per pattern.</p>
+  </header>
+
+  <!-- Buttons ---------------------------------------------------------- -->
+  <section>
+    <h2 class="section-title mb-3">Buttons</h2>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+      <div class="panel flex flex-col items-start gap-2">
+        <button type="button" class="btn btn-primary">Post invoice</button>
+        <code class="text-[11px] text-ink-faint">.btn .btn-primary</code>
+      </div>
+      <div class="panel flex flex-col items-start gap-2">
+        <button type="button" class="btn btn-secondary">Save draft</button>
+        <code class="text-[11px] text-ink-faint">.btn .btn-secondary</code>
+      </div>
+      <div class="panel flex flex-col items-start gap-2">
+        <button type="button" class="btn btn-ghost">Cancel</button>
+        <code class="text-[11px] text-ink-faint">.btn .btn-ghost</code>
+      </div>
+      <div class="panel flex flex-col items-start gap-2">
+        <button type="button" class="btn btn-danger">Delete</button>
+        <code class="text-[11px] text-ink-faint">.btn .btn-danger</code>
+      </div>
+      <div class="panel flex flex-col items-start gap-2">
+        <button type="button" class="btn btn-primary" disabled>Disabled</button>
+        <code class="text-[11px] text-ink-faint">.btn:disabled</code>
+      </div>
+      <div class="panel flex flex-col items-start gap-2">
+        <button type="button" class="btn btn-secondary btn-sm">Small</button>
+        <code class="text-[11px] text-ink-faint">.btn .btn-secondary .btn-sm</code>
+      </div>
+      <div class="panel flex flex-col items-start gap-2">
+        <button type="button" class="btn btn-ghost btn-icon" aria-label="More actions"><i data-icon="dots-vertical" class="icon"></i></button>
+        <code class="text-[11px] text-ink-faint">.btn .btn-ghost .btn-icon</code>
+      </div>
+      <div class="panel flex flex-col items-start gap-2">
+        <button type="button" class="btn btn-secondary btn-icon btn-sm" aria-label="Filter"><i data-icon="filter" class="icon"></i></button>
+        <code class="text-[11px] text-ink-faint">.btn-icon .btn-sm</code>
+      </div>
+      <div class="panel flex flex-col items-start gap-2">
+        <a class="link" href="#/components">Reverse transaction</a>
+        <code class="text-[11px] text-ink-faint">.link</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inputs & fields ---------------------------------------------------- -->
+  <section>
+    <h2 class="section-title mb-3">Inputs &amp; fields</h2>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="field">
+        <label class="field-label" for="cmp-text">Reference</label>
+        <input class="input" id="cmp-text" type="text" placeholder="PO number, memo…">
+        <p class="field-hint">.field .field-label .input .field-hint</p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="cmp-select">Customer</label>
+        <select class="select" id="cmp-select">
+          <option>Choose…</option>
+          <option>Lahore Fabric House</option>
+          <option>Bismillah Garments</option>
+        </select>
+        <p class="field-hint">.select</p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="cmp-amount">Amount <span class="optional">(PKR)</span></label>
+        <input class="input input-amount" id="cmp-amount" type="text" value="185,400.00">
+        <p class="field-hint">.input-amount (right-aligned, tabular)</p>
+      </div>
+      <div class="field field-error">
+        <label class="field-label" for="cmp-error">Due date</label>
+        <span class="input-affix"><input class="input" id="cmp-error" type="text" placeholder="dd Mmm yyyy"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+        <p class="field-error-text">Due date is required.</p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="cmp-textarea">Notes</label>
+        <textarea class="textarea" id="cmp-textarea" rows="2" placeholder="Optional"></textarea>
+        <p class="field-hint">.textarea</p>
+      </div>
+      <div class="field">
+        <span class="field-label">Include tax in prices</span>
+        <label class="flex items-center gap-2 text-sm text-ink"><input type="checkbox"> Entered prices include tax</label>
+        <p class="field-hint">input[type=checkbox] (accent-colored)</p>
+      </div>
+      <div class="field sm:col-span-2">
+        <label class="field-label" for="cmp-search">Search field</label>
+        <label class="search-field" id="cmp-search"><i data-icon="search" class="icon"></i><input type="search" placeholder="Name, reference or memo"></label>
+        <p class="field-hint">.search-field</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Badges ---------------------------------------------------------- -->
+  <section>
+    <h2 class="section-title mb-3">Badges / status pills</h2>
+    <p class="mb-3 text-xs text-ink-muted">Status is never color alone — each pill pairs a dot with a text label.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="badge badge-draft"><i class="badge-dot"></i>Draft</span>
+      <span class="badge badge-posted"><i class="badge-dot"></i>Posted</span>
+      <span class="badge badge-reversed"><i class="badge-dot"></i>Reversed</span>
+      <span class="badge badge-paid"><i class="badge-dot"></i>Paid</span>
+      <span class="badge badge-partially-paid"><i class="badge-dot"></i>Partially paid</span>
+      <span class="badge badge-unpaid"><i class="badge-dot"></i>Unpaid</span>
+      <span class="badge badge-overdue"><i class="badge-dot"></i>Overdue</span>
+      <span class="badge badge-due-soon"><i class="badge-dot"></i>Due soon</span>
+      <span class="badge badge-sample"><i class="badge-dot"></i>Sample</span>
+      <span class="badge badge-info"><i class="badge-dot"></i>Info</span>
+    </div>
+    <code class="mt-2 block text-[11px] text-ink-faint">.badge .badge-draft|posted|reversed|paid|partially-paid|unpaid|overdue|due-soon|sample|info</code>
+  </section>
+
+  <!-- Tabs -------------------------------------------------------------- -->
+  <section>
+    <h2 class="section-title mb-3">Tabs</h2>
+    <div class="grid gap-6 lg:grid-cols-2">
+      <div class="panel">
+        <p class="mb-2 text-[11px] text-ink-faint">.tabs-seg .tabs-seg-item[aria-selected]</p>
+        <div class="tabs-seg" role="tablist" aria-label="Status">
+          <button type="button" class="tabs-seg-item" aria-selected="true">Drafts</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Posted</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Reversed</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">All</button>
+        </div>
+      </div>
+      <div class="panel">
+        <p class="mb-2 text-[11px] text-ink-faint">.tabs-underline / data-tabs · data-tab · data-panel (click to try it)</p>
+        <div class="tabs-underline" data-tabs role="tablist" aria-label="Record sections">
+          <button type="button" class="tabs-underline-item" data-tab="details" aria-selected="true">Details</button>
+          <button type="button" class="tabs-underline-item" data-tab="journal" aria-selected="false">Journal</button>
+          <button type="button" class="tabs-underline-item" data-tab="history" aria-selected="false">History</button>
+        </div>
+        <div class="tab-panel pt-3 text-sm text-ink-muted" data-panel="details">Paid to · Reference · Date · Category — the record's key fields.</div>
+        <div class="tab-panel pt-3 text-sm text-ink-muted" data-panel="journal" hidden>Debit / credit lines for this entry's posting.</div>
+        <div class="tab-panel pt-3 text-sm text-ink-muted" data-panel="history" hidden>Created / last saved timestamps and revisions.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Table -------------------------------------------------------------- -->
+  <section>
+    <h2 class="section-title mb-3">Table</h2>
+    <code class="mb-2 block text-[11px] text-ink-faint">.table-wrap &gt; .table (sticky header, .num for amounts, tr[aria-selected], .table-totals)</code>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Date / reference</th><th>Name</th><th class="num">Amount</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr aria-selected="true"><td><span class="row-title">04 Feb 2026</span><span class="row-sub">EXP-000590</span></td><td>Fictional local stationery</td><td class="num">12.50</td><td><span class="badge badge-draft"><i class="badge-dot"></i>Draft</span></td></tr>
+          <tr><td><span class="row-title">03 Feb 2026</span><span class="row-sub">EXP-000589</span></td><td>Harbor Office Supply</td><td class="num">65.00</td><td><span class="badge badge-draft"><i class="badge-dot"></i>Draft</span></td></tr>
+          <tr><td><span class="row-title">02 Feb 2026</span><span class="row-sub">REC-000588</span></td><td>Fictional new customer</td><td class="num">225.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Posted</span></td></tr>
+        </tbody>
+        <tfoot><tr class="table-totals"><td colspan="2">Total</td><td class="num">302.50</td><td></td></tr></tfoot>
+      </table>
+    </div>
+  </section>
+
+  <!-- Definition grid + panel -------------------------------------------- -->
+  <section class="grid gap-6 lg:grid-cols-2">
+    <div>
+      <h2 class="section-title mb-3">Definition grid</h2>
+      <code class="mb-2 block text-[11px] text-ink-faint">.dgrid &gt; .dgrid-row &gt; dt/dd</code>
+      <div class="panel">
+        <dl class="dgrid">
+          <div class="dgrid-row"><dt>Paid to</dt><dd>Faisalabad Yarn Mills</dd></div>
+          <div class="dgrid-row"><dt>Reference</dt><dd>PO-000017</dd></div>
+          <div class="dgrid-row"><dt>Date</dt><dd>15 Sep 2026</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div>
+      <h2 class="section-title mb-3">Card / panel</h2>
+      <code class="mb-2 block text-[11px] text-ink-faint">.panel .panel-header</code>
+      <div class="panel">
+        <div class="panel-header"><h3 class="text-sm font-semibold">Posting preview</h3><span class="balanced-label"><i data-icon="check" class="icon"></i>Balanced</span></div>
+        <p class="text-sm text-ink-muted">Panels separate content that means something on its own — not every block needs one.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alerts & strips ------------------------------------------------------ -->
+  <section>
+    <h2 class="section-title mb-3">Alerts &amp; context strips</h2>
+    <div class="flex flex-col gap-3">
+      <div class="alert alert-danger"><i data-icon="alert-triangle" class="icon"></i><div><span class="alert-title">We couldn't complete that action.</span><p>Choose a document action.</p></div></div>
+      <div class="alert alert-info"><i data-icon="info-circle" class="icon"></i><div><span class="alert-title">Posting adds this to reports.</span><p>A saved draft does not change your books.</p></div></div>
+      <code class="text-[11px] text-ink-faint">.alert .alert-danger|info|warning</code>
+      <div class="overflow-hidden rounded-panel border border-border">
+        <div class="strip strip-sample" data-dismissible><i data-icon="info-circle" class="icon"></i><p>Sample company — synthetic data, resets automatically.</p><button type="button" class="strip-dismiss" data-dismiss aria-label="Dismiss"><i data-icon="x" class="icon"></i></button></div>
+        <div class="strip strip-warning" data-dismissible><i data-icon="alert-triangle" class="icon"></i><p>Opening balances required — <a href="#/components">Review setup</a></p><button type="button" class="strip-dismiss" data-dismiss aria-label="Dismiss"><i data-icon="x" class="icon"></i></button></div>
+      </div>
+      <code class="text-[11px] text-ink-faint">.strip .strip-info|warning|sample (data-dismissible / data-dismiss)</code>
+    </div>
+  </section>
+
+  <!-- Menu / popover, dialog, sheet ---------------------------------------- -->
+  <section class="grid gap-6 lg:grid-cols-3">
+    <div>
+      <h2 class="section-title mb-3">Menu / popover</h2>
+      <code class="mb-2 block text-[11px] text-ink-faint">&lt;details class="menu"&gt; + .menu-panel .menu-item</code>
+      <details class="menu">
+        <summary class="btn btn-secondary">Filters<i data-icon="chevron-down" class="icon"></i></summary>
+        <div class="menu-panel">
+          <p class="menu-label">Type</p>
+          <button type="button" class="menu-item">Expenses</button>
+          <button type="button" class="menu-item">Receipts</button>
+          <div class="menu-divider"></div>
+          <button type="button" class="menu-item"><i data-icon="x" class="icon"></i>Clear filters</button>
+        </div>
+      </details>
+    </div>
+    <div>
+      <h2 class="section-title mb-3">Dialog</h2>
+      <code class="mb-2 block text-[11px] text-ink-faint">&lt;dialog class="dialog"&gt; · data-dialog-open</code>
+      <button type="button" class="btn btn-secondary" data-dialog-open="cmp-dialog">Open dialog</button>
+      <dialog class="dialog" id="cmp-dialog" aria-label="Record customer receipt">
+        <div class="dialog-header"><h3 class="text-sm font-semibold">Record customer receipt</h3></div>
+        <div class="dialog-body">
+          <div class="field px-2 py-1"><label class="field-label" for="cmp-dialog-amount">Amount received</label><input class="input input-amount" id="cmp-dialog-amount" value="27.50"></div>
+        </div>
+        <form method="dialog" class="dialog-footer">
+          <button type="submit" class="btn btn-ghost">Cancel</button>
+          <button type="submit" class="btn btn-primary">Record receipt</button>
+        </form>
+      </dialog>
+    </div>
+    <div>
+      <h2 class="section-title mb-3">kbd</h2>
+      <code class="mb-2 block text-[11px] text-ink-faint">.kbd-group &gt; .kbd</code>
+      <p class="flex items-center gap-2 text-sm text-ink-muted">Jump anywhere <span class="kbd-group"><span class="kbd">Ctrl</span><span class="kbd">K</span></span></p>
+    </div>
+  </section>
+
+  <!-- Empty state, stepper -------------------------------------------------- -->
+  <section class="grid gap-6 lg:grid-cols-2">
+    <div>
+      <h2 class="section-title mb-3">Empty state</h2>
+      <code class="mb-2 block text-[11px] text-ink-faint">.empty-state .empty-state-icon</code>
+      <div class="panel">
+        <div class="empty-state">
+          <span class="empty-state-icon"><i data-icon="receipt-2" class="icon"></i></span>
+          <h2>A clear place to start.</h2>
+          <p>Record money in or money out. Review the balanced entry before it reaches your books.</p>
+          <a class="btn btn-primary" href="#/transactions-list">Record your first transaction</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2 class="section-title mb-3">Stepper</h2>
+      <code class="mb-2 block text-[11px] text-ink-faint">.stepper .stepper-step.is-done|is-current</code>
+      <div class="panel">
+        <ol class="stepper">
+          <li class="stepper-step is-done"><span class="stepper-index"><i data-icon="check" class="icon"></i></span><span class="stepper-label">Business &amp; currency</span></li>
+          <li class="stepper-step is-current"><span class="stepper-index">2</span><span class="stepper-label">Chart of accounts<span class="stepper-hint">Choose a starting set, then adjust</span></span></li>
+          <li class="stepper-step"><span class="stepper-index">3</span><span class="stepper-label">Opening balances</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Page header / filter bar / pagination ---------------------------------- -->
+  <section>
+    <h2 class="section-title mb-3">Page header · filter bar · pagination</h2>
+    <code class="mb-2 block text-[11px] text-ink-faint">.page-header · .filter-bar · .pagination</code>
+    <div class="overflow-hidden rounded-panel border border-border bg-surface">
+      <div class="flex items-start justify-between gap-4 px-4 py-4">
+        <div><p class="eyebrow">Your day-to-day books</p><h1 class="page-title">Drafts <span class="page-header-count">· 3</span></h1></div>
+        <div class="page-header-actions"><button type="button" class="btn btn-primary"><i data-icon="plus" class="icon"></i>New transaction</button></div>
+      </div>
+      <div class="filter-bar px-4 border-t border-border">
+        <div class="tabs-seg"><button type="button" class="tabs-seg-item" aria-selected="true">Drafts</button><button type="button" class="tabs-seg-item">Posted</button></div>
+        <label class="search-field"><i data-icon="search" class="icon"></i><input type="search" placeholder="Name, reference or memo"></label>
+        <select class="select max-w-[140px]"><option>All types</option></select>
+        <details class="menu"><summary class="btn btn-secondary">Filters<i data-icon="chevron-down" class="icon"></i></summary><div class="menu-panel"><button type="button" class="menu-item">Date range…</button></div></details>
+        <button type="button" class="btn btn-secondary btn-icon" aria-label="Export"><i data-icon="download" class="icon"></i></button>
+      </div>
+      <div class="pagination px-4 border-t border-border">
+        <span class="pagination-summary">Showing 1–3 of 3</span>
+        <div class="pagination-controls">
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" disabled aria-label="Previous page"><i data-icon="chevron-left" class="icon"></i></button>
+          <span class="pagination-page">Page 1 of 1</span>
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" disabled aria-label="Next page"><i data-icon="chevron-right" class="icon"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Avatar -------------------------------------------------------------- -->
+  <section>
+    <h2 class="section-title mb-3">Avatar</h2>
+    <div class="flex items-center gap-3">
+      <span class="avatar">AK</span>
+      <span class="avatar-sm">RT</span>
+      <code class="text-[11px] text-ink-faint">.avatar / .avatar-sm</code>
+    </div>
+  </section>
+
+  <!-- Line items: add / remove row ------------------------------------------ -->
+  <section>
+    <h2 class="section-title mb-3">Line items — Add / remove row</h2>
+    <code class="mb-2 block text-[11px] text-ink-faint">data-add-row · data-row-template · data-remove-row (try it)</code>
+    <div class="table-wrap">
+      <table class="table doc-lines-table">
+        <thead><tr><th class="w-10">#</th><th>Description</th><th class="num w-24">Qty</th><th class="num w-32">Unit price</th><th class="w-10"></th></tr></thead>
+        <tbody id="cmp-lines-body">
+          <tr data-row><td data-row-index>1</td><td><input class="input" value="Cotton fabric — 60&quot; width"></td><td><input class="input input-amount" value="120"></td><td><input class="input input-amount" value="410.00"></td><td><button type="button" class="btn btn-ghost btn-icon btn-sm" data-remove-row aria-label="Remove line"><i data-icon="trash" class="icon"></i></button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <template id="cmp-line-template">
+      <tr data-row><td data-row-index></td><td><input class="input" placeholder="Description"></td><td><input class="input input-amount" placeholder="0"></td><td><input class="input input-amount" placeholder="0.00"></td><td><button type="button" class="btn btn-ghost btn-icon btn-sm" data-remove-row aria-label="Remove line"><i data-icon="x" class="icon"></i></button></td></tr>
+    </template>
+    <button type="button" class="btn btn-ghost btn-sm mt-2" data-add-row="cmp-lines-body" data-row-template="cmp-line-template"><i data-icon="plus" class="icon"></i>Add line</button>
+  </section>
+
+  <!-- Report statement table -------------------------------------------------- -->
+  <section>
+    <h2 class="section-title mb-3">Report statement table</h2>
+    <code class="mb-2 block text-[11px] text-ink-faint">.stmt-table .stmt-indent-1|2 .stmt-subtotal .stmt-total</code>
+    <div class="table-wrap p-2">
+      <table class="stmt-table">
+        <thead><tr><th>Account</th><th class="num">PKR</th></tr></thead>
+        <tbody>
+          <tr class="stmt-row"><td class="stmt-group-label">Current assets</td><td class="num"></td></tr>
+          <tr class="stmt-row stmt-indent-1"><td>Cash and bank</td><td class="num">46,785.00</td></tr>
+          <tr class="stmt-row stmt-indent-1"><td>Accounts receivable</td><td class="num">78,750.00</td></tr>
+          <tr class="stmt-row stmt-subtotal"><td>Total current assets</td><td class="num">125,535.00</td></tr>
+          <tr class="stmt-row stmt-total"><td>Total assets</td><td class="num">125,535.00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Amount typography -------------------------------------------------------- -->
+  <section>
+    <h2 class="section-title mb-3">Amount typography</h2>
+    <div class="flex flex-wrap items-end gap-8">
+      <div><p class="text-[11px] text-ink-faint mb-1">.amount-lg</p><p class="amount-lg">PKR 185,400.00</p></div>
+      <div><p class="text-[11px] text-ink-faint mb-1">.amount-xl</p><p class="amount-xl">PKR 46,785.00</p></div>
+    </div>
+  </section>
+</div>

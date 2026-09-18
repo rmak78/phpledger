@@ -1,0 +1,58 @@
+<!--meta {"id":"product-form","title":"Edit product","route":"/inventory?id=1","group":"Inventory","nav":"products","crumbs":[["Inventory","#/products-list"],["Products & stock","#/products-list"],["Cotton 60\""]],"pattern":"document-editor","layout":"app","state":"Editing Cotton 60\" (stock)"} -->
+<div class="py-5">
+  <div class="flex flex-col rounded-panel border border-border bg-surface">
+    <header class="doc-header" data-fold="doc header">
+      <div class="doc-heading">
+        <span class="doc-type">Product</span>
+        <h1 class="doc-number">Cotton 60&quot;</h1>
+        <span class="badge badge-posted"><i class="badge-dot"></i>Active</span>
+      </div>
+      <div class="doc-actions">
+        <a class="btn btn-ghost" href="#/products-list">Cancel</a>
+        <button type="button" class="btn btn-primary" data-fold="primary action">Save product</button>
+      </div>
+    </header>
+
+    <div class="doc-body">
+      <section>
+        <h2 class="section-title mb-2">Protected after first use</h2>
+        <dl class="grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-3">
+          <div><dt class="field-label">Product code</dt><dd class="mt-0.5 text-sm font-medium text-ink">FAB-COT60</dd></div>
+          <div><dt class="field-label">Type</dt><dd class="mt-0.5 text-sm font-medium text-ink">Stock item</dd></div>
+          <div><dt class="field-label">Base unit</dt><dd class="mt-0.5 text-sm font-medium text-ink">metre</dd></div>
+        </dl>
+        <p class="mt-2 text-xs text-ink-muted">These fields lock once a movement has posted, so past valuations stay meaningful.</p>
+      </section>
+
+      <section>
+        <h2 class="section-title mb-2">Editable details</h2>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
+          <div class="field">
+            <label class="field-label" for="pd-name">Name</label>
+            <input class="input" id="pd-name" type="text" value="Cotton 60&quot;">
+          </div>
+          <div class="field">
+            <label class="field-label" for="pd-price">Selling price</label>
+            <input class="input input-amount" id="pd-price" type="text" value="350.0000">
+          </div>
+          <div class="field">
+            <label class="field-label" for="pd-sales">Sales income account</label>
+            <select class="select" id="pd-sales"><option selected>4000 &middot; Fabric sales</option><option>4010 &middot; Stitching &amp; job work</option></select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="pd-purchase">Purchase account <span class="optional">(optional)</span></label>
+            <select class="select" id="pd-purchase"><option selected>5700 &middot; General &amp; admin expenses</option><option>Choose&hellip;</option></select>
+          </div>
+        </div>
+        <dl class="mt-3 grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2">
+          <div><dt class="field-label">Inventory asset account</dt><dd class="mt-0.5 text-sm font-medium text-ink">1200 &middot; Inventory &mdash; fabric stock</dd></div>
+          <div><dt class="field-label">Cost of goods sold account</dt><dd class="mt-0.5 text-sm font-medium text-ink">5000 &middot; Cost of goods sold &mdash; fabric</dd></div>
+        </dl>
+        <div class="mt-3 grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
+          <div class="field"><label class="field-label" for="pd-reason">Reason for this change</label><input class="input" id="pd-reason" type="text" placeholder="e.g. seasonal price update"></div>
+        </div>
+        <label class="mt-3 inline-flex items-center gap-2 text-sm text-ink"><input type="checkbox" checked>Active</label>
+      </section>
+    </div>
+  </div>
+</div>

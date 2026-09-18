@@ -1,0 +1,113 @@
+<!--meta {"id":"home","title":"Home","route":"/","group":"Home","nav":"home","crumbs":[["Home"]],"pattern":"home","layout":"app","state":"Proposed start page · 4 needs-attention items"} -->
+<div class="flex flex-col gap-8 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Home</h1>
+      <p class="mt-1 text-sm text-ink-muted">Ravi Textile Traders · 17 Sep 2026</p>
+    </div>
+    <div class="page-header-actions">
+      <button type="button" class="btn btn-primary" data-fold="new transaction button"><i data-icon="plus" class="icon"></i>New transaction</button>
+    </div>
+  </header>
+
+  <div class="flex flex-wrap items-center gap-2" data-fold="quick actions">
+    <a class="btn btn-secondary btn-sm" href="#/transactions-list"><i data-icon="receipt-2" class="icon"></i>Expense</a>
+    <a class="btn btn-secondary btn-sm" href="#/transactions-list"><i data-icon="receipt" class="icon"></i>Receipt</a>
+    <a class="btn btn-secondary btn-sm" href="#/ar-invoice-new"><i data-icon="file-invoice" class="icon"></i>Invoice</a>
+    <a class="btn btn-secondary btn-sm" href="#/ap-list"><i data-icon="file-dollar" class="icon"></i>Bill</a>
+    <a class="btn btn-secondary btn-sm" href="#/journals-list"><i data-icon="book-2" class="icon"></i>Journal</a>
+  </div>
+
+  <section data-fold="needs attention">
+    <div class="mb-3 flex items-center gap-2">
+      <h2 class="section-title">Needs attention</h2>
+      <span class="badge badge-info"><i class="badge-dot"></i>4 items</span>
+      <span data-proposed title="Proposed: this list combines drafts, AR/AP ageing, bank reconciliation and setup status onto one page. Each figure is already computed by its own module today — this view is a new way of surfacing them together."><i data-icon="info-circle" class="icon size-3.5 text-ink-faint"></i></span>
+    </div>
+    <div class="panel !p-2">
+      <ul class="flex flex-col">
+        <li>
+          <a class="flex items-center gap-3 rounded-control px-3 py-2.5 hover:bg-surface-subtle" href="#/transactions-list">
+            <span class="inline-flex size-8 flex-none items-center justify-center rounded-full bg-surface-subtle text-ink-muted"><i data-icon="receipt-2" class="icon"></i></span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-semibold text-ink">3 drafts ready to post</span>
+              <span class="block text-xs text-ink-muted">PKR 113,850.00 total · Receipts &amp; expenses</span>
+            </span>
+            <i data-icon="chevron-right" class="icon text-ink-faint"></i>
+          </a>
+        </li>
+        <li>
+          <a class="flex items-center gap-3 rounded-control px-3 py-2.5 hover:bg-surface-subtle" href="#/ar-list">
+            <span class="inline-flex size-8 flex-none items-center justify-center rounded-full bg-danger-bg text-danger"><i data-icon="file-invoice" class="icon"></i></span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-semibold text-ink">2 invoices overdue</span>
+              <span class="block text-xs text-ink-muted">PKR 46,800.00 · Lahore Fabric House, Bismillah Garments</span>
+            </span>
+            <i data-icon="chevron-right" class="icon text-ink-faint"></i>
+          </a>
+        </li>
+        <li>
+          <a class="flex items-center gap-3 rounded-control px-3 py-2.5 hover:bg-surface-subtle" href="#/ap-list">
+            <span class="inline-flex size-8 flex-none items-center justify-center rounded-full bg-warning-bg text-warning"><i data-icon="file-dollar" class="icon"></i></span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-semibold text-ink">1 bill due in 3 days</span>
+              <span class="block text-xs text-ink-muted">PKR 173,460.00 · Faisalabad Yarn Mills</span>
+            </span>
+            <i data-icon="chevron-right" class="icon text-ink-faint"></i>
+          </a>
+        </li>
+        <li>
+          <a class="flex items-center gap-3 rounded-control px-3 py-2.5 hover:bg-surface-subtle" href="#/bank-reconciliation" data-proposed title="Proposed: illustrative count — exact bank-matching output was not reviewed in this pass.">
+            <span class="inline-flex size-8 flex-none items-center justify-center rounded-full bg-info-bg text-info"><i data-icon="building-bank" class="icon"></i></span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-semibold text-ink">1 bank line to review</span>
+              <span class="block text-xs text-ink-muted">Meezan Bank – Current · Bank reconciliation</span>
+            </span>
+            <i data-icon="chevron-right" class="icon text-ink-faint"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-fold="balances">
+    <h2 class="section-title mb-3">Cash &amp; bank, and what's due</h2>
+    <div class="grid grid-cols-1 gap-4 min-[900px]:grid-cols-3">
+      <div class="panel">
+        <div class="mb-3 flex items-center justify-between">
+          <span class="flex items-center gap-2 text-sm font-medium text-ink-muted"><i data-icon="building" class="icon"></i>Cash &amp; bank</span>
+          <span class="badge badge-posted">Posted balance</span>
+        </div>
+        <p class="amount-xl text-brand" data-fold="cash balance"><span class="align-top text-xs font-normal text-ink-muted">PKR</span> 1,842,650.00</p>
+        <a class="link mt-3 inline-flex items-center gap-1 text-xs font-semibold" href="#/balance-sheet">See your financial position<i data-icon="arrow-right" class="icon"></i></a>
+      </div>
+      <div class="panel">
+        <div class="mb-3 flex items-center justify-between"><span class="flex items-center gap-2 text-sm font-medium text-ink-muted"><i data-icon="file-invoice" class="icon"></i>Receivable</span></div>
+        <p class="amount-lg">PKR 312,400.00</p>
+        <p class="mt-1 text-xs text-danger">PKR 46,800.00 overdue</p>
+        <a class="link mt-3 inline-flex items-center gap-1 text-xs font-semibold" href="#/ar-list">Review invoices<i data-icon="arrow-right" class="icon"></i></a>
+      </div>
+      <div class="panel">
+        <div class="mb-3 flex items-center justify-between"><span class="flex items-center gap-2 text-sm font-medium text-ink-muted"><i data-icon="file-dollar" class="icon"></i>Payable</span></div>
+        <p class="amount-lg">PKR 219,610.00</p>
+        <p class="mt-1 text-xs text-warning">PKR 173,460.00 due within 3 days</p>
+        <a class="link mt-3 inline-flex items-center gap-1 text-xs font-semibold" href="#/ap-list">Review bills<i data-icon="arrow-right" class="icon"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title mb-3">Recent activity</h2>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Date / reference</th><th>Description</th><th class="num">Amount</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr data-href="#/ar-invoice-draft"><td><span class="row-title">15 Sep 2026</span><span class="row-sub">INV-000194</span></td><td>Bismillah Garments<span class="row-sub">Invoice</span></td><td class="num">185,496.00</td><td><span class="badge badge-draft"><i class="badge-dot"></i>Draft</span></td></tr>
+          <tr data-href="#/transactions-list"><td><span class="row-title">14 Sep 2026</span><span class="row-sub">EXP-000590</span></td><td>Sialkot Packaging<span class="row-sub">Expense</span></td><td class="num">3,250.00</td><td><span class="badge badge-draft"><i class="badge-dot"></i>Draft</span></td></tr>
+          <tr data-href="#/transactions-list"><td><span class="row-title">10 Sep 2026</span><span class="row-sub">REC-000588</span></td><td>Lahore Fabric House<span class="row-sub">Receipt</span></td><td class="num">92,000.00</td><td><span class="badge badge-draft"><i class="badge-dot"></i>Draft</span></td></tr>
+          <tr data-href="#/journals-list"><td><span class="row-title">12 Sep 2026</span><span class="row-sub">JRN-000112</span></td><td>Opening stock adjustment<span class="row-sub">Journal</span></td><td class="num">64,200.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Posted</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,104 @@
+<!--meta {"id":"products-list","title":"Products & stock","route":"/inventory","group":"Inventory","nav":"products","crumbs":[["Inventory","#/products-list"],["Products & stock"]],"pattern":"list-detail","layout":"app","state":"All · Cotton 60\" selected"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Products &amp; stock</h1>
+      <p class="mt-1 text-sm text-ink-muted">6 products &middot; PKR 677,675.00 total carrying value</p>
+    </div>
+    <div class="page-header-actions">
+      <a class="btn btn-ghost" href="#/purchase-orders-list"><i data-icon="clipboard-list" class="icon"></i>Purchase orders</a>
+      <a class="btn btn-primary" href="#/product-form" data-fold="new product button"><i data-icon="plus" class="icon"></i>New product</a>
+    </div>
+  </header>
+
+  <div class="split-view">
+    <section class="split-view-list has-detail" aria-label="Product list">
+     <div class="flex flex-col gap-3">
+      <div class="filter-bar" data-fold="filter bar">
+        <div class="tabs-seg" role="tablist" aria-label="Product type">
+          <button type="button" class="tabs-seg-item" aria-selected="true">All</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Stock</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Non-stock</button>
+        </div>
+        <label class="search-field"><i data-icon="search" class="icon"></i><input type="search" placeholder="Product code or name" aria-label="Search products"></label>
+        <button type="button" class="btn btn-secondary btn-icon" aria-label="Export list"><i data-icon="download" class="icon"></i></button>
+      </div>
+
+      <div class="table-wrap" data-fold="first rows">
+        <table class="table">
+          <thead><tr><th>Product</th><th class="num">On hand</th><th class="num">Carrying value</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr data-href="#/products-list" aria-selected="true"><td><span class="row-title">Cotton 60&quot;</span><span class="row-sub">FAB-COT60 &middot; stock</span></td><td class="num">1,240.0000 m</td><td class="num">235,600.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td></tr>
+            <tr data-href="#/products-list"><td><span class="row-title">Voile 44&quot;</span><span class="row-sub">FAB-VOI44 &middot; stock</span></td><td class="num">860.0000 m</td><td class="num">129,000.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td></tr>
+            <tr data-href="#/products-list"><td><span class="row-title">Cotton yarn 20s</span><span class="row-sub">RM-YARN20 &middot; stock</span></td><td class="num">1,200.0000 kg</td><td class="num">252,000.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td></tr>
+            <tr data-href="#/products-list"><td><span class="row-title">Printed cartons</span><span class="row-sub">RM-CARTON &middot; stock</span></td><td class="num">3,500.0000 pcs</td><td class="num">61,075.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td></tr>
+            <tr data-href="#/products-list"><td><span class="row-title">Cutting &amp; packing</span><span class="row-sub">SVC-CUTPACK &middot; service</span></td><td class="num text-ink-faint">&mdash;</td><td class="num text-ink-faint">&mdash;</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td></tr>
+            <tr data-href="#/products-list"><td><span class="row-title">Local delivery</span><span class="row-sub">SVC-DELIVERY &middot; service</span></td><td class="num text-ink-faint">&mdash;</td><td class="num text-ink-faint">&mdash;</td><td><span class="badge badge-unpaid"><i class="badge-dot"></i>Inactive</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span class="pagination-summary">6 records &middot; Total <strong class="text-ink">PKR 677,675.00</strong></span>
+        <div class="pagination-controls">
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" disabled aria-label="Previous page"><i data-icon="chevron-left" class="icon"></i></button>
+          <span class="pagination-page">Page 1 of 1</span>
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" disabled aria-label="Next page"><i data-icon="chevron-right" class="icon"></i></button>
+        </div>
+      </div>
+      <p class="sample-note"><i data-icon="info-circle" class="icon"></i>These are synthetic records in a separate sample company.</p>
+     </div>
+    </section>
+
+    <section class="split-view-detail" aria-label="Product details">
+      <a class="split-view-back link" href="#/products-list"><i data-icon="arrow-left" class="icon"></i>Back to list</a>
+      <div class="border-b border-border px-5 pb-4 pt-4">
+        <div class="mb-1.5 flex flex-wrap items-center gap-2">
+          <h2 class="text-[1.0625rem] font-semibold text-ink">Cotton 60&quot;</h2>
+          <span class="badge badge-posted"><i class="badge-dot"></i>Active</span>
+        </div>
+        <div class="flex items-end justify-between gap-3">
+          <h3 class="text-sm text-ink-muted">FAB-COT60 &middot; 1,240.0000 m on hand</h3>
+          <p class="amount-lg whitespace-nowrap" data-fold="document total"><span class="text-xs font-normal text-ink-muted">PKR</span> 235,600.00</p>
+        </div>
+      </div>
+
+      <div class="flex min-h-0 flex-1 flex-col overflow-y-auto px-5 pt-4">
+        <div class="tabs-underline" data-tabs role="tablist" aria-label="Record sections">
+          <button type="button" class="tabs-underline-item" data-tab="details" aria-selected="true">Details</button>
+          <button type="button" class="tabs-underline-item" data-tab="movements" aria-selected="false">Movements</button>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="details">
+          <dl class="dgrid">
+            <div class="dgrid-row"><dt>Base unit</dt><dd>metre</dd></div>
+            <div class="dgrid-row"><dt>Average unit cost</dt><dd>190.0000</dd></div>
+            <div class="dgrid-row"><dt>Selling price</dt><dd>350.0000</dd></div>
+            <div class="dgrid-row"><dt>Sales account</dt><dd>4000 &middot; Fabric sales</dd></div>
+            <div class="dgrid-row"><dt>Inventory account</dt><dd>1200 &middot; Inventory &mdash; fabric stock</dd></div>
+            <div class="dgrid-row"><dt>Stock to ledger</dt><dd>235,600.00 = 235,600.00 &middot; reconciled</dd></div>
+          </dl>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="movements" hidden>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>Date</th><th>Movement</th><th class="num">Qty</th><th>Source</th></tr></thead>
+              <tbody>
+                <tr><td>14 Sep 2026</td><td>Issue</td><td class="num">&minus;400.0000</td><td><a class="link" href="#/ar-invoice-draft">INV-000194</a></td></tr>
+                <tr><td>02 Sep 2026</td><td>Issue</td><td class="num">&minus;120.0000</td><td><a class="link" href="#/ar-list">INV-000190</a></td></tr>
+                <tr><td>10 Aug 2026</td><td>Manual receipt</td><td class="num">+1,760.0000</td><td>Cutting order MRN-0042</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-actions">
+        <p class="panel-actions-note">Protected fields (code, type, unit) lock after first use.</p>
+        <a class="btn btn-secondary" href="#/product-form"><i data-icon="pencil" class="icon"></i>Edit product</a>
+        <a class="btn btn-primary" href="#/stock-count"><i data-icon="clipboard-check" class="icon"></i>Record count</a>
+      </div>
+    </section>
+  </div>
+</div>

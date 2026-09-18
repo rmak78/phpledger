@@ -1,0 +1,47 @@
+/* Extra components for the sales screens. Use @layer components; tokens only. */
+@layer components {
+  /* Compact ageing summary strip (AR/AP lists) — clickable buckets, no big panel. */
+  .ageing-strip { display: flex; flex-wrap: wrap; column-gap: 1.5rem; row-gap: .375rem; }
+  .ageing-item {
+    display: flex; flex-direction: column; gap: .0625rem; background: none; border: 0; padding: 0;
+    text-align: start; cursor: pointer; border-radius: 4px;
+  }
+  .ageing-item:hover .ageing-item-value { color: var(--brand-blue); }
+  .ageing-item-label { font-size: .6875rem; text-transform: uppercase; letter-spacing: .03em; color: var(--ink-faint); }
+  .ageing-item-value { font-size: .8125rem; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .ageing-item[aria-current="true"] .ageing-item-label,
+  .ageing-item[aria-current="true"] .ageing-item-value { color: var(--brand-blue); }
+
+  /* Control-account reconciliation — a single subtle line, not a panel. */
+  .control-check { display: flex; align-items: center; gap: .375rem; font-size: .75rem; color: var(--ink-muted); white-space: nowrap; }
+
+  /* Simple progress meter (PO receiving, stock count, product quantity vs. count). */
+  .meter { height: 6px; border-radius: 999px; background: var(--surface-subtle); overflow: hidden; flex: 1 1 auto; }
+  .meter-fill { height: 100%; background: var(--brand-blue); border-radius: 999px; }
+  .meter-fill.is-full { background: var(--success); }
+
+  /* Neutral role tag (Customer / Vendor) — not a status, so no badge colour. */
+  .role-tag {
+    display: inline-flex; align-items: center; padding: .0625rem .5rem; border-radius: 999px;
+    border: 1px solid var(--border-strong); font-size: .6875rem; font-weight: 600; color: var(--ink-muted);
+  }
+
+  /* Allocation table (ar-payment / ap-payment) — narrow amount entry cell. */
+  .alloc-input { width: 7.5rem; }
+
+  /* Small quantity/value comparison rows in the stock-count preview. */
+  .count-compare { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .count-compare-item { display: flex; flex-direction: column; gap: .1875rem; }
+  .count-compare-label { font-size: .6875rem; text-transform: uppercase; letter-spacing: .03em; color: var(--ink-faint); }
+  .count-compare-value { font-size: 1.0625rem; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .count-compare-value.is-negative { color: var(--danger); }
+  .count-compare-value.is-positive { color: var(--success); }
+
+  /* goods-receipt's order-lines table: same compact line-editor look as .doc-lines-table,
+     but WITHOUT its hardcoded min-width: 66.875rem (that value is tuned for the 8-column
+     invoice/bill pattern with a trailing empty delete-button column; forcing it on a
+     6-column table with a real trailing amount column pushes real content off the edge
+     of .table-wrap's visible width and hides it behind horizontal scroll — see NOTES.md). */
+  .gr-lines-table { table-layout: fixed; }
+  .gr-lines-table input, .gr-lines-table select { height: 1.875rem; font-size: .75rem; }
+}

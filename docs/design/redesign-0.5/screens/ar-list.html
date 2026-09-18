@@ -1,0 +1,143 @@
+<!--meta {"id":"ar-list","title":"Invoices","route":"/ar","group":"Sales","nav":"invoices","crumbs":[["Sales","#/ar-list"],["Invoices"]],"pattern":"list-detail","layout":"app","state":"All · INV-000190 selected"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Invoices</h1>
+      <p class="mt-1 text-sm text-ink-muted">PKR 312,400.00 outstanding · PKR 46,800.00 overdue</p>
+    </div>
+    <div class="page-header-actions">
+      <a class="btn btn-ghost" href="#/parties-list"><i data-icon="users" class="icon"></i>Customers</a>
+      <a class="btn btn-primary" href="#/ar-invoice-new" data-fold="new invoice button"><i data-icon="plus" class="icon"></i>New invoice</a>
+    </div>
+  </header>
+
+  <div class="split-view">
+    <section class="split-view-list has-detail" aria-label="Invoice list">
+     <div class="flex flex-col gap-3">
+      <div class="filter-bar" data-fold="filter bar">
+        <div class="tabs-seg" role="tablist" aria-label="Invoice status">
+          <button type="button" class="tabs-seg-item" aria-selected="false">Draft</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Unpaid</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Overdue</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Paid</button>
+          <button type="button" class="tabs-seg-item" aria-selected="true">All</button>
+        </div>
+        <label class="search-field"><i data-icon="search" class="icon"></i><input type="search" placeholder="Customer, number or reference" aria-label="Search invoices"></label>
+        <details class="menu">
+          <summary class="btn btn-secondary"><i data-icon="filter" class="icon"></i>Filters</summary>
+          <div class="menu-panel menu-panel-wide">
+            <p class="menu-label">Date range</p>
+            <div class="flex items-center gap-2 px-2 py-1">
+              <div class="field"><label class="field-label" for="ar-from">From</label>
+                <span class="input-affix"><input class="input" type="text" value="01 Jul 2026" id="ar-from"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+              </div>
+              <div class="field"><label class="field-label" for="ar-to">To</label>
+                <span class="input-affix"><input class="input" type="text" value="17 Sep 2026" id="ar-to"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+              </div>
+            </div>
+            <div class="px-2 pb-1 pt-2"><button type="button" class="btn btn-secondary btn-sm w-full justify-center">Apply dates</button></div>
+          </div>
+        </details>
+        <button type="button" class="btn btn-secondary btn-icon" aria-label="Export list"><i data-icon="download" class="icon"></i></button>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 rounded-panel border border-border bg-surface px-4 py-2.5" data-fold="ageing summary">
+        <div class="ageing-strip" role="group" aria-label="Ageing buckets">
+          <button type="button" class="ageing-item"><span class="ageing-item-label">Not due</span><span class="ageing-item-value">265,600.00</span></button>
+          <button type="button" class="ageing-item" aria-current="true"><span class="ageing-item-label">1&ndash;30</span><span class="ageing-item-value">46,800.00</span></button>
+          <button type="button" class="ageing-item"><span class="ageing-item-label">31&ndash;60</span><span class="ageing-item-value">0.00</span></button>
+          <button type="button" class="ageing-item"><span class="ageing-item-label">61&ndash;90</span><span class="ageing-item-value">0.00</span></button>
+          <button type="button" class="ageing-item"><span class="ageing-item-label">90+</span><span class="ageing-item-value">0.00</span></button>
+        </div>
+        <p class="control-check"><i data-icon="check" class="icon size-3.5 text-success"></i>Receivable control reconciled &middot; ledger 312,400.00 = open items 312,400.00</p>
+      </div>
+
+      <div class="table-wrap" data-fold="first rows">
+        <table class="table">
+          <thead><tr><th>Document / date</th><th>Customer</th><th class="num">Amount</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr data-href="#/ar-list"><td><span class="row-title">15 Sep 2026</span><span class="row-sub">INV-000194</span></td><td>Bismillah Garments</td><td class="num">185,496.00</td><td><span class="badge badge-draft"><i class="badge-dot"></i>Draft</span></td></tr>
+            <tr data-href="#/ar-list"><td><span class="row-title">12 Sep 2026</span><span class="row-sub">INV-000193</span></td><td>Karachi Linen Co.</td><td class="num">218,456.00</td><td><span class="badge badge-unpaid"><i class="badge-dot"></i>Unpaid</span></td></tr>
+            <tr data-href="#/ar-list" aria-selected="true"><td><span class="row-title">20 Aug 2026</span><span class="row-sub">INV-000190</span></td><td>Lahore Fabric House</td><td class="num">107,144.00</td><td><span class="badge badge-partially-paid"><i class="badge-dot"></i>Partially paid</span></td></tr>
+            <tr data-href="#/ar-list"><td><span class="row-title">06 Aug 2026</span><span class="row-sub">INV-000188</span></td><td>Bismillah Garments</td><td class="num">26,800.00</td><td><span class="badge badge-overdue"><i class="badge-dot"></i>Overdue &middot; 12d</span></td></tr>
+            <tr data-href="#/ar-list"><td><span class="row-title">02 Aug 2026</span><span class="row-sub">INV-000185</span></td><td>Lahore Fabric House</td><td class="num">20,000.00</td><td><span class="badge badge-overdue"><i class="badge-dot"></i>Overdue &middot; 16d</span></td></tr>
+            <tr data-href="#/ar-list"><td><span class="row-title">28 Jun 2026</span><span class="row-sub">INV-000176</span></td><td>Bismillah Garments</td><td class="num">92,300.00</td><td><span class="badge badge-paid"><i class="badge-dot"></i>Paid</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span class="pagination-summary">6 records &middot; Total <strong class="text-ink">PKR 650,196.00</strong></span>
+        <div class="pagination-controls">
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" disabled aria-label="Previous page"><i data-icon="chevron-left" class="icon"></i></button>
+          <span class="pagination-page">Page 1 of 1</span>
+          <button type="button" class="btn btn-ghost btn-icon btn-sm" disabled aria-label="Next page"><i data-icon="chevron-right" class="icon"></i></button>
+        </div>
+      </div>
+      <p class="sample-note"><i data-icon="info-circle" class="icon"></i>These are synthetic records in a separate sample company.</p>
+     </div>
+    </section>
+
+    <section class="split-view-detail" aria-label="Invoice details">
+      <a class="split-view-back link" href="#/ar-list"><i data-icon="arrow-left" class="icon"></i>Back to list</a>
+      <div class="border-b border-border px-5 pb-4 pt-4">
+        <div class="mb-1.5 flex flex-wrap items-center gap-2">
+          <h2 class="text-[1.0625rem] font-semibold text-ink">INV-000190</h2>
+          <span class="badge badge-partially-paid"><i class="badge-dot"></i>Partially paid</span>
+        </div>
+        <div class="flex items-end justify-between gap-3">
+          <h3 class="text-sm text-ink-muted">Lahore Fabric House</h3>
+          <p class="amount-lg whitespace-nowrap" data-fold="document total"><span class="text-xs font-normal text-ink-muted">PKR</span> 107,144.00</p>
+        </div>
+      </div>
+
+      <div class="flex min-h-0 flex-1 flex-col overflow-y-auto px-5 pt-4">
+        <div class="tabs-underline" data-tabs role="tablist" aria-label="Record sections">
+          <button type="button" class="tabs-underline-item" data-tab="details" aria-selected="true">Details</button>
+          <button type="button" class="tabs-underline-item" data-tab="journal" aria-selected="false">Journal</button>
+          <button type="button" class="tabs-underline-item" data-tab="history" aria-selected="false">History</button>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="details">
+          <dl class="dgrid">
+            <div class="dgrid-row"><dt>Customer</dt><dd>Lahore Fabric House</dd></div>
+            <div class="dgrid-row"><dt>Document date</dt><dd>20 Aug 2026</dd></div>
+            <div class="dgrid-row"><dt>Due date</dt><dd>19 Sep 2026</dd></div>
+            <div class="dgrid-row"><dt>Entered prices</dt><dd>Exclude tax</dd></div>
+            <div class="dgrid-row"><dt>Amount paid</dt><dd>60,000.00</dd></div>
+            <div class="dgrid-row"><dt>Remaining</dt><dd class="font-semibold text-ink">47,144.00</dd></div>
+          </dl>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="journal" hidden>
+          <div class="posting-preview-head"><h3 class="text-sm font-semibold text-ink">Journal</h3><span class="balanced-label"><i data-icon="check" class="icon"></i>Balanced</span></div>
+          <div class="table-wrap">
+            <table class="table journal-table">
+              <thead><tr><th>Account</th><th class="num">Debit (PKR)</th><th class="num">Credit (PKR)</th></tr></thead>
+              <tbody>
+                <tr><td><span class="row-title">1100</span><span class="row-sub">Accounts receivable</span></td><td class="num">107,144.00</td><td class="num">0.00</td></tr>
+                <tr><td><span class="row-title">4000</span><span class="row-sub">Fabric sales</span></td><td class="num">0.00</td><td class="num">90,800.00</td></tr>
+                <tr><td><span class="row-title">2100</span><span class="row-sub">GST payable (output)</span></td><td class="num">0.00</td><td class="num">16,344.00</td></tr>
+              </tbody>
+              <tfoot><tr class="table-totals"><td>Total</td><td class="num">107,144.00</td><td class="num">107,144.00</td></tr></tfoot>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-panel pb-4 pt-3" data-panel="history" hidden>
+          <dl class="dgrid">
+            <div class="dgrid-row"><dt>Created</dt><dd>20 Aug 2026, 10:05 &middot; Asia/Karachi</dd></div>
+            <div class="dgrid-row"><dt>Posted</dt><dd>20 Aug 2026, 10:06 &middot; Asia/Karachi</dd></div>
+            <div class="dgrid-row"><dt>Payment recorded</dt><dd>05 Sep 2026, 14:20 &middot; PKR 60,000.00</dd></div>
+            <div class="dgrid-row"><dt>Revision</dt><dd>1</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="panel-actions">
+        <p class="panel-actions-note">Partially paid &middot; <a class="link" href="#/ar-invoice-posted">View full record</a></p>
+        <a class="btn btn-primary" href="#/ar-payment" data-fold="post button"><i data-icon="cash" class="icon"></i>Record payment</a>
+      </div>
+    </section>
+  </div>
+</div>

@@ -10,8 +10,8 @@ if (PHP_SAPI !== 'cli' || getenv('PL_ENV') !== 'test' || getenv('PL_DB_HOST') !=
 require dirname(__DIR__) . '/www/phpledger/includes/bootstrap.php';
 require dirname(__DIR__) . '/www/phpledger/install/migrate.php';
 $baseline = $argv[1] ?? 'foundation';
-if (!in_array($baseline, ['foundation', 'core-0.1.2', 'opening-local', 'preview-0.2.1', 'fresh'], true)) {
-    throw new DomainException('Choose foundation, core-0.1.2, opening-local, preview-0.2.1 or fresh.');
+if (!in_array($baseline, ['foundation', 'core-0.1.2', 'opening-local', 'preview-0.2.1', 'preview-0.5.0', 'fresh'], true)) {
+    throw new DomainException('Choose foundation, core-0.1.2, opening-local, preview-0.2.1, preview-0.5.0 or fresh.');
 }
 $allFiles = glob(PL_APP . '/install/migrations/*.php') ?: [];
 sort($allFiles, SORT_STRING);
@@ -21,6 +21,7 @@ $baseVersions = match ($baseline) {
     'core-0.1.2' => array_values(array_filter($allVersions, static fn(string $v): bool => $v <= '006_core_accounts_journals')),
     'opening-local' => array_values(array_filter($allVersions, static fn(string $v): bool => $v <= '009_bank_draft_cancellation' && $v !== '006_core_accounts_journals')),
     'preview-0.2.1' => array_values(array_filter($allVersions, static fn(string $v): bool => $v <= '012_demo_history_periods')),
+    'preview-0.5.0' => array_values(array_filter($allVersions, static fn(string $v): bool => $v <= '028_ar_ap_upgrade_completion')),
     'fresh' => [],
 };
 $upgradeDatabase = 'phpledger_upgrade_verify_' . bin2hex(random_bytes(12));
@@ -59,6 +60,32 @@ try {
         DB::insert('pl_schema_migrations', ['version' => $version, 'checksum' => hash_file('sha256', $file), 'status' => 'applied', 'applied_at' => gmdate('Y-m-d H:i:s')]);
     }
     $actor = pl_create_user('upgrade@example.invalid', 'Synthetic upgrade owner', 'Synthetic upgrade passphrase 471!');
+    if ($baseline === 'preview-0.5.0') {
+        $f = pl_create_company($actor, 'Synthetic 0.5 upgrade company', 'USD', '2026-01-01');
+        $journal = pl_post_journal($actor, $f['company_id'], $f['book_id'], [
+            'date'=>'2026-09-17','currency'=>'USD','source_type'=>'receipt','source_reference'=>'synthetic-upgrade-0.5',
+            'description'=>'Prior 0.5 synthetic receipt','idempotency_key'=>'synthetic-upgrade-0.5',
+            'lines'=>[['account_id'=>$f['accounts']['1000'],'debit'=>'125.0000','credit'=>'0'],['account_id'=>$f['accounts']['4000'],'debit'=>'0','credit'=>'125.0000']],
+        ]);
+        DB::insert('pl_connection_clients',['client_id'=>'synthetic-upgrade','name'=>'Prior synthetic client','redirect_uris'=>'[]','source'=>'personal']);
+        $connectionId = bin2hex(random_bytes(16));
+        DB::insert('pl_connections',['id'=>$connectionId,'actor_id'=>$actor,'client_id'=>'synthetic-upgrade','name'=>'Prior synthetic grant','kind'=>'personal','oauth_scopes'=>'ledger.read','resource'=>'https://synthetic.invalid/mcp','expires_at'=>'2026-10-17 00:00:00']);
+        $before = pl_get_journal($actor,$f['company_id'],$f['book_id'],$journal['id']);
+        $beforeAccounts = DB::query('SELECT * FROM pl_accounts ORDER BY id');
+        $migration = pl_migrate();
+        if ($migration['applied'] !== array_values(array_diff($allVersions,$baseVersions))
+            || $before !== pl_get_journal($actor,$f['company_id'],$f['book_id'],$journal['id'])
+            || $beforeAccounts !== array_map(static fn(array $row): array=>array_intersect_key($row,$beforeAccounts[0]), DB::query('SELECT * FROM pl_accounts ORDER BY id'))
+            || (int)DB::queryFirstField('SELECT COUNT(*) FROM pl_accounts WHERE report_classification IS NOT NULL') !== 0
+            || DB::queryFirstField('SELECT access_mode FROM pl_connections WHERE id=%s',$connectionId) !== 'full'
+            || pl_company_context($actor,$f['company_id'])['setup_status'] !== 'ready'
+            || pl_trial_balance($actor,$f['company_id'],$f['book_id'])['total_debit'] !== '125.0000'
+            || pl_migrate()['applied'] !== []) {
+            throw new RuntimeException('0.5 upgrade changed historical records, access, setup or repeatability.');
+        }
+        echo "Upgrade passed: 0.5 schema through 028, preserved posted journal/accounts/setup, existing full-read connection, balanced report and replay.\n";
+        return;
+    }
     DB::insert('pl_companies', ['name' => 'Prior foundation synthetic company', 'currency' => 'USD', 'start_date' => '2026-01-01', 'fiscal_year_end' => '12-31', 'created_by' => $actor]);
     $company = (int) DB::insertId();
     DB::insert('pl_company_members', ['company_id' => $company, 'user_id' => $actor, 'role' => 'owner']);

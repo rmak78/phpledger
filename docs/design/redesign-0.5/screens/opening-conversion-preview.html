@@ -1,0 +1,96 @@
+<!--meta {"id":"opening-conversion-preview","title":"Opening documents","route":"/opening-conversion","group":"Setup & access","nav":"opening-conversion","crumbs":[["Opening documents"]],"layout":"app","pattern":"wizard","state":"Mapping in progress · 2 rows need attention"} -->
+<div class="flex flex-col gap-3 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Opening documents</h1>
+      <p class="mt-1 text-sm text-ink-muted">Noor Surgical Instruments (Pvt) Ltd · Map unpaid opening documents into the shared receivables and payables ledger.</p>
+    </div>
+    <span class="badge badge-draft">Not converted yet</span>
+  </header>
+
+  <div class="alert alert-danger !py-2" role="alert" tabindex="-1" data-fold="error summary">
+    <i data-icon="alert-triangle" class="icon"></i>
+    <div>
+      <span class="alert-title">2 rows need attention before you can confirm.</span>
+      <ul class="mt-0.5 list-inside list-disc">
+        <li><a class="link" href="#row-2">Row 2 · INV-000181 — choose a party to map this document.</a></li>
+        <li><a class="link" href="#row-4">Row 4 · BILL-000091 — the selected party isn't set up as a supplier.</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="rounded-panel border border-border bg-surface p-3.5">
+    <div class="mb-2 flex items-center justify-between">
+      <h2 class="section-title">Cutover 30 Jun 2026</h2>
+      <p class="text-xs text-ink-muted">Conversion preserves the original trial balance and creates no new journal.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th class="w-10">Row</th><th>Document</th><th>Kind</th><th>Due</th><th class="num">Outstanding</th><th class="w-64">Map to party</th></tr></thead>
+        <tbody>
+          <tr id="row-1">
+            <td class="text-ink-faint">1</td>
+            <td>INV-000180</td>
+            <td>Receivable</td>
+            <td>30 Aug 2026</td>
+            <td class="num">96,400.00</td>
+            <td><select class="select"><option selected>Lahore Surgical Distributors</option><option>Choose…</option></select></td>
+          </tr>
+          <tr id="row-2">
+            <td class="text-danger">2</td>
+            <td>INV-000181</td>
+            <td>Receivable</td>
+            <td>15 Sep 2026</td>
+            <td class="num">58,000.00</td>
+            <td>
+              <div class="field-error flex items-center gap-1.5">
+                <select class="select"><option selected>Choose…</option><option>Karachi MedEquip Traders</option></select>
+                <i data-icon="alert-circle" class="icon size-4 flex-none text-danger" title="Choose a party."></i>
+              </div>
+            </td>
+          </tr>
+          <tr id="row-3">
+            <td class="text-ink-faint">3</td>
+            <td>INV-000182</td>
+            <td>Receivable</td>
+            <td>05 Sep 2026</td>
+            <td class="num">32,000.00</td>
+            <td><select class="select"><option selected>Multan Hospital Supplies</option><option>Choose…</option></select></td>
+          </tr>
+          <tr id="row-4">
+            <td class="text-danger">4</td>
+            <td>BILL-000091</td>
+            <td>Payable</td>
+            <td>10 Sep 2026</td>
+            <td class="num">61,150.00</td>
+            <td>
+              <div class="field-error flex items-center gap-1.5">
+                <select class="select"><option selected>Lahore Surgical Distributors</option><option>Sialkot Steel Forgings</option></select>
+                <i data-icon="alert-circle" class="icon size-4 flex-none text-danger" title="Not a supplier."></i>
+              </div>
+            </td>
+          </tr>
+          <tr id="row-5">
+            <td class="text-ink-faint">5</td>
+            <td>BILL-000092</td>
+            <td>Payable</td>
+            <td>20 Sep 2026</td>
+            <td class="num">31,000.00</td>
+            <td><select class="select"><option selected>Punjab Surgical Packaging</option><option>Choose…</option></select></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="rounded-panel border border-border bg-surface p-3.5" data-fold="totals vs control">
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <h2 class="section-title">Totals vs. control accounts</h2>
+        <p class="mt-1 text-xs text-warning flex items-center gap-1.5"><i data-icon="alert-triangle" class="icon size-3.5"></i>Completes once every document above has a valid party mapping.</p>
+        <div class="mt-1.5"><div class="recon-row"><span>Receivable · 2 of 3 mapped</span><span class="num tabular-nums">PKR 128,400.00 of 186,400.00</span></div><div class="recon-row"><span>Payable · 1 of 2 mapped</span><span class="num tabular-nums">PKR 31,000.00 of 92,150.00</span></div></div>
+      </div>
+      <button type="button" class="btn btn-primary flex-none" disabled title="Fix the 2 flagged rows above before confirming" data-fold="primary action">Confirm conversion</button>
+    </div>
+  </section>
+</div>

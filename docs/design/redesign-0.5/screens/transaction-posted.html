@@ -1,0 +1,71 @@
+<!--meta {"id":"transaction-posted","title":"REC-000586","route":"/transactions/detail","group":"Daily work","nav":"transactions","crumbs":[["Receipts & expenses","#/transactions-list"],["REC-000586"]],"pattern":"record-view","layout":"app","state":"Posted receipt"} -->
+<div class="py-5">
+  <div class="flex flex-col rounded-panel border border-border bg-surface">
+    <header class="doc-header" data-fold="doc header">
+      <div class="doc-heading">
+        <span class="doc-type">Receipt</span>
+        <h1 class="doc-number">REC-000586</h1>
+        <span class="badge badge-posted"><i class="badge-dot"></i>Posted</span>
+      </div>
+      <div class="doc-actions">
+        <a class="btn btn-secondary" href="#/journal-entry"><i data-icon="scale" class="icon"></i>View trial balance</a>
+        <button type="button" class="btn btn-primary" data-toggle="tp-reverse-panel" aria-expanded="false" aria-controls="tp-reverse-panel" data-fold="primary action">Reverse receipt</button>
+      </div>
+    </header>
+
+    <div class="doc-body">
+      <section>
+        <dl class="dgrid">
+          <div class="dgrid-row"><dt>Received from</dt><dd>Bismillah Garments</dd></div>
+          <div class="dgrid-row"><dt>Reference</dt><dd>BG-CASH-10SEP</dd></div>
+          <div class="dgrid-row"><dt>Date</dt><dd>10 Sep 2026</dd></div>
+          <div class="dgrid-row"><dt>Received into</dt><dd>Meezan Bank – Current</dd></div>
+          <div class="dgrid-row"><dt>Category</dt><dd>Fabric sales</dd></div>
+          <div class="dgrid-row"><dt>Memo</dt><dd>Cash-with-order payment for a repeat lawn fabric order.</dd></div>
+        </dl>
+      </section>
+
+      <section>
+        <div class="posting-preview-head"><h2 class="section-title">Posted journal</h2><span class="balanced-label"><i data-icon="check" class="icon"></i>Balanced</span></div>
+        <div class="table-wrap">
+          <table class="table journal-table">
+            <thead><tr><th>Account</th><th class="num">Debit (PKR)</th><th class="num">Credit (PKR)</th></tr></thead>
+            <tbody>
+              <tr><td><span class="row-title">1010</span><span class="row-sub">Meezan Bank – Current</span></td><td class="num">54,000.00</td><td class="num">0.00</td></tr>
+              <tr><td><span class="row-title">4000</span><span class="row-sub">Fabric sales</span></td><td class="num">0.00</td><td class="num">54,000.00</td></tr>
+            </tbody>
+            <tfoot><tr class="table-totals"><td>Total</td><td class="num">54,000.00</td><td class="num">54,000.00</td></tr></tfoot>
+          </table>
+        </div>
+        <p class="mt-2 text-xs text-ink-muted">This entry is included in your reports. Posted financial details are preserved. <a class="link" href="#/journal-entry">Open journal JRN-000109</a></p>
+      </section>
+
+      <section>
+        <h2 class="section-title mb-2">History</h2>
+        <dl class="dgrid">
+          <div class="dgrid-row"><dt>Created</dt><dd>10 Sep 2026, 11:16 · Asia/Karachi</dd></div>
+          <div class="dgrid-row"><dt>Posted</dt><dd>10 Sep 2026, 11:20 · Asia/Karachi</dd></div>
+          <div class="dgrid-row"><dt>Revision</dt><dd>1</dd></div>
+        </dl>
+      </section>
+
+      <section id="tp-reverse-panel" hidden>
+        <div class="rounded-panel border border-border p-4">
+          <h2 class="section-title mb-1">Correct this entry with a reversal</h2>
+          <p class="mb-3 text-sm text-ink-muted">A reversal creates an opposite, linked entry on the date you choose. It preserves this transaction — nothing is deleted or overwritten.</p>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="field">
+              <label class="field-label" for="tp-rev-date">Reversal date</label>
+              <span class="input-affix"><input class="input" id="tp-rev-date" type="text" value="17 Sep 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+            </div>
+            <div class="field sm:col-span-2">
+              <label class="field-label" for="tp-rev-reason">Reason</label>
+              <textarea class="textarea" id="tp-rev-reason" rows="2" placeholder="Why is this entry being reversed?"></textarea>
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary mt-3">Post linked reversal</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

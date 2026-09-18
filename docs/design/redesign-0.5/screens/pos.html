@@ -1,0 +1,142 @@
+<!--meta {"id":"pos","title":"Point of sale","route":"/pos","group":"Daily work","nav":"pos","crumbs":[["Point of sale"]],"pattern":"pos","layout":"bare","state":"Cart: 3 products, 11 units"} -->
+<div class="min-h-dvh flex flex-col bg-canvas">
+  <header class="flex h-12 flex-none items-center gap-4 border-b border-border bg-surface px-4">
+    <div class="flex items-center gap-2.5">
+      <span class="company-switcher-mark" aria-hidden="true">R</span>
+      <div class="flex flex-col leading-tight">
+        <span class="whitespace-nowrap text-sm font-semibold text-ink">Ravi Textile Traders</span>
+        <span class="text-[11px] text-ink-muted">Point of sale</span>
+      </div>
+      <span class="badge badge-sample ms-1">Sample catalog</span>
+    </div>
+    <ol class="ms-4 flex items-center gap-4 text-xs text-ink-muted" aria-label="Sale progress">
+      <li class="flex items-center gap-1.5 font-semibold text-ink"><span class="flex size-5 items-center justify-center rounded-full bg-brand text-[11px] text-white">1</span>Build cart</li>
+      <li class="flex items-center gap-1.5"><span class="flex size-5 items-center justify-center rounded-full border border-border-strong text-[11px]">2</span>Review &amp; cash</li>
+      <li class="flex items-center gap-1.5"><span class="flex size-5 items-center justify-center rounded-full border border-border-strong text-[11px]">3</span>Receipt</li>
+    </ol>
+    <div class="ms-auto flex items-center gap-3">
+      <span class="hidden whitespace-nowrap text-xs text-ink-muted min-[860px]:inline" data-proposed title="Proposed: today's app has no till or cashier identity — point of sale uses the same company session as the rest of the app.">Cashier: Ayesha Khan</span>
+      <a class="btn btn-ghost btn-sm" href="#/home"><i data-icon="logout" class="icon"></i>Exit to app</a>
+    </div>
+  </header>
+
+  <div class="grid min-h-0 flex-1 grid-cols-[1fr_360px] gap-4 p-4">
+    <section class="flex min-h-0 flex-col gap-3" aria-label="Products">
+      <div class="flex flex-wrap items-center gap-2" data-fold="filter bar">
+        <label class="search-field max-w-xs flex-1"><i data-icon="search" class="icon"></i><input type="search" placeholder="Name or product code" aria-label="Find a product"></label>
+        <div class="tabs-seg" role="tablist" aria-label="Product categories">
+          <button type="button" class="tabs-seg-item" aria-selected="true">All products</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Fabric</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Ready-made</button>
+          <button type="button" class="tabs-seg-item" aria-selected="false">Notions</button>
+        </div>
+      </div>
+      <details>
+        <summary class="link w-fit cursor-pointer text-xs">About this sample shop</summary>
+        <p class="mt-1 max-w-lg text-xs text-ink-muted">These products and prices are illustrative. Checkout posts to Ravi Textile Traders. No actual payment is taken; inventory, tax and credit sales are not included.</p>
+      </details>
+      <div class="grid grid-cols-3 gap-3" data-fold="product grid">
+        <button type="button" class="pos-product is-in-cart">
+          <span class="pos-product-qty-badge">6</span>
+          <span class="pos-product-mark">CL</span>
+          <span class="eyebrow">Fabric</span>
+          <strong class="text-sm font-semibold text-ink">Cotton Lawn (metre)</strong>
+          <span class="text-xs text-ink-faint">FAB-CTN-45</span>
+          <span class="amount-lg mt-1 text-brand">380.00</span>
+        </button>
+        <button type="button" class="pos-product">
+          <span class="pos-product-mark">PV</span>
+          <span class="eyebrow">Fabric</span>
+          <strong class="text-sm font-semibold text-ink">Printed Voile (metre)</strong>
+          <span class="text-xs text-ink-faint">FAB-VOL-44</span>
+          <span class="amount-lg mt-1 text-brand">320.00</span>
+        </button>
+        <button type="button" class="pos-product">
+          <span class="pos-product-mark">3P</span>
+          <span class="eyebrow">Ready-made</span>
+          <strong class="text-sm font-semibold text-ink">Stitched 3-Piece Suit</strong>
+          <span class="text-xs text-ink-faint">RDY-3PC-STD</span>
+          <span class="amount-lg mt-1 text-brand">6,500.00</span>
+        </button>
+        <button type="button" class="pos-product is-in-cart">
+          <span class="pos-product-qty-badge">1</span>
+          <span class="pos-product-mark">ED</span>
+          <span class="eyebrow">Ready-made</span>
+          <strong class="text-sm font-semibold text-ink">Embroidered Dupatta</strong>
+          <span class="text-xs text-ink-faint">RDY-DUP-EMB</span>
+          <span class="amount-lg mt-1 text-brand">1,800.00</span>
+        </button>
+        <button type="button" class="pos-product is-in-cart">
+          <span class="pos-product-qty-badge">4</span>
+          <span class="pos-product-mark">TH</span>
+          <span class="eyebrow">Notions</span>
+          <strong class="text-sm font-semibold text-ink">Cotton Thread (spool)</strong>
+          <span class="text-xs text-ink-faint">NOT-THR-40</span>
+          <span class="amount-lg mt-1 text-brand">90.00</span>
+        </button>
+        <button type="button" class="pos-product">
+          <span class="pos-product-mark">BT</span>
+          <span class="eyebrow">Notions</span>
+          <strong class="text-sm font-semibold text-ink">Button Card (dozen)</strong>
+          <span class="text-xs text-ink-faint">NOT-BTN-DZ</span>
+          <span class="amount-lg mt-1 text-brand">60.00</span>
+        </button>
+      </div>
+    </section>
+
+    <aside class="flex min-h-0 flex-col rounded-panel border border-border bg-surface p-4" aria-label="Current sale">
+      <div class="mb-2 flex items-center justify-between">
+        <h2 class="section-title">Current sale</h2>
+        <span class="badge badge-info">11 items</span>
+      </div>
+      <div class="min-h-0 flex-1 overflow-y-auto" data-fold="cart lines">
+        <div class="pos-cart-line">
+          <div class="flex items-start justify-between gap-2">
+            <div class="min-w-0">
+              <p class="truncate text-sm font-medium text-ink">Cotton Lawn (metre)</p>
+              <p class="text-xs text-ink-faint">PKR 380.00 each</p>
+            </div>
+            <button type="button" class="btn btn-ghost btn-icon btn-sm" aria-label="Remove Cotton Lawn from sale"><i data-icon="trash" class="icon"></i></button>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="pos-qty-stepper"><button type="button" aria-label="Decrease quantity">−</button><span>6</span><button type="button" aria-label="Increase quantity">+</button></span>
+            <span class="amount text-sm font-semibold">2,280.00</span>
+          </div>
+        </div>
+        <div class="pos-cart-line">
+          <div class="flex items-start justify-between gap-2">
+            <div class="min-w-0">
+              <p class="truncate text-sm font-medium text-ink">Embroidered Dupatta</p>
+              <p class="text-xs text-ink-faint">PKR 1,800.00 each</p>
+            </div>
+            <button type="button" class="btn btn-ghost btn-icon btn-sm" aria-label="Remove Embroidered Dupatta from sale"><i data-icon="trash" class="icon"></i></button>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="pos-qty-stepper"><button type="button" aria-label="Decrease quantity">−</button><span>1</span><button type="button" aria-label="Increase quantity">+</button></span>
+            <span class="amount text-sm font-semibold">1,800.00</span>
+          </div>
+        </div>
+        <div class="pos-cart-line">
+          <div class="flex items-start justify-between gap-2">
+            <div class="min-w-0">
+              <p class="truncate text-sm font-medium text-ink">Cotton Thread (spool)</p>
+              <p class="text-xs text-ink-faint">PKR 90.00 each</p>
+            </div>
+            <button type="button" class="btn btn-ghost btn-icon btn-sm" aria-label="Remove Cotton Thread from sale"><i data-icon="trash" class="icon"></i></button>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="pos-qty-stepper"><button type="button" aria-label="Decrease quantity">−</button><span>4</span><button type="button" aria-label="Increase quantity">+</button></span>
+            <span class="amount text-sm font-semibold">360.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="doc-totals-row is-grand mt-2 border-t border-border pt-2"><span>Total</span><span class="amount">PKR 4,440.00</span></div>
+      <div class="field mt-3">
+        <label class="field-label" for="pos-date">Sale date</label>
+        <span class="input-affix"><input class="input" id="pos-date" type="text" value="17 Sep 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+      </div>
+      <a class="btn btn-primary mt-3 w-full justify-center" href="#/pos-review" data-fold="primary action">Review sale<i data-icon="arrow-right" class="icon"></i></a>
+      <p class="mt-2 text-center text-xs text-ink-muted">Up to 99 of each product and 200 units per sale.</p>
+    </aside>
+  </div>
+</div>

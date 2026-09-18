@@ -61,7 +61,9 @@ test('foreign snapshots validate accounts and conversion and reverse frozen orig
     $payload['lines'][0] += ['currency' => 'EUR','amount_fc' => '10','rate' => '1.25','rate_source_id' => (int) $r['id']];
     $j = pl_post_journal($f['actor_id'], $f['company_id'], $f['book_id'], $payload);
     assert_same('10.0000', $j['lines'][0]['amount_fc']);
-    $reverse = pl_reverse_journal($f['actor_id'], $f['company_id'], $f['book_id'], $j['id'], '2026-09-16', bin2hex(random_bytes(16)), 'Synthetic reversal');
+    // The fixture owner may reverse on the original open-period date. A fixed
+    // later date becomes an invalid backdate when the wall clock advances.
+    $reverse = pl_reverse_journal($f['actor_id'], $f['company_id'], $f['book_id'], $j['id'], $payload['date'], bin2hex(random_bytes(16)), 'Synthetic reversal');
     assert_same($j['lines'][0]['rate'], $reverse['lines'][0]['rate']);
     assert_same(false, $reverse['lines'][0]['rate_is_stale']);
     assert_same('12.5000', $reverse['lines'][0]['credit']);

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 function pl_web_starter_parties(int $actorId,int $companyId,int $bookId,array $user,array $company,string $path,string $method): never
 {
+    $filters=($method==='POST' || isset($_GET['id']) || isset($_GET['new'])) ? pl_return_list_filters($method==='POST'?$_POST:$_GET,'parties') : pl_list_filters($_GET,'parties');
+    $return=['return_filters'=>$filters];
     if ($method==='POST') {
         $id=pl_web_id($_POST,'id');
         try {
@@ -32,12 +34,24 @@ function pl_web_starter_parties(int $actorId,int $companyId,int $bookId,array $u
                     'acknowledge_phone_duplicates'=>isset($_POST['acknowledge_phone_duplicates']),'duplicate_reason'=>pl_web_text($_POST,'duplicate_reason'),
                     'request_key'=>pl_web_text($_POST,'request_key'),'reason'=>pl_web_text($_POST,'reason')]);
             } else { throw new DomainException('Choose a party action.'); }
-            pl_notice('Party information saved.'); pl_redirect(pl_url($path,['id'=>$id]));
-        } catch (DomainException $error) { pl_form_failure(pl_url($path,['id'=>$id?:null,'new'=>$id?null:'1']),array_filter($_POST,static fn(mixed $value):bool=>is_scalar($value)),$error->getMessage()); }
+            pl_notice('Party information saved.'); pl_redirect(pl_url($path,['id'=>$id]+$return));
+        } catch (DomainException $error) { pl_form_failure(pl_url($path,['id'=>$id?:null,'new'=>$id?null:'1']+$return),array_filter($_POST,static fn(mixed $value):bool=>is_scalar($value)),$error->getMessage()); }
     }
     $id=pl_web_id($_GET,'id'); $party=$id?pl_get_party($actorId,$companyId,$bookId,$id):null;
-    $form=pl_form_state(pl_url($path,['id'=>$id?:null,'new'=>$id?null:(pl_web_text($_GET,'new')?:null)]));
-    pl_render('parties',['title'=>'Customers and vendors','user'=>$user,'company'=>$company,'form'=>$form,'party'=>$party,
-        'rows'=>pl_starter_parties($actorId,$companyId,$bookId),'accounts'=>pl_starter_accounts($actorId,$companyId,$bookId),
-        'contacts'=>$party?DB::query('SELECT c.id,c.name,c.email,c.role,c.is_primary,GROUP_CONCAT(p.phone ORDER BY p.id SEPARATOR ", ") AS phones FROM pl_contacts c LEFT JOIN pl_contact_phones p ON p.contact_id=c.id AND p.company_id=c.company_id WHERE c.company_id=%i AND c.party_id=%i GROUP BY c.id,c.name,c.email,c.role,c.is_primary ORDER BY c.name',$companyId,$id):[]]);
+    $form=pl_form_state(pl_url($path,['id'=>$id?:null,'new'=>$id?null:(pl_web_text($_GET,'new')?:null)]+$return));
+    $selectionId=pl_web_id($_GET,'select'); $selection=$selectionId?pl_get_party($actorId,$companyId,$bookId,$selectionId):null;
+    $list=(!$party && !isset($_GET['new']))?pl_list_query($actorId,$companyId,$bookId,'parties',$filters):null;
+    $balances=[]; $activity=$selection?pl_party_document_activity($actorId,$companyId,$bookId,$selectionId):[];
+    if ($list!==null) {
+        foreach (['receivable','payable'] as $direction) {
+            foreach (pl_ar_ap_open_items($actorId,$companyId,$bookId,$direction)['items'] as $item) {
+                $pid=(int)$item['party_id'];
+                $balances[$pid][$direction]=bcadd($balances[$pid][$direction]??'0.0000',$item['remaining_base'],4);
+            }
+        }
+    }
+    pl_render('parties',['title'=>'Customers and suppliers','user'=>$user,'company'=>$company,'form'=>$form,'party'=>$party,
+        'filters'=>$filters,'list'=>$list,'selection'=>$selection,'balances'=>$balances,'activity'=>$activity,
+        'accounts'=>pl_starter_accounts($actorId,$companyId,$bookId),
+        'contacts'=>($party || $selection)?DB::query('SELECT c.id,c.name,c.email,c.role,c.is_primary,GROUP_CONCAT(p.phone ORDER BY p.id SEPARATOR ", ") AS phones FROM pl_contacts c LEFT JOIN pl_contact_phones p ON p.contact_id=c.id AND p.company_id=c.company_id WHERE c.company_id=%i AND c.party_id=%i GROUP BY c.id,c.name,c.email,c.role,c.is_primary ORDER BY c.name',$companyId,$id?:$selectionId):[]]);
 }

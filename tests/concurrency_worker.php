@@ -44,9 +44,11 @@ try {
             if (!($input['allow_domain_failure'] ?? false)) { throw $error; }
             $journal = ['id' => 0];
         }
-    } elseif ($input['mode'] === 'open_item_settle') {
+    } elseif (in_array($input['mode'], ['open_item_settle','open_items_settle'], true)) {
         try {
-            $result = pl_settle_open_item($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['settlement_input']);
+            $result = $input['mode']==='open_items_settle'
+                ? pl_settle_open_items($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['settlement_input'])
+                : pl_settle_open_item($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $input['settlement_input']);
             $journal = ['id' => $result['journal_id']];
         } catch (DomainException $error) {
             if (!($input['allow_domain_failure'] ?? false)) { throw $error; }

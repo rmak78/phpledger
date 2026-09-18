@@ -9,12 +9,43 @@ function pl_table_size(mixed $size): int
     return $size;
 }
 
-/** SQL identifiers are selected only from a server-owned map. */
-function pl_table_order(array $options, array $columns, string $default, string $tie): string
+/** Complete SQL order clauses are fixed source constants, selected by validated keys. */
+function pl_table_order(array $options, string $screen): string
 {
-    if (!isset($options['sort'])) { return $default; }
-    if (!is_string($options['sort']) || !isset($columns[$options['sort']]) || !in_array($options['direction'] ?? '', ['asc','desc'], true)) { throw new DomainException('Unsupported table order.'); }
-    return $columns[$options['sort']] . ' ' . strtoupper($options['direction']) . ', ' . $tie;
+    $orders = [
+        'transactions' => ['default' => 'd.document_date DESC, d.id ASC',
+            'date' => ['asc' => 'd.document_date ASC, d.id ASC', 'desc' => 'd.document_date DESC, d.id ASC'],
+            'name' => ['asc' => 'd.counterparty ASC, d.id ASC', 'desc' => 'd.counterparty DESC, d.id ASC'],
+            'amount' => ['asc' => 'd.amount ASC, d.id ASC', 'desc' => 'd.amount DESC, d.id ASC'],
+            'status' => ['asc' => 'CASE WHEN d.journal_id IS NULL THEN \'draft\' WHEN r.id IS NOT NULL THEN \'reversed\' ELSE \'posted\' END ASC, d.id ASC', 'desc' => 'CASE WHEN d.journal_id IS NULL THEN \'draft\' WHEN r.id IS NOT NULL THEN \'reversed\' ELSE \'posted\' END DESC, d.id ASC'],
+        ],
+        'general-journals' => ['default' => 'd.document_date DESC, d.id DESC',
+            'date' => ['asc' => 'd.document_date ASC, d.id DESC', 'desc' => 'd.document_date DESC, d.id DESC'],
+            'description' => ['asc' => 'd.description ASC, d.id DESC', 'desc' => 'd.description DESC, d.id DESC'],
+            'status' => ['asc' => 'CASE WHEN d.journal_id IS NULL THEN \'draft\' WHEN r.id IS NOT NULL THEN \'reversed\' ELSE \'posted\' END ASC, d.id DESC', 'desc' => 'CASE WHEN d.journal_id IS NULL THEN \'draft\' WHEN r.id IS NOT NULL THEN \'reversed\' ELSE \'posted\' END DESC, d.id DESC'],
+        ],
+        'account' => ['default' => 'q.date, q.journal_id, q.line_number',
+            'date' => ['asc' => 'q.date ASC, q.date, q.journal_id, q.line_number', 'desc' => 'q.date DESC, q.date, q.journal_id, q.line_number'],
+            'journal' => ['asc' => 'q.journal_id ASC, q.date, q.journal_id, q.line_number', 'desc' => 'q.journal_id DESC, q.date, q.journal_id, q.line_number'],
+            'description' => ['asc' => 'q.description ASC, q.date, q.journal_id, q.line_number', 'desc' => 'q.description DESC, q.date, q.journal_id, q.line_number'],
+            'source' => ['asc' => 'q.source_reference ASC, q.date, q.journal_id, q.line_number', 'desc' => 'q.source_reference DESC, q.date, q.journal_id, q.line_number'],
+            'debit' => ['asc' => 'q.debit ASC, q.date, q.journal_id, q.line_number', 'desc' => 'q.debit DESC, q.date, q.journal_id, q.line_number'],
+            'credit' => ['asc' => 'q.credit ASC, q.date, q.journal_id, q.line_number', 'desc' => 'q.credit DESC, q.date, q.journal_id, q.line_number'],
+            'balance' => ['asc' => 'q.running_movement ASC, q.date, q.journal_id, q.line_number', 'desc' => 'q.running_movement DESC, q.date, q.journal_id, q.line_number'],
+        ],
+        'bank' => ['default' => 'r.line_number',
+            'date' => ['asc' => 'r.transaction_date ASC, r.line_number', 'desc' => 'r.transaction_date DESC, r.line_number'],
+            'reference' => ['asc' => 'r.reference ASC, r.line_number', 'desc' => 'r.reference DESC, r.line_number'],
+            'money_in' => ['asc' => 'r.money_in ASC, r.line_number', 'desc' => 'r.money_in DESC, r.line_number'],
+            'money_out' => ['asc' => 'r.money_out ASC, r.line_number', 'desc' => 'r.money_out DESC, r.line_number'],
+            'match' => ['asc' => 'm.journal_line_id ASC, r.line_number', 'desc' => 'm.journal_line_id DESC, r.line_number'],
+        ],
+    ];
+    if (!isset($orders[$screen])) { throw new DomainException('Unknown list order.'); }
+    if (!isset($options['sort'])) { return $orders[$screen]['default']; }
+    $sort=$options['sort']; $direction=$options['direction']??'';
+    if (!is_string($sort) || !is_string($direction) || $sort==='default' || !isset($orders[$screen][$sort][$direction])) { throw new DomainException('Unsupported table order.'); }
+    return $orders[$screen][$sort][$direction];
 }
 
 /** The same allowlist drives API validation, MCP schemas and the independent OpenAPI file. */
@@ -124,12 +155,25 @@ function pl_read_source(array $row, string $type, int $page, int $size): array
     return $result;
 }
 
+/** Report-only grants exclude transaction-level records and account statements. */
+function pl_connection_read_operations(array $connection): array
+{
+    return match ($connection['access_mode'] ?? null) {
+        'reports' => ['companies', 'capabilities', 'trial_balance', 'profit_loss', 'balance_sheet'],
+        'full' => array_keys(pl_read_catalog()),
+        default => throw new DomainException('This connection has an unsupported access scope.'),
+    };
+}
+
 /** One scoped business interface for HTTP and MCP; only existing accounting services compute money. */
 function pl_read_operation(string $connectionId, string $operation, array $input): array
 {
     $args = pl_read_arguments($operation, $input);
     return pl_ledger_transaction(function () use ($connectionId, $operation, $args): array {
         $connection = pl_connection_require($connectionId);
+        if (!in_array($operation, pl_connection_read_operations($connection), true)) {
+            throw new DomainException('This connection permits summary reports only. Create a full read connection to read individual records.');
+        }
         $actor = $connection['actor_id'];
         $page = $args['page'] ?? 1;
         $size = $args['page_size'] ?? 25;
@@ -146,7 +190,7 @@ function pl_read_operation(string $connectionId, string $operation, array $input
         pl_connection_scope($connection, $company, $book);
         $bookInfo = pl_ledger_book($company, $book);
         $data = match ($operation) {
-            'capabilities' => ['read_operations' => array_keys(pl_read_catalog()), 'financial_writes' => false, 'enabled_modules' => array_values(array_filter(array_keys(pl_module_registry()), static fn (string $id): bool => pl_module_available($actor, $company, $book, $id)))],
+            'capabilities' => ['read_operations' => pl_connection_read_operations($connection), 'financial_writes' => false, 'enabled_modules' => array_values(array_filter(array_keys(pl_module_registry()), static fn (string $id): bool => pl_module_available($actor, $company, $book, $id)))],
             'accounts' => pl_read_page(array_map(static fn (array $row): array => pl_read_fields($row, ['id','code','name','type','role','is_active']), DB::query('SELECT id, code, name, type, role, is_active FROM pl_accounts WHERE company_id = %i AND book_id = %i ORDER BY code, id', $company, $book)), $page, $size),
             'trial_balance' => pl_trial_balance($actor, $company, $book, $args['as_of']),
             'profit_loss' => pl_profit_loss($actor, $company, $book, $args['from'], $args['to']),
@@ -158,7 +202,7 @@ function pl_read_operation(string $connectionId, string $operation, array $input
             'account_statement' => pl_account_activity($actor, $company, $book, $args['account_id'], $args['as_of'], $page, $args['from'], ['page_size' => $size]),
             default => throw new LogicException('Read operation is not implemented.'),
         };
-        foreach (match ($operation) { 'trial_balance' => ['accounts'], 'profit_loss' => ['income','expenses'], 'balance_sheet' => ['assets','liabilities','equity'], default => [] } as $field) {
+        foreach (match ($operation) { 'trial_balance' => ['accounts'], 'profit_loss' => ['income','cost_of_sales','expenses'], 'balance_sheet' => ['assets','liabilities','equity'], default => [] } as $field) {
             $data[$field] = pl_read_page($data[$field], $page, $size);
         }
         if (in_array($operation, ['transactions','general_journals','account_statement'], true)) {

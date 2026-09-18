@@ -1,0 +1,68 @@
+<!--meta {"id":"onboarding-business","title":"Set up a business — Business & period","route":"/onboarding","group":"Setup & access","nav":"","crumbs":[["Your businesses","#/companies"],["Set up a business"]],"layout":"auth","pattern":"wizard","state":"Step 2 of 5 · valid"} -->
+<div class="auth-panel">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <p class="eyebrow">Business setup · Step 2 of 5</p>
+      <h1 class="page-title">Business &amp; period</h1>
+    </div>
+    <a class="btn btn-ghost btn-sm" href="#/companies">Cancel</a>
+  </div>
+
+  <div class="mt-5 grid grid-cols-1 gap-7 lg:grid-cols-[168px_1fr]">
+    <ol class="stepper">
+      <li class="stepper-step is-done"><span class="stepper-index"><i data-icon="check" class="icon"></i></span><span class="stepper-label">Purpose</span></li>
+      <li class="stepper-step is-current"><span class="stepper-index">2</span><span class="stepper-label">Business &amp; period</span></li>
+      <li class="stepper-step"><span class="stepper-index">3</span><span class="stepper-label">Chart</span></li>
+      <li class="stepper-step"><span class="stepper-index">4</span><span class="stepper-label">Preview</span></li>
+      <li class="stepper-step"><span class="stepper-index">5</span><span class="stepper-label">Confirm</span></li>
+    </ol>
+
+    <div>
+      <div class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2" data-fold="fields">
+        <div class="field sm:col-span-2">
+          <label class="field-label" for="ob-name">Business name</label>
+          <input class="input" id="ob-name" type="text" value="Noor Surgical Instruments (Pvt) Ltd" autocomplete="organization">
+          <p class="field-hint">Use the name your team will recognise.</p>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ob-currency">Base currency</label>
+          <select class="select" id="ob-currency">
+            <option selected>PKR — Pakistani rupee</option>
+            <option>USD — US dollar</option>
+            <option>AED — UAE dirham</option>
+          </select>
+          <p class="field-hint">This book uses one functional currency.</p>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ob-start">Accounting start date</label>
+          <span class="input-affix"><input class="input" id="ob-start" type="text" value="30 Jun 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+          <p class="field-hint">The first date for these books. Accounting dates do not shift with time zones.</p>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ob-entity">Business or entity type</label>
+          <select class="select" id="ob-entity">
+            <option>Individual / sole proprietor</option>
+            <option>Association of persons (AOP) / partnership</option>
+            <option selected>Company (Pvt Ltd / Ltd)</option>
+            <option>Other</option>
+          </select>
+          <p class="field-hint">Guides the year-end explanation only; it does not decide legal status or tax rules.</p>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ob-year-end">Financial year end</label>
+          <select class="select" id="ob-year-end">
+            <option selected>30 June</option>
+            <option>31 December</option>
+            <option>Custom…</option>
+          </select>
+          <p class="field-hint">A company may use 30 June or another permitted year end. This sets the book period boundary only.</p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center justify-between gap-2 border-t border-border pt-4">
+        <a class="btn btn-ghost" href="#/onboarding-purpose">Back</a>
+        <a class="btn btn-primary" href="#/onboarding-chart" data-fold="primary action">Continue</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,135 @@
+<template id="layout-app"><div data-shell>
+<a class="skip-link" href="#main">Skip to content</a>
+<aside class="shell-sidebar" data-sidebar aria-label="Main navigation">
+  <div class="shell-brand">
+    <a class="shell-brand-link" href="#/home" aria-label="PHP Ledger home">
+      <img class="shell-logo" src="{{logo}}" alt="PHP Ledger" width="1578" height="436">
+      <span class="shell-logo-compact" aria-hidden="true">P</span>
+    </a>
+  </div>
+  <details class="company-switcher">
+    <summary class="company-switcher-trigger">
+      <span class="company-switcher-mark" aria-hidden="true">R</span>
+      <span class="company-switcher-info">
+        <strong>Ravi Textile Traders</strong>
+        <span>Primary book · PKR <span class="badge badge-sample">Sample</span></span>
+      </span>
+      <i data-icon="chevron-down" class="company-switcher-caret"></i>
+    </summary>
+    <div class="menu-panel company-switcher-panel menu-panel-wide">
+      <p class="menu-label">Switch business</p>
+      <a class="menu-item" href="#/home">
+        <span class="company-switcher-mark" aria-hidden="true">R</span>
+        <span class="company-switcher-info"><strong>Ravi Textile Traders</strong><span>Primary book · PKR</span></span>
+        <i data-icon="check" class="icon"></i>
+      </a>
+      <div class="menu-divider"></div>
+      <a class="menu-item" href="#/home"><i data-icon="plus" class="icon"></i>Add a business</a>
+      <a class="menu-item" href="#/home"><i data-icon="building-cog" class="icon"></i>Business setup</a>
+    </div>
+  </details>
+
+  <nav class="shell-nav">
+    <a class="nav-item" data-nav="home" href="#/home" title="Home"><i data-icon="home" class="icon"></i><span>Home</span></a>
+
+    <p class="nav-group-label">Daily work</p>
+    <a class="nav-item" data-nav="transactions" href="#/transactions-list" title="Receipts &amp; expenses"><i data-icon="receipt-2" class="icon"></i><span>Receipts &amp; expenses</span></a>
+    <a class="nav-item" data-nav="pos" href="#/pos" title="Point of sale"><i data-icon="cash-register" class="icon"></i><span>Point of sale</span></a>
+    <a class="nav-item" data-nav="journals" href="#/journals-list" title="Journals"><i data-icon="book-2" class="icon"></i><span>Journals</span></a>
+
+    <p class="nav-group-label">Sales</p>
+    <a class="nav-item" data-nav="invoices" href="#/ar-list" title="Invoices"><i data-icon="file-invoice" class="icon"></i><span>Invoices</span></a>
+    <a class="nav-item" data-nav="customers" href="#/parties-list" title="Customers"><i data-icon="users" class="icon"></i><span>Customers</span></a>
+
+    <p class="nav-group-label">Purchases</p>
+    <a class="nav-item" data-nav="bills" href="#/ap-list" title="Bills"><i data-icon="file-dollar" class="icon"></i><span>Bills</span></a>
+    <a class="nav-item" data-nav="purchase-orders" href="#/purchase-orders-list" title="Purchase orders"><i data-icon="clipboard-list" class="icon"></i><span>Purchase orders</span></a>
+    <a class="nav-item" data-nav="suppliers" href="#/parties-list" title="Suppliers"><i data-icon="building-store" class="icon"></i><span>Suppliers</span></a>
+
+    <p class="nav-group-label">Inventory</p>
+    <a class="nav-item" data-nav="products" href="#/products-list" title="Products &amp; stock"><i data-icon="package" class="icon"></i><span>Products &amp; stock</span></a>
+
+    <p class="nav-group-label">Banking</p>
+    <a class="nav-item" data-nav="bank-reconciliation" href="#/bank-reconciliation" title="Bank reconciliation"><i data-icon="building-bank" class="icon"></i><span>Bank reconciliation</span></a>
+
+    <p class="nav-group-label">Reports</p>
+    <a class="nav-item" data-nav="reports" href="#/reports" title="All reports"><i data-icon="report" class="icon"></i><span>All reports</span></a>
+    <a class="nav-item" data-nav="profit-loss" href="#/profit-loss" title="Profit &amp; loss"><i data-icon="chart-line" class="icon"></i><span>Profit &amp; loss</span></a>
+    <a class="nav-item" data-nav="balance-sheet" href="#/balance-sheet" title="Balance sheet"><i data-icon="scale" class="icon"></i><span>Balance sheet</span></a>
+    <a class="nav-item" data-nav="trial-balance" href="#/trial-balance" title="Trial balance"><i data-icon="list-check" class="icon"></i><span>Trial balance</span></a>
+    <a class="nav-item" data-nav="account-statement" href="#/account-statement" title="Account statement"><i data-icon="file-text" class="icon"></i><span>Account statement</span></a>
+    <a class="nav-item" data-nav="cash-forecast" href="#/cash-forecast" title="Cash forecast"><i data-icon="trending-up" class="icon"></i><span>Cash forecast</span></a>
+
+    <details class="nav-group-collapsible">
+      <summary class="nav-group-summary"><span>Setup</span><i data-icon="chevron-down" class="icon"></i></summary>
+      <div class="nav-group-body">
+        <a class="nav-item" data-nav="accounts" href="#/accounts" title="Chart of accounts"><i data-icon="list-details" class="icon"></i><span>Chart of accounts</span></a>
+        <a class="nav-item" data-nav="tax" href="#/tax-codes" title="Tax codes"><i data-icon="receipt-tax" class="icon"></i><span>Tax codes</span></a>
+        <a class="nav-item" data-nav="opening-balances" href="#/opening-balances" title="Opening balances"><i data-icon="flag-2" class="icon"></i><span>Opening balances</span></a>
+        <a class="nav-item" data-nav="opening-conversion" href="#/opening-conversion-preview" title="Opening documents"><i data-icon="refresh" class="icon"></i><span>Opening documents</span></a>
+        <a class="nav-item" data-nav="periods" href="#/periods" title="Periods"><i data-icon="calendar" class="icon"></i><span>Periods</span></a>
+        <a class="nav-item" data-nav="modules" href="#/modules" title="Modules"><i data-icon="grid-dots" class="icon"></i><span>Modules</span></a>
+        <a class="nav-item" data-nav="connections" href="#/connections" title="Connections &amp; API"><i data-icon="link" class="icon"></i><span>Connections &amp; API</span></a>
+      </div>
+    </details>
+  </nav>
+
+  <div class="shell-sidebar-footer">
+    <a class="nav-item" data-nav="help" href="#/help" title="Help"><i data-icon="help-circle" class="icon"></i><span>Help</span></a>
+    <p class="shell-version">0.5.0-preview</p>
+  </div>
+</aside>
+
+<div class="shell-overlay" data-drawer-overlay></div>
+
+<div class="shell-body">
+  <header class="shell-topbar">
+    <button type="button" class="btn btn-ghost btn-icon" data-sidebar-toggle aria-label="Toggle sidebar"><i data-icon="layout-sidebar-left-collapse" class="icon"></i></button>
+    <ol class="crumbs" data-slot="crumbs"></ol>
+    <div class="topbar-search">
+      <button type="button" class="search-trigger" data-command-open aria-haspopup="dialog">
+        <i data-icon="search" class="icon"></i>
+        <span class="hidden lg:inline">Search or jump to…</span>
+        <span class="kbd-group hidden lg:inline-flex ms-auto"><span class="kbd">Ctrl</span><span class="kbd">K</span></span>
+      </button>
+    </div>
+    <div class="topbar-actions">
+      <details class="menu">
+        <summary class="btn btn-primary btn-sm"><i data-icon="plus" class="icon"></i><span class="hidden sm:inline">New</span></summary>
+        <div class="menu-panel menu-panel-end">
+          <p class="menu-label">Quick create</p>
+          <a class="menu-item" href="#/transactions-list"><i data-icon="receipt-2" class="icon"></i>Expense</a>
+          <a class="menu-item" href="#/transactions-list"><i data-icon="receipt" class="icon"></i>Receipt</a>
+          <a class="menu-item" href="#/ar-invoice-new"><i data-icon="file-invoice" class="icon"></i>Invoice</a>
+          <a class="menu-item" href="#/ap-list"><i data-icon="file-dollar" class="icon"></i>Bill</a>
+          <a class="menu-item" href="#/journals-list"><i data-icon="book-2" class="icon"></i>Journal entry</a>
+          <a class="menu-item" href="#/purchase-orders-list"><i data-icon="clipboard-list" class="icon"></i>Purchase order</a>
+          <a class="menu-item" href="#/parties-list"><i data-icon="user-plus" class="icon"></i>Customer or supplier</a>
+          <a class="menu-item" href="#/products-list"><i data-icon="package" class="icon"></i>Product</a>
+        </div>
+      </details>
+      <a class="sample-guide-link max-lg:hidden" href="#/home">Sample guide<i data-icon="arrow-right" class="icon"></i></a>
+      <details class="menu">
+        <summary class="user-menu-trigger" aria-label="User menu"><span class="avatar">AK</span><i data-icon="chevron-down" class="icon"></i></summary>
+        <div class="menu-panel menu-panel-end">
+          <p class="menu-label">Ayesha Khan</p>
+          <p class="menu-item-static">ayesha@ravitextile.sample</p>
+          <div class="menu-divider"></div>
+          <a class="menu-item" href="#/home"><i data-icon="arrows-shuffle" class="icon"></i>Switch business</a>
+          <a class="menu-item" href="#/home"><i data-icon="logout" class="icon"></i>Sign out</a>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <div class="shell-strips" data-slot="strips"></div>
+
+  <main id="main" class="shell-main" data-slot="content" tabindex="-1"></main>
+</div>
+</div></template>
+<template id="layout-auth"><div class="auth-shell">
+<div class="auth-card">
+  <a href="#/home" aria-label="PHP Ledger home"><img class="auth-logo" src="{{logo}}" alt="PHP Ledger" width="2172" height="724"></a>
+  <main data-slot="content"></main>
+</div>
+</div></template>

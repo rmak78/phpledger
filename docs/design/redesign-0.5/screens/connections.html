@@ -1,0 +1,95 @@
+<!--meta {"id":"connections","title":"Connections","route":"/connections","group":"Setup","nav":"connections","crumbs":[["Setup"],["Connections & API"]],"pattern":"settings-list","layout":"app","state":"Token just issued · 3 connections"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Connections</h1>
+      <p class="mt-1 text-sm text-ink-muted">Connect your tools to Ravi Textile Traders · Primary book. Each credential reads only this company and book using your current permissions.</p>
+    </div>
+  </header>
+
+  <section class="panel" data-fold="endpoint">
+    <h2 class="section-title">Connect a client</h2>
+    <p class="mt-1 text-sm text-ink-muted">Use the Streamable HTTP endpoint below with a personal token, or choose OAuth in a client that supports it. Access is read-only.</p>
+    <div class="mt-2 flex items-center gap-2">
+      <code class="flex-1 truncate rounded-control border border-border bg-surface-subtle px-3 py-2 text-xs">https://ravitextile.phpledger.sample/mcp</code>
+      <button type="button" class="btn btn-secondary btn-icon" data-copy="https://ravitextile.phpledger.sample/mcp" aria-label="Copy endpoint"><i data-icon="copy" class="icon"></i></button>
+      <span class="text-xs text-success" data-copy-status role="status" aria-live="polite"></span>
+    </div>
+    <p class="mt-2 text-xs text-ink-muted">Your client receives financial results and may store or send them per its own settings. Use a separate credential for each private agent or workflow; a separate OAuth connection for each shared-chat user. Personal tokens and OAuth grants expire after 30 days.</p>
+  </section>
+
+  <section class="panel" aria-labelledby="new-token-heading" data-fold="issued token">
+    <div class="flex items-center gap-2"><i data-icon="key" class="icon text-warning"></i><h2 id="new-token-heading" class="section-title">Save your token now</h2></div>
+    <p class="mt-1 text-sm text-ink-muted">This is its only display. Copy it into your client's private credential settings — reloading this page cannot retrieve it again.</p>
+    <div class="mt-2 flex items-center gap-2">
+      <code class="flex-1 truncate rounded-control border border-border-strong bg-surface-subtle px-3 py-2 text-xs">plk_live_8f2b1c4d9e6a4d0f9c9e7b1a5d3c8e2f0a4b6c8d</code>
+      <button type="button" class="btn btn-secondary btn-icon" data-copy="plk_live_8f2b1c4d9e6a4d0f9c9e7b1a5d3c8e2f0a4b6c8d" aria-label="Copy token"><i data-icon="copy" class="icon"></i></button>
+      <span class="text-xs text-success" data-copy-status role="status" aria-live="polite"></span>
+    </div>
+    <p class="mt-2 text-xs text-ink-muted">Access expires 17 Oct 2026, 08:20 UTC.</p>
+    <a class="btn btn-secondary mt-2" href="#/connections">I saved the token</a>
+  </section>
+
+  <section class="panel">
+    <h2 class="section-title">Create a personal token</h2>
+    <div class="mt-3 grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
+      <div class="field">
+        <label class="field-label" for="conn-name">Connection name</label>
+        <input class="input" id="conn-name" type="text" placeholder="For example, my private reporting agent">
+      </div>
+      <div class="field" data-proposed title="Proposed: choosing between report-only and full read access. Today every connection gets the same fixed read-only scope shown here.">
+        <label class="field-label" for="conn-scope">Scope</label>
+        <select class="select" id="conn-scope" disabled><option>Read access — all reports</option></select>
+      </div>
+    </div>
+    <p class="mt-2 text-xs text-ink-muted">Company: <strong class="font-medium text-ink">Ravi Textile Traders</strong> · Primary book · Read access</p>
+    <button type="button" class="btn btn-primary mt-3">Create token</button>
+  </section>
+
+  <section>
+    <h2 class="section-title mb-2">Recent connections for this book</h2>
+    <p class="mb-2 text-xs text-ink-muted">Owners can revoke any connection that includes their company. Revoking a connection ends all of its company grants.</p>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Connection</th><th>Kind</th><th>Status</th><th>Created</th><th>Expires</th><th></th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="row-title">Ayesha's reporting agent</span></td>
+            <td class="text-ink-muted">Personal token</td>
+            <td><span class="badge badge-due-soon"><i class="badge-dot"></i>Active</span></td>
+            <td>17 Sep 2026</td>
+            <td>17 Oct 2026</td>
+            <td class="text-end"><button type="button" class="btn btn-secondary btn-sm" data-dialog-open="revoke-1" data-proposed title="Proposed: a confirmation step before revoking. Today the form submits immediately.">Revoke</button></td>
+          </tr>
+          <tr>
+            <td><span class="row-title">Accounting copilot</span></td>
+            <td class="text-ink-muted">OAuth</td>
+            <td><span class="badge badge-posted"><i class="badge-dot"></i>Active</span></td>
+            <td>05 Sep 2026</td>
+            <td>05 Oct 2026</td>
+            <td class="text-end"><button type="button" class="btn btn-secondary btn-sm" data-dialog-open="revoke-2">Revoke</button></td>
+          </tr>
+          <tr>
+            <td><span class="row-title">Old prototype test key</span></td>
+            <td class="text-ink-muted">Personal token</td>
+            <td><span class="badge badge-reversed"><i class="badge-dot"></i>Revoked</span></td>
+            <td>10 Jul 2026</td>
+            <td class="text-ink-faint">Revoked 12 Jul 2026</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <dialog id="revoke-1" class="dialog">
+    <div class="dialog-header"><h2 class="text-sm font-semibold">Revoke "Ayesha's reporting agent"?</h2><form method="dialog"><button class="btn btn-ghost btn-icon" aria-label="Close"><i data-icon="x" class="icon"></i></button></form></div>
+    <div class="dialog-body"><p class="text-sm text-ink-muted">This ends every grant this connection holds for this company, immediately on its next request. This cannot be undone; the client will need a new token or consent.</p></div>
+    <div class="dialog-footer"><form method="dialog"><button class="btn btn-ghost">Cancel</button></form><button type="button" class="btn btn-danger">Revoke connection</button></div>
+  </dialog>
+  <dialog id="revoke-2" class="dialog">
+    <div class="dialog-header"><h2 class="text-sm font-semibold">Revoke "Accounting copilot"?</h2><form method="dialog"><button class="btn btn-ghost btn-icon" aria-label="Close"><i data-icon="x" class="icon"></i></button></form></div>
+    <div class="dialog-body"><p class="text-sm text-ink-muted">This ends every grant this connection holds for this company, immediately on its next request. This cannot be undone; the client will need to sign in and consent again.</p></div>
+    <div class="dialog-footer"><form method="dialog"><button class="btn btn-ghost">Cancel</button></form><button type="button" class="btn btn-danger">Revoke connection</button></div>
+  </dialog>
+</div>

@@ -36,11 +36,13 @@ It records receipts and expenses as balanced double-entry journals, keeps posted
 
 The accounting starter adds customer invoices, supplier bills, partial payments, credits and ageing to the base accounting core. Purchasing and shared Inventory are bundled optional modules. A manually configurable core tax engine supports inclusive or exclusive entered prices. All financial activity uses the same posting and reporting services.
 
-**Release status:** **0.5.0-preview is published**, extending the 0.4.0 starter with eleven isolated synthetic sample companies. The hosted demo and marketing site point to the same release. It remains a development preview; observed usability, accessibility certification and production readiness for every business workflow remain separate limits.
+**Release status:** **0.6.0-preview** rebuilds the server-rendered interface and adds reviewed editor previews, scoped lists, atomic multi-item settlement and gross-profit presentation. This is a development preview. Complete visual/accessibility acceptance, field-error recovery and nested report/source/action return behavior remain unfinished; see the release notes and publication receipt for verification scope.
 
-Each release publishes the application archive, its SHA-256 checksum and a release-specific marketing kit containing factual announcement copy, guided experiments, FAQs, social/email drafts and genuine screenshots with captions and alt text. The [0.5.0-preview media kit](https://github.com/rmak78/phpledger/releases/download/v0.5.0-preview/phpledger-0.5.0-preview-media-kit.zip) is attached to the GitHub release; campaign publication remains a human decision.
+Every release, including previews and patch releases, must publish the application archive, its SHA-256 checksum and a matching versioned media kit. The kit contains factual announcement/press copy, guided experiments, FAQs, social/email drafts and verified screenshots from that release with captions and alt text. Attach it to the GitHub release, link it in the release notes and owner handoff, and verify its public download and checksum. A release is incomplete without its media kit. The [0.6.0-preview media kit](https://github.com/rmak78/phpledger/releases/download/v0.6.0-preview/phpledger-0.6.0-preview-media-kit.zip) is attached to the GitHub release; campaign publication remains a human decision.
 
-## Current release: 0.5.0-preview
+Every release also reviews and updates the GitHub Wiki, repository About description, website URL and topics, README, release notes, version/package manifests, and affected website download and social/share metadata. Verify the public results and record each surface as updated or reviewed unchanged in the publication receipt and owner handoff. All surfaces must agree on shipped capabilities, version, download links and preview limitations.
+
+## Current release: 0.6.0-preview
 
 The accounting starter, eleven-pack chooser, responsive shell and catalogue-led setup are included in the published preview. In local Docker, sign in, open **Your businesses**, and use **Try a sample company** to provision only the selected synthetic book.
 
@@ -56,7 +58,7 @@ Remove-Variable testPassword
 
 Use that email and the password you entered at `http://127.0.0.1:18200/login`. The command requires the local database configuration and completed migrations; it does not send email or create a production account.
 
-| Area | Included in the 0.5.0-preview candidate |
+| Area | Included in 0.6.0-preview |
 |---|---|
 | Base accounting: AR and AP | Customer invoices, supplier bills, partial/final payments, linked credit notes, historical ageing and control-account reconciliation. Separate service modules are included in the required accounting core. |
 | Purchasing | Optional module for purchase orders, partial goods receipts, later supplier bills, receipt matching, returns and received-but-unbilled reconciliation. Supplier balances always belong to AP. |
@@ -89,7 +91,7 @@ The application requires **PHP 8.2 or newer**; **PHP 8.3 is the recommended depl
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS remain development previews.*
 
 > [!NOTE]
-> **Evaluate the accounting core.** [Download 0.5.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.5.0-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional package validation and pilot usability gates remain open.
+> **Evaluate the accounting core.** [Download 0.6.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.6.0-preview) with production dependencies and installation instructions. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Regional package validation and pilot usability gates remain open.
 
 ## Explore the working preview
 

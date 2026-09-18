@@ -1,0 +1,62 @@
+<!--meta {"id":"profit-loss","title":"Profit & loss","route":"/reports/profit-loss","group":"Reports","nav":"profit-loss","crumbs":[["Reports","#/reports"],["Profit & loss"]],"pattern":"report","layout":"app","state":"This year · 01 Jan – 17 Sep 2026"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Profit &amp; loss</h1>
+      <p class="mt-1 text-sm text-ink-muted">Ravi Textile Traders · 01 Jan 2026 – 17 Sep 2026 · Posted entries only</p>
+    </div>
+    <div class="page-header-actions">
+      <button type="button" class="btn btn-secondary" data-fold="export"><i data-icon="download" class="icon"></i>Export CSV</button>
+    </div>
+  </header>
+
+  <div class="filter-bar" data-fold="filter bar">
+    <div class="tabs-seg" role="tablist" aria-label="Period preset" data-proposed title="Proposed: quick period presets that fill the dates below. Today the report only accepts explicit from/to dates.">
+      <button type="button" class="tabs-seg-item" aria-selected="false">This month</button>
+      <button type="button" class="tabs-seg-item" aria-selected="false">Last month</button>
+      <button type="button" class="tabs-seg-item" aria-selected="false">Quarter</button>
+      <button type="button" class="tabs-seg-item" aria-selected="true">This year</button>
+      <button type="button" class="tabs-seg-item" aria-selected="false">Custom</button>
+    </div>
+    <div class="field">
+      <label class="field-label" for="pl-from">From</label>
+      <span class="input-affix"><input class="input max-w-[7.5rem]" id="pl-from" type="text" value="01 Jan 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+    </div>
+    <div class="field">
+      <label class="field-label" for="pl-to">To</label>
+      <span class="input-affix"><input class="input max-w-[7.5rem]" id="pl-to" type="text" value="17 Sep 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+    </div>
+    <button type="button" class="btn btn-secondary">Update</button>
+  </div>
+
+  <div class="table-wrap p-2 max-w-[60rem]">
+    <table class="stmt-table">
+      <thead data-fold="statement heading"><tr><th>Account</th><th class="num">PKR</th></tr></thead>
+      <tbody>
+        <tr class="stmt-row" data-fold="first section"><td class="stmt-group-label">Income</td><td class="num"></td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">4000</span><a class="link" href="#/account-statement" title="Opens the account statement for 01 Jan 2026 – 17 Sep 2026">Fabric sales</a></td><td class="num">2,540,000.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">4010</span><a class="link" href="#/account-statement" title="Opens the account statement for 01 Jan 2026 – 17 Sep 2026">Stitching &amp; job work</a></td><td class="num">186,500.00</td></tr>
+        <tr class="stmt-row stmt-subtotal"><td>Total income</td><td class="num">2,726,500.00</td></tr>
+
+        <tr class="stmt-row" data-proposed title="Proposed grouping: the report returns one combined expenses list today; cost of sales is not a separate account classification."><td class="stmt-group-label">Cost of sales</td><td class="num"></td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">5000</span><a class="link" href="#/account-statement" title="Opens the account statement for 01 Jan 2026 – 17 Sep 2026">Cost of goods sold — fabric</a></td><td class="num">1,540,000.00</td></tr>
+        <tr class="stmt-row stmt-subtotal" data-proposed title="Proposed subtotal: derived from the accounts above, not a field the report returns."><td>Total cost of sales</td><td class="num">1,540,000.00</td></tr>
+
+        <tr class="stmt-row stmt-total" data-proposed title="Proposed: gross profit is not a field the report returns today — it is income less cost of sales, shown here for context."><td>Gross profit</td><td class="num">1,186,500.00</td></tr>
+
+        <tr class="stmt-row"><td class="stmt-group-label">Expenses</td><td class="num"></td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">5100</span><a class="link" href="#/account-statement" title="Opens the account statement for 01 Jan 2026 – 17 Sep 2026">Salaries &amp; wages</a></td><td class="num">420,000.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">5200</span><a class="link" href="#/account-statement" title="Opens the account statement for 01 Jan 2026 – 17 Sep 2026">Rent</a></td><td class="num">180,000.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">5300</span><a class="link" href="#/account-statement" title="Opens the account statement for 01 Jan 2026 – 17 Sep 2026">Utilities</a></td><td class="num">86,400.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">5400</span><a class="link" href="#/account-statement" title="Opens the account statement for 01 Jan 2026 – 17 Sep 2026">Packaging &amp; printing</a></td><td class="num">34,250.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">5500</span><a class="link" href="#/account-statement" title="Opens the account statement for 01 Jan 2026 – 17 Sep 2026">Depreciation expense</a></td><td class="num">27,500.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">5600</span><a class="link" href="#/account-statement" title="Opens the account statement for 01 Jan 2026 – 17 Sep 2026">Loan interest</a></td><td class="num">18,600.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">5700</span><a class="link" href="#/account-statement" title="Opens the account statement for 01 Jan 2026 – 17 Sep 2026">General &amp; admin expenses</a></td><td class="num">12,900.00</td></tr>
+        <tr class="stmt-row stmt-subtotal"><td>Total expenses</td><td class="num">779,650.00</td></tr>
+
+        <tr class="stmt-row stmt-total"><td>Net profit</td><td class="num">406,850.00</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-xs text-ink-muted">Includes posted entries and dated reversals only. Amounts link to that account's statement for the same date range — see <a class="link" href="#/period-drilldown">Fabric sales, drilled down</a> for a worked example.</p>
+</div>

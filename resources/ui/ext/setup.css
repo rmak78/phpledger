@@ -1,0 +1,155 @@
+/* Extra components for the setup screens. Use @layer components; tokens only. */
+@layer components {
+  .setup-option { display: flex; align-items: flex-start; gap: .625rem; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--surface); cursor: pointer; font-size: .8125rem; }
+  .setup-option:has(input:checked) { border-color: var(--brand-blue); background: var(--brand-selected); }
+  .setup-option input { flex: none; margin-block-start: .125rem; }
+  .setup-option small { display: block; margin-block-start: .25rem; color: var(--ink-muted); font-size: .75rem; }
+  .setup-summary dt { font-size: .75rem; color: var(--ink-muted); }
+  .setup-summary dd { font-weight: 500; }
+  .setup-wizard fieldset { display: flex; flex-direction: column; gap: .5rem; }
+  /* The auth layout's .auth-card is fixed at max-width:420px in the foundation (src/app.css) for a
+     single login-style form. A handful of setup/access screens need more room (a business list, a
+     stepper + fields, a two-column demo landing) — widen just those, keyed off the screen id proto.js
+     already stamps on <html data-screen="…">. Higher specificity (not source order) is what wins here,
+     since this file is @import-ed before the foundation's own .auth-card rule in the same
+     @layer components — see NOTES.md. */
+  html[data-screen="companies"] .auth-card,
+  html[data-screen="sample-chooser"] .auth-card { max-width: 43rem; }
+  html[data-screen="demo"] .auth-card { max-width: 54rem; }
+  html[data-screen="onboarding-purpose"] .auth-card,
+  html[data-screen="onboarding-business"] .auth-card,
+  html[data-screen="onboarding-chart"] .auth-card,
+  html[data-screen="onboarding-preview"] .auth-card,
+  html[data-screen="onboarding-confirm"] .auth-card,
+  html[data-screen="onboarding-validation"] .auth-card { max-width: 50rem; }
+
+  /* Selectable option card (onboarding radio choices: purpose, chart). Native radio input stays for
+     a11y/keyboard; :has() promotes the checked state to the whole card. */
+  .option-card {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+    padding: .8125rem 1rem;
+    cursor: pointer;
+    transition: border-color .12s ease, background-color .12s ease;
+  }
+  .option-card:hover { border-color: var(--border-strong); }
+  .option-card:has(input:checked) { border-color: var(--brand-blue); background: var(--brand-selected); }
+  .option-card:has(input:disabled) { cursor: not-allowed; opacity: .55; }
+  .option-card input[type="radio"] { margin-block-start: .1875rem; flex: none; }
+  .option-card-body { min-width: 0; }
+  .option-card-title { font-size: .8125rem; font-weight: 600; color: var(--ink); }
+  .option-card-desc { font-size: .75rem; color: var(--ink-muted); margin-block-start: .125rem; }
+
+  /* Compact sample/industry pick card (sample-chooser, demo). Same selected-state affordance as
+     option-card but a vertical layout sized for a grid of short cards. */
+  .pick-card {
+    display: flex;
+    flex-direction: column;
+    gap: .3125rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+    padding: .625rem .75rem;
+    cursor: pointer;
+    transition: border-color .12s ease, background-color .12s ease;
+  }
+  .pick-card:hover { border-color: var(--border-strong); }
+  .pick-card:has(input:checked) { border-color: var(--brand-blue); background: var(--brand-selected); }
+  .pick-card input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+  .pick-card-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+  .pick-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--surface-subtle);
+    color: var(--ink-muted);
+    flex: none;
+  }
+  .pick-card:has(input:checked) .pick-card-icon { background: var(--brand-navy); color: #fff; }
+  .pick-card-title { font-size: .8125rem; font-weight: 600; color: var(--ink); }
+  .pick-card-desc { font-size: .75rem; color: var(--ink-muted); }
+
+  /* Business row (companies list) — compact aligned row per the UX audit, replacing the original
+     app's large padded cards. */
+  .biz-row {
+    display: flex;
+    align-items: center;
+    gap: .875rem;
+    padding: .875rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+    background: var(--surface);
+  }
+  .biz-row-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: var(--brand-navy);
+    color: #fff;
+    font-size: .75rem;
+    font-weight: 700;
+    flex: none;
+  }
+
+  /* Task card grid (Help) — compact card linking straight to a screen instead of a paragraph. */
+  .task-card {
+    display: flex;
+    flex-direction: column;
+    gap: .375rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+    padding: 1rem;
+    background: var(--surface);
+    transition: border-color .12s ease, background-color .12s ease;
+  }
+  .task-card:hover { border-color: var(--border-strong); background: var(--surface-subtle); }
+  .task-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--info-bg);
+    color: var(--info);
+    flex: none;
+  }
+  .task-card-title { font-size: .8125rem; font-weight: 600; color: var(--ink); }
+  .task-card-desc { font-size: .75rem; color: var(--ink-muted); }
+
+  /* Reconciliation mini-panel (opening balances / opening conversion): a quiet, bordered summary of
+     computed totals vs. a control account — not a full .panel, just enough separation. */
+  .recon-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: .375rem;
+    border-block-end: 1px solid var(--border);
+    font-size: .8125rem;
+  }
+  .recon-row:last-child { border-block-end: 0; }
+}
+
+/* Sample exercises share the workspace type, spacing and focus tokens. */
+@layer components {
+  .sample-guide { font-size: .8125rem; }
+  .sample-guide p { line-height: 1.5; }
+  .sample-guide ul, .sample-guide ol { padding-inline-start: 1.25rem; }
+  .sample-guide li { margin-block-end: .25rem; }
+  .sample-guide a:not(.btn) { color: var(--brand-blue); text-underline-offset: .2em; }
+  .sample-guide summary { cursor: pointer; font-weight: 600; }
+  .sample-guide details:not(.sample-exercise) > summary { padding-block: .5rem; }
+  .sample-schedules, .sample-months { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .sample-schedules dt { font-weight: 600; margin-block-end: .5rem; }
+  .sample-schedules dd { margin: 0; line-height: 1.5; }
+  @media (max-width: 767px) { .sample-schedules, .sample-months { grid-template-columns: minmax(0, 1fr); } }
+}

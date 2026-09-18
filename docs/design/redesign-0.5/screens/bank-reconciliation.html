@@ -1,0 +1,80 @@
+<!--meta {"id":"bank-reconciliation","title":"Bank reconciliation","route":"/bank-reconciliation","group":"Banking","nav":"bank-reconciliation","crumbs":[["Banking"],["Bank reconciliation"]],"pattern":"reconciliation","layout":"app","state":"MEZ-2026-09A · 5 of 6 matched · difference 0.00"} -->
+<div class="flex flex-col gap-3 py-4">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Bank reconciliation</h1>
+      <p class="mt-1 text-sm text-ink-muted">Compare a statement with posted bank entries in PKR.</p>
+    </div>
+    <div class="page-header-actions">
+      <a class="btn btn-ghost" href="#/bank-reconciliation"><i data-icon="history" class="icon"></i>Statement history</a>
+    </div>
+  </header>
+
+  <div class="flex flex-wrap items-center justify-between gap-3 rounded-panel border border-border bg-surface px-4 py-2" data-fold="statement summary">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-8 flex-none items-center justify-center rounded-full bg-surface-subtle text-ink-muted"><i data-icon="building-bank" class="icon"></i></span>
+      <div>
+        <p class="text-sm font-semibold text-ink">MEZ-2026-09A <span class="badge badge-draft ms-1"><i class="badge-dot"></i>In progress</span></p>
+        <p class="text-xs text-ink-muted">1010 · Meezan Bank — Current · 01–15 Sep 2026 · Closing 1,750,000.00</p>
+      </div>
+    </div>
+    <p class="text-xs text-ink-faint">Imported 15 Sep 2026 · Ayesha Khan</p>
+  </div>
+
+  <div class="grid grid-cols-2 gap-px overflow-hidden rounded-panel border border-border bg-border min-[900px]:grid-cols-5" data-fold="cleared totals">
+    <div class="bg-surface px-3 py-2"><p class="text-xs text-ink-muted">Statement closing</p><p class="text-sm font-semibold tabular-nums">1,750,000.00</p></div>
+    <div class="bg-surface px-3 py-2"><p class="text-xs text-ink-muted">+ Outstanding (0)</p><p class="text-sm font-semibold tabular-nums">0.00</p></div>
+    <div class="bg-surface px-3 py-2"><p class="text-xs text-ink-muted">Adjusted balance</p><p class="text-sm font-semibold tabular-nums">1,750,000.00</p></div>
+    <div class="bg-surface px-3 py-2"><p class="text-xs text-ink-muted">Ledger balance</p><p class="text-sm font-semibold tabular-nums">1,750,000.00</p></div>
+    <div class="bg-surface px-3 py-2"><p class="text-xs text-ink-muted">Difference</p><p class="flex items-center gap-1 text-sm font-semibold tabular-nums text-success">0.00 <i data-icon="check" class="icon size-3.5"></i></p></div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_340px]">
+    <section aria-label="Statement lines">
+      <h2 class="section-title mb-2">Statement lines <span class="font-normal text-ink-muted">· 5 of 6 matched · every row must be matched to finish</span></h2>
+      <div class="table-wrap" data-fold="first rows">
+        <table class="table">
+          <thead><tr><th>Date</th><th>Reference / description</th><th class="num">Money in</th><th class="num">Money out</th><th>Match</th></tr></thead>
+          <tbody>
+            <tr><td>02 Sep 2026</td><td>REC-000581<span class="row-sub">Lahore Fabric House</span></td><td class="num">145,000.00</td><td class="num">0.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Matched</span></td></tr>
+            <tr><td>05 Sep 2026</td><td>EXP-000582<span class="row-sub">Faisalabad Yarn Mills</span></td><td class="num">0.00</td><td class="num">85,000.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Matched</span></td></tr>
+            <tr><td>08 Sep 2026</td><td>REC-000583<span class="row-sub">Karachi Linen Co.</span></td><td class="num">96,500.00</td><td class="num">0.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Matched</span></td></tr>
+            <tr><td>10 Sep 2026</td><td>REC-000584<span class="row-sub">Lahore Fabric House</span></td><td class="num">92,000.00</td><td class="num">0.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Matched</span></td></tr>
+            <tr aria-selected="true"><td>12 Sep 2026</td><td>EXP-000585<span class="row-sub">K-Electric</span></td><td class="num">0.00</td><td class="num">18,600.00</td><td><span class="badge badge-unpaid"><i class="badge-dot"></i>Unmatched</span></td></tr>
+            <tr><td>15 Sep 2026</td><td>Bank charges &amp; transfer adj.<span class="row-sub">—</span></td><td class="num">0.00</td><td class="num">2,500.00</td><td><span class="badge badge-posted"><i class="badge-dot"></i>Matched</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-label="Review match" id="match-review">
+      <h2 class="section-title mb-2">Review match for EXP-000585</h2>
+      <div class="panel flex flex-col gap-2.5 !p-3">
+        <p class="text-xs text-ink-muted">12 Sep 2026 · K-Electric · 18,600.00 out</p>
+        <fieldset class="flex flex-col gap-2">
+          <legend class="field-label mb-0.5">Journal entry to match</legend>
+          <label class="flex items-start gap-2 rounded-control border border-border-strong bg-selected px-3 py-1.5 text-sm">
+            <input type="radio" name="bank-match" checked class="mt-0.5">
+            <span><span class="block font-medium text-ink">12 Sep 2026 · Journal 1042</span><span class="block text-xs text-ink-muted">EXP-000585 · K-Electric — utilities</span></span>
+          </label>
+        </fieldset>
+        <p class="flex items-start gap-1.5 text-xs text-warning"><i data-icon="alert-triangle" class="icon size-3.5 flex-none"></i>1 other entry shares this exact amount — verify the source before confirming.</p>
+        <button type="button" class="btn btn-primary justify-center btn-sm">Confirm this match</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-between gap-3 rounded-panel border border-border bg-surface px-4 py-2.5" data-fold="complete action">
+    <p class="text-sm font-semibold text-ink">Complete reconciliation <span class="font-normal text-ink-muted">· match the remaining row first</span></p>
+    <button type="button" class="btn btn-primary" disabled title="1 statement row is still unmatched">Confirm reconciliation</button>
+  </div>
+
+  <details class="rounded-panel border border-border">
+    <summary class="flex cursor-pointer list-none items-center gap-2 px-4 py-2.5 text-sm font-semibold text-ink"><i data-icon="chevron-right" class="icon"></i>Cancel an incorrect import</summary>
+    <div class="border-t border-border px-4 py-3">
+      <p class="text-sm text-ink-muted">Remove all 5 saved matches first, then explain the correction. Cancellation retains the original statement, rows and match history.</p>
+      <div class="field mt-3 max-w-md"><label class="field-label" for="cancel-reason">Reason for cancelling</label><textarea class="textarea" id="cancel-reason" rows="2"></textarea></div>
+      <button type="button" class="btn btn-danger mt-3" disabled title="Remove every saved match before cancelling">Cancel draft statement</button>
+    </div>
+  </details>
+</div>

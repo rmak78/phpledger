@@ -1,0 +1,60 @@
+<!--meta {"id":"balance-sheet","title":"Balance sheet","route":"/reports/balance-sheet","group":"Reports","nav":"balance-sheet","crumbs":[["Reports","#/reports"],["Balance sheet"]],"pattern":"report","layout":"app","state":"As of 17 Sep 2026"} -->
+<div class="flex flex-col gap-4 py-5">
+  <header class="page-header !static !py-0" data-fold="page header">
+    <div>
+      <h1 class="page-title">Balance sheet</h1>
+      <p class="mt-1 text-sm text-ink-muted">Ravi Textile Traders · As of 17 Sep 2026 · Posted entries only</p>
+    </div>
+    <div class="page-header-actions">
+      <button type="button" class="btn btn-secondary" data-fold="export"><i data-icon="download" class="icon"></i>Export CSV</button>
+    </div>
+  </header>
+
+  <div class="grid grid-cols-2 gap-px overflow-hidden rounded-panel border border-border bg-border min-[720px]:grid-cols-4" data-fold="summary strip">
+    <div class="bg-surface px-4 py-3"><p class="text-xs text-ink-muted">Total assets</p><p class="amount-lg mt-1">2,978,050.00</p></div>
+    <div class="bg-surface px-4 py-3"><p class="text-xs text-ink-muted">Total liabilities</p><p class="amount-lg mt-1">511,910.00</p></div>
+    <div class="bg-surface px-4 py-3"><p class="text-xs text-ink-muted">Owner's equity</p><p class="amount-lg mt-1">2,466,140.00</p></div>
+    <div class="flex flex-col justify-center gap-1 bg-surface px-4 py-3">
+      <span class="balanced-label"><i data-icon="check" class="icon"></i>Assets = Liabilities + Equity</span>
+      <span class="text-xs tabular-nums text-ink-muted">2,978,050.00 = 2,978,050.00 PKR</span>
+    </div>
+  </div>
+
+  <div class="filter-bar" data-fold="filter bar">
+    <div class="field">
+      <label class="field-label" for="bs-asof">As of date</label>
+      <span class="input-affix"><input class="input max-w-[8.5rem]" id="bs-asof" type="text" value="17 Sep 2026"><i data-icon="calendar" class="icon input-affix-icon"></i></span>
+    </div>
+    <button type="button" class="btn btn-secondary">Update</button>
+  </div>
+
+  <div class="table-wrap p-2 max-w-[60rem]">
+    <table class="stmt-table">
+      <thead data-fold="statement heading"><tr><th>Account</th><th class="num">PKR</th></tr></thead>
+      <tbody>
+        <tr class="stmt-row" data-fold="first section"><td class="stmt-group-label">Assets</td><td class="num"></td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">1000</span><a class="link" href="#/account-statement">Cash in hand</a></td><td class="num">42,650.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">1010</span><a class="link" href="#/account-statement">Meezan Bank — Current</a></td><td class="num">1,800,000.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">1100</span><a class="link" href="#/account-statement">Accounts receivable</a></td><td class="num">312,400.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">1200</span><a class="link" href="#/account-statement">Inventory — fabric stock</a></td><td class="num">640,000.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">1300</span><a class="link" href="#/account-statement">Prepaid insurance</a></td><td class="num">18,000.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">1400</span><a class="link" href="#/account-statement">Equipment &amp; fixtures</a></td><td class="num">220,000.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">1490</span><a class="link" href="#/account-statement">Accumulated depreciation</a></td><td class="num">&minus;55,000.00</td></tr>
+        <tr class="stmt-row stmt-subtotal"><td>Total assets</td><td class="num">2,978,050.00</td></tr>
+
+        <tr class="stmt-row"><td class="stmt-group-label">Liabilities</td><td class="num"></td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">2000</span><a class="link" href="#/account-statement">Accounts payable</a></td><td class="num">219,610.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">2100</span><a class="link" href="#/account-statement">GST payable (output)</a></td><td class="num">42,300.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">2300</span><a class="link" href="#/account-statement">Term loan — Meezan Bank</a></td><td class="num">250,000.00</td></tr>
+        <tr class="stmt-row stmt-subtotal"><td>Total liabilities</td><td class="num">511,910.00</td></tr>
+
+        <tr class="stmt-row"><td class="stmt-group-label">Equity</td><td class="num"></td></tr>
+        <tr class="stmt-row stmt-indent-1"><td><span class="me-1 text-xs text-ink-faint">3000</span><a class="link" href="#/account-statement">Owner's capital</a></td><td class="num">2,059,290.00</td></tr>
+        <tr class="stmt-row stmt-indent-1"><td>Current-year earnings<span class="row-sub block text-xs text-ink-faint">Unclosed income less expenses</span></td><td class="num">406,850.00</td></tr>
+        <tr class="stmt-row stmt-total"><td>Total equity</td><td class="num text-brand">2,466,140.00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="text-xs text-ink-muted">Posted entries only. Current-year earnings is shown separately from recorded owner's capital. A balanced total does not by itself confirm every account is classified correctly.</p>
+</div>
