@@ -6,11 +6,11 @@
 
 With 1.0.0 published, next is **1.0.x** production fixes and compatibility improvements, **1.1** reviewed Urdu/RTL plus installer distribution channels (Softaculous/Installatron, published containers/packages), and **1.2** reviewed Arabic/RTL and demand-led reporting refinements. Independent accounting/security review and supervised pilots run in parallel as post-release commitments rather than as pre-publication gates. Later capability releases add reviewed regional connectors, stock/tax-integrated shop POS, e-commerce, controlled API/MCP writes and restaurant/distribution/specialist modules, each with its own independent acceptance. See [[Module roadmap|Module-Roadmap]] for current gates; older milestone snapshots below retain their historical scope.
 
-The direction confirmed on 15 September 2026 is **complete accounting core first, optional business modules next**, with a business API and MCP access over the same services. The current preview supplies working slices; it does not complete the accounting, user or release gates below.
+The direction confirmed on 15 September 2026 is **complete accounting core first, optional business modules next**, with a business API and MCP access over the same services. 1.0.0 completes the required core and read API/MCP access; it does not complete the independent-review, pilot or release-candidate gates described in [Validation](https://github.com/rmak78/phpledger/blob/master/docs/VALIDATION.md) and [Release 1.0.0](https://github.com/rmak78/phpledger/wiki/Release-1.0.0).
 
-The 0.1.4-preview release completes the bounded core implementation and bundled module lifecycle technical checks: 121 tests pass, with a two-period reconciliation, exports and owner-controlled POS enablement. API/MCP reads are the next implementation milestone, followed by commands and optional AR/AP. Qualified reviews and observed pilot use remain separate gates.
+1.0.0 completes the bounded core implementation, required AR/AP, optional Purchasing/Inventory and bundled module lifecycle technical checks, along with browser installation and signed automatic updates. API/MCP writes are the next implementation milestone. Qualified reviews and observed pilot use remain separate, open gates.
 
-The [[module roadmap|Module-Roadmap]] gives the detailed delivery order. [[First package|First-Package]] describes the 0.1.4-preview scope and remaining acceptance work.
+The [[module roadmap|Module-Roadmap]] gives the detailed delivery order. [[First package|First-Package]] points to the 1.0.0 scope and remaining acceptance work.
 
 | Stage | What it delivers | Completion gate |
 |---|---|---|
@@ -26,21 +26,20 @@ The [[module roadmap|Module-Roadmap]] gives the detailed delivery order. [[First
 
 ## Required accounting progression
 
-Account statements, chart management and general journals are the current core slice. Reviewed opening entries, period-close/reopen administration and bank reconciliation come next. Historical import must preview mappings, errors and totals before confirmation, with a cutover that does not double count existing balances.
+Account statements, chart management, general journals, opening conversion, bank reconciliation and required AR/AP with manually configured tax are shipped in 1.0.0's core. Historical import still needs preview of mappings, errors and totals before confirmation for cases not already covered.
 
-AR/AP open-item records and stock valuation belong to their future modules. An account statement alone cannot provide aging, outstanding invoices/bills or stock reports. Unexplained opening controls must keep readiness unresolved.
+AR/AP open-item records, ageing and control-account reconciliation are part of the 1.0.0 core; stock valuation belongs to the optional Inventory module, also shipped. An account statement alone does not provide ageing or stock reports on its own — use AR/AP and Inventory for those.
 
 Financial reporting uses explicit, reviewed regional entity/period profiles over a country-neutral core. Pakistan FBR is one planned connector; the product is not defined by one country. Tax research runs alongside it, covers eight countries and seven industries, and remains disabled and unreviewed. [[Tax research|Tax-Research]] explains that separate boundary.
 
 ## Optional business expansion
 
-- **AR and AP:** invoices/bills, credit notes, receipts/payments, allocations, aging and reconciled unpaid-document imports.
-- **Purchasing and inventory:** products, receiving/returns, warehouses, quantities, reviewed valuation and COGS.
-- **Tax:** reviewed jurisdiction adapters, effective rules and immutable calculation snapshots; required before applicable production use.
-- **Shop and restaurant POS:** shared checkout, shop entry or table/order/kitchen operations, returns and settlement controls.
+- **Purchasing and Inventory (shipped, optional):** products, receiving/returns, one stock location, moving weighted-average valuation and reviewed adjustments.
+- **Tax (research only):** reviewed jurisdiction adapters, effective rules and immutable calculation snapshots; required before applicable production use. 1.0.0 ships only manually configured core tax codes and rates.
+- **Shop and restaurant POS:** shared checkout, shop entry or table/order/kitchen operations, returns and settlement controls. The bundled cash POS is an illustrative demonstration, not this production module.
 - **Distribution and specialists:** route/van stock and collections; pharmacy batch/expiry; jewelry pricing; membership dues; workshop jobs/parts/labour.
 
-The bundled core/POS lifecycle is implemented. API/MCP access remains the next implementation milestone. Optional software does not make legal obligations optional.
+The bundled core/POS lifecycle and required AR/AP are implemented. Controlled API/MCP write access remains the next implementation milestone. Optional software does not make legal obligations optional.
 
 ## Later investigations
 

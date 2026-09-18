@@ -1,6 +1,6 @@
 # A shop sale with a visible accounting trail
 
-The current POS is a cash-sale showcase retained in the 0.1.6-preview package and hosted demo, using six fictional products. It demonstrates how a simple shop transaction reaches the same accounting records as other receipts. Click-to-add product tiles and a separate review/cash screen are included.
+The current POS is a cash-sale showcase retained in the 1.0.0 package and hosted demo, using six fictional products. It demonstrates how a simple shop transaction reaches the same accounting records as other receipts. Click-to-add product tiles and a separate review/cash screen are included. It is an illustrative demonstration, not a production shop POS.
 
 ## Try the complete journey
 
@@ -20,7 +20,7 @@ Search/categories, a small sample cart, exact cash/change calculation, explicit 
 
 ## What production retail still needs
 
-Inventory and COGS, purchasing, returns, discounts, taxes, customer credit, payment-provider reconciliation, tills/hardware and end-of-day controls remain future work. The showcase does not collect payments or provide restaurant, pharmacy or fiscal-device compliance.
+The showcase does not use the shared Inventory module: its stock is not issued from and does not affect real inventory records, even though Inventory and Purchasing are available elsewhere in 1.0.0. Integration with shared stock, returns, discounts, taxes, customer credit, payment-provider reconciliation, tills/hardware and end-of-day controls remain future work. The showcase does not collect real payments or provide restaurant, pharmacy or fiscal-device compliance.
 
 The next priority is the accounting core. A supported module lifecycle will later separate checkout and industry interfaces from core accounting. Production shop and restaurant capabilities follow the [[module roadmap|Module-Roadmap]]; the current showcase is not an installable add-on.
 

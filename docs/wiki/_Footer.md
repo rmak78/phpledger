@@ -1,3 +1,3 @@
 PHP Ledger · [[Current status|Home]] · [[First package|First-Package]] · [[Roadmap]] · [[Contact and contribute|Contributing-and-Support]]
 
-This Wiki describes the revival and its development preview. Feature plans are not release or compliance claims.
+This Wiki describes PHP Ledger 1.0.0, the first stable release, and the roadmap beyond it. Feature plans are not release or compliance claims.

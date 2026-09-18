@@ -21,7 +21,7 @@ Modern application source is in `www/phpledger`; the historical application rema
 | I want to… | Start here |
 |---|---|
 | Understand the product and who it serves | [[Product overview|Product-Overview]] |
-| Try the preview or plan an installation | [[Getting started|Getting-Started]] |
+| Try the demo or plan an installation | [[Getting started|Getting-Started]] |
 | Follow accounts, journals and report balances | [[Accounting and reports|Accounting-and-Reports]] |
 | See how a shop sale reaches the ledger | [[POS showcase|POS-Showcase]] |
 | Understand core and optional module delivery | [[Module roadmap|Module-Roadmap]] |
@@ -31,7 +31,7 @@ Modern application source is in `www/phpledger`; the historical application rema
 | Explore the broader future path | [[Roadmap]] |
 | Help build or review PHP Ledger | [[Contributing and support|Contributing-and-Support]] |
 
-## What the preview demonstrates
+## What 1.0.0 demonstrates
 
 Follow any authorized account from its opening balance through period debits, credits and running balances to its closing balance. Return from a statement line to the journal and source behind it. Authorized owners and accountants can create accounts and audit changes to names or active status; account code, type and purpose stay fixed.
 
@@ -41,7 +41,7 @@ The public demo provides temporary visitor books: accounts are read-only, while 
 
 ## The direction
 
-Opening cutover, period administration, bank CSV reconciliation and the bundled core/POS lifecycle are included. Scoped API/MCP reads come next, followed by controlled commands, the browser installer and optional AR/AP. Richer multi-year demo packs have separate reconciliation and reset gates.
+Opening conversion, period controls, bank CSV reconciliation, required AR/AP, optional Purchasing/Inventory, the bundled core/POS lifecycle, scoped read API/MCP access, browser installation and signed automatic updates are included in 1.0.0. Controlled API/MCP write commands and distribution-channel packaging are next. Richer multi-year demo packs have separate reconciliation and reset gates.
 
 Accounting framework work uses explicit regional entity/period profiles over a country-neutral core. Pakistan is one intended direction; connector readiness and validated demand determine delivery. The separate tax candidate catalog covers eight countries and seven industries, remains disabled and unreviewed, and supplies no active tax calculations.
 
@@ -57,7 +57,7 @@ The core is country-neutral and serves businesses, owners, bookkeepers and accou
 
 The current release uses AGPL-3.0-or-later with a commercial licence available. Previously published 0.1.0 through 0.1.5 previews retain MIT. Self-hosting stays free without licence keys or licensing-server calls. See [[Licensing and contributions|Licensing]].
 
-## 0.1.5 accessibility update
+## Historical note: 0.1.5 accessibility update (15 September 2026)
 
 [Nagulanvelu contributed PR #65](https://github.com/rmak78/phpledger/pull/65), giving each fallback POS quantity its product name. A maintainer correction keeps the fields visible with JavaScript disabled. The package passed fresh installation, upgrade from 0.1.4, 29 synthetic checkout checks and desktop/tablet/mobile browser checks. See the [release](https://github.com/rmak78/phpledger/releases/tag/v0.1.5-preview), [privacy notice](https://phpledger.com/privacy/) and [demo-use terms](https://phpledger.com/terms/).
 

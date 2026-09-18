@@ -19,7 +19,7 @@ PHP Ledger aims to make the first useful accounting task straightforward while p
 5. Post it and inspect its balanced journal.
 6. Find the report effect and return to the source transaction.
 
-The local preview implements that core journey. Existing-business setup keeps opening review visible; guided migration and reconciliation of opening unpaid documents remain future work. A business must not be treated as ready simply because its name and currency have been entered.
+1.0.0 implements that core journey, including opening conversion and bank reconciliation. A business must not be treated as ready simply because its name and currency have been entered.
 
 ## Experience standards
 
@@ -29,6 +29,6 @@ The initial goals are simple-company setup within five minutes and a first usefu
 
 ## What comes next
 
-The product follows a [[core-first module roadmap|Module-Roadmap]]: complete opening/cutover, periods and bank reconciliation, then add module contracts, business API/MCP access and optional operational modules. The [[current package|First-Package]] is a development preview. Industry research covers restaurants, clubs, pharmacies, traders, distributors, shops and workshops; sample scenarios and disabled [[tax candidates|Tax-Research]] are not installed industry modules.
+The product follows a [[core-first module roadmap|Module-Roadmap]]: 1.0.0 ships the required core, AR/AP, optional Purchasing/Inventory, opening conversion, bank reconciliation, read API/MCP access, browser installation and signed automatic updates. See [[current package|First-Package]] for the full 1.0.0 scope. Industry research covers restaurants, clubs, pharmacies, traders, distributors, shops and workshops; sample scenarios and disabled [[tax candidates|Tax-Research]] are not installed industry modules.
 
 [[Getting started|Getting-Started]] · [[Accounting and reports|Accounting-and-Reports]] · [[POS showcase|POS-Showcase]]

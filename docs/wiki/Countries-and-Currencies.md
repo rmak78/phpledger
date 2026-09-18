@@ -1,8 +1,8 @@
 # Regional choices without hidden accounting assumptions
 
-The local preview supports **one base currency per business/book**. Its country selector can suggest a currency, while users retain an explicit manual choice. A bounded backend country lookup may provide a suggestion once per session; local/private addresses skip it and failed lookups are cached.
+1.0.0 supports **one immutable base currency per business/book**. Its country selector can suggest a currency, while users retain an explicit manual choice. A bounded backend country lookup may provide a suggestion once per session; local/private addresses skip it and failed lookups are cached.
 
-## Base currencies in the current preview
+## Base currencies in 1.0.0
 
 | Currency | Code |
 |---|---|
