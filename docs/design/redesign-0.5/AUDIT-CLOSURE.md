@@ -75,7 +75,7 @@ Source: [REPORTING-ADMIN-AUDIT.md](../ux-recovery/REPORTING-ADMIN-AUDIT.md).
 | P1 Reporting context | Partial | P&L presets and report/account/source return filters verified; nested source actions still require full return-chain acceptance. |
 | P1 Populated bank reconciliation | Closed locally | Synthetic CSV preview/import, match/unmatch, completion and 26-row cancellation verified with JS/no-JS; no duplicate payment posting. |
 | P1 Tax/module/period impact review | Closed locally | Immutable tax definitions/dated rates, consequence confirmations, reasoned period history and stale input checks retained. |
-| P1 Invalid OAuth recovery | Closed locally for malformed/expired requests | Request-specific recovery, unchanged 403 rejection and no untrusted redirect verified at four widths. Valid consent/cancel acceptance remains separate. |
+| P1 Invalid OAuth recovery | Closed locally for malformed/expired requests; consent/cancel browser checks passed | Request-specific recovery, unchanged 403 rejection and no untrusted redirect verified at four widths. Valid consent and cancel passed with JS on/off at both folds; callback state retained using an intercepted local callback. Token exchange and external client compatibility are separate checks. |
 | P2 Long report/settings pages | Partial | Compact report directory/settings and paged lists; final history density/scroll review pending. |
 | P2 Financial statement links | Closed locally for layout/returns | Explicit link styling and context-preserving account returns; final keyboard coverage pending. |
 | P2 Shared navigation | Closed locally for shell layout | Sidebar/rail/drawer replaces clipped navigation stacks; earlier drawer/command-palette checks recorded. |

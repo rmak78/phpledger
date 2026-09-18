@@ -1370,8 +1370,26 @@
       "route": "/oauth/authorize",
       "pattern": "focused-auth",
       "state": "Pending consent decision",
-      "acceptance": "pending",
-      "captures": []
+      "acceptance": "consent_cancel_browser_passed_final_accessibility_pending",
+      "captures": [
+        {
+          "file": "completion-checkpoint/oauth-consent-true-allow-1366.png",
+          "width": 1366,
+          "height": 768,
+          "http_status": 200,
+          "page_overflow": false,
+          "visual_review": "pending"
+        },
+        {
+          "file": "completion-checkpoint/oauth-consent-true-allow-1024.png",
+          "width": 1024,
+          "height": 768,
+          "http_status": 200,
+          "page_overflow": false,
+          "visual_review": "reviewed"
+        }
+      ],
+      "workflow_receipt": "completion-checkpoint/oauth-consent-results.json"
     },
     {
       "prototype": "screens/oauth-invalid.html",
@@ -2529,16 +2547,18 @@
   "automated_screen_states": 33,
   "total_prototype_entries": 75,
   "source": {
-    "git_head_before_checkpoint": "4fc9f38",
-    "working_tree_changes": true,
-    "compiled_css_sha256": "56683ee0306bbaae73fad7e7bb4657adf0f3b3387f5c3e82f6ef4239dae9f749"
+    "git_head_before_checkpoint": "c3a57e52562ec19557dc02a9d22abad216eb8e27",
+    "working_tree_changes": false,
+    "compiled_css_sha256": "fa6c302bdae3825f0500c72131b29411924e88074d216dee710476a7874bd325",
+    "capture_generated_at": "2026-09-18T03:09:26.680Z"
   },
   "additionalWorkflowEvidence": {
     "directory": "completion-checkpoint",
     "checks": [
       "Invoice correction with JavaScript; bill correction without JavaScript; stale review rejected; replacement posted once",
       "Supplier bill to purchase order and receipt; linked physical-return credit; JavaScript on/off",
-      "POS cash receipt print width 302.359375 CSS pixels; no receipt overflow; navigation hidden"
+      "POS cash receipt print width 302.359375 CSS pixels; no receipt overflow; navigation hidden",
+      "Valid local OAuth consent and cancel with JavaScript on/off at both desktop/tablet folds; callback state retained; no token exchange or external client call"
     ],
     "limitations": [
       "Correction and purchase-source captures precede legacy stylesheet retirement; recapture before final visual acceptance.",
