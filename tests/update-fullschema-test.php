@@ -33,7 +33,7 @@ try {
     while (!$preserved && $verifySteps++ < 1000) { $preserved = pl_update_database_preserved($directory); }
     if (!$preserved) { throw new RuntimeException('Original record comparison did not complete.'); }
     DB::query('CREATE TABLE pl_failed_update (id INT PRIMARY KEY) ENGINE=InnoDB');
-    DB::insert('pl_schema_migrations', ['version' => '999_synthetic_failed_update', 'checksum' => str_repeat('b', 64), 'status' => 'applying']);
+    DB::insert('pl_schema_migrations', ['version' => '999_sample_failed_update', 'checksum' => str_repeat('b', 64), 'status' => 'applying']);
     $complete = false; $restoreSteps = 0;
     while (!$complete && $restoreSteps++ < 2000) { $complete = pl_update_database_restore($directory, $receipt); }
     if (!$complete) { throw new RuntimeException('Full schema recovery did not complete.'); }

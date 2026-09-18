@@ -564,7 +564,7 @@ def authored_material(slug):
         "source_pack_version": source.get("pack_version"),
         "source_status": source.get("status"),
         "source_created_on": source.get("created_on"),
-        "review_status": source.get("accounting_assumptions", {}).get("fixture_status", "synthetic_candidate"),
+        "review_status": source.get("accounting_assumptions", {}).get("fixture_status", "sample_candidate"),
         "business_profile": {
             "display_name": business.get("display_name"),
             "business_type": business.get("business_type"),

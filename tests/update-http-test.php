@@ -20,7 +20,7 @@ $database = 'phpledger_update_http_' . bin2hex(random_bytes(8));
 DB::$host = 'db_test'; DB::$user = 'root'; DB::$password = 'local-test-root-only'; DB::$dbName = 'information_schema'; DB::$encoding = 'utf8mb4';
 DB::query('CREATE DATABASE %b CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci', $database); DB::query('USE %b', $database);
 DB::query('CREATE TABLE pl_schema_migrations (version VARCHAR(100) PRIMARY KEY, status VARCHAR(10)) ENGINE=InnoDB');
-DB::insert('pl_schema_migrations', ['version' => '001_synthetic', 'status' => 'applied']);
+DB::insert('pl_schema_migrations', ['version' => '001_sample', 'status' => 'applied']);
 DB::query('CREATE TABLE pl_journal_lines (id INT PRIMARY KEY, journal_id INT, company_id INT, book_id INT, debit DECIMAL(20,4), credit DECIMAL(20,4)) ENGINE=InnoDB');
 DB::insert('pl_journal_lines', ['id' => 1, 'journal_id' => 1, 'company_id' => 1, 'book_id' => 1, 'debit' => '10.0000', 'credit' => '10.0000']);
 pl_update_write($root . '/www/phpledger/includes/config.local.php', '<?php return ' . var_export(['host' => 'db_test', 'port' => 3306, 'database' => $database, 'user' => 'root', 'password' => 'local-test-root-only'], true) . ';');

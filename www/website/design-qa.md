@@ -1,5 +1,16 @@
 # Website design and publication QA
 
+## Live 1.0.0 product-site redesign — 19 September 2026
+
+The intended new design is live from `master` `86a1eef` (rebuild `ac8fca3`), published at 21:02:58 UTC on 18 September / 02:02:58 PKT on 19 September as `website-1-0-0-20260918-210112`. The main `record-demo-cutover` checkout contains an older site with the same version label; deployment used `.cache/website-redesign-live` and verified all 295 files against the prepared design artifact. The [publication receipt](../../docs/design/website/qa/live-1.0.0-product-publication.json) records all public-file results, source commit, backup, archive and vhost hashes.
+
+Build/check: 70 HTML outputs, zero errors/warnings. AEO audit exited 0 with an informational Home figure/caption count note; builder/checker/audit/source/generated JavaScript syntax passed. The active Nginx configuration changed only its static root and the two `/support` redirects to `/pricing/`. All public files, canonical redirects, private-path rejection, custom 404, headers and unchanged demo containers passed; the demo reset generation advanced at 21:00:26 UTC.
+
+Live browser smoke covered Home, Product, Point of sale, Download, Pricing, Community, Roadmap, News, the 1.0.0 article and Credits at 1440, 768, 390 and 320 pixels. All 40 route/width states returned 200 with no broken images or page errors. Layout passed the 30 states at 1440/768/390. **At 320 pixels, the shared header actions extend to 376 pixels, causing horizontal overflow on all ten routes.** This existing narrow-screen defect is recorded for Claude; the deployed bytes remain the owner's exact reviewed build. Browser evidence is under `output/playwright/deploy-1.0.0-20260919/` locally.
+
+No financial suite or independent accounting/security review was repeated for this static publication. No application source, migrations, schema or demo proxy was changed. Screenshots and a fresh starter visitor use sample data only. No enquiry, email or campaign was sent. See `AGENTS_SYNC.MD` and `AGENT_MESSAGES.MD` for shared operator handoff.
+
+
 ## 1.0.0 product site rebuild — 18 September 2026
 
 Status: implemented and checked locally; not published. The owner publishes; the `/support` 301 rules in `docker/website.conf` ship with it. Application source, release archives and the demo were not changed.

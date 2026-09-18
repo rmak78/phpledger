@@ -1,5 +1,16 @@
 # PHP Ledger marketing website
 
+## Live product-site redesign — 19 September 2026
+
+The new product site from `master` commit `86a1eef35fd497c7f5f708a47af227657fd4a2ee` (rebuild `ac8fca3`) is live as `website-1-0-0-20260918-210112`, published at 21:02:58 UTC on 18 September / 02:02:58 PKT on 19 September. Its 295 static files match the reviewed build, with 70 HTML outputs, the new homepage, Pricing and Community. Both `/support` and `/support/` redirect to `/pricing/`. The demo proxy and containers were preserved. See the [publication receipt](../../docs/design/website/qa/live-1.0.0-product-publication.json).
+
+**Choose the source by commit and design, not just its version label.** The `record-demo-cutover` branch has an older website also labelled 1.0.0. The verified product-site build is in the isolated `.cache/website-redesign-live` checkout of `86a1eef`; do not rebuild the older root and publish it over the redesign. Check [AGENTS_SYNC.MD](../../AGENTS_SYNC.MD), [AGENT_MESSAGES.MD](../../AGENT_MESSAGES.MD) and the [operator runbook](../../docs/DEMO.md#operator-deployment-runbook-for-claude-and-codex) before another deployment.
+
+On the configured Windows operator checkout, `python tools/hosting-status.py` reads live state using the saved Credential Manager identity and pinned host key. The reviewed `.cache/publish-product-website-1.0.0.py` wrapper supplies the selected source and the support redirects to the existing backup/verify/rollback lane. Its `--prepare`, `--publish <prepared-release-id>` and `--rollback <prepared-release-id>` commands use the existing credential without asking for or printing passwords. These local helpers are ignored operational dependencies, not part of a fresh clone. Future releases need a newly reviewed source pin and baseline; retain the assertions.
+
+The earlier sections below record historical local refreshes and do not identify the current deployment source.
+
+
 The deployable static document root is `www/website/public`. It is separate from the accounting application and never loads its bootstrap or serves the repository root.
 
 ## 1.0.0 product site rebuild — 18 September 2026
