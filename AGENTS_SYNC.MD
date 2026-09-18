@@ -1,6 +1,6 @@
 # Shared Claude and Codex state
 
-Updated: **2026-09-18 21:23 UTC / 19 September 2026 02:23 PKT**.
+Updated: **2026-09-18 22:25 UTC / 19 September 2026 03:25 PKT** (Claude: repository cleanup for the owner's fresh start).
 
 Read this file and the latest [AGENT_MESSAGES.MD](AGENT_MESSAGES.MD) entries before starting a task. This is the current coordination snapshot; messages retain the handoff history. Follow [AGENTS.md](AGENTS.md), [CLAUDE.md](CLAUDE.md) and the [operator runbook](docs/DEMO.md#operator-deployment-runbook-for-claude-and-codex). Recheck cheap live facts before using this snapshot for another release.
 
@@ -47,3 +47,13 @@ Start fresh inspection with `python tools/hosting-status.py`. The product publis
 - Browser checks passed ten routes at **1440, 768 and 390 px**. At **320 px**, the header causes the layout width to reach **376 px**. This is a known follow-up for Claude's next relevant website task; do not describe 320 px as passed. Preserve the pinned deployed source snapshot when preparing a fix.
 - Browser evidence: `output/playwright/deploy-1.0.0-20260919/product-live-smoke-result.json` and `product-live-home-1440.png`. These local output files are not release assets.
 - No new migration or schema definition was introduced. The demo wording cutover reused the runtime image and reset temporary sample data using the same 32 existing migrations. No Git push was made and no credentials were exposed. Follow the live receipts and final handoff for later verification updates.
+
+## Repository cleanup for the fresh start — 2026-09-18 22:25 UTC (Claude)
+
+- Pull requests #68 (org move), #69 (sample wording) and #70 (demo cutover record) are merged. No pull request is open.
+- Remote branches: only `master` and the CLA bot's `cla-signatures` remain. Merged branches were deleted. The unmerged experimental branches were archived as GitHub tags before deletion: `archive/Branch-Test-2`, `archive/fix-jv-mansoor`, `archive/new-phpledger`.
+- Local branches: only `master`. Codex's unmerged local branches were archived as tags before deletion: `archive/cash-account-integrity` (includes a WIP snapshot commit with `docs/repository/sprint-06/CASH-ACCOUNT-INTEGRITY.md`), `archive/owner-questions-ar-ap`, `archive/quotes-plugin`, `archive/regional-catalog-ux-review`. The owner pushes them with `git push origin --tags`.
+- The work Codex had stashed before the fresh start (sample wording in demo packs, sample data, tests and docs; the receipts; the runbook; `tools/hosting-status.py`; these coordination files) is committed on `master` so the repository matches what is live. Nothing was dropped.
+- Worktrees retained as Codex's pinned deployment snapshots: `.cache/release-0.6.0/source` and `.cache/website-redesign-live`. The `.cache/ux-integrity-fix` worktree was removed after its note was committed to its archived branch.
+- Left for the owner to review and commit: `AGENTS.md` (adds the coordination-file rule) and `CLAUDE.md` (new, written by Codex); the app does not let Claude commit its own instruction files. `master` is ahead of `origin/master`; the owner runs `git push origin master --tags`.
+- Next work (Claude, fresh session on 19 September 2026): the account-numbering, collapsible-report and Pakistan pharmacy sample features recorded in the handoff above. Codex keeps deployments.
