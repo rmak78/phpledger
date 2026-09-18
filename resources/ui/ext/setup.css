@@ -1,5 +1,12 @@
 /* Extra components for the setup screens. Use @layer components; tokens only. */
 @layer components {
+  .setup-option { display: flex; align-items: flex-start; gap: .625rem; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--surface); cursor: pointer; font-size: .8125rem; }
+  .setup-option:has(input:checked) { border-color: var(--brand-blue); background: var(--brand-selected); }
+  .setup-option input { flex: none; margin-block-start: .125rem; }
+  .setup-option small { display: block; margin-block-start: .25rem; color: var(--ink-muted); font-size: .75rem; }
+  .setup-summary dt { font-size: .75rem; color: var(--ink-muted); }
+  .setup-summary dd { font-weight: 500; }
+  .setup-wizard fieldset { display: flex; flex-direction: column; gap: .5rem; }
   /* The auth layout's .auth-card is fixed at max-width:420px in the foundation (src/app.css) for a
      single login-style form. A handful of setup/access screens need more room (a business list, a
      stepper + fields, a two-column demo landing) — widen just those, keyed off the screen id proto.js

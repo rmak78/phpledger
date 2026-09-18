@@ -136,7 +136,7 @@ function pl_inventory_movement_input(array $input): array
 }
 
 /** Read-only movement plan, shared by preview and the single inventory writer. */
-function pl_inventory_movement_plan(int $actorId, int $companyId, int $bookId, array $data, string $quantity, string $value): array
+function pl_inventory_movement_plan(int $actorId, int $companyId, int $bookId, array $data, string $quantity, string $value, ?array $previewBasis = null): array
 {
     pl_require_module($actorId, $companyId, $bookId, 'inventory');
     $book = pl_ledger_book($companyId, $bookId, true); pl_require_book_ready($companyId);
@@ -150,7 +150,7 @@ function pl_inventory_movement_plan(int $actorId, int $companyId, int $bookId, a
         foreach (DB::query('SELECT debit,credit FROM pl_journal_lines WHERE company_id=%i AND book_id=%i AND account_id=%i FOR SHARE', $companyId, $bookId, $product['inventory_account_id']) as $line) { $existingValue = bcadd($existingValue, bcsub($line['debit'], $line['credit'], 4), 4); }
         if (bccomp($existingValue, '0', 4) !== 0) { throw new DomainException('Review and convert the existing inventory opening balance before recording new stock movements.'); }
     }
-    $state = pl_inventory_balance($actorId, $companyId, $bookId, $product['id']);
+    $state = $previewBasis ?? pl_inventory_balance($actorId, $companyId, $bookId, $product['id']);
     if ($state['latest_date'] !== null && $data['date'] < $state['latest_date']) { throw new DomainException('Stock cannot be backdated before the latest movement for this product.'); }
     $quantityAfter = pl_inventory_signed(bcadd($state['quantity'], $quantity, 4)); $valueAfter = pl_inventory_signed(bcadd($state['value_base'], $value, 4));
     if (bccomp($quantityAfter, '0', 4) < 0 || bccomp($valueAfter, '0', 4) < 0 || (bccomp($quantityAfter, '0', 4) === 0 && bccomp($valueAfter, '0', 4) !== 0)) { throw new DomainException('This movement would leave negative stock or an unexplained stock value without quantity.'); }
@@ -215,7 +215,7 @@ function pl_inventory_issue_plan(int $actorId,int $companyId,int $bookId,array $
     $cost=pl_inventory_cost($basis['value_base'],$basis['quantity'],$quantity);
     $quantityDelta=bcsub('0',$quantity,4); $valueDelta=bcsub('0',$cost,4);
     return ['data'=>$data,'basis'=>$basis,'quantity_delta'=>$quantityDelta,'value_delta'=>$valueDelta,
-        'movement'=>pl_inventory_movement_plan($actorId,$companyId,$bookId,$data,$quantityDelta,$valueDelta)];
+        'movement'=>pl_inventory_movement_plan($actorId,$companyId,$bookId,$data,$quantityDelta,$valueDelta,$basis)];
 }
 
 /** Both return directions consume the original movement's exact unreturned carrying basis. */
@@ -423,7 +423,7 @@ function pl_inventory_credit_ar_document(int $actorId, int $companyId, int $book
 }
 
 /** Allocate a credit across its original issue movements without changing their residuals. */
-function pl_inventory_credit_allocations(int $actorId,int $companyId,int $bookId,array $credit,array $original): array
+function pl_inventory_credit_allocations(int $actorId,int $companyId,int $bookId,array $credit,array $original,array $restored = []): array
 {
     $allocations=[]; $basis=[];
     foreach ($credit['lines'] as $index=>$line) {
@@ -434,7 +434,14 @@ function pl_inventory_credit_allocations(int $actorId,int $companyId,int $bookId
         $sources=DB::query("SELECT * FROM pl_inventory_movements WHERE company_id=%i AND book_id=%i AND product_id=%i AND source_type='ar_invoice' AND source_document_id=%i AND source_journal_id=%i ORDER BY id FOR SHARE",$companyId,$bookId,$product['id'],(int)$original['id'],(int)$original['journal_id']);
         foreach ($sources as $source) {
             if (bccomp($take,'0',4)<=0) { break; }
-            $id=(int)$source['id']; $basis[$id]??=pl_inventory_return_basis($companyId,$bookId,$source);
+            $id=(int)$source['id'];
+            if (!isset($basis[$id])) {
+                $basis[$id]=pl_inventory_return_basis($companyId,$bookId,$source);
+                if (isset($restored[$id])) {
+                    $basis[$id]['quantity']=bcadd($basis[$id]['quantity'],$restored[$id]['quantity'],4);
+                    $basis[$id]['value_base']=bcadd($basis[$id]['value_base'],$restored[$id]['value_base'],4);
+                }
+            }
             $remaining=$basis[$id];
             if (bccomp($remaining['quantity'],'0',4)<=0) { continue; }
             $part=bccomp($take,$remaining['quantity'],4)>0?$remaining['quantity']:$take;
@@ -464,10 +471,40 @@ function pl_inventory_credit_ar_document_locked(int $actorId, int $companyId, in
     });
 }
 
-/** Read-only inventory effects for the financial document editor. */
-function pl_inventory_ar_preview(int $actorId,int $companyId,int $bookId,array $document,?array $original): array
+/** Simulate correction reversals in memory; never insert movements or consume identities. */
+function pl_inventory_ar_correction_basis(int $actorId,int $companyId,int $bookId,array $document,string $date): array
 {
-    $plans=[]; $balances=[];
+    $balances=[]; $restored=[]; $plans=[];
+    $credit=$document['kind']==='customer_credit';
+    $rows=DB::query('SELECT * FROM pl_inventory_movements WHERE company_id=%i AND book_id=%i AND source_type=%s AND source_document_id=%i AND source_journal_id=%i ORDER BY id FOR SHARE',
+        $companyId,$bookId,$credit?'ar_credit':'ar_invoice',$document['id'],$document['journal_id']);
+    foreach ($rows as $row) {
+        $id=(int)$row['product_id'];
+        $balances[$id]??=pl_inventory_balance($actorId,$companyId,$bookId,$id);
+        if ($credit) {
+            if (DB::queryFirstField('SELECT id FROM pl_inventory_movements WHERE original_movement_id=%i LIMIT 1 FOR SHARE',$row['id'])) { throw new DomainException('This credit stock return was already reversed.'); }
+            $originalId=(int)$row['original_movement_id'];
+            $restored[$originalId]??=['quantity'=>'0.0000','value_base'=>'0.0000'];
+            $restored[$originalId]['quantity']=bcadd($restored[$originalId]['quantity'],$row['quantity_delta'],4);
+            $restored[$originalId]['value_base']=bcadd($restored[$originalId]['value_base'],$row['value_delta'],4);
+        } else {
+            $basis=pl_inventory_return_basis($companyId,$bookId,$row);
+            pl_inventory_return_effect($row,['date'=>$date],ltrim($row['quantity_delta'],'-'),$basis);
+        }
+        $quantity=bcsub('0',$row['quantity_delta'],4); $value=bcsub('0',$row['value_delta'],4);
+        $data=pl_inventory_movement_input(['product_id'=>$id,'date'=>$date,'offset_account_id'=>(int)$row['offset_account_id'],
+            'source_type'=>$credit?'ar_credit_reversal':'ar_invoice_reversal','source_reference'=>'correction-preview:'.$row['id'],'reason'=>'Correction stock reversal preview']);
+        $movement=pl_inventory_movement_plan($actorId,$companyId,$bookId,$data,$quantity,$value,$balances[$id]);
+        $plans[]=['product_name'=>$movement['product']['name'],'quantity_delta'=>$quantity,'value_delta'=>$value,'movement'=>$movement];
+        $balances[$id]['quantity']=$movement['quantity_after']; $balances[$id]['value_base']=$movement['value_after']; $balances[$id]['latest_date']=$date;
+    }
+    return ['balances'=>$balances,'restored'=>$restored,'plans'=>$plans];
+}
+
+/** Read-only inventory effects for the financial document editor. */
+function pl_inventory_ar_preview(int $actorId,int $companyId,int $bookId,array $document,?array $original,array $balances = [],array $restored = []): array
+{
+    $plans=[];
     if ($document['kind']==='invoice') {
         foreach ($document['lines'] as $index=>$line) {
             if (($line['product_id']??null)===null) { continue; }
@@ -481,11 +518,15 @@ function pl_inventory_ar_preview(int $actorId,int $companyId,int $bookId,array $
             $balances[$id]['value_base']=bcadd($balances[$id]['value_base'],$plan['value_delta'],4);
         }
     } elseif ($document['kind']==='customer_credit' && $original!==null) {
-        foreach (pl_inventory_credit_allocations($actorId,$companyId,$bookId,$document,$original) as $allocation) {
+        foreach (pl_inventory_credit_allocations($actorId,$companyId,$bookId,$document,$original,$restored) as $allocation) {
             $source=$allocation['source']; $effect=$allocation['effect'];
             $data=pl_inventory_movement_input(['product_id'=>(int)$source['product_id'],'date'=>$document['document_date'],'offset_account_id'=>(int)$source['offset_account_id'],
                 'source_type'=>'ar_credit','source_reference'=>'editor-preview:'.$allocation['index'].':'.$source['id'],'reason'=>'Credit stock return preview']);
-            $movement=pl_inventory_movement_plan($actorId,$companyId,$bookId,$data,$effect['quantity_delta'],$effect['value_delta']);
+            $productId=(int)$source['product_id'];
+            $balances[$productId]??=pl_inventory_balance($actorId,$companyId,$bookId,$productId);
+            $movement=pl_inventory_movement_plan($actorId,$companyId,$bookId,$data,$effect['quantity_delta'],$effect['value_delta'],$balances[$productId]);
+            $balances[$productId]['quantity']=$movement['quantity_after'];
+            $balances[$productId]['value_base']=$movement['value_after'];
             $plans[]=['line_number'=>$allocation['index']+1,'product_name'=>$movement['product']['name'],'basis'=>$allocation['basis'],'quantity_delta'=>$effect['quantity_delta'],'value_delta'=>$effect['value_delta'],'movement'=>$movement];
         }
     }

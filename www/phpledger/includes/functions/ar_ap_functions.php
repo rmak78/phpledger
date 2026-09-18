@@ -320,7 +320,7 @@ function pl_ar_snapshot(array $line): array
 
 /** Internal work under the document command and book lock. No independent balance is stored. */
 /** Shared financial posting plan; preview does not activate a control or create an item. */
-function pl_ar_posting_plan(int $actorId, int $companyId, int $bookId, array $document, ?int $offsetAccountId, ?string $rate, bool $activateControl): array
+function pl_ar_posting_plan(int $actorId, int $companyId, int $bookId, array $document, ?int $offsetAccountId, ?string $rate, bool $activateControl, ?array $creditRestoration = null): array
 {
     pl_require_module($actorId, $companyId, $bookId, in_array($document['kind'], ['bill','supplier_credit'], true) ? 'ap' : 'ar');
     pl_require_book_ready($companyId); pl_ar_validate_source($actorId, $companyId, $bookId, $document);
@@ -338,6 +338,11 @@ function pl_ar_posting_plan(int $actorId, int $companyId, int $bookId, array $do
     if ($credit) {
         $original = pl_get_ar_document($actorId, $companyId, $bookId, $document['original_document_id']);
         $item = pl_open_item_state($companyId, $bookId, $original['open_item_id']);
+        if ($creditRestoration!==null) {
+            $item['remaining_fc']=bcadd($item['remaining_fc'],$creditRestoration['amount_fc'],4);
+            $item['remaining_base']=bcadd($item['remaining_base'],$creditRestoration['amount_base'],4);
+            $item['latest_activity_date']=max($item['latest_activity_date'],$creditRestoration['date']);
+        }
         $control = (int) $item['control_account_id']; $itemId = (int) $item['id'];
         $base = pl_oi_allocated_base($item, $document['total']);
         if ($document['document_date'] < $item['latest_activity_date']) { throw new DomainException('A credit cannot precede the latest open-item activity.'); }
@@ -475,10 +480,55 @@ function pl_reverse_ar_document(int $actorId, int $companyId, int $bookId, int $
     });
 }
 
-function pl_correct_ar_document(int $actorId, int $companyId, int $bookId, int $documentId, array $input, int $expectedRevision, string $key, string $reason, ?string $reversalDate = null, ?string $rate = null): array
+/** Read-only reversal and replacement effects, including stock restored before re-issue. */
+function pl_preview_ar_correction(int $actorId,int $companyId,int $bookId,int $documentId,array $input,int $expectedRevision,string $reason,?string $reversalDate=null,?string $rate=null): array
+{
+    $data=pl_normalize_ar_document($input); $reason=pl_ledger_text($reason,'Correction reason',400);
+    $date=pl_ledger_date($reversalDate??gmdate('Y-m-d'));
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$documentId,$data,$expectedRevision,$reason,$date,$rate): array {
+        $member=pl_require_company_access($actorId,$companyId,true); pl_ledger_book($companyId,$bookId,true);
+        $document=pl_get_ar_document($actorId,$companyId,$bookId,$documentId);
+        if ($document['journal_id']===null || $document['revision']!==$expectedRevision || $document['payment_status']==='reversed') { throw new DomainException('Review the current posted revision before correction.'); }
+        if ($document['kind']!==$data['kind'] || $document['reference']!==$data['reference'] || $document['original_document_id']!==$data['original_document_id']) { throw new DomainException('A correction retains the same document identity, kind, reference and original credit link.'); }
+        $journal=pl_get_journal($actorId,$companyId,$bookId,$document['journal_id']);
+        if ($date<$journal['journal_date'] || $data['document_date']<$date) { throw new DomainException('Date the reversal on or after its original posting, and the replacement on or after the reversal.'); }
+        if ($date<gmdate('Y-m-d') && ($member['role']!=='owner' || $date!==$journal['journal_date'])) { throw new DomainException('Backdated reversals require an owner, the original posting date and an open period.'); }
+        pl_open_item_assert_correction_allowed($companyId,$bookId,$document['journal_id']);
+        pl_purchasing_assert_reversal_allowed($companyId,$bookId,$document['journal_id']);
+        $reversal=[];
+        foreach ($journal['lines'] as $line) { $reversal[]=['account_id'=>(int)$line['account_id'],'debit'=>$line['credit'],'credit'=>$line['debit']]; }
+        $restoration=null;
+        if ($document['is_credit']) {
+            $control=(int)$document['open_item']['control_account_id'];
+            $allocated=array_values(array_filter($journal['lines'],static fn(array $line):bool=>(int)$line['account_id']===$control));
+            if (count($allocated)!==1) { throw new DomainException('Review the credit control allocation before correction.'); }
+            $restoration=['amount_fc'=>$allocated[0]['amount_fc'],'amount_base'=>$allocated[0]['amount_base'],'date'=>$date];
+        }
+        $updated=array_replace($document,$data,['revision'=>$expectedRevision+1,'journal_id'=>null,'open_item_id'=>null,'status'=>'draft']);
+        $updated['party']=pl_ar_document_party($actorId,$companyId,$bookId,$updated['party_id'],$updated['kind']);
+        $updated=pl_ar_price_document($actorId,$companyId,$bookId,$updated,$document['is_credit']?$documentId:null);
+        $plan=pl_ar_posting_plan($actorId,$companyId,$bookId,$updated,null,$rate,false,$restoration);
+        foreach ([['date'=>$date,'lines'=>$reversal],['date'=>$data['document_date'],'lines'=>$plan['lines']]] as $posting) {
+            $periods=DB::query('SELECT status FROM pl_periods WHERE company_id=%i AND book_id=%i AND start_date<=%s AND end_date>=%s FOR SHARE',$companyId,$bookId,$posting['date'],$posting['date']);
+            if (count($periods)!==1 || $periods[0]['status']!=='open') { throw new DomainException('Both correction dates must fall within open accounting periods.'); }
+            pl_reconciliation_assert_posting_allowed($companyId,$bookId,$posting);
+        }
+        $stock=pl_inventory_ar_correction_basis($actorId,$companyId,$bookId,$document,$date);
+        $plan['stock']=pl_inventory_ar_preview($actorId,$companyId,$bookId,$plan['document'],$plan['original'],$stock['balances'],$stock['restored']);
+        $plan['stock_reversal']=$stock['plans'];
+        $plan['reversal']=['journal_id'=>$document['journal_id'],'date'=>$date,'reason'=>$reason,'lines'=>$reversal];
+        return $plan;
+    });
+}
+
+function pl_correct_ar_document(int $actorId, int $companyId, int $bookId, int $documentId, array $input, int $expectedRevision, string $key, string $reason, ?string $reversalDate = null, ?string $rate = null, ?string $expectedHash = null): array
 {
     $data = pl_normalize_ar_document($input); $reason = pl_ledger_text($reason, 'Correction reason', 500);
-    return pl_ar_action($actorId, $companyId, $bookId, $documentId, 'correct', $key, compact('data','expectedRevision','reason','reversalDate','rate'), function () use ($actorId,$companyId,$bookId,$documentId,$data,$expectedRevision,$key,$reason,$reversalDate,$rate): array {
+    return pl_ar_action($actorId, $companyId, $bookId, $documentId, 'correct', $key, compact('data','expectedRevision','reason','reversalDate','rate'), function () use ($actorId,$companyId,$bookId,$documentId,$input,$data,$expectedRevision,$key,$reason,$reversalDate,$rate,$expectedHash): array {
+        if ($expectedHash!==null) {
+            $plan=pl_preview_ar_correction($actorId,$companyId,$bookId,$documentId,$input,$expectedRevision,$reason,$reversalDate,$rate);
+            if (!hash_equals($expectedHash,hash('sha256',json_encode($plan,JSON_THROW_ON_ERROR)))) { throw new DomainException('The correction or its posting basis changed. Update the preview before posting.'); }
+        }
         $document = pl_get_ar_document($actorId, $companyId, $bookId, $documentId);
         if ($document['journal_id'] === null || $document['revision'] !== $expectedRevision || $document['payment_status'] === 'reversed') { throw new DomainException('Review the current posted revision before correction.'); }
         if ($document['kind'] !== $data['kind'] || $document['reference'] !== $data['reference'] || $document['original_document_id'] !== $data['original_document_id']) { throw new DomainException('A correction retains the same document identity, kind, reference and original credit link.'); }

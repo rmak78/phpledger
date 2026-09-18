@@ -37,7 +37,7 @@ after verification are approved. Mobile refinement is deferred; overflow safety 
 ## Status
 
 Implementation remains in progress on codex/ui-redesign-0.6. The branch includes
-screen rebuilds and migrations 029-031; the latest full local suite passed 276
+screen rebuilds and migrations 029-031; the latest full local suite passed 281
 tests with zero failures. The unified evidence index contains 33 screen states
 and 132 captures, with remaining state/visual/keyboard acceptance explicitly open.
 No 0.6 release or hosted update has been published. The checkpoint sections below
@@ -646,3 +646,16 @@ passed at both fold sizes with JS enabled/disabled. PHP lint passed. The actual
 expired demo generation was not induced; its new copy is not browser acceptance
 of that state. AUDIT-CLOSURE.md records every original audit finding's current
 closed/partial/open disposition, including the remaining publication gates.
+
+
+## Completion checkpoint — 18 September 2026
+
+- Owner added a permanent requirement to update/review GitHub Wiki, repository About (description, URL, topics), and release/package/website/share metadata for every release. Recorded in AGENTS.md, README and the implementation prompt; each surface needs an updated or reviewed-unchanged receipt.
+- Invoice, bill and credit corrections now have a read-only reversing-entry and replacement preview. Confirmation binds the reviewed basis on the server inside the existing correction transaction, and preserves stable retries. Stock reversal effects are simulated in memory before replacement costing; previews do not allocate journal, movement or command identities. Supplier-credit FX carrying allocations are restored in memory for the preview.
+- Supplier bills and credits expose scoped purchase order / receipt source links. Receipt links expand the exact receipt line. Physical returns are distinguished from standalone payable credits; billed returns retain their linked credit.
+- Full composer check: **281 tests, zero failures**, lint 209 PHP files, PHPStan and sample validation passed. Targeted correction/editor suite before the final FX case: 71 tests, zero failures. An undefined optional account-return variable encountered during an earlier full run was fixed; the final full run emitted no such warning.
+- Browser workflows passed: invoice correction with JS, bill correction without JS, stale-review rejection and replacement; purchasing bill/receipt/physical-return/credit links with JS on/off. Each editor/source was checked at 1366, 1024, 768 and 390 pixels. Those captures predate the final CSS retirement and require final recapture.
+- Removed legacy.css and its layer/import. Shared record/form/journal structure and POS are now expressed in the approved token component layer. CSS compiled successfully. The 33-state/132-capture sweep after initial retirement passed HTTP, error and page-overflow assertions. Follow-up shared journal, setup and POS style refinements still need the final consolidated sweep/index refresh.
+- Access/onboarding screenshots passed both fold sizes; setup/opening/recovery checks passed with JS on/off at both folds. POS cart, review, exact-cash checkout and receipt passed with JS on/off at four widths. Print-media testing found and fixed a cascade conflict: the receipt now measures 302.359375 CSS pixels (80 mm), with no internal overflow or navigation in print. Physical printer testing was not performed.
+- Additional evidence: evidence-0.6.0/completion-checkpoint. Prototype/state and keyboard acceptance remain open; these checks are not accounting sign-off or WCAG certification.
+- No migration or schema changes in this checkpoint. Local synthetic test writes only; no external publication/deployment or secrets exposure. Publication remains gated by remaining field-error/return-chain/audit acceptance and exact-package verification.

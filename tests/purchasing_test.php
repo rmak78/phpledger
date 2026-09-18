@@ -69,6 +69,25 @@ test('purchasing partial order receipts and later AP bills reconcile independent
     assert_same('100.0000', pl_purchase_received_unbilled($f['actor_id'], $f['company_id'], $f['book_id'], '2026-01-07')['accounts'][0]['unbilled_base']);
 });
 
+test('supplier document sources retain multiple receipt links and reject another book', function (): void {
+    $f=purchasing_fixture(); $order=purchasing_order($f);
+    $a=pl_receive_purchase_order($f['actor_id'],$f['company_id'],$f['book_id'],$order['id'],purchasing_receipt_input($f,$order,'6'));
+    $b=pl_receive_purchase_order($f['actor_id'],$f['company_id'],$f['book_id'],$order['id'],purchasing_receipt_input($f,$order,'4'));
+    $input=purchasing_bill_input($f,$a,'6');
+    $input['lines'][]=['receipt_line_id'=>$b['lines'][0]['id'],'quantity'=>'4','unit_price'=>'10'];
+    $bill=pl_bill_purchase_receipts($f['actor_id'],$f['company_id'],$f['book_id'],$input);
+    $sources=pl_purchase_document_sources($f['actor_id'],$f['company_id'],$f['book_id'],$bill['bill_document_id']);
+    assert_same(2,count($sources));
+    assert_same([$a['receipt_id'],$b['receipt_id']],array_map('intval',array_column($sources,'receipt_id')));
+    assert_same([$order['id'],$order['id']],array_map('intval',array_column($sources,'order_id')));
+    $return=pl_return_purchase_receipt($f['actor_id'],$f['company_id'],$f['book_id'],['receipt_line_id'=>$a['lines'][0]['id'],'match_id'=>$bill['match_ids'][0],'quantity'=>'1','date'=>'2026-01-10','reason'=>'Synthetic return source','idempotency_key'=>bin2hex(random_bytes(16))]);
+    $creditSources=pl_purchase_document_sources($f['actor_id'],$f['company_id'],$f['book_id'],$return['credit_document_id']);
+    assert_same([1,0],array_map('intval',array_column($creditSources,'returned_by_credit')));
+    $other=purchasing_fixture();
+    assert_throws(fn()=>pl_purchase_document_sources($other['actor_id'],$other['company_id'],$other['book_id'],$bill['bill_document_id']),DomainException::class);
+    assert_throws(fn()=>pl_purchase_document_sources($other['actor_id'],$f['company_id'],$f['book_id'],$bill['bill_document_id']),DomainException::class);
+});
+
 test('purchasing rejects excess receipt duplicate billing and cross-company references atomically', function (): void {
     $f = purchasing_fixture(); $order = purchasing_order($f);
     assert_throws(fn() => pl_receive_purchase_order($f['actor_id'], $f['company_id'], $f['book_id'], $order['id'], purchasing_receipt_input($f, $order, '11')), DomainException::class, 'exceeds');

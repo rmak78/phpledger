@@ -1,6 +1,24 @@
 <?php
 declare(strict_types=1);
 
+/** Read the purchasing trail for a bill or supplier credit within its owning book. */
+function pl_purchase_document_sources(int $actorId, int $companyId, int $bookId, int $documentId): array
+{
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$documentId): array {
+        $document=pl_get_ar_document($actorId,$companyId,$bookId,$documentId);
+        if (!in_array($document['kind'],['bill','supplier_credit'],true)) { return []; }
+        $billId=$document['kind']==='supplier_credit'?(int)$document['original_document_id']:$documentId;
+        return DB::query('SELECT m.id AS match_id,m.bill_line_number,m.quantity,l.id AS receipt_line_id,r.id AS receipt_id,r.document_date,r.order_id,o.reference AS order_reference,
+            EXISTS(SELECT 1 FROM pl_purchase_returns pr WHERE pr.company_id=m.company_id AND pr.book_id=m.book_id AND pr.match_id=m.id AND pr.credit_document_id=%i) AS returned_by_credit
+            FROM pl_purchase_bill_matches m
+            JOIN pl_purchase_receipt_lines l ON l.id=m.receipt_line_id AND l.company_id=m.company_id AND l.book_id=m.book_id
+            JOIN pl_purchase_receipts r ON r.id=l.receipt_id AND r.company_id=l.company_id AND r.book_id=l.book_id
+            JOIN pl_purchase_orders o ON o.id=r.order_id AND o.company_id=r.company_id AND o.book_id=r.book_id
+            WHERE m.company_id=%i AND m.book_id=%i AND m.bill_document_id=%i ORDER BY r.id,l.id,m.id',
+            $documentId,$companyId,$bookId,$billId);
+    });
+}
+
 /** Purchasing owns commitments and matching, while Inventory and AP own their ledgers. */
 function pl_purchase_command(int $actorId, int $companyId, int $bookId, string $action, string $key, array $payload, callable $work): array
 {

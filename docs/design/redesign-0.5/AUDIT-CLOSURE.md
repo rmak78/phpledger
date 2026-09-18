@@ -56,13 +56,13 @@ Source: [OPERATIONS-AUDIT.md](../ux-recovery/OPERATIONS-AUDIT.md).
 | Priority/finding | Current disposition | Evidence or remaining work |
 |---|---|---|
 | P1 Domestic FX choices | Closed locally | Shared settlement and converted-opening payments hide unnecessary FX controls; service tests cover zero/difference/net-zero cases. |
-| P1 Product-first lines/totals | Closed locally for ordinary editors | One-row editors, product assistance and exact totals/previews; correction-editor preview still needs review. |
+| P1 Product-first lines/totals | Closed locally for ordinary editors | One-row editors, product assistance and exact totals/previews; correction reversal/replacement preview now implemented and service/browser tested; final visual acceptance remains. |
 | P1 Daily tasks precede maintenance/reports | Closed locally | AR/AP/PO/product registers and focused records rebuilt; ageing/reconciliation remain separate accessible tasks. |
 | P2 Eligible purchase returns | Closed locally | Receipt/bill return basis and linked credit exercised in purchasing browser flow. |
 | P2 Essential phone columns | Deferred refinement; accessibility open | Owner deferred phone refinement. Four-width page-overflow checks pass; labelled horizontal-region keyboard review is still required. |
 | P2 Reviewed defaults/accountant controls | Partial | Product defaults, optional party accounting fields and count/receipt previews implemented; remaining manual FX/clearing choices need review. |
 | P2 Business labels/source state | Partial | Derived PO receipt states and friendly document status implemented; remaining raw source references need final review. |
-| P2 AP bill/credit purchasing context | Open | Receipt-to-bill links exist; bill-to-PO/receipt and physical-return guidance need explicit closure. |
+| P2 AP bill/credit purchasing context | Closed locally | Bill/credit to purchase-order and exact receipt links, return guidance and linked physical-return credit passed scoped service and JS/no-JS browser checks. Final CSS captures remain pending. |
 
 ## Reporting and administration
 
@@ -89,8 +89,8 @@ setup browser-state/field-error/assistive-technology acceptance.
 ## Release gates still open
 
 - Complete prototype-to-runtime state coverage, visual review and all 38 route receipts.
-- Resolve remaining field-error, correction-preview and purchasing-context findings.
-- Remove the remaining legacy CSS compatibility dependency.
+- Complete remaining field-error findings and final acceptance of correction-preview/purchasing-context changes.
+- Legacy CSS dependency removed; finish consolidated visual acceptance after token component retirement.
 - Finish representative keyboard/zoom/accessibility checks; record the approval-review rejection honestly.
 - Verify the final package on fresh/0.5 upgrade data, supported runtimes and restore path.
 - Align version, README, Wiki, help, website, demo, release notes, archive/checksum and media kit; publish only after verification.

@@ -1,0 +1,67 @@
+/* Shared record, form and journal structure in the approved token system. */
+@layer components {
+  .muted, .optional { color: var(--ink-muted); }
+  .small, .optional, .core-footnote { font-size: .75rem; line-height: 1.5; }
+  .eyebrow { font-size: .6875rem; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-muted); }
+  .amount { text-align: end; white-space: nowrap; }
+  .icon { display: inline-block; }
+  .page-wrap { padding-block: 1.25rem; }
+  .page-heading, .section-heading, .detail-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem; }
+  .page-heading { margin-block-end: 1rem; }
+  .page-heading h1 { font-size: 1.25rem; font-weight: 600; }
+  .section-heading h2, .detail-heading h2 { font-size: .9375rem; font-weight: 600; }
+  .back-link { display: inline-flex; align-items: center; gap: .375rem; margin-block-end: .75rem; font-size: .8125rem; color: var(--brand-blue); }
+  .field { gap: .25rem; font-size: .8125rem; font-weight: 500; min-inline-size: 0; }
+  .field input, .field select, .field textarea { inline-size: 100%; min-inline-size: 0; }
+  .field textarea:not(.textarea), .field input:not(.input):not([type=checkbox]):not([type=radio]):not([type=hidden]), .field select:not(.select) {
+    border: 1px solid var(--border-strong); border-radius: var(--radius-control); padding: .375rem .625rem; background: var(--surface); color: var(--ink); font-weight: 400;
+  }
+  .form-grid, .core-journal-meta { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .75rem 1rem; }
+  .form-grid .full-width { grid-column: 1 / -1; }
+  fieldset { min-inline-size: 0; }
+  legend { font-size: .8125rem; font-weight: 600; }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-panel); padding: 1rem; min-inline-size: 0; }
+  .panel + .panel { margin-block-start: 1rem; }
+  .panel h2 { font-size: .9375rem; font-weight: 600; }
+  .record-details { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .75rem 1rem; margin-block: 1rem; }
+  .record-details dt { font-size: .75rem; color: var(--ink-muted); }
+  .record-details dd { font-size: .8125rem; overflow-wrap: anywhere; }
+  .record-link { display: block; font-weight: 500; color: var(--ink); text-decoration: none; overflow-wrap: anywhere; }
+  .record-link > span, .row-secondary { display: block; color: var(--ink-muted); font-size: .6875rem; font-weight: 400; }
+  .table-wrap { overflow-x: auto; min-inline-size: 0; }
+  .data-table, .entry-table { inline-size: 100%; border-collapse: collapse; font-size: .8125rem; }
+  .data-table th, .data-table td, .entry-table th, .entry-table td { padding: .5rem .625rem; border-block-end: 1px solid var(--border); text-align: start; }
+  .data-table .amount, .entry-table .amount { text-align: end; }
+  .data-table th, .entry-table th { font-size: .6875rem; color: var(--ink-muted); background: var(--surface-subtle); font-weight: 600; }
+  .list-footer, .pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; padding-block: .75rem; font-size: .75rem; color: var(--ink-muted); }
+  .date-filters { font-size: .75rem; }
+  .date-filters summary { cursor: pointer; }
+  .date-filters > div { display: flex; flex-wrap: wrap; gap: .5rem; padding-block-start: .5rem; }
+  .date-filters label { display: flex; flex-direction: column; gap: .25rem; }
+  .empty-detail { padding: 2rem 1.25rem; text-align: center; }
+  .empty-detail h2 { font-size: .9375rem; font-weight: 600; margin-block: .75rem .5rem; }
+  .empty-detail p { color: var(--ink-muted); font-size: .8125rem; }
+  .detail-mark { display: inline-flex; align-items: center; justify-content: center; inline-size: 2.5rem; block-size: 2.5rem; border-radius: var(--radius-control); background: var(--surface-subtle); }
+  .core-journal-form { display: flex; flex-direction: column; gap: .75rem; }
+  .core-line-toolbar, .core-draft-totals { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; }
+  .core-line-editor th:first-child { inline-size: 3rem; }
+  .core-line-editor { table-layout: fixed; }
+  .core-line-editor th:last-child, .core-line-editor td:last-child { padding-inline: .25rem; }
+  .core-line-editor th:nth-child(2) { inline-size: 28%; }
+  .core-line-editor th:nth-child(3), .core-line-editor th:nth-child(4) { inline-size: 16%; }
+  .core-line-editor th:last-child { inline-size: 4rem; }
+  .core-line-editor input[data-journal-amount] { text-align: end; font-variant-numeric: tabular-nums; }
+  .core-draft-totals { background: var(--surface-subtle); border-radius: var(--radius-control); font-size: .8125rem; }
+  .balanced-label { display: inline-flex; align-items: center; gap: .3rem; color: var(--success); font-size: .75rem; }
+  .core-footnote { margin-block-start: .75rem; color: var(--ink-muted); }
+  @media (max-width: 767px) {
+    .form-grid, .record-details { grid-template-columns: minmax(0,1fr); }
+    .core-line-editor { min-inline-size: 620px; }
+  }
+  @media print {
+    .sidebar, .topbar, .shell-strips, .skip-link, .btn, .back-link, form, .pos-noprint, .pos-mobile-cart { display: none !important; }
+    .shell, .shell-content, .shell-main, .shell-main-inner { display: block; overflow: visible; block-size: auto; max-block-size: none; padding: 0; }
+    .table-wrap, .split-view-detail { overflow: visible; max-block-size: none; }
+    .panel { border: 0; box-shadow: none; }
+  }
+}
