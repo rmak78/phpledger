@@ -23,8 +23,8 @@ Current income/expense and position summaries do not provide a reviewed accounti
 
 Pakistan is first; UK/UAE and broader entity profiles remain later work. This issue does not promise complete regulatory coverage or install AR/AP, inventory, payroll or tax modules merely to populate a template. Narrow the candidate's supported statements if their dependencies are incomplete.
 
-Part of the [first package plan](https://github.com/rmak78/phpledger/wiki/First-Package).
+Part of the [first package plan](https://github.com/phpledger/phpledger/wiki/First-Package).
 
 ## Linked work
 
-The reviewed profile and report evidence feed [#59 candidate acceptance](https://github.com/rmak78/phpledger/issues/59). Coordinate any versioned migration with [#56 the installable package](https://github.com/rmak78/phpledger/issues/56) so installation, upgrade and recovery test the same schema. Reviewer approval of the selected profile remains a prerequisite for affected accounting behavior.
+The reviewed profile and report evidence feed [#59 candidate acceptance](https://github.com/phpledger/phpledger/issues/59). Coordinate any versioned migration with [#56 the installable package](https://github.com/phpledger/phpledger/issues/56) so installation, upgrade and recovery test the same schema. Reviewer approval of the selected profile remains a prerequisite for affected accounting behavior.

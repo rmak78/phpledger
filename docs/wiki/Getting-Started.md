@@ -1,18 +1,18 @@
 ## Current package: 1.0.0
 
-**1.0.0**, published 18 September 2026, is the first stable release. [Download 1.0.0](https://github.com/rmak78/phpledger/releases/tag/v1.0.0) and its [matching media kit](https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip). It consolidates the interface rebuild, the guided browser installer and publisher-signed automatic updates with automatic matched backup/recovery. Compiled CSS is included; no Node is needed on the host. The PHP/MeekroDB architecture and central immutable posting model remain.
+**1.0.0**, published 18 September 2026, is the first stable release. [Download 1.0.0](https://github.com/phpledger/phpledger/releases/tag/v1.0.0) and its [matching media kit](https://github.com/phpledger/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip). It consolidates the interface rebuild, the guided browser installer and publisher-signed automatic updates with automatic matched backup/recovery. Compiled CSS is included; no Node is needed on the host. The PHP/MeekroDB architecture and central immutable posting model remain.
 
-Automated test suites, fault-injection update/recovery tests, exact-artifact install/upgrade/recovery checks and developer-operated browser checks back this release. Independent accounting review, independent security review, supervised pilots with a real month-end close, unfamiliar-operator installation observation and restricted shared-host recovery certification have **not** happened; these continue as post-release commitments. See [[Release 1.0.0|Release-1.0.0]], [INSTALL.md](https://github.com/rmak78/phpledger/blob/master/resources/release/INSTALL.md), [UPGRADE.md](https://github.com/rmak78/phpledger/blob/master/resources/release/UPGRADE.md) and [RELEASE-SIGNING.md](https://github.com/rmak78/phpledger/blob/master/docs/RELEASE-SIGNING.md).
+Automated test suites, fault-injection update/recovery tests, exact-artifact install/upgrade/recovery checks and developer-operated browser checks back this release. Independent accounting review, independent security review, supervised pilots with a real month-end close, unfamiliar-operator installation observation and restricted shared-host recovery certification have **not** happened; these continue as post-release commitments. See [[Release 1.0.0|Release-1.0.0]], [INSTALL.md](https://github.com/phpledger/phpledger/blob/master/resources/release/INSTALL.md), [UPGRADE.md](https://github.com/phpledger/phpledger/blob/master/resources/release/UPGRADE.md) and [RELEASE-SIGNING.md](https://github.com/phpledger/phpledger/blob/master/docs/RELEASE-SIGNING.md).
 
 # Start with the package
 
 Start at [the PHP Ledger website](https://phpledger.com/) or [open the demonstration](https://phpledger.com/demo/).
 
-**[Download the 1.0.0 package](https://github.com/rmak78/phpledger/releases/tag/v1.0.0).** Choose `phpledger-1.0.0.zip` and its SHA-256 file from the release assets; automatic source archives do not include installed dependencies. Follow the package's `INSTALL.md`, or `UPGRADE.md` when upgrading an existing installation. Compare the ZIP with its SHA-256 file before installing; 1.0.0 carries no signed update metadata because the publisher key was not yet generated (see the repository `docs/RELEASE-SIGNING.md`). Use synthetic data for evaluation.
+**[Download the 1.0.0 package](https://github.com/phpledger/phpledger/releases/tag/v1.0.0).** Choose `phpledger-1.0.0.zip` and its SHA-256 file from the release assets; automatic source archives do not include installed dependencies. Follow the package's `INSTALL.md`, or `UPGRADE.md` when upgrading an existing installation. Compare the ZIP with its SHA-256 file before installing; 1.0.0 carries no signed update metadata because the publisher key was not yet generated (see the repository `docs/RELEASE-SIGNING.md`). Use sample data for evaluation.
 
 This release adds universal account statements, chart management, saved general-journal draft/review/post/reverse workflows, the accounting starter (AR/AP, optional Purchasing/Inventory, core tax), browser installation and signed automatic updates. It retains receipts, expenses, owner reports and the sample cash POS. It is the first stable release, with the remaining independent-review and pilot gates described in [[First package|First-Package]].
 
-Modern source is in `www/phpledger`; historical code remains only in Git history. Developers can use the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md). New project-owned code and documentation are [AGPL-3.0-or-later licensed](https://github.com/rmak78/phpledger/blob/master/LICENSE); [licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) preserves separate historical, dependency and asset terms.
+Modern source is in `www/phpledger`; historical code remains only in Git history. Developers can use the [development guide](https://github.com/phpledger/phpledger/blob/master/docs/DEVELOPMENT.md). New project-owned code and documentation are [AGPL-3.0-or-later licensed](https://github.com/phpledger/phpledger/blob/master/LICENSE); [licence scope](https://github.com/phpledger/phpledger/blob/master/LICENSE-SCOPE.md) preserves separate historical, dependency and asset terms.
 
 ## Install in the browser
 
@@ -24,10 +24,10 @@ Signed automatic updates are available from the independent `/maintenance.php` o
 
 ## Try the demonstration
 
-Each visitor receives a separate fictional business. Synthetic records reset hourly, ending the old sample session. Capacity limits apply to temporary writes. Do not enter real customer records, credentials or business documents.
+Each visitor receives a separate fictional business. Sample records reset hourly, ending the old sample session. Capacity limits apply to temporary writes. Do not enter real customer records, credentials or business documents.
 
 1. Open **Reports → Open account ledger**, choose an account and inspect opening, debit, credit, running and closing balances. Transactions and Journals also link directly to the ledger; mobile entries keep the running balance visible.
-2. Create a general-journal draft with synthetic amounts and save it.
+2. Create a general-journal draft with sample amounts and save it.
 3. Reopen it, review the lines and balance debits against credits before posting.
 4. Follow its source and journal into the account statement and trial balance.
 5. Try a linked reversal with a reason, or explore the [[sample shop sale|POS-Showcase]].

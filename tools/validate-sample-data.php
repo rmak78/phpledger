@@ -66,7 +66,7 @@ function sample_stock_key(array $row): string
 function sample_validate(array $p): array
 {
     sample_check($p['schema_version'] === '1.0.0' && $p['pack_version'] === '1.0.0', 'Unknown schema or pack version.');
-    sample_check($p['demo_only'] === true && $p['synthetic'] === true && $p['status'] === 'authored_candidate_not_runtime_seed', 'Missing candidate demo markers.');
+    sample_check($p['demo_only'] === true && $p['sample'] === true && $p['status'] === 'authored_candidate_not_runtime_seed', 'Missing candidate demo markers.');
     sample_check($p['isolation']['may_merge_into_real_company'] === false && $p['isolation']['automatic_posting_authorized'] === false, 'Unsafe isolation metadata.');
     sample_check($p['country_variations']['reviewed_variants'] === [] && $p['country_variations']['automatic_tax_activation'] === false, 'Unexpected country activation.');
     sample_check($p['business']['base_currency'] === 'USD' && $p['business']['country_code'] === null, 'Unexpected fixture currency or country.');
@@ -88,7 +88,7 @@ function sample_validate(array $p): array
     };
     $contacts = sample_index($p['contacts']);
     foreach ($contacts as $contact) {
-        sample_check($contact['synthetic'] === true && str_ends_with($contact['email'], '@example.invalid'), 'Contact must be synthetic and non-deliverable.');
+        sample_check($contact['sample'] === true && str_ends_with($contact['email'], '@example.invalid'), 'Contact must be sample and non-deliverable.');
     }
     $items = sample_index($p['items']);
     $locations = sample_index($p['locations']);

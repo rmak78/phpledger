@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 function demo_pack_fixture(string $id): array
 {
-    $actor = pl_create_user('pack-' . bin2hex(random_bytes(8)) . '@example.invalid', 'Synthetic pack owner', 'Synthetic fixture password 123!');
+    $actor = pl_create_user('pack-' . bin2hex(random_bytes(8)) . '@example.invalid', 'Sample pack owner', 'Sample fixture password 123!');
     $input = ['name' => pl_demo_pack($id)['name'], 'currency' => 'USD', 'start_date' => '2024-01-01',
         'fiscal_year_end' => '12-31', 'start_mode' => 'sample', 'sample_pack' => $id, 'template_digest' => pl_starter_template()['digest']];
     $key = 'pack:' . bin2hex(random_bytes(8));

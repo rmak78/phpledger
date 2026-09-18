@@ -1,6 +1,6 @@
 # Accounting starter: facts, FAQ and guided experiment
 
-> **RELEASE VERIFIED - 16 September 2026.** The application and media kit are published as [0.4.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview), with public byte/checksum verification and live starter workflow evidence reported by the release lead. The static release article and guided experiment are also live, with [publication evidence](qa/release040-live-publication.json). The subsequently requested country-chart research, deeper example companies and UX review remain separate work and are not capabilities to announce as shipped.
+> **RELEASE VERIFIED - 16 September 2026.** The application and media kit are published as [0.4.0-preview](https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview), with public byte/checksum verification and live starter workflow evidence reported by the release lead. The static release article and guided experiment are also live, with [publication evidence](qa/release040-live-publication.json). The subsequently requested country-chart research, deeper example companies and UX review remain separate work and are not capabilities to announce as shipped.
 
 This sheet supports the [launch copy kit](ACCOUNTING-STARTER-LAUNCH-KIT.md). It provides a factual review boundary and a reproducible fictional experiment. Do not send or publish either artifact solely because the copy is complete.
 
@@ -21,7 +21,7 @@ This sheet supports the [launch copy kit](ACCOUNTING-STARTER-LAUNCH-KIT.md). It 
 | Reconciliation | Open items versus GL controls, stock value versus inventory accounts, received-but-unbilled versus clearing, and the existing exact bank CSV matching workflow. | [Development contracts](../../DEVELOPMENT.md), [starter record](../../repository/sprint-06/ACCOUNTING-STARTER.md) |
 | Corrections | Traceable reversals/reposts retain document identity; dependencies, periods and bank-reconciliation restrictions remain enforced. | [Architecture](../../ARCHITECTURE.md), [release notes](../../../resources/release/RELEASE-NOTES.md) |
 | Integration | Existing scoped read API/MCP remains. The starter exposes internal PHP services; it adds no public financial write API or autonomous external delivery. | [Integrations](../../INTEGRATIONS.md), [starter record](../../repository/sprint-06/ACCOUNTING-STARTER.md) |
-| Preview boundary | Technical checks and synthetic journeys are evidence for the tested scope, not professional accounting/tax certification or every host's production readiness. | [Validation record](../../VALIDATION.md) |
+| Preview boundary | Technical checks and sample journeys are evidence for the tested scope, not professional accounting/tax certification or every host's production readiness. | [Validation record](../../VALIDATION.md) |
 
 ### Claims that must not enter launch copy
 
@@ -30,7 +30,7 @@ This sheet supports the [launch copy kit](ACCOUNTING-STARTER-LAUNCH-KIT.md). It 
 - No country-certified accounting, automatic tax compliance, e-filing, bank feeds or automatic payment processing.
 - No completed quotes plugin, distributor routes, delivery planning, manufacturing, batches, serials, expiry, multiple warehouses, LC or landed-cost claims.
 - No claim that the existing sample POS uses shared Inventory or the new document tax engine.
-- No claim that the forthcoming country-chart catalogs, expanded synthetic-company program or UX prototypes are implemented or reviewed.
+- No claim that the forthcoming country-chart catalogs, expanded sample-company program or UX prototypes are implemented or reviewed.
 - Describe the verified hosted Accounting starter playground separately from the four existing multi-year teaching histories; do not imply eleven new examples are shipped.
 
 Use **first accounting starter spanning core AR/AP and optional stock/purchasing** when describing the milestone. Earlier previews delivered real foundations and workflows; avoid describing them as unusable or erasing their release history.
@@ -95,17 +95,17 @@ Quotes are excluded and preserved for a future separate plugin. Distributor rout
 
 ### Is this certified or suitable for every production business?
 
-No such claim is made. It is a development preview for synthetic experimentation and reviewed pilot preparation. Read the exact release's test evidence and limitations, arrange appropriate accounting/tax review and verify the intended installation and backup process.
+No such claim is made. It is a development preview for sample experimentation and reviewed pilot preparation. Read the exact release's test evidence and limitations, arrange appropriate accounting/tax review and verify the intended installation and backup process.
 
 ### Where should I download it or report feedback?
 
-Use the exact verified https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview from the [release listing](https://github.com/rmak78/phpledger/releases). Read the source in the [repository](https://github.com/rmak78/phpledger). Use [issues](https://github.com/rmak78/phpledger/issues) for reproducible bugs and [discussions](https://github.com/rmak78/phpledger/discussions) for workflow questions. Include synthetic examples only.
+Use the exact verified https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview from the [release listing](https://github.com/phpledger/phpledger/releases). Read the source in the [repository](https://github.com/phpledger/phpledger). Use [issues](https://github.com/phpledger/phpledger/issues) for reproducible bugs and [discussions](https://github.com/phpledger/phpledger/discussions) for workflow questions. Include sample examples only.
 
 ## 3. Guided experiment A — services and supplier costs
 
 **Preparation:** install the exact starter preview separately. Create a fictional new business, complete setup, choose one functional currency and leave tax codes unselected for this first arithmetic example. Choose dates within an open accounting period, after any opening cutover. Create a fictional customer and supplier in Parties. Use the ordinary bank, revenue, expense and AR/AP control accounts from your reviewed chart. If the owner is prompted to activate an unused control, review that choice; do not bypass existing opening-balance conversion.
 
-The amounts below use the same currency, domestic rate one and no tax. They are expected synthetic accounting results, not observed customer results.
+The amounts below use the same currency, domestic rate one and no tax. They are expected sample accounting results, not observed customer results.
 
 ### Customer sequence
 
@@ -139,7 +139,7 @@ Choose historical ageing dates before and after each payment/credit. The earlier
 
 If this fictional company started with zero bank balance and contains only these transactions, the ending bank balance is **630**: receipts of 900 less payments of 270. Net sales are 900, net expenses 270 and the resulting profit is 630. Neither the invoice nor its credit is a bank transaction. Both AR and AP outstanding balances are zero.
 
-For a bank-reconciliation extension, create a synthetic statement containing the two customer receipts and two supplier payments on their actual dates. Opening balance is zero and closing balance is 630. Match the four bank rows to their exact posted bank lines, review the baseline/outstanding items and complete only when the adjusted difference is zero. Do not create extra journals merely to make the statement match.
+For a bank-reconciliation extension, create a sample statement containing the two customer receipts and two supplier payments on their actual dates. Opening balance is zero and closing balance is 630. Match the four bank rows to their exact posted bank lines, review the baseline/outstanding items and complete only when the adjusted difference is zero. Do not create extra journals merely to make the statement match.
 
 ## 4. Guided experiment B — purchase, receive, bill and sell stock
 
@@ -168,7 +168,7 @@ With no other transactions or opening balances, assets are bank 10 + AR 50 + sto
 
 ### Tax experiment in another draft
 
-Create a deliberately fictional ten-percent code with explicit input/output accounts and an effective date. A tax-exclusive line with net 100 should show tax 10 and total 110. A tax-inclusive entered amount of 110 should show net 100, tax 10 and total 110. Label the rate **synthetic**. Do not present ten percent as a rate applicable to any country or real customer transaction.
+Create a deliberately fictional ten-percent code with explicit input/output accounts and an effective date. A tax-exclusive line with net 100 should show tax 10 and total 110. A tax-inclusive entered amount of 110 should show net 100, tax 10 and total 110. Label the rate **sample**. Do not present ten percent as a rate applicable to any country or real customer transaction.
 
 ## 5. Reproducible feedback template
 
@@ -176,12 +176,12 @@ Create a deliberately fictional ten-percent code with explicit input/output acco
 Package version and source revision:
 PHP / MySQL versions:
 Workflow and selected modules:
-Price-entry mode and synthetic tax configuration, if relevant:
+Price-entry mode and sample tax configuration, if relevant:
 Steps to reproduce:
 Expected amounts or behavior:
 Actual amounts or behavior:
 First step where the difference appears:
-Relevant synthetic document / journal references:
+Relevant sample document / journal references:
 Screenshot with no credentials or real customer details:
 ```
 
@@ -200,7 +200,7 @@ Ask whether a report is an arithmetic discrepancy, an unclear next action, a per
 
 ## 7. Screenshot and card brief
 
-These are **capture briefs**, not claims that artwork or approved screenshots have already been produced. Use actual candidate screens after they have passed the release's browser checks. Keep any display of the version, synthetic label and as-of date legible.
+These are **capture briefs**, not claims that artwork or approved screenshots have already been produced. Use actual candidate screens after they have passed the release's browser checks. Keep any display of the version, sample label and as-of date legible.
 
 | Asset | Evidence to capture | Suggested caption / alt text |
 |---|---|---|
@@ -208,9 +208,9 @@ These are **capture briefs**, not claims that artwork or approved screenshots ha
 | 2. Historical ageing | Date before final settlement, document drilldown and reconciled control | “Check what was outstanding at the selected date.” Alt: Receivables ageing with an as-of date and linked fictional documents. |
 | 3. Purchase matching | Ten-unit order, six/four receipt quantities and later bill preview | “Receive goods in parts; match the supplier bill to the receipts.” Alt: Supplier bill preview matching two goods receipts. |
 | 4. Inventory cost | Five units, carrying value 50 and a zero GL difference | “Quantity, recorded cost and selling price are different measures.” Alt: Inventory valuation showing five units with carrying value 50. |
-| 5. Tax split | Fictional inclusive 110 split into net 100 and tax 10 | “Choose inclusive or exclusive entry and review the split.” Alt: Synthetic tax example with net 100, tax 10 and total 110. |
+| 5. Tax split | Fictional inclusive 110 split into net 100 and tax 10 | “Choose inclusive or exclusive entry and review the split.” Alt: Sample tax example with net 100, tax 10 and total 110. |
 
-For article artwork, use a real desktop capture or a clearly labelled arrangement of these captures. Social crops must preserve the balance/date labels rather than crop them into an ambiguous claim. Do not use fake customer logos, certification badges, star ratings or fabricated interface states. A social card with a number from the experiment must identify it as a synthetic example.
+For article artwork, use a real desktop capture or a clearly labelled arrangement of these captures. Social crops must preserve the balance/date labels rather than crop them into an ambiguous claim. Do not use fake customer logos, certification badges, star ratings or fabricated interface states. A social card with a number from the experiment must identify it as a sample example.
 
 ## 8. Final release/editor checklist
 
@@ -219,10 +219,10 @@ For article artwork, use a real desktop capture or a clearly labelled arrangemen
 - Retain the verified 0.4.0 hosted-starter scope: one focused playground and four unchanged multi-year teaching histories.
 - Keep future catalog research, expanded sample programs and UX work out of shipped-feature lists.
 - Resolve release/article/guide/contact variables; remove the unused demo variable. Verify destinations without substituting a generic “latest” link for the intended version.
-- Capture and review actual synthetic screenshots. Prepare captions/alt text and record their candidate version.
+- Capture and review actual sample screenshots. Prepare captions/alt text and record their candidate version.
 - Use the owner's actual authorised channels and verified account identity. Copy preparation does not send posts, email or press outreach.
 - Record what was published or sent, where and when. Preserve draft, submission, publication and indexing as separate states.
 
 ## Actual screenshot media
 
-[Download the six original PNG assets and read their captions](accounting-starter-media/README.md). The [manifest](accounting-starter-media/manifest.json) records alt text, hashes, synthetic baselines and local capture context. These are faithful application captures, not generated product mockups or live-publication proof. The final release media ZIP also separates press, SEO, social and email copy for the marketing team.
+[Download the six original PNG assets and read their captions](accounting-starter-media/README.md). The [manifest](accounting-starter-media/manifest.json) records alt text, hashes, sample baselines and local capture context. These are faithful application captures, not generated product mockups or live-publication proof. The final release media ZIP also separates press, SEO, social and email copy for the marketing team.

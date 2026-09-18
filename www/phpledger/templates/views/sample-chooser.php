@@ -1,6 +1,6 @@
 <?php declare(strict_types=1); ?>
 <section class="auth-panel sample-chooser" aria-labelledby="sample-chooser-title">
-    <p class="eyebrow">Local synthetic catalogue</p>
+    <p class="eyebrow">Local sample catalogue</p>
     <?php pl_ui_page_header('Choose one sample company', 'Each choice creates one new, isolated company and book. Your existing businesses are never used as a target and are not changed.', static function (): void { ?>
         <a class="btn btn-secondary" href="<?= pl_e(pl_url('/companies')) ?>">Back to businesses</a>
     <?php }, 'sample-chooser-title'); ?>
@@ -15,7 +15,7 @@
                     <option value="<?= pl_e((string) $entry['id']) ?>"<?= pl_web_text($form['input'], 'sample_pack') === $entry['id'] ? ' selected' : '' ?>><?= pl_e($label) ?></option>
                 <?php endforeach; ?>
             </select>
-            <p class="muted">The historical companies contain pinned synthetic source records, closed 2024–2025 history, an open 2026 practice year and editable drafts. The starter playground begins at zero balances.</p>
+            <p class="muted">The historical companies contain pinned sample source records, closed 2024–2025 history, an open 2026 practice year and editable drafts. The starter playground begins at zero balances.</p>
         </div>
         <div class="field">
             <label class="field-label" for="sample-currency">Functional currency</label>
@@ -25,7 +25,7 @@
             <p class="muted">Amounts are illustrative. Country tax and statutory rules are not enabled by choosing a sample.</p>
         </div>
         <div class="field full-width">
-            <p class="small muted">Samples are synthetic teaching books. Provisioning uses the bundled, checksummed catalogue only and never sends messages, payments or provider requests.</p>
+            <p class="small muted">Samples are sample teaching books. Provisioning uses the bundled, checksummed catalogue only and never sends messages, payments or provider requests.</p>
         </div>
         <div class="panel-actions full-width" data-fold="primary action"><button class="btn btn-primary" type="submit">Create this separate sample</button><a class="btn btn-secondary" href="<?= pl_e(pl_url('/companies')) ?>">Cancel</a></div>
     </form>

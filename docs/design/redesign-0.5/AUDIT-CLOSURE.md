@@ -1,6 +1,6 @@
 # 0.6.0-preview audit closure checkpoint
 
-18 September 2026. Local implementation and synthetic browser evidence only.
+18 September 2026. Local implementation and sample browser evidence only.
 **Published as 0.6.0-preview on 18 September after the owner instructed publication with the outstanding limitations disclosed.** See [publication receipt](../../repository/PUBLICATION-2026-09-18.md). Remaining findings below track follow-up acceptance, not an unpublished release. A closed defect below does not establish accounting
 sign-off, observed usability or WCAG conformance. Mobile refinement is deferred
 by the owner; page-overflow safety, keyboard access and readable controls are not.
@@ -73,7 +73,7 @@ Source: [REPORTING-ADMIN-AUDIT.md](../ux-recovery/REPORTING-ADMIN-AUDIT.md).
 | P1 Offscreen dates/recovery actions | Partial | Four-width report checks and OAuth recovery action bounds pass; 200% zoom acceptance pending. |
 | P1 Mobile chart/statement/history | Partial | Compact/paged reports, grouped account balances and clear statement links; complete keyboard/scroll cues pending. |
 | P1 Reporting context | Partial | P&L presets and report/account/source return filters verified; nested source actions still require full return-chain acceptance. |
-| P1 Populated bank reconciliation | Closed locally | Synthetic CSV preview/import, match/unmatch, completion and 26-row cancellation verified with JS/no-JS; no duplicate payment posting. |
+| P1 Populated bank reconciliation | Closed locally | Sample CSV preview/import, match/unmatch, completion and 26-row cancellation verified with JS/no-JS; no duplicate payment posting. |
 | P1 Tax/module/period impact review | Closed locally | Immutable tax definitions/dated rates, consequence confirmations, reasoned period history and stale input checks retained. |
 | P1 Invalid OAuth recovery | Closed locally for malformed/expired requests; consent/cancel browser checks passed | Request-specific recovery, unchanged 403 rejection and no untrusted redirect verified at four widths. Valid consent and cancel passed with JS on/off at both folds; callback state retained using an intercepted local callback. Token exchange and external client compatibility are separate checks. |
 | P2 Long report/settings pages | Partial | Compact report directory/settings and paged lists; final history density/scroll review pending. |
@@ -120,7 +120,7 @@ original audits or every form's field-error coverage.
 
 A read-only smoke pass requested all 41 current route paths at 1366×768,
 1024×768, 768×1024 and 390×844, producing 164 captures. After authenticating and
-selecting the existing synthetic company, the browser blocked all methods except
+selecting the existing sample company, the browser blocked all methods except
 GET/HEAD; no blocked financial write was attempted. Evidence:
 `output/playwright/workflow061-route-smoke-auth.json` and
 `output/playwright/workflow061-route-auth-*.png`.

@@ -7,7 +7,7 @@ PHP Ledger is open-source, self-hosted double-entry accounting software with a s
 In scope:
 
 - The modern application in `www/phpledger`.
-- The release package from the [v0.1.0-preview release](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview): `phpledger-0.1.0-preview.zip` and its `.sha256` file.
+- The release package from the [v0.1.0-preview release](https://github.com/phpledger/phpledger/releases/tag/v0.1.0-preview): `phpledger-0.1.0-preview.zip` and its `.sha256` file.
 - The website at https://phpledger.com/ and the public demo at https://phpledger.com/demo/.
 
 Out of scope:
@@ -18,7 +18,7 @@ Out of scope:
 
 ## How to report
 
-- Preferred: [open a private vulnerability report on GitHub](https://github.com/rmak78/phpledger/security/advisories/new).
+- Preferred: [open a private vulnerability report on GitHub](https://github.com/phpledger/phpledger/security/advisories/new).
 - Alternatively, email [rmak78@gmail.com](mailto:rmak78@gmail.com) with the subject "PHP Ledger security".
 
 Please do not post exploit details, screenshots of real data or credentials anywhere public.
@@ -26,7 +26,7 @@ Please do not post exploit details, screenshots of real data or credentials anyw
 ## What to include
 
 - The affected component and the version, tag or commit (for example `0.1.0-preview`).
-- Steps to reproduce with synthetic data only.
+- Steps to reproduce with sample data only.
 - The impact you observed or expect, for example data exposure, unauthorized posting or reversal, privilege escalation, or bypass of company and book permissions.
 - Your environment: PHP and MySQL versions, web server, and browser if the problem is in the interface.
 - Sanitized logs or screenshots. Never send passwords, tokens, session cookies, real business records or database backups.
@@ -46,8 +46,8 @@ Please give the project a reasonable period to investigate and prepare a fix or 
 |---|---|
 | `0.1.0-preview` | Development preview. Fixes on a best-effort basis; no security-support guarantee. |
 
-There is no stable release yet. Evaluate the preview with synthetic data on your own installation.
+There is no stable release yet. Evaluate the preview with sample data on your own installation.
 
 ## Public demo
 
-The demo at https://phpledger.com/demo/ gives each visitor a private synthetic company, resets every hour and is capacity-limited. Do not test destructive actions, load or automated scanning against it, and never enter real records or credentials there. Use your own installation of the release package for security testing.
+The demo at https://phpledger.com/demo/ gives each visitor a private sample company, resets every hour and is capacity-limited. Do not test destructive actions, load or automated scanning against it, and never enter real records or credentials there. Use your own installation of the release package for security testing.

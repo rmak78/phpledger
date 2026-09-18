@@ -14,7 +14,7 @@ Published 15 September 2026 under the owner's explicit instruction to fix the PH
 
 | Surface | Verified identity |
 |---|---|
-| Release and tag | [v0.1.6-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.6-preview) |
+| Release and tag | [v0.1.6-preview](https://github.com/phpledger/phpledger/releases/tag/v0.1.6-preview) |
 | Package/application source | `f2c228c08185dc7803c763dc286c2ba23712ddf2` |
 | Downloaded ZIP | `phpledger-0.1.6-preview.zip`, **1,346,895 bytes** |
 | Download SHA-256 | `ab912843f045a7fb904f6b158e2c18d1d6d7792cd91ea4567ee35eb539253eb8` |
@@ -29,20 +29,20 @@ The package and checksum were downloaded again from the public release; their ha
 
 | Check | Result |
 |---|---|
-| Maintenance CI on PHP 8.2.33 / 8.3.33 / 8.4.25 | [All three jobs passed](https://github.com/rmak78/phpledger/actions/runs/35000843488): **121 tests, zero failures and 90 PHP files linted per runtime**; PHPStan and sample validation passed |
+| Maintenance CI on PHP 8.2.33 / 8.3.33 / 8.4.25 | [All three jobs passed](https://github.com/phpledger/phpledger/actions/runs/35000843488): **121 tests, zero failures and 90 PHP files linted per runtime**; PHPStan and sample validation passed |
 | Local maintenance checks | Full `composer check` passed on PHP 8.2.33 and 8.3.33; package-builder tests 6/6 passed |
 | Actual platform/dependencies | `composer check-platform-reqs` and manifest validation passed; deliberate exact-pin warnings retained; dependency audit reported no known advisories |
 | Final ZIP fresh install | Passed independently on PHP 8.2.33 and 8.3.33; eleven receipts; trial-balance debit/credit both `1000.0000` |
 | Final ZIP upgrades | Actual 0.1.4 and 0.1.5 packages upgraded to this ZIP on both runtimes; **four upgrade cases**, zero new migrations; exact trial balance and all prior receipts preserved |
-| Restoration | CI restored **27 tables, 35 guards and 11 receipts** with matching definitions/data checksums; 2,352 synthetic rows on 8.2/8.3 and 2,349 on 8.4 |
-| Restricted demo test | Synthetic isolation, concurrent reset lock, CSRF, posting/reversal, capacity, generation expiry and denied administrative/destructive actions passed on the separate local maintenance database |
+| Restoration | CI restored **27 tables, 35 guards and 11 receipts** with matching definitions/data checksums; 2,352 sample rows on 8.2/8.3 and 2,349 on 8.4 |
+| Restricted demo test | Sample isolation, concurrent reset lock, CSRF, posting/reversal, capacity, generation expiry and denied administrative/destructive actions passed on the separate local maintenance database |
 | Website build | **18 pages, zero errors, zero warnings** in the clean maintenance worktree |
 | Live website browser | Eight routes at **1440, 768 and 390px**: 24 layouts, HTTP 200, no horizontal overflow or JavaScript errors; current PHP/version/licence/direction copy asserted |
 | Live demo without JavaScript | Six named POS quantity inputs at all three widths; 9.00 sample sale, 10.00 illustrative cash and 1.00 change; posted journal drilldown; bank 875.00 + sale 9.00 = **884.00** |
 | Existing live visitor | Pre-switch browser session remained authorized; bank balance stayed **875.00**; new corresponding-source link visible; trial balance, P&L and Balance Sheet routes returned 200 |
 | Public web checks | Exact static bytes, canonical and directory redirects, private-path 404s, HTTPS headers, health and demo noindex passed |
 
-The integration development branch separately resolved `symfony/uid` from 8.1.5 to 7.4.17, keeping MCP SDK 0.8.1 and OAuth server 9.4.1. Its [three-version CI also passed](https://github.com/rmak78/phpledger/actions/runs/35000839904). These libraries are absent from the smaller 0.1.6 maintenance package. The full local integration tree's 142-test runs include preserved multi-year demo work and do not establish Release B/C or native-client acceptance.
+The integration development branch separately resolved `symfony/uid` from 8.1.5 to 7.4.17, keeping MCP SDK 0.8.1 and OAuth server 9.4.1. Its [three-version CI also passed](https://github.com/phpledger/phpledger/actions/runs/35000839904). These libraries are absent from the smaller 0.1.6 maintenance package. The full local integration tree's 142-test runs include preserved multi-year demo work and do not establish Release B/C or native-client acceptance.
 
 ## Live change and recovery evidence
 

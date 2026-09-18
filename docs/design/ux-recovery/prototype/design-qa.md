@@ -16,7 +16,7 @@ The shared selected task is EXP-0018, Harbor Office Supply, USD125.00. The new d
 | Layout/spacing | Shared context header; 192px/164px navigation on desktop/tablet; explicit mobile Menu. List/detail collapses to reachable list-to-detail. Amounts and both debit/credit columns fit 390px. |
 | Colour/tokens | Existing navy `#0c2052`, blue `#304dea`, ink `#182546`, light borders and pale selected rows retained. Status uses text as well as colour. Comprehensive contrast review is still required. |
 | Assets | Existing PHP Ledger raster logo and bundled Inter font reused with font licence. No invented illustration, icon system or customer imagery. |
-| Copy/content | Always-visible design/synthetic notice, explicit sample identity, country Research gates, manually configured tax example and unimplemented deep-history notices. No fabricated review date, package hash or release status. |
+| Copy/content | Always-visible design/sample notice, explicit sample identity, country Research gates, manually configured tax example and unimplemented deep-history notices. No fabricated review date, package hash or release status. |
 
 ## Iterations and fixes
 

@@ -24,15 +24,15 @@ This issue depends on the completed decisions/evidence from the other four Sprin
 
 No dates, assignees, funding commitments, full ERP scope or next-sprint AI Scan document promise are set here. Existing legacy issues are not closed or replaced by creating this candidate issue.
 
-Part of the [first package plan](https://github.com/rmak78/phpledger/wiki/First-Package).
+Part of the [first package plan](https://github.com/phpledger/phpledger/wiki/First-Package).
 
 ## Linked work
 
 Release acceptance depends on all four workstreams:
 
-- [#55 Licence and provenance decision](https://github.com/rmak78/phpledger/issues/55)
-- [#56 Installable package and recovery](https://github.com/rmak78/phpledger/issues/56)
-- [#57 Reviewed Pakistan profile and reports](https://github.com/rmak78/phpledger/issues/57)
-- [#58 Deliberate POS checkout experience](https://github.com/rmak78/phpledger/issues/58)
+- [#55 Licence and provenance decision](https://github.com/phpledger/phpledger/issues/55)
+- [#56 Installable package and recovery](https://github.com/phpledger/phpledger/issues/56)
+- [#57 Reviewed Pakistan profile and reports](https://github.com/phpledger/phpledger/issues/57)
+- [#58 Deliberate POS checkout experience](https://github.com/phpledger/phpledger/issues/58)
 
-Track the complete sprint in [milestone 4](https://github.com/rmak78/phpledger/milestone/4).
+Track the complete sprint in [milestone 4](https://github.com/phpledger/phpledger/milestone/4).

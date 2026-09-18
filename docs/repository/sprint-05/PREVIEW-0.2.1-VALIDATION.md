@@ -7,7 +7,7 @@ The combined preview includes the full existing accounting core, scoped read API
 - Source: `a8ee38a37616cc245102404bd47b6afea9373a23`.
 - ZIP: **3,054,692 bytes**; SHA-256 `65eca3c57b084e185affb93a4167fa36cc141e94d5fd6f9e6c1243844ee696d1`.
 - The exact ZIP passed fresh installation and upgrades from 0.1.4, 0.1.5 and 0.1.6 on PHP 8.2.33 and 8.3.33. Existing totals and prior migration receipts were preserved.
-- [Final-source CI](https://github.com/rmak78/phpledger/actions/runs/35009834133): 142 tests per PHP 8.2.33, 8.3.33 and 8.4.25, zero failures. PHP lint, static analysis, dependency audit and backup restoration passed on all three versions.
+- [Final-source CI](https://github.com/phpledger/phpledger/actions/runs/35009834133): 142 tests per PHP 8.2.33, 8.3.33 and 8.4.25, zero failures. PHP lint, static analysis, dependency audit and backup restoration passed on all three versions.
 
 ## Accounting and samples
 

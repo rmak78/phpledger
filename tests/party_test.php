@@ -24,13 +24,13 @@ test('party list pages scoped records with literal search and role filters',func
 
 function party_input(string $country='PK'): array
 {
-    return ['legal_name'=>'Synthetic dual role party','entity_type'=>'private_company','country_code'=>$country,
+    return ['legal_name'=>'Sample dual role party','entity_type'=>'private_company','country_code'=>$country,
         'is_customer'=>true,'is_vendor'=>true,'currency'=>'USD','request_key'=>bin2hex(random_bytes(16)),
-        'reason'=>'Synthetic foundation entry','localized_names'=>['ur'=>'فرضی کمپنی'],
+        'reason'=>'Sample foundation entry','localized_names'=>['ur'=>'فرضی کمپنی'],
         'identifiers'=>[['scheme'=>$country==='PK'?'NTN':'TAX_ID','value'=>'1234567','country_code'=>$country]],
-        'addresses'=>[['role'=>'registered','country_code'=>$country,'subdivision'=>'Synthetic region','street'=>'Synthetic street']],
-        'registrations'=>[['country_code'=>$country,'authority'=>'Synthetic authority','number'=>'TEST123']],
-        'exemption_reference'=>'SYNTHETIC-EXEMPT','exemption_expires_on'=>'2027-12-31','credit_limit'=>'100.2500'];
+        'addresses'=>[['role'=>'registered','country_code'=>$country,'subdivision'=>'Sample region','street'=>'Sample street']],
+        'registrations'=>[['country_code'=>$country,'authority'=>'Sample authority','number'=>'TEST123']],
+        'exemption_reference'=>'SAMPLE-EXEMPT','exemption_expires_on'=>'2027-12-31','credit_limit'=>'100.2500'];
 }
 
 test('party storage is country neutral, dual role and creates one private-data-free event',function():void{
@@ -45,7 +45,7 @@ test('party storage is country neutral, dual role and creates one private-data-f
     $payload=json_decode($event['payload'],true,512,JSON_THROW_ON_ERROR);
     assert_same('party',$payload['entity_type']);assert_same($receipt['id'],$payload['entity_id']);assert_same(1,$payload['revision']);assert_same(3,count($payload));
     assert_true(!str_contains($event['payload'],'1234567'));
-    $other=party_input('GB');$other['legal_name']='Synthetic second jurisdiction';
+    $other=party_input('GB');$other['legal_name']='Sample second jurisdiction';
     pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],$other);
 });
 
@@ -60,7 +60,7 @@ test('legal identifier dedup blocks canonical collision and allows isolated comp
 
 test('party mutations enforce revision, scope, membership and reserved schema boundaries',function():void{
     $f=ledger_fixture();$input=party_input();$r=pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],$input);
-    $changed=$input;$changed['request_key']=bin2hex(random_bytes(16));$changed['legal_name']='Synthetic corrected name';
+    $changed=$input;$changed['request_key']=bin2hex(random_bytes(16));$changed['legal_name']='Sample corrected name';
     $updated=pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],$changed,$r['id'],1);assert_same(2,$updated['revision']);
     $changed['request_key']=bin2hex(random_bytes(16));
     assert_throws(fn()=>pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],$changed,$r['id'],1),DomainException::class,'revision');
@@ -78,16 +78,16 @@ test('party mutations enforce revision, scope, membership and reserved schema bo
 
 test('phone duplicates need explicit acknowledgement and reason without silent merge',function():void{
     $f=ledger_fixture();$r=pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],party_input());
-    $input=['name'=>'Synthetic billing contact','role'=>'billing','is_primary'=>true,'reason'=>'Synthetic contact entry',
+    $input=['name'=>'Sample billing contact','role'=>'billing','is_primary'=>true,'reason'=>'Sample contact entry',
         'request_key'=>bin2hex(random_bytes(16)),'phones'=>[['phone'=>'+92 300 1234567','is_whatsapp'=>true]]];
     $first=pl_save_contact($f['actor_id'],$f['company_id'],$f['book_id'],$r['id'],$input);
     assert_same($first,pl_save_contact($f['actor_id'],$f['company_id'],$f['book_id'],$r['id'],$input));
-    $input['request_key']=bin2hex(random_bytes(16));$input['name']='Synthetic shared-office contact';$input['is_primary']=false;
+    $input['request_key']=bin2hex(random_bytes(16));$input['name']='Sample shared-office contact';$input['is_primary']=false;
     $input['phones'][0]['phone']='+92(300)123-4567';
     assert_throws(fn()=>pl_save_contact($f['actor_id'],$f['company_id'],$f['book_id'],$r['id'],$input),DomainException::class,'acknowledgement');
     $input['acknowledge_phone_duplicates']=true;
     assert_throws(fn()=>pl_save_contact($f['actor_id'],$f['company_id'],$f['book_id'],$r['id'],$input),DomainException::class,'reason');
-    $input['duplicate_reason']='Shared synthetic office telephone confirmed';
+    $input['duplicate_reason']='Shared sample office telephone confirmed';
     $second=pl_save_contact($f['actor_id'],$f['company_id'],$f['book_id'],$r['id'],$input);
     assert_true($second['id']!==$first['id']);
     assert_same(1,(int)DB::queryFirstField('SELECT phone_duplicate_acknowledged FROM pl_party_actions WHERE company_id=%i AND request_key=%s',$f['company_id'],$input['request_key']));
@@ -101,7 +101,7 @@ test('party failure and caller rollback preserve source and event atomicity',fun
     assert_throws(fn()=>pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],$bad),DomainException::class);
     $bad=party_input();$bad['credit_limit']='0.00001';
     assert_throws(fn()=>pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],$bad),DomainException::class);
-    assert_throws(function()use($f):void{pl_ledger_transaction(function()use($f):void{pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],party_input());throw new DomainException('Rollback synthetic mutation');});});
+    assert_throws(function()use($f):void{pl_ledger_transaction(function()use($f):void{pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],party_input());throw new DomainException('Rollback sample mutation');});});
     assert_same(0,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_parties WHERE company_id=%i',$f['company_id']));
     assert_same(0,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_outbound_events WHERE book_id=%i',$f['book_id']));
 });
@@ -119,14 +119,14 @@ test('concurrent normalized tax identities create one scoped party and event',fu
 
 test('concurrent shared phone entries require acknowledgement without losing either acknowledged contact',function():void{
     $f=ledger_fixture();$party=pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],party_input());
-    $first=['name'=>'Synthetic first caller','role'=>'billing','reason'=>'Synthetic race','request_key'=>bin2hex(random_bytes(16)),
+    $first=['name'=>'Sample first caller','role'=>'billing','reason'=>'Sample race','request_key'=>bin2hex(random_bytes(16)),
         'phones'=>[['phone'=>'+44 7700 900123','is_whatsapp'=>false]]];
-    $second=$first;$second['request_key']=bin2hex(random_bytes(16));$second['name']='Synthetic second caller';$second['phones'][0]['phone']='+44(7700)900-123';
+    $second=$first;$second['request_key']=bin2hex(random_bytes(16));$second['name']='Sample second caller';$second['phones'][0]['phone']='+44(7700)900-123';
     $job=['mode'=>'contact','fixture'=>$f,'party_id'=>$party['id']];
     $results=pl_foundation_race([$job+['input'=>$first],$job+['input'=>$second]]);
     assert_same(1,count(array_filter($results,static fn(array $r):bool=>$r['ok'])));
     $failed=array_values(array_filter($results,static fn(array $r):bool=>!$r['ok']));assert_true(str_contains($failed[0]['error'],'acknowledgement'));
-    foreach([&$first,&$second] as &$input){$input['request_key']=bin2hex(random_bytes(16));$input['acknowledge_phone_duplicates']=true;$input['duplicate_reason']='Shared synthetic reception phone confirmed';}unset($input);
+    foreach([&$first,&$second] as &$input){$input['request_key']=bin2hex(random_bytes(16));$input['acknowledge_phone_duplicates']=true;$input['duplicate_reason']='Shared sample reception phone confirmed';}unset($input);
     $accepted=pl_foundation_race([$job+['input'=>$first],$job+['input'=>$second]]);
     assert_same(2,count(array_filter($accepted,static fn(array $r):bool=>$r['ok'])));
     assert_same(3,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_contacts WHERE party_id=%i',$party['id']));

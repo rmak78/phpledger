@@ -34,7 +34,7 @@ function pl_update_download_official(array $metadata, string $directory): string
     if ($file === false) { throw new RuntimeException('Private download storage is not writable.'); }
     $success = false;
     try {
-        $url = 'https://github.com/rmak78/phpledger/releases/download/v' . $version . '/phpledger-' . $version . '.zip';
+        $url = 'https://github.com/phpledger/phpledger/releases/download/v' . $version . '/phpledger-' . $version . '.zip';
         for ($redirects = 0; $redirects <= 5; $redirects++) {
             if (!pl_update_download_url_allowed($url)) { throw new DomainException('Release download redirected outside the supported publisher hosts.'); }
             if (!ftruncate($file, 0) || !rewind($file)) { throw new RuntimeException('Private download could not be reset.'); }

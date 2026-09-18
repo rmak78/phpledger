@@ -15,11 +15,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/rmak78/phpledger/releases"><strong>Release downloads</strong></a> &nbsp; · &nbsp;
+  <a href="https://github.com/phpledger/phpledger/releases"><strong>Release downloads</strong></a> &nbsp; · &nbsp;
   <a href="https://phpledger.com/demo/">Try the demo</a> &nbsp; · &nbsp;
-  <a href="https://github.com/rmak78/phpledger/wiki">Read the Wiki</a> &nbsp; · &nbsp;
-  <a href="https://github.com/rmak78/phpledger/wiki/Roadmap">Roadmap</a> &nbsp; · &nbsp;
-  <a href="https://github.com/rmak78/phpledger/discussions">Discussions</a>
+  <a href="https://github.com/phpledger/phpledger/wiki">Read the Wiki</a> &nbsp; · &nbsp;
+  <a href="https://github.com/phpledger/phpledger/wiki/Roadmap">Roadmap</a> &nbsp; · &nbsp;
+  <a href="https://github.com/phpledger/phpledger/discussions">Discussions</a>
 </p>
 
 ---
@@ -40,17 +40,17 @@ The accounting starter adds customer invoices, supplier bills, partial payments,
 
 **Release signing:** the updater verifies publisher-signed release metadata against a key the operator pins out of band. The official publisher key had not been generated when 1.0.0 was published, so the 1.0.0 release carries a SHA-256 checksum but no signed update metadata; its fingerprint will be published in [docs/RELEASE-SIGNING.md](docs/RELEASE-SIGNING.md), the website and the Wiki once it exists, and later releases will ship signed metadata.
 
-Every release, including previews and patch releases, must publish the application archive, its SHA-256 checksum and a matching versioned media kit. The kit contains factual announcement/press copy, guided experiments, FAQs, social/email drafts and verified screenshots from that release with captions and alt text. Attach it to the GitHub release, link it in the release notes and owner handoff, and verify its public download and checksum. A release is incomplete without its media kit. The [1.0.0 media kit](https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip) is attached to the GitHub release; campaign publication remains a human decision.
+Every release, including previews and patch releases, must publish the application archive, its SHA-256 checksum and a matching versioned media kit. The kit contains factual announcement/press copy, guided experiments, FAQs, social/email drafts and verified screenshots from that release with captions and alt text. Attach it to the GitHub release, link it in the release notes and owner handoff, and verify its public download and checksum. A release is incomplete without its media kit. The [1.0.0 media kit](https://github.com/phpledger/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip) is attached to the GitHub release; campaign publication remains a human decision.
 
 Every release also reviews and updates the GitHub Wiki, repository About description, website URL and topics, README, release notes, version/package manifests, and affected website download and social/share metadata. Verify the public results and record each surface as updated or reviewed unchanged in the publication receipt and owner handoff. All surfaces must agree on shipped capabilities, version, download links and preview limitations.
 
 ## Current release: 1.0.0
 
-The accounting starter, eleven-pack chooser, responsive shell, catalogue-led setup, browser installation, and signed automatic updates with backup and recovery are included in the published 1.0.0 release. In local Docker, sign in, open **Your businesses**, and use **Try a sample company** to provision only the selected synthetic book.
+The accounting starter, eleven-pack chooser, responsive shell, catalogue-led setup, browser installation, and signed automatic updates with backup and recovery are included in the published 1.0.0 release. In local Docker, sign in, open **Your businesses**, and use **Try a sample company** to provision only the selected sample book.
 
 ### Local test login
 
-There is no shared development password. After the local database is healthy and migrated, create a synthetic owner account with the installer and keep the password in memory only:
+There is no shared development password. After the local database is healthy and migrated, create a sample owner account with the installer and keep the password in memory only:
 
 ```powershell
 $testPassword = Read-Host 'Choose a local test password (12-72 characters)'
@@ -75,7 +75,7 @@ Use that email and the password you entered at `http://127.0.0.1:18200/login`. T
 
 Owners can hide AR/AP navigation without disabling accounting services or changing reports. Purchasing and Inventory use the existing module activation controls; historical records remain readable after disabling new operations. Quotes are preserved separately on `codex/quotes-plugin` and are excluded from this starter.
 
-The 0.5.0-preview candidate adds eleven selectable synthetic businesses: Cedar Studio, Sunrise Garden Services, Willow Corner Shop, Harbour Trade, Harbor Supply Company, Cedar Table, Riverside Community Club, Meadow Training Pharmacy, Lantern Finch Jewelry Studio, Maple Bench Works and Wheel & Spoke Workshop. Each historical pack contains fixed 2024-2025 examples, an open 2026 practice year, durable source identities, a pinned digest and reconciled monthly checkpoints. Industry names describe teaching scenarios only; unsupported operational, regulatory and compliance features remain out of scope.
+The 0.5.0-preview candidate adds eleven selectable sample businesses: Cedar Studio, Sunrise Garden Services, Willow Corner Shop, Harbour Trade, Harbor Supply Company, Cedar Table, Riverside Community Club, Meadow Training Pharmacy, Lantern Finch Jewelry Studio, Maple Bench Works and Wheel & Spoke Workshop. Each historical pack contains fixed 2024-2025 examples, an open 2026 practice year, durable source identities, a pinned digest and reconciled monthly checkpoints. Industry names describe teaching scenarios only; unsupported operational, regulatory and compliance features remain out of scope.
 
 The candidate also carries `resources/coa/industry-profiles-0.5.0.json`, a research-backed vertical account vocabulary for all eleven samples. It improves the isolated sample chart labels and keeps distinctions such as food versus beverage, labor versus parts, raw material versus WIP versus finished goods, and earned versus unearned dues visible. Its illustrative codes are not statutory account numbers and it does not activate country tax rules.
 
@@ -85,7 +85,7 @@ See [starter implementation and validation](docs/repository/sprint-06/ACCOUNTING
 
 ## Who it is for
 
-The public demo has eleven multi-year synthetic businesses and a separate, empty Accounting starter playground with prepared accounts, parties, a product and illustrative tax configuration. A visitor selects one sample; only that isolated company is provisioned, and trusted seed history is separate from the visitor's practice-record allowance.
+The public demo has eleven multi-year sample businesses and a separate, empty Accounting starter playground with prepared accounts, parties, a product and illustrative tax configuration. A visitor selects one sample; only that isolated company is provisioned, and trusted seed history is separate from the visitor's practice-record allowance.
 
 PHP Ledger is country-neutral accounting software for small businesses, owners, bookkeepers, accountants and organisations managing multiple client companies. Pakistan is one intended regional direction, not the main market or the product's defining scope. Owner-equity reporting is a shared priority; partner capital, profit-sharing and drawings are planned examples that require the appropriate entity and accounting profile. Daily entry should work well on phones, with clear reporting and review on larger screens.
 
@@ -93,12 +93,12 @@ The application requires **PHP 8.2 or newer**; **PHP 8.3 is the recommended depl
 
 ## What the working preview shows
 
-[![PHP Ledger owner overview: synthetic cash, income, expenses and profit with linked reports.](docs/repository/assets/owner-overview-preview.webp)](docs/repository/assets/owner-overview-preview.webp)
+[![PHP Ledger owner overview: sample cash, income, expenses and profit with linked reports.](docs/repository/assets/owner-overview-preview.webp)](docs/repository/assets/owner-overview-preview.webp)
 
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS remain development previews.*
 
 > [!NOTE]
-> **Evaluate the accounting core.** [Download 1.0.0](https://github.com/rmak78/phpledger/releases/tag/v1.0.0) with production dependencies and installation instructions. Install in the browser at `/install`, or follow the CLI steps. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Independent regional package validation and pilot usability review remain open post-release commitments.
+> **Evaluate the accounting core.** [Download 1.0.0](https://github.com/phpledger/phpledger/releases/tag/v1.0.0) with production dependencies and installation instructions. Install in the browser at `/install`, or follow the CLI steps. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Independent regional package validation and pilot usability review remain open post-release commitments.
 
 ## Explore the working preview
 
@@ -116,7 +116,7 @@ The application requires **PHP 8.2 or newer**; **PHP 8.3 is the recommended depl
 
 [![A posted sample expense beside its source record and balanced debit and credit entry.](docs/repository/assets/expense-to-journal-preview.webp)](docs/repository/assets/expense-to-journal-preview.webp)
 
-A saved draft has no effect on the books. Posting creates the balanced entry; a correction retains history through a linked reversal. This screenshot uses synthetic data from the working preview.
+A saved draft has no effect on the books. Posting creates the balanced entry; a correction retains history through a linked reversal. This screenshot uses sample data from the working preview.
 
 </details>
 
@@ -125,19 +125,19 @@ A saved draft has no effect on the books. Posting creates the balanced entry; a 
 
 [![PHP Ledger click-to-add POS with selected products, cart quantity controls and a separate review action.](docs/repository/assets/cash-pos-click-preview.png)](docs/repository/assets/cash-pos-click-preview.png)
 
-The owner-approved cash-sale layout: click a product to add one, adjust quantities in the cart, then review the sale before confirming cash. This actual capture contains an unposted synthetic cart. Stock deduction, COGS, tax, card processing and credit sales are not implemented by this showcase.
+The owner-approved cash-sale layout: click a product to add one, adjust quantities in the cart, then review the sale before confirming cash. This actual capture contains an unposted sample cart. Stock deduction, COGS, tax, card processing and credit sales are not implemented by this showcase.
 
 </details>
 
 [**Open your sample company →**](https://phpledger.com/demo/)
 
-No registration is needed. Each visitor gets separate synthetic books. Demo records reset hourly; destructive user actions are disabled. The [demo guide](https://github.com/rmak78/phpledger/wiki/Getting-Started) explains what to try and what is still in development.
+No registration is needed. Each visitor gets separate sample books. Demo records reset hourly; destructive user actions are disabled. The [demo guide](https://github.com/phpledger/phpledger/wiki/Getting-Started) explains what to try and what is still in development.
 
 ## How it is built
 
 The modern foundation uses **PHP 8.2+, MySQL 8.4/InnoDB and MeekroDB** in BixiSoft's lightweight modular PHP structure. Server-rendered screens and small JavaScript modules keep the application approachable to maintain.
 
-Every financial write follows the same posting path: exact decimal amounts, company/book permissions, atomic transactions, duplicate protection, period controls and immutable posted history. Local checks cover these behaviors; they do not replace independent security, accounting or usability review. [Explore the architecture →](https://github.com/rmak78/phpledger/wiki/Architecture)
+Every financial write follows the same posting path: exact decimal amounts, company/book permissions, atomic transactions, duplicate protection, period controls and immutable posted history. Local checks cover these behaviors; they do not replace independent security, accounting or usability review. [Explore the architecture →](https://github.com/phpledger/phpledger/wiki/Architecture)
 
 Developers can work with the modern source using the [local development guide](docs/DEVELOPMENT.md). Serve only `www/phpledger/public`; the repository root is not a web document root. Source availability is separate from a tested installable release.
 
@@ -145,13 +145,13 @@ Developers can work with the modern source using the [local development guide](d
 
 The current preview is English and uses one base currency per book. Choose **USD, EUR, GBP, PKR, INR, MYR, BDT, LKR, NPR or SGD**. Event times are stored in UTC and shown in the terminal's timezone; accounting dates keep their meaning.
 
-The accounting core is country-neutral. Pakistan, the UK, UAE, Saudi Arabia, Oman, Singapore, Malaysia, Sri Lanka and Bangladesh are regional research or connector directions, not a fixed definition of the product's audience. Pakistan FBR is one planned connector alongside other tax/e-invoicing integrations. Currency selection does not activate country accounting or tax rules. Reviewed translations, flexible formats and foreign-exchange accounting remain future capabilities. [Countries and currencies →](https://github.com/rmak78/phpledger/wiki/Countries-and-Currencies)
+The accounting core is country-neutral. Pakistan, the UK, UAE, Saudi Arabia, Oman, Singapore, Malaysia, Sri Lanka and Bangladesh are regional research or connector directions, not a fixed definition of the product's audience. Pakistan FBR is one planned connector alongside other tax/e-invoicing integrations. Currency selection does not activate country accounting or tax rules. Reviewed translations, flexible formats and foreign-exchange accounting remain future capabilities. [Countries and currencies →](https://github.com/phpledger/phpledger/wiki/Countries-and-Currencies)
 
 Early [tax research](docs/tax/README.md) covers eight countries and seven business types. Its 81 candidate regimes are **disabled and unreviewed**; they do not calculate taxes or establish eligibility. The [accounting rule register](docs/accounting/CORE_RULE_REGISTER.md) connects the core's controls with ICAP, ICMAP and ACCA guidance and records the remaining review gates.
 
 ## Read connections and richer samples
 
-Release **0.2.1-preview** combines scoped read API/MCP, existing-user OAuth/Connections and server-side tables with four synthetic businesses: service agency, retail shop, seasonal business and distributor. Each has 74 sources, closed 2024–2025 history, an open 2026 practice period and three editable drafts. [Reporting guides](https://phpledger.com/guides/) explain daily checks, monthly closing and quarterly/yearly review. [Setup recipes and client matrix](docs/INTEGRATIONS.md) distinguish actual native-client results from pending compatibility checks. Financial commands remain future work.
+Release **0.2.1-preview** combines scoped read API/MCP, existing-user OAuth/Connections and server-side tables with four sample businesses: service agency, retail shop, seasonal business and distributor. Each has 74 sources, closed 2024–2025 history, an open 2026 practice period and three editable drafts. [Reporting guides](https://phpledger.com/guides/) explain daily checks, monthly closing and quarterly/yearly review. [Setup recipes and client matrix](docs/INTEGRATIONS.md) distinguish actual native-client results from pending compatibility checks. Financial commands remain future work.
 
 ## Where we go from here
 
@@ -168,15 +168,15 @@ The core must work independently of add-ons. Shop and restaurant interfaces will
 
 Restaurant, pharmacy, club, trader, distributor, shop and workshop scenarios inform the longer-term product. **Scan document** and AI extraction come later, with human review before saving or posting.
 
-[**Full roadmap**](https://github.com/rmak78/phpledger/wiki/Roadmap) · [**Package scope**](https://github.com/rmak78/phpledger/wiki/First-Package) · [**Release validation**](docs/repository/sprint-05/PREVIEW-0.2.1-VALIDATION.md)
+[**Full roadmap**](https://github.com/phpledger/phpledger/wiki/Roadmap) · [**Package scope**](https://github.com/phpledger/phpledger/wiki/First-Package) · [**Release validation**](docs/repository/sprint-05/PREVIEW-0.2.1-VALIDATION.md)
 
 ## How to get involved
 
-We welcome thoughtful feedback from business owners, bookkeepers, accountants, designers and developers. Describe the task you need to finish, show a synthetic example, and tell us where the flow gets in your way.
+We welcome thoughtful feedback from business owners, bookkeepers, accountants, designers and developers. Describe the task you need to finish, show a sample example, and tell us where the flow gets in your way.
 
-- **Ask a question:** [Discussions Q&A](https://github.com/rmak78/phpledger/discussions/categories/q-a) for usage and installation help.
-- **Report a bug:** [open an issue](https://github.com/rmak78/phpledger/issues) with synthetic data and sanitized logs; [SUPPORT.md](SUPPORT.md) explains what to include.
-- **Review accounting or contribute:** start with the [contributor guide](https://github.com/rmak78/phpledger/wiki/Contributing-and-Support) or a [good first issue](https://github.com/rmak78/phpledger/issues?q=is%3Aopen+label%3A%22good+first+issue%22).
+- **Ask a question:** [Discussions Q&A](https://github.com/phpledger/phpledger/discussions/categories/q-a) for usage and installation help.
+- **Report a bug:** [open an issue](https://github.com/phpledger/phpledger/issues) with sample data and sanitized logs; [SUPPORT.md](SUPPORT.md) explains what to include.
+- **Review accounting or contribute:** start with the [contributor guide](https://github.com/phpledger/phpledger/wiki/Contributing-and-Support) or a [good first issue](https://github.com/phpledger/phpledger/issues?q=is%3Aopen+label%3A%22good+first+issue%22).
 - **Report a security problem privately:** see [SECURITY.md](SECURITY.md).
 - **Discuss a pilot or setup support:** [rmak78@gmail.com](mailto:rmak78@gmail.com).
 - **Connect on LinkedIn:** [Rana Mansoor Akbar Khan](https://pk.linkedin.com/in/rmak78).
@@ -191,6 +191,6 @@ The project-owned core and documentation use [AGPL-3.0-or-later](LICENSE), with 
 
 <p align="center">
   <a href="https://phpledger.com/">PHP Ledger</a> &nbsp; · &nbsp;
-  <a href="https://github.com/rmak78/phpledger/wiki">Documentation</a> &nbsp; · &nbsp;
-  <a href="https://github.com/rmak78/phpledger/wiki/Roadmap">What's next</a>
+  <a href="https://github.com/phpledger/phpledger/wiki">Documentation</a> &nbsp; · &nbsp;
+  <a href="https://github.com/phpledger/phpledger/wiki/Roadmap">What's next</a>
 </p>

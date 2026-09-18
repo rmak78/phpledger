@@ -80,7 +80,7 @@ Keep the same factual entity description, official URL, repository and verified 
 
 **Entity sentence:** PHP Ledger is open-source, self-hosted double-entry accounting software for small businesses, built on PHP 8.5 and MySQL 8.4 and currently in development preview.
 
-**Short bio:** Self-hosted accounting on PHP and MySQL. Trace entries, review balances and explore the synthetic demo. Development preview.
+**Short bio:** Self-hosted accounting on PHP and MySQL. Trace entries, review balances and explore the sample demo. Development preview.
 
 **0.1.3 scope for release copy:** core accounting and CSV reports; account statements with opening, running and closing balances; journal review and cumulative debit/credit totals; opening CSV cutover with an unpaid-document reconciliation register; period administration; bank CSV reconciliation; optional bundled POS enablement with retained receipt history.
 
@@ -91,9 +91,9 @@ Keep the same factual entity description, official URL, repository and verified 
 | General discovery | `https://phpledger.com/` |
 | Feature walkthrough | `https://phpledger.com/product/` |
 | Evaluation download | `https://phpledger.com/download/` |
-| Synthetic hands-on demo | `https://phpledger.com/demo/` |
-| Version-specific release | `https://github.com/rmak78/phpledger/releases/tag/v0.1.3-preview` — publish first |
-| Technical conversation | `https://github.com/rmak78/phpledger/discussions` |
+| Sample hands-on demo | `https://phpledger.com/demo/` |
+| Version-specific release | `https://github.com/phpledger/phpledger/releases/tag/v0.1.3-preview` — publish first |
+| Technical conversation | `https://github.com/phpledger/phpledger/discussions` |
 
 Social links may use `utm_source=linkedin|x|facebook|instagram|youtube`, `utm_medium=social`, `utm_campaign=preview-0-1-3`, and a descriptive `utm_content` such as `expense-to-journal`. Use clean canonical URLs for directory entries and HN. UTM parameters are labels, not an installed analytics system; no client tracking or conversion attribution is claimed.
 
@@ -109,7 +109,7 @@ All version-specific text below is a **draft for the verified 0.1.3 publication*
 >
 > This preview brings together opening cutover, period controls, bank reconciliation and CSV reports. Account statements show opening, running and closing balances; journal review shows cumulative debits and credits. Optional POS can be enabled per company while existing receipts remain readable after disablement.
 >
-> Try the synthetic demo or download the package: https://phpledger.com/download/
+> Try the sample demo or download the package: https://phpledger.com/download/
 >
 > We would like feedback on the bookkeeping tasks you can finish and the screens that need clearer explanations. It remains a development preview; accountant review and jurisdiction-specific reporting support are still open work.
 
@@ -119,7 +119,7 @@ All version-specific text below is a **draft for the verified 0.1.3 publication*
 >
 > That is the review path in the PHP Ledger preview. Opening balances, bank reconciliation and reports use the same company and book scope. Corrections retain their original entry through a linked reversal.
 >
-> If you keep or review books, try a synthetic example and tell us where the evidence or presentation is missing: https://phpledger.com/product/
+> If you keep or review books, try a sample example and tell us where the evidence or presentation is missing: https://phpledger.com/product/
 >
 > These are country-neutral reports available for review. Customer/vendor subledgers and reviewed regional reporting remain later work.
 
@@ -135,19 +135,19 @@ All version-specific text below is a **draft for the verified 0.1.3 publication*
 
 > PHP Ledger uses small typed PHP functions, MySQL transactions and one central posting service. The next milestone is scoped API/MCP read access, followed by controlled commands and then optional receivables/payables.
 >
-> We are looking for concrete feedback on installation, access isolation, report reconciliation and the clarity of the UI. Please use synthetic examples and sanitized logs.
+> We are looking for concrete feedback on installation, access isolation, report reconciliation and the clarity of the UI. Please use sample examples and sanitized logs.
 >
-> Source and contributor guidance: https://github.com/rmak78/phpledger
+> Source and contributor guidance: https://github.com/phpledger/phpledger
 
 ### X: short post and five-part thread
 
-**Short post:** PHP Ledger 0.1.3-preview: self-hosted accounting on PHP/MySQL, with account running balances, opening cutover, period controls, bank reconciliation and CSV reports. Explore synthetic books: https://phpledger.com/ Development preview.
+**Short post:** PHP Ledger 0.1.3-preview: self-hosted accounting on PHP/MySQL, with account running balances, opening cutover, period controls, bank reconciliation and CSV reports. Explore sample books: https://phpledger.com/ Development preview.
 
-1. PHP Ledger is a self-hosted accounting project built on PHP and MySQL. The 0.1.3 development preview is ready to explore with synthetic books: https://phpledger.com/
+1. PHP Ledger is a self-hosted accounting project built on PHP and MySQL. The 0.1.3 development preview is ready to explore with sample books: https://phpledger.com/
 2. Follow an account from its opening balance through each movement to the closing balance. Source links help explain the numbers; journal review shows cumulative debits and credits.
 3. Opening cutover, period administration, bank reconciliation and CSV reports now sit alongside the central posting and linked-reversal workflow.
 4. Optional cash POS is enabled per company. Existing receipts remain readable after disablement. Tax, inventory/COGS, credit sales and card processing are outside this showcase.
-5. Next: API/MCP reads, controlled commands, then AR/AP. Accountant and user review remain open. Try it and share a concrete workflow problem: https://github.com/rmak78/phpledger/discussions
+5. Next: API/MCP reads, controlled commands, then AR/AP. Accountant and user review remain open. Try it and share a concrete workflow problem: https://github.com/phpledger/phpledger/discussions
 
 ### Facebook
 
@@ -161,14 +161,14 @@ All version-specific text below is a **draft for the verified 0.1.3 publication*
 
 ### Instagram carousel: four 1080 × 1350 panels
 
-Use actual release captures, the supplied logo and the existing brand colors. Keep “Development preview · Synthetic data” readable on every capture. These dimensions are production instructions, not a claim that new artwork has been generated.
+Use actual release captures, the supplied logo and the existing brand colors. Keep “Development preview · Sample data” readable on every capture. These dimensions are production instructions, not a claim that new artwork has been generated.
 
 1. **Follow every movement** — Account statement capture with opening, running and closing balances.
 2. **See the entry behind it** — Journal capture with cumulative debit/credit totals and source link.
 3. **Reconcile the period** — Bank reconciliation/report capture with its actual state visible.
 4. **Try the sample books** — Product/demo address and a concise development-preview label.
 
-**Caption:** Explore PHP Ledger's accounting preview on your own PHP and MySQL hosting. Follow account movements, review journals and reconcile the period with synthetic sample books. API/MCP access is next; customer/vendor subledgers follow later. Product and demo: phpledger.com. #OpenSource #SelfHosted #Accounting #PHP
+**Caption:** Explore PHP Ledger's accounting preview on your own PHP and MySQL hosting. Follow account movements, review journals and reconcile the period with sample books. API/MCP access is next; customer/vendor subledgers follow later. Product and demo: phpledger.com. #OpenSource #SelfHosted #Accounting #PHP
 
 ### YouTube: approximately 60-second narration
 
@@ -180,11 +180,11 @@ Use actual release captures, the supplied logo and the existing brand colors. Ke
 >
 > The optional cash POS showcase shares the posting service. It does not manage stock, calculate tax or process cards.
 >
-> Try the synthetic demo or evaluation download at phpledger.com. API and MCP read access come next. Accountant review and customer/vendor subledgers remain further work.
+> Try the sample demo or evaluation download at phpledger.com. API and MCP read access come next. Accountant review and customer/vendor subledgers remain further work.
 
-**Shot order:** 0–8s identity/preview label; 8–23s account statement and source; 23–36s journal and reconciliation; 36–46s report export; 46–54s optional POS boundary; 54–60s demo/download. Capture the deployed version after release; keep identifiers synthetic and leave the actual version label visible. Add captions and a transcript.
+**Shot order:** 0–8s identity/preview label; 8–23s account statement and source; 23–36s journal and reconciliation; 36–46s report export; 46–54s optional POS boundary; 54–60s demo/download. Capture the deployed version after release; keep identifiers sample and leave the actual version label visible. Add captions and a transcript.
 
-**Description:** PHP Ledger 0.1.3-preview walkthrough using fictional books. Download, requirements and limitations: https://phpledger.com/download/ · Demo: https://phpledger.com/demo/ · Source: https://github.com/rmak78/phpledger. This is a development preview, with country-neutral reporting and later API/MCP and AR/AP work.
+**Description:** PHP Ledger 0.1.3-preview walkthrough using fictional books. Download, requirements and limitations: https://phpledger.com/download/ · Demo: https://phpledger.com/demo/ · Source: https://github.com/phpledger/phpledger. This is a development preview, with country-neutral reporting and later API/MCP and AR/AP work.
 
 ## Community and directory kit
 
@@ -192,7 +192,7 @@ Use actual release captures, the supplied logo and the existing brand colors. Ke
 
 **Short description:** Self-hosted double-entry accounting on PHP and MySQL, with traceable journals, account statements, bank reconciliation and CSV reports. Development preview.
 
-**Long description:** PHP Ledger is an open-source accounting project for customer-owned PHP 8.5 and MySQL 8.4 hosting. The preview includes company/book scope, receipts and expenses, general journals, linked reversals, account statements, opening cutover, period controls, bank CSV reconciliation and core reports. A bundled optional cash POS showcase shares the posting service. New project-owned code is MIT licensed; dependencies keep their own terms. A temporary synthetic demo and evaluation package are available. API/MCP access, operational AR/AP, tax and inventory remain future work. Regional accountant review is not complete.
+**Long description:** PHP Ledger is an open-source accounting project for customer-owned PHP 8.5 and MySQL 8.4 hosting. The preview includes company/book scope, receipts and expenses, general journals, linked reversals, account statements, opening cutover, period controls, bank CSV reconciliation and core reports. A bundled optional cash POS showcase shares the posting service. New project-owned code is MIT licensed; dependencies keep their own terms. A temporary sample demo and evaluation package are available. API/MCP access, operational AR/AP, tax and inventory remain future work. Regional accountant review is not complete.
 
 | Destination | Execution path and current state |
 |---|---|
@@ -202,19 +202,19 @@ Use actual release captures, the supplied logo and the existing brand colors. Ke
 | SaaSHub, LibHunt, OpenSourceAlternative.to, php[architect] | Retained as candidate channels from the original plan. Verify current submission forms, existing listings, development-preview eligibility and any charge before action. No account/form inspection or acceptance is claimed here. |
 | awesome-selfhosted | Retain as a later candidate and check its [current data-repository contribution rules](https://github.com/awesome-selfhosted/awesome-selfhosted-data) before proposing an entry. The original plan's January 2027 date is a reminder to recheck, not a guaranteed eligibility date. |
 
-**Editorial pitch draft:** I maintain PHP Ledger, an open-source accounting preview on PHP 8.5 and MySQL 8.4. Its current release adds reviewed opening-cutover workflows, bank reconciliation and company-level optional-module controls to the core journal/report path. A synthetic demo and installable evaluation package are available at https://phpledger.com/. API/MCP reads are next; AR/AP, tax and inventory remain future work. If development-stage tools fit your publication, the release notes and source are linked from the download page.
+**Editorial pitch draft:** I maintain PHP Ledger, an open-source accounting preview on PHP 8.5 and MySQL 8.4. Its current release adds reviewed opening-cutover workflows, bank reconciliation and company-level optional-module controls to the core journal/report path. A sample demo and installable evaluation package are available at https://phpledger.com/. API/MCP reads are next; AR/AP, tax and inventory remain future work. If development-stage tools fit your publication, the release notes and source are linked from the download page.
 
 **Show HN title draft:** Show HN: PHP Ledger, self-hosted accounting on PHP and MySQL
 
-**First-comment draft:** I maintain PHP Ledger. I wanted a small accounting core whose entries can be followed from source to journal to report, with optional modules layered on it. The current preview supports synthetic evaluation with an installable package and a no-registration demo. The newest work covers running balances, opening cutover, period controls, bank reconciliation and module lifecycle. It is not a regional compliance package, and tax, inventory and operational AR/AP are still ahead. I would value feedback on installation, the traceability of the numbers and the workflows that feel incomplete.
+**First-comment draft:** I maintain PHP Ledger. I wanted a small accounting core whose entries can be followed from source to journal to report, with optional modules layered on it. The current preview supports sample evaluation with an installable package and a no-registration demo. The newest work covers running balances, opening cutover, period controls, bank reconciliation and module lifecycle. It is not a regional compliance package, and tax, inventory and operational AR/AP are still ahead. I would value feedback on installation, the traceability of the numbers and the workflows that feel incomplete.
 
 Check whether a prior Show HN exists and whether the current work meets the [Show HN guidelines](https://news.ycombinator.com/showhn.html): a usable project, maker available for discussion, no coordinated upvotes, and no routine point-release announcement presented as a new project. Verify demo capacity before choosing a time; publication popularity and uptime are not guaranteed.
 
-**Reddit/community draft:** I maintain PHP Ledger, a PHP/MySQL accounting development preview. I am sharing it for feedback on [installation and code structure / self-hosting and backups / contributing to an accounting core]. It has a synthetic demo and downloadable package. The current scope includes journals, running account balances, opening cutover, bank reconciliation and CSV reports. API/MCP reads are next; customer/vendor subledgers, tax and stock remain future work. Source and limitations: https://github.com/rmak78/phpledger. What would make this evaluation more useful in your workflow?
+**Reddit/community draft:** I maintain PHP Ledger, a PHP/MySQL accounting development preview. I am sharing it for feedback on [installation and code structure / self-hosting and backups / contributing to an accounting core]. It has a sample demo and downloadable package. The current scope includes journals, running account balances, opening cutover, bank reconciliation and CSV reports. API/MCP reads are next; customer/vendor subledgers, tax and stock remain future work. Source and limitations: https://github.com/phpledger/phpledger. What would make this evaluation more useful in your workflow?
 
 Adapt the bracketed topic to each community and check its rules, promotion frequency and megathread requirements on the actual day. Do not cross-post identical text on a timer. No posts or moderator messages were sent.
 
-**Technical article outline:** why one central posting service; trace a synthetic expense through a journal and statement; fixed-precision amounts and linked reversals; opening/cutover and period reconciliation; optional-module disablement with retained history; what API/MCP reads must preserve; evaluation instructions and explicit remaining gates. Publish one original article first; follow the destination's canonical/cross-post policy before reuse.
+**Technical article outline:** why one central posting service; trace a sample expense through a journal and statement; fixed-precision amounts and linked reversals; opening/cutover and period reconciliation; optional-module disablement with retained history; what API/MCP reads must preserve; evaluation instructions and explicit remaining gates. Publish one original article first; follow the destination's canonical/cross-post policy before reuse.
 
 ## Launch sequence and measurement
 
@@ -230,7 +230,7 @@ Use **Day 0 = verified 0.1.3 publication**. These are sequencing recommendations
 | Day 5 | Developer/contributor post and concrete feedback triage. |
 | Days 6–7 | Review search coverage, failed installs, reproducible reports and substantive conversations; decide what to continue. |
 
-Paid creative can reuse two verified synthetic screen stories: account-to-journal for developers and account/report review for bookkeepers. Prepare the actual post/ad identity, destination, placement-compatible assets and account-side terms first. No budget, spend, guaranteed clicks, fabricated adoption, endorsements or tax-compliance claims belong in this public kit. No paid campaign has been activated.
+Paid creative can reuse two verified sample screen stories: account-to-journal for developers and account/report review for bookkeepers. Prepare the actual post/ad identity, destination, placement-compatible assets and account-side terms first. No budget, spend, guaranteed clicks, fabricated adoption, endorsements or tax-compliance claims belong in this public kit. No paid campaign has been activated.
 
 ### Read-only snapshot commands
 

@@ -1,4 +1,4 @@
-# Synthetic retail statements: two-year acceptance fixture
+# Sample retail statements: two-year acceptance fixture
 
 **Original documentation fixture only — not installed sample data, a working report export, a real business, a tax calculation, or a compliance claim.** The values below were specified for the report redesign and checked independently for arithmetic consistency. They are not loaded into the current application or its sample company.
 
@@ -106,13 +106,13 @@ The fixture assumes the supplied tax expense flows through the tax-payable movem
 | Total loan | 260 opening − 60 repayments = 200 (140 non-current + 60 current) | 300 derived opening − 40 repayments = 260 (200 non-current + 60 current) |
 | Cash | 500 opening + 150 net increase = 650 | 438 opening + 62 net increase = 500 |
 
-The 2025 opening amounts above are **derived bridges within this synthetic fixture**, not imported or verified records. They also balance as an opening position: assets `400 + 220 + 190 + 438 = 1,248`; capital/retained earnings/liabilities `800 + 8 + 300 + 100 + 40 = 1,248`. The actual opening transaction set, individual invoices, inventory layers and asset register have not been created.
+The 2025 opening amounts above are **derived bridges within this sample fixture**, not imported or verified records. They also balance as an opening position: assets `400 + 220 + 190 + 438 = 1,248`; capital/retained earnings/liabilities `800 + 8 + 300 + 100 + 40 = 1,248`. The actual opening transaction set, individual invoices, inventory layers and asset register have not been created.
 
 ## Future supporting-fixture requirements
 
 The following are requirements for later original acceptance datasets, not working modules or invented transaction detail:
 
-- **Receivables aging:** provide synthetic invoices, due dates, credit notes, receipt allocations, cutover positions and dated reversals. A selected-date aging must reconcile to receivables **350/250**, with an explicit aging basis and bucket definitions; no balancing plug or guessed invoice can fill a gap.
+- **Receivables aging:** provide sample invoices, due dates, credit notes, receipt allocations, cutover positions and dated reversals. A selected-date aging must reconcile to receivables **350/250**, with an explicit aging basis and bucket definitions; no balancing plug or guessed invoice can fill a gap.
 - **Payables aging:** supply bills, due dates, supplier credits and payment allocations that reconcile to **180/140**. Distinguish a genuine zero from an unavailable subledger or unresolved opening balance.
 - **Stock valuation and COGS:** supply item quantities, opening valuation, purchases, sales/issues, returns, stock adjustments and an explicitly reviewed costing policy that reconcile inventory **400/300** and COGS **1,800/1,440**. A catalog selling price or total-only journal does not satisfy this requirement.
 - **Asset register and loans:** provide the asset additions/depreciation and loan maturity/payment facts needed to reconcile PPE **540/500**, depreciation **60/50**, and current/non-current loan balances. Do not classify maturity from an account label alone.

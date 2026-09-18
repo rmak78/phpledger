@@ -34,7 +34,7 @@ The menu's prepared meal kit is a deliberately simplified counted stock unit; it
 
 The opening position includes 120 overdue dues, 300 unpaid hall hire and 1,100 prepaid membership income remaining from an earlier 1,200 contract. During September, two new annual memberships collect 240 into deferred income, three monthly memberships are invoiced for 60, and event tickets earn 150 cash. Receipts settle 80 of opening dues and 20 of current dues. Hall hire adds a 300 unpaid bill; a 200 payment reduces the older bill. Utilities cost 40 and 100 till cash moves to bank.
 
-At month end, recognize 100 from the older annual contract and 20 from the new annual contracts. September income is 330; remaining prepaid income is **1,220**, not current income. The fixture models even monthly service over stated annual terms solely for demonstration; real membership agreements and recognition policy need accounting review. Member groups are synthetic aggregate contacts, not real members. Recurring billing, attendance, access permissions and renewal messages remain future workflows.
+At month end, recognize 100 from the older annual contract and 20 from the new annual contracts. September income is 330; remaining prepaid income is **1,220**, not current income. The fixture models even monthly service over stated annual terms solely for demonstration; real membership agreements and recognition policy need accounting review. Member groups are sample aggregate contacts, not real members. Recurring billing, attendance, access permissions and renewal messages remain future workflows.
 
 ## Pharmacy: Meadow Training Pharmacy
 

@@ -2,9 +2,9 @@
 
 **Published on 18 September 2026.** First stable release, by owner decision, consolidating the 0.6.1 workflow closure, the 0.7 browser installer and the 0.8 signed update/backup/recovery work.
 
-- GitHub release: https://github.com/rmak78/phpledger/releases/tag/v1.0.0 (published 14:25:35 UTC, marked latest, not a prerelease)
-- Media kit: https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip
-- Wiki: https://github.com/rmak78/phpledger/wiki/Release-1.0.0 (wiki commit `5f5f2e5`)
+- GitHub release: https://github.com/phpledger/phpledger/releases/tag/v1.0.0 (published 14:25:35 UTC, marked latest, not a prerelease)
+- Media kit: https://github.com/phpledger/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip
+- Wiki: https://github.com/phpledger/phpledger/wiki/Release-1.0.0 (wiki commit `5f5f2e5`)
 - Downloads page and hosted demo: **not yet updated on phpledger.com**; see "Pending owner actions" below.
 
 The owner instructed same-day publication of the consolidated work as 1.0.0 on 18 September 2026. Independent accounting review, independent security review, supervised pilots with a month-end close, unfamiliar-operator installation observation, the 14-day release-candidate period and restricted shared-host recovery certification did not run before publication. Every release surface says so; none claims otherwise.
@@ -25,7 +25,7 @@ The owner instructed same-day publication of the consolidated work as 1.0.0 on 1
 
 All four assets (both archives and both `.sha256` files) were downloaded anonymously from their public URLs after publication and matched the local artifacts; `sha256sum -c` passed for both archives. The media-kit checksum asset was re-uploaded once to correct a Windows line ending; the corrected asset is the one verified.
 
-The media kit contains README, announcement, social and e-mail drafts, a guided demo, FAQ, checksums and eight screenshots captured from the local 1.0.0 runtime with a synthetic "Northbridge Bookkeeping Demo" company (Home at 1440 and 390, invoice editor, ageing, profit and loss, bank reconciliation, Modules, and the browser installer's database step from a disposable unconfigured instance). No campaign was sent.
+The media kit contains README, announcement, social and e-mail drafts, a guided demo, FAQ, checksums and eight screenshots captured from the local 1.0.0 runtime with a sample "Northbridge Bookkeeping Demo" company (Home at 1440 and 390, invoice editor, ageing, profit and loss, bank reconciliation, Modules, and the browser installer's database step from a disposable unconfigured instance). No campaign was sent.
 
 **No signed update metadata is attached.** The official publisher signing key did not exist at publication (generating a long-lived private key on this machine was refused by the tooling's permission policy and is an owner action). The procedure, fingerprint conventions and the owner's key-generation command are in [RELEASE-SIGNING.md](../RELEASE-SIGNING.md). 1.0.0 is verified by checksum; later releases ship `phpledger-<version>.update.json`.
 

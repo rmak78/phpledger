@@ -27,7 +27,7 @@ test('correction preview is read only and reviewed replacement is atomic and ret
 
 test('stock correction previews restore the old issue before costing replacement and credit returns',function():void {
     $f=inventory_fixture(); $args=[$f['actor_id'],$f['company_id'],$f['book_id']];
-    $party=pl_save_party(...array_merge($args,[['legal_name'=>'Synthetic correction buyer','entity_type'=>'private_company','country_code'=>'GB','is_customer'=>true,'is_vendor'=>true,'currency'=>'USD','request_key'=>bin2hex(random_bytes(16)),'reason'=>'Correction fixture']]));
+    $party=pl_save_party(...array_merge($args,[['legal_name'=>'Sample correction buyer','entity_type'=>'private_company','country_code'=>'GB','is_customer'=>true,'is_vendor'=>true,'currency'=>'USD','request_key'=>bin2hex(random_bytes(16)),'reason'=>'Correction fixture']]));
     $f['party_id']=$party['id'];
     pl_inventory_receive(...array_merge($args,[inventory_move_input($f,'3','10')]));
     $input=ar_ap_input($f,'invoice','20'); $input['date']='2026-01-06'; $input['lines'][0]['quantity']='3'; $input['lines'][0]['product_id']=$f['product_id'];
@@ -77,7 +77,7 @@ test('foreign supplier credit correction restores its carrying allocation for re
 
 test('stock document previews consume exact sequential issue and historical return residuals', function (): void {
     $f=inventory_fixture();
-    $party=pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],['legal_name'=>'Synthetic stock preview customer','entity_type'=>'private_company','country_code'=>'GB','is_customer'=>true,'is_vendor'=>true,'currency'=>'USD','request_key'=>bin2hex(random_bytes(16)),'reason'=>'Synthetic stock preview']);
+    $party=pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],['legal_name'=>'Sample stock preview customer','entity_type'=>'private_company','country_code'=>'GB','is_customer'=>true,'is_vendor'=>true,'currency'=>'USD','request_key'=>bin2hex(random_bytes(16)),'reason'=>'Sample stock preview']);
     $f['party_id']=$party['id'];
     pl_inventory_receive($f['actor_id'],$f['company_id'],$f['book_id'],inventory_move_input($f,'3','10'));
     $input=ar_ap_input($f,'invoice','20'); $input['date']='2026-01-06'; $input['lines'][0]['product_id']=$f['product_id'];
@@ -100,7 +100,7 @@ test('stock document previews consume exact sequential issue and historical retu
 
 test('stock editor confirmation rejects a changed cost basis without saving a draft', function (): void {
     $f=inventory_fixture();
-    $party=pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],['legal_name'=>'Synthetic stale stock customer','entity_type'=>'private_company','country_code'=>'GB','is_customer'=>true,'is_vendor'=>false,'currency'=>'USD','request_key'=>bin2hex(random_bytes(16)),'reason'=>'Synthetic stale stock preview']);
+    $party=pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],['legal_name'=>'Sample stale stock customer','entity_type'=>'private_company','country_code'=>'GB','is_customer'=>true,'is_vendor'=>false,'currency'=>'USD','request_key'=>bin2hex(random_bytes(16)),'reason'=>'Sample stale stock preview']);
     $f['party_id']=$party['id'];
     pl_inventory_receive($f['actor_id'],$f['company_id'],$f['book_id'],inventory_move_input($f,'3','10'));
     $input=ar_ap_input($f,'invoice','20'); $input['date']='2026-01-06'; $input['lines'][0]['product_id']=$f['product_id'];

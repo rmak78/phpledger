@@ -263,7 +263,7 @@ function pl_seed_core_sample(int $actorId, int $companyId, int $bookId): void
             || $drafts['total_amount'] !== $sample['expected']['draft_total'] || $drafts['total'] !== count($sample['drafts'])) {
             throw new RuntimeException('The sample pack did not reconcile; the entire setup was rolled back.');
         }
-        // Pin the exact synthetic pack in append-only installation history;
+        // Pin the exact sample pack in append-only installation history;
         // the original chart snapshot remains unchanged.
         $snapshot = json_encode(['sample_pack' => ['id' => $sample['id'], 'version' => $sample['version'], 'digest' => hash('sha256', $contents), 'date' => $company['start_date'], 'currency' => $company['currency']]], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
         pl_record_installation_history($actorId, $companyId, $bookId, 'sample', pl_starter_template(), $snapshot);

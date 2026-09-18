@@ -32,7 +32,7 @@ row is still written and the script then exits with code 1.
 
 [CmdletBinding()]
 param(
-    [ValidatePattern('^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$')][string]$Repository = 'rmak78/phpledger',
+    [ValidatePattern('^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$')][string]$Repository = 'phpledger/phpledger',
     [ValidatePattern('^$|^v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$')][string]$ReleaseTag = '',
     [string]$ZipAssetName = '',
     [string]$ShaAssetName = '',
@@ -302,7 +302,7 @@ if ($IncludePrivateTraffic) {
 }
 $releases = Get-JsonSource -Label 'target release' -Arguments @('api', '--method', 'GET', ('repos/{0}/releases/tags/{1}' -f $Repository,$ReleaseTag)) -RawName 'release.json'
 
-# Same query as {repository(owner:"rmak78",name:"phpledger"){discussions{totalCount}}}.
+# Same query as {repository(owner:"phpledger",name:"phpledger"){discussions{totalCount}}}.
 # Owner and name travel as GraphQL variables so no double quotes have to survive
 # Windows PowerShell 5.1 native-command argument passing.
 $discussionQuery = 'query($owner:String!,$name:String!){repository(owner:$owner,name:$name){discussions{totalCount}}}'

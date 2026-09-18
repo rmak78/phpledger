@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 function currency_rate_fixture(array $f, string $rate = '1.234567890123', string $date = '2026-09-10'): array
 {
-    return pl_currency_rate_enter($f['actor_id'], $f['company_id'], $f['book_id'], ['from_currency' => 'EUR', 'to_currency' => 'USD', 'rate_date' => $date, 'rate' => $rate, 'source' => 'Synthetic manual quote', 'note' => 'Synthetic rate evidence', 'idempotency_key' => bin2hex(random_bytes(16))]);
+    return pl_currency_rate_enter($f['actor_id'], $f['company_id'], $f['book_id'], ['from_currency' => 'EUR', 'to_currency' => 'USD', 'rate_date' => $date, 'rate' => $rate, 'source' => 'Sample manual quote', 'note' => 'Sample rate evidence', 'idempotency_key' => bin2hex(random_bytes(16))]);
 }
 
 test('currency arithmetic uses twelve-place rates and explicit half-up without floats', function (): void {
@@ -35,7 +35,7 @@ test('domestic snapshots, immutable functional currency and unknown monetary cla
 
 test('manual rates append revisions, select prior dates, enforce scope and preserve provenance', function (): void {
     $f = ledger_fixture(); $other = ledger_fixture();
-    $input = ['from_currency' => 'EUR','to_currency' => 'USD','rate_date' => '2026-09-10','rate' => '1.25','source' => 'Synthetic quote','note' => 'Synthetic evidence','idempotency_key' => bin2hex(random_bytes(16))];
+    $input = ['from_currency' => 'EUR','to_currency' => 'USD','rate_date' => '2026-09-10','rate' => '1.25','source' => 'Sample quote','note' => 'Sample evidence','idempotency_key' => bin2hex(random_bytes(16))];
     $a = pl_currency_rate_enter($f['actor_id'], $f['company_id'], $f['book_id'], $input);
     $retry = pl_currency_rate_enter($f['actor_id'], $f['company_id'], $f['book_id'], $input);
     assert_same((string) $a['id'], (string) $retry['id']);
@@ -48,10 +48,10 @@ test('manual rates append revisions, select prior dates, enforce scope and prese
     assert_same(2, (int) $b['revision']);
     assert_throws(fn() => DB::update('pl_currency_rates', ['rate' => '2'], 'id = %i', $a['id']), Throwable::class, 'append-only');
     currency_rate_fixture($f, '9', '2026-09-20');
-    $selected = pl_currency_rate_lookup($f['actor_id'], $f['company_id'], $f['book_id'], 'EUR','USD','2026-09-14','spot','Synthetic quote');
+    $selected = pl_currency_rate_lookup($f['actor_id'], $f['company_id'], $f['book_id'], 'EUR','USD','2026-09-14','spot','Sample quote');
     assert_same((string) $b['id'], (string) $selected['id']); assert_same(true, $selected['rate_is_stale']);
-    assert_same(null, pl_currency_rate_lookup($f['actor_id'], $f['company_id'], $f['book_id'], 'EUR','USD','2026-09-01','spot','Synthetic quote'));
-    assert_throws(fn() => pl_currency_rate_lookup($other['actor_id'], $f['company_id'], $f['book_id'], 'EUR','USD','2026-09-14','spot','Synthetic quote'), DomainException::class);
+    assert_same(null, pl_currency_rate_lookup($f['actor_id'], $f['company_id'], $f['book_id'], 'EUR','USD','2026-09-01','spot','Sample quote'));
+    assert_throws(fn() => pl_currency_rate_lookup($other['actor_id'], $f['company_id'], $f['book_id'], 'EUR','USD','2026-09-14','spot','Sample quote'), DomainException::class);
 });
 
 test('foreign snapshots validate accounts and conversion and reverse frozen original rate metadata', function (): void {
@@ -63,7 +63,7 @@ test('foreign snapshots validate accounts and conversion and reverse frozen orig
     assert_same('10.0000', $j['lines'][0]['amount_fc']);
     // The fixture owner may reverse on the original open-period date. A fixed
     // later date becomes an invalid backdate when the wall clock advances.
-    $reverse = pl_reverse_journal($f['actor_id'], $f['company_id'], $f['book_id'], $j['id'], $payload['date'], bin2hex(random_bytes(16)), 'Synthetic reversal');
+    $reverse = pl_reverse_journal($f['actor_id'], $f['company_id'], $f['book_id'], $j['id'], $payload['date'], bin2hex(random_bytes(16)), 'Sample reversal');
     assert_same($j['lines'][0]['rate'], $reverse['lines'][0]['rate']);
     assert_same(false, $reverse['lines'][0]['rate_is_stale']);
     assert_same('12.5000', $reverse['lines'][0]['credit']);
@@ -84,7 +84,7 @@ test('account currency changes see postings committed after the caller snapshot'
     $f = ledger_fixture(); $accountId = $f['accounts']['1000'];
     $account = pl_get_account($f['actor_id'], $f['company_id'], $f['book_id'], $accountId);
     $input = ['name'=>$account['name'], 'code'=>$account['code'], 'type'=>$account['type'], 'role'=>$account['role'], 'is_active'=>true,
-        'currency'=>'EUR', 'reason'=>'Synthetic stale snapshot currency change'];
+        'currency'=>'EUR', 'reason'=>'Sample stale snapshot currency change'];
     DB::startTransaction();
     try {
         assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journal_lines WHERE account_id=%i', $accountId));

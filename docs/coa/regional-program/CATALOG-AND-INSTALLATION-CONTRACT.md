@@ -36,7 +36,7 @@ Current sample provisioning adds sample metadata to the installation row within 
 | Country | 0 or 1 | Reviewed suggestions for a stated country, legal form and reporting scope. Country selection is independent of functional currency. |
 | Optional account group | 0 or more, explicitly selected | A small reviewed extension with declared dependencies and conflicts. It cannot act as a hidden second country or industry package. |
 
-An undecided user can save a setup draft or deliberately use the existing neutral-only setup. That fallback is visibly labelled **Neutral chart only**; it is not a fabricated industry choice or evidence that a composed regional package is ready. Do not require an answer about regional obligations to explore a separate synthetic sample.
+An undecided user can save a setup draft or deliberately use the existing neutral-only setup. That fallback is visibly labelled **Neutral chart only**; it is not a fabricated industry choice or evidence that a composed regional package is ready. Do not require an answer about regional obligations to explore a separate sample.
 
 The agreed country IDs are ISO alpha-2 **PK, IN, AE, GB, US**, displayed as Pakistan, India, United Arab Emirates, United Kingdom and United States. Keep country ID, jurisdiction/registration scope, reporting framework, legal form and currency as separate fields. Do not infer any of them from an IP address, browser language, tax identifier or currency.
 
@@ -128,7 +128,7 @@ The exact user-visible lifecycle is:
 | Status | Meaning | Permitted use |
 |---|---|---|
 | **Research** | Incomplete evidence or proposals; no accounting approval. | Read research notes and gaps. No application to a real company. |
-| **Preview-only** | A structurally readable candidate with enough attribution to review. | Inspect a clearly labelled proposal/prototype and synthetic examples. No application to a real company. |
+| **Preview-only** | A structurally readable candidate with enough attribution to review. | Inspect a clearly labelled proposal/prototype and sample examples. No application to a real company. |
 | **Accountant reviewed** | Named qualified review covers the exact candidate and scope. | Continue technical and UX validation. No application to a real company yet. |
 | **Validated** | Required technical, accounting-example and setup acceptance evidence passes for the reviewed digest. | Release preparation only; no ordinary-company installation until publication decision. |
 | **Released** | Maintainer release decision pins the validated artifact and compatibility. | Eligible for installation when all composition and company-specific checks also pass. |
@@ -200,7 +200,7 @@ Every installed snapshot is self-contained enough to explain and export the char
 
 The upgrade preserves every existing `pl_template_installations.snapshot` exactly. Create a baseline history record referencing or copying its exact bytes and known IDs/digests; label unrecorded choices/review details **Unknown from legacy installation**, not inferred approval. Keep any recorded sample-pack metadata intact. Preserve account IDs, codes, types, roles, journal counts/amounts and company setup state. A compatibility reader can expose the latest installation while the new history becomes authoritative; two writable installation histories are not permitted.
 
-New sample creation either persists its final installation snapshot after synthetic provisioning succeeds inside the same transaction, or records sample provenance in a separate append-only companion event. It must not mutate an already-confirmed chart snapshot. This changes metadata mechanics only; it does not authorize rebuilding current sample companies.
+New sample creation either persists its final installation snapshot after sample provisioning succeeds inside the same transaction, or records sample provenance in a separate append-only companion event. It must not mutate an already-confirmed chart snapshot. This changes metadata mechanics only; it does not authorize rebuilding current sample companies.
 
 ### Additions, upgrades and reversible metadata
 

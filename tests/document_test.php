@@ -5,12 +5,12 @@ function document_input(array $f, string $kind = 'expense', string $amount = '12
 {
     return ['kind' => $kind, 'date' => '2026-09-14', 'amount' => $amount,
         'money_account_id' => $f['accounts']['1000'], 'category_account_id' => $f['accounts'][$kind === 'receipt' ? '4000' : '5000'],
-        'counterparty' => 'Synthetic supplier', 'reference' => 'TEST-REFERENCE', 'memo' => 'Synthetic document proof', 'creation_key' => bin2hex(random_bytes(16))];
+        'counterparty' => 'Sample supplier', 'reference' => 'TEST-REFERENCE', 'memo' => 'Sample document proof', 'creation_key' => bin2hex(random_bytes(16))];
 }
 
 function setup_input(string $mode = 'fresh'): array
 {
-    return ['name' => 'Synthetic setup ' . bin2hex(random_bytes(4)), 'currency' => 'USD', 'start_date' => '2026-09-14', 'fiscal_year_end' => '12-31', 'start_mode' => $mode, 'template_digest' => pl_starter_template()['digest'], 'zero_balances_confirmed' => true];
+    return ['name' => 'Sample setup ' . bin2hex(random_bytes(4)), 'currency' => 'USD', 'start_date' => '2026-09-14', 'fiscal_year_end' => '12-31', 'start_mode' => $mode, 'template_digest' => pl_starter_template()['digest'], 'zero_balances_confirmed' => true];
 }
 
 test('setup pins one chart and rejects stale previews and changed requests', function (): void {
@@ -141,9 +141,9 @@ test('closed periods and source linkage failures preserve drafts with no partial
     assert_throws(fn () => pl_post_document($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], 1), DomainException::class, 'open accounting period');
     assert_same('draft', pl_get_document($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'])['status']);
     DB::update('pl_periods', ['status' => 'open'], 'id = %i', $f['period_id']);
-    DB::query("CREATE TRIGGER pl_test_document_failure BEFORE UPDATE ON pl_documents FOR EACH ROW BEGIN IF NEW.id = " . $draft['id'] . " AND NEW.journal_id IS NOT NULL THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Synthetic source linkage failure'; END IF; END");
+    DB::query("CREATE TRIGGER pl_test_document_failure BEFORE UPDATE ON pl_documents FOR EACH ROW BEGIN IF NEW.id = " . $draft['id'] . " AND NEW.journal_id IS NOT NULL THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Sample source linkage failure'; END IF; END");
     try {
-        assert_throws(fn () => pl_post_document($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], 1), MeekroDBException::class, 'Synthetic source linkage failure');
+        assert_throws(fn () => pl_post_document($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], 1), MeekroDBException::class, 'Sample source linkage failure');
         assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id = %i', $f['book_id']));
         assert_same('draft', pl_get_document($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'])['status']);
     } finally {

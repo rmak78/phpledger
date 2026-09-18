@@ -24,7 +24,7 @@ Status: implemented and checked locally; not published. Application source, vers
 
 Updated source pages: Home, Product, Point of sale, Download, About, Roadmap, News, the new 0.6.0 release article, daily cash, monthly closing and quarterly/yearly review. Shared `site.json` capabilities, limitations, product screenshot and default social artwork were updated; generated HTML, RSS, sitemap and AI discovery documents were rebuilt from source.
 
-The screenshot library contains 18 fresh captures from the existing local 0.6.0 runtime (`127.0.0.1:18219`) and 36 WebP derivatives. Fresh Willow Corner Shop and Cedar Studio sample companies were provisioned through the application's sample chooser in the isolated local test runtime. One synthetic cash sale of USD 5.75, with USD 10.00 tender and USD 4.25 change, supplied the POS cart/review/receipt sequence. No real customer records or external providers were used. This does create local synthetic records; it does not change schema or production.
+The screenshot library contains 18 fresh captures from the existing local 0.6.0 runtime (`127.0.0.1:18219`) and 36 WebP derivatives. Fresh Willow Corner Shop and Cedar Studio sample companies were provisioned through the application's sample chooser in the isolated local test runtime. One sample cash sale of USD 5.75, with USD 10.00 tender and USD 4.25 change, supplied the POS cart/review/receipt sequence. No real customer records or external providers were used. This does create local sample records; it does not change schema or production.
 
 `public/assets/screens/v0.6.0-preview/manifest.json` records sample names, routes, captions, alt text, dimensions and SHA-256 hashes. Captures were visually inspected. Their pixels were only resized and encoded for the website; no generated interface or substituted accounting figures were used. Historical screenshot paths remain unchanged. Shared social artwork uses the new Home capture; dated article artwork remains historical.
 
@@ -180,7 +180,7 @@ The application retained the Review Console structure and existing routes/forms.
 | Credits at 320px | Header wraps and text remains readable, width 305 within 320. [Capture](../../docs/design/website/qa/credits-320.png) |
 | Keyboard report tabs | Right arrow changes selection and the visible report. Modal focuses Close; Escape closes and restores the opener. [Report](../../docs/design/website/qa/report-dialog-desktop.png) |
 | Mobile enlarged image | Fits viewport, internally scrolls a larger readable image. A keyboard-focusable image region and explicit scroll instructions were added. [Capture before instruction addition](../../docs/design/website/qa/mobile-dialog.png) |
-| Pilot validation and correction | Empty submission identifies all four required fields; entered synthetic values are retained and an exact reviewable message is copied. No message was sent. [Pilot](../../docs/design/website/qa/pilot-desktop.png) |
+| Pilot validation and correction | Empty submission identifies all four required fields; entered sample values are retained and an exact reviewable message is copied. No message was sent. [Pilot](../../docs/design/website/qa/pilot-desktop.png) |
 | JavaScript | `node --check www/website/public/assets/site.js` passed, including the grouped-tab update. |
 | Markup/assets/styles | Local structure, duplicate IDs, anchors, image alt/asset paths and CSS parser checks passed before expansion. Final asset check is recorded separately below. |
 

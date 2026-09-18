@@ -65,11 +65,11 @@ There are 26 migration receipts after installation (the historical migration nam
 
 ## Validation record
 
-The [validation record](ACCOUNTING-STARTER-VALIDATION.json) separates checks from remaining release gates. All data was synthetic and isolated from the existing development and live databases.
+The [validation record](ACCOUNTING-STARTER-VALIDATION.json) separates checks from remaining release gates. All data was sample and isolated from the existing development and live databases.
 
 - Final full `composer check` on PHP 8.2.33 and PHP 8.3.33: **225 tests, zero failures on each runtime**. Each run linted 168 PHP files with no failures, passed PHPStan, validated seven sample packs (77 events, 42 documents and 16 items), and rejected eight invalid fixtures. The final two demo template label changes were linted separately; the exact final archive was then verified below.
 - Fresh installation: 26 migration receipts. All 17 published migration files retain their exact checksums; index blobs, working LF bytes and fresh receipts agree.
-- Populated 0.3.0 upgrade: nine new migrations, 55 data tables and 51 synthetic rows preserved along with all 17 prior receipts. Existing cash, opening and open-item history remained usable; new partial/final AR settlement and retry reconciled exactly.
+- Populated 0.3.0 upgrade: nine new migrations, 55 data tables and 51 sample rows preserved along with all 17 prior receipts. Existing cash, opening and open-item history remained usable; new partial/final AR settlement and retry reconciled exactly.
 - Backup/restore: 79 tables, 10,048 rows, two views, 104 guard triggers and 26 receipts verified, with source links and balanced journals retained. Temporary verifier databases were removed.
 - Browser: invoices, partial/final receipts, customer credits, purchase orders, partial deliveries, inclusive supplier bills, matching, supplier returns, stock sales and tax snapshots exercised through the UI. AR, AP, stock and received-but-unbilled reconciliation differences reached zero. Five bank movements reconciled to `884.2500`, with zero unmatched rows and a completed statement.
 - Responsive checks: ten new/related route states at 1440, 768 and 390 pixels returned HTTP 200 with no document overflow, clipped navigation, visible PHP errors or JavaScript page errors. Fresh screenshots were captured; the long forms and stacked navigation remain known UX debt for the later full audit.
@@ -80,4 +80,4 @@ The [validation record](ACCOUNTING-STARTER-VALIDATION.json) separates checks fro
 
 The verified archive is `phpledger-0.4.0-preview.zip`, source commit `680fa6fa3c7a35e6865207b52f38fbf9a9663947`, 3,179,444 bytes, SHA-256 `b777f9b831db7a6e774e53f510c17ea001514f278ef9a585245ac013dc3aecf6`. Its old-package baseline matched the published 0.3.0 checksum and all 1,453 old manifest files. These are local installation and service results; actual publication and hosted cutover are recorded separately by the release owner.
 
-Local detailed evidence remains in ignored `.cache/starter/` and `output/playwright/`. Checked-in evidence contains synthetic identifiers and summarized results only. Technical checks do not close professional accounting, observed owner usability or WCAG 2.2 AA review gates.
+Local detailed evidence remains in ignored `.cache/starter/` and `output/playwright/`. Checked-in evidence contains sample identifiers and summarized results only. Technical checks do not close professional accounting, observed owner usability or WCAG 2.2 AA review gates.

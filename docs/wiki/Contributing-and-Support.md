@@ -10,13 +10,13 @@ The most valuable early contributions connect a real business task to a clear, t
 | Product and design | A concrete task, where it became difficult, and a proposed improvement tested with representative users. |
 | Development | Small changes within the shared PHP/MeekroDB architecture, preserving central posting and server permissions. |
 | Quality and documentation | Reproducible issues, clear installation notes and recoverable error-path checks. |
-| Regional/industry research | Sourced account-template requirements and coherent synthetic scenarios, with assumptions clearly marked. |
+| Regional/industry research | Sourced account-template requirements and coherent sample scenarios, with assumptions clearly marked. |
 
-Use synthetic records in public issues and examples. Do not include private customer data or credentials. Preserve third-party notices and contribute original material or material whose reuse terms permit it.
+Use sample records in public issues and examples. Do not include private customer data or credentials. Preserve third-party notices and contribute original material or material whose reuse terms permit it.
 
-The [public repository](https://github.com/rmak78/phpledger) contains modern source under `www/phpledger`, with the historical application retained only in Git history. Follow the [development guide](https://github.com/rmak78/phpledger/blob/master/docs/DEVELOPMENT.md), and use [Issues](https://github.com/rmak78/phpledger/issues) to discuss a bounded proposal. See the [1.0.0 release](https://github.com/rmak78/phpledger/releases/tag/v1.0.0); independent review and supported-pilot review remain open post-release commitments.
+The [public repository](https://github.com/phpledger/phpledger) contains modern source under `www/phpledger`, with the historical application retained only in Git history. Follow the [development guide](https://github.com/phpledger/phpledger/blob/master/docs/DEVELOPMENT.md), and use [Issues](https://github.com/phpledger/phpledger/issues) to discuss a bounded proposal. See the [1.0.0 release](https://github.com/phpledger/phpledger/releases/tag/v1.0.0); independent review and supported-pilot review remain open post-release commitments.
 
-New project-owned code and documentation use the [AGPL-3.0-or-later](https://github.com/rmak78/phpledger/blob/master/LICENSE). Preserve the [separate scope and notices](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) for historical code, dependencies and assets. Pre-adoption releases retain their original grants; this release does not relicense legacy contributions or company marks. New contributions require the [individual/entity CLA](https://github.com/rmak78/phpledger/blob/master/CLA.md).
+New project-owned code and documentation use the [AGPL-3.0-or-later](https://github.com/phpledger/phpledger/blob/master/LICENSE). Preserve the [separate scope and notices](https://github.com/phpledger/phpledger/blob/master/LICENSE-SCOPE.md) for historical code, dependencies and assets. Pre-adoption releases retain their original grants; this release does not relicense legacy contributions or company marks. New contributions require the [individual/entity CLA](https://github.com/phpledger/phpledger/blob/master/CLA.md).
 
 ## Support direction
 

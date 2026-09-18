@@ -1,6 +1,6 @@
 # Operations audit: AR/AP, parties, Purchasing and Inventory
 
-**Status: observed local UX findings and proposed changes; no runtime changes.** Captured 16 September 2026, Asia/Karachi, using the authorized isolated Playwright session `ux-operations` at local port 18211. Only **Starter Workshop — synthetic audit**, company/book 822, was selected. The session was independent of the other audit lanes.
+**Status: observed local UX findings and proposed changes; no runtime changes.** Captured 16 September 2026, Asia/Karachi, using the authorized isolated Playwright session `ux-operations` at local port 18211. Only **Starter Workshop — sample audit**, company/book 822, was selected. The session was independent of the other audit lanes.
 
 ## Overall assessment
 
@@ -16,7 +16,7 @@ This is a combined usability and limited accessibility audit, not a new financia
 4. Order goods, receive a partial delivery, inspect bill matching and choose the correct return path.
 5. Find a product, understand its stock and source movements, and prepare a stock count.
 
-The fixture contains draft invoice 194, partially paid invoice 193, partially paid bill 192, purchase order 42, receipt 62 and product 108. It demonstrates AR remaining **27.50**, AP remaining **43.00**, stock quantity **4**, carrying value **40.00**, and zero displayed control differences. These values describe this synthetic fixture, not a live business.
+The fixture contains draft invoice 194, partially paid invoice 193, partially paid bill 192, purchase order 42, receipt 62 and product 108. It demonstrates AR remaining **27.50**, AP remaining **43.00**, stock quantity **4**, carrying value **40.00**, and zero displayed control differences. These values describe this sample fixture, not a live business.
 
 ## 1. Evidence and capture quality
 
@@ -171,10 +171,10 @@ The work should begin with domestic payment validation and one-line invoice entr
 ## 6. Limits and handoff
 
 - All screenshots and DOM checks were captured in this run. No previous release screenshots, remembered behavior or source-code assumptions were used as visual evidence.
-- Financial state came from the supplied synthetic fixture. The auditor selected a company, navigated, opened receipt/count disclosures, selected an unsaved product and filled an unsubmitted payment form. No invoice, bill, payment, party, receipt, product or stock movement was saved/posted.
+- Financial state came from the supplied sample fixture. The auditor selected a company, navigated, opened receipt/count disclosures, selected an unsaved product and filled an unsubmitted payment form. No invoice, bill, payment, party, receipt, product or stock movement was saved/posted.
 - Draft posting, payment success/error response, credit creation, correction/reversal, new party duplicate handling, large lists, multi-user concurrency and empty/disabled-module states were not exercised here. Their backend tests and prior release evidence are outside this UX audit.
 - No screen reader, full keyboard task, measured contrast, browser zoom, physical touch device, printing or localization run was performed. The DOM checks identify labels and risks; they do not replace those tests.
 - No Google Drive or external reference documents were required. The only browser traffic was to the local isolated application. Private fixture credentials/session state remain ignored and are not copied into the evidence folder.
 - Documentation and evidence validation: all accepted image hashes/dimensions matched; all report links resolved; JSON evidence parsed. No PHP/JavaScript application file changed, so application lint/test suites were not rerun for this documentation-only audit.
 
-**Next review:** agree the focused invoice/payment and purchasing/stock task flows, then implement the highest-ranked changes using the existing services and rerun these same synthetic tasks at all three widths.
+**Next review:** agree the focused invoice/payment and purchasing/stock task flows, then implement the highest-ranked changes using the existing services and rerun these same sample tasks at all three widths.

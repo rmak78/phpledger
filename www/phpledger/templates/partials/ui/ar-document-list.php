@@ -17,7 +17,7 @@ $ageLabels=['not_due'=>'Not due','1_30'=>'1–30','31_60'=>'31–60','61_90'=>'6
 <?php foreach ($list['documents'] as $row): $selected=$selection && $selection['id']===$row['id']; ?><tr<?= $selected?' class="selected"':'' ?>><td><a class="record-link" data-record-link href="<?= pl_e(pl_workflow_url($path,array_replace($filters,['select'=>$row['id']]))) ?>"<?= $selected?' aria-current="true"':'' ?>><span class="row-title"><?= pl_e($row['number']) ?></span><span class="row-sub"><?= pl_e(pl_date_label($row['document_date'])) ?></span></a></td><td><?= pl_e($row['party']['legal_name']) ?></td><td class="amount"><?= pl_e($row['currency'].' '.pl_money($row['total'])) ?></td><td><?php pl_ui_badge(str_replace('_','-',$row['payment_status']??$row['status'])); ?></td></tr><?php endforeach; ?></tbody></table>
 <?php if (!$list['documents']): pl_ui_empty('No matching documents.','Choose another status or adjust the search and dates.'); endif; ?></div>
 <div class="flex flex-wrap justify-between items-center gap-3 mt-3"><span class="text-xs text-ink-muted"><?= (int)$list['total'] ?> records</span><?php pl_ui_pagination($path,$filters,$list['page'],$list['pages']); ?></div>
-<?php if ($company['is_sample']): ?><p class="sample-note">These are synthetic records in a separate sample company.</p><?php endif; ?>
+<?php if ($company['is_sample']): ?><p class="sample-note">These are sample records in a separate sample company.</p><?php endif; ?>
 </section>
 <?php pl_ui_side_panel($isAr?'Invoice details':'Bill details',static function () use ($selection,$selectionJournal,$path,$filters,$company,$isAr): void { ?>
 <a class="split-view-back link" href="<?= pl_e(pl_workflow_url($path,$filters)) ?>"><?= pl_icon('arrow-left') ?> Back to list</a>

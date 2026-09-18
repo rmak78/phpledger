@@ -3,7 +3,7 @@ The working development environment is not yet a downloadable product package. P
 ## Scope
 
 - Define the candidate contents and supported PHP 8.5/MySQL 8.4 environment, including required extensions, private configuration, writable paths and the single public document root.
-- Build a versioned archive with an inventory and checksums. Include the required new runtime, migrations, dependencies/notices and operator instructions; exclude secrets, local state, synthetic test credentials and unrelated legacy runtime files.
+- Build a versioned archive with an inventory and checksums. Include the required new runtime, migrations, dependencies/notices and operator instructions; exclude secrets, local state, sample test credentials and unrelated legacy runtime files.
 - Provide a clear requirements check, first-administrator setup and installation failure/recovery guidance using the existing bootstrap, configuration and migration conventions.
 - Document the supported upgrade starting points and prove backup restoration into an isolated environment.
 
@@ -21,8 +21,8 @@ The working development environment is not yet a downloadable product package. P
 
 The licence/provenance issue gates publication, while packaging can be prepared in parallel. No package download, tag or supported hosting certification is claimed by this issue's creation. Do not migrate historical root SQL dumps or expose customer data to prove the installer.
 
-Part of the [first package plan](https://github.com/rmak78/phpledger/wiki/First-Package).
+Part of the [first package plan](https://github.com/phpledger/phpledger/wiki/First-Package).
 
 ## Linked work
 
-Publication depends on [#55 the licence/provenance decision](https://github.com/rmak78/phpledger/issues/55). This package supplies the artifact tested by [#59 candidate acceptance](https://github.com/rmak78/phpledger/issues/59). Packaging preparation may proceed in parallel with [#57 reporting](https://github.com/rmak78/phpledger/issues/57) and [#58 POS refinement](https://github.com/rmak78/phpledger/issues/58).
+Publication depends on [#55 the licence/provenance decision](https://github.com/phpledger/phpledger/issues/55). This package supplies the artifact tested by [#59 candidate acceptance](https://github.com/phpledger/phpledger/issues/59). Packaging preparation may proceed in parallel with [#57 reporting](https://github.com/phpledger/phpledger/issues/57) and [#58 POS refinement](https://github.com/phpledger/phpledger/issues/58).

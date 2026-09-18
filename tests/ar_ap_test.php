@@ -4,19 +4,19 @@ declare(strict_types=1);
 function ar_ap_fixture(): array
 {
     $f = ledger_fixture('USD');
-    $party = pl_save_party($f['actor_id'], $f['company_id'], $f['book_id'], ['legal_name'=>'Synthetic starter party','entity_type'=>'private_company','country_code'=>'GB','is_customer'=>true,'is_vendor'=>true,'currency'=>'USD','request_key'=>bin2hex(random_bytes(16)),'reason'=>'Synthetic starter fixture']);
+    $party = pl_save_party($f['actor_id'], $f['company_id'], $f['book_id'], ['legal_name'=>'Sample starter party','entity_type'=>'private_company','country_code'=>'GB','is_customer'=>true,'is_vendor'=>true,'currency'=>'USD','request_key'=>bin2hex(random_bytes(16)),'reason'=>'Sample starter fixture']);
     return $f + ['party_id'=>$party['id']];
 }
 
 function ar_ap_input(array $f, string $kind = 'invoice', string $amount = '1000'): array
 {
-    return ['kind'=>$kind,'party_id'=>$f['party_id'],'date'=>'2026-01-05','due_date'=>'2026-02-04','currency'=>'USD','reference'=>'Synthetic reference','creation_key'=>bin2hex(random_bytes(16)),
-        'lines'=>[['description'=>'Synthetic service','quantity'=>'1','unit_price'=>$amount,'account_id'=>$f['accounts'][in_array($kind,['bill','supplier_credit'],true) ? '5000' : '4000']]]];
+    return ['kind'=>$kind,'party_id'=>$f['party_id'],'date'=>'2026-01-05','due_date'=>'2026-02-04','currency'=>'USD','reference'=>'Sample reference','creation_key'=>bin2hex(random_bytes(16)),
+        'lines'=>[['description'=>'Sample service','quantity'=>'1','unit_price'=>$amount,'account_id'=>$f['accounts'][in_array($kind,['bill','supplier_credit'],true) ? '5000' : '4000']]]];
 }
 
 function ar_ap_payment(array $f, string $amount, string $date): array
 {
-    return ['bank_account_id'=>$f['accounts']['1000'],'gain_account_id'=>$f['accounts']['4000'],'loss_account_id'=>$f['accounts']['5000'],'amount_fc'=>$amount,'date'=>$date,'description'=>'Synthetic allocated bank payment','idempotency_key'=>bin2hex(random_bytes(16))];
+    return ['bank_account_id'=>$f['accounts']['1000'],'gain_account_id'=>$f['accounts']['4000'],'loss_account_id'=>$f['accounts']['5000'],'amount_fc'=>$amount,'date'=>$date,'description'=>'Sample allocated bank payment','idempotency_key'=>bin2hex(random_bytes(16))];
 }
 
 test('AR AP exact draft lines round once and prohibit quote kinds', function (): void {
@@ -147,11 +147,11 @@ function ar_ap_tax_fixture(): array
 {
     $f=ar_ap_fixture();
     foreach (['sales'=>['2200','liability'],'purchase'=>['1400','asset']] as $name=>[$code,$type]) {
-        $account=pl_save_account($f['actor_id'],$f['company_id'],$f['book_id'],['code'=>$code,'name'=>'Synthetic tax '.$name,'type'=>$type,'role'=>null,'is_active'=>true,'creation_key'=>bin2hex(random_bytes(16)),'reason'=>'Synthetic tax account']);
+        $account=pl_save_account($f['actor_id'],$f['company_id'],$f['book_id'],['code'=>$code,'name'=>'Sample tax '.$name,'type'=>$type,'role'=>null,'is_active'=>true,'creation_key'=>bin2hex(random_bytes(16)),'reason'=>'Sample tax account']);
         $f[$name.'_tax_account_id']=$account['id'];
     }
-    $code=pl_create_tax_code($f['actor_id'],$f['company_id'],$f['book_id'],['code'=>'SYN-TAX','name'=>'Synthetic sales tax','treatment'=>'standard','sales_account_id'=>$f['sales_tax_account_id'],'purchase_account_id'=>$f['purchase_tax_account_id'],'reason'=>'Synthetic tax configuration','idempotency_key'=>bin2hex(random_bytes(16))]);
-    pl_enter_tax_rate($f['actor_id'],$f['company_id'],$f['book_id'],['tax_code_id'=>$code['id'],'effective_from'=>'2026-01-01','percentage'=>'10','reason'=>'Synthetic initial rate','idempotency_key'=>bin2hex(random_bytes(16))]);
+    $code=pl_create_tax_code($f['actor_id'],$f['company_id'],$f['book_id'],['code'=>'SYN-TAX','name'=>'Sample sales tax','treatment'=>'standard','sales_account_id'=>$f['sales_tax_account_id'],'purchase_account_id'=>$f['purchase_tax_account_id'],'reason'=>'Sample tax configuration','idempotency_key'=>bin2hex(random_bytes(16))]);
+    pl_enter_tax_rate($f['actor_id'],$f['company_id'],$f['book_id'],['tax_code_id'=>$code['id'],'effective_from'=>'2026-01-01','percentage'=>'10','reason'=>'Sample initial rate','idempotency_key'=>bin2hex(random_bytes(16))]);
     return $f+['tax_code_id'=>$code['id']];
 }
 
@@ -170,18 +170,18 @@ test('AR AP mixed tax lines post gross controls and separate output and input ta
 test('AR AP changed effective tax rate requires draft review and never restates posted tax', function (): void {
     $f=ar_ap_tax_fixture(); $input=ar_ap_input($f,'invoice','100'); $input['lines'][0]['tax_code_id']=$f['tax_code_id'];
     $draft=pl_save_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$input);
-    pl_enter_tax_rate($f['actor_id'],$f['company_id'],$f['book_id'],['tax_code_id'=>$f['tax_code_id'],'effective_from'=>'2026-01-01','percentage'=>'12','reason'=>'Synthetic revised rate','idempotency_key'=>bin2hex(random_bytes(16))]);
+    pl_enter_tax_rate($f['actor_id'],$f['company_id'],$f['book_id'],['tax_code_id'=>$f['tax_code_id'],'effective_from'=>'2026-01-01','percentage'=>'12','reason'=>'Sample revised rate','idempotency_key'=>bin2hex(random_bytes(16))]);
     assert_throws(fn()=>pl_post_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$draft['id'],1),DomainException::class,'effective tax rate');
     $draft=pl_save_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$input,$draft['id'],1); assert_same('112.0000',$draft['total']);
     $posted=pl_post_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$draft['id'],2);
-    pl_enter_tax_rate($f['actor_id'],$f['company_id'],$f['book_id'],['tax_code_id'=>$f['tax_code_id'],'effective_from'=>'2026-01-01','percentage'=>'15','reason'=>'Synthetic later correction','idempotency_key'=>bin2hex(random_bytes(16))]);
+    pl_enter_tax_rate($f['actor_id'],$f['company_id'],$f['book_id'],['tax_code_id'=>$f['tax_code_id'],'effective_from'=>'2026-01-01','percentage'=>'15','reason'=>'Sample later correction','idempotency_key'=>bin2hex(random_bytes(16))]);
     $current=pl_get_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$posted['id']); assert_same('12.0000',$current['tax_total']); assert_same('112.0000',$current['outstanding_fc']);
 });
 
 test('AR AP tax credits preserve original tax snapshot and exact residual across partial credits', function (): void {
     $f=ar_ap_tax_fixture(); $input=ar_ap_input($f,'invoice','0.0005'); $input['lines'][0]['tax_code_id']=$f['tax_code_id'];
     $d=pl_save_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$input); $d=pl_post_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$d['id'],1); assert_same('0.0006',$d['total']);
-    pl_enter_tax_rate($f['actor_id'],$f['company_id'],$f['book_id'],['tax_code_id'=>$f['tax_code_id'],'effective_from'=>'2026-01-01','percentage'=>'20','reason'=>'Synthetic rate after invoice','idempotency_key'=>bin2hex(random_bytes(16))]);
+    pl_enter_tax_rate($f['actor_id'],$f['company_id'],$f['book_id'],['tax_code_id'=>$f['tax_code_id'],'effective_from'=>'2026-01-01','percentage'=>'20','reason'=>'Sample rate after invoice','idempotency_key'=>bin2hex(random_bytes(16))]);
     foreach (['0.0002','0.0003'] as $amount) {
         $credit=ar_ap_input($f,'customer_credit',$amount); $credit['original_document_id']=$d['id']; $credit['date']='2026-02-10'; $credit['due_date']=$credit['date']; $credit['lines'][0]['original_line_number']=1;
         $credit=pl_save_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$credit); assert_same('10.000000',$credit['lines'][0]['tax_rate']);
@@ -193,11 +193,11 @@ test('AR AP tax credits preserve original tax snapshot and exact residual across
 });
 
 test('AR AP inclusive setting freezes entered prices and original-mode credits retain gross totals', function (): void {
-    $f=ar_ap_tax_fixture(); pl_set_tax_price_mode($f['actor_id'],$f['company_id'],$f['book_id'],'inclusive',0,'Synthetic inclusive pricing',bin2hex(random_bytes(16)));
+    $f=ar_ap_tax_fixture(); pl_set_tax_price_mode($f['actor_id'],$f['company_id'],$f['book_id'],'inclusive',0,'Sample inclusive pricing',bin2hex(random_bytes(16)));
     $input=ar_ap_input($f,'invoice','110'); $input['lines'][0]['tax_code_id']=$f['tax_code_id'];
     $d=pl_save_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$input);
     assert_same('inclusive',$d['price_mode']); assert_same('100.0000',$d['subtotal']); assert_same('10.0000',$d['tax_total']); assert_same('110.0000',$d['total']); assert_same('110.0000',$d['lines'][0]['unit_price']);
-    pl_set_tax_price_mode($f['actor_id'],$f['company_id'],$f['book_id'],'exclusive',1,'Synthetic changed default',bin2hex(random_bytes(16)));
+    pl_set_tax_price_mode($f['actor_id'],$f['company_id'],$f['book_id'],'exclusive',1,'Sample changed default',bin2hex(random_bytes(16)));
     $d=pl_post_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$d['id'],1); assert_same('110.0000',$d['outstanding_fc']);
     $credit=ar_ap_input($f,'customer_credit','55'); $credit['original_document_id']=$d['id']; $credit['date']='2026-02-10'; $credit['due_date']=$credit['date']; $credit['lines'][0]['original_line_number']=1;
     $wrong=$credit; $wrong['price_mode']='exclusive'; assert_throws(fn()=>pl_save_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$wrong),DomainException::class,'original document price mode');
@@ -210,7 +210,7 @@ test('AR AP inclusive setting freezes entered prices and original-mode credits r
 });
 
 test('AR AP many small tax credits consume remaining tax without cumulative rounding over-credit', function (): void {
-    $f=ar_ap_tax_fixture(); pl_enter_tax_rate($f['actor_id'],$f['company_id'],$f['book_id'],['tax_code_id'=>$f['tax_code_id'],'effective_from'=>'2026-01-01','percentage'=>'50','reason'=>'Synthetic rounding boundary','idempotency_key'=>bin2hex(random_bytes(16))]);
+    $f=ar_ap_tax_fixture(); pl_enter_tax_rate($f['actor_id'],$f['company_id'],$f['book_id'],['tax_code_id'=>$f['tax_code_id'],'effective_from'=>'2026-01-01','percentage'=>'50','reason'=>'Sample rounding boundary','idempotency_key'=>bin2hex(random_bytes(16))]);
     $input=ar_ap_input($f,'invoice','0.0010'); $input['lines'][0]['tax_code_id']=$f['tax_code_id'];
     $d=pl_save_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$input); $d=pl_post_ar_document($f['actor_id'],$f['company_id'],$f['book_id'],$d['id'],1); assert_same('0.0015',$d['total']);
     $tax='0.0000';

@@ -1,6 +1,6 @@
 # First-package licence decision
 
-Work item: [#55 — Licence and provenance](https://github.com/rmak78/phpledger/issues/55). Related: [package contract](PACKAGE-CONTRACT.md) and [exact candidate inventory](package-candidate.json).
+Work item: [#55 — Licence and provenance](https://github.com/phpledger/phpledger/issues/55). Related: [package contract](PACKAGE-CONTRACT.md) and [exact candidate inventory](package-candidate.json).
 
 **Decision pending: MIT or GNU AGPLv3 for PHP Ledger's new project-owned code.** Both are viable with the inspected dependencies when their separate terms and notices are preserved. No project licence has been selected, no `LICENSE` has been created, and this audit does not certify ownership. Package engineering can continue while the owner makes this one policy choice.
 
@@ -40,7 +40,7 @@ The new bootstrap, route entry points and installer load the new application's h
 
 The [legacy review](../../LICENSE_REVIEW.md) records unresolved historical licensing. A fresh author-name inventory contains more names than its initial summary; author aliases are not a rights-holder register. Do not apply a new licence retroactively to all historical contributions or require every historical contributor's permission merely because history is retained. Any actual copied/adapted protected material needs its own provenance resolution. Existing accounting vocabulary and general workflow concepts are research inputs; the source review does not establish the extent of every influence. Local BixiSoft/Agency75 conventions likewise do not transfer that project's code or rights by implication.
 
-The six-account starter, Cedar Trading sample and six-product POS catalog are marked preliminary, synthetic or fictional in their files. No imported customer records, accounting-standard text or commercial script dataset was found in these three candidate resources. Record them with the new project material rather than implying that a country template or third-party chart was licensed for redistribution.
+The six-account starter, Cedar Trading sample and six-product POS catalog are marked preliminary, sample or fictional in their files. No imported customer records, accounting-standard text or commercial script dataset was found in these three candidate resources. Record them with the new project material rather than implying that a country template or third-party chart was licensed for redistribution.
 
 The preferred horizontal logo is a **user-supplied 2172 × 724 image**. Its supplied PNG and the 678,094-byte application PNG have different encodings, but decoded RGBA pixels match exactly. Application-file SHA-256: `859a749124e98c121b096cc37e24ab70d095225fe4b4da8b0554eca50051c6f4`. The user explicitly authorized use, cropping and modification. That authorization supports the requested use; this audit does not invent a designer assignment or claim exclusive ownership. The alternative designer SVG/PNG package uses a different wordmark and is not the candidate's source. See [brand record](../../BRAND.md).
 
@@ -66,11 +66,11 @@ MIT's permissions and notice condition are set out in the [OSI MIT text](https:/
 2. Generate the clean production vendor tree. Add `THIRD-PARTY-NOTICES.md`, both LGPLv3 and GPLv3 texts for MeekroDB, and all existing font/icon/Unicode/Composer notices. Check the final archive, not just source paths.
 3. If AGPL is selected, make the exact source of the released/running version available, with necessary installation/build material and legal/source navigation. A link to the legacy default branch is insufficient. Keep credentials and customer data excluded.
 4. Record the candidate revision, build tools, dependency versions and final hashes. Provide contribution guidance under the selected inbound licence; do not silently adopt a CLA, copyright transfer or DCO policy.
-5. Recheck any new package file or dependency against this inventory before [#59 release acceptance](https://github.com/rmak78/phpledger/issues/59). Build preparation may continue; do not label an unlicensed candidate as an approved open-source release.
+5. Recheck any new package file or dependency against this inventory before [#59 release acceptance](https://github.com/phpledger/phpledger/issues/59). Build preparation may continue; do not label an unlicensed candidate as an approved open-source release.
 
 ## Audit receipt
 
-Read local licence/legacy/brand/package records, the 78-file inventory, bootstrap/install/runtime references, Composer manifest/lock/vendor notices, font/icon notices and sources, regional provenance, synthetic resources and historical source inventory. No private configuration, customer data, credential store or Google Drive document was read for this audit.
+Read local licence/legacy/brand/package records, the 78-file inventory, bootstrap/install/runtime references, Composer manifest/lock/vendor notices, font/icon notices and sources, regional provenance, sample resources and historical source inventory. No private configuration, customer data, credential store or Google Drive document was read for this audit.
 
 Checks completed: **78/78 candidate hashes; 28/28 exact upstream file comparisons** (21 icons, their licence, Unicode licence, three MeekroDB files, Inter font and licence); **4/4 CLDR source/licence hashes**; full decoded-logo pixel equality; and the bounded historical reuse screen described above. The Unicode licence is included in both comparison groups, so these are not 32 unique upstream files. GNU-hosted pages timed out; the published FSF licence texts on the Open Source Initiative site and pinned upstream licence files were read instead.
 

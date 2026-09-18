@@ -20,7 +20,7 @@ test('cost-of-sales classification preserves net profit and immutable entries an
     assert_same('0.0000',$before['total_cost_of_sales']); assert_same('1000.0000',$before['gross_profit']);
     $entries=DB::query('SELECT * FROM pl_journal_lines WHERE book_id=%i ORDER BY id',$f['book_id']);
     $account=pl_get_account($f['actor_id'],$f['company_id'],$f['book_id'],$f['accounts']['5000']);
-    pl_save_account($f['actor_id'],$f['company_id'],$f['book_id'],array_replace($account,['report_classification'=>'cost_of_sales','reason'=>'Synthetic reviewed cost classification']),$account['id'],$account['revision']);
+    pl_save_account($f['actor_id'],$f['company_id'],$f['book_id'],array_replace($account,['report_classification'=>'cost_of_sales','reason'=>'Sample reviewed cost classification']),$account['id'],$account['revision']);
     $after=pl_profit_loss($f['actor_id'],$f['company_id'],$f['book_id'],'2026-01-01','2026-12-31');
     assert_same('125.0000',$after['total_cost_of_sales']); assert_same('0.0000',$after['total_expenses']);
     assert_same('875.0000',$after['gross_profit']); assert_same($before['net_profit'],$after['net_profit']);
@@ -48,7 +48,7 @@ test('owner statements reconcile posted receipt expense and dated reversal witho
     assert_same('875.0000', $balance['total_equity']);
     assert_true($balance['balanced']);
     assert_same('875.0000', pl_cash_balance($f['actor_id'], $f['company_id'], $f['book_id'], '2026-09-14'));
-    pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $expense['id'], $today, 'Synthetic report correction');
+    pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $expense['id'], $today, 'Sample report correction');
     assert_same('875.0000', pl_balance_sheet($f['actor_id'], $f['company_id'], $f['book_id'], '2026-09-14')['earned_profit']);
     assert_same('1000.0000', pl_balance_sheet($f['actor_id'], $f['company_id'], $f['book_id'], $today)['total_assets']);
     assert_same('-125.0000', pl_profit_loss($f['actor_id'], $f['company_id'], $f['book_id'], $today, $today)['total_expenses']);

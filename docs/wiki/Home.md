@@ -1,10 +1,10 @@
 ## Current package: 1.0.0
 
-**1.0.0**, published 18 September 2026, is PHP Ledger's first stable release. [Download 1.0.0](https://github.com/rmak78/phpledger/releases/tag/v1.0.0) and its [matching media kit](https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip). It consolidates the interface rebuild with a workspace sidebar, compact server-side lists, posting/correction previews, atomic multi-item allocation and gross-profit presentation, a guided browser installer, and publisher-signed automatic updates with automatic matched backup and recovery. Compiled CSS is included; no Node is needed on the host. The PHP/MeekroDB architecture and central immutable posting model remain.
+**1.0.0**, published 18 September 2026, is PHP Ledger's first stable release. [Download 1.0.0](https://github.com/phpledger/phpledger/releases/tag/v1.0.0) and its [matching media kit](https://github.com/phpledger/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip). It consolidates the interface rebuild with a workspace sidebar, compact server-side lists, posting/correction previews, atomic multi-item allocation and gross-profit presentation, a guided browser installer, and publisher-signed automatic updates with automatic matched backup and recovery. Compiled CSS is included; no Node is needed on the host. The PHP/MeekroDB architecture and central immutable posting model remain.
 
 **Assurance status:** automated test suites, fault-injection update/recovery tests, exact-artifact install/upgrade/recovery checks and developer-operated browser checks back this release. Independent accounting review, independent security review, supervised pilots with a real month-end close, unfamiliar-operator installation observation and restricted shared-host recovery certification have **not** happened; the owner published 1.0.0 with these limits disclosed, as post-release commitments. See [[Release 1.0.0|Release-1.0.0]] and [[Getting started|Getting-Started]].
 
-<p><img src="https://raw.githubusercontent.com/rmak78/phpledger/master/docs/repository/assets/phpledger-logo.webp" alt="PHP Ledger" width="320"></p>
+<p><img src="https://raw.githubusercontent.com/phpledger/phpledger/master/docs/repository/assets/phpledger-logo.webp" alt="PHP Ledger" width="320"></p>
 
 # PHP Ledger
 
@@ -12,7 +12,7 @@
 
 PHP Ledger serves small-business owners, accountants and bookkeepers who want a useful workspace on hosting they control, installable from a browser without a terminal. The direction is a complete accounting core, followed by optional business modules.
 
-Explore [phpledger.com](https://phpledger.com/) and [your temporary sample company](https://phpledger.com/demo/). The [1.0.0 package](https://github.com/rmak78/phpledger/releases/tag/v1.0.0) includes universal account statements, chart management and saved general journals alongside the accounting starter. Evaluate it with synthetic data; independent review and pilot use remain in progress.
+Explore [phpledger.com](https://phpledger.com/) and [your temporary sample company](https://phpledger.com/demo/). The [1.0.0 package](https://github.com/phpledger/phpledger/releases/tag/v1.0.0) includes universal account statements, chart management and saved general journals alongside the accounting starter. Evaluate it with sample data; independent review and pilot use remain in progress.
 
 Modern application source is in `www/phpledger`; the historical application remains only in Git history. See [[Getting started|Getting-Started]] for the package, installation requirements and demonstration limits.
 
@@ -37,7 +37,7 @@ Follow any authorized account from its opening balance through period debits, cr
 
 Save a general-journal draft, return to edit it, review its lines and post when debits equal credits. Corrections use linked reversals that preserve the original entry. Receipts, expenses, owner reports and the sample cash POS use the same accounting services.
 
-The public demo provides temporary visitor books: accounts are read-only, while general-journal drafts, posting and linked reversals are available within capacity limits. Its synthetic data resets hourly. The shop showcase remains a six-product cash example, without stock, tax or payment processing.
+The public demo provides temporary visitor books: accounts are read-only, while general-journal drafts, posting and linked reversals are available within capacity limits. Its sample data resets hourly. The shop showcase remains a six-product cash example, without stock, tax or payment processing.
 
 ## The direction
 
@@ -45,7 +45,7 @@ Opening conversion, period controls, bank CSV reconciliation, required AR/AP, op
 
 Accounting framework work uses explicit regional entity/period profiles over a country-neutral core. Pakistan is one intended direction; connector readiness and validated demand determine delivery. The separate tax candidate catalog covers eight countries and seven industries, remains disabled and unreviewed, and supplies no active tax calculations.
 
-New project-owned code and documentation use the [AGPL-3.0-or-later](https://github.com/rmak78/phpledger/blob/master/LICENSE). [Licence scope](https://github.com/rmak78/phpledger/blob/master/LICENSE-SCOPE.md) preserves separate historical, dependency and asset terms. No stable release, professional-body endorsement or regulatory certification is claimed.
+New project-owned code and documentation use the [AGPL-3.0-or-later](https://github.com/phpledger/phpledger/blob/master/LICENSE). [Licence scope](https://github.com/phpledger/phpledger/blob/master/LICENSE-SCOPE.md) preserves separate historical, dependency and asset terms. No stable release, professional-body endorsement or regulatory certification is claimed.
 
 [[Package scope|First-Package]] · [[Module roadmap|Module-Roadmap]] · [[Full roadmap|Roadmap]]
 
@@ -59,7 +59,7 @@ The current release uses AGPL-3.0-or-later with a commercial licence available. 
 
 ## Historical note: 0.1.5 accessibility update (15 September 2026)
 
-[Nagulanvelu contributed PR #65](https://github.com/rmak78/phpledger/pull/65), giving each fallback POS quantity its product name. A maintainer correction keeps the fields visible with JavaScript disabled. The package passed fresh installation, upgrade from 0.1.4, 29 synthetic checkout checks and desktop/tablet/mobile browser checks. See the [release](https://github.com/rmak78/phpledger/releases/tag/v0.1.5-preview), [privacy notice](https://phpledger.com/privacy/) and [demo-use terms](https://phpledger.com/terms/).
+[Nagulanvelu contributed PR #65](https://github.com/phpledger/phpledger/pull/65), giving each fallback POS quantity its product name. A maintainer correction keeps the fields visible with JavaScript disabled. The package passed fresh installation, upgrade from 0.1.4, 29 sample checkout checks and desktop/tablet/mobile browser checks. See the [release](https://github.com/phpledger/phpledger/releases/tag/v0.1.5-preview), [privacy notice](https://phpledger.com/privacy/) and [demo-use terms](https://phpledger.com/terms/).
 
 ## Connected reporting and richer samples
 

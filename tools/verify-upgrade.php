@@ -37,11 +37,11 @@ try {
     if ($baseline === 'fresh') {
         $fresh = pl_migrate();
         if ($fresh['applied'] !== $allVersions) { throw new RuntimeException('Fresh migration chain differs.'); }
-        $owner = pl_create_user('fresh@example.invalid', 'Synthetic fresh owner', bin2hex(random_bytes(24)));
-        $company = pl_create_company($owner, 'Synthetic fresh installation', 'USD', '2026-01-01');
+        $owner = pl_create_user('fresh@example.invalid', 'Sample fresh owner', bin2hex(random_bytes(24)));
+        $company = pl_create_company($owner, 'Sample fresh installation', 'USD', '2026-01-01');
         pl_post_journal($owner, $company['company_id'], $company['book_id'], [
             'date' => '2026-09-14', 'currency' => 'USD', 'source_type' => 'receipt', 'source_reference' => 'fresh',
-            'idempotency_key' => 'fresh', 'description' => 'Synthetic fresh posting', 'lines' => [
+            'idempotency_key' => 'fresh', 'description' => 'Sample fresh posting', 'lines' => [
                 ['account_id' => $company['accounts']['1000'], 'debit' => '125', 'credit' => '0'],
                 ['account_id' => $company['accounts']['4000'], 'debit' => '0', 'credit' => '125'],
             ],
@@ -59,17 +59,17 @@ try {
         foreach (require $file as $statement) { DB::query($statement); }
         DB::insert('pl_schema_migrations', ['version' => $version, 'checksum' => hash_file('sha256', $file), 'status' => 'applied', 'applied_at' => gmdate('Y-m-d H:i:s')]);
     }
-    $actor = pl_create_user('upgrade@example.invalid', 'Synthetic upgrade owner', 'Synthetic upgrade passphrase 471!');
+    $actor = pl_create_user('upgrade@example.invalid', 'Sample upgrade owner', 'Sample upgrade passphrase 471!');
     if ($baseline === 'preview-0.5.0') {
-        $f = pl_create_company($actor, 'Synthetic 0.5 upgrade company', 'USD', '2026-01-01');
+        $f = pl_create_company($actor, 'Sample 0.5 upgrade company', 'USD', '2026-01-01');
         $journal = pl_post_journal($actor, $f['company_id'], $f['book_id'], [
-            'date'=>'2026-09-17','currency'=>'USD','source_type'=>'receipt','source_reference'=>'synthetic-upgrade-0.5',
-            'description'=>'Prior 0.5 synthetic receipt','idempotency_key'=>'synthetic-upgrade-0.5',
+            'date'=>'2026-09-17','currency'=>'USD','source_type'=>'receipt','source_reference'=>'sample-upgrade-0.5',
+            'description'=>'Prior 0.5 sample receipt','idempotency_key'=>'sample-upgrade-0.5',
             'lines'=>[['account_id'=>$f['accounts']['1000'],'debit'=>'125.0000','credit'=>'0'],['account_id'=>$f['accounts']['4000'],'debit'=>'0','credit'=>'125.0000']],
         ]);
-        DB::insert('pl_connection_clients',['client_id'=>'synthetic-upgrade','name'=>'Prior synthetic client','redirect_uris'=>'[]','source'=>'personal']);
+        DB::insert('pl_connection_clients',['client_id'=>'sample-upgrade','name'=>'Prior sample client','redirect_uris'=>'[]','source'=>'personal']);
         $connectionId = bin2hex(random_bytes(16));
-        DB::insert('pl_connections',['id'=>$connectionId,'actor_id'=>$actor,'client_id'=>'synthetic-upgrade','name'=>'Prior synthetic grant','kind'=>'personal','oauth_scopes'=>'ledger.read','resource'=>'https://synthetic.invalid/mcp','expires_at'=>'2026-10-17 00:00:00']);
+        DB::insert('pl_connections',['id'=>$connectionId,'actor_id'=>$actor,'client_id'=>'sample-upgrade','name'=>'Prior sample grant','kind'=>'personal','oauth_scopes'=>'ledger.read','resource'=>'https://sample.invalid/mcp','expires_at'=>'2026-10-17 00:00:00']);
         $before = pl_get_journal($actor,$f['company_id'],$f['book_id'],$journal['id']);
         $beforeAccounts = DB::query('SELECT * FROM pl_accounts ORDER BY id');
         $migration = pl_migrate();
@@ -86,7 +86,7 @@ try {
         echo "Upgrade passed: 0.5 schema through 028, preserved posted journal/accounts/setup, existing full-read connection, balanced report and replay.\n";
         return;
     }
-    DB::insert('pl_companies', ['name' => 'Prior foundation synthetic company', 'currency' => 'USD', 'start_date' => '2026-01-01', 'fiscal_year_end' => '12-31', 'created_by' => $actor]);
+    DB::insert('pl_companies', ['name' => 'Prior foundation sample company', 'currency' => 'USD', 'start_date' => '2026-01-01', 'fiscal_year_end' => '12-31', 'created_by' => $actor]);
     $company = (int) DB::insertId();
     DB::insert('pl_company_members', ['company_id' => $company, 'user_id' => $actor, 'role' => 'owner']);
     DB::insert('pl_books', ['company_id' => $company, 'name' => 'Primary book']);
@@ -98,10 +98,10 @@ try {
         DB::insert('pl_accounts', ['company_id' => $company, 'book_id' => $book, 'code' => $definition['code'], 'name' => $definition['code'] === '1000' ? 'Preserved custom bank name' : $definition['name'], 'type' => $definition['type']]);
         $accounts[$definition['semantic_key']] = (int) DB::insertId();
     }
-    DB::insert('pl_journals', ['company_id' => $company, 'book_id' => $book, 'period_id' => $period, 'journal_date' => '2026-09-14', 'currency' => 'USD', 'description' => 'Prior synthetic receipt', 'source_type' => 'receipt', 'source_reference' => 'upgrade-fixture', 'idempotency_key' => 'upgrade-fixture', 'payload_hash' => hash('sha256', 'synthetic-old-fixture'), 'posted_by' => $actor]);
+    DB::insert('pl_journals', ['company_id' => $company, 'book_id' => $book, 'period_id' => $period, 'journal_date' => '2026-09-14', 'currency' => 'USD', 'description' => 'Prior sample receipt', 'source_type' => 'receipt', 'source_reference' => 'upgrade-fixture', 'idempotency_key' => 'upgrade-fixture', 'payload_hash' => hash('sha256', 'sample-old-fixture'), 'posted_by' => $actor]);
     $journal = (int) DB::insertId();
     foreach ([['core.cash_bank', '125.0000', '0.0000'], ['core.income.sales', '0.0000', '125.0000']] as $index => [$key, $debit, $credit]) {
-        DB::insert('pl_journal_lines', ['journal_id' => $journal, 'company_id' => $company, 'book_id' => $book, 'line_number' => $index + 1, 'account_id' => $accounts[$key], 'description' => 'Prior synthetic line', 'debit' => $debit, 'credit' => $credit]);
+        DB::insert('pl_journal_lines', ['journal_id' => $journal, 'company_id' => $company, 'book_id' => $book, 'line_number' => $index + 1, 'account_id' => $accounts[$key], 'description' => 'Prior sample line', 'debit' => $debit, 'credit' => $credit]);
     }
     $beforeHeader = DB::queryFirstRow('SELECT * FROM pl_journals WHERE id = %i', $journal);
     $beforeLines = DB::query('SELECT * FROM pl_journal_lines WHERE journal_id = %i ORDER BY line_number', $journal);

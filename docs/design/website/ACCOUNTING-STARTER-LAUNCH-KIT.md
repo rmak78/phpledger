@@ -1,6 +1,6 @@
 # Accounting starter launch kit
 
-> **RELEASE VERIFIED - 16 September 2026.** The accounting starter application and media kit are published as [0.4.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview). The release lead downloaded both public archives and confirmed their bytes and checksums. The hosted starter passed its live synthetic workflow checks. The static release article and guided experiment are also live; [the website receipt](qa/release040-live-publication.json) records the 165-file publication. No social post, email, press submission or scheduled campaign has been sent by preparing or publishing these artifacts.
+> **RELEASE VERIFIED - 16 September 2026.** The accounting starter application and media kit are published as [0.4.0-preview](https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview). The release lead downloaded both public archives and confirmed their bytes and checksums. The hosted starter passed its live sample workflow checks. The static release article and guided experiment are also live; [the website receipt](qa/release040-live-publication.json) records the 165-file publication. No social post, email, press submission or scheduled campaign has been sent by preparing or publishing these artifacts.
 
 This kit follows the existing [campaign execution convention](SEO-CAMPAIGN-EXECUTION.md) and the [release marketing procedure](../../strategy/OWNER-QUESTIONS-DASHBOARD-AND-RELEASE-MARKETING.md). It supersedes their older campaign versions, optional-AR/AP descriptions and PHP runtime wording **for this starter campaign only**. Source facts, exact scope, FAQ, a guided experiment and asset briefs are in [the companion fact and demo sheet](ACCOUNTING-STARTER-FACTS-AND-DEMO.md).
 
@@ -8,25 +8,25 @@ This kit follows the existing [campaign execution convention](SEO-CAMPAIGN-EXECU
 
 ## 1. Handoff and verified release destinations
 
-**Audience:** technical self-hosters, PHP developers, bookkeepers who can review synthetic accounting examples, and small-business owners evaluating software with technical help. The first action is to experiment with a complete fictional workflow, then send reproducible feedback.
+**Audience:** technical self-hosters, PHP developers, bookkeepers who can review sample accounting examples, and small-business owners evaluating software with technical help. The first action is to experiment with a complete fictional workflow, then send reproducible feedback.
 
 **Message:** PHP Ledger extends its accounting foundation into an accounting starter spanning core AR/AP, optional Purchasing and Inventory, and manually configured tax. Start with invoices and bills; enable stock workflows when needed.
 
-**Primary CTA:** download the specific verified starter preview, install it separately and follow the synthetic experiment. **Secondary CTA:** read the source and report a reproducible issue. The hosted demo now offers the Accounting starter playground alongside four unchanged multi-year teaching histories. These are five choices, not five deep historical datasets.
+**Primary CTA:** download the specific verified starter preview, install it separately and follow the sample experiment. **Secondary CTA:** read the source and report a reproducible issue. The hosted demo now offers the Accounting starter playground alongside four unchanged multi-year teaching histories. These are five choices, not five deep historical datasets.
 
 | Release field | Destination or status |
 |---|---|
 | Version | `0.4.0-preview`; published GitHub prerelease. |
 | Release date | 16 September 2026 (Asia/Karachi). |
-| Application release | [Exact release](https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview). Archive: 3,179,444 bytes; SHA-256 `b777f9b831db7a6e774e53f510c17ea001514f278ef9a585245ac013dc3aecf6`. |
-| Media ZIP | [Press and media kit](https://github.com/rmak78/phpledger/releases/download/v0.4.0-preview/phpledger-0.4.0-preview-media-kit.zip). Archive: 715,562 bytes; SHA-256 `b71f59da80e0b1e0cda753a53d34f0e2e63023cb3996f1ae2637e4bbe05a19a6`. |
+| Application release | [Exact release](https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview). Archive: 3,179,444 bytes; SHA-256 `b777f9b831db7a6e774e53f510c17ea001514f278ef9a585245ac013dc3aecf6`. |
+| Media ZIP | [Press and media kit](https://github.com/phpledger/phpledger/releases/download/v0.4.0-preview/phpledger-0.4.0-preview-media-kit.zip). Archive: 715,562 bytes; SHA-256 `b71f59da80e0b1e0cda753a53d34f0e2e63023cb3996f1ae2637e4bbe05a19a6`. |
 | Release article | [Accounting starter release](https://phpledger.com/news/0-4-0-preview/); publication verified. |
 | Guided experiment | [Fictional service-business and stock exercises](https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment); part of the verified live release article. |
-| Public project contact | [GitHub Discussions](https://github.com/rmak78/phpledger/discussions). |
-| Hosted demo | [Synthetic playground](https://phpledger.com/demo/); starter flows verified live, private sample per visit and hourly resets. |
+| Public project contact | [GitHub Discussions](https://github.com/phpledger/phpledger/discussions). |
+| Hosted demo | [Sample playground](https://phpledger.com/demo/); starter flows verified live, private sample per visit and hourly resets. |
 
 
-Public destinations already identified by the repository are [PHP Ledger](https://phpledger.com/), the [source repository](https://github.com/rmak78/phpledger), [release listing](https://github.com/rmak78/phpledger/releases), [issues](https://github.com/rmak78/phpledger/issues) and [discussions](https://github.com/rmak78/phpledger/discussions). The exact release assets above were verified independently of these generic destinations. The static article and experiment links have their own verified publication receipt. Distribution through individual channels remains a separate action.
+Public destinations already identified by the repository are [PHP Ledger](https://phpledger.com/), the [source repository](https://github.com/phpledger/phpledger), [release listing](https://github.com/phpledger/phpledger/releases), [issues](https://github.com/phpledger/phpledger/issues) and [discussions](https://github.com/phpledger/phpledger/discussions). The exact release assets above were verified independently of these generic destinations. The static article and experiment links have their own verified publication receipt. Distribution through individual channels remains a separate action.
 
 **Copy boundary:** the sections below are ready for editorial use with resolved release links. Application, media, article and experiment links are verified; distributing posts or email remains a separate action. No customer testimonial, attributed quote, adoption figure, benchmark, revenue figure or certification claim is supplied.
 
@@ -34,10 +34,10 @@ Public destinations already identified by the repository are [PHP Ledger](https:
 
 **Headline:** PHP Ledger introduces an open-source accounting starter with invoicing, purchasing and inventory
 
-**Subheading:** The PHP and MySQL development preview connects customer and supplier accounting with optional stock workflows, inviting self-hosters and bookkeepers to test complete examples using synthetic data.
+**Subheading:** The PHP and MySQL development preview connects customer and supplier accounting with optional stock workflows, inviting self-hosters and bookkeepers to test complete examples using sample data.
 
 **Release date:** 16 September 2026
-**Media contact:** https://github.com/rmak78/phpledger/discussions
+**Media contact:** https://github.com/phpledger/phpledger/discussions
 
 PHP Ledger introduces 0.4.0-preview, a development preview that extends its self-hosted accounting foundation into a connected accounting starter. The release brings together customer invoices, supplier bills, partial payments, credit notes, ageing and reconciliation, with optional Purchasing and Inventory modules for businesses that handle stock. It is intended for practical evaluation with fictional records and feedback from developers, bookkeepers and technically supported small businesses.
 
@@ -57,9 +57,9 @@ The release deliberately limits the first stock workflow to one location. Multip
 
 PHP Ledger runs on PHP 8.2 or newer, with PHP 8.3 recommended, and MySQL 8.4. Project-owned code is licensed under AGPL-3.0-or-later, with a separate commercial licence available. Self-hosting gives an operator responsibility for hosting, backups, access controls and upgrades; it does not establish that a particular installation has passed accounting, security or tax review. The development-preview label remains part of this release.
 
-Evaluators are invited to install 0.4.0-preview in a separate environment and try a fictional service or stock business. A useful first test is to post an invoice, collect part of it, apply a credit and collect the remainder, then check ageing and the ledger. Stock evaluators can follow an order through partial receipts, a matched bill and a stock sale. Reports should include the version, steps, expected result and a synthetic example, without customer records or credentials.
+Evaluators are invited to install 0.4.0-preview in a separate environment and try a fictional service or stock business. A useful first test is to post an invoice, collect part of it, apply a credit and collect the remainder, then check ageing and the ledger. Stock evaluators can follow an order through partial receipts, a matched bill and a stock sale. Reports should include the version, steps, expected result and a sample example, without customer records or credentials.
 
-The release archive, installation instructions and recorded limitations are available at https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview. The source repository is [github.com/rmak78/phpledger](https://github.com/rmak78/phpledger), and project information is at [phpledger.com](https://phpledger.com/). The guided experiment is at https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment.
+The release archive, installation instructions and recorded limitations are available at https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview. The source repository is [github.com/phpledger/phpledger](https://github.com/phpledger/phpledger), and project information is at [phpledger.com](https://phpledger.com/). The guided experiment is at https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment.
 
 **About PHP Ledger**
 
@@ -71,7 +71,7 @@ PHP Ledger is open-source, self-hosted double-entry accounting software built wi
 
 - **SEO title:** PHP Ledger accounting starter: invoices, bills and stock
 - **H1:** A self-hosted accounting starter for invoices, bills and stock
-- **Meta description:** Explore PHP Ledger's accounting starter: invoices, bills, partial payments, purchasing and inventory. Try a synthetic business on your own PHP hosting.
+- **Meta description:** Explore PHP Ledger's accounting starter: invoices, bills, partial payments, purchasing and inventory. Try a sample business on your own PHP hosting.
 - **Proposed slug:** `/news/accounting-starter-ar-ap-purchasing-inventory/`
 - **Canonical after publication:** `https://phpledger.com/news/accounting-starter-ar-ap-purchasing-inventory/`
 - **Search intent:** evaluate self-hosted accounting with invoicing and optional inventory.
@@ -135,7 +135,7 @@ Begin with the service example: an invoice, partial receipt, credit and final re
 
 Quotes are excluded from this starter and preserved for a separate plugin. Bank feeds, advances, unapplied credits, refunds, public financial write APIs and advanced stock operations are also deferred. The existing cash POS showcase has its own illustrative catalogue and does not deduct shared inventory.
 
-Download the verified development preview from https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview and follow https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment with synthetic data. PHP 8.2 or newer, MySQL 8.4, HTTPS and command-line access are required; PHP 8.3 is the recommended deployment version. Project-owned code uses AGPL-3.0-or-later, with commercial licensing available separately. Report a reproducible result in the [issue tracker](https://github.com/rmak78/phpledger/issues) or discuss a workflow in [GitHub Discussions](https://github.com/rmak78/phpledger/discussions).
+Download the verified development preview from https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview and follow https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment with sample data. PHP 8.2 or newer, MySQL 8.4, HTTPS and command-line access are required; PHP 8.3 is the recommended deployment version. Project-owned code uses AGPL-3.0-or-later, with commercial licensing available separately. Report a reproducible result in the [issue tracker](https://github.com/phpledger/phpledger/issues) or discuss a workflow in [GitHub Discussions](https://github.com/phpledger/phpledger/discussions).
 
 ## 4. LinkedIn — three variants
 
@@ -151,9 +151,9 @@ The core tax engine supports manually configured rates and inclusive or exclusiv
 
 We are inviting developers, bookkeepers and technically supported business owners to experiment with fictional records. Try an invoice for 1,000, collect 400, credit 100 and collect the final 500. Then check the source, ageing and journal.
 
-Development preview. Start in a separate installation with synthetic data.
+Development preview. Start in a separate installation with sample data.
 
-Release: https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview
+Release: https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview
 Walkthrough: https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment
 
 #OpenSource #AccountingSoftware #SelfHosted #PHP
@@ -170,9 +170,9 @@ There are deliberate limits: one stock location, moving weighted-average cost an
 
 I am looking for concrete feedback from self-hosters and bookkeepers: where did the next step feel unclear, and can you reproduce a result that does not reconcile?
 
-Please use synthetic data and include the version and steps. This is a development preview, not a claim of accounting or tax certification.
+Please use sample data and include the version and steps. This is a development preview, not a claim of accounting or tax certification.
 
-https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview
+https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview
 
 *Internal note: use this first-person version only from the actual owner/maintainer. It is a suggested post, not an attributed statement already made.*
 
@@ -189,16 +189,16 @@ AR/AP is bundled with the core. Purchasing and Inventory are optional and use th
 
 If you are a PHP self-hoster or a bookkeeper willing to review fictional examples, we would value a reproducible experiment. Tell us what you entered, what you expected and what happened.
 
-Download 0.4.0-preview: https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview
+Download 0.4.0-preview: https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview
 Guided example: https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment
 
-Development preview; use a separate installation and synthetic data.
+Development preview; use a separate installation and sample data.
 
 ## 5. X — thread and standalone posts
 
 ### Eight-post thread
 
-1. PHP Ledger 0.4.0-preview: core invoices, bills, partial payments, credits and ageing. Optional Purchasing and Inventory. A self-hosted development preview for fictional experiments. https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview
+1. PHP Ledger 0.4.0-preview: core invoices, bills, partial payments, credits and ageing. Optional Purchasing and Inventory. A self-hosted development preview for fictional experiments. https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview
 
 2. AR and AP are included in the core. Hide navigation you do not need without removing balances or disabling the services other modules use.
 
@@ -212,19 +212,19 @@ Development preview; use a separate installation and synthetic data.
 
 7. Quotes are excluded for a future plugin. Multiple warehouses, serials/batches, landed cost, bank feeds and public financial write APIs are also deferred. The illustrative POS does not deduct shared stock.
 
-8. Try a fictional workflow; report the version, steps and result. Guide: https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment Source: https://github.com/rmak78/phpledger
+8. Try a fictional workflow; report the version, steps and result. Guide: https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment Source: https://github.com/phpledger/phpledger
 
 ### Standalone: accounting experiment
 
-Invoice 1,000. Receive 400. Credit 100. Receive 500. Trace the balance in PHP Ledger: core AR/AP, optional Purchasing and Inventory. Development preview; use fictional data. https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview
+Invoice 1,000. Receive 400. Credit 100. Receive 500. Trace the balance in PHP Ledger: core AR/AP, optional Purchasing and Inventory. Development preview; use fictional data. https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview
 
 ### Standalone: stock experiment
 
-Order, receive in parts, then match the supplier bill. PHP Ledger connects Purchasing, shared Inventory and AP. Reconcile goods awaiting billing. Development preview; use fictional data. https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview
+Order, receive in parts, then match the supplier bill. PHP Ledger connects Purchasing, shared Inventory and AP. Reconcile goods awaiting billing. Development preview; use fictional data. https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview
 
 ### Standalone: source-first invitation
 
-PHP self-hosters and bookkeepers: help review a complete accounting example in PHP Ledger 0.4.0-preview. Invoices, bills, partial payments, credits and ageing, plus optional stock workflows. Source: https://github.com/rmak78/phpledger
+PHP self-hosters and bookkeepers: help review a complete accounting example in PHP Ledger 0.4.0-preview. Invoices, bills, partial payments, credits and ageing, plus optional stock workflows. Source: https://github.com/phpledger/phpledger
 
 *Channel check: validate final character counts after replacing variables and shortening links through the platform. Do not remove the development-preview qualification to fit.*
 
@@ -240,12 +240,12 @@ We are inviting technical self-hosters, bookkeepers and business owners with tec
 
 This is a development preview. Quotes, advanced stock features and country tax filing remain outside the starter. The existing sample POS does not deduct shared Inventory stock.
 
-Download and installation notes: https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview
+Download and installation notes: https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview
 Step-by-step fictional example: https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment
 
 ### Community forum / self-hosting group
 
-**Suggested title:** PHP Ledger accounting starter: looking for feedback on a synthetic invoice-to-payment flow
+**Suggested title:** PHP Ledger accounting starter: looking for feedback on a sample invoice-to-payment flow
 
 Disclosure: I am involved with PHP Ledger.
 
@@ -255,11 +255,11 @@ I would appreciate feedback from people who can install it separately and run a 
 
 Project-owned code is AGPL-3.0-or-later. It requires PHP 8.2+ and MySQL 8.4. Tax configuration is manual; country filing, bank feeds and public financial write APIs are outside this preview. Quotes are a separate future plugin.
 
-Release: https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview
-Source: https://github.com/rmak78/phpledger
+Release: https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview
+Source: https://github.com/phpledger/phpledger
 Experiment: https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment
 
-Please keep feedback synthetic. I can discuss the implemented accounting flow and reproducible bugs, but I am not presenting it as certified for a jurisdiction or production-ready for every business.
+Please keep feedback sample. I can discuss the implemented accounting flow and reproducible bugs, but I am not presenting it as certified for a jurisdiction or production-ready for every business.
 
 ### Reddit-style post
 
@@ -273,11 +273,11 @@ The first stock scope is intentionally small: one location, moving weighted-aver
 
 I would like feedback on a specific test rather than a general feature wish list: invoice 1,000, receive 400, credit 100 and receive 500. Do the balance, history and next action make sense at each step? There is also a ten-unit purchase/receipt/bill example.
 
-Source: https://github.com/rmak78/phpledger
-Release: https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview
+Source: https://github.com/phpledger/phpledger
+Release: https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview
 Guide: https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment
 
-It is a development preview, uses AGPL-3.0-or-later for project-owned code and needs PHP 8.2+/MySQL 8.4. Please use synthetic records. I will be available to discuss reproducible issues when this is posted.
+It is a development preview, uses AGPL-3.0-or-later for project-owned code and needs PHP 8.2+/MySQL 8.4. Please use sample records. I will be available to discuss reproducible issues when this is posted.
 
 *Internal note: the actual poster must be affiliated and available to answer. Check the chosen community's current self-promotion and submission rules before posting; this draft is not a claim that a particular subreddit permits it.*
 
@@ -297,7 +297,7 @@ The code is PHP/MeekroDB on MySQL, with BCMath for financial arithmetic. Require
 
 I would particularly value feedback on workflow clarity, reproducible accounting differences and the developer experience of self-hosting it. It is a development preview. Quotes, advanced stock operations, country filing and public financial write APIs are outside the release. Please test with fictional records.
 
-Guide: https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment. Known boundaries and validation are linked from https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview.
+Guide: https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment. Known boundaries and validation are linked from https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview.
 
 *Internal note: this is candidate submission copy only. Verify current community rules and the exact public artifact before choosing a submission type. Do not claim a hosted starter demo exists unless it has been released.*
 
@@ -305,7 +305,7 @@ Guide: https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-ex
 
 **Subject A:** Try the PHP Ledger accounting starter with a fictional business
 **Subject B:** Invoices, bills and stock: the next PHP Ledger preview
-**Preheader:** Core AR/AP, optional Purchasing and Inventory, and a guided synthetic experiment.
+**Preheader:** Core AR/AP, optional Purchasing and Inventory, and a guided sample experiment.
 
 Hello,
 
@@ -319,12 +319,12 @@ The core tax engine supports manually configured codes and dated rates. You can 
 
 Create a fictional invoice for 1,000. Receive 400, apply a credit of 100 and receive the remaining 500. Check the outstanding balance, ageing and journal at each step. The guide also includes an order for ten stock units received in two deliveries.
 
-**Download the development preview:** https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview
+**Download the development preview:** https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview
 **Follow the guided experiment:** https://phpledger.com/news/0-4-0-preview/#try-a-small-service-business-experiment
 
-Please install it separately and use synthetic records. Quotes, advances/unapplied credits/refunds, advanced inventory features and bank feeds remain deferred. The release notes explain the current boundaries and validation.
+Please install it separately and use sample records. Quotes, advances/unapplied credits/refunds, advanced inventory features and bank feeds remain deferred. The release notes explain the current boundaries and validation.
 
-If a result differs from the guide or an action is unclear, share the version, steps, expected result and a fictional example in the [issue tracker](https://github.com/rmak78/phpledger/issues). Please leave customer data, credentials and private backups out of reports.
+If a result differs from the guide or an action is unclear, share the version, steps, expected result and a fictional example in the [issue tracker](https://github.com/phpledger/phpledger/issues). Please leave customer data, credentials and private backups out of reports.
 
 Thank you,
 PHP Ledger project
@@ -343,4 +343,4 @@ For simple attribution, the team may consistently use `utm_campaign=accounting_s
 
 ## Actual screenshot media
 
-[Download the six original PNG assets and read their captions](accounting-starter-media/README.md). The [manifest](accounting-starter-media/manifest.json) records alt text, hashes, synthetic baselines and local capture context. These are faithful application captures, not generated product mockups or live-publication proof. The final release media ZIP also separates press, SEO, social and email copy for the marketing team.
+[Download the six original PNG assets and read their captions](accounting-starter-media/README.md). The [manifest](accounting-starter-media/manifest.json) records alt text, hashes, sample baselines and local capture context. These are faithful application captures, not generated product mockups or live-publication proof. The final release media ZIP also separates press, SEO, social and email copy for the marketing team.

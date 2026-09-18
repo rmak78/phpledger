@@ -4,7 +4,7 @@ Validated 15 September 2026 (Asia/Karachi). This is an evaluation prerelease, no
 
 ## Published artifacts
 
-- [Release and downloads](https://github.com/rmak78/phpledger/releases/tag/v0.1.1-preview).
+- [Release and downloads](https://github.com/phpledger/phpledger/releases/tag/v0.1.1-preview).
 - Runtime source: `0258a844d83b0ee225b2fc24cabae35ee6bfc9dc`.
 - ZIP: `phpledger-0.1.1-preview.zip`, **1,214,419 bytes**.
 - SHA-256: `56bdaafd6cb0981d28f36e0a214397543fa1a66c61527878f6549d7dbb51eede`.
@@ -21,11 +21,11 @@ Validated 15 September 2026 (Asia/Karachi). This is an evaluation prerelease, no
 | 0.1.0-preview to 0.1.1-preview | Old archive installed and passed 26 HTTP checks before replacement; new archive preflight/replay left all 15 table checksums unchanged |
 | Backup restoration | 15 definitions/data checksums, 1,066 rows, nine triggers, five migration receipts, scoped source links and balanced journals verified |
 | Package builder guards | Five tests passed |
-| Syntax/static/CI | 59 PHP files, JavaScript and Python syntax passed; PHPStan no errors; [source CI](https://github.com/rmak78/phpledger/actions/runs/34896577861) passed |
+| Syntax/static/CI | 59 PHP files, JavaScript and Python syntax passed; PHPStan no errors; [source CI](https://github.com/phpledger/phpledger/actions/runs/34896577861) passed |
 | Browser | Product click/add, cart +/-/remove, separate cash review, recovery, keyboard, reduced motion, no-JavaScript fallback, desktop/tablet/mobile and 720px reflow checked |
 | Print preview | Receipt PDF rendered and inspected: 14.75 total, 20.00 cash, 5.25 change; complete rows |
 
-Package acceptance used its unpacked read-only files, production vendor and a separate nonshipping harness in the isolated `phpledger-release-011` Compose project. Source development, live demo and customer databases were not used for package tests. Recovery HTTP testing injected a lost-response state only into its own synthetic session; this is not a real network interruption test.
+Package acceptance used its unpacked read-only files, production vendor and a separate nonshipping harness in the isolated `phpledger-release-011` Compose project. Source development, live demo and customer databases were not used for package tests. Recovery HTTP testing injected a lost-response state only into its own sample session; this is not a real network interruption test.
 
 ## Hosted verification
 

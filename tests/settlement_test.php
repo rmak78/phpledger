@@ -37,7 +37,7 @@ function settlement_fixture(bool $payable=false, bool $foreign=false): array
 function settlement_input(array $f): array
 {
     return ['party_id'=>$f['party_id'],'direction'=>$f['payable']?'payable':'receivable','date'=>'2026-03-01',
-        'bank_account_id'=>$f['accounts']['1000'],'amount_fc'=>'20','description'=>'Synthetic multi-document payment',
+        'bank_account_id'=>$f['accounts']['1000'],'amount_fc'=>'20','description'=>'Sample multi-document payment',
         'idempotency_key'=>bin2hex(random_bytes(16)),'allocations'=>array_map(static fn(int $id): array=>['item_id'=>$id,'amount_fc'=>'10'],$f['items'])];
 }
 
@@ -54,7 +54,7 @@ test('multi-item domestic settlement previews without writes and posts one bank 
         foreach ($f['items'] as $id) { assert_same('0.0000',pl_get_open_item($f['actor_id'],$f['company_id'],$f['book_id'],$id)['remaining_fc']); }
         $input['allocations']=array_reverse($input['allocations']);
         assert_same($posted,pl_settle_open_items($f['actor_id'],$f['company_id'],$f['book_id'],$input));
-        pl_reverse_journal($f['actor_id'],$f['company_id'],$f['book_id'],$posted['journal_id'],gmdate('Y-m-d'),bin2hex(random_bytes(16)),'Synthetic whole-payment reversal');
+        pl_reverse_journal($f['actor_id'],$f['company_id'],$f['book_id'],$posted['journal_id'],gmdate('Y-m-d'),bin2hex(random_bytes(16)),'Sample whole-payment reversal');
         foreach ($f['items'] as $id) { assert_same('10.0000',pl_get_open_item($f['actor_id'],$f['company_id'],$f['book_id'],$id)['remaining_fc']); }
         assert_same($posted,pl_settle_open_items($f['actor_id'],$f['company_id'],$f['book_id'],$input));
     }

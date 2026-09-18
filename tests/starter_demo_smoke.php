@@ -39,8 +39,8 @@ try {
         starter_demo_check(!preg_match('/\b(ALL PRIVILEGES|DELETE|CREATE|ALTER|DROP|GRANT OPTION)\b/i', $grant), 'Demo grants were broadened.');
     }
     $key = 'demo-starter:' . bin2hex(random_bytes(12));
-    $input = ['kind'=>'invoice','party_id'=>$party,'date'=>$date,'due_date'=>$date,'currency'=>'USD','reference'=>'Synthetic restricted invoice','creation_key'=>$key . ':ar',
-        'lines'=>[['description'=>'Synthetic service','quantity'=>'1','unit_price'=>'100','account_id'=>(int)$accounts['4000']]]];
+    $input = ['kind'=>'invoice','party_id'=>$party,'date'=>$date,'due_date'=>$date,'currency'=>'USD','reference'=>'Sample restricted invoice','creation_key'=>$key . ':ar',
+        'lines'=>[['description'=>'Sample service','quantity'=>'1','unit_price'=>'100','account_id'=>(int)$accounts['4000']]]];
     $draft = pl_save_ar_document($actor,$company,$book,$input);
     $lineId = $draft['lines'][0]['id'];
     $edit = $input; $edit['lines'][0]['unit_price'] = '110';
@@ -53,12 +53,12 @@ try {
     starter_demo_check(pl_get_ar_document($actor,$company,$book,$draft['id'])['total'] === '120.0000', 'Rejected line removal changed the draft.');
     $posted = pl_post_ar_document($actor,$company,$book,$draft['id'],$draft['revision']);
     $payment = ['bank_account_id'=>(int)$accounts['1000'],'gain_account_id'=>(int)$accounts['4000'],'loss_account_id'=>(int)$accounts['5000'],
-        'amount_fc'=>'10','date'=>$date,'description'=>'Synthetic partial payment','idempotency_key'=>$key . ':payment'];
+        'amount_fc'=>'10','date'=>$date,'description'=>'Sample partial payment','idempotency_key'=>$key . ':payment'];
     $paid = pl_settle_ar_document($actor,$company,$book,$draft['id'],$payment);
     starter_demo_check(pl_get_ar_document($actor,$company,$book,$draft['id'])['outstanding_fc'] === '110.0000', 'Restricted demo partial payment failed.');
 
-    $orderInput = ['party_id'=>$party,'date'=>$date,'currency'=>'USD','reference'=>'Synthetic restricted order','creation_key'=>$key . ':po',
-        'lines'=>[['product_id'=>$product,'description'=>'Synthetic goods','quantity'=>'10','unit_price'=>'5']]];
+    $orderInput = ['party_id'=>$party,'date'=>$date,'currency'=>'USD','reference'=>'Sample restricted order','creation_key'=>$key . ':po',
+        'lines'=>[['product_id'=>$product,'description'=>'Sample goods','quantity'=>'10','unit_price'=>'5']]];
     $order = pl_save_purchase_order($actor,$company,$book,$orderInput);
     $orderLineId = $order['lines'][0]['id'];
     $orderEdit = $orderInput; $orderEdit['creation_key'] = $key . ':po-edit'; $orderEdit['lines'][0]['unit_price'] = '6';
@@ -69,13 +69,13 @@ try {
     $receipt = pl_receive_purchase_order($actor,$company,$book,$order['id'],$receiptInput);
     starter_demo_check(pl_inventory_balance($actor,$company,$book,$product)['quantity'] === '4.0000', 'Restricted purchase receipt did not update shared stock.');
     $stockInput = ['product_id'=>$product,'date'=>$date,'quantity'=>'2','amount_base'=>'12','offset_account_id'=>(int)$accounts['5000'],
-        'source_type'=>'manual_stock','source_reference'=>$key . ':stock','reason'=>'Synthetic stock adjustment','idempotency_key'=>$key . ':stock'];
+        'source_type'=>'manual_stock','source_reference'=>$key . ':stock','reason'=>'Sample stock adjustment','idempotency_key'=>$key . ':stock'];
     $stock = pl_inventory_receive($actor,$company,$book,$stockInput);
     starter_demo_check(pl_inventory_balance($actor,$company,$book,$product)['quantity'] === '6.0000', 'Restricted manual stock receipt failed.');
 
     // Three stock lines produce three durable stock commands plus the AR posting receipt.
     $compoundInput = $input; $compoundInput['creation_key'] = $key . ':compound'; $compoundInput['lines'] = [];
-    for ($i=0;$i<3;$i++) { $compoundInput['lines'][] = ['description'=>'Synthetic stock sale ' . $i,'quantity'=>'1','unit_price'=>'10','account_id'=>(int)$accounts['4000'],'product_id'=>$product]; }
+    for ($i=0;$i<3;$i++) { $compoundInput['lines'][] = ['description'=>'Sample stock sale ' . $i,'quantity'=>'1','unit_price'=>'10','account_id'=>(int)$accounts['4000'],'product_id'=>$product]; }
     $compound = pl_save_ar_document($actor,$company,$book,$compoundInput);
     while (pl_demo_document_count($company,$book)<10) {
         $padding=$input; $padding['creation_key']=$key . ':padding:' . pl_demo_document_count($company,$book); pl_save_ar_document($actor,$company,$book,$padding);
@@ -109,7 +109,7 @@ try {
     starter_demo_denied(fn()=>pl_settle_open_item($actor,$company,$book,$newPayment+['item_id'=>$draft['open_item_id']??$posted['open_item_id']]),'transaction limit');
     starter_demo_check(pl_demo_document_count($company,$book)===$beforeCount+4 && pl_trial_balance($actor,$company,$book)['balanced'], 'Capacity denials changed the books.');
     starter_demo_denied(fn()=>pl_save_inventory_product($actor,$company,$book,[]), 'disabled');
-    starter_demo_denied(fn()=>pl_activate_open_item_account($actor,$company,$book,(int)$accounts['1100'],'Synthetic forbidden activation'), 'disabled');
+    starter_demo_denied(fn()=>pl_activate_open_item_account($actor,$company,$book,(int)$accounts['1100'],'Sample forbidden activation'), 'disabled');
     echo "Starter restricted demo smoke: {$checks} checks passed; AR/PO draft edits, partial payment, goods receipt, stock, exact retries at capacity, atomic compound limit rollback and unchanged administrative restrictions.\n";
 } finally {
     putenv($limitBefore === false ? 'PL_DEMO_MAX_DOCUMENTS' : 'PL_DEMO_MAX_DOCUMENTS=' . $limitBefore);

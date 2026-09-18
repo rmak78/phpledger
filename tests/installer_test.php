@@ -62,10 +62,10 @@ test('preflight and migration replay preserve receipts and existing data', funct
 });
 
 test('installer connection failures do not expose credentials or stack traces', function (): void {
-    $secret = 'Synthetic-private-check-' . bin2hex(random_bytes(12));
+    $secret = 'Sample-private-check-' . bin2hex(random_bytes(12));
     foreach (['preflight.php', 'migrate.php', 'create-admin.php'] as $name) {
         $args = $name === 'create-admin.php' ? ['--email=wrong-db@example.invalid', '--name=Fixture', '--password-stdin'] : [];
-        $result = installer_process(dirname(__DIR__) . '/www/phpledger/install/' . $name, $args, 'Synthetic account passphrase 427!' . "\n", ['PL_DB_PASSWORD' => $secret]);
+        $result = installer_process(dirname(__DIR__) . '/www/phpledger/install/' . $name, $args, 'Sample account passphrase 427!' . "\n", ['PL_DB_PASSWORD' => $secret]);
         assert_same(1, $result['status']);
         assert_true(!str_contains($result['output'], $secret));
         assert_true(!str_contains($result['output'], 'Stack trace'));
@@ -98,7 +98,7 @@ test('missing autoload and invalid local configuration produce safe installer fa
         assert_true(str_contains($missing['output'], 'Composer dependencies are missing'));
         assert_true(!str_contains($missing['output'], 'Warning:'));
         file_put_contents($root . '/vendor/autoload.php', '<?php require ' . var_export(dirname(__DIR__) . '/vendor/autoload.php', true) . ';');
-        $secret = 'Synthetic-invalid-config-' . bin2hex(random_bytes(8));
+        $secret = 'Sample-invalid-config-' . bin2hex(random_bytes(8));
         file_put_contents($includes . '/config.local.php', '<?php return ' . var_export($secret, true) . ';');
         $invalid = installer_process($install . '/preflight.php');
         assert_same(1, $invalid['status']);
@@ -130,14 +130,14 @@ test('repeating administrator creation preserves the original account and passwo
     $email = 'installer-' . bin2hex(random_bytes(8)) . '@example.invalid';
     $script = dirname(__DIR__) . '/www/phpledger/install/create-admin.php';
     $args = ['--email=' . $email, '--name=Original installer owner', '--password-stdin'];
-    $password = 'Original synthetic passphrase 481!';
+    $password = 'Original sample passphrase 481!';
     $created = installer_process($script, $args, $password . "\n");
     assert_same(0, $created['status'], $created['output']);
     $before = DB::queryFirstRow('SELECT * FROM pl_users WHERE email=%s', $email);
     assert_true(is_array($before));
-    $replayed = installer_process($script, $args, "Replacement synthetic passphrase 482!\n");
+    $replayed = installer_process($script, $args, "Replacement sample passphrase 482!\n");
     assert_same(1, $replayed['status']);
     assert_same($before, DB::queryFirstRow('SELECT * FROM pl_users WHERE email=%s', $email));
     assert_true(pl_verify_password($password, $before['password_hash']));
-    assert_true(!pl_verify_password('Replacement synthetic passphrase 482!', $before['password_hash']));
+    assert_true(!pl_verify_password('Replacement sample passphrase 482!', $before['password_hash']));
 });
