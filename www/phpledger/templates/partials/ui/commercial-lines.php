@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /** Shared compact quantity/price editor. Row changes work through POST without JS. */
-function pl_ui_commercial_lines(array $rows, array $options, bool $credit = false, bool $purchase = false): void
+function pl_ui_commercial_lines(array $rows, array $options, bool $credit = false, bool $purchase = false, array $errors = []): void
 {
     $rows = $rows === [] ? [[]] : array_values($rows);
     $fields = ['description'=>'Description','product_id'=>'Product'];
@@ -19,12 +19,12 @@ function pl_ui_commercial_lines(array $rows, array $options, bool $credit = fals
     <th scope="col" class="text-end <?= $purchase?'w-[15%]':'w-[10%]' ?>">Entered amount</th><th scope="col" class="w-[4%]"><span class="sr-only">Actions</span></th></tr></thead><tbody data-commercial-rows>
     <?php foreach ($rows as $index=>$raw): $line=is_array($raw)?$raw:[]; ?>
     <tr data-commercial-row>
-    <?php foreach ($fields as $name=>$label): $id='commercial-'.$index.'-'.$name; ?>
+    <?php foreach ($fields as $name=>$label): $id='commercial-'.$index.'-'.$name; $error=$errors['lines.'.$index.'.'.$name]??''; ?>
     <td><label class="sr-only" for="<?= $id ?>" data-commercial-label="<?= pl_e($label) ?>"><?= pl_e($label.', line '.($index+1)) ?></label>
-    <?php if (isset($options[$name])): ?><select class="select" id="<?= $id ?>" name="lines[<?= $index ?>][<?= $name ?>]" data-commercial-field="<?= $name ?>"><option value="">Choose…</option>
+    <?php if (isset($options[$name])): ?><select class="select" id="<?= $id ?>"<?= pl_ui_error_attributes($id,$error) ?> name="lines[<?= $index ?>][<?= $name ?>]" data-commercial-field="<?= $name ?>"><option value="">Choose…</option>
     <?php if (($line[$name]??'')!=='' && $line[$name]!==null && !isset($options[$name][$line[$name]])): ?><option value="<?= pl_e((string)$line[$name]) ?>" selected>Unavailable selection <?= pl_e((string)$line[$name]) ?> — choose another</option><?php endif; ?>
     <?php foreach ($options[$name] as $value=>$text): ?><option value="<?= pl_e((string)$value) ?>"<?= (string)($line[$name]??'')===(string)$value?' selected':'' ?>><?= pl_e($text) ?></option><?php endforeach; ?></select>
-    <?php else: ?><input class="input<?= in_array($name,['quantity','unit_price'],true)?' input-amount':'' ?>" id="<?= $id ?>" name="lines[<?= $index ?>][<?= $name ?>]" data-commercial-field="<?= $name ?>" value="<?= pl_e((string)($line[$name]??'')) ?>" maxlength="<?= $name==='description'?500:21 ?>"<?= $name==='description'?'':' inputmode="decimal"' ?>><?php endif; ?></td>
+    <?php else: ?><input class="input<?= in_array($name,['quantity','unit_price'],true)?' input-amount':'' ?>" id="<?= $id ?>"<?= pl_ui_error_attributes($id,$error) ?> name="lines[<?= $index ?>][<?= $name ?>]" data-commercial-field="<?= $name ?>" value="<?= pl_e((string)($line[$name]??'')) ?>" maxlength="<?= $name==='description'?500:21 ?>"<?= $name==='description'?'':' inputmode="decimal"' ?>><?php endif; ?><?php if ($error !== ''): ?><p class="field-error-text" id="<?= $id ?>-error"><?= pl_e($error) ?></p><?php endif; ?></td>
     <?php endforeach; ?>
     <?php $amount='—'; try { $amount=pl_ar_line_amount((string)($line['quantity']??''),(string)($line['unit_price']??'')); } catch (DomainException) {} ?>
     <td class="amount" data-commercial-amount><?= pl_e($amount) ?></td><td><button class="btn btn-ghost btn-icon btn-sm" name="remove_line" value="<?= $index ?>" formnovalidate data-remove-commercial-row aria-label="Remove line <?= $index+1 ?>"><?= pl_icon('trash') ?></button></td>

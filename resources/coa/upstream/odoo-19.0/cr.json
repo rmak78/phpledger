@@ -1,0 +1,370 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "1f8d1b3bec5158815acc063f24fbcf3a4f1957efd4bc06c8bd66c7113527c79f",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/cr",
+  "country_code": "CR",
+  "country_name": "Costa Rica",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Costa Rica - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_cr' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "ClearCorp S.A.",
+    "module": "l10n_cr",
+    "module_name": "Costa Rica - Accounting",
+    "module_version": null,
+    "contributing_modules": [
+      "l10n_cr"
+    ],
+    "template_code": "cr",
+    "template_chain": [
+      "cr"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_cr/data/template/account.account-cr.csv",
+        "sha256": "26a61599bbcb6b443df93931277194e396aaa48b8707e956395396d2d3574187",
+        "rows": 98
+      }
+    ],
+    "python_files": [
+      "addons/l10n_cr/models/template_cr.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": null,
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "0.1112",
+      "cash": "0.1111",
+      "transfer": "0.1114"
+    },
+    "default_sale_tax": "account_tax_template_IV_0",
+    "default_purchase_tax": "account_tax_template_IV_1",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "account_account_template_0_112001",
+        "code": "0.112001",
+        "name": "0-Trade accounts receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "account_account_template_0_211001",
+        "code": "0.211001",
+        "name": "0-Accounts payable to suppliers",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "account_account_template_0_410001",
+        "code": "0.410001",
+        "name": "0-Category 1",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "account_account_template_0_511301",
+        "code": "0.511301",
+        "name": "0-Product cost",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "account_account_template_0_113101",
+        "code": "0.113101",
+        "name": "0-Product inventory for sale",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "account_account_template_0_112011",
+        "code": "0.112011",
+        "name": "0-Trade accounts receivable (PoS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "account_account_template_0_450001",
+        "code": "0.450001",
+        "name": "0-Exchange differential",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "account_account_template_0_530004",
+        "code": "0.530004",
+        "name": "0-Exchange differential",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 98,
+    "posting_accounts": 98,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 37,
+      "equity": 11,
+      "expense": 36,
+      "income": 6,
+      "liability": 8
+    },
+    "by_subtype": {
+      "cash_bank": 1,
+      "current_asset": 26,
+      "current_liability": 4,
+      "equity": 11,
+      "expense": 36,
+      "income": 5,
+      "other_income": 1,
+      "payable": 4,
+      "receivable": 10
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 1,
+      "expense": 1,
+      "income": 1,
+      "payables": 4,
+      "receivables": 10
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "es"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "account_account_template_0_111301", "code": "0.111301", "name": "0-PayPal Account 1", "translations": {"es": "0-Cuenta PayPal 1"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "account_account_template_0_111401", "code": "0.111401", "name": "0-Funds in transit in treasury", "translations": {"es": "0-Fondos en tránsito en tesorería"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_111403", "code": "0.111403", "name": "0-Funds in transit from PayPal to Banks", "translations": {"es": "0-Fondos en tránsito de PayPal a Bancos"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_111501", "code": "0.111501", "name": "0-Investment 1", "translations": {"es": "0-Inversión 1"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_112001", "code": "0.112001", "name": "0-Trade accounts receivable", "translations": {"es": "0-Cuentas por cobrar comerciales"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "account_account_template_0_112002", "code": "0.112002", "name": "0-Accounts receivable from related companies", "translations": {"es": "0-Cuentas por cobrar a compañías relacionadas"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "account_account_template_0_112003", "code": "0.112003", "name": "0-Accounts receivable from employees", "translations": {"es": "0-Cuentas por cobrar a empleados"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "account_account_template_0_112004", "code": "0.112004", "name": "0-Other accounts receivable", "translations": {"es": "0-Otras cuentas por cobrar"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "account_account_template_0_112005", "code": "0.112005", "name": "0-Short-term investments", "translations": {"es": "0-Inversiones de corto plazo"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "account_account_template_0_112011", "code": "0.112011", "name": "0-Trade accounts receivable (PoS)", "translations": {"es": "0-Cuentas por cobrar comerciales (PoS)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "account_account_template_0_113101", "code": "0.113101", "name": "0-Product inventory for sale", "translations": {"es": "0-Inventario de producto para la venta"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_expense_id": "account_account_template_0_511302", "account_stock_variation_id": "account_account_template_0_520001"}}},
+    {"source_id": "account_account_template_0_113102", "code": "0.113102", "name": "0-Consumables inventory", "translations": {"es": "0-Inventario de consumibles"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_121111", "code": "0.121111", "name": "0-Land 1", "translations": {"es": "0-Terreno 1"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_121121", "code": "0.121121", "name": "0-Land 1", "translations": {"es": "0-Terreno 1"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_122111", "code": "0.122111", "name": "0-Building 1", "translations": {"es": "0-Edificio 1"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_122121", "code": "0.122121", "name": "0-Building 1", "translations": {"es": "0-Edificio 1"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_122211", "code": "0.122211", "name": "0-Building 1", "translations": {"es": "0-Edificio 1"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_122221", "code": "0.122221", "name": "0-Building 1", "translations": {"es": "0-Edificio 1"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_122301", "code": "0.122301", "name": "0-Machinery and building equipment", "translations": {"es": "0-Maquinaria y equipo de edificios"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_122302", "code": "0.122302", "name": "0-Major tools", "translations": {"es": "0-Herramientas mayores"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_122303", "code": "0.122303", "name": "0-Office furniture and office equipment", "translations": {"es": "0-Moibliario y equipo de oficina"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_122304", "code": "0.122304", "name": "0-Computer equipment", "translations": {"es": "0-Equipo de cómputo"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_122305", "code": "0.122305", "name": "0-Vehicles", "translations": {"es": "0-Vehículos"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_131101", "code": "0.131101", "name": "0-Building 1", "translations": {"es": "0-Edificio 1"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_131201", "code": "0.131201", "name": "0-Building 1", "translations": {"es": "0-Edificio 1"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_132101", "code": "0.132101", "name": "0-Building 1", "translations": {"es": "0-Edificio 1"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_132201", "code": "0.132201", "name": "0-Building 1", "translations": {"es": "0-Edificio 1"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_133001", "code": "0.133001", "name": "0-Dep. ac. of machinery and equipment of buildings", "translations": {"es": "0-Dep. ac. de maquinaria y equipo de edificios"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_133002", "code": "0.133002", "name": "0-Major tools ac. dept.", "translations": {"es": "0-Dep. ac. de herramientas mayores"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_133003", "code": "0.133003", "name": "0-Dep. ac. of machinery and equipment of buildings", "translations": {"es": "0-Dep. ac. de maquinaria y equipo de edificios"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_133004", "code": "0.133004", "name": "0-Dep. ac. of computer equipment", "translations": {"es": "0-Dep. ac. de equipo de cómputo"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_133005", "code": "0.133005", "name": "0-Vehicle ac. dept.", "translations": {"es": "0-Dep. ac. de vehículos"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_141001", "code": "0.141001", "name": "0-Prepaid insurance policies", "translations": {"es": "0-Pólizas de seguros prepagadas"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "account_account_template_0_142001", "code": "0.142001", "name": "0-Deposits on telephone rights", "translations": {"es": "0-Depósitos sobre derechos telefónicos"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "account_account_template_0_142002", "code": "0.142002", "name": "0-Deposits on Internet connections", "translations": {"es": "0-Depósitos sobre conexiones de Internet"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "account_account_template_0_142003", "code": "0.142003", "name": "0-Deposits on leased premises", "translations": {"es": "0-Depósitos sobre locales en alquiler"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "account_account_template_0_211001", "code": "0.211001", "name": "0-Accounts payable to suppliers", "translations": {"es": "0-Cuentas por pagar a proveedores"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "account_account_template_0_211002", "code": "0.211002", "name": "0-Accounts payable to employees", "translations": {"es": "0-Cuentas por pagar a empleados"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "account_account_template_0_211003", "code": "0.211003", "name": "0-Provisions payable", "translations": {"es": "0-Cuentas por pagar de provisiones"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "account_account_template_0_211004", "code": "0.211004", "name": "0-Accounts payable to related companies", "translations": {"es": "0-Cuentas por pagar a compañías relacionadas"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "account_account_template_0_212101", "code": "0.212101", "name": "0-Sales tax payable", "translations": {"es": "0-Impuesto de ventas por pagar"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "account_account_template_0_212102", "code": "0.212102", "name": "0-Sales tax paid", "translations": {"es": "0-Impuesto de ventas pagado"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_account_template_0_212201", "code": "0.212201", "name": "0-Income tax payable", "translations": {"es": "0-Impuesto de renta por pagar"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "account_account_template_0_212202", "code": "0.212202", "name": "0-Income tax deductions", "translations": {"es": "0-Adelantos de impuesto de renta"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "account_account_template_0_212203", "code": "0.212203", "name": "0-Income tax withholdings", "translations": {"es": "0-Retenciones de impuesto de renta"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "account_account_template_0_310001", "code": "0.310001", "name": "0-Partner 1", "translations": {"es": "0-Socio 1"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "account_account_template_0_320001", "code": "0.320001", "name": "0-Legal reserve", "translations": {"es": "0-Reserva legal"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "account_account_template_0_330001", "code": "0.330001", "name": "0-Reserve for improvements", "translations": {"es": "0-Reserva para mejoras"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "account_account_template_0_330002", "code": "0.330002", "name": "0-Reserve for projects", "translations": {"es": "0-Reserva para proyectos"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "account_account_template_0_340001", "code": "0.340001", "name": "0-Partner 1", "translations": {"es": "0-Socio 1"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "account_account_template_0_350001", "code": "0.350001", "name": "0-Capital surplus", "translations": {"es": "0-Superávit de capital"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "account_account_template_0_350002", "code": "0.350002", "name": "0-Assets revaluation surplus", "translations": {"es": "0-Superavit por revaluación de activos"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "account_account_template_0_350003", "code": "0.350003", "name": "0-Earned surplus", "translations": {"es": "0-Superavit ganado"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "account_account_template_0_360001", "code": "0.360001", "name": "0-Period 1", "translations": {"es": "0-Periodo 1"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "account_account_template_0_370001", "code": "0.370001", "name": "0-Utility or loss for the current period", "translations": {"es": "0-Utilidad o pérdida del período actual"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "account_account_template_0_380001", "code": "0.380001", "name": "0-Initial balance", "translations": {"es": "0-Balance inicial"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "account_account_template_0_410001", "code": "0.410001", "name": "0-Category 1", "translations": {"es": "0-Categoría 1"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income_other", "tax_ids": ["account_tax_template_IV_0"]}},
+    {"source_id": "account_account_template_0_420001", "code": "0.420001", "name": "0-Administration fee", "translations": {"es": "0-Cuota por administración"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "account_account_template_0_430001", "code": "0.430001", "name": "0-Interest earned on current accounts", "translations": {"es": "0-Intereses ganados sobre cuentas corrientes"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "account_account_template_0_440001", "code": "0.440001", "name": "0-Adjustments", "translations": {"es": "0-Ajustes"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "account_account_template_0_440002", "code": "0.440002", "name": "0-Donations", "translations": {"es": "0-Donaciones"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "account_account_template_0_450001", "code": "0.450001", "name": "0-Exchange differential", "translations": {"es": "0-Diferencial cambiario"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "account_account_template_0_511111", "code": "0.511111", "name": "0-Salaries", "translations": {"es": "0-Salarios"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511112", "code": "0.511112", "name": "0-Extras", "translations": {"es": "0-Extras"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511113", "code": "0.511113", "name": "0-Bonuses", "translations": {"es": "0-Bonificaciones"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511114", "code": "0.511114", "name": "0-Salary", "translations": {"es": "0-Comisiones"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511115", "code": "0.511115", "name": "0-Employer's charges", "translations": {"es": "0-Cargas patronales"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511116", "code": "0.511116", "name": "0-Extra pay at Christmas", "translations": {"es": "0-Aguinaldo"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511117", "code": "0.511117", "name": "0-Notice", "translations": {"es": "0-Preaviso"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511118", "code": "0.511118", "name": "0-Salary", "translations": {"es": "0-Comisiones"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511121", "code": "0.511121", "name": "0-Transportation", "translations": {"es": "0-Transporte"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511122", "code": "0.511122", "name": "0-Feeding", "translations": {"es": "0-Alimentación"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511123", "code": "0.511123", "name": "0-Hosting", "translations": {"es": "0-Hospedaje"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511201", "code": "0.511201", "name": "0-Category 1", "translations": {"es": "0-Categoría 1"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511301", "code": "0.511301", "name": "0-Product cost", "translations": {"es": "0-Costo de producto"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511302", "code": "0.511302", "name": "0-Raw material cost", "translations": {"es": "0-Costo de materia prima"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511303", "code": "0.511303", "name": "0-Cost of production", "translations": {"es": "0-Costo de producción"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511304", "code": "0.511304", "name": "0-Storage cost", "translations": {"es": "0-Costo de almacenamiento"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511305", "code": "0.511305", "name": "0-Distribution cost", "translations": {"es": "0-Costo de distribución"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511401", "code": "0.511401", "name": "0-Image design", "translations": {"es": "0-Diseño de imagen"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_511402", "code": "0.511402", "name": "0-Advertising campaigns", "translations": {"es": "0-Campañas publicitarias"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_512101", "code": "0.512101", "name": "0-Managing company 1", "translations": {"es": "0-Compañía administradora 1"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_512201", "code": "0.512201", "name": "0-Office 1", "translations": {"es": "0-Oficina 1"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_512311", "code": "0.512311", "name": "0-Meter 1", "translations": {"es": "0-Medidor 1"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_512321", "code": "0.512321", "name": "0-Meter 1", "translations": {"es": "0-Medidor 1"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_512331", "code": "0.512331", "name": "0-Telephone 1", "translations": {"es": "0-Teléfono 1"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_512341", "code": "0.512341", "name": "0-Contract 1", "translations": {"es": "0-Contrato 1"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_512401", "code": "0.512401", "name": "0-Department 1", "translations": {"es": "0-Departamento 1"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_512501", "code": "0.512501", "name": "0-Department 1", "translations": {"es": "0-Departamento 1"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_520001", "code": "0.520001", "name": "0-Adjustments", "translations": {"es": "0-Ajustes"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_520002", "code": "0.520002", "name": "0-Financial Expenses", "translations": {"es": "0-Gastos Financieros"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_520003", "code": "0.520003", "name": "0-Depreciation of fixed assets", "translations": {"es": "0-Depreciación de activo fijo"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_520004", "code": "0.520004", "name": "0-Loss due to theft", "translations": {"es": "0-Perdida por robo"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_520005", "code": "0.520005", "name": "0-Deductible donations", "translations": {"es": "0-Donaciones deducibles"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_530001", "code": "0.530001", "name": "0-Non-deductible donations", "translations": {"es": "0-Donaciones no deducibles"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_530002", "code": "0.530002", "name": "0-Chairman's expenses", "translations": {"es": "0-Gastos de presidencia"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_530003", "code": "0.530003", "name": "0-Fines", "translations": {"es": "0-Multas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "account_account_template_0_530004", "code": "0.530004", "name": "0-Exchange differential", "translations": {"es": "0-Diferencial cambiario"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}}
+  ]
+}

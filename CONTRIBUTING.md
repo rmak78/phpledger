@@ -1,6 +1,6 @@
 # Contributing to PHP Ledger
 
-PHP Ledger is being rebuilt as a self-hosted accounting application for SME owners, accountants, and bookkeepers. The current work is a local development milestone. Read [the README](README.md), [repository instructions](AGENTS.md), [architecture](https://github.com/rmak78/phpledger/blob/8cf7386/docs/ARCHITECTURE.md), and [current sprint](https://github.com/rmak78/phpledger/blob/8cf7386/docs/SPRINT-02.md) before changing code.
+PHP Ledger is being rebuilt as a self-hosted accounting application for SME owners, accountants, and bookkeepers. The current work is a local development milestone. Read [the README](README.md), [repository instructions](AGENTS.md), [architecture](docs/ARCHITECTURE.md), and [current sprint](docs/SPRINT-02.md) before changing code.
 
 ## Get the development environment running
 
@@ -16,7 +16,7 @@ The isolated test profile uses the disposable `db_test` service and `phpledger_t
 - Keep financial rules in typed functions independent of request variables, HTML, and sessions. All posted financial writes go through the central posting interface; use exact decimal strings, balanced lines, durable sources, and duplicate prevention.
 - Scope reads and writes to the authorized company and book. Recheck write permissions on the server, reject closed-period postings, and correct posted entries with linked reversals.
 - Make necessary schema changes in a new versioned migration. Do not edit an already applied migration or execute the historical root installation scripts.
-- Use the approved Review Console direction and Inter typography from [Design](https://github.com/rmak78/phpledger/blob/8cf7386/docs/DESIGN.md) and [Brand](https://github.com/rmak78/phpledger/blob/8cf7386/docs/BRAND.md). Keep owners' first tasks clear and accountants' repeated work efficient. Preserve entered values on errors and support keyboard and narrow-screen use.
+- Use the approved Review Console direction and Inter typography from [Design](docs/DESIGN.md) and [Brand](docs/BRAND.md). Keep owners' first tasks clear and accountants' repeated work efficient. Preserve entered values on errors and support keyboard and narrow-screen use.
 - Keep scope focused and preserve unrelated changes. Use synthetic fixtures and original or appropriately licensed assets. Do not copy proprietary application code, datasets, or screenshots into the product.
 
 ## Checks before review
@@ -35,7 +35,7 @@ Use the pull request template to record implementation, validation, documentatio
 
 ## Licensing and release status
 
-New project-owned code and documentation use [AGPL-3.0-or-later](LICENSE), selected by the owner on 15 September 2026, with a separate commercial licensing offer. Published 0.1.0 through 0.1.5 previews retain their MIT grant. Submit original material that you have the right to contribute; identify third-party material and preserve its separate notices. Read [licence scope](LICENSE-SCOPE.md), [licensing policy](https://github.com/rmak78/phpledger/blob/8cf7386/docs/LICENSING-POLICY.md) and the [current provenance review](https://github.com/rmak78/phpledger/blob/8cf7386/docs/LICENSE_REVIEW.md).
+New project-owned code and documentation use [AGPL-3.0-or-later](LICENSE), selected by the owner on 15 September 2026, with a separate commercial licensing offer. Published 0.1.0 through 0.1.5 previews retain their MIT grant. Submit original material that you have the right to contribute; identify third-party material and preserve its separate notices. Read [licence scope](LICENSE-SCOPE.md), [licensing policy](docs/LICENSING-POLICY.md) and the [current provenance review](docs/LICENSE_REVIEW.md).
 
 The [Contributor Licence Agreement](CLA.md) is required on your first pull request and again for a new substantive CLA version. It covers individual and authorised entity contributions, permits AGPL and commercial sublicensing, and leaves copyright with you. Sign using the exact comment in the CLA. For entity-owned work, identify the entity and your authority in the pull request; maintainer review is required as well as the automated signature check.
 

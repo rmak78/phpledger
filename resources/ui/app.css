@@ -470,7 +470,11 @@ a {
   .field-label .optional { font-weight: 400; color: var(--ink-faint); }
   .field-hint { font-size: .75rem; color: var(--ink-muted); margin-block-start: .3rem; }
   .field-error .input, .field-error .select, .field-error .textarea { border-color: var(--danger); }
+  .input[aria-invalid="true"], .select[aria-invalid="true"], .textarea[aria-invalid="true"] { border-color: var(--danger); }
   .field-error-text { font-size: .75rem; color: var(--danger); margin-block-start: .3rem; font-weight: 500; }
+  .alert[data-form-error], .alert[data-field-errors], .alert[data-error-message] { display: block; }
+  .alert[data-form-error] > p, .alert[data-error-message] > p { margin-block-start: .5rem; }
+  .alert[data-field-errors] ul { list-style: disc; padding-inline-start: 1.25rem; margin-block-start: .5rem; }
 
   .search-field {
     display: inline-flex;

@@ -34,22 +34,23 @@ function pl_starter_parties(int $actorId,int $companyId,int $bookId): array
     return DB::query('SELECT id,legal_name,is_customer,is_vendor FROM pl_parties WHERE company_id=%i ORDER BY legal_name,id',$companyId);
 }
 
-function pl_starter_field(string $label,string $name,mixed $value='',string $type='text',bool $required=true): void
+function pl_starter_field(string $label,string $name,mixed $value='',string $type='text',bool $required=true,string $error='',string $id=''): void
 {
-    static $sequence=0; $id='starter-field-'.++$sequence;
-    pl_ui_field($id, $label, static function () use ($id, $name, $type, $value, $required): void {
-        echo '<input class="input" id="'.pl_e($id).'" name="'.pl_e($name).'" type="'.pl_e($type).'" value="'.pl_e((string)($value??'')).'"'.($required?' required':'').($type==='text'?' maxlength="500"':'').'>';
-    });
+    static $sequence=0; $id=$id !== '' ? $id : 'starter-field-'.++$sequence;
+    pl_ui_field($id, $label, static function () use ($id, $name, $type, $value, $required, $error): void {
+        echo '<input class="input" id="'.pl_e($id).'" name="'.pl_e($name).'" type="'.pl_e($type).'" value="'.pl_e((string)($value??'')).'"'.pl_ui_error_attributes($id,$error).($required?' required':'').($type==='text'?' maxlength="500"':'').'>';
+    }, '', $error);
 }
 
-function pl_starter_select(string $label,string $name,array $options,mixed $value='',bool $required=true): void
+function pl_starter_select(string $label,string $name,array $options,mixed $value='',bool $required=true,string $error='',string $id=''): void
 {
-    static $sequence=0; $id='starter-select-'.++$sequence;
-    pl_ui_field($id, $label, static function () use ($id, $name, $required, $options, $value): void {
-        echo '<select class="select" id="'.pl_e($id).'" name="'.pl_e($name).'"'.($required?' required':'').'><option value="">Choose…</option>';
+    static $sequence=0; $id=$id !== '' ? $id : 'starter-select-'.++$sequence;
+    pl_ui_field($id, $label, static function () use ($id, $name, $required, $options, $value, $error): void {
+        echo '<select class="select" id="'.pl_e($id).'" name="'.pl_e($name).'"'.pl_ui_error_attributes($id,$error).($required?' required':'').'><option value="">Choose…</option>';
+        if (!in_array($value,['',null,0,'0'],true) && !array_key_exists((string)$value,$options)) { echo '<option value="'.pl_e((string)$value).'" selected>Unavailable selection — choose another</option>'; }
         foreach ($options as $key=>$text) { echo '<option value="'.pl_e((string)$key).'"'.((string)$value===(string)$key?' selected':'').'>'.pl_e((string)$text).'</option>'; }
         echo '</select>';
-    });
+    }, '', $error);
 }
 
 function pl_starter_hidden(string $name,mixed $value): void
@@ -72,7 +73,10 @@ function pl_starter_lines(array $input): array
     $result=[];
     foreach ($rows as $row) {
         if (!is_array($row)) { throw new DomainException('Invalid document line.'); }
-        if (pl_web_text($row,'description')==='' && pl_web_text($row,'quantity')==='' && pl_web_id($row,'product_id')===0) { continue; }
+        $hasInput=false;
+        foreach (['description','quantity','unit_price'] as $field) { if (pl_web_text($row,$field)!=='') { $hasInput=true; } }
+        foreach (['account_id','product_id','tax_code_id','original_line_number'] as $field) { if (pl_web_id($row,$field)>0) { $hasInput=true; } }
+        if (!$hasInput) { continue; }
         $result[]=['description'=>pl_web_text($row,'description'),'quantity'=>pl_web_text($row,'quantity'),
             'unit_price'=>pl_web_text($row,'unit_price'),'account_id'=>pl_web_id($row,'account_id'),
             'product_id'=>pl_web_id($row,'product_id')?:null,'tax_code_id'=>pl_web_id($row,'tax_code_id')?:null,'original_line_number'=>pl_web_id($row,'original_line_number')?:null];

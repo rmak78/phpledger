@@ -1,0 +1,454 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "a08f2a1b6fa19dfd4753946ac1b55c684a20083983342e09963556474e0ab607",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/pk",
+  "country_code": "PK",
+  "country_name": "Pakistan",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Pakistan - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_pk' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_pk",
+    "module_name": "Pakistan - Accounting",
+    "module_version": "1.1",
+    "contributing_modules": [
+      "l10n_pk"
+    ],
+    "template_code": "pk",
+    "template_chain": [
+      "pk"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_pk/data/template/account.account-pk.csv",
+        "sha256": "709ce5122c69af482c861be1c8b0bde11895f8a63d6bd5352c6b3e07265f4aae",
+        "rows": 123
+      },
+      {
+        "path": "addons/l10n_pk/data/template/account.group-pk.csv",
+        "sha256": "0be522167890460361fc2b9c8e8da453efbd229ff27f99712fd829c7cdb4fa02",
+        "rows": 44
+      }
+    ],
+    "python_files": [
+      "addons/l10n_pk/models/template_pk.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "7",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "112600",
+      "cash": "112600",
+      "transfer": "112600"
+    },
+    "default_sale_tax": "pk_sales_tax_17",
+    "default_purchase_tax": "purchases_tax_17",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "l10n_pk_1121001",
+        "code": "1121001",
+        "name": "Receivable from Customers",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "l10n_pk_2221001",
+        "code": "2221001",
+        "name": "Payable to Suppliers",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "l10n_pk_3111001",
+        "code": "3111001",
+        "name": "Sales Income",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "l10n_pk_4111001",
+        "code": "4111001",
+        "name": "Purchases",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "l10n_pk_1125001",
+        "code": "1125001",
+        "name": "Stock in Hand",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "l10n_pk_1121001",
+        "code": "1121001",
+        "name": "Receivable from Customers",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "l10n_pk_2226000",
+        "code": "2226000",
+        "name": "Suspense Account",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "l10n_pk_3112004",
+        "code": "3112004",
+        "name": "Cash Discount Gain",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "l10n_pk_4411003",
+        "code": "4411003",
+        "name": "Cash Discount Loss",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 123,
+    "posting_accounts": 123,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 32,
+      "equity": 3,
+      "expense": 67,
+      "income": 5,
+      "liability": 16
+    },
+    "by_subtype": {
+      "current_asset": 12,
+      "current_liability": 8,
+      "depreciation": 9,
+      "equity": 3,
+      "expense": 58,
+      "fixed_asset": 10,
+      "income": 3,
+      "non_current_asset": 8,
+      "non_current_liability": 3,
+      "other_income": 2,
+      "payable": 5,
+      "receivable": 2
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 5,
+      "receivables": 2
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [],
+    "groups": 44
+  },
+  "groups": [
+    {"source_id": "l10n_pk_group_1", "code_prefix_start": "1", "code_prefix_end": "1", "name": "Assets", "parent_source_id": null, "path": ["Assets"]},
+    {"source_id": "l10n_pk_group_2", "code_prefix_start": "2", "code_prefix_end": "2", "name": "Equity and Liabilities", "parent_source_id": null, "path": ["Equity and Liabilities"]},
+    {"source_id": "l10n_pk_group_3", "code_prefix_start": "3", "code_prefix_end": "3", "name": "Revenue", "parent_source_id": null, "path": ["Revenue"]},
+    {"source_id": "l10n_pk_group_4", "code_prefix_start": "4", "code_prefix_end": "4", "name": "Expenses", "parent_source_id": null, "path": ["Expenses"]},
+    {"source_id": "l10n_pk_group_21", "code_prefix_start": "21", "code_prefix_end": "21", "name": "Equity", "parent_source_id": "l10n_pk_group_2", "path": ["Equity and Liabilities", "Equity"]},
+    {"source_id": "l10n_pk_group_22", "code_prefix_start": "22", "code_prefix_end": "22", "name": "Liabilities", "parent_source_id": "l10n_pk_group_2", "path": ["Equity and Liabilities", "Liabilities"]},
+    {"source_id": "l10n_pk_group_41", "code_prefix_start": "41", "code_prefix_end": "41", "name": "Cost of Sales", "parent_source_id": "l10n_pk_group_4", "path": ["Expenses", "Cost of Sales"]},
+    {"source_id": "l10n_pk_group_42", "code_prefix_start": "42", "code_prefix_end": "42", "name": "General and Administrative Expenses", "parent_source_id": "l10n_pk_group_4", "path": ["Expenses", "General and Administrative Expenses"]},
+    {"source_id": "l10n_pk_group_43", "code_prefix_start": "43", "code_prefix_end": "43", "name": "Selling and Distribution Expenses", "parent_source_id": "l10n_pk_group_4", "path": ["Expenses", "Selling and Distribution Expenses"]},
+    {"source_id": "l10n_pk_group_44", "code_prefix_start": "44", "code_prefix_end": "44", "name": "Banking and Finance Costs", "parent_source_id": "l10n_pk_group_4", "path": ["Expenses", "Banking and Finance Costs"]},
+    {"source_id": "l10n_pk_group_45", "code_prefix_start": "45", "code_prefix_end": "45", "name": "Income Tax Expense", "parent_source_id": "l10n_pk_group_4", "path": ["Expenses", "Income Tax Expense"]},
+    {"source_id": "l10n_pk_group_111", "code_prefix_start": "111", "code_prefix_end": "111", "name": "Non Current Assets", "parent_source_id": "l10n_pk_group_1", "path": ["Assets", "Non Current Assets"]},
+    {"source_id": "l10n_pk_group_112", "code_prefix_start": "112", "code_prefix_end": "112", "name": "Current Assets", "parent_source_id": "l10n_pk_group_1", "path": ["Assets", "Current Assets"]},
+    {"source_id": "l10n_pk_group_221", "code_prefix_start": "221", "code_prefix_end": "221", "name": "Non Current Liabilities", "parent_source_id": "l10n_pk_group_22", "path": ["Equity and Liabilities", "Liabilities", "Non Current Liabilities"]},
+    {"source_id": "l10n_pk_group_222", "code_prefix_start": "222", "code_prefix_end": "222", "name": "Current Liabilities", "parent_source_id": "l10n_pk_group_22", "path": ["Equity and Liabilities", "Liabilities", "Current Liabilities"]},
+    {"source_id": "l10n_pk_group_421", "code_prefix_start": "421", "code_prefix_end": "421", "name": "Staff Cost", "parent_source_id": "l10n_pk_group_42", "path": ["Expenses", "General and Administrative Expenses", "Staff Cost"]},
+    {"source_id": "l10n_pk_group_422", "code_prefix_start": "422", "code_prefix_end": "422", "name": "Other Operating and General Expenses", "parent_source_id": "l10n_pk_group_42", "path": ["Expenses", "General and Administrative Expenses", "Other Operating and General Expenses"]},
+    {"source_id": "l10n_pk_group_1111", "code_prefix_start": "1111", "code_prefix_end": "1111", "name": "Property, Plant and Equipment", "parent_source_id": "l10n_pk_group_111", "path": ["Assets", "Non Current Assets", "Property, Plant and Equipment"]},
+    {"source_id": "l10n_pk_group_1112", "code_prefix_start": "1112", "code_prefix_end": "1112", "name": "Intangible Assets", "parent_source_id": "l10n_pk_group_111", "path": ["Assets", "Non Current Assets", "Intangible Assets"]},
+    {"source_id": "l10n_pk_group_1113", "code_prefix_start": "1113", "code_prefix_end": "1113", "name": "Investment Property", "parent_source_id": "l10n_pk_group_111", "path": ["Assets", "Non Current Assets", "Investment Property"]},
+    {"source_id": "l10n_pk_group_1114", "code_prefix_start": "1114", "code_prefix_end": "1114", "name": "Long Term Investments", "parent_source_id": "l10n_pk_group_111", "path": ["Assets", "Non Current Assets", "Long Term Investments"]},
+    {"source_id": "l10n_pk_group_1115", "code_prefix_start": "1115", "code_prefix_end": "1115", "name": "Long Term Deposits", "parent_source_id": "l10n_pk_group_111", "path": ["Assets", "Non Current Assets", "Long Term Deposits"]},
+    {"source_id": "l10n_pk_group_1116", "code_prefix_start": "1116", "code_prefix_end": "1116", "name": "Biological Assets", "parent_source_id": "l10n_pk_group_111", "path": ["Assets", "Non Current Assets", "Biological Assets"]},
+    {"source_id": "l10n_pk_group_1117", "code_prefix_start": "1117", "code_prefix_end": "1117", "name": "Investments in Associates", "parent_source_id": "l10n_pk_group_111", "path": ["Assets", "Non Current Assets", "Investments in Associates"]},
+    {"source_id": "l10n_pk_group_1118", "code_prefix_start": "1118", "code_prefix_end": "1118", "name": "Investments in Jointly Controlled Entities", "parent_source_id": "l10n_pk_group_111", "path": ["Assets", "Non Current Assets", "Investments in Jointly Controlled Entities"]},
+    {"source_id": "l10n_pk_group_1119", "code_prefix_start": "1119", "code_prefix_end": "1119", "name": "Other Financial Assets", "parent_source_id": "l10n_pk_group_111", "path": ["Assets", "Non Current Assets", "Other Financial Assets"]},
+    {"source_id": "l10n_pk_group_1121", "code_prefix_start": "1121", "code_prefix_end": "1121", "name": "Trade Receivable", "parent_source_id": "l10n_pk_group_112", "path": ["Assets", "Current Assets", "Trade Receivable"]},
+    {"source_id": "l10n_pk_group_1122", "code_prefix_start": "1122", "code_prefix_end": "1122", "name": "Loans and Advances", "parent_source_id": "l10n_pk_group_112", "path": ["Assets", "Current Assets", "Loans and Advances"]},
+    {"source_id": "l10n_pk_group_1123", "code_prefix_start": "1123", "code_prefix_end": "1123", "name": "Trade Deposits and Short Term Prepayments", "parent_source_id": "l10n_pk_group_112", "path": ["Assets", "Current Assets", "Trade Deposits and Short Term Prepayments"]},
+    {"source_id": "l10n_pk_group_1124", "code_prefix_start": "1124", "code_prefix_end": "1124", "name": "Other Current Assets", "parent_source_id": "l10n_pk_group_112", "path": ["Assets", "Current Assets", "Other Current Assets"]},
+    {"source_id": "l10n_pk_group_1125", "code_prefix_start": "1125", "code_prefix_end": "1125", "name": "Stock in Trade", "parent_source_id": "l10n_pk_group_112", "path": ["Assets", "Current Assets", "Stock in Trade"]},
+    {"source_id": "l10n_pk_group_1126", "code_prefix_start": "1126", "code_prefix_end": "1126", "name": "Cash and Bank", "parent_source_id": "l10n_pk_group_112", "path": ["Assets", "Current Assets", "Cash and Bank"]},
+    {"source_id": "l10n_pk_group_2111", "code_prefix_start": "2111", "code_prefix_end": "2111", "name": "Share Capital", "parent_source_id": "l10n_pk_group_21", "path": ["Equity and Liabilities", "Equity", "Share Capital"]},
+    {"source_id": "l10n_pk_group_2112", "code_prefix_start": "2112", "code_prefix_end": "2112", "name": "Reserves", "parent_source_id": "l10n_pk_group_21", "path": ["Equity and Liabilities", "Equity", "Reserves"]},
+    {"source_id": "l10n_pk_group_2113", "code_prefix_start": "2113", "code_prefix_end": "2113", "name": "Revaluation Surplus on Property and Equipment", "parent_source_id": "l10n_pk_group_21", "path": ["Equity and Liabilities", "Equity", "Revaluation Surplus on Property and Equipment"]},
+    {"source_id": "l10n_pk_group_2211", "code_prefix_start": "2211", "code_prefix_end": "2211", "name": "Long Term Financing", "parent_source_id": "l10n_pk_group_221", "path": ["Equity and Liabilities", "Liabilities", "Non Current Liabilities", "Long Term Financing"]},
+    {"source_id": "l10n_pk_group_2212", "code_prefix_start": "2212", "code_prefix_end": "2212", "name": "Deferred Liabilities", "parent_source_id": "l10n_pk_group_221", "path": ["Equity and Liabilities", "Liabilities", "Non Current Liabilities", "Deferred Liabilities"]},
+    {"source_id": "l10n_pk_group_2221", "code_prefix_start": "2221", "code_prefix_end": "2221", "name": "Trade and Payables", "parent_source_id": "l10n_pk_group_222", "path": ["Equity and Liabilities", "Liabilities", "Current Liabilities", "Trade and Payables"]},
+    {"source_id": "l10n_pk_group_2222", "code_prefix_start": "2222", "code_prefix_end": "2222", "name": "Short Term Borrowings", "parent_source_id": "l10n_pk_group_222", "path": ["Equity and Liabilities", "Liabilities", "Current Liabilities", "Short Term Borrowings"]},
+    {"source_id": "l10n_pk_group_2223", "code_prefix_start": "2223", "code_prefix_end": "2223", "name": "Provisions", "parent_source_id": "l10n_pk_group_222", "path": ["Equity and Liabilities", "Liabilities", "Current Liabilities", "Provisions"]},
+    {"source_id": "l10n_pk_group_2224", "code_prefix_start": "2224", "code_prefix_end": "2224", "name": "Unpaid Dividend", "parent_source_id": "l10n_pk_group_222", "path": ["Equity and Liabilities", "Liabilities", "Current Liabilities", "Unpaid Dividend"]},
+    {"source_id": "l10n_pk_group_2225", "code_prefix_start": "2225", "code_prefix_end": "2225", "name": "Unclaimed Dividend", "parent_source_id": "l10n_pk_group_222", "path": ["Equity and Liabilities", "Liabilities", "Current Liabilities", "Unclaimed Dividend"]},
+    {"source_id": "l10n_pk_group_3111", "code_prefix_start": "3111", "code_prefix_end": "3111", "name": "Sales", "parent_source_id": "l10n_pk_group_3", "path": ["Revenue", "Sales"]},
+    {"source_id": "l10n_pk_group_3112", "code_prefix_start": "3112", "code_prefix_end": "3112", "name": "Other Income", "parent_source_id": "l10n_pk_group_3", "path": ["Revenue", "Other Income"]}
+  ],
+  "accounts": [
+    {"source_id": "l10n_pk_1111001", "code": "1111001", "name": "Building", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1111", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_pk_1111002", "code": "1111002", "name": "Furniture and Fixture", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1111", "reconcile": false, "description": "Large expenses related to workplaces", "source": {"account_type": "asset_fixed", "asset_model_ids": ["pk_asset_furniture_material"]}},
+    {"source_id": "l10n_pk_1111003", "code": "1111003", "name": "Tools and Equipment", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1111", "reconcile": false, "description": "Machinery and tools directly related to your business", "source": {"account_type": "asset_fixed", "asset_model_ids": ["pk_asset_machines_tools"]}},
+    {"source_id": "l10n_pk_1111004", "code": "1111004", "name": "Plant and Machinery", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1111", "reconcile": false, "description": "Other type of property, like plants, machinery or various equipment", "source": {"account_type": "asset_fixed", "asset_model_ids": ["pk_asset_other_property"]}},
+    {"source_id": "l10n_pk_1111005", "code": "1111005", "name": "Technology", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1111", "reconcile": false, "description": "Technological products or services bought for your business", "source": {"account_type": "asset_fixed", "asset_model_ids": ["pk_asset_technology"]}},
+    {"source_id": "l10n_pk_1111006", "code": "1111006", "name": "Land", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1111", "reconcile": false, "description": "Purchases of lands without buildings", "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_pk_1111007", "code": "1111007", "name": "Construction", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1111", "reconcile": false, "description": "Construction of buildings and costs associated to buildings", "source": {"account_type": "asset_fixed", "asset_model_ids": ["pk_asset_construction"]}},
+    {"source_id": "l10n_pk_1111008", "code": "1111008", "name": "Installations", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1111", "reconcile": false, "description": "Purchases of installations related to buildings, like solar panels or heater", "source": {"account_type": "asset_fixed", "asset_model_ids": ["pk_asset_installation"]}},
+    {"source_id": "l10n_pk_1111009", "code": "1111009", "name": "Vehicle", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1111", "reconcile": false, "description": "Purchase of a car, including second hand or after-lease contract", "source": {"account_type": "asset_fixed", "asset_model_ids": ["pk_asset_vehicle"]}},
+    {"source_id": "l10n_pk_1111010", "code": "1111010", "name": "Vehicle Accessories", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1111", "reconcile": false, "description": "All accessories purchases related to your professional vehicle", "source": {"account_type": "asset_fixed", "asset_model_ids": ["pk_asset_vehicle_accessories"]}},
+    {"source_id": "l10n_pk_1112001", "code": "1112001", "name": "ERP System", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1112", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_pk_1113000", "code": "1113000", "name": "Investment Property", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1113", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_pk_1114000", "code": "1114000", "name": "Long Term Investments", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1114", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_pk_1115000", "code": "1115000", "name": "Long Term Deposits", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1115", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_pk_1116000", "code": "1116000", "name": "Biological Assets", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1116", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_pk_1117000", "code": "1117000", "name": "Investments in Associates", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1117", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_pk_1118000", "code": "1118000", "name": "Investments in Jointly Controlled Entities", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1118", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_pk_1119000", "code": "1119000", "name": "Other Financial Assets", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1119", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_pk_1121001", "code": "1121001", "name": "Receivable from Customers", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1121", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_pk_1122001", "code": "1122001", "name": "Advances to Suppliers", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1122", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_pk_1122002", "code": "1122002", "name": "Withholding Tax- Advance", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1122", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_pk_1122003", "code": "1122003", "name": "Loan to Employees", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1122", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_pk_1123001", "code": "1123001", "name": "Security Deposits", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1123", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_pk_1123002", "code": "1123002", "name": "Prepaid Rent", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1123", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_pk_1123003", "code": "1123003", "name": "Income Tax Refundable", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1123", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_pk_1123004", "code": "1123004", "name": "Sales Tax Refundable", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1123", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "l10n_pk_1123005", "code": "1123005", "name": "Sales Tax Paid", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1123", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_pk_1124000", "code": "1124000", "name": "Other Current Assets", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1124", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_pk_1125001", "code": "1125001", "name": "Stock in Hand", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1125", "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_variation_id": "l10n_pk_4111001"}}},
+    {"source_id": "l10n_pk_1125002", "code": "1125002", "name": "Work in Process", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1125", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_pk_1125003", "code": "1125003", "name": "Finished Goods", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_1125", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_pk_2111000", "code": "2111000", "name": "Share Capital", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2111", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_pk_2111002", "code": "2112000", "name": "Reserves", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2112", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_pk_2113000", "code": "2113000", "name": "Revaluation Surplus on Property and Equipment", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2113", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_pk_2211001", "code": "2211001", "name": "Long term Loan", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2211", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_pk_2211002", "code": "2211002", "name": "Liabilities Against Assets Subject to Finance Lease", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2211", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_pk_2212000", "code": "2212000", "name": "Deferred Liabilities", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2212", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_pk_2221001", "code": "2221001", "name": "Payable to Suppliers", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2221", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_pk_2221002", "code": "2221002", "name": "Accrued Expenses", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2221", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_pk_2221003", "code": "2221003", "name": "Salaries Payable", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2221", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_pk_2221004", "code": "2221004", "name": "Mark-up accrued", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2221", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_pk_2221005", "code": "2221005", "name": "Sales Tax Payable", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2221", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "l10n_pk_2221006", "code": "2221006", "name": "Withholding Tax Payable", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2221", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_pk_2221007", "code": "2221007", "name": "Payable to Canteen", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2221", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_pk_2221008", "code": "2221008", "name": "Sales Tax Received", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2221", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_pk_2222001", "code": "2222001", "name": "Current Portion of Long Term Liabilities", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2222", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_pk_2223001", "code": "2223001", "name": "Provision for Employee Benefit", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2223", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_pk_2223002", "code": "2223002", "name": "Other Provision", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2223", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_pk_2224000", "code": "2224000", "name": "Unpaid Dividend", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2224", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_pk_2225000", "code": "2225000", "name": "Unclaimed Dividend", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_2225", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_pk_2226000", "code": "2226000", "name": "Suspense Account", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_222", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_pk_3111001", "code": "3111001", "name": "Sales Income", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_3111", "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "l10n_pk_3112001", "code": "3112001", "name": "Bank Profit", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_3112", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_pk_3112002", "code": "3112002", "name": "Employee Fine", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_3112", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_pk_3112003", "code": "3112003", "name": "Misc Income", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_3112", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_pk_3112004", "code": "3112004", "name": "Cash Discount Gain", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_pk_group_3112", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_pk_4111001", "code": "4111001", "name": "Purchases", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_41", "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4111002", "code": "4111002", "name": "Carriage Inwards", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_41", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4111003", "code": "4111003", "name": "Cost of Goods Sold", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_41", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4211001", "code": "4211001", "name": "Salary and Wages", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_421", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4211002", "code": "4211002", "name": "Other Staff Benefits", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_421", "reconcile": false, "description": "Company's personel costs excluding compensations, contributions and vouchers", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221001", "code": "4221001", "name": "Rent Rates and Taxes", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Rental fees related to your workplace", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221002", "code": "4221002", "name": "Traveling and Conveyance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Expenses incurred during business trips (Excluding Flights, Hotels, Daily expenses, public transportation)", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221003", "code": "4221003", "name": "Vehicle Running Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Expenses made for the repair and maintenance of a vehicle", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221004", "code": "4221004", "name": "Telephone and Internet", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Internet or phone bills incurred", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221005", "code": "4221005", "name": "Electricity Fitting", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221006", "code": "4221006", "name": "Printing and Stationery", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221007", "code": "4221007", "name": "Fee and Subscription", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Subscriptions to clubs and associations related to your business", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221008", "code": "4221008", "name": "Legal and Professional Charges", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Bills from lawyers, fees paid to the justice system", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221009", "code": "4221009", "name": "Office Consumables and Supplies", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Various supplies bought for your workplace or office, like pencils, paper etc", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221010", "code": "4221010", "name": "Entertainment Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221011", "code": "4221011", "name": "Repair and maintenance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Services related to the maintenance of your worplace, like repair or cleaning fees", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221012", "code": "4221012", "name": "Postage Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221013", "code": "4221013", "name": "Canteen Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221014", "code": "4221014", "name": "Bad Debts Written Off", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221015", "code": "4221015", "name": "Charity and Donations", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221016", "code": "4221016", "name": "Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221017", "code": "4221017", "name": "Misc Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221018", "code": "4221018", "name": "Auditor's Remuneration", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Bills from your accountant or accounting firm", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221019", "code": "4221019", "name": "Depreciation Expenses", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_pk_4221020", "code": "4221020", "name": "Electricity Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Bills from your water and energy suppliers", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221021", "code": "4221021", "name": "Suspense Account", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221022", "code": "4221022", "name": "Raw Materials", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "All goods purchased as raw materials used by your activity", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221023", "code": "4221023", "name": "Consumables", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Consumables bought and used in the context of your activity", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221024", "code": "4221024", "name": "Studies & Works", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Compensation and fees paid to other parties", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221025", "code": "4221025", "name": "General Subcontracting", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Compensation and fees with other partners that act as subcontractors or consultants for your activity", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221026", "code": "4221026", "name": "Goods for Resale", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Goods you buy to resale later, as part of your activity", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221027", "code": "4221027", "name": "Vehicle Rent", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Rental of cars, including shared services, but excluding leasing", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221028", "code": "4221028", "name": "Office Services", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "All expenses made for your office or workplace that are not material goods", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221029", "code": "4221029", "name": "Fuel", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "All fuel expenses for a car", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221030", "code": "4221030", "name": "Software", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Licenses or computer services (like repairs or upgrades)", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221031", "code": "4221031", "name": "Administration Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Services incurred for the administration of your business (excluding supplies)", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221032", "code": "4221032", "name": "Fire Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Fees related to insurance to protect your property (building and content) against fire or other natural catastrophies", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221033", "code": "4221033", "name": "Professional Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "All fees related to insurance taken in the context of your business", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221034", "code": "4221034", "name": "Legal Protection Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Insurance against legal costs incurred in the context of your activity", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221035", "code": "4221035", "name": "Professional Liability Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Insurance for damage caused to third parties", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221036", "code": "4221036", "name": "Flights", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "All expenses related to travel by plane", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221037", "code": "4221037", "name": "Hotels", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Hotel or B&B bills incurred during business trips", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221038", "code": "4221038", "name": "Public Transportation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Travel expenses done using public transportation (metro, bus, tramways, ...)", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221039", "code": "4221039", "name": "Business Gift", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Business gifts to clients over 16,000+ PKR", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221040", "code": "4221040", "name": "Employee Compensation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Compensation costs for employees and manual workers employed by the company", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221041", "code": "4221041", "name": "Bar & Restaurant", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Expenses incurred when eating or drinking at bars or restaurants", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221042", "code": "4221042", "name": "Food: Reception & Delivery", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Food or drinks incurred outside of bars or restaurants, like receptions, canteen and food delivery, etc", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221043", "code": "4221043", "name": "Training & Documentation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Training fees not including food and drinks", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221044", "code": "4221044", "name": "Social Security", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "All fees related to pension plans and social security contributions", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221045", "code": "4221045", "name": "Property Tax", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Local taxes that have to paid due to the ownership of property", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221046", "code": "4221046", "name": "Import Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "description": "Customs fees incurred while importing goods from outside of the European Union", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4221047", "code": "4221047", "name": "Depreciation of Computer Hard & Soft", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_pk_4221048", "code": "4221048", "name": "Depreciation of Construction", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_pk_4221049", "code": "4221049", "name": "Depreciation of Installations", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_pk_4221050", "code": "4221050", "name": "Depreciation of Machines & Tools", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_pk_4221051", "code": "4221051", "name": "Depreciation of Other Property", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_pk_4221052", "code": "4221052", "name": "Depreciation of Furniture & Office Equipment", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_pk_4221053", "code": "4221053", "name": "Depreciation of Motor Vehicles", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_pk_4221054", "code": "4221054", "name": "Depreciation of Vehicle Accessories", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_422", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_pk_4311001", "code": "4311001", "name": "Advertisement and Marketing", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_43", "reconcile": false, "description": "Publicity fees for your activity, including promotional material", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4311002", "code": "4311002", "name": "Commission on Sales", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_43", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4311003", "code": "4311003", "name": "Freight Outward", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_43", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4311004", "code": "4311004", "name": "Sample Expense", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_43", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4411001", "code": "4411001", "name": "Bank Charges and Commission", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_44", "reconcile": false, "description": "Nasty charges and interests from your bank", "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4411002", "code": "4411002", "name": "Foreign Exchange Difference", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_44", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4411003", "code": "4411003", "name": "Cash Discount Loss", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_44", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_pk_4511000", "code": "4511000", "name": "Income Tax Expense", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_pk_group_45", "reconcile": false, "source": {"account_type": "expense"}}
+  ]
+}

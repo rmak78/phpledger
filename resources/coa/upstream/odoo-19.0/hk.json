@@ -1,0 +1,362 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "38255b564beec5968e4afd56ab52cd77bb9a99db6533ec0ae444f04a68dccf89",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/hk",
+  "country_code": "HK",
+  "country_name": "Hong Kong SAR China",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Hong Kong - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_hk' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_hk",
+    "module_name": "Hong Kong - Accounting",
+    "module_version": "1.0",
+    "contributing_modules": [
+      "l10n_hk"
+    ],
+    "template_code": "hk",
+    "template_chain": [
+      "hk"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_hk/data/template/account.account-hk.csv",
+        "sha256": "d685e53f27d96079fe91dba0a9520cfa09fd2d9a9284bdc22cf21e2ae4343e48",
+        "rows": 75
+      }
+    ],
+    "python_files": [
+      "addons/l10n_hk/models/template_hk.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": true,
+    "account_code_prefixes": {
+      "bank": "1200",
+      "cash": "1210",
+      "transfer": "111220"
+    },
+    "default_sale_tax": null,
+    "default_purchase_tax": null,
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "l10n_hk_1240",
+        "code": "1240",
+        "name": "Account Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "l10n_hk_2211",
+        "code": "2211",
+        "name": "Account Payable",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "l10n_hk_41",
+        "code": "41",
+        "name": "Trade Income",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "l10n_hk_51",
+        "code": "51",
+        "name": "Costs",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "l10n_hk_1270",
+        "code": "1270",
+        "name": "Stock Valuation Account",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "l10n_hk_1243",
+        "code": "1243",
+        "name": "Account Receivable (PoS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "l10n_hk_4240",
+        "code": "4240",
+        "name": "Foreign Exchange Gain",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "l10n_hk_5240",
+        "code": "5240",
+        "name": "Foreign Exchange Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "l10n_hk_4250",
+        "code": "4250",
+        "name": "Cash Discount Gain",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "l10n_hk_5250",
+        "code": "5250",
+        "name": "Cash Discount Loss",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 75,
+    "posting_accounts": 75,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 16,
+      "expense": 36,
+      "income": 7,
+      "liability": 16
+    },
+    "by_subtype": {
+      "current_asset": 8,
+      "current_liability": 13,
+      "expense": 36,
+      "fixed_asset": 1,
+      "income": 6,
+      "non_current_asset": 4,
+      "non_current_liability": 1,
+      "other_income": 1,
+      "payable": 2,
+      "receivable": 3
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 2,
+      "receivables": 3
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "l10n_hk_11", "code": "11", "name": "Fixed Assets", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_hk_1110", "code": "1110", "name": "Furniture and Fixtures", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_hk_1130", "code": "1130", "name": "Equipment", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_hk_1140", "code": "1140", "name": "Decoration", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_hk_1160", "code": "1160", "name": "Investments", "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_hk_12", "code": "12", "name": "Current Assets", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_hk_1240", "code": "1240", "name": "Account Receivable", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_hk_1241", "code": "1241", "name": "Utility & Rental Deposit", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_hk_1242", "code": "1242", "name": "Supplier Prepayments", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_hk_1243", "code": "1243", "name": "Account Receivable (PoS)", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_hk_1245", "code": "1245", "name": "Sundry Deposits", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_hk_1246", "code": "1246", "name": "Other Receivable", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_hk_1250", "code": "1250", "name": "Stock Interim Account (Received)", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_hk_1260", "code": "1260", "name": "Stock Interim Account (Delivered)", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_hk_1270", "code": "1270", "name": "Stock Valuation Account", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_variation_id": "l10n_hk_51"}}},
+    {"source_id": "l10n_hk_1400", "code": "1400", "name": "Prepaid Expenses", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_hk_21", "code": "21", "name": "Non-current Liabilities", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_hk_2107", "code": "2107", "name": "Unearned Income from System", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_22", "code": "22", "name": "Current Liabilities", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_2210", "code": "2210", "name": "Accruals", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_221001", "code": "221001", "name": "MPF Accrued (Employer)", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_221002", "code": "221002", "name": "MPF Witheld (Employee)", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_2211", "code": "2211", "name": "Account Payable", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_hk_2212", "code": "2212", "name": "Receipt in Advance (Customer Prepayments)", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_2214", "code": "2214", "name": "Provision for Taxation", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_2215", "code": "2215", "name": "Proposed Dividend", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_2216", "code": "2216", "name": "Other Payable", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_hk_2217", "code": "2217", "name": "Salaries & Wages Payable", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_31", "code": "31", "name": "Paid Capital", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_32", "code": "32", "name": "Accumulated Profit & Loss", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_33", "code": "33", "name": "Profit & Loss Account", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_34", "code": "34", "name": "Short-term Borrowing", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_hk_41", "code": "41", "name": "Trade Income", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_42", "code": "42", "name": "Other Income and Gains", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_4210", "code": "4210", "name": "Sundry Income", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_4220", "code": "4220", "name": "Exchange Adjustment", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_4230", "code": "4230", "name": "Bank Interest Income", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_4240", "code": "4240", "name": "Foreign Exchange Gain", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_4250", "code": "4250", "name": "Cash Discount Gain", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_51", "code": "51", "name": "Costs", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5101", "code": "5101", "name": "Trade Costs", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5105", "code": "5105", "name": "Misc. Costs", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5106", "code": "5106", "name": "Costs of Transportation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5111", "code": "5111", "name": "Declaration Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5112", "code": "5112", "name": "Packing Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_52", "code": "52", "name": "Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5201", "code": "5201", "name": "Bank Charges", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5202", "code": "5202", "name": "Entertainment", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5203", "code": "5203", "name": "Electricity & Water Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5205", "code": "5205", "name": "Postage & Stamps", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5206", "code": "5206", "name": "Printing & Stationery", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5207", "code": "5207", "name": "Rent & Rates", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5208", "code": "5208", "name": "Sundry Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5209", "code": "5209", "name": "Telecommunication Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5210", "code": "5210", "name": "Traffic Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5211", "code": "5211", "name": "IT Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5214", "code": "5214", "name": "Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5215", "code": "5215", "name": "Sales Commission", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5216", "code": "5216", "name": "Overseas Traveling", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5217", "code": "5217", "name": "MPF Contribution (Employer)", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5218", "code": "5218", "name": "Wages & Salaries", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5219", "code": "5219", "name": "Bonus Payment", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5221", "code": "5221", "name": "Taxation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5222", "code": "5222", "name": "Local Delivery", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5223", "code": "5223", "name": "Management Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5224", "code": "5224", "name": "Depreciation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5225", "code": "5225", "name": "Audit Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5226", "code": "5226", "name": "Bad Debts", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5228", "code": "5228", "name": "Legal & Professional Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5229", "code": "5229", "name": "Dividend", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5231", "code": "5231", "name": "Disposal", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5234", "code": "5234", "name": "Repair and Maintenance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5235", "code": "5235", "name": "Advertising", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5240", "code": "5240", "name": "Foreign Exchange Loss", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_hk_5250", "code": "5250", "name": "Cash Discount Loss", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}}
+  ]
+}

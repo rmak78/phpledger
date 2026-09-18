@@ -1,0 +1,663 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "111c5cb498cfcbfc0a0c7cc501d2725067dc3bf5491bf5a5e2059079e2d8ab7b",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/cn_large_bis",
+  "country_code": "CN",
+  "country_name": "China",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Accounting Standards for Business Enterprises",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_cn' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "openerp-china",
+    "module": "l10n_cn",
+    "module_name": "China - Accounting",
+    "module_version": "1.8",
+    "contributing_modules": [
+      "l10n_cn"
+    ],
+    "template_code": "cn_large_bis",
+    "template_chain": [
+      "cn_common",
+      "cn_large_bis"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": false,
+    "files": [
+      {
+        "path": "addons/l10n_cn/data/template/account.account-cn_common.csv",
+        "sha256": "1568c447f6e68981b54b77ce58abcdd5e6a5b728e0bc58d1634f15620f07074a",
+        "rows": 88
+      },
+      {
+        "path": "addons/l10n_cn/data/template/account.account-cn_large_bis.csv",
+        "sha256": "ae512335ea42bc80c71e724425cc3776f69a2f8fb7284beb1504db9222252baa",
+        "rows": 202
+      }
+    ],
+    "python_files": [
+      "addons/l10n_cn/models/template_cn_common.py",
+      "addons/l10n_cn/models/template_cn_large_bis.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": 4,
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "1002",
+      "cash": "1001",
+      "transfer": "1004"
+    },
+    "default_sale_tax": "l10n_cn_tax_large_bis_sales_excluded_13",
+    "default_purchase_tax": "l10n_cn_purchase_excluded_13",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "l10n_cn_common_account_1122",
+        "code": "1122",
+        "name": "Accounts Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "l10n_cn_common_account_2202",
+        "code": "2202",
+        "name": "Accounts Payable",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "l10n_cn_large_bis_account_6001",
+        "code": "6001",
+        "name": "Income",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "l10n_cn_large_bis_account_6401",
+        "code": "6401",
+        "name": "Cost of Goods Sold",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "l10n_cn_common_account_1403",
+        "code": "1403",
+        "name": "Raw Materials",
+        "resolved": true
+      },
+      {
+        "source_field": "property_stock_valuation_account_id",
+        "source_id": "l10n_cn_common_account_1405",
+        "code": "1405",
+        "name": "Inventory",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "l10n_cn_common_account_112201",
+        "code": "1122.01",
+        "name": "Account Receivable (Pos)",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "l10n_cn_large_bis_account_100201",
+        "code": "1002.01",
+        "name": "Bank Suspense Account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "l10n_cn_large_bis_account_660304",
+        "code": "6603.03.01",
+        "name": "Financial Expenses - Exchange Gain or Loss - Realized",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "l10n_cn_large_bis_account_660304",
+        "code": "6603.03.01",
+        "name": "Financial Expenses - Exchange Gain or Loss - Realized",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "l10n_cn_large_bis_account_630101",
+        "code": "6301.01",
+        "name": "Cash Difference Gain",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "l10n_cn_large_bis_account_671101",
+        "code": "6711.01",
+        "name": "Cash Difference Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "l10n_cn_large_bis_account_630102",
+        "code": "6301.02",
+        "name": "Cash Discount Gain",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "l10n_cn_large_bis_account_671102",
+        "code": "6711.02",
+        "name": "Cash Discount Loss",
+        "resolved": true
+      }
+    ],
+    "production_wip": [
+      {
+        "source_field": "account_production_wip_account_id",
+        "source_id": "l10n_cn_large_bis_account_140501",
+        "code": "1405.01",
+        "name": "Work In Progress",
+        "resolved": true
+      }
+    ],
+    "production_overhead": [
+      {
+        "source_field": "account_production_wip_overhead_account_id",
+        "source_id": "l10n_cn_large_bis_account_140502",
+        "code": "1405.02",
+        "name": "Work In Progress Overhead",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "l10n_cn_common_account_1801",
+        "code": "1801",
+        "name": "Long-Term Deferred Expenses",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "l10n_cn_common_account_2401",
+        "code": "2401",
+        "name": "Deferred Income",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 290,
+    "posting_accounts": 290,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 124,
+      "equity": 19,
+      "expense": 58,
+      "income": 16,
+      "liability": 73
+    },
+    "by_subtype": {
+      "cash_bank": 3,
+      "credit_card": 1,
+      "current_asset": 57,
+      "current_liability": 56,
+      "direct_cost": 8,
+      "equity": 18,
+      "expense": 50,
+      "fixed_asset": 29,
+      "income": 16,
+      "non_current_asset": 32,
+      "non_current_liability": 15,
+      "payable": 1,
+      "prepayment": 1,
+      "receivable": 2,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 3,
+      "expense": 1,
+      "income": 1,
+      "payables": 1,
+      "receivables": 2
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "zh_CN"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "l10n_cn_common_account_1001", "code": "1001", "name": "Cash", "translations": {"zh_CN": "库存现金"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_cn_common_account_1002", "code": "1002", "name": "Bank", "translations": {"zh_CN": "银行存款"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_cn_large_bis_account_100201", "code": "1002.01", "name": "Bank Suspense Account", "translations": {"zh_CN": "银行待清算账户"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1003", "code": "1003", "name": "Deposit Central Bank Funds", "translations": {"zh_CN": "存放中央银行款项"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_cn_large_bis_account_1004", "code": "1004", "name": "Liquidity Transfer", "translations": {"zh_CN": "流动性转账"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1005", "code": "1005", "name": "Credit Card", "translations": {"zh_CN": "信用卡"}, "root_type": "liability", "subtype": "credit_card", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_credit_card"}},
+    {"source_id": "account_journal_payment_debit_account_id", "code": "1006", "name": "Outstanding Receipts", "translations": {"zh_CN": "未结清收据"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_journal_payment_credit_account_id", "code": "1007", "name": "Outstanding Payments", "translations": {"zh_CN": "未结清付款"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1011", "code": "1011", "name": "Deposit Peers", "translations": {"zh_CN": "存放同业"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1012", "code": "1012", "name": "Other Monetary Funds", "translations": {"zh_CN": "其他货币资金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1021", "code": "1021", "name": "Settlement Reserve Fund", "translations": {"zh_CN": "结算备付金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1031", "code": "1031", "name": "Deposit Margin", "translations": {"zh_CN": "存出保证金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1101", "code": "1101", "name": "Trading Financial Assets", "translations": {"zh_CN": "交易性金融资产"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1102", "code": "1102", "name": "Derivative Financial Assets", "translations": {"zh_CN": "衍生金融资产"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1111", "code": "1111", "name": "Financial Assets Under Resale Agreements", "translations": {"zh_CN": "买入返售金融资产"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1121", "code": "1121", "name": "Notes Receivable", "translations": {"zh_CN": "应收票据"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1122", "code": "1122", "name": "Accounts Receivable", "translations": {"zh_CN": "应收账款"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_cn_common_account_112201", "code": "1122.01", "name": "Account Receivable (Pos)", "translations": {"zh_CN": "POS 应收账款"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_cn_common_account_1123", "code": "1123", "name": "Prepayments", "translations": {"zh_CN": "预付账款"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "l10n_cn_large_bis_account_1124", "code": "1124", "name": "Receivables Financing", "translations": {"zh_CN": "应收款项融资"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1131", "code": "1131", "name": "Dividend Receivable", "translations": {"zh_CN": "应收股利"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1132", "code": "1132", "name": "Interest Receivable", "translations": {"zh_CN": "应收利息"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1201", "code": "1201", "name": "Subrogation Recovery Receivables", "translations": {"zh_CN": "应收代位追偿款"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1211", "code": "1211", "name": "Reinsurance Accounts Receivable", "translations": {"zh_CN": "应收分保账款"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1212", "code": "1212", "name": "Receivable Reinsurance Contract Reserves", "translations": {"zh_CN": "应收分保合同准备金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1221", "code": "1221", "name": "Other Receivables", "translations": {"zh_CN": "其他应收款"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1223", "code": "1223", "name": "Tax Receivable", "translations": {"zh_CN": "应收税金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1231", "code": "1231", "name": "Provision For Bad Debts", "translations": {"zh_CN": "坏账准备"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_123101", "code": "1231.01", "name": "Provision For Bad Debts - Notes Receivable", "translations": {"zh_CN": "坏账准备 - 应收票据坏账准备"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_123102", "code": "1231.02", "name": "Provision For Bad Debts - Accounts Receivable", "translations": {"zh_CN": "坏账准备 - 应收账款坏账准备"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_123103", "code": "1231.03", "name": "Provision For Bad Debts - Prepayments", "translations": {"zh_CN": "坏账准备 - 预付账款坏账准备"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_123104", "code": "1231.04", "name": "Provision For Bad Debts - Credit Losses", "translations": {"zh_CN": "坏账准备 - 信用减值准备"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_123105", "code": "1231.05", "name": "Provision For Bad Debts - Dividend Receivable", "translations": {"zh_CN": "坏账准备 - 应收股利坏账准备"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_123106", "code": "1231.06", "name": "Provision For Bad Debts - Interest Receivable", "translations": {"zh_CN": "坏账准备 - 应收利息坏账准备"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_123107", "code": "1231.07", "name": "Provision For Bad Debts - Other Receivables", "translations": {"zh_CN": "坏账准备 - 其他应收款坏账准备"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_123108", "code": "1231.08", "name": "Provision For Bad Debts - Tax Receivable", "translations": {"zh_CN": "坏账准备 - 应收税金坏账准备"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1301", "code": "1301", "name": "Discount Assets", "translations": {"zh_CN": "贴现资产"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1302", "code": "1302", "name": "Loan Funds", "translations": {"zh_CN": "拆出资金"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1303", "code": "1303", "name": "Loan", "translations": {"zh_CN": "贷款"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1304", "code": "1304", "name": "Loan Loss Provisions", "translations": {"zh_CN": "贷款损失准备"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1311", "code": "1311", "name": "Agent To Redeem Securities", "translations": {"zh_CN": "代理兑付证券"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1321", "code": "1321", "name": "Agency Business Assets", "translations": {"zh_CN": "代理业务资产"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1401", "code": "1401", "name": "Purchase Of Material", "translations": {"zh_CN": "材料采购"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1402", "code": "1402", "name": "Materials In Transit", "translations": {"zh_CN": "在途物资"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1403", "code": "1403", "name": "Raw Materials", "translations": {"zh_CN": "原材料"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_variation_id": "l10n_cn_large_bis_account_6601"}}},
+    {"source_id": "l10n_cn_common_account_1404", "code": "1404", "name": "Material Cost Variance", "translations": {"zh_CN": "材料成本差异"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1405", "code": "1405", "name": "Inventory", "translations": {"zh_CN": "库存商品"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_140501", "code": "1405.01", "name": "Work In Progress", "translations": {"zh_CN": "在产品"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_140502", "code": "1405.02", "name": "Work In Progress Overhead", "translations": {"zh_CN": "在产品费用"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1406", "code": "1406", "name": "Stock Interim Account", "translations": {"zh_CN": "发出商品"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_140601", "code": "1406.01", "name": "Stock Interim (Received)", "translations": {"zh_CN": "暂收存货"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_140602", "code": "1406.02", "name": "Stock Interim (Delivered)", "translations": {"zh_CN": "暂付存货"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1407", "code": "1407", "name": "Difference Between Selling Price and Cost", "translations": {"zh_CN": "商品进销差价"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1408", "code": "1408", "name": "Consigned Materials for Processing", "translations": {"zh_CN": "委托加工物资"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1411", "code": "1411", "name": "Consumable Supplies", "translations": {"zh_CN": "周转材料"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_common_account_1421", "code": "1421", "name": "Consumable Biological Assets", "translations": {"zh_CN": "消耗性生物资产"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1431", "code": "1431", "name": "Precious Metal", "translations": {"zh_CN": "贵金属"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1441", "code": "1441", "name": "Foreclosed Assets", "translations": {"zh_CN": "抵债资产"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1451", "code": "1451", "name": "Surplus Materials", "translations": {"zh_CN": "损余物资"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1461", "code": "1461", "name": "Finance Lease Assets", "translations": {"zh_CN": "融资租赁资产"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_large_bis_account_1471", "code": "1471", "name": "Provision For Stock Impairment", "translations": {"zh_CN": "存货跌价准备"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1481", "code": "1481", "name": "Contract Assets", "translations": {"zh_CN": "合同资产"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1491", "code": "1491", "name": "Assets Held For Sale", "translations": {"zh_CN": "持有待售资产"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1492", "code": "1492", "name": "Impairment Provision For Assets Held For Sale", "translations": {"zh_CN": "持有待售资产减值准备"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1493", "code": "1493", "name": "Non-Current Assets Due Within One Year", "translations": {"zh_CN": "一年内到期的非流动资产"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1501", "code": "1501", "name": "Investments Held To Maturity", "translations": {"zh_CN": "持有至到期投资"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1502", "code": "1502", "name": "Provision For Impairment Of Investments Held To Maturity", "translations": {"zh_CN": "持有至到期投资减值准备"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1503", "code": "1503", "name": "Financial Assets Available For Sale", "translations": {"zh_CN": "可供出售金融资产"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1504", "code": "1504", "name": "Debt Investment", "translations": {"zh_CN": "债权投资"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1505", "code": "1505", "name": "Other Debt Investments", "translations": {"zh_CN": "其他债权投资"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_common_account_1511", "code": "1511", "name": "Long-Term Equity Investment", "translations": {"zh_CN": "长期股权投资"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1512", "code": "1512", "name": "Impairment Provision For Long-Term Equity Investments", "translations": {"zh_CN": "长期股权投资减值准备"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1513", "code": "1513", "name": "Other Equity Instrument Investments", "translations": {"zh_CN": "其他权益工具投资"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1521", "code": "1521", "name": "Investment Property", "translations": {"zh_CN": "投资性房地产"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1531", "code": "1531", "name": "Long-Term Receivables", "translations": {"zh_CN": "长期应收款"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1532", "code": "1532", "name": "Unrealised Financial Income", "translations": {"zh_CN": "未实现融资收益"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1541", "code": "1541", "name": "Deposited Capital Guarantee", "translations": {"zh_CN": "存出资本保证金"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_common_account_1601", "code": "1601", "name": "Fixed Assets", "translations": {"zh_CN": "固定资产"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160101", "code": "1601.01", "name": "Fixed Assets - Land and Buildings", "translations": {"zh_CN": "固定资产 - 房屋建筑物"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160102", "code": "1601.02", "name": "Fixed Assets - Machinery and Equipment", "translations": {"zh_CN": "固定资产 - 机器设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160103", "code": "1601.03", "name": "Fixed Assets - Transportation Equipment", "translations": {"zh_CN": "固定资产 - 运输设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160104", "code": "1601.04", "name": "Fixed Assets - Computer and Electronic Equipment", "translations": {"zh_CN": "固定资产 - 电子设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160105", "code": "1601.05", "name": "Fixed Assets - Office Equipment", "translations": {"zh_CN": "固定资产 - 办公设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160106", "code": "1601.06", "name": "Fixed Assets - Other Fixed Assets", "translations": {"zh_CN": "固定资产 - 其他固定资产"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_1602", "code": "1602", "name": "Accumulated Depreciation", "translations": {"zh_CN": "累计折旧"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160201", "code": "1602.01", "name": "Accumulated Depreciation - Land and Buildings", "translations": {"zh_CN": "累计折旧 - 房屋建筑物"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160202", "code": "1602.02", "name": "Accumulated Depreciation - Machinery and Equipment", "translations": {"zh_CN": "累计折旧 - 机器设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160203", "code": "1602.03", "name": "Accumulated Depreciation - Transportation Equipment", "translations": {"zh_CN": "累计折旧 - 运输设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160204", "code": "1602.04", "name": "Accumulated Depreciation - Computer and Electronic Equipment", "translations": {"zh_CN": "累计折旧 - 电子设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160205", "code": "1602.05", "name": "Accumulated Depreciation - Office Equipment", "translations": {"zh_CN": "累计折旧 - 办公设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160206", "code": "1602.06", "name": "Accumulated Depreciation - Other Fixed Assets", "translations": {"zh_CN": "累计折旧 - 其他固定资产"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_large_bis_account_1603", "code": "1603", "name": "Accumulated Impairment Losses", "translations": {"zh_CN": "固定资产减值准备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_large_bis_account_160301", "code": "1603.01", "name": "Accumulated Impairment Losses - Land and Buildings", "translations": {"zh_CN": "固定资产减值准备 - 房屋建筑物"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_large_bis_account_160302", "code": "1603.02", "name": "Accumulated Impairment Losses - Machinery and Equipment", "translations": {"zh_CN": "固定资产减值准备 - 机器设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_large_bis_account_160303", "code": "1603.03", "name": "Accumulated Impairment Losses - Transportation Equipment", "translations": {"zh_CN": "固定资产减值准备 - 运输设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_large_bis_account_160304", "code": "1603.04", "name": "Accumulated Impairment Losses - Computer and Electronic Equipment", "translations": {"zh_CN": "固定资产减值准备 - 电子设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_large_bis_account_160305", "code": "1603.05", "name": "Accumulated Impairment Losses - Office Equipment", "translations": {"zh_CN": "固定资产减值准备 - 办公设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_large_bis_account_160306", "code": "1603.06", "name": "Accumulated Impairment Losses - Other Fixed Assets", "translations": {"zh_CN": "固定资产减值准备 - 其他固定资产"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_large_bis_account_1604", "code": "1604", "name": "Construction In Progress", "translations": {"zh_CN": "在建工程"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1605", "code": "1605", "name": "Construction Materials", "translations": {"zh_CN": "工程物资"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_common_account_1606", "code": "1606", "name": "Disposal of Property, Plant and Equipment", "translations": {"zh_CN": "固定资产清理"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160601", "code": "1606.01", "name": "Disposal of Property, Plant and Equipment - Land and Buildings", "translations": {"zh_CN": "固定资产清理 - 房屋建筑物"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160602", "code": "1606.02", "name": "Disposal of Property, Plant and Equipment - Machinery and Equipment", "translations": {"zh_CN": "固定资产清理 - 机器设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160603", "code": "1606.03", "name": "Disposal of Property, Plant and Equipment - Transportation Equipment", "translations": {"zh_CN": "固定资产清理 - 运输设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160604", "code": "1606.04", "name": "Disposal of Property, Plant and Equipment - Computer and Electronic Equipment", "translations": {"zh_CN": "固定资产清理 - 电子设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160605", "code": "1606.05", "name": "Disposal of Property, Plant and Equipment - Office Equipment", "translations": {"zh_CN": "固定资产清理 - 办公设备"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_common_account_160606", "code": "1606.06", "name": "Disposal of Property, Plant and Equipment - Other Fixed Assets", "translations": {"zh_CN": "固定资产清理 - 其他固定资产"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_cn_large_bis_account_1611", "code": "1611", "name": "Unguaranteed Residual Value", "translations": {"zh_CN": "未担保余值"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1621", "code": "1621", "name": "Bearer Biological Assets", "translations": {"zh_CN": "生产性生物资产"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1622", "code": "1622", "name": "Accumulated Depreciation Of Bearer Biological Assets", "translations": {"zh_CN": "生产性生物资产累计折旧"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1623", "code": "1623", "name": "Public Welfare Biological Assets", "translations": {"zh_CN": "公益性生物资产"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1631", "code": "1631", "name": "Oil And Gas Assets", "translations": {"zh_CN": "油气资产"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1632", "code": "1632", "name": "Accumulated Depletion", "translations": {"zh_CN": "累计折耗"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_common_account_1701", "code": "1701", "name": "Intangible Assets", "translations": {"zh_CN": "无形资产"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_common_account_1702", "code": "1702", "name": "Accumulated Amortization", "translations": {"zh_CN": "累计摊销"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1703", "code": "1703", "name": "Accumulated Impairment Losses On Intangible Assets", "translations": {"zh_CN": "无形资产减值准备"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1704", "code": "1704", "name": "Right-Of-Use Assets", "translations": {"zh_CN": "使用权资产"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1705", "code": "1705", "name": "Accumulated Depreciation - Right-Of-Use Assets", "translations": {"zh_CN": "使用权资产 - 累计折旧"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1706", "code": "1706", "name": "Accumulated Impairment Losses - Right-Of-Use Assets", "translations": {"zh_CN": "使用权资产 - 减值准备"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1711", "code": "1711", "name": "Goodwill", "translations": {"zh_CN": "商誉"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1731", "code": "1731", "name": "Capitalized Expense", "translations": {"zh_CN": "开发支出"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_common_account_1801", "code": "1801", "name": "Long-Term Deferred Expenses", "translations": {"zh_CN": "长期待摊费用"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1811", "code": "1811", "name": "Deferred Tax Assets", "translations": {"zh_CN": "递延所得税资产"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_1821", "code": "1821", "name": "Separate Account Assets", "translations": {"zh_CN": "独立账户资产"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_common_account_1901", "code": "1901", "name": "Suspense Account for Asset Disposal Gains and Losses", "translations": {"zh_CN": "待处理财产损溢"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_cn_common_account_2001", "code": "2001", "name": "Short Term Borrowing", "translations": {"zh_CN": "短期借款"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2002", "code": "2002", "name": "Deposit Margin", "translations": {"zh_CN": "存入保证金"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2003", "code": "2003", "name": "Borrowing Funds", "translations": {"zh_CN": "拆入资金"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2004", "code": "2004", "name": "Borrowing From Central Bank", "translations": {"zh_CN": "向中央银行借款"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2011", "code": "2011", "name": "Take Deposit", "translations": {"zh_CN": "吸收存款"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2012", "code": "2012", "name": "Interbank Deposit", "translations": {"zh_CN": "同业存放"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2021", "code": "2021", "name": "Discounted Liabilities", "translations": {"zh_CN": "贴现负债"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2101", "code": "2101", "name": "Trading Financial Liabilities", "translations": {"zh_CN": "交易性金融负债"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2111", "code": "2111", "name": "Financial Assets Sold And Repurchased", "translations": {"zh_CN": "卖出回购金融资产款"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2112", "code": "2112", "name": "Derivative Financial Liabilities", "translations": {"zh_CN": "衍生金融负债"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_2201", "code": "2201", "name": "Notes Payable", "translations": {"zh_CN": "应付票据"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_2202", "code": "2202", "name": "Accounts Payable", "translations": {"zh_CN": "应付账款"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_cn_common_account_2203", "code": "2203", "name": "Advance From Customers", "translations": {"zh_CN": "预收账款"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2204", "code": "2204", "name": "Contract Liabilities", "translations": {"zh_CN": "合同负债"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_2211", "code": "2211", "name": "Payroll Payable", "translations": {"zh_CN": "应付职工薪酬"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_221101", "code": "2211.01", "name": "Payroll Payable - Salary", "translations": {"zh_CN": "应付职工薪酬 - 工资"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_221102", "code": "2211.02", "name": "Payroll Payable - Employee Benefits", "translations": {"zh_CN": "应付职工薪酬 - 职工福利费"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_221103", "code": "2211.03", "name": "Payroll Payable - Insurance", "translations": {"zh_CN": "应付职工薪酬 - 社会保险"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_2221", "code": "2221", "name": "Tax Payable", "translations": {"zh_CN": "应交税费"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222101", "code": "2221.01", "name": "Tax Payable - Value-Added Tax", "translations": {"zh_CN": "应交税费 - 应交增值税"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_22210101", "code": "2221.01.01", "name": "Tax Payable - VAT (Output VAT)", "translations": {"zh_CN": "应交税费 - 应交增值税（销项税额）"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_22210102", "code": "2221.01.02", "name": "Tax Payable - VAT (Input VAT)", "translations": {"zh_CN": "应交税费 - 应交增值税（进项税额）"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_22210103", "code": "2221.01.03", "name": "Tax Payable - VAT  (Offset of Output VAT)", "translations": {"zh_CN": "应交税费 - 应交增值税（销项税额抵减）"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_22210104", "code": "2221.01.04", "name": "Tax Payable - VAT  (Reversal of Input VAT)", "translations": {"zh_CN": "应交税费 - 应交增值税（进项税额转出）"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_22210105", "code": "2221.01.05", "name": "Tax Payable - VAT (Export Tax Refund)", "translations": {"zh_CN": "应交税费 - 应交增值税（出口退税）"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_22210106", "code": "2221.01.06", "name": "Tax Payable - VAT (Offset of Domestic Tax Payable by Export)", "translations": {"zh_CN": "应交税费 - 应交增值税（出口抵减内销产品应纳税额）"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_22210107", "code": "2221.01.07", "name": "Tax Payable - VAT (Transferred Unpaid VAT)", "translations": {"zh_CN": "应交税费 - 应交增值税（转出未交增值税）"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_22210108", "code": "2221.01.08", "name": "Tax Payable - VAT (Transferred Excess VAT)", "translations": {"zh_CN": "应交税费 - 应交增值税（转出多交增值税）"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_22210109", "code": "2221.01.09", "name": "Tax Payable - VAT (Input VAT Additional Deduction)", "translations": {"zh_CN": "应交税费 - 应交增值税（进项税加计抵减）"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_22210110", "code": "2221.01.10", "name": "Tax Payable - VAT (Taxes Payment)", "translations": {"zh_CN": "应交税费 - 应交增值税（已交税金）"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_22210111", "code": "2221.01.11", "name": "Tax Payable - VAT (Tax Reduction and Exemption)", "translations": {"zh_CN": "应交税费 - 应交增值税（减免税款）"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222102", "code": "2221.02", "name": "Tax Payable - Unpaid VAT", "translations": {"zh_CN": "应交税费 - 未交增值税"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222103", "code": "2221.03", "name": "Tax Payable - Prepaid VAT", "translations": {"zh_CN": "应交税费 - 预交增值税"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222104", "code": "2221.04", "name": "Tax Payable - Pending Certification of Input VAT", "translations": {"zh_CN": "应交税费 - 待认证进项税额"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222105", "code": "2221.05", "name": "Tax Payable - Pending Deduction of Input VAT", "translations": {"zh_CN": "应交税费 - 待抵扣进项税额"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222106", "code": "2221.06", "name": "Tax Payable - Pending Transfer of Output VAT", "translations": {"zh_CN": "应交税费 - 待转销项税额"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222107", "code": "2221.07", "name": "Tax Payable - VAT Retained Credit", "translations": {"zh_CN": "应交税费 - 增值税留抵税额"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222108", "code": "2221.08", "name": "Tax Payable - Withholding and Remittance of VAT", "translations": {"zh_CN": "应交税费 - 代扣代交增值税"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222109", "code": "2221.09", "name": "Tax Payable - Simplified Taxation", "translations": {"zh_CN": "应交税费 - 简易计税"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222110", "code": "2221.10", "name": "Tax Payable - Transfer of Financial Products VAT Payable", "translations": {"zh_CN": "应交税费 - 转让金融商品应交增值税"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222111", "code": "2221.11", "name": "Tax Payable - Corporate Income Tax Payable", "translations": {"zh_CN": "应交税费 - 应交企业所得税"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222112", "code": "2221.12", "name": "Tax Payable - Urban Maintenance and Construction Tax Payable", "translations": {"zh_CN": "应交税费 - 应交城市维护建设税"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222113", "code": "2221.13", "name": "Tax Payable - Education Surcharge Payable", "translations": {"zh_CN": "应交税费 - 应交教育费附加"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222114", "code": "2221.14", "name": "Tax Payable - Local Education Surcharge Payable", "translations": {"zh_CN": "应交税费 - 应交地方教育费附加"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222115", "code": "2221.15", "name": "Tax Payable - Consumption Tax Payable", "translations": {"zh_CN": "应交税费 - 应交消费税"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_222116", "code": "2221.16", "name": "Tax Payable - Stamp Duty Payable", "translations": {"zh_CN": "应交税费 - 应交印花税"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_2231", "code": "2231", "name": "Interest Payable", "translations": {"zh_CN": "应付利息"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2232", "code": "2232", "name": "Dividend Payable", "translations": {"zh_CN": "应付股利"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_2241", "code": "2241", "name": "Other Payables", "translations": {"zh_CN": "其他应付款"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2245", "code": "2245", "name": "Liabilities Held For Sale", "translations": {"zh_CN": "持有待售负债"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2251", "code": "2251", "name": "Policy Dividends Payable", "translations": {"zh_CN": "应付保单红利"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2261", "code": "2261", "name": "Reinsurance Accounts Payable", "translations": {"zh_CN": "应付分保账款"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2311", "code": "2311", "name": "Brokerage For Buying And Selling Securities", "translations": {"zh_CN": "代理买卖证券款"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2312", "code": "2312", "name": "Agency Underwriting Securities Payment", "translations": {"zh_CN": "代理承销证券款"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2313", "code": "2313", "name": "Agent Acting For Redemption Of Security Payment Redemption", "translations": {"zh_CN": "代理兑付证券款"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2314", "code": "2314", "name": "Agency Business Liabilities", "translations": {"zh_CN": "代理业务负债"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_2401", "code": "2401", "name": "Deferred Income", "translations": {"zh_CN": "递延收益"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2402", "code": "2402", "name": "Non-Current Liabilities Due Within One Year", "translations": {"zh_CN": "一年内到期的非流动负债"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_cn_common_account_2501", "code": "2501", "name": "Long-Term Loan", "translations": {"zh_CN": "长期借款"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2502", "code": "2502", "name": "Bonds Payable", "translations": {"zh_CN": "应付债券"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_250201", "code": "2502.01", "name": "Bonds Payable - Preferred Stock", "translations": {"zh_CN": "应付债券 - 优先股"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_250202", "code": "2502.02", "name": "Bonds Payable - Perpetual Debt", "translations": {"zh_CN": "应付债券 - 永续债"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2510", "code": "2510", "name": "Lease Liability", "translations": {"zh_CN": "租赁负债"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2601", "code": "2601", "name": "Reserve For Unearned Liabilities", "translations": {"zh_CN": "未到期责任准备金"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2602", "code": "2602", "name": "Insurance Liability Reserve", "translations": {"zh_CN": "保险责任准备金"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2611", "code": "2611", "name": "Policyholder Savings", "translations": {"zh_CN": "保户储金"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2621", "code": "2621", "name": "Separate Account Liabilities", "translations": {"zh_CN": "独立账户负债"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_common_account_2701", "code": "2701", "name": "Long-Term Payables", "translations": {"zh_CN": "长期应付款"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2702", "code": "2702", "name": "Unrecognized Financing Charges", "translations": {"zh_CN": "未确认融资费用"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2711", "code": "2711", "name": "Special Payables", "translations": {"zh_CN": "专项应付款"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2801", "code": "2801", "name": "Provisions", "translations": {"zh_CN": "预计负债"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_2901", "code": "2901", "name": "Deferred Tax Liabilities", "translations": {"zh_CN": "递延所得税负债"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_cn_large_bis_account_3001", "code": "3001", "name": "Liquidation Of Funds", "translations": {"zh_CN": "清算资金往来"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_3002", "code": "3002", "name": "Currency Exchange", "translations": {"zh_CN": "货币兑换"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_3101", "code": "3101", "name": "Derivatives", "translations": {"zh_CN": "衍生工具"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_3201", "code": "3201", "name": "Hedging Instrument", "translations": {"zh_CN": "套期工具"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_3202", "code": "3202", "name": "Hedged Item", "translations": {"zh_CN": "被套期项目"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_4001", "code": "4001", "name": "Paid-In Capital", "translations": {"zh_CN": "实收资本"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_4002", "code": "4002", "name": "Capital Reserve", "translations": {"zh_CN": "资本公积"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_4003", "code": "4003", "name": "Other Comprehensive Income", "translations": {"zh_CN": "其他综合收益"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_4101", "code": "4101", "name": "Surplus Reserve", "translations": {"zh_CN": "盈余公积"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_4102", "code": "4102", "name": "General Risk Provision", "translations": {"zh_CN": "一般风险准备"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_4103", "code": "4103", "name": "Current Year Profit", "translations": {"zh_CN": "本年利润"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity_unaffected"}},
+    {"source_id": "l10n_cn_large_bis_account_4104", "code": "4104", "name": "Profit Distribution", "translations": {"zh_CN": "利润分配"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_410401", "code": "4104.01", "name": "Profit Distribution - Transfer to Statutory Surplus Reserve", "translations": {"zh_CN": "利润分配 - 提取法定盈余公积"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_410402", "code": "4104.02", "name": "Profit Distribution - Transfer to Discretionary Surplus Reserve", "translations": {"zh_CN": "利润分配 - 提取任意盈余公积"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_4106", "code": "4106", "name": "Other Equity Instruments", "translations": {"zh_CN": "其他权益工具"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_410601", "code": "4106.01", "name": "Other Equity Instruments - Preferred Stock", "translations": {"zh_CN": "其他权益工具 - 优先股"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_410602", "code": "4106.02", "name": "Other Equity Instruments - Perpetual Debt", "translations": {"zh_CN": "其他权益工具 - 永续债"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_4201", "code": "4201", "name": "Treasury Stock", "translations": {"zh_CN": "库存股"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_4301", "code": "4301", "name": "Special Reserve", "translations": {"zh_CN": "专项储备"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_cn_large_bis_account_5001", "code": "5001", "name": "Production Costs", "translations": {"zh_CN": "生产成本"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_cn_large_bis_account_5101", "code": "5101", "name": "Manufacturing Expenses", "translations": {"zh_CN": "制造费用"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_cn_large_bis_account_5201", "code": "5201", "name": "Service Cost", "translations": {"zh_CN": "劳务成本"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_cn_large_bis_account_5301", "code": "5301", "name": "R&D Expenditure", "translations": {"zh_CN": "研发支出"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_5401", "code": "5401", "name": "Construction Cost", "translations": {"zh_CN": "工程施工"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_cn_large_bis_account_5402", "code": "5402", "name": "Project Settlement Cost", "translations": {"zh_CN": "工程结算"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_cn_large_bis_account_5403", "code": "5403", "name": "Equipment Operating Costs", "translations": {"zh_CN": "机械作业"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_cn_large_bis_account_6001", "code": "6001", "name": "Income", "translations": {"zh_CN": "主营业务收入"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6021", "code": "6021", "name": "Fee And Commission Income", "translations": {"zh_CN": "手续费及佣金收入"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6031", "code": "6031", "name": "Premium Income", "translations": {"zh_CN": "保费收入"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6041", "code": "6041", "name": "Rental Income", "translations": {"zh_CN": "租赁收入"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6051", "code": "6051", "name": "Other Operating Income", "translations": {"zh_CN": "其他业务收入"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6071", "code": "6071", "name": "Hedging Income", "translations": {"zh_CN": "套期保值收益"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6101", "code": "6101", "name": "Gains And Losses Of Fair Value Change", "translations": {"zh_CN": "公允价值变动损益"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6111", "code": "6111", "name": "Income From Investments", "translations": {"zh_CN": "投资收益"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6115", "code": "6115", "name": "Gains And Losses On Disposal Of Assets", "translations": {"zh_CN": "资产处置损益"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6201", "code": "6201", "name": "Amortization Of Insurance Liability Reserves", "translations": {"zh_CN": "摊回保险责任准备金"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6202", "code": "6202", "name": "Amortization Of Compensation Expenses", "translations": {"zh_CN": "摊回赔付支出"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6203", "code": "6203", "name": "Amortization Of Reinsurance Expenses", "translations": {"zh_CN": "摊回分保费用"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6301", "code": "6301", "name": "Non-Operating Income", "translations": {"zh_CN": "营业外收入"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_630101", "code": "6301.01", "name": "Cash Difference Gain", "translations": {"zh_CN": "现金溢余收益"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_630102", "code": "6301.02", "name": "Cash Discount Gain", "translations": {"zh_CN": "现金折扣收益"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_6401", "code": "6401", "name": "Cost of Goods Sold", "translations": {"zh_CN": "主营业务成本"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_cn_large_bis_account_6402", "code": "6402", "name": "Other Operating Costs", "translations": {"zh_CN": "其他业务成本"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_cn_large_bis_account_6403", "code": "6403", "name": "Taxes and Surcharges", "translations": {"zh_CN": "税金及附加"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_640301", "code": "6403.01", "name": "Taxes and Surcharges - Urban Maintenance and Construction Tax", "translations": {"zh_CN": "税金及附加 - 城市维护建设税"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_640302", "code": "6403.02", "name": "Taxes and Surcharges - Education Surcharge", "translations": {"zh_CN": "税金及附加 - 教育费附加"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_640303", "code": "6403.03", "name": "Taxes and Surcharges - Local Education Surcharge", "translations": {"zh_CN": "税金及附加 - 地方教育费附加"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_640304", "code": "6403.04", "name": "Taxes and Surcharges - Consumption Tax", "translations": {"zh_CN": "税金及附加 - 消费税"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_640305", "code": "6403.05", "name": "Taxes and Surcharges - Stamp Duty", "translations": {"zh_CN": "税金及附加 - 印花税"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6421", "code": "6421", "name": "Handling Fees And Commission Expenses", "translations": {"zh_CN": "手续费及佣金支出"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6501", "code": "6501", "name": "Withdrawal Of Unexpired Liability Reserves", "translations": {"zh_CN": "提取未到期责任准备金"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6502", "code": "6502", "name": "Withdrawal Of Insurance Liability Reserves", "translations": {"zh_CN": "提取保险责任准备金"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6511", "code": "6511", "name": "Compensation Expenses", "translations": {"zh_CN": "赔付支出"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6521", "code": "6521", "name": "Policy Dividend Payout", "translations": {"zh_CN": "保单红利支出"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6531", "code": "6531", "name": "Surrender Benefit", "translations": {"zh_CN": "退保金"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6541", "code": "6541", "name": "Ceded Premiums", "translations": {"zh_CN": "分出保费"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6542", "code": "6542", "name": "Reinsurance Expenses", "translations": {"zh_CN": "分保费用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6601", "code": "6601", "name": "Selling Expenses", "translations": {"zh_CN": "销售费用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_660101", "code": "6601.01", "name": "Selling Expenses - Employee salaries and benefits", "translations": {"zh_CN": "销售费用 - 职工薪酬"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_66010101", "code": "6601.01.01", "name": "Selling Expenses - Employee salaries and benefits - Salary", "translations": {"zh_CN": "销售费用 - 职工薪酬 - 工资"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_66010102", "code": "6601.01.02", "name": "Selling Expenses - Employee salaries and benefits - Benefits", "translations": {"zh_CN": "销售费用 - 职工薪酬 - 职工福利费"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_66010103", "code": "6601.01.03", "name": "Selling Expenses - Employee salaries and benefits - Insurance", "translations": {"zh_CN": "销售费用 - 职工薪酬 - 社会保险"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_660102", "code": "6601.02", "name": "Selling Expenses - Advertising and Promotion Expenses", "translations": {"zh_CN": "销售费用 - 广告及宣传费"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6602", "code": "6602", "name": "Administrative Expenses", "translations": {"zh_CN": "管理费用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_660201", "code": "6602.01", "name": "Administrative Expenses - Employee salaries and benefits", "translations": {"zh_CN": "管理费用 - 职工薪酬"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_66020101", "code": "6602.01.01", "name": "Administrative Expenses - Employee salaries and benefits - Salary", "translations": {"zh_CN": "管理费用 - 职工薪酬 - 工资"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_66020102", "code": "6602.01.02", "name": "Administrative Expenses - Employee salaries and benefits - Benefits", "translations": {"zh_CN": "管理费用 - 职工薪酬 - 职工福利费"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_66020103", "code": "6602.01.03", "name": "Administrative Expenses - Employee salaries and benefits - Insurance", "translations": {"zh_CN": "管理费用 - 职工薪酬 - 社会保险"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_660202", "code": "6602.02", "name": "Administrative Expenses - Depreciation", "translations": {"zh_CN": "管理费用 - 折旧"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_66020201", "code": "6602.02.01", "name": "Administrative Expenses - Depreciation - Land and Buildings", "translations": {"zh_CN": "管理费用 - 折旧 - 房屋建筑物"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_66020202", "code": "6602.02.02", "name": "Administrative Expenses - Depreciation - Machinery and Equipment", "translations": {"zh_CN": "管理费用 - 折旧 - 机器设备"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_66020203", "code": "6602.02.03", "name": "Administrative Expenses - Depreciation - Transportation Equipment", "translations": {"zh_CN": "管理费用 - 折旧 - 运输设备"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_66020204", "code": "6602.02.04", "name": "Administrative Expenses - Depreciation - Computer and Electronic Equipment", "translations": {"zh_CN": "管理费用 - 折旧 - 电子设备"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_66020205", "code": "6602.02.05", "name": "Administrative Expenses - Depreciation - Office Equipment", "translations": {"zh_CN": "管理费用 - 折旧 - 办公设备"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_66020206", "code": "6602.02.06", "name": "Administrative Expenses - Depreciation - Other Fixed Assets", "translations": {"zh_CN": "管理费用 - 折旧 - 其他固定资产"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_660203", "code": "6602.03", "name": "Administrative Expenses - Office Rent", "translations": {"zh_CN": "管理费用 - 办公室租金"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_660204", "code": "6602.04", "name": "Administrative Expenses - Water and Electricity Fees", "translations": {"zh_CN": "管理费用 - 水电费"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6603", "code": "6603", "name": "Financial Expenses", "translations": {"zh_CN": "财务费用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_660301", "code": "6603.01", "name": "Financial Expenses - Interest Payment", "translations": {"zh_CN": "财务费用 - 利息支出"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_660302", "code": "6603.02", "name": "Financial Expenses - Interest Income", "translations": {"zh_CN": "财务费用 - 利息收入"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_cn_large_bis_account_660303", "code": "6603.03", "name": "Financial Expenses - Exchange Gain or Loss", "translations": {"zh_CN": "财务费用 - 汇兑损益"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_660304", "code": "6603.03.01", "name": "Financial Expenses - Exchange Gain or Loss - Realized", "translations": {"zh_CN": "财务费用 - 汇兑损益 - 已实现损益"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_660305", "code": "6603.03.02", "name": "Financial Expenses - Exchange Gain or Loss - Unrealized", "translations": {"zh_CN": "财务费用 - 汇兑损益 - 未实现损益"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6604", "code": "6604", "name": "Exploration Costs", "translations": {"zh_CN": "勘探费用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6701", "code": "6701", "name": "Asset Impairment Loss", "translations": {"zh_CN": "资产减值损失"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6711", "code": "6711", "name": "Non-Operating Expenses", "translations": {"zh_CN": "营业外支出"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_671101", "code": "6711.01", "name": "Cash Difference Loss", "translations": {"zh_CN": "现金短缺损失"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_671102", "code": "6711.02", "name": "Cash Discount Loss", "translations": {"zh_CN": "现金折扣损失"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6721", "code": "6721", "name": "Credit Impairment Loss", "translations": {"zh_CN": "信用减值损失"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6801", "code": "6801", "name": "Income Tax Expense", "translations": {"zh_CN": "所得税费用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_680101", "code": "6801.01", "name": "Income Tax Expense - Current Income Tax Expense", "translations": {"zh_CN": "所得税费用 - 当期所得税费用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_680102", "code": "6801.02", "name": "Income Tax Expense - Deferred Income Tax Expense", "translations": {"zh_CN": "所得税费用 - 递延所得税费用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_cn_large_bis_account_6901", "code": "6901", "name": "Adjustment of Prior Year Profits and Losses", "translations": {"zh_CN": "以前年度损益调整"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}}
+  ]
+}

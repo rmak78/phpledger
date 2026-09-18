@@ -96,3 +96,81 @@ setup browser-state/field-error/assistive-technology acceptance.
 - Align version, README, GitHub Wiki, repository About (description, website URL and topics), version/package manifests, website download/share metadata, help, demo, release notes, archive/checksum and media kit; publish only after verification. Record each published surface as updated or reviewed unchanged, with verification evidence, in the publication receipt and owner handoff.
 
 The original checkpoint above was followed by the owner instruction to publish the current preview with its limitations disclosed. Package/accounting/CI checks passed; the CLA was personally signed by the owner. GitHub, demo, website, Wiki and metadata are now published and verified.
+
+## 0.6.1 local workflow follow-up — 18 September 2026
+
+This section records later local work; it does not change the historical 0.6.0
+publication receipt. The current registry has **41 HTML GET paths**, rather than
+the 38 in the 16 September inventory: `/home`, `/sample-chooser` and
+`/reports/ageing` were added. `/`, `/tables` and `/reports/export` remain redirect,
+JSON and CSV surfaces respectively. Browser installation and maintenance/update
+operations are separate pre-router entry points and require their own evidence.
+The prototype directory contains 75 HTML entries, including its component sheet
+and prototype index; that number is not 75 independently verified runtime states.
+
+The focused workflow implementation and browser checks now cover cash and journal
+field recovery, save/edit/post/reversal returns with JavaScript on and off,
+invoice/purchase input recovery, and ageing date/direction through document,
+journal, settlement selection and correction-editor returns. Linked field hints
+cover the main cash, journal, invoice/bill and purchase-order editors. Domain-state
+errors still use the general server message. Evidence:
+`output/playwright/workflow061-validation.json` and matching workflow captures.
+These checks close the exercised nested return chains, not every state in the
+original audits or every form's field-error coverage.
+
+A read-only smoke pass requested all 41 current route paths at 1366×768,
+1024×768, 768×1024 and 390×844, producing 164 captures. After authenticating and
+selecting the existing synthetic company, the browser blocked all methods except
+GET/HEAD; no blocked financial write was attempted. Evidence:
+`output/playwright/workflow061-route-smoke-auth.json` and
+`output/playwright/workflow061-route-auth-*.png`.
+
+- 32 route paths rendered their direct ordinary screen. No page overflow,
+  JavaScript exception, unexpected console error or marked desktop/tablet
+  primary-action fold failure was observed in those states.
+- Five paths exercised 403 recovery only: `/transactions/edit` without a draft
+  ID, `/general-journals/detail` without an ID, `/pos/receipt` without a sale ID,
+  `/sample-guide` in an ordinary company and `/oauth/authorize` without a request.
+  Their expected 403 resource messages are retained in the evidence.
+- Two paths redirected as expected: authenticated `/login` to `/companies`, and
+  `/pos/review` without a cart to `/pos`.
+- Two paths showed fallback states: `/transactions/detail` without an ID showed
+  the register; `/general-journals/edit` without an ID showed a new editor. These
+  are not edited/posted document acceptance.
+- The initial run used an expired session and is explicitly rejected for route
+  acceptance in `output/playwright/workflow061-route-smoke.json`; its sign-in
+  redirects are not passes. No original publication evidence was overwritten.
+- The ageing phone capture was visually inspected. The sweep is automated smoke
+  evidence, not a visual comparison of every capture or screen-reader acceptance.
+
+The following current-state work remains before claiming complete 0.6.1 UI
+acceptance. Existing focused checks and older receipts remain useful evidence;
+they must be mapped to the actual state rather than inferred from a route visit.
+
+| Routes / lane | Required remaining state evidence |
+|---|---|
+| `/login`, `/companies`, `/sample-chooser`, `/onboarding`, `/setup/review` | Failed/throttled sign-in and resume; empty/large/reader company lists; each purpose/chart step, retained validation, preview, repeated/stale confirmation and completed setup. |
+| `/opening-balances`, `/opening-conversion` | Expanded import, row errors, balanced and mismatched preview, explicit party mapping, confirmed cutover/allocation history, duplicate/stale confirmation and keyboard/zoom review. |
+| `/transactions/edit`, `/transactions/detail`, `/general-journals/edit`, `/general-journals/detail`, `/journals/detail` | Map the focused JS/no-JS draft/post/reversal checks to current prototype states and final four-width captures; add stale revision, unavailable account, reader permission and non-cash/non-AR journal source variants. |
+| `/ar`, `/ap`, `/purchasing` | Full current partial/final settlement and reversal states; linked customer/supplier credit and correction/cancellation histories; goods receipt, variance/tax bill preview and billed/unbilled returns; retained invalid FX/clearing choices and stale preview recovery. Ordinary invoice/order error and return checks do not cover all of these. |
+| `/parties`, `/inventory`, `/accounts` | Duplicate/edit validation, role/contact variants, inactive/empty/reader states; stock opening/count/value-adjustment previews and results, stale quantities, disabled-module retained history; account history/immutable-classification review. |
+| `/reports*`, `/bank-reconciliation` | Final keyboard/200% zoom and scroll-region review; empty/loss/invalid periods; source-return variants for settlements, stock and opening journals; current populated bank import/match/unmatch/completion/cancellation states reconciled against the existing functional receipt. |
+| `/periods`, `/tax`, `/modules`, `/connections`, `/oauth/authorize` | Current stale/permission/error states, period history, dated tax/inclusive settings, module impact confirmations, connection creation/revocation and valid consent/cancel/resume. Earlier valid OAuth evidence is separate from this invalid-request smoke pass. |
+| `/pos`, `/pos/review`, `/pos/receipt` | Populated cart and keyboard operation; reviewed tender/change; successful receipt and print/action bounds; duplicate/stale/unconfirmed outcome recovery. The empty-cart redirect and missing-sale denial do not cover these. |
+| `/sample-guide`, public demo, global errors | Historical and starter guide states; public chooser/reset countdown; actual expired-generation recovery; missing-route/wrong-method and contextual safe returns at current dimensions. |
+| All affected screens | Prototype-to-runtime state mapping, visual inspection, 200% zoom, keyboard focus/scroll access and assistive-technology review. Phone visual refinement remains distinct from overflow/access safety. |
+
+For exact prototype reconciliation, 42 entry IDs were absent from the old
+33-state sweep: `ar-credit-note`, `ar-invoice-draft`, `ar-invoice-posted`,
+`companies`, `components`, `demo-transactions`, `demo`, `error-not-found`,
+`error-unavailable`, `error-wrong-method`, `expense-edit-dirty`, `goods-receipt`,
+`index`, `journal-entry`, `journal-posted`, `journal-reversed`,
+`journal-unbalanced`, `login-error`, `login`, `oauth-consent`, `oauth-invalid`,
+`onboarding-business`, `onboarding-chart`, `onboarding-confirm`,
+`onboarding-preview`, `onboarding-purpose`, `onboarding-validation`,
+`opening-balances`, `opening-conversion-confirm`, `opening-conversion-preview`,
+`period-drilldown`, `pos-receipt`, `pos-recovery`, `pos-review`, `pos`,
+`readiness-strip`, `sample-chooser`, `sample-guide`, `setup-review`, `stock-count`,
+`transaction-posted`, `transaction-reversed`. `components` and `index` are
+prototype-only entries. This is an inventory of unmatched old sweep IDs, not a
+claim that all 42 features are absent or that later workflow evidence is missing.

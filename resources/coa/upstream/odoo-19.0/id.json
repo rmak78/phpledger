@@ -1,0 +1,445 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "18b15c692ea99762b4c33baa75d30fdbf54ace64f271d90a8e0eda2b08f4dbf9",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/id",
+  "country_code": "ID",
+  "country_name": "Indonesia",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Indonesian - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_id' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "vitraining.com",
+    "module": "l10n_id",
+    "module_name": "Indonesian - Accounting",
+    "module_version": "1.3",
+    "contributing_modules": [
+      "l10n_id"
+    ],
+    "template_code": "id",
+    "template_chain": [
+      "id"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_id/data/template/account.account-id.csv",
+        "sha256": "4f4e0f584b904d09eb5429412b513cd675ccb19b3c0988887c2070912ff53e24",
+        "rows": 114
+      }
+    ],
+    "python_files": [
+      "addons/l10n_id/models/template_id.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "8",
+    "anglo_saxon_accounting": true,
+    "account_code_prefixes": {
+      "bank": "1112",
+      "cash": "1111",
+      "transfer": "1999999"
+    },
+    "default_sale_tax": "tax_ST4",
+    "default_purchase_tax": "tax_PT4",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "l10n_id_11210010",
+        "code": "11210010",
+        "name": "Account Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "l10n_id_21100010",
+        "code": "21100010",
+        "name": "Account Payable",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "l10n_id_41000010",
+        "code": "41000010",
+        "name": "Sales",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "l10n_id_51000010",
+        "code": "51000010",
+        "name": "Cost of Goods Sold",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "l10n_id_11300180",
+        "code": "11300180",
+        "name": "Inventory",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "l10n_id_11210011",
+        "code": "11210011",
+        "name": "Account Receivable (PoS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "l10n_id_81100030",
+        "code": "81100030",
+        "name": "Foreign Exchange Gain",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "l10n_id_91100020",
+        "code": "91100020",
+        "name": "Foreign Exchange Loss",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "l10n_id_99900002",
+        "code": "99900002",
+        "name": "Cash Difference Gain",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "l10n_id_99900001",
+        "code": "99900001",
+        "name": "Cash Difference Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "l10n_id_99900004",
+        "code": "99900004",
+        "name": "Cash Discount Gain",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "l10n_id_99900003",
+        "code": "99900003",
+        "name": "Cash Discount Loss",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "l10n_id_11210040",
+        "code": "11210040",
+        "name": "Prepaid Expense",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "l10n_id_28110030",
+        "code": "28110030",
+        "name": "Deferred Revenue",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 114,
+    "posting_accounts": 114,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 25,
+      "equity": 9,
+      "expense": 38,
+      "income": 10,
+      "liability": 32
+    },
+    "by_subtype": {
+      "cash_bank": 3,
+      "current_asset": 3,
+      "current_liability": 28,
+      "depreciation": 3,
+      "direct_cost": 1,
+      "equity": 8,
+      "expense": 34,
+      "fixed_asset": 6,
+      "income": 4,
+      "other_income": 6,
+      "payable": 4,
+      "prepayment": 8,
+      "receivable": 5,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 3,
+      "expense": 1,
+      "income": 1,
+      "payables": 4,
+      "receivables": 5
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "id"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "l10n_id_11110001", "code": "11110001", "name": "Cash", "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_id_11110010", "code": "11110010", "name": "Petty Cash", "translations": {"id": "Kas Kecil"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_id_11120001", "code": "11120001", "name": "Bank", "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_id_11210010", "code": "11210010", "name": "Account Receivable", "translations": {"id": "Piutang Usaha"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_id_11210011", "code": "11210011", "name": "Account Receivable (PoS)", "translations": {"id": "Piutang Usaha (PoS)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_id_11210012", "code": "11210012", "name": "VAT Receivable", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "l10n_id_11210013", "code": "11210013", "name": "STLG Receivable", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "l10n_id_11210014", "code": "11210014", "name": "PPh 28A Prepaid", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "l10n_id_11210030", "code": "11210030", "name": "VAT Purchase", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_id_11210040", "code": "11210040", "name": "Prepaid Expense", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_id_11300180", "code": "11300180", "name": "Inventory", "translations": {"id": "Persediaan Lainnya"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_expense_id": "l10n_id_51000020", "account_stock_variation_id": "l10n_id_42500010"}}},
+    {"source_id": "l10n_id_11410010", "code": "11410010", "name": "Building Rent", "translations": {"id": "Sewa Bangunan"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "l10n_id_11410020", "code": "11410020", "name": "Prepaid Insurance", "translations": {"id": "Asuransi Dibayar Dimuka"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "l10n_id_11410030", "code": "11410030", "name": "Prepaid Advertisement-Free", "translations": {"id": "Beban Iklan Dibayar Dimuka"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "l10n_id_11510010", "code": "11510010", "name": "Prepaid Tax PPh 21", "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "l10n_id_11510020", "code": "11510020", "name": "Prepaid Tax Pph 22", "translations": {"id": "Pajak Dibayar Dimuka PPH 22"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "l10n_id_11510030", "code": "11510030", "name": "Prepaid Tax Pph 23", "translations": {"id": "Pajak Dibayar Dimuka PPH 23"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "l10n_id_11510040", "code": "11510040", "name": "Prepaid Tax Pph 25", "translations": {"id": "Pajak Dibayar Dimuka PPH 25"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "l10n_id_11800000", "code": "11800000", "name": "Down Payment", "translations": {"id": "Uang Muka Pembelian"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "l10n_id_12210010", "code": "12210010", "name": "Office Building", "translations": {"id": "Bangunan Kantor"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_id_12210020", "code": "12210020", "name": "Vehicle", "translations": {"id": "Kendaraan"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_id_12210030", "code": "12210030", "name": "Office Supplies", "translations": {"id": "Peralatan Kantor"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_id_12281010", "code": "12281010", "name": "Accumulation Building Depreciation", "translations": {"id": "Akumulasi Penyusutan Bangunan Kantor"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_id_12281020", "code": "12281020", "name": "Accumulation Vehicle Depreciation", "translations": {"id": "Akumulasi Penyusutan Kendaraan"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_id_12281030", "code": "12281030", "name": "Accumulation Office Supplies Depreciation", "translations": {"id": "Akumulasi Penyusutan Peralatan Kantor"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_id_21100010", "code": "21100010", "name": "Account Payable", "translations": {"id": "Hutang Usaha"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_id_21100011", "code": "21100011", "name": "VAT Payable", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "l10n_id_21100012", "code": "21100012", "name": "STLG Payable", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "l10n_id_21100013", "code": "21100013", "name": "Employee Liabilities", "translations": {"id": "Piutang Karyawan"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_21100014", "code": "21100014", "name": "Tax Payable PPh 29", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "l10n_id_21100020", "code": "21100020", "name": "Shareholder Deposit", "translations": {"id": "Hutang Pemegang Saham"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_21100030", "code": "21100030", "name": "Third-Party Deposit", "translations": {"id": "Hutang Pihak Ketiga"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_21100040", "code": "21100040", "name": "Salary Deposit", "translations": {"id": "Hutang Gaji"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_21210010", "code": "21210010", "name": "Tax Payable PPh 21", "translations": {"id": "Hutang Pajak PPh 21"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_21210020", "code": "21210020", "name": "Tax Payable PPh 22", "translations": {"id": "Hutang Pajak PPh 22"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_21210030", "code": "21210030", "name": "Tax Payable PPh 23", "translations": {"id": "Hutang Pajak PPh 23"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_21210040", "code": "21210040", "name": "Tax Payable PPh 25", "translations": {"id": "Hutang Pajak PPh 25"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_21210050", "code": "21210050", "name": "Tax Payable 4(2)", "translations": {"id": "Hutang Pajak Pasal 4 (2)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_21210060", "code": "21210060", "name": "Tax Payable PPh 26", "translations": {"id": "Hutang Pajak PPh 26"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_21221010", "code": "21221010", "name": "VAT Sales", "translations": {"id": "PPN Pembelian"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_22110010", "code": "22110010", "name": "Bank Loan", "translations": {"id": "Hutang Bank"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_22110020", "code": "22110020", "name": "Leasing Deposit", "translations": {"id": "Hutang Leasing"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_25110010", "code": "25110010", "name": "Accrued Payable Electricity", "translations": {"id": "BYMHD Listrik"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_25110020", "code": "25110020", "name": "Accrued Payable Jamsostek", "translations": {"id": "BYMHD Jamsostek"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_25110030", "code": "25110030", "name": "Accrued Payable Water", "translations": {"id": "BYMHD Air"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_25110040", "code": "25110040", "name": "Accrued Payable Telp & Internet", "translations": {"id": "BYMHD Telepon"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_25110050", "code": "25110050", "name": "Accrued Payable Security Management", "translations": {"id": "BYMHD Jasa Pengelola Keamanan"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_25110060", "code": "25110060", "name": "Accrued Payable Bank", "translations": {"id": "BYMHD Bank"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_25110070", "code": "25110070", "name": "Accrued Payable PBB", "translations": {"id": "BYMHD PBB"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_25110080", "code": "25110080", "name": "Accrued Payable Business License", "translations": {"id": "BYMHD Izin Usaha"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_25110090", "code": "25110090", "name": "Accrued Payable Insurance", "translations": {"id": "BYMHD Asuransi"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_25110100", "code": "25110100", "name": "Accrued Payable Education", "translations": {"id": "BYMHD Pendidikan dan Latihan"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_25110110", "code": "25110110", "name": "Accrued Payable Health Insurance/BPJS", "translations": {"id": "BYMHD Jaminan Kesehatan/BPJS"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_28110010", "code": "28110010", "name": "Advance Sales", "translations": {"id": "Uang Muka Penjualan"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_28110020", "code": "28110020", "name": "Customer Deposit", "translations": {"id": "Deposit Customer"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_28110030", "code": "28110030", "name": "Deferred Revenue", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_29000000", "code": "29000000", "name": "Interim Stock", "translations": {"id": "Stok Interim"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_id_31100010", "code": "31100010", "name": "Authorized Capital", "translations": {"id": "Modal Dasar"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_id_31100020", "code": "31100020", "name": "Paid Capital", "translations": {"id": "Modal Yang Disetor"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_id_31100030", "code": "31100030", "name": "Unpaid Capital", "translations": {"id": "Modal Yang Belum Disetor"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_id_31100040", "code": "31100040", "name": "Prive (Personal Retrieval)", "translations": {"id": "Prive (Pengambilan Pribadi)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_id_31210010", "code": "31210010", "name": "Capital Reserves", "translations": {"id": "Cadangan Modal"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_id_31510010", "code": "31510010", "name": "Past Profit & Loss", "translations": {"id": "Laba Rugi Tahun Lalu"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_id_31510020", "code": "31510020", "name": "Ongoing Profit & Loss", "translations": {"id": "Laba Rugi Tahun Berjalan"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_id_39000000", "code": "39000000", "name": "Historical Balance", "translations": {"id": "Historical Balance"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_id_41000010", "code": "41000010", "name": "Sales", "translations": {"id": "Penjualan"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "l10n_id_42000060", "code": "42000060", "name": "Sales Refund", "translations": {"id": "Retur Penjualan"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_id_42000070", "code": "42000070", "name": "Sales Discount", "translations": {"id": "Discount Penjualan"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_id_42500010", "code": "42500010", "name": "Change in Inventory", "translations": {"id": "Perubahan Persediaan"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_51000010", "code": "51000010", "name": "Cost of Goods Sold", "translations": {"id": "Harga Pokok Penjualan"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_id_51000020", "code": "51000020", "name": "Purchases - Raw Materials", "translations": {"id": "Pembelian Bahan Baku"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_61100010", "code": "61100010", "name": "Employee Salary", "translations": {"id": "Gaji Karyawan"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_61100020", "code": "61100020", "name": "Employee Bonus / Benefits", "translations": {"id": "Tunjangan/ Bonus Karyawan"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_61100030", "code": "61100030", "name": "Employee Overtime Pay", "translations": {"id": "Lembur Karyawan"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_61100100", "code": "61100100", "name": "Pph 21 Benefit", "translations": {"id": "Tunjangan PPH Pasal 21"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_61100110", "code": "61100110", "name": "PPh 22 Final", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_61100120", "code": "61100120", "name": "PPh 4(2) Final", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_63110060", "code": "63110060", "name": "Phone", "translations": {"id": "Telepon"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_63110080", "code": "63110080", "name": "Electricity", "translations": {"id": "Listrik"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_63110100", "code": "63110100", "name": "Research & Development", "translations": {"id": "Research & Development"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_63110120", "code": "63110120", "name": "Office Equipment", "translations": {"id": "Perlengkapan Kantor"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_63110140", "code": "63110140", "name": "Other Necessities", "translations": {"id": "Keperluan Lain-lain"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_64110020", "code": "64110020", "name": "Post Necessities", "translations": {"id": "Keperluan Pos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_65110010", "code": "65110010", "name": "Licensing Fees", "translations": {"id": "Biaya Perizinan"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_65110020", "code": "65110020", "name": "Bank Administration Fees", "translations": {"id": "Biaya Administrasi Bank"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_65110030", "code": "65110030", "name": "Consultant Fees", "translations": {"id": "Biaya Konsultan"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_65110040", "code": "65110040", "name": "Rental Costs", "translations": {"id": "Biaya Sewa"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_65110050", "code": "65110050", "name": "Insurance Costs", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_65110060", "code": "65110060", "name": "Building Maintenance Costs", "translations": {"id": "Biaya Pemeliharaan & Perawatan Gedung"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_65110070", "code": "65110070", "name": "Income Tax Expenses (CIT)", "translations": {"id": "Pajak"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_65110080", "code": "65110080", "name": "Asset Maintenance Costs", "translations": {"id": "Biaya Pemeliharaan & Perawatan Aset"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_65110090", "code": "65110090", "name": "Shipping Costs", "translations": {"id": "Biaya Pengiriman Dokumen/Barang"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_66110010", "code": "66110010", "name": "Vehicle Fuel", "translations": {"id": "BBM kendaraan"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_66110020", "code": "66110020", "name": "Vehicle Service", "translations": {"id": "Service kendaraan"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_66110030", "code": "66110030", "name": "Vehicle Parking & Toll Fee", "translations": {"id": "Parkir & tol kendaraan"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_66110040", "code": "66110040", "name": "Vehicle Taxes", "translations": {"id": "Pajak Kendaraan"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_66110050", "code": "66110050", "name": "Vehicle Insurance", "translations": {"id": "Asuransi Kendaraan"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_67100010", "code": "67100010", "name": "Office Building", "translations": {"id": "Bangunan Kantor"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_id_67100020", "code": "67100020", "name": "Vehicle", "translations": {"id": "Kendaraan"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_id_67100030", "code": "67100030", "name": "Office Supplies", "translations": {"id": "Peralatan Kantor"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_id_69000000", "code": "69000000", "name": "Other Expenses", "translations": {"id": "Biaya Lain-lain"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_81100010", "code": "81100010", "name": "Interest Income", "translations": {"id": "Pendapatan Bunga"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_id_81100020", "code": "81100020", "name": "Deposit Income", "translations": {"id": "Pendapatan Deposit"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_id_81100030", "code": "81100030", "name": "Foreign Exchange Gain", "translations": {"id": "Keuntungan Selisih Kurs"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_id_81100040", "code": "81100040", "name": "Other Income", "translations": {"id": "Pendapatan lainnya"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_id_81100050", "code": "81100050", "name": "Gain on Sale of Fixed Assets", "translations": {"id": "Keuntungan Atas Penjualan Aktiva Tetap"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_id_91100010", "code": "91100010", "name": "Interest Expense", "translations": {"id": "Beban Bunga"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_91100020", "code": "91100020", "name": "Foreign Exchange Loss", "translations": {"id": "Kerugian Selisih Kurs"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_91100030", "code": "91100030", "name": "Loss on Sale of Fixed Assets", "translations": {"id": "Kerugian Atas Penjualan Aktiva Tetap"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_99900001", "code": "99900001", "name": "Cash Difference Loss", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_99900002", "code": "99900002", "name": "Cash Difference Gain", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_id_99900003", "code": "99900003", "name": "Cash Discount Loss", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_id_99900004", "code": "99900004", "name": "Cash Discount Gain", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_id_999999", "code": "999999", "name": "Undistributed Profits/Losses", "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity_unaffected"}}
+  ]
+}

@@ -1,0 +1,645 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "e8213766c3fc668956047ef1c10a9d66015fba786cea24e05f423cdc42a9f623",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/ee",
+  "country_code": "EE",
+  "country_name": "Estonia",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Estonia - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_ee' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo SA",
+    "module": "l10n_ee",
+    "module_name": "Estonia - Accounting",
+    "module_version": "1.3",
+    "contributing_modules": [
+      "l10n_ee"
+    ],
+    "template_code": "ee",
+    "template_chain": [
+      "ee"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_ee/data/template/account.account-ee.csv",
+        "sha256": "e1205c5757e7962fc0f2fbdfa0d3d1fc162dcb0f68109ccfc8db1478625d5d80",
+        "rows": 211
+      },
+      {
+        "path": "addons/l10n_ee/data/template/account.group-ee.csv",
+        "sha256": "e24a96c41ec064b282035b895106bf1aa91f81ff36c74be2dfdd026bec5a4c5d",
+        "rows": 103
+      }
+    ],
+    "python_files": [
+      "addons/l10n_ee/models/template_ee.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "1001",
+      "cash": "1000",
+      "transfer": "1008"
+    },
+    "default_sale_tax": "l10n_ee_vat_out_24_g",
+    "default_purchase_tax": "l10n_ee_vat_in_24_g",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "l10n_ee_10200",
+        "code": "10200",
+        "name": "Accounts Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "l10n_ee_2010",
+        "code": "2010",
+        "name": "Accounts Payable",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "l10n_ee_40000",
+        "code": "40000",
+        "name": "Sales of Goods in Estonia",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "l10n_ee_50",
+        "code": "50",
+        "name": "Purchase of Goods for Resale",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "l10n_ee_1030",
+        "code": "1030",
+        "name": "Raw and Other Materials",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "l10n_ee_10201",
+        "code": "10201",
+        "name": "Accounts Receivable (POS)",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "l10n_ee_1009",
+        "code": "1009",
+        "name": "Bank Suspense Account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "l10n_ee_422",
+        "code": "422",
+        "name": "Currency Exchange Rate Gains",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "l10n_ee_673",
+        "code": "673",
+        "name": "Currency Exchange Losses",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "l10n_ee_420",
+        "code": "420",
+        "name": "Cash Rounding Gains",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "l10n_ee_671",
+        "code": "671",
+        "name": "Cash Rounding Losses",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "l10n_ee_430",
+        "code": "430",
+        "name": "Cash Discount Gains",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "l10n_ee_6850",
+        "code": "6850",
+        "name": "Cash Discount Losses",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 211,
+    "posting_accounts": 211,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 61,
+      "equity": 10,
+      "expense": 73,
+      "income": 20,
+      "liability": 46,
+      "unclassified": 1
+    },
+    "by_subtype": {
+      "cash_bank": 2,
+      "current_asset": 20,
+      "current_liability": 31,
+      "depreciation": 2,
+      "direct_cost": 5,
+      "equity": 10,
+      "expense": 66,
+      "fixed_asset": 14,
+      "income": 10,
+      "non_current_asset": 21,
+      "non_current_liability": 13,
+      "off_balance": 1,
+      "other_income": 10,
+      "payable": 2,
+      "prepayment": 1,
+      "receivable": 3
+    },
+    "unclassified_root_type": 1,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 2,
+      "expense": 1,
+      "income": 1,
+      "payables": 2,
+      "receivables": 3
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "et"
+    ],
+    "groups": 103
+  },
+  "groups": [
+    {"source_id": "ee_group_1", "code_prefix_start": "1", "code_prefix_end": "1", "name": "Assets", "translations": {"et": "Varad"}, "parent_source_id": null, "path": ["Assets"]},
+    {"source_id": "ee_group_2", "code_prefix_start": "2", "code_prefix_end": "2", "name": "Liabilities", "translations": {"et": "Kohustised"}, "parent_source_id": null, "path": ["Liabilities"]},
+    {"source_id": "ee_group_3", "code_prefix_start": "3", "code_prefix_end": "3", "name": "Equity", "translations": {"et": "Omakapital"}, "parent_source_id": null, "path": ["Equity"]},
+    {"source_id": "ee_group_4", "code_prefix_start": "4", "code_prefix_end": "4", "name": "Income", "translations": {"et": "Tulud"}, "parent_source_id": null, "path": ["Income"]},
+    {"source_id": "ee_group_5", "code_prefix_start": "5", "code_prefix_end": "5", "name": "Cost of Goods Sold", "translations": {"et": "Müüdud kaupade maksumus"}, "parent_source_id": null, "path": ["Cost of Goods Sold"]},
+    {"source_id": "ee_group_6", "code_prefix_start": "6", "code_prefix_end": "6", "name": "Other Expenses", "translations": {"et": "Muud kulud"}, "parent_source_id": null, "path": ["Other Expenses"]},
+    {"source_id": "ee_group_10", "code_prefix_start": "10", "code_prefix_end": "10", "name": "Current Assets", "translations": {"et": "Käibevarad"}, "parent_source_id": "ee_group_1", "path": ["Assets", "Current Assets"]},
+    {"source_id": "ee_group_11", "code_prefix_start": "11", "code_prefix_end": "11", "name": "Non-Current Assets", "translations": {"et": "Põhivarad"}, "parent_source_id": "ee_group_1", "path": ["Assets", "Non-Current Assets"]},
+    {"source_id": "ee_group_20", "code_prefix_start": "20", "code_prefix_end": "20", "name": "Current Liabilities", "translations": {"et": "Lühiajalised kohustised"}, "parent_source_id": "ee_group_2", "path": ["Liabilities", "Current Liabilities"]},
+    {"source_id": "ee_group_21", "code_prefix_start": "21", "code_prefix_end": "21", "name": "Non-Current Liabilities", "translations": {"et": "Pikaajalised kohustised"}, "parent_source_id": "ee_group_2", "path": ["Liabilities", "Non-Current Liabilities"]},
+    {"source_id": "ee_group_30", "code_prefix_start": "30", "code_prefix_end": "30", "name": "Share Capital (Nominal Value)", "translations": {"et": "Aktsiakapital või osakapital nimiväärtuses"}, "parent_source_id": "ee_group_3", "path": ["Equity", "Share Capital (Nominal Value)"]},
+    {"source_id": "ee_group_31", "code_prefix_start": "31", "code_prefix_end": "31", "name": "Unregistered Share Capital or Equity", "translations": {"et": "Registreerimata aktsiakapital või osakapital"}, "parent_source_id": "ee_group_3", "path": ["Equity", "Unregistered Share Capital or Equity"]},
+    {"source_id": "ee_group_32", "code_prefix_start": "32", "code_prefix_end": "32", "name": "Unpaid Share Capital", "translations": {"et": "Sissemaksmata osakapital"}, "parent_source_id": "ee_group_3", "path": ["Equity", "Unpaid Share Capital"]},
+    {"source_id": "ee_group_33", "code_prefix_start": "33", "code_prefix_end": "33", "name": "Share Premium", "translations": {"et": "Ülekurss"}, "parent_source_id": "ee_group_3", "path": ["Equity", "Share Premium"]},
+    {"source_id": "ee_group_34", "code_prefix_start": "34", "code_prefix_end": "34", "name": "Own Shares", "translations": {"et": "Oma aktsiad või osad"}, "parent_source_id": "ee_group_3", "path": ["Equity", "Own Shares"]},
+    {"source_id": "ee_group_35", "code_prefix_start": "35", "code_prefix_end": "35", "name": "Statutory Reserve Capital", "translations": {"et": "Kohustuslik reservkapital"}, "parent_source_id": "ee_group_3", "path": ["Equity", "Statutory Reserve Capital"]},
+    {"source_id": "ee_group_36", "code_prefix_start": "36", "code_prefix_end": "36", "name": "Other Reserves", "translations": {"et": "Muud reservid"}, "parent_source_id": "ee_group_3", "path": ["Equity", "Other Reserves"]},
+    {"source_id": "ee_group_37", "code_prefix_start": "37", "code_prefix_end": "37", "name": "Other Equity", "translations": {"et": "Muu omakapital"}, "parent_source_id": "ee_group_3", "path": ["Equity", "Other Equity"]},
+    {"source_id": "ee_group_38", "code_prefix_start": "38", "code_prefix_end": "38", "name": "Retained Profit/Loss From Previous Periods", "translations": {"et": "Eelmiste perioodide jaotamata kasum (kahjum)"}, "parent_source_id": "ee_group_3", "path": ["Equity", "Retained Profit/Loss From Previous Periods"]},
+    {"source_id": "ee_group_39", "code_prefix_start": "39", "code_prefix_end": "39", "name": "Profit/Loss for the Financial Year", "translations": {"et": "Aruandeaasta kasum (kahjum)"}, "parent_source_id": "ee_group_3", "path": ["Equity", "Profit/Loss for the Financial Year"]},
+    {"source_id": "ee_group_40", "code_prefix_start": "40", "code_prefix_end": "40", "name": "Sales of Goods and Services", "translations": {"et": "Kaupade ja teenuste müük"}, "parent_source_id": "ee_group_4", "path": ["Income", "Sales of Goods and Services"]},
+    {"source_id": "ee_group_41", "code_prefix_start": "41", "code_prefix_end": "41", "name": "Sales of Assets", "translations": {"et": "Varade müük"}, "parent_source_id": "ee_group_4", "path": ["Income", "Sales of Assets"]},
+    {"source_id": "ee_group_42", "code_prefix_start": "42", "code_prefix_end": "42", "name": "Financial Income", "translations": {"et": "Finantstulud"}, "parent_source_id": "ee_group_4", "path": ["Income", "Financial Income"]},
+    {"source_id": "ee_group_43", "code_prefix_start": "43", "code_prefix_end": "43", "name": "Other Income", "translations": {"et": "Muud tulud"}, "parent_source_id": "ee_group_4", "path": ["Income", "Other Income"]},
+    {"source_id": "ee_group_60", "code_prefix_start": "60", "code_prefix_end": "60", "name": "Property Expenses", "translations": {"et": "Kinnisvarakulud"}, "parent_source_id": "ee_group_6", "path": ["Other Expenses", "Property Expenses"]},
+    {"source_id": "ee_group_61", "code_prefix_start": "61", "code_prefix_end": "61", "name": "Equipment Expenses", "translations": {"et": "Seadmete kulud"}, "parent_source_id": "ee_group_6", "path": ["Other Expenses", "Equipment Expenses"]},
+    {"source_id": "ee_group_62", "code_prefix_start": "62", "code_prefix_end": "62", "name": "Product Expenses", "translations": {"et": "Toote kulud"}, "parent_source_id": "ee_group_6", "path": ["Other Expenses", "Product Expenses"]},
+    {"source_id": "ee_group_63", "code_prefix_start": "63", "code_prefix_end": "63", "name": "Service Expenses", "translations": {"et": "Teenuse kulud"}, "parent_source_id": "ee_group_6", "path": ["Other Expenses", "Service Expenses"]},
+    {"source_id": "ee_group_64", "code_prefix_start": "64", "code_prefix_end": "64", "name": "Car Expenses", "translations": {"et": "Autokulud"}, "parent_source_id": "ee_group_6", "path": ["Other Expenses", "Car Expenses"]},
+    {"source_id": "ee_group_65", "code_prefix_start": "65", "code_prefix_end": "65", "name": "Employee Expenses", "translations": {"et": "Töötajate kulud"}, "parent_source_id": "ee_group_6", "path": ["Other Expenses", "Employee Expenses"]},
+    {"source_id": "ee_group_66", "code_prefix_start": "66", "code_prefix_end": "66", "name": "Fees and Taxes", "translations": {"et": "Tasud ja maksud"}, "parent_source_id": "ee_group_6", "path": ["Other Expenses", "Fees and Taxes"]},
+    {"source_id": "ee_group_67", "code_prefix_start": "67", "code_prefix_end": "67", "name": "Financial Expenses", "translations": {"et": "Financial Expenses"}, "parent_source_id": "ee_group_6", "path": ["Other Expenses", "Financial Expenses"]},
+    {"source_id": "ee_group_68", "code_prefix_start": "68", "code_prefix_end": "68", "name": "Other Operating Expenses", "translations": {"et": "Muud ärikulud"}, "parent_source_id": "ee_group_6", "path": ["Other Expenses", "Other Operating Expenses"]},
+    {"source_id": "ee_group_70", "code_prefix_start": "70", "code_prefix_end": "70", "name": "Other Accounts", "translations": {"et": "Muud arved"}, "parent_source_id": null, "path": ["Other Accounts"]},
+    {"source_id": "ee_group_100", "code_prefix_start": "100", "code_prefix_end": "100", "name": "Cash", "translations": {"et": "Raha"}, "parent_source_id": "ee_group_10", "path": ["Assets", "Current Assets", "Cash"]},
+    {"source_id": "ee_group_101", "code_prefix_start": "101", "code_prefix_end": "101", "name": "Financial Investments", "translations": {"et": "Finantsinvesteeringud"}, "parent_source_id": "ee_group_10", "path": ["Assets", "Current Assets", "Financial Investments"]},
+    {"source_id": "ee_group_102", "code_prefix_start": "102", "code_prefix_end": "102", "name": "Receivables and Prepayments", "translations": {"et": "Nõuded ja ettemaksed"}, "parent_source_id": "ee_group_10", "path": ["Assets", "Current Assets", "Receivables and Prepayments"]},
+    {"source_id": "ee_group_103", "code_prefix_start": "103", "code_prefix_end": "103", "name": "Inventory", "translations": {"et": "Varud"}, "parent_source_id": "ee_group_10", "path": ["Assets", "Current Assets", "Inventory"]},
+    {"source_id": "ee_group_104", "code_prefix_start": "104", "code_prefix_end": "104", "name": "Biological Assets", "translations": {"et": "Bioloogilised varad"}, "parent_source_id": "ee_group_10", "path": ["Assets", "Current Assets", "Biological Assets"]},
+    {"source_id": "ee_group_110", "code_prefix_start": "110", "code_prefix_end": "110", "name": "Investments in Subsidiaries and Affiliates", "translations": {"et": "Investeeringud tütar- ja sidusettevõtjatesse"}, "parent_source_id": "ee_group_11", "path": ["Assets", "Non-Current Assets", "Investments in Subsidiaries and Affiliates"]},
+    {"source_id": "ee_group_111", "code_prefix_start": "111", "code_prefix_end": "111", "name": "Financial Investments", "translations": {"et": "Finantsinvesteeringud"}, "parent_source_id": "ee_group_11", "path": ["Assets", "Non-Current Assets", "Financial Investments"]},
+    {"source_id": "ee_group_112", "code_prefix_start": "112", "code_prefix_end": "112", "name": "Receivables and Prepayments", "translations": {"et": "Nõuded ja ettemaksed"}, "parent_source_id": "ee_group_11", "path": ["Assets", "Non-Current Assets", "Receivables and Prepayments"]},
+    {"source_id": "ee_group_113", "code_prefix_start": "113", "code_prefix_end": "113", "name": "Real Estate Investments", "translations": {"et": "Kinnisvarainvesteeringud"}, "parent_source_id": "ee_group_11", "path": ["Assets", "Non-Current Assets", "Real Estate Investments"]},
+    {"source_id": "ee_group_114", "code_prefix_start": "114", "code_prefix_end": "114", "name": "Tangible Non-Current Assets", "translations": {"et": "Materiaalsed põhivarad"}, "parent_source_id": "ee_group_11", "path": ["Assets", "Non-Current Assets", "Tangible Non-Current Assets"]},
+    {"source_id": "ee_group_115", "code_prefix_start": "115", "code_prefix_end": "115", "name": "Biological Assets", "translations": {"et": "Bioloogilised varad"}, "parent_source_id": "ee_group_11", "path": ["Assets", "Non-Current Assets", "Biological Assets"]},
+    {"source_id": "ee_group_116", "code_prefix_start": "116", "code_prefix_end": "116", "name": "Intangible Non-Current Assets", "translations": {"et": "Immateriaalsed põhivarad"}, "parent_source_id": "ee_group_11", "path": ["Assets", "Non-Current Assets", "Intangible Non-Current Assets"]},
+    {"source_id": "ee_group_200", "code_prefix_start": "200", "code_prefix_end": "200", "name": "Loan Liabilities", "translations": {"et": "Laenukohustised"}, "parent_source_id": "ee_group_20", "path": ["Liabilities", "Current Liabilities", "Loan Liabilities"]},
+    {"source_id": "ee_group_201", "code_prefix_start": "201", "code_prefix_end": "201", "name": "Payables and Prepayments", "translations": {"et": "Võlad ja ettemaksed"}, "parent_source_id": "ee_group_20", "path": ["Liabilities", "Current Liabilities", "Payables and Prepayments"]},
+    {"source_id": "ee_group_202", "code_prefix_start": "202", "code_prefix_end": "202", "name": "Provisions", "translations": {"et": "Eraldised"}, "parent_source_id": "ee_group_20", "path": ["Liabilities", "Current Liabilities", "Provisions"]},
+    {"source_id": "ee_group_203", "code_prefix_start": "203", "code_prefix_end": "203", "name": "Government Grants", "translations": {"et": "Sihtfinantseerimine"}, "parent_source_id": "ee_group_20", "path": ["Liabilities", "Current Liabilities", "Government Grants"]},
+    {"source_id": "ee_group_210", "code_prefix_start": "210", "code_prefix_end": "210", "name": "Long-Term Loan Liabilities", "translations": {"et": "Laenukohustised"}, "parent_source_id": "ee_group_21", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Loan Liabilities"]},
+    {"source_id": "ee_group_211", "code_prefix_start": "211", "code_prefix_end": "211", "name": "Long-Term Payables and Prepayments", "translations": {"et": "Võlad ja ettemaksed"}, "parent_source_id": "ee_group_21", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Payables and Prepayments"]},
+    {"source_id": "ee_group_212", "code_prefix_start": "212", "code_prefix_end": "212", "name": "Long-Term Provisions", "translations": {"et": "Eraldised"}, "parent_source_id": "ee_group_21", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Provisions"]},
+    {"source_id": "ee_group_213", "code_prefix_start": "213", "code_prefix_end": "213", "name": "Long-Term Government Grants", "translations": {"et": "Sihtfinantseerimine"}, "parent_source_id": "ee_group_21", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Government Grants"]},
+    {"source_id": "ee_group_400", "code_prefix_start": "400", "code_prefix_end": "400", "name": "Sales of Goods and Services in Estonia", "translations": {"et": "Kaupade ja teenuste müük Eestis"}, "parent_source_id": "ee_group_40", "path": ["Income", "Sales of Goods and Services", "Sales of Goods and Services in Estonia"]},
+    {"source_id": "ee_group_401", "code_prefix_start": "401", "code_prefix_end": "401", "name": "Sales of Goods and Services in the EU", "translations": {"et": "Kaupade ja teenuste müük ELis"}, "parent_source_id": "ee_group_40", "path": ["Income", "Sales of Goods and Services", "Sales of Goods and Services in the EU"]},
+    {"source_id": "ee_group_402", "code_prefix_start": "402", "code_prefix_end": "402", "name": "Export of Goods and Services", "translations": {"et": "Kaupade ja teenuste eksport"}, "parent_source_id": "ee_group_40", "path": ["Income", "Sales of Goods and Services", "Export of Goods and Services"]},
+    {"source_id": "ee_group_600", "code_prefix_start": "600", "code_prefix_end": "600", "name": "Buildings Rental", "translations": {"et": "Hoonete rentimine"}, "parent_source_id": "ee_group_60", "path": ["Other Expenses", "Property Expenses", "Buildings Rental"]},
+    {"source_id": "ee_group_601", "code_prefix_start": "601", "code_prefix_end": "601", "name": "Office Expenses", "translations": {"et": "Kontorikulud"}, "parent_source_id": "ee_group_60", "path": ["Other Expenses", "Property Expenses", "Office Expenses"]},
+    {"source_id": "ee_group_602", "code_prefix_start": "602", "code_prefix_end": "602", "name": "Workshop Expenses", "translations": {"et": "Töötoa kulud"}, "parent_source_id": "ee_group_60", "path": ["Other Expenses", "Property Expenses", "Workshop Expenses"]},
+    {"source_id": "ee_group_603", "code_prefix_start": "603", "code_prefix_end": "603", "name": "Property Insurance", "translations": {"et": "Varakindlustus"}, "parent_source_id": "ee_group_60", "path": ["Other Expenses", "Property Expenses", "Property Insurance"]},
+    {"source_id": "ee_group_604", "code_prefix_start": "604", "code_prefix_end": "604", "name": "Electricity / Gas", "translations": {"et": "Elekter / gaas"}, "parent_source_id": "ee_group_60", "path": ["Other Expenses", "Property Expenses", "Electricity / Gas"]},
+    {"source_id": "ee_group_605", "code_prefix_start": "605", "code_prefix_end": "605", "name": "Water", "translations": {"et": "Vesi"}, "parent_source_id": "ee_group_60", "path": ["Other Expenses", "Property Expenses", "Water"]},
+    {"source_id": "ee_group_606", "code_prefix_start": "606", "code_prefix_end": "606", "name": "Internet", "translations": {"et": "Internet"}, "parent_source_id": "ee_group_60", "path": ["Other Expenses", "Property Expenses", "Internet"]},
+    {"source_id": "ee_group_607", "code_prefix_start": "607", "code_prefix_end": "607", "name": "Phone Costs", "translations": {"et": "Telefonikulud"}, "parent_source_id": "ee_group_60", "path": ["Other Expenses", "Property Expenses", "Phone Costs"]},
+    {"source_id": "ee_group_657", "code_prefix_start": "657", "code_prefix_end": "657", "name": "Employee Expenses - Taxes", "translations": {"et": "Töötajate kulud - Maksud"}, "parent_source_id": "ee_group_65", "path": ["Other Expenses", "Employee Expenses", "Employee Expenses - Taxes"]},
+    {"source_id": "ee_group_1020", "code_prefix_start": "1020", "code_prefix_end": "1020", "name": "Trade Receivables", "translations": {"et": "Nõuded ostjate vastu"}, "parent_source_id": "ee_group_102", "path": ["Assets", "Current Assets", "Receivables and Prepayments", "Trade Receivables"]},
+    {"source_id": "ee_group_1021", "code_prefix_start": "1021", "code_prefix_end": "1021", "name": "Receivables from Related Parties", "translations": {"et": "Nõuded seotud osapoolte vastu"}, "parent_source_id": "ee_group_102", "path": ["Assets", "Current Assets", "Receivables and Prepayments", "Receivables from Related Parties"]},
+    {"source_id": "ee_group_1022", "code_prefix_start": "1022", "code_prefix_end": "1022", "name": "Prepaid and Deferred Taxes", "translations": {"et": "Maksude ettemaksed ja tagasinõuded"}, "parent_source_id": "ee_group_102", "path": ["Assets", "Current Assets", "Receivables and Prepayments", "Prepaid and Deferred Taxes"]},
+    {"source_id": "ee_group_1023", "code_prefix_start": "1023", "code_prefix_end": "1023", "name": "Loan Receivables", "translations": {"et": "Laenunõuded"}, "parent_source_id": "ee_group_102", "path": ["Assets", "Current Assets", "Receivables and Prepayments", "Loan Receivables"]},
+    {"source_id": "ee_group_1024", "code_prefix_start": "1024", "code_prefix_end": "1024", "name": "Other Receivables", "translations": {"et": "Muud nõuded"}, "parent_source_id": "ee_group_102", "path": ["Assets", "Current Assets", "Receivables and Prepayments", "Other Receivables"]},
+    {"source_id": "ee_group_1025", "code_prefix_start": "1025", "code_prefix_end": "1025", "name": "Prepayments", "translations": {"et": "Ettemaksed"}, "parent_source_id": "ee_group_102", "path": ["Assets", "Current Assets", "Receivables and Prepayments", "Prepayments"]},
+    {"source_id": "ee_group_1030", "code_prefix_start": "1030", "code_prefix_end": "1030", "name": "Raw and Other Materials", "translations": {"et": "Tooraine ja materjal"}, "parent_source_id": "ee_group_103", "path": ["Assets", "Current Assets", "Inventory", "Raw and Other Materials"]},
+    {"source_id": "ee_group_1031", "code_prefix_start": "1031", "code_prefix_end": "1031", "name": "Work in Progress", "translations": {"et": "Lõpetamata toodang"}, "parent_source_id": "ee_group_103", "path": ["Assets", "Current Assets", "Inventory", "Work in Progress"]},
+    {"source_id": "ee_group_1032", "code_prefix_start": "1032", "code_prefix_end": "1032", "name": "Finished Goods", "translations": {"et": "Valmistoodang"}, "parent_source_id": "ee_group_103", "path": ["Assets", "Current Assets", "Inventory", "Finished Goods"]},
+    {"source_id": "ee_group_1033", "code_prefix_start": "1033", "code_prefix_end": "1033", "name": "Goods for Resale", "translations": {"et": "Müügiks ostetud kaubad"}, "parent_source_id": "ee_group_103", "path": ["Assets", "Current Assets", "Inventory", "Goods for Resale"]},
+    {"source_id": "ee_group_1034", "code_prefix_start": "1034", "code_prefix_end": "1034", "name": "Prepayments to Suppliers", "translations": {"et": "Ettemaksed varude eest"}, "parent_source_id": "ee_group_103", "path": ["Assets", "Current Assets", "Inventory", "Prepayments to Suppliers"]},
+    {"source_id": "ee_group_1100", "code_prefix_start": "1100", "code_prefix_end": "1100", "name": "Shares and Participations in Subsidiaries", "translations": {"et": "Tütarettevõtjate aktsiad ja osad"}, "parent_source_id": "ee_group_110", "path": ["Assets", "Non-Current Assets", "Investments in Subsidiaries and Affiliates", "Shares and Participations in Subsidiaries"]},
+    {"source_id": "ee_group_1101", "code_prefix_start": "1101", "code_prefix_end": "1101", "name": "Shares and Participations in Affiliates", "translations": {"et": "Sidusettevõtjate aktsiad ja osad"}, "parent_source_id": "ee_group_110", "path": ["Assets", "Non-Current Assets", "Investments in Subsidiaries and Affiliates", "Shares and Participations in Affiliates"]},
+    {"source_id": "ee_group_1120", "code_prefix_start": "1120", "code_prefix_end": "1120", "name": "Long-Term Trade Receivables", "translations": {"et": "Nõuded ostjate vastu"}, "parent_source_id": "ee_group_112", "path": ["Assets", "Non-Current Assets", "Receivables and Prepayments", "Long-Term Trade Receivables"]},
+    {"source_id": "ee_group_1121", "code_prefix_start": "1121", "code_prefix_end": "1121", "name": "Long-Term Receivables from Related Parties", "translations": {"et": "Nõuded seotud osapoolte vastu"}, "parent_source_id": "ee_group_112", "path": ["Assets", "Non-Current Assets", "Receivables and Prepayments", "Long-Term Receivables from Related Parties"]},
+    {"source_id": "ee_group_1122", "code_prefix_start": "1122", "code_prefix_end": "1122", "name": "Long-Term Prepaid and Deferred Taxes", "translations": {"et": "Maksude ettemaksed ja tagasinõuded"}, "parent_source_id": "ee_group_112", "path": ["Assets", "Non-Current Assets", "Receivables and Prepayments", "Long-Term Prepaid and Deferred Taxes"]},
+    {"source_id": "ee_group_1123", "code_prefix_start": "1123", "code_prefix_end": "1123", "name": "Long-Term Loan Receivables", "translations": {"et": "Laenunõuded"}, "parent_source_id": "ee_group_112", "path": ["Assets", "Non-Current Assets", "Receivables and Prepayments", "Long-Term Loan Receivables"]},
+    {"source_id": "ee_group_1124", "code_prefix_start": "1124", "code_prefix_end": "1124", "name": "Other Long-Term Receivables", "translations": {"et": "Muud nõuded"}, "parent_source_id": "ee_group_112", "path": ["Assets", "Non-Current Assets", "Receivables and Prepayments", "Other Long-Term Receivables"]},
+    {"source_id": "ee_group_1125", "code_prefix_start": "1125", "code_prefix_end": "1125", "name": "Long-Term Prepayments", "translations": {"et": "Pikaajalised ettemaksed"}, "parent_source_id": "ee_group_112", "path": ["Assets", "Non-Current Assets", "Receivables and Prepayments", "Long-Term Prepayments"]},
+    {"source_id": "ee_group_2010", "code_prefix_start": "2010", "code_prefix_end": "2010", "name": "Accounts Payable", "translations": {"et": "Võlad tarnijatele"}, "parent_source_id": "ee_group_201", "path": ["Liabilities", "Current Liabilities", "Payables and Prepayments", "Accounts Payable"]},
+    {"source_id": "ee_group_2011", "code_prefix_start": "2011", "code_prefix_end": "2011", "name": "Employee Payables", "translations": {"et": "Võlad töövõtjatele"}, "parent_source_id": "ee_group_201", "path": ["Liabilities", "Current Liabilities", "Payables and Prepayments", "Employee Payables"]},
+    {"source_id": "ee_group_2012", "code_prefix_start": "2012", "code_prefix_end": "2012", "name": "Taxes Payable", "translations": {"et": "Maksuvõlad"}, "parent_source_id": "ee_group_201", "path": ["Liabilities", "Current Liabilities", "Payables and Prepayments", "Taxes Payable"]},
+    {"source_id": "ee_group_2013", "code_prefix_start": "2013", "code_prefix_end": "2013", "name": "Other Payables", "translations": {"et": "Muud võlad"}, "parent_source_id": "ee_group_201", "path": ["Liabilities", "Current Liabilities", "Payables and Prepayments", "Other Payables"]},
+    {"source_id": "ee_group_2014", "code_prefix_start": "2014", "code_prefix_end": "2014", "name": "Deferred Revenue", "translations": {"et": "Tulevaste perioodide tulud"}, "parent_source_id": "ee_group_201", "path": ["Liabilities", "Current Liabilities", "Payables and Prepayments", "Deferred Revenue"]},
+    {"source_id": "ee_group_2015", "code_prefix_start": "2015", "code_prefix_end": "2015", "name": "Other Received Prepayments", "translations": {"et": "Muud saadud ettemaksed"}, "parent_source_id": "ee_group_201", "path": ["Liabilities", "Current Liabilities", "Payables and Prepayments", "Other Received Prepayments"]},
+    {"source_id": "ee_group_2020", "code_prefix_start": "2020", "code_prefix_end": "2020", "name": "Warranty Provisions", "translations": {"et": "Garantiieraldis"}, "parent_source_id": "ee_group_202", "path": ["Liabilities", "Current Liabilities", "Provisions", "Warranty Provisions"]},
+    {"source_id": "ee_group_2021", "code_prefix_start": "2021", "code_prefix_end": "2021", "name": "Tax Provisions", "translations": {"et": "Maksueraldis"}, "parent_source_id": "ee_group_202", "path": ["Liabilities", "Current Liabilities", "Provisions", "Tax Provisions"]},
+    {"source_id": "ee_group_2022", "code_prefix_start": "2022", "code_prefix_end": "2022", "name": "Other Provisions", "translations": {"et": "Muud eraldised"}, "parent_source_id": "ee_group_202", "path": ["Liabilities", "Current Liabilities", "Provisions", "Other Provisions"]},
+    {"source_id": "ee_group_2110", "code_prefix_start": "2110", "code_prefix_end": "2110", "name": "Long-Term Accounts Payable", "translations": {"et": "Võlad tarnijatele"}, "parent_source_id": "ee_group_211", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Payables and Prepayments", "Long-Term Accounts Payable"]},
+    {"source_id": "ee_group_2111", "code_prefix_start": "2111", "code_prefix_end": "2111", "name": "Long-Term Employee Payables", "translations": {"et": "Võlad töövõtjatele"}, "parent_source_id": "ee_group_211", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Payables and Prepayments", "Long-Term Employee Payables"]},
+    {"source_id": "ee_group_2112", "code_prefix_start": "2112", "code_prefix_end": "2112", "name": "Long-Term Taxes Payable", "translations": {"et": "Maksuvõlad"}, "parent_source_id": "ee_group_211", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Payables and Prepayments", "Long-Term Taxes Payable"]},
+    {"source_id": "ee_group_2113", "code_prefix_start": "2113", "code_prefix_end": "2113", "name": "Other Long-Term Payables", "translations": {"et": "Muud võlad"}, "parent_source_id": "ee_group_211", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Payables and Prepayments", "Other Long-Term Payables"]},
+    {"source_id": "ee_group_2114", "code_prefix_start": "2114", "code_prefix_end": "2114", "name": "Long-Term Deferred Revenue", "translations": {"et": "Tulevaste perioodide tulud"}, "parent_source_id": "ee_group_211", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Payables and Prepayments", "Long-Term Deferred Revenue"]},
+    {"source_id": "ee_group_2115", "code_prefix_start": "2115", "code_prefix_end": "2115", "name": "Other Received Long-Term Prepayments", "translations": {"et": "Muud saadud ettemaksed"}, "parent_source_id": "ee_group_211", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Payables and Prepayments", "Other Received Long-Term Prepayments"]},
+    {"source_id": "ee_group_2120", "code_prefix_start": "2120", "code_prefix_end": "2120", "name": "Long-Term Warranty Provisions", "translations": {"et": "Garantiieraldis"}, "parent_source_id": "ee_group_212", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Provisions", "Long-Term Warranty Provisions"]},
+    {"source_id": "ee_group_2121", "code_prefix_start": "2121", "code_prefix_end": "2121", "name": "Long-Term Tax Provisions", "translations": {"et": "Maksueraldis"}, "parent_source_id": "ee_group_212", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Provisions", "Long-Term Tax Provisions"]},
+    {"source_id": "ee_group_2122", "code_prefix_start": "2122", "code_prefix_end": "2122", "name": "Other Long-Term Provisions", "translations": {"et": "Muud eraldised"}, "parent_source_id": "ee_group_212", "path": ["Liabilities", "Non-Current Liabilities", "Long-Term Provisions", "Other Long-Term Provisions"]}
+  ],
+  "accounts": [
+    {"source_id": "l10n_ee_1000", "code": "1000", "name": "Cash Accounts", "translations": {"et": "Rahakontod"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_100", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_ee_1001", "code": "1001", "name": "Bank Accounts", "translations": {"et": "Pangakontod"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_100", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_ee_1008", "code": "1008", "name": "Transfer Accounts", "translations": {"et": "Ülekandekontod"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_100", "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_1009", "code": "1009", "name": "Bank Suspense Account", "translations": {"et": "Panga vahekonto"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_100", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_1010", "code": "1010", "name": "Short-Term Financial Investments", "translations": {"et": "Lühiajalised finantsinvesteeringud"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_101", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_1011", "code": "1011", "name": "Depreciations on Short-Term Financial Investments", "translations": {"et": "Lühiajaliste finantsinvesteeringute amortisatsioon"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_101", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_10200", "code": "10200", "name": "Accounts Receivable", "translations": {"et": "Nõuded"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1020", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_ee_10201", "code": "10201", "name": "Accounts Receivable (POS)", "translations": {"et": "Nõuded (POS)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1020", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_ee_10202", "code": "10202", "name": "Doubtful Receivables", "translations": {"et": "Ebatõenäolised nõuded"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1020", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "l10n_ee_1021", "code": "1021", "name": "Receivables from Related Parties", "translations": {"et": "Nõuded seotud osapoolte vastu"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1021", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_1022", "code": "1022", "name": "Prepaid and Deferred Taxes", "translations": {"et": "Maksude ettemaksed ja tagasinõuded"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1022", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_1023", "code": "1023", "name": "Loan Receivables", "translations": {"et": "Laenunõuded"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1023", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_10240", "code": "10240", "name": "Interest Receivable", "translations": {"et": "Saadaolevad intressid"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1024", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_10241", "code": "10241", "name": "Dividend Receivable", "translations": {"et": "Saadaolevad dividendid"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1024", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_10242", "code": "10242", "name": "Accounts Receivable from Social Insurance Board", "translations": {"et": "Nõuded Sotsiaalkindlustusametilt"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1024", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_10243", "code": "10243", "name": "Netting Account", "translations": {"et": "Tasaarvelduskonto"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1024", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_10244", "code": "10244", "name": "Other Short-Term Receivables", "translations": {"et": "Muud lühiajalised nõuded"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1024", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_1025", "code": "1025", "name": "Prepayments", "translations": {"et": "Ettemaksed"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1025", "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "l10n_ee_1030", "code": "1030", "name": "Raw and Other Materials", "translations": {"et": "Tooraine ja materjal"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1030", "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_expense_id": "l10n_ee_51", "account_stock_variation_id": "l10n_ee_6810"}}},
+    {"source_id": "l10n_ee_1031", "code": "1031", "name": "Work in Progress", "translations": {"et": "Lõpetamata toodang"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1031", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_10320", "code": "10320", "name": "Finished Goods from Agricultural Production", "translations": {"et": "Põllumajandustootmisest saadud valmistooted"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1032", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_10321", "code": "10321", "name": "Other Finished Goods", "translations": {"et": "Muud valmistooted"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1032", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_1033", "code": "1033", "name": "Goods for Resale", "translations": {"et": "Müügiks ostetud kaubad"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1033", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_1034", "code": "1034", "name": "Prepayments to Suppliers", "translations": {"et": "Ettemaksed varude eest"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1034", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_1040", "code": "1040", "name": "Biological Assets", "translations": {"et": "Bioloogilised varad"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_104", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_1100", "code": "1100", "name": "Shares and Participations in Subsidiaries", "translations": {"et": "Tütarettevõtjate aktsiad ja osad"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1100", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_1101", "code": "1101", "name": "Shares and Participations in Affiliates", "translations": {"et": "Sidusettevõtjate aktsiad ja osad"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1101", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_1110", "code": "1110", "name": "Other Shares, Stocks and Bonds", "translations": {"et": "Muud aktsiad, aktsiad ja võlakirjad"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_111", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_1111", "code": "1111", "name": "Other Long-Term Financial Investments", "translations": {"et": "Muud pikaajalised finantsinvesteeringud"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_111", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_1120", "code": "1120", "name": "Long-Term Trade Receivables", "translations": {"et": "Nõuded ostjate vastu"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1120", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_1121", "code": "1121", "name": "Long-Term Receivables from Related Parties", "translations": {"et": "Nõuded seotud osapoolte vastu"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1121", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_1122", "code": "1122", "name": "Long-Term Prepaid and Deferred Taxes", "translations": {"et": "Maksude ettemaksed ja tagasinõuded"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1122", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_1123", "code": "1123", "name": "Long-Term Loan Receivables", "translations": {"et": "Laenunõuded"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1123", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_1124", "code": "1124", "name": "Other Long-Term Receivables", "translations": {"et": "Muud nõuded"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1124", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_11250", "code": "11250", "name": "Constructions in Progress", "translations": {"et": "Käimasolevad ehitised"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1125", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_11251", "code": "11251", "name": "Prepayments for Non-Current Assets", "translations": {"et": "Ettemaksed põhivara eest"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_1125", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_11300", "code": "11300", "name": "Investment Properties", "translations": {"et": "Investeerimiskinnisvara"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_113", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_11301", "code": "11301", "name": "Depreciations on Investment Properties", "translations": {"et": "Kinnisvarainvesteeringute amortisatsioon"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_113", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_1140", "code": "1140", "name": "Land", "translations": {"et": "Maa"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_114", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_11410", "code": "11410", "name": "Buildings and Structures", "translations": {"et": "Ehitised ja struktuurid"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_114", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_11411", "code": "11411", "name": "Depreciations on Buildings and Structures", "translations": {"et": "Hoonete ja rajatiste amortisatsioon"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_114", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_11420", "code": "11420", "name": "Vehicles", "translations": {"et": "Sõidukid"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_114", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_11421", "code": "11421", "name": "Depreciations on Vehicles", "translations": {"et": "Sõidukite amortisatsioon"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_114", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_11430", "code": "11430", "name": "Computers and Computer Systems", "translations": {"et": "Arvutid ja arvutisüsteemid"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_114", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_11431", "code": "11431", "name": "Depreciations on Computers and Computer Systems", "translations": {"et": "Arvutite ja arvutisüsteemide amortisatsioon"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_114", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_11440", "code": "11440", "name": "Other Machinery and Equipment", "translations": {"et": "Muud masinad ja seadmed"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_114", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_11441", "code": "11441", "name": "Depreciations on Other Machinery and Equipment", "translations": {"et": "Muude masinate ja seadmete amortisatsioon"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_114", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_11450", "code": "11450", "name": "Other Tangible Non-Current Assets", "translations": {"et": "Muud materiaalsed põhivarad"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_114", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_11451", "code": "11451", "name": "Depreciations on Other Tangible Non-Current Assets", "translations": {"et": "Muude materiaalsete põhivarade amortisatsioonikulud"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_114", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_115", "code": "115", "name": "Biological Assets", "translations": {"et": "Bioloogilised varad"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_115", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "l10n_ee_11600", "code": "11600", "name": "Goodwill", "translations": {"et": "Firmaväärtus"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_116", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_11601", "code": "11601", "name": "Amortizations on Goodwill", "translations": {"et": "Firmaväärtuse amortisatsioon"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_116", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_11610", "code": "11610", "name": "Development Costs", "translations": {"et": "Arenduskulud"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_116", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_11611", "code": "11611", "name": "Amortizations on Development Costs", "translations": {"et": "Arengukulude amortisatsioon"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_116", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_11620", "code": "11620", "name": "Computer Software", "translations": {"et": "Arvutitarkvara"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_116", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_11621", "code": "11621", "name": "Amortizations on Computer Software", "translations": {"et": "Arvutitarkvara amortisatsioon"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_116", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_11630", "code": "11630", "name": "Patents, Licenses and Trademarks", "translations": {"et": "Patendid, litsentsid ja kaubamärgid"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_116", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_11631", "code": "11631", "name": "Amortizations on Patents, Licenses and Trademarks", "translations": {"et": "Patendite, litsentside ja kaubamärkide amortisatsioonid"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_116", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_11640", "code": "11640", "name": "Other Intangible Assets", "translations": {"et": "Muud immateriaalsed varad"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_116", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_11641", "code": "11641", "name": "Amortizations on Other Intangible Assets", "translations": {"et": "Muude immateriaalsete varade amortisatsioonid"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_116", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "l10n_ee_2000", "code": "2000", "name": "Short-Term Bank Loans", "translations": {"et": "Lühiajalised pangalaenud"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_200", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_2001", "code": "2001", "name": "Current Bank Overdrafts", "translations": {"et": "Praegused panga arvelduskontod"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_200", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_2002", "code": "2002", "name": "Short-Term Loans from Owners", "translations": {"et": "Lühiajalised laenud omanikelt"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_200", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_2003", "code": "2003", "name": "Short-Term Loans from Other Parties", "translations": {"et": "Lühiajalised laenud teistelt osapooltelt"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_200", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_2004", "code": "2004", "name": "Current Portion of Long-Term Loan", "translations": {"et": "Pikaajalise laenu praegune osa"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_200", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_2010", "code": "2010", "name": "Accounts Payable", "translations": {"et": "Võlad tarnijatele"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2010", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "l10n_ee_20110", "code": "20110", "name": "Salaries and Wages Payable", "translations": {"et": "Makstavad palgad ja töötasud"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2011", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20111", "code": "20111", "name": "Withholdings from Salary", "translations": {"et": "Palgast kinnipeetavad summad"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2011", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20112", "code": "20112", "name": "Vacation Pay Reserve", "translations": {"et": "Puhkusetasu reserv"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2011", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20113", "code": "20113", "name": "Other Employee Payables", "translations": {"et": "Muud töötajate võlad"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2011", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_201200", "code": "201200", "name": "VAT Current Account", "translations": {"et": "Käibemaksu arvelduskonto"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "l10n_ee_201201", "code": "201201", "name": "VAT Receivable (Input VAT)", "translations": {"et": "Saadaolev käibemaks (sisendkäibemaks)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "l10n_ee_201202", "code": "201202", "name": "VAT on the Acquisition of Non-Current Assets", "translations": {"et": "Käibemaksu põhivara soetamisel"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_201203", "code": "201203", "name": "VAT on the Import at Customs", "translations": {"et": "Impordi käibemaksu tasumine tollis"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_201204", "code": "201204", "name": "VAT Payable (Output VAT)", "translations": {"et": "Maksmisele kuuluv käibemaks (väljundkäibemaks)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20121", "code": "20121", "name": "Income Tax Payable (Company)", "translations": {"et": "Maksmisele kuuluv tulumaks (ettevõte)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20122", "code": "20122", "name": "Income Tax Payable (Personal)", "translations": {"et": "Maksmisele kuuluv tulumaks (füüsiline)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20123", "code": "20123", "name": "Income Tax Payable (Fringe Benefits)", "translations": {"et": "Maksmisele kuuluv tulumaks (lisahüvitised)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20124", "code": "20124", "name": "Social Tax Payable", "translations": {"et": "Maksmisele kuuluv sotsiaalmaks"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20125", "code": "20125", "name": "Unemployment Insurance Premium Payable", "translations": {"et": "Tasumisele kuuluv töötuskindlustusmakse"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20126", "code": "20126", "name": "Pension Insurance Payable", "translations": {"et": "Maksmisele kuuluv pensionikindlustus"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20127", "code": "20127", "name": "Land Tax Payable", "translations": {"et": "Maksmisele kuuluv maamaks"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20128", "code": "20128", "name": "Excise Tax Payable", "translations": {"et": "Maksmisele kuuluv aktsiisimaks"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20129", "code": "20129", "name": "Other Taxes Payable", "translations": {"et": "Muud tasumisele kuuluvad maksud"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2012", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20130", "code": "20130", "name": "Payables to Related Parties", "translations": {"et": "Võlad seotud osapooltele"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2013", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20131", "code": "20131", "name": "Dividends Payable", "translations": {"et": "Maksmisele kuuluvad dividendid"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2013", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20132", "code": "20132", "name": "Interests Payable", "translations": {"et": "Tasumisele kuuluvad intressid"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2013", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20133", "code": "20133", "name": "Other Short-Term Payables", "translations": {"et": "Muud lühiajalised võlgnevused"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2013", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_20140", "code": "20140", "name": "Prepayments from Customers", "translations": {"et": "Klientide ettemaksed"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2014", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_2015", "code": "2015", "name": "Other Received Prepayments", "translations": {"et": "Muud saadud ettemaksed"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2015", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_2020", "code": "2020", "name": "Warranty Provisions", "translations": {"et": "Garantiieraldis"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2020", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_2021", "code": "2021", "name": "Tax Provisions", "translations": {"et": "Maksueraldis"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2021", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_2022", "code": "2022", "name": "Other Provisions", "translations": {"et": "Muud eraldised"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2022", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_203", "code": "203", "name": "Government Grants", "translations": {"et": "Sihtfinantseerimine"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_203", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "l10n_ee_2100", "code": "2100", "name": "Long-Term Bank Loans", "translations": {"et": "Pikaajalised pangalaenud"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_210", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_2101", "code": "2101", "name": "Long-Term Loans from Owners", "translations": {"et": "Omanike pikaajalised laenud"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_210", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_2102", "code": "2102", "name": "Long-Term Portion of Financial Lease", "translations": {"et": "Kapitalirendi pikaajaline osa"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_210", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_2110", "code": "2110", "name": "Long-Term Accounts Payable", "translations": {"et": "Võlad tarnijatele"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2110", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_2111", "code": "2111", "name": "Long-Term Employee Payables", "translations": {"et": "Võlad töövõtjatele"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2111", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_2112", "code": "2112", "name": "Long-Term Taxes Payable", "translations": {"et": "Maksuvõlad"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2112", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_2113", "code": "2113", "name": "Other Long-Term Payables", "translations": {"et": "Muud võlad"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2113", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_2114", "code": "2114", "name": "Long-Term Deferred Revenue", "translations": {"et": "Tulevaste perioodide tulud"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2114", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_2115", "code": "2115", "name": "Other Received Long-Term Prepayments", "translations": {"et": "Muud saadud ettemaksed"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2115", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_2120", "code": "2120", "name": "Long-Term Warranty Provisions", "translations": {"et": "Garantiieraldis"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2120", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_2121", "code": "2121", "name": "Long-Term Tax Provisions", "translations": {"et": "Maksueraldis"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2121", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_2122", "code": "2122", "name": "Other Long-Term Provisions", "translations": {"et": "Muud eraldised"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_2122", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_213", "code": "213", "name": "Long-Term Government Grants", "translations": {"et": "Sihtfinantseerimine"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_213", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "l10n_ee_300", "code": "300", "name": "Share Capital (Nominal Value)", "translations": {"et": "Aktsiakapital või osakapital nimiväärtuses"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_30", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_ee_301", "code": "301", "name": "Unregistered Share Capital or Equity", "translations": {"et": "Registreerimata aktsiakapital või osakapital"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_30", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_ee_302", "code": "302", "name": "Unpaid Share Capital", "translations": {"et": "Sissemaksmata osakapital"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_30", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_ee_303", "code": "303", "name": "Share Premium", "translations": {"et": "Ülekurss"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_30", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_ee_304", "code": "304", "name": "Own Shares", "translations": {"et": "Oma aktsiad või osad"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_30", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_ee_310", "code": "310", "name": "Statutory Reserve Capital", "translations": {"et": "Kohustuslik reservkapital"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_31", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_ee_311", "code": "311", "name": "Other Reserves", "translations": {"et": "Muud reservid"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_31", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_ee_32", "code": "32", "name": "Other Equity", "translations": {"et": "Muu omakapital"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_32", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_ee_330", "code": "330", "name": "Retained Profit/Loss From Previous Periods", "translations": {"et": "Eelmiste perioodide jaotamata kasum (kahjum)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_33", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_ee_331", "code": "331", "name": "Profit/Loss for the Financial Year", "translations": {"et": "Aruandeaasta kasum (kahjum)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_33", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "l10n_ee_40000", "code": "40000", "name": "Sales of Goods in Estonia", "translations": {"et": "Kaupade müük Eestis"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_400", "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "l10n_ee_40001", "code": "40001", "name": "Sales of Goods from Biological Assets in Estonia", "translations": {"et": "Kaupade müük bioloogilistest varadest Eestis"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_400", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_ee_4001", "code": "4001", "name": "Sales of Services in Estonia", "translations": {"et": "Teenuste müük Eestis"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_400", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_ee_40100", "code": "40100", "name": "Sales of Goods in the EU", "translations": {"et": "Kaupade müük ELis"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_401", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_ee_40101", "code": "40101", "name": "Sales of Goods from Biological Assets in the EU", "translations": {"et": "Kaupade müük bioloogilistest varadest ELis"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_401", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_ee_4011", "code": "4011", "name": "Sales of Services in the EU", "translations": {"et": "Teenuste müük ELis"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_401", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_ee_40200", "code": "40200", "name": "Export of Goods", "translations": {"et": "Kaupade eksport"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_402", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_ee_40201", "code": "40201", "name": "Export of Goods from Biological Assets", "translations": {"et": "Kaupade eksport bioloogilistest varadest"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_402", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_ee_4021", "code": "4021", "name": "Export of Services", "translations": {"et": "Teenuste eksport"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_402", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_ee_41", "code": "41", "name": "Sales of Assets", "translations": {"et": "Varade müük"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_41", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "l10n_ee_420", "code": "420", "name": "Cash Rounding Gains", "translations": {"et": "Sularaha ümardamise kasumid"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_42", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_ee_421", "code": "421", "name": "Payment Difference Gains", "translations": {"et": "Maksete erinevus kasum"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_42", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_ee_422", "code": "422", "name": "Currency Exchange Rate Gains", "translations": {"et": "Valuutakursi kasumid"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_42", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_ee_423", "code": "423", "name": "Interest Received", "translations": {"et": "Saadud intressid"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_42", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_ee_424", "code": "424", "name": "Financial Income from Shares in Subsidiaries", "translations": {"et": "Finantstulu tütarettevõtete aktsiatest"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_42", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_ee_425", "code": "425", "name": "Financial Income from Shares in Associates", "translations": {"et": "Finantstulu sidusettevõtete aktsiatest"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_42", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_ee_426", "code": "426", "name": "Financial Income from Other Financial Investments", "translations": {"et": "Finantstulu muudest finantsinvesteeringutest"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_42", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_ee_427", "code": "427", "name": "Other Financial Income", "translations": {"et": "Muud finantstulud"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_42", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_ee_430", "code": "430", "name": "Cash Discount Gains", "translations": {"et": "Sularaha diskontokasumid"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_43", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_ee_431", "code": "431", "name": "Other Income", "translations": {"et": "Muud tulud"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ee_group_43", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "l10n_ee_50", "code": "50", "name": "Purchase of Goods for Resale", "translations": {"et": "Kaupade ostmine edasimüügiks"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_5", "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_ee_51", "code": "51", "name": "Purchase of Raw and Other Materials", "translations": {"et": "Tooraine ja muude materjalide ostmine"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_5", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_ee_52", "code": "52", "name": "Purchase of Services / Subcontracting", "translations": {"et": "Teenuste ostmine / alltöövõtt"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_5", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_ee_53", "code": "53", "name": "Transportation Costs for Goods, Raw Materials and Services", "translations": {"et": "Kaupade, tooraine ja teenuste transpordikulud"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_5", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_ee_54", "code": "54", "name": "Customs Fees for Goods, Raw Materials and Services", "translations": {"et": "Kaupade, tooraine ja teenuste tollimaksud"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_5", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "l10n_ee_600", "code": "600", "name": "Buildings Rental", "translations": {"et": "Hoonete rentimine"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_600", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6010", "code": "6010", "name": "Office Rental", "translations": {"et": "Kontori rentimine"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_601", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6011", "code": "6011", "name": "Office Utilities", "translations": {"et": "Kontori kommunaalteenused"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_601", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6012", "code": "6012", "name": "Office Security Costs", "translations": {"et": "Kontori turvakulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_601", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6013", "code": "6013", "name": "Office Maintenance and Repairs", "translations": {"et": "Kontori hooldus ja remont"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_601", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6020", "code": "6020", "name": "Workshop Rental", "translations": {"et": "Töökoja rentimine"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_602", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6021", "code": "6021", "name": "Workshop Utilities", "translations": {"et": "Töökoja kommunaalteenused"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_602", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6022", "code": "6022", "name": "Workshop Security Costs", "translations": {"et": "Töökoja turvalisuse kulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_602", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6023", "code": "6023", "name": "Workshop Maintance and Repairs", "translations": {"et": "Töökoja hooldus ja remont"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_602", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_603", "code": "603", "name": "Property Insurance", "translations": {"et": "Varakindlustus"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_603", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_604", "code": "604", "name": "Electricity / Gas", "translations": {"et": "Elekter / gaas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_604", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_605", "code": "605", "name": "Water", "translations": {"et": "Vesi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_605", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_606", "code": "606", "name": "Internet", "translations": {"et": "Internet"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_606", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_607", "code": "607", "name": "Phone Costs", "translations": {"et": "Telefonikulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_607", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_610", "code": "610", "name": "Equipment Rental", "translations": {"et": "Seadmete rentimine"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_61", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_611", "code": "611", "name": "Machinery and Equipment Maintenance and Repairs", "translations": {"et": "Masinate ja seadmete hooldus ja remont"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_61", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_612", "code": "612", "name": "Fuels, Oils and Lubricants", "translations": {"et": "Kütused, õlid ja määrdeained"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_61", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_620", "code": "620", "name": "Office Supplies and Postal Expenses", "translations": {"et": "Kontoritarbed ja postikulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_62", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_621", "code": "621", "name": "Informational and Educational Materials", "translations": {"et": "Informatsiooni- ja õppematerjalid"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_62", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_622", "code": "622", "name": "Small Tools", "translations": {"et": "Väikesed tööriistad"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_62", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_630", "code": "630", "name": "IT Services", "translations": {"et": "IT-teenused"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_63", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_631", "code": "631", "name": "Software", "translations": {"et": "Tarkvara"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_63", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_632", "code": "632", "name": "Consultations and Trainings", "translations": {"et": "Konsultatsioonid ja koolitused"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_63", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_633", "code": "633", "name": "Accounting Services", "translations": {"et": "Raamatupidamisteenused"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_63", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_634", "code": "634", "name": "Legal Services", "translations": {"et": "Õigusteenused"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_63", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_635", "code": "635", "name": "Auditing Services", "translations": {"et": "Auditeerimisteenused"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_63", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_636", "code": "636", "name": "Costs of Entertaining Guests", "translations": {"et": "Külaliste majutamisega seotud kulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_63", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_637", "code": "637", "name": "Marketing Expenses", "translations": {"et": "Turunduskulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_63", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_640", "code": "640", "name": "Car Rental", "translations": {"et": "Autorent"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_64", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_641", "code": "641", "name": "Car Insurance", "translations": {"et": "Autokindlustus"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_64", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_642", "code": "642", "name": "Car Fuel", "translations": {"et": "Autokütus"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_64", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_643", "code": "643", "name": "Car Maintenance and Repairs", "translations": {"et": "Autode hooldus ja remont"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_64", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_644", "code": "644", "name": "Other Car Expenses", "translations": {"et": "Muud autokulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_64", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_650", "code": "650", "name": "Compensation for the Use of a Personal Car", "translations": {"et": "Isikliku auto kasutamise eest makstav hüvitis"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_65", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_651", "code": "651", "name": "Fringe Benefits to Employees", "translations": {"et": "Töötajatele makstavad lisahüvitised"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_65", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_652", "code": "652", "name": "Salaries and Wages", "translations": {"et": "Palgad ja töötasu"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_65", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_653", "code": "653", "name": "Social Security Costs", "translations": {"et": "Sotsiaalkindlustuskulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_65", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_654", "code": "654", "name": "Unemployment Insurance Premium", "translations": {"et": "Töötuskindlustusmakse"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_65", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_655", "code": "655", "name": "Pension Expenses", "translations": {"et": "Pensionikulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_65", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_656", "code": "656", "name": "Vacation Pay Reserve", "translations": {"et": "Puhkusetasu reserv"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_65", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6570", "code": "6570", "name": "Income Tax on Fringe Benefits", "translations": {"et": "Lisahüvitiste tulumaks"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_657", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6571", "code": "6571", "name": "Social Tax on Fringe Benefits", "translations": {"et": "Sotsiaalmaks lisahüvitistele"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_657", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6572", "code": "6572", "name": "Social Tax", "translations": {"et": "Sotsiaalmaks"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_657", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_660", "code": "660", "name": "State Fees", "translations": {"et": "Riigilõivud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_66", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_661", "code": "661", "name": "Land Tax", "translations": {"et": "Maamaks"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_66", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_662", "code": "662", "name": "Income Tax", "translations": {"et": "Tulumaks"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_66", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_663", "code": "663", "name": "Fines and Fines for Delay", "translations": {"et": "Trahvid ja trahvid hilinemise eest"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_66", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_670", "code": "670", "name": "Bank Fees", "translations": {"et": "Pangatasud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_67", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_671", "code": "671", "name": "Cash Rounding Losses", "translations": {"et": "Sularaha ümardamise kahjum"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_67", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_672", "code": "672", "name": "Payment Difference Losses", "translations": {"et": "Maksete erinevus kahjud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_67", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_673", "code": "673", "name": "Currency Exchange Losses", "translations": {"et": "Valuutakursikahjum"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_67", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_674", "code": "674", "name": "Interest Expenses", "translations": {"et": "Intressikulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_67", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_675", "code": "675", "name": "Financial Expenses from Shares in Subsidiaries", "translations": {"et": "Tütarettevõtete aktsiatest tulenevad finantskulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_67", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_676", "code": "676", "name": "Financial Expenses from Shares in Associates", "translations": {"et": "Finantskulud sidusettevõtete aktsiatest"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_67", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_677", "code": "677", "name": "Financial Expenses from Other Financial Investments", "translations": {"et": "Finantskulud muudest finantsinvesteeringutest"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_67", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_678", "code": "678", "name": "Other Financial Expenses", "translations": {"et": "Muud finantskulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_67", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_680", "code": "680", "name": "Capitalized Expenses in the Manufacturing of Fixed Assets for Own Use", "translations": {"et": "Kapitaliseeritud väljaminekud oma tarbeks põhivarade valmistamisel"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_68", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6810", "code": "6810", "name": "Changes in Inventories of Finished Goods and Work in Progress", "translations": {"et": "Valmis ja lõpetamata toodangu varude jääkide muutus"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_68", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6811", "code": "6811", "name": "Changes in Inventories of Agricultural Production", "translations": {"et": "Põllumajandusliku toodangu varude jääkide muutus"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_68", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_682", "code": "682", "name": "Irrecoverable Receivables", "translations": {"et": "Sissenõudmata nõuded"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_68", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6830", "code": "6830", "name": "Depreciations on Non-Current Assets", "translations": {"et": "Põhivara amortisatsioon"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_68", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_ee_6831", "code": "6831", "name": "Amortizations on Intangible Assets", "translations": {"et": "Immateriaalsete varade amortisatsioonid"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_68", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "l10n_ee_6832", "code": "6832", "name": "Loss on Sales of Biological Assets", "translations": {"et": "Kahju bioloogiliste varade müügist"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_68", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6833", "code": "6833", "name": "Loss on Sales of Non-Current Assets", "translations": {"et": "Kahju põhivara müügist"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_68", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6834", "code": "6834", "name": "Significant Impairment of Current Assets", "translations": {"et": "Olulised käibevara allahindlused"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_68", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_684", "code": "684", "name": "Gifts and Donations", "translations": {"et": "Kingitused ja annetused"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_68", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6850", "code": "6850", "name": "Cash Discount Losses", "translations": {"et": "Sularaha diskontokahjumid"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_68", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_6851", "code": "6851", "name": "Other Operating Expenses", "translations": {"et": "Muud ärikulud"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ee_group_68", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "l10n_ee_70", "code": "70", "name": "Clearing Account", "translations": {"et": "Arvelduskonto"}, "root_type": null, "subtype": "off_balance", "normal_balance": null, "is_group": false, "parent_source_id": "ee_group_70", "reconcile": false, "flags": ["off_balance"], "source": {"account_type": "off_balance"}}
+  ]
+}

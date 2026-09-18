@@ -1,0 +1,322 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "8e93909bab721cd67faafabe453d29a76e36674d558a13d6a41578e524a94e64",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/hn",
+  "country_code": "HN",
+  "country_name": "Honduras",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Honduras - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_hn' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Salvatore Josue Trimarchi Pinto",
+    "module": "l10n_hn",
+    "module_name": "Honduras - Accounting",
+    "module_version": "0.2",
+    "contributing_modules": [
+      "l10n_hn"
+    ],
+    "template_code": "hn",
+    "template_chain": [
+      "hn"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_hn/data/template/account.account-hn.csv",
+        "sha256": "0a16e7c292b0bb7ba84aa9e1abde1295d707c5ed89d0ead52f54dbcdce7e9b32",
+        "rows": 34
+      }
+    ],
+    "python_files": [
+      "addons/l10n_hn/models/template_hn.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "9",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "1.1.01.",
+      "cash": "1.1.01.",
+      "transfer": "1.1.01.00"
+    },
+    "default_sale_tax": "impuestos_plantilla_isv_por_pagar",
+    "default_purchase_tax": "impuestos_plantilla_isv_por_cobrar",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "cta110201",
+        "code": "1.1.02.01",
+        "name": "General Accounts Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "cta210101",
+        "code": "2.1.01.01",
+        "name": "Accounts and notes payable",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "cta410101",
+        "code": "4.1.01.01",
+        "name": "Sales",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "cta510101",
+        "code": "5.1.01.01",
+        "name": "Cost of sales",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "cta130601",
+        "code": "1.3.04.01",
+        "name": "Other Assets",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "cta110205",
+        "code": "1.1.02.05",
+        "name": "General Accounts Receivable (PoS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "cta410103",
+        "code": "4.1.01.03",
+        "name": "Earn an account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "cta710101",
+        "code": "7.1.01.01",
+        "name": "Other Financial Expenses",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "cta420102",
+        "code": "4.2.01.02",
+        "name": "Cash Discount Gain",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "cta620202",
+        "code": "6.2.02.02",
+        "name": "Cash Discount Loss",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 34,
+    "posting_accounts": 34,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 13,
+      "equity": 3,
+      "expense": 8,
+      "income": 5,
+      "liability": 5
+    },
+    "by_subtype": {
+      "current_asset": 8,
+      "current_liability": 4,
+      "equity": 3,
+      "expense": 8,
+      "income": 3,
+      "other_income": 2,
+      "payable": 1,
+      "receivable": 5
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 1,
+      "receivables": 5
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "es"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "cta110201", "code": "1.1.02.01", "name": "General Accounts Receivable", "translations": {"es": "Cuentas por Cobrar Generales"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cta110202", "code": "1.1.02.02", "name": "Accounts Receivable Affiliated Companies", "translations": {"es": "Cuentas por Cobrar Empresas Afilidas"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cta110203", "code": "1.1.02.03", "name": "Loans to Personnel", "translations": {"es": "Prestamos al Personal"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cta110204", "code": "1.1.02.04", "name": "Other Accounts Receivable", "translations": {"es": "Otras Cuentas por Cobrar"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cta110205", "code": "1.1.02.05", "name": "General Accounts Receivable (PoS)", "translations": {"es": "Cuentas por Cobrar Generales (PoS)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "cta110301", "code": "1.1.03.01", "name": "ISV receivable", "translations": {"es": "ISV por Cobrar"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta110302", "code": "1.1.03.02", "name": "ISV withholdings received", "translations": {"es": "Retenciones de ISV recibidas"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta120101", "code": "1.2.01.01", "name": "Property, Plant and Equipment", "translations": {"es": "Propiedad, Planta y Equipo"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta120201", "code": "1.2.02.01", "name": "Accumulated Depreciation", "translations": {"es": "Depreciaciones Acumuladas"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta130101", "code": "1.3.01.01", "name": "Unamortized Expenses", "translations": {"es": "Gastos por Amortizar"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta130201", "code": "1.3.02.01", "name": "Prepaid Expenses", "translations": {"es": "Gastos Anticipados"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta130501", "code": "1.3.03.01", "name": "Organizational Expenses", "translations": {"es": "Gastos de Organización"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "cta130601", "code": "1.3.04.01", "name": "Other Assets", "translations": {"es": "Otros Activos"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_expense_id": "cta510101", "account_stock_variation_id": "cta620201"}}},
+    {"source_id": "cta210101", "code": "2.1.01.01", "name": "Accounts and notes payable", "translations": {"es": "Cuentas y Documentos por Pagar"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "cta210201", "code": "2.1.02.01", "name": "ISV Payable", "translations": {"es": "ISV por Pagar"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cta210301", "code": "2.1.03.01", "name": "Taxes", "translations": {"es": "Impuestos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cta220101", "code": "2.2.01.01", "name": "Provision for severance indemnities", "translations": {"es": "Provisión para Indemnizaciones"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cta230101", "code": "2.3.01.01", "name": "Advances", "translations": {"es": "Anticipos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "cta310101", "code": "3.1.01.01", "name": "Authorized, Subscribed and Paid-in Capital", "translations": {"es": "Capital Autorizado, Suscríto y Pagado"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "cta310102", "code": "3.1.01.02", "name": "Reservations", "translations": {"es": "Reservas"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "cta310103", "code": "3.1.01.03", "name": "Profit and loss", "translations": {"es": "Perdidas y Ganancias"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "cta410101", "code": "4.1.01.01", "name": "Sales", "translations": {"es": "Ventas"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "cta410102", "code": "4.1.01.02", "name": "Sales Discounts", "translations": {"es": "Descuentos Sobre Ventas"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "cta410103", "code": "4.1.01.03", "name": "Earn an account", "translations": {"es": "Ganar cuenta"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cta420101", "code": "4.2.01.01", "name": "Other Income", "translations": {"es": "Otros Ingresos"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "cta420102", "code": "4.2.01.02", "name": "Cash Discount Gain", "translations": {"es": "Ganancia por descuento"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "cta510101", "code": "5.1.01.01", "name": "Cost of sales", "translations": {"es": "Costos de Ventas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense"}},
+    {"source_id": "cta610101", "code": "6.1.01.01", "name": "Cost of sales", "translations": {"es": "Costos de Ventas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta620101", "code": "6.2.01.01", "name": "Administrative Expenses", "translations": {"es": "Gastos de Administración"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta620201", "code": "6.2.02.01", "name": "Other Operating Expenses", "translations": {"es": "Otros Gastos de Operación"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta620202", "code": "6.2.02.02", "name": "Cash Discount Loss", "translations": {"es": "Pérdida por descuento"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta630101", "code": "6.3.01.01", "name": "Non-Deductible Expenses", "translations": {"es": "Gastos no Deducibles"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta710101", "code": "7.1.01.01", "name": "Other Financial Expenses", "translations": {"es": "Otros Gastos Financieros"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "cta710102", "code": "7.1.01.02", "name": "Interests", "translations": {"es": "Intereses"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}}
+  ]
+}

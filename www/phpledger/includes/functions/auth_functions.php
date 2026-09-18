@@ -15,7 +15,7 @@ function pl_verify_password(string $password, string $hash): bool
     return strlen($password) <= 72 && !str_contains($password, "\0") && password_verify($password, $hash);
 }
 
-/** CLI setup entry point; there is no public user-creation route. */
+/** Internal account creation, used by guarded CLI and one-time browser setup. */
 function pl_create_user(string $email, string $displayName, string $password): int
 {
     pl_demo_require_setup_action();
@@ -91,7 +91,8 @@ function pl_authenticate(string $email, string $password, string $clientIp): ?ar
             && $user !== null && (int) $user['is_active'] === 1;
 
         foreach ($buckets as $key => $bucket) {
-            $count = ($valid && $key === $accountKey) ? 0 : (int) $bucket['attempt_count'] + 1;
+            // Successful sign-ins reset the account bucket and never consume the shared client bucket.
+            $count = $valid ? ($key === $accountKey ? 0 : (int) $bucket['attempt_count']) : (int) $bucket['attempt_count'] + 1;
             $windowStart = ($valid && $key === $accountKey) ? gmdate('Y-m-d H:i:s', $now) : $bucket['window_started_at'];
             DB::update('pl_login_attempts', [
                 'window_started_at' => $windowStart,

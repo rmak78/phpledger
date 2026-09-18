@@ -1,0 +1,492 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "687e0786013ba2de41a6d539b7a58d4e53bd6285dadb9291c98740351763709e",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/lt",
+  "country_code": "LT",
+  "country_name": "Lithuania",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Lithuania - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_lt' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Focusate",
+    "module": "l10n_lt",
+    "module_name": "Lithuania - Accounting",
+    "module_version": "1.0.0",
+    "contributing_modules": [
+      "l10n_lt"
+    ],
+    "template_code": "lt",
+    "template_chain": [
+      "lt"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_lt/data/template/account.account-lt.csv",
+        "sha256": "a81f1d8ee26d03c1acb2ee4b271bbe42e891eff13a3d599fea06ac0e75be23fd",
+        "rows": 188
+      }
+    ],
+    "python_files": [
+      "addons/l10n_lt/models/template_lt.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": true,
+    "account_code_prefixes": {
+      "bank": "271",
+      "cash": "272",
+      "transfer": "273"
+    },
+    "default_sale_tax": "account_tax_template_sales_21",
+    "default_purchase_tax": "account_tax_template_purchase_21",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "account_account_template_2410",
+        "code": "2410",
+        "name": "Value of Debts from Customers",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "account_account_template_4430",
+        "code": "4430",
+        "name": "Debts to Suppliers for Goods and Services",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "account_account_template_5000",
+        "code": "5000",
+        "name": "Income from Goods Sold",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "account_account_template_6000",
+        "code": "6000",
+        "name": "Cost of Goods Sold",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "account_account_template_2010",
+        "code": "2010",
+        "name": "Acquisition Cost of Raw Materials, Materials and Assembly Parts",
+        "resolved": true
+      },
+      {
+        "source_field": "property_stock_valuation_account_id",
+        "source_id": "account_account_template_2040",
+        "code": "2040",
+        "name": "Cost of Purchased Goods for Resale",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "account_account_template_2411",
+        "code": "2411",
+        "name": "Value of Debts from POS Customers",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "account_account_template_5803",
+        "code": "5803",
+        "name": "Positive Currency Exchange Difference",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "account_account_template_6803",
+        "code": "6803",
+        "name": "Negative Currency Exchange Difference",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "account_account_template_6209",
+        "code": "6209",
+        "name": "Discounts Received (-)",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "account_account_template_509",
+        "code": "509",
+        "name": "Discounts, Returns (-)",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 188,
+    "posting_accounts": 188,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 73,
+      "equity": 13,
+      "expense": 52,
+      "income": 13,
+      "liability": 37
+    },
+    "by_subtype": {
+      "cash_bank": 3,
+      "current_asset": 24,
+      "current_liability": 23,
+      "depreciation": 2,
+      "direct_cost": 14,
+      "equity": 12,
+      "expense": 36,
+      "fixed_asset": 20,
+      "income": 7,
+      "non_current_asset": 12,
+      "non_current_liability": 11,
+      "other_income": 6,
+      "payable": 3,
+      "prepayment": 2,
+      "receivable": 12,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 3,
+      "expense": 1,
+      "income": 1,
+      "payables": 3,
+      "receivables": 12
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "lt"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "account_account_template_1130", "code": "1130", "name": "Software Acquisition Cost", "translations": {"lt": "Programinės įrangos įsigijimo savikaina"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["l10n_lt.account_account_tag_a_1_3"]}},
+    {"source_id": "account_account_template_1138", "code": "1138", "name": "Amortization of Software Value (-)", "translations": {"lt": "Programinės įrangos vertės amortizacija (−)"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["l10n_lt.account_account_tag_a_1_3"]}},
+    {"source_id": "account_account_template_1200", "code": "1200", "name": "Land Acquisition Cost", "translations": {"lt": "Žemės įsigijimo savikaina"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_1"]}},
+    {"source_id": "account_account_template_1201", "code": "1201", "name": "Change of Land Value after Revaluation", "translations": {"lt": "Žemės vertės pokytis dėl perkainojimo"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_1"]}},
+    {"source_id": "account_account_template_1210", "code": "1210", "name": "Acquisition Cost of Buildings", "translations": {"lt": "Pastatų ir statinių įsigijimo savikaina"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_2"]}},
+    {"source_id": "account_account_template_1212", "code": "1212", "name": "Buildings being Prepared for Use", "translations": {"lt": "Ruošiami naudoti pastatai ir statiniai"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_2"]}},
+    {"source_id": "account_account_template_1217", "code": "1217", "name": "Depreciation of the Acquisition Cost of Buildings (-)", "translations": {"lt": "Pastatų ir statinių įsigijimo savikainos nusidėvėjimas (−)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_2"]}},
+    {"source_id": "account_account_template_1220", "code": "1220", "name": "Acquisition Cost of Machinery and Equipment", "translations": {"lt": "Mašinų ir įrangos įsigijimo savikaina"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_3"]}},
+    {"source_id": "account_account_template_1222", "code": "1222", "name": "Machinery and Equipment being Prepared for Use", "translations": {"lt": "Ruošiamos naudoti mašinos ir įranga"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_3"]}},
+    {"source_id": "account_account_template_1227", "code": "1227", "name": "Depreciation of the Acquisition Cost of Machinery and Equipment (-)", "translations": {"lt": "Mašinų ir įrangos įsigijimo savikainos nusidėvėjimas (−)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_3"]}},
+    {"source_id": "account_account_template_1230", "code": "1230", "name": "Acquisition Cost of Vehicles", "translations": {"lt": "Transporto priemonių įsigijimo savikaina"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_4"]}},
+    {"source_id": "account_account_template_1232", "code": "1232", "name": "Vehicles being Prepared for Use", "translations": {"lt": "Ruošiamos naudoti transporto priemonės"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_4"]}},
+    {"source_id": "account_account_template_1237", "code": "1237", "name": "Depreciation of the Acquisition Cost of Vehicles (-)", "translations": {"lt": "Transporto priemonių įsigijimo savikainos nusidėvėjimas (−)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_4"]}},
+    {"source_id": "account_account_template_1240", "code": "1240", "name": "Acquisition Cost of Other Equipment, Appliances and Tools", "translations": {"lt": "Kitų įrenginių, prietaisų ir įrankių įsigijimo savikaina"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_5"]}},
+    {"source_id": "account_account_template_1242", "code": "1242", "name": "Other Equipment, Appliances and Tools being Prepared for Use", "translations": {"lt": "Ruošiami naudoti kiti įrenginiai, prietaisai ir įrankiai"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_5"]}},
+    {"source_id": "account_account_template_1247", "code": "1247", "name": "Depreciation of the Acquisition Cost of Other Equipment, Appliances and Tools (-)", "translations": {"lt": "Kitų įrenginių, prietaisų ir įrankių įsigijimo savikainos nusidėvėjimas (−)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_5"]}},
+    {"source_id": "account_account_template_12500", "code": "12500", "name": "Cost of the Acquisition of Land as Investment Property", "translations": {"lt": "Žemės, kaip investicinio turto, įsigijimo savikaina"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_6_1"]}},
+    {"source_id": "account_account_template_12509", "code": "12509", "name": "Value Loss of the Land as Investment Property (-)", "translations": {"lt": "Žemės, kaip investicinio turto, vertės sumažėjimas (−)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_6_1"]}},
+    {"source_id": "account_account_template_12510", "code": "12510", "name": "Cost of the Acquisition of Buildings as Investment Property", "translations": {"lt": "Pastatų, kaip investicinio turto, įsigijimo savikaina"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_6_2"]}},
+    {"source_id": "account_account_template_12517", "code": "12517", "name": "Depreciation of the Acquisition Cost of Buildings as Investment Property (-)", "translations": {"lt": "Pastatų, kaip investicinio turto, įsigijimo savikainos nusidėvėjimas (−)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_6_2"]}},
+    {"source_id": "account_account_template_12519", "code": "12519", "name": "Value Loss of Buildings as Investment Property (-)", "translations": {"lt": "Pastatų, kaip investicinio turto, vertės sumažėjimas (−)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_6_2"]}},
+    {"source_id": "account_account_template_1260", "code": "1260", "name": "Advance Payments for Long-Term Tangible Assets", "translations": {"lt": "Sumokėti avansai už ilgalaikį materialųjį turtą"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["l10n_lt.account_account_tag_a_2_7"]}},
+    {"source_id": "account_account_template_166110", "code": "166110", "name": "Acquisition Cost of Other Non-Equity Securities", "translations": {"lt": "Kitų ne nuosavybės vertybinių popierių įsigijimo savikaina"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["l10n_lt.account_account_tag_a_3_7"]}},
+    {"source_id": "account_account_template_166119", "code": "166119", "name": "Value Loss of Other Non-Equity Securities (-)", "translations": {"lt": "Kitų ne nuosavybės vertybinių popierių vertės sumažėjimas (−)"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["l10n_lt.account_account_tag_a_3_7"]}},
+    {"source_id": "account_account_template_1665", "code": "1665", "name": "Term Deposits", "translations": {"lt": "Terminuotieji indėliai"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["l10n_lt.account_account_tag_a_3_7"]}},
+    {"source_id": "account_account_template_16700", "code": "16700", "name": "Value of Receivable Debts from Customers", "translations": {"lt": "Gautinų pirkėjų skolų vertė"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["l10n_lt.account_account_tag_a_3_8"]}},
+    {"source_id": "account_account_template_16710", "code": "16710", "name": "Value of Loans Granted", "translations": {"lt": "Suteiktų paskolų vertė"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["l10n_lt.account_account_tag_a_3_8"]}},
+    {"source_id": "account_account_template_1672", "code": "1672", "name": "Receivable Amount of Leasing (Financial Rent) after One Year", "translations": {"lt": "Po vienų metų gautinos lizingo (finansinės nuomos) sumos"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["l10n_lt.account_account_tag_a_3_8"]}},
+    {"source_id": "account_account_template_16740", "code": "16740", "name": "Value of Receivables", "translations": {"lt": "Gautinų sumų vertė"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["l10n_lt.account_account_tag_a_3_8"]}},
+    {"source_id": "account_account_template_1680", "code": "1680", "name": "Advance Payments for Financial Assets", "translations": {"lt": "Sumokėti avansai už finansinį turtą"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["l10n_lt.account_account_tag_a_3_9"]}},
+    {"source_id": "account_account_template_1681", "code": "1681", "name": "Derivative Financial Assets", "translations": {"lt": "Iš išvestinių finansinių priemonių atsiradęs finansinis turtas"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["l10n_lt.account_account_tag_a_3_9"]}},
+    {"source_id": "account_account_template_171", "code": "171", "name": "Deferred Profit Tax Asset", "translations": {"lt": "Atidėtojo pelno mokesčio turtas"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["l10n_lt.account_account_tag_a_4_1"]}},
+    {"source_id": "account_account_template_2010", "code": "2010", "name": "Acquisition Cost of Raw Materials, Materials and Assembly Parts", "translations": {"lt": "Žaliavų, medžiagų ir komplektavimo detalių įsigijimo savikaina"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_1"], "extra": {"account_stock_expense_id": "account_account_template_6208", "account_stock_variation_id": "account_account_template_6005"}}},
+    {"source_id": "account_account_template_2011", "code": "2011", "name": "Raw Materials, Materials and Assembly Parts in Transit", "translations": {"lt": "Žaliavos, medžiagos ir komplektavimo detalės kelyje"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_1"]}},
+    {"source_id": "account_account_template_2012", "code": "2012", "name": "Raw Materials, Materials and Assembly Parts at Third Parties", "translations": {"lt": "Žaliavos, medžiagos ir komplektavimo detalės pas trečiuosius asmenis"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_1"]}},
+    {"source_id": "account_account_template_2019", "code": "2019", "name": "Value Loss of Raw Materials, Materials and Assembly Parts (-)", "translations": {"lt": "Žaliavų, medžiagų ir komplektavimo detalių vertės sumažėjimas (−)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_1"]}},
+    {"source_id": "account_account_template_20200", "code": "20200", "name": "Cost of Incomplete Production", "translations": {"lt": "Nebaigtos produkcijos savikaina"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_2"]}},
+    {"source_id": "account_account_template_20210", "code": "20210", "name": "Cost of Executive Works", "translations": {"lt": "Vykdomų darbų savikaina"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_2"]}},
+    {"source_id": "account_account_template_2030", "code": "2030", "name": "Cost of Production", "translations": {"lt": "Produkcijos savikaina"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_3"]}},
+    {"source_id": "account_account_template_2035", "code": "2035", "name": "Production in Transit", "translations": {"lt": "Produkcija kelyje"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_3"]}},
+    {"source_id": "account_account_template_2036", "code": "2036", "name": "Production at Third Parties", "translations": {"lt": "Produkcija pas trečiuosius asmenis"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_3"]}},
+    {"source_id": "account_account_template_2039", "code": "2039", "name": "Value Loss of Production (-)", "translations": {"lt": "Produkcijos vertės sumažėjimas (−)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_3"]}},
+    {"source_id": "account_account_template_2040", "code": "2040", "name": "Cost of Purchased Goods for Resale", "translations": {"lt": "Pirktų prekių, skirtų perparduoti, įsigijimo savikaina"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_4"]}},
+    {"source_id": "account_account_template_2045", "code": "2045", "name": "Purchased Goods for Resale in Transit", "translations": {"lt": "Pirktos prekės, skirtos perparduoti, kelyje"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_4"]}},
+    {"source_id": "account_account_template_2046", "code": "2046", "name": "Purchased Goods for Resale at Third Parties", "translations": {"lt": "Pirktos prekės, skirtos perparduoti, pas trečiuosius asmenis"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_4"]}},
+    {"source_id": "account_account_template_2049", "code": "2049", "name": "Value Loss of Purchased Goods for Resale (-)", "translations": {"lt": "Pirktų prekių, skirtų perparduoti, vertės sumažėjimas (−)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_4"]}},
+    {"source_id": "account_account_template_2060", "code": "2060", "name": "Cost of Tangible Assets", "translations": {"lt": "Ilgalaikio materialiojo turto, skirto parduoti, savikaina"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_1_6"]}},
+    {"source_id": "account_account_template_2080", "code": "2080", "name": "Prepayments to Suppliers", "translations": {"lt": "Sumokėti avansai tiekėjams"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments", "tag_ids": ["l10n_lt.account_account_tag_b_1_7"]}},
+    {"source_id": "account_account_template_2084", "code": "2084", "name": "Deposit", "translations": {"lt": "Užstatas"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments", "tag_ids": ["l10n_lt.account_account_tag_b_1_7"]}},
+    {"source_id": "account_account_template_2410", "code": "2410", "name": "Value of Debts from Customers", "translations": {"lt": "Pirkėjų skolų vertė"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_lt.account_account_tag_b_2_1"]}},
+    {"source_id": "account_account_template_2411", "code": "2411", "name": "Value of Debts from POS Customers", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_lt.account_account_tag_b_2_1"]}},
+    {"source_id": "account_account_template_24400", "code": "24400", "name": "Value of Loans Granted", "translations": {"lt": "Suteiktų paskolų vertė"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_lt.account_account_tag_b_2_4"]}},
+    {"source_id": "account_account_template_2441", "code": "2441", "name": "Receivable Value-Added Tax", "translations": {"lt": "Gautinas pridėtinės vertės mokestis"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_2_4"]}},
+    {"source_id": "account_account_template_24411", "code": "24411", "name": "Receivable Value-Added Tax: VAT Current Account", "translations": {"lt": "Gautinas pridėtinės vertės mokestis: PVM einamoji sąskaita"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_lt.account_account_tag_b_2_4"], "non_trade": true}},
+    {"source_id": "account_account_template_2442", "code": "2442", "name": "Prepaid Profit Tax", "translations": {"lt": "Iš anksto sumokėtas pelno mokestis"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_lt.account_account_tag_b_2_4"]}},
+    {"source_id": "account_account_template_2443", "code": "2443", "name": "Tax Overpayments", "translations": {"lt": "Mokesčių permokos"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_lt.account_account_tag_b_2_4"]}},
+    {"source_id": "account_account_template_2444", "code": "2444", "name": "VSDF (Lithuanian State Social Insurance Fund) Debt to the Company", "translations": {"lt": "VSDF skola įmonei"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_lt.account_account_tag_b_2_4"]}},
+    {"source_id": "account_account_template_24450", "code": "24450", "name": "Value of Receivables from Accountable Persons", "translations": {"lt": "Iš atskaitingų asmenų gautinų sumų vertė"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_lt.account_account_tag_b_2_4"]}},
+    {"source_id": "account_account_template_24460", "code": "24460", "name": "Value of Other Receivable Debts", "translations": {"lt": "Kitų gautinos skolų vertė"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_lt.account_account_tag_b_2_4"]}},
+    {"source_id": "account_account_template_24471", "code": "24471", "name": "Profit paid in Advance to the Owners of the Company", "translations": {"lt": "Įmonės savininkams avansu išmokėtas pelnas"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_lt.account_account_tag_b_2_4"]}},
+    {"source_id": "account_account_template_24472", "code": "24472", "name": "Payed Funds for Personal Use to the Owners of the Company", "translations": {"lt": "Įmonės savininkų asmeniniams poreikiams išmokėtos lėšos"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_lt.account_account_tag_b_2_4"]}},
+    {"source_id": "account_account_template_2449", "code": "2449", "name": "Other Questionable Debts (-)", "translations": {"lt": "Kitos abejotinos skolos (−)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["l10n_lt.account_account_tag_b_2_4"]}},
+    {"source_id": "account_account_template_26200", "code": "26200", "name": "Acquisition Cost of Equity Securities of Other Companies", "translations": {"lt": "Kitų įmonių nuosavybės vertybinių popierių įsigijimo savikaina"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_3_2"]}},
+    {"source_id": "account_account_template_26209", "code": "26209", "name": "Value Loss of Equity Securities of Other Companies (-)", "translations": {"lt": "Kitų įmonių nuosavybės vertybinių popierių vertės sumažėjimas (−)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_3_2"]}},
+    {"source_id": "account_account_template_262110", "code": "262110", "name": "Acquisition Cost of Other Non-Equity Securities", "translations": {"lt": "Kitų ne nuosavybės vertybinių popierių įsigijimo savikaina"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_3_2"]}},
+    {"source_id": "account_account_template_262119", "code": "262119", "name": "Value Loss of Other Non-Equity Securities (-)", "translations": {"lt": "Kitų ne nuosavybės vertybinių popierių vertės sumažėjimas (−)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_3_2"]}},
+    {"source_id": "account_account_template_2623", "code": "2623", "name": "Term Deposits", "translations": {"lt": "Terminuotieji indėliai"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_3_2"]}},
+    {"source_id": "account_chart_template_lithuania_liquidity_transfer", "code": "273", "name": "Cash in Transit", "translations": {"lt": "Pinigai kelyje"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_b_4"]}},
+    {"source_id": "account_account_template_274", "code": "274", "name": "Cash Equivalents", "translations": {"lt": "Pinigų ekvivalentai"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash", "tag_ids": ["l10n_lt.account_account_tag_b_4"]}},
+    {"source_id": "account_account_template_279", "code": "279", "name": "Frozen Funds (-)", "translations": {"lt": "Įšaldytos lėšos (−)"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash", "tag_ids": ["l10n_lt.account_account_tag_b_4"]}},
+    {"source_id": "account_account_template_291", "code": "291", "name": "Future Expenses", "translations": {"lt": "Ateinančių laikotarpių sąnaudos"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_c_prepayments_accrued_income"]}},
+    {"source_id": "account_account_template_292", "code": "292", "name": "Accumulative Income", "translations": {"lt": "Sukauptos pajamos"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["l10n_lt.account_account_tag_c_prepayments_accrued_income"]}},
+    {"source_id": "account_account_template_3011", "code": "3011", "name": "Ordinary Shares", "translations": {"lt": "Paprastosios akcijos"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_lt.account_account_tag_d_1_1"]}},
+    {"source_id": "account_account_template_3012", "code": "3012", "name": "Preference Shares", "translations": {"lt": "Privilegijuotosios akcijos"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_lt.account_account_tag_d_1_1"]}},
+    {"source_id": "account_account_template_302", "code": "302", "name": "Subscribed Capital Unpaid (-)", "translations": {"lt": "Pasirašytasis neapmokėtas kapitalas (−)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_lt.account_account_tag_d_1_2"]}},
+    {"source_id": "account_account_template_303", "code": "303", "name": "Own Shares (Yawn) (-)", "translations": {"lt": "Savos akcijos (pajai) (−)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_lt.account_account_tag_d_1_3"]}},
+    {"source_id": "account_account_template_305", "code": "305", "name": "Company Owner’s Capital", "translations": {"lt": "Įmonės savininko kapitalas"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_lt.account_account_tag_d_1_3"]}},
+    {"source_id": "account_account_template_308", "code": "308", "name": "Owners’ Contributions", "translations": {"lt": "Savininkų įnašai"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_lt.account_account_tag_d_1_3"]}},
+    {"source_id": "account_account_template_331", "code": "331", "name": "Mandatory or Reserve Capital", "translations": {"lt": "Privalomasis arba atsargos (rezervinis) kapitalas"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_lt.account_account_tag_d_4_1"]}},
+    {"source_id": "account_account_template_3411", "code": "3411", "name": "Acknowledged Net Profit (Loss) of The Accounting Year in The Profit (Loss) Report", "translations": {"lt": "Pelno (nuostolių) ataskaitoje pripažintas ataskaitinių metų grynasis pelnas (nuostoliai)"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity_unaffected", "tag_ids": ["l10n_lt.account_account_tag_d_5_1"]}},
+    {"source_id": "account_account_template_3412", "code": "3412", "name": "Unacknowledged Net Profit (Loss) of The Accounting Year in The Profit (Loss) Report", "translations": {"lt": "Pelno (nuostolių) ataskaitoje nepripažintas ataskaitinių metų pelnas (nuostoliai)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_lt.account_account_tag_d_5_1"]}},
+    {"source_id": "account_account_template_3421", "code": "3421", "name": "Acknowledged Net Profit (Loss) of The Previous Accounting Year in The Profit (Loss) Report", "translations": {"lt": "Pelno (nuostolių) ataskaitoje pripažintas ankstesnių metų pelnas (nuostoliai)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_lt.account_account_tag_d_5_2"]}},
+    {"source_id": "account_account_template_3422", "code": "3422", "name": "Unacknowledged Net Profit (Loss) of The Previous Accounting Year in The Profit (Loss) Report", "translations": {"lt": "Pelno (nuostolių) ataskaitoje nepripažintas ankstesnių metų pelnas (nuostoliai)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_lt.account_account_tag_d_5_2"]}},
+    {"source_id": "account_account_template_3424", "code": "3424", "name": "Profit (Loss) of Material Corrections of The Previous Years", "translations": {"lt": "Ankstesnių metų esminių klaidų taisymo pelnas (nuostoliai)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_lt.account_account_tag_d_5_2"]}},
+    {"source_id": "account_account_template_390", "code": "390", "name": "Common Summary of Accounts", "translations": {"lt": "Bendra sąskaitų suvestinė"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["l10n_lt.account_account_tag_d_6"]}},
+    {"source_id": "account_account_template_411", "code": "411", "name": "Provisions for Pensions and Similar Liabilities", "translations": {"lt": "Pensijų ir panašių įsipareigojimų atidėjiniai"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_lt.account_account_tag_f_1"]}},
+    {"source_id": "account_account_template_412", "code": "412", "name": "Tax Provisions", "translations": {"lt": "Mokesčių atidėjiniai"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_lt.account_account_tag_f_2"]}},
+    {"source_id": "account_account_template_413", "code": "413", "name": "Other Provisions", "translations": {"lt": "Kiti atidėjiniai"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_lt.account_account_tag_f_3"]}},
+    {"source_id": "account_account_template_4211", "code": "4211", "name": "Leasing (Financial Rent) or Other Obligations", "translations": {"lt": "Lizingo (finansinės nuomos) ar panašūs įsipareigojimai"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_lt.account_account_tag_g_1_1"]}},
+    {"source_id": "account_account_template_4214", "code": "4214", "name": "Other Debt Obligations", "translations": {"lt": "Kiti skoliniai įsipareigojimai"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_lt.account_account_tag_g_1_1"]}},
+    {"source_id": "account_account_template_4220", "code": "4220", "name": "Long-Term Liabilities under Loan Agreements", "translations": {"lt": "Ilgalaikiai įsipareigojimai pagal paskolų sutartis"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_lt.account_account_tag_g_1_2"]}},
+    {"source_id": "account_account_template_4221", "code": "4221", "name": "Other Obligations", "translations": {"lt": "Kiti įsipareigojimai"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_lt.account_account_tag_g_1_2"]}},
+    {"source_id": "account_account_template_4230", "code": "4230", "name": "Prepayments from Customers", "translations": {"lt": "Iš pirkėjų gauti avansai"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_lt.account_account_tag_g_1_3"]}},
+    {"source_id": "account_account_template_4231", "code": "4231", "name": "Prepayments from Service Receivers", "translations": {"lt": "Iš paslaugų gavėjų gauti avansai"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_lt.account_account_tag_g_1_3"]}},
+    {"source_id": "account_account_template_424", "code": "424", "name": "Debts to Suppliers", "translations": {"lt": "Skolos tiekėjams"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_lt.account_account_tag_g_1_4"]}},
+    {"source_id": "account_account_template_428", "code": "428", "name": "Other Payables and Long-Term Liabilities", "translations": {"lt": "Kitos mokėtinos sumos ir ilgalaikiai įsipareigojimai"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["l10n_lt.account_account_tag_g_1_8"]}},
+    {"source_id": "account_account_template_4401", "code": "4401", "name": "Part of Leasing (Financial Rent) or Other Obligations in The Current Year", "translations": {"lt": "Lizingo (finansinės nuomos) ar panašių įsipareigojimų einamųjų metų dalis"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_1"]}},
+    {"source_id": "account_account_template_4403", "code": "4403", "name": "Part of Other Long-Term Debts in The Current Year", "translations": {"lt": "Kitų ilgalaikių skolų einamųjų metų dalis"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_1"]}},
+    {"source_id": "account_account_template_4410", "code": "4410", "name": "Liabilities under Short-Term Loan Agreements", "translations": {"lt": "Įsipareigojimai pagal trumpalaikių paskolų sutartis"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_2"]}},
+    {"source_id": "account_account_template_4411", "code": "4411", "name": "Part of Debts to Credit Institutions in The Current Year", "translations": {"lt": "Skolų kredito įstaigoms einamųjų metų dalis"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_2"]}},
+    {"source_id": "account_account_template_4413", "code": "4413", "name": "Other Obligations (Executables and etc.)", "translations": {"lt": "Kiti įsipareigojimai (vykdomieji ir pan.)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_2"]}},
+    {"source_id": "account_account_template_4420", "code": "4420", "name": "Prepayments from Customers", "translations": {"lt": "Iš pirkėjų gauti avansai"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_3"]}},
+    {"source_id": "account_account_template_4421", "code": "4421", "name": "Prepayments from Service Receivers", "translations": {"lt": "Iš paslaugų gavėjų gauti avansai"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_3"]}},
+    {"source_id": "account_account_template_4430", "code": "4430", "name": "Debts to Suppliers for Goods and Services", "translations": {"lt": "Skolos tiekėjams už prekes ir paslaugas"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["l10n_lt.account_account_tag_g_2_4"]}},
+    {"source_id": "account_account_template_4431", "code": "4431", "name": "Other Debts to Suppliers", "translations": {"lt": "Kitos skolos tiekėjams"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["l10n_lt.account_account_tag_g_2_4"]}},
+    {"source_id": "account_account_template_4470", "code": "4470", "name": "Obligations of Profit Tax", "translations": {"lt": "Pelno mokesčio įsipareigojimai"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_8"]}},
+    {"source_id": "account_account_template_4471", "code": "4471", "name": "Other Obligations", "translations": {"lt": "Kiti įsipareigojimai"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_8"]}},
+    {"source_id": "account_account_template_4480", "code": "4480", "name": "Payable Salary", "translations": {"lt": "Mokėtinas darbo užmokestis"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_9"]}},
+    {"source_id": "account_account_template_4481", "code": "4481", "name": "Payable Personal Income Tax", "translations": {"lt": "Mokėtinas gyventojų pajamų mokestis"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_9"]}},
+    {"source_id": "account_account_template_4482", "code": "4482", "name": "Contributions of Payable Social Security", "translations": {"lt": "Mokėtinos socialinio draudimo įmokos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_9"]}},
+    {"source_id": "account_account_template_4483", "code": "4483", "name": "Contributions of Payable Guarantee Fund", "translations": {"lt": "Mokėtinos garantinio fondo įmokos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_9"]}},
+    {"source_id": "account_account_template_4485", "code": "4485", "name": "Leave Liabilities", "translations": {"lt": "Atostoginių kaupiniai"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_9"]}},
+    {"source_id": "account_account_template_4486", "code": "4486", "name": "Contributions of Payable Compulsory Health Insurance", "translations": {"lt": "Mokėtinos privalomojo sveikatos draudimo įmokos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_9"]}},
+    {"source_id": "account_account_template_4490", "code": "4490", "name": "Payable Dividends", "translations": {"lt": "Mokėtini dividendai"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_10"]}},
+    {"source_id": "account_account_template_4491", "code": "4491", "name": "Payable Bonuses", "translations": {"lt": "Mokėtinos tantjemos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_10"]}},
+    {"source_id": "account_account_template_4492", "code": "4492", "name": "Payable Value-Added Tax", "translations": {"lt": "Mokėtinas pridėtinės vertės mokestis"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_10"]}},
+    {"source_id": "account_account_template_44921", "code": "44921", "name": "Payable Value-Added Tax: VAT Current Account", "translations": {"lt": "Mokėtinas pridėtinės vertės mokestis: PVM einamoji sąskaita"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["l10n_lt.account_account_tag_g_2_10"], "non_trade": true}},
+    {"source_id": "account_account_template_4493", "code": "4493", "name": "Other Payable Taxes to Budget", "translations": {"lt": "Kiti į biudžetą mokėtini mokesčiai"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_10"]}},
+    {"source_id": "account_account_template_4494", "code": "4494", "name": "Other Payables", "translations": {"lt": "Kitos mokėtinos sumos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_10"]}},
+    {"source_id": "account_account_template_4495", "code": "4495", "name": "Payables to the Owners of the Company", "translations": {"lt": "Įmonės savininkams mokėtinos sumos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_g_2_10"]}},
+    {"source_id": "account_account_template_491", "code": "491", "name": "Accumulated Expenses", "translations": {"lt": "Sukauptos sąnaudos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_h_accruals_deferred_income"]}},
+    {"source_id": "account_account_template_492", "code": "492", "name": "Income of Future Periods", "translations": {"lt": "Ateinančių laikotarpių pajamos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["l10n_lt.account_account_tag_h_accruals_deferred_income"]}},
+    {"source_id": "account_account_template_5000", "code": "5000", "name": "Income from Goods Sold", "translations": {"lt": "Parduotų prekių pajamos"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income", "tag_ids": ["l10n_lt.account_account_tag_1_net_turnover"]}},
+    {"source_id": "account_account_template_5001", "code": "5001", "name": "Income from Services Sold", "translations": {"lt": "Suteiktų paslaugų pajamos"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["l10n_lt.account_account_tag_1_net_turnover"]}},
+    {"source_id": "account_account_template_5003", "code": "5003", "name": "Income from Production Sold", "translations": {"lt": "Pagamintos produkcijos pajamos"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["l10n_lt.account_account_tag_1_net_turnover"]}},
+    {"source_id": "account_account_template_5009", "code": "5009", "name": "Rounding of Cash Payments (+/-)", "translations": {"lt": "Atsiskaitymų grynais pinigais apvalinimas (+/-)"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["l10n_lt.account_account_tag_1_net_turnover"]}},
+    {"source_id": "account_account_template_509", "code": "509", "name": "Discounts, Returns (-)", "translations": {"lt": "Nuolaidos, grąžinimas (−)"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["l10n_lt.account_account_tag_1_net_turnover"]}},
+    {"source_id": "account_account_template_5400", "code": "5400", "name": "Profit from Asset Disposition", "translations": {"lt": "Ilgalaikio turto perleidimo pelnas"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["l10n_lt.account_account_tag_6_other_operating_results"]}},
+    {"source_id": "account_account_template_5401", "code": "5401", "name": "Other Income", "translations": {"lt": "Kitos pajamos"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["l10n_lt.account_account_tag_6_other_operating_results"]}},
+    {"source_id": "account_account_template_5600", "code": "5600", "name": "Income from Other Long-Term Investments and Loan Interests", "translations": {"lt": "Kitų ilgalaikių investicijų ir paskolų palūkanų pajamos"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["l10n_lt.account_account_tag_8_income_other_longterm_investments_loans"]}},
+    {"source_id": "account_account_template_5802", "code": "5802", "name": "Income from Other Loan Interests", "translations": {"lt": "Kitų suteiktų paskolų palūkanų pajamos"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["l10n_lt.account_account_tag_9_other_interest_similar_income"]}},
+    {"source_id": "account_account_template_5803", "code": "5803", "name": "Positive Currency Exchange Difference", "translations": {"lt": "Teigiama valiutų kursų pokyčio įtaka"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["l10n_lt.account_account_tag_9_other_interest_similar_income", "account.account_tag_financing"]}},
+    {"source_id": "account_account_template_5804", "code": "5804", "name": "Income from Fines", "translations": {"lt": "Baudų ir delspinigių pajamos"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["l10n_lt.account_account_tag_9_other_interest_similar_income"]}},
+    {"source_id": "account_account_template_5809", "code": "5809", "name": "Profit from Disposition of Investments", "translations": {"lt": "Investicijų perleidimo pelnas"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["l10n_lt.account_account_tag_9_other_interest_similar_income"]}},
+    {"source_id": "account_account_template_6000", "code": "6000", "name": "Cost of Goods Sold", "translations": {"lt": "Parduotų prekių savikaina"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_6001", "code": "6001", "name": "Cost of Services Sold", "translations": {"lt": "Suteiktų paslaugų savikaina"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_60030", "code": "60030", "name": "Cost of Production Sold", "translations": {"lt": "Parduotos pagamintos produkcijos savikaina"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_60031", "code": "60031", "name": "Short-Term Production Inventory", "translations": {"lt": "Mažavertis gamybos inventorius"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_60032", "code": "60032", "name": "Direct Transport", "translations": {"lt": "Tiesioginis transportas"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_60033", "code": "60033", "name": "Direct Commissions", "translations": {"lt": "Tiesioginiai komisiniai"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_60034", "code": "60034", "name": "Direct Payroll of Employees Working in Production", "translations": {"lt": "Tiesioginis gamybos DU"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_60040", "code": "60040", "name": "Working Tools for Production", "translations": {"lt": "Gamybos įrankiai ir darbo priemonės"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_60041", "code": "60041", "name": "Maintenance of Working Tools for Production", "translations": {"lt": "Gamybos įrangos remontas ir techn. aptarnavimas"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_60042", "code": "60042", "name": "Maintenance of Production Transport", "translations": {"lt": "Gamybos transporto remontas ir techn. aptarnavimas"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_60043", "code": "60043", "name": "Energy Resources", "translations": {"lt": "Energetiniai resursai"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_60044", "code": "60044", "name": "Fuel", "translations": {"lt": "Kuras"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_6005", "code": "6005", "name": "Increase (Decrease) in Inventories", "translations": {"lt": "Atsargų padidėjimas (sumažėjimas)"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_609", "code": "609", "name": "Discounts, Returns (-)", "translations": {"lt": "Nuolaidos, grąžinimas (−)"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "tag_ids": ["l10n_lt.account_account_tag_2_cost_of_sales"]}},
+    {"source_id": "account_account_template_6202", "code": "6202", "name": "Cost of Services and Goods Advertising", "translations": {"lt": "Paslaugų ir prekių reklamos sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_4_selling_expenses"]}},
+    {"source_id": "account_account_template_6203", "code": "6203", "name": "Payroll and Other Costs of Employees Working in Sales", "translations": {"lt": "Pardavimo darbuotojų DU ir su juo susijusios sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_4_selling_expenses"]}},
+    {"source_id": "account_account_template_6208", "code": "6208", "name": "Other Costs of Sales", "translations": {"lt": "Kitos pardavimo sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_4_selling_expenses"]}},
+    {"source_id": "account_account_template_6209", "code": "6209", "name": "Discounts Received (-)", "translations": {"lt": "Gautos nuolaidos (−)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_4_selling_expenses"]}},
+    {"source_id": "account_account_template_6300", "code": "6300", "name": "Rental Costs", "translations": {"lt": "Nuomos sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_6301", "code": "6301", "name": "Costs of Maintenance and Exploitation", "translations": {"lt": "Remonto ir eksploatacijos sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_6302", "code": "6302", "name": "Fuel Costs", "translations": {"lt": "Kuro sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_6303", "code": "6303", "name": "Insurance Costs", "translations": {"lt": "Draudimo sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_6304", "code": "6304", "name": "Payroll and Other Costs of Employees Working in Administration", "translations": {"lt": "Administracijos darbuotojų DU ir su juo susijusios sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_6306", "code": "6306", "name": "Depreciation Costs of Long-Term Tangible Assets", "translations": {"lt": "Ilgalaikio materialiojo turto vertės nusidėvėjimo sąnaudos"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_6307", "code": "6307", "name": "Amortization Costs of Intangible Assets Value", "translations": {"lt": "Nematerialiojo turto vertės amortizacijos sąnaudos"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63080", "code": "63080", "name": "Costs of Real Estate Tax", "translations": {"lt": "Nekilnojamojo turto mokesčio sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63081", "code": "63081", "name": "Costs of not Deductible Value-Added Tax", "translations": {"lt": "Neatskaitomo pridėtinės vertės mokesčio sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63082", "code": "63082", "name": "Pollution Tax Costs", "translations": {"lt": "Aplinkos teršimo mokesčio sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63083", "code": "63083", "name": "Costs of Other Taxes", "translations": {"lt": "Kitų mokesčių sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63090", "code": "63090", "name": "Costs of Value Loss of Debts from Customers", "translations": {"lt": "Pirkėjų skolų vertės sumažėjimo sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63091", "code": "63091", "name": "Costs of Inventory Value Loss", "translations": {"lt": "Atsargų vertės sumažėjimo sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63092", "code": "63092", "name": "Costs of Intangible Assets Value Loss", "translations": {"lt": "Nematerialiojo turto vertės sumažėjimo sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63093", "code": "63093", "name": "Costs of Value Loss of Long-Term Tangible Assets", "translations": {"lt": "Ilgalaikio materialiojo turto vertės sumažėjimo sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63094", "code": "63094", "name": "Costs of Value Loss of Other Assets", "translations": {"lt": "Kito turto vertės sumažėjimo sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_6310", "code": "6310", "name": "Provisions Costs", "translations": {"lt": "Atidėjinių sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_6311", "code": "6311", "name": "Costs of Fines", "translations": {"lt": "Baudų ir delspinigių sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63120", "code": "63120", "name": "Other Costs and Bank Taxes", "translations": {"lt": "Kitos sąnaudos ir banko mokesčiai"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63121", "code": "63121", "name": "Representative Costs", "translations": {"lt": "Reprezentacinės sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63122", "code": "63122", "name": "Daily Allowance", "translations": {"lt": "Dienpinigiai"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_63123", "code": "63123", "name": "Support", "translations": {"lt": "Parama"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_6319", "code": "6319", "name": "Rounding of Cash Payments (+/-)", "translations": {"lt": "Atsiskaitymų grynais pinigais apvalinimas (+/-)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_5_general_administrative_expenses"]}},
+    {"source_id": "account_account_template_6400", "code": "6400", "name": "Asset Disposition Losses", "translations": {"lt": "Ilgalaikio turto perleidimo nuostoliai"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_6_other_operating_results"]}},
+    {"source_id": "account_account_template_6401", "code": "6401", "name": "Other Costs", "translations": {"lt": "Kitos sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_6_other_operating_results"]}},
+    {"source_id": "account_account_template_6701", "code": "6701", "name": "Costs of Value Loss of Long-Term Financial Assets", "translations": {"lt": "Ilgalaikio finansinio turto vertės sumažėjimo sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_10_impaired_fin_assets_short_investments"]}},
+    {"source_id": "account_account_template_6702", "code": "6702", "name": "Costs of Value Loss of Short-Term Investments", "translations": {"lt": "Trumpalaikių investicijų vertės sumažėjimo sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_10_impaired_fin_assets_short_investments"]}},
+    {"source_id": "account_account_template_6802", "code": "6802", "name": "Costs of Other Loan Interests", "translations": {"lt": "Kitų suteiktų paskolų palūkanų sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_11_interest_other_similar_expenses"]}},
+    {"source_id": "account_account_template_6803", "code": "6803", "name": "Negative Currency Exchange Difference", "translations": {"lt": "Neigiama valiutų kursų pokyčio įtaka"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_11_interest_other_similar_expenses"]}},
+    {"source_id": "account_account_template_6804", "code": "6804", "name": "Costs of Fines", "translations": {"lt": "Baudų ir delspinigių sąnaudos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_11_interest_other_similar_expenses"]}},
+    {"source_id": "account_account_template_6805", "code": "6805", "name": "Representation and other disallowed deductions", "translations": {"lt": "Reprezentacija ir kiti neleidžiami atskaitymai"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_11_interest_other_similar_expenses"]}},
+    {"source_id": "account_account_template_6806", "code": "6806", "name": "Costs of Interests for Financial Rent", "translations": {"lt": "Palūkanų sąnaudos už finansinės nuomos būdu įsigyjamą turtą"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_11_interest_other_similar_expenses"]}},
+    {"source_id": "account_account_template_6809", "code": "6809", "name": "Investment Disposition Losses", "translations": {"lt": "Investicijų perleidimo nuostoliai"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_11_interest_other_similar_expenses"]}},
+    {"source_id": "account_account_template_6900", "code": "6900", "name": "Profit and Other Similar Taxes of The Current Year", "translations": {"lt": "Ataskaitinių metų pelno ir panašūs mokesčiai"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "tag_ids": ["l10n_lt.account_account_tag_12_tax_on_profit"]}},
+    {"source_id": "account_account_template_6901", "code": "6901", "name": "Costs (Income) of Deferred Value-Added Tax", "translations": {"lt": "Atidėtojo pelno mokesčio sąnaudos (pajamos)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["l10n_lt.account_account_tag_12_tax_on_profit"]}},
+    {"source_id": "account_account_template_999", "code": "999", "name": "Interim Account", "translations": {"lt": "Tarpinė sąskaita užskaitoms"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash", "tag_ids": ["l10n_lt.account_account_tag_b_4"]}}
+  ]
+}

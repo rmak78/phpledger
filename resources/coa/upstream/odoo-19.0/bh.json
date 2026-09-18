@@ -1,0 +1,512 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "f59e68b71864f6354f1d941bab474f6e91e763e25ee09b6ac91f6ba2f095d644",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/bh",
+  "country_code": "BH",
+  "country_name": "Bahrain",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Bahrain - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_bh' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_bh",
+    "module_name": "Bahrain - Accounting",
+    "module_version": "1.0",
+    "contributing_modules": [
+      "l10n_bh"
+    ],
+    "template_code": "bh",
+    "template_chain": [
+      "bh"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_bh/data/template/account.account-bh.csv",
+        "sha256": "808eef1f0d43aa4d395586a5e18349a1edfeb3b8e742781d8f4b824ef2155913",
+        "rows": 137
+      },
+      {
+        "path": "addons/l10n_bh/data/template/account.group-bh.csv",
+        "sha256": "6e17b533a7fb1c2580327723c1b91b0dc35780549b9e8086c0a4fbf1e40929e5",
+        "rows": 31
+      }
+    ],
+    "python_files": [
+      "addons/l10n_bh/models/template_bh.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "1000",
+      "cash": "1009",
+      "transfer": "1001"
+    },
+    "default_sale_tax": null,
+    "default_purchase_tax": null,
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "bh_account_100201",
+        "code": "100201",
+        "name": "Accounts Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "bh_account_200101",
+        "code": "200101",
+        "name": "Payables",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "bh_account_400101",
+        "code": "400101",
+        "name": "Sales Account",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "bh_account_500101",
+        "code": "500101",
+        "name": "Cost of Goods Sold in Trading",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "property_stock_valuation_account_id",
+        "source_id": "bh_account_100502",
+        "code": "100502",
+        "name": "Inventory Valuation",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "bh_account_100202",
+        "code": "100202",
+        "name": "Accounts Receivable (PoS)",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "bh_account_100102",
+        "code": "100102",
+        "name": "Bank Suspense Account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "bh_account_400301",
+        "code": "400301",
+        "name": "Gain on Difference on Exchange",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "bh_account_500903",
+        "code": "500903",
+        "name": "Loss on Difference on Exchange",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "bh_account_400302",
+        "code": "400302",
+        "name": "Cash Difference Gain",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "bh_account_500909",
+        "code": "500909",
+        "name": "Cash Difference Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "bh_account_400304",
+        "code": "400304",
+        "name": "Cash Discount Gain",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "bh_account_501107",
+        "code": "501107",
+        "name": "Cash Discount Loss",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "bh_account_100416",
+        "code": "100416",
+        "name": "Prepaid Expenses",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "bh_account_200401",
+        "code": "200401",
+        "name": "Deferred income",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 137,
+    "posting_accounts": 137,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 47,
+      "equity": 2,
+      "expense": 54,
+      "income": 11,
+      "liability": 23
+    },
+    "by_subtype": {
+      "current_asset": 35,
+      "current_liability": 15,
+      "depreciation": 6,
+      "direct_cost": 2,
+      "equity": 1,
+      "expense": 46,
+      "fixed_asset": 9,
+      "income": 6,
+      "non_current_liability": 4,
+      "other_income": 5,
+      "payable": 4,
+      "receivable": 3,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 4,
+      "receivables": 3
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "ar"
+    ],
+    "groups": 31
+  },
+  "groups": [
+    {"source_id": "bh_group_01", "code_prefix_start": "1000", "code_prefix_end": "1000", "name": "Liquidity", "translations": {"ar": "السيولة"}, "parent_source_id": null, "path": ["Liquidity"]},
+    {"source_id": "bh_group_02", "code_prefix_start": "1001", "code_prefix_end": "1001", "name": "Liquidity", "translations": {"ar": "السيولة"}, "parent_source_id": null, "path": ["Liquidity"]},
+    {"source_id": "bh_group_04", "code_prefix_start": "1002", "code_prefix_end": "1002", "name": "Receivables", "translations": {"ar": "الحسابات المدينة"}, "parent_source_id": null, "path": ["Receivables"]},
+    {"source_id": "bh_group_05", "code_prefix_start": "1003", "code_prefix_end": "1003", "name": "Deposits", "translations": {"ar": "الإيداعات"}, "parent_source_id": null, "path": ["Deposits"]},
+    {"source_id": "bh_group_06", "code_prefix_start": "1004", "code_prefix_end": "1004", "name": "Prepaid Expenses", "translations": {"ar": "النفقات مسبقة الدفع"}, "parent_source_id": null, "path": ["Prepaid Expenses"]},
+    {"source_id": "bh_group_07", "code_prefix_start": "1005", "code_prefix_end": "1005", "name": "Inventory", "translations": {"ar": "المخزون"}, "parent_source_id": null, "path": ["Inventory"]},
+    {"source_id": "bh_group_08", "code_prefix_start": "1006", "code_prefix_end": "1006", "name": "Company Assets & Depreciation", "translations": {"ar": "أصول الشركة والإهلاك"}, "parent_source_id": null, "path": ["Company Assets & Depreciation"]},
+    {"source_id": "bh_group_09", "code_prefix_start": "1007", "code_prefix_end": "1007", "name": "Licensing and Copyrights", "translations": {"ar": "الترخيص وحقوق النشر"}, "parent_source_id": null, "path": ["Licensing and Copyrights"]},
+    {"source_id": "bh_group_10", "code_prefix_start": "1008", "code_prefix_end": "1008", "name": "IFRS16 Assets & Depreciation", "translations": {"ar": "أصول IFRS16 والإهلاك"}, "parent_source_id": null, "path": ["IFRS16 Assets & Depreciation"]},
+    {"source_id": "bh_group_03", "code_prefix_start": "1009", "code_prefix_end": "1009", "name": "Liquidity", "translations": {"ar": "السيولة"}, "parent_source_id": null, "path": ["Liquidity"]},
+    {"source_id": "bh_group_11", "code_prefix_start": "2001", "code_prefix_end": "2001", "name": "Payables", "translations": {"ar": "الحسابات الدائنة"}, "parent_source_id": null, "path": ["Payables"]},
+    {"source_id": "bh_group_12", "code_prefix_start": "2002", "code_prefix_end": "2002", "name": "Accrued Employee Expenses", "translations": {"ar": "نفقات الموظفين المستحقة"}, "parent_source_id": null, "path": ["Accrued Employee Expenses"]},
+    {"source_id": "bh_group_13", "code_prefix_start": "2003", "code_prefix_end": "2003", "name": "Accrued Expenses", "translations": {"ar": "النفقات المستحقة"}, "parent_source_id": null, "path": ["Accrued Expenses"]},
+    {"source_id": "bh_group_14", "code_prefix_start": "2004", "code_prefix_end": "2004", "name": "Deferrals", "translations": {"ar": "التأجيلات"}, "parent_source_id": null, "path": ["Deferrals"]},
+    {"source_id": "bh_group_15", "code_prefix_start": "2005", "code_prefix_end": "2005", "name": "Provisions", "translations": {"ar": "الأحكام"}, "parent_source_id": null, "path": ["Provisions"]},
+    {"source_id": "bh_group_16", "code_prefix_start": "2009", "code_prefix_end": "2009", "name": "VAT", "translations": {"ar": "ضريبة القيمة المضافة"}, "parent_source_id": null, "path": ["VAT"]},
+    {"source_id": "bh_group_17", "code_prefix_start": "4001", "code_prefix_end": "4001", "name": "Operating Income", "translations": {"ar": "الإيرادات التشغيلية"}, "parent_source_id": null, "path": ["Operating Income"]},
+    {"source_id": "bh_group_18", "code_prefix_start": "4002", "code_prefix_end": "4002", "name": "Non-Operating Income", "translations": {"ar": "الإيرادات غير التشغيلية"}, "parent_source_id": null, "path": ["Non-Operating Income"]},
+    {"source_id": "bh_group_19", "code_prefix_start": "4003", "code_prefix_end": "4003", "name": "Other gains & losses - Other Income", "translations": {"ar": "المكاسب والخسائر الأخرى - إيرادات أخرى"}, "parent_source_id": null, "path": ["Other gains & losses - Other Income"]},
+    {"source_id": "bh_group_20", "code_prefix_start": "5001", "code_prefix_end": "5001", "name": "Cost of Sales", "translations": {"ar": "تكلفة المبيعات"}, "parent_source_id": null, "path": ["Cost of Sales"]},
+    {"source_id": "bh_group_21", "code_prefix_start": "5002", "code_prefix_end": "5002", "name": "Employees Expenses", "translations": {"ar": "مصروفات الموظفين"}, "parent_source_id": null, "path": ["Employees Expenses"]},
+    {"source_id": "bh_group_22", "code_prefix_start": "5003", "code_prefix_end": "5003", "name": "Payroll Expenses", "translations": {"ar": "مصروفات الرواتب"}, "parent_source_id": null, "path": ["Payroll Expenses"]},
+    {"source_id": "bh_group_23", "code_prefix_start": "5004", "code_prefix_end": "5004", "name": "Office and Location Expenses", "translations": {"ar": "نفقات المكتب والموقع"}, "parent_source_id": null, "path": ["Office and Location Expenses"]},
+    {"source_id": "bh_group_24", "code_prefix_start": "5005", "code_prefix_end": "5005", "name": "Company Expenses", "translations": {"ar": "مصروفات الشركة"}, "parent_source_id": null, "path": ["Company Expenses"]},
+    {"source_id": "bh_group_27", "code_prefix_start": "5007", "code_prefix_end": "5007", "name": "Misc. Company Expenses", "translations": {"ar": "متفرقات. مصروفات الشركة"}, "parent_source_id": null, "path": ["Misc. Company Expenses"]},
+    {"source_id": "bh_group_30", "code_prefix_start": "5009", "code_prefix_end": "5009", "name": "Other gains & losses - Expenses", "translations": {"ar": "الأرباح والخسائر الأخرى - المصروفات"}, "parent_source_id": null, "path": ["Other gains & losses - Expenses"]},
+    {"source_id": "bh_group_31", "code_prefix_start": "5011", "code_prefix_end": "5011", "name": "Misc. Office Expenses", "translations": {"ar": "متفرقات. نفقات مكتبية"}, "parent_source_id": null, "path": ["Misc. Office Expenses"]},
+    {"source_id": "bh_group_25", "code_prefix_start": "500600", "code_prefix_end": "500649", "name": "Finance Expenses", "translations": {"ar": "المصروفات المالية"}, "parent_source_id": null, "path": ["Finance Expenses"]},
+    {"source_id": "bh_group_26", "code_prefix_start": "500650", "code_prefix_end": "500699", "name": "Income Tax", "translations": {"ar": "ضريبة الدخل"}, "parent_source_id": null, "path": ["Income Tax"]},
+    {"source_id": "bh_group_28", "code_prefix_start": "500800", "code_prefix_end": "500849", "name": "Assets Depreciation Expenses", "translations": {"ar": "مصروفات استهلاك الأصول"}, "parent_source_id": null, "path": ["Assets Depreciation Expenses"]},
+    {"source_id": "bh_group_29", "code_prefix_start": "500851", "code_prefix_end": "500899", "name": "IFRS16 Depreciation", "translations": {"ar": "IFRS16 الإهلاك"}, "parent_source_id": null, "path": ["IFRS16 Depreciation"]}
+  ],
+  "accounts": [
+    {"source_id": "bh_account_100102", "code": "100102", "name": "Bank Suspense Account", "translations": {"ar": "حساب التعليق البنكي"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_02", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100103", "code": "100103", "name": "Outstanding Receipts", "translations": {"ar": "الإيصالات المستحقة"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_02", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100104", "code": "100104", "name": "Outstanding Payments", "translations": {"ar": "المدفوعات المستحقة"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_02", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100106", "code": "100106", "name": "Credit cards", "translations": {"ar": "البطاقات الائتمانية"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_02", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100107", "code": "100107", "name": "Post Dated Cheques Received", "translations": {"ar": "الشيكات مؤجلة الصرف المستلمة"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_02", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100201", "code": "100201", "name": "Accounts Receivable", "translations": {"ar": "الحسابات المدينة"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_04", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "bh_account_100202", "code": "100202", "name": "Accounts Receivable (PoS)", "translations": {"ar": "الحسابات المدينة (نقطة البيع)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_04", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "bh_account_100203", "code": "100203", "name": "Other Receivable", "translations": {"ar": "المستحقات الأخرى"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_04", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100301", "code": "100301", "name": "Deposit - Office Rent", "translations": {"ar": "إيداع - إيجار المكتب"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_05", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100302", "code": "100302", "name": "Deposits - Customs", "translations": {"ar": "الإيداعات - الجمارك"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_05", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100303", "code": "100303", "name": "Deposit to Immigration (Visa)", "translations": {"ar": "إيداع للهجرة (فيزا)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_05", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100304", "code": "100304", "name": "Deposit Others", "translations": {"ar": "إيداع آخر"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_05", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100401", "code": "100401", "name": "Prepaid Medical Insurance", "translations": {"ar": "التأمين الصحي مسبق الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100402", "code": "100402", "name": "Prepaid Life Insurance", "translations": {"ar": "التأمين على الحياة مسبق الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100403", "code": "100403", "name": "Prepaid Office Rent", "translations": {"ar": "إيجار المكتب مسبق الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100404", "code": "100404", "name": "Prepaid Other Insurance", "translations": {"ar": "التأمينات الأخرى مسبقة الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100405", "code": "100405", "name": "Prepaid License Fees", "translations": {"ar": "رسوم الرخصة مسبقة الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100406", "code": "100406", "name": "Prepaid Maintenance", "translations": {"ar": "الصيانة مسبقة الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100407", "code": "100407", "name": "Prepaid Employees Housing", "translations": {"ar": "سكن الموظفين مسبق الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100408", "code": "100408", "name": "Prepaid Schooling Fees", "translations": {"ar": "الرسوم الدراسية مسبقة الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100409", "code": "100409", "name": "Prepaid Consultancy Fees", "translations": {"ar": "الرسوم الاستشارية مسبقة الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100410", "code": "100410", "name": "Prepaid Legal Fees", "translations": {"ar": "الرسوم القانونية مسبقة الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100411", "code": "100411", "name": "Prepaid Sponsorship Fees", "translations": {"ar": "رسوم الكفالة مسبقة الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100412", "code": "100412", "name": "Prepaid Advertisement Expenses", "translations": {"ar": "نفقات الإعلان مسبقة الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100413", "code": "100413", "name": "Prepaid Bank Guarantee", "translations": {"ar": "ضمان البنك مسبق الدفع"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100414", "code": "100414", "name": "Prepaid Finance charge for Loans", "translations": {"ar": "رسوم التمويل مسبقة الدفع للقروض"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100415", "code": "100415", "name": "Other Prepayments", "translations": {"ar": "المدفوعات المسبقة الأخرى"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100416", "code": "100416", "name": "Prepaid Expenses", "translations": {"ar": "المصروفات المدفوعة مقدما"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_06", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100501", "code": "100501", "name": "Handling Difference in Inventory", "translations": {"ar": "التعامل مع الفرق في المخزون"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_07", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100502", "code": "100502", "name": "Inventory Valuation", "translations": {"ar": "تقييم المخزون"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_07", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100503", "code": "100503", "name": "Stock Incoming", "translations": {"ar": "المخزون الوارد"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_07", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100504", "code": "100504", "name": "Stock Outgoing", "translations": {"ar": "المخزون الصادر"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_07", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100505", "code": "100505", "name": "Work in Progress (Inventory)", "translations": {"ar": "العمل قيد التنفيذ (المخزون)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_07", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100601", "code": "100601", "name": "Accumulated Depreciation of Motor Vehicles", "translations": {"ar": "حساب الإهلاك للمركبات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_08", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "bh_account_100602", "code": "100602", "name": "Amortisation on Leasehold Improvement", "translations": {"ar": "الاستهلاك عند تحسين العقارات المستأجرة"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_08", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "bh_account_100603", "code": "100603", "name": "Leasehold Improvement", "translations": {"ar": "تحسين العقارات المستأجرة"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_08", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "bh_account_100604", "code": "100604", "name": "Furniture and Equipment", "translations": {"ar": "الأثاث والمعدات"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_08", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "bh_account_100605", "code": "100605", "name": "Computer Hardware & Software", "translations": {"ar": "أجهزة وبرامج الحاسوب"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_08", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "bh_account_100606", "code": "100606", "name": "Accumulated Depreciation of Furniture & Office Equipment", "translations": {"ar": "حساب الإهلاك للأثاث والأدوات المكتبية"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_08", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "bh_account_100607", "code": "100607", "name": "Accumulated Depreciation of Computer Hardware & Software", "translations": {"ar": "حساب الإهلاك لبرامج وأجهزة الحاسوب"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_08", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "bh_account_100701", "code": "100701", "name": "Registration of Trademarks", "translations": {"ar": "تسجيل العلامات التجارية"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_09", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_100801", "code": "100801", "name": "Right of use Asset (IFRS 16)", "translations": {"ar": "حق استخدام الأصل (IFRS 16)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_10", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "bh_account_100802", "code": "100802", "name": "Accumulated Depreciation Right of use Asset (IFRS 16)", "translations": {"ar": "حق استخدام الأصل للإهلاك المتراكم (IFRS 16)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_10", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "bh_account_200101", "code": "200101", "name": "Payables", "translations": {"ar": "المبالغ مستحقة الدفع"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_11", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "bh_account_200102", "code": "200102", "name": "Trade Payables", "translations": {"ar": "الذمم التجارية الدائنة"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_11", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "bh_account_200103", "code": "200103", "name": "Employees Payables", "translations": {"ar": "المبالغ المستحقة للموظفين"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_11", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "bh_account_200104", "code": "200104", "name": "Credit Notes to Customers", "translations": {"ar": "الإشعارات الدائنة للعملاء"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_11", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200201", "code": "200201", "name": "Accrued - Salaries", "translations": {"ar": "مستحق - المرتبات"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_12", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200202", "code": "200202", "name": "Accrued - Commissions", "translations": {"ar": "مستحق - العمولات"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_12", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200203", "code": "200203", "name": "Accrued - Staff Bonus", "translations": {"ar": "مكافآت الموظفين المستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_12", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200204", "code": "200204", "name": "Accrued Other Personnel Cost", "translations": {"ar": "تكاليف الموظفين الآخرين المستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_12", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200205", "code": "200205", "name": "Accrued - Sponsorship", "translations": {"ar": "مستحق - الكفالة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_12", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200301", "code": "200301", "name": "Accrued - Utilities", "translations": {"ar": "مستحق - المرافق"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_13", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200302", "code": "200302", "name": "Accrued - Telephone", "translations": {"ar": "مستحق - الهاتف"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_13", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200303", "code": "200303", "name": "Accrued - Audit Fees", "translations": {"ar": "مستحق - رسوم التدقيق"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_13", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200304", "code": "200304", "name": "Accrued - Office Rent", "translations": {"ar": "مستحق - إيجار المكتب"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_13", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200305", "code": "200305", "name": "Accrued Others", "translations": {"ar": "المستحقات الأخرى"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_13", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200306", "code": "200306", "name": "Accrued Bahrain Customs", "translations": {"ar": "جمارك البحرين المستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_13", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200401", "code": "200401", "name": "Deferred income", "translations": {"ar": "الدخل المؤجل"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_14", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200501", "code": "200501", "name": "Leave Tickets Provision", "translations": {"ar": "حكم تذاكر الطيران"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_15", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "bh_account_200502", "code": "200502", "name": "Leave Days Provision", "translations": {"ar": "حكم أيام الإجازة"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_15", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "bh_account_200503", "code": "200503", "name": "End of Service Provision", "translations": {"ar": "حكم نهاية الخدمة"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_15", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "bh_account_200504", "code": "200504", "name": "Income Tax Provision", "translations": {"ar": "حكم ضريبة الدخل"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_15", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "bh_account_200901", "code": "200901", "name": "VAT Input", "translations": {"ar": "مدخلات ضريبة القيمة المضافة"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_200902", "code": "200902", "name": "VAT Output", "translations": {"ar": "مخرجات ضريبة القيمة المضافة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_16", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200903", "code": "200903", "name": "VAT Receivable", "translations": {"ar": "ضريبة القيمة المضافة مستحقة الدفع"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_16", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "bh_account_200904", "code": "200904", "name": "VAT Payable", "translations": {"ar": "ضريبة القيمة المضافة المستحقة"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_16", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "bh_account_200905", "code": "200905", "name": "Tax Payable", "translations": {"ar": "الضريبة المستحقة"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_16", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "bh_account_200906", "code": "200906", "name": "Tax Receivable", "translations": {"ar": "ضريبة مستحقة القبض"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_200907", "code": "200907", "name": "Recoverable VAT Input - Reverse Charge", "translations": {"ar": "مدخلات ضريبة القيمة المضافة القابلة للاسترداد - الرسوم العكسية"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "bh_account_300100", "code": "300100", "name": "Retained Earnings", "translations": {"ar": "الأرباح المستبقاة"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "bh_account_300101", "code": "300101", "name": "Undistributed Profits/Losses", "translations": {"ar": "الأرباح/الخسائر غير الموزعة"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity_unaffected"}},
+    {"source_id": "bh_account_400100", "code": "400100", "name": "Income Clearing Account", "translations": {"ar": "حساب مقاصة الدخل"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_17", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "bh_account_400101", "code": "400101", "name": "Sales Account", "translations": {"ar": "حساب المبيعات"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_17", "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "bh_account_400102", "code": "400102", "name": "Sales of I/C", "translations": {"ar": "المبيعات بين الشركات التابعة"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_17", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "bh_account_400103", "code": "400103", "name": "Sales from Other Region", "translations": {"ar": "المبيعات من منطقة أخرى"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_17", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "bh_account_400104", "code": "400104", "name": "Management Consultancy Fees", "translations": {"ar": "رسوم الاستشارة الإدارية"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_17", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "bh_account_400105", "code": "400105", "name": "Advertising Income", "translations": {"ar": "دخل الإعلان"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_17", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "bh_account_400201", "code": "400201", "name": "Other Income", "translations": {"ar": "دخل آخر"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_18", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "bh_account_400301", "code": "400301", "name": "Gain on Difference on Exchange", "translations": {"ar": "أرباح فرق صرف العملة"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_19", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "bh_account_400302", "code": "400302", "name": "Cash Difference Gain", "translations": {"ar": "أرباح فرق النقد"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_19", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "bh_account_400303", "code": "400303", "name": "Excess In Till", "translations": {"ar": "الفائض في صندوق النقود"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_19", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "bh_account_400304", "code": "400304", "name": "Cash Discount Gain", "translations": {"ar": "مكاسب الخصم النقدي"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "bh_group_19", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "bh_account_500101", "code": "500101", "name": "Cost of Goods Sold in Trading", "translations": {"ar": "تكاليف البضائع المباعة في التجارة"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_20", "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "bh_account_500102", "code": "500102", "name": "Cost Of Goods Sold I/C Sales", "translations": {"ar": "تكاليف البضائع المباعة - المبيعات بين الشركات التابعة"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_20", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "bh_account_500200", "code": "500200", "name": "Expense Clearing Account", "translations": {"ar": "حساب مقاصة النفقات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_21", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500201", "code": "500201", "name": "Medical Insurance", "translations": {"ar": "التأمين الصحي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_21", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500202", "code": "500202", "name": "End of Service Indemnity", "translations": {"ar": "تعويض نهاية الخدمة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_21", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500203", "code": "500203", "name": "Sponsorship Fees", "translations": {"ar": "رسوم الكفالة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_21", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500301", "code": "500301", "name": "Basic Salary", "translations": {"ar": "الراتب الأساسي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_22", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500302", "code": "500302", "name": "Housing Allowance", "translations": {"ar": "بدل السكن"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_22", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500303", "code": "500303", "name": "Transportation Allowance", "translations": {"ar": "بدل المواصلات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_22", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500304", "code": "500304", "name": "Leave Ticket", "translations": {"ar": "تذكرة الطيران"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_22", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500305", "code": "500305", "name": "Leave Salary", "translations": {"ar": "راتب الإجازة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_22", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500306", "code": "500306", "name": "Sales Commission", "translations": {"ar": "عمولة المبيعات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_22", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500307", "code": "500307", "name": "Visa Expenses", "translations": {"ar": "نفقات الفيزا"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_22", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500308", "code": "500308", "name": "Staff Other Allowances", "translations": {"ar": "نفقات الموظفين الأخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_22", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500309", "code": "500309", "name": "Air tickets", "translations": {"ar": "تذاكر الطيران"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_22", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500401", "code": "500401", "name": "Office Rent", "translations": {"ar": "إيجار المكتب"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_23", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500402", "code": "500402", "name": "Warehouse Rent", "translations": {"ar": "إيجار المستودع"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_23", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500403", "code": "500403", "name": "Water & Electricity", "translations": {"ar": "الماء والكهرباء"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_23", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500404", "code": "500404", "name": "Other Utility Charges", "translations": {"ar": "رسوم المرافق الأخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_23", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500501", "code": "500501", "name": "Audit Fees", "translations": {"ar": "رسوم التدقيق"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_24", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500502", "code": "500502", "name": "Legal fees", "translations": {"ar": "الرسوم القانونية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_24", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500503", "code": "500503", "name": "Trade License Fees", "translations": {"ar": "رسوم الرخصة التجارية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_24", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500504", "code": "500504", "name": "Others - Professional Fees", "translations": {"ar": "غير ذلك - الرسوم المهنية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_24", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500505", "code": "500505", "name": "Insurance", "translations": {"ar": "التأمين"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_24", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500506", "code": "500506", "name": "Previous Year Adjustments Account", "translations": {"ar": "حساب تعديلات العام الماضي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_24", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500601", "code": "500601", "name": "Credit Card Charges", "translations": {"ar": "رسوم البطاقة الائتمانية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_25", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500602", "code": "500602", "name": "Other Bank Charges", "translations": {"ar": "الرسوم البنكية الأخرى"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_25", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500603", "code": "500603", "name": "Bank Finance & Loan Charges", "translations": {"ar": "رسوم القروض والتمويل البنكي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_25", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500651", "code": "500651", "name": "Income Tax Expense", "translations": {"ar": "نفقات ضريبة الدخل"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_26", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500701", "code": "500701", "name": "Other - Advertising Expenses", "translations": {"ar": "غير ذلك - نفقات الإعلان"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_27", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500702", "code": "500702", "name": "Training", "translations": {"ar": "التدريب"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_27", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500703", "code": "500703", "name": "Consultancy Fees", "translations": {"ar": "الرسوم الاستشارية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_27", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500801", "code": "500801", "name": "Amortisation on Leasehold Improvement", "translations": {"ar": "الاستهلاك عند تحسين العقارات المستأجرة"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_28", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "bh_account_500802", "code": "500802", "name": "Vehicle Expenses", "translations": {"ar": "نفقات المركبات"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_28", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "bh_account_500803", "code": "500803", "name": "Depreciation of Motor Vehicles", "translations": {"ar": "إهلاك المركبات"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_28", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "bh_account_500804", "code": "500804", "name": "Depreciation of Furniture & Office Equipment", "translations": {"ar": "إهلاك الأثاث والمعدات المكتبية"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_28", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "bh_account_500805", "code": "500805", "name": "Depreciation of Computer Hard & Soft", "translations": {"ar": "إهلاك أجهزة وبرامج الحاسوب"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_28", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "bh_account_500851", "code": "500851", "name": "Depreciation on Right of use Asset (IFRS 16)", "translations": {"ar": "إهلاك حق استخدام الأصل (IFRS 16)"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_29", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "bh_account_500901", "code": "500901", "name": "Loss on Fixed Assets Disposal", "translations": {"ar": "خسائر التصرف في الأصول الثابتة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_30", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500902", "code": "500902", "name": "Cash Shortage", "translations": {"ar": "القصور النقدي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_30", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500903", "code": "500903", "name": "Loss on Difference on Exchange", "translations": {"ar": "حسائر فرق صرف العملة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_30", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500904", "code": "500904", "name": "Write Off Receivables & Payables", "translations": {"ar": "شطب الحسابات المدينة والدائنة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_30", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500905", "code": "500905", "name": "Write Off Inventory", "translations": {"ar": "شطب المخزون"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_30", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500906", "code": "500906", "name": "Others - Provision & Write Off", "translations": {"ar": "غير ذلك - المَحافظ والتعديلات"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_30", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500907", "code": "500907", "name": "Others", "translations": {"ar": "غير ذلك"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_30", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500908", "code": "500908", "name": "Other Non-Operating Expenses", "translations": {"ar": "النفقات الأخرى غير التشغيلية"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_30", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_500909", "code": "500909", "name": "Cash Difference Loss", "translations": {"ar": "خسائر فريق النقد"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_30", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_501101", "code": "501101", "name": "Telephone", "translations": {"ar": "الهاتف"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_31", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_501102", "code": "501102", "name": "Others - Communication", "translations": {"ar": "غير ذلك - التواصل"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_31", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_501103", "code": "501103", "name": "Maintenance", "translations": {"ar": "الصيانة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_31", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_501104", "code": "501104", "name": "Security & Guard", "translations": {"ar": "الأمن والحراسة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_31", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_501105", "code": "501105", "name": "Cleaning", "translations": {"ar": "التنظيف"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_31", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_501106", "code": "501106", "name": "Others - Office Various Expenses", "translations": {"ar": "غير ذلك - نفقات المكتب المختلفة"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_31", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "bh_account_501107", "code": "501107", "name": "Cash Discount Loss", "translations": {"ar": "خسارة الخصم النقدي"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "bh_group_31", "reconcile": false, "source": {"account_type": "expense"}}
+  ]
+}

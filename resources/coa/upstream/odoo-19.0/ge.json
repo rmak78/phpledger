@@ -1,0 +1,674 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "1d1f2968b853fce27b7e42cfb92b4a0706584fba3dea4c9da459dc8297cde90f",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/ge",
+  "country_code": "GE",
+  "country_name": "Georgia",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Georgia - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_ge' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_ge",
+    "module_name": "Georgia - Accounting",
+    "module_version": null,
+    "contributing_modules": [
+      "l10n_ge"
+    ],
+    "template_code": "ge",
+    "template_chain": [
+      "ge"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_ge/data/template/account.account-ge.csv",
+        "sha256": "d3af4b742f718de14f170eb7ad4250091926e3bde760793047c73519f93d9eee",
+        "rows": 256
+      },
+      {
+        "path": "addons/l10n_ge/data/template/account.group-ge.csv",
+        "sha256": "8f0704b011fe5abaefb9fcc7ad61910ff8e0a6beec56fa0927f3a4641b8d052a",
+        "rows": 50
+      }
+    ],
+    "python_files": [
+      "addons/l10n_ge/models/template_ge.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": 6,
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "120"
+    },
+    "default_sale_tax": "ge_vat_sale_18",
+    "default_purchase_tax": "ge_vat_purchase_18",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "ge_account_140110",
+        "code": "140110",
+        "name": "Accounts Receivable - Trade and Services",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "ge_account_310110",
+        "code": "310110",
+        "name": "Accounts Payable - Trade and Services",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "ge_account_611101",
+        "code": "611101",
+        "name": "Revenue from Sale of Goods",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "ge_account_749000",
+        "code": "749000",
+        "name": "General & Administrative - Others",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "ge_account_161003",
+        "code": "161003",
+        "name": "Stock Valuation",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "ge_account_140120",
+        "code": "140120",
+        "name": "Accounts Receivable (POS)",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "ge_account_120210",
+        "code": "120210",
+        "name": "Cash in Bank Foreign Currency",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "ge_account_810110",
+        "code": "810110",
+        "name": "Foreign Exchange Gains Realized",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "ge_account_820110",
+        "code": "820110",
+        "name": "Foreign Exchange Losses Realized",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "ge_account_810210",
+        "code": "810210",
+        "name": "Cash Difference Gain",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "ge_account_820210",
+        "code": "820210",
+        "name": "Cash Difference Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "ge_account_810710",
+        "code": "810710",
+        "name": "Cash Discount Gain",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "ge_account_710400",
+        "code": "710400",
+        "name": "Cash Discount Loss (Inventory Related)",
+        "resolved": true
+      }
+    ],
+    "production_wip": [
+      {
+        "source_field": "account_production_wip_account_id",
+        "source_id": "ge_account_160230",
+        "code": "160230",
+        "name": "Work-in-Process Inventory",
+        "resolved": true
+      }
+    ],
+    "production_overhead": [
+      {
+        "source_field": "account_production_wip_overhead_account_id",
+        "source_id": "ge_account_160610",
+        "code": "160610",
+        "name": "Cost of Production",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "ge_account_170910",
+        "code": "170910",
+        "name": "Other Prepaid Expenses",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "ge_account_310610",
+        "code": "310610",
+        "name": "Deferred Income (Advances Received)",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 256,
+    "posting_accounts": 256,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 96,
+      "equity": 10,
+      "expense": 73,
+      "income": 29,
+      "liability": 41,
+      "unclassified": 7
+    },
+    "by_subtype": {
+      "cash_bank": 4,
+      "credit_card": 1,
+      "current_asset": 40,
+      "current_liability": 21,
+      "depreciation": 14,
+      "direct_cost": 1,
+      "equity": 8,
+      "expense": 47,
+      "fixed_asset": 19,
+      "income": 20,
+      "non_current_asset": 16,
+      "non_current_liability": 6,
+      "off_balance": 7,
+      "other_expense": 11,
+      "other_income": 9,
+      "payable": 13,
+      "prepayment": 5,
+      "receivable": 12,
+      "retained_earnings": 2
+    },
+    "unclassified_root_type": 7,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 4,
+      "expense": 1,
+      "income": 1,
+      "payables": 13,
+      "receivables": 12
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "ka"
+    ],
+    "groups": 50
+  },
+  "groups": [
+    {"source_id": "ge_group_1", "code_prefix_start": "1", "code_prefix_end": "1", "name": "Assets", "translations": {"ka": "აქტივები"}, "parent_source_id": null, "path": ["Assets"]},
+    {"source_id": "ge_group_2", "code_prefix_start": "2", "code_prefix_end": "2", "name": "Non Current Assets", "translations": {"ka": "გრძელვადიანი აქტივები"}, "parent_source_id": null, "path": ["Non Current Assets"]},
+    {"source_id": "ge_group_3", "code_prefix_start": "3", "code_prefix_end": "3", "name": "Liabilities", "translations": {"ka": "ვალდებულებები"}, "parent_source_id": null, "path": ["Liabilities"]},
+    {"source_id": "ge_group_4", "code_prefix_start": "4", "code_prefix_end": "4", "name": "Long Term Liabilities", "translations": {"ka": "გრძელვადიანი ვალდებულებები"}, "parent_source_id": null, "path": ["Long Term Liabilities"]},
+    {"source_id": "ge_group_5", "code_prefix_start": "5", "code_prefix_end": "5", "name": "Equity", "translations": {"ka": "კაპიტალი"}, "parent_source_id": null, "path": ["Equity"]},
+    {"source_id": "ge_group_6", "code_prefix_start": "6", "code_prefix_end": "6", "name": "Revenue", "translations": {"ka": "შემოსავლები"}, "parent_source_id": null, "path": ["Revenue"]},
+    {"source_id": "ge_group_7", "code_prefix_start": "7", "code_prefix_end": "7", "name": "Expenses", "translations": {"ka": "საოპერაციო ხარჯები"}, "parent_source_id": null, "path": ["Expenses"]},
+    {"source_id": "ge_group_8", "code_prefix_start": "8", "code_prefix_end": "8", "name": "Non-Operating Income Expenses", "translations": {"ka": "არასაოპერაციო შემოსავლები და ხარჯები"}, "parent_source_id": null, "path": ["Non-Operating Income Expenses"]},
+    {"source_id": "ge_group_9", "code_prefix_start": "9", "code_prefix_end": "9", "name": "Other Non Operational and Control Accounts", "translations": {"ka": "სხვა არასაოპერაციო და საკონტროლო ანგარიშები"}, "parent_source_id": null, "path": ["Other Non Operational and Control Accounts"]},
+    {"source_id": "ge_group_11", "code_prefix_start": "11", "code_prefix_end": "11", "name": "Cash on Hand", "translations": {"ka": "სალარო (ნაღდი ფული)"}, "parent_source_id": "ge_group_1", "path": ["Assets", "Cash on Hand"]},
+    {"source_id": "ge_group_12", "code_prefix_start": "12", "code_prefix_end": "12", "name": "Cash in Bank Accounts", "translations": {"ka": "ფული საბანკო ანგარიშებზე"}, "parent_source_id": "ge_group_1", "path": ["Assets", "Cash in Bank Accounts"]},
+    {"source_id": "ge_group_13", "code_prefix_start": "13", "code_prefix_end": "13", "name": "Short Term Investments", "translations": {"ka": "მოკლევადიანი ინვესტიციები"}, "parent_source_id": "ge_group_1", "path": ["Assets", "Short Term Investments"]},
+    {"source_id": "ge_group_14", "code_prefix_start": "14", "code_prefix_end": "14", "name": "Accounts Receivable", "translations": {"ka": "დებიტორული დავალიანება"}, "parent_source_id": "ge_group_1", "path": ["Assets", "Accounts Receivable"]},
+    {"source_id": "ge_group_15", "code_prefix_start": "15", "code_prefix_end": "15", "name": "Advances", "translations": {"ka": "ავანსები"}, "parent_source_id": "ge_group_1", "path": ["Assets", "Advances"]},
+    {"source_id": "ge_group_16", "code_prefix_start": "16", "code_prefix_end": "16", "name": "Inventory", "translations": {"ka": "მარაგები"}, "parent_source_id": "ge_group_1", "path": ["Assets", "Inventory"]},
+    {"source_id": "ge_group_17", "code_prefix_start": "17", "code_prefix_end": "17", "name": "Prepaid Expenses", "translations": {"ka": "წინასწარ გადახდილი ხარჯები"}, "parent_source_id": "ge_group_1", "path": ["Assets", "Prepaid Expenses"]},
+    {"source_id": "ge_group_18", "code_prefix_start": "18", "code_prefix_end": "18", "name": "Accrued Receivables", "translations": {"ka": "დარიცხული მოთხოვნები"}, "parent_source_id": "ge_group_1", "path": ["Assets", "Accrued Receivables"]},
+    {"source_id": "ge_group_19", "code_prefix_start": "19", "code_prefix_end": "19", "name": "Other Current Assets", "translations": {"ka": "სხვა მიმდინარე აქტივები"}, "parent_source_id": "ge_group_1", "path": ["Assets", "Other Current Assets"]},
+    {"source_id": "ge_group_21", "code_prefix_start": "21", "code_prefix_end": "21", "name": "Fixed Assets", "translations": {"ka": "ძირითადი საშუალებები"}, "parent_source_id": "ge_group_2", "path": ["Non Current Assets", "Fixed Assets"]},
+    {"source_id": "ge_group_22", "code_prefix_start": "22", "code_prefix_end": "22", "name": "Accumulated Depreciation PPE", "translations": {"ka": "დაგროვილი ცვეთა — ძირითადი საშუალებები"}, "parent_source_id": "ge_group_2", "path": ["Non Current Assets", "Accumulated Depreciation PPE"]},
+    {"source_id": "ge_group_25", "code_prefix_start": "25", "code_prefix_end": "25", "name": "Intangible Assets Cost", "translations": {"ka": "არამატერიალური აქტივები"}, "parent_source_id": "ge_group_2", "path": ["Non Current Assets", "Intangible Assets Cost"]},
+    {"source_id": "ge_group_26", "code_prefix_start": "26", "code_prefix_end": "26", "name": "Accumulated Amortisation Intangibles", "translations": {"ka": "დაგროვილი ამორტიზაცია — არამატერიალური აქტივები"}, "parent_source_id": "ge_group_2", "path": ["Non Current Assets", "Accumulated Amortisation Intangibles"]},
+    {"source_id": "ge_group_27", "code_prefix_start": "27", "code_prefix_end": "27", "name": "Long Term Receivables", "translations": {"ka": "გრძელვადიანი მოთხოვნები"}, "parent_source_id": "ge_group_2", "path": ["Non Current Assets", "Long Term Receivables"]},
+    {"source_id": "ge_group_28", "code_prefix_start": "28", "code_prefix_end": "28", "name": "Long Term Investments", "translations": {"ka": "გრძელვადიანი ინვესტიციები"}, "parent_source_id": "ge_group_2", "path": ["Non Current Assets", "Long Term Investments"]},
+    {"source_id": "ge_group_31", "code_prefix_start": "31", "code_prefix_end": "31", "name": "Short Term Liabilities", "translations": {"ka": "მოკლევადიანი ვალდებულებები"}, "parent_source_id": "ge_group_3", "path": ["Liabilities", "Short Term Liabilities"]},
+    {"source_id": "ge_group_32", "code_prefix_start": "32", "code_prefix_end": "32", "name": "Short Term Loans", "translations": {"ka": "მოკლევადიანი სესხები"}, "parent_source_id": "ge_group_3", "path": ["Liabilities", "Short Term Loans"]},
+    {"source_id": "ge_group_33", "code_prefix_start": "33", "code_prefix_end": "33", "name": "Tax and Government Liabilities", "translations": {"ka": "საგადასახადო ვალდებულებები"}, "parent_source_id": "ge_group_3", "path": ["Liabilities", "Tax and Government Liabilities"]},
+    {"source_id": "ge_group_34", "code_prefix_start": "34", "code_prefix_end": "34", "name": "Accrued Liabilities", "translations": {"ka": "დარიცხული ვალდებულებები"}, "parent_source_id": "ge_group_3", "path": ["Liabilities", "Accrued Liabilities"]},
+    {"source_id": "ge_group_41", "code_prefix_start": "41", "code_prefix_end": "41", "name": "Long Term Loans", "translations": {"ka": "გრძელვადიანი სასესხო ვალდებულებები"}, "parent_source_id": "ge_group_4", "path": ["Long Term Liabilities", "Long Term Loans"]},
+    {"source_id": "ge_group_44", "code_prefix_start": "44", "code_prefix_end": "44", "name": "Deferred Income", "translations": {"ka": "გადავადებული შემოსავალი"}, "parent_source_id": "ge_group_4", "path": ["Long Term Liabilities", "Deferred Income"]},
+    {"source_id": "ge_group_45", "code_prefix_start": "45", "code_prefix_end": "45", "name": "Provisions", "translations": {"ka": "რეზერვები"}, "parent_source_id": "ge_group_4", "path": ["Long Term Liabilities", "Provisions"]},
+    {"source_id": "ge_group_51", "code_prefix_start": "51", "code_prefix_end": "51", "name": "Capital & Contributions", "translations": {"ka": "საწესდებო კაპიტალი"}, "parent_source_id": "ge_group_5", "path": ["Equity", "Capital & Contributions"]},
+    {"source_id": "ge_group_53", "code_prefix_start": "53", "code_prefix_end": "53", "name": "Profit & Loss", "translations": {"ka": "მოგება / ზარალი"}, "parent_source_id": "ge_group_5", "path": ["Equity", "Profit & Loss"]},
+    {"source_id": "ge_group_54", "code_prefix_start": "54", "code_prefix_end": "54", "name": "Reserves", "translations": {"ka": "რეზერვები"}, "parent_source_id": "ge_group_5", "path": ["Equity", "Reserves"]},
+    {"source_id": "ge_group_61", "code_prefix_start": "61", "code_prefix_end": "61", "name": "Core Revenue", "translations": {"ka": "საოპერაციო შემოსავალი"}, "parent_source_id": "ge_group_6", "path": ["Revenue", "Core Revenue"]},
+    {"source_id": "ge_group_63", "code_prefix_start": "63", "code_prefix_end": "63", "name": "Contra Revenue", "translations": {"ka": "კონტრ-შემოსავალი"}, "parent_source_id": "ge_group_6", "path": ["Revenue", "Contra Revenue"]},
+    {"source_id": "ge_group_65", "code_prefix_start": "65", "code_prefix_end": "65", "name": "Other Operating Revenue", "translations": {"ka": "სხვა საოპერაციო შემოსავალი"}, "parent_source_id": "ge_group_6", "path": ["Revenue", "Other Operating Revenue"]},
+    {"source_id": "ge_group_66", "code_prefix_start": "66", "code_prefix_end": "66", "name": "Intercompany Revenue", "translations": {"ka": "შიდა ჯგუფური შემოსავალი"}, "parent_source_id": "ge_group_6", "path": ["Revenue", "Intercompany Revenue"]},
+    {"source_id": "ge_group_67", "code_prefix_start": "67", "code_prefix_end": "67", "name": "Government & Grant-Related Revenue", "translations": {"ka": "გრანტები და სუბსიდიები"}, "parent_source_id": "ge_group_6", "path": ["Revenue", "Government & Grant-Related Revenue"]},
+    {"source_id": "ge_group_71", "code_prefix_start": "71", "code_prefix_end": "71", "name": "Cost of Goods Sold", "translations": {"ka": "რეალიზებული პროდუქციის თვითღირებულება"}, "parent_source_id": "ge_group_7", "path": ["Expenses", "Cost of Goods Sold"]},
+    {"source_id": "ge_group_72", "code_prefix_start": "72", "code_prefix_end": "72", "name": "Employee Expenses", "translations": {"ka": "პერსონალის ხარჯები"}, "parent_source_id": "ge_group_7", "path": ["Expenses", "Employee Expenses"]},
+    {"source_id": "ge_group_73", "code_prefix_start": "73", "code_prefix_end": "73", "name": "Sales & Marketing Expenses", "translations": {"ka": "მარკეტინგისა და გაყიდვების ხარჯები"}, "parent_source_id": "ge_group_7", "path": ["Expenses", "Sales & Marketing Expenses"]},
+    {"source_id": "ge_group_74", "code_prefix_start": "74", "code_prefix_end": "74", "name": "General & Administrative Expenses", "translations": {"ka": "საერთო და ადმინისტრაციული ხარჯები"}, "parent_source_id": "ge_group_7", "path": ["Expenses", "General & Administrative Expenses"]},
+    {"source_id": "ge_group_75", "code_prefix_start": "75", "code_prefix_end": "75", "name": "Travel & Representation", "translations": {"ka": "სამივლინებო და წარმომადგენლობითი ხარჯები"}, "parent_source_id": "ge_group_7", "path": ["Expenses", "Travel & Representation"]},
+    {"source_id": "ge_group_76", "code_prefix_start": "76", "code_prefix_end": "76", "name": "Impairment & Credit Losses", "translations": {"ka": "გაუფასურება და საკრედიტო ზარალი"}, "parent_source_id": "ge_group_7", "path": ["Expenses", "Impairment & Credit Losses"]},
+    {"source_id": "ge_group_77", "code_prefix_start": "77", "code_prefix_end": "77", "name": "Depreciation & Amortisation", "translations": {"ka": "ცვეთა და ამორტიზაცია"}, "parent_source_id": "ge_group_7", "path": ["Expenses", "Depreciation & Amortisation"]},
+    {"source_id": "ge_group_81", "code_prefix_start": "81", "code_prefix_end": "81", "name": "Non-Operating Income", "translations": {"ka": "არასაოპერაციო შემოსავლები"}, "parent_source_id": "ge_group_8", "path": ["Non-Operating Income Expenses", "Non-Operating Income"]},
+    {"source_id": "ge_group_82", "code_prefix_start": "82", "code_prefix_end": "82", "name": "Non-Operating Expenses", "translations": {"ka": "არასაოპერაციო ხარჯები"}, "parent_source_id": "ge_group_8", "path": ["Non-Operating Income Expenses", "Non-Operating Expenses"]},
+    {"source_id": "ge_group_91", "code_prefix_start": "91", "code_prefix_end": "91", "name": "Corporate Income Taxes", "translations": {"ka": "მოგების გადასახადი"}, "parent_source_id": "ge_group_9", "path": ["Other Non Operational and Control Accounts", "Corporate Income Taxes"]},
+    {"source_id": "ge_group_99", "code_prefix_start": "99", "code_prefix_end": "99", "name": "Zero Balance Control Accounts", "translations": {"ka": "ნულოვანი ნაშთის საკონტროლო ანგარიშები"}, "parent_source_id": "ge_group_9", "path": ["Other Non Operational and Control Accounts", "Zero Balance Control Accounts"]}
+  ],
+  "accounts": [
+    {"source_id": "ge_account_100001", "code": "100001", "name": "Liquidity Transfer", "translations": {"ka": "ფულადი სახსრების ტრანსფერი"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_1", "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_110110", "code": "110110", "name": "Cash on Hand", "translations": {"ka": "სალარო (ნაღდი ფული)"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_11", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "ge_account_120001", "code": "120001", "name": "Bank Suspense", "translations": {"ka": "საბანკო გარდამავალი ანგარიში"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_12", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_120110", "code": "120110", "name": "Cash in Bank Local Currency", "translations": {"ka": "ფული ბანკში (ეროვნული ვალუტა)"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_12", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "ge_account_120210", "code": "120210", "name": "Cash in Bank Foreign Currency", "translations": {"ka": "ფული ბანკში (უცხოური ვალუტა)"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_12", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "account_journal_payment_debit_account_id", "code": "120310", "name": "Outstanding Receipts", "translations": {"ka": "გზაში მყოფი შემოსვლები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_12", "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "account_journal_payment_credit_account_id", "code": "120410", "name": "Outstanding Payments", "translations": {"ka": "გზაში მყოფი გადასახდელები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_12", "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_120990", "code": "120990", "name": "Other Bank Accounts", "translations": {"ka": "სხვა საბანკო ანგარიშები"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_12", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "ge_account_130110", "code": "130110", "name": "Current Portion of Long-Term Investments", "translations": {"ka": "გრძელვადიანი ინვესტიციების მიმდინარე ნაწილი"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_13", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_130990", "code": "130990", "name": "Other Short-Term Investments", "translations": {"ka": "სხვა მოკლევადიანი ინვესტიციები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_13", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_140110", "code": "140110", "name": "Accounts Receivable - Trade and Services", "translations": {"ka": "დებიტორული დავალიანება — მიწოდებიდან და მომსახურებიდან"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_14", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ge_account_140120", "code": "140120", "name": "Accounts Receivable (POS)", "translations": {"ka": "დებიტორული დავალიანება — POS"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_14", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ge_account_140130", "code": "140130", "name": "Current Portion of Long-Term Receivables", "translations": {"ka": "გრძელვადიანი მოთხოვნების მიმდინარე ნაწილი"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_14", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ge_account_140140", "code": "140140", "name": "Allowance for Expected Credit Losses (ECL)", "translations": {"ka": "მოსალოდნელი საკრედიტო ზარალის რეზერვი"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_14", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ge_account_140310", "code": "140310", "name": "Receivables from Employees", "translations": {"ka": "მოთხოვნები თანამშრომლების მიმართ"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_14", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_140320", "code": "140320", "name": "Receivables from Management / Supervisory Bodies", "translations": {"ka": "მოთხოვნები ხელმძღვანელობისა და სამეთვალყურეო ორგანოებიდან"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_14", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_140410", "code": "140410", "name": "Receivables from Loans to Partners", "translations": {"ka": "პარტნიორებზე გაცემული სესხები"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_14", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ge_account_140510", "code": "140510", "name": "Receivables from Affiliated Enterprises (I/C)", "translations": {"ka": "შიდაჯგუფური მოთხოვნები (I/C)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_14", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ge_account_140610", "code": "140610", "name": "VAT Receivable", "translations": {"ka": "გადახდილი დღგ (ჩასათვლელი დღგ)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_14", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ge_account_140710", "code": "140710", "name": "Owner Current Account", "translations": {"ka": "მფლობელის მიმდინარე ანგარიში"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_14", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ge_account_140990", "code": "140990", "name": "Other Short-Term Receivables", "translations": {"ka": "სხვა მოკლევადიანი მოთხოვნები"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_14", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ge_account_150110", "code": "150110", "name": "Advances Paid to Suppliers", "translations": {"ka": "მომწოდებლებზე გაცემული ავანსები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_15", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_150120", "code": "150120", "name": "Advances to Contractors", "translations": {"ka": "კონტრაქტორებზე გაცემული ავანსები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_15", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_150310", "code": "150310", "name": "Payroll Advances", "translations": {"ka": "ავანსად გაცემული ხელფასი"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_15", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_150510", "code": "150510", "name": "Advances Paid to Affiliated Enterprises (I/C)", "translations": {"ka": "ასოცირებულ საწარმოებზე გაცემილი ავანსები (შიდასაჯგუფო)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_15", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_160110", "code": "160110", "name": "Goods", "translations": {"ka": "საქონელი"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_160210", "code": "160210", "name": "Raw Materials and Supplies", "translations": {"ka": "ნედლეული და მასალები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_160230", "code": "160230", "name": "Work-in-Process Inventory", "translations": {"ka": "დაუმთავრებელი წარმოება"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_160410", "code": "160410", "name": "Finished Goods", "translations": {"ka": "მზა პროდუქცია"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_160510", "code": "160510", "name": "Consumable Materials", "translations": {"ka": "სახარჯო მასალა"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_160520", "code": "160520", "name": "Maintenance & Operating Supplies", "translations": {"ka": "ტექნიკური და საექსპლუატაციო მასალები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_160530", "code": "160530", "name": "Fuel", "translations": {"ka": "საწვავი"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_160610", "code": "160610", "name": "Cost of Production", "translations": {"ka": "წარმოების თვითღირებულება"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_160810", "code": "160810", "name": "Goods in Transit", "translations": {"ka": "გზაში მყოფი საქონელი"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_160990", "code": "160990", "name": "Other Inventory", "translations": {"ka": "სხვა მარაგები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_161001", "code": "161001", "name": "Intermediate Inventory Account", "translations": {"ka": "მარაგების შუალედური ანგარიში"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_161002", "code": "161002", "name": "Inventory Adjustments / Differences", "translations": {"ka": "მარაგების კორექტირება / სხვაობები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_161003", "code": "161003", "name": "Stock Valuation", "translations": {"ka": "მარაგების შეფასება"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_16", "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_variation_id": "ge_account_820510"}}},
+    {"source_id": "ge_account_170110", "code": "170110", "name": "Prepaid Medical Insurance", "translations": {"ka": "წინასწარ გადახდილი სამედიცინო დაზღვევა"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_17", "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "ge_account_170120", "code": "170120", "name": "Prepaid Vehicle Insurance", "translations": {"ka": "წინასწარ გადახდილი ავტოსატრანსპორტო დაზღვევა"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_17", "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "ge_account_170190", "code": "170190", "name": "Prepaid Other Insurance", "translations": {"ka": "წინასწარ გადახდილი სხვა დაზღვევა"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_17", "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "ge_account_170250", "code": "170250", "name": "Prepaid Sponsorship", "translations": {"ka": "წინასწარ გადახდილი სპონსორობა"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_17", "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "ge_account_170910", "code": "170910", "name": "Other Prepaid Expenses", "translations": {"ka": "სხვა წინასწარ გადახდილი ხარჯები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_17", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_170920", "code": "170920", "name": "Prepaid Other Tax", "translations": {"ka": "წინასწარ გადახდილი სხვა გადასახადები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_17", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_170990", "code": "170990", "name": "Other Prepayments", "translations": {"ka": "სხვა წინასწარი გადახდები"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_17", "reconcile": false, "source": {"account_type": "asset_prepayments"}},
+    {"source_id": "ge_account_180110", "code": "180110", "name": "Dividends Receivable", "translations": {"ka": "მისაღები დივიდენდი"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_18", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ge_account_180120", "code": "180120", "name": "Interest Receivable", "translations": {"ka": "მისაღები პროცენტი"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_18", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ge_account_180210", "code": "180210", "name": "Accrued Revenue / Unbilled Services (Service WIP)", "translations": {"ka": "დარიცხული შემოსავალი  (WIP)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_18", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "ge_account_180910", "code": "180910", "name": "Other Accrued Receivables", "translations": {"ka": "სხვა დარიცხული მოთხოვნები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_18", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_190110", "code": "190110", "name": "Refundable Deposits", "translations": {"ka": "დაბრუნებადი დეპოზიტები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_19", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_190910", "code": "190910", "name": "Other Current Assets", "translations": {"ka": "სხვა მიმდინარე აქტივები"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_19", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_210001", "code": "210001", "name": "Transit Account for Fixed Assets", "translations": {"ka": "ძირითადი საშუალებების სატრანზიტო ანგარიში"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_21", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_210110", "code": "210110", "name": "Land", "translations": {"ka": "მიწა"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_21", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_210120", "code": "210120", "name": "Construction in Progress", "translations": {"ka": "დაუმთავრებელი მშენებლობა"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_21", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_211210", "code": "211210", "name": "Buildings and Constructions", "translations": {"ka": "შენობები და ნაგებობები"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_21", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_211310", "code": "211310", "name": "Machinery and Equipment", "translations": {"ka": "მანქანა-დანადგარები და აღჭურვილობა"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_21", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_211410", "code": "211410", "name": "Office Equipment", "translations": {"ka": "საოფისე აღჭურვილობა"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_21", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_211420", "code": "211420", "name": "Furniture and Fixtures", "translations": {"ka": "ავეჯი და ინვენტარი"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_21", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_211510", "code": "211510", "name": "Vehicles", "translations": {"ka": "სატრანსპორტო საშუალებები"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_21", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_212610", "code": "212610", "name": "Leasehold Improvements", "translations": {"ka": "იჯარით აღებული ქონების გაუმჯობესება"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_21", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_213810", "code": "213810", "name": "Right-of-Use Asset (IFRS 16)", "translations": {"ka": "აქტივების გამოყენების უფლება (IFRS 16)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_21", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_216990", "code": "216990", "name": "Other Fixed Assets", "translations": {"ka": "სხვა ძირითადი აქტივები"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_21", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_221210", "code": "221210", "name": "Depreciation Buildings & Construction", "translations": {"ka": "დაგროვილი ცვეთა — შენობა-ნაგებობები"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_22", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_221310", "code": "221310", "name": "Depreciation Machinery and Equipment", "translations": {"ka": "დაგროვილი ცვეთა — მანქანა-დანადგარები და მოწყობილობები"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_22", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_221410", "code": "221410", "name": "Depreciation Office Equipment", "translations": {"ka": "დაგროვილი ცვეთა— საოფისე ტექნიკა"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_22", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_221420", "code": "221420", "name": "Depreciation Furniture and Fixtures", "translations": {"ka": "დაგროვილი ცვეთა— ავეჯი და ინვენტარი"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_22", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_221510", "code": "221510", "name": "Depreciation Vehicles", "translations": {"ka": "დაგროვილი ცვეთა— სატრანსპორტო საშუალებები"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_22", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_222610", "code": "222610", "name": "Depreciation Leasehold Improvements", "translations": {"ka": "დაგროვილი ცვეთა— იჯარით აღებული ქონების გაუმჯობესება"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_22", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_223810", "code": "223810", "name": "Depreciation Right-of-Use Assets", "translations": {"ka": "დაგროვილი ცვეთა — აქტივების გამოყენების უფლება (IFRS 16)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_22", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_225990", "code": "225990", "name": "Depreciation Other Fixed Assets", "translations": {"ka": "დაგროვილი ცვეთა — სხვა ძირითადი საშუალებები"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_22", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "ge_account_256110", "code": "256110", "name": "Licenses", "translations": {"ka": "ლიცენზიები"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_25", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_256210", "code": "256210", "name": "Computer Software", "translations": {"ka": "პროგრამული უზრუნველყოფა"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_25", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_256310", "code": "256310", "name": "Franchises", "translations": {"ka": "ფრანშიზა"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_25", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_256410", "code": "256410", "name": "Patents", "translations": {"ka": "პატენტები"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_25", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_256510", "code": "256510", "name": "Goodwill", "translations": {"ka": "გუდვილი"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_25", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_256990", "code": "256990", "name": "Other Intangible Assets", "translations": {"ka": "სხვა არამატერიალური აქტივები"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_25", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_266110", "code": "266110", "name": "Amortisation Licenses", "translations": {"ka": "ლიცენზიების დაგროვილი ამორტიზაცია"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_26", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_266210", "code": "266210", "name": "Amortisation Computer Software", "translations": {"ka": "კომპიუტერული პროგრამების ამორტიზაცია"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_26", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_266310", "code": "266310", "name": "Amortisation Franchises", "translations": {"ka": "ამორტიზაცია — ფრანშიზა"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_26", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_266410", "code": "266410", "name": "Amortisation Patents", "translations": {"ka": "პატენტების ამორტიზაცია"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_26", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_266510", "code": "266510", "name": "Amortisation Goodwill", "translations": {"ka": "გუდვილის ამორტიზაცია"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_26", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_266990", "code": "266990", "name": "Amortisation Other Intangibles", "translations": {"ka": "სხვა არამატერიალური აქტივების ამორტიზაცია"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_26", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_270510", "code": "270510", "name": "Intercompany Loans Receivable (I/C)", "translations": {"ka": "დაკავშირებულ მხარეებზე გაცემული სესხები (მისაღები)"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_27", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_270990", "code": "270990", "name": "Other Long-Term Receivables", "translations": {"ka": "სხვა გრძელვადიანი მოთხოვნები"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_27", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_280110", "code": "280110", "name": "Equity Investments", "translations": {"ka": "წილობრივ ინსტრუმენტებში ინვესტიციები"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_28", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_280210", "code": "280210", "name": "Debt Investments", "translations": {"ka": "ინვესტიციები სესხებში"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_28", "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "ge_account_310110", "code": "310110", "name": "Accounts Payable - Trade and Services", "translations": {"ka": "მიწოდებიდან და მომსახურებიდან წარმოქმნილი ვალდებულებები"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_31", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_310210", "code": "310210", "name": "Bills to receive", "translations": {"ka": "გადასახდელი თამასუქები"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_31", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_310310", "code": "310310", "name": "Salaries Payable", "translations": {"ka": "გადასახდელი ხელფასები"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_31", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_310315", "code": "310315", "name": "Liabilities to Employees (Non-Salary)", "translations": {"ka": "ვალდებულებები თანამშრომლების მიმართ (გარდა ხელფასისა)"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_31", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_310510", "code": "310510", "name": "Liabilities to Affiliated Enterprises (I/C)", "translations": {"ka": "ვალდებულებები დაკავშირებულ მხარეებთან"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_31", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_310610", "code": "310610", "name": "Deferred Income (Advances Received)", "translations": {"ka": "გადავადებული შემოსავალი (მიღებული ავანსები)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_31", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_310710", "code": "310710", "name": "Credit card", "translations": {"ka": "საკრედიტო ბარათი"}, "root_type": "liability", "subtype": "credit_card", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_31", "reconcile": false, "source": {"account_type": "liability_credit_card"}},
+    {"source_id": "ge_account_310990", "code": "310990", "name": "Other Short-Term Liabilities", "translations": {"ka": "სხვა მოკლევადიანი ვალდებულებები"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_31", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_320110", "code": "320110", "name": "Short-Term Loans", "translations": {"ka": "მოკლევადიანი სასესხო ვალდებულებები"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_32", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_320210", "code": "320210", "name": "Current Portion of Long-Term Loans", "translations": {"ka": "გრძელვადიანი სესხების მიმდინარე ნაწილი"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_32", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_320510", "code": "320510", "name": "Loans from Affiliated Enterprises (I/C)", "translations": {"ka": "დაკავშირებული მხარეებისაგან მიღებული სესხები"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_32", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_320990", "code": "320990", "name": "Other Short-Term Financial Liabilities", "translations": {"ka": "სხვა მოკლევადიანი ფინანსური ვალდებულებები"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_32", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_330010", "code": "330010", "name": "General Tax Card", "translations": {"ka": "ნაერთი საგადასახადო ბარათი"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_331110", "code": "331110", "name": "Corporate Income Taxes", "translations": {"ka": "მოგების გადასახადი"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_331210", "code": "331210", "name": "Withholding Tax (WHT) Accrued", "translations": {"ka": "დარიცხული საშემოსავლო გადასახადი გადახდის წყაროსთან (WHT)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_331211", "code": "331211", "name": "Withholding Tax (WHT) Settled", "translations": {"ka": "გადახდის წყაროსთან დაკავებული გადასახადი — ვადადამდგარი"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_331212", "code": "331212", "name": "Withholding Tax (WHT) Transition Account", "translations": {"ka": "არარეზიდენტისთვის გადახდის წყაროსთან დაკავებული გადასახადი — შუალედური ანგარიში"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_331310", "code": "331310", "name": "Employee Personal Income Tax (PIT) Accrued", "translations": {"ka": "საშემოსავლო გადასახადი ხელფასებზე — დარიცხული"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_331311", "code": "331311", "name": "Employee Personal Income Tax (PIT) Prepaid Settled", "translations": {"ka": "საშემოსავლო გადასახადი ხელფასებზე — ვადადამდგარი"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_332010", "code": "332010", "name": "Pension Contribution Accrued", "translations": {"ka": "დარიცხული საპენსიო შენატანი"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_332011", "code": "332011", "name": "Pension Contribution Prepaid Settled", "translations": {"ka": "საპენსიო შენატანი — ვადადამდგარი"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_333001", "code": "333001", "name": "VAT Settlement Account", "translations": {"ka": "დღგ-ს ანგარიშსწორების ანგარიში"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_333002", "code": "333002", "name": "VAT Output", "translations": {"ka": "დღგ დასაბეგრ ოპერაციებზე"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_333010", "code": "333010", "name": "VAT Payable", "translations": {"ka": "გადასახდელი დღგ"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_333011", "code": "333011", "name": "VAT Accrued on Customer advances", "translations": {"ka": "გადასახდელი დღგ მიღებულ ავანსებზე"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_333040", "code": "333040", "name": "VAT Payable on Imports", "translations": {"ka": "გადასახდელი დღგ იმპორტზე"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_333060", "code": "333060", "name": "Reverse Charge VAT Payable", "translations": {"ka": "გადასახდელი დღგ უკუდაბეგვრაზე"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_334002", "code": "334002", "name": "Input VAT Pending Invoice", "translations": {"ka": "ჩასათვლელი დღგ მისაღებ ინვოისზე"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_334010", "code": "334010", "name": "Input VAT Local Purchases", "translations": {"ka": "ჩასათვლელი დღგ (ადგილობრივი შესყიდვებიდან)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_334020", "code": "334020", "name": "Input VAT Advances to Suppliers", "translations": {"ka": "ჩასათვლელი დღგ მომწოდებლებზე გაცემული ავანსებიდან"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_334030", "code": "334030", "name": "Input VAT on Imports", "translations": {"ka": "ჩასათვლელი დღგ იმპორტიდან"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_334040", "code": "334040", "name": "Input Reverse Charge VAT", "translations": {"ka": "ჩასათვლელი უკუდაბეგვრის დღგ"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_335010", "code": "335010", "name": "Excise Tax Accrued", "translations": {"ka": "გადასახდელი აქციზის გადასახადი"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_335120", "code": "335120", "name": "Excise Tax Paid (Input / Offset)", "translations": {"ka": "ჩასათვლელი აქციზის გადასახადი"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_336010", "code": "336010", "name": "Import Tax", "translations": {"ka": "საბაჟო (იმპორტის) გადასახადი"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_337010", "code": "337010", "name": "Property Tax", "translations": {"ka": "ქონების გადასახადი"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_337020", "code": "337020", "name": "Property Tax Prepayment", "translations": {"ka": "წინასწარ გადახდილი ქონების გადასახადი"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "ge_account_339090", "code": "339090", "name": "Other Tax Liabilities", "translations": {"ka": "სხვა საგადასახადო ვალდებულებები"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_33", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "ge_account_340110", "code": "340110", "name": "Accrued Interest Payable", "translations": {"ka": "გადასახდელი პროცენტის დარიცხვა"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_34", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_340120", "code": "340120", "name": "Accrued Dividends Payable", "translations": {"ka": "გადასახდელი დივიდენდების დარიცხვა"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_34", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_340210", "code": "340210", "name": "Accrued Warranty Service Obligation", "translations": {"ka": "დარიცხული ვალდებულება საგარანტიო მომსახურებაზე"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_34", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_340310", "code": "340310", "name": "Accrued Vacation Leave Liability", "translations": {"ka": "გამოუყენებელი შვებულების დარიცხული ვალდებულება"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_34", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_340320", "code": "340320", "name": "Accrued Bonuses", "translations": {"ka": "დარიცხული ბონუსები"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_34", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_340330", "code": "340330", "name": "Accrued Employee-Related Expenses", "translations": {"ka": "პერსონალთან დაკავშირებული სხვა დარიცხული ხარჯები"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_34", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_340510", "code": "340510", "name": "Accruals to (I/C)", "translations": {"ka": "დარიცხული ვალდებულებები დაკავშირებული მხარეების მიმართ"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_34", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_340990", "code": "340990", "name": "Other Accrued Liabilities", "translations": {"ka": "სხვა დარიცხული ვალდებულებები"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_34", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "ge_account_410110", "code": "410110", "name": "Long Term Loans", "translations": {"ka": "გრძელვადიანი სესხები"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_41", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "ge_account_410120", "code": "410120", "name": "Finance Lease Liabilities", "translations": {"ka": "ვალდებულებები ფინანსურ იჯარაზე"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_41", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "ge_account_410510", "code": "410510", "name": "Long Term Intercompany Loans Payable (I/C)", "translations": {"ka": "გრძელვადიანი სესხები დაკავშირებული მხარეების მიმართ"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_41", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "ge_account_410990", "code": "410990", "name": "Other Long-Term Liabilities", "translations": {"ka": "სხვა გრძელვადიანი ვალდებულებები"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_41", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "ge_account_440610", "code": "440610", "name": "Deferred Income Non-Current", "translations": {"ka": "გრძელვადიანი გადავადებული შემოსავალი"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_44", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "ge_account_450990", "code": "450990", "name": "Other Provisions", "translations": {"ka": "სხვა რეზერვები / ანარიცხები"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_45", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "ge_account_510110", "code": "510110", "name": "Charter Capital", "translations": {"ka": "საწესდებო კაპიტალი"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_51", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ge_account_510210", "code": "510210", "name": "Capital & Contributions", "translations": {"ka": "კაპიტალი და შენატანები"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_51", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ge_account_510310", "code": "510310", "name": "Dividends", "translations": {"ka": "დივიდენდები"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_51", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ge_account_510710", "code": "510710", "name": "Funding from Head Office Parent Company", "translations": {"ka": "დაფინანსება სათავო ოფისიდან / მშობელი კომპანიისგან"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_51", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ge_account_530110", "code": "530110", "name": "Retained Earnings", "translations": {"ka": "გაუნაწილებელი მოგება"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_53", "reconcile": false, "source": {"account_type": "equity_unaffected"}},
+    {"source_id": "ge_account_530510", "code": "530510", "name": "Profit Loss for the Reporting Period", "translations": {"ka": "საანგარიშგებო პერიოდის მოგება / ზარალი"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_53", "reconcile": false, "source": {"account_type": "equity_unaffected"}},
+    {"source_id": "ge_account_540110", "code": "540110", "name": "Legal Statutory Reserves", "translations": {"ka": "სარეზერვო კაპიტალი"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_54", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ge_account_540210", "code": "540210", "name": "Revaluation Reserve", "translations": {"ka": "გადაფასების რეზერვი"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_54", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ge_account_540410", "code": "540410", "name": "Foreign Currency Translation Reserve", "translations": {"ka": "უცხოური ვალუტის კურსთაშორისი სხვაობის რეზერვი"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_54", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ge_account_540990", "code": "540990", "name": "Other Reserves", "translations": {"ka": "სხვა რეზერვები"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_54", "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "ge_account_611101", "code": "611101", "name": "Revenue from Sale of Goods", "translations": {"ka": "შემოსავალი საქონლის რეალიზაციიდან"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_61", "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "ge_account_612102", "code": "612102", "name": "Revenue from Services", "translations": {"ka": "შემოსავალი მომსახურების გაწევიდან"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_61", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_613103", "code": "613103", "name": "Revenue from Long-Term Contracts", "translations": {"ka": "შემოსავალი გრძელვადიანი კონტრაქტებიდან"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_61", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_614104", "code": "614104", "name": "Subscription & Recurring Revenue", "translations": {"ka": "შემოსავალი გამომწერებიდან და პერიოდული გადახდებიდან"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_61", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_631010", "code": "631010", "name": "Sales Discounts", "translations": {"ka": "ფასდათმობა გაყიდვებიდან"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_63", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_631020", "code": "631020", "name": "Rebates", "translations": {"ka": "რაბატები / ფასდაკლებები"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_63", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_631030", "code": "631030", "name": "Sales Returns", "translations": {"ka": "გაყიდული საქონლის დაბრუნება"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_63", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_631040", "code": "631040", "name": "Contract Price Adjustments", "translations": {"ka": "საკონტრაქტო ფასის კორექტირება"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_63", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_631050", "code": "631050", "name": "Revenue Related Write-offs", "translations": {"ka": "შემოსავლებთან დაკავშირებული ჩამოწერები"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_63", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_651010", "code": "651010", "name": "Rental Income", "translations": {"ka": "შემოსავალი იჯარიდან"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_65", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_655010", "code": "655010", "name": "Penalties Charged to Customers", "translations": {"ka": "მომხმარებელთა ჯარიმებიდან მიღებული შემოსავალი"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_65", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_659090", "code": "659090", "name": "Other Operating Income", "translations": {"ka": "სხვა საოპერაციო შემოსავალი"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_65", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_661010", "code": "661010", "name": "Intercompany Goods Services", "translations": {"ka": "შიდა ჯგუფური საქოინელი და მომსახურება"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_66", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_661020", "code": "661020", "name": "Intercompany Management Fees", "translations": {"ka": "შიდა ჯგუფური მართვის საკომისიოები"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_66", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_661030", "code": "661030", "name": "Intercompany Cost Recharge", "translations": {"ka": "შიდა ჯგუფური ხარჯების რეინვოისირება"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_66", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_661040", "code": "661040", "name": "Intercompany License Fees", "translations": {"ka": "შიდა ჯგუფური სალიცენზიო მოსაკრებლები"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_66", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_671010", "code": "671010", "name": "Government Grants Operating", "translations": {"ka": "სახელმწიფო გრანტები (საოპერაციო)"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_67", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_671020", "code": "671020", "name": "Subsidies", "translations": {"ka": "სუბსიდიები"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_67", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_671030", "code": "671030", "name": "Donor Funded Revenue", "translations": {"ka": "დონორების მიერ დაფინანსებული შემოსავალი"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_67", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_671040", "code": "671040", "name": "Tax Incentives Recognized as Revenue", "translations": {"ka": "საგადასახადო შეღავათები, აღიარებული შემოსავლად"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_67", "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "ge_account_710100", "code": "710100", "name": "Cost of Goods Sold in Trading", "translations": {"ka": "რეალიზებული საქონლის თვითღირებულება"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_71", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "ge_account_710200", "code": "710200", "name": "Cost of Goods Sold I/C Sales", "translations": {"ka": "რეალიზებული საქონლის თვითღირებულება — შიდა ჯგუფური გაყიდვები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_71", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_710300", "code": "710300", "name": "Write Off Inventory", "translations": {"ka": "მარაგების ჩამოწერა / ზარალი"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_71", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_710400", "code": "710400", "name": "Cash Discount Loss (Inventory Related)", "translations": {"ka": "ზარალი ფასდათმობიდან (მარაგებთან დაკავშირებული)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_71", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_720100", "code": "720100", "name": "Salaries & Wages", "translations": {"ka": "ხელფასები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_720110", "code": "720110", "name": "Allowances & Bonuses", "translations": {"ka": "დანამატები და ბონუსები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_720200", "code": "720200", "name": "Overtime & Commissions", "translations": {"ka": "ზეგანაკვეთური სამუშაო და საკომისიოები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_720300", "code": "720300", "name": "Medical Health Insurance", "translations": {"ka": "ჯანმრთელობის დაზღვევა"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_720310", "code": "720310", "name": "Life & Accident Insurance", "translations": {"ka": "სიცოცხლისა და უბედური შემთხვევის დაზღვევა"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_720400", "code": "720400", "name": "Paid Leave & Accrued Vacation", "translations": {"ka": "ანაზღაურებადი შვებულება და დარიცხული საშვებულებო ხარჯი"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_720500", "code": "720500", "name": "Training & Education", "translations": {"ka": "ტრენინგი და განათლება"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_720600", "code": "720600", "name": "Hiring, Recruitment & Mobilization", "translations": {"ka": "თანამშრომელთა აყვანა, რეკრუტირება და მობილიზაცია"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_720700", "code": "720700", "name": "Termination & Severance Benefits", "translations": {"ka": "გათავისუფლების შემდგომი კომპენსაციები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_720900", "code": "720900", "name": "Personnel Cost Others", "translations": {"ka": "პერსონალის სხვა ხარჯები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_721000", "code": "721000", "name": "Pension & Post-Employment Contributions", "translations": {"ka": "საპენსიო შენატანები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_721100", "code": "721100", "name": "Payroll Taxes (Employer)", "translations": {"ka": "საშემოსავლო გადასახადი (დამსაქმებლის)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_72", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_730100", "code": "730100", "name": "Digital Advertising", "translations": {"ka": "ციფრული რეკლამა"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_730220", "code": "730220", "name": "Traditional Advertising (TV, Radio, Print)", "translations": {"ka": "ტრადიციული რეკლამა (ტელევიზია, რადიო, ბეჭდური მედია)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_730230", "code": "730230", "name": "Outdoor & Billboard Advertising", "translations": {"ka": "გარე რეკლამა და ბილბორდები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_730300", "code": "730300", "name": "Marketing Production & Creative", "translations": {"ka": "მარკეტინგული წარმოება და კრეატივი"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_730400", "code": "730400", "name": "Events, Exhibitions & Sponsorships", "translations": {"ka": "ღონისძიებები, გამოფენები და სპონსორობა"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_730500", "code": "730500", "name": "Customer Acquisition & Lead Generation", "translations": {"ka": "კლიენტების მოზიდვა და ლიდების გენერაცია"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_730600", "code": "730600", "name": "Promotional Materials", "translations": {"ka": "პრომო მასალები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_730700", "code": "730700", "name": "Brand & PR Activities", "translations": {"ka": "ბრენდინგი და PR აქტივობები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_730800", "code": "730800", "name": "Market Research & Intelligence", "translations": {"ka": "ბაზრის კვლევა და ანალიტიკა"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_730900", "code": "730900", "name": "Sales & Marketing Others", "translations": {"ka": "სხვა მარკეტინგული და გაყიდვების ხარჯები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_73", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_740100", "code": "740100", "name": "Professional & Compliance Services", "translations": {"ka": "პროფესიული და საკონსულტაციო მომსახურება"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_740200", "code": "740200", "name": "Licenses, Permits & Memberships", "translations": {"ka": "ლიცენზიები, ნებართვები და წევრობა"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_740300", "code": "740300", "name": "Insurance", "translations": {"ka": "დაზღვევა"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_740400", "code": "740400", "name": "Facility Services", "translations": {"ka": "საოფისე/საწარმოო ფართის მომსახურება"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_740410", "code": "740410", "name": "Repairs & Maintenance", "translations": {"ka": "რემონტი და ტექნიკური მომსახურება"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_740420", "code": "740420", "name": "Supplies & Consumables", "translations": {"ka": "საოფისე მასალები და სახარჯი მასალები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_740500", "code": "740500", "name": "Utilities", "translations": {"ka": "კომუნალური ხარჯები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_740600", "code": "740600", "name": "Communication Expenses", "translations": {"ka": "კავშირგაბმულობის ხარჯები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_740601", "code": "740601", "name": "IT Software & Subscriptions", "translations": {"ka": "IT პროგრამები და ხელმოწერები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_740700", "code": "740700", "name": "Transportation, Fuel & Vehicle Operating Costs", "translations": {"ka": "ტრანსპორტირება, საწვავი და ავტომანქანის საექსპლუატაციო ხარჯები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_740800", "code": "740800", "name": "Bank Charges & Payment Fees", "translations": {"ka": "ბანკის მომსახურების საკომისიოები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_740900", "code": "740900", "name": "Corporate Taxes, Other than Income Tax", "translations": {"ka": "სხვა საგადასახადო ხარჯები(მოგების გადასახადის გარდა)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_741100", "code": "741100", "name": "Rent Expense", "translations": {"ka": "საიჯარო ქირა"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_742100", "code": "742100", "name": "RD Expenses", "translations": {"ka": "კვლევისა და განვითარების (R&D) ხარჯები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_743100", "code": "743100", "name": "Purchase of Equipments", "translations": {"ka": "მცირეფასიანი აღჭურვილობის შეძენა"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_749000", "code": "749000", "name": "General & Administrative - Others", "translations": {"ka": "სხვა ადმინისტრაციული ხარჯები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_74", "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_750100", "code": "750100", "name": "Business Travel", "translations": {"ka": "მივლინების ხარჯები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_75", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_750300", "code": "750300", "name": "Representation Expenses", "translations": {"ka": "სამასპინძლო ხარჯები"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_75", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_760100", "code": "760100", "name": "Expected Credit Losses Trade Receivables", "translations": {"ka": "მოსალოდნელი საკრედიტო ზარალი სავაჭრო მოთხოვნებიდან"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_76", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_760200", "code": "760200", "name": "Bad Debt Write Offs", "translations": {"ka": "უიმედო ვალების ჩამოწერა"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_76", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_760300", "code": "760300", "name": "Recovery of Bad Debts", "translations": {"ka": "ჩამოწერილი უიმედო ვალების ამოსაღება"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_76", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "ge_account_771210", "code": "771210", "name": "Depreciation Buildings & Construction", "translations": {"ka": "შენობებისა და ნაგებობების ცვეთა"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_771310", "code": "771310", "name": "Depreciation Machinery & Equipment", "translations": {"ka": "მანქანა-დანადგარებისა და აღჭურვილობის ცვეთა"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_771410", "code": "771410", "name": "Depreciation Office Equipment", "translations": {"ka": "საოფისე აღჭურვილობის ცვეთა"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_771420", "code": "771420", "name": "Depreciation Furniture & Office Equipment", "translations": {"ka": "ავეჯისა და საოფისე ინვენტარის ცვეთა"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_771510", "code": "771510", "name": "Depreciation Vehicles", "translations": {"ka": "სატრანსპორტო საშუალებების ცვეთა"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_772610", "code": "772610", "name": "Depreciation Leasehold Improvements", "translations": {"ka": "იჯარით აღებული ქონების კეთილმოწყობის ცვეთა"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_773810", "code": "773810", "name": "Depreciation Right-of-Use Assets", "translations": {"ka": "გამოყენების უფლებით გადაცემული აქტივების ცვეთა"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_775990", "code": "775990", "name": "Depreciation Other Fixed Assets", "translations": {"ka": "სხვა ძირითადი აქტივების ცვეთა"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_776110", "code": "776110", "name": "Amortisation Licenses", "translations": {"ka": "ლიცენზიების ამორტიზაცია"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_776210", "code": "776210", "name": "Amortisation Computer Software", "translations": {"ka": "კომპიუტერული პროგრამების ამორტიზაცია"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_776310", "code": "776310", "name": "Amortisation Franchises", "translations": {"ka": "ფრანშიზების ამორტიზაცია"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_776410", "code": "776410", "name": "Amortisation Patents", "translations": {"ka": "პატენტების ამორტიზაცია"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_776510", "code": "776510", "name": "Amortisation Goodwill", "translations": {"ka": "გუდვილის ამორტიზაცია"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_776990", "code": "776990", "name": "Amortisation Other Intangibles", "translations": {"ka": "სხვა არამატერიალური აქტივების ამორტიზაცია"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_77", "reconcile": false, "source": {"account_type": "expense_depreciation"}},
+    {"source_id": "ge_account_810110", "code": "810110", "name": "Foreign Exchange Gains Realized", "translations": {"ka": "რეალიზებული მოგება საკურსო სხვაობიდან"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "ge_account_810120", "code": "810120", "name": "Foreign Exchange Gains Unrealized", "translations": {"ka": "არარეალიზებული მოგება საკურსო სხვაობიდან"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "ge_account_810210", "code": "810210", "name": "Cash Difference Gain", "translations": {"ka": "მოგება ნაღდი ფულის სხვაობიდან"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "ge_account_810310", "code": "810310", "name": "Interest Income", "translations": {"ka": "საპროცენტო შემოსავალი"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "ge_account_810410", "code": "810410", "name": "Gain on Disposal of Assets", "translations": {"ka": "მოგება აქტივების გასხვისებიდან"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "ge_account_810510", "code": "810510", "name": "Asset and Inventory Surplus", "translations": {"ka": "მარაგებისა და აქტივების ზედმეტობა/მოგება"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "ge_account_810610", "code": "810610", "name": "Compensation & Settlements Received", "translations": {"ka": "მიღებული კომპენსაციები და ანაზღაურებები"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "ge_account_810710", "code": "810710", "name": "Cash Discount Gain", "translations": {"ka": "მოგება მიღებული ფასდათმობიდან"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "ge_account_810990", "code": "810990", "name": "Other Non Operating Income", "translations": {"ka": "სხვა არასაოპერაციო შემოსავლები"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "ge_group_81", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "ge_account_820110", "code": "820110", "name": "Foreign Exchange Losses Realized", "translations": {"ka": "რეალიზებული ზარალი საკურსო სხვაობიდან"}, "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_82", "reconcile": false, "source": {"account_type": "expense_other"}},
+    {"source_id": "ge_account_820120", "code": "820120", "name": "Foreign Exchange Losses Unrealized", "translations": {"ka": "არარეალიზებული ზარალი საკურსო სხვაობიდან"}, "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_82", "reconcile": false, "source": {"account_type": "expense_other"}},
+    {"source_id": "ge_account_820210", "code": "820210", "name": "Cash Difference Loss", "translations": {"ka": "ზარალი ნაღდი ფულის სხვაობიდან"}, "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_82", "reconcile": false, "source": {"account_type": "expense_other"}},
+    {"source_id": "ge_account_820310", "code": "820310", "name": "Interest Expense", "translations": {"ka": "საპროცენტო ხარჯები"}, "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_82", "reconcile": false, "source": {"account_type": "expense_other"}},
+    {"source_id": "ge_account_820320", "code": "820320", "name": "Interest Expense Lease Liabilities (IFRS 16)", "translations": {"ka": "საპროცენტო ხარჯები- იჯარა  (IFRS 16)"}, "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_82", "reconcile": false, "source": {"account_type": "expense_other"}},
+    {"source_id": "ge_account_820410", "code": "820410", "name": "Loss on Disposal of Assets", "translations": {"ka": "ზარალი აქტივების გასხვისებიდან"}, "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_82", "reconcile": false, "source": {"account_type": "expense_other"}},
+    {"source_id": "ge_account_820510", "code": "820510", "name": "Asset and Inventory Shortages & Losses", "translations": {"ka": "მარაგებისა და აქტივების დანაკლისი/ზარალი"}, "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_82", "reconcile": false, "source": {"account_type": "expense_other"}},
+    {"source_id": "ge_account_820610", "code": "820610", "name": "Compensation & Settlements Paid", "translations": {"ka": "გაცემული კომპენსაციები და ანაზღაურებები"}, "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_82", "reconcile": false, "source": {"account_type": "expense_other"}},
+    {"source_id": "ge_account_820710", "code": "820710", "name": "Donations & Charitable Contributions (Non-Operating)", "translations": {"ka": "საქველმოქმედო ხარჯები"}, "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_82", "reconcile": false, "source": {"account_type": "expense_other"}},
+    {"source_id": "ge_account_820990", "code": "820990", "name": "Other Non Operating Expenses", "translations": {"ka": "სხვა არასაოპერაციო ხარჯები"}, "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_82", "reconcile": false, "source": {"account_type": "expense_other"}},
+    {"source_id": "ge_account_910010", "code": "910010", "name": "Corporate Income Tax", "translations": {"ka": "მოგების გადასახადი"}, "root_type": "expense", "subtype": "other_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "ge_group_91", "reconcile": false, "source": {"account_type": "expense_other"}},
+    {"source_id": "ge_account_990010", "code": "990010", "name": "Customer Balancing Account", "translations": {"ka": "დებიტორების საკონტროლო ანგარიში"}, "root_type": null, "subtype": "off_balance", "normal_balance": null, "is_group": false, "parent_source_id": "ge_group_99", "reconcile": false, "flags": ["off_balance"], "source": {"account_type": "off_balance"}},
+    {"source_id": "ge_account_990020", "code": "990020", "name": "Supplier Balancing Account", "translations": {"ka": "კრედიტორების საკონტროლო ანგარიში"}, "root_type": null, "subtype": "off_balance", "normal_balance": null, "is_group": false, "parent_source_id": "ge_group_99", "reconcile": false, "flags": ["off_balance"], "source": {"account_type": "off_balance"}},
+    {"source_id": "ge_account_990030", "code": "990030", "name": "Payroll Settlement Account", "translations": {"ka": "თანამშრომელთა საკონტროლო ანგარიში"}, "root_type": null, "subtype": "off_balance", "normal_balance": null, "is_group": false, "parent_source_id": "ge_group_99", "reconcile": false, "flags": ["off_balance"], "source": {"account_type": "off_balance"}},
+    {"source_id": "ge_account_990040", "code": "990040", "name": "Tax Settlement Account (Non-CIT)", "translations": {"ka": "საგადასახადო ხარჯების საკონტროლო ანგარიში(მოგების გადასახადის გარდა)"}, "root_type": null, "subtype": "off_balance", "normal_balance": null, "is_group": false, "parent_source_id": "ge_group_99", "reconcile": false, "flags": ["off_balance"], "source": {"account_type": "off_balance"}},
+    {"source_id": "ge_account_990050", "code": "990050", "name": "Intercompany Settlement Account", "translations": {"ka": "დაკავშირებულ მხარეთა საკონტორლო ანგარიში"}, "root_type": null, "subtype": "off_balance", "normal_balance": null, "is_group": false, "parent_source_id": "ge_group_99", "reconcile": false, "flags": ["off_balance"], "source": {"account_type": "off_balance"}},
+    {"source_id": "ge_account_990060", "code": "990060", "name": "Temporary Posting Account", "translations": {"ka": "დროებითი გატარებების ანგარიში"}, "root_type": null, "subtype": "off_balance", "normal_balance": null, "is_group": false, "parent_source_id": "ge_group_99", "reconcile": false, "flags": ["off_balance"], "source": {"account_type": "off_balance"}},
+    {"source_id": "ge_account_990070", "code": "990070", "name": "Off-Balance Sheet Counterpart Account", "translations": {"ka": "გარე საბალანსო ანგარიშების მატერიალური ტექნიკური ანგარიში"}, "root_type": null, "subtype": "off_balance", "normal_balance": null, "is_group": false, "parent_source_id": "ge_group_99", "reconcile": false, "flags": ["off_balance"], "source": {"account_type": "off_balance"}}
+  ]
+}

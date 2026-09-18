@@ -1,0 +1,456 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "da732d0affc70c885eba8c72a4641c117edc339ce8188ee5f9f3246a5670cbbc",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/tz",
+  "country_code": "TZ",
+  "country_name": "Tanzania",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Tanzania - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_tz_account' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_tz_account",
+    "module_name": "Tanzania - Accounting",
+    "module_version": "1.0",
+    "contributing_modules": [
+      "l10n_tz_account"
+    ],
+    "template_code": "tz",
+    "template_chain": [
+      "tz"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_tz_account/data/template/account.account-tz.csv",
+        "sha256": "1fb42ea2beb231f10db9610607032c83812e0f7574c9a37e0f7c2524aee5b2a3",
+        "rows": 164
+      }
+    ],
+    "python_files": [
+      "addons/l10n_tz_account/models/template_tz.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "4",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "103",
+      "cash": "101",
+      "transfer": "105"
+    },
+    "default_sale_tax": "VAT_S_TAXABLE_18",
+    "default_purchase_tax": "VAT_P_TAXABLE_18",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "tz_190",
+        "code": "190",
+        "name": "Receivables And Contracts",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "tz_311",
+        "code": "311",
+        "name": "Trade Payables",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "tz_400",
+        "code": "400",
+        "name": "Revenue",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "tz_510",
+        "code": "510",
+        "name": "Expenses Classified By Nature",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "tz_172",
+        "code": "172",
+        "name": "Raw Material, Parts And Supplies",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "tz_155",
+        "code": "155",
+        "name": "Trade receivables (PoS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "tz_671",
+        "code": "671",
+        "name": "Foreign Exchange Gain",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "tz_672",
+        "code": "672",
+        "name": "Foreign Exchange Loss",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "tz_342",
+        "code": "342",
+        "name": "Deferred Income (Unearned Revenue)",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "tz_181",
+        "code": "181",
+        "name": "Prepaid Expense",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 164,
+    "posting_accounts": 164,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 54,
+      "equity": 20,
+      "expense": 37,
+      "income": 24,
+      "liability": 29
+    },
+    "by_subtype": {
+      "cash_bank": 2,
+      "current_asset": 17,
+      "current_liability": 18,
+      "equity": 20,
+      "expense": 37,
+      "fixed_asset": 9,
+      "income": 24,
+      "non_current_asset": 15,
+      "non_current_liability": 4,
+      "payable": 7,
+      "receivable": 11
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 2,
+      "expense": 1,
+      "income": 1,
+      "payables": 7,
+      "receivables": 11
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "sw"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "tz_102", "code": "102", "name": "Cash Equivalents", "translations": {"sw": "Sawa za pesa"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "tz_104", "code": "104", "name": "Internal Transfers of Funds", "translations": {"sw": "Uhamisho wa Fedha wa Ndani"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_106", "code": "106", "name": "Other current assets", "translations": {"sw": "Mali zingine za sasa"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_107", "code": "107", "name": "Tax paid", "translations": {"sw": "Kodi imelipwa"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_108", "code": "108", "name": "Tax receivable", "translations": {"sw": "Kodi inayopokelewa"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "tz_110", "code": "110", "name": "Property, Plant And Equipment", "translations": {"sw": "Mali, Kiwanda na Vifaa"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "tz_111", "code": "111", "name": "Land And Land Improvements", "translations": {"sw": "Uboreshaji wa Ardhi na Ardhi"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "tz_112", "code": "112", "name": "Buildings, Structures And Improvements", "translations": {"sw": "Majengo, Miundo na Uboreshaji"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "tz_113", "code": "113", "name": "Machinery And Equipment", "translations": {"sw": "Mashine na Vifaa"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "tz_114", "code": "114", "name": "Furniture And Fixtures", "translations": {"sw": "Samani na Fixtures"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "tz_115", "code": "115", "name": "Right Of Use Assets (Classified As PP&E)", "translations": {"sw": "Haki ya Matumizi ya Mali (Imeainishwa kama PP"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "tz_116", "code": "116", "name": "Additional Property, Plant And Equipment", "translations": {"sw": "Mali ya Ziada, Mitambo na Vifaa"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "tz_117", "code": "117", "name": "Construction In Progress", "translations": {"sw": "Ujenzi Unaendelea"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_121", "code": "121", "name": "Investment Property", "translations": {"sw": "Mali ya Uwekezaji"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_122", "code": "122", "name": "Investment Property Under Construction Or Development", "translations": {"sw": "Mali ya Uwekezaji Chini ya Ujenzi au Maendeleo"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_130", "code": "130", "name": "Goodwill", "translations": {"sw": "Nia njema"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_135", "code": "135", "name": "Advances for Capital Assets", "translations": {"sw": "Maendeleo kwa Mali ya Mtaji"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_140", "code": "140", "name": "Intangible Assets (Excluding Goodwill)", "translations": {"sw": "Mali Zisizogusika (Bila Nia Njema)"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_141", "code": "141", "name": "Intellectual Property", "translations": {"sw": "Mali ya kiakili"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "tz_142", "code": "142", "name": "Computer Software", "translations": {"sw": "Programu ya Kompyuta"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "tz_143", "code": "143", "name": "Trade And Distribution Assets", "translations": {"sw": "Biashara na Usambazaji Mali"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_144", "code": "144", "name": "Contracts And Rights", "translations": {"sw": "Mikataba na Haki"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_145", "code": "145", "name": "Right To Use Assets (Classified By Type)", "translations": {"sw": "Haki ya Kutumia Mali (Imeainishwa Kwa Aina)"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_146", "code": "146", "name": "Other Intangible Assets", "translations": {"sw": "Mali Nyingine Zisizogusika"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_147", "code": "147", "name": "Acquisition In Progress", "translations": {"sw": "Upatikanaji Unaendelea"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_148", "code": "148", "name": "Deferred tax assets", "translations": {"sw": "Mali ya ushuru iliyoahirishwa"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_149", "code": "149", "name": "Available for sale investments", "translations": {"sw": "Inapatikana kwa uwekezaji wa mauzo"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_150", "code": "150", "name": "Financial Assets (Investments)", "translations": {"sw": "Mali za Kifedha (Uwekezaji)"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_151", "code": "151", "name": "Non-Derivative Financial Assets", "translations": {"sw": "Mali Zisizotokana na Fedha"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "tz_152", "code": "152", "name": "Derivative Financial Assets", "translations": {"sw": "Derivative Financial Assets"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "tz_153", "code": "153", "name": "Restricted Cash And Financial Assets", "translations": {"sw": "Pesa Zilizozuiliwa na Mali za Kifedha"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "tz_154", "code": "154", "name": "Additional Financial Assets And Investments", "translations": {"sw": "Mali ya Ziada ya Fedha na Uwekezaji"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current"}},
+    {"source_id": "tz_155", "code": "155", "name": "Trade receivables (PoS)", "translations": {"sw": "Mapokezi ya Biashara (PoS)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "tz_156", "code": "156", "name": "Investments in associate", "translations": {"sw": "Uwekezaji kwa washirika"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "tz_160", "code": "160", "name": "Agricultural (Biological) Assets", "translations": {"sw": "Mali za Kilimo (Biolojia)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_161", "code": "161", "name": "Bearer Plants", "translations": {"sw": "Mimea ya kubeba"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_162", "code": "162", "name": "Animals", "translations": {"sw": "Wanyama"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_163", "code": "163", "name": "Other Agricultural Assets", "translations": {"sw": "Mali Nyingine za Kilimo"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_170", "code": "170", "name": "Inventory", "translations": {"sw": "Mali"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_171", "code": "171", "name": "Merchandise", "translations": {"sw": "Bidhaa"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_172", "code": "172", "name": "Raw Material, Parts And Supplies", "translations": {"sw": "Malighafi, Sehemu na Ugavi"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "extra": {"account_stock_variation_id": "tz_521"}}},
+    {"source_id": "tz_173", "code": "173", "name": "Work In Process", "translations": {"sw": "Fanya Kazi Katika Mchakato"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_174", "code": "174", "name": "Finished Goods", "translations": {"sw": "Bidhaa za kumaliza"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_175", "code": "175", "name": "Other Inventory", "translations": {"sw": "Mali nyingine"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_176", "code": "176", "name": "Income tax assets", "translations": {"sw": "Mali ya kodi ya mapato"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_180", "code": "180", "name": "Accruals And Additional Assets", "translations": {"sw": "Mapato na Mali ya Ziada"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "tz_181", "code": "181", "name": "Prepaid Expense", "translations": {"sw": "Gharama ya kulipia kabla"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_182", "code": "182", "name": "Accrued Income", "translations": {"sw": "Mapato ya ziada"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_183", "code": "183", "name": "Additional Assets", "translations": {"sw": "Mali ya Ziada"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "tz_184", "code": "184", "name": "Investments and financial receivables", "translations": {"sw": "Uwekezaji na mapato ya kifedha"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "tz_190", "code": "190", "name": "Receivables And Contracts", "translations": {"sw": "Mapokezi na Mikataba"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "tz_191", "code": "191", "name": "Accounts, Notes And Loans Receivable", "translations": {"sw": "Akaunti, Noti na Mikopo Inayopatikana"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "tz_192", "code": "192", "name": "Contracts", "translations": {"sw": "Mikataba"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "tz_193", "code": "193", "name": "Nontrade And Other Receivables", "translations": {"sw": "Nontrade na Receivables Nyingine"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "tz_210", "code": "210", "name": "Owners Equity (Attributable To Owners Of Parent)", "translations": {"sw": "Sawa ya Wamiliki (Inayohusishwa na Wamiliki wa Mzazi)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_211", "code": "211", "name": "Equity At Par (Issued Capital)", "translations": {"sw": "Equity At Par (Mtaji Uliotolewa)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_212", "code": "212", "name": "Retained Earnings", "translations": {"sw": "Mapato yaliyobaki"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_213", "code": "213", "name": "Additional Paid-In Capital", "translations": {"sw": "Mtaji wa Ziada wa Kulipwa"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_220", "code": "220", "name": "Treasury Stock", "translations": {"sw": "Hazina ya Hifadhi"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_221", "code": "221", "name": "Treasury Stock Common", "translations": {"sw": "Hazina ya kawaida ya hisa"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_222", "code": "222", "name": "Treasury Stock Preferred", "translations": {"sw": "Hazina Inapendekezwa"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_230", "code": "230", "name": "Accumulated OCI", "translations": {"sw": "OCI iliyokusanywa"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_231", "code": "231", "name": "Exchange Differences On Translation", "translations": {"sw": "Badilisha Tofauti kwenye Tafsiri"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_232", "code": "232", "name": "Remeasurements Cash Flow Hedges", "translations": {"sw": "Vipimo vya Ua wa mtiririko wa pesa"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_233", "code": "233", "name": "Remeasurements Available-For-Sale Financial Assets", "translations": {"sw": "Vipimo Vinavyopatikana-Kwa-Kuuzwa Mali ya Fedha"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_234", "code": "234", "name": "Remeasurement Of Defined Benefit Plans", "translations": {"sw": "Upimaji upya wa Mipango ya Faida iliyoainishwa"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_235", "code": "235", "name": "Revaluation Surplus (IFRS Only)", "translations": {"sw": "Ziada ya Uhakiki (IFRS Pekee)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_236", "code": "236", "name": "Remeasurements Investments In Equity Instruments (IFRS only)", "translations": {"sw": "Uwekezaji wa Vipimo Katika Hati za Usawa (IFRS pekee)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_240", "code": "240", "name": "Other Equity Items", "translations": {"sw": "Vitu vingine vya Usawa"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_241", "code": "241", "name": "ESOP Related Items", "translations": {"sw": "Vipengee vinavyohusiana na ESOP"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_242", "code": "242", "name": "Subscribed Stock Receivables", "translations": {"sw": "Mapokezi ya Hisa Unayosajiliwa"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_250", "code": "250", "name": "Miscellaneous Equity", "translations": {"sw": "Usawa Mbalimbali"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_260", "code": "260", "name": "Non-controlling (Minority) Interest", "translations": {"sw": "Maslahi yasiyo ya kudhibiti (Wachache)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_270", "code": "270", "name": "Share capital", "translations": {"sw": "Shiriki mtaji"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity"}},
+    {"source_id": "tz_307", "code": "307", "name": "Tax received", "translations": {"sw": "Kodi imepokelewa"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_308", "code": "308", "name": "Tax Payable", "translations": {"sw": "Kodi inayolipwa"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "tz_311", "code": "311", "name": "Trade Payables", "translations": {"sw": "Malipo ya Biashara"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "tz_312", "code": "312", "name": "Dividends Payable", "translations": {"sw": "Gawio linalolipwa"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "tz_313", "code": "313", "name": "Interest Payable", "translations": {"sw": "Riba Inalipwa"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "tz_314", "code": "314", "name": "Other Payables", "translations": {"sw": "Malipo mengine"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "tz_320", "code": "320", "name": "Provisions (Contingencies)", "translations": {"sw": "Masharti (ya Dharura)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_321", "code": "321", "name": "Customer Related Provisions", "translations": {"sw": "Masharti Yanayohusiana na Wateja"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_322", "code": "322", "name": "Ligation And Regulatory Provisions", "translations": {"sw": "Masharti ya Kuunganisha na Udhibiti"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_323", "code": "323", "name": "Additional Provisions", "translations": {"sw": "Masharti ya Ziada"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_330", "code": "330", "name": "Financial Liabilities", "translations": {"sw": "Madeni ya Kifedha"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_331", "code": "331", "name": "Notes Payable", "translations": {"sw": "Noti Zinazolipwa"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "tz_332", "code": "332", "name": "Loans Payable", "translations": {"sw": "Mikopo inayolipwa"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "tz_333", "code": "333", "name": "Bonds (Debentures)", "translations": {"sw": "Vifungo (Debentures)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_334", "code": "334", "name": "Other Debts And Borrowings", "translations": {"sw": "Madeni Mengine na Mikopo"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_335", "code": "335", "name": "Lease Obligations", "translations": {"sw": "Majukumu ya kukodisha"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_336", "code": "336", "name": "Derivative Financial Liabilities", "translations": {"sw": "Derivative Financial Liabilities"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_340", "code": "340", "name": "Accruals And Other Liabilities", "translations": {"sw": "Accruals na Madeni Mengine"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_341", "code": "341", "name": "Accrued Expenses", "translations": {"sw": "Gharama yatokanayo"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_342", "code": "342", "name": "Deferred Income (Unearned Revenue)", "translations": {"sw": "Mapato Yaliyoahirishwa (Mapato Yasiyopatikana)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_343", "code": "343", "name": "Accrued Taxes (Other Than Payroll)", "translations": {"sw": "Kodi Zilizoongezwa (Zaidi ya Malipo)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_344", "code": "344", "name": "Other Liabilities", "translations": {"sw": "Madeni mengine"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_350", "code": "350", "name": "Banks overdrafts and short-term borrowings", "translations": {"sw": "Overdrafts za benki na mikopo ya muda mfupi"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_360", "code": "360", "name": "Interest-bearing loans and short term borrowings", "translations": {"sw": "Mikopo yenye riba na mikopo ya muda mfupi"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_370", "code": "370", "name": "Income tax liabilities", "translations": {"sw": "Madeni ya kodi ya mapato"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "tz_380", "code": "380", "name": "Interest-bearing loans and short term borrowings", "translations": {"sw": "Mikopo yenye riba na mikopo ya muda mfupi"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "tz_390", "code": "390", "name": "Employee benefits liabilities", "translations": {"sw": "Madeni ya faida ya mfanyakazi"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "tz_395", "code": "395", "name": "Provisions", "translations": {"sw": "Masharti"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "tz_396", "code": "396", "name": "Deferred tax liabilities", "translations": {"sw": "Madeni ya ushuru yaliyoahirishwa"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "tz_400", "code": "400", "name": "Revenue", "translations": {"sw": "Mapato"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "tz_410", "code": "410", "name": "Recognized Point Of Time", "translations": {"sw": "Wakati Unaotambuliwa"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_411", "code": "411", "name": "Goods", "translations": {"sw": "Bidhaa"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_412", "code": "412", "name": "Services", "translations": {"sw": "Huduma"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_420", "code": "420", "name": "Recognized Over Time", "translations": {"sw": "Inatambuliwa kwa Wakati"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_421", "code": "421", "name": "Products", "translations": {"sw": "Bidhaa"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_422", "code": "422", "name": "Services", "translations": {"sw": "Huduma"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_430", "code": "430", "name": "Adjustments", "translations": {"sw": "Marekebisho"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_431", "code": "431", "name": "Variable Consideration", "translations": {"sw": "Kuzingatia Tofauti"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_432", "code": "432", "name": "Consideration Paid (Payable) To Customers", "translations": {"sw": "Kuzingatia Kulipwa (Kulipwa) kwa Wateja"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_433", "code": "433", "name": "Other Adjustments", "translations": {"sw": "Marekebisho Mengine"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_510", "code": "510", "name": "Expenses Classified By Nature", "translations": {"sw": "Gharama Zilizoainishwa Kwa Asili"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense"}},
+    {"source_id": "tz_511", "code": "511", "name": "Material And Merchandise", "translations": {"sw": "Nyenzo na Bidhaa"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_512", "code": "512", "name": "Employee Benefits", "translations": {"sw": "Faida za Wafanyikazi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_513", "code": "513", "name": "Services", "translations": {"sw": "Huduma"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_514", "code": "514", "name": "Rent, Depreciation, Amortization And Depletion", "translations": {"sw": "Kukodisha, Kushuka kwa Thamani, Malipo ya Mapato na Kupungua"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_515", "code": "515", "name": "Increase (Decrease) In Inventories Of Finished Goods And Work In Progress (IFRS only)", "translations": {"sw": "Ongezeko (Kupungua) Katika Orodha ya Bidhaa Zilizomalizika na Kazi Inayoendelea (IFRS pekee)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_516", "code": "516", "name": "Other Work Performed By Entity And Capitalized (IFRS only)", "translations": {"sw": "Kazi Nyingine Zinazofanywa na Shirika na Mtaji (IFRS pekee)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_520", "code": "520", "name": "Expenses Classified By Function", "translations": {"sw": "Gharama Zimeainishwa Kulingana na Kazi"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_521", "code": "521", "name": "Cost Of Sales", "translations": {"sw": "Gharama ya Mauzo"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_522", "code": "522", "name": "Selling, General And Administrative", "translations": {"sw": "Kuuza, Jumla na Utawala"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_611", "code": "611", "name": "Other Revenue", "translations": {"sw": "Mapato mengine"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_612", "code": "612", "name": "Other Expenses", "translations": {"sw": "Gharama Nyingine"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_613", "code": "613", "name": "Change in inventories", "translations": {"sw": "Mabadiliko katika orodha"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_614", "code": "614", "name": "Change in fair value of investment property", "translations": {"sw": "Mabadiliko ya thamani ya haki ya mali ya uwekezaji"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_615", "code": "615", "name": "Depreciation, amortisation and impairment of non-financial assets", "translations": {"sw": "Kushuka kwa thamani, punguzo na uharibifu wa mali zisizo za kifedha"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_616", "code": "616", "name": "Impairment losses of financial assets", "translations": {"sw": "Hasara za uharibifu wa mali ya kifedha"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_6211", "code": "6211", "name": "Foreign Currency Transaction Gain", "translations": {"sw": "Faida ya Muamala wa Fedha za Kigeni"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_6212", "code": "6212", "name": "Foreign Currency Transaction Loss", "translations": {"sw": "Hasara ya Muamala wa Fedha za Kigeni"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_6221", "code": "6221", "name": "Gain On Investments", "translations": {"sw": "Faida kwa Uwekezaji"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_6222", "code": "6222", "name": "Loss On Investments", "translations": {"sw": "Hasara kwenye Uwekezaji"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_6231", "code": "6231", "name": "Gain On Derivatives", "translations": {"sw": "Pata kwenye Miche"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_6232", "code": "6232", "name": "Loss On Derivatives", "translations": {"sw": "Hasara juu ya derivatives"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_6241", "code": "6241", "name": "Gain On Disposal Of Assets", "translations": {"sw": "Faida ya Utoaji wa Mali"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_6242", "code": "6242", "name": "Loss On Disposal Of Assets", "translations": {"sw": "Hasara ya Uondoaji wa Mali"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_6251", "code": "6251", "name": "Debt Related Gain", "translations": {"sw": "Faida inayohusiana na deni"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_6252", "code": "6252", "name": "Debt Related Loss", "translations": {"sw": "Hasara inayohusiana na deni"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_626", "code": "626", "name": "Impairment Loss", "translations": {"sw": "Hasara ya uharibifu"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_627", "code": "627", "name": "Impairment Loss (Reversal) Financial Assets (IFRS Only)", "translations": {"sw": "Hasara ya Uharibifu (Kurudishwa) Mali za Kifedha (IFRS Pekee)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_6281", "code": "6281", "name": "Other Gains", "translations": {"sw": "Faida Nyingine"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_6282", "code": "6282", "name": "Other Losses", "translations": {"sw": "Hasara Nyingine"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_630", "code": "630", "name": "Taxes (Other Than Income And Payroll) And Fees", "translations": {"sw": "Kodi (Zaidi ya Mapato na Malipo) na Ada"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_631", "code": "631", "name": "Real Estate Taxes And Insurance", "translations": {"sw": "Kodi ya Mali isiyohamishika na Bima"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_632", "code": "632", "name": "Highway (Road) Taxes And Tolls", "translations": {"sw": "Ushuru na Ushuru wa Barabara kuu (Barabara)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_633", "code": "633", "name": "Direct Tax And License Fees", "translations": {"sw": "Kodi ya Moja kwa Moja na Ada za Leseni"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_634", "code": "634", "name": "Excise And Sales Taxes", "translations": {"sw": "Ushuru na Ushuru wa Mauzo"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_635", "code": "635", "name": "Customs Fees And Duties (Not Classified As Sales Or Excise)", "translations": {"sw": "Ada na Ushuru wa Forodha (Hazijaainishwa kama Mauzo au Ushuru)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_636", "code": "636", "name": "Non-Deductible VAT (GST)", "translations": {"sw": "VAT Isiyokatwa (GST)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_637", "code": "637", "name": "General Insurance Expense", "translations": {"sw": "Gharama za Bima ya Jumla"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_638", "code": "638", "name": "Administrative Fees (Revenue Stamps)", "translations": {"sw": "Ada za Utawala (Stampu za Mapato)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_639", "code": "639", "name": "Fines And Penalties", "translations": {"sw": "Faini na Adhabu"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_640", "code": "640", "name": "Income Tax Expense (Benefit)", "translations": {"sw": "Gharama ya Kodi ya Mapato (Faida)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_650", "code": "650", "name": "Miscellaneous Taxes", "translations": {"sw": "Kodi Mbalimbali"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_660", "code": "660", "name": "Other Taxes And Fees", "translations": {"sw": "Kodi Nyingine na Ada"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_671", "code": "671", "name": "Foreign Exchange Gain", "translations": {"sw": "Faida ya Fedha za Kigeni"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_672", "code": "672", "name": "Foreign Exchange Loss", "translations": {"sw": "Hasara ya Fedha za Kigeni"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_680", "code": "680", "name": "Share of profit from equity accounted investments", "translations": {"sw": "Mgawo wa faida kutoka kwa uwekezaji uliohesabiwa kwa hisa"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_681", "code": "681", "name": "Finance costs", "translations": {"sw": "Gharama za fedha"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_682", "code": "682", "name": "Finance income", "translations": {"sw": "Mapato ya kifedha"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income"}},
+    {"source_id": "tz_683", "code": "683", "name": "Other financial items", "translations": {"sw": "Vitu vingine vya kifedha"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "tz_690", "code": "690", "name": "Loss for the year from discontinued operations", "translations": {"sw": "Hasara kwa mwaka kutokana na shughuli zilizositishwa"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}}
+  ]
+}

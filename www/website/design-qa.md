@@ -1,5 +1,32 @@
 # Website design and publication QA
 
+## Local 0.6.0 UI information and screenshot refresh — 18 September 2026
+
+Status: implemented and checked locally; not published. Application source, versioned application/media archives, deployment settings and historical release articles were not changed.
+
+Updated source pages: Home, Product, Point of sale, Download, About, Roadmap, News, the new 0.6.0 release article, daily cash, monthly closing and quarterly/yearly review. Shared `site.json` capabilities, limitations, product screenshot and default social artwork were updated; generated HTML, RSS, sitemap and AI discovery documents were rebuilt from source.
+
+The screenshot library contains 18 fresh captures from the existing local 0.6.0 runtime (`127.0.0.1:18219`) and 36 WebP derivatives. Fresh Willow Corner Shop and Cedar Studio sample companies were provisioned through the application's sample chooser in the isolated local test runtime. One synthetic cash sale of USD 5.75, with USD 10.00 tender and USD 4.25 change, supplied the POS cart/review/receipt sequence. No real customer records or external providers were used. This does create local synthetic records; it does not change schema or production.
+
+`public/assets/screens/v0.6.0-preview/manifest.json` records sample names, routes, captions, alt text, dimensions and SHA-256 hashes. Captures were visually inspected. Their pixels were only resized and encoded for the website; no generated interface or substituted accounting figures were used. Historical screenshot paths remain unchanged. Shared social artwork uses the new Home capture; dated article artwork remains historical.
+
+| Check | Result |
+|---|---|
+| `node www/website/build.mjs --check` | 67 HTML pages, zero errors, zero warnings |
+| `node www/website/tools/aeo-geo-audit.mjs` | Passed, exit 0 |
+| Main browser matrix | Nine routes at 1440, 768, 390 and 320 pixels: 36 HTTP/layout/image checks, no errors, overflow or broken images |
+| Follow-up browser checks | About, Roadmap and the final release article at the same four widths: 12 additional HTTP/layout checks passed |
+| Screenshot dialogs | 32 opening/image-target/Escape/focus-return checks passed |
+| Navigation and fallback | Mobile menu/Escape/focus passed; product content and download link passed without JavaScript |
+| Network boundary | No external page requests observed in the main browser matrix |
+| Guide figures | Cedar daily opening 40,825 + receipt 2,700 = closing 43,525; December income 3,000 − expenses 2,990 = profit 10; closing assets 49,015 = liabilities 4,150 + equity 44,865 verified in the application |
+| Quarter/year examples | Q1 2,580; Q2 2,580; Q3 2,535; Q4 1,730; 2025 total 9,425; 2024 total 10,440 verified against fresh sample reports |
+| `git diff --check` | Passed |
+
+Browser scripts, full-page captures and reports are under `output/playwright/website-060-*`; the main structured receipt is `docs/design/website/qa/website-060-refresh-browser.json`. The existing local website service is available at `http://127.0.0.1:18201/`. The local static server's `/demo/` path does not proxy the separate application.
+
+No PHP or application JavaScript changed, so financial/access suites, fresh-install/upgrade tests and PHP lint were not rerun. Current screenshot and website checks do not establish application accessibility certification, mobile readiness, accounting sign-off or production readiness. No Google Drive references were required. No migrations/schema changes, raw-secret exposure, external/live calls, push, deployment or campaign occurred. Publication requires a separate explicit instruction.
+
 ## Completed content library and publication — 16 September 2026
 
 The owner authorized takeover, completion, review and publication of the shared website work. The earlier 53-page stub pass is superseded by this completed release: 63 source pages, 64 HTML outputs, 62 sitemap URLs, seven release-feed items and 162 static files. The [content register](../../docs/design/website/CONTENT-REGISTER.md) records each page and the remaining professional-review boundaries.

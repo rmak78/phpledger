@@ -6,6 +6,8 @@ const PL_APP = __DIR__ . '/..';
 
 require_once __DIR__ . '/functions/runtime_functions.php';
 pl_require_runtime(PHP_VERSION_ID);
+require_once __DIR__ . '/functions/update_functions.php';
+pl_update_application_guard(PL_ROOT);
 require_once PL_ROOT . '/vendor/autoload.php';
 date_default_timezone_set('UTC');
 
@@ -17,13 +19,21 @@ $plConfig = [
     'user' => getenv('PL_DB_USER') ?: 'phpledger',
     'password' => getenv('PL_DB_PASSWORD') ?: '',
 ];
-$plLocalConfig = __DIR__ . '/config.local.php';
+require_once __DIR__ . '/functions/installation_state_functions.php';
+$plLocalConfig = pl_install_config_path();
 if (is_file($plLocalConfig)) {
     $plOverride = require $plLocalConfig;
     if (!is_array($plOverride)) {
         throw new RuntimeException('Invalid local configuration.');
     }
     $plConfig = array_replace($plConfig, $plOverride);
+}
+// Browser installation stores host settings in the existing private config.
+// Explicit hosting environment values take precedence for integration settings.
+foreach (['public_url' => 'PL_PUBLIC_URL', 'oauth_key_directory' => 'PL_OAUTH_KEY_DIRECTORY'] as $plSetting => $plEnvironmentName) {
+    if (!getenv($plEnvironmentName) && isset($plConfig[$plSetting]) && is_string($plConfig[$plSetting])) {
+        putenv($plEnvironmentName . '=' . $plConfig[$plSetting]);
+    }
 }
 if ($plConfig['password'] === '') {
     throw new RuntimeException('A database password must be configured.');

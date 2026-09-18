@@ -1,0 +1,451 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "edb650a4633c499e670a40543dbc4f2f20e21c60532addb9d920371a937c1a66",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "erpnext-version-16/unverified/pa_l10npa_chart_template",
+  "country_code": "PA",
+  "country_name": "Panama",
+  "country_basis": "chart file country_code",
+  "name": "Panama - Plan de Cuentas",
+  "source": {
+    "system": "erpnext",
+    "repository": "https://github.com/frappe/erpnext",
+    "branch": "version-16",
+    "commit": "4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+    "commit_date": "2026-09-08T13:23:31+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "GPL-3.0-only",
+    "license_basis": "repository license.txt (GNU GPL v3); chart files carry no separate licence header",
+    "attribution": "Frappe Technologies Pvt. Ltd. and Contributors",
+    "upstream_folder": "unverified",
+    "upstream_verified": false,
+    "upstream_disabled": false,
+    "files": [
+      {
+        "path": "erpnext/accounts/doctype/account/chart_of_accounts/unverified/pa_l10npa_chart_template.json",
+        "sha256": "fa801ed9c314214a218f48c57db39e740e7ffd5dc788be74de31a6ce2755f7eb",
+        "kind": "json"
+      }
+    ]
+  },
+  "template": {
+    "hierarchy": "nested groups; posting accounts are leaves; source_id is the full ' / ' separated path",
+    "account_numbers_present": false
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "account_type",
+        "source_id": "ACTIVOS / Cuentas por Cobrar / Cuentas por Cobrar / (-) Previsión para Incobrables",
+        "code": null,
+        "name": "Cuentas por Cobrar / (-) Previsión para Incobrables",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ACTIVOS / Cuentas por Cobrar / Cuentas por Cobrar / Deudores Morosos",
+        "code": null,
+        "name": "Cuentas por Cobrar / Deudores Morosos",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ACTIVOS / Cuentas por Cobrar / Cuentas por Cobrar / Deudores Varios",
+        "code": null,
+        "name": "Cuentas por Cobrar / Deudores Varios",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ACTIVOS / Cuentas por Cobrar / Cuentas por Cobrar / Deudores en Gestión Judicial",
+        "code": null,
+        "name": "Cuentas por Cobrar / Deudores en Gestión Judicial",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ACTIVOS / Cuentas por Cobrar / Cuentas por Cobrar / Deudores por Ventas",
+        "code": null,
+        "name": "Cuentas por Cobrar / Deudores por Ventas",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "account_type",
+        "source_id": "PASIVOS / Cuentas por Pagar / Cuentas por Pagar / (-) Intereses a Devengar por Compras al Crédito",
+        "code": null,
+        "name": "Cuentas por Pagar / (-) Intereses a Devengar por Compras al Crédito",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "PASIVOS / Cuentas por Pagar / Cuentas por Pagar / Anticipos de Clientes",
+        "code": null,
+        "name": "Cuentas por Pagar / Anticipos de Clientes",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "PASIVOS / Cuentas por Pagar / Cuentas por Pagar / Proveedores",
+        "code": null,
+        "name": "Cuentas por Pagar / Proveedores",
+        "resolved": true
+      }
+    ],
+    "cash": [
+      {
+        "source_field": "account_type",
+        "source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Caja / Caja y Bancos - Caja / efectivo PAB",
+        "code": null,
+        "name": "Caja y Bancos - Caja / efectivo PAB",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Fondos fijos / Caja y Bancos - Fondos fijos / caja menuda 01 PAB",
+        "code": null,
+        "name": "Caja y Bancos - Fondos fijos / caja menuda 01 PAB",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Moneda Extranjera / Caja y Bancos - Caja / efectivo USD",
+        "code": null,
+        "name": "Caja y Bancos - Caja / efectivo USD",
+        "resolved": true
+      }
+    ],
+    "bank": [
+      {
+        "source_field": "account_type",
+        "source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Bancos / Caja y Bancos.../ BCO. CTA CTE PAB",
+        "code": null,
+        "name": "Caja y Bancos.../ BCO. CTA CTE PAB",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Recaudaciones a Depositar",
+        "code": null,
+        "name": "Caja y Bancos - Recaudaciones a Depositar",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Valores a Depositar",
+        "code": null,
+        "name": "Caja y Bancos - Valores a Depositar",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "Receivable": {
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "Payable": {
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "Bank": {
+      "subtype": "bank",
+      "role_hint": "cash_bank"
+    },
+    "Cash": {
+      "subtype": "cash",
+      "role_hint": "cash_bank"
+    },
+    "Stock": {
+      "subtype": "inventory",
+      "role_hint": null
+    },
+    "Tax": {
+      "subtype": "tax",
+      "role_hint": null
+    },
+    "Cost of Goods Sold": {
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "Fixed Asset": {
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "Accumulated Depreciation": {
+      "subtype": "accumulated_depreciation",
+      "role_hint": null
+    },
+    "Depreciation": {
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "Expense Account": {
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "Income Account": {
+      "subtype": "income",
+      "role_hint": null
+    },
+    "Equity": {
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "Liability": {
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "Chargeable": {
+      "subtype": "chargeable",
+      "role_hint": null
+    },
+    "Stock Received But Not Billed": {
+      "subtype": "stock_received_not_billed",
+      "role_hint": null
+    },
+    "Asset Received But Not Billed": {
+      "subtype": "asset_received_not_billed",
+      "role_hint": null
+    },
+    "Service Received But Not Billed": {
+      "subtype": "service_received_not_billed",
+      "role_hint": null
+    },
+    "Stock Delivered But Not Billed": {
+      "subtype": "stock_delivered_not_billed",
+      "role_hint": null
+    },
+    "Stock Adjustment": {
+      "subtype": "stock_adjustment",
+      "role_hint": null
+    },
+    "Expenses Included In Valuation": {
+      "subtype": "valuation_expense",
+      "role_hint": null
+    },
+    "Expenses Included In Asset Valuation": {
+      "subtype": "asset_valuation_expense",
+      "role_hint": null
+    },
+    "Capital Work in Progress": {
+      "subtype": "capital_work_in_progress",
+      "role_hint": null
+    },
+    "Temporary": {
+      "subtype": "temporary",
+      "role_hint": null
+    },
+    "Round Off": {
+      "subtype": "round_off",
+      "role_hint": null
+    },
+    "Indirect Expense": {
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "Indirect Income": {
+      "subtype": "other_income",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 151,
+    "posting_accounts": 113,
+    "group_accounts": 38,
+    "by_root_type": {
+      "asset": 80,
+      "expense": 22,
+      "income": 17,
+      "liability": 32
+    },
+    "by_subtype": {
+      "bank": 3,
+      "cash": 3,
+      "group": 38,
+      "payable": 3,
+      "receivable": 5,
+      "unspecified": 99
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 113,
+    "role_hints": {
+      "cash_bank": 6,
+      "payables": 3,
+      "receivables": 5
+    },
+    "unmapped_account_types": {},
+    "roots_without_root_type": [],
+    "top_level_groups": [
+      "ACTIVOS",
+      "PASIVOS",
+      "PATRIMONIO",
+      "CUENTAS DE ORDEN ACREEDORAS",
+      "CUENTAS DE ORDEN DEUDORAS",
+      "COSTOS",
+      "GASTOS",
+      "INGRESOS"
+    ],
+    "max_depth": 4,
+    "account_numbers_present": false
+  },
+  "accounts": [
+    {"source_id": "ACTIVOS", "code": null, "name": "ACTIVOS", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Asset"}},
+    {"source_id": "ACTIVOS / Activo Fijo", "code": null, "name": "Activo Fijo", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ACTIVOS", "depth": 2},
+    {"source_id": "ACTIVOS / Activo Fijo / Activo Fijo / (-) Depreciación Acumulada", "code": null, "name": "Activo Fijo / (-) Depreciación Acumulada", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Activo Fijo", "depth": 3},
+    {"source_id": "ACTIVOS / Activo Fijo / Activo Fijo / Equipos", "code": null, "name": "Activo Fijo / Equipos", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Activo Fijo", "depth": 3},
+    {"source_id": "ACTIVOS / Activo Fijo / Activo Fijo / Inmuebles", "code": null, "name": "Activo Fijo / Inmuebles", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Activo Fijo", "depth": 3},
+    {"source_id": "ACTIVOS / Activo Fijo / Activo Fijo / Maquinaria", "code": null, "name": "Activo Fijo / Maquinaria", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Activo Fijo", "depth": 3},
+    {"source_id": "ACTIVOS / Activo Fijo / Activo Fijo / Material Rodante Motorizado", "code": null, "name": "Activo Fijo / Material Rodante Motorizado", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Activo Fijo", "depth": 3},
+    {"source_id": "ACTIVOS / Activo Intangible", "code": null, "name": "Activo Intangible", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ACTIVOS", "depth": 2},
+    {"source_id": "ACTIVOS / Activo Intangible / Activo Intangible / (-) Amortización Acumulada", "code": null, "name": "Activo Intangible / (-) Amortización Acumulada", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Activo Intangible", "depth": 3},
+    {"source_id": "ACTIVOS / Activo Intangible / Activo Intangible / Concesiones y Franquicias", "code": null, "name": "Activo Intangible / Concesiones y Franquicias", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Activo Intangible", "depth": 3},
+    {"source_id": "ACTIVOS / Activo Intangible / Activo Intangible / Derecho de Llaves", "code": null, "name": "Activo Intangible / Derecho de Llaves", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Activo Intangible", "depth": 3},
+    {"source_id": "ACTIVOS / Activo Intangible / Activo Intangible / Marcas y Patentes de Invención", "code": null, "name": "Activo Intangible / Marcas y Patentes de Invención", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Activo Intangible", "depth": 3},
+    {"source_id": "ACTIVOS / Caja y Bancos", "code": null, "name": "Caja y Bancos", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ACTIVOS", "depth": 2},
+    {"source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Bancos", "code": null, "name": "Caja y Bancos - Bancos", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ACTIVOS / Caja y Bancos", "depth": 3},
+    {"source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Bancos / Caja y Bancos.../ BCO. CTA CTE PAB", "code": null, "name": "Caja y Bancos.../ BCO. CTA CTE PAB", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Bancos", "depth": 4, "role_hint": "cash_bank", "source": {"account_type": "Bank"}},
+    {"source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Caja", "code": null, "name": "Caja y Bancos - Caja", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ACTIVOS / Caja y Bancos", "depth": 3},
+    {"source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Caja / Caja y Bancos - Caja / efectivo PAB", "code": null, "name": "Caja y Bancos - Caja / efectivo PAB", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Caja", "depth": 4, "role_hint": "cash_bank", "source": {"account_type": "Cash"}},
+    {"source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Fondos fijos", "code": null, "name": "Caja y Bancos - Fondos fijos", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ACTIVOS / Caja y Bancos", "depth": 3},
+    {"source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Fondos fijos / Caja y Bancos - Fondos fijos / caja menuda 01 PAB", "code": null, "name": "Caja y Bancos - Fondos fijos / caja menuda 01 PAB", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Fondos fijos", "depth": 4, "role_hint": "cash_bank", "source": {"account_type": "Cash"}},
+    {"source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Moneda Extranjera", "code": null, "name": "Caja y Bancos - Moneda Extranjera", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ACTIVOS / Caja y Bancos", "depth": 3},
+    {"source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Moneda Extranjera / Caja y Bancos - Caja / efectivo USD", "code": null, "name": "Caja y Bancos - Caja / efectivo USD", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Moneda Extranjera", "depth": 4, "role_hint": "cash_bank", "source": {"account_type": "Cash"}},
+    {"source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Recaudaciones a Depositar", "code": null, "name": "Caja y Bancos - Recaudaciones a Depositar", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Caja y Bancos", "depth": 3, "role_hint": "cash_bank", "source": {"account_type": "Bank"}},
+    {"source_id": "ACTIVOS / Caja y Bancos / Caja y Bancos - Valores a Depositar", "code": null, "name": "Caja y Bancos - Valores a Depositar", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Caja y Bancos", "depth": 3, "role_hint": "cash_bank", "source": {"account_type": "Bank"}},
+    {"source_id": "ACTIVOS / Cuentas por Cobrar", "code": null, "name": "Cuentas por Cobrar", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ACTIVOS", "depth": 2},
+    {"source_id": "ACTIVOS / Cuentas por Cobrar / Cuentas por Cobrar / (-) Previsión para Incobrables", "code": null, "name": "Cuentas por Cobrar / (-) Previsión para Incobrables", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Cuentas por Cobrar", "depth": 3, "role_hint": "receivables", "source": {"account_type": "Receivable"}},
+    {"source_id": "ACTIVOS / Cuentas por Cobrar / Cuentas por Cobrar / Deudores Morosos", "code": null, "name": "Cuentas por Cobrar / Deudores Morosos", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Cuentas por Cobrar", "depth": 3, "role_hint": "receivables", "source": {"account_type": "Receivable"}},
+    {"source_id": "ACTIVOS / Cuentas por Cobrar / Cuentas por Cobrar / Deudores Varios", "code": null, "name": "Cuentas por Cobrar / Deudores Varios", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Cuentas por Cobrar", "depth": 3, "role_hint": "receivables", "source": {"account_type": "Receivable"}},
+    {"source_id": "ACTIVOS / Cuentas por Cobrar / Cuentas por Cobrar / Deudores en Gestión Judicial", "code": null, "name": "Cuentas por Cobrar / Deudores en Gestión Judicial", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Cuentas por Cobrar", "depth": 3, "role_hint": "receivables", "source": {"account_type": "Receivable"}},
+    {"source_id": "ACTIVOS / Cuentas por Cobrar / Cuentas por Cobrar / Deudores por Ventas", "code": null, "name": "Cuentas por Cobrar / Deudores por Ventas", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Cuentas por Cobrar", "depth": 3, "role_hint": "receivables", "source": {"account_type": "Receivable"}},
+    {"source_id": "ACTIVOS / Inventarios", "code": null, "name": "Inventarios", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ACTIVOS", "depth": 2},
+    {"source_id": "ACTIVOS / Inventarios / (-) Previsión para Desvalorización de Inventarios", "code": null, "name": "(-) Previsión para Desvalorización de Inventarios", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Inventarios", "depth": 3},
+    {"source_id": "ACTIVOS / Inventarios / Inventarios - Mercancias", "code": null, "name": "Inventarios - Mercancias", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ACTIVOS / Inventarios", "depth": 3},
+    {"source_id": "ACTIVOS / Inventarios / Inventarios - Mercancias / Inventarios - Mercancias / Categoria de productos 01", "code": null, "name": "Inventarios - Mercancias / Categoria de productos 01", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Inventarios / Inventarios - Mercancias", "depth": 4},
+    {"source_id": "ACTIVOS / Inventarios / Inventarios - Mercancias en Tránsito", "code": null, "name": "Inventarios - Mercancias en Tránsito", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Inventarios", "depth": 3},
+    {"source_id": "ACTIVOS / Inventarios / Materiales Varios", "code": null, "name": "Materiales Varios", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Inventarios", "depth": 3},
+    {"source_id": "ACTIVOS / Inventarios / Materias primas", "code": null, "name": "Materias primas", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Inventarios", "depth": 3},
+    {"source_id": "ACTIVOS / Inventarios / Productos Elaborados", "code": null, "name": "Productos Elaborados", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Inventarios", "depth": 3},
+    {"source_id": "ACTIVOS / Inventarios / Productos en Curso de Elaboración", "code": null, "name": "Productos en Curso de Elaboración", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Inventarios", "depth": 3},
+    {"source_id": "ACTIVOS / Inversiones Financieras", "code": null, "name": "Inversiones Financieras", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ACTIVOS", "depth": 2},
+    {"source_id": "ACTIVOS / Inversiones Financieras / Inversiones / (-) Previsión para Devalorización de Acciones", "code": null, "name": "Inversiones / (-) Previsión para Devalorización de Acciones", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Inversiones Financieras", "depth": 3},
+    {"source_id": "ACTIVOS / Inversiones Financieras / Inversiones / Acciones Permanentes", "code": null, "name": "Inversiones / Acciones Permanentes", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Inversiones Financieras", "depth": 3},
+    {"source_id": "ACTIVOS / Inversiones Financieras / Inversiones / Acciones Transitorias", "code": null, "name": "Inversiones / Acciones Transitorias", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Inversiones Financieras", "depth": 3},
+    {"source_id": "ACTIVOS / Inversiones Financieras / Inversiones / Títulos Públicos", "code": null, "name": "Inversiones / Títulos Públicos", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Inversiones Financieras", "depth": 3},
+    {"source_id": "ACTIVOS / Otras Cuentas por Cobrar", "code": null, "name": "Otras Cuentas por Cobrar", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "ACTIVOS", "depth": 2},
+    {"source_id": "ACTIVOS / Otras Cuentas por Cobrar / Otras Cuentas por Cobrar / (-) Intereses (+) a Devengar", "code": null, "name": "Otras Cuentas por Cobrar / (-) Intereses (+) a Devengar", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Otras Cuentas por Cobrar", "depth": 3},
+    {"source_id": "ACTIVOS / Otras Cuentas por Cobrar / Otras Cuentas por Cobrar / (-) Previsión para Descuentos", "code": null, "name": "Otras Cuentas por Cobrar / (-) Previsión para Descuentos", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Otras Cuentas por Cobrar", "depth": 3},
+    {"source_id": "ACTIVOS / Otras Cuentas por Cobrar / Otras Cuentas por Cobrar / Accionistas", "code": null, "name": "Otras Cuentas por Cobrar / Accionistas", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Otras Cuentas por Cobrar", "depth": 3},
+    {"source_id": "ACTIVOS / Otras Cuentas por Cobrar / Otras Cuentas por Cobrar / Alquileres Pagados por Adelantado", "code": null, "name": "Otras Cuentas por Cobrar / Alquileres Pagados por Adelantado", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Otras Cuentas por Cobrar", "depth": 3},
+    {"source_id": "ACTIVOS / Otras Cuentas por Cobrar / Otras Cuentas por Cobrar / Anticipo al Personal", "code": null, "name": "Otras Cuentas por Cobrar / Anticipo al Personal", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Otras Cuentas por Cobrar", "depth": 3},
+    {"source_id": "ACTIVOS / Otras Cuentas por Cobrar / Otras Cuentas por Cobrar / Anticipo de Impuestos", "code": null, "name": "Otras Cuentas por Cobrar / Anticipo de Impuestos", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Otras Cuentas por Cobrar", "depth": 3},
+    {"source_id": "ACTIVOS / Otras Cuentas por Cobrar / Otras Cuentas por Cobrar / Anticipos a Proveedores", "code": null, "name": "Otras Cuentas por Cobrar / Anticipos a Proveedores", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Otras Cuentas por Cobrar", "depth": 3},
+    {"source_id": "ACTIVOS / Otras Cuentas por Cobrar / Otras Cuentas por Cobrar / Intereses Pagados por Adelantado", "code": null, "name": "Otras Cuentas por Cobrar / Intereses Pagados por Adelantado", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Otras Cuentas por Cobrar", "depth": 3},
+    {"source_id": "ACTIVOS / Otras Cuentas por Cobrar / Otras Cuentas por Cobrar / Préstamos otorgados", "code": null, "name": "Otras Cuentas por Cobrar / Préstamos otorgados", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "ACTIVOS / Otras Cuentas por Cobrar", "depth": 3},
+    {"source_id": "PASIVOS", "code": null, "name": "PASIVOS", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Liability"}},
+    {"source_id": "PASIVOS / Cuentas por Pagar", "code": null, "name": "Cuentas por Pagar", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "PASIVOS", "depth": 2},
+    {"source_id": "PASIVOS / Cuentas por Pagar / Cuentas por Pagar / (-) Intereses a Devengar por Compras al Crédito", "code": null, "name": "Cuentas por Pagar / (-) Intereses a Devengar por Compras al Crédito", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Cuentas por Pagar", "depth": 3, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "PASIVOS / Cuentas por Pagar / Cuentas por Pagar / Anticipos de Clientes", "code": null, "name": "Cuentas por Pagar / Anticipos de Clientes", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Cuentas por Pagar", "depth": 3, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "PASIVOS / Cuentas por Pagar / Cuentas por Pagar / Proveedores", "code": null, "name": "Cuentas por Pagar / Proveedores", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Cuentas por Pagar", "depth": 3, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "PASIVOS / Impuestos por Pagar", "code": null, "name": "Impuestos por Pagar", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "PASIVOS", "depth": 2},
+    {"source_id": "PASIVOS / Impuestos por Pagar / Impuestos por Pagar / ITBMS a Pagar", "code": null, "name": "Impuestos por Pagar / ITBMS a Pagar", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Impuestos por Pagar", "depth": 3},
+    {"source_id": "PASIVOS / Impuestos por Pagar / Impuestos por Pagar / Impuesto sobre la Renta a Pagar", "code": null, "name": "Impuestos por Pagar / Impuesto sobre la Renta a Pagar", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Impuestos por Pagar", "depth": 3},
+    {"source_id": "PASIVOS / Otras Cuentas por Pagar", "code": null, "name": "Otras Cuentas por Pagar", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "PASIVOS", "depth": 2},
+    {"source_id": "PASIVOS / Otras Cuentas por Pagar / Otras Cuentas por Pagar / Acreedores Varios", "code": null, "name": "Otras Cuentas por Pagar / Acreedores Varios", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Otras Cuentas por Pagar", "depth": 3},
+    {"source_id": "PASIVOS / Otras Cuentas por Pagar / Otras Cuentas por Pagar / Cobros por Adelantado", "code": null, "name": "Otras Cuentas por Pagar / Cobros por Adelantado", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Otras Cuentas por Pagar", "depth": 3},
+    {"source_id": "PASIVOS / Otras Cuentas por Pagar / Otras Cuentas por Pagar / Dividendos a Pagar", "code": null, "name": "Otras Cuentas por Pagar / Dividendos a Pagar", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Otras Cuentas por Pagar", "depth": 3},
+    {"source_id": "PASIVOS / Otras Cuentas por Pagar / Otras Cuentas por Pagar / Honorarios Directores y Síndicos a Pagar", "code": null, "name": "Otras Cuentas por Pagar / Honorarios Directores y Síndicos a Pagar", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Otras Cuentas por Pagar", "depth": 3},
+    {"source_id": "PASIVOS / Pasivo Circulante", "code": null, "name": "Pasivo Circulante", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "PASIVOS", "depth": 2},
+    {"source_id": "PASIVOS / Pasivo Circulante / Pasivo Circulante / Adelantos en Cuenta Corriente", "code": null, "name": "Pasivo Circulante / Adelantos en Cuenta Corriente", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Pasivo Circulante", "depth": 3},
+    {"source_id": "PASIVOS / Pasivo Circulante / Pasivo Circulante / Debentures Emitidos", "code": null, "name": "Pasivo Circulante / Debentures Emitidos", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Pasivo Circulante", "depth": 3},
+    {"source_id": "PASIVOS / Pasivo Circulante / Pasivo Circulante / Intereses a Pagar", "code": null, "name": "Pasivo Circulante / Intereses a Pagar", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Pasivo Circulante", "depth": 3},
+    {"source_id": "PASIVOS / Pasivo Circulante / Pasivo Circulante / Obligaciones a Pagar", "code": null, "name": "Pasivo Circulante / Obligaciones a Pagar", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Pasivo Circulante", "depth": 3},
+    {"source_id": "PASIVOS / Pasivo Circulante / Pasivo Circulante / Prestamos", "code": null, "name": "Pasivo Circulante / Prestamos", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Pasivo Circulante", "depth": 3},
+    {"source_id": "PASIVOS / Provisiones", "code": null, "name": "Provisiones", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "PASIVOS", "depth": 2},
+    {"source_id": "PASIVOS / Provisiones / Provisiones / Previsión Indemnización por Despidos", "code": null, "name": "Provisiones / Previsión Indemnización por Despidos", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Provisiones", "depth": 3},
+    {"source_id": "PASIVOS / Provisiones / Provisiones / Previsión para Garantías por Service", "code": null, "name": "Provisiones / Previsión para Garantías por Service", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Provisiones", "depth": 3},
+    {"source_id": "PASIVOS / Provisiones / Provisiones / Previsión para juicios Pendientes", "code": null, "name": "Provisiones / Previsión para juicios Pendientes", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Provisiones", "depth": 3},
+    {"source_id": "PASIVOS / Salarios por Pagar", "code": null, "name": "Salarios por Pagar", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "PASIVOS", "depth": 2},
+    {"source_id": "PASIVOS / Salarios por Pagar / Salarios por Pagar / Cargas Sociales a Pagar", "code": null, "name": "Salarios por Pagar / Cargas Sociales a Pagar", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Salarios por Pagar", "depth": 3},
+    {"source_id": "PASIVOS / Salarios por Pagar / Salarios por Pagar / Provisión para Sueldo Anual Complementario", "code": null, "name": "Salarios por Pagar / Provisión para Sueldo Anual Complementario", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Salarios por Pagar", "depth": 3},
+    {"source_id": "PASIVOS / Salarios por Pagar / Salarios por Pagar / Retenciones a Depositar", "code": null, "name": "Salarios por Pagar / Retenciones a Depositar", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Salarios por Pagar", "depth": 3},
+    {"source_id": "PASIVOS / Salarios por Pagar / Salarios por Pagar / Sueldos a Pagar", "code": null, "name": "Salarios por Pagar / Sueldos a Pagar", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "PASIVOS / Salarios por Pagar", "depth": 3},
+    {"source_id": "PATRIMONIO", "code": null, "name": "PATRIMONIO", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Asset"}},
+    {"source_id": "PATRIMONIO / Ajustes al Patrimonio", "code": null, "name": "Ajustes al Patrimonio", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "PATRIMONIO", "depth": 2},
+    {"source_id": "PATRIMONIO / Ajustes al Patrimonio / Ajustes al Patrimonio / Revaluo Técnico de Activo Fijo", "code": null, "name": "Ajustes al Patrimonio / Revaluo Técnico de Activo Fijo", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Ajustes al Patrimonio", "depth": 3},
+    {"source_id": "PATRIMONIO / Aportes No Capitalizados", "code": null, "name": "Aportes No Capitalizados", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "PATRIMONIO", "depth": 2},
+    {"source_id": "PATRIMONIO / Aportes No Capitalizados / Aportes No Capitalizados / Aportes Irrevocables Futura Suscripción de Acciones", "code": null, "name": "Aportes No Capitalizados / Aportes Irrevocables Futura Suscripción de Acciones", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Aportes No Capitalizados", "depth": 3},
+    {"source_id": "PATRIMONIO / Aportes No Capitalizados / Aportes No Capitalizados / Primas de Emsión", "code": null, "name": "Aportes No Capitalizados / Primas de Emsión", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Aportes No Capitalizados", "depth": 3},
+    {"source_id": "PATRIMONIO / Capital", "code": null, "name": "Capital", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "PATRIMONIO", "depth": 2},
+    {"source_id": "PATRIMONIO / Capital / Capital / (-) Descuento de Emisión de Acciones", "code": null, "name": "Capital / (-) Descuento de Emisión de Acciones", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Capital", "depth": 3},
+    {"source_id": "PATRIMONIO / Capital / Capital / Acciones en Circulación", "code": null, "name": "Capital / Acciones en Circulación", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Capital", "depth": 3},
+    {"source_id": "PATRIMONIO / Capital / Capital / Capital Propio", "code": null, "name": "Capital / Capital Propio", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Capital", "depth": 3},
+    {"source_id": "PATRIMONIO / Capital / Capital / Dividendos a Distribuir en Acciones", "code": null, "name": "Capital / Dividendos a Distribuir en Acciones", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Capital", "depth": 3},
+    {"source_id": "PATRIMONIO / Futuras Eventualidades", "code": null, "name": "Futuras Eventualidades", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "PATRIMONIO", "depth": 2},
+    {"source_id": "PATRIMONIO / Futuras Eventualidades / Reserva Estatutaria", "code": null, "name": "Reserva Estatutaria", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Futuras Eventualidades", "depth": 3},
+    {"source_id": "PATRIMONIO / Futuras Eventualidades / Reserva Facultativa", "code": null, "name": "Reserva Facultativa", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Futuras Eventualidades", "depth": 3},
+    {"source_id": "PATRIMONIO / Futuras Eventualidades / Reserva Legal", "code": null, "name": "Reserva Legal", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Futuras Eventualidades", "depth": 3},
+    {"source_id": "PATRIMONIO / Futuras Eventualidades / Reserva para Renovación de Activo Fijo", "code": null, "name": "Reserva para Renovación de Activo Fijo", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Futuras Eventualidades", "depth": 3},
+    {"source_id": "PATRIMONIO / Resultados No Asignados", "code": null, "name": "Resultados No Asignados", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "PATRIMONIO", "depth": 2},
+    {"source_id": "PATRIMONIO / Resultados No Asignados / Resultado del Ejercicio", "code": null, "name": "Resultado del Ejercicio", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Resultados No Asignados", "depth": 3},
+    {"source_id": "PATRIMONIO / Resultados No Asignados / Resultados Acumulados", "code": null, "name": "Resultados Acumulados", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Resultados No Asignados", "depth": 3},
+    {"source_id": "PATRIMONIO / Resultados No Asignados / Resultados Acumulados del Ejercicio Anterior", "code": null, "name": "Resultados Acumulados del Ejercicio Anterior", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Resultados No Asignados", "depth": 3},
+    {"source_id": "PATRIMONIO / Resultados No Asignados / Utilidades y Pérdidas del Ejercicio", "code": null, "name": "Utilidades y Pérdidas del Ejercicio", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "PATRIMONIO / Resultados No Asignados", "depth": 3},
+    {"source_id": "CUENTAS DE ORDEN ACREEDORAS", "code": null, "name": "CUENTAS DE ORDEN ACREEDORAS", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Liability"}},
+    {"source_id": "CUENTAS DE ORDEN ACREEDORAS / Acreedor por Documentos Descontados", "code": null, "name": "Acreedor por Documentos Descontados", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "CUENTAS DE ORDEN ACREEDORAS", "depth": 2},
+    {"source_id": "CUENTAS DE ORDEN ACREEDORAS / Acreedor por Garantías Otorgadas", "code": null, "name": "Acreedor por Garantías Otorgadas", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "CUENTAS DE ORDEN ACREEDORAS", "depth": 2},
+    {"source_id": "CUENTAS DE ORDEN ACREEDORAS / Comitente por Mercaderias Recibidas en Consignación", "code": null, "name": "Comitente por Mercaderias Recibidas en Consignación", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "CUENTAS DE ORDEN ACREEDORAS", "depth": 2},
+    {"source_id": "CUENTAS DE ORDEN DEUDORAS", "code": null, "name": "CUENTAS DE ORDEN DEUDORAS", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Asset"}},
+    {"source_id": "CUENTAS DE ORDEN DEUDORAS / Depósito de Valores Recibos en Garantía", "code": null, "name": "Depósito de Valores Recibos en Garantía", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "CUENTAS DE ORDEN DEUDORAS", "depth": 2},
+    {"source_id": "CUENTAS DE ORDEN DEUDORAS / Documentos Descontados", "code": null, "name": "Documentos Descontados", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "CUENTAS DE ORDEN DEUDORAS", "depth": 2},
+    {"source_id": "CUENTAS DE ORDEN DEUDORAS / Documentos Endosados", "code": null, "name": "Documentos Endosados", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "CUENTAS DE ORDEN DEUDORAS", "depth": 2},
+    {"source_id": "CUENTAS DE ORDEN DEUDORAS / Garantias Otorgadas", "code": null, "name": "Garantias Otorgadas", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "CUENTAS DE ORDEN DEUDORAS", "depth": 2},
+    {"source_id": "CUENTAS DE ORDEN DEUDORAS / Mercaderias Recibidas en Consignación", "code": null, "name": "Mercaderias Recibidas en Consignación", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "CUENTAS DE ORDEN DEUDORAS", "depth": 2},
+    {"source_id": "COSTOS", "code": null, "name": "COSTOS", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense"}},
+    {"source_id": "COSTOS / Compras", "code": null, "name": "Compras", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "COSTOS", "depth": 2},
+    {"source_id": "COSTOS / Compras / Compras - Categoria de productos 01", "code": null, "name": "Compras - Categoria de productos 01", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "COSTOS / Compras", "depth": 3},
+    {"source_id": "COSTOS / Costo de Venta", "code": null, "name": "Costo de Venta", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "COSTOS", "depth": 2},
+    {"source_id": "COSTOS / Costo de Venta / Costo de Venta - Categoria de productos 01", "code": null, "name": "Costo de Venta - Categoria de productos 01", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "COSTOS / Costo de Venta", "depth": 3},
+    {"source_id": "COSTOS / Costos de Producción", "code": null, "name": "Costos de Producción", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "COSTOS", "depth": 2},
+    {"source_id": "COSTOS / Gastos de Administración", "code": null, "name": "Gastos de Administración", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "COSTOS", "depth": 2},
+    {"source_id": "COSTOS / Gastos de Comercialización", "code": null, "name": "Gastos de Comercialización", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "COSTOS", "depth": 2},
+    {"source_id": "GASTOS", "code": null, "name": "GASTOS", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense"}},
+    {"source_id": "GASTOS / Gastos No Operativos", "code": null, "name": "Gastos No Operativos", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "GASTOS", "depth": 2},
+    {"source_id": "GASTOS / Gastos No Operativos / Donaciones Cedidas, Otorgadas", "code": null, "name": "Donaciones Cedidas, Otorgadas", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "GASTOS / Gastos No Operativos", "depth": 3},
+    {"source_id": "GASTOS / Gastos No Operativos / Gastos en Siniestros", "code": null, "name": "Gastos en Siniestros", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "GASTOS / Gastos No Operativos", "depth": 3},
+    {"source_id": "GASTOS / Gastos No Operativos / Pérdida Venta Activo Fijo", "code": null, "name": "Pérdida Venta Activo Fijo", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "GASTOS / Gastos No Operativos", "depth": 3},
+    {"source_id": "GASTOS / Gastos Operativos", "code": null, "name": "Gastos Operativos", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "GASTOS", "depth": 2},
+    {"source_id": "GASTOS / Gastos Operativos / Gastos Bancarios", "code": null, "name": "Gastos Bancarios", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "GASTOS / Gastos Operativos", "depth": 3},
+    {"source_id": "GASTOS / Gastos Operativos / Gastos de Publicidad y Propaganda", "code": null, "name": "Gastos de Publicidad y Propaganda", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "GASTOS / Gastos Operativos", "depth": 3},
+    {"source_id": "GASTOS / Gastos Operativos / Gastos en Amortización", "code": null, "name": "Gastos en Amortización", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "GASTOS / Gastos Operativos", "depth": 3},
+    {"source_id": "GASTOS / Gastos Operativos / Gastos en Cargas Sociales", "code": null, "name": "Gastos en Cargas Sociales", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "GASTOS / Gastos Operativos", "depth": 3},
+    {"source_id": "GASTOS / Gastos Operativos / Gastos en Depreciación de Activo Fijo", "code": null, "name": "Gastos en Depreciación de Activo Fijo", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "GASTOS / Gastos Operativos", "depth": 3},
+    {"source_id": "GASTOS / Gastos Operativos / Gastos en Impuestos", "code": null, "name": "Gastos en Impuestos", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "GASTOS / Gastos Operativos", "depth": 3},
+    {"source_id": "GASTOS / Gastos Operativos / Gastos en Salarios", "code": null, "name": "Gastos en Salarios", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "GASTOS / Gastos Operativos", "depth": 3},
+    {"source_id": "GASTOS / Gastos Operativos / Gastos en Servicios Públicos", "code": null, "name": "Gastos en Servicios Públicos", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "GASTOS / Gastos Operativos", "depth": 3},
+    {"source_id": "INGRESOS", "code": null, "name": "INGRESOS", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Income"}},
+    {"source_id": "INGRESOS / Ingresos No Operativos", "code": null, "name": "Ingresos No Operativos", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "INGRESOS", "depth": 2},
+    {"source_id": "INGRESOS / Ingresos No Operativos / Donaciones obtenidas, ganandas, percibidas", "code": null, "name": "Donaciones obtenidas, ganandas, percibidas", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos No Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos No Operativos / Ganancia Venta Inversiones Permanentes", "code": null, "name": "Ganancia Venta Inversiones Permanentes", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos No Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos No Operativos / Ganancia Venta de Activo Fijo", "code": null, "name": "Ganancia Venta de Activo Fijo", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos No Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos No Operativos / Recupero de Deudores Incobrables", "code": null, "name": "Recupero de Deudores Incobrables", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos No Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos No Operativos / Recupero de Rezagos", "code": null, "name": "Recupero de Rezagos", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos No Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos Operativos", "code": null, "name": "Ingresos Operativos", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "INGRESOS", "depth": 2},
+    {"source_id": "INGRESOS / Ingresos Operativos / Alquileres gananados, obtenidos, percibidos", "code": null, "name": "Alquileres gananados, obtenidos, percibidos", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos Operativos / Comisiones gananados, obtenidos, percibidos", "code": null, "name": "Comisiones gananados, obtenidos, percibidos", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos Operativos / Descuentos gananados, obtenidos, percibidos", "code": null, "name": "Descuentos gananados, obtenidos, percibidos", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos Operativos / Ganancia Venta de Acciones", "code": null, "name": "Ganancia Venta de Acciones", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos Operativos / Honorarios gananados, obtenidos, percibidos", "code": null, "name": "Honorarios gananados, obtenidos, percibidos", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos Operativos / Interese sobre Inversiones", "code": null, "name": "Interese sobre Inversiones", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos Operativos / Intereses gananados, obtenidos, percibidos", "code": null, "name": "Intereses gananados, obtenidos, percibidos", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos Operativos / Ventas", "code": null, "name": "Ventas", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "INGRESOS / Ingresos Operativos", "depth": 3},
+    {"source_id": "INGRESOS / Ingresos Operativos / Ventas / Ventas - Categoria de productos 01", "code": null, "name": "Ventas - Categoria de productos 01", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "INGRESOS / Ingresos Operativos / Ventas", "depth": 4}
+  ]
+}

@@ -1,0 +1,539 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "2f8acd3423a9de3ea2f36161e1405440521da9aaf7d0a2ee0975057713895e52",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/kh",
+  "country_code": "KH",
+  "country_name": "Cambodia",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Cambodia - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_kh' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_kh",
+    "module_name": "Cambodia - Accounting",
+    "module_version": "1.0",
+    "contributing_modules": [
+      "l10n_kh"
+    ],
+    "template_code": "kh",
+    "template_chain": [
+      "kh"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_kh/data/template/account.account-kh.csv",
+        "sha256": "e923971d26c4c02dbaf5bca6de31850e7148eb5237d354f8d371a48eeb3f34ab",
+        "rows": 106
+      },
+      {
+        "path": "addons/l10n_kh/data/template/account.group-kh.csv",
+        "sha256": "0e08be238831dc6ef13a3230be59be82c89ee3853893ffd6cda71b5e816f24ce",
+        "rows": 85
+      }
+    ],
+    "python_files": [
+      "addons/l10n_kh/models/template_kh.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "5",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "1090",
+      "cash": "1080",
+      "transfer": "1100"
+    },
+    "default_sale_tax": "l10n_kh_tax_sale_10_m_t",
+    "default_purchase_tax": "l10n_kh_tax_purchase_10_m",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "l10n_kh_account_10500",
+        "code": "10500",
+        "name": "Accounts Receivable / Trade Debtors",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "l10n_kh_account_20300",
+        "code": "20300",
+        "name": "Accounts payable to related parties",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "l10n_kh_account_40100",
+        "code": "40100",
+        "name": "Sales of Products",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "l10n_kh_account_50100",
+        "code": "50100",
+        "name": "Cost of products sold of production enterprises",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "property_stock_valuation_account_id",
+        "source_id": "l10n_kh_account_10200",
+        "code": "10200",
+        "name": "Stock of Goods",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "l10n_kh_account_10501",
+        "code": "10501",
+        "name": "Accounts Receivable / Trade Debtors (PoS)",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "l10n_kh_account_10901",
+        "code": "10901",
+        "name": "Bank Suspense Account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "l10n_kh_account_42800",
+        "code": "42800",
+        "name": "Gain on Realised Currency Translation",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "l10n_kh_account_61700",
+        "code": "61700",
+        "name": "Loss on Realised Currency Translations",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "l10n_kh_account_42910",
+        "code": "42910",
+        "name": "Cash Difference Gain",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "l10n_kh_account_61910",
+        "code": "61910",
+        "name": "Cash Difference Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "l10n_kh_account_42900",
+        "code": "42900",
+        "name": "Other Revenues",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "l10n_kh_account_61900",
+        "code": "61900",
+        "name": "Other Expenses",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "l10n_kh_account_10700",
+        "code": "10700",
+        "name": "Prepaid Expenses",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "l10n_kh_account_20500",
+        "code": "20500",
+        "name": "Unearned revenues",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 106,
+    "posting_accounts": 106,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 36,
+      "equity": 8,
+      "expense": 27,
+      "income": 16,
+      "liability": 19
+    },
+    "by_subtype": {
+      "cash_bank": 2,
+      "current_asset": 14,
+      "current_liability": 9,
+      "depreciation": 1,
+      "direct_cost": 3,
+      "equity": 7,
+      "expense": 23,
+      "fixed_asset": 8,
+      "income": 3,
+      "non_current_asset": 5,
+      "non_current_liability": 4,
+      "other_income": 13,
+      "payable": 6,
+      "prepayment": 1,
+      "receivable": 6,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 2,
+      "expense": 1,
+      "income": 1,
+      "payables": 6,
+      "receivables": 6
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "km_KH"
+    ],
+    "groups": 85
+  },
+  "groups": [
+    {"source_id": "l10n_kh_group_101_101", "code_prefix_start": "101", "code_prefix_end": "101", "name": "A14 Stock of Raw Materials & Supplies", "translations": {"km_KH": "A14 ស្តុកវត្ថុធាតុដើម និងសម្ភារផ្គត់ផ្គង់"}, "parent_source_id": null, "path": ["A14 Stock of Raw Materials & Supplies"]},
+    {"source_id": "l10n_kh_group_102_102", "code_prefix_start": "102", "code_prefix_end": "102", "name": "A15 Stock of Goods", "translations": {"km_KH": "A15 ស្តុកទំនិញ"}, "parent_source_id": null, "path": ["A15 Stock of Goods"]},
+    {"source_id": "l10n_kh_group_103_103", "code_prefix_start": "103", "code_prefix_end": "103", "name": "A16 Stock of Finished Products", "translations": {"km_KH": "A16 ស្តុកផលិតផលសម្រេច"}, "parent_source_id": null, "path": ["A16 Stock of Finished Products"]},
+    {"source_id": "l10n_kh_group_104_104", "code_prefix_start": "104", "code_prefix_end": "104", "name": "A17 Products in progress", "translations": {"km_KH": "A17 ផលិតផលកំពុងផលិត"}, "parent_source_id": null, "path": ["A17 Products in progress"]},
+    {"source_id": "l10n_kh_group_105_105", "code_prefix_start": "105", "code_prefix_end": "105", "name": "A18 Accounts Receivable / Trade Debtors", "translations": {"km_KH": "A18 គណនីត្រូវទទួល / អតិថិជន"}, "parent_source_id": null, "path": ["A18 Accounts Receivable / Trade Debtors"]},
+    {"source_id": "l10n_kh_group_106_106", "code_prefix_start": "106", "code_prefix_end": "106", "name": "A19 Other Accounts Receivable", "translations": {"km_KH": "A19 គណនីដែលត្រូវទទួលផ្សេងទៀត"}, "parent_source_id": null, "path": ["A19 Other Accounts Receivable"]},
+    {"source_id": "l10n_kh_group_107_107", "code_prefix_start": "107", "code_prefix_end": "107", "name": "A20 Prepaid Expenses", "translations": {"km_KH": "A20 ចំណាយបានកត់ត្រាមុន"}, "parent_source_id": null, "path": ["A20 Prepaid Expenses"]},
+    {"source_id": "l10n_kh_group_108_108", "code_prefix_start": "108", "code_prefix_end": "108", "name": "A21 Cash on Hand", "translations": {"km_KH": "A21 សាច់ប្រាក់នៅក្នុងបេឡា"}, "parent_source_id": null, "path": ["A21 Cash on Hand"]},
+    {"source_id": "l10n_kh_group_109_109", "code_prefix_start": "109", "code_prefix_end": "109", "name": "A22 Cash in Banks", "translations": {"km_KH": "A22 សាច់ប្រាក់នៅធនាគារ"}, "parent_source_id": null, "path": ["A22 Cash in Banks"]},
+    {"source_id": "l10n_kh_group_110_110", "code_prefix_start": "110", "code_prefix_end": "110", "name": "A23 Credit on Prepayment on income tax", "translations": {"km_KH": "A23 ឥណទានប្រាក់រំដោះពន្ធលើប្រាក់ចំណូល"}, "parent_source_id": null, "path": ["A23 Credit on Prepayment on income tax"]},
+    {"source_id": "l10n_kh_group_111_111", "code_prefix_start": "111", "code_prefix_end": "111", "name": "A24 Value added tax credit", "translations": {"km_KH": "A24 អាករលើតម្លៃបន្ថែមត្រូវទារ"}, "parent_source_id": null, "path": ["A24 Value added tax credit"]},
+    {"source_id": "l10n_kh_group_112_112", "code_prefix_start": "112", "code_prefix_end": "112", "name": "A25 Other Taxes Receivable", "translations": {"km_KH": "A25 ពន្ធ-អាករផ្សេងៗត្រូវទារ"}, "parent_source_id": null, "path": ["A25 Other Taxes Receivable"]},
+    {"source_id": "l10n_kh_group_113_113", "code_prefix_start": "113", "code_prefix_end": "113", "name": "A26 Other current assets", "translations": {"km_KH": "A26 ទ្រព្យសកម្មរយៈពេលខ្លីផ្សេងៗ"}, "parent_source_id": null, "path": ["A26 Other current assets"]},
+    {"source_id": "l10n_kh_group_114_114", "code_prefix_start": "114", "code_prefix_end": "114", "name": "A27 Gain/(loss) on currency translation of assets", "translations": {"km_KH": "A27 ចំណេញ/(ខាត)ពីការប្តូរប្រាក់លើទ្រព្យសកម្ម"}, "parent_source_id": null, "path": ["A27 Gain/(loss) on currency translation of assets"]},
+    {"source_id": "l10n_kh_group_121_121", "code_prefix_start": "121", "code_prefix_end": "121", "name": "A2 Freehold Land", "translations": {"km_KH": "A2 ដីធ្លីរបស់សហគ្រាស"}, "parent_source_id": null, "path": ["A2 Freehold Land"]},
+    {"source_id": "l10n_kh_group_122_122", "code_prefix_start": "122", "code_prefix_end": "122", "name": "A3 Improvement and Preparation of Land", "translations": {"km_KH": "A3 ការធ្វើអោយប្រសើរឡើងនិងការរៀបចំនៃដីធ្លី"}, "parent_source_id": null, "path": ["A3 Improvement and Preparation of Land"]},
+    {"source_id": "l10n_kh_group_123_123", "code_prefix_start": "123", "code_prefix_end": "123", "name": "A4 Freehold Buildings", "translations": {"km_KH": "A4 សំណង់អគាររបស់សហគ្រាស"}, "parent_source_id": null, "path": ["A4 Freehold Buildings"]},
+    {"source_id": "l10n_kh_group_124_124", "code_prefix_start": "124", "code_prefix_end": "124", "name": "A5 Freehold buildings on leasehold land", "translations": {"km_KH": "A5 សំណង់អគារលើដីធ្លីក្រោមភតិសន្យា"}, "parent_source_id": null, "path": ["A5 Freehold buildings on leasehold land"]},
+    {"source_id": "l10n_kh_group_125_125", "code_prefix_start": "125", "code_prefix_end": "125", "name": "A6 Non-current assets in progress", "translations": {"km_KH": "A6 ទ្រព្យសកម្មរយៈពេលវែងកំពុងដំណើរការ"}, "parent_source_id": null, "path": ["A6 Non-current assets in progress"]},
+    {"source_id": "l10n_kh_group_126_126", "code_prefix_start": "126", "code_prefix_end": "126", "name": "A7 Plant and Equipment", "translations": {"km_KH": "A7 រោងចក្រ (ក្រៅពីអគារ) និងបរិក្ខារ"}, "parent_source_id": null, "path": ["A7 Plant and Equipment"]},
+    {"source_id": "l10n_kh_group_127_127", "code_prefix_start": "127", "code_prefix_end": "127", "name": "A8 Goodwill", "translations": {"km_KH": "A8 កេរ្តិ៍ឈ្មោះ/មូលនិធិពាណិជ្ជកម្ម"}, "parent_source_id": null, "path": ["A8 Goodwill"]},
+    {"source_id": "l10n_kh_group_128_128", "code_prefix_start": "128", "code_prefix_end": "128", "name": "A9 Preliminary business formation expenses", "translations": {"km_KH": "A9 ចំណាយបង្កើតសហគ្រាសដំបូង"}, "parent_source_id": null, "path": ["A9 Preliminary business formation expenses"]},
+    {"source_id": "l10n_kh_group_129_129", "code_prefix_start": "129", "code_prefix_end": "129", "name": "A10 Leasehold assets and lease premiums", "translations": {"km_KH": "A10 ទ្រព្យសកម្មក្រោមភតិសន្យា និង បុព្វលាភនៃការប្រើប្រាស់"}, "parent_source_id": null, "path": ["A10 Leasehold assets and lease premiums"]},
+    {"source_id": "l10n_kh_group_130_130", "code_prefix_start": "130", "code_prefix_end": "130", "name": "A11 Investment in other enterprises", "translations": {"km_KH": "A11 វិនិយោគក្នុងសហគ្រាសដទៃ"}, "parent_source_id": null, "path": ["A11 Investment in other enterprises"]},
+    {"source_id": "l10n_kh_group_131_131", "code_prefix_start": "131", "code_prefix_end": "131", "name": "A12 Other Non-current Assets", "translations": {"km_KH": "A12 ទ្រព្យសកម្មរយៈពេលវែងផ្សេងៗ"}, "parent_source_id": null, "path": ["A12 Other Non-current Assets"]},
+    {"source_id": "l10n_kh_group_201_201", "code_prefix_start": "201", "code_prefix_end": "201", "name": "A43 Bank Overdraft", "translations": {"km_KH": "A43 សាច់ប្រាក់ដកពីធនាគារលើសប្រាក់បញ្ញើ (ឥណទានវិបារូប៍រ)"}, "parent_source_id": null, "path": ["A43 Bank Overdraft"]},
+    {"source_id": "l10n_kh_group_202_202", "code_prefix_start": "202", "code_prefix_end": "202", "name": "A44 Short-term borrowing-current portion of interest bearing borrowing", "translations": {"km_KH": "A44 ចំណែកចរន្តនៃបំណុលមានការប្រាក់"}, "parent_source_id": null, "path": ["A44 Short-term borrowing-current portion of interest bearing borrowing"]},
+    {"source_id": "l10n_kh_group_203_203", "code_prefix_start": "203", "code_prefix_end": "203", "name": "A45 Accounts payable to related parties", "translations": {"km_KH": "A45 គណនីត្រូវសងភាគីសម្ព័ន្"}, "parent_source_id": null, "path": ["A45 Accounts payable to related parties"]},
+    {"source_id": "l10n_kh_group_204_204", "code_prefix_start": "204", "code_prefix_end": "204", "name": "A46 Other Accounts Payable", "translations": {"km_KH": "A46 គណនីត្រូវសងផ្សេងៗ"}, "parent_source_id": null, "path": ["A46 Other Accounts Payable"]},
+    {"source_id": "l10n_kh_group_205_205", "code_prefix_start": "205", "code_prefix_end": "205", "name": "A47 Unearned revenues", "translations": {"km_KH": "A47 ចំណូលកត់មុន"}, "parent_source_id": null, "path": ["A47 Unearned revenues"]},
+    {"source_id": "l10n_kh_group_206_206", "code_prefix_start": "206", "code_prefix_end": "206", "name": "A48 Accrual expenses and other current liabilities", "translations": {"km_KH": "A48 គណនីចំណាយបង្គរ និងបំណុលរយៈពេលខ្លីផ្សេងៗ"}, "parent_source_id": null, "path": ["A48 Accrual expenses and other current liabilities"]},
+    {"source_id": "l10n_kh_group_207_207", "code_prefix_start": "207", "code_prefix_end": "207", "name": "A49 Provisions", "translations": {"km_KH": "A49 សំវិធានធន"}, "parent_source_id": null, "path": ["A49 Provisions"]},
+    {"source_id": "l10n_kh_group_208_208", "code_prefix_start": "208", "code_prefix_end": "208", "name": "A50 Income tax payable", "translations": {"km_KH": "A50 ពន្ធលើប្រាក់ចំណូលត្រូវបង់"}, "parent_source_id": null, "path": ["A50 Income tax payable"]},
+    {"source_id": "l10n_kh_group_209_209", "code_prefix_start": "209", "code_prefix_end": "209", "name": "A51 Other taxes payable", "translations": {"km_KH": "A51 ពន្ធ-អាករផ្សេងៗត្រូវបង់"}, "parent_source_id": null, "path": ["A51 Other taxes payable"]},
+    {"source_id": "l10n_kh_group_210_210", "code_prefix_start": "210", "code_prefix_end": "210", "name": "A52 Gain/(Loss) on currency translation of liabilities", "translations": {"km_KH": "A52 ចំណេញ/(ខាត)ពីការប្តូរប្រាក់លើបំណុល"}, "parent_source_id": null, "path": ["A52 Gain/(Loss) on currency translation of liabilities"]},
+    {"source_id": "l10n_kh_group_221_221", "code_prefix_start": "221", "code_prefix_end": "221", "name": "A38 Loan from banks and other external parties", "translations": {"km_KH": "A38 បំណុលធនាគារ និងបំណុលភាគីមិនជាប់ទាក់ទិនផ្សេងៗ"}, "parent_source_id": null, "path": ["A38 Loan from banks and other external parties"]},
+    {"source_id": "l10n_kh_group_222_222", "code_prefix_start": "222", "code_prefix_end": "222", "name": "A39 Loan from related parties", "translations": {"km_KH": "A39 បំណុលភាគីជាប់ទាក់ទិន"}, "parent_source_id": null, "path": ["A39 Loan from related parties"]},
+    {"source_id": "l10n_kh_group_223_223", "code_prefix_start": "223", "code_prefix_end": "223", "name": "A40 Provisions", "translations": {"km_KH": "A40 សំវិធានធន"}, "parent_source_id": null, "path": ["A40 Provisions"]},
+    {"source_id": "l10n_kh_group_224_224", "code_prefix_start": "224", "code_prefix_end": "224", "name": "A41 Other Non-current Liabilities", "translations": {"km_KH": "A41 បំណុលរយៈពេលវែងផ្សេងៗ"}, "parent_source_id": null, "path": ["A41 Other Non-current Liabilities"]},
+    {"source_id": "l10n_kh_group_301_301", "code_prefix_start": "301", "code_prefix_end": "301", "name": "A30 Capital / Share capital / Fund of Foreign Branch or Representative Office", "translations": {"km_KH": "A30 មូលធន/មូលធនភាគហ៊ុន/ មូលនិធិសាខាក្រុមហ៊ុនបរទេស ឬការិយាល័យតំណាង"}, "parent_source_id": null, "path": ["A30 Capital / Share capital / Fund of Foreign Branch or Representative Office"]},
+    {"source_id": "l10n_kh_group_302_302", "code_prefix_start": "302", "code_prefix_end": "302", "name": "A31 Share premium", "translations": {"km_KH": "A31 តម្លៃលើសនៃការលក់ប័ណ្ណភាគហ៊ុន"}, "parent_source_id": null, "path": ["A31 Share premium"]},
+    {"source_id": "l10n_kh_group_303_303", "code_prefix_start": "303", "code_prefix_end": "303", "name": "A32 Legal reserve capital", "translations": {"km_KH": "A32 មូលធនបម្រុងតាមច្បាប់"}, "parent_source_id": null, "path": ["A32 Legal reserve capital"]},
+    {"source_id": "l10n_kh_group_304_304", "code_prefix_start": "304", "code_prefix_end": "304", "name": "A33 Gain on revaluation of assets", "translations": {"km_KH": "A33 ចំណេញពីការវាយតម្លៃឡើងវិញនូវទ្រព្យសកម្ម"}, "parent_source_id": null, "path": ["A33 Gain on revaluation of assets"]},
+    {"source_id": "l10n_kh_group_305_305", "code_prefix_start": "305", "code_prefix_end": "305", "name": "A34 Other reserve capital", "translations": {"km_KH": "A34 មូលធនបម្រុងផ្សេងៗ"}, "parent_source_id": null, "path": ["A34 Other reserve capital"]},
+    {"source_id": "l10n_kh_group_401_401", "code_prefix_start": "401", "code_prefix_end": "401", "name": "B1 Sales of Products", "translations": {"km_KH": "B1 ការលក់ផលិតផល"}, "parent_source_id": null, "path": ["B1 Sales of Products"]},
+    {"source_id": "l10n_kh_group_402_402", "code_prefix_start": "402", "code_prefix_end": "402", "name": "B2 Sales of Goods", "translations": {"km_KH": "B2 ការលក់ទំនិញ"}, "parent_source_id": null, "path": ["B2 Sales of Goods"]},
+    {"source_id": "l10n_kh_group_403_403", "code_prefix_start": "403", "code_prefix_end": "403", "name": "B3 Supplies of Services", "translations": {"km_KH": "B3 ការផ្គត់ផ្គង់សេវា"}, "parent_source_id": null, "path": ["B3 Supplies of Services"]},
+    {"source_id": "l10n_kh_group_411_411", "code_prefix_start": "411", "code_prefix_end": "411", "name": "B9 Rental Fees Received or Receivable", "translations": {"km_KH": "B9 ចំណូលទទួលបានពីការជួលឬត្រូវទទួលបាន"}, "parent_source_id": null, "path": ["B9 Rental Fees Received or Receivable"]},
+    {"source_id": "l10n_kh_group_412_412", "code_prefix_start": "412", "code_prefix_end": "412", "name": "B10 Royalties Received or Receivable", "translations": {"km_KH": "B10 ចំណូលទទួលបានពីសួយសារឬត្រូវទទួលបាន"}, "parent_source_id": null, "path": ["B10 Royalties Received or Receivable"]},
+    {"source_id": "l10n_kh_group_413_413", "code_prefix_start": "413", "code_prefix_end": "413", "name": "B11 Other Subsidiary Revenues", "translations": {"km_KH": "B11 ចំណូលបន្ទាប់បន្សំដទៃទៀត"}, "parent_source_id": null, "path": ["B11 Other Subsidiary Revenues"]},
+    {"source_id": "l10n_kh_group_421_421", "code_prefix_start": "421", "code_prefix_end": "421", "name": "B13 Grants/Subsidies", "translations": {"km_KH": "B13 ឧបត្ថម្ភកធន"}, "parent_source_id": null, "path": ["B13 Grants/Subsidies"]},
+    {"source_id": "l10n_kh_group_422_422", "code_prefix_start": "422", "code_prefix_end": "422", "name": "B14 Dividends Received or Receivable", "translations": {"km_KH": "B14 ចំណូលទទួលបានពីភាគលាភឬត្រូវទទួលបាន"}, "parent_source_id": null, "path": ["B14 Dividends Received or Receivable"]},
+    {"source_id": "l10n_kh_group_423_423", "code_prefix_start": "423", "code_prefix_end": "423", "name": "B15 Interests Received or Receivable", "translations": {"km_KH": "B15 ចំណូលទទួលបានពីការប្រាក់ឬត្រូវទទួលបាន"}, "parent_source_id": null, "path": ["B15 Interests Received or Receivable"]},
+    {"source_id": "l10n_kh_group_424_424", "code_prefix_start": "424", "code_prefix_end": "424", "name": "B16 Gain/surplus on Disposal of Fixed Assets (Capital Gain)", "translations": {"km_KH": "B16 ផលចំណេញ/តម្លៃលើសពីការលក់ទ្រព្យសកម្មរយៈពេលវែង"}, "parent_source_id": null, "path": ["B16 Gain/surplus on Disposal of Fixed Assets (Capital Gain)"]},
+    {"source_id": "l10n_kh_group_425_425", "code_prefix_start": "425", "code_prefix_end": "425", "name": "B17 Gain on Disposal of Securities", "translations": {"km_KH": "B17 ផលចំណេញពីការលក់មូលបត្រ/សញ្ញាប័ណ្ណ"}, "parent_source_id": null, "path": ["B17 Gain on Disposal of Securities"]},
+    {"source_id": "l10n_kh_group_426_426", "code_prefix_start": "426", "code_prefix_end": "426", "name": "B18 Share of Profit from Joint Venture", "translations": {"km_KH": "B18 ភាគចំណេញពីប្រតិបត្តិការរួមគ្នា"}, "parent_source_id": null, "path": ["B18 Share of Profit from Joint Venture"]},
+    {"source_id": "l10n_kh_group_427_427", "code_prefix_start": "427", "code_prefix_end": "427", "name": "B19 Gain on Unrealised Currency Translation", "translations": {"km_KH": "B19 ផលចំណេញពីការប្តូរប្រាក់មិនទាន់សម្រេចបាន"}, "parent_source_id": null, "path": ["B19 Gain on Unrealised Currency Translation"]},
+    {"source_id": "l10n_kh_group_428_428", "code_prefix_start": "428", "code_prefix_end": "428", "name": "B20 Gain on Realised Currency Translation", "translations": {"km_KH": "B20 ផលចំណេញពីការប្តូរប្រាក់សម្រេចបាន"}, "parent_source_id": null, "path": ["B20 Gain on Realised Currency Translation"]},
+    {"source_id": "l10n_kh_group_429_429", "code_prefix_start": "429", "code_prefix_end": "429", "name": "B21 Other Revenues", "translations": {"km_KH": "B21 ចំណូលដទៃទៀត"}, "parent_source_id": null, "path": ["B21 Other Revenues"]},
+    {"source_id": "l10n_kh_group_501_501", "code_prefix_start": "501", "code_prefix_end": "501", "name": "B4 Cost of products sold of production enterprises", "translations": {"km_KH": "B4 ថ្លៃដើមផលិតផលបានលក់របស់សហគ្រាសផលិតកម្ម"}, "parent_source_id": null, "path": ["B4 Cost of products sold of production enterprises"]},
+    {"source_id": "l10n_kh_group_502_502", "code_prefix_start": "502", "code_prefix_end": "502", "name": "B5 Cost of goods sold of non-production enterprises", "translations": {"km_KH": "B5 ថ្លៃដើមទំនិញបានលក់របស់សហគ្រាសក្រៅពីផលិតកម្ម"}, "parent_source_id": null, "path": ["B5 Cost of goods sold of non-production enterprises"]},
+    {"source_id": "l10n_kh_group_503_503", "code_prefix_start": "503", "code_prefix_end": "503", "name": "B6 Cost of services supplied", "translations": {"km_KH": "B6 ថ្លៃដើមសេវាបានផ្គត់ផ្គង់"}, "parent_source_id": null, "path": ["B6 Cost of services supplied"]},
+    {"source_id": "l10n_kh_group_601_601", "code_prefix_start": "601", "code_prefix_end": "601", "name": "B23 Salary Expenses", "translations": {"km_KH": "B23 ចំណាយបៀវត្ស"}, "parent_source_id": null, "path": ["B23 Salary Expenses"]},
+    {"source_id": "l10n_kh_group_602_602", "code_prefix_start": "602", "code_prefix_end": "602", "name": "B24 Fuel, gas, electricity and water expenses", "translations": {"km_KH": "B24 ចំណាយប្រេង ឧស្ម័ន អគ្គិសនី និងទឹក"}, "parent_source_id": null, "path": ["B24 Fuel, gas, electricity and water expenses"]},
+    {"source_id": "l10n_kh_group_603_603", "code_prefix_start": "603", "code_prefix_end": "603", "name": "B25 Travelling and Accommodation Expenses", "translations": {"km_KH": "B25 ចំណាយធ្វើដំណើរ និងចំណាយស្នាក់នៅ"}, "parent_source_id": null, "path": ["B25 Travelling and Accommodation Expenses"]},
+    {"source_id": "l10n_kh_group_604_604", "code_prefix_start": "604", "code_prefix_end": "604", "name": "B26 Transportation Expenses", "translations": {"km_KH": "B26 ចំណាយដឹកជញ្ជូន"}, "parent_source_id": null, "path": ["B26 Transportation Expenses"]},
+    {"source_id": "l10n_kh_group_605_605", "code_prefix_start": "605", "code_prefix_end": "605", "name": "B27 Rental Expenses", "translations": {"km_KH": "B27 ចំណាយលើការជួល"}, "parent_source_id": null, "path": ["B27 Rental Expenses"]},
+    {"source_id": "l10n_kh_group_606_606", "code_prefix_start": "606", "code_prefix_end": "606", "name": "B28 Repair and Maintenance Expenses", "translations": {"km_KH": "B28 ចំណាយលើការថែទាំ និងជួសជុល"}, "parent_source_id": null, "path": ["B28 Repair and Maintenance Expenses"]},
+    {"source_id": "l10n_kh_group_607_607", "code_prefix_start": "607", "code_prefix_end": "607", "name": "B29 Entertainment Expenses", "translations": {"km_KH": "B29 ចំណាយលើការកម្សាន្តសប្បាយ"}, "parent_source_id": null, "path": ["B29 Entertainment Expenses"]},
+    {"source_id": "l10n_kh_group_608_608", "code_prefix_start": "608", "code_prefix_end": "608", "name": "B30 Commission, Advertising and Selling Expenses", "translations": {"km_KH": "B30 ចំណាយកម្រៃជើងសា ការផ្សាយពាណិជ្ជកម្ម និងចំណាយការលក់"}, "parent_source_id": null, "path": ["B30 Commission, Advertising and Selling Expenses"]},
+    {"source_id": "l10n_kh_group_609_609", "code_prefix_start": "609", "code_prefix_end": "609", "name": "B31 Other Tax Expenses", "translations": {"km_KH": "B31 ចំណាយបង់ពន្ធ និងអាករផ្សេងៗ"}, "parent_source_id": null, "path": ["B31 Other Tax Expenses"]},
+    {"source_id": "l10n_kh_group_610_610", "code_prefix_start": "610", "code_prefix_end": "610", "name": "B32 Donation Expenses", "translations": {"km_KH": "B32 ចំណាយលើអំណោយ"}, "parent_source_id": null, "path": ["B32 Donation Expenses"]},
+    {"source_id": "l10n_kh_group_611_611", "code_prefix_start": "611", "code_prefix_end": "611", "name": "B33 Management, consulting, technical, and other similar service expenses", "translations": {"km_KH": "B33 ចំណាយសេវាគ្រប់គ្រង ពិគ្រោះយោបល់ បច្ចេកទេស និងសេវាប្រហាក់ប្រហែល"}, "parent_source_id": null, "path": ["B33 Management, consulting, technical, and other similar service expenses"]},
+    {"source_id": "l10n_kh_group_612_612", "code_prefix_start": "612", "code_prefix_end": "612", "name": "B34 Royalty expenses", "translations": {"km_KH": "B34 ចំណាយលើសួយសារ"}, "parent_source_id": null, "path": ["B34 Royalty expenses"]},
+    {"source_id": "l10n_kh_group_613_613", "code_prefix_start": "613", "code_prefix_end": "613", "name": "B35 Written-off Bad Debts Expenses", "translations": {"km_KH": "B35 ចំណាយលើបំណុលទារមិនបាន"}, "parent_source_id": null, "path": ["B35 Written-off Bad Debts Expenses"]},
+    {"source_id": "l10n_kh_group_614_614", "code_prefix_start": "614", "code_prefix_end": "614", "name": "B36 Armortisation/depletion and/or depreciation expenses", "translations": {"km_KH": "B36 ចំណាយរំលស់ និងរំសាយ"}, "parent_source_id": null, "path": ["B36 Armortisation/depletion and/or depreciation expenses"]},
+    {"source_id": "l10n_kh_group_615_615", "code_prefix_start": "615", "code_prefix_end": "615", "name": "B37 Increase/decrease in Provisions", "translations": {"km_KH": "B37 ការកើនឡើង/ថយចុះ នូវសំវិធានធន"}, "parent_source_id": null, "path": ["B37 Increase/decrease in Provisions"]},
+    {"source_id": "l10n_kh_group_616_616", "code_prefix_start": "616", "code_prefix_end": "616", "name": "B38 Loss on Disposal of Fixed Assets", "translations": {"km_KH": "B38 ខាតពីការលក់ទ្រព្យសកម្មរយៈពេលវែង"}, "parent_source_id": null, "path": ["B38 Loss on Disposal of Fixed Assets"]},
+    {"source_id": "l10n_kh_group_617_617", "code_prefix_start": "617", "code_prefix_end": "617", "name": "B39 Loss on Realised Currency Translations", "translations": {"km_KH": "B39 ខាតពីការប្តូរប្រាក់សម្រេចបាន"}, "parent_source_id": null, "path": ["B39 Loss on Realised Currency Translations"]},
+    {"source_id": "l10n_kh_group_618_618", "code_prefix_start": "618", "code_prefix_end": "618", "name": "B40 Loss on Unrealised Currency Translations", "translations": {"km_KH": "B40 ខាតពីការប្តូរប្រាក់មិនទាន់សម្រេចបាន"}, "parent_source_id": null, "path": ["B40 Loss on Unrealised Currency Translations"]},
+    {"source_id": "l10n_kh_group_619_619", "code_prefix_start": "619", "code_prefix_end": "619", "name": "B41 Other Expenses", "translations": {"km_KH": "B41 ចំណាយផ្សេងៗ"}, "parent_source_id": null, "path": ["B41 Other Expenses"]},
+    {"source_id": "l10n_kh_group_631_631", "code_prefix_start": "631", "code_prefix_end": "631", "name": "B43 Interest expense paid to residents", "translations": {"km_KH": "B43 ចំណាយការប្រាក់បង់ឱ្យនិវាសនជន"}, "parent_source_id": null, "path": ["B43 Interest expense paid to residents"]},
+    {"source_id": "l10n_kh_group_632_632", "code_prefix_start": "632", "code_prefix_end": "632", "name": "B44 Interest expense paid to non-residents", "translations": {"km_KH": "B44 ចំណាយការប្រាក់បង់ឱ្យអនិវាសនជន"}, "parent_source_id": null, "path": ["B44 Interest expense paid to non-residents"]},
+    {"source_id": "l10n_kh_group_633_633", "code_prefix_start": "633", "code_prefix_end": "633", "name": "B45 Unwinding interest expenses", "translations": {"km_KH": "B45 ចំណាយការប្រាក់សន្មត"}, "parent_source_id": null, "path": ["B45 Unwinding interest expenses"]},
+    {"source_id": "l10n_kh_group_641_641", "code_prefix_start": "641", "code_prefix_end": "641", "name": "B46 Income Tax expense", "translations": {"km_KH": "B46 ចំណាយពន្ធលើប្រាក់ចំណូល"}, "parent_source_id": null, "path": ["B46 Income Tax expense"]}
+  ],
+  "accounts": [
+    {"source_id": "l10n_kh_account_10100", "code": "10100", "name": "Stock of Raw Materials & Supplies", "translations": {"km_KH": "ស្តុកវត្ថុធាតុដើម និងសម្ភារផ្គត់ផ្គង់"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_101_101", "reconcile": true, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10200", "code": "10200", "name": "Stock of Goods", "translations": {"km_KH": "ស្តុកទំនិញ"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_102_102", "reconcile": true, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10210", "code": "10210", "name": "Stock Interim (Received)", "translations": {"km_KH": "ស្តុកបណ្តោះអាសន្ន (ត្រូវទទួលបាន)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_102_102", "reconcile": true, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10220", "code": "10220", "name": "Stock Interim (Delivered)", "translations": {"km_KH": "ស្តុកបណ្តោះអាសន្ន (ត្រូវបានចែកចាយ)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_102_102", "reconcile": true, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10300", "code": "10300", "name": "Stock of Finished Products", "translations": {"km_KH": "ស្តុកផលិតផលសម្រេច"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_103_103", "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10400", "code": "10400", "name": "Products in progress", "translations": {"km_KH": "ផលិតផលកំពុងផលិត"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_104_104", "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10500", "code": "10500", "name": "Accounts Receivable / Trade Debtors", "translations": {"km_KH": "គណនីត្រូវទទួល / អតិថិជន"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_105_105", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10501", "code": "10501", "name": "Accounts Receivable / Trade Debtors (PoS)", "translations": {"km_KH": "គណនីត្រូវទទួល / អតិថិជន (PoS)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_105_105", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10600", "code": "10600", "name": "Other Accounts Receivable", "translations": {"km_KH": "គណនីដែលត្រូវទទួលផ្សេងទៀត"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_106_106", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10700", "code": "10700", "name": "Prepaid Expenses", "translations": {"km_KH": "ចំណាយបានកត់ត្រាមុន"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_107_107", "reconcile": false, "source": {"account_type": "asset_prepayments", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10800", "code": "10800", "name": "Cash on Hand", "translations": {"km_KH": "សាច់ប្រាក់នៅក្នុងបេឡា"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_108_108", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10900", "code": "10900", "name": "Cash in Banks", "translations": {"km_KH": "សាច់ប្រាក់នៅធនាគារ"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_109_109", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10901", "code": "10901", "name": "Bank Suspense Account", "translations": {"km_KH": "គណនីផ្អាកធនាគារ"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_109_109", "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_10902", "code": "10902", "name": "Liquidity Transfer", "translations": {"km_KH": "ការផ្ទេរសាច់ប្រាក់"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_109_109", "reconcile": true, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_11000", "code": "11000", "name": "Credit on Prepayment on income tax", "translations": {"km_KH": "ឥណទានប្រាក់រំដោះពន្ធលើប្រាក់ចំណូល"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_110_110", "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_11100", "code": "11100", "name": "Value added tax credit", "translations": {"km_KH": "អាករលើតម្លៃបន្ថែមត្រូវទារ"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_111_111", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "l10n_kh_account_11200", "code": "11200", "name": "Other Taxes Receivable", "translations": {"km_KH": "ពន្ធ-អាករផ្សេងៗត្រូវទារ"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_112_112", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "l10n_kh_account_11201", "code": "11201", "name": "Withholding tax receivable", "translations": {"km_KH": "អាករទុកជាមុនត្រូវទទួល"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_112_112", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "l10n_kh_account_11300", "code": "11300", "name": "Other current assets", "translations": {"km_KH": "ទ្រព្យសកម្មរយៈពេលខ្លីផ្សេងៗ"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_113_113", "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_11301", "code": "11301", "name": "VAT Input", "translations": {"km_KH": "អាកรលើការទិញ"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_113_113", "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_11302", "code": "11302", "name": "WHT Credit", "translations": {"km_KH": "ឥណទានពន្ធកាត់ទុក"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_113_113", "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_11303", "code": "11303", "name": "Other Taxes Paid", "translations": {"km_KH": "ពន្ធ-អាករផ្សេងៗត្រូវបង់"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_113_113", "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_11400", "code": "11400", "name": "Gain/loss on currency translation of assets", "translations": {"km_KH": "ចំណេញ/ខាត ពីការប្តូរប្រាក់លើទ្រព្យសកម្ម"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_114_114", "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_12100", "code": "12100", "name": "Freehold Land", "translations": {"km_KH": "ដីធ្លីរបស់សហគ្រាស"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_121_121", "reconcile": false, "source": {"account_type": "asset_fixed", "non_trade": false}},
+    {"source_id": "l10n_kh_account_12200", "code": "12200", "name": "Improvement and Preparation of Land", "translations": {"km_KH": "ការធ្វើអោយប្រសើរឡើងនិងការរៀបចំនៃដីធ្លី"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_122_122", "reconcile": false, "source": {"account_type": "asset_fixed", "non_trade": false}},
+    {"source_id": "l10n_kh_account_12300", "code": "12300", "name": "Freehold Buildings", "translations": {"km_KH": "សំណង់អគាររបស់សហគ្រាស"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_123_123", "reconcile": false, "source": {"account_type": "asset_fixed", "non_trade": false}},
+    {"source_id": "l10n_kh_account_12310", "code": "12310", "name": "Accumulated Depreciation on Freehold Buildings", "translations": {"km_KH": "ការរំលស់បង្គរលើអគារកម្មសិទ្ធិ"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_123_123", "reconcile": false, "source": {"account_type": "asset_fixed", "non_trade": false}},
+    {"source_id": "l10n_kh_account_12400", "code": "12400", "name": "Freehold buildings on leasehold land", "translations": {"km_KH": "សំណង់អគារលើដីធ្លីក្រោមភតិសន្យា"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_124_124", "reconcile": false, "source": {"account_type": "asset_fixed", "non_trade": false}},
+    {"source_id": "l10n_kh_account_12500", "code": "12500", "name": "Non-current assets in progress", "translations": {"km_KH": "ទ្រព្យសកម្មរយៈពេលវែងកំពុងដំណើរការ"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_125_125", "reconcile": false, "source": {"account_type": "asset_fixed", "non_trade": false}},
+    {"source_id": "l10n_kh_account_12600", "code": "12600", "name": "Plant and Equipment", "translations": {"km_KH": "រោងចក្រ (ក្រៅពីអគារ) និងបរិក្ខារ"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_126_126", "reconcile": false, "source": {"account_type": "asset_fixed", "non_trade": false}},
+    {"source_id": "l10n_kh_account_12620", "code": "12620", "name": "Accumulated Depreciation on Plant and Equipment", "translations": {"km_KH": "ការរំលស់បង្គរលើរោងចក្រនិងគ្រឿងចក្រ"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_126_126", "reconcile": false, "source": {"account_type": "asset_fixed", "non_trade": false}},
+    {"source_id": "l10n_kh_account_12700", "code": "12700", "name": "Goodwill", "translations": {"km_KH": "កេរ្តិ៍ឈ្មោះ/មូលនិធិពាណិជ្ជកម្ម"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_127_127", "reconcile": false, "source": {"account_type": "asset_non_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_12800", "code": "12800", "name": "Preliminary business formation expenses", "translations": {"km_KH": "ចំណាយបង្កើតសហគ្រាសដំបូង"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_128_128", "reconcile": false, "source": {"account_type": "asset_non_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_12900", "code": "12900", "name": "Leasehold assets and lease premiums", "translations": {"km_KH": "ទ្រព្យសកម្មក្រោមភតិសន្យា និង បុព្វលាភនៃការប្រើប្រាស់"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_129_129", "reconcile": false, "source": {"account_type": "asset_non_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_13000", "code": "13000", "name": "Investment in other enterprises", "translations": {"km_KH": "វិនិយោគក្នុងសហគ្រាសដទៃ"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_130_130", "reconcile": false, "source": {"account_type": "asset_non_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_13100", "code": "13100", "name": "Other Non-current Assets", "translations": {"km_KH": "ទ្រព្យសកម្មរយៈពេលវែងផ្សេងៗ"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_131_131", "reconcile": false, "source": {"account_type": "asset_non_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_20100", "code": "20100", "name": "Bank Overdraft", "translations": {"km_KH": "សាច់ប្រាក់ដកពីធនាគារលើសប្រាក់បញ្ញើ (ឥណទានវិបារូប៍រ)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_201_201", "reconcile": false, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_20200", "code": "20200", "name": "Short-term borrowing-current portion of interest bearing borrowing", "translations": {"km_KH": "ចំណែកចរន្តនៃបំណុលមានការប្រាក់"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_202_202", "reconcile": false, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_20300", "code": "20300", "name": "Accounts payable to related parties", "translations": {"km_KH": "គណនីត្រូវសងភាគីសម្ព័ន្"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_203_203", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": false}},
+    {"source_id": "l10n_kh_account_20400", "code": "20400", "name": "Other Accounts Payable", "translations": {"km_KH": "គណនីត្រូវសងផ្សេងៗ"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_204_204", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": false}},
+    {"source_id": "l10n_kh_account_20500", "code": "20500", "name": "Unearned revenues", "translations": {"km_KH": "ចំណូលកត់មុន"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_205_205", "reconcile": false, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_20600", "code": "20600", "name": "Accrual expenses and other current liabilities", "translations": {"km_KH": "គណនីចំណាយបង្គរ និងបំណុលរយៈពេលខ្លីផ្សេងៗ"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_206_206", "reconcile": false, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_20700", "code": "20700", "name": "Provisions", "translations": {"km_KH": "សំវិធានធន"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_207_207", "reconcile": false, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_20800", "code": "20800", "name": "Income tax payable", "translations": {"km_KH": "ពន្ធលើប្រាក់ចំណូលត្រូវបង់"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_208_208", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "l10n_kh_account_20900", "code": "20900", "name": "Other taxes payable", "translations": {"km_KH": "ពន្ធ-អាករផ្សេងៗត្រូវបង់"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_209_209", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "l10n_kh_account_20901", "code": "20901", "name": "Value added tax payable", "translations": {"km_KH": "អាករលើតម្លៃបន្ថែមត្រូវបង់"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_209_209", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "l10n_kh_account_20902", "code": "20902", "name": "Withholding tax payable", "translations": {"km_KH": "ពន្ធកាត់ទុកត្រូវបង់"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_209_209", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "l10n_kh_account_20903", "code": "20903", "name": "VAT Output", "translations": {"km_KH": "អាករលើការលក់"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_209_209", "reconcile": false, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_20904", "code": "20904", "name": "Tax Withheld", "translations": {"km_KH": "ពន្ធកាត់ទុកត្រូវបង់"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_209_209", "reconcile": false, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_20905", "code": "20905", "name": "Other taxes received", "translations": {"km_KH": "ពន្ធ-អាករផ្សេងៗត្រូវបង់"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_209_209", "reconcile": false, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_21000", "code": "21000", "name": "Gain/Loss on currency translation of liabilities", "translations": {"km_KH": "ចំណេញ/ខាត ពីការប្តូរប្រាក់លើបំណុល"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_210_210", "reconcile": false, "source": {"account_type": "liability_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_22100", "code": "22100", "name": "Loan from banks and other external parties", "translations": {"km_KH": "បំណុលធនាគារ និងបំណុលភាគីមិនជាប់ទាក់ទិនផ្សេងៗ"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_221_221", "reconcile": false, "source": {"account_type": "liability_non_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_22200", "code": "22200", "name": "Loan from related parties", "translations": {"km_KH": "បំណុលភាគីជាប់ទាក់ទិន"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_222_222", "reconcile": false, "source": {"account_type": "liability_non_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_22300", "code": "22300", "name": "Provisions", "translations": {"km_KH": "សំវិធានធន"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_223_223", "reconcile": false, "source": {"account_type": "liability_non_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_22400", "code": "22400", "name": "Other Non-current Liabilities", "translations": {"km_KH": "បំណុលរយៈពេលវែងផ្សេងៗ"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_224_224", "reconcile": false, "source": {"account_type": "liability_non_current", "non_trade": false}},
+    {"source_id": "l10n_kh_account_30100", "code": "30100", "name": "Capital / Share capital / Fund of Foreign Branch or Representative Office", "translations": {"km_KH": "មូលធន/មូលធនភាគហ៊ុន/ មូលនិធិសាខាក្រុមហ៊ុនបរទេស ឬការិយាល័យតំណាង"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_301_301", "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "l10n_kh_account_30200", "code": "30200", "name": "Share premium", "translations": {"km_KH": "តម្លៃលើសនៃការលក់ប័ណ្ណភាគហ៊ុន"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_302_302", "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "l10n_kh_account_30300", "code": "30300", "name": "Legal reserve capital", "translations": {"km_KH": "មូលធនបម្រុងតាមច្បាប់"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_303_303", "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "l10n_kh_account_30400", "code": "30400", "name": "Gain on revaluation of assets", "translations": {"km_KH": "ចំណេញពីការវាយតម្លៃឡើងវិញនូវទ្រព្យសកម្ម"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_304_304", "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "l10n_kh_account_30500", "code": "30500", "name": "Other reserve capital", "translations": {"km_KH": "មូលធនបម្រុងផ្សេងៗ"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_305_305", "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "l10n_kh_account_31000", "code": "31000", "name": "Profit/loss for the period (+ or -)", "translations": {"km_KH": "លទ្ធផលចំណេញ/ខាត នៃការិយបរិច្ឆេទនេះ(+ ឬ -)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "l10n_kh_account_32000", "code": "32000", "name": "Profit/loss brought forward (+ or -)", "translations": {"km_KH": "លទ្ធផលចំណេញ/ខាត យោងពីមុន (+ ឬ -)"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "l10n_kh_account_40100", "code": "40100", "name": "Sales of Products", "translations": {"km_KH": "ការលក់ផលិតផល"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_401_401", "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "l10n_kh_account_40200", "code": "40200", "name": "Sales of Goods", "translations": {"km_KH": "ការលក់ទំនិញ"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_402_402", "reconcile": false, "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "l10n_kh_account_40300", "code": "40300", "name": "Supplies of Services", "translations": {"km_KH": "ការផ្គត់ផ្គង់សេវា"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_403_403", "reconcile": false, "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "l10n_kh_account_41100", "code": "41100", "name": "Rental Fees Received or Receivable", "translations": {"km_KH": "ចំណូលទទួលបានពីការជួលឬត្រូវទទួលបាន"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_411_411", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_41200", "code": "41200", "name": "Royalties Received or Receivable", "translations": {"km_KH": "ចំណូលទទួលបានពីសួយសារឬត្រូវទទួលបាន"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_412_412", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_41300", "code": "41300", "name": "Other Subsidiary Revenues", "translations": {"km_KH": "ចំណូលបន្ទាប់បន្សំដទៃទៀត"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_413_413", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_42100", "code": "42100", "name": "Grants/Subsidies", "translations": {"km_KH": "ឧបត្ថម្ភកធន"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_421_421", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_42200", "code": "42200", "name": "Dividends Received or Receivable", "translations": {"km_KH": "ចំណូលទទួលបានពីភាគលាភឬត្រូវទទួលបាន"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_422_422", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_42300", "code": "42300", "name": "Interests Received or Receivable", "translations": {"km_KH": "ចំណូលទទួលបានពីការប្រាក់ឬត្រូវទទួលបាន"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_423_423", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_42400", "code": "42400", "name": "Gain/surplus on Disposal of Fixed Assets (Capital Gain)", "translations": {"km_KH": "ផលចំណេញ/តម្លៃលើសពីការលក់ទ្រព្យសកម្មរយៈពេលវែង"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_424_424", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_42500", "code": "42500", "name": "Gain on Disposal of Securities", "translations": {"km_KH": "ផលចំណេញពីការលក់មូលបត្រ/សញ្ញាប័ណ្ណ"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_425_425", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_42600", "code": "42600", "name": "Share of Profit from Joint Venture", "translations": {"km_KH": "ភាគចំណេញពីប្រតិបត្តិការរួមគ្នា"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_426_426", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_42700", "code": "42700", "name": "Gain on Unrealised Currency Translation", "translations": {"km_KH": "ផលចំណេញពីការប្តូរប្រាក់មិនទាន់សម្រេចបាន"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_427_427", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_42800", "code": "42800", "name": "Gain on Realised Currency Translation", "translations": {"km_KH": "ផលចំណេញពីការប្តូរប្រាក់សម្រេចបាន"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_428_428", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_42900", "code": "42900", "name": "Other Revenues", "translations": {"km_KH": "ចំណូលដទៃទៀត"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_429_429", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_42910", "code": "42910", "name": "Cash Difference Gain", "translations": {"km_KH": "ប្រាក់ចំណេញពីភាពខុសគ្នានៃសាច់ប្រាក់"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_kh_group_429_429", "reconcile": false, "source": {"account_type": "income_other", "non_trade": false}},
+    {"source_id": "l10n_kh_account_50100", "code": "50100", "name": "Cost of products sold of production enterprises", "translations": {"km_KH": "ថ្លៃដើមផលិតផលបានលក់របស់សហគ្រាសផលិតកម្ម"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_501_501", "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense_direct_cost", "non_trade": false}},
+    {"source_id": "l10n_kh_account_50200", "code": "50200", "name": "Cost of goods sold of non-production enterprises", "translations": {"km_KH": "ថ្លៃដើមទំនិញបានលក់របស់សហគ្រាសក្រៅពីផលិតកម្ម"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_502_502", "reconcile": false, "source": {"account_type": "expense_direct_cost", "non_trade": false}},
+    {"source_id": "l10n_kh_account_50300", "code": "50300", "name": "Cost of services supplied", "translations": {"km_KH": "ថ្លៃដើមសេវាបានផ្គត់ផ្គង់"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_503_503", "reconcile": false, "source": {"account_type": "expense_direct_cost", "non_trade": false}},
+    {"source_id": "l10n_kh_account_60100", "code": "60100", "name": "Salary Expenses", "translations": {"km_KH": "ចំណាយបៀវត្ស"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_601_601", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_60200", "code": "60200", "name": "Fuel, gas, electricity and water expenses", "translations": {"km_KH": "ចំណាយប្រេង ឧស្ម័ន អគ្គិសនី និងទឹក"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_602_602", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_60300", "code": "60300", "name": "Travelling and Accommodation Expenses", "translations": {"km_KH": "ចំណាយធ្វើដំណើរ និងចំណាយស្នាក់នៅ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_603_603", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_60400", "code": "60400", "name": "Transportation Expenses", "translations": {"km_KH": "ចំណាយដឹកជញ្ជូន"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_604_604", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_60500", "code": "60500", "name": "Rental Expenses", "translations": {"km_KH": "ចំណាយលើការជួល"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_605_605", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_60600", "code": "60600", "name": "Repair and Maintenance Expenses", "translations": {"km_KH": "ចំណាយលើការថែទាំ និងជួសជុល"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_606_606", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_60700", "code": "60700", "name": "Entertainment Expenses", "translations": {"km_KH": "ចំណាយលើការកម្សាន្តសប្បាយ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_607_607", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_60800", "code": "60800", "name": "Commission, Advertising and Selling Expenses", "translations": {"km_KH": "ចំណាយកម្រៃជើងសា ការផ្សាយពាណិជ្ជកម្ម និងចំណាយការលក់"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_608_608", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_60900", "code": "60900", "name": "Other Tax Expenses", "translations": {"km_KH": "ចំណាយបង់ពន្ធ និងអាករផ្សេងៗ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_609_609", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_61000", "code": "61000", "name": "Donation Expenses", "translations": {"km_KH": "ចំណាយលើអំណោយ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_610_610", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_61100", "code": "61100", "name": "Management, consulting, technical, and other similar service expenses", "translations": {"km_KH": "ចំណាយសេវាគ្រប់គ្រង ពិគ្រោះយោបល់ បច្ចេកទេស និងសេវាប្រហាក់ប្រហែល"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_611_611", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_61200", "code": "61200", "name": "Royalty expenses", "translations": {"km_KH": "ចំណាយលើសួយសារ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_612_612", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_61300", "code": "61300", "name": "Written-off Bad Debts Expenses", "translations": {"km_KH": "ចំណាយលើបំណុលទារមិនបាន"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_613_613", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_61400", "code": "61400", "name": "Armortisation/depletion and/or depreciation expenses", "translations": {"km_KH": "ចំណាយរំលស់ និងរំសាយ"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_614_614", "reconcile": false, "source": {"account_type": "expense_depreciation", "non_trade": false}},
+    {"source_id": "l10n_kh_account_61500", "code": "61500", "name": "Increase/decrease in Provisions", "translations": {"km_KH": "ការកើនឡើង/ថយចុះ នូវសំវិធានធន"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_615_615", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_61600", "code": "61600", "name": "Loss on Disposal of Fixed Assets", "translations": {"km_KH": "ខាតពីការលក់ទ្រព្យសកម្មរយៈពេលវែង"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_616_616", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_61700", "code": "61700", "name": "Loss on Realised Currency Translations", "translations": {"km_KH": "ខាតពីការប្តូរប្រាក់សម្រេចបាន"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_617_617", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_61800", "code": "61800", "name": "Loss on Unrealised Currency Translations", "translations": {"km_KH": "ខាតពីការប្តូរប្រាក់មិនទាន់សម្រេចបាន"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_618_618", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_61900", "code": "61900", "name": "Other Expenses", "translations": {"km_KH": "ចំណាយផ្សេងៗ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_619_619", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_61910", "code": "61910", "name": "Cash Difference Loss", "translations": {"km_KH": "ការបាត់បង់ភាពខុសគ្នានៃសាច់ប្រាក់"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_619_619", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_63100", "code": "63100", "name": "Interest expense paid to residents", "translations": {"km_KH": "ចំណាយការប្រាក់បង់ឱ្យនិវាសនជន"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_631_631", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_63200", "code": "63200", "name": "Interest expense paid to non-residents", "translations": {"km_KH": "ចំណាយការប្រាក់បង់ឱ្យអនិវាសនជន"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_632_632", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_63300", "code": "63300", "name": "Unwinding interest expenses", "translations": {"km_KH": "ចំណាយការប្រាក់សន្មត"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_633_633", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_64100", "code": "64100", "name": "Income Tax expense", "translations": {"km_KH": "ចំណាយពន្ធលើប្រាក់ចំណូល"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_kh_group_641_641", "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_kh_account_99999", "code": "99999", "name": "Undistributed profit/loss", "translations": {"km_KH": "ប្រាក់ចំណេញ/ខាតមិនទាន់បែងចែក"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "source": {"account_type": "equity_unaffected"}}
+  ]
+}

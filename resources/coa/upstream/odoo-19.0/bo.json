@@ -1,0 +1,497 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "6c0b98bdaebc8e334d2a574fbb54d78319c6f1723b10388552cd3d453a49d539",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/bo",
+  "country_code": "BO",
+  "country_name": "Bolivia",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Bolivia - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_bo' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo / Cubic ERP",
+    "module": "l10n_bo",
+    "module_name": "Bolivia - Accounting",
+    "module_version": "2.0",
+    "contributing_modules": [
+      "l10n_bo"
+    ],
+    "template_code": "bo",
+    "template_chain": [
+      "bo"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_bo/data/template/account.account-bo.csv",
+        "sha256": "1edb0321409458477204e546d7f6f25cc4abb6d66d9a1402b34fc00d7cb5fe1e",
+        "rows": 127
+      },
+      {
+        "path": "addons/l10n_bo/data/template/account.group-bo.csv",
+        "sha256": "dc7a7e04e6398dff2a0218c05fa5d12e20cc0baba5c8c6aa4734610ae77e260d",
+        "rows": 43
+      }
+    ],
+    "python_files": [
+      "addons/l10n_bo/models/template_bo.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": true,
+    "account_code_prefixes": {
+      "bank": "11130",
+      "cash": "11110",
+      "transfer": "11110"
+    },
+    "default_sale_tax": "l10n_bo_iva_13_sale",
+    "default_purchase_tax": "l10n_bo_iva_13_purchase",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "l10n_bo_1121",
+        "code": "1121",
+        "name": "Commercial Accounts Receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "l10n_bo_2121",
+        "code": "2121",
+        "name": "Commercial Accounts Payable",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "l10n_bo_4101",
+        "code": "4101",
+        "name": "Sales",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "l10n_bo_53008",
+        "code": "53008",
+        "name": "Administration Expenses - Materials and Supplies",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "l10n_bo_1133",
+        "code": "1133",
+        "name": "Inventory - Raw Materials",
+        "resolved": true
+      },
+      {
+        "source_field": "property_stock_valuation_account_id",
+        "source_id": "l10n_bo_1131",
+        "code": "1131",
+        "name": "Inventory - Finished Products",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "l10n_bo_11211",
+        "code": "11211",
+        "name": "Commercial Accounts Receivable - PoS",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "l10n_bo_4303",
+        "code": "4303",
+        "name": "Exchange Gain",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "l10n_bo_5602",
+        "code": "5602",
+        "name": "Exchange Loss",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "l10n_bo_4301",
+        "code": "4301",
+        "name": "Adjustment for Inflation and Property Ownership",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "l10n_bo_5601",
+        "code": "5601",
+        "name": "Adjustment for Inflation and Property Ownership",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "l10n_bo_4102",
+        "code": "4102",
+        "name": "Returns, Rebates and Discounts of Goods and/or Services",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "l10n_bo_5104",
+        "code": "5104",
+        "name": "Discounts on Purchases",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 127,
+    "posting_accounts": 127,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 41,
+      "equity": 8,
+      "expense": 44,
+      "income": 9,
+      "liability": 25
+    },
+    "by_subtype": {
+      "cash_bank": 2,
+      "current_asset": 9,
+      "current_liability": 17,
+      "depreciation": 1,
+      "equity": 7,
+      "expense": 43,
+      "fixed_asset": 11,
+      "income": 8,
+      "non_current_asset": 9,
+      "non_current_liability": 3,
+      "other_income": 1,
+      "payable": 5,
+      "prepayment": 1,
+      "receivable": 9,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 2,
+      "expense": 1,
+      "income": 1,
+      "payables": 5,
+      "receivables": 9
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "es"
+    ],
+    "groups": 43
+  },
+  "groups": [
+    {"source_id": "l10n_bo_group_1", "code_prefix_start": "1", "code_prefix_end": "1", "name": "Activos", "parent_source_id": null, "path": ["Activos"]},
+    {"source_id": "l10n_bo_group_2", "code_prefix_start": "2", "code_prefix_end": "2", "name": "Pasivos", "parent_source_id": null, "path": ["Pasivos"]},
+    {"source_id": "l10n_bo_group_3", "code_prefix_start": "3", "code_prefix_end": "3", "name": "Patrimonio", "parent_source_id": null, "path": ["Patrimonio"]},
+    {"source_id": "l10n_bo_group_4", "code_prefix_start": "4", "code_prefix_end": "4", "name": "Ingresos", "parent_source_id": null, "path": ["Ingresos"]},
+    {"source_id": "l10n_bo_group_5", "code_prefix_start": "5", "code_prefix_end": "5", "name": "Gastos", "parent_source_id": null, "path": ["Gastos"]},
+    {"source_id": "l10n_bo_group_11", "code_prefix_start": "11", "code_prefix_end": "11", "name": "Activos Corrientes", "parent_source_id": "l10n_bo_group_1", "path": ["Activos", "Activos Corrientes"]},
+    {"source_id": "l10n_bo_group_12", "code_prefix_start": "12", "code_prefix_end": "12", "name": "Activos no Corrientes", "parent_source_id": "l10n_bo_group_1", "path": ["Activos", "Activos no Corrientes"]},
+    {"source_id": "l10n_bo_group_21", "code_prefix_start": "21", "code_prefix_end": "21", "name": "Pasivos Corrientes", "parent_source_id": "l10n_bo_group_2", "path": ["Pasivos", "Pasivos Corrientes"]},
+    {"source_id": "l10n_bo_group_22", "code_prefix_start": "22", "code_prefix_end": "22", "name": "Pasivos no Corrientes", "parent_source_id": "l10n_bo_group_2", "path": ["Pasivos", "Pasivos no Corrientes"]},
+    {"source_id": "l10n_bo_group_31", "code_prefix_start": "31", "code_prefix_end": "31", "name": "Capital", "parent_source_id": "l10n_bo_group_3", "path": ["Patrimonio", "Capital"]},
+    {"source_id": "l10n_bo_group_32", "code_prefix_start": "32", "code_prefix_end": "32", "name": "Reservas", "parent_source_id": "l10n_bo_group_3", "path": ["Patrimonio", "Reservas"]},
+    {"source_id": "l10n_bo_group_33", "code_prefix_start": "33", "code_prefix_end": "33", "name": "Retained Earnings", "translations": {"es": "Resultados Acumulados"}, "parent_source_id": "l10n_bo_group_3", "path": ["Patrimonio", "Retained Earnings"]},
+    {"source_id": "l10n_bo_group_41", "code_prefix_start": "41", "code_prefix_end": "41", "name": "Ingresos Netos", "parent_source_id": "l10n_bo_group_4", "path": ["Ingresos", "Ingresos Netos"]},
+    {"source_id": "l10n_bo_group_42", "code_prefix_start": "42", "code_prefix_end": "42", "name": "Ingresos Financieros", "parent_source_id": "l10n_bo_group_4", "path": ["Ingresos", "Ingresos Financieros"]},
+    {"source_id": "l10n_bo_group_43", "code_prefix_start": "43", "code_prefix_end": "43", "name": "Other Income", "translations": {"es": "Otros Ingresos"}, "parent_source_id": "l10n_bo_group_4", "path": ["Ingresos", "Other Income"]},
+    {"source_id": "l10n_bo_group_51", "code_prefix_start": "51", "code_prefix_end": "51", "name": "Costo de Ventas", "parent_source_id": "l10n_bo_group_5", "path": ["Gastos", "Costo de Ventas"]},
+    {"source_id": "l10n_bo_group_52", "code_prefix_start": "52", "code_prefix_end": "52", "name": "Gastos de Comercialización", "parent_source_id": "l10n_bo_group_5", "path": ["Gastos", "Gastos de Comercialización"]},
+    {"source_id": "l10n_bo_group_53", "code_prefix_start": "53", "code_prefix_end": "53", "name": "Gastos Generales de Administración", "parent_source_id": "l10n_bo_group_5", "path": ["Gastos", "Gastos Generales de Administración"]},
+    {"source_id": "l10n_bo_group_54", "code_prefix_start": "54", "code_prefix_end": "54", "name": "Gastos Financieros", "parent_source_id": "l10n_bo_group_5", "path": ["Gastos", "Gastos Financieros"]},
+    {"source_id": "l10n_bo_group_55", "code_prefix_start": "55", "code_prefix_end": "55", "name": "Other Operational Expenses", "translations": {"es": "Otros Gastos de Operación"}, "parent_source_id": "l10n_bo_group_5", "path": ["Gastos", "Other Operational Expenses"]},
+    {"source_id": "l10n_bo_group_56", "code_prefix_start": "56", "code_prefix_end": "56", "name": "Otros Gastos no Operativos", "parent_source_id": "l10n_bo_group_5", "path": ["Gastos", "Otros Gastos no Operativos"]},
+    {"source_id": "l10n_bo_group_111", "code_prefix_start": "111", "code_prefix_end": "111", "name": "Efectivo y Equivalentes de Efectivo", "parent_source_id": "l10n_bo_group_11", "path": ["Activos", "Activos Corrientes", "Efectivo y Equivalentes de Efectivo"]},
+    {"source_id": "l10n_bo_group_112", "code_prefix_start": "112", "code_prefix_end": "112", "name": "Cuentas por Cobrar", "parent_source_id": "l10n_bo_group_11", "path": ["Activos", "Activos Corrientes", "Cuentas por Cobrar"]},
+    {"source_id": "l10n_bo_group_113", "code_prefix_start": "113", "code_prefix_end": "113", "name": "Inventarios", "parent_source_id": "l10n_bo_group_11", "path": ["Activos", "Activos Corrientes", "Inventarios"]},
+    {"source_id": "l10n_bo_group_114", "code_prefix_start": "114", "code_prefix_end": "114", "name": "Other Current Assets", "translations": {"es": "Otros Activos Corrientes"}, "parent_source_id": "l10n_bo_group_11", "path": ["Activos", "Activos Corrientes", "Other Current Assets"]},
+    {"source_id": "l10n_bo_group_115", "code_prefix_start": "115", "code_prefix_end": "115", "name": "Inventarios", "parent_source_id": "l10n_bo_group_11", "path": ["Activos", "Activos Corrientes", "Inventarios"]},
+    {"source_id": "l10n_bo_group_121", "code_prefix_start": "121", "code_prefix_end": "121", "name": "Cuentas por Cobrar a Largo Plazo", "parent_source_id": "l10n_bo_group_12", "path": ["Activos", "Activos no Corrientes", "Cuentas por Cobrar a Largo Plazo"]},
+    {"source_id": "l10n_bo_group_122", "code_prefix_start": "122", "code_prefix_end": "122", "name": "Inventarios no Corrientes", "parent_source_id": "l10n_bo_group_12", "path": ["Activos", "Activos no Corrientes", "Inventarios no Corrientes"]},
+    {"source_id": "l10n_bo_group_123", "code_prefix_start": "123", "code_prefix_end": "123", "name": "Propriedad Planta y Equipo", "parent_source_id": "l10n_bo_group_12", "path": ["Activos", "Activos no Corrientes", "Propriedad Planta y Equipo"]},
+    {"source_id": "l10n_bo_group_124", "code_prefix_start": "124", "code_prefix_end": "124", "name": "Investment Properties", "translations": {"es": "Propriedades de Inversión"}, "parent_source_id": "l10n_bo_group_12", "path": ["Activos", "Activos no Corrientes", "Investment Properties"]},
+    {"source_id": "l10n_bo_group_125", "code_prefix_start": "125", "code_prefix_end": "125", "name": "Activos Intangibles", "parent_source_id": "l10n_bo_group_12", "path": ["Activos", "Activos no Corrientes", "Activos Intangibles"]},
+    {"source_id": "l10n_bo_group_126", "code_prefix_start": "126", "code_prefix_end": "126", "name": "Permanent Investments", "translations": {"es": "Inversiones Permanentes"}, "parent_source_id": "l10n_bo_group_12", "path": ["Activos", "Activos no Corrientes", "Permanent Investments"]},
+    {"source_id": "l10n_bo_group_127", "code_prefix_start": "127", "code_prefix_end": "127", "name": "Otros Activos no Corrientes", "parent_source_id": "l10n_bo_group_12", "path": ["Activos", "Activos no Corrientes", "Otros Activos no Corrientes"]},
+    {"source_id": "l10n_bo_group_211", "code_prefix_start": "211", "code_prefix_end": "211", "name": "Obligaciones Bancarias y Financieras", "parent_source_id": "l10n_bo_group_21", "path": ["Pasivos", "Pasivos Corrientes", "Obligaciones Bancarias y Financieras"]},
+    {"source_id": "l10n_bo_group_212", "code_prefix_start": "212", "code_prefix_end": "212", "name": "Cuentas por Pagar", "parent_source_id": "l10n_bo_group_21", "path": ["Pasivos", "Pasivos Corrientes", "Cuentas por Pagar"]},
+    {"source_id": "l10n_bo_group_213", "code_prefix_start": "213", "code_prefix_end": "213", "name": "Obligaciones Sociales y Fiscales", "parent_source_id": "l10n_bo_group_21", "path": ["Pasivos", "Pasivos Corrientes", "Obligaciones Sociales y Fiscales"]},
+    {"source_id": "l10n_bo_group_214", "code_prefix_start": "214", "code_prefix_end": "214", "name": "Provisions", "translations": {"es": "Provisiones"}, "parent_source_id": "l10n_bo_group_21", "path": ["Pasivos", "Pasivos Corrientes", "Provisions"]},
+    {"source_id": "l10n_bo_group_215", "code_prefix_start": "215", "code_prefix_end": "215", "name": "Deferred Income", "translations": {"es": "Ingresos Diferidos"}, "parent_source_id": "l10n_bo_group_21", "path": ["Pasivos", "Pasivos Corrientes", "Deferred Income"]},
+    {"source_id": "l10n_bo_group_216", "code_prefix_start": "216", "code_prefix_end": "216", "name": "Other Current Liabilities", "translations": {"es": "Otros Pasivos Corrientes"}, "parent_source_id": "l10n_bo_group_21", "path": ["Pasivos", "Pasivos Corrientes", "Other Current Liabilities"]},
+    {"source_id": "l10n_bo_group_221", "code_prefix_start": "221", "code_prefix_end": "221", "name": "Obligaciones Bancarias y Financieras a Largo Plazo", "parent_source_id": "l10n_bo_group_22", "path": ["Pasivos", "Pasivos no Corrientes", "Obligaciones Bancarias y Financieras a Largo Plazo"]},
+    {"source_id": "l10n_bo_group_222", "code_prefix_start": "222", "code_prefix_end": "222", "name": "Cuentas por Pagar a Largo Plazo", "parent_source_id": "l10n_bo_group_22", "path": ["Pasivos", "Pasivos no Corrientes", "Cuentas por Pagar a Largo Plazo"]},
+    {"source_id": "l10n_bo_group_223", "code_prefix_start": "223", "code_prefix_end": "223", "name": "Previsión para Beneficios Sociales", "parent_source_id": "l10n_bo_group_22", "path": ["Pasivos", "Pasivos no Corrientes", "Previsión para Beneficios Sociales"]},
+    {"source_id": "l10n_bo_group_224", "code_prefix_start": "224", "code_prefix_end": "224", "name": "Otros Pasivos no Corrientes", "parent_source_id": "l10n_bo_group_22", "path": ["Pasivos", "Pasivos no Corrientes", "Otros Pasivos no Corrientes"]}
+  ],
+  "accounts": [
+    {"source_id": "l10n_bo_1112", "code": "1112", "name": "Petty Cash", "translations": {"es": "Fondo fijo"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_111", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_bo_1114", "code": "1114", "name": "Temporary Investments", "translations": {"es": "Inversiones Temporales"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_111", "reconcile": false, "role_hint": "cash_bank", "source": {"account_type": "asset_cash"}},
+    {"source_id": "l10n_bo_1121", "code": "1121", "name": "Commercial Accounts Receivable", "translations": {"es": "Cuentas por Cobrar Comerciales"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_112", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_11211", "code": "11211", "name": "Commercial Accounts Receivable - PoS", "translations": {"es": "Cuentas por Cobrar Comerciales - PoS"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_112", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1122", "code": "1122", "name": "Other Accounts Receivable", "translations": {"es": "Otras Cuentas por Cobrar"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_112", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1123", "code": "1123", "name": "Accounts Receivable from Related Companies", "translations": {"es": "Cuentas por Cobrar a Empresas Relacionadas"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_112", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1124", "code": "1124", "name": "Advances to Suppliers", "translations": {"es": "Anticipo a Proveedores"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_112", "reconcile": false, "source": {"account_type": "asset_prepayments", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1125", "code": "1125", "name": "Provision for Bad Accounts", "translations": {"es": "Provisión para Cuentas Incobrables"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_112", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1131", "code": "1131", "name": "Inventory - Finished Products", "translations": {"es": "Inventarios de Productos Terminados"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_113", "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1132", "code": "1132", "name": "Inventory - Work in Process", "translations": {"es": "Inventarios de Productos en Proceso"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_113", "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1133", "code": "1133", "name": "Inventory - Raw Materials", "translations": {"es": "Inventarios de Materia Prima"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_113", "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "extra": {"account_stock_expense_id": "l10n_bo_53008", "account_stock_variation_id": "l10n_bo_5106"}}},
+    {"source_id": "l10n_bo_11341", "code": "11341", "name": "Stock Interim (Received)", "translations": {"es": "Inventario en Tránsito Entrante"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_113", "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_11342", "code": "11342", "name": "Stock Interim (Delivered)", "translations": {"es": "Inventario en Tránsito Saliente"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_113", "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1135", "code": "1135", "name": "Inventory - Provision for Obsolescence", "translations": {"es": "Inventario - Provisión para Obsolescencias"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_113", "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1141", "code": "1141", "name": "IVA Tax Credit", "translations": {"es": "Crédito Fiscal IVA"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_114", "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1142", "code": "1142", "name": "Taxes to Recover", "translations": {"es": "Impuestos por Recuperar"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_114", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"], "non_trade": true}},
+    {"source_id": "l10n_bo_1143", "code": "1143", "name": "Advance Payments", "translations": {"es": "Pagos Anticipados"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_114", "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1144", "code": "1144", "name": "Other Current Assets", "translations": {"es": "Otros Activos Corrientes"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_114", "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_1211", "code": "1211", "name": "Commercial Accounts Receivable - Long Term", "translations": {"es": "Cuentas por Cobrar Comerciales - Largo Plazo"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_121", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1212", "code": "1212", "name": "Other Accounts Receivable - Long Term", "translations": {"es": "Otras Cuentas por Cobrar - Largo Plazo"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_121", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1213", "code": "1213", "name": "Long-Term Accounts Receivable from Related and/or Linked Companies", "translations": {"es": "Cuentas por Cobrar Empresas Relacionadas y/o Vinculadas Largo Plazo"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_121", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_1221", "code": "1221", "name": "Inventory - Spare Parts", "translations": {"es": "Inventarios de Repuestos"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_122", "reconcile": true, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_1222", "code": "1222", "name": "Other Inventory", "translations": {"es": "Otros Inventarios"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_122", "reconcile": true, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_1231", "code": "1231", "name": "Land", "translations": {"es": "Terrenos"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_123", "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_1232", "code": "1232", "name": "Buildings", "translations": {"es": "Edificios"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_123", "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_12321", "code": "12321", "name": "Accumulated Depreciation Buildings", "translations": {"es": "Depreciación Acumulada Edificios"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_123", "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_1233", "code": "1233", "name": "Machinery", "translations": {"es": "Maquinaria"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_123", "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_12331", "code": "12331", "name": "Accumulated Depreciation Machinery", "translations": {"es": "Depreciación Acumulada Maquinaria"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_123", "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_1234", "code": "1234", "name": "Vehicles", "translations": {"es": "Vehículos"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_123", "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_12341", "code": "12341", "name": "Accumulated Depreciation Vehicles", "translations": {"es": "Depreciación Acumulada Vehículos"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_123", "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_1235", "code": "1235", "name": "Furniture and Fixtures", "translations": {"es": "Muebles y Enseres"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_123", "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_12351", "code": "12351", "name": "Accumulated Depreciation Furniture and Fixtures", "translations": {"es": "Depreciación Acumulada Muebles y Enseres"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_123", "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_1236", "code": "1236", "name": "Computer Equipment", "translations": {"es": "Equipos de Computación"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_123", "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_12361", "code": "12361", "name": "Accumulated Depreciation Computer Equipment", "translations": {"es": "Depreciación Acumulada Equipos de Computación"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_123", "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_124", "code": "124", "name": "Investment Properties", "translations": {"es": "Propriedades de Inversión"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_124", "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_1251", "code": "1251", "name": "Patents and Trademarks", "translations": {"es": "Patentes y Marcas"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_125", "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_12511", "code": "12511", "name": "Accumulated Amortization Patents and Trademarks", "translations": {"es": "Amortización Acumulada Patentes y Marcas"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_125", "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_1252", "code": "1252", "name": "Rights of Use", "translations": {"es": "Derechos de Llave"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_125", "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_12521", "code": "12521", "name": "Accumulated Amortization Rights of Use", "translations": {"es": "Amortización Acumulada Derechos de Llave"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_125", "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_126", "code": "126", "name": "Permanent Investments", "translations": {"es": "Inversiones Permanentes"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_126", "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_127", "code": "127", "name": "Other Non-Current Assets", "translations": {"es": "Otros Activos No Corrientes"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_127", "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2111", "code": "2111", "name": "Bank loans", "translations": {"es": "Préstamos Bancarios"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_211", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_2112", "code": "2112", "name": "Other Financial Liabilities", "translations": {"es": "Otros Pasivos Financieros"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_211", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_2113", "code": "2113", "name": "Interest Payable", "translations": {"es": "Intereses por Pagar"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_211", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_2121", "code": "2121", "name": "Commercial Accounts Payable", "translations": {"es": "Cuentas por Pagar Comerciales"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_212", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2122", "code": "2122", "name": "Notes Payable Short Term", "translations": {"es": "Documentos por Pagar Corto Plazo"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_212", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2123", "code": "2123", "name": "Accounts Payable to Related Companies", "translations": {"es": "Cuentas por Pagar a Empresas Relacionadas"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_212", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2131", "code": "2131", "name": "Short-term Contributions and Withholdings", "translations": {"es": "Aportes y Retenciones a Corto Plazo"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_213", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2132", "code": "2132", "name": "Wages Payable", "translations": {"es": "Sueldos por Pagar"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_213", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2133", "code": "2133", "name": "Social Benefits Payable", "translations": {"es": "Beneficios Sociales por Pagar"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_213", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2134", "code": "2134", "name": "Social Charges", "translations": {"es": "Cargos Sociales"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_213", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2135", "code": "2135", "name": "IVA Tax Debit", "translations": {"es": "Débito Fiscal IVA"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_213", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2136", "code": "2136", "name": "Transaction Tax Payable", "translations": {"es": "Impuesto a las Transacciones por Pagar"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_213", "reconcile": true, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2137", "code": "2137", "name": "IT Withholdings Payable", "translations": {"es": "Retenciones IT por Pagar"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_213", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2138", "code": "2138", "name": "IUE Withholdings Payable", "translations": {"es": "Retenciones IUE por Pagar"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_213", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2139", "code": "2139", "name": "Other Tax Payable", "translations": {"es": "Otros Impuestos por Pagar"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_213", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_21399", "code": "21399", "name": "Taxes to Pay", "translations": {"es": "Impuestos por Pagar"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_213", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["account.account_tag_operating"], "non_trade": true}},
+    {"source_id": "l10n_bo_214", "code": "214", "name": "Provisions", "translations": {"es": "Provisiones"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_214", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_215", "code": "215", "name": "Deferred Income", "translations": {"es": "Ingresos Diferidos"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_215", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_216", "code": "216", "name": "Other Current Liabilities", "translations": {"es": "Otros Pasivos Corrientes"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_216", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_2211", "code": "2211", "name": "Bank loans - Long Term", "translations": {"es": "Préstamos Bancarios a Largo Plazo"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_221", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2212", "code": "2212", "name": "Other Long-Term Financial Liabilities", "translations": {"es": "Otros Pasivos Financieros a Largo Plazo"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_221", "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2221", "code": "2221", "name": "Notes Payable Long Term", "translations": {"es": "Documentos por Pagar a Largo Plazo"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_222", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_2222", "code": "2222", "name": "Long-term Accounts Payable to Related Companies", "translations": {"es": "Cuentas por Pagar a Empresas Relacionadas a Largo Plazo"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_222", "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_223", "code": "223", "name": "Provision for Social Benefits (Personnel Compensation)", "translations": {"es": "Provisión para Beneficios Sociales (Indemnizaciones al Personal)"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_223", "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_224", "code": "224", "name": "Other Non-Current Liabilities", "translations": {"es": "Otros Pasivos No Corrientes"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_224", "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_3101", "code": "3101", "name": "Paid Share Capital", "translations": {"es": "Capital Social Pagado"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_31", "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_3102", "code": "3102", "name": "Contributions to Capitalize", "translations": {"es": "Aportes por Capitalizar"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_31", "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_3103", "code": "3103", "name": "Capital Adjustment", "translations": {"es": "Ajuste de Capital"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_31", "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_3201", "code": "3201", "name": "Legal Reserve", "translations": {"es": "Reserva Legal"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_32", "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_3202", "code": "3202", "name": "Other Reserves", "translations": {"es": "Otras Reservas"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_32", "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_3203", "code": "3203", "name": "Adjustment of Equity Reserves", "translations": {"es": "Ajuste de Reservas Patrimoniales"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_32", "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_331", "code": "331", "name": "Retained Earnings", "translations": {"es": "Resultados Acumulados"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_33", "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_332", "code": "332", "name": "Current Year Earnings", "translations": {"es": "Resultados de la Gestión"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_33", "reconcile": false, "source": {"account_type": "equity_unaffected", "tag_ids": ["account.account_tag_financing"]}},
+    {"source_id": "l10n_bo_4101", "code": "4101", "name": "Sales", "translations": {"es": "Ventas"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_41", "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_4102", "code": "4102", "name": "Returns, Rebates and Discounts of Goods and/or Services", "translations": {"es": "Devoluciones, Rebajas y Descuetos de Bienes y/o Servicios"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_41", "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_4201", "code": "4201", "name": "Interest on Bank Deposits", "translations": {"es": "Intereses Sobre Depósitos Bancarios"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_42", "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_4202", "code": "4202", "name": "Interest on Temporary Investments", "translations": {"es": "Intereses de Inversiones Temporales"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_42", "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_4203", "code": "4203", "name": "Other Financial Income", "translations": {"es": "Otros Ingresos Financieros"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_42", "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_investing"]}},
+    {"source_id": "l10n_bo_4301", "code": "4301", "name": "Adjustment for Inflation and Property Ownership", "translations": {"es": "Ajuste por Inflación y Tenencie de Bienes"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_43", "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_4302", "code": "4302", "name": "Income from Sale of Securities", "translations": {"es": "Ingresos por Venta de Valores"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_43", "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_4303", "code": "4303", "name": "Exchange Gain", "translations": {"es": "Ganancia Cambiaria"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_43", "reconcile": false, "source": {"account_type": "income", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_4304", "code": "4304", "name": "Other Income", "translations": {"es": "Otros Ingresos"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "l10n_bo_group_43", "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5101", "code": "5101", "name": "Product Costs", "translations": {"es": "Costos de Productos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_51", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5102", "code": "5102", "name": "Freight and Transportation of Products", "translations": {"es": "Fletes y Transportes de Productos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_51", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5103", "code": "5103", "name": "Returns on Purchases", "translations": {"es": "Devolución en Compras"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_51", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5104", "code": "5104", "name": "Discounts on Purchases", "translations": {"es": "Descuentos Sobre Compras"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_51", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5105", "code": "5105", "name": "Cost of Damaged Products", "translations": {"es": "Costo de Productos Dañados"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_51", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5106", "code": "5106", "name": "Inventory Variation", "translations": {"es": "Variación de Inventarios"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_51", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5201", "code": "5201", "name": "Costs of Sale - Wages and Salaries", "translations": {"es": "Gastos de Comercialización - Sueldos y Salarios"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_52", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5202", "code": "5202", "name": "Costs of Sale - Social Benefits", "translations": {"es": "Gastos de Comercialización - Beneficios Sociales"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_52", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5203", "code": "5203", "name": "Costs of Sale - Sales Commissions", "translations": {"es": "Gastos de Comercialización - Comisiones Sobre Ventas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_52", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5204", "code": "5204", "name": "Costs of Sale - Per diems", "translations": {"es": "Gastos de Comercialización - Víaticos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_52", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5205", "code": "5205", "name": "Costs of Sale - Tickets", "translations": {"es": "Gastos de Comercialización - Pasajes"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_52", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5206", "code": "5206", "name": "Costs of Sale - Advertising", "translations": {"es": "Gastos de Comercialización - Publicidad"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_52", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5207", "code": "5207", "name": "Costs of Sale - Depreciation of Fixed Assets", "translations": {"es": "Gastos de Comercialización - Depreciación de Bienes de Uso"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_52", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5208", "code": "5208", "name": "Costs of Sale - Loss on Bad Accounts", "translations": {"es": "Gastos de Comercialización - Pérdida en Cuentas Incobrabres"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_52", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5209", "code": "5209", "name": "Other Costs of Sale", "translations": {"es": "Otros Gastos de Comercialización"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_52", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_52091", "code": "52091", "name": "Transaction Tax", "translations": {"es": "Impuesto a las Transacciones"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_52", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_52092", "code": "52092", "name": "IT Withholdings", "translations": {"es": "Retenciones IT"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_52", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_52093", "code": "52093", "name": "IUE Withholdings", "translations": {"es": "Retenciones IUE"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_52", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53001", "code": "53001", "name": "Administration Expenses - Wages and Salaries", "translations": {"es": "Gastos de Administración - Sueldos y Salarios"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53002", "code": "53002", "name": "Administration Expenses - Social Benefits", "translations": {"es": "Gastos de Administración - Beneficios Sociales"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53003", "code": "53003", "name": "Administrative Expenses - Provision for Christmas Bonuses", "translations": {"es": "Gastos de Administración - Provisión Aguinaldos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53004", "code": "53004", "name": "Administration Expenses - Provision for Compensations", "translations": {"es": "Gastos de Administración - Provisión Indemnizaciones"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53005", "code": "53005", "name": "Administration Expenses - Per diem", "translations": {"es": "Gastos de Administración - Víaticos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53006", "code": "53006", "name": "Administration Expenses - Tickets", "translations": {"es": "Gastos de Administración - Pasajes"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53007", "code": "53007", "name": "Administration Expenses - Basic Services", "translations": {"es": "Gastos de Administración - Servicios Básicos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53008", "code": "53008", "name": "Administration Expenses - Materials and Supplies", "translations": {"es": "Gastos de Administración - Materiales y Suministros"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53009", "code": "53009", "name": "Administration Expenses - Freight and Transportation", "translations": {"es": "Gastos de Administración - Fletes y Transporte"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53010", "code": "53010", "name": "Administration Expenses - Maintenance and Repair", "translations": {"es": "Gastos de Administración - Mantenimento y Reparación"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53011", "code": "53011", "name": "Administration Expenses - Depreciation of Fixed Assets", "translations": {"es": "Gastos de Administración - Depreciación de Bienes de Uso"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53012", "code": "53012", "name": "Administration Expenses - Rentals", "translations": {"es": "Gastos de Administración - Alquileres"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53013", "code": "53013", "name": "Administration Expenses - Insurance", "translations": {"es": "Gastos de Administración - Seguros"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53014", "code": "53014", "name": "Administration Expenses - Security Service", "translations": {"es": "Gastos de Administración - Servicio de Seguridad"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53015", "code": "53015", "name": "Administration Expenses - General Expenses", "translations": {"es": "Gastos de Administración - Gastos Generales"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_53016", "code": "53016", "name": "Other Administrative Expenses", "translations": {"es": "Otros Gastos de Administración"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_53", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5401", "code": "5401", "name": "Interest on Bank Loans", "translations": {"es": "Intereses Sobre Préstamos Bancarios"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_54", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5402", "code": "5402", "name": "Interest on Other Financial Obligations", "translations": {"es": "Intereses Sobre Otras Obligaciones Financieras"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_54", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5403", "code": "5403", "name": "Other Interests", "translations": {"es": "Otros Intereses"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_54", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5404", "code": "5404", "name": "Bank Fees", "translations": {"es": "Comisiones Bancarias"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_54", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5405", "code": "5405", "name": "Other Financial Expenses", "translations": {"es": "Otros Gastos Financieros"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_54", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_550", "code": "550", "name": "Other Operational Expenses", "translations": {"es": "Otros Gastos de Operación"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_55", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5601", "code": "5601", "name": "Adjustment for Inflation and Property Ownership", "translations": {"es": "Ajuste por Inflación y Tenencie de Bienes"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_56", "reconcile": false, "source": {"account_type": "expense_depreciation", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5602", "code": "5602", "name": "Exchange Loss", "translations": {"es": "Pérdida Cambiaria"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_56", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_5603", "code": "5603", "name": "Other Expenses", "translations": {"es": "Otros Gastos"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_56", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}},
+    {"source_id": "l10n_bo_570", "code": "570", "name": "Corporate Income Tax", "translations": {"es": "Impuesto Sobre las Utilidades de las Empresas"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "l10n_bo_group_5", "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"]}}
+  ]
+}

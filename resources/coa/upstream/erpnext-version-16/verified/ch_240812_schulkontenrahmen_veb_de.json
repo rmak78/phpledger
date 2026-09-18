@@ -1,0 +1,370 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "446c6073ccd12231af4c03c66dc13da5bb53beac2ae90812009d903c9ec7d95e",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "erpnext-version-16/verified/ch_240812_schulkontenrahmen_veb_de",
+  "country_code": "CH",
+  "country_name": "Switzerland",
+  "country_basis": "chart file country_code",
+  "name": "240812 Schulkontenrahmen VEB - DE",
+  "source": {
+    "system": "erpnext",
+    "repository": "https://github.com/frappe/erpnext",
+    "branch": "version-16",
+    "commit": "4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+    "commit_date": "2026-09-08T13:23:31+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "GPL-3.0-only",
+    "license_basis": "repository license.txt (GNU GPL v3); chart files carry no separate licence header",
+    "attribution": "Frappe Technologies Pvt. Ltd. and Contributors",
+    "upstream_folder": "verified",
+    "upstream_verified": true,
+    "upstream_disabled": false,
+    "files": [
+      {
+        "path": "erpnext/accounts/doctype/account/chart_of_accounts/verified/ch_240812_schulkontenrahmen_veb_de.json",
+        "sha256": "4b8f953130a54019692d3d809f0feecd99f4f044b2272eaec46de387af1f5878",
+        "kind": "json"
+      }
+    ]
+  },
+  "template": {
+    "hierarchy": "nested groups; posting accounts are leaves; source_id is the full ' / ' separated path",
+    "account_numbers_present": true
+  },
+  "role_defaults": {
+    "cash": [
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiven / Umlaufvermögen / Flüssige Mittel / Kasse",
+        "code": "1000",
+        "name": "Kasse",
+        "resolved": true
+      }
+    ],
+    "bank": [
+      {
+        "source_field": "account_type",
+        "source_id": "Aktiven / Umlaufvermögen / Flüssige Mittel / Bankguthaben",
+        "code": "1020",
+        "name": "Bankguthaben",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "Receivable": {
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "Payable": {
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "Bank": {
+      "subtype": "bank",
+      "role_hint": "cash_bank"
+    },
+    "Cash": {
+      "subtype": "cash",
+      "role_hint": "cash_bank"
+    },
+    "Stock": {
+      "subtype": "inventory",
+      "role_hint": null
+    },
+    "Tax": {
+      "subtype": "tax",
+      "role_hint": null
+    },
+    "Cost of Goods Sold": {
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "Fixed Asset": {
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "Accumulated Depreciation": {
+      "subtype": "accumulated_depreciation",
+      "role_hint": null
+    },
+    "Depreciation": {
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "Expense Account": {
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "Income Account": {
+      "subtype": "income",
+      "role_hint": null
+    },
+    "Equity": {
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "Liability": {
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "Chargeable": {
+      "subtype": "chargeable",
+      "role_hint": null
+    },
+    "Stock Received But Not Billed": {
+      "subtype": "stock_received_not_billed",
+      "role_hint": null
+    },
+    "Asset Received But Not Billed": {
+      "subtype": "asset_received_not_billed",
+      "role_hint": null
+    },
+    "Service Received But Not Billed": {
+      "subtype": "service_received_not_billed",
+      "role_hint": null
+    },
+    "Stock Delivered But Not Billed": {
+      "subtype": "stock_delivered_not_billed",
+      "role_hint": null
+    },
+    "Stock Adjustment": {
+      "subtype": "stock_adjustment",
+      "role_hint": null
+    },
+    "Expenses Included In Valuation": {
+      "subtype": "valuation_expense",
+      "role_hint": null
+    },
+    "Expenses Included In Asset Valuation": {
+      "subtype": "asset_valuation_expense",
+      "role_hint": null
+    },
+    "Capital Work in Progress": {
+      "subtype": "capital_work_in_progress",
+      "role_hint": null
+    },
+    "Temporary": {
+      "subtype": "temporary",
+      "role_hint": null
+    },
+    "Round Off": {
+      "subtype": "round_off",
+      "role_hint": null
+    },
+    "Indirect Expense": {
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "Indirect Income": {
+      "subtype": "other_income",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 160,
+    "posting_accounts": 125,
+    "group_accounts": 35,
+    "by_root_type": {
+      "asset": 64,
+      "equity": 2,
+      "expense": 32,
+      "income": 17,
+      "liability": 45
+    },
+    "by_subtype": {
+      "bank": 1,
+      "cash": 1,
+      "group": 35,
+      "unspecified": 123
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 2
+    },
+    "unmapped_account_types": {},
+    "roots_without_root_type": [],
+    "top_level_groups": [
+      "Aktiven",
+      "Passiven",
+      "Betrieblicher Ertrag aus Lieferungen und Leistungen",
+      "Aufwand für Material, Handelswaren, Dienstleistungen und Energie",
+      "Personalaufwand",
+      "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis",
+      "Betrieblicher Nebenerfolg",
+      "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag",
+      "Abschluss"
+    ],
+    "max_depth": 4,
+    "account_numbers_present": true
+  },
+  "accounts": [
+    {"source_id": "Aktiven", "code": "1", "name": "Aktiven", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Asset", "is_group": 1}},
+    {"source_id": "Aktiven / Umlaufvermögen", "code": "10", "name": "Umlaufvermögen", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Umlaufvermögen / Flüssige Mittel", "code": "100", "name": "Flüssige Mittel", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven / Umlaufvermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Umlaufvermögen / Flüssige Mittel / Kasse", "code": "1000", "name": "Kasse", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Flüssige Mittel", "depth": 4, "role_hint": "cash_bank", "source": {"account_type": "Cash"}},
+    {"source_id": "Aktiven / Umlaufvermögen / Flüssige Mittel / Bankguthaben", "code": "1020", "name": "Bankguthaben", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Flüssige Mittel", "depth": 4, "role_hint": "cash_bank", "source": {"account_type": "Bank"}},
+    {"source_id": "Aktiven / Umlaufvermögen / Kurzfristig gehaltene Aktiven mit Börsenkurs", "code": "106", "name": "Kurzfristig gehaltene Aktiven mit Börsenkurs", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven / Umlaufvermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Umlaufvermögen / Kurzfristig gehaltene Aktiven mit Börsenkurs / Wertschriften", "code": "1060", "name": "Wertschriften", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Kurzfristig gehaltene Aktiven mit Börsenkurs", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Kurzfristig gehaltene Aktiven mit Börsenkurs / Wertberichtigungen Wertschriften", "code": "1069", "name": "Wertberichtigungen Wertschriften", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Kurzfristig gehaltene Aktiven mit Börsenkurs", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Forderungen aus Lieferungen und Leistungen", "code": "110", "name": "Forderungen aus Lieferungen und Leistungen", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven / Umlaufvermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Umlaufvermögen / Forderungen aus Lieferungen und Leistungen / Forderungen aus Lieferungen und Leistungen (Debitoren)", "code": "1100", "name": "Forderungen aus Lieferungen und Leistungen (Debitoren)", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Forderungen aus Lieferungen und Leistungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Forderungen aus Lieferungen und Leistungen / Delkredere", "code": "1109", "name": "Delkredere", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Forderungen aus Lieferungen und Leistungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen", "code": "114", "name": "Übrige kurzfristige Forderungen", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven / Umlaufvermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen / Vorschüsse und Darlehen", "code": "1140", "name": "Vorschüsse und Darlehen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen / Wertberichtigungen Vorschüsse und Darlehen", "code": "1149", "name": "Wertberichtigungen Vorschüsse und Darlehen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen / Vorsteuer MWST Material, Waren, Dienstleistungen, Energie", "code": "1170", "name": "Vorsteuer MWST Material, Waren, Dienstleistungen, Energie", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen / Vorsteuer MWST Investitionen, übriger Betriebsaufwand", "code": "1171", "name": "Vorsteuer MWST Investitionen, übriger Betriebsaufwand", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen / Verrechnungssteuer", "code": "1176", "name": "Verrechnungssteuer", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen / Forderungen gegenüber Sozialversicherungen und Vorsorgeeinrichtungen", "code": "1180", "name": "Forderungen gegenüber Sozialversicherungen und Vorsorgeeinrichtungen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen / Quellensteuer", "code": "1189", "name": "Quellensteuer", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen / Sonstige kurzfristige Forderungen", "code": "1190", "name": "Sonstige kurzfristige Forderungen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen / Wertberichtigungen sonstige kurzfristige Forderungen", "code": "1199", "name": "Wertberichtigungen sonstige kurzfristige Forderungen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Übrige kurzfristige Forderungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen", "code": "120", "name": "Vorräte und nicht fakturierte Dienstleistungen", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven / Umlaufvermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen / Handelswaren", "code": "1200", "name": "Handelswaren", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen / Rohstoffe", "code": "1210", "name": "Rohstoffe", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen / Werkstoffe", "code": "1220", "name": "Werkstoffe", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen / Hilfs- und Verbrauchsmaterial", "code": "1230", "name": "Hilfs- und Verbrauchsmaterial", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen / Handelswaren in Konsignation", "code": "1250", "name": "Handelswaren in Konsignation", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen / Fertige Erzeugnisse", "code": "1260", "name": "Fertige Erzeugnisse", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen / Unfertige Erzeugnisse", "code": "1270", "name": "Unfertige Erzeugnisse", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen / Nicht fakturierte Dienstleistungen", "code": "1280", "name": "Nicht fakturierte Dienstleistungen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Vorräte und nicht fakturierte Dienstleistungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Aktive Rechnungsabgrenzungen", "code": "130", "name": "Aktive Rechnungsabgrenzungen", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven / Umlaufvermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Umlaufvermögen / Aktive Rechnungsabgrenzungen / Bezahlter Aufwand des Folgejahres", "code": "1300", "name": "Bezahlter Aufwand des Folgejahres", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Aktive Rechnungsabgrenzungen", "depth": 4},
+    {"source_id": "Aktiven / Umlaufvermögen / Aktive Rechnungsabgrenzungen / Noch nicht erhaltener Ertrag", "code": "1301", "name": "Noch nicht erhaltener Ertrag", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Umlaufvermögen / Aktive Rechnungsabgrenzungen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen", "code": "14", "name": "Anlagevermögen", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Anlagevermögen / Finanzanlagen", "code": "140", "name": "Finanzanlagen", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven / Anlagevermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Anlagevermögen / Finanzanlagen / Wertschriften", "code": "1400", "name": "Wertschriften", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Finanzanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Finanzanlagen / Wertberichtigungen Wertschriften", "code": "1409", "name": "Wertberichtigungen Wertschriften", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Finanzanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Finanzanlagen / Darlehen", "code": "1440", "name": "Darlehen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Finanzanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Finanzanlagen / Hypotheken", "code": "1441", "name": "Hypotheken", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Finanzanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Finanzanlagen / Wertberichtigungen langfristige Forderungen", "code": "1449", "name": "Wertberichtigungen langfristige Forderungen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Finanzanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Beteiligungen", "code": "148", "name": "Beteiligungen", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven / Anlagevermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Anlagevermögen / Beteiligungen / Beteiligungen", "code": "1480", "name": "Beteiligungen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Beteiligungen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Beteiligungen / Wertberichtigungen Beteiligungen", "code": "1489", "name": "Wertberichtigungen Beteiligungen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Beteiligungen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen", "code": "150", "name": "Mobile Sachanlagen", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven / Anlagevermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen / Maschinen und Apparate", "code": "1500", "name": "Maschinen und Apparate", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen / Wertberichtigungen Maschinen und Apparate", "code": "1509", "name": "Wertberichtigungen Maschinen und Apparate", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen / Mobiliar und Einrichtungen", "code": "1510", "name": "Mobiliar und Einrichtungen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen / Wertberichtigungen Mobiliar und Einrichtungen", "code": "1519", "name": "Wertberichtigungen Mobiliar und Einrichtungen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen / Büromaschinen, Informatik, Kommunikationstechnologie", "code": "1520", "name": "Büromaschinen, Informatik, Kommunikationstechnologie", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen / Wertberichtigungen Büromaschinen, Informatik, Kommunikationstechnologie", "code": "1529", "name": "Wertberichtigungen Büromaschinen, Informatik, Kommunikationstechnologie", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen / Fahrzeuge", "code": "1530", "name": "Fahrzeuge", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen / Wertberichtigungen Fahrzeuge", "code": "1539", "name": "Wertberichtigungen Fahrzeuge", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen / Werkzeuge und Geräte", "code": "1540", "name": "Werkzeuge und Geräte", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen / Wertberichtigungen Werkzeuge und Geräte", "code": "1549", "name": "Wertberichtigungen Werkzeuge und Geräte", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Mobile Sachanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Immobile Sachanlagen", "code": "160", "name": "Immobile Sachanlagen", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven / Anlagevermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Anlagevermögen / Immobile Sachanlagen / Geschäftsliegenschaften", "code": "1600", "name": "Geschäftsliegenschaften", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Immobile Sachanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Immobile Sachanlagen / Wertberichtigungen Geschäftsliegenschaften", "code": "1609", "name": "Wertberichtigungen Geschäftsliegenschaften", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Immobile Sachanlagen", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Immaterielle Werte", "code": "170", "name": "Immaterielle Werte", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven / Anlagevermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Anlagevermögen / Immaterielle Werte / Patente, Know-how, Lizenzen, Rechte, Entwicklungen", "code": "1700", "name": "Patente, Know-how, Lizenzen, Rechte, Entwicklungen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Immaterielle Werte", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Immaterielle Werte / Wertberichtigungen Patente, Know-how, Lizenzen, Rechte, Entwicklungen", "code": "1709", "name": "Wertberichtigungen Patente, Know-how, Lizenzen, Rechte, Entwicklungen", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Immaterielle Werte", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Immaterielle Werte / Goodwill", "code": "1770", "name": "Goodwill", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Immaterielle Werte", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Immaterielle Werte / Wertberichtigungen Goodwill", "code": "1779", "name": "Wertberichtigungen Goodwill", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Immaterielle Werte", "depth": 4},
+    {"source_id": "Aktiven / Anlagevermögen / Nicht einbezahltes Grund-, Gesellschafter- oder Stiftungskapital", "code": "180", "name": "Nicht einbezahltes Grund-, Gesellschafter- oder Stiftungskapital", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Aktiven / Anlagevermögen", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Aktiven / Anlagevermögen / Nicht einbezahltes Grund-, Gesellschafter- oder Stiftungskapital / Nicht einbezahltes Aktien-, Stamm-, Anteilschein- oder Stiftungskapital", "code": "1850", "name": "Nicht einbezahltes Aktien-, Stamm-, Anteilschein- oder Stiftungskapital", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aktiven / Anlagevermögen / Nicht einbezahltes Grund-, Gesellschafter- oder Stiftungskapital", "depth": 4},
+    {"source_id": "Passiven", "code": "2", "name": "Passiven", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Liability", "is_group": 1}},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital", "code": "20", "name": "Kurzfristiges Fremdkapital", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiven", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Verbindlichkeiten aus Lieferungen und Leistungen", "code": "200", "name": "Verbindlichkeiten aus Lieferungen und Leistungen", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Verbindlichkeiten aus Lieferungen und Leistungen / Verbindlichkeiten aus Lieferungen und Leistungen (Kreditoren)", "code": "2000", "name": "Verbindlichkeiten aus Lieferungen und Leistungen (Kreditoren)", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Verbindlichkeiten aus Lieferungen und Leistungen", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Verbindlichkeiten aus Lieferungen und Leistungen / Erhaltene Anzahlungen", "code": "2030", "name": "Erhaltene Anzahlungen", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Verbindlichkeiten aus Lieferungen und Leistungen", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Kurzfristige verzinsliche Verbindlichkeiten", "code": "210", "name": "Kurzfristige verzinsliche Verbindlichkeiten", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Kurzfristige verzinsliche Verbindlichkeiten / Bankverbindlichkeiten", "code": "2100", "name": "Bankverbindlichkeiten", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Kurzfristige verzinsliche Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Kurzfristige verzinsliche Verbindlichkeiten / Verbindlichkeiten aus Finanzierungsleasing", "code": "2120", "name": "Verbindlichkeiten aus Finanzierungsleasing", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Kurzfristige verzinsliche Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Kurzfristige verzinsliche Verbindlichkeiten / Übrige verzinsliche Verbindlichkeiten", "code": "2140", "name": "Übrige verzinsliche Verbindlichkeiten", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Kurzfristige verzinsliche Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten", "code": "220", "name": "Übrige kurzfristige Verbindlichkeiten", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten / Geschuldete MWST (Umsatzsteuer)", "code": "2200", "name": "Geschuldete MWST (Umsatzsteuer)", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten / Abrechnungskonto MWST", "code": "2201", "name": "Abrechnungskonto MWST", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten / Verrechnungssteuer", "code": "2206", "name": "Verrechnungssteuer", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten / Direkte Steuern", "code": "2208", "name": "Direkte Steuern", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten / Sonstige kurzfristige Verbindlichkeiten", "code": "2210", "name": "Sonstige kurzfristige Verbindlichkeiten", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten / Beschlossene Ausschüttungen", "code": "2261", "name": "Beschlossene Ausschüttungen", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten / Sozialversicherungen und Vorsorgeeinrichtungen", "code": "2270", "name": "Sozialversicherungen und Vorsorgeeinrichtungen", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten / Quellensteuer", "code": "2279", "name": "Quellensteuer", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Übrige kurzfristige Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Passive Rechnungsabgrenzungen und kurzfristige Rückstellungen", "code": "230", "name": "Passive Rechnungsabgrenzungen und kurzfristige Rückstellungen", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Passive Rechnungsabgrenzungen und kurzfristige Rückstellungen / Noch nicht bezahlter Aufwand", "code": "2300", "name": "Noch nicht bezahlter Aufwand", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Passive Rechnungsabgrenzungen und kurzfristige Rückstellungen", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Passive Rechnungsabgrenzungen und kurzfristige Rückstellungen / Erhaltener Ertrag des Folgejahres", "code": "2301", "name": "Erhaltener Ertrag des Folgejahres", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Passive Rechnungsabgrenzungen und kurzfristige Rückstellungen", "depth": 4},
+    {"source_id": "Passiven / Kurzfristiges Fremdkapital / Passive Rechnungsabgrenzungen und kurzfristige Rückstellungen / Kurzfristige Rückstellungen", "code": "2330", "name": "Kurzfristige Rückstellungen", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Kurzfristiges Fremdkapital / Passive Rechnungsabgrenzungen und kurzfristige Rückstellungen", "depth": 4},
+    {"source_id": "Passiven / Langfristiges Fremdkapital", "code": "24", "name": "Langfristiges Fremdkapital", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiven", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Passiven / Langfristiges Fremdkapital / Langfristige verzinsliche Verbindlichkeiten", "code": "240", "name": "Langfristige verzinsliche Verbindlichkeiten", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiven / Langfristiges Fremdkapital", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiven / Langfristiges Fremdkapital / Langfristige verzinsliche Verbindlichkeiten / Bankverbindlichkeiten", "code": "2400", "name": "Bankverbindlichkeiten", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Langfristiges Fremdkapital / Langfristige verzinsliche Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Langfristiges Fremdkapital / Langfristige verzinsliche Verbindlichkeiten / Verbindlichkeiten aus Finanzierungsleasing", "code": "2420", "name": "Verbindlichkeiten aus Finanzierungsleasing", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Langfristiges Fremdkapital / Langfristige verzinsliche Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Langfristiges Fremdkapital / Langfristige verzinsliche Verbindlichkeiten / Obligationenanleihen", "code": "2430", "name": "Obligationenanleihen", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Langfristiges Fremdkapital / Langfristige verzinsliche Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Langfristiges Fremdkapital / Langfristige verzinsliche Verbindlichkeiten / Darlehen", "code": "2450", "name": "Darlehen", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Langfristiges Fremdkapital / Langfristige verzinsliche Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Langfristiges Fremdkapital / Langfristige verzinsliche Verbindlichkeiten / Hypotheken", "code": "2451", "name": "Hypotheken", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Langfristiges Fremdkapital / Langfristige verzinsliche Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Langfristiges Fremdkapital / Übrige langfristige Verbindlichkeiten", "code": "250", "name": "Übrige langfristige Verbindlichkeiten", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiven / Langfristiges Fremdkapital", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiven / Langfristiges Fremdkapital / Übrige langfristige Verbindlichkeiten / Übrige langfristige Verbindlichkeiten (unverzinslich)", "code": "2500", "name": "Übrige langfristige Verbindlichkeiten (unverzinslich)", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Langfristiges Fremdkapital / Übrige langfristige Verbindlichkeiten", "depth": 4},
+    {"source_id": "Passiven / Langfristiges Fremdkapital / Rückstellungen sowie vom Gesetz vorgesehene ähnliche Positionen", "code": "260", "name": "Rückstellungen sowie vom Gesetz vorgesehene ähnliche Positionen", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiven / Langfristiges Fremdkapital", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiven / Langfristiges Fremdkapital / Rückstellungen sowie vom Gesetz vorgesehene ähnliche Positionen / Rückstellungen", "code": "2600", "name": "Rückstellungen", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Langfristiges Fremdkapital / Rückstellungen sowie vom Gesetz vorgesehene ähnliche Positionen", "depth": 4},
+    {"source_id": "Passiven / Eigenkapital (juristische Personen)", "code": "28", "name": "Eigenkapital (juristische Personen)", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiven", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Passiven / Eigenkapital (juristische Personen) / Grund-, Gesellschafter- oder Stiftungskapital", "code": "280", "name": "Grund-, Gesellschafter- oder Stiftungskapital", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiven / Eigenkapital (juristische Personen)", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiven / Eigenkapital (juristische Personen) / Grund-, Gesellschafter- oder Stiftungskapital / Aktien-, Stamm-, Anteilschein- oder Stiftungskapital", "code": "2800", "name": "Aktien-, Stamm-, Anteilschein- oder Stiftungskapital", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Eigenkapital (juristische Personen) / Grund-, Gesellschafter- oder Stiftungskapital", "depth": 4},
+    {"source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust", "code": "290", "name": "Reserven und Jahresgewinn oder Jahresverlust", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Passiven / Eigenkapital (juristische Personen)", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust / Gesetzliche Kapitalreserve", "code": "2900", "name": "Gesetzliche Kapitalreserve", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust", "depth": 4},
+    {"source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust / Reserve für eigene Kapitalanteile", "code": "2930", "name": "Reserve für eigene Kapitalanteile", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust", "depth": 4},
+    {"source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust / Aufwertungsreserve", "code": "2940", "name": "Aufwertungsreserve", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust", "depth": 4},
+    {"source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust / Gesetzliche Gewinnreserve", "code": "2950", "name": "Gesetzliche Gewinnreserve", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust", "depth": 4},
+    {"source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust / Freiwillige Gewinnreserven", "code": "2960", "name": "Freiwillige Gewinnreserven", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust", "depth": 4},
+    {"source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust / Gewinnvortrag oder Verlustvortrag", "code": "2970", "name": "Gewinnvortrag oder Verlustvortrag", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust", "depth": 4},
+    {"source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust / Jahresgewinn oder Jahresverlust", "code": "2979", "name": "Jahresgewinn oder Jahresverlust", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust", "depth": 4},
+    {"source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust / Eigene Aktien, Stammanteile oder Anteilscheine (Minusposten)", "code": "2980", "name": "Eigene Aktien, Stammanteile oder Anteilscheine (Minusposten)", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Passiven / Eigenkapital (juristische Personen) / Reserven und Jahresgewinn oder Jahresverlust", "depth": 4},
+    {"source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "code": "3", "name": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Income", "is_group": 1}},
+    {"source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen / Produktionserlöse", "code": "3000", "name": "Produktionserlöse", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "depth": 2},
+    {"source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen / Handelserlöse", "code": "3200", "name": "Handelserlöse", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "depth": 2},
+    {"source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen / Dienstleistungserlöse", "code": "3400", "name": "Dienstleistungserlöse", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "depth": 2},
+    {"source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen / Übrige Erlöse aus Lieferungen und Leistungen", "code": "3600", "name": "Übrige Erlöse aus Lieferungen und Leistungen", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "depth": 2},
+    {"source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen / Eigenleistungen", "code": "3700", "name": "Eigenleistungen", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "depth": 2},
+    {"source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen / Eigenverbrauch", "code": "3710", "name": "Eigenverbrauch", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "depth": 2},
+    {"source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen / Erlösminderungen", "code": "3800", "name": "Erlösminderungen", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "depth": 2},
+    {"source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen / Verluste Forderungen (Debitoren), Veränderung Delkredere", "code": "3805", "name": "Verluste Forderungen (Debitoren), Veränderung Delkredere", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "depth": 2},
+    {"source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen / Bestandesänderungen unfertige Erzeugnisse", "code": "3900", "name": "Bestandesänderungen unfertige Erzeugnisse", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "depth": 2},
+    {"source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen / Bestandesänderungen fertige Erzeugnisse", "code": "3901", "name": "Bestandesänderungen fertige Erzeugnisse", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "depth": 2},
+    {"source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen / Bestandesänderungen nicht fakturierte Dienstleistungen", "code": "3940", "name": "Bestandesänderungen nicht fakturierte Dienstleistungen", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Ertrag aus Lieferungen und Leistungen", "depth": 2},
+    {"source_id": "Aufwand für Material, Handelswaren, Dienstleistungen und Energie", "code": "4", "name": "Aufwand für Material, Handelswaren, Dienstleistungen und Energie", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense", "is_group": 1}},
+    {"source_id": "Aufwand für Material, Handelswaren, Dienstleistungen und Energie / Materialaufwand Produktion", "code": "4000", "name": "Materialaufwand Produktion", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwand für Material, Handelswaren, Dienstleistungen und Energie", "depth": 2},
+    {"source_id": "Aufwand für Material, Handelswaren, Dienstleistungen und Energie / Handelswarenaufwand", "code": "4200", "name": "Handelswarenaufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwand für Material, Handelswaren, Dienstleistungen und Energie", "depth": 2},
+    {"source_id": "Aufwand für Material, Handelswaren, Dienstleistungen und Energie / Aufwand für bezogene Dienstleistungen", "code": "4400", "name": "Aufwand für bezogene Dienstleistungen", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwand für Material, Handelswaren, Dienstleistungen und Energie", "depth": 2},
+    {"source_id": "Aufwand für Material, Handelswaren, Dienstleistungen und Energie / Energieaufwand zur Leistungserstellung", "code": "4500", "name": "Energieaufwand zur Leistungserstellung", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwand für Material, Handelswaren, Dienstleistungen und Energie", "depth": 2},
+    {"source_id": "Aufwand für Material, Handelswaren, Dienstleistungen und Energie / Aufwandminderungen", "code": "4900", "name": "Aufwandminderungen", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Aufwand für Material, Handelswaren, Dienstleistungen und Energie", "depth": 2},
+    {"source_id": "Personalaufwand", "code": "5", "name": "Personalaufwand", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense", "is_group": 1}},
+    {"source_id": "Personalaufwand / Lohnaufwand", "code": "5000", "name": "Lohnaufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Personalaufwand", "depth": 2},
+    {"source_id": "Personalaufwand / Sozialversicherungsaufwand", "code": "5700", "name": "Sozialversicherungsaufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Personalaufwand", "depth": 2},
+    {"source_id": "Personalaufwand / Übriger Personalaufwand", "code": "5800", "name": "Übriger Personalaufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Personalaufwand", "depth": 2},
+    {"source_id": "Personalaufwand / Leistungen Dritter", "code": "5900", "name": "Leistungen Dritter", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Personalaufwand", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "code": "6", "name": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense", "is_group": 1}},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Raumaufwand", "code": "6000", "name": "Raumaufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Unterhalt, Reparaturen, Ersatz mobile Sachanlagen", "code": "6100", "name": "Unterhalt, Reparaturen, Ersatz mobile Sachanlagen", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Leasingaufwand mobile Sachanlagen", "code": "6105", "name": "Leasingaufwand mobile Sachanlagen", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Fahrzeug- und Transportaufwand", "code": "6200", "name": "Fahrzeug- und Transportaufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Fahrzeugleasing und -mieten", "code": "6260", "name": "Fahrzeugleasing und -mieten", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Sachversicherungen, Abgaben, Gebühren, Bewilligungen", "code": "6300", "name": "Sachversicherungen, Abgaben, Gebühren, Bewilligungen", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Energie- und Entsorgungsaufwand", "code": "6400", "name": "Energie- und Entsorgungsaufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Verwaltungsaufwand", "code": "6500", "name": "Verwaltungsaufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Informatikaufwand inkl. Leasing", "code": "6570", "name": "Informatikaufwand inkl. Leasing", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Werbeaufwand", "code": "6600", "name": "Werbeaufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Sonstiger betrieblicher Aufwand", "code": "6700", "name": "Sonstiger betrieblicher Aufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Abschreibungen und Wertberichtigungen auf Positionen des Anlagevermögens", "code": "6800", "name": "Abschreibungen und Wertberichtigungen auf Positionen des Anlagevermögens", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Finanzaufwand", "code": "6900", "name": "Finanzaufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis / Finanzertrag", "code": "6950", "name": "Finanzertrag", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis", "depth": 2},
+    {"source_id": "Betrieblicher Nebenerfolg", "code": "7", "name": "Betrieblicher Nebenerfolg", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Income", "is_group": 1}},
+    {"source_id": "Betrieblicher Nebenerfolg / Ertrag Nebenbetrieb", "code": "7000", "name": "Ertrag Nebenbetrieb", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Nebenerfolg", "depth": 2},
+    {"source_id": "Betrieblicher Nebenerfolg / Aufwand Nebenbetrieb", "code": "7010", "name": "Aufwand Nebenbetrieb", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Nebenerfolg", "depth": 2},
+    {"source_id": "Betrieblicher Nebenerfolg / Ertrag betriebliche Liegenschaft", "code": "7500", "name": "Ertrag betriebliche Liegenschaft", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Nebenerfolg", "depth": 2},
+    {"source_id": "Betrieblicher Nebenerfolg / Aufwand betriebliche Liegenschaft", "code": "7510", "name": "Aufwand betriebliche Liegenschaft", "root_type": "income", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Betrieblicher Nebenerfolg", "depth": 2},
+    {"source_id": "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag", "code": "8", "name": "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense", "is_group": 1}},
+    {"source_id": "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag / Betriebsfremder Aufwand", "code": "8000", "name": "Betriebsfremder Aufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag", "depth": 2},
+    {"source_id": "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag / Betriebsfremder Ertrag", "code": "8100", "name": "Betriebsfremder Ertrag", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag", "depth": 2},
+    {"source_id": "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag / Ausserordentlicher, einmaliger oder periodenfremder Aufwand", "code": "8500", "name": "Ausserordentlicher, einmaliger oder periodenfremder Aufwand", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag", "depth": 2},
+    {"source_id": "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag / Ausserordentlicher, einmaliger oder periodenfremder Ertrag", "code": "8510", "name": "Ausserordentlicher, einmaliger oder periodenfremder Ertrag", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag", "depth": 2},
+    {"source_id": "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag / Direkte Steuern", "code": "8900", "name": "Direkte Steuern", "root_type": "expense", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag", "depth": 2},
+    {"source_id": "Abschluss", "code": "9", "name": "Abschluss", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Equity", "is_group": 1}},
+    {"source_id": "Abschluss / Jahresgewinn oder Jahresverlust", "code": "9200", "name": "Jahresgewinn oder Jahresverlust", "root_type": "equity", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Abschluss", "depth": 2}
+  ]
+}

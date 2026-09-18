@@ -1,4 +1,4 @@
-"""Build a reproducible preview ZIP from committed, explicitly selected inputs."""
+"""Build a reproducible release ZIP from committed, explicitly selected inputs."""
 from __future__ import annotations
 
 import argparse
@@ -86,9 +86,25 @@ def git(root: Path, *args: str) -> str:
     return result.stdout.strip()
 
 
-def gather(source: Path, vendor: Path, specification: dict, version: str) -> tuple[dict[str, bytes], str]:
-    if not re.fullmatch(r"\d+\.\d+\.\d+-[a-z0-9][a-z0-9.-]*", version):
-        raise PackageError("Use an explicit prerelease version")
+def release_identity(version: str, channel: str | None = None) -> dict[str, str]:
+    """Channels follow the version, never an operator-supplied stability claim."""
+    number = r"(?:0|[1-9][0-9]*)"
+    identifier = r"(?:0|[1-9][0-9]*|[0-9]*[a-z-][0-9a-z-]*)"
+    if not isinstance(version, str) or not re.fullmatch(
+        rf"{number}\.{number}\.{number}(?:-{identifier}(?:\.{identifier})*)?", version
+    ):
+        raise PackageError("Use a semantic version such as 0.7.0-preview, 1.0.0-rc.1 or 1.0.0")
+    expected = "preview" if "-" in version else "stable"
+    if channel is not None and channel != expected:
+        raise PackageError("Release channel does not match the version")
+    status = "stable" if expected == "stable" else "development-preview"
+    if re.search(r"-rc(?:\.|$)", version):
+        status = "release-candidate"
+    return {"version": version, "channel": expected, "status": status}
+
+
+def gather(source: Path, vendor: Path, specification: dict, version: str, channel: str | None = None) -> tuple[dict[str, bytes], str]:
+    identity = release_identity(version, channel)
     if not specification.get("project_license"):
         raise PackageError("Record the owner-approved project licence before building")
     if git(source, "status", "--porcelain", "--untracked-files=normal"):
@@ -135,7 +151,7 @@ def gather(source: Path, vendor: Path, specification: dict, version: str) -> tup
     if sum(map(len, payload.values())) > 100_000_000:
         raise PackageError("Unexpectedly large package")
     manifest = {
-        "version": version, "status": "development-preview", "source_commit": revision,
+        **identity, "source_commit": revision,
         "project_license": specification["project_license"],
         "composer_lock_sha256": hashlib.sha256(payload["composer.lock"]).hexdigest(),
         "files": [{"path": name, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()} for name, data in sorted(payload.items())],
@@ -144,8 +160,8 @@ def gather(source: Path, vendor: Path, specification: dict, version: str) -> tup
     return payload, revision
 
 
-def build(source: Path, vendor: Path, specification: dict, output: Path, version: str) -> Path:
-    payload, _ = gather(source.resolve(), vendor.resolve(), specification, version)
+def build(source: Path, vendor: Path, specification: dict, output: Path, version: str, channel: str | None = None) -> Path:
+    payload, _ = gather(source.resolve(), vendor.resolve(), specification, version, channel)
     output.mkdir(parents=True, exist_ok=True)
     archive = output / f"phpledger-{version}.zip"
     checksum = output / (archive.name + ".sha256")
@@ -180,10 +196,11 @@ def main() -> int:
     parser.add_argument("--specification", type=Path, default=Path(__file__).with_name("package-files.json"))
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--version", default="0.1.0-preview")
+    parser.add_argument("--channel", choices=("stable", "preview"), help="Optional assertion; must match the version")
     args = parser.parse_args()
     try:
         spec = json.loads(args.specification.read_text(encoding="utf-8"))
-        print(build(args.source, args.vendor, spec, args.output, args.version))
+        print(build(args.source, args.vendor, spec, args.output, args.version, args.channel))
         return 0
     except (PackageError, OSError, ValueError, KeyError) as error:
         print(f"Package not built: {error}", file=sys.stderr)

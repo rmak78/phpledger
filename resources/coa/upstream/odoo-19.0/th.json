@@ -1,0 +1,467 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "86ba0e8005d1127e719b6787c2b55828a45fa7b3dfdd93c4b57af099a9f5ea18",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/th",
+  "country_code": "TH",
+  "country_name": "Thailand",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Thailand - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_th' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Almacom (http://almacom.co.th/)",
+    "module": "l10n_th",
+    "module_name": "Thailand - Accounting",
+    "module_version": "2.0",
+    "contributing_modules": [
+      "l10n_th"
+    ],
+    "template_code": "th",
+    "template_chain": [
+      "th"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_th/data/template/account.account-th.csv",
+        "sha256": "068d9dc7fbbd8289a93c1840fdf32adee620a9bf39fe00b6db6f1bdd3b3a7b59",
+        "rows": 144
+      }
+    ],
+    "python_files": [
+      "addons/l10n_th/models/template_th.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "11120",
+      "cash": "11110",
+      "transfer": "l10n_th_account_11120"
+    },
+    "default_sale_tax": "tax_output_vat",
+    "default_purchase_tax": "tax_input_vat",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "l10n_th_account_112100",
+        "code": "112100",
+        "name": "Trade Receivables",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "l10n_th_account_212100",
+        "code": "212100",
+        "name": "Trade Payables",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "l10n_th_account_411100",
+        "code": "411100",
+        "name": "Sales Revenue",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "l10n_th_account_511100",
+        "code": "511100",
+        "name": "Cost of Goods Sold",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "l10n_th_account_113100",
+        "code": "113100",
+        "name": "Goods for resale",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "l10n_th_account_112101",
+        "code": "112101",
+        "name": "Trade Receivables (POS)",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "l10n_th_account_111201",
+        "code": "111201",
+        "name": "Bank Suspense Account",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "l10n_th_account_421300",
+        "code": "421300",
+        "name": "Gain on Exchange Rate",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "l10n_th_account_621200",
+        "code": "621200",
+        "name": "Loss on Exchange Rate",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "l10n_th_account_421600",
+        "code": "421600",
+        "name": "Cash Difference Income",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "l10n_th_account_622200",
+        "code": "622200",
+        "name": "Cash Difference Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "l10n_th_account_421500",
+        "code": "421500",
+        "name": "Purchase Discounts",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "l10n_th_account_411400",
+        "code": "411400",
+        "name": "Sales Discounts",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 144,
+    "posting_accounts": 144,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 50,
+      "equity": 4,
+      "expense": 61,
+      "income": 10,
+      "liability": 19
+    },
+    "by_subtype": {
+      "cash_bank": 3,
+      "current_asset": 15,
+      "current_liability": 13,
+      "depreciation": 12,
+      "direct_cost": 7,
+      "equity": 3,
+      "expense": 42,
+      "fixed_asset": 22,
+      "income": 4,
+      "non_current_asset": 6,
+      "non_current_liability": 3,
+      "other_income": 6,
+      "payable": 3,
+      "receivable": 4,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 3,
+      "expense": 1,
+      "income": 1,
+      "payables": 3,
+      "receivables": 4
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "th_TH"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "l10n_th_account_111100", "code": "111100", "name": "Cash on Hand", "translations": {"th_TH": "เงินสดในมือ"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Physical cash in safe or tills. Reconcile with daily cash counts.", "role_hint": "cash_bank", "source": {"account_type": "asset_cash", "descriptions": {"th_TH": "เงินสดที่มีอยู่จริงในตู้เซฟหรือลิ้นชักเก็บเงิน ตรวจสอบยอดกับรายงานการนับเงินสดประจำวัน"}}},
+    {"source_id": "l10n_th_account_111200", "code": "111200", "name": "Bank Deposits", "translations": {"th_TH": "เงินฝากธนาคาร"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Funds in savings/current accounts. Reconcile with monthly bank statements.", "role_hint": "cash_bank", "source": {"account_type": "asset_cash", "descriptions": {"th_TH": "เงินฝากในบัญชีออมทรัพย์หรือกระแสรายวัน ตรวจสอบยอดกับ Bank Statement ประจำเดือน"}}},
+    {"source_id": "l10n_th_account_111201", "code": "111201", "name": "Bank Suspense Account", "translations": {"th_TH": "บัญชีพักรอตรวจสอบ (ธนาคาร)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Temporary holding account for imported bank transactions pending reconciliation.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "บัญชีพักสำหรับรายการบัญชีธนาคารที่นำเข้ามาแล้วแต่รอการกระทบยอด"}}},
+    {"source_id": "l10n_th_account_111202", "code": "111202", "name": "Liquidity Transfer", "translations": {"th_TH": "บัญชีพักโอนเงินระหว่างกัน"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Interim clearing account for internal fund transfers between bank or cash journals.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "บัญชีพักสำหรับการโอนเงินภายในระหว่างสมุดเงินสดหรือสมุดธนาคาร"}}},
+    {"source_id": "l10n_th_account_111300", "code": "111300", "name": "Cash Equivalents", "translations": {"th_TH": "รายการเทียบเท่าเงินสด"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Highly liquid short-term investments convertible to known cash amounts.", "role_hint": "cash_bank", "source": {"account_type": "asset_cash", "descriptions": {"th_TH": "เงินลงทุนระยะสั้นที่มีสภาพคล่องสูง สามารถเปลี่ยนเป็นเงินสดได้ในจำนวนที่ทราบได้แน่นอน"}}},
+    {"source_id": "l10n_th_account_112100", "code": "112100", "name": "Trade Receivables", "translations": {"th_TH": "ลูกหนี้การค้า"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Amounts owed by customers for goods sold or services rendered on credit.", "role_hint": "receivables", "source": {"account_type": "asset_receivable", "descriptions": {"th_TH": "ยอดเงินที่ลูกค้าค้างชำระจากการขายสินค้าหรือให้บริการแบบเชื่อ (เครดิต)"}}},
+    {"source_id": "l10n_th_account_112101", "code": "112101", "name": "Trade Receivables (POS)", "translations": {"th_TH": "ลูกหนี้การค้า (POS)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Amounts owed by POS customers for goods sold or services rendered on credit.", "role_hint": "receivables", "source": {"account_type": "asset_receivable", "descriptions": {"th_TH": "ยอดเงินที่ลูกค้าหน้าร้าน (POS) ค้างชำระจากการขายสินค้าหรือบริการ"}}},
+    {"source_id": "l10n_th_account_112190", "code": "112190", "name": "Allowance for Doubtful Accounts", "translations": {"th_TH": "ค่าเผื่อหนี้สงสัยจะสูญ"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Estimated portion of receivables unlikely to be collected (Contra Asset).", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "ประมาณการยอดลูกหนี้ที่คาดว่าจะเก็บเงินไม่ได้ (บัญชีปรับมูลค่าสินทรัพย์)"}}},
+    {"source_id": "l10n_th_account_112200", "code": "112200", "name": "Other Receivables", "translations": {"th_TH": "ลูกหนี้อื่น"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Non-trade receivables such as loans to employees or insurance claims.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "ลูกหนี้ที่ไม่ใช่การค้า เช่น เงินให้กู้ยืมแก่พนักงาน หรือเงินชดเชยประกันภัย"}}},
+    {"source_id": "l10n_th_account_113100", "code": "113100", "name": "Goods for resale", "translations": {"th_TH": "สินค้าสำเร็จรูป / สินค้าเพื่อขาย"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Finished goods purchased specifically for resale to customers.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "สินค้าสำเร็จรูปที่ซื้อมาเพื่อขายต่อให้แก่ลูกค้าโดยเฉพาะ"}}},
+    {"source_id": "l10n_th_account_113200", "code": "113200", "name": "Raw materials", "translations": {"th_TH": "วัตถุดิบ"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Basic materials kept on hand for use in the production process.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "วัสดุพื้นฐานที่เก็บไว้เพื่อใช้ในกระบวนการผลิต"}}},
+    {"source_id": "l10n_th_account_113300", "code": "113300", "name": "Consumables", "translations": {"th_TH": "วัสดุสิ้นเปลือง"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Supplies used in operations (e.g., packaging) that are not direct product costs.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "วัสดุที่ใช้ในการดำเนินงาน (เช่น บรรจุภัณฑ์) ที่ไม่ใช่ต้นทุนสินค้าโดยตรง"}}},
+    {"source_id": "l10n_th_account_113400", "code": "113400", "name": "Work in Process", "translations": {"th_TH": "งานระหว่างทำ"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Goods currently in production but not yet completed.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "สินค้าที่อยู่ระหว่างกระบวนการผลิตแต่ยังผลิตไม่เสร็จสมบูรณ์"}}},
+    {"source_id": "l10n_th_account_113900", "code": "113900", "name": "Allowance for Inventory Decline", "translations": {"th_TH": "ค่าเผื่อมูลค่าสินค้าลดลง"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Provision to reduce inventory value if market price drops below cost.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "การตั้งสำรองเพื่อลดมูลค่าสินค้าคงเหลือ หากราคาตลาดต่ำกว่าราคาทุน"}}},
+    {"source_id": "l10n_th_account_114100", "code": "114100", "name": "Undue Input VAT", "translations": {"th_TH": "ภาษีซื้อยังไม่ถึงกำหนด"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Suspense VAT: Input tax from service bills received but not yet paid. Move to 'Input VAT' upon payment.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "ภาษีซื้อจากค่าบริการที่ได้รับใบแจ้งหนี้แล้วแต่ยังไม่ได้ชำระเงิน (จะย้ายไป \"ภาษีซื้อ\" เมื่อจ่ายเงิน)"}}},
+    {"source_id": "l10n_th_account_114200", "code": "114200", "name": "Input VAT", "translations": {"th_TH": "ภาษีซื้อ"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Tax paid on purchases. Balance is transferred to VAT Payable/Receivable at month-end.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "ภาษีที่จ่ายจากการซื้อสินค้า/บริการ ยอดนี้จะนำไปหักลบกับภาษีขายหรือขอคืนภาษีได้"}}},
+    {"source_id": "l10n_th_account_114300", "code": "114300", "name": "WHT Creditable", "translations": {"th_TH": "ภาษีเงินได้ถูกหัก ณ ที่จ่าย (สินทรัพย์)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Prepaid Tax: Income tax deducted by customers when paying you. Claimable against year-end CIT.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "ภาษีที่ถูกลูกค้าหักไว้เมื่อรับชำระเงิน สามารถนำไปเครดิตภาษีเงินได้นิติบุคคลสิ้นปี"}}},
+    {"source_id": "l10n_th_account_114400", "code": "114400", "name": "VAT Receivable", "translations": {"th_TH": "ลูกหนี้กรมสรรพากร (ขอคืน VAT)"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Net tax refund due from the Revenue Dept (if Input VAT > Output VAT).", "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true, "descriptions": {"th_TH": "ยอดขอคืนภาษีสุทธิจากกรมสรรพากร (กรณีภาษีซื้อมากกว่าภาษีขาย)"}}},
+    {"source_id": "l10n_th_account_114401", "code": "114401", "name": "WHT Receivable", "translations": {"th_TH": "ภาษีหัก ณ ที่จ่ายรอเครดิต/ขอคืน"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Tax Closing Account: Consolidated WHT tax credits transferred from daily accounts. To be claimed against annual Corporate Income Tax (P.N.D. 50).", "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true, "descriptions": {"th_TH": "บัญชีรวบรวมเครดิตภาษีหัก ณ ที่จ่ายรายวัน เพื่อนำไปเครดิตภาษีเงินได้ประจำปี (ภ.ง.ด. 50)"}}},
+    {"source_id": "l10n_th_account_114500", "code": "114500", "name": "Prepaid CIT (PND 51)", "translations": {"th_TH": "ภาษีเงินได้นิติบุคคลจ่ายล่วงหน้า (ภ.ง.ด. 51)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Prepaid Tax: Corporate Income Tax paid mid-year (Form PND 51). Creditable against annual tax.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "ภาษีเงินได้นิติบุคคลครึ่งปีที่ชำระแล้ว (ภ.ง.ด. 51) ใช้เครดิตภาษีประจำปีได้"}}},
+    {"source_id": "l10n_th_account_115100", "code": "115100", "name": "Temporary Investments", "translations": {"th_TH": "เงินลงทุนชั่วคราว"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Investments held for trading or short-term gains (e.g., stocks, bonds).", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "เงินลงทุนที่ถือไว้เพื่อค้าหรือหากำไรระยะสั้น (เช่น หุ้น, พันธบัตร)"}}},
+    {"source_id": "l10n_th_account_115200", "code": "115200", "name": "Biological Assets (Current)", "translations": {"th_TH": "สินทรัพย์ชีวภาพ (หมุนเวียน)"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Living animals or plants held for sale or harvest within one accounting period.", "source": {"account_type": "asset_current", "descriptions": {"th_TH": "สัตว์หรือพืชที่มีชีวิตที่ถือไว้เพื่อขายหรือเก็บเกี่ยวภายในรอบบัญชีเดียว"}}},
+    {"source_id": "l10n_th_account_121100", "code": "121100", "name": "Investments in Associates", "translations": {"th_TH": "เงินลงทุนในบริษัทร่วม"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Long-term equity investments where the company has significant influence (20-50%).", "source": {"account_type": "asset_non_current", "descriptions": {"th_TH": "เงินลงทุนระยะยาวในหุ้นทุนที่บริษัทมีอิทธิพลอย่างมีนัยสำคัญ (ถือหุ้น 20-50%)"}}},
+    {"source_id": "l10n_th_account_122100", "code": "122100", "name": "Investment Property", "translations": {"th_TH": "อสังหาริมทรัพย์เพื่อการลงทุน"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Land or buildings held specifically to earn rentals or for capital appreciation.", "source": {"account_type": "asset_non_current", "descriptions": {"th_TH": "ที่ดินหรืออาคารที่ถือครองเพื่อหาประโยชน์จากค่าเช่า หรือหวังผลกำไรจากการเพิ่มขึ้นของราคา"}}},
+    {"source_id": "l10n_th_account_123100", "code": "123100", "name": "Land", "translations": {"th_TH": "ที่ดิน"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Land owned for operations. Not depreciated.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ที่ดินที่ใช้ในการดำเนินงาน (ไม่มีการคิดค่าเสื่อมราคา)"}}},
+    {"source_id": "l10n_th_account_123150", "code": "123150", "name": "Land Improvements", "translations": {"th_TH": "ส่วนปรับปรุงที่ดิน"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Cost of paving, fencing, or drainage systems.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ต้นทุนการปรับปรุงพื้นที่ เช่น การลาดยาง ทำรั้ว หรือระบบระบายน้ำ"}}},
+    {"source_id": "l10n_th_account_123151", "code": "123151", "name": "Accum. Depr. - Land Improvements", "translations": {"th_TH": "ค่าเสื่อมราคาสะสม - ส่วนปรับปรุงที่ดิน"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated depreciation for land improvements.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ค่าเสื่อมราคาสะสมสำหรับส่วนปรับปรุงที่ดิน"}}},
+    {"source_id": "l10n_th_account_123200", "code": "123200", "name": "Buildings (Structure)", "translations": {"th_TH": "อาคาร (โครงสร้าง)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Cost of main building structures owned by the company.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ราคาทุนของโครงสร้างตัวอาคารหลักที่บริษัทเป็นเจ้าของ"}}},
+    {"source_id": "l10n_th_account_123201", "code": "123201", "name": "Accum. Depr. - Buildings", "translations": {"th_TH": "ค่าเสื่อมราคาสะสม - อาคาร"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated depreciation for buildings.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ค่าเสื่อมราคาสะสมสำหรับอาคาร"}}},
+    {"source_id": "l10n_th_account_123210", "code": "123210", "name": "Building Installations", "translations": {"th_TH": "งานระบบประกอบอาคาร"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Integrated systems like HVAC, solar panels, or elevators with shorter lives.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ระบบที่ติดตั้งในอาคาร เช่น HVAC, แผงโซลาร์เซลล์ หรือลิฟต์ (อายุการใช้งานสั้นกว่าตัวอาคาร)"}}},
+    {"source_id": "l10n_th_account_123211", "code": "123211", "name": "Accum. Depr. - Installations", "translations": {"th_TH": "ค่าเสื่อมราคาสะสม - งานระบบ"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated depreciation for building installations.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ค่าเสื่อมราคาสะสมสำหรับงานระบบประกอบอาคาร"}}},
+    {"source_id": "l10n_th_account_123220", "code": "123220", "name": "Construction in Progress", "translations": {"th_TH": "งานระหว่างก่อสร้าง"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Costs accumulated for assets currently being built. Not depreciated until ready for use.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ต้นทุนสะสมสำหรับสินทรัพย์ที่กำลังก่อสร้าง (ยังไม่คิดค่าเสื่อมจนกว่าจะพร้อมใช้งาน)"}}},
+    {"source_id": "l10n_th_account_123230", "code": "123230", "name": "Machinery & Tools", "translations": {"th_TH": "เครื่องจักรและเครื่องมือ"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Machinery and equipment used in production or service delivery.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "เครื่องจักรและอุปกรณ์ที่ใช้ในการผลิตหรือให้บริการ"}}},
+    {"source_id": "l10n_th_account_123231", "code": "123231", "name": "Accum. Depr. - Machinery", "translations": {"th_TH": "ค่าเสื่อมราคาสะสม - เครื่องจักร"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated depreciation for machinery.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ค่าเสื่อมราคาสะสมสำหรับเครื่องจักร"}}},
+    {"source_id": "l10n_th_account_123240", "code": "123240", "name": "Major Spare Parts (Stand-by)", "translations": {"th_TH": "อะไหล่หลัก (สำรองไว้ใช้งาน)"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "High-value spares expected to be used for >1 year (TFRS NPAEs).", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "อะไหล่มูลค่าสูงที่คาดว่าจะใช้งานเกิน 1 ปี (ตามมาตรฐาน TFRS for NPAEs)"}}},
+    {"source_id": "l10n_th_account_123241", "code": "123241", "name": "Accum. Depr. - Major Spares", "translations": {"th_TH": "ค่าเสื่อมราคาสะสม - อะไหล่หลัก"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated depreciation for major spare parts.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ค่าเสื่อมราคาสะสมสำหรับอะไหล่หลัก"}}},
+    {"source_id": "l10n_th_account_123250", "code": "123250", "name": "Vehicles", "translations": {"th_TH": "ยานพาหนะ"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Cost of company cars, trucks, or motorcycles.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ราคาทุนของรถยนต์ รถบรรทุก หรือรถจักรยานยนต์ของบริษัท"}}},
+    {"source_id": "l10n_th_account_123251", "code": "123251", "name": "Accum. Depr. - Vehicles", "translations": {"th_TH": "ค่าเสื่อมราคาสะสม - ยานพาหนะ"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated depreciation for vehicles.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ค่าเสื่อมราคาสะสมสำหรับยานพาหนะ"}}},
+    {"source_id": "l10n_th_account_123260", "code": "123260", "name": "Vehicle Accessories", "translations": {"th_TH": "อุปกรณ์ตกแต่งยานพาหนะ"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Modifications or add-ons to vehicles.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "การดัดแปลงหรืออุปกรณ์เสริมที่ติดตั้งเพิ่มในยานพาหนะ"}}},
+    {"source_id": "l10n_th_account_123261", "code": "123261", "name": "Accum. Depr. - Vehicle Acc.", "translations": {"th_TH": "ค่าเสื่อมราคาสะสม - อุปกรณ์รถยนต์"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated depreciation for vehicle accessories.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ค่าเสื่อมราคาสะสมสำหรับอุปกรณ์ตกแต่งยานพาหนะ"}}},
+    {"source_id": "l10n_th_account_123270", "code": "123270", "name": "Furniture & Fixtures", "translations": {"th_TH": "เครื่องตกแต่งและติดตั้ง"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Office furniture, desks, chairs, and fixtures.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "เฟอร์นิเจอร์สำนักงาน โต๊ะ เก้าอี้ และเครื่องตกแต่งต่างๆ"}}},
+    {"source_id": "l10n_th_account_123271", "code": "123271", "name": "Accum. Depr. - Furniture", "translations": {"th_TH": "ค่าเสื่อมราคาสะสม - เครื่องตกแต่ง"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated depreciation for furniture.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ค่าเสื่อมราคาสะสมสำหรับเครื่องตกแต่งและติดตั้ง"}}},
+    {"source_id": "l10n_th_account_123280", "code": "123280", "name": "Technology & Computers", "translations": {"th_TH": "คอมพิวเตอร์และอุปกรณ์ไอที"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Laptops, servers, and IT hardware.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "แล็ปท็อป เซิร์ฟเวอร์ และฮาร์ดแวร์ไอทีต่างๆ"}}},
+    {"source_id": "l10n_th_account_123281", "code": "123281", "name": "Accum. Depr. - Technology", "translations": {"th_TH": "ค่าเสื่อมราคาสะสม - คอมพิวเตอร์"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated depreciation for technology.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ค่าเสื่อมราคาสะสมสำหรับคอมพิวเตอร์และอุปกรณ์ไอที"}}},
+    {"source_id": "l10n_th_account_123290", "code": "123290", "name": "Other Fixed Assets", "translations": {"th_TH": "สินทรัพย์ถาวรอื่น"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Miscellaneous fixed assets not categorized above.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "สินทรัพย์ถาวรเบ็ดเตล็ดที่ไม่ได้จัดเข้าหมวดหมู่ข้างต้น"}}},
+    {"source_id": "l10n_th_account_123291", "code": "123291", "name": "Accum. Depr. - Other Assets", "translations": {"th_TH": "ค่าเสื่อมราคาสะสม - สินทรัพย์อื่น"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated depreciation for other assets.", "source": {"account_type": "asset_fixed", "descriptions": {"th_TH": "ค่าเสื่อมราคาสะสมสำหรับสินทรัพย์ถาวรอื่น"}}},
+    {"source_id": "l10n_th_account_124100", "code": "124100", "name": "Computer Software", "translations": {"th_TH": "โปรแกรมคอมพิวเตอร์ (ซอฟต์แวร์)"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Intangible assets for purchased software licenses.", "source": {"account_type": "asset_non_current", "descriptions": {"th_TH": "สินทรัพย์ไม่มีตัวตนสำหรับค่าลิขสิทธิ์ซอฟต์แวร์ที่ซื้อมา"}}},
+    {"source_id": "l10n_th_account_124101", "code": "124101", "name": "Accum. Amortization - Software", "translations": {"th_TH": "ค่าตัดจำหน่ายสะสม - ซอฟต์แวร์"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated amortization for software.", "source": {"account_type": "asset_non_current", "descriptions": {"th_TH": "ค่าตัดจำหน่ายสะสมสำหรับซอฟต์แวร์"}}},
+    {"source_id": "l10n_th_account_124200", "code": "124200", "name": "Goodwill", "translations": {"th_TH": "ค่าความนิยม"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Excess payment over net assets acquired in a business combination.", "source": {"account_type": "asset_non_current", "descriptions": {"th_TH": "ส่วนเกินของเงินที่จ่ายซื้อกิจการที่สูงกว่ามูลค่าสินทรัพย์สุทธิที่ได้มา"}}},
+    {"source_id": "l10n_th_account_124201", "code": "124201", "name": "Accum. Amortization - Goodwill", "translations": {"th_TH": "ค่าตัดจำหน่ายสะสม - ค่าความนิยม"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated amortization for goodwill.", "source": {"account_type": "asset_non_current", "descriptions": {"th_TH": "ค่าตัดจำหน่ายสะสมสำหรับค่าความนิยม"}}},
+    {"source_id": "l10n_th_account_211100", "code": "211100", "name": "Bank Overdrafts", "translations": {"th_TH": "เงินเบิกเกินบัญชีธนาคาร (O/D)"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Negative bank balance repayable on demand.", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "ยอดคงเหลือติดลบในธนาคารที่ต้องชำระคืนเมื่อทวงถาม"}}},
+    {"source_id": "l10n_th_account_211200", "code": "211200", "name": "Short-term Loans", "translations": {"th_TH": "เงินกู้ยืมระยะสั้น"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Bank loans or borrowings due within one year.", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "เงินกู้ยืมธนาคารหรือหนี้สินที่มีกำหนดชำระคืนภายใน 1 ปี"}}},
+    {"source_id": "l10n_th_account_212100", "code": "212100", "name": "Trade Payables", "translations": {"th_TH": "เจ้าหนี้การค้า"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Amounts owed to suppliers for goods or services purchased on credit.", "role_hint": "payables", "source": {"account_type": "liability_payable", "descriptions": {"th_TH": "ยอดเงินที่ค้างชำระซัพพลายเออร์สำหรับสินค้าหรือบริการที่ซื้อเชื่อ (เครดิต)"}}},
+    {"source_id": "l10n_th_account_212200", "code": "212200", "name": "Other Payables", "translations": {"th_TH": "เจ้าหนี้อื่น"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Non-trade obligations (e.g., payables to directors).", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "หนี้สินที่ไม่ใช่การค้า (เช่น เงินค้างจ่ายกรรมการ)"}}},
+    {"source_id": "l10n_th_account_212300", "code": "212300", "name": "Accrued Expenses", "translations": {"th_TH": "ค่าใช้จ่ายค้างจ่าย"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Estimated liabilities for services received but not yet billed.", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "หนี้สินประมาณการสำหรับบริการที่ได้รับแล้วแต่ยังไม่ได้วางบิล"}}},
+    {"source_id": "l10n_th_account_212400", "code": "212400", "name": "Advances from Customers", "translations": {"th_TH": "เงินรับล่วงหน้าจากลูกค้า"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Deposit/Downpayment received from customers. Reconcile against the final Customer Invoice.", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "เงินมัดจำหรือเงินดาวน์ที่ได้รับจากลูกค้า (กระทบยอดเมื่อออกใบแจ้งหนี้จริง)"}}},
+    {"source_id": "l10n_th_account_213100", "code": "213100", "name": "Undue Output VAT", "translations": {"th_TH": "ภาษีขายยังไม่ถึงกำหนด"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Suspense VAT: Output tax on service invoices issued but not yet paid.", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "ภาษีพัก: ภาษีขายจากการวางบิลค่าบริการที่ยังไม่ได้รับชำระเงิน"}}},
+    {"source_id": "l10n_th_account_213200", "code": "213200", "name": "Output VAT", "translations": {"th_TH": "ภาษีขาย"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Net VAT liability (Output VAT - Input VAT) to be remitted to Revenue Dept (PP.30).", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "ภาระภาษีมูลค่าเพิ่มสุทธิ (ภาษีขาย - ภาษีซื้อ) ที่ต้องนำส่งกรมสรรพากร (ภ.พ. 30)"}}},
+    {"source_id": "l10n_th_account_213300", "code": "213300", "name": "Tax Withheld - PND 1", "translations": {"th_TH": "ภาษีหัก ณ ที่จ่าย - ภ.ง.ด. 1"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Tax deducted from Employee Salaries. Remit monthly via form PND 1.", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "ภาษีที่หักจากเงินเดือนพนักงาน นำส่งรายเดือนด้วยแบบ ภ.ง.ด. 1"}}},
+    {"source_id": "l10n_th_account_213301", "code": "213301", "name": "Tax Withheld - PND 3", "translations": {"th_TH": "ภาษีหัก ณ ที่จ่าย - ภ.ง.ด. 3"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Tax deducted from Individual Suppliers. Remit monthly via form PND 3.", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "ภาษีที่หักจากบุคคลธรรมดา นำส่งรายเดือนด้วยแบบ ภ.ง.ด. 3"}}},
+    {"source_id": "l10n_th_account_213302", "code": "213302", "name": "Tax Withheld - PND 53", "translations": {"th_TH": "ภาษีหัก ณ ที่จ่าย - ภ.ง.ด. 53"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Tax deducted from Juristic (Company) Suppliers. Remit monthly via form PND 53.", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "ภาษีที่หักจากนิติบุคคล นำส่งรายเดือนด้วยแบบ ภ.ง.ด. 53"}}},
+    {"source_id": "l10n_th_account_213303", "code": "213303", "name": "Tax Withheld - PND 54", "translations": {"th_TH": "ภาษีหัก ณ ที่จ่าย - ภ.ง.ด. 54"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Tax deducted from payments sent Overseas. Remit via form PND 54.", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "ภาษีที่หักจากการจ่ายเงินไปต่างประเทศ นำส่งด้วยแบบ ภ.ง.ด. 54"}}},
+    {"source_id": "l10n_th_account_213400", "code": "213400", "name": "VAT Payable", "translations": {"th_TH": "ภาษีมูลค่าเพิ่มค้างจ่าย"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "VAT Payable: Tax collected from sales. To be remitted to Revenue Dept (PP.30).", "role_hint": "payables", "source": {"account_type": "liability_payable", "descriptions": {"th_TH": "ภาษีมูลค่าเพิ่มที่เก็บจากการขาย เตรียมนำส่งกรมสรรพากร (ภ.พ. 30)"}}},
+    {"source_id": "l10n_th_account_213500", "code": "213500", "name": "WHT Payable", "translations": {"th_TH": "ภาษีหัก ณ ที่จ่ายค้างจ่าย"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Net WHT liability moved here from PND specific accounts at month-end for lump-sum payment to Revenue Dept.", "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true, "descriptions": {"th_TH": "ยอดรวมภาษีหัก ณ ที่จ่ายที่โอนมาจากบัญชีย่อย เพื่อเตรียมจ่ายสรรพากร"}}},
+    {"source_id": "l10n_th_account_213600", "code": "213600", "name": "Corporate Income Tax Payable", "translations": {"th_TH": "ภาษีเงินได้นิติบุคคลค้างจ่าย"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Accrued corporate income tax liability for the year.", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "ภาระภาษีเงินได้นิติบุคคลค้างจ่ายสำหรับปี"}}},
+    {"source_id": "l10n_th_account_216100", "code": "216100", "name": "Provisions for Employee Benefits", "translations": {"th_TH": "ประมาณการหนี้สินผลประโยชน์พนักงาน"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "description": "Short-term liabilities for employee benefits like severance.", "source": {"account_type": "liability_current", "descriptions": {"th_TH": "หนี้สินระยะสั้นสำหรับผลประโยชน์พนักงาน เช่น ค่าชดเชย"}}},
+    {"source_id": "l10n_th_account_221100", "code": "221100", "name": "Long-Term Loans", "translations": {"th_TH": "เงินกู้ยืมระยะยาว"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bank loans or borrowings due after more than one year.", "source": {"account_type": "liability_non_current", "descriptions": {"th_TH": "เงินกู้ยืมธนาคารที่มีกำหนดชำระคืนเกินกว่า 1 ปี"}}},
+    {"source_id": "l10n_th_account_222100", "code": "222100", "name": "Employee Benefit Obligations", "translations": {"th_TH": "ภาระผูกพันผลประโยชน์พนักงาน"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Long-term post-employment benefit obligations.", "source": {"account_type": "liability_non_current", "descriptions": {"th_TH": "ภาระผูกพันผลประโยชน์พนักงานหลังออกจากงาน (ระยะยาว)"}}},
+    {"source_id": "l10n_th_account_223100", "code": "223100", "name": "Deferred Income (Gov Grants)", "translations": {"th_TH": "รายได้รับล่วงหน้า (เงินอุดหนุนรัฐ)"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Grant income received but not yet recognized as revenue.", "source": {"account_type": "liability_non_current", "descriptions": {"th_TH": "รายได้จากเงินอุดหนุนที่ได้รับแล้ว แต่ยังไม่ได้รับรู้เป็นรายได้"}}},
+    {"source_id": "l10n_th_account_311100", "code": "311100", "name": "Share Capital", "translations": {"th_TH": "ทุนจดทะเบียน / ทุนเรือนหุ้น"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Par value of shares issued and paid-up.", "source": {"account_type": "equity", "descriptions": {"th_TH": "มูลค่าพาร์ของหุ้นที่ออกและชำระแล้ว"}}},
+    {"source_id": "l10n_th_account_321100", "code": "321100", "name": "Legal Reserve", "translations": {"th_TH": "สำรองตามกฎหมาย"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Profits set aside by law (10% of capital), cannot be distributed.", "source": {"account_type": "equity", "descriptions": {"th_TH": "กำไรที่กันไว้ตามกฎหมาย (10% ของทุน) ไม่สามารถนำมาปันผลได้"}}},
+    {"source_id": "l10n_th_account_321200", "code": "321200", "name": "Retained Earnings", "translations": {"th_TH": "กำไรสะสม"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accumulated profits available for dividend distribution.", "source": {"account_type": "equity", "descriptions": {"th_TH": "กำไรสะสมที่สามารถนำมาจ่ายเงินปันผลได้"}}},
+    {"source_id": "l10n_th_account_411100", "code": "411100", "name": "Sales Revenue", "translations": {"th_TH": "รายได้จากการขาย"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Revenue from sale of goods (recognized upon delivery/transfer of risk).", "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income", "descriptions": {"th_TH": "รายได้จากการขายสินค้า (รับรู้รายได้เมื่อส่งมอบ/โอนความเสี่ยง)"}}},
+    {"source_id": "l10n_th_account_411200", "code": "411200", "name": "Service Revenue", "translations": {"th_TH": "รายได้ค่าบริการ"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Revenue from services (recognized by stage of completion).", "source": {"account_type": "income", "descriptions": {"th_TH": "รายได้จากการให้บริการ (รับรู้รายได้ตามขั้นความสำเร็จของงาน)"}}},
+    {"source_id": "l10n_th_account_411300", "code": "411300", "name": "Sales Returns and Allowances", "translations": {"th_TH": "รับคืนสินค้าและส่วนลดจ่าย"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Contra-revenue account for customer refunds or credits.", "source": {"account_type": "income", "descriptions": {"th_TH": "บัญชีปรับลดรายได้จากการคืนเงินหรือรับคืนสินค้าจากลูกค้า"}}},
+    {"source_id": "l10n_th_account_411400", "code": "411400", "name": "Sales Discounts", "translations": {"th_TH": "ส่วนลดจ่าย (ส่วนลดเงินสด)"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Contra-revenue account for discounts given.", "source": {"account_type": "income", "descriptions": {"th_TH": "บัญชีปรับลดรายได้จากส่วนลดที่ให้ลูกค้า"}}},
+    {"source_id": "l10n_th_account_421100", "code": "421100", "name": "Interest Income", "translations": {"th_TH": "ดอกเบี้ยรับ"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Income earned from bank deposits or loans provided.", "source": {"account_type": "income_other", "descriptions": {"th_TH": "รายได้ดอกเบี้ยจากเงินฝากธนาคารหรือเงินให้กู้ยืม"}}},
+    {"source_id": "l10n_th_account_421200", "code": "421200", "name": "Dividend Income", "translations": {"th_TH": "เงินปันผลรับ"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Income received from share investments.", "source": {"account_type": "income_other", "descriptions": {"th_TH": "รายได้เงินปันผลจากการลงทุนในหุ้น"}}},
+    {"source_id": "l10n_th_account_421300", "code": "421300", "name": "Gain on Exchange Rate", "translations": {"th_TH": "กำไรจากอัตราแลกเปลี่ยน"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Profit from currency fluctuations on foreign transactions.", "source": {"account_type": "income_other", "descriptions": {"th_TH": "กำไรจากความผันผวนของค่าเงินในธุรกรรมต่างประเทศ"}}},
+    {"source_id": "l10n_th_account_421400", "code": "421400", "name": "Government Grant Income", "translations": {"th_TH": "รายได้เงินอุดหนุนจากรัฐบาล"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Income recognized from government subsidies/grants.", "source": {"account_type": "income_other", "descriptions": {"th_TH": "รายได้ที่รับรู้จากเงินอุดหนุนของรัฐบาล"}}},
+    {"source_id": "l10n_th_account_421500", "code": "421500", "name": "Purchase Discounts", "translations": {"th_TH": "ส่วนลดรับ"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Early Pay Gain: Discounts received from suppliers for early payment.", "source": {"account_type": "income_other", "descriptions": {"th_TH": "กำไรจากการจ่ายชำระเงินเร็ว: ส่วนลดที่ได้รับจากซัพพลายเออร์"}}},
+    {"source_id": "l10n_th_account_421600", "code": "421600", "name": "Cash Difference Income", "translations": {"th_TH": "รายได้จากเงินสดเกินบัญชี"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Cash Diff Income: Cash overages found during reconciliation.", "source": {"account_type": "income_other", "descriptions": {"th_TH": "รายได้จากเงินสดเกินที่พบระหว่างการกระทบยอด"}}},
+    {"source_id": "l10n_th_account_511100", "code": "511100", "name": "Cost of Goods Sold", "translations": {"th_TH": "ต้นทุนขาย"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Direct cost of inventory sold during the period.", "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense_direct_cost", "descriptions": {"th_TH": "ต้นทุนทางตรงของสินค้าที่ขายไปในระหว่างงวด"}}},
+    {"source_id": "l10n_th_account_511200", "code": "511200", "name": "Cost of Services", "translations": {"th_TH": "ต้นทุนบริการ"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Direct costs incurred to provide services (e.g., labor, materials).", "source": {"account_type": "expense_direct_cost", "descriptions": {"th_TH": "ต้นทุนทางตรงที่เกิดขึ้นเพื่อให้บริการ (เช่น ค่าแรง, ค่าวัสดุ)"}}},
+    {"source_id": "l10n_th_account_511300", "code": "511300", "name": "Inventory Write-down", "translations": {"th_TH": "ขาดทุนจากการลดมูลค่าสินค้า"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Loss from reducing inventory value to Net Realizable Value.", "source": {"account_type": "expense_direct_cost", "descriptions": {"th_TH": "ผลขาดทุนจากการปรับลดมูลค่าสินค้าคงเหลือให้เท่ากับมูลค่าสุทธิที่จะได้รับ"}}},
+    {"source_id": "l10n_th_account_511400", "code": "511400", "name": "Import fees", "translations": {"th_TH": "อากรและค่าธรรมเนียมนำเข้"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Customs duties, freight, and clearance costs for imported goods.", "source": {"account_type": "expense_direct_cost", "descriptions": {"th_TH": "อากรขาเข้า ค่าระวาง และค่าดำเนินพิธีการศุลกากรสำหรับสินค้านำเข้า"}}},
+    {"source_id": "l10n_th_account_511500", "code": "511500", "name": "Raw materials Used", "translations": {"th_TH": "วัตถุดิบใช้ไป"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Cost of raw materials consumed in the production process.", "source": {"account_type": "expense_direct_cost", "descriptions": {"th_TH": "ต้นทุนวัตถุดิบที่ใช้ไปในกระบวนการผลิต"}}},
+    {"source_id": "l10n_th_account_511600", "code": "511600", "name": "General subcontracting", "translations": {"th_TH": "ค่าจ้างทำของ / ค่าจ้างเหมารายย่อย"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Fees paid to subcontractors for direct project work.", "source": {"account_type": "expense_direct_cost", "descriptions": {"th_TH": "ค่าธรรมเนียมที่จ่ายให้ผู้รับเหมาช่วงสำหรับงานโครงการโดยตรง"}}},
+    {"source_id": "l10n_th_account_511700", "code": "511700", "name": "Freight & Transportation", "translations": {"th_TH": "ค่าขนส่งขาเข้า"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Direct cost for transporting raw materials or goods to the warehouse (Freight In).", "source": {"account_type": "expense_direct_cost", "descriptions": {"th_TH": "ต้นทุนทางตรงในการขนส่งวัตถุดิบหรือสินค้าเข้ามายังคลังสินค้า"}}},
+    {"source_id": "l10n_th_account_611100", "code": "611100", "name": "Employees compensation", "translations": {"th_TH": "เงินเดือนและค่าตอบแทนพนักงาน"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Salaries, wages, overtime, and bonuses for staff.", "source": {"account_type": "expense", "descriptions": {"th_TH": "เงินเดือน ค่าจ้าง ค่าล่วงเวลา และโบนัสสำหรับพนักงาน"}}},
+    {"source_id": "l10n_th_account_611200", "code": "611200", "name": "Commissions & Brokerage Fees", "translations": {"th_TH": "ค่านายหน้าและค่าคอมมิชชั่น"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Fees paid to agents, brokers, or intermediaries for facilitating sales or business deals.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าธรรมเนียมที่จ่ายให้ตัวแทน นายหน้า หรือคนกลางในการขาย"}}},
+    {"source_id": "l10n_th_account_611300", "code": "611300", "name": "Social Security", "translations": {"th_TH": "เงินสมทบประกันสังคม"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Employer's contribution to the Social Security Fund.", "source": {"account_type": "expense", "descriptions": {"th_TH": "เงินสมทบกองทุนประกันสังคมส่วนของนายจ้าง"}}},
+    {"source_id": "l10n_th_account_611400", "code": "611400", "name": "Other personnel costs", "translations": {"th_TH": "ค่าใช้จ่ายเกี่ยวกับพนักงานอื่น"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Staff benefits, vouchers, and other non-salary costs.", "source": {"account_type": "expense", "descriptions": {"th_TH": "สวัสดิการพนักงาน คูปอง และค่าใช้จ่ายพนักงานอื่นๆ ที่ไม่ใช่เงินเดือน"}}},
+    {"source_id": "l10n_th_account_611500", "code": "611500", "name": "Training and documentation", "translations": {"th_TH": "ค่าอบรมและสัมมนา"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Expenses for staff training courses and educational materials.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าใช้จ่ายสำหรับหลักสูตรฝึกอบรมพนักงานและเอกสารประกอบ"}}},
+    {"source_id": "l10n_th_account_611600", "code": "611600", "name": "Royalties & License Fees", "translations": {"th_TH": "ค่าสิทธิและค่าใบอนุญาต"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Payments for the use of intellectual property, copyrights, franchises, patents, or specialized licensing rights.", "source": {"account_type": "expense", "descriptions": {"th_TH": "การจ่ายเงินเพื่อใช้ทรัพย์สินทางปัญญา ลิขสิทธิ์ แฟรนไชส์ หรือสิทธิบัตร"}}},
+    {"source_id": "l10n_th_account_612100", "code": "612100", "name": "Land Improvements (Depr)", "translations": {"th_TH": "ค่าเสื่อมราคา - ส่วนปรับปรุงที่ดิน"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Periodic depreciation charge for land improvements.", "source": {"account_type": "expense_depreciation", "descriptions": {"th_TH": "ค่าใช้จ่ายค่าเสื่อมราคาตามงวดบัญชีสำหรับส่วนปรับปรุงที่ดิน"}}},
+    {"source_id": "l10n_th_account_612200", "code": "612200", "name": "Buildings (Depr)", "translations": {"th_TH": "ค่าเสื่อมราคา - อาคาร"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Periodic depreciation charge for building structures.", "source": {"account_type": "expense_depreciation", "descriptions": {"th_TH": "ค่าใช้จ่ายค่าเสื่อมราคาตามงวดบัญชีสำหรับอาคาร"}}},
+    {"source_id": "l10n_th_account_612300", "code": "612300", "name": "Building Installations (Depr)", "translations": {"th_TH": "ค่าเสื่อมราคา - งานระบบ"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Periodic depreciation charge for building systems.", "source": {"account_type": "expense_depreciation", "descriptions": {"th_TH": "ค่าใช้จ่ายค่าเสื่อมราคาตามงวดบัญชีสำหรับงานระบบอาคาร"}}},
+    {"source_id": "l10n_th_account_612400", "code": "612400", "name": "Machinery & Tools (Depr)", "translations": {"th_TH": "ค่าเสื่อมราคา - เครื่องจักร"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Periodic depreciation charge for machinery and tools.", "source": {"account_type": "expense_depreciation", "descriptions": {"th_TH": "ค่าใช้จ่ายค่าเสื่อมราคาตามงวดบัญชีสำหรับเครื่องจักรและเครื่องมือ"}}},
+    {"source_id": "l10n_th_account_612500", "code": "612500", "name": "Major Spare Parts (Depr)", "translations": {"th_TH": "ค่าเสื่อมราคา - อะไหล่หลัก"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Periodic depreciation charge for capitalized spare parts.", "source": {"account_type": "expense_depreciation", "descriptions": {"th_TH": "ค่าใช้จ่ายค่าเสื่อมราคาตามงวดบัญชีสำหรับอะไหล่หลัก (Capitalized)"}}},
+    {"source_id": "l10n_th_account_612600", "code": "612600", "name": "Vehicles (Depr)", "translations": {"th_TH": "ค่าเสื่อมราคา - ยานพาหนะ"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Periodic depreciation charge for vehicles.", "source": {"account_type": "expense_depreciation", "descriptions": {"th_TH": "ค่าใช้จ่ายค่าเสื่อมราคาตามงวดบัญชีสำหรับยานพาหนะ"}}},
+    {"source_id": "l10n_th_account_612650", "code": "612650", "name": "Vehicle Accessories (Depr)", "translations": {"th_TH": "ค่าเสื่อมราคา - อุปกรณ์รถยนต์"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Periodic depreciation charge for vehicle add-ons.", "source": {"account_type": "expense_depreciation", "descriptions": {"th_TH": "ค่าใช้จ่ายค่าเสื่อมราคาตามงวดบัญชีสำหรับอุปกรณ์ตกแต่งรถยนต์"}}},
+    {"source_id": "l10n_th_account_612700", "code": "612700", "name": "Furniture & Fixtures (Depr)", "translations": {"th_TH": "ค่าเสื่อมราคา - เครื่องตกแต่ง"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Periodic depreciation charge for furniture.", "source": {"account_type": "expense_depreciation", "descriptions": {"th_TH": "ค่าใช้จ่ายค่าเสื่อมราคาตามงวดบัญชีสำหรับเฟอร์นิเจอร์"}}},
+    {"source_id": "l10n_th_account_612800", "code": "612800", "name": "Technology & Computers (Depr)", "translations": {"th_TH": "ค่าเสื่อมราคา - คอมพิวเตอร์"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Periodic depreciation charge for IT equipment.", "source": {"account_type": "expense_depreciation", "descriptions": {"th_TH": "ค่าใช้จ่ายค่าเสื่อมราคาตามงวดบัญชีสำหรับอุปกรณ์ไอที"}}},
+    {"source_id": "l10n_th_account_612900", "code": "612900", "name": "Other Fixed Assets (Depr)", "translations": {"th_TH": "ค่าเสื่อมราคา - สินทรัพย์อื่น"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Periodic depreciation charge for miscellaneous assets.", "source": {"account_type": "expense_depreciation", "descriptions": {"th_TH": "ค่าใช้จ่ายค่าเสื่อมราคาตามงวดบัญชีสำหรับสินทรัพย์เบ็ดเตล็ด"}}},
+    {"source_id": "l10n_th_account_612950", "code": "612950", "name": "Computer Software (Amt)", "translations": {"th_TH": "ค่าตัดจำหน่าย - ซอฟต์แวร์"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Amortization expense for intangible software assets.", "source": {"account_type": "expense_depreciation", "descriptions": {"th_TH": "ค่าใช้จ่ายค่าตัดจำหน่ายสำหรับสินทรัพย์ไม่มีตัวตน (ซอฟต์แวร์)"}}},
+    {"source_id": "l10n_th_account_612960", "code": "612960", "name": "Goodwill (Amt)", "translations": {"th_TH": "ค่าตัดจำหน่าย - ค่าความนิยม"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Amortization expense for goodwill.", "source": {"account_type": "expense_depreciation", "descriptions": {"th_TH": "ค่าใช้จ่ายค่าตัดจำหน่ายสำหรับค่าความนิยม"}}},
+    {"source_id": "l10n_th_account_613100", "code": "613100", "name": "Office Rent", "translations": {"th_TH": "ค่าเช่าสำนักงาน"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Monthly rental fees for office space (Operating Lease).", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าเช่ารายเดือนสำหรับพื้นที่สำนักงาน (สัญญาเช่าดำเนินงาน)"}}},
+    {"source_id": "l10n_th_account_613200", "code": "613200", "name": "Vehicle rent", "translations": {"th_TH": "ค่าเช่ายานพาหนะ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Rental fees for cars or transport vehicles.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าเช่ารถยนต์หรือยานพาหนะขนส่ง"}}},
+    {"source_id": "l10n_th_account_613300", "code": "613300", "name": "Freight & Postage Expenses", "translations": {"th_TH": "ค่าไปรษณีย์และค่าขนส่ง (สนง.)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Administrative expenses for courier services, document delivery, and postage.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าใช้จ่ายสำนักงานสำหรับบริการรับส่งเอกสารและพัสดุภัณฑ์"}}},
+    {"source_id": "l10n_th_account_614100", "code": "614100", "name": "Office Maintenance services", "translations": {"th_TH": "ค่าบริการดูแลรักษาสำนักงาน"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Costs for office cleaning, repairs, and general upkeep.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าใช้จ่ายทำความสะอาด ซ่อมแซม และดูแลรักษาสำนักงานทั่วไป"}}},
+    {"source_id": "l10n_th_account_614200", "code": "614200", "name": "Vehicle maintenance", "translations": {"th_TH": "ค่าซ่อมบำรุงยานพาหนะ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Routine repair and maintenance costs for vehicles.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าซ่อมแซมและบำรุงรักษายานพาหนะตามปกติ"}}},
+    {"source_id": "l10n_th_account_614300", "code": "614300", "name": "Studies & works", "translations": {"th_TH": "ค่าที่ปรึกษาและวิจัย"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Professional fees for research, studies, or external consultations.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าวิชาชีพสำหรับการวิจัย การศึกษา หรือที่ปรึกษาภายนอก"}}},
+    {"source_id": "l10n_th_account_615100", "code": "615100", "name": "Accounting Fees", "translations": {"th_TH": "ค่าทำบัญชี / ค่าสอบบัญชี"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Fees paid to external audit or bookkeeping firms.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าธรรมเนียมที่จ่ายให้สำนักงานบัญชีหรือผู้สอบบัญชีภายนอก"}}},
+    {"source_id": "l10n_th_account_615200", "code": "615200", "name": "Legal expenses", "translations": {"th_TH": "ค่าทนายความและกฎหมาย"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Fees paid to lawyers or legal advisors.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าธรรมเนียมที่จ่ายให้ทนายความหรือที่ปรึกษากฎหมาย"}}},
+    {"source_id": "l10n_th_account_615300", "code": "615300", "name": "Administration fees", "translations": {"th_TH": "ค่าธรรมเนียมการบริหาร"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "General administrative service fees.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าธรรมเนียมการบริหารจัดการทั่วไป"}}},
+    {"source_id": "l10n_th_account_615400", "code": "615400", "name": "Membership fees", "translations": {"th_TH": "ค่าสมาชิก"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Subscriptions to professional clubs or associations.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าบำรุงสมาชิกสโมสรหรือสมาคมวิชาชีพต่างๆ"}}},
+    {"source_id": "l10n_th_account_615500", "code": "615500", "name": "Software Subscription", "translations": {"th_TH": "ค่าเช่าใช้ซอฟต์แวร์ (Subscription)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Recurring fees for SaaS/Cloud software (not capitalized).", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าธรรมเนียมรายงวดสำหรับซอฟต์แวร์ SaaS/Cloud (ไม่บันทึกเป็นสินทรัพย์)"}}},
+    {"source_id": "l10n_th_account_615801", "code": "615801", "name": "Fire Insurance", "translations": {"th_TH": "ค่าเบี้ยประกันอัคคีภัย"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Insurance premiums for property protection against fire/theft.", "source": {"account_type": "expense", "descriptions": {"th_TH": "เบี้ยประกันสำหรับคุ้มครองทรัพย์สินจากไฟไหม้/โจรกรรม"}}},
+    {"source_id": "l10n_th_account_615802", "code": "615802", "name": "Professional Insurance", "translations": {"th_TH": "ค่าเบี้ยประกันภัยวิชาชีพ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Insurance premiums for business liability coverage.", "source": {"account_type": "expense", "descriptions": {"th_TH": "เบี้ยประกันภัยสำหรับความรับผิดทางธุรกิจ"}}},
+    {"source_id": "l10n_th_account_615803", "code": "615803", "name": "Legal protection Insurance", "translations": {"th_TH": "ประกันภัยคุ้มครองทางกฎหมาย"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Insurance coverage for legal costs.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ความคุ้มครองประกันภัยสำหรับค่าใช้จ่ายทางกฎหมาย"}}},
+    {"source_id": "l10n_th_account_615804", "code": "615804", "name": "Professional Liability Insurance", "translations": {"th_TH": "ประกันภัยความรับผิดทางวิชาชีพ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Insurance for errors and omissions.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ประกันภัยสำหรับความผิดพลาดและการละเลยในการปฏิบัติงาน"}}},
+    {"source_id": "l10n_th_account_617100", "code": "617100", "name": "Advertising", "translations": {"th_TH": "ค่าโฆษณา"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Costs for marketing campaigns and advertising.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าใช้จ่ายสำหรับแคมเปญการตลาดและการโฆษณา"}}},
+    {"source_id": "l10n_th_account_617200", "code": "617200", "name": "Business gift", "translations": {"th_TH": "ของขวัญธุรกิจ / ของสมนาคุณ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Gifts for clients or partners (Check tax deductibility limits).", "source": {"account_type": "expense", "descriptions": {"th_TH": "ของขวัญสำหรับลูกค้าหรือคู่ค้า (ตรวจสอบเงื่อนไขภาษีเกี่ยวกับมูลค่า)"}}},
+    {"source_id": "l10n_th_account_618100", "code": "618100", "name": "Consumables", "translations": {"th_TH": "วัสดุสิ้นเปลืองใช้ไป"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Low-value items used immediately (expensed upon purchase).", "source": {"account_type": "expense", "descriptions": {"th_TH": "รายการมูลค่าต่ำที่ใช้หมดไปทันที (บันทึกเป็นค่าใช้จ่ายเมื่อซื้อ)"}}},
+    {"source_id": "l10n_th_account_618200", "code": "618200", "name": "Office supplies", "translations": {"th_TH": "วัสดุสำนักงาน"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Stationery, paper, ink, and general office supplies.", "source": {"account_type": "expense", "descriptions": {"th_TH": "เครื่องเขียน กระดาษ หมึกพิมพ์ และอุปกรณ์สำนักงานทั่วไป"}}},
+    {"source_id": "l10n_th_account_618300", "code": "618300", "name": "Office services", "translations": {"th_TH": "ค่าบริการสำนักงาน"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Utilities, internet, and other general office services.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าสาธารณูปโภค อินเทอร์เน็ต และบริการทั่วไปในสำนักงาน"}}},
+    {"source_id": "l10n_th_account_618400", "code": "618400", "name": "Water, electricity, gas", "translations": {"th_TH": "ค่าน้ำ ค่าไฟ แก๊ส"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Utility bills for business premises.", "source": {"account_type": "expense", "descriptions": {"th_TH": "บิลค่าสาธารณูปโภคสำหรับสถานที่ประกอบธุรกิจ"}}},
+    {"source_id": "l10n_th_account_618500", "code": "618500", "name": "Phone & Internet", "translations": {"th_TH": "ค่าโทรศัพท์และอินเทอร์เน็ต"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Communication and internet service costs.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าใช้จ่ายด้านการสื่อสารและบริการอินเทอร์เน็ต"}}},
+    {"source_id": "l10n_th_account_618600", "code": "618600", "name": "Fuel", "translations": {"th_TH": "ค่าน้ำมันเชื้อเพลิง"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Fuel costs for company vehicles.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าน้ำมันสำหรับยานพาหนะของบริษัท"}}},
+    {"source_id": "l10n_th_account_618700", "code": "618700", "name": "Property tax", "translations": {"th_TH": "ภาษีที่ดินและสิ่งปลูกสร้าง"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Annual taxes paid on land and building ownership.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ภาษีรายปีที่จ่ายจากการเป็นเจ้าของที่ดินและอาคาร"}}},
+    {"source_id": "l10n_th_account_619101", "code": "619101", "name": "Flights", "translations": {"th_TH": "ค่าตั๋วเครื่องบิน"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Air travel costs for business purposes.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าเดินทางโดยเครื่องบินเพื่อวัตถุประสงค์ทางธุรกิจ"}}},
+    {"source_id": "l10n_th_account_619102", "code": "619102", "name": "Hotels", "translations": {"th_TH": "ค่าที่พักแรม"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Accommodation costs during business travel.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าที่พักระหว่างการเดินทางไปติดต่อธุรกิจ"}}},
+    {"source_id": "l10n_th_account_619103", "code": "619103", "name": "Public Transportation", "translations": {"th_TH": "ค่าพาหนะเดินทาง"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Taxi, train, or bus fares for business travel.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าแท็กซี่ รถไฟ หรือรถโดยสารสำหรับการเดินทางไปติดต่อธุรกิจ"}}},
+    {"source_id": "l10n_th_account_619104", "code": "619104", "name": "Other travel costs", "translations": {"th_TH": "ค่าเดินทางอื่นๆ"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Miscellaneous travel expenses (per diems, etc.).", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าใช้จ่ายการเดินทางเบ็ดเตล็ด (เบี้ยเลี้ยง ฯลฯ)"}}},
+    {"source_id": "l10n_th_account_619200", "code": "619200", "name": "Bar & Restaurant", "translations": {"th_TH": "ค่ารับรอง (อาหารและเครื่องดื่ม)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Business meals and entertainment expenses.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าอาหารและการบันเทิงเพื่อธุรกิจ"}}},
+    {"source_id": "l10n_th_account_619300", "code": "619300", "name": "Food: Reception & delivery", "translations": {"th_TH": "ค่าอาหารรับรองและจัดเลี้ยง"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Catering costs for office events or receptions.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าจัดเลี้ยงสำหรับกิจกรรมในสำนักงานหรือการต้อนรับ"}}},
+    {"source_id": "l10n_th_account_619900", "code": "619900", "name": "Donations", "translations": {"th_TH": "เงินบริจาค"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Charitable donation.", "source": {"account_type": "expense", "descriptions": {"th_TH": "การบริจาคเพื่อการกุศล"}}},
+    {"source_id": "l10n_th_account_621100", "code": "621100", "name": "Interest Expense", "translations": {"th_TH": "ดอกเบี้ยจ่าย"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Cost of borrowing funds (Finance costs).", "source": {"account_type": "expense", "descriptions": {"th_TH": "ต้นทุนจากการกู้ยืมเงิน (ต้นทุนทางการเงิน)"}}},
+    {"source_id": "l10n_th_account_621200", "code": "621200", "name": "Loss on Exchange Rate", "translations": {"th_TH": "ขาดทุนจากอัตราแลกเปลี่ยน"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Realized/unrealized losses from currency fluctuations.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ผลขาดทุนที่เกิดขึ้นจริง/ยังไม่เกิดขึ้นจริงจากความผันผวนของค่าเงิน"}}},
+    {"source_id": "l10n_th_account_622100", "code": "622100", "name": "Bank fees", "translations": {"th_TH": "ค่าธรรมเนียมธนาคาร"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Bank charges, transaction fees, and transfer costs.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าธรรมเนียมธนาคาร ค่าทำธุรกรรม และค่าโอนเงิน"}}},
+    {"source_id": "l10n_th_account_622200", "code": "622200", "name": "Cash Difference Loss", "translations": {"th_TH": "ขาดทุนจากเงินสดขาดบัญชี"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Cash Diff Expense: Cash shortages found during reconciliation or rounding.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าใช้จ่ายจากเงินสดขาดบัญชีที่พบระหว่างการกระทบยอดหรือปัดเศษ"}}},
+    {"source_id": "l10n_th_account_631100", "code": "631100", "name": "Corporate Income Tax", "translations": {"th_TH": "ภาษีเงินได้นิติบุคคล (ค่าใช้จ่าย)"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Annual tax expense on net profit.", "source": {"account_type": "expense", "descriptions": {"th_TH": "ค่าใช้จ่ายภาษีประจำปีคำนวณจากกำไรสุทธิ"}}},
+    {"source_id": "l10n_th_account_999999", "code": "999999", "name": "Current Year Earnings", "translations": {"th_TH": "กำไร(ขาดทุน) สุทธิประจำปี"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "description": "Automated account for current year profit/loss accumulation.", "source": {"account_type": "equity_unaffected", "descriptions": {"th_TH": "บัญชีอัตโนมัติสำหรับสะสมกำไรหรือขาดทุนในปีปัจจุบัน"}}}
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "version": "1.0.0",
+  "channel": "stable",
+  "archive": "phpledger-1.0.0.zip",
+  "archive_bytes": 3137991,
+  "archive_sha256": "1c44e685b126352220c54d2ce13d575aaf2dfaf873d6b372a3a2b17189dcc63d",
+  "source_commit": "1415ceb61cab2fe27be3947d611a16f4035e54c7",
+  "old_baseline_archive": "phpledger-0.6.0-preview.zip",
+  "old_baseline_bytes": 3113762,
+  "old_baseline_sha256": "627dd5219a8de66ad46c55fe671ea0f4140280ea178270d3728ea1ac512ef8d1",
+  "old_baseline_source_commit": "b117b5cef7b4d1d3cc0a4328751820a000c580f6",
+  "checked_at_utc": "2026-09-18T14:05:23Z",
+  "php_version": "8.3.33",
+  "mysql_version": "8.4",
+  "test_image": "plfull-test:latest",
+  "compose_project": "placc",
+  "docker_subnet": "10.203.89.0/24",
+  "extracted_archive_only": true,
+  "random_databases_cleaned_up": true,
+  "scenarios": [
+    {
+      "id": 1,
+      "name": "Exact archive verification",
+      "passed": true,
+      "key_counts": {
+        "manifest_files_verified": 1582,
+        "required_files_present": 11,
+        "release_docs_checked": 4
+      },
+      "notes": "Archive bytes/sha256 match the receipt exactly. All 1582 manifest entries verified byte-for-byte and sha256; extracted file set equals manifest set plus PACKAGE-MANIFEST.json (no unlisted files). Manifest version=1.0.0, channel/status=stable, source_commit=1415ceb61cab2fe27be3947d611a16f4035e54c7. Confirmed present: www/phpledger/public/maintenance.php, templates/views/install.php, includes/functions/install_functions.php, install_web_functions.php, install_oauth_functions.php, includes/functions/update_functions.php, update_database_functions.php, update_web_functions.php, update_probe_functions.php, update_download_functions.php, tools/resume-update.php. README.md, INSTALL.md, UPGRADE.md and RELEASE-NOTES.md inside the ZIP each contain '1.0.0' and the full source commit, with no '{{' placeholders remaining."
+    },
+    {
+      "id": 2,
+      "name": "Fresh installation from the extracted 1.0.0 archive",
+      "passed": true,
+      "key_counts": {
+        "migration_receipts": 32,
+        "new_migrations_applied": 0,
+        "ar_remaining": "6.2500",
+        "ap_remaining": "60.0000",
+        "stock_quantity": "9.0000",
+        "stock_value": "90.0000",
+        "grni_unbilled": "0.0000"
+      },
+      "notes": "Ran the full migration chain (32 receipts) via the packaged install/migrate.php against a disposable phpledger_package100_<hex> database, created a user/company through the packaged setup service, exercised the central posting service (purchase order -> receipt -> bill -> partial payment, taxed invoice -> post -> settle -> credit note), and asserted trial balance balanced and AR/AP/inventory/GRNI reconciliations. A second migration replay applied nothing new."
+    },
+    {
+      "id": 3,
+      "name": "Browser installer against the extracted archive",
+      "passed": true,
+      "key_counts": {
+        "checks_passed": 75
+      },
+      "notes": "tests/browser_installer_test.php run with PL_INSTALL_TEST_PACKAGE_ROOT pointed at the extracted 1.0.0 tree (mounted read-only, separate from the checkout mount used only to load the test harness itself). Output: 'Browser installer: 75 checks passed, including complete disposable-schema installation and locked re-entry.' Covers ownership/CSRF, dedicated empty schema, migration receipts/retries, private config/download, owner creation, completion lock, OAuth provisioning/discovery and wrong-Host rejection, all against the packaged install_web_functions.php/install.php."
+    },
+    {
+      "id": 4,
+      "name": "Upgrade from the published 0.6.0-preview archive",
+      "passed": true,
+      "key_counts": {
+        "seed_migration_receipts": 32,
+        "new_migrations_applied": 0,
+        "prior_financial_rows_preserved": 16,
+        "ar_remaining": "6.2500",
+        "ap_remaining": "60.0000",
+        "stock_quantity": "9.0000",
+        "stock_value": "90.0000",
+        "grni_unbilled": "0.0000"
+      },
+      "notes": "Extracted the verified 0.6.0-preview archive, ran its own migration chain and fixture builders to seed a disposable database (trial balance 1000.0000/1000.0000), then pointed the extracted 1.0.0 archive at that same database. ADDITIONS=[] because no migrations were added after 031 between 0.6.0-preview and 1.0.0: migration replay applied nothing new, all 16 prior financial rows and all 32 migration receipts were byte-identical afterward, domestic-currency snapshots and the current-source view were unchanged, and a new document (purchase order through taxed invoice, settlement and credit note) posted successfully afterward with a balanced trial balance."
+    },
+    {
+      "id": 5,
+      "name": "Signed update fault recovery using the extracted archive as the installed application",
+      "passed": null,
+      "attempted": true,
+      "feasible_within_budget": false,
+      "notes": "tests/update-http-test.php and tests/update-recovery-test.php do not accept an installed-root/PL_ROOT parameter: both hardcode `dirname(__DIR__)` (the live checkout) to source update_functions.php/update_database_functions.php/update_web_functions.php/update_probe_functions.php and to hand-build their own minimal synthetic fixture tree, unlike tests/browser_installer_test.php which exposes PL_INSTALL_TEST_PACKAGE_ROOT for exactly this purpose. Editing those two test files is outside this agent's file ownership (tests/ is not owned by the acceptance task and no allowlist exception applies), so they cannot be redirected at the extracted 1.0.0 tree without a repository change. Building an independent from-scratch harness that drives maintenance.php's multi-phase state machine (begin -> backup -> apply -> runtime probe -> recover/restore -> resume) against a full copy of the extracted tree was judged too high-risk to produce a trustworthy result inside the remaining time budget for this task, since it would not itself have been exercised by anyone. Not run.",
+      "mitigating_evidence": "Scenario 1's manifest verification already proves www/phpledger/public/maintenance.php and every includes/functions/update_*.php file inside the 1.0.0 archive are byte-for-byte identical to the reviewed source at commit 1415ceb61cab2fe27be3947d611a16f4035e54c7 (sha256 verified per manifest entry, no unlisted files). The orchestrator's own suite run against that same commit already exercised this exact code: .cache/release-1.0.0/baseline/update-recovery.log records 26 PASS lines (unsafe paths, operator authority/lockout/reset, channel downgrade/crossover, tampered/expired/symlink/case-colliding archives, concurrent-update rejection, drained in-flight requests, automatic matched-file recovery after a failed migration, interrupted-mutation fail-closed/resume, and bounded backup/apply/recovery stage counts with lost-checkpoint replay) and .cache/release-1.0.0/baseline/update-http.log records 17 PASS lines (HTTPS normalization, CSRF, operator authentication without secret reflection, signed multipart upload into maintenance, real HTTP 503 barrier, broken-bootstrap detection and automatic restoration of matched code and database, fresh bootstrap/database probe reopening, interrupted terminal-checkpoint finalization, and bounded remote operator-key guessing)."
+    },
+    {
+      "id": 6,
+      "name": "Teardown",
+      "passed": true,
+      "notes": "docker compose -p placc --profile test down --volumes --remove-orphans removed placc-db_test-1 and the placc_default network. Extracted directories under .cache/release-1.0.0/acceptance/ were deleted. Only phpledger_package100_<hex> databases were created during this run and each was dropped immediately after its scenario; a post-run SHOW DATABASES LIKE 'phpledger_package100_%' on db_test returned none before teardown."
+    }
+  ],
+  "limitations": "Local synthetic service, migration and installer proof against extracted archives only; no accountant sign-off, independent security review, hosting-provider certification or unfamiliar-operator observation. Scenario 5 (signed update fault recovery specifically re-run against the extracted archive as the installed application) was not executed for the reasons stated in that scenario; the equivalent code paths were exercised against the identical source commit and are recorded in .cache/release-1.0.0/baseline/update-recovery.log and update-http.log. This proof covers PHP 8.3.33 only; no PHP 8.2/8.4 pass was repeated here."
+}

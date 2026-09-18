@@ -1,0 +1,530 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "9333c54665089af2a35bbbad03644996968e2f0f3432ddff178cf2426f00c088",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "erpnext-version-16/unverified/it_l10n_it_chart_template_generic",
+  "country_code": "IT",
+  "country_name": "Italy",
+  "country_basis": "chart file country_code",
+  "name": "Italy - Generic Chart of Accounts",
+  "source": {
+    "system": "erpnext",
+    "repository": "https://github.com/frappe/erpnext",
+    "branch": "version-16",
+    "commit": "4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+    "commit_date": "2026-09-08T13:23:31+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "GPL-3.0-only",
+    "license_basis": "repository license.txt (GNU GPL v3); chart files carry no separate licence header",
+    "attribution": "Frappe Technologies Pvt. Ltd. and Contributors",
+    "upstream_folder": "unverified",
+    "upstream_verified": false,
+    "upstream_disabled": false,
+    "files": [
+      {
+        "path": "erpnext/accounts/doctype/account/chart_of_accounts/unverified/it_l10n_it_chart_template_generic.json",
+        "sha256": "d6a668385b8daa4af916b21d46417cddcf9cfc0b7083543d8e21db2d0e0fbe55",
+        "kind": "json"
+      }
+    ]
+  },
+  "template": {
+    "hierarchy": "nested groups; posting accounts are leaves; source_id is the full ' / ' separated path",
+    "account_numbers_present": false
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "account_type",
+        "source_id": "ATTIVO / CREDITI COMMERCIALI / clienti c/spese anticipate",
+        "code": null,
+        "name": "clienti c/spese anticipate",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ATTIVO / CREDITI COMMERCIALI / crediti v/clienti",
+        "code": null,
+        "name": "crediti v/clienti",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ATTIVO / CREDITI DIVERSI / debitori diversi",
+        "code": null,
+        "name": "debitori diversi",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "account_type",
+        "source_id": "PASSIVO / DEBITI COMMERCIALI / clienti c/acconti",
+        "code": null,
+        "name": "clienti c/acconti",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "PASSIVO / DEBITI COMMERCIALI / debiti v/fornitori",
+        "code": null,
+        "name": "debiti v/fornitori",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "PASSIVO / DEBITI DIVERSI / creditori diversi",
+        "code": null,
+        "name": "creditori diversi",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "PASSIVO / DEBITI DIVERSI / debiti per ritenute da versare",
+        "code": null,
+        "name": "debiti per ritenute da versare",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "PASSIVO / DEBITI DIVERSI / erario c/IVA",
+        "code": null,
+        "name": "erario c/IVA",
+        "resolved": true
+      }
+    ],
+    "cash": [
+      {
+        "source_field": "account_type",
+        "source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE / assegni",
+        "code": null,
+        "name": "assegni",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE / denaro in cassa",
+        "code": null,
+        "name": "denaro in cassa",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE / valori bollati",
+        "code": null,
+        "name": "valori bollati",
+        "resolved": true
+      }
+    ],
+    "bank": [
+      {
+        "source_field": "account_type",
+        "source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE / banche c/c",
+        "code": null,
+        "name": "banche c/c",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE / c/c postali",
+        "code": null,
+        "name": "c/c postali",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "Receivable": {
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "Payable": {
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "Bank": {
+      "subtype": "bank",
+      "role_hint": "cash_bank"
+    },
+    "Cash": {
+      "subtype": "cash",
+      "role_hint": "cash_bank"
+    },
+    "Stock": {
+      "subtype": "inventory",
+      "role_hint": null
+    },
+    "Tax": {
+      "subtype": "tax",
+      "role_hint": null
+    },
+    "Cost of Goods Sold": {
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "Fixed Asset": {
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "Accumulated Depreciation": {
+      "subtype": "accumulated_depreciation",
+      "role_hint": null
+    },
+    "Depreciation": {
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "Expense Account": {
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "Income Account": {
+      "subtype": "income",
+      "role_hint": null
+    },
+    "Equity": {
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "Liability": {
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "Chargeable": {
+      "subtype": "chargeable",
+      "role_hint": null
+    },
+    "Stock Received But Not Billed": {
+      "subtype": "stock_received_not_billed",
+      "role_hint": null
+    },
+    "Asset Received But Not Billed": {
+      "subtype": "asset_received_not_billed",
+      "role_hint": null
+    },
+    "Service Received But Not Billed": {
+      "subtype": "service_received_not_billed",
+      "role_hint": null
+    },
+    "Stock Delivered But Not Billed": {
+      "subtype": "stock_delivered_not_billed",
+      "role_hint": null
+    },
+    "Stock Adjustment": {
+      "subtype": "stock_adjustment",
+      "role_hint": null
+    },
+    "Expenses Included In Valuation": {
+      "subtype": "valuation_expense",
+      "role_hint": null
+    },
+    "Expenses Included In Asset Valuation": {
+      "subtype": "asset_valuation_expense",
+      "role_hint": null
+    },
+    "Capital Work in Progress": {
+      "subtype": "capital_work_in_progress",
+      "role_hint": null
+    },
+    "Temporary": {
+      "subtype": "temporary",
+      "role_hint": null
+    },
+    "Round Off": {
+      "subtype": "round_off",
+      "role_hint": null
+    },
+    "Indirect Expense": {
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "Indirect Income": {
+      "subtype": "other_income",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 231,
+    "posting_accounts": 189,
+    "group_accounts": 42,
+    "by_root_type": {
+      "unclassified": 231
+    },
+    "by_subtype": {
+      "bank": 2,
+      "cash": 3,
+      "group": 42,
+      "payable": 5,
+      "receivable": 3,
+      "unspecified": 176
+    },
+    "unclassified_root_type": 231,
+    "duplicate_codes": [],
+    "missing_codes": 189,
+    "role_hints": {
+      "cash_bank": 5,
+      "payables": 5,
+      "receivables": 3
+    },
+    "unmapped_account_types": {},
+    "roots_without_root_type": [
+      "ATTIVO",
+      "CONTI DI RISULTATO",
+      "COSTI DELLA PRODUZIONE",
+      "IMPOSTE DELL'ESERCIZIO",
+      "PASSIVO",
+      "PROVENTI E ONERI FINANZIARI",
+      "PROVENTI E ONERI STRAORDINARI",
+      "VALORE DELLA PRODUZIONE"
+    ],
+    "top_level_groups": [
+      "ATTIVO",
+      "CONTI DI RISULTATO",
+      "COSTI DELLA PRODUZIONE",
+      "IMPOSTE DELL'ESERCIZIO",
+      "PASSIVO",
+      "PROVENTI E ONERI FINANZIARI",
+      "PROVENTI E ONERI STRAORDINARI",
+      "VALORE DELLA PRODUZIONE"
+    ],
+    "max_depth": 4,
+    "account_numbers_present": false
+  },
+  "accounts": [
+    {"source_id": "ATTIVO", "code": null, "name": "ATTIVO", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": null, "depth": 1, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI", "code": null, "name": "CREDITI COMMERCIALI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "ATTIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI / cambiali all'incasso", "code": null, "name": "cambiali all'incasso", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI / cambiali allo sconto", "code": null, "name": "cambiali allo sconto", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI / cambiali attive", "code": null, "name": "cambiali attive", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI / cambiali insolute", "code": null, "name": "cambiali insolute", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI / clienti c/spese anticipate", "code": null, "name": "clienti c/spese anticipate", "root_type": null, "subtype": "receivable", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI COMMERCIALI", "depth": 3, "role_hint": "receivables", "flags": ["missing_root_type"], "source": {"account_type": "Receivable"}},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI / crediti commerciali diversi", "code": null, "name": "crediti commerciali diversi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI / crediti da liquidare", "code": null, "name": "crediti da liquidare", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI / crediti insoluti", "code": null, "name": "crediti insoluti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI / crediti v/clienti", "code": null, "name": "crediti v/clienti", "root_type": null, "subtype": "receivable", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI COMMERCIALI", "depth": 3, "role_hint": "receivables", "flags": ["missing_root_type"], "source": {"account_type": "Receivable"}},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI / fatture da emettere", "code": null, "name": "fatture da emettere", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI / fondo rischi su crediti", "code": null, "name": "fondo rischi su crediti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI COMMERCIALI / fondo svalutazione crediti", "code": null, "name": "fondo svalutazione crediti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI DIVERSI", "code": null, "name": "CREDITI DIVERSI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "ATTIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI DIVERSI / IVA c/acconto", "code": null, "name": "IVA c/acconto", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI DIVERSI / IVA n/credito", "code": null, "name": "IVA n/credito", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI DIVERSI / crediti per IVA", "code": null, "name": "crediti per IVA", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI DIVERSI / crediti per cauzioni", "code": null, "name": "crediti per cauzioni", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI DIVERSI / crediti per imposte", "code": null, "name": "crediti per imposte", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI DIVERSI / crediti per ritenute subite", "code": null, "name": "crediti per ritenute subite", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI DIVERSI / crediti v/istituti previdenziali", "code": null, "name": "crediti v/istituti previdenziali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI DIVERSI / debitori diversi", "code": null, "name": "debitori diversi", "root_type": null, "subtype": "receivable", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI DIVERSI", "depth": 3, "role_hint": "receivables", "flags": ["missing_root_type"], "source": {"account_type": "Receivable"}},
+    {"source_id": "ATTIVO / CREDITI DIVERSI / imposte c/acconto", "code": null, "name": "imposte c/acconto", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / CREDITI DIVERSI / personale c/acconti", "code": null, "name": "personale c/acconti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / CREDITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE", "code": null, "name": "DISPONIBILITÀ LIQUIDE", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "ATTIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE / assegni", "code": null, "name": "assegni", "root_type": null, "subtype": "cash", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE", "depth": 3, "role_hint": "cash_bank", "flags": ["missing_root_type"], "source": {"account_type": "Cash"}},
+    {"source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE / banche c/c", "code": null, "name": "banche c/c", "root_type": null, "subtype": "bank", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE", "depth": 3, "role_hint": "cash_bank", "flags": ["missing_root_type"], "source": {"account_type": "Bank"}},
+    {"source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE / c/c postali", "code": null, "name": "c/c postali", "root_type": null, "subtype": "bank", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE", "depth": 3, "role_hint": "cash_bank", "flags": ["missing_root_type"], "source": {"account_type": "Bank"}},
+    {"source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE / denaro in cassa", "code": null, "name": "denaro in cassa", "root_type": null, "subtype": "cash", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE", "depth": 3, "role_hint": "cash_bank", "flags": ["missing_root_type"], "source": {"account_type": "Cash"}},
+    {"source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE / valori bollati", "code": null, "name": "valori bollati", "root_type": null, "subtype": "cash", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / DISPONIBILITÀ LIQUIDE", "depth": 3, "role_hint": "cash_bank", "flags": ["missing_root_type"], "source": {"account_type": "Cash"}},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI FINANZIARIE", "code": null, "name": "IMMOBILIZZAZIONI FINANZIARIE", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "ATTIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI FINANZIARIE / mutui attivi", "code": null, "name": "mutui attivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI FINANZIARIE", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI", "code": null, "name": "IMMOBILIZZAZIONI IMMATERIALI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "ATTIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI / avviamento", "code": null, "name": "avviamento", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI / costi di impianto", "code": null, "name": "costi di impianto", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI / fondo ammortamento avviamento", "code": null, "name": "fondo ammortamento avviamento", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI / fondo ammortamento costi di impianto", "code": null, "name": "fondo ammortamento costi di impianto", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI / fondo ammortamento software", "code": null, "name": "fondo ammortamento software", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI / software", "code": null, "name": "software", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI IMMATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "code": null, "name": "IMMOBILIZZAZIONI MATERIALI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "ATTIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / arredamento", "code": null, "name": "arredamento", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / attrezzature commerciali", "code": null, "name": "attrezzature commerciali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / automezzi", "code": null, "name": "automezzi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / fabbricati", "code": null, "name": "fabbricati", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / fondo ammortamento arredamento", "code": null, "name": "fondo ammortamento arredamento", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / fondo ammortamento attrezzature commerciali", "code": null, "name": "fondo ammortamento attrezzature commerciali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / fondo ammortamento automezzi", "code": null, "name": "fondo ammortamento automezzi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / fondo ammortamento fabbricati", "code": null, "name": "fondo ammortamento fabbricati", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / fondo ammortamento imballaggi durevoli", "code": null, "name": "fondo ammortamento imballaggi durevoli", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / fondo ammortamento impianti e macchinari", "code": null, "name": "fondo ammortamento impianti e macchinari", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / fondo ammortamento macchine d'ufficio", "code": null, "name": "fondo ammortamento macchine d'ufficio", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / fornitori immobilizzazioni c/acconti", "code": null, "name": "fornitori immobilizzazioni c/acconti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / imballaggi durevoli", "code": null, "name": "imballaggi durevoli", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / impianti e macchinari", "code": null, "name": "impianti e macchinari", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI / macchine d'ufficio", "code": null, "name": "macchine d'ufficio", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / RATEI E RISCONTI ATTIVI", "code": null, "name": "RATEI E RISCONTI ATTIVI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "ATTIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / RATEI E RISCONTI ATTIVI / ratei attivi", "code": null, "name": "ratei attivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / RATEI E RISCONTI ATTIVI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / RATEI E RISCONTI ATTIVI / risconti attivi", "code": null, "name": "risconti attivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / RATEI E RISCONTI ATTIVI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / RIMANENZE", "code": null, "name": "RIMANENZE", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "ATTIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / RIMANENZE / fornitori c/acconti", "code": null, "name": "fornitori c/acconti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / RIMANENZE", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / RIMANENZE / materie di consumo", "code": null, "name": "materie di consumo", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / RIMANENZE", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "ATTIVO / RIMANENZE / merci", "code": null, "name": "merci", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "ATTIVO / RIMANENZE", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "CONTI DI RISULTATO", "code": null, "name": "CONTI DI RISULTATO", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": null, "depth": 1, "flags": ["missing_root_type"]},
+    {"source_id": "CONTI DI RISULTATO / conto di risultato economico", "code": null, "name": "conto di risultato economico", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "CONTI DI RISULTATO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "CONTI DI RISULTATO / stato patrimoniale", "code": null, "name": "stato patrimoniale", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "CONTI DI RISULTATO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE", "code": null, "name": "COSTI DELLA PRODUZIONE", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": null, "depth": 1, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ACCANTONAMENTI", "code": null, "name": "ACCANTONAMENTI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "COSTI DELLA PRODUZIONE", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ACCANTONAMENTI / ACCANTONAMENTI PER RISCHI", "code": null, "name": "ACCANTONAMENTI PER RISCHI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "COSTI DELLA PRODUZIONE / ACCANTONAMENTI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ACCANTONAMENTI / ACCANTONAMENTI PER RISCHI / accantonamento per responsabilità civile", "code": null, "name": "accantonamento per responsabilità civile", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / ACCANTONAMENTI / ACCANTONAMENTI PER RISCHI", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ACCANTONAMENTI / ALTRI ACCANTONAMENTI", "code": null, "name": "ALTRI ACCANTONAMENTI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "COSTI DELLA PRODUZIONE / ACCANTONAMENTI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ACCANTONAMENTI / ALTRI ACCANTONAMENTI / accantonamento per manutenzioni programmate", "code": null, "name": "accantonamento per manutenzioni programmate", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / ACCANTONAMENTI / ALTRI ACCANTONAMENTI", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ACCANTONAMENTI / ALTRI ACCANTONAMENTI / accantonamento per spese future", "code": null, "name": "accantonamento per spese future", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / ACCANTONAMENTI / ALTRI ACCANTONAMENTI", "depth": 4, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI IMMATERIALI", "code": null, "name": "AMMORTAMENTI IMMOBILIZZAZIONI IMMATERIALI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "COSTI DELLA PRODUZIONE", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI IMMATERIALI / ammortamento avviamento", "code": null, "name": "ammortamento avviamento", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI IMMATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI IMMATERIALI / ammortamento costi di impianto", "code": null, "name": "ammortamento costi di impianto", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI IMMATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI IMMATERIALI / ammortamento software", "code": null, "name": "ammortamento software", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI IMMATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI", "code": null, "name": "AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "COSTI DELLA PRODUZIONE", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI / ammortamento arredamento", "code": null, "name": "ammortamento arredamento", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI / ammortamento attrezzature commerciali", "code": null, "name": "ammortamento attrezzature commerciali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI / ammortamento automezzi", "code": null, "name": "ammortamento automezzi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI / ammortamento fabbricati", "code": null, "name": "ammortamento fabbricati", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI / ammortamento imballaggi durevoli", "code": null, "name": "ammortamento imballaggi durevoli", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI / ammortamento impianti e macchinari", "code": null, "name": "ammortamento impianti e macchinari", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI / ammortamento macchine d'ufficio", "code": null, "name": "ammortamento macchine d'ufficio", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / AMMORTAMENTI IMMOBILIZZAZIONI MATERIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER GODIMENTO BENI DI TERZI", "code": null, "name": "COSTI PER GODIMENTO BENI DI TERZI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "COSTI DELLA PRODUZIONE", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER GODIMENTO BENI DI TERZI / canoni di leasing", "code": null, "name": "canoni di leasing", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER GODIMENTO BENI DI TERZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER GODIMENTO BENI DI TERZI / fitti passivi", "code": null, "name": "fitti passivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER GODIMENTO BENI DI TERZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER IL PERSONALE", "code": null, "name": "COSTI PER IL PERSONALE", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "COSTI DELLA PRODUZIONE", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER IL PERSONALE / TFRL", "code": null, "name": "TFRL", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER IL PERSONALE", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER IL PERSONALE / altri costi per il personale", "code": null, "name": "altri costi per il personale", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER IL PERSONALE", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER IL PERSONALE / oneri sociali", "code": null, "name": "oneri sociali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER IL PERSONALE", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER IL PERSONALE / salari e stipendi", "code": null, "name": "salari e stipendi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER IL PERSONALE", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "code": null, "name": "COSTI PER SERVIZI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "COSTI DELLA PRODUZIONE", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / costi di assicurazione", "code": null, "name": "costi di assicurazione", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / costi di consulenze", "code": null, "name": "costi di consulenze", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / costi di esercizio automezzi", "code": null, "name": "costi di esercizio automezzi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / costi di manutenzione e riparazione", "code": null, "name": "costi di manutenzione e riparazione", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / costi di pubblicità", "code": null, "name": "costi di pubblicità", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / costi di trasporto", "code": null, "name": "costi di trasporto", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / costi di vigilanza", "code": null, "name": "costi di vigilanza", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / costi per energia", "code": null, "name": "costi per energia", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / costi per i locali", "code": null, "name": "costi per i locali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / costi postali", "code": null, "name": "costi postali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / costi telefonici", "code": null, "name": "costi telefonici", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / provvigioni passive", "code": null, "name": "provvigioni passive", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI / spese di incasso", "code": null, "name": "spese di incasso", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTI PER SERVIZI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO", "code": null, "name": "COSTO DEL VENDUTO", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "COSTI DELLA PRODUZIONE", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO / materie di consumo c/acquisti", "code": null, "name": "materie di consumo c/acquisti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO / materie di consumo c/esistenze iniziali", "code": null, "name": "materie di consumo c/esistenze iniziali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO / materie di consumo c/rimanenze finali", "code": null, "name": "materie di consumo c/rimanenze finali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO / merci c/acquisti", "code": null, "name": "merci c/acquisti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO / merci c/apporti", "code": null, "name": "merci c/apporti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO / merci c/esistenze iniziali", "code": null, "name": "merci c/esistenze iniziali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO / merci c/rimanenze finali", "code": null, "name": "merci c/rimanenze finali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO / premi su acquisti", "code": null, "name": "premi su acquisti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO / resi su acquisti", "code": null, "name": "resi su acquisti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO / ribassi e abbuoni attivi", "code": null, "name": "ribassi e abbuoni attivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / COSTO DEL VENDUTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI", "code": null, "name": "ONERI DIVERSI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "COSTI DELLA PRODUZIONE", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI / arrotondamenti passivi", "code": null, "name": "arrotondamenti passivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI / insussistenze passive ordinarie diverse", "code": null, "name": "insussistenze passive ordinarie diverse", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI / minusvalenze ordinarie diverse", "code": null, "name": "minusvalenze ordinarie diverse", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI / oneri fiscali diversi", "code": null, "name": "oneri fiscali diversi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI / oneri vari", "code": null, "name": "oneri vari", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI / perdite su crediti", "code": null, "name": "perdite su crediti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI / sopravvenienze passive ordinarie diverse", "code": null, "name": "sopravvenienze passive ordinarie diverse", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / ONERI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / SVALUTAZIONI", "code": null, "name": "SVALUTAZIONI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "COSTI DELLA PRODUZIONE", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / SVALUTAZIONI / svalutazione crediti", "code": null, "name": "svalutazione crediti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / SVALUTAZIONI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / SVALUTAZIONI / svalutazioni immobilizzazioni immateriali", "code": null, "name": "svalutazioni immobilizzazioni immateriali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / SVALUTAZIONI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "COSTI DELLA PRODUZIONE / SVALUTAZIONI / svalutazioni immobilizzazioni materiali", "code": null, "name": "svalutazioni immobilizzazioni materiali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "COSTI DELLA PRODUZIONE / SVALUTAZIONI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "IMPOSTE DELL'ESERCIZIO", "code": null, "name": "IMPOSTE DELL'ESERCIZIO", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": null, "depth": 1, "flags": ["missing_root_type"]},
+    {"source_id": "IMPOSTE DELL'ESERCIZIO / imposte dell'esercizio", "code": null, "name": "imposte dell'esercizio", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "IMPOSTE DELL'ESERCIZIO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO", "code": null, "name": "PASSIVO", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": null, "depth": 1, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "code": null, "name": "CONTI DEI SISTEMI SUPPLEMENTARI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PASSIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / banche c/effetti scontati", "code": null, "name": "banche c/effetti scontati", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / beni di terzi", "code": null, "name": "beni di terzi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / clienti c/impegni", "code": null, "name": "clienti c/impegni", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / creditori c/leasing", "code": null, "name": "creditori c/leasing", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / creditori per avalli", "code": null, "name": "creditori per avalli", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / creditori per fideiussioni", "code": null, "name": "creditori per fideiussioni", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / depositanti beni", "code": null, "name": "depositanti beni", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / fornitori c/impegni", "code": null, "name": "fornitori c/impegni", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / impegni per beni in leasing", "code": null, "name": "impegni per beni in leasing", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / merci da consegnare", "code": null, "name": "merci da consegnare", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / merci da ricevere", "code": null, "name": "merci da ricevere", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / rischi per avalli", "code": null, "name": "rischi per avalli", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / rischi per effetti scontati", "code": null, "name": "rischi per effetti scontati", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI / rischi per fideiussioni", "code": null, "name": "rischi per fideiussioni", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI DEI SISTEMI SUPPLEMENTARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI TRANSITORI E DIVERSI", "code": null, "name": "CONTI TRANSITORI E DIVERSI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PASSIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI TRANSITORI E DIVERSI / IVA c/liquidazioni", "code": null, "name": "IVA c/liquidazioni", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI TRANSITORI E DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI TRANSITORI E DIVERSI / banca ... c/c", "code": null, "name": "banca ... c/c", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI TRANSITORI E DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI TRANSITORI E DIVERSI / bilancio di apertura", "code": null, "name": "bilancio di apertura", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI TRANSITORI E DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI TRANSITORI E DIVERSI / bilancio di chiusura", "code": null, "name": "bilancio di chiusura", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI TRANSITORI E DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / CONTI TRANSITORI E DIVERSI / istituti previdenziali", "code": null, "name": "istituti previdenziali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / CONTI TRANSITORI E DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI COMMERCIALI", "code": null, "name": "DEBITI COMMERCIALI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PASSIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI COMMERCIALI / cambiali passive", "code": null, "name": "cambiali passive", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI COMMERCIALI / clienti c/acconti", "code": null, "name": "clienti c/acconti", "root_type": null, "subtype": "payable", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI COMMERCIALI", "depth": 3, "role_hint": "payables", "flags": ["missing_root_type"], "source": {"account_type": "Payable"}},
+    {"source_id": "PASSIVO / DEBITI COMMERCIALI / debiti da liquidare", "code": null, "name": "debiti da liquidare", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI COMMERCIALI / debiti v/fornitori", "code": null, "name": "debiti v/fornitori", "root_type": null, "subtype": "payable", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI COMMERCIALI", "depth": 3, "role_hint": "payables", "flags": ["missing_root_type"], "source": {"account_type": "Payable"}},
+    {"source_id": "PASSIVO / DEBITI COMMERCIALI / fatture da ricevere", "code": null, "name": "fatture da ricevere", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI COMMERCIALI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI DIVERSI", "code": null, "name": "DEBITI DIVERSI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PASSIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI DIVERSI / IVA n/debito", "code": null, "name": "IVA n/debito", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI DIVERSI / clienti c/cessione", "code": null, "name": "clienti c/cessione", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI DIVERSI / creditori diversi", "code": null, "name": "creditori diversi", "root_type": null, "subtype": "payable", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI DIVERSI", "depth": 3, "role_hint": "payables", "flags": ["missing_root_type"], "source": {"account_type": "Payable"}},
+    {"source_id": "PASSIVO / DEBITI DIVERSI / debiti per cauzioni", "code": null, "name": "debiti per cauzioni", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI DIVERSI / debiti per imposte", "code": null, "name": "debiti per imposte", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI DIVERSI / debiti per ritenute da versare", "code": null, "name": "debiti per ritenute da versare", "root_type": null, "subtype": "payable", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI DIVERSI", "depth": 3, "role_hint": "payables", "flags": ["missing_root_type"], "source": {"account_type": "Payable"}},
+    {"source_id": "PASSIVO / DEBITI DIVERSI / debiti v/istituti previdenziali", "code": null, "name": "debiti v/istituti previdenziali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI DIVERSI / erario c/IVA", "code": null, "name": "erario c/IVA", "root_type": null, "subtype": "payable", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI DIVERSI", "depth": 3, "role_hint": "payables", "flags": ["missing_root_type"], "source": {"account_type": "Payable"}},
+    {"source_id": "PASSIVO / DEBITI DIVERSI / personale c/liquidazioni", "code": null, "name": "personale c/liquidazioni", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI DIVERSI / personale c/retribuzioni", "code": null, "name": "personale c/retribuzioni", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI FINANZIARI", "code": null, "name": "DEBITI FINANZIARI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PASSIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI FINANZIARI / banche c/RIBA all'incasso", "code": null, "name": "banche c/RIBA all'incasso", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI FINANZIARI / banche c/anticipi su fatture", "code": null, "name": "banche c/anticipi su fatture", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI FINANZIARI / banche c/c passivi", "code": null, "name": "banche c/c passivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI FINANZIARI / banche c/cambiali all'incasso", "code": null, "name": "banche c/cambiali all'incasso", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI FINANZIARI / banche c/sovvenzioni", "code": null, "name": "banche c/sovvenzioni", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI FINANZIARI / debiti v/altri finanziatori", "code": null, "name": "debiti v/altri finanziatori", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / DEBITI FINANZIARI / mutui passivi", "code": null, "name": "mutui passivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / DEBITI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / FONDI PER RISCHI E ONERI", "code": null, "name": "FONDI PER RISCHI E ONERI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PASSIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / FONDI PER RISCHI E ONERI / fondo manutenzioni programmate", "code": null, "name": "fondo manutenzioni programmate", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / FONDI PER RISCHI E ONERI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / FONDI PER RISCHI E ONERI / fondo per imposte", "code": null, "name": "fondo per imposte", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / FONDI PER RISCHI E ONERI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / FONDI PER RISCHI E ONERI / fondo responsabilità civile", "code": null, "name": "fondo responsabilità civile", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / FONDI PER RISCHI E ONERI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / FONDI PER RISCHI E ONERI / fondo spese future", "code": null, "name": "fondo spese future", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / FONDI PER RISCHI E ONERI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / PATRIMONIO NETTO", "code": null, "name": "PATRIMONIO NETTO", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PASSIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / PATRIMONIO NETTO / patrimonio netto", "code": null, "name": "patrimonio netto", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / PATRIMONIO NETTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / PATRIMONIO NETTO / perdita d'esercizio", "code": null, "name": "perdita d'esercizio", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / PATRIMONIO NETTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / PATRIMONIO NETTO / prelevamenti extra gestione", "code": null, "name": "prelevamenti extra gestione", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / PATRIMONIO NETTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / PATRIMONIO NETTO / titolare c/ritenute subite", "code": null, "name": "titolare c/ritenute subite", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / PATRIMONIO NETTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / PATRIMONIO NETTO / utile d'esercizio", "code": null, "name": "utile d'esercizio", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / PATRIMONIO NETTO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / RATEI E RISCONTI PASSIVI", "code": null, "name": "RATEI E RISCONTI PASSIVI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PASSIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / RATEI E RISCONTI PASSIVI / ratei passivi", "code": null, "name": "ratei passivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / RATEI E RISCONTI PASSIVI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / RATEI E RISCONTI PASSIVI / risconti passivi", "code": null, "name": "risconti passivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / RATEI E RISCONTI PASSIVI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / TRATTAMENTO FINE RAPPORTO DI LAVORO", "code": null, "name": "TRATTAMENTO FINE RAPPORTO DI LAVORO", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PASSIVO", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PASSIVO / TRATTAMENTO FINE RAPPORTO DI LAVORO / debiti per TFRL", "code": null, "name": "debiti per TFRL", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PASSIVO / TRATTAMENTO FINE RAPPORTO DI LAVORO", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI FINANZIARI", "code": null, "name": "PROVENTI E ONERI FINANZIARI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": null, "depth": 1, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI FINANZIARI / ONERI FINANZIARI", "code": null, "name": "ONERI FINANZIARI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PROVENTI E ONERI FINANZIARI", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI FINANZIARI / ONERI FINANZIARI / interessi passivi bancari", "code": null, "name": "interessi passivi bancari", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI FINANZIARI / ONERI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI FINANZIARI / ONERI FINANZIARI / interessi passivi su mutui", "code": null, "name": "interessi passivi su mutui", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI FINANZIARI / ONERI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI FINANZIARI / ONERI FINANZIARI / interessi passivi v/fornitori", "code": null, "name": "interessi passivi v/fornitori", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI FINANZIARI / ONERI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI FINANZIARI / ONERI FINANZIARI / oneri finanziari diversi", "code": null, "name": "oneri finanziari diversi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI FINANZIARI / ONERI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI FINANZIARI / ONERI FINANZIARI / sconti passivi bancari", "code": null, "name": "sconti passivi bancari", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI FINANZIARI / ONERI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI FINANZIARI / PROVENTI FINANZIARI", "code": null, "name": "PROVENTI FINANZIARI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PROVENTI E ONERI FINANZIARI", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI FINANZIARI / PROVENTI FINANZIARI / interessi attivi bancari", "code": null, "name": "interessi attivi bancari", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI FINANZIARI / PROVENTI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI FINANZIARI / PROVENTI FINANZIARI / interessi attivi postali", "code": null, "name": "interessi attivi postali", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI FINANZIARI / PROVENTI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI FINANZIARI / PROVENTI FINANZIARI / interessi attivi v/clienti", "code": null, "name": "interessi attivi v/clienti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI FINANZIARI / PROVENTI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI FINANZIARI / PROVENTI FINANZIARI / proventi finanziari diversi", "code": null, "name": "proventi finanziari diversi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI FINANZIARI / PROVENTI FINANZIARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI STRAORDINARI", "code": null, "name": "PROVENTI E ONERI STRAORDINARI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": null, "depth": 1, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI STRAORDINARI / ONERI STRAORDINARI", "code": null, "name": "ONERI STRAORDINARI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PROVENTI E ONERI STRAORDINARI", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI STRAORDINARI / ONERI STRAORDINARI / imposte esercizi precedenti", "code": null, "name": "imposte esercizi precedenti", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI STRAORDINARI / ONERI STRAORDINARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI STRAORDINARI / ONERI STRAORDINARI / insussistenze passive straordinarie", "code": null, "name": "insussistenze passive straordinarie", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI STRAORDINARI / ONERI STRAORDINARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI STRAORDINARI / ONERI STRAORDINARI / minusvalenze straordinarie", "code": null, "name": "minusvalenze straordinarie", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI STRAORDINARI / ONERI STRAORDINARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI STRAORDINARI / ONERI STRAORDINARI / sopravvenienze passive straordinarie", "code": null, "name": "sopravvenienze passive straordinarie", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI STRAORDINARI / ONERI STRAORDINARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI STRAORDINARI / PROVENTI STRAORDINARI", "code": null, "name": "PROVENTI STRAORDINARI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "PROVENTI E ONERI STRAORDINARI", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI STRAORDINARI / PROVENTI STRAORDINARI / insussistenze attive straordinarie", "code": null, "name": "insussistenze attive straordinarie", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI STRAORDINARI / PROVENTI STRAORDINARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI STRAORDINARI / PROVENTI STRAORDINARI / plusvalenze straordinarie", "code": null, "name": "plusvalenze straordinarie", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI STRAORDINARI / PROVENTI STRAORDINARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "PROVENTI E ONERI STRAORDINARI / PROVENTI STRAORDINARI / sopravvenienze attive straordinarie", "code": null, "name": "sopravvenienze attive straordinarie", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "PROVENTI E ONERI STRAORDINARI / PROVENTI STRAORDINARI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE", "code": null, "name": "VALORE DELLA PRODUZIONE", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": null, "depth": 1, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI", "code": null, "name": "RICAVI E PROVENTI DIVERSI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "VALORE DELLA PRODUZIONE", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI / arrotondamenti attivi", "code": null, "name": "arrotondamenti attivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI / fitti attivi", "code": null, "name": "fitti attivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI / insussistenze attive ordinarie diverse", "code": null, "name": "insussistenze attive ordinarie diverse", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI / plusvalenze ordinarie diverse", "code": null, "name": "plusvalenze ordinarie diverse", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI / proventi vari", "code": null, "name": "proventi vari", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI / sopravvenienze attive ordinarie diverse", "code": null, "name": "sopravvenienze attive ordinarie diverse", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "VALORE DELLA PRODUZIONE / RICAVI E PROVENTI DIVERSI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / VENDITE E PRESTAZIONI", "code": null, "name": "VENDITE E PRESTAZIONI", "root_type": null, "subtype": "group", "normal_balance": null, "is_group": true, "parent_source_id": "VALORE DELLA PRODUZIONE", "depth": 2, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / VENDITE E PRESTAZIONI / merci c/vendite", "code": null, "name": "merci c/vendite", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "VALORE DELLA PRODUZIONE / VENDITE E PRESTAZIONI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / VENDITE E PRESTAZIONI / premi su vendite", "code": null, "name": "premi su vendite", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "VALORE DELLA PRODUZIONE / VENDITE E PRESTAZIONI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / VENDITE E PRESTAZIONI / resi su vendite", "code": null, "name": "resi su vendite", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "VALORE DELLA PRODUZIONE / VENDITE E PRESTAZIONI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / VENDITE E PRESTAZIONI / ribassi e abbuoni passivi", "code": null, "name": "ribassi e abbuoni passivi", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "VALORE DELLA PRODUZIONE / VENDITE E PRESTAZIONI", "depth": 3, "flags": ["missing_root_type"]},
+    {"source_id": "VALORE DELLA PRODUZIONE / VENDITE E PRESTAZIONI / rimborsi spese di vendita", "code": null, "name": "rimborsi spese di vendita", "root_type": null, "subtype": "unspecified", "normal_balance": null, "is_group": false, "parent_source_id": "VALORE DELLA PRODUZIONE / VENDITE E PRESTAZIONI", "depth": 3, "flags": ["missing_root_type"]}
+  ]
+}

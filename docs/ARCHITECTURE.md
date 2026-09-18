@@ -1,8 +1,16 @@
 # Architecture
 
-## 0.6.0-preview status
+## Stable delivery boundary adopted 18 September 2026
 
-The 0.6.0-preview UI remains PHP server-rendered with MeekroDB and the existing router/bootstrap/posting funnel. Compiled Tailwind CSS is shipped; no Node runtime or DataTables dependency is deployed. GET lists use page/per_page/q/sort/dir, fixed sort allow-lists and SQL LIMIT/OFFSET. The /tables JSON endpoint remains. Migration chain additions are 029-031; immutable correction previews share the accounting planner.
+The [1.0 release checklist](ROADMAP.md#current-delivery-contract-first-stable-10) controls current sequencing. English-first core accounting, required AR/AP, manual tax and optional basic Purchasing/Inventory form the supported target. Browser installation and operator-initiated updates with automatic matched backups/recovery are required before stable. Urdu/RTL is 1.1 and Arabic/RTL is 1.2; regional connectors and production retail retain independent later gates.
+
+Installation authority belongs to a host-controlled operator, not an owner of one company. Setup and update entry points use private state, ownership proof, CSRF and locking before accessing the normal application. Existing CLI entry points retain CLI guards and share internal migration/preflight services. Signed update metadata uses RSA-SHA256 over exact payload bytes and a separately configured trusted publisher public key; package-provided keys cannot establish trust. Stable versus preview channel is bound to the semantic version. Publisher private keys never enter packages.
+
+Update recovery is installation-wide: block/drain writes, preserve matched code/configuration/OAuth keys and the complete schema/data/views/triggers/receipts, then verify a new version or restore the matched backup. Recovery state must remain independent of newly installed application code. Interrupted infrastructure resumes safely when available; maintenance remains active until successful verification. MySQL DDL is not a rollbackable application transaction. A requirements-based hosting claim and representative restricted-host recovery evidence are separate from ordinary VPS operation. These contracts do not by themselves close implementation, independent review or production gates.
+
+## 1.0.0 status
+
+The published 1.0.0 UI remains PHP server-rendered with MeekroDB and the existing router/bootstrap/posting funnel. Compiled Tailwind CSS is shipped; no Node runtime or DataTables dependency is deployed. GET lists use page/per_page/q/sort/dir, fixed sort allow-lists and SQL LIMIT/OFFSET. The /tables JSON endpoint remains. Migration chain additions are 029-031; immutable correction previews share the accounting planner. 1.0.0 adds the browser installer and the signed update/maintenance path described in [Installer](INSTALLER.md) and [Development](DEVELOPMENT.md).
 
 ## Accounting starter: published 0.4.0-preview (16 September 2026)
 

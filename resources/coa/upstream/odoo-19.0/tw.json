@@ -1,0 +1,495 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "12a95ab89a916ac7ea0ae3439fde877604216802d5ef34318c24943c37a242c0",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/tw",
+  "country_code": "TW",
+  "country_name": "Taiwan",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Taiwan - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_tw' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo PS",
+    "module": "l10n_tw",
+    "module_name": "Taiwan - Accounting",
+    "module_version": "1.0",
+    "contributing_modules": [
+      "l10n_tw"
+    ],
+    "template_code": "tw",
+    "template_chain": [
+      "tw"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_tw/data/template/account.account-tw.csv",
+        "sha256": "9e91ced10019f19b31834fb2a5e9fcddf1a258cc2446c81e0ae788b09817f2ea",
+        "rows": 135
+      }
+    ],
+    "python_files": [
+      "addons/l10n_tw/models/template_tw.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "4",
+    "anglo_saxon_accounting": true,
+    "account_code_prefixes": {
+      "bank": "1100",
+      "cash": "1101",
+      "transfer": "1103"
+    },
+    "default_sale_tax": "l10n_tw_tax_sale_5_tr_vat",
+    "default_purchase_tax": "l10n_tw_tax_purchase_5_vat_pc_uid",
+    "tax_calculation_rounding_method": "round_globally"
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "l10n_tw_account_1156",
+        "code": "1156",
+        "name": "Accounts receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "l10n_tw_account_2171",
+        "code": "2171",
+        "name": "Accounts payable",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "l10n_tw_account_4111",
+        "code": "4111",
+        "name": "Sales revenue - main product",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "l10n_tw_account_5601",
+        "code": "5601",
+        "name": "Other operating costs",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "l10n_tw_account_1315",
+        "code": "1315",
+        "name": "Raw materials",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "l10n_tw_account_1157",
+        "code": "1157",
+        "name": "Accounts receivable for Point of Sale (POS)",
+        "resolved": true
+      }
+    ],
+    "bank_suspense": [
+      {
+        "source_field": "account_journal_suspense_account_id",
+        "source_id": "l10n_tw_account_1102",
+        "code": "1102",
+        "name": "Bank suspense",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "l10n_tw_account_7171",
+        "code": "7171",
+        "name": "Foreign exchange gain",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "l10n_tw_account_7541",
+        "code": "7541",
+        "name": "Foreign exchange loss",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "l10n_tw_account_7181",
+        "code": "7181",
+        "name": "Cash difference gain",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "l10n_tw_account_7561",
+        "code": "7561",
+        "name": "Cash difference loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "l10n_tw_account_7191",
+        "code": "7191",
+        "name": "Purchase discounts",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "l10n_tw_account_4821",
+        "code": "4821",
+        "name": "Sales discounts",
+        "resolved": true
+      }
+    ],
+    "production_wip": [
+      {
+        "source_field": "account_production_wip_account_id",
+        "source_id": "l10n_tw_account_1314",
+        "code": "1314",
+        "name": "Work in progress",
+        "resolved": true
+      }
+    ],
+    "production_overhead": [
+      {
+        "source_field": "account_production_wip_overhead_account_id",
+        "source_id": "l10n_tw_account_5601",
+        "code": "5601",
+        "name": "Other operating costs",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "l10n_tw_account_1411",
+        "code": "1411",
+        "name": "Prepayments",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "l10n_tw_account_2141",
+        "code": "2141",
+        "name": "Contract liability",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 135,
+    "posting_accounts": 135,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 45,
+      "equity": 15,
+      "expense": 29,
+      "income": 19,
+      "liability": 27
+    },
+    "by_subtype": {
+      "cash_bank": 2,
+      "current_asset": 22,
+      "current_liability": 13,
+      "depreciation": 2,
+      "direct_cost": 3,
+      "equity": 14,
+      "expense": 24,
+      "fixed_asset": 1,
+      "income": 8,
+      "non_current_asset": 12,
+      "non_current_liability": 8,
+      "other_income": 11,
+      "payable": 6,
+      "prepayment": 1,
+      "receivable": 7,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 2,
+      "expense": 1,
+      "income": 1,
+      "payables": 6,
+      "receivables": 7
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "zh_TW"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": [
+    {"source_id": "l10n_tw_account_1100", "code": "1100", "name": "Bank deposits", "translations": {"zh_TW": "銀行存款"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "cash_bank", "source": {"account_type": "asset_cash", "non_trade": false}},
+    {"source_id": "l10n_tw_account_1101", "code": "1101", "name": "Cash and cash equivalents", "translations": {"zh_TW": "現金及約當現金"}, "root_type": "asset", "subtype": "cash_bank", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "cash_bank", "source": {"account_type": "asset_cash", "non_trade": false}},
+    {"source_id": "l10n_tw_account_1102", "code": "1102", "name": "Bank suspense", "translations": {"zh_TW": "銀行暫記帳戶"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_tw_account_1103", "code": "1103", "name": "Liquidity transfer", "translations": {"zh_TW": "流動性移轉"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current", "non_trade": false}},
+    {"source_id": "l10n_tw_account_1111", "code": "1111", "name": "Financial assets at fair value through profit or loss - current", "translations": {"zh_TW": "透過損益按公允價值衡量之金融資產－流動"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1113", "code": "1113", "name": "Financial assets at fair value through other comprehensive income - current", "translations": {"zh_TW": "透過其他綜合損益按公允價值衡量之金融資產－流動"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1121", "code": "1121", "name": "Hedging derivative financial assets - current", "translations": {"zh_TW": "避險之衍生金融資產－流動"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1131", "code": "1131", "name": "Financial assets at amortized cost - current", "translations": {"zh_TW": "按攤銷後成本衡量之金融資產－流動"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1151", "code": "1151", "name": "Notes receivable", "translations": {"zh_TW": "應收票據"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1156", "code": "1156", "name": "Accounts receivable", "translations": {"zh_TW": "應收帳款"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1157", "code": "1157", "name": "Accounts receivable for Point of Sale (POS)", "translations": {"zh_TW": "門市應收款"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1158", "code": "1158", "name": "Allowance for doubtful accounts", "translations": {"zh_TW": "備抵呆帳"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1171", "code": "1171", "name": "Other receivables", "translations": {"zh_TW": "其他應收款"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"], "non_trade": true}},
+    {"source_id": "l10n_tw_account_1221", "code": "1221", "name": "Current income tax asset", "translations": {"zh_TW": "本期所得稅資產"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1310", "code": "1310", "name": "Inventory", "translations": {"zh_TW": "存貨"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1311", "code": "1311", "name": "Finished products", "translations": {"zh_TW": "製成品"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1312", "code": "1312", "name": "By-products", "translations": {"zh_TW": "副產品"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1313", "code": "1313", "name": "Semi-finished products", "translations": {"zh_TW": "半成品"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1314", "code": "1314", "name": "Work in progress", "translations": {"zh_TW": "在製品"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1315", "code": "1315", "name": "Raw materials", "translations": {"zh_TW": "原料"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false, "extra": {"account_stock_variation_id": "l10n_tw_account_5101"}}},
+    {"source_id": "l10n_tw_account_1316", "code": "1316", "name": "Goods in transit", "translations": {"zh_TW": "在途存貨"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1318", "code": "1318", "name": "Uninvoiced shipments", "translations": {"zh_TW": "已出貨未開票存貨"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1319", "code": "1319", "name": "Allowance for inventory impairment", "translations": {"zh_TW": "備抵存貨跌價"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1361", "code": "1361", "name": "Biological assets - current", "translations": {"zh_TW": "生物資產－流動"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1411", "code": "1411", "name": "Prepayments", "translations": {"zh_TW": "預付款項"}, "root_type": "asset", "subtype": "prepayment", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_prepayments", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1461", "code": "1461", "name": "Non-current assets for sale", "translations": {"zh_TW": "待出售非流動資產"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1470", "code": "1470", "name": "Other current assets", "translations": {"zh_TW": "其他流動資產"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1481", "code": "1481", "name": "Input VAT", "translations": {"zh_TW": "進項稅額"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1482", "code": "1482", "name": "Creditable Withholding Tax (WHT)", "translations": {"zh_TW": "尚未抵繳之扣繳稅款"}, "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1485", "code": "1485", "name": "Withholding (WHT) receivable", "translations": {"zh_TW": "代扣稅額"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"], "non_trade": true}},
+    {"source_id": "l10n_tw_account_1486", "code": "1486", "name": "Value added tax (VAT) receivable", "translations": {"zh_TW": "應收退稅款"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"], "non_trade": true}},
+    {"source_id": "l10n_tw_account_1487", "code": "1487", "name": "Other tax receivables", "translations": {"zh_TW": "其他應收稅款"}, "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "tag_ids": ["account.account_tag_operating"], "non_trade": true}},
+    {"source_id": "l10n_tw_account_1511", "code": "1511", "name": "Financial assets at fair value through profit or loss - non-current", "translations": {"zh_TW": "透過損益按公允價值衡量之金融資產－非流動"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1513", "code": "1513", "name": "Financial assets at fair value through other comprehensive income - non-current", "translations": {"zh_TW": "透過其他綜合損益按公允價值衡量之金融資產－非流動"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1521", "code": "1521", "name": "Hedging derivative financial assets - non-current", "translations": {"zh_TW": "避險之衍生金融資產－非流動"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1531", "code": "1531", "name": "Financial assets at amortized cost - non-current", "translations": {"zh_TW": "按攤銷後成本衡量之金融資產－非流動"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1543", "code": "1543", "name": "Financial assets measured at cost - non-current", "translations": {"zh_TW": "按成本衡量之金融資產－非流動"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1551", "code": "1551", "name": "Investments accounted for using equity method", "translations": {"zh_TW": "採用權益法之投資"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1601", "code": "1601", "name": "Property, plant and equipment", "translations": {"zh_TW": "不動產、廠房及設備"}, "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1609", "code": "1609", "name": "Accumulated depreciation", "translations": {"zh_TW": "累計折舊"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "non_trade": false}},
+    {"source_id": "l10n_tw_account_1651", "code": "1651", "name": "Investment property", "translations": {"zh_TW": "投資性不動產"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1701", "code": "1701", "name": "Intangible assets", "translations": {"zh_TW": "無形資產"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1761", "code": "1761", "name": "Biological assets—non-current", "translations": {"zh_TW": "生物資產－非流動"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1861", "code": "1861", "name": "Deferred income tax asset", "translations": {"zh_TW": "遞延所得稅資產"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_1881", "code": "1881", "name": "Other non-current assets", "translations": {"zh_TW": "其他非流動資產"}, "root_type": "asset", "subtype": "non_current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_non_current", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2101", "code": "2101", "name": "Short-term borrowings", "translations": {"zh_TW": "短期借款"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2111", "code": "2111", "name": "Financial liabilities at fair value through profit or loss - current", "translations": {"zh_TW": "透過損益按公允價值衡量之金融負債－流動"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2121", "code": "2121", "name": "Short-term notes and bills payable", "translations": {"zh_TW": "應付短期票券"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2122", "code": "2122", "name": "Hedging derivative financial liabilities - current", "translations": {"zh_TW": "避險之衍生金融負債－流動"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2131", "code": "2131", "name": "Financial liabilities at amortized cost - current", "translations": {"zh_TW": "按攤銷後成本衡量之金融負債－流動"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2141", "code": "2141", "name": "Contract liability", "translations": {"zh_TW": "合約負債"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2151", "code": "2151", "name": "Notes payable", "translations": {"zh_TW": "應付票據"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2171", "code": "2171", "name": "Accounts payable", "translations": {"zh_TW": "應付帳款"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2211", "code": "2211", "name": "Other payable", "translations": {"zh_TW": "其他應付款"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["account.account_tag_operating"], "non_trade": true}},
+    {"source_id": "l10n_tw_account_2221", "code": "2221", "name": "Current income tax liability", "translations": {"zh_TW": "本期所得稅負債"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2261", "code": "2261", "name": "Provisions - current", "translations": {"zh_TW": "負債準備－流動"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2271", "code": "2271", "name": "Liabilities directly associated with non-current assets held for sale", "translations": {"zh_TW": "與待出售非流動資產直接相關之負債"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2281", "code": "2281", "name": "Output VAT", "translations": {"zh_TW": "銷項稅額"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2282", "code": "2282", "name": "Receipts Under Custody", "translations": {"zh_TW": "代收款"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2284", "code": "2284", "name": "GBRT Tax Payable", "translations": {"zh_TW": "應付特種營業稅"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2285", "code": "2285", "name": "Value added tax (VAT) payable", "translations": {"zh_TW": "應付營業稅"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["account.account_tag_operating"], "non_trade": true}},
+    {"source_id": "l10n_tw_account_2286", "code": "2286", "name": "Withholding (WHT) payable", "translations": {"zh_TW": "應付代扣稅款"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["account.account_tag_operating"], "non_trade": true}},
+    {"source_id": "l10n_tw_account_2287", "code": "2287", "name": "Other tax payables", "translations": {"zh_TW": "其他應付稅款"}, "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "tag_ids": ["account.account_tag_operating"], "non_trade": true}},
+    {"source_id": "l10n_tw_account_2381", "code": "2381", "name": "Other current liabilities", "translations": {"zh_TW": "其他流動負債"}, "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2501", "code": "2501", "name": "Bonds payable", "translations": {"zh_TW": "應付公司債"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2511", "code": "2511", "name": "Financial liabilities at fair value through profit or loss - non-current", "translations": {"zh_TW": "透過損益按公允價值衡量之金融負債－非流動"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2522", "code": "2522", "name": "Hedging derivative financial liabilities - non-current", "translations": {"zh_TW": "避險之衍生金融負債－非流動"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2531", "code": "2531", "name": "Financial liabilities at amortized cost - non-current", "translations": {"zh_TW": "按攤銷後成本衡量之金融負債－非流動"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2571", "code": "2571", "name": "Long-term borrowings", "translations": {"zh_TW": "長期借款"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2641", "code": "2641", "name": "Deferred income tax liability", "translations": {"zh_TW": "遞延所得稅負債"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2661", "code": "2661", "name": "Provisions - non-current", "translations": {"zh_TW": "負債準備－非流動"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_2681", "code": "2681", "name": "Other non-current Liabilities", "translations": {"zh_TW": "其他非流動負債"}, "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "liability_non_current", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_3100", "code": "3100", "name": "Share capital", "translations": {"zh_TW": "股本"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_3111", "code": "3111", "name": "Common stock", "translations": {"zh_TW": "普通股股本"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_3121", "code": "3121", "name": "Preferred stock", "translations": {"zh_TW": "特別股股本"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_3200", "code": "3200", "name": "Capital surplus", "translations": {"zh_TW": "資本公積"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_3300", "code": "3300", "name": "Unappropriated retained earnings (or accumulated deficit)", "translations": {"zh_TW": "未分配盈餘（或待彌補虧損）"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_3311", "code": "3311", "name": "Legal reserve", "translations": {"zh_TW": "法定盈餘公積"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "l10n_tw_account_3321", "code": "3321", "name": "Special reserve", "translations": {"zh_TW": "特別盈餘公積"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "l10n_tw_account_3400", "code": "3400", "name": "Other equity", "translations": {"zh_TW": "其他權益"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_3500", "code": "3500", "name": "Treasury stock", "translations": {"zh_TW": "庫藏股票"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_financing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_3611", "code": "3611", "name": "Non-controlling interests", "translations": {"zh_TW": "非控制權益"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_3700", "code": "3700", "name": "Net income (loss) for the current period", "translations": {"zh_TW": "本期損益"}, "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity_unaffected", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_4111", "code": "4111", "name": "Sales revenue - main product", "translations": {"zh_TW": "主要產品線銷貨收入"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "l10n_tw_account_4171", "code": "4171", "name": "Service revenue", "translations": {"zh_TW": "勞務收入"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "l10n_tw_account_4211", "code": "4211", "name": "Royalty revenue", "translations": {"zh_TW": "權利金收入"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "l10n_tw_account_4221", "code": "4221", "name": "Licensing fee revenue", "translations": {"zh_TW": "授權費收入"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "l10n_tw_account_4311", "code": "4311", "name": "Franchise fee revenue", "translations": {"zh_TW": "加盟金收入"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "l10n_tw_account_4711", "code": "4711", "name": "Sales returns", "translations": {"zh_TW": "銷貨退回"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "l10n_tw_account_4811", "code": "4811", "name": "Sales allowances", "translations": {"zh_TW": "銷貨折讓"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "l10n_tw_account_4821", "code": "4821", "name": "Sales discounts", "translations": {"zh_TW": "銷貨折扣"}, "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income", "non_trade": false}},
+    {"source_id": "l10n_tw_account_5101", "code": "5101", "name": "Cost of goods sold", "translations": {"zh_TW": "銷貨成本"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "non_trade": false}},
+    {"source_id": "l10n_tw_account_5501", "code": "5501", "name": "Cost of services rendered", "translations": {"zh_TW": "勞務成本"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_direct_cost", "non_trade": false}},
+    {"source_id": "l10n_tw_account_5601", "code": "5601", "name": "Other operating costs", "translations": {"zh_TW": "其他營業成本"}, "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense_direct_cost", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6511", "code": "6511", "name": "Salaries expense", "translations": {"zh_TW": "薪資費用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6521", "code": "6521", "name": "Labor and health insurance expense", "translations": {"zh_TW": "勞健保費用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6531", "code": "6531", "name": "Pension expense", "translations": {"zh_TW": "退休金費用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6541", "code": "6541", "name": "Employee benefits expense", "translations": {"zh_TW": "職工福利費用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6611", "code": "6611", "name": "Rent expense", "translations": {"zh_TW": "租金費用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6621", "code": "6621", "name": "Utilities expense", "translations": {"zh_TW": "水電瓦斯費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6631", "code": "6631", "name": "Repair and maintenance expense", "translations": {"zh_TW": "修繕費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6641", "code": "6641", "name": "Insurance expense", "translations": {"zh_TW": "保險費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6651", "code": "6651", "name": "Depreciation expense", "translations": {"zh_TW": "折舊費用"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_6661", "code": "6661", "name": "Amortization expense", "translations": {"zh_TW": "攤銷費用"}, "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense_depreciation", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_6711", "code": "6711", "name": "Travel expense", "translations": {"zh_TW": "旅費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6721", "code": "6721", "name": "Transportation expense", "translations": {"zh_TW": "運費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6731", "code": "6731", "name": "Postage & communication expense", "translations": {"zh_TW": "郵電費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6741", "code": "6741", "name": "Office supplies expense", "translations": {"zh_TW": "文具用品費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6751", "code": "6751", "name": "Advertising & promotion expense", "translations": {"zh_TW": "廣告費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6761", "code": "6761", "name": "Professional service fees", "translations": {"zh_TW": "專業服務費"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6771", "code": "6771", "name": "Taxes & dues", "translations": {"zh_TW": "稅捐"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_6781", "code": "6781", "name": "Miscellaneous expense", "translations": {"zh_TW": "雜項費用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_7100", "code": "7100", "name": "Other income", "translations": {"zh_TW": "其他收入"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7111", "code": "7111", "name": "Interest income", "translations": {"zh_TW": "利息收入"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7121", "code": "7121", "name": "Dividend income", "translations": {"zh_TW": "股利收入"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7131", "code": "7131", "name": "Rental income", "translations": {"zh_TW": "租金收入"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7141", "code": "7141", "name": "Royalty income", "translations": {"zh_TW": "權利金收入"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7151", "code": "7151", "name": "Investment income (equity method)", "translations": {"zh_TW": "採用權益法認列之投資收益"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7161", "code": "7161", "name": "Gain on disposal of property, plant & equipment", "translations": {"zh_TW": "處分不動產、廠房及設備利益"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7171", "code": "7171", "name": "Foreign exchange gain", "translations": {"zh_TW": "兌換利益"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7181", "code": "7181", "name": "Cash difference gain", "translations": {"zh_TW": "現金差益"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7191", "code": "7191", "name": "Purchase discounts", "translations": {"zh_TW": "進貨折扣"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7200", "code": "7200", "name": "Other non-operating income", "translations": {"zh_TW": "其他營業外收"}, "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "income_other", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7500", "code": "7500", "name": "Other non-operating expenses", "translations": {"zh_TW": "其他營業外及支出"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7511", "code": "7511", "name": "Interest expense (Finance Costs)", "translations": {"zh_TW": "利息費用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7521", "code": "7521", "name": "Investment loss (Equity Method)", "translations": {"zh_TW": "採用權益法認列之投資損失"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_7531", "code": "7531", "name": "Loss on disposal of property, plant & equipment", "translations": {"zh_TW": "處分不動產、廠房及設備損失"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_investing"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7541", "code": "7541", "name": "Foreign exchange loss", "translations": {"zh_TW": "兌換損失"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7551", "code": "7551", "name": "Loss from disasters", "translations": {"zh_TW": "災害損失"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_7561", "code": "7561", "name": "Cash difference loss", "translations": {"zh_TW": "現金差損"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "tag_ids": ["account.account_tag_operating"], "non_trade": false}},
+    {"source_id": "l10n_tw_account_8101", "code": "8101", "name": "Income tax expense (benefit)", "translations": {"zh_TW": "所得稅費用"}, "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense", "non_trade": false}},
+    {"source_id": "l10n_tw_account_9111", "code": "9111", "name": "Unrealized gain/loss on FVOCI equity investments", "translations": {"zh_TW": "透過其他綜合損益按公允價值衡量之權益工具投資未實現評價損益"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "l10n_tw_account_9131", "code": "9131", "name": "Revaluation surplus", "translations": {"zh_TW": "資產重估增值"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "l10n_tw_account_9211", "code": "9211", "name": "Exchange differences on translation of foreign operations", "translations": {"zh_TW": "國外營運機構財務報表換算之兌換差額"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "non_trade": false}},
+    {"source_id": "l10n_tw_account_9221", "code": "9221", "name": "Unrealized gain/loss on FVOCI debt investments", "translations": {"zh_TW": "透過其他綜合損益按公允價值衡量之債務工具投資未實現評價損益"}, "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "equity", "non_trade": false}}
+  ]
+}

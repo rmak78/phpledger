@@ -1,0 +1,311 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "4c9e5a6580b739c7f7d5cfe7a0aa3d1735f3d7498d235464f1e0757f8c4de201",
+  "accounts_identical_to": "odoo-19.0/syscebnl",
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/ci_syscebnl",
+  "country_code": "CI",
+  "country_name": "Côte d’Ivoire",
+  "country_basis": "derived from template code",
+  "name": "SYSCEBNL for Associations",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_ci' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_ci",
+    "module_name": "Ivory Coast - Accounting",
+    "module_version": null,
+    "contributing_modules": [
+      "l10n_ci",
+      "l10n_syscohada"
+    ],
+    "template_code": "ci_syscebnl",
+    "template_chain": [
+      "syscebnl",
+      "ci_syscebnl"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_syscohada/data/template/account.account-syscebnl.csv",
+        "sha256": "006efc56ee8f027531edfa9e3ae11617a3cb705597a4ef53ca256c21d03c9d2f",
+        "rows": 452
+      }
+    ],
+    "python_files": [
+      "addons/l10n_ci/models/template_ci_syscebnl.py",
+      "addons/l10n_syscohada/models/template_syscebnl.py"
+    ],
+    "non_literal_python": [
+      "account.account:_get_ci_syscebnl_account_account (parses another template's CSV)",
+      "res.company:_get_ci_syscebnl_res_company"
+    ]
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "521",
+      "cash": "571",
+      "transfer": "585"
+    },
+    "default_sale_tax": null,
+    "default_purchase_tax": null,
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "syscebnl_409",
+        "code": "409",
+        "name": "Trade accounts receivable",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "syscebnl_419",
+        "code": "419",
+        "name": "Members, Customer-users creditors",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "syscebnl_7051",
+        "code": "7051",
+        "name": "Sales of goods",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "syscebnl_601",
+        "code": "601",
+        "name": "Purchases of goods and services related to the activity",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "syscebnl_412",
+        "code": "412",
+        "name": "Customers-users",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "syscebnl_776",
+        "code": "776",
+        "name": "Financial exchange gains",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "syscebnl_676",
+        "code": "676",
+        "name": "Financial exchange losses",
+        "resolved": true
+      }
+    ],
+    "cash_difference_gain": [
+      {
+        "source_field": "default_cash_difference_income_account_id",
+        "source_id": "syscebnl_758",
+        "code": "758",
+        "name": "Miscellaneous income",
+        "resolved": true
+      }
+    ],
+    "cash_difference_loss": [
+      {
+        "source_field": "default_cash_difference_expense_account_id",
+        "source_id": "syscebnl_658",
+        "code": "658",
+        "name": "Sundry expenses",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "syscebnl_773",
+        "code": "773",
+        "name": "Discounts received",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "syscebnl_601",
+        "code": "601",
+        "name": "Purchases of goods and services related to the activity",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 452,
+    "posting_accounts": 452,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 232,
+      "equity": 27,
+      "expense": 82,
+      "income": 61,
+      "liability": 35,
+      "unclassified": 15
+    },
+    "by_subtype": {
+      "cash_bank": 25,
+      "current_asset": 91,
+      "current_liability": 18,
+      "direct_cost": 3,
+      "equity": 26,
+      "expense": 79,
+      "fixed_asset": 70,
+      "income": 5,
+      "non_current_asset": 39,
+      "non_current_liability": 12,
+      "off_balance": 15,
+      "other_income": 56,
+      "payable": 5,
+      "receivable": 7,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 15,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 25,
+      "expense": 1,
+      "income": 1,
+      "payables": 5,
+      "receivables": 7
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "fr"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": []
+}

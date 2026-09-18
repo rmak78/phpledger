@@ -79,11 +79,15 @@ test('missing autoload and invalid local configuration produce safe installer fa
     $includes = $root . '/www/phpledger/includes';
     mkdir($install, 0700, true);
     mkdir($includes . '/functions', 0700, true);
+    mkdir($root . '/www/phpledger/public', 0700, true);
     mkdir($root . '/vendor', 0700);
     $files = [
         $install . '/preflight.php' => dirname(__DIR__) . '/www/phpledger/install/preflight.php',
         $includes . '/bootstrap.php' => dirname(__DIR__) . '/www/phpledger/includes/bootstrap.php',
         $includes . '/functions/runtime_functions.php' => dirname(__DIR__) . '/www/phpledger/includes/functions/runtime_functions.php',
+        $includes . '/functions/install_functions.php' => dirname(__DIR__) . '/www/phpledger/includes/functions/install_functions.php',
+        $includes . '/functions/installation_state_functions.php' => dirname(__DIR__) . '/www/phpledger/includes/functions/installation_state_functions.php',
+        $includes . '/functions/update_functions.php' => dirname(__DIR__) . '/www/phpledger/includes/functions/update_functions.php',
     ];
     foreach ($files as $target => $source) {
         copy($source, $target);
@@ -105,13 +109,18 @@ test('missing autoload and invalid local configuration produce safe installer fa
         $thrown = installer_process($install . '/preflight.php');
         assert_same(1, $thrown['status']);
         assert_true(!str_contains($thrown['output'], $secret));
+        unlink($includes . '/functions/install_functions.php');
+        $missingService = installer_process($install . '/preflight.php');
+        assert_same(1, $missingService['status']);
+        assert_true(str_contains($missingService['output'], 'Installation service files are missing'));
+        assert_true(!str_contains($missingService['output'], 'Warning:'));
     } finally {
         foreach ([...array_keys($files), $root . '/vendor/autoload.php', $includes . '/config.local.php'] as $file) {
             if (is_file($file)) {
                 unlink($file);
             }
         }
-        foreach ([$install, $includes . '/functions', $includes, $root . '/www/phpledger', $root . '/www', $root . '/vendor', $root] as $directory) {
+        foreach ([$install, $includes . '/functions', $includes, $root . '/www/phpledger/public', $root . '/www/phpledger', $root . '/www', $root . '/vendor', $root] as $directory) {
             rmdir($directory);
         }
     }

@@ -28,7 +28,7 @@ function pl_web_text(array $source, string $key, string $default = ''): string
 /** The application version is a shared presentation value, not a user-controlled setting. */
 function pl_app_version(): string
 {
-    return '0.6.0-preview';
+    return '1.0.0';
 }
 
 function pl_web_id(array $source, string $key, int $default = 0): int
@@ -178,7 +178,7 @@ function pl_list_filters(array $input, string $screen): array
         $report=$input['return_report'];
         if (!in_array($report,['profit-loss','balance-sheet','trial-balance'],true)) { throw new DomainException('Choose a valid return report.'); }
         $to=$input['return_to']??$input['as_of']??gmdate('Y-m-d');
-        $from=$input['return_from']??$input['from']??'';
+        $from=$input['return_from']??($report==='profit-loss'?($input['from']??''):'');
         $preset=$input['return_preset']??'custom';
         if (!is_string($to) || !is_string($from) || !in_array($preset,['month','last_month','quarter','year','custom'],true)) { throw new DomainException('Choose valid return report dates.'); }
         $filters+=['return_report'=>$report,'return_to'=>pl_ledger_date($to),'return_from'=>$from===''?'':pl_ledger_date($from),'return_preset'=>$preset];
@@ -393,6 +393,94 @@ function pl_web_account_return(array $input): array
     return $filters;
 }
 
+/** Preserve the ageing report's accounting date and direction through document actions. */
+function pl_web_ageing_return(array $input, string $path = ''): array
+{
+    $source=$input['return_ageing']??[];
+    if ($source===[] && ($input['return_report']??'')==='ageing' && in_array($path,['/ar','/ap'],true)) {
+        $source=['direction'=>$path==='/ar'?'receivable':'payable','as_of'=>pl_web_text($input,'as_of')];
+    }
+    if (!is_array($source)) { throw new DomainException('Invalid ageing return filters.'); }
+    if ($source===[]) { return []; }
+    $direction=$source['direction']??'';
+    if (!in_array($direction,['receivable','payable'],true)) { throw new DomainException('Choose a valid ageing return direction.'); }
+    return ['direction'=>$direction,'as_of'=>pl_ledger_date(pl_web_text($source,'as_of'))];
+}
+
+/** A workflow keeps structured, validated report filters, never a caller's redirect URL. */
+function pl_workflow_url(string $path, array $query = [], ?array $input = null): string
+{
+    $allowed = ['/transactions','/transactions/new','/transactions/edit','/transactions/detail','/transactions/save','/transactions/post','/transactions/reverse',
+        '/general-journals','/general-journals/new','/general-journals/edit','/general-journals/detail','/general-journals/save','/general-journals/post','/general-journals/reverse',
+        '/journals/detail','/ar','/ap','/purchasing'];
+    if (!in_array($path, $allowed, true)) { throw new DomainException('Unsupported workflow destination.'); }
+    $input ??= ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' ? array_replace($_GET, $_POST) : $_GET;
+    $context = pl_web_account_return($input);
+    if ($context !== []) { $query['return_account'] = $context; }
+    $ageing = pl_web_ageing_return($input, $path);
+    if ($ageing !== []) { $query['return_ageing'] = $ageing; }
+    return pl_url($path, $query);
+}
+
+/** Field hints for a rejected editor; the existing services remain authoritative. */
+function pl_web_editor_errors(array $input, string $screen): array
+{
+    if (!in_array($screen, ['transaction','journal','ar','purchase'], true)) { throw new LogicException('Unknown document editor.'); }
+    $errors = [];
+    $check = static function (string $field, callable $validate) use (&$errors): void {
+        try { $validate(); } catch (DomainException $error) { $errors[$field] = $error->getMessage(); }
+    };
+    $check('date', static fn () => pl_ledger_date(pl_web_text($input, 'date')));
+    $textFields = match ($screen) {
+        'transaction' => ['counterparty'=>['Paid to / received from',160,true], 'reference'=>['Reference',120,false], 'memo'=>['Memo',500,false]],
+        'journal' => ['description'=>['Journal description',500,true], 'reference'=>['Reference',120,false]],
+        default => ['reference'=>['Reference',120,false]],
+    };
+    foreach ($textFields as $field => [$label,$limit,$required]) {
+        $check($field, static fn () => pl_ledger_text($input[$field] ?? '', $label, $limit, $required));
+    }
+    $positive = static function (string $value): string {
+        $amount = pl_amount($value);
+        if (bccomp($amount, '0', 4) <= 0) { throw new DomainException('Enter an amount greater than zero.'); }
+        return $amount;
+    };
+    if ($screen === 'transaction') {
+        $check('amount', static fn () => $positive(pl_web_text($input,'amount')));
+        foreach (['money_account_id'=>'cash or bank account','category_account_id'=>'category'] as $field=>$label) {
+            if (pl_web_id($input,$field) < 1) { $errors[$field] = 'Choose a '.$label.'.'; }
+        }
+        return $errors;
+    }
+    if ($screen !== 'journal') {
+        if (pl_web_id($input,'party_id') < 1) { $errors['party_id'] = 'Choose a customer or supplier.'; }
+        if (!preg_match('/^[A-Z]{3}$/D',strtoupper(pl_web_text($input,'currency')))) { $errors['currency']='Enter a three-letter currency code.'; }
+        if ($screen === 'ar') {
+            $check('due_date', static fn () => pl_ledger_date(pl_web_text($input,'due_date')));
+            if (!isset($errors['date']) && !isset($errors['due_date']) && pl_web_text($input,'due_date') < pl_web_text($input,'date')) { $errors['due_date']='The due date cannot precede the document date.'; }
+        }
+    }
+    $rows = is_array($input['lines'] ?? null) ? array_values($input['lines']) : [];
+    foreach ($rows ?: [[]] as $index=>$row) {
+        if (!is_array($row)) { continue; }
+        $prefix='lines.'.$index.'.';
+        if ($screen === 'journal') {
+            $debit=pl_web_text($row,'debit'); $credit=pl_web_text($row,'credit');
+            if (pl_web_id($row,'account_id')===0 && $debit==='' && $credit==='' && pl_web_text($row,'description')==='') { continue; }
+            if (pl_web_id($row,'account_id') < 1) { $errors[$prefix.'account_id']='Choose an account for this line.'; }
+            foreach (['debit'=>$debit,'credit'=>$credit] as $field=>$value) { $check($prefix.$field, static fn () => pl_amount($value === '' ? '0' : $value)); }
+            if (!isset($errors[$prefix.'debit']) && !isset($errors[$prefix.'credit'])) {
+                $hasDebit=bccomp($debit ?: '0','0',4)>0; $hasCredit=bccomp($credit ?: '0','0',4)>0;
+                if ($hasDebit === $hasCredit) { $errors[$prefix.'debit']='Enter one positive debit or credit, not both.'; }
+            }
+        } else {
+            $check($prefix.'description', static fn () => pl_ledger_text($row['description'] ?? '', 'Line description', $screen === 'purchase' ? 300 : 500, $screen !== 'purchase'));
+            foreach (['quantity','unit_price'] as $field) { $check($prefix.$field, static fn () => $positive(pl_web_text($row,$field))); }
+            if ($screen === 'purchase' && pl_web_id($row,'product_id') < 1) { $errors[$prefix.'product_id']='Choose a product for this line.'; }
+        }
+    }
+    return $errors;
+}
+
 function pl_render(string $view, array $data = []): never
 {
     $allowed = ['home','ar','ap','parties','inventory','purchasing','tax','opening-conversion','login', 'companies', 'sample-chooser', 'onboarding', 'setup-review', 'transactions', 'editor',
@@ -401,7 +489,8 @@ function pl_render(string $view, array $data = []): never
     if (!in_array($view, $allowed, true)) {
         throw new LogicException('Unknown template.');
     }
-    $accountReturn=in_array($view,['journal','general-detail','transactions'],true)?pl_web_account_return($_GET):[];
+    $accountReturn=in_array($view,['journal','general-detail','general-editor','transactions','editor','ar','ap','settlement','purchasing'],true)?pl_web_account_return($_GET):[];
+    $ageingReturn=in_array($view,['journal','ar','ap','settlement','purchasing'],true)?pl_web_ageing_return($_GET,'/'.$view):[];
     extract($data, EXTR_SKIP);
     $title = $data['title'] ?? 'PHP Ledger';
     $company = $data['company'] ?? null;

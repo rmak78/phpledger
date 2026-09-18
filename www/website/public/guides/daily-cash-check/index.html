@@ -16,22 +16,23 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="dns-prefetch" href="https://github.com">
 <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=1870e2e375">
+<link rel="stylesheet" href="/assets/site.css?v=43848de1a2">
 <meta property="og:site_name" content="PHP Ledger">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
 <meta property="og:title" content="Follow a day's bank movement to its source | PHP Ledger">
 <meta property="og:description" content="A worked synthetic account-statement example: opening balance, one posted receipt, closing balance and the source behind the figure.">
 <meta property="og:url" content="https://phpledger.com/guides/daily-cash-check/">
-<meta property="og:image" content="https://phpledger.com/assets/og/home.png">
-<meta property="og:image:width" content="1280">
-<meta property="og:image:height" content="640">
-<meta property="og:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
+<meta property="og:image" content="https://phpledger.com/assets/og/workspace-0.6.0-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PHP Ledger 0.6.0-preview Home using an isolated synthetic sample company.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Follow a day's bank movement to its source | PHP Ledger">
 <meta name="twitter:description" content="A worked synthetic account-statement example: opening balance, one posted receipt, closing balance and the source behind the figure.">
-<meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
-<meta name="twitter:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
+<meta name="twitter:image" content="https://phpledger.com/assets/og/workspace-0.6.0-preview.png">
+<meta name="twitter:image:alt" content="PHP Ledger 0.6.0-preview Home using an isolated synthetic sample company.">
+<meta name="twitter:site" content="@LedgerPhp94831">
 <link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
 <script type="application/ld+json">
 {
@@ -67,7 +68,12 @@
         ]
       },
       "sameAs": [
-        "https://github.com/rmak78/phpledger"
+        "https://github.com/rmak78/phpledger",
+        "https://www.linkedin.com/company/phpledger/",
+        "https://x.com/LedgerPhp94831",
+        "https://www.facebook.com/profile.php?id=61594129753409",
+        "https://www.instagram.com/phpledgerapp/",
+        "https://www.youtube.com/@PHPLedger"
       ]
     },
     {
@@ -76,7 +82,7 @@
       "url": "https://phpledger.com/",
       "name": "PHP Ledger",
       "alternateName": "phpledger",
-      "description": "PHP Ledger is open-source, self-hosted double-entry accounting software with core invoices, bills and payments, optional purchasing and inventory, and a manually configured tax engine. Built on PHP 8.2+ and MySQL 8.4, it is a development preview for synthetic evaluation.",
+      "description": "PHP Ledger is open-source, self-hosted double-entry accounting software with core invoices, bills and payments, optional purchasing and inventory, and a manually configured tax engine. Built on PHP 8.2+ and MySQL 8.4, 1.0.0 is the first stable release with browser installation and signed automatic updates; independent accounting and security review remain post-release commitments.",
       "inLanguage": "en",
       "publisher": {
         "@id": "https://phpledger.com/#organization"
@@ -92,8 +98,8 @@
       "isPartOf": {
         "@id": "https://phpledger.com/#website"
       },
-      "datePublished": "2026-09-16",
-      "dateModified": "2026-09-16",
+      "datePublished": "2026-09-18",
+      "dateModified": "2026-09-18",
       "author": {
         "@id": "https://phpledger.com/#maintainer"
       },
@@ -102,7 +108,7 @@
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
-        "url": "https://phpledger.com/assets/og/home.png"
+        "url": "https://phpledger.com/assets/og/workspace-0.6.0-preview.png"
       },
       "breadcrumb": {
         "@id": "https://phpledger.com/guides/daily-cash-check/#breadcrumb"
@@ -173,14 +179,14 @@
 </header>
 <main id="main">
 <article class="container article section">
-<p><a href="/guides/">Reporting walkthroughs</a> · Local 0.2.1 candidate</p>
+<p><a href="/guides/">Reporting walkthroughs</a> · 0.6.0-preview interface</p>
 <h1>Follow a day's bank movement to its source</h1>
 <p class="lead">Start with the balance, check the movement, then open the receipt that created it.</p><p class="small">PHP Ledger guidance: use this page with the matching release notes and evaluate the workflow using synthetic records.</p>
-<p>This walkthrough uses Cedar Studio, the fictional service-agency pack prepared for 0.2.1-preview. The public download and demo remain 0.1.5-preview while the next release is being verified. These figures are synthetic USD examples from the local candidate.</p>
+<p>This walkthrough uses Cedar Studio, the fictional professional-services sample. The screenshots were recaptured in 0.6.0-preview using a fresh local sample. The figures are synthetic USD examples; record identifiers vary between samples.</p>
 <nav class="page-toc" aria-label="On this page"><p><strong>On this page</strong></p><ol><li><a href="#1-open-the-right-company-and-day">1. Open the right company and day</a></li><li><a href="#2-reconcile-the-movement">2. Reconcile the movement</a></li><li><a href="#3-open-the-source">3. Open the source</a></li><li><a href="#4-try-a-small-change">4. Try a small change</a></li></ol></nav>
 <h2 id="1-open-the-right-company-and-day">1. Open the right company and day</h2>
-<p>In the candidate demo, choose <strong>Service agency — Cedar Studio</strong> and USD. Open the sample guide, then <strong>Check that day's bank movements</strong>. The account is <strong>1000 · Cash and bank</strong>, used as the primary bank in this pack. Both the From and Through dates are <strong>15 January 2026</strong>.</p>
-<figure class="capture"><a href="/assets/screens/guides/daily-bank.png"><img src="/assets/screens/guides/daily-bank.png" alt="Cedar Studio account statement for 15 January 2026: opening 40,825, debit receipt 2,700 and closing 43,525, with a View transaction source link." width="1280" height="1245" loading="lazy" decoding="async"></a><figcaption>Actual local candidate capture. Open the image to inspect the full statement; record numbers vary between private samples.</figcaption></figure>
+<p>In the sample chooser, choose <strong>Professional services / agency — Cedar Studio</strong> and USD. Open the sample guide, then <strong>Check that day's bank movements</strong>. The account is <strong>1000 · Cash and bank</strong>, used as the primary bank in this pack. Both the From and Through dates are <strong>15 January 2026</strong>.</p>
+<figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Follow a bank movement" data-full="/assets/screens/v0.6.0-preview/daily-bank.webp"><span class="capture-frame"><img src="/assets/screens/v0.6.0-preview/daily-bank-720.webp" srcset="/assets/screens/v0.6.0-preview/daily-bank-720.webp 720w, /assets/screens/v0.6.0-preview/daily-bank.webp 1366w" sizes="(max-width: 900px) 100vw, 780px" width="1366" height="900" alt="Cedar Studio: the 15 January 2026 statement moves from USD 40,825.00 to USD 43,525.00 through a USD 2,700.00 receipt." loading="lazy"></span></button><figcaption>Cedar Studio: the 15 January 2026 statement moves from USD 40,825.00 to USD 43,525.00 through a USD 2,700.00 receipt. · 0.6.0-preview · Synthetic data</figcaption></figure>
 <h2 id="2-reconcile-the-movement">2. Reconcile the movement</h2>
 <p>The opening bank balance is <strong>40,825.00</strong>. The receipt adds a <strong>2,700.00 debit</strong>, and there are no credits that day. The closing bank balance is therefore <strong>43,525.00</strong>.</p>
 <p><strong>40,825.00 + 2,700.00 − 0.00 = 43,525.00.</strong> For this asset account a debit increases the balance. Opening and closing balances use the complete posted ledger, even when the table is searched or paginated.</p>
@@ -206,6 +212,17 @@
       <div class="footer-col"><h2>Project</h2><a href="/about/">About</a><a href="https://github.com/rmak78/phpledger">GitHub</a><a href="https://github.com/rmak78/phpledger/discussions">Discussions</a><a href="/news/">News</a><a href="/support/">Support</a><a href="/credits/">Credits</a><a href="/privacy/">Privacy</a><a href="/terms/">Demo use and terms</a></div>
       <div class="footer-col"><h2>Contact</h2><a href="mailto:rmak78@gmail.com">rmak78@gmail.com</a><a href="https://pk.linkedin.com/in/rmak78">Rana Mansoor Akbar Khan on LinkedIn</a><address>Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan</address></div>
     </div>
+    <nav class="footer-social" aria-label="PHP Ledger on social networks">
+      <p>Follow the project</p>
+      <ul>
+        <li><a href="https://github.com/rmak78/phpledger"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"/></svg><span>GitHub</span></a></li>
+        <li><a href="https://www.linkedin.com/company/phpledger/"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11v5"/><path d="M8 8v.01"/><path d="M12 16v-5"/><path d="M16 16v-3a2 2 0 1 0 -4 0"/><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10"/></svg><span>LinkedIn</span></a></li>
+        <li><a href="https://x.com/LedgerPhp94831"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16l-4.267 0"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg><span>X</span></a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61594129753409"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"/></svg><span>Facebook</span></a></li>
+        <li><a href="https://www.instagram.com/phpledgerapp/"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8"/><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M16.5 7.5v.01"/></svg><span>Instagram</span></a></li>
+        <li><a href="https://www.youtube.com/@PHPLedger"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8"/><path d="M10 9l5 3l-5 3l0 -6"/></svg><span>YouTube</span></a></li>
+      </ul>
+    </nav>
     <div class="supporters">
       <p>Companies supporting the open-source initiative</p>
       <ul>
@@ -217,7 +234,7 @@
     </div>
     <nav class="trust-links" aria-label="Project policies"><a href="https://github.com/rmak78/phpledger/blob/master/LICENSE">Licence</a><a href="https://github.com/rmak78/phpledger/blob/master/SECURITY.md">Security contact</a><a href="https://github.com/rmak78/phpledger/blob/master/CODE_OF_CONDUCT.md">Code of conduct</a><a href="/privacy/">Privacy and data boundaries</a></nav>
     <p class="footer-legal">New project-owned code uses AGPL-3.0-or-later; a commercial licence is available. The pre-adoption 0.1.0 through 0.1.5 previews retain MIT; dependencies, fonts and the archived 2015 application keep their own terms. Photographs are illustrative and are not customer endorsements. Screens show synthetic sample data from the development preview.</p>
-    <p class="footer-meta">Maintained by <a href="/about/" rel="author">Rana Mansoor Akbar Khan</a>, PHP Ledger project maintainer. Last reviewed <time datetime="2026-09-16">2026-09-16</time>.</p>
+    <p class="footer-meta">Maintained by <a href="/about/" rel="author">Rana Mansoor Akbar Khan</a>, PHP Ledger project maintainer. Last reviewed <time datetime="2026-09-18">2026-09-18</time>.</p>
   </div>
 </footer>
 <dialog id="screen-dialog" aria-labelledby="screen-dialog-title"><div class="dialog-heading"><h2 id="screen-dialog-title">Product screen</h2><button type="button" class="dialog-close" aria-label="Close enlarged screen"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>Close</button></div><p id="screen-dialog-note">Development preview with synthetic sample data</p><p class="dialog-hint" id="dialog-hint">Scroll the image to explore it. With a keyboard, focus the image area and use the arrow keys.</p><div class="dialog-image-wrap" tabindex="0" role="region" aria-label="Enlarged product image" aria-describedby="dialog-hint"><img id="dialog-image" width="1440" height="1200" alt=""></div></dialog>

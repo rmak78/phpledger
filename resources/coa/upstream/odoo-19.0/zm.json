@@ -1,0 +1,440 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "855a6fc6e76a455ec7e657f5a647900b8c1c3622b979d3025471a758e388ac21",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/zm",
+  "country_code": "ZM",
+  "country_name": "Zambia",
+  "country_basis": "template res.company account_fiscal_country_id",
+  "name": "Zambia - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_zm_account' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_zm_account",
+    "module_name": "Zambia - Accounting",
+    "module_version": "1.0.0",
+    "contributing_modules": [
+      "l10n_zm_account"
+    ],
+    "template_code": "zm",
+    "template_chain": [
+      "zm"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_zm_account/data/template/account.account-zm.csv",
+        "sha256": "a355b630c6cef7568e3eaee9a5c30fdfdea280e35328ff3c0ef6db73361d638a",
+        "rows": 89
+      },
+      {
+        "path": "addons/l10n_zm_account/data/template/account.group-zm.csv",
+        "sha256": "d40faf5ff0528b294a75aa847dc8f4caa4cb77cd4102c2591e7fa73240d23e8b",
+        "rows": 47
+      }
+    ],
+    "python_files": [
+      "addons/l10n_zm_account/models/template_zm.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": 7,
+    "anglo_saxon_accounting": true,
+    "account_code_prefixes": {
+      "bank": "840000",
+      "cash": "840000",
+      "transfer": "840000"
+    },
+    "default_sale_tax": "zm_tax_sale_16",
+    "default_purchase_tax": "zm_tax_purchase_16",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "zm_account_8000000",
+        "code": "8",
+        "name": "Customers",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "zm_account_9000000",
+        "code": "9",
+        "name": "Suppliers",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "zm_account_1000000",
+        "code": "1",
+        "name": "Sales",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "zm_account_3800000",
+        "code": "38",
+        "name": "General Expenses",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "zm_account_8100000",
+        "code": "81",
+        "name": "Customes (POS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "zm_account_4210000",
+        "code": "421",
+        "name": "Foreign Exchange Loss",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "zm_account_4210000",
+        "code": "421",
+        "name": "Foreign Exchange Loss",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "zm_account_2700000",
+        "code": "27",
+        "name": "Discount Received for Cash",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "zm_account_3550000",
+        "code": "355",
+        "name": "Discount Allowed for Cash",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "zm_account_8900000",
+        "code": "89",
+        "name": "Deferred Expenses",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "zm_account_9900000",
+        "code": "99",
+        "name": "Deferred Income",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 89,
+    "posting_accounts": 89,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 28,
+      "equity": 1,
+      "expense": 40,
+      "income": 6,
+      "liability": 14
+    },
+    "by_subtype": {
+      "current_asset": 6,
+      "current_liability": 8,
+      "direct_cost": 8,
+      "expense": 32,
+      "fixed_asset": 19,
+      "income": 1,
+      "non_current_liability": 2,
+      "other_income": 5,
+      "payable": 4,
+      "receivable": 3,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 4,
+      "receivables": 3
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [],
+    "groups": 47
+  },
+  "groups": [
+    {"source_id": "zm_group_1", "code_prefix_start": "1", "code_prefix_end": "1", "name": "Sales income", "parent_source_id": null, "path": ["Sales income"]},
+    {"source_id": "zm_group_2", "code_prefix_start": "2", "code_prefix_end": "2", "name": "Sales extra incomes and fees", "parent_source_id": null, "path": ["Sales extra incomes and fees"]},
+    {"source_id": "zm_group_3", "code_prefix_start": "3", "code_prefix_end": "3", "name": "Accounting Fees", "parent_source_id": null, "path": ["Accounting Fees"]},
+    {"source_id": "zm_group_20", "code_prefix_start": "20", "code_prefix_end": "20", "name": "Cost of Sales", "parent_source_id": "zm_group_2", "path": ["Sales extra incomes and fees", "Cost of Sales"]},
+    {"source_id": "zm_group_27", "code_prefix_start": "27", "code_prefix_end": "27", "name": "Discount and Interests", "parent_source_id": "zm_group_2", "path": ["Sales extra incomes and fees", "Discount and Interests"]},
+    {"source_id": "zm_group_28", "code_prefix_start": "28", "code_prefix_end": "28", "name": "Non Current Assets Income", "parent_source_id": "zm_group_2", "path": ["Sales extra incomes and fees", "Non Current Assets Income"]},
+    {"source_id": "zm_group_29", "code_prefix_start": "29", "code_prefix_end": "29", "name": "Sundry Income", "parent_source_id": "zm_group_2", "path": ["Sales extra incomes and fees", "Sundry Income"]},
+    {"source_id": "zm_group_30", "code_prefix_start": "30", "code_prefix_end": "30", "name": "Accounting, Advertising and Promotion Costs", "parent_source_id": "zm_group_3", "path": ["Accounting Fees", "Accounting, Advertising and Promotion Costs"]},
+    {"source_id": "zm_group_31", "code_prefix_start": "31", "code_prefix_end": "31", "name": "Bad Debts", "parent_source_id": "zm_group_3", "path": ["Accounting Fees", "Bad Debts"]},
+    {"source_id": "zm_group_32", "code_prefix_start": "32", "code_prefix_end": "32", "name": "Bank Charges and Cleaning", "parent_source_id": "zm_group_3", "path": ["Accounting Fees", "Bank Charges and Cleaning"]},
+    {"source_id": "zm_group_33", "code_prefix_start": "33", "code_prefix_end": "33", "name": "Computer Expenses and Consulting Fees", "parent_source_id": "zm_group_3", "path": ["Accounting Fees", "Computer Expenses and Consulting Fees"]},
+    {"source_id": "zm_group_34", "code_prefix_start": "34", "code_prefix_end": "34", "name": "Courier, Postage and Depreciation", "parent_source_id": "zm_group_3", "path": ["Accounting Fees", "Courier, Postage and Depreciation"]},
+    {"source_id": "zm_group_35", "code_prefix_start": "35", "code_prefix_end": "35", "name": "Cash Discount", "parent_source_id": "zm_group_3", "path": ["Accounting Fees", "Cash Discount"]},
+    {"source_id": "zm_group_36", "code_prefix_start": "36", "code_prefix_end": "36", "name": "Donations and Electricity", "parent_source_id": "zm_group_3", "path": ["Accounting Fees", "Donations and Electricity"]},
+    {"source_id": "zm_group_37", "code_prefix_start": "37", "code_prefix_end": "37", "name": "Enternainement and Finance Expenses", "parent_source_id": "zm_group_3", "path": ["Accounting Fees", "Enternainement and Finance Expenses"]},
+    {"source_id": "zm_group_38", "code_prefix_start": "38", "code_prefix_end": "38", "name": "General Expenses and Insurance", "parent_source_id": "zm_group_3", "path": ["Accounting Fees", "General Expenses and Insurance"]},
+    {"source_id": "zm_group_39", "code_prefix_start": "39", "code_prefix_end": "39", "name": "Interests and Leasing Charges", "parent_source_id": "zm_group_3", "path": ["Accounting Fees", "Interests and Leasing Charges"]},
+    {"source_id": "zm_group_40", "code_prefix_start": "40", "code_prefix_end": "40", "name": "Legal Fees and Levies", "parent_source_id": null, "path": ["Legal Fees and Levies"]},
+    {"source_id": "zm_group_41", "code_prefix_start": "41", "code_prefix_end": "41", "name": "Motor Vehicle Expenses", "parent_source_id": null, "path": ["Motor Vehicle Expenses"]},
+    {"source_id": "zm_group_42", "code_prefix_start": "42", "code_prefix_end": "42", "name": "Printing, Stationery and Foreing Exchange Gains and Losses", "parent_source_id": null, "path": ["Printing, Stationery and Foreing Exchange Gains and Losses"]},
+    {"source_id": "zm_group_43", "code_prefix_start": "43", "code_prefix_end": "43", "name": "Rent Paid, Repirs and Maintenance", "parent_source_id": null, "path": ["Rent Paid, Repirs and Maintenance"]},
+    {"source_id": "zm_group_45", "code_prefix_start": "45", "code_prefix_end": "45", "name": "Staff Wellfare and Subcriptions", "parent_source_id": null, "path": ["Staff Wellfare and Subcriptions"]},
+    {"source_id": "zm_group_46", "code_prefix_start": "46", "code_prefix_end": "46", "name": "Telephone, Fax, Travel and Accomodations", "parent_source_id": null, "path": ["Telephone, Fax, Travel and Accomodations"]},
+    {"source_id": "zm_group_52", "code_prefix_start": "52", "code_prefix_end": "52", "name": "Retained Income", "parent_source_id": null, "path": ["Retained Income"]},
+    {"source_id": "zm_group_55", "code_prefix_start": "55", "code_prefix_end": "55", "name": "Long Term Liabilities", "parent_source_id": null, "path": ["Long Term Liabilities"]},
+    {"source_id": "zm_group_56", "code_prefix_start": "56", "code_prefix_end": "56", "name": "Instalment Sale Creditors Other", "parent_source_id": null, "path": ["Instalment Sale Creditors Other"]},
+    {"source_id": "zm_group_61", "code_prefix_start": "61", "code_prefix_end": "61", "name": "Land and Building", "parent_source_id": null, "path": ["Land and Building"]},
+    {"source_id": "zm_group_62", "code_prefix_start": "62", "code_prefix_end": "62", "name": "Motor Vehicles and Computer Equipement", "parent_source_id": null, "path": ["Motor Vehicles and Computer Equipement"]},
+    {"source_id": "zm_group_63", "code_prefix_start": "63", "code_prefix_end": "63", "name": "Office Equipement and Furnitures and Fittings", "parent_source_id": null, "path": ["Office Equipement and Furnitures and Fittings"]},
+    {"source_id": "zm_group_66", "code_prefix_start": "66", "code_prefix_end": "66", "name": "Other Fixed Assets", "parent_source_id": null, "path": ["Other Fixed Assets"]},
+    {"source_id": "zm_group_70", "code_prefix_start": "70", "code_prefix_end": "70", "name": "Goodwill or Other Intangible Assets", "parent_source_id": null, "path": ["Goodwill or Other Intangible Assets"]},
+    {"source_id": "zm_group_71", "code_prefix_start": "71", "code_prefix_end": "71", "name": "Investments", "parent_source_id": null, "path": ["Investments"]},
+    {"source_id": "zm_group_77", "code_prefix_start": "77", "code_prefix_end": "77", "name": "Inventory Control Account", "parent_source_id": null, "path": ["Inventory Control Account"]},
+    {"source_id": "zm_group_80", "code_prefix_start": "80", "code_prefix_end": "80", "name": "Customer Account", "parent_source_id": null, "path": ["Customer Account"]},
+    {"source_id": "zm_group_81", "code_prefix_start": "81", "code_prefix_end": "81", "name": "POS Cash Control", "parent_source_id": null, "path": ["POS Cash Control"]},
+    {"source_id": "zm_group_82", "code_prefix_start": "82", "code_prefix_end": "82", "name": "Sundry Customers", "parent_source_id": null, "path": ["Sundry Customers"]},
+    {"source_id": "zm_group_83", "code_prefix_start": "83", "code_prefix_end": "83", "name": "VAT Purchase Tax Control Account", "parent_source_id": null, "path": ["VAT Purchase Tax Control Account"]},
+    {"source_id": "zm_group_84", "code_prefix_start": "84", "code_prefix_end": "84", "name": "Bank and Outstanding Receipts and Payments", "parent_source_id": null, "path": ["Bank and Outstanding Receipts and Payments"]},
+    {"source_id": "zm_group_90", "code_prefix_start": "90", "code_prefix_end": "90", "name": "Supplier Account", "parent_source_id": null, "path": ["Supplier Account"]},
+    {"source_id": "zm_group_91", "code_prefix_start": "91", "code_prefix_end": "91", "name": "GRN Accrual Account", "parent_source_id": null, "path": ["GRN Accrual Account"]},
+    {"source_id": "zm_group_92", "code_prefix_start": "92", "code_prefix_end": "92", "name": "Sundry Suppliers", "parent_source_id": null, "path": ["Sundry Suppliers"]},
+    {"source_id": "zm_group_94", "code_prefix_start": "94", "code_prefix_end": "94", "name": "Provisions for Future Expenses, Insurance and Salary Bonuses", "parent_source_id": null, "path": ["Provisions for Future Expenses, Insurance and Salary Bonuses"]},
+    {"source_id": "zm_group_95", "code_prefix_start": "95", "code_prefix_end": "95", "name": "VAT Sales Control and Provisions Account", "parent_source_id": null, "path": ["VAT Sales Control and Provisions Account"]},
+    {"source_id": "zm_group_440", "code_prefix_start": "440", "code_prefix_end": "440", "name": "Salaries and Wages", "parent_source_id": null, "path": ["Salaries and Wages"]},
+    {"source_id": "zm_group_445", "code_prefix_start": "445", "code_prefix_end": "445", "name": "Staff Training", "parent_source_id": null, "path": ["Staff Training"]},
+    {"source_id": "zm_group_9990", "code_prefix_start": "9990", "code_prefix_end": "9990", "name": "Suspense Account", "parent_source_id": null, "path": ["Suspense Account"]},
+    {"source_id": "zm_group_9999", "code_prefix_start": "9999", "code_prefix_end": "9999", "name": "Undistributed Profits and Losses", "parent_source_id": null, "path": ["Undistributed Profits and Losses"]}
+  ],
+  "accounts": [
+    {"source_id": "zm_account_1000000", "code": "1", "name": "Sales", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_1", "reconcile": false, "role_hint": "income", "flags": ["default_for_income"], "source": {"account_type": "income"}},
+    {"source_id": "zm_account_2000000", "code": "2", "name": "Cost of Sales / Purchases", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_2", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "zm_account_2100000", "code": "21", "name": "Inventory Adjustment", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_2", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "zm_account_2150000", "code": "215", "name": "Inventory Count Variance", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_2", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "zm_account_2200000", "code": "22", "name": "Purchase Variance", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_2", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "zm_account_2400000", "code": "240000", "name": "Recovery Account", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_2", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "zm_account_2400010", "code": "240001", "name": "Labour Cost Manufacturing Variance", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_2", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "zm_account_2400020", "code": "240002", "name": "Direct Cost Manufacturing Variance", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_2", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "zm_account_2400030", "code": "240003", "name": "Other Cost Manufacturing Variance", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_2", "reconcile": false, "source": {"account_type": "expense_direct_cost"}},
+    {"source_id": "zm_account_2700000", "code": "27", "name": "Discount Received for Cash", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_27", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "zm_account_2750000", "code": "275", "name": "Interest Received", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_27", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "zm_account_2800000", "code": "28", "name": "Profit on Sale of Non Current Assets", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_28", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "zm_account_2850000", "code": "285", "name": "Bad Debts Recovered", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_28", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "zm_account_2900000", "code": "29", "name": "Foreign Exchange Gain", "root_type": "income", "subtype": "other_income", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_29", "reconcile": false, "source": {"account_type": "income_other"}},
+    {"source_id": "zm_account_3050000", "code": "305", "name": "Advertising & Promotions", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_30", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3150000", "code": "315", "name": "Bad Debts", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_31", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3200000", "code": "32", "name": "Bank Charges", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_32", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3250000", "code": "325", "name": "Cleaning", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_32", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3300000", "code": "33", "name": "Computer Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_33", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3350000", "code": "335", "name": "Consulting Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_33", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3400000", "code": "34", "name": "Courier & Postage", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_34", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3450000", "code": "345", "name": "Depreciation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_34", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3550000", "code": "355", "name": "Discount Allowed for Cash", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_35", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3600000", "code": "36", "name": "Donations", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_36", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3650000", "code": "365", "name": "Electricity & Water", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_36", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3700000", "code": "37", "name": "Entertainment Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_37", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3750000", "code": "375", "name": "Finance Charges", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_37", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3800000", "code": "38", "name": "General Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_38", "reconcile": false, "role_hint": "expense", "flags": ["default_for_expense"], "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3850000", "code": "385", "name": "Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_38", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3900000", "code": "39", "name": "Interest Paid", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_39", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_3950000", "code": "395", "name": "Leasing Charges", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_39", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4000000", "code": "4", "name": "Legal Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4050000", "code": "405", "name": "Levies", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_40", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4150000", "code": "415", "name": "Motor Vehicle Expenses", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_41", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4200000", "code": "42", "name": "Printing & Stationery", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_42", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4210000", "code": "421", "name": "Foreign Exchange Loss", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_42", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4300000", "code": "43", "name": "Rent Paid", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_43", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4350000", "code": "435", "name": "Repairs & Maintenance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_43", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4400000", "code": "44", "name": "Salaries & Wages", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4450000", "code": "445", "name": "Staff Training", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_445", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4500000", "code": "45", "name": "Staff Welfare", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_45", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4550000", "code": "455", "name": "Subscriptions", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_45", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4560000", "code": "456", "name": "License costs", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_45", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4600000", "code": "46", "name": "Telephone & Fax", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_46", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4650000", "code": "465", "name": "Travel & Accommodation", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_46", "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_4700000", "code": "47", "name": "Loss on Sale of Non Current Assets", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "expense"}},
+    {"source_id": "zm_account_5200000", "code": "52", "name": "Retained Income / (Accumulated Loss)", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_52", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "zm_account_5500000", "code": "55", "name": "Long Term Liabilities", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_55", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "zm_account_5600000", "code": "56", "name": "Instalment Sale Creditors Other", "root_type": "liability", "subtype": "non_current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_56", "reconcile": false, "source": {"account_type": "liability_non_current"}},
+    {"source_id": "zm_account_6100000", "code": "610000", "name": "Land & Buildings - Net Value", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_61", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6100010", "code": "610001", "name": "Land & Buildings - At Cost", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_61", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6100020", "code": "610002", "name": "Land & Buildings - Accumulated Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_61", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6200000", "code": "620000", "name": "Motor Vehicles - Net Value", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_62", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6200010", "code": "620001", "name": "Motor Vehicles - At Cost", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_62", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6200020", "code": "620002", "name": "Motor Vehicles - Accumulated Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_62", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6250000", "code": "625000", "name": "Computer Equipment - Net Value", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_62", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6250010", "code": "625001", "name": "Computer Equipment - At Cost", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_62", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6250020", "code": "625002", "name": "Computer Equipment - Accumulated Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_62", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6300000", "code": "630000", "name": "Office Equipment - Net Value", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_63", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6300010", "code": "630001", "name": "Office Equipment - At Cost", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_63", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6300020", "code": "630002", "name": "Office Equipment - Accumulated Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_63", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6350000", "code": "635000", "name": "Furniture & Fittings - Net value", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_63", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6350010", "code": "635001", "name": "Furniture & Fittings - At Cost", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_63", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6350020", "code": "635002", "name": "Furniture & Fittings - Accumulated Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_63", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6600000", "code": "660000", "name": "Other Fixed Assets - Net Value", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_66", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6600010", "code": "660001", "name": "Other Fixed Assets - At Cost", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_66", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_6600020", "code": "660002", "name": "Other Fixed Assets - Accumulated Depreciation", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_66", "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_7000000", "code": "7", "name": "Goodwill / Other Intangible Assets", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": false, "source": {"account_type": "asset_fixed"}},
+    {"source_id": "zm_account_7100000", "code": "71", "name": "Investments", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_71", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "zm_account_7700000", "code": "77", "name": "Inventory Control Account", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_77", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "zm_account_8000000", "code": "8", "name": "Customers", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "zm_account_8100000", "code": "81", "name": "Customes (POS)", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_81", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable"}},
+    {"source_id": "zm_account_8200000", "code": "82", "name": "Sundry Customers", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_82", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "zm_account_8300000", "code": "83", "name": "VAT Purchase Tax Control Account", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_83", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "zm_account_8300001", "code": "8300001", "name": "Withholding Tax on Sales", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_83", "reconcile": false, "source": {"account_type": "asset_current"}},
+    {"source_id": "zm_account_8300002", "code": "8300002", "name": "Withholding Tax on Sales - Transition Account", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_83", "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "zm_account_8310000", "code": "831", "name": "VAT Receivable - Closing Entry", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "zm_group_83", "reconcile": true, "role_hint": "receivables", "source": {"account_type": "asset_receivable", "non_trade": true}},
+    {"source_id": "zm_account_8900000", "code": "89", "name": "Deferred Expenses", "root_type": "asset", "subtype": "current_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "asset_current"}},
+    {"source_id": "zm_account_9000000", "code": "9", "name": "Suppliers", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "zm_account_9100000", "code": "91", "name": "GRN Accrual Account", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_91", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "zm_account_9200000", "code": "92", "name": "Sundry Suppliers", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_92", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "zm_account_9400000", "code": "940000", "name": "Provision for Future Expenses", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_94", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "zm_account_9400010", "code": "940001", "name": "Provision for Insurance", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_94", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "zm_account_9400020", "code": "940002", "name": "Provision for Salary Bonus", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_94", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "zm_account_9500000", "code": "95", "name": "VAT Sales Tax Control Account", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_95", "reconcile": false, "source": {"account_type": "liability_current"}},
+    {"source_id": "zm_account_9510000", "code": "951", "name": "Vat / Tax Provision Account", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_95", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable"}},
+    {"source_id": "zm_account_9520000", "code": "952", "name": "VAT Payable - Closing Entry", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_95", "reconcile": true, "role_hint": "payables", "source": {"account_type": "liability_payable", "non_trade": true}},
+    {"source_id": "zm_account_9900000", "code": "99", "name": "Deferred Income", "root_type": "liability", "subtype": "current_liability", "normal_balance": "credit", "is_group": false, "parent_source_id": null, "reconcile": true, "source": {"account_type": "liability_current"}},
+    {"source_id": "zm_account_9999990", "code": "999999", "name": "Undistributed Profits/Losses", "root_type": "equity", "subtype": "retained_earnings", "normal_balance": "credit", "is_group": false, "parent_source_id": "zm_group_9999", "reconcile": false, "source": {"account_type": "equity_unaffected"}}
+  ]
+}

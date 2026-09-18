@@ -1,0 +1,400 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "a84ade8dd302f46d9e338960520ecc5ef6a4a6d747a7310cd462e1fa2003a724",
+  "accounts_identical_to": null,
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "erpnext-version-16/verified/nz_standard_chart_of_accounts",
+  "country_code": "NZ",
+  "country_name": "New Zealand",
+  "country_basis": "chart file country_code",
+  "name": "New Zealand - Chart of Accounts with Account Numbers",
+  "source": {
+    "system": "erpnext",
+    "repository": "https://github.com/frappe/erpnext",
+    "branch": "version-16",
+    "commit": "4048fb70e14d1843956fcdabb7c3cca75a1cbcdd",
+    "commit_date": "2026-09-08T13:23:31+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "GPL-3.0-only",
+    "license_basis": "repository license.txt (GNU GPL v3); chart files carry no separate licence header",
+    "attribution": "Frappe Technologies Pvt. Ltd. and Contributors",
+    "upstream_folder": "verified",
+    "upstream_verified": true,
+    "upstream_disabled": true,
+    "files": [
+      {
+        "path": "erpnext/accounts/doctype/account/chart_of_accounts/verified/nz_standard_chart_of_accounts.json",
+        "sha256": "e116b6550ceed7d30da2bb76451605c64c98cafc25f21aa5606a5bfcd4fc1a6b",
+        "kind": "json"
+      }
+    ]
+  },
+  "template": {
+    "hierarchy": "nested groups; posting accounts are leaves; source_id is the full ' / ' separated path",
+    "account_numbers_present": true
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "account_type",
+        "source_id": "Application of Funds (Assets) / Current Assets / Accounts Receivable / Debtors",
+        "code": "11210",
+        "name": "Debtors",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "account_type",
+        "source_id": "Source of Funds (Liabilities) / Current Liabilities / Accounts Payable / Creditors",
+        "code": "21010",
+        "name": "Creditors",
+        "resolved": true
+      }
+    ],
+    "cash": [
+      {
+        "source_field": "account_type",
+        "source_id": "Application of Funds (Assets) / Current Assets / Cash on Hand",
+        "code": "11020",
+        "name": "Cash on Hand",
+        "resolved": true
+      }
+    ],
+    "bank": [
+      {
+        "source_field": "account_type",
+        "source_id": "Application of Funds (Assets) / Current Assets / Bank Accounts / Business Transaction Account",
+        "code": "11011",
+        "name": "Business Transaction Account",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Application of Funds (Assets) / Current Assets / Bank Accounts / Business Savings Account",
+        "code": "11012",
+        "name": "Business Savings Account",
+        "resolved": true
+      }
+    ],
+    "inventory": [
+      {
+        "source_field": "account_type",
+        "source_id": "Application of Funds (Assets) / Current Assets / Inventory / Stock on Hand",
+        "code": "11311",
+        "name": "Stock on Hand",
+        "resolved": true
+      },
+      {
+        "source_field": "account_type",
+        "source_id": "Application of Funds (Assets) / Current Assets / Inventory / Work In Progress",
+        "code": "11312",
+        "name": "Work In Progress",
+        "resolved": true
+      }
+    ],
+    "direct_cost": [
+      {
+        "source_field": "account_type",
+        "source_id": "Expenses / Cost of Goods Sold / Purchases",
+        "code": "51010",
+        "name": "Purchases",
+        "resolved": true
+      }
+    ],
+    "round_off": [
+      {
+        "source_field": "account_type",
+        "source_id": "Expenses / Finance Costs / Rounding Off",
+        "code": "67030",
+        "name": "Rounding Off",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "Receivable": {
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "Payable": {
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "Bank": {
+      "subtype": "bank",
+      "role_hint": "cash_bank"
+    },
+    "Cash": {
+      "subtype": "cash",
+      "role_hint": "cash_bank"
+    },
+    "Stock": {
+      "subtype": "inventory",
+      "role_hint": null
+    },
+    "Tax": {
+      "subtype": "tax",
+      "role_hint": null
+    },
+    "Cost of Goods Sold": {
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "Fixed Asset": {
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "Accumulated Depreciation": {
+      "subtype": "accumulated_depreciation",
+      "role_hint": null
+    },
+    "Depreciation": {
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "Expense Account": {
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "Income Account": {
+      "subtype": "income",
+      "role_hint": null
+    },
+    "Equity": {
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "Liability": {
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "Chargeable": {
+      "subtype": "chargeable",
+      "role_hint": null
+    },
+    "Stock Received But Not Billed": {
+      "subtype": "stock_received_not_billed",
+      "role_hint": null
+    },
+    "Asset Received But Not Billed": {
+      "subtype": "asset_received_not_billed",
+      "role_hint": null
+    },
+    "Service Received But Not Billed": {
+      "subtype": "service_received_not_billed",
+      "role_hint": null
+    },
+    "Stock Delivered But Not Billed": {
+      "subtype": "stock_delivered_not_billed",
+      "role_hint": null
+    },
+    "Stock Adjustment": {
+      "subtype": "stock_adjustment",
+      "role_hint": null
+    },
+    "Expenses Included In Valuation": {
+      "subtype": "valuation_expense",
+      "role_hint": null
+    },
+    "Expenses Included In Asset Valuation": {
+      "subtype": "asset_valuation_expense",
+      "role_hint": null
+    },
+    "Capital Work in Progress": {
+      "subtype": "capital_work_in_progress",
+      "role_hint": null
+    },
+    "Temporary": {
+      "subtype": "temporary",
+      "role_hint": null
+    },
+    "Round Off": {
+      "subtype": "round_off",
+      "role_hint": null
+    },
+    "Indirect Expense": {
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "Indirect Income": {
+      "subtype": "other_income",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 114,
+    "posting_accounts": 84,
+    "group_accounts": 30,
+    "by_root_type": {
+      "asset": 35,
+      "equity": 5,
+      "expense": 39,
+      "income": 6,
+      "liability": 29
+    },
+    "by_subtype": {
+      "accumulated_depreciation": 5,
+      "asset_received_not_billed": 1,
+      "asset_valuation_expense": 1,
+      "bank": 2,
+      "capital_work_in_progress": 1,
+      "cash": 1,
+      "depreciation": 4,
+      "direct_cost": 2,
+      "equity": 4,
+      "expense": 22,
+      "fixed_asset": 5,
+      "group": 28,
+      "income": 4,
+      "inventory": 3,
+      "payable": 1,
+      "receivable": 1,
+      "round_off": 1,
+      "service_received_not_billed": 1,
+      "stock_adjustment": 2,
+      "stock_received_not_billed": 1,
+      "tax": 6,
+      "unspecified": 16,
+      "valuation_expense": 2
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 3,
+      "payables": 1,
+      "receivables": 1
+    },
+    "unmapped_account_types": {},
+    "roots_without_root_type": [],
+    "top_level_groups": [
+      "Application of Funds (Assets)",
+      "Source of Funds (Liabilities)",
+      "Equity",
+      "Income",
+      "Expenses"
+    ],
+    "max_depth": 4,
+    "account_numbers_present": true
+  },
+  "accounts": [
+    {"source_id": "Application of Funds (Assets)", "code": "10000", "name": "Application of Funds (Assets)", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Asset"}},
+    {"source_id": "Application of Funds (Assets) / Current Assets", "code": "11000", "name": "Current Assets", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Application of Funds (Assets)", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Bank Accounts", "code": "11010", "name": "Bank Accounts", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Application of Funds (Assets) / Current Assets", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Bank Accounts / Business Transaction Account", "code": "11011", "name": "Business Transaction Account", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Current Assets / Bank Accounts", "depth": 4, "role_hint": "cash_bank", "source": {"account_type": "Bank"}},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Bank Accounts / Business Savings Account", "code": "11012", "name": "Business Savings Account", "root_type": "asset", "subtype": "bank", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Current Assets / Bank Accounts", "depth": 4, "role_hint": "cash_bank", "source": {"account_type": "Bank"}},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Cash on Hand", "code": "11020", "name": "Cash on Hand", "root_type": "asset", "subtype": "cash", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Current Assets", "depth": 3, "role_hint": "cash_bank", "source": {"account_type": "Cash"}},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Accounts Receivable", "code": "11200", "name": "Accounts Receivable", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Application of Funds (Assets) / Current Assets", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Accounts Receivable / Debtors", "code": "11210", "name": "Debtors", "root_type": "asset", "subtype": "receivable", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Current Assets / Accounts Receivable", "depth": 4, "role_hint": "receivables", "source": {"account_type": "Receivable"}},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Accounts Receivable / Provision for Doubtful Debts", "code": "11220", "name": "Provision for Doubtful Debts", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Current Assets / Accounts Receivable", "depth": 4},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Inventory", "code": "11310", "name": "Inventory", "root_type": "asset", "subtype": "inventory", "normal_balance": "debit", "is_group": true, "parent_source_id": "Application of Funds (Assets) / Current Assets", "depth": 3, "source": {"account_type": "Stock", "is_group": 1}},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Inventory / Stock on Hand", "code": "11311", "name": "Stock on Hand", "root_type": "asset", "subtype": "inventory", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Current Assets / Inventory", "depth": 4, "source": {"account_type": "Stock"}},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Inventory / Work In Progress", "code": "11312", "name": "Work In Progress", "root_type": "asset", "subtype": "inventory", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Current Assets / Inventory", "depth": 4, "source": {"account_type": "Stock"}},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Prepayments", "code": "11410", "name": "Prepayments", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Application of Funds (Assets) / Current Assets", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Prepayments / Prepayments", "code": "11411", "name": "Prepayments", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Current Assets / Prepayments", "depth": 4},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Prepayments / Supplier Advances", "code": "11412", "name": "Supplier Advances", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Current Assets / Prepayments", "depth": 4},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Prepayments / Deferred Expense", "code": "11413", "name": "Deferred Expense", "root_type": "asset", "subtype": "unspecified", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Current Assets / Prepayments", "depth": 4},
+    {"source_id": "Application of Funds (Assets) / Current Assets / GST Receivable", "code": "11510", "name": "GST Receivable", "root_type": "asset", "subtype": "tax", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Current Assets", "depth": 3, "source": {"account_type": "Tax"}},
+    {"source_id": "Application of Funds (Assets) / Current Assets / Income Tax Receivable", "code": "11520", "name": "Income Tax Receivable", "root_type": "asset", "subtype": "tax", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Current Assets", "depth": 3, "source": {"account_type": "Tax"}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets", "code": "16000", "name": "Fixed Assets", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Application of Funds (Assets)", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Plant & Equipment", "code": "16010", "name": "Plant & Equipment", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Application of Funds (Assets) / Fixed Assets", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Plant & Equipment / Plant & Equipment", "code": "16011", "name": "Plant & Equipment", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Fixed Assets / Plant & Equipment", "depth": 4, "source": {"account_type": "Fixed Asset"}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Plant & Equipment / Accumulated Depreciation - Plant & Equipment", "code": "16012", "name": "Accumulated Depreciation - Plant & Equipment", "root_type": "asset", "subtype": "accumulated_depreciation", "normal_balance": "credit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Fixed Assets / Plant & Equipment", "depth": 4, "flags": ["contra"], "source": {"account_type": "Accumulated Depreciation"}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Motor Vehicles", "code": "16020", "name": "Motor Vehicles", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Application of Funds (Assets) / Fixed Assets", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Motor Vehicles / Motor Vehicles", "code": "16021", "name": "Motor Vehicles", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Fixed Assets / Motor Vehicles", "depth": 4, "source": {"account_type": "Fixed Asset"}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Motor Vehicles / Accumulated Depreciation - Motor Vehicles", "code": "16022", "name": "Accumulated Depreciation - Motor Vehicles", "root_type": "asset", "subtype": "accumulated_depreciation", "normal_balance": "credit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Fixed Assets / Motor Vehicles", "depth": 4, "flags": ["contra"], "source": {"account_type": "Accumulated Depreciation"}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Office Equipment", "code": "16030", "name": "Office Equipment", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Application of Funds (Assets) / Fixed Assets", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Office Equipment / Office Equipment", "code": "16031", "name": "Office Equipment", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Fixed Assets / Office Equipment", "depth": 4, "source": {"account_type": "Fixed Asset"}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Office Equipment / Accumulated Depreciation - Office Equipment", "code": "16032", "name": "Accumulated Depreciation - Office Equipment", "root_type": "asset", "subtype": "accumulated_depreciation", "normal_balance": "credit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Fixed Assets / Office Equipment", "depth": 4, "flags": ["contra"], "source": {"account_type": "Accumulated Depreciation"}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Buildings", "code": "16040", "name": "Buildings", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Application of Funds (Assets) / Fixed Assets", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Buildings / Buildings", "code": "16041", "name": "Buildings", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Fixed Assets / Buildings", "depth": 4, "source": {"account_type": "Fixed Asset"}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Buildings / Accumulated Depreciation - Buildings", "code": "16042", "name": "Accumulated Depreciation - Buildings", "root_type": "asset", "subtype": "accumulated_depreciation", "normal_balance": "credit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Fixed Assets / Buildings", "depth": 4, "flags": ["contra"], "source": {"account_type": "Accumulated Depreciation"}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Computer Equipment", "code": "16050", "name": "Computer Equipment", "root_type": "asset", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Application of Funds (Assets) / Fixed Assets", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Computer Equipment / Computer Equipment", "code": "16051", "name": "Computer Equipment", "root_type": "asset", "subtype": "fixed_asset", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Fixed Assets / Computer Equipment", "depth": 4, "source": {"account_type": "Fixed Asset"}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Computer Equipment / Accumulated Depreciation - Computer Equipment", "code": "16052", "name": "Accumulated Depreciation - Computer Equipment", "root_type": "asset", "subtype": "accumulated_depreciation", "normal_balance": "credit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Fixed Assets / Computer Equipment", "depth": 4, "flags": ["contra"], "source": {"account_type": "Accumulated Depreciation"}},
+    {"source_id": "Application of Funds (Assets) / Fixed Assets / Capital Work in Progress", "code": "16090", "name": "Capital Work in Progress", "root_type": "asset", "subtype": "capital_work_in_progress", "normal_balance": "debit", "is_group": false, "parent_source_id": "Application of Funds (Assets) / Fixed Assets", "depth": 3, "source": {"account_type": "Capital Work in Progress"}},
+    {"source_id": "Source of Funds (Liabilities)", "code": "20000", "name": "Source of Funds (Liabilities)", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Liability"}},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities", "code": "21500", "name": "Current Liabilities", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Source of Funds (Liabilities)", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Accounts Payable", "code": "21000", "name": "Accounts Payable", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Accounts Payable / Creditors", "code": "21010", "name": "Creditors", "root_type": "liability", "subtype": "payable", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities / Accounts Payable", "depth": 4, "role_hint": "payables", "source": {"account_type": "Payable"}},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Goods Received Not Invoiced", "code": "21100", "name": "Goods Received Not Invoiced", "root_type": "liability", "subtype": "stock_received_not_billed", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3, "source": {"account_type": "Stock Received But Not Billed"}},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Asset Received Not Invoiced", "code": "21110", "name": "Asset Received Not Invoiced", "root_type": "liability", "subtype": "asset_received_not_billed", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3, "source": {"account_type": "Asset Received But Not Billed"}},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Service Received Not Invoiced", "code": "21120", "name": "Service Received Not Invoiced", "root_type": "liability", "subtype": "service_received_not_billed", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3, "source": {"account_type": "Service Received But Not Billed"}},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Accrued Expenses", "code": "21200", "name": "Accrued Expenses", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Wages Payable", "code": "21300", "name": "Wages Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / PAYE Payable", "code": "22010", "name": "PAYE Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / KiwiSaver Payable", "code": "22020", "name": "KiwiSaver Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / ACC Payable", "code": "22030", "name": "ACC Payable", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Credit Cards", "code": "22100", "name": "Credit Cards", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Credit Cards / Business Credit Card", "code": "22110", "name": "Business Credit Card", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities / Credit Cards", "depth": 4},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Customer Advances", "code": "22200", "name": "Customer Advances", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Deferred Revenue", "code": "22210", "name": "Deferred Revenue", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Provisional Account", "code": "22220", "name": "Provisional Account", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Tax Liabilities", "code": "22300", "name": "Tax Liabilities", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Tax Liabilities / GST Payable", "code": "22310", "name": "GST Payable", "root_type": "liability", "subtype": "tax", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities / Tax Liabilities", "depth": 4, "source": {"account_type": "Tax"}},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Tax Liabilities / GST Suspense", "code": "22320", "name": "GST Suspense", "root_type": "liability", "subtype": "tax", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities / Tax Liabilities", "depth": 4, "source": {"account_type": "Tax"}},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Tax Liabilities / FBT Payable", "code": "22330", "name": "FBT Payable", "root_type": "liability", "subtype": "tax", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities / Tax Liabilities", "depth": 4, "source": {"account_type": "Tax"}},
+    {"source_id": "Source of Funds (Liabilities) / Current Liabilities / Tax Liabilities / Income Tax Payable", "code": "22340", "name": "Income Tax Payable", "root_type": "liability", "subtype": "tax", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Current Liabilities / Tax Liabilities", "depth": 4, "source": {"account_type": "Tax"}},
+    {"source_id": "Source of Funds (Liabilities) / Non-Current Liabilities", "code": "25000", "name": "Non-Current Liabilities", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Source of Funds (Liabilities)", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Source of Funds (Liabilities) / Non-Current Liabilities / Bank Loans", "code": "25010", "name": "Bank Loans", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Source of Funds (Liabilities) / Non-Current Liabilities", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Source of Funds (Liabilities) / Non-Current Liabilities / Bank Loans / Bank Loan", "code": "25011", "name": "Bank Loan", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Non-Current Liabilities / Bank Loans", "depth": 4},
+    {"source_id": "Source of Funds (Liabilities) / Non-Current Liabilities / Lease Liabilities", "code": "25020", "name": "Lease Liabilities", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Source of Funds (Liabilities) / Non-Current Liabilities", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Source of Funds (Liabilities) / Non-Current Liabilities / Lease Liabilities / Lease Liability", "code": "25021", "name": "Lease Liability", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Non-Current Liabilities / Lease Liabilities", "depth": 4},
+    {"source_id": "Source of Funds (Liabilities) / Non-Current Liabilities / Shareholder Loans", "code": "25030", "name": "Shareholder Loans", "root_type": "liability", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Source of Funds (Liabilities) / Non-Current Liabilities", "depth": 3, "source": {"is_group": 1}},
+    {"source_id": "Source of Funds (Liabilities) / Non-Current Liabilities / Shareholder Loans / Shareholder Loan", "code": "25031", "name": "Shareholder Loan", "root_type": "liability", "subtype": "unspecified", "normal_balance": "credit", "is_group": false, "parent_source_id": "Source of Funds (Liabilities) / Non-Current Liabilities / Shareholder Loans", "depth": 4},
+    {"source_id": "Equity", "code": "30000", "name": "Equity", "root_type": "equity", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Equity"}},
+    {"source_id": "Equity / Share Capital", "code": "31010", "name": "Share Capital", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "Equity", "depth": 2, "source": {"account_type": "Equity"}},
+    {"source_id": "Equity / Drawings", "code": "31020", "name": "Drawings", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "Equity", "depth": 2, "source": {"account_type": "Equity"}},
+    {"source_id": "Equity / Current Year Earnings", "code": "35010", "name": "Current Year Earnings", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "Equity", "depth": 2, "source": {"account_type": "Equity"}},
+    {"source_id": "Equity / Retained Earnings", "code": "35020", "name": "Retained Earnings", "root_type": "equity", "subtype": "equity", "normal_balance": "credit", "is_group": false, "parent_source_id": "Equity", "depth": 2, "source": {"account_type": "Equity"}},
+    {"source_id": "Income", "code": "40000", "name": "Income", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Income"}},
+    {"source_id": "Income / Sales", "code": "41010", "name": "Sales", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Income", "depth": 2, "source": {"account_type": "Income Account"}},
+    {"source_id": "Income / Other Income", "code": "47000", "name": "Other Income", "root_type": "income", "subtype": "group", "normal_balance": "credit", "is_group": true, "parent_source_id": "Income", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Income / Other Income / Interest Income", "code": "47010", "name": "Interest Income", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Income / Other Income", "depth": 3, "source": {"account_type": "Income Account"}},
+    {"source_id": "Income / Other Income / Rounding Gain/Loss", "code": "47020", "name": "Rounding Gain/Loss", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Income / Other Income", "depth": 3, "source": {"account_type": "Income Account"}},
+    {"source_id": "Income / Other Income / Foreign Exchange Gain", "code": "47030", "name": "Foreign Exchange Gain", "root_type": "income", "subtype": "income", "normal_balance": "credit", "is_group": false, "parent_source_id": "Income / Other Income", "depth": 3, "source": {"account_type": "Income Account"}},
+    {"source_id": "Expenses", "code": "50000", "name": "Expenses", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": null, "depth": 1, "source": {"root_type": "Expense"}},
+    {"source_id": "Expenses / Cost of Goods Sold", "code": "51000", "name": "Cost of Goods Sold", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": true, "parent_source_id": "Expenses", "depth": 2, "source": {"account_type": "Cost of Goods Sold", "is_group": 1}},
+    {"source_id": "Expenses / Cost of Goods Sold / Purchases", "code": "51010", "name": "Purchases", "root_type": "expense", "subtype": "direct_cost", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Cost of Goods Sold", "depth": 3, "source": {"account_type": "Cost of Goods Sold"}},
+    {"source_id": "Expenses / Cost of Goods Sold / Freight Inwards", "code": "51020", "name": "Freight Inwards", "root_type": "expense", "subtype": "valuation_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Cost of Goods Sold", "depth": 3, "source": {"account_type": "Expenses Included In Valuation"}},
+    {"source_id": "Expenses / Cost of Goods Sold / Duty and Landing Costs", "code": "51030", "name": "Duty and Landing Costs", "root_type": "expense", "subtype": "valuation_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Cost of Goods Sold", "depth": 3, "source": {"account_type": "Expenses Included In Valuation"}},
+    {"source_id": "Expenses / Cost of Goods Sold / Stock Adjustment", "code": "51040", "name": "Stock Adjustment", "root_type": "expense", "subtype": "stock_adjustment", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Cost of Goods Sold", "depth": 3, "source": {"account_type": "Stock Adjustment"}},
+    {"source_id": "Expenses / Cost of Goods Sold / Stock Write Off", "code": "51050", "name": "Stock Write Off", "root_type": "expense", "subtype": "stock_adjustment", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Cost of Goods Sold", "depth": 3, "source": {"account_type": "Stock Adjustment"}},
+    {"source_id": "Expenses / Operating Expenses", "code": "60000", "name": "Operating Expenses", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Expenses", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Expenses / Operating Expenses / Wages & Salaries", "code": "61010", "name": "Wages & Salaries", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Operating Expenses / KiwiSaver Employer Contribution", "code": "61020", "name": "KiwiSaver Employer Contribution", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Operating Expenses / ACC Levies", "code": "61030", "name": "ACC Levies", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Operating Expenses / Rent", "code": "65010", "name": "Rent", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Operating Expenses / Power", "code": "65020", "name": "Power", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Operating Expenses / Telephone", "code": "66010", "name": "Telephone", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Operating Expenses / Insurance", "code": "64010", "name": "Insurance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Operating Expenses / Accounting Fees", "code": "64020", "name": "Accounting Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Operating Expenses / Legal Fees", "code": "64030", "name": "Legal Fees", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Operating Expenses / Advertising and Marketing", "code": "65030", "name": "Advertising and Marketing", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Operating Expenses / Repairs and Maintenance", "code": "65040", "name": "Repairs and Maintenance", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Operating Expenses / Freight and Courier", "code": "65050", "name": "Freight and Courier", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Operating Expenses / Operating Costs", "code": "65060", "name": "Operating Costs", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Operating Expenses", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Depreciation and Amortisation", "code": "62000", "name": "Depreciation and Amortisation", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Expenses", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Expenses / Depreciation and Amortisation / Depreciation - Plant & Equipment", "code": "62010", "name": "Depreciation - Plant & Equipment", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Depreciation and Amortisation", "depth": 3, "source": {"account_type": "Depreciation"}},
+    {"source_id": "Expenses / Depreciation and Amortisation / Depreciation - Motor Vehicles", "code": "62020", "name": "Depreciation - Motor Vehicles", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Depreciation and Amortisation", "depth": 3, "source": {"account_type": "Depreciation"}},
+    {"source_id": "Expenses / Depreciation and Amortisation / Depreciation - Office Equipment", "code": "62030", "name": "Depreciation - Office Equipment", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Depreciation and Amortisation", "depth": 3, "source": {"account_type": "Depreciation"}},
+    {"source_id": "Expenses / Depreciation and Amortisation / Depreciation - Computer Equipment", "code": "62040", "name": "Depreciation - Computer Equipment", "root_type": "expense", "subtype": "depreciation", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Depreciation and Amortisation", "depth": 3, "source": {"account_type": "Depreciation"}},
+    {"source_id": "Expenses / Finance Costs", "code": "67000", "name": "Finance Costs", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Expenses", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Expenses / Finance Costs / Bank Charges", "code": "67010", "name": "Bank Charges", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Finance Costs", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Finance Costs / Interest Expense", "code": "67020", "name": "Interest Expense", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Finance Costs", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Finance Costs / Rounding Off", "code": "67030", "name": "Rounding Off", "root_type": "expense", "subtype": "round_off", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Finance Costs", "depth": 3, "source": {"account_type": "Round Off"}},
+    {"source_id": "Expenses / Finance Costs / Payment Discounts", "code": "67040", "name": "Payment Discounts", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Finance Costs", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Income Tax Expense", "code": "81010", "name": "Income Tax Expense", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses", "depth": 2, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Foreign Exchange", "code": "82000", "name": "Foreign Exchange", "root_type": "expense", "subtype": "group", "normal_balance": "debit", "is_group": true, "parent_source_id": "Expenses", "depth": 2, "source": {"is_group": 1}},
+    {"source_id": "Expenses / Foreign Exchange / Exchange Gain/Loss", "code": "82010", "name": "Exchange Gain/Loss", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Foreign Exchange", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Foreign Exchange / Unrealized Exchange Gain/Loss", "code": "82020", "name": "Unrealized Exchange Gain/Loss", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses / Foreign Exchange", "depth": 3, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Bad Debts", "code": "83010", "name": "Bad Debts", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses", "depth": 2, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Write Off", "code": "83020", "name": "Write Off", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses", "depth": 2, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Gain/Loss on Asset Disposal", "code": "83030", "name": "Gain/Loss on Asset Disposal", "root_type": "expense", "subtype": "expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses", "depth": 2, "source": {"account_type": "Expense Account"}},
+    {"source_id": "Expenses / Expenses Included In Asset Valuation", "code": "84010", "name": "Expenses Included In Asset Valuation", "root_type": "expense", "subtype": "asset_valuation_expense", "normal_balance": "debit", "is_group": false, "parent_source_id": "Expenses", "depth": 2, "source": {"account_type": "Expenses Included In Asset Valuation"}}
+  ]
+}

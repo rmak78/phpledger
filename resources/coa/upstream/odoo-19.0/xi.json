@@ -1,0 +1,289 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "ceb4a3761538da78e854b237a3c4d8d41784ce16e37746eb458cffdf1e08f354",
+  "accounts_identical_to": "odoo-19.0/uk",
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/xi",
+  "country_code": "GB",
+  "country_name": "United Kingdom",
+  "country_basis": "fiscal country inherited from parent template",
+  "name": "United Kingdom - Accounting",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_uk' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "SmartMode LTD",
+    "module": "l10n_uk",
+    "module_name": "United Kingdom - Accounting",
+    "module_version": "1.1",
+    "contributing_modules": [
+      "l10n_uk"
+    ],
+    "template_code": "xi",
+    "template_chain": [
+      "uk",
+      "xi"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_uk/data/template/account.account-uk.csv",
+        "sha256": "0c925e4558c988eeb39744eb6fc2c7ff9a3a8d5c00c5d7450fdf27a77bf8863f",
+        "rows": 118
+      }
+    ],
+    "python_files": [
+      "addons/l10n_uk/models/template_uk.py",
+      "addons/l10n_uk/models/template_xi.py"
+    ],
+    "non_literal_python": []
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": true,
+    "account_code_prefixes": {
+      "bank": "1200",
+      "cash": "1210",
+      "transfer": "1220"
+    },
+    "default_sale_tax": "ST11",
+    "default_purchase_tax": "PT_20_G",
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "110000",
+        "code": "110000",
+        "name": "Debtors Control Account",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "210000",
+        "code": "210000",
+        "name": "Creditors Control Account",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "400000",
+        "code": "400000",
+        "name": "Sales category 1",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "500000",
+        "code": "500000",
+        "name": "Cost of sales 1",
+        "resolved": true
+      }
+    ],
+    "stock_valuation": [
+      {
+        "source_field": "account_stock_valuation_id",
+        "source_id": "100100",
+        "code": "100100",
+        "name": "Stock",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "110400",
+        "code": "110400",
+        "name": "Debtors Control Account (PoS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "770000",
+        "code": "770000",
+        "name": "Exchange gains/losses",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "770000",
+        "code": "770000",
+        "name": "Exchange gains/losses",
+        "resolved": true
+      }
+    ],
+    "deferred_expense": [
+      {
+        "source_field": "deferred_expense_account_id",
+        "source_id": "110300",
+        "code": "110300",
+        "name": "Prepayments",
+        "resolved": true
+      }
+    ],
+    "deferred_revenue": [
+      {
+        "source_field": "deferred_revenue_account_id",
+        "source_id": "210900",
+        "code": "210900",
+        "name": "Accruals",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 118,
+    "posting_accounts": 118,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 30,
+      "equity": 5,
+      "expense": 61,
+      "income": 7,
+      "liability": 15
+    },
+    "by_subtype": {
+      "current_asset": 7,
+      "current_liability": 9,
+      "direct_cost": 4,
+      "equity": 4,
+      "expense": 57,
+      "fixed_asset": 20,
+      "income": 7,
+      "payable": 6,
+      "receivable": 3,
+      "retained_earnings": 1
+    },
+    "unclassified_root_type": 0,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "expense": 1,
+      "income": 1,
+      "payables": 6,
+      "receivables": 3
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": []
+}

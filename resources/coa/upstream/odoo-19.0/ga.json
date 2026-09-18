@@ -1,0 +1,288 @@
+{
+  "format": "phpledger.coa.upstream-chart",
+  "format_version": 1,
+  "status": "Research",
+  "runtime_importable": false,
+  "accounts_digest": "24fb47f4f858382df16168ce94c0976c429f845b0fc218c299c92d41070b498a",
+  "accounts_identical_to": "odoo-19.0/syscohada",
+  "notice": "Upstream chart mirrored for research and country-package authoring. Not accountant reviewed, not a PHP Ledger release, not installable into a real company, and not a statement that any account number is legally mandated. Root types, normal balances and role hints were derived mechanically from the upstream account_type vocabulary and must be reviewed before reuse.",
+  "chart_id": "odoo-19.0/ga",
+  "country_code": "GA",
+  "country_name": "Gabon",
+  "country_basis": "derived from template code",
+  "name": "SYSCOHADA for Companies",
+  "source": {
+    "system": "odoo",
+    "repository": "https://github.com/odoo/odoo",
+    "branch": "19.0",
+    "commit": "f84eeb3ed1421e0cc07c906ff6444734dc01d35f",
+    "commit_date": "2026-09-14T11:24:44+00:00",
+    "retrieved_at": "2026-09-18T11:59:26+00:00",
+    "license": "LGPL-3.0-only",
+    "license_basis": "module manifest 'l10n_ga' declares LGPL-3; repository LICENSE file is LGPL-3",
+    "attribution": "Odoo S.A.",
+    "module": "l10n_ga",
+    "module_name": "Gabon - Accounting",
+    "module_version": null,
+    "contributing_modules": [
+      "l10n_ga",
+      "l10n_syscohada"
+    ],
+    "template_code": "ga",
+    "template_chain": [
+      "syscohada",
+      "ga"
+    ],
+    "derived_from_template": null,
+    "visible_in_odoo": true,
+    "files": [
+      {
+        "path": "addons/l10n_syscohada/data/template/account.account-syscohada.csv",
+        "sha256": "fdfd3eba7ca2d4794178bb8cd4853b6c8692bf66c090a332a396532b7156002a",
+        "rows": 1134
+      }
+    ],
+    "python_files": [
+      "addons/l10n_ga/models/template_ga.py",
+      "addons/l10n_syscohada/models/template_syscohada.py"
+    ],
+    "non_literal_python": [
+      "account.account:_get_ga_account_account (parses another template's CSV)",
+      "res.company:_get_ga_res_company"
+    ]
+  },
+  "template": {
+    "code_digits": "6",
+    "anglo_saxon_accounting": null,
+    "account_code_prefixes": {
+      "bank": "521",
+      "cash": "571",
+      "transfer": "585"
+    },
+    "default_sale_tax": null,
+    "default_purchase_tax": null,
+    "tax_calculation_rounding_method": null
+  },
+  "role_defaults": {
+    "receivable": [
+      {
+        "source_field": "property_account_receivable_id",
+        "source_id": "pcg_4111",
+        "code": "4111",
+        "name": "Customers",
+        "resolved": true
+      }
+    ],
+    "payable": [
+      {
+        "source_field": "property_account_payable_id",
+        "source_id": "pcg_4011",
+        "code": "4011",
+        "name": "Suppliers",
+        "resolved": true
+      }
+    ],
+    "income": [
+      {
+        "source_field": "income_account_id",
+        "source_id": "pcg_7011",
+        "code": "7011",
+        "name": "Sale of goods in the Region",
+        "resolved": true
+      }
+    ],
+    "expense": [
+      {
+        "source_field": "expense_account_id",
+        "source_id": "pcg_6011",
+        "code": "6011",
+        "name": "Purchases of goods in the Region",
+        "resolved": true
+      }
+    ],
+    "pos_receivable": [
+      {
+        "source_field": "account_default_pos_receivable_account_id",
+        "source_id": "pcg_4113",
+        "code": "4113",
+        "name": "Clients (PoS)",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_gain": [
+      {
+        "source_field": "income_currency_exchange_account_id",
+        "source_id": "pcg_776",
+        "code": "776",
+        "name": "Financial exchange gains",
+        "resolved": true
+      }
+    ],
+    "currency_exchange_loss": [
+      {
+        "source_field": "expense_currency_exchange_account_id",
+        "source_id": "pcg_676",
+        "code": "676",
+        "name": "Financial exchange losses",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_gain": [
+      {
+        "source_field": "account_journal_early_pay_discount_gain_account_id",
+        "source_id": "pcg_7019",
+        "code": "7019",
+        "name": "Rebates, rebates, rebates granted (not broken down) on the sale of goods",
+        "resolved": true
+      }
+    ],
+    "early_payment_discount_loss": [
+      {
+        "source_field": "account_journal_early_pay_discount_loss_account_id",
+        "source_id": "pcg_6019",
+        "code": "6019",
+        "name": "Discounts and rebates obtained (not broken down)",
+        "resolved": true
+      }
+    ]
+  },
+  "type_map": {
+    "asset_receivable": {
+      "root_type": "asset",
+      "subtype": "receivable",
+      "role_hint": "receivables"
+    },
+    "asset_cash": {
+      "root_type": "asset",
+      "subtype": "cash_bank",
+      "role_hint": "cash_bank"
+    },
+    "asset_current": {
+      "root_type": "asset",
+      "subtype": "current_asset",
+      "role_hint": null
+    },
+    "asset_non_current": {
+      "root_type": "asset",
+      "subtype": "non_current_asset",
+      "role_hint": null
+    },
+    "asset_prepayments": {
+      "root_type": "asset",
+      "subtype": "prepayment",
+      "role_hint": null
+    },
+    "asset_fixed": {
+      "root_type": "asset",
+      "subtype": "fixed_asset",
+      "role_hint": null
+    },
+    "liability_payable": {
+      "root_type": "liability",
+      "subtype": "payable",
+      "role_hint": "payables"
+    },
+    "liability_credit_card": {
+      "root_type": "liability",
+      "subtype": "credit_card",
+      "role_hint": null
+    },
+    "liability_current": {
+      "root_type": "liability",
+      "subtype": "current_liability",
+      "role_hint": null
+    },
+    "liability_non_current": {
+      "root_type": "liability",
+      "subtype": "non_current_liability",
+      "role_hint": null
+    },
+    "equity": {
+      "root_type": "equity",
+      "subtype": "equity",
+      "role_hint": null
+    },
+    "equity_unaffected": {
+      "root_type": "equity",
+      "subtype": "retained_earnings",
+      "role_hint": null
+    },
+    "income": {
+      "root_type": "income",
+      "subtype": "income",
+      "role_hint": null
+    },
+    "income_other": {
+      "root_type": "income",
+      "subtype": "other_income",
+      "role_hint": null
+    },
+    "expense": {
+      "root_type": "expense",
+      "subtype": "expense",
+      "role_hint": null
+    },
+    "expense_direct_cost": {
+      "root_type": "expense",
+      "subtype": "direct_cost",
+      "role_hint": null
+    },
+    "expense_depreciation": {
+      "root_type": "expense",
+      "subtype": "depreciation",
+      "role_hint": null
+    },
+    "expense_other": {
+      "root_type": "expense",
+      "subtype": "other_expense",
+      "role_hint": null
+    },
+    "off_balance": {
+      "root_type": null,
+      "subtype": "off_balance",
+      "role_hint": null
+    }
+  },
+  "summary": {
+    "accounts_total": 1134,
+    "posting_accounts": 1134,
+    "group_accounts": 0,
+    "by_root_type": {
+      "asset": 435,
+      "equity": 59,
+      "expense": 239,
+      "income": 121,
+      "liability": 208,
+      "unclassified": 72
+    },
+    "by_subtype": {
+      "cash_bank": 1,
+      "current_asset": 149,
+      "current_liability": 191,
+      "equity": 59,
+      "expense": 239,
+      "fixed_asset": 245,
+      "income": 121,
+      "off_balance": 72,
+      "payable": 17,
+      "receivable": 40
+    },
+    "unclassified_root_type": 72,
+    "duplicate_codes": [],
+    "missing_codes": 0,
+    "role_hints": {
+      "cash_bank": 1,
+      "expense": 1,
+      "income": 1,
+      "payables": 17,
+      "receivables": 40
+    },
+    "unmapped_account_types": {},
+    "translation_languages": [
+      "fr"
+    ],
+    "groups": 0
+  },
+  "groups": [],
+  "accounts": []
+}

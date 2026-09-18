@@ -6,12 +6,12 @@ $names=pl_starter_options($accounts);
 ?>
 <div class="py-5"><section class="rounded-panel border border-border bg-surface">
 <?php pl_ui_document_header('Goods receipt · '.$order['number'],'draft',static function () use ($order,$preview,$eligible,$filters): void { ?>
-<a class="btn btn-ghost" href="<?= pl_e(pl_url('/purchasing',['id'=>$order['id'],'return_filters'=>$filters])) ?>">Cancel</a>
+<a class="btn btn-ghost" href="<?= pl_e(pl_workflow_url('/purchasing',['id'=>$order['id'],'return_filters'=>$filters])) ?>">Cancel</a>
 <?php if ($order['status']==='confirmed' && $eligible!==[]): ?><button class="btn btn-secondary" form="goods-receipt-editor" name="action" value="receipt_preview">Update receipt preview</button>
 <?php if ($preview): ?><button class="btn btn-primary" form="goods-receipt-editor" name="action" value="receipt_confirm" data-review-confirm>Record goods receipt</button><?php endif; endif; ?>
 <?php }); ?>
 <?php if ($order['status']!=='confirmed' || $eligible===[]): ?><?php pl_ui_empty('No goods to receive','Receive goods from a confirmed order with quantities still outstanding. Existing receipts remain in the order history.'); ?>
-<?php else: ?><form id="goods-receipt-editor" class="doc-body" method="post" action="<?= pl_e(pl_url('/purchasing')) ?>" data-reviewed-form>
+<?php else: ?><form id="goods-receipt-editor" class="doc-body" method="post" action="<?= pl_e(pl_workflow_url('/purchasing')) ?>" data-reviewed-form>
 <?php pl_ui_return_filters($filters); ?><?= pl_csrf_field() ?><?= pl_scope_fields($company) ?><?php pl_starter_hidden('id',$order['id']); pl_starter_hidden('request_key',$input['request_key']??bin2hex(random_bytes(20))); ?>
 <?php if ($form['message']!==''): ?><div class="alert alert-danger" role="alert" tabindex="-1" data-form-error><?= pl_e($form['message']) ?><p>Your entered values are retained.</p></div><?php endif; ?>
 <p class="text-xs text-ink-muted">Enter only quantities received now; leave other lines blank. Purchase order prices are tax-exclusive. Receipt value uses the net order price and the selected rate.</p>

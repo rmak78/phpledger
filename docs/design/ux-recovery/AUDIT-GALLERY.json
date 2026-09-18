@@ -1,0 +1,1798 @@
+{
+  "recorded": "2026-09-16",
+  "scope": "local synthetic current-run screenshots; research and design only",
+  "steps": [
+    {
+      "lane": "Setup, daily and samples",
+      "step": "01",
+      "title": "Login — generally clear",
+      "notes": "Task: sign in to an existing installation. Context: anonymous, no company selected. Evidence: `01-login-{1440,768,390}.png`, inspected at all three widths.\n\n- Strength: explicit email/password labels, one primary action, and a concrete explanation of administrator-provided access. Brand and form fit all widths.\n- Friction: the decorative introduction consumes roughly 210px before the form on mobile/tablet. A returning user must pass the same marketing heading each visit.\n- Accessibility risk: the smaller muted help/footer text needs measured contrast/zoom checks; screenshots cannot confirm input autocomplete or screen-reader error announcements.\n- Responsive behavior: form remains readable with full-width fields; no visible clipping. The oversized introduction is a priority issue, not a broken layout.\n- Direction: shorten the introduction on small screens and keep the form above it in reading order. Preserve the clear single-action pattern.\n- Evidence limit: this capture is the initial form, not authentication success or validation recovery.",
+      "files": [
+        "01-login-1440.png",
+        "01-login-390.png",
+        "01-login-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "02",
+      "title": "Company selection — clear identity, excessive space",
+      "notes": "Task: open the correct company. Evidence: `02-companies-{1440,768,390}.png`, all inspected. Sample/ordinary labels, currency, ownership and opening-readiness warning are clear. Each card repeats a large amount of padding; three companies require 1654px on mobile, and the staggered desktop cards reduce scan speed. Keep the identity labels, use compact aligned rows, add a separate Explore samples entry and expose last-used company without implying account readiness. No clipping or page overflow observed. Screen-reader grouping and large-company-list navigation remain untested.",
+      "files": [
+        "02-companies-1440.png",
+        "02-companies-390.png",
+        "02-companies-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "03",
+      "title": "Onboarding — needs workflow redesign",
+      "notes": "Task: define a business before creation. Evidence: `03-onboarding-{1440,768,390}.png`, all inspected. Preview-before-create, explicit zero-balance confirmation and a visible template version are useful safeguards. However, the regional detection panel precedes business details, the six-account neutral template is the sole automatic path, and sample creation competes with ordinary setup in the same radio group. Mobile page height is 3025px. Currency labels combine countries with currencies, and the statement that currency conversion is not included is stale relative to current posting foundations. Plain help is useful but repeated limitations overwhelm the next action. Replace this with the proposed six-step progressive flow and separate sample chooser; do not infer compliance from currency. This requires catalog/backend contracts, not CSS alone. No page overflow or JS exception was measured.",
+      "files": [
+        "03-onboarding-1440.png",
+        "03-onboarding-390.png",
+        "03-onboarding-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "04",
+      "title": "Setup validation — useful recovery, distant correction",
+      "notes": "Evidence: `04-setup-validation-{1440,768,390}.png`, all inspected. Submitting a named business without the required zero-balance confirmation returned HTTP422, focused the alert, and retained the entered name. These are observed strengths. The summary explains the fix but offers no direct link to the unchecked field far below the regional panel; mobile height grows to3218px. Add a linked field error and keep conditional guidance beside the relevant choice. Screen-reader announcement was not independently tested.",
+      "files": [
+        "04-setup-validation-1440.png",
+        "04-setup-validation-390.png",
+        "04-setup-validation-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "05",
+      "title": "Setup preview — clear confirmation, incomplete future contract",
+      "notes": "Evidence: `05-setup-preview-{1440,768,390}.png`, all inspected. Correcting the checkbox reaches a separate review screen without creating a company. It clearly shows business, currency, dates, six accounts and separate Back/Create actions. The long table repeats step1, while required-role mappings, country/industry eligibility and import work are absent. Those are future contract features, not a claim of present malfunction. A compact purpose-grouped chart plus expandable accountant detail would shorten review. Mobile remains readable; creation and duplicate-confirmation were not executed in this visual audit.\n**05 responsive defect:** although page scroll width equals viewport width, the primary Create button extends beyond the left edge at390px; its leading text is clipped. Whole-page overflow checks missed this. Acceptance must measure actionable element bounds and inspect screenshots, not only document width.",
+      "files": [
+        "05-setup-preview-1440.png",
+        "05-setup-preview-390.png",
+        "05-setup-preview-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "06",
+      "title": "Existing setup review — focused warning, noisy shell",
+      "notes": "Evidence: `06-setup-review-{1440,768,390}.png`, all inspected. The opening-required company is explicitly identified and the single reconcile-opening action is clear. Multiple global navigation, company context and module-link rows precede that action; mobile hides much of the navigation behind horizontal scroll. The actual opening task is short. Collapse navigation into one consistent menu and keep company identity with the heading. Warning text is understandable; keyboard order and account permissions need separate verification.",
+      "files": [
+        "06-setup-review-1440.png",
+        "06-setup-review-390.png",
+        "06-setup-review-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "07",
+      "title": "Opening balances — sound boundary, expert input",
+      "notes": "Evidence: `07-opening-balances-{1440,768,390}.png`, all inspected. The page names one balanced starting point and separates preview from confirmation. CSV text areas expose exact account/date/document requirements, but demand accounting-format knowledge from an owner and show multiple lengthy instructions before entry. Mobile requires substantial scrolling; the page fits without whole-page overflow, but textarea horizontal content and table usability need keyboard testing. Future flow should offer upload/mapping/row errors and a clear AR/AP reconciliation difference, while retaining the existing no-double-posting contract. No cutover was confirmed.\n**07 visual detail:** the initial screen uses account/debit/credit inputs; CSV and unpaid-document entry are collapsed disclosures. On mobile the numeric inputs become very narrow. The initial capture establishes discovery of those disclosures, not their expanded contents.",
+      "files": [
+        "07-opening-balances-1440.png",
+        "07-opening-balances-390.png",
+        "07-opening-balances-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "08",
+      "title": "Opening conversion, before cutover — valid empty state, unclear prerequisite",
+      "notes": "Evidence: `08-opening-conversion-{1440,768,390}.png`, all inspected. The screen says no opening debts have been converted, inside a plain empty-state panel. It repeats the global opening warning and adds another starter-navigation strip. An owner has to infer that Opening balances comes before this page; the advice that new businesses can start ordinary flows is unhelpful for this opening-required company. Replace that generic advice with the actual prerequisite and direct action, then show mappings/reconciliation only when data exists. Mobile text wraps without page overflow. No conversion was executed. Populated conversion remains an interaction-test gap in this run.",
+      "files": [
+        "08-opening-conversion-1440.png",
+        "08-opening-conversion-390.png",
+        "08-opening-conversion-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "09",
+      "title": "Transactions — useful review console, competing navigation",
+      "notes": "Evidence: `09-transactions-{1440,768,390}.png`, all inspected. Desktop draft list and selected expense show status, amount and posting preview, with edit/post actions. Four stacked areas (global navigation, company, sample guide, administration links) precede the task. Tablet/mobile hide the adjacent detail; row links become the detail entry. Both a server filter and a table Search appear, followed by repeated counts and totals; the search icon overlaps its placeholder. The mobile date/reference column wraps one identifier across several lines and the status column is offscreen. Preserve list/detail with a compact shell, one filter model and explicit mobile Back to list. Keyboard row selection and retained-filter behavior require interaction checks.",
+      "files": [
+        "09-transactions-1440.png",
+        "09-transactions-390.png",
+        "09-transactions-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "10",
+      "title": "New receipt/expense — clear draft action, oversized guidance",
+      "notes": "Evidence: `10-expense-new-{1440,768,390}.png`, all inspected. Money in/out, date, amount, bank and category are plainly labeled; Save draft accurately describes the next action. A large guidance panel repeats the three-step flow and squeezes tablet fields, truncating select labels. On mobile that panel follows the form, extending the page to2387px. Put optional reference/memo and one-line posting guidance behind progressive disclosure; keep the primary form full-width on tablet. The statement about tax and FX being planned must be explicitly scoped to this simple editor, since other documents already support them. No save was executed on this blank form.",
+      "files": [
+        "10-expense-new-1440.png",
+        "10-expense-new-390.png",
+        "10-expense-new-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "11",
+      "title": "Existing expense edit — potential accounting-choice loss",
+      "notes": "Evidence: `11-expense-edit-{1440,768,390}.png`, all inspected. Amount, counterparty, reference and memo are retained and draft identity remains visible. However, detail09 shows Petty cash as the saved paying account, while editor11 offers only Cash and bank. Saving may substitute the saved choice; this is a high-priority source/fixture investigation, not a cosmetic issue. No save was performed. The layout repeats10, including the oversized guidance panel and narrow tablet fields. Preserve every valid saved account in edit choices and block an unavailable mapping visibly instead of selecting a different default.",
+      "files": [
+        "11-expense-edit-1440.png",
+        "11-expense-edit-390.png",
+        "11-expense-edit-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "12",
+      "title": "Posted transaction detail — traceable, misleading list context",
+      "notes": "Evidence: `12-transaction-detail-{1440,768,390}.png`, all inspected. Posted status, amount, balanced journal and report/source links are explicit. Tablet/mobile correctly present a standalone detail with Back to list. Desktop still shows the Drafts list next to the posted receipt reached by a direct link; no matching row is visible. Journal/History tabs coexist with an always-visible journal and a second History disclosure. Keep one detail hierarchy and reconcile list filter/selection context. Reversal is deliberately secondary, but two reversal affordances duplicate the same task. This historical entry was not reversed.",
+      "files": [
+        "12-transaction-detail-1440.png",
+        "12-transaction-detail-390.png",
+        "12-transaction-detail-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "13",
+      "title": "Posted journal — useful traceability, narrow amount review",
+      "notes": "Evidence: `13-journal-detail-{1440,768,390}.png`, all inspected. Source transaction and account links make the accounting chain discoverable. Business date and posted-at time are distinct. The mobile table squeezes account/description into tall wrapped columns while credit remains partially offscreen. Preserve description in expandable line detail and keep account plus debit/credit readable together; provide labeled horizontal scrolling where unavoidable. Source reference document:563 is technical context suitable for an accountant expansion. This screen highlights Reports globally despite being a journal, a navigation consistency issue.",
+      "files": [
+        "13-journal-detail-1440.png",
+        "13-journal-detail-390.png",
+        "13-journal-detail-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "14",
+      "title": "General journals — scannable desktop, mobile values hidden",
+      "notes": "Evidence: `14-general-journals-{1440,768,390}.png`, all inspected. Desktop shows date, description, status, debit, credit and balance, and the reversed example is labeled. Twenty-five long rows make a tall page; tablet loses the final balance column and mobile initially shows only identifier/description. A mobile row summary must include amount and state before opening detail. Date/status filters would be more useful than requiring free-text search across mixed history. Keep dense desktop review, pagination and source identity; verify keyboard scrolling and table announcements separately.",
+      "files": [
+        "14-general-journals-1440.png",
+        "14-general-journals-390.png",
+        "14-general-journals-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "15",
+      "title": "New general journal — strong responsive entry pattern",
+      "notes": "Evidence: `15-journal-new-{1440,768,390}.png`, all inspected. Desktop lines become labeled cards on tablet/mobile; debit and credit remain visible together. Add/remove controls and draft-only saving are clear. This is a useful existing pattern for other line editors. The shell and long instructions still delay entry. Repeated labels are appropriate on mobile, while optional descriptions can be collapsed. Removing a line must preserve focus and totals; this is not proven by screenshots. The save/review boundary is explicit and correctly separate from opening import.",
+      "files": [
+        "15-journal-new-1440.png",
+        "15-journal-new-390.png",
+        "15-journal-new-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "16",
+      "title": "Saved journal review — accurate success, mobile amount visibility fails",
+      "notes": "Evidence: `16-journal-draft-success-{1440,768,390}.png`, all inspected. A synthetic10.00 transfer draft was saved through the UI; the notice states that review/posting remains. Desktop/tablet show exact equal totals and revision1. Mobile review initially hides BOTH amount columns behind a horizontal table, while Post journal remains prominent. Entry cards in15 are stronger than this review table. Require both totals and line amounts visible before the action at narrow widths. This draft was not posted. Success has a role=status notice in the observed DOM; actual screen-reader announcement remains untested.",
+      "files": [
+        "16-journal-draft-success-1440.png",
+        "16-journal-draft-success-390.png",
+        "16-journal-draft-success-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "17",
+      "title": "General journal edit — values retained",
+      "notes": "Evidence: `17-journal-edit-{1440,768,390}.png`, all inspected. Reopening draft706 retains both cash accounts and10.0000 line values, with equal10.00 totals and draft identity. Mobile cards keep amounts readable, unlike review16. Layout suggestions match15. Four-place editing versus two-place display needs a deliberate precision policy for non-cent values, not casual rounding. No second save or posting occurred.",
+      "files": [
+        "17-journal-edit-1440.png",
+        "17-journal-edit-390.png",
+        "17-journal-edit-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "18",
+      "title": "Reversed journal — history preserved and discoverable",
+      "notes": "Evidence: `18-reversed-journal-{1440,768,390}.png`, all inspected. The original25.00 entry remains with Reversed status and a linked reversing journal. Posting/edit controls are absent. Mobile shares16's hidden amount columns. The description explains the teaching correction, but a concise dated correction timeline would make original/reversal/replacement easier to follow. The existing pack uses its historical fixture structure; this capture does not prove a new same-document correction workflow. No new reversal was submitted.",
+      "files": [
+        "18-reversed-journal-1440.png",
+        "18-reversed-journal-390.png",
+        "18-reversed-journal-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "19",
+      "title": "POS cart — clear task, context consumes first screen",
+      "notes": "Evidence: `19-pos-{1440,768,390}.png`, all inspected. Product buttons, prices, category search, empty-cart guidance and disabled Review action establish a clear sequence. Desktop/tablet keep cart adjacent; mobile places it below products with a fixed View cart shortcut. That shortcut overlaps content in the viewport and needs focus/scroll-obscuring tests. Much of the first screen is shell/progress/context. The catalog is explicitly a sample; its showcase stock/tax limitations must stay visible without implying shared inventory integration. Preserve this task-focused pattern with a shorter shell.",
+      "files": [
+        "19-pos-1440.png",
+        "19-pos-390.png",
+        "19-pos-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "20",
+      "title": "POS cash review — clear amounts and boundary",
+      "notes": "Evidence: `20-pos-review-{1440,768,390}.png`, all inspected. Adding one notebook and choosing Review produces4.50 due, a separate cash field and an explicit no-provider-payment statement. Record remains disabled until sufficient cash. Mobile stacks items then cash and keeps all values readable, though the repeated total and whitespace lengthen the task. Preserve the explicit amount-due/cash/change sequence, support a compact summary and test focus after Edit cart. This is a synthetic local showcase sale.",
+      "files": [
+        "20-pos-review-1440.png",
+        "20-pos-review-390.png",
+        "20-pos-review-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "21",
+      "title": "POS receipt — successful local flow, clipped print action",
+      "notes": "Evidence: `21-pos-receipt-{1440,768,390}.png`, all inspected. Entering5.00 showed0.50 change; recording saved synthetic receipt591 with a balanced journal. Receipt totals, source/journal links and stock/tax limitations are explicit. On mobile the Print receipt button is partly outside the LEFT edge, another negative-overflow defect that document-width checks miss. Source/journal links need wrapping as a vertical action group. Printing itself was not invoked; no real payment was taken. The local fixture now includes this4.50 practice sale.",
+      "files": [
+        "21-pos-receipt-1440.png",
+        "21-pos-receipt-390.png",
+        "21-pos-receipt-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "22",
+      "title": "Historical sample guide — strong teaching links, too much at once",
+      "notes": "Evidence: `22-sample-guide-{1440,768,390}.png`, all inspected. The guide names closed2024/2025 and open2026, gives specific amounts to trace, and links source records, monthly statements, reversals and practice drafts. It clearly distinguishes manual support schedules from implemented operational modules. Three teaching tasks plus lengthy schedules produce4511px on mobile. Turn this into a short Choose an exercise list with expandable evidence and progress retained in the sample session. Keep pack/version and synthetic identity, and explain that original checkpoints differ after practice entries. Public hourly-expiry behavior is not present on this ordinary local sample route.",
+      "files": [
+        "22-sample-guide-1440.png",
+        "22-sample-guide-390.png",
+        "22-sample-guide-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "23",
+      "title": "Help — clear instructions, stale feature inventory",
+      "notes": "Evidence: `23-help-{1440,768,390}.png`, all inspected. Numbered receipt/expense instructions and explicit permissions are useful. However, What this preview includes still calls invoice collection, bill settlement and inventory future work, conflicting with0.4.0. The correction text also needs current service-specific boundaries. Help drops the active company shell, forcing a return through businesses rather than the originating task. The3993px mobile page needs a task index and contextual return link. Update claims from release evidence, with separate simple-editor/POS limitations. No help links to external services were followed.",
+      "files": [
+        "23-help-1440.png",
+        "23-help-390.png",
+        "23-help-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "24",
+      "title": "Missing route — clear basic recovery",
+      "notes": "Evidence: `24-not-found-{1440,768,390}.png`, all inspected. HTTP404 shows a short title and Return link, without stack traces. It fits all widths. It drops company context and offers no way back to the exact prior task; a safe contextual return would help. Keyboard focus on initial error navigation and screen-reader page-title usefulness remain untested.",
+      "files": [
+        "24-not-found-1440.png",
+        "24-not-found-390.png",
+        "24-not-found-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "25",
+      "title": "Wrong-method error — safe but technical",
+      "notes": "Evidence: `25-wrong-method-{1440,768,390}.png`, all inspected. Visiting the POST-only save route with GET returns405 and a simple recovery link; no write occurs. Text fits each width but 'different request' is implementation language. Explain that the action must be started from the form, with a safe return to it where possible. This deliberately invalid navigation is an error-state check, not an ordinary workflow route.",
+      "files": [
+        "25-wrong-method-1440.png",
+        "25-wrong-method-390.png",
+        "25-wrong-method-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "26",
+      "title": "Expired local public-demo generation — honest block, wrong recovery advice",
+      "notes": "Evidence: `26-public-demo-{1440,768,390}.png`, all inspected. After the local generation expired at00:00UTC, HTTP503 correctly prevented further work and focused the refresh-due notice. The generic company-permissions paragraph is irrelevant to a timed refresh, and mobile clips Return to your businesses off the left edge. Replace this with refresh status, a safe retry and explicit draft/session consequences. This was the isolated local demo, not evidence of a production outage. The local harness has no scheduler, so the approved guarded local reset is needed to continue capture.",
+      "files": [
+        "26-public-demo-1440.png",
+        "26-public-demo-390.png",
+        "26-public-demo-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "27",
+      "title": "Public sample chooser — clear isolation, delayed entry",
+      "notes": "Evidence: `27-demo-chooser-{1440,768,390}.png`, all inspected after the guarded local-only reset. Countdown, per-visitor isolation, no-registration and fictional-data notices are explicit. The five choices include the new starter and four historical packs. The marketing headline and country-detection panel push Start below the first mobile screen; country/currency labels still merge two concepts. Put company choice and currency first, show concrete exercise previews, and keep the expiry notice. No regional chart/compliance is implied by the help text. Only the isolated local schema was refreshed; production scheduling was untouched.",
+      "files": [
+        "27-demo-chooser-1440.png",
+        "27-demo-chooser-390.png",
+        "27-demo-chooser-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "28",
+      "title": "Accounting starter guide — useful linked exercises",
+      "notes": "Evidence: `28-starter-guide-{1440,768,390}.png`, all inspected. The guide names the zero-balance starting point, manual synthetic tax example, expected partial-payment balances and three-step purchase/sale/reconciliation exercise. The purchase action and source links fit every width. It correctly distinguishes this empty starter from the four historical companies. The mobile page remains long and repeats the sample-guide link above its own guide; replace the introductory stack with compact persistent identity and one exercise at a time. This local sample was created through Start my sample. These captures do not prove completion of the exercises; the release has a separate end-to-end receipt.",
+      "files": [
+        "28-starter-guide-1440.png",
+        "28-starter-guide-390.png",
+        "28-starter-guide-768.png"
+      ]
+    },
+    {
+      "lane": "Setup, daily and samples",
+      "step": "29",
+      "title": "Keyboard spot check — skip link works",
+      "notes": "Evidence: `29-keyboard-skip-390.png`, inspected. Starting from the fresh sample-guide page, the first Tab visibly focused Skip to content with a strong outline. Enter moved actual focus to `MAIN#main` and the URL fragment became `#main`. This is a successful narrow keyboard check, not evidence that all controls, dialogs or financial workflows are keyboard accessible. Screen-reader use, browser zoom, contrast measurement and reduced-motion checks remain separate gates.",
+      "files": [
+        "29-keyboard-skip-390.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R1",
+      "title": "Choose an account - usable, with mobile discovery friction",
+      "notes": "**Route/context:** `/accounts`, Cedar Studio, 20 accounts. User wants an account's classification or statement.\n\n**Strengths:** company, book and currency stay visible; active status and readable account names/codes are clear. Each statement link has an account-specific accessible name in the DOM. Historical/inactive-account retention is explained.\n\n**Friction:** the desktop view dedicates a large right pane to \"Choose an account\" while the twenty-row list occupies the left. There is no visible search/type filter or balance in the list. On a phone the statement action sits beyond the initially visible table columns, so the direct route to an account's activity is easy to miss.\n\n**Responsive/accessibility:** page width stays within the viewport, but the account table and main navigation scroll horizontally; that is not equivalent to all content being immediately readable. The active Accounts navigation item is partially outside the phone view. Table headers/caption and descriptive statement link names are strengths; keyboard discoverability of horizontal scrolling needs explicit acceptance testing.\n\n**Next design criterion:** search/filter the chart, expose the selected account's balance and statement action without lateral hunting, and retain fixed account identity/classification rules. Creating or editing accounts was not exercised.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone</summary>\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-accounts-1440.png",
+        "50-accounts-768.png",
+        "50-accounts-390.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R2",
+      "title": "Trace an account statement - strong accounting context, heavy small-screen layout",
+      "notes": "**Route/context:** `/reports/account?id=5511`, Cedar Studio cash/bank, all posted history through 15 September 2026. The route parameter is `id`, not `account_id`.\n\n**Strengths:** opening/debit/credit/closing totals, Dr/Cr explanation, per-line running balances, source and journal links, date filters and an explicit all-pages CSV action support traceability. The screen explains that sorting/searching do not recalculate historical running balances. The captured total is 41,935.00 Dr across 94 entries; this is observed fixture output, not an independently reconciled audit assertion.\n\n**Friction:** the default starts at the oldest entries across all history. At 768px the table becomes tall cards, producing a 7,348px page; at 390px it becomes 8,539px. The first phone viewport ends before the headline balances. Twenty-five rows and pagination at the very bottom make movement through years of history cumbersome.\n\n**Responsive/accessibility:** cards keep descriptions, debit/credit labels and running balances readable without page overflow. Compact statement layout and a shorter default mobile page would reduce repeated scrolling. Search and period filters must preserve clear distinctions between filtered rows and full-period totals. Keyboard sorting, screen-reader announcement of filtered counts and CSV contents were not tested.\n\n**Capture note:** the first desktop capture raced table initialization and contained an artificial blank lower area; it was rejected. The accepted `ready` captures wait for network/font/layout readiness. Original rejected files remain outside this report's evidence directory.\n\n<details><summary>Accepted screenshots: full desktop/tablet/phone and readable viewport details</summary>\n\n\n\n\n\n\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-account-statement-ready-1440.png",
+        "50-account-statement-ready-768.png",
+        "50-account-statement-ready-390.png",
+        "50-account-statement-phone-top.png",
+        "50-account-statement-phone-entries.png",
+        "50-account-statement-tablet-entries.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R3",
+      "title": "Find a report - clear owner language, missing shared reporting controls",
+      "notes": "**Route/context:** `/reports`, Cedar Studio. User wants cash, profit, financial position or an account drill-down.\n\n**Strengths:** question-led cards explain balance sheet, profit/loss and a cash scenario; currency, posted-only basis and reporting dates are visible. Cash/bank explicitly aggregates several accounts. Totals accompany the small bar graphic, so colour alone does not carry its meaning.\n\n**Friction:** the hub uses the full history from January 2024 to the current server date without a visible period selector. Trial balance and account ledger sit below three large cards, especially far down on a phone. The primary New transaction button competes with the report-selection task. Clicking the cash summary leads to financial position rather than a focused cash-account breakdown. AR/AP ageing and inventory/GRNI reconciliations are not available as report cards here.\n\n**Responsive/accessibility:** cards reflow cleanly with no page overflow. Tablet/phone stacking adds scrolling and places technical reports near the bottom. Small muted explanatory text needs contrast measurement before sign-off; visual inspection alone cannot establish compliance.\n\n**Next design criterion:** common period controls and a compact report chooser should expose owner summaries and reconciliation/ledger routes while preserving posted-only and scenario distinctions.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone</summary>\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-reports-1440.png",
+        "50-reports-768.png",
+        "50-reports-390.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R4",
+      "title": "Review profit and loss - readable totals, weak drill-down affordance",
+      "notes": "**Route/context:** `/reports/profit-loss`, Cedar Studio, 1 January 2024 through 15 September 2026.\n\n**Strengths:** separate income/expense sections, net profit, date fields, CSV action and an explicit arithmetic summary make the statement understandable. The explanation distinguishes profit from cash and includes dated reversals. Account codes and names remain visible.\n\n**Friction:** the page defaults to the business's full multi-year history rather than a familiar current reporting period. There are no visible this-month/year or prior-period comparison choices. Account labels look like ordinary text, weakening the path from an expense total to its transactions; the follow-up click in step 14 confirms that the existing drill-down works and preserves dates.\n\n**Responsive/accessibility:** two desktop sections stack into a readable single column on tablet/phone, with no page overflow. Phone dates/actions and totals remain legible. Small account codes and low-emphasis explanatory text need measured contrast and zoom testing. This capture does not test an invalid date range, export or report navigation with a screen reader.\n\n**Next design criterion:** preserve the selected period across report-to-account drill-down; provide familiar period presets and clearly interactive rows without changing report accounting.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone</summary>\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-profit-loss-1440.png",
+        "50-profit-loss-768.png",
+        "50-profit-loss-390.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R5",
+      "title": "Review financial position - coherent statement, dense hierarchy",
+      "notes": "**Route/context:** `/reports/balance-sheet`, Cedar Studio, as of 15 September 2026.\n\n**Strengths:** assets/liabilities/equity totals, account detail, earned-profit explanation and the explicit accounting equation provide a clear review structure. The screen correctly qualifies that balanced totals alone do not establish correct books. Negative accumulated depreciation remains visible rather than being hidden.\n\n**Friction:** all accounts, including zero balances, share the same visual weight. There is no current/noncurrent or reviewed reporting-group hierarchy, comparison column, or visible hide-zero choice. The top equity value wraps its currency on the phone. Account links again resemble static text; source inspection confirms both balance-sheet and P&L names actually link to `/reports/account`, carrying the report dates. This is an affordance weakness, not a missing backend drill-down.\n\n**Responsive/accessibility:** three columns become a readable stack. No page overflow occurs, but the equation and qualification appear only after a long phone scroll. Preserve the visible text equation alongside its green styling; colour should not be the only review signal. Keyboard/focus behaviour of statement links remains to be tested.\n\n**Next design criterion:** make drill-downs discoverable, keep financial-position date context, and add hierarchy only through reviewed metadata rather than guessed country classifications.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone</summary>\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-balance-sheet-1440.png",
+        "50-balance-sheet-768.png",
+        "50-balance-sheet-390.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R6",
+      "title": "Check the trial balance - useful desktop view, phone filter defect",
+      "notes": "**Route/context:** `/reports/trial-balance`, Cedar Studio. User checks debit/credit equality and drills into accounts.\n\n**Strengths:** underlined account links are discoverable; the posted-only explanation, account codes, separate debit/credit columns and qualification of equal totals are appropriate. Tablet rendering remains readable.\n\n**Friction/confirmed defect:** at 390px the Through date label and input extend beyond the **left** viewport edge. The browser's document-width check still reports390px, so a no-horizontal-overflow check alone misses this clipping. The table's Credit column also lies outside the initial phone view, weakening a side-by-side equality check. The Back to transactions action differs from the other reports' All reports action.\n\n**Responsive/accessibility:** the offscreen date control is a priority repair; users should not need to discover an inaccessible negative horizontal offset to set the report date. The table needs a clear horizontal-scroll cue or a compact readable alternative, and a visible top-level debit/credit/difference summary. The tiny agreement badge below twenty rows should not be the only status cue.\n\n**Next design criterion:** at 390px and 200% zoom every filter remains fully reachable, both totals/difference are available before the long list, and back-navigation returns to the report task. No report values were changed in this capture.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone</summary>\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-trial-balance-1440.png",
+        "50-trial-balance-768.png",
+        "50-trial-balance-390.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R7",
+      "title": "Explore a cash scenario - honest scope, small-screen chart/table weaknesses",
+      "notes": "**Route/context:** `/reports/cash-forecast`, Cedar Studio, illustrative weekly inflow 250 / outflow 175 over 12 weeks.\n\n**Strengths:** the screen clearly labels this a planning scenario, shows starting posted cash, editable assumptions, projected closing cash and a week-by-week table. It explicitly says receivables timing, seasonality, taxes and unrecorded commitments are not included, and that the scenario does not post entries.\n\n**Friction:** a large nearly flat graph conveys little change for this fixture; no saved/named scenario or comparison is visible. On a phone the table's outflow/closing columns are outside the initial view, while the chart's axis labels become very small. The repeated weekly assumptions cannot represent a seasonal month-by-month business without additional, explicitly scoped work.\n\n**Responsive/accessibility:** assumption controls remain readable and the main page has no horizontal overflow. A textual projected result and detailed table provide alternatives to the chart, but those alternatives need readable small-screen access. No scenario submission, validation error, keyboard chart interaction or screen-reader chart description was tested.\n\n**Next design criterion:** keep the explicit manual-scenario boundary; use readable chart labels and compact weekly rows, and make a missing/negative-cash condition understandable without relying on chart colour.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone</summary>\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-cash-forecast-1440.png",
+        "50-cash-forecast-768.png",
+        "50-cash-forecast-390.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R8",
+      "title": "Begin bank reconciliation - cautious import contract, empty review lane",
+      "notes": "**Route/context:** `/bank-reconciliation`, Cedar Studio. No statements exist in this fixture; this captures the entry/empty-history state only.\n\n**Strengths:** currency, CSV format/limits, statement period and balances are explicit. The first-statement checkbox exposes the cleared-baseline assumption rather than silently accepting earlier outstanding items. The primary action is Preview statement, not an immediate import/post.\n\n**Friction:** a long technical CSV specification precedes every input. No downloadable example, account-specific current reconciliation status or guided first-baseline explanation is visible. Both paste and upload choices occupy the main form. A new user must understand the long baseline checkbox before seeing a concrete comparison.\n\n**Responsive/accessibility:** the form stacks cleanly on a phone with readable labels and no page overflow. The small checkbox plus a multi-line consequential statement needs a generous clickable label, keyboard and error-association verification. File parsing, preview errors, match suggestions, manual matching, completion and cancellation were not exercised because this lane was read-only and the fixture had no statement history.\n\n**Next design criterion:** show each account's last completed statement and next action; use a short prepare/preview/match/finish flow with an explicit first-baseline review. Preserve exact-amount matching, existing AR/AP settlement matching and no-double-post rules.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone</summary>\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-bank-reconciliation-1440.png",
+        "50-bank-reconciliation-768.png",
+        "50-bank-reconciliation-390.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R9",
+      "title": "Review accounting periods - controls are explained, history is hard to scan",
+      "notes": "**Route/context:** `/periods`, Cedar Studio, closed historical periods and an open 2026 practice year.\n\n**Strengths:** the introduction distinguishes posting-date closure from year-end adjustments, profit transfer or accounting approval. Close/reopen actions are collapsed rather than immediate one-click writes. The list shows date ranges and states; administration history retains reasons, actors and event times.\n\n**Friction:** the history renders below the complete period list, with up to 100 actions and no visible filter/pagination. In this fixture the phone page reaches 9,295px. Its five-column history wraps reasons into narrow word stacks and pushes actor/time offscreen. A generic View reports link does not guide a bookkeeper through actual pre-close checks.\n\n**Responsive/accessibility:** explanatory text and collapsed action labels are readable at 390px; the historical table is not efficient to read. Open/Closed text accompanies status styling. No close, reopen, create, reason validation or permission-denied submission was performed. Keyboard behaviour of disclosures and focus after a failed action need testing.\n\n**Next design criterion:** group periods by year, show the active period and a compact review summary, and move searchable/paginated action history into a readable timeline or dedicated view. Keep owner-only reopening and service-enforced closed-period rules.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone and readable phone details</summary>\n\n\n\n\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-periods-1440.png",
+        "50-periods-768.png",
+        "50-periods-390.png",
+        "50-periods-phone-top.png",
+        "50-periods-phone-history.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R10",
+      "title": "Configure tax - honest country-neutral boundary, form-heavy administration",
+      "notes": "**Route/context:** `/tax`, Starter Workshop, one synthetic DEMO5 rate and the default tax-exclusive price mode.\n\n**Strengths:** the screen states that codes/rates are manual and excludes country rules, filing and forms. It explains the saved document's frozen price mode, the effect of a dated rate and the distinction between input/output tax accounts. Current default and immutable rate history are visible.\n\n**Friction:** three full forms (price default, create code, add rate) precede the only existing-rate row. There is no compact code list showing each code's treatment, mapped accounts, current rate and next action. Switching inclusive/exclusive prices has no numerical example. The new-document default and per-document saved choice require careful reading. Secondary starter navigation repeats destinations already in the main navigation.\n\n**Responsive/accessibility:** inputs stack successfully with no page overflow; on the phone the history's reason extends beyond the initial table view. Multiple identical Reason labels rely on section context. The six-decimal percentage display is exact but visually noisy for a simple 5% example. Keyboard section navigation, errors, owner permissions and changes to existing drafts were not exercised.\n\n**Next design criterion:** show current configuration before edit/create actions, illustrate the price-mode difference, and review each rate/account change with its effective date and affected-new-document scope. Preserve frozen document snapshots and manual, jurisdiction-neutral behaviour.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone</summary>\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-tax-1440.png",
+        "50-tax-768.png",
+        "50-tax-390.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R11",
+      "title": "Choose optional modules - boundaries clear, dependency impact needs a review step",
+      "notes": "**Route/context:** `/modules`, Starter Workshop. Inventory/Purchasing enabled; cash POS showcase disabled; AR/AP navigation shown.\n\n**Strengths:** the page clearly separates hiding AR/AP navigation from disabling optional operations. It states that core AR/AP remain available, existing financial totals/history remain intact and the POS showcase does not use Inventory. Module state, installed version, reason fields and recent changes are visible.\n\n**Friction:** navigation preferences and operational activation share one long settings page. The Inventory card offers Disable while Purchasing is enabled, without an immediate visible dependency-impact explanation beside the button. Each card repeats history text and a full reason form. Recent changes start directly beneath the final card and their narrow phone table hides actor/time metadata.\n\n**Responsive/accessibility:** cards stack without page overflow and state words accompany styling. The checkbox targets and repeated Disable module labels need keyboard/screen-reader context testing. No preference/module state was changed; any backend rejection of an invalid dependency transition was not exercised here.\n\n**Next design criterion:** keep required/core services distinct from visibility preferences, show dependency consequences before confirmation, and preserve reasoned owner-only changes and historical reads. Avoid presenting a hide-navigation choice as removing an accounting capability.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone</summary>\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-modules-1440.png",
+        "50-modules-768.png",
+        "50-modules-390.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R12",
+      "title": "Understand reporting connections - scope clear, technical setup needs guidance",
+      "notes": "**Route/context:** `/connections`, Starter Workshop, no existing credentials. No token was created.\n\n**Strengths:** the company/book and read-only nature are explicit. Expiry, revocation and the receiving client's handling of financial data are described. Separate credentials for private workflows and separate OAuth connections for shared-chat users are advised. The empty state does not imply a connected client.\n\n**Friction:** Streamable HTTP, OAuth and tokens appear before a task-oriented choice or client-specific instruction. The endpoint is plain text without a visible copy action. The page exposes a numeric book ID while the human-readable Primary book label is already available. Broad connection-revocation wording needs a concrete impact review when a connection has multiple grants.\n\n**Responsive/accessibility:** text and controls reflow cleanly at all three widths; the long placeholder clips in the phone input, although the visible Connection name label remains. A copy action should provide an accessible success message, not only an icon. Credential reveal, consent, token expiry, revoke confirmation and actual client access were not exercised.\n\n**Next design criterion:** present a clear private-token versus supported-client/OAuth choice with explicit company/book scope, copyable endpoint, and useful empty/history states; retain read-only access and no automatic external connection.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone</summary>\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-connections-1440.png",
+        "50-connections-768.png",
+        "50-connections-390.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R13",
+      "title": "Recover from invalid authorization - clear focus, wrong recovery emphasis and phone clipping",
+      "notes": "**Route/context:** `/oauth/authorize` without an OAuth request. This is the deliberately requested invalid-request state, not a valid consent flow.\n\n**Strengths:** the screen rejects the incomplete request, exposes no credential, gives a conspicuous focused error panel and offers return/help actions. It does not silently authorize a client or redirect to an unverified address.\n\n**Friction/confirmed defect:** the message requires authorization-code/PKCE/state/redirect/resource parameters, but the generic recovery text advises checking business permissions. That is unlikely to resolve a malformed client request. At390px the primary Return to your businesses button extends beyond the left viewport edge; the measured page width still appears valid.\n\n**Responsive/accessibility:** the error explanation wraps readably and visible focus is a strength. The clipped recovery action is a priority repair. Error focus/announcement needs screen-reader validation; the currently focused panel alone does not prove an announcement. Valid consent, denial, client redirect and scope review were not tested.\n\n**Next design criterion:** distinguish an invalid client request from access denial, provide a useful client-setup/restart path, and keep both recovery actions inside the phone viewport without weakening OAuth validation.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone</summary>\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-oauth-invalid-1440.png",
+        "50-oauth-invalid-768.png",
+        "50-oauth-invalid-390.png"
+      ]
+    },
+    {
+      "lane": "Reporting and administration",
+      "step": "R14",
+      "title": "Follow a period result to its account - successful date-preserving drill-down",
+      "notes": "**Route/context:** after opening P&L with `from=2025-01-01&to=2025-12-31`, clicked its observed Sales and service income link. The resulting URL is `/reports/account?id=5515&as_of=2025-12-31&from=2025-01-01`.\n\n**Observed result:** both dates survive, the account is correct and the statement shows 24 matching entries. The period credit total is 36,000.00, separately from opening 36,800.00 Cr and cumulative closing 72,800.00 Cr. This confirms a useful existing report-to-account interaction; it does not independently validate the fixture's accounting.\n\n**Design consequence:** improve the original statement row's link styling and keep the distinction between period movement and cumulative closing balance. Back to reports currently returns to the generic hub rather than an explicit breadcrumb to the originating period P&L. The same tall-card behaviour remains at 768/390px. No transaction was edited or posted.\n\n<details><summary>Accepted screenshots: desktop, tablet, phone</summary>\n\n\n\n\n\n\n\n</details>",
+      "files": [
+        "50-period-drilldown-1440.png",
+        "50-period-drilldown-768.png",
+        "50-period-drilldown-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O1",
+      "title": "AR register, `/ar`",
+      "notes": "Friction: clear balance/actions; register follows a large report\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-ar-list-1440.png",
+        "30-ar-list-768.png",
+        "30-ar-list-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O2",
+      "title": "New invoice, `/ar?new=1`",
+      "notes": "High friction: five fixed empty line groups; no visible running total\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-ar-new-1440.png",
+        "30-ar-new-768.png",
+        "30-ar-new-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O3",
+      "title": "Draft review, `/ar?id=194`",
+      "notes": "Friction: clear total and edit/post actions; domestic rate field and repeated reports\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-ar-draft-1440.png",
+        "30-ar-draft-768.png",
+        "30-ar-draft-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O4",
+      "title": "Posted invoice/receipt form, `/ar?id=193`",
+      "notes": "High friction: remaining amount clear; unnecessary required FX choices\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-ar-posted-1440.png",
+        "30-ar-posted-768.png",
+        "30-ar-posted-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O5",
+      "title": "AP register, `/ap`",
+      "notes": "Friction: same report-before-register hierarchy\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-ap-list-1440.png",
+        "30-ap-list-768.png",
+        "30-ap-list-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O6",
+      "title": "Posted bill/payment form, `/ap?id=192`",
+      "notes": "High friction: balance clear; required FX choices and weak purchase context\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-ap-bill-1440.png",
+        "30-ap-bill-768.png",
+        "30-ap-bill-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O7",
+      "title": "Party register, `/parties`",
+      "notes": "Friction: one shared record is clear; roles hidden to the right on mobile\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-parties-1440.png",
+        "30-parties-768.png",
+        "30-parties-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O8",
+      "title": "New party, `/parties?new=1`",
+      "notes": "Friction: labels present; basic roles follow advanced account choices\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-party-form-1440.png",
+        "30-party-form-768.png",
+        "30-party-form-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O9",
+      "title": "Purchasing register, `/purchasing`",
+      "notes": "Friction: order list follows receipts/reconciliation\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-purchasing-list-1440.png",
+        "30-purchasing-list-768.png",
+        "30-purchasing-list-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O10",
+      "title": "Order/partial receiving, `/purchasing?id=42`",
+      "notes": "Friction: quantities clear; GRNI account and rate interrupt receiving\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-purchase-order-1440.png",
+        "30-purchase-order-768.png",
+        "30-purchase-order-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O11",
+      "title": "Expanded receipt and return, same route",
+      "notes": "High friction: ineligible unbilled return option is the default\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-purchase-receipt-1440.png",
+        "30-purchase-receipt-768.png",
+        "30-purchase-receipt-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O12",
+      "title": "New order, `/purchasing?new=1`",
+      "notes": "High friction: five fixed lines; unit-price tax basis is not adjacent\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-purchase-new-1440.png",
+        "30-purchase-new-768.png",
+        "30-purchase-new-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O13",
+      "title": "Inventory valuation/movements, `/inventory`",
+      "notes": "Friction: reconciliation visible; internal IDs and catalogue below reports\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-inventory-1440.png",
+        "30-inventory-768.png",
+        "30-inventory-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O14",
+      "title": "Product details, `/inventory?id=108`",
+      "notes": "Friction: product maintenance precedes stock actions\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-inventory-product-1440.png",
+        "30-inventory-product-768.png",
+        "30-inventory-product-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O15",
+      "title": "Expanded stock count, same route",
+      "notes": "Friction: current stock/reason visible; no adjustment preview\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-inventory-count-1440.png",
+        "30-inventory-count-768.png",
+        "30-inventory-count-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O16",
+      "title": "Select product in unsaved invoice line",
+      "notes": "High friction confirmed: product changes, known defaults stay blank\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-ar-product-selected-1440.png",
+        "30-ar-product-selected-390.png"
+      ]
+    },
+    {
+      "lane": "Customer, supplier and stock",
+      "step": "O17",
+      "title": "Keyboard skip link, `/ar`",
+      "notes": "Healthy in this check: visible focus; Enter focuses `main`\nSee OPERATIONS-AUDIT.md for ranked findings, interaction evidence and acceptance criteria.",
+      "files": [
+        "30-keyboard-skip-390.png"
+      ]
+    },
+    {
+      "lane": "Additional evidence",
+      "step": "Extra",
+      "title": "Focused interaction captures",
+      "notes": "Focused current-run evidence referenced by the detailed reports.",
+      "files": [
+        "60-account-detail-1440.png",
+        "60-account-detail-390.png",
+        "60-account-detail-768.png",
+        "60-account-new-1440.png",
+        "60-account-new-390.png",
+        "60-account-new-768.png"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "file": "01-login-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "cba9e4a01099139f5fbe4beb72f3a267b36520e650c7e32042c64873a94359e0"
+    },
+    {
+      "file": "01-login-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "c6cc33a7c55ace6d791c18fb5ab83885cfd7308f6157ed9417aaf0006e496dd6"
+    },
+    {
+      "file": "01-login-768.png",
+      "width": 768,
+      "height": 1000,
+      "sha256": "8d6aa8c8dc3eda8484461a6b204a20301e0ac2a6b81815332c1dacb57266af82"
+    },
+    {
+      "file": "02-companies-1440.png",
+      "width": 1440,
+      "height": 1039,
+      "sha256": "1f8965d74899864f1b3350b0f73aa4ee00e5b1061833a2b78f0dd7344ccc9564"
+    },
+    {
+      "file": "02-companies-390.png",
+      "width": 390,
+      "height": 1654,
+      "sha256": "385830a207188d619b769417499187c8759f5c52e5ff6814cd63adfea7fc181d"
+    },
+    {
+      "file": "02-companies-768.png",
+      "width": 768,
+      "height": 1216,
+      "sha256": "504acfa8fbfd9b6a6e320d2afc5d1ed2ac61ccf3bace864fad3cd8537c347880"
+    },
+    {
+      "file": "03-onboarding-1440.png",
+      "width": 1440,
+      "height": 2219,
+      "sha256": "521a8a85e115e96c2e340aeb36950446a7a90df9b0fe5033f485d9877741c87f"
+    },
+    {
+      "file": "03-onboarding-390.png",
+      "width": 390,
+      "height": 3025,
+      "sha256": "718c93816d153c04948912135f8de57b0de915ff2c088c1f5d1ddf98122c0e55"
+    },
+    {
+      "file": "03-onboarding-768.png",
+      "width": 768,
+      "height": 2347,
+      "sha256": "7be28a5e81847d6e2dd11d36d2707e01744aa228a1a343d35df255898d7496ff"
+    },
+    {
+      "file": "04-setup-validation-1440.png",
+      "width": 1440,
+      "height": 2367,
+      "sha256": "15852cbdf867ec72d86bd1cc939a43c1b7eae7f6973e9e088719c17f0f8e0bb0"
+    },
+    {
+      "file": "04-setup-validation-390.png",
+      "width": 390,
+      "height": 3218,
+      "sha256": "e6200b52bdc13de833196b8baa23911f2c0cf482464044720c00be8fa1d4c9f3"
+    },
+    {
+      "file": "04-setup-validation-768.png",
+      "width": 768,
+      "height": 2494,
+      "sha256": "382678c4e3cb6df0faf711799f6fbb59cf940b13185a64d89702a601688ccf3e"
+    },
+    {
+      "file": "05-setup-preview-1440.png",
+      "width": 1440,
+      "height": 1344,
+      "sha256": "8ae42262e8f4eb2d639dca290273aece0dbfec63dd5309b6bc7fe3487959d4f7"
+    },
+    {
+      "file": "05-setup-preview-390.png",
+      "width": 390,
+      "height": 1768,
+      "sha256": "d3199dcb9720e4b0da7f18d559056f5819bccb98e2c171038b3556e1bf79fffc"
+    },
+    {
+      "file": "05-setup-preview-768.png",
+      "width": 768,
+      "height": 1368,
+      "sha256": "9575b5ae0f073497d9af9eb3332dc530ff5ccb1b1a0938cf535bc491872a41f7"
+    },
+    {
+      "file": "06-setup-review-1440.png",
+      "width": 1440,
+      "height": 1090,
+      "sha256": "70731c1882803e6fdff8cd81daa08098463551ea65ebb494d3baf2737e839fdc"
+    },
+    {
+      "file": "06-setup-review-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "6f1339ce74228005ed4c512bc079af7afa85e9afac5bf1a479589d789341526f"
+    },
+    {
+      "file": "06-setup-review-768.png",
+      "width": 768,
+      "height": 1143,
+      "sha256": "560ab06f5a6a4c3edc678b621ed03ee6fa2c6893993027cc48f1bbeaab561d98"
+    },
+    {
+      "file": "07-opening-balances-1440.png",
+      "width": 1440,
+      "height": 1760,
+      "sha256": "ce1a5e36546e7d07e50666db97a4c5291df1f005fff24062b3f06561f39ea483"
+    },
+    {
+      "file": "07-opening-balances-390.png",
+      "width": 390,
+      "height": 2333,
+      "sha256": "d6414a87686594fb6b1be63b348f9e59f8f378b6d4fe3e31858dc60a540e23d3"
+    },
+    {
+      "file": "07-opening-balances-768.png",
+      "width": 768,
+      "height": 1882,
+      "sha256": "91d88a6bec4158cb0f6192e420324135223871adbc1f4082c0e46e32cd20eaa0"
+    },
+    {
+      "file": "08-opening-conversion-1440.png",
+      "width": 1440,
+      "height": 1090,
+      "sha256": "1f600adb29e2824c49e641c22a6a7e63bc6b1b3b0dc98f71a707233f7f240b06"
+    },
+    {
+      "file": "08-opening-conversion-390.png",
+      "width": 390,
+      "height": 1041,
+      "sha256": "2e6e5aaad471bdf15ce128f6f6f1bf56796fb9db3b36c313f97717fcc8c4a071"
+    },
+    {
+      "file": "08-opening-conversion-768.png",
+      "width": 768,
+      "height": 1143,
+      "sha256": "e4cef5c9246edd8ebbd6bd7adf9acbebe5a665c11705b451338e19d55211ec4a"
+    },
+    {
+      "file": "09-transactions-1440.png",
+      "width": 1440,
+      "height": 1337,
+      "sha256": "2092b79fb9588c62bdb46b5561f706aef414a53379c37d9515db9fddb293bf22"
+    },
+    {
+      "file": "09-transactions-390.png",
+      "width": 390,
+      "height": 1636,
+      "sha256": "8e7b60836be49e3c05a1d805d247022cd69da26690883f40c437ef24d6bafd25"
+    },
+    {
+      "file": "09-transactions-768.png",
+      "width": 768,
+      "height": 1237,
+      "sha256": "bc04e1eb018019c3fd63a6029455b52ef68afc1704b9be66050787518a6ad3f0"
+    },
+    {
+      "file": "10-expense-new-1440.png",
+      "width": 1440,
+      "height": 1432,
+      "sha256": "c8d8cbc8d5d1127b80f9c3bd7d224a52392858f631b0d2f206e008df1e66142d"
+    },
+    {
+      "file": "10-expense-new-390.png",
+      "width": 390,
+      "height": 2387,
+      "sha256": "1a48e2b03f5176a50a572240775c7c1ce861e29f746dbdc0ea0d7f9b59b08749"
+    },
+    {
+      "file": "10-expense-new-768.png",
+      "width": 768,
+      "height": 1539,
+      "sha256": "6eb905e3683051a2938338419914e748b8585940d84ce7e52c0ec2dc90ca1a5d"
+    },
+    {
+      "file": "11-expense-edit-1440.png",
+      "width": 1440,
+      "height": 1432,
+      "sha256": "fda368ede7ae69b24b58ccd8226233075ae7318a33809e76eef61dc21ee213d0"
+    },
+    {
+      "file": "11-expense-edit-390.png",
+      "width": 390,
+      "height": 2387,
+      "sha256": "aeddd843195c32dfb0eae7dba416b468cee8be077ebe11ac3513c33aac9e5b0d"
+    },
+    {
+      "file": "11-expense-edit-768.png",
+      "width": 768,
+      "height": 1539,
+      "sha256": "be22a24bcf89dd1cb9f13ec41f7d5551533bed230101c9a149750d0ee89c96d4"
+    },
+    {
+      "file": "12-transaction-detail-1440.png",
+      "width": 1440,
+      "height": 1461,
+      "sha256": "29ed3a260282afa171ddbbd6daa4eefc19bac7db49aaaca9ce5e24dd08b97ead"
+    },
+    {
+      "file": "12-transaction-detail-390.png",
+      "width": 390,
+      "height": 1735,
+      "sha256": "91998296fa7204daa2019a4e8c1d3c90fa389b4dccc9758bf8ca0836e67e8668"
+    },
+    {
+      "file": "12-transaction-detail-768.png",
+      "width": 768,
+      "height": 1483,
+      "sha256": "3547df22f2e61ddbd88ff3cecf2eb7ef66ebd08b7303f166050f85e10c386ab5"
+    },
+    {
+      "file": "13-journal-detail-1440.png",
+      "width": 1440,
+      "height": 1182,
+      "sha256": "f411e3b3e171dafc2add4edc8d769173ed23195f394dfa3cf6db6425c1b31c35"
+    },
+    {
+      "file": "13-journal-detail-390.png",
+      "width": 390,
+      "height": 1683,
+      "sha256": "41dd4852610975f3cf85bdadb4a70404ac7d897691087493cc6fb235018b4889"
+    },
+    {
+      "file": "13-journal-detail-768.png",
+      "width": 768,
+      "height": 1263,
+      "sha256": "1d85cd2083235c4ebda830cb252bffb776076e9655c79121cfa851f61fa120e0"
+    },
+    {
+      "file": "14-general-journals-1440.png",
+      "width": 1440,
+      "height": 2447,
+      "sha256": "658cca36f1a2a136a7322fbdf72c7d74a71130a1fa9de661dd4964f083fcf8cb"
+    },
+    {
+      "file": "14-general-journals-390.png",
+      "width": 390,
+      "height": 3206,
+      "sha256": "5a5887b8ba54dfa2eb4d40b4678afa5be73dfce40001034e2bb443736c0421ef"
+    },
+    {
+      "file": "14-general-journals-768.png",
+      "width": 768,
+      "height": 2993,
+      "sha256": "694f76930370b62cb8f09281df5f945149a637c00cb90038ebd0060a16faf4ea"
+    },
+    {
+      "file": "15-journal-new-1440.png",
+      "width": 1440,
+      "height": 1421,
+      "sha256": "476b76e5a5f1775f7cf87cbbb7902e8449cf3395483f82c63585934bf20d02f0"
+    },
+    {
+      "file": "15-journal-new-390.png",
+      "width": 390,
+      "height": 2170,
+      "sha256": "d58e991955aa664bb3a298d80ded2c7f6d29c2d0b9128ee031f48690c7f90fcd"
+    },
+    {
+      "file": "15-journal-new-768.png",
+      "width": 768,
+      "height": 1887,
+      "sha256": "b548a5e25c3a137c33a5256fc85a2d5e635222e59065775203d42ff1a3776e80"
+    },
+    {
+      "file": "16-journal-draft-success-1440.png",
+      "width": 1440,
+      "height": 1341,
+      "sha256": "b340e672f6d48bdf7a007d2256e0d34cad9c595cfc274f6a7b036aaa8e04f732"
+    },
+    {
+      "file": "16-journal-draft-success-390.png",
+      "width": 390,
+      "height": 1458,
+      "sha256": "d85c5123587f076afb84e818f0dfdc9678876868891c6199b47ee2747a076603"
+    },
+    {
+      "file": "16-journal-draft-success-768.png",
+      "width": 768,
+      "height": 1341,
+      "sha256": "d0c2e99c93fb0186999a250d00b66f30f4d9789ae3a6382b6541d49178d33804"
+    },
+    {
+      "file": "17-journal-edit-1440.png",
+      "width": 1440,
+      "height": 1421,
+      "sha256": "4a4a5b3015d3918a5c387dd29f1d39becb063e152d5c86e98ee221f54da6b29e"
+    },
+    {
+      "file": "17-journal-edit-390.png",
+      "width": 390,
+      "height": 2189,
+      "sha256": "e31222864ccf0c991cf50925145f87033237d0e3149d1f7bac0feb97cf6ca12a"
+    },
+    {
+      "file": "17-journal-edit-768.png",
+      "width": 768,
+      "height": 1887,
+      "sha256": "5f875b0b0cfc08d8ec31225c5bc1cb3bafc1351f4d220c242a17e40c4d51a7e5"
+    },
+    {
+      "file": "18-reversed-journal-1440.png",
+      "width": 1440,
+      "height": 1276,
+      "sha256": "5bff97e6a0d31a93aa9c286586d51080f4d41c90556495c1ecb6037850180ad7"
+    },
+    {
+      "file": "18-reversed-journal-390.png",
+      "width": 390,
+      "height": 1452,
+      "sha256": "cc30bb38ef90c8ea89a24b6cb64597563f456a096e772d7ce6e264f4643867fa"
+    },
+    {
+      "file": "18-reversed-journal-768.png",
+      "width": 768,
+      "height": 1276,
+      "sha256": "fe6d31a0f5c15bac5e6c8d335ab39d2b69555378040bb371b5e0014bc7d28fc6"
+    },
+    {
+      "file": "19-pos-1440.png",
+      "width": 1440,
+      "height": 1191,
+      "sha256": "60d78b074e6036a20fd0a371616d7e348a461c345e1cb177847647dce59b6432"
+    },
+    {
+      "file": "19-pos-390.png",
+      "width": 390,
+      "height": 2083,
+      "sha256": "f349f4019ee503cc7ea4241a90864912df446eec55d5cd7863987d914d2df9bb"
+    },
+    {
+      "file": "19-pos-768.png",
+      "width": 768,
+      "height": 1436,
+      "sha256": "f4e5722bdd449600697d1a4cfc20a15695d0832ec6a8e046846b805d2d08f5d5"
+    },
+    {
+      "file": "20-pos-review-1440.png",
+      "width": 1440,
+      "height": 1187,
+      "sha256": "797c3974d3b9650c5799a31144507c36f099d2667c52972a62c29d4716248a8c"
+    },
+    {
+      "file": "20-pos-review-390.png",
+      "width": 390,
+      "height": 1660,
+      "sha256": "fdd8e21c2713fb0efc9bdce9b32ba9728ac214e78cff8dd1acb87e03931b24bf"
+    },
+    {
+      "file": "20-pos-review-768.png",
+      "width": 768,
+      "height": 1199,
+      "sha256": "95b360391356047bf9e935be767276249038e6e1494f13a8a3f5c7f76f9cffdf"
+    },
+    {
+      "file": "21-pos-receipt-1440.png",
+      "width": 1440,
+      "height": 1245,
+      "sha256": "fab6200ca14d46a7cc847c6e838ca09f0fdb6581a39fc5ec6a8c20a4d1bbe3fa"
+    },
+    {
+      "file": "21-pos-receipt-390.png",
+      "width": 390,
+      "height": 1391,
+      "sha256": "3b712417d764a1fe195b3362625b752da18a9f21988fb18652b2fe4848387d99"
+    },
+    {
+      "file": "21-pos-receipt-768.png",
+      "width": 768,
+      "height": 1245,
+      "sha256": "b2749f8ecd3cea0ab1f04f5babeeb78785e0b7fa4e25c24a0275c51b95e07891"
+    },
+    {
+      "file": "22-sample-guide-1440.png",
+      "width": 1440,
+      "height": 2181,
+      "sha256": "af40e7eabfda296aaff08d7e8c7810e0d220f26f1e49dafd743ebb4090e9d297"
+    },
+    {
+      "file": "22-sample-guide-390.png",
+      "width": 390,
+      "height": 4511,
+      "sha256": "03f9eda88c85f40e823125970d342ef34f845e91d70b600fcb230ed13d95711d"
+    },
+    {
+      "file": "22-sample-guide-768.png",
+      "width": 768,
+      "height": 3065,
+      "sha256": "5308bb0cba1fb85d85447e2718897e7ac69f361794d40204845cb9320aa310a4"
+    },
+    {
+      "file": "23-help-1440.png",
+      "width": 1440,
+      "height": 2089,
+      "sha256": "743b8d59ab46105050f53cd1f0d523cacb13a81ce29ef7b607497679c204a57b"
+    },
+    {
+      "file": "23-help-390.png",
+      "width": 390,
+      "height": 3993,
+      "sha256": "fb9f89eaa28bfc3c0f332175e172984bf533beebea1e592535a8a195aa2ffbf0"
+    },
+    {
+      "file": "23-help-768.png",
+      "width": 768,
+      "height": 2536,
+      "sha256": "6897fdcd606e9a71d5370554f481ecfe46e5e40bf9243f71710ec55a7bba3dc9"
+    },
+    {
+      "file": "24-not-found-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "70d12cd2d8bbafea7eab15350afb25bf7229bc8cc8b6b8b0f588f51836ec31cf"
+    },
+    {
+      "file": "24-not-found-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "030bf34c8a5da895ce3c57e57f87e23977959a4587aff8f7068bcdafa8397e20"
+    },
+    {
+      "file": "24-not-found-768.png",
+      "width": 768,
+      "height": 1000,
+      "sha256": "f401a9a2756c509630fde948141a3fa0026ed59f1b22f53007b02689e2f29df4"
+    },
+    {
+      "file": "25-wrong-method-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "d1e45043fd76a5e90add93085085a8276c00dd647acf5de49b73ddb26859fb24"
+    },
+    {
+      "file": "25-wrong-method-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "2b62fe1030fc544236d2cf62acd213c7e22d5b4a0543e4cb2bc5016bd82f2020"
+    },
+    {
+      "file": "25-wrong-method-768.png",
+      "width": 768,
+      "height": 1000,
+      "sha256": "865c27a142ef1ab5d57b2f819547000c2440b040007719655a5f65be775e4682"
+    },
+    {
+      "file": "26-public-demo-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "fffa8d44a1577cf1a293dbb6040c48d857122b9b2edc4a4433cf60e4ca9a0cea"
+    },
+    {
+      "file": "26-public-demo-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "7e15ac453f6c833e5a0bfa72f0608177b0283877ce88e292ba2d58596dd71b7a"
+    },
+    {
+      "file": "26-public-demo-768.png",
+      "width": 768,
+      "height": 1000,
+      "sha256": "363908c24293349859fd6e7287b8110b3ad208b7c0f2d3a591f290c36b193653"
+    },
+    {
+      "file": "27-demo-chooser-1440.png",
+      "width": 1440,
+      "height": 1480,
+      "sha256": "ec2735a1061b55be1644df0d84a73c5846ab2845c12d8af471ba9ca41cd71cd4"
+    },
+    {
+      "file": "27-demo-chooser-390.png",
+      "width": 390,
+      "height": 2322,
+      "sha256": "54fbf0398d101b657a788a36bf237d7f6864c6a83a898a46a20ef0588bc1ccc9"
+    },
+    {
+      "file": "27-demo-chooser-768.png",
+      "width": 768,
+      "height": 1891,
+      "sha256": "c50378ac201aa2af6594a4ef2cb7b87d1b20c7253626ef0b9787b373a39aabe2"
+    },
+    {
+      "file": "28-starter-guide-1440.png",
+      "width": 1440,
+      "height": 1580,
+      "sha256": "4f6be34b355b480aa5952b4d3fe44d58091ade3be6d89f73992a594f96c53d06"
+    },
+    {
+      "file": "28-starter-guide-390.png",
+      "width": 390,
+      "height": 3272,
+      "sha256": "c600d17fee9837f869a7cc42f5338f7048cf9f481004221204d8733a9aecffa3"
+    },
+    {
+      "file": "28-starter-guide-768.png",
+      "width": 768,
+      "height": 2341,
+      "sha256": "db3b55787ce0a062814daac998ab0188e357922e3c29e16e6f273221713843c5"
+    },
+    {
+      "file": "29-keyboard-skip-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "90872300d86fbcf6b98532b4d3c8120b7a5fcbd54d6c49e9c122a24c6a6dfe20"
+    },
+    {
+      "file": "50-accounts-1440.png",
+      "width": 1440,
+      "height": 2070,
+      "sha256": "18c41160bf158190a3302c40e346f654e3001acc5ba67e62d50e6aa5d059f637"
+    },
+    {
+      "file": "50-accounts-768.png",
+      "width": 768,
+      "height": 2055,
+      "sha256": "1b5cb772482eff27f826237ebce3d3cb422def57581c3307025798b8c6ea1977"
+    },
+    {
+      "file": "50-accounts-390.png",
+      "width": 390,
+      "height": 2134,
+      "sha256": "c52be2b1f7917570495224d91b82b29d37de9dbcad9d752819cbd14ad665ad9f"
+    },
+    {
+      "file": "50-account-statement-ready-1440.png",
+      "width": 1440,
+      "height": 2508,
+      "sha256": "0488d666684dc58cc409a20c868d6be697e7a5b5579b71cfbde69fc799a15f14"
+    },
+    {
+      "file": "50-account-statement-ready-768.png",
+      "width": 768,
+      "height": 7348,
+      "sha256": "e09ee1751f68131dec47776041b9b43f7c4397e81908d6217bf3d38187202c7f"
+    },
+    {
+      "file": "50-account-statement-ready-390.png",
+      "width": 390,
+      "height": 8539,
+      "sha256": "240b73839c97debc6f7cf94c4175051a932ff92bb57d8e4e7b1a08246048ef82"
+    },
+    {
+      "file": "50-account-statement-phone-top.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "3f80deeeaaa1c712922238e1857c76d0e3348322ebb546204fc57685636cfc6d"
+    },
+    {
+      "file": "50-account-statement-phone-entries.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "cde588778cb63506f5ed6ae9b4fab781dd837366baa258fed1f58945fd0ce2de"
+    },
+    {
+      "file": "50-account-statement-tablet-entries.png",
+      "width": 768,
+      "height": 1000,
+      "sha256": "b9ddf8223bad84974145cf66ff0fd8b54c155307aa50442d87db476f82a3440b"
+    },
+    {
+      "file": "50-reports-1440.png",
+      "width": 1440,
+      "height": 1432,
+      "sha256": "f62a8904cd869a010abe5d88bcf2fbb0fef79576256d79cf23641cf9bf5fce41"
+    },
+    {
+      "file": "50-reports-768.png",
+      "width": 768,
+      "height": 2141,
+      "sha256": "67460e8df34763b165c4c72b3e3b46052e8b61e84c3fd29e6033a63cb9bbbc82"
+    },
+    {
+      "file": "50-reports-390.png",
+      "width": 390,
+      "height": 2571,
+      "sha256": "c287f806350fe3488f563da0501c4e11d5811311286e5e021fc71cc3c888cfd2"
+    },
+    {
+      "file": "50-profit-loss-1440.png",
+      "width": 1440,
+      "height": 1496,
+      "sha256": "62f77149a5f9f563cea198931f7a740d2c7081de20b1314fb7291b768ff6173e"
+    },
+    {
+      "file": "50-profit-loss-768.png",
+      "width": 768,
+      "height": 1815,
+      "sha256": "02968af7939933313e52b192ff410b8cb170c967bcc44adadef871483c6e51d2"
+    },
+    {
+      "file": "50-profit-loss-390.png",
+      "width": 390,
+      "height": 2187,
+      "sha256": "ea2cee3af5732170ab4160d79ad58b244acad253fc890f2c65ea5811db2ec9dc"
+    },
+    {
+      "file": "50-balance-sheet-1440.png",
+      "width": 1440,
+      "height": 1546,
+      "sha256": "6d2f2ecf6b652d58216d5c943266ae8a5d8e0e98174259e8624e81cd910e9f5d"
+    },
+    {
+      "file": "50-balance-sheet-768.png",
+      "width": 768,
+      "height": 2288,
+      "sha256": "af9267cb9b244812c8fc2513b50b713ae26563e530e22e7fac38b1bc37a64f00"
+    },
+    {
+      "file": "50-balance-sheet-390.png",
+      "width": 390,
+      "height": 2585,
+      "sha256": "9ea0832a2317e33c281997d067e6a44a175d6f897a9484f3e2295ec9b06c1612"
+    },
+    {
+      "file": "50-trial-balance-1440.png",
+      "width": 1440,
+      "height": 2025,
+      "sha256": "0911f095f491e348ab4ce9697ef023bf8ca1277f3e6efc53ce9cecdf8cb54736"
+    },
+    {
+      "file": "50-trial-balance-768.png",
+      "width": 768,
+      "height": 2073,
+      "sha256": "54c210137b4a082123e7029e9a682eddd91ade240595cb251c3c9ff49d5f7967"
+    },
+    {
+      "file": "50-trial-balance-390.png",
+      "width": 390,
+      "height": 2427,
+      "sha256": "b158f168e0f6558667132480855acba7d304dd5276f8e54ff7b987da18bd4d90"
+    },
+    {
+      "file": "50-cash-forecast-1440.png",
+      "width": 1440,
+      "height": 1946,
+      "sha256": "9c27c6bc3539a1372a159b787625f4851ac574ac0f04106b1b5da78e0e3a6939"
+    },
+    {
+      "file": "50-cash-forecast-768.png",
+      "width": 768,
+      "height": 2466,
+      "sha256": "e9a14c8717737fb4e9a70bef713338c3c2df313bf7baa101d3e124a0d85e4d81"
+    },
+    {
+      "file": "50-cash-forecast-390.png",
+      "width": 390,
+      "height": 2565,
+      "sha256": "acc99dd76b4d5b75b18adffe8515bb4c3cfd7c28370854910b2466cd6185e4c8"
+    },
+    {
+      "file": "50-bank-reconciliation-1440.png",
+      "width": 1440,
+      "height": 1594,
+      "sha256": "2a744b9dddc6899734a517751f6ff27507c715a933da08963c9aab5c99956d87"
+    },
+    {
+      "file": "50-bank-reconciliation-768.png",
+      "width": 768,
+      "height": 1686,
+      "sha256": "9b3cbe232195c63268e739aa26804a29fdcb553e9038e8bad95d317f63268eec"
+    },
+    {
+      "file": "50-bank-reconciliation-390.png",
+      "width": 390,
+      "height": 2215,
+      "sha256": "355b83ef84c6e4e182f9dbd2cecd1ea636e95e60d24353340b02a271146edbf4"
+    },
+    {
+      "file": "50-periods-1440.png",
+      "width": 1440,
+      "height": 3916,
+      "sha256": "f6d569da20930ae8d209553fc11f2e71abad4cd8aed4cb24e926ef9613ab2eb5"
+    },
+    {
+      "file": "50-periods-768.png",
+      "width": 768,
+      "height": 5347,
+      "sha256": "15d8b35acf470fa4c0c98604a98fdba5cf5c9a289d13cdcaf813a313e5853ad0"
+    },
+    {
+      "file": "50-periods-390.png",
+      "width": 390,
+      "height": 9295,
+      "sha256": "3c546607c7061a062a4a18f1b39517eb5371b50dd858c4e732c7f72e8cbe96e8"
+    },
+    {
+      "file": "50-periods-phone-top.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "d0773c9a74bca35b6a93a8791b3c1a52687313e7a22ef46553562cee8766ff07"
+    },
+    {
+      "file": "50-periods-phone-history.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "2178fb968ad76a38c1cbbc12be1b4f2fbda86b7b573c695d2e0acd36dee95087"
+    },
+    {
+      "file": "50-tax-1440.png",
+      "width": 1440,
+      "height": 1972,
+      "sha256": "1ca730df2180cc825ea6b7b550f937348003e740deb92e1c5520ff524c1bea04"
+    },
+    {
+      "file": "50-tax-768.png",
+      "width": 768,
+      "height": 2193,
+      "sha256": "fd92005ee1f6017126ae61c67e2c5bee0ae7613b479f763bbb49d694994896ab"
+    },
+    {
+      "file": "50-tax-390.png",
+      "width": 390,
+      "height": 2848,
+      "sha256": "df9b3fa14325c5b048cc236abaa2393c2545a0ea15270586fdf8b30395e5231a"
+    },
+    {
+      "file": "50-modules-1440.png",
+      "width": 1440,
+      "height": 2494,
+      "sha256": "a5c57600cbd9b88bbe16fb9c2de2cc6d00dba1e93f53e8bbce68bb0fd52e03cf"
+    },
+    {
+      "file": "50-modules-768.png",
+      "width": 768,
+      "height": 2770,
+      "sha256": "d3454c130fbd99e2176ad1736d9bde50b1c55b07e2b59d5331eccbea4712b30c"
+    },
+    {
+      "file": "50-modules-390.png",
+      "width": 390,
+      "height": 3319,
+      "sha256": "39be0018951b50c4f8272781b382618fc0bca8e802a731bbcf614d80dd20fc06"
+    },
+    {
+      "file": "50-connections-1440.png",
+      "width": 1440,
+      "height": 1140,
+      "sha256": "ef3cc3201ff108a62b8f77f12b9aeeb28470a5da199c5b681da0f792d53fc4ac"
+    },
+    {
+      "file": "50-connections-768.png",
+      "width": 768,
+      "height": 1236,
+      "sha256": "29498b024a1a7462fa68648b559368949a42155bfc5bf994707d905020f7be03"
+    },
+    {
+      "file": "50-connections-390.png",
+      "width": 390,
+      "height": 1517,
+      "sha256": "49915832188a3dd925abfa03ec2c6744156c977625720e6f6fb3b8f789e51bcb"
+    },
+    {
+      "file": "50-oauth-invalid-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "24f6586d78ef23a5a96b15e0f262999685046fa8397bd8869fc0357e5c880bd4"
+    },
+    {
+      "file": "50-oauth-invalid-768.png",
+      "width": 768,
+      "height": 1000,
+      "sha256": "5a283b420f9016e41e7eb5ac27d7a3dc4a84c2bde5dc09c63f282b646dd5b89d"
+    },
+    {
+      "file": "50-oauth-invalid-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "870bf6bb2f9959ba6887642c480c1aff652e6b4fd08e924e0e1d587737f5fe0b"
+    },
+    {
+      "file": "50-period-drilldown-1440.png",
+      "width": 1440,
+      "height": 2407,
+      "sha256": "94c0658e5ca8606eb14c7322b8d56241e1f80bd925317be65b70a0deea355e71"
+    },
+    {
+      "file": "50-period-drilldown-768.png",
+      "width": 768,
+      "height": 7111,
+      "sha256": "71619f8e8cf7208b5fd3597240db73943be8287fede49c5937e43fcb910f62c1"
+    },
+    {
+      "file": "50-period-drilldown-390.png",
+      "width": 390,
+      "height": 8323,
+      "sha256": "41e9c0d9ae652bc5846579faaf60fb2a5dc4f157359122c79019e93af37ca913"
+    },
+    {
+      "file": "30-ar-list-1440.png",
+      "width": 1440,
+      "height": 1733,
+      "sha256": "eca6cb34add79deb108d63d19a01e37ce3b8343b640a1c1c34c83c7a98dfdbf2"
+    },
+    {
+      "file": "30-ar-list-768.png",
+      "width": 768,
+      "height": 1808,
+      "sha256": "8cf2f219781e62b04ffa9e6f091ff53d233e8c776bf7d1bf41728ee45ad50cc2"
+    },
+    {
+      "file": "30-ar-list-390.png",
+      "width": 390,
+      "height": 2143,
+      "sha256": "d210cc12a235ed8c6d94ba3a36ecf33b0f7c71ae3c8be7122a21d9b88bfcb967"
+    },
+    {
+      "file": "30-ar-new-1440.png",
+      "width": 1440,
+      "height": 3456,
+      "sha256": "c3411ff8b679547bca09c9225d48a23c6ddad926d1f24aeffcf84ce62ddc7eb4"
+    },
+    {
+      "file": "30-ar-new-768.png",
+      "width": 768,
+      "height": 3710,
+      "sha256": "8a9b9fcfea7607aa13c66e63efafbeafb63ee47f0f252ea5c12440fcf71017ae"
+    },
+    {
+      "file": "30-ar-new-390.png",
+      "width": 390,
+      "height": 6269,
+      "sha256": "5e9ac7c3dabd7dc1809fa3d833d74093fba4ba5767786e2efc4565495ce9a334"
+    },
+    {
+      "file": "30-ar-draft-1440.png",
+      "width": 1440,
+      "height": 2373,
+      "sha256": "7032963ac4b0a9b25a18faf8b7746128de1178e0b2a8b9d37a4fa4184cd9cadb"
+    },
+    {
+      "file": "30-ar-draft-768.png",
+      "width": 768,
+      "height": 2448,
+      "sha256": "9d11e332a0ed3ff0381dcd339e1d66c8aa154b5f5864dc7e2c5f9ffb1b810640"
+    },
+    {
+      "file": "30-ar-draft-390.png",
+      "width": 390,
+      "height": 2895,
+      "sha256": "236dffa5f7c2430edaeb457d462b7a3ccc1511c85abf6c7bfba368d5ec553c35"
+    },
+    {
+      "file": "30-ar-posted-1440.png",
+      "width": 1440,
+      "height": 2816,
+      "sha256": "5fb85a6252beafa534c63c4e06c4e6bfcc425d3d203c33193ae2fc9ce0897635"
+    },
+    {
+      "file": "30-ar-posted-768.png",
+      "width": 768,
+      "height": 2980,
+      "sha256": "225103b93ac3d5804ce06b8ff38c227abc4a749bee4adc413f8fe9fb9926e444"
+    },
+    {
+      "file": "30-ar-posted-390.png",
+      "width": 390,
+      "height": 3675,
+      "sha256": "fa839a9f94f9f07038e49af0077ca20b3c54b178412319b9a1fe6915482ca797"
+    },
+    {
+      "file": "30-ap-list-1440.png",
+      "width": 1440,
+      "height": 1660,
+      "sha256": "9d1735dadf1c7c881c6cc53c4629f6abd2dbc4b6239d9675416d6e27d9cf3170"
+    },
+    {
+      "file": "30-ap-list-768.png",
+      "width": 768,
+      "height": 1735,
+      "sha256": "5d4794338d0463cc18d41a2aa53085add41eaf214b4e5fb1e6bcf75b9c37d65c"
+    },
+    {
+      "file": "30-ap-list-390.png",
+      "width": 390,
+      "height": 2072,
+      "sha256": "fcc9a7f2e7c7308cc8b77e6258eaf5c601bad0d708cb406aa35d62b0f6792a89"
+    },
+    {
+      "file": "30-ap-bill-1440.png",
+      "width": 1440,
+      "height": 2743,
+      "sha256": "812e8f5015aada49f35bdef1961bca0870de600305137c15a3a490fe3eb81b6d"
+    },
+    {
+      "file": "30-ap-bill-768.png",
+      "width": 768,
+      "height": 2907,
+      "sha256": "644992ff020688ab8feaac11c44f50378f90605ae5a7382e43960fb0fa02f185"
+    },
+    {
+      "file": "30-ap-bill-390.png",
+      "width": 390,
+      "height": 3643,
+      "sha256": "8190c08d4863965cd65224bd546f5a9602edf0af8a67fa3d360600f5ccf1c6a5"
+    },
+    {
+      "file": "30-parties-1440.png",
+      "width": 1440,
+      "height": 1119,
+      "sha256": "84aac6892f5d7763a1bf7a19c43dab6906e0e7cb786653ee89d07b838ea440f3"
+    },
+    {
+      "file": "30-parties-768.png",
+      "width": 768,
+      "height": 1119,
+      "sha256": "f0f36e0fc489df810a180aa5d010892af0bb4668f01d268e6e3e13e1ed837c41"
+    },
+    {
+      "file": "30-parties-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "629a88ad60d195423244728df2afb9450e4ec950f74ca759c3919f1eb16ec857"
+    },
+    {
+      "file": "30-party-form-1440.png",
+      "width": 1440,
+      "height": 1370,
+      "sha256": "8ac3d2edfc8d3992a414a946b2b9f733a85d4ea75b61f73c9e2f25408fb03fe8"
+    },
+    {
+      "file": "30-party-form-768.png",
+      "width": 768,
+      "height": 1548,
+      "sha256": "b4b660925080b87c57692bdce32960e13a4bc758792f054db7d3c5026a9be5c1"
+    },
+    {
+      "file": "30-party-form-390.png",
+      "width": 390,
+      "height": 1948,
+      "sha256": "c7d2bba7baa727157ef277e2b21604fe76214895ead6b60d37e813d28c82af7a"
+    },
+    {
+      "file": "30-purchasing-list-1440.png",
+      "width": 1440,
+      "height": 1381,
+      "sha256": "2cd3e2c844a4f97f302fa705814b13fb1cbfbcefcf1fe7f5dcb0fbf2550ec852"
+    },
+    {
+      "file": "30-purchasing-list-768.png",
+      "width": 768,
+      "height": 1425,
+      "sha256": "363dcb2f3ac45b8f86db78119dd1c52fa74aac5aba2198edd0fc4b0438b6d68c"
+    },
+    {
+      "file": "30-purchasing-list-390.png",
+      "width": 390,
+      "height": 1598,
+      "sha256": "6a699fad1f8327a852f009af02057daf9339366ede40234d207f4800fa0b7329"
+    },
+    {
+      "file": "30-purchase-order-1440.png",
+      "width": 1440,
+      "height": 2148,
+      "sha256": "b2b98f29afec63a5f8adaf71812d35549c6f5921da8fb7b45c32048df3b531ff"
+    },
+    {
+      "file": "30-purchase-order-768.png",
+      "width": 768,
+      "height": 2281,
+      "sha256": "517b12e248907ec64df6d2bcca42bc6f52ddc1ecc079f58215dfb463a188ade4"
+    },
+    {
+      "file": "30-purchase-order-390.png",
+      "width": 390,
+      "height": 2726,
+      "sha256": "79b0825d6c1600234fed53d17a624e211b34e0322f97a06883544ba6cf143100"
+    },
+    {
+      "file": "30-purchase-receipt-1440.png",
+      "width": 1440,
+      "height": 2504,
+      "sha256": "4734d01194b912a253115530a78523b5102c3b8b278b8d8a52f582c90cba7dcf"
+    },
+    {
+      "file": "30-purchase-receipt-768.png",
+      "width": 768,
+      "height": 2726,
+      "sha256": "72de4f08a0756b629a42de5e3c83a15d9ee572445e32ca9d3af232918030f655"
+    },
+    {
+      "file": "30-purchase-receipt-390.png",
+      "width": 390,
+      "height": 3561,
+      "sha256": "339b227ccef9f370a0a533de10612efadc04a37060412c46207ea7a58792e364"
+    },
+    {
+      "file": "30-purchase-new-1440.png",
+      "width": 1440,
+      "height": 2875,
+      "sha256": "6e2666fcca26cb037ba12e0d29ca0952203387ff2405f11a5242052de7e585eb"
+    },
+    {
+      "file": "30-purchase-new-768.png",
+      "width": 768,
+      "height": 3032,
+      "sha256": "dfdb9e70c612eae0584e8c3d45ad15ebd79526ae2cab9cde8d69e55d0c55ce12"
+    },
+    {
+      "file": "30-purchase-new-390.png",
+      "width": 390,
+      "height": 4256,
+      "sha256": "8968ab3df4993ce01dd4373650b5e62044d91d733101d13ba06ce4bd338c138f"
+    },
+    {
+      "file": "30-inventory-1440.png",
+      "width": 1440,
+      "height": 1732,
+      "sha256": "43f6350b5f507febeeb08ff85e32a86faad9edff8abf1a43fadb0dd791b1ec14"
+    },
+    {
+      "file": "30-inventory-768.png",
+      "width": 768,
+      "height": 1792,
+      "sha256": "3a064be04d6491aafc26e18770ed20abe9a95355e85d9e9de34d7a335be85c94"
+    },
+    {
+      "file": "30-inventory-390.png",
+      "width": 390,
+      "height": 2005,
+      "sha256": "0a847e6449bf1fabbb0842a6b5b18d8b070d88eb48c03e6d60f62d767070d2be"
+    },
+    {
+      "file": "30-inventory-product-1440.png",
+      "width": 1440,
+      "height": 2617,
+      "sha256": "b24d212e5f8142c45c209e6cffd9f7916c7377358ad132bdb5af1d44a69788ea"
+    },
+    {
+      "file": "30-inventory-product-768.png",
+      "width": 768,
+      "height": 2841,
+      "sha256": "5dbec7bc083503c4010c392de518af5ce955d95b4e82023aa4b85ba98b18907c"
+    },
+    {
+      "file": "30-inventory-product-390.png",
+      "width": 390,
+      "height": 3494,
+      "sha256": "837f11e00de68db4169d9db07d4c31453e3b8d7dd1a4d14323a7491697cab025"
+    },
+    {
+      "file": "30-inventory-count-1440.png",
+      "width": 1440,
+      "height": 2885,
+      "sha256": "976c48dc4425e853e3c5a13fa069d65e83ba5ae831f615b912135f865ab01c7c"
+    },
+    {
+      "file": "30-inventory-count-768.png",
+      "width": 768,
+      "height": 3222,
+      "sha256": "8fa6e3afea66bc2a345f88d199a338586051213f54c38b21d52fcf8fb6c40eb1"
+    },
+    {
+      "file": "30-inventory-count-390.png",
+      "width": 390,
+      "height": 4217,
+      "sha256": "5b2dd5e7c463c46a3eb336f05c20ab02b6dff84f2ebe9eb0703a697a61795856"
+    },
+    {
+      "file": "30-ar-product-selected-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "20e3cdf1b2842ed40245d008d6841c046586d92bd48d87278016c60dfcad9b21"
+    },
+    {
+      "file": "30-ar-product-selected-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "891f765a6ac76f9aa4a8c99f594e6470b8171441e7ad421db2fa23cba5d1e31d"
+    },
+    {
+      "file": "30-keyboard-skip-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "2e586fb5e8da8ea76428ae249a9c7acd427673b532dc3404441dc1e9c69c21d8"
+    },
+    {
+      "file": "60-account-detail-1440.png",
+      "width": 1440,
+      "height": 2070,
+      "sha256": "1c88f97f7d6aa8d14f3f822ef202ee51cbc11c91f342688cd24c757015cd1193"
+    },
+    {
+      "file": "60-account-detail-390.png",
+      "width": 390,
+      "height": 1215,
+      "sha256": "075856e02ea0adcb331a0e6150f6180a06852ccc4aac8e68b4fc3b02c522a64b"
+    },
+    {
+      "file": "60-account-detail-768.png",
+      "width": 768,
+      "height": 1091,
+      "sha256": "521fb45cc51c7c5b2b484328d1c0b5e31686b26b500ad5697c445c97cae45752"
+    },
+    {
+      "file": "60-account-new-1440.png",
+      "width": 1440,
+      "height": 2070,
+      "sha256": "a476675d53326808394b50889bc753fd59375f109ef0f3b8a24a310110885eaf"
+    },
+    {
+      "file": "60-account-new-390.png",
+      "width": 390,
+      "height": 1210,
+      "sha256": "84549bc19c79de730f58ea24b911ac9a332093032a1420993c3eab0620cca9ab"
+    },
+    {
+      "file": "60-account-new-768.png",
+      "width": 768,
+      "height": 1091,
+      "sha256": "217862a31b378012fad127fa0772f1fcaa58091fcb92c0601f5c25aadcad646a"
+    }
+  ]
+}

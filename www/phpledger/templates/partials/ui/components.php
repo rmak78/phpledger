@@ -59,6 +59,37 @@ function pl_ui_field(string $id, string $label, callable $control, string $hint 
     echo '</div>';
 }
 
+function pl_ui_error_attributes(string $id, string $error = '', string $hint = ''): string
+{
+    $describedBy = array_filter([$hint !== '' ? $id.'-hint' : '', $error !== '' ? $id.'-error' : '']);
+    return ($error !== '' ? ' aria-invalid="true"' : '')
+        . ($describedBy !== [] ? ' aria-describedby="'.pl_e(implode(' ', $describedBy)).'"' : '');
+}
+
+/** Links are fixed control IDs declared by the current template. */
+function pl_ui_error_summary(array $errors, array $fields): void
+{
+    if ($errors === []) { return; }
+    echo '<div class="alert alert-danger" role="alert" tabindex="-1" data-form-error data-field-errors><strong>Check the highlighted fields.</strong><ul>';
+    foreach ($errors as $name=>$message) {
+        if (!isset($fields[$name])) { continue; }
+        [$id,$label] = $fields[$name];
+        echo '<li><a href="#'.pl_e($id).'">'.pl_e($label).': '.pl_e($message).'</a></li>';
+    }
+    echo '</ul></div>';
+}
+
+function pl_ui_account_return(?array $input = null): void
+{
+    $input ??= ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' ? $_POST : $_GET;
+    foreach (pl_web_account_return($input) as $key=>$value) {
+        echo '<input type="hidden" name="return_account['.pl_e((string)$key).']" value="'.pl_e((string)$value).'">';
+    }
+    foreach (pl_web_ageing_return($input) as $key=>$value) {
+        echo '<input type="hidden" name="return_ageing['.pl_e((string)$key).']" value="'.pl_e((string)$value).'">';
+    }
+}
+
 function pl_ui_stepper(array $steps, int $current): void
 {
     echo '<ol class="stepper" aria-label="Progress">';
@@ -108,10 +139,11 @@ function pl_ui_sheet(string $title,callable $body,bool $open=false,string $butto
 
 function pl_ui_pagination(string $path, array $filters, int $page, int $pages): void
 {
+    $url=static fn(array $query):string=>in_array($path,['/transactions','/general-journals','/ar','/ap','/purchasing'],true)?pl_workflow_url($path,$query):pl_url($path,$query);
     echo '<nav class="pagination" aria-label="List pages">';
-    if ($page > 1) { echo '<a class="btn btn-secondary btn-sm" href="' . pl_e(pl_url($path, array_replace($filters, ['page' => $page - 1]))) . '">Previous</a>'; }
+    if ($page > 1) { echo '<a class="btn btn-secondary btn-sm" href="' . pl_e($url(array_replace($filters, ['page' => $page - 1]))) . '">Previous</a>'; }
     echo '<span>Page ' . $page . ' of ' . max(1, $pages) . '</span>';
-    if ($page < $pages) { echo '<a class="btn btn-secondary btn-sm" href="' . pl_e(pl_url($path, array_replace($filters, ['page' => $page + 1]))) . '">Next</a>'; }
+    if ($page < $pages) { echo '<a class="btn btn-secondary btn-sm" href="' . pl_e($url(array_replace($filters, ['page' => $page + 1]))) . '">Next</a>'; }
     echo '</nav>';
 }
 
@@ -126,6 +158,7 @@ function pl_ui_connection_scope(string $id, string $value = 'reports'): void
 /** Canonical list filters, never a user-controlled redirect URL. */
 function pl_ui_return_filters(array $filters): void
 {
+    pl_ui_account_return();
     foreach ($filters as $key=>$value) {
         echo '<input type="hidden" name="return_filters[' . pl_e((string)$key) . ']" value="' . pl_e((string)$value) . '">';
     }
@@ -135,12 +168,15 @@ function pl_ui_sort(string $path, array $filters, string $column, string $label)
 {
     $active = ($filters['sort'] ?? '') === $column;
     $direction = $active && ($filters['dir'] ?? '') === 'asc' ? 'desc' : 'asc';
-    echo '<a href="' . pl_e(pl_url($path, array_replace($filters, ['sort' => $column, 'dir' => $direction, 'page' => 1]))) . '">' . pl_e($label)
+    $query=array_replace($filters, ['sort' => $column, 'dir' => $direction, 'page' => 1]);
+    $url=in_array($path,['/transactions','/general-journals','/ar','/ap','/purchasing'],true)?pl_workflow_url($path,$query):pl_url($path,$query);
+    echo '<a href="' . pl_e($url) . '">' . pl_e($label)
         . ($active ? (($filters['dir'] ?? '') === 'asc' ? ' ↑' : ' ↓') : '') . '</a>';
 }
 
 function pl_ui_list_controls(array $filters): void
 {
+    pl_ui_account_return();
     echo '<label class="field"><span class="sr-only">Search records</span><input class="input" type="search" name="q" maxlength="160" value="' . pl_e($filters['q']) . '" placeholder="Search records"></label>';
     echo '<label class="field"><span class="sr-only">Rows per page</span><select class="select" name="per_page">';
     foreach ([25,50,100] as $size) { echo '<option value="' . $size . '"' . ($size === $filters['per_page'] ? ' selected' : '') . '>' . $size . ' per page</option>'; }

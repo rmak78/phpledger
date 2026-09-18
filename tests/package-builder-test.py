@@ -66,7 +66,8 @@ class PackageTests(unittest.TestCase):
         sources = {entry["source"] for entry in policy["files"]}
         for folder in ("www/phpledger/includes/functions", "www/phpledger/templates/views", "www/phpledger/install/migrations"):
             for path in (ROOT / folder).glob("*.php"):
-                self.assertIn(path.relative_to(ROOT).as_posix(), sources, "Runtime dependency omitted from package")
+                source = path.relative_to(ROOT).as_posix()
+                self.assertTrue(source in sources, "Runtime dependency omitted from package: " + source)
         for source in sources:
             self.assertTrue((ROOT / source).is_file(), "Missing allowlisted source: " + source)
 
@@ -75,6 +76,23 @@ class PackageTests(unittest.TestCase):
         with self.assertRaisesRegex(builder.PackageError, "clean"):
             self.build()
         self.assertFalse((self.root / "one").exists())
+
+    def test_stable_and_candidate_channels_are_version_bound(self):
+        for version, channel, status in (("1.0.0", "stable", "stable"), ("1.0.0-rc.1", "preview", "release-candidate"), ("0.9.0-beta", "preview", "development-preview")):
+            with self.subTest(version=version):
+                archive = builder.build(self.source, self.vendor, self.policy, self.root / version, version, channel)
+                with zipfile.ZipFile(archive) as package:
+                    manifest = json.loads(package.read(f"phpledger-{version}/PACKAGE-MANIFEST.json"))
+                    self.assertEqual(channel, manifest["channel"])
+                    self.assertEqual(status, manifest["status"])
+        for version, channel in (("1.0.0-rc.1", "stable"), ("1.0.0", "preview")):
+            with self.assertRaisesRegex(builder.PackageError, "channel"):
+                builder.release_identity(version, channel)
+
+    def test_ambiguous_or_unsafe_release_versions_are_rejected(self):
+        for version in ("1.0", "01.0.0", "1.0.0-rc.01", "1.0.0-", "1.0.0-rc..1", "1.0.0/escape", "1.0.0+untracked"):
+            with self.subTest(version=version), self.assertRaises(builder.PackageError):
+                builder.release_identity(version)
 
     def test_untracked_release_input_requires_and_checks_sha256(self):
         local_doc = self.source / "docs/local-release.md"

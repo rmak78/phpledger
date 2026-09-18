@@ -2,7 +2,7 @@
   "name": "PHP Ledger",
   "alternateName": "phpledger",
   "baseUrl": "https://phpledger.com",
-  "entity": "PHP Ledger is open-source, self-hosted double-entry accounting software with core invoices, bills and payments, optional purchasing and inventory, and a manually configured tax engine. Built on PHP 8.2+ and MySQL 8.4, it is a development preview for synthetic evaluation.",
+  "entity": "PHP Ledger is open-source, self-hosted double-entry accounting software with core invoices, bills and payments, optional purchasing and inventory, and a manually configured tax engine. Built on PHP 8.2+ and MySQL 8.4, 1.0.0 is the first stable release with browser installation and signed automatic updates; independent accounting and security review remain post-release commitments.",
   "locale": "en_GB",
   "email": "rmak78@gmail.com",
   "founder": {
@@ -19,35 +19,29 @@
   "repo": "https://github.com/rmak78/phpledger",
   "wiki": "https://github.com/rmak78/phpledger/wiki",
   "demo": "/demo/",
-  "social": {
-    "linkedin": "",
-    "x": "",
-    "facebook": "",
-    "instagram": "",
-    "youtube": ""
-  },
-  "twitterHandle": "",
+  "social": {"linkedin": "https://www.linkedin.com/company/phpledger/", "x": "https://x.com/LedgerPhp94831", "facebook": "https://www.facebook.com/profile.php?id=61594129753409", "instagram": "https://www.instagram.com/phpledgerapp/", "youtube": "https://www.youtube.com/@PHPLedger"},
+  "twitterHandle": "@LedgerPhp94831",
   "verification": {
     "google": "",
     "bing": ""
   },
   "indexNowKey": "240b73d781977f499ab7c75318b9a14f",
   "release": {
-    "version": "0.6.0-preview",
-    "tag": "v0.6.0-preview",
+    "version": "1.0.0",
+    "tag": "v1.0.0",
     "date": "2026-09-18",
     "dateLabel": "18 September 2026",
-    "url": "https://github.com/rmak78/phpledger/releases/tag/v0.6.0-preview",
-    "zipUrl": "https://github.com/rmak78/phpledger/releases/download/v0.6.0-preview/phpledger-0.6.0-preview.zip",
-    "shaUrl": "https://github.com/rmak78/phpledger/releases/download/v0.6.0-preview/phpledger-0.6.0-preview.zip.sha256",
-    "sha256": "627dd5219a8de66ad46c55fe671ea0f4140280ea178270d3728ea1ac512ef8d1",
-    "bytes": 3113762,
-    "bytesLabel": "3,113,762",
-    "sizeLabel": "3.11 MB",
+    "url": "https://github.com/rmak78/phpledger/releases/tag/v1.0.0",
+    "zipUrl": "https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0.zip",
+    "shaUrl": "https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0.zip.sha256",
+    "sha256": "1c44e685b126352220c54d2ce13d575aaf2dfaf873d6b372a3a2b17189dcc63d",
+    "bytes": 3137991,
+    "bytesLabel": "3,137,991",
+    "sizeLabel": "3.14 MB",
     "license": "https://github.com/rmak78/phpledger/blob/master/LICENSE",
-    "mediaKitUrl": "https://github.com/rmak78/phpledger/releases/download/v0.6.0-preview/phpledger-0.6.0-preview-media-kit.zip"
+    "mediaKitUrl": "https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip"
   },
-  "requirements": "PHP 8.2+ (8.3 recommended), MySQL 8.4 (InnoDB), HTTPS, terminal access",
+  "requirements": "PHP 8.2+ (8.3 recommended), MySQL 8.4 (InnoDB), HTTPS; browser installation, no terminal required for setup; PHP zip extension for automatic updates",
   "nav": [
     [
       "product",
@@ -85,9 +79,11 @@
     "width": 600,
     "height": 200
   },
-  "screenshot": "/assets/screens/home-0.6.0-preview.png",
-  "ogDefault": "/assets/og/home.png",
+  "screenshot": "/assets/screens/v1.0.0/home-1440.webp",
+  "ogDefault": "/assets/og/workspace-1.0.0.png",
   "capabilities": [
+    "0.6.0 workspace with a focused Home, sidebar and company switcher, search/jump, quick-create actions, URL-based list filters and 25/50/100-row pagination.",
+    "One-line-first invoice and bill editors, exact totals and posting previews; atomic allocation of one settlement across multiple open items; cost-of-sales classification, gross profit and P&L period presets.",
     "Company setup in ten functional currencies, one immutable functional currency per book; account management and audit history.",
     "Receipt, expense and general-journal drafts, balanced posting, linked dated reversals and correction mechanics preserving document identity.",
     "Account ledgers, trial balance, profit and loss, balance sheet, core CSV exports, bank CSV reconciliation, period controls and reviewed opening-cutover workflow.",
@@ -98,7 +94,9 @@
     "Reviewed opening party/product conversion ties supported existing balances to shared ledgers without reposting the opening journal.",
     "Cash POS with a synthetic catalogue and printable receipt; twelve demo choices: an Accounting starter playground plus eleven multi-year teaching histories. Cash POS does not issue shared stock.",
     "Scoped, revocable read API and MCP connections, with the published client compatibility matrix defining tested clients.",
-    "Exact currency snapshots with manual document and settlement rates, realised FX settlement mechanics, same-identity corrections and an unconfigured retryable event outbox."
+    "Exact currency snapshots with manual document and settlement rates, realised FX settlement mechanics, same-identity corrections and an unconfigured retryable event outbox.",
+    "Browser installation at /install: host and database checks, the existing migration chain, first-account creation and business onboarding, without Composer, Node or a terminal.",
+    "Publisher-signed automatic updates from an independent maintenance interface, with automatic matched code/configuration/key/database backup before applying a release and automatic restoration if a migration or mutation fails."
   ],
   "limitations": [
     "Advances, unapplied credits, overpayments and cash refunds; Quotes remains a separate future plugin.",
@@ -106,6 +104,8 @@
     "Country tax rules, withholding, compound or nonrecoverable tax policies, statutory filing and professionally accepted reporting packages.",
     "Automated rate providers, outgoing payments from foreign-currency bank accounts, period-end revaluation and group consolidation.",
     "Vetting enforcement, vendor bank change control and outbound connectors.",
-    "Financial write API/MCP, card processing, bank feeds, offline use, document scanning and detailed historical imports. New country account catalogues and advanced vertical workflows remain outside this preview."
+    "Financial write API/MCP, card processing, bank feeds, offline use, document scanning and detailed historical imports. New country account catalogues and advanced vertical workflows remain outside this release.",
+    "Mobile refinement and dark mode; complete visual/accessibility acceptance, consistent field-level validation recovery and full nested report/source/action return behavior remain unfinished.",
+    "Independent accounting review, independent security review, supervised pilots with a real month-end close, unfamiliar-operator installation observation and restricted shared-host recovery certification have not happened; these are post-release commitments, not completed acceptance."
   ]
 }
