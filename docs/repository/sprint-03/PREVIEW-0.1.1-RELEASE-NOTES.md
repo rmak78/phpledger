@@ -20,7 +20,7 @@ This change adds **no migration and no schema changes**. Existing migrations 001
 
 The [artifact and publication receipt](PREVIEW-0.1.1-VALIDATION.md) records 67 integration tests, 69 artifact HTTP checks, installation, upgrade, restoration, reproducible archive checks, CI and 78 public-demo checks. The [earlier local receipt](POS-CHECKOUT-VALIDATION.md) remains available.
 
-This remains the six-product synthetic cash-sale showcase. It does not add inventory, stock deductions, cost of goods sold, tax, discounts, credit sales, card processing, hardware integration or offline operation. Recording a cash sale does not collect a payment. The existing single-base-currency accounting model is unchanged.
+This remains the six-product sample cash-sale showcase. It does not add inventory, stock deductions, cost of goods sold, tax, discounts, credit sales, card processing, hardware integration or offline operation. Recording a cash sale does not collect a payment. The existing single-base-currency accounting model is unchanged.
 
 Qualified accounting review and representative cashier sessions remain open. No Pakistan, UK or UAE accounting framework is certified by this update. Historical imports, opening-balance cutover, AR/AP, translations, exchange-rate posting and AI scanning remain later work. MIT applies to new project-owned code and documentation, with separate dependency, asset and historical terms retained.
 

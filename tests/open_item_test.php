@@ -4,20 +4,20 @@ declare(strict_types=1);
 function open_item_fixture(bool $payable = false): array
 {
     $f = ledger_fixture('PKR');
-    $party = pl_save_party($f['actor_id'], $f['company_id'], $f['book_id'], ['legal_name' => 'Synthetic settlement party', 'entity_type' => 'private_company', 'country_code' => 'GB', 'is_customer' => true, 'is_vendor' => true, 'currency' => 'USD', 'request_key' => bin2hex(random_bytes(16)), 'reason' => 'Synthetic foundation fixture']);
+    $party = pl_save_party($f['actor_id'], $f['company_id'], $f['book_id'], ['legal_name' => 'Sample settlement party', 'entity_type' => 'private_company', 'country_code' => 'GB', 'is_customer' => true, 'is_vendor' => true, 'currency' => 'USD', 'request_key' => bin2hex(random_bytes(16)), 'reason' => 'Sample foundation fixture']);
     $account = (int) DB::queryFirstField('SELECT id FROM pl_accounts WHERE book_id = %i AND role = %s', $f['book_id'], $payable ? 'payables' : 'receivables');
-    pl_activate_open_item_account($f['actor_id'], $f['company_id'], $f['book_id'], $account, 'Synthetic unused control activation');
+    pl_activate_open_item_account($f['actor_id'], $f['company_id'], $f['book_id'], $account, 'Sample unused control activation');
     return $f + ['party_id' => $party['id'], 'control_account_id' => $account, 'payable' => $payable];
 }
 
 function open_item_recognition_input(array $f, string $amount = '2000', string $rate = '281'): array
 {
-    return ['party_id' => $f['party_id'], 'control_account_id' => $f['control_account_id'], 'offset_account_id' => $f['accounts'][$f['payable'] ? '5000' : '4000'], 'currency' => 'USD', 'amount_fc' => $amount, 'date' => '2026-01-05', 'rate' => $rate, 'source_reference' => bin2hex(random_bytes(16)), 'description' => 'Synthetic recognition, no invoice document', 'idempotency_key' => bin2hex(random_bytes(16))];
+    return ['party_id' => $f['party_id'], 'control_account_id' => $f['control_account_id'], 'offset_account_id' => $f['accounts'][$f['payable'] ? '5000' : '4000'], 'currency' => 'USD', 'amount_fc' => $amount, 'date' => '2026-01-05', 'rate' => $rate, 'source_reference' => bin2hex(random_bytes(16)), 'description' => 'Sample recognition, no invoice document', 'idempotency_key' => bin2hex(random_bytes(16))];
 }
 
 function open_item_settlement_input(array $f, int $itemId, string $amount = '2000', string $rate = '279.50'): array
 {
-    return ['item_id' => $itemId, 'bank_account_id' => $f['accounts']['1000'], 'gain_account_id' => $f['accounts']['4000'], 'loss_account_id' => $f['accounts']['5000'], 'amount_fc' => $amount, 'date' => '2026-02-20', 'actual_rate' => $rate, 'description' => 'Synthetic bank settlement', 'idempotency_key' => bin2hex(random_bytes(16))];
+    return ['item_id' => $itemId, 'bank_account_id' => $f['accounts']['1000'], 'gain_account_id' => $f['accounts']['4000'], 'loss_account_id' => $f['accounts']['5000'], 'amount_fc' => $amount, 'date' => '2026-02-20', 'actual_rate' => $rate, 'description' => 'Sample bank settlement', 'idempotency_key' => bin2hex(random_bytes(16))];
 }
 
 test('realised FX worked example closes both currencies and reverses allocation with the journal', function (): void {
@@ -82,7 +82,7 @@ test('settlement rejects conflicts closed periods over-allocation and failed wri
     assert_throws(fn() => pl_settle_open_item($f['actor_id'], $f['company_id'], $f['book_id'], $input), DomainException::class, 'over-allocated');
     $input['amount_fc'] = '1000';
     $before = (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id = %i', $f['book_id']);
-    assert_throws(function () use ($f, $input): void { pl_ledger_transaction(function () use ($f, $input): void { pl_settle_open_item($f['actor_id'], $f['company_id'], $f['book_id'], $input); throw new DomainException('Synthetic outer failure'); }); });
+    assert_throws(function () use ($f, $input): void { pl_ledger_transaction(function () use ($f, $input): void { pl_settle_open_item($f['actor_id'], $f['company_id'], $f['book_id'], $input); throw new DomainException('Sample outer failure'); }); });
     assert_same($before, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id = %i', $f['book_id']));
     assert_same('2000.0000', pl_get_open_item($f['actor_id'], $f['company_id'], $f['book_id'], $r['item_id'])['remaining_fc']);
     DB::update('pl_periods', ['status' => 'closed'], 'id = %i', $f['period_id']);
@@ -122,7 +122,7 @@ test('foreign-bank payments and out-of-order activity are rejected without base-
 test('recognition reversal exact retry returns its original receipt after the item closes', function (): void {
     $f = open_item_fixture();
     $recognized = pl_open_item_recognize($f['actor_id'], $f['company_id'], $f['book_id'], open_item_recognition_input($f));
-    $key = bin2hex(random_bytes(16)); $date = gmdate('Y-m-d'); $reason = 'Synthetic recognition cancellation';
+    $key = bin2hex(random_bytes(16)); $date = gmdate('Y-m-d'); $reason = 'Sample recognition cancellation';
     $reversal = pl_reverse_journal($f['actor_id'], $f['company_id'], $f['book_id'], $recognized['journal_id'], $date, $key, $reason);
     assert_same('0.0000', pl_get_open_item($f['actor_id'], $f['company_id'], $f['book_id'], $recognized['item_id'])['remaining_fc']);
     assert_same($reversal, pl_reverse_journal($f['actor_id'], $f['company_id'], $f['book_id'], $recognized['journal_id'], $date, $key, $reason));
@@ -141,7 +141,7 @@ test('open-item activation sees postings committed after the caller snapshot', f
         assert_true($posted[0]['id'] > 0);
         // Confirm this connection still has the older consistent-read snapshot.
         assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journal_lines WHERE account_id=%i', $control));
-        assert_throws(fn() => pl_activate_open_item_account($f['actor_id'], $f['company_id'], $f['book_id'], $control, 'Synthetic stale snapshot activation'), DomainException::class, 'unused');
+        assert_throws(fn() => pl_activate_open_item_account($f['actor_id'], $f['company_id'], $f['book_id'], $control, 'Sample stale snapshot activation'), DomainException::class, 'unused');
     } finally { DB::rollback(); }
     assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_open_item_accounts WHERE account_id=%i', $control));
 });

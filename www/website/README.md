@@ -6,7 +6,7 @@ The deployable static document root is `www/website/public`. It is separate from
 
 The 18 September 2026 refresh updates the homepage, product and POS walkthroughs, download illustration, three reporting guides, news index and a new `/news/0-6-0-preview/` article. Shared capability/limitation metadata and social previews describe the rebuilt workspace. This website refresh is local and has not been published.
 
-Current screenshots live under `public/assets/screens/v0.6.0-preview/`. Its `manifest.json` records routes, sample identity, captions, alt text, dimensions and SHA-256 hashes for 18 actual application captures and their responsive WebP derivatives. They were captured from the local 0.6.0 runtime with fresh Willow Corner Shop and Cedar Studio samples; image pixels were not rewritten. The POS sequence uses a local synthetic USD 5.75 sale. The three Cedar Studio walkthroughs retain their worked figures with new interface captures. Historical release pages and their original screenshots remain intact.
+Current screenshots live under `public/assets/screens/v0.6.0-preview/`. Its `manifest.json` records routes, sample identity, captions, alt text, dimensions and SHA-256 hashes for 18 actual application captures and their responsive WebP derivatives. They were captured from the local 0.6.0 runtime with fresh Willow Corner Shop and Cedar Studio samples; image pixels were not rewritten. The POS sequence uses a local sample USD 5.75 sale. The three Cedar Studio walkthroughs retain their worked figures with new interface captures. Historical release pages and their original screenshots remain intact.
 
 Desktop/tablet are the application design targets. Mobile refinement, dark mode, full visual/accessibility acceptance, field-error consistency and nested report/source/action return behavior remain unfinished. Website layout checks do not close those application acceptance gates. No application release archive, version, migration or published media kit changes as part of this refresh. See `design-qa.md` for local checks and publication boundaries.
 
@@ -16,7 +16,7 @@ The 0.4.0 website presented core AR/AP, optional Purchasing/Inventory, manual in
 
 Published as `website-redesign-20260915-233156` at **04:32 PKT on 16 September 2026** (23:32 UTC on 15 September). All 165 static files matched archive, host and public hashes. Demo identity, entry/health, noindex and existing headers were preserved. See [the static publication receipt](../../docs/design/website/qa/release040-live-publication.json). The separate application and media archives are published on [GitHub](https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview), with verified public downloads. The site builds 64 source pages into 65 HTML outputs and 63 sitemap URLs.
 
-The [marketing handoff](../../docs/design/website/ACCOUNTING-STARTER-LAUNCH-KIT.md) contains final copy, evidence, actual synthetic screenshots and a downloadable media ZIP. No email or social post is sent by the static site or this publication.
+The [marketing handoff](../../docs/design/website/ACCOUNTING-STARTER-LAUNCH-KIT.md) contains final copy, evidence, actual sample screenshots and a downloadable media ZIP. No email or social post is sent by the static site or this publication.
 
 ## Source and build
 
@@ -28,7 +28,7 @@ node www/website/build.mjs --check
 
 Edit `src/pages/*.html` (JSON front matter followed by page content), `src/partials/*.html`, `src/css/*.css`, `src/js/site.js` and `src/site.json`; then rebuild. The generator writes public HTML, versioned CSS/JS links, sitemap and the release RSS feed. `src/static` supplies the manifest, credits redirect and robots policy. Release facts and page metadata generate `llms.txt`, `/.well-known/ai.txt`, `/ai/summary.json` and `/ai/faq.json`; the former static discovery copies were removed. Valid `lastmod` is required on every page. WebPage/Person/breadcrumb data is emitted consistently, while explicit HowTo/ItemList metadata is validated. Generated contents use stable, collision-safe heading anchors. Commit source and generated output together. Do not hand-edit generated pages.
 
-The public output needs no Node.js, PHP, database, analytics or third-party page assets. GitHub DNS/preconnect hints can establish a connection before you follow a download link. It uses locally served Manrope, Poppins and Inter fonts, the supplied brand, licensed photographs and actual synthetic application captures. Existing originals remain under `docs/design`. See [asset provenance](../../docs/design/website/SOURCES.md).
+The public output needs no Node.js, PHP, database, analytics or third-party page assets. GitHub DNS/preconnect hints can establish a connection before you follow a download link. It uses locally served Manrope, Poppins and Inter fonts, the supplied brand, licensed photographs and actual sample application captures. Existing originals remain under `docs/design`. See [asset provenance](../../docs/design/website/SOURCES.md).
 
 `tools/prepare-images.py` is the existing optional Pillow-based asset preparation tool; the prepared derivatives are already present. It is not part of normal page builds. The image manifests record source paths, dimensions, bytes and hashes.
 
@@ -44,7 +44,7 @@ The existing website Compose service serves `public` at [http://127.0.0.1:18201/
 | `/download/` | 0.6.0-preview assets, checksum, installation requirements and FAQ |
 | `/about/` | Project, maintainer and current scope |
 | `/privacy/` | Sessions, country hints, sample reset and operational logs |
-| `/terms/` | Synthetic demo use and preview/license boundaries |
+| `/terms/` | Sample demo use and preview/license boundaries |
 | `/support/` | Setup/training/troubleshooting information and local email-draft form |
 | `/roadmap/` | Opening balances/cutover → period administration → bank reconciliation, then later gates |
 | `/news/` | Release index and RSS link |

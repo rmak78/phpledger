@@ -16,7 +16,7 @@ The installation/business-onboarding wizard should offer a small, understandable
 
 | Package | Evidence gathered | Next gate |
 |---|---|---|
-| Country-neutral core | Original candidate accounts and common posting roles | Accounting review and synthetic transaction examples |
+| Country-neutral core | Original candidate accounts and common posting roles | Accounting review and sample transaction examples |
 | Seven business profiles | Original candidate accounts, scope limits, and industry questions | Practitioner review per business profile; inventory/specialist workflows remain later releases |
 | Pakistan (launch research priority) | Pinned 123-row Odoo chart; federal and Punjab/Sindh authority references; financial-reporting applicability source inventory | Pakistan accountant review; entity classification and other provincial coverage; current rules and reporting requirements |
 | India (launch research priority) | Pinned 102-row Odoo chart; ERPNext account tree; GST ledger guidance and ICAI reporting references | Indian accountant review; entity/GST registration model, tax-rule and disclosure validation |

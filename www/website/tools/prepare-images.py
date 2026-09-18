@@ -47,7 +47,7 @@ WHITE = (255, 255, 255)
 OG_SIZE = (1200, 630)
 OG_FIT = (1040, 470)
 OG_MARGIN = 40
-OG_CAPTION = "Development preview · Synthetic sample data"
+OG_CAPTION = "Development preview · Sample data"
 OG_INPUTS = {
     "home": None,  # docs/repository/assets/social-preview-candidate.png, copied unchanged
     "product": "01-expense.png",

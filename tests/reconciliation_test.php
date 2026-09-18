@@ -8,7 +8,7 @@ function bank_fixture_input(array $fixture, array $rows = [], string $closing = 
 
 function bank_fixture_row(string $reference, string $in = '12.34', string $out = '0', string $date = '2026-09-14'): array
 {
-    return ['date' => $date, 'reference' => $reference, 'description' => 'Synthetic bank transfer', 'money_in' => $in, 'money_out' => $out];
+    return ['date' => $date, 'reference' => $reference, 'description' => 'Sample bank transfer', 'money_in' => $in, 'money_out' => $out];
 }
 
 function bank_fixture_import(array $fixture, array $input): array
@@ -268,7 +268,7 @@ test('bank cancellation retains immutable evidence and releases exact references
     assert_true((int) $corrected['id'] !== $id);
     assert_same($input['reference'], $corrected['reference']);
     assert_same('ORIGINAL-BANK-REF', $corrected['rows'][0]['reference']);
-    assert_same('Synthetic bank transfer', pl_bank_get_statement($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $id)['rows'][0]['description']);
+    assert_same('Sample bank transfer', pl_bank_get_statement($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $id)['rows'][0]['description']);
     $corrected = pl_bank_match_row($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], (int) $corrected['id'], (int) $corrected['rows'][0]['id'], bank_fixture_line($journal['id'], $fixture['accounts']['1000']), 1);
     $corrected = pl_bank_complete_statement($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], (int) $corrected['id'], 2, 'complete-corrected');
     assert_same('completed', $corrected['status']);

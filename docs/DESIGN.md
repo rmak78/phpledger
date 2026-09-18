@@ -32,7 +32,7 @@ Required refinements before the working journey is accepted:
 
 The selection authorizes this direction for implementation and refinement; it does not establish a finished interface, approved final logo assets, measured usability, WCAG conformance, or a production release. Six static brand comparisons and review documentation are complete. [Sprint 02](SPRINT-02.md) now implements the working login, onboarding, receipt/expense draft, posting, trial-balance, and reversal journey. Historical-import execution is deferred from this sprint while its future design requirements remain documented.
 
-The website is a separate public experience using the same identity and typography. Three visual compositions were prepared before code; the user selected **1, Field Notes**. Continue with meaningful international business photography, a genuine product walkthrough, and clear installation/support/contribution paths. The subsequently authorized `/demo` must make its synthetic, hourly-reset nature clear and keep unsupported/destructive actions out of its usable flow. Website screenshots and photographs must not imply completed product capabilities or customer endorsements.
+The website is a separate public experience using the same identity and typography. Three visual compositions were prepared before code; the user selected **1, Field Notes**. Continue with meaningful international business photography, a genuine product walkthrough, and clear installation/support/contribution paths. The subsequently authorized `/demo` must make its sample, hourly-reset nature clear and keep unsupported/destructive actions out of its usable flow. Website screenshots and photographs must not imply completed product capabilities or customer endorsements.
 
 ## Rejected first set, preserved for reference
 
@@ -71,7 +71,7 @@ All candidates must demonstrate the same content and journeys so the decision re
 
 Sprint 02 applies the selected Review Console system to working onboarding, transaction review, reports, and a touch-friendly sample POS. The reports hub distinguishes posted figures from the user's explicit cash-scenario assumptions. POS provides searchable categories, quantity/removal before checkout, cash/change review, clear saved status, and receipt/source links. Keep receivables/payables/stock and the later Scan document flow in the roadmap until their underlying behavior exists. The current visual refinement raises dense text to a readable size and strengthens navigation, hierarchy, and action contrast; final browser evidence remains separate from this design intent.
 
-- Separate installation from business onboarding. Let users explore synthetic sample data without exposing or mixing real company records.
+- Separate installation from business onboarding. Let users explore sample data without exposing or mixing real company records.
 - Begin with essential company information, an account template, and a start-fresh/import choice. Progressive disclosure reveals advanced accounting settings when relevant.
 - Explain the next action in empty states and show exactly whether work is draft, saved, posted, reversed, or awaiting confirmation.
 - Keep entered values on validation errors. Place plain-language errors at the relevant field and supply an accessible summary/focus path.
@@ -82,7 +82,7 @@ Sprint 02 applies the selected Review Console system to working onboarding, tran
 
 ## Prototype content and review
 
-Use synthetic company names and transactions. Display a clear preview/sample notice and avoid implying that a candidate screen saves business data unless that behavior is implemented. The current image comparison covers the daily expense task and its journal preview. After selection, the working prototype must also include onboarding and a report with traceable transaction detail. Import examples must show mapping, validation errors, totals, and the confirmation boundary.
+Use sample company names and transactions. Display a clear preview/sample notice and avoid implying that a candidate screen saves business data unless that behavior is implemented. The current image comparison covers the daily expense task and its journal preview. After selection, the working prototype must also include onboarding and a report with traceable transaction detail. Import examples must show mapping, validation errors, totals, and the confirmation boundary.
 
 Review desktop, tablet, and mobile widths, keyboard navigation, form errors, empty/loading/success states, and the path back from a report to its source. Automated checks support this review; screenshots alone do not establish usable interaction or WCAG conformance.
 

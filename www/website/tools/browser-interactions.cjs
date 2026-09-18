@@ -13,7 +13,7 @@ async (page) => {
   check('Escape closes menu and restores focus', await page.locator('.menu-toggle').evaluate(e => e === document.activeElement && e.getAttribute('aria-expanded') === 'false'));
   await page.locator('#copy-message').click();
   check('Required fields reported and focused', await page.locator('[aria-invalid=true]').count() === 3 && await page.locator('.form-errors').evaluate(e => e === document.activeElement));
-  await page.locator('#enquiry-name').fill('Synthetic Website Reviewer');
+  await page.locator('#enquiry-name').fill('Sample Website Reviewer');
   await page.locator('#enquiry-email').fill('invalid');
   await page.locator('#enquiry-message').fill('Please help evaluate installation using fictional records.');
   await page.locator('#copy-message').click();

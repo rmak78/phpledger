@@ -25,7 +25,7 @@ Describe the user's task, the previous behavior, and the resulting behavior. Lin
 
 - [ ] Existing architecture and central posting/permission interfaces are used.
 - [ ] Unrelated work and legacy history are preserved.
-- [ ] Synthetic examples replace real customer data; secrets are excluded.
+- [ ] Sample examples replace real customer data; secrets are excluded.
 - [ ] Implemented facts are distinguished from plans, mockups, and release claims.
 - [ ] Necessary documentation and meaningful tests are included.
 - [ ] Dependency/asset provenance and applicable notices are recorded; no project license is assumed.

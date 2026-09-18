@@ -2,7 +2,7 @@
 
 ## Stable-path installation and signed updates
 
-Browser installation and signed updates are published in **1.0.0**. The current [roadmap](ROADMAP.md#current-delivery-contract-first-stable-10) and [validation receipt](VALIDATION.md#100-publication--18-september-2026) separate implemented/tested behavior from independent review and pilot acceptance, which remain open post-release commitments. Browser setup shares the CLI migration/preflight service; installation state lives in private files, without a new accounting schema. The independent maintenance loader and its copied recovery worker run without the application version being replaced. Tests use random disposable databases and synthetic signing material.
+Browser installation and signed updates are published in **1.0.0**. The current [roadmap](ROADMAP.md#current-delivery-contract-first-stable-10) and [validation receipt](VALIDATION.md#100-publication--18-september-2026) separate implemented/tested behavior from independent review and pilot acceptance, which remain open post-release commitments. Browser setup shares the CLI migration/preflight service; installation state lives in private files, without a new accounting schema. The independent maintenance loader and its copied recovery worker run without the application version being replaced. Tests use random disposable databases and sample signing material.
 
 `tools/build-package.py` accepts stable versions and explicit `--channel stable|preview`, retaining the clean committed-source and explicit file allowlist requirements. After building a reviewed package, a publisher can create the updater envelope with:
 
@@ -10,7 +10,7 @@ Browser installation and signed updates are published in **1.0.0**. The current 
 php tools/sign-update.php --archive=/private/release/phpledger-VERSION.zip --key=/private/signing/publisher.pem --output=/private/release/phpledger-VERSION.update.json
 ```
 
-This is a publisher command, not a customer installation step. It requires PHP ZIP/OpenSSL and an external RSA private key of at least 3072 bits, validates the complete package inventory, and refuses to overwrite an existing output. An encrypted key may use the host-provided `PL_RELEASE_KEY_PASSPHRASE`; never put a passphrase in arguments or commit a key. Tests generate temporary synthetic keys; no official release identity has been provisioned by this implementation.
+This is a publisher command, not a customer installation step. It requires PHP ZIP/OpenSSL and an external RSA private key of at least 3072 bits, validates the complete package inventory, and refuses to overwrite an existing output. An encrypted key may use the host-provided `PL_RELEASE_KEY_PASSPHRASE`; never put a passphrase in arguments or commit a key. Tests generate temporary sample keys; no official release identity has been provisioned by this implementation.
 
 The operator pins the independently authenticated publisher public key outside the public root. A key inside a downloaded package cannot establish that trust. Production key custody, distribution of its fingerprint and an authenticated rotation/revocation procedure must be accepted before publishing signed updates. Publish the signed envelope alongside the ZIP, SHA-256 file and matching media kit under the normal explicit release authorization. A local package proof is not a published release.
 
@@ -43,7 +43,7 @@ original JSON contract for API consumers; pages no longer load DataTables.
 Run `docker compose --profile test run --rm test php tests/run.php --suite=lists`
 for the targeted list tests, and `--suite=ar-lists` for current-revision AR/AP lists.
 `docker compose --profile test run --rm test php tools/verify-list-capacity.php`
-seeds 5,000 synthetic receipt drafts, posted journals and bank rows using normal
+seeds 5,000 sample receipt drafts, posted journals and bank rows using normal
 services on the isolated test database, then records bounded query plans/timings.
 Use `--measure-only` to reuse that fixture. Bank statements retain their 500-row
 limit; the fixture has ten separate statements/accounts. Migration 031 indexes
@@ -97,7 +97,7 @@ docker compose --profile test run --rm test composer check
 docker compose --profile test run --rm -e PL_DB_USER=root -e PL_DB_PASSWORD=local-test-root-only test php tools/verify-starter-upgrade.php
 ```
 
-`verify-starter-upgrade.php` is **disposable-test-only**. It rejects non-CLI use, non-test environments and any effective connection other than the local `db_test` service, `phpledger_test` database and its test root account. It creates a randomly named `phpledger_starter_verify_*` schema, reconstructs a synthetic published 0.3.0 baseline through migration 016, checks original rows/receipts during upgrade and exercises subsequent posting/settlement. Its fixture-only historical inserts are not an application posting interface. Cleanup removes only that run's random schema and preserves `phpledger_test` and browser fixtures. The literal password above is the existing disposable test credential, not a deployment credential.
+`verify-starter-upgrade.php` is **disposable-test-only**. It rejects non-CLI use, non-test environments and any effective connection other than the local `db_test` service, `phpledger_test` database and its test root account. It creates a randomly named `phpledger_starter_verify_*` schema, reconstructs a sample published 0.3.0 baseline through migration 016, checks original rows/receipts during upgrade and exercises subsequent posting/settlement. Its fixture-only historical inserts are not an application posting interface. Cleanup removes only that run's random schema and preserves `phpledger_test` and browser fixtures. The literal password above is the existing disposable test credential, not a deployment credential.
 
 Run financial suites serially against the shared test service. Run backup/restore verification after other writers finish. Follow [validation evidence](VALIDATION.md) and the [starter record](repository/sprint-06/ACCOUNTING-STARTER.md) for commands actually executed, browser viewports and unresolved review gates; a passing suite is not accounting or tax approval.
 
@@ -106,7 +106,7 @@ Run financial suites serially against the shared test service. Run backup/restor
 Read [foundation notes](strategy/AR-AP-FOUNDATIONS-NOTES.md) before using migrations 013–016. These prerequisites are included in 0.3.0-preview, without invoice/bill UI or public write endpoints. Keep the existing MeekroDB bootstrap and use the central posting functions.
 
 - `pl_currency_rate_enter(actor, company, book, input)` accepts decimal-string manual spot/actual rates, dated provenance, reason, request key and an optional superseded row. `pl_currency_rate_lookup(..., type, source)` selects the newest applicable date/revision from that exact source. Six rate types are reserved in schema; later types have no active calculation workflow.
-- `php tools/currency-rates.php ACTOR_ID COMPANY_ID BOOK_ID INPUT.json` records a manual rate and prints only its ID/revision. Keep private input outside the web root; use synthetic data during development.
+- `php tools/currency-rates.php ACTOR_ID COMPANY_ID BOOK_ID INPUT.json` records a manual rate and prints only its ID/revision. Keep private input outside the web root; use sample data during development.
 - `pl_save_party` and `pl_save_contact` use company/book scope, request receipts and optimistic revisions. Party tax identifiers use jurisdiction/scheme/value, and phone duplicates require acknowledgement with a reason. Bank/tag/attachment/status-transition fields cannot be mutated through generic party entry.
 - `pl_activate_open_item_account(actor, company, book, account, reason)` is owner-only and rejects used or currency-designated controls. `pl_open_item_recognize(..., input)` accepts party/control/offset account IDs, currency, amount_fc, date, source_reference, description, optional rate/rate_source_id and idempotency_key.
 - `pl_settle_open_item(..., input)` accepts item/bank/gain/loss account IDs, amount_fc, date, description, actual_rate or rate_source_id and idempotency_key. Exact historical basis is read from the ledger; the command receipt retains the actual settlement rate even when bank lines are in functional currency. Partial settlement, final residual and allocation reversal remain atomic with journal posting. Outgoing foreign-bank payments and activity dated before the latest item event are rejected.
@@ -130,7 +130,7 @@ docker compose up -d --build
 docker compose exec -T web php www/phpledger/install/migrate.php
 ```
 
-Open the local sign-in screen at `http://127.0.0.1:18200/login`. Serve only `www/phpledger/public`, never the repository root. Historical installation dumps are not part of the revival; never run them against the modern database. Use synthetic data and a separate development database.
+Open the local sign-in screen at `http://127.0.0.1:18200/login`. Serve only `www/phpledger/public`, never the repository root. Historical installation dumps are not part of the revival; never run them against the modern database. Use sample data and a separate development database.
 
 Create the first administrator through the controlled command. Supply its password through standard input or a private `PL_ADMIN_PASSWORD` variable; never put the password in command arguments or committed files.
 
@@ -153,7 +153,7 @@ docker compose --profile test run --rm test composer audit --no-interaction
 
 The test profile uses `phpledger_test` in its separate `db_test` service. The restore check creates and removes only its own isolated test database. See [validation receipts](VALIDATION.md) for exact executed checks and remaining limits.
 
-Optional browser-facing acceptance scripts are [core HTTP](../tests/http-smoke.py), [POS HTTP](../tests/pos-http-smoke.py) and [demo HTTP](../tests/demo-http-smoke.py). They use local synthetic records; read each script's scope and required private inputs before running it. Do not broaden their targets to production or real customer books.
+Optional browser-facing acceptance scripts are [core HTTP](../tests/http-smoke.py), [POS HTTP](../tests/pos-http-smoke.py) and [demo HTTP](../tests/demo-http-smoke.py). They use local sample records; read each script's scope and required private inputs before running it. Do not broaden their targets to production or real customer books.
 
 ## Opening cutover, periods and bank reconciliation
 
@@ -179,16 +179,16 @@ account_code,debit,credit
 
 ```csv
 kind,account_code,party,reference,document_date,due_date,outstanding
-receivable,1100,Synthetic customer,INV-01,2026-08-15,2026-09-15,300
-payable,2000,Synthetic supplier,BILL-01,2026-08-20,2026-09-20,200
+receivable,1100,Sample customer,INV-01,2026-08-15,2026-09-15,300
+payable,2000,Sample supplier,BILL-01,2026-08-20,2026-09-20,200
 ```
 
 The two examples reconcile an opening cutover at 2026-09-01: cash 1,000 + receivables 300 = payables 200 + equity 1,100. Unpaid amounts are source evidence for those control balances and are never posted a second time. This opening register supports positive unpaid invoices/bills; importing opening credits or advances remains deferred. Opening stock quantities and value use the separate reviewed Inventory conversion. Use the actual scoped account codes, which may differ from the example.
 
 ```csv
 date,reference,description,money_in,money_out
-2026-09-02,BANK-001,Synthetic receipt,125,0
-2026-09-03,BANK-002,Synthetic expense,0,25
+2026-09-02,BANK-001,Sample receipt,125,0
+2026-09-03,BANK-002,Sample expense,0,25
 ```
 
 For that bank example, enter opening 1,000 and closing 1,100 and explicitly confirm the first cleared baseline. The corresponding receipt/expense must already be posted through the normal services before matching; import/reconciliation creates no financial entries. Review bank-only fees or other missing transactions and record them through the normal accounting workflow before matching. A first baseline with unresolved earlier outstanding items is rejected; resolve or reconcile the earlier history first. Completion protects history from backdated postings even if a period is reopened.
@@ -204,7 +204,7 @@ node www/website/build.mjs
 node www/website/check.mjs
 ```
 
-`accounting-http-smoke.py` is hard-limited to `http://127.0.0.1:18200`, creates isolated synthetic owner/viewer companies and keeps random credentials in memory/stdin. It retains its synthetic data for inspection. Unit/financial tests use only `db_test`; upgrade/restore scripts create, validate and remove their own randomly named databases in that disposable test service. The literal root password shown is solely the documented disposable test credential.
+`accounting-http-smoke.py` is hard-limited to `http://127.0.0.1:18200`, creates isolated sample owner/viewer companies and keeps random credentials in memory/stdin. It retains its sample data for inspection. Unit/financial tests use only `db_test`; upgrade/restore scripts create, validate and remove their own randomly named databases in that disposable test service. The literal root password shown is solely the documented disposable test credential.
 
 ## Company modules
 
@@ -212,7 +212,7 @@ Open `/modules` in an installation to inspect required AR/AP, optional Inventory
 
 Run the existing preflight/migrations before using new source. The original `010_module_lifecycle` adds state/audit tables without activating existing companies; the starter extends the supplied registry and adds audited visibility preferences. Retain both `006_*` migrations unchanged. A changed optional-module manifest requires owner review, and missing or mismatched migration receipts block operation. Disabling preserves source/journal history; new requests, including retries, still pass the current service gate. See [the original lifecycle contract](repository/sprint-05/MODULE-FOUNDATION.md) and the [current starter dependencies](repository/sprint-06/ACCOUNTING-STARTER.md).
 
-Run `python tests/module-http-smoke.py` for the existing local-only HTTP assertions with synthetic owner/viewer books. Run `composer check` through the test container for service, concurrency and rollback tests; `./tools/verify-demo.ps1` verifies isolated sample provisioning/reset in `db_test`. Existing read API/MCP remains available; the starter adds no public financial write endpoint or machine credential.
+Run `python tests/module-http-smoke.py` for the existing local-only HTTP assertions with sample owner/viewer books. Run `composer check` through the test container for service, concurrency and rollback tests; `./tools/verify-demo.ps1` verifies isolated sample provisioning/reset in `db_test`. Existing read API/MCP remains available; the starter adds no public financial write endpoint or machine credential.
 
 ## Repository working boundaries
 
@@ -230,7 +230,7 @@ The PowerShell restoration check explicitly uses UTF-8 for native process input/
 
 Read [architecture](ARCHITECTURE.md), [contribution guidance](../CONTRIBUTING.md) and [repository instructions](../AGENTS.md). Reuse the bootstrap, MeekroDB helpers, explicit routes and central posting service. Preserve historical files and migration receipts. Configuration, dependencies and storage remain outside the public document root.
 
-The [demo runbook](DEMO.md) covers separate synthetic storage, restricted runtime permissions, hourly UTC reset and deployment. The [roadmap](ROADMAP.md) preserves future language/formatting/FX, imports, regional accounting, inventory, production POS and industry modules. Development checks are not accounting sign-off, observed usability evidence or a stable-release claim.
+The [demo runbook](DEMO.md) covers separate sample storage, restricted runtime permissions, hourly UTC reset and deployment. The [roadmap](ROADMAP.md) preserves future language/formatting/FX, imports, regional accounting, inventory, production POS and industry modules. Development checks are not accounting sign-off, observed usability evidence or a stable-release claim.
 
 ### Published 0.5-to-0.6 data verification
 

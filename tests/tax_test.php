@@ -5,10 +5,10 @@ function starter_tax_fixture(): array
 {
     $f=ledger_fixture();
     foreach (['tax_out'=>['2150','liability'],'tax_in'=>['1350','asset']] as $name=>[$code,$type]) {
-        $account=pl_save_account($f['actor_id'],$f['company_id'],$f['book_id'],['code'=>$code,'name'=>'Synthetic '.$name,'type'=>$type,'role'=>null,'is_active'=>true,'reason'=>'Synthetic tax accounts','creation_key'=>bin2hex(random_bytes(16))]);
+        $account=pl_save_account($f['actor_id'],$f['company_id'],$f['book_id'],['code'=>$code,'name'=>'Sample '.$name,'type'=>$type,'role'=>null,'is_active'=>true,'reason'=>'Sample tax accounts','creation_key'=>bin2hex(random_bytes(16))]);
         $f[$name]=(int)$account['id'];
     }
-    $input=['code'=>'SYNTHETIC','name'=>'Synthetic test tax','treatment'=>'standard','sales_account_id'=>$f['tax_out'],'purchase_account_id'=>$f['tax_in'],'reason'=>'Synthetic tax engine test','idempotency_key'=>bin2hex(random_bytes(16))];
+    $input=['code'=>'SAMPLE','name'=>'Sample test tax','treatment'=>'standard','sales_account_id'=>$f['tax_out'],'purchase_account_id'=>$f['tax_in'],'reason'=>'Sample tax engine test','idempotency_key'=>bin2hex(random_bytes(16))];
     $code=pl_create_tax_code($f['actor_id'],$f['company_id'],$f['book_id'],$input);
     assert_same($code['id'],pl_create_tax_code($f['actor_id'],$f['company_id'],$f['book_id'],$input)['id']);
     return $f+['tax_code_id'=>$code['id']];
@@ -24,7 +24,7 @@ test('core tax exact percentage and four-place rounding avoid floats',function()
 });
 
 test('core tax dated revisions are scoped immutable and selected without future lookahead',function():void {
-    $f=starter_tax_fixture(); $input=['tax_code_id'=>$f['tax_code_id'],'effective_from'=>'2026-01-01','percentage'=>'5','reason'=>'Synthetic first rate','idempotency_key'=>'first'];
+    $f=starter_tax_fixture(); $input=['tax_code_id'=>$f['tax_code_id'],'effective_from'=>'2026-01-01','percentage'=>'5','reason'=>'Sample first rate','idempotency_key'=>'first'];
     $rate=pl_enter_tax_rate($f['actor_id'],$f['company_id'],$f['book_id'],$input);
     assert_same($rate,pl_enter_tax_rate($f['actor_id'],$f['company_id'],$f['book_id'],$input));
     $calc=fn(string $date)=>pl_tax_calculate($f['actor_id'],$f['company_id'],$f['book_id'],$f['tax_code_id'],$date,'100','sale');

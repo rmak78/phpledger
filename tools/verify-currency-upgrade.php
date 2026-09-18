@@ -52,8 +52,8 @@ try {
         foreach (require $file as $statement) { DB::query($statement); }
         DB::insert('pl_schema_migrations', ['version' => $version, 'checksum' => hash_file('sha256', $file), 'status' => 'applied', 'applied_at' => gmdate('Y-m-d H:i:s')]);
     }
-    $actor = pl_create_user('currency-upgrade@example.invalid', 'Synthetic currency upgrade owner', 'Synthetic upgrade password 293!');
-    DB::insert('pl_companies', ['name' => 'Synthetic prior currency book', 'currency' => 'USD', 'start_date' => '2026-01-01', 'fiscal_year_end' => '12-31', 'created_by' => $actor, 'setup_status' => 'ready']);
+    $actor = pl_create_user('currency-upgrade@example.invalid', 'Sample currency upgrade owner', 'Sample upgrade password 293!');
+    DB::insert('pl_companies', ['name' => 'Sample prior currency book', 'currency' => 'USD', 'start_date' => '2026-01-01', 'fiscal_year_end' => '12-31', 'created_by' => $actor, 'setup_status' => 'ready']);
     $company = (int) DB::insertId();
     DB::insert('pl_company_members', ['company_id' => $company, 'user_id' => $actor, 'role' => 'owner']);
     DB::insert('pl_books', ['company_id' => $company, 'name' => 'Primary book']);
@@ -61,14 +61,14 @@ try {
     DB::insert('pl_periods', ['company_id' => $company, 'book_id' => $book, 'start_date' => '2026-01-01', 'end_date' => '2026-12-31']);
     $period = (int) DB::insertId();
     $accounts = [];
-    foreach ([['1000', 'Synthetic cash', 'asset', 'cash_bank'], ['4000', 'Synthetic revenue', 'income', 'income']] as [$code, $name, $type, $role]) {
+    foreach ([['1000', 'Sample cash', 'asset', 'cash_bank'], ['4000', 'Sample revenue', 'income', 'income']] as [$code, $name, $type, $role]) {
         DB::insert('pl_accounts', ['company_id' => $company, 'book_id' => $book, 'code' => $code, 'name' => $name, 'type' => $type, 'role' => $role]);
         $accounts[] = (int) DB::insertId();
     }
     // This is the exact canonical pre-013 shape and hashing order, not a placeholder hash.
-    $legacy = ['date' => '2026-09-14', 'currency' => 'USD', 'source_type' => 'receipt', 'source_reference' => 'currency-upgrade-original', 'idempotency_key' => 'currency-upgrade-original', 'description' => 'Synthetic original posting', 'lines' => [
-        ['account_id' => $accounts[0], 'debit' => '125.0000', 'credit' => '0.0000', 'description' => 'Synthetic original line'],
-        ['account_id' => $accounts[1], 'debit' => '0.0000', 'credit' => '125.0000', 'description' => 'Synthetic original line'],
+    $legacy = ['date' => '2026-09-14', 'currency' => 'USD', 'source_type' => 'receipt', 'source_reference' => 'currency-upgrade-original', 'idempotency_key' => 'currency-upgrade-original', 'description' => 'Sample original posting', 'lines' => [
+        ['account_id' => $accounts[0], 'debit' => '125.0000', 'credit' => '0.0000', 'description' => 'Sample original line'],
+        ['account_id' => $accounts[1], 'debit' => '0.0000', 'credit' => '125.0000', 'description' => 'Sample original line'],
     ]];
     $hash = hash('sha256', json_encode(['company_id' => $company, 'book_id' => $book, 'reversal_of_id' => null, 'payload' => $legacy], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
     DB::insert('pl_journals', ['company_id' => $company, 'book_id' => $book, 'period_id' => $period, 'journal_date' => $legacy['date'], 'currency' => 'USD', 'description' => $legacy['description'], 'source_type' => $legacy['source_type'], 'source_reference' => $legacy['source_reference'], 'idempotency_key' => $legacy['idempotency_key'], 'payload_hash' => $hash, 'posted_by' => $actor]);

@@ -1,7 +1,7 @@
-"""Check the local POS browser routes in an existing synthetic HTTP Acceptance company.
+"""Check the local POS browser routes in an existing sample HTTP Acceptance company.
 
 Uses only http://127.0.0.1:18200 with in-memory cookies. Set PL_HTTP_EMAIL and
-PL_HTTP_PASSWORD privately. Leaves one posted synthetic sale for inspection.
+PL_HTTP_PASSWORD privately. Leaves one posted sample sale for inspection.
 Never opens a browser, resets a database, collects money, or contacts a provider.
 """
 
@@ -26,7 +26,7 @@ spec.loader.exec_module(http)
 
 def run(company_id: int) -> dict:
     if company_id < 1:
-        raise RuntimeError("Choose an existing synthetic HTTP Acceptance company.")
+        raise RuntimeError("Choose an existing sample HTTP Acceptance company.")
     email, password = os.environ.get("PL_HTTP_EMAIL", ""), os.environ.get("PL_HTTP_PASSWORD", "")
     if not email or not password:
         raise RuntimeError("Set PL_HTTP_EMAIL and PL_HTTP_PASSWORD privately before running.")
@@ -44,7 +44,7 @@ def run(company_id: int) -> dict:
     check(signed_in.status == 200 and urlparse(signed_in.url).path == "/companies", "Login succeeds in an independent local session")
     form = next((form for form in signed_in.markup.forms if urlparse(form.action).path == "/company/select" and form.fields.get("company_id") == str(company_id)), None)
     if form is None:
-        raise RuntimeError("The requested synthetic company is unavailable to this local account.")
+        raise RuntimeError("The requested sample company is unavailable to this local account.")
     selected = session.submit(form)
     check(selected.status == 200 and "HTTP Acceptance " in selected.body, "Only the selected HTTP Acceptance business is used")
     date = datetime.now(timezone.utc).date().isoformat()
@@ -109,7 +109,7 @@ def run(company_id: int) -> dict:
     check(session.request("/pos/edit").status == 405, "Cart editing rejects GET requests")
     session.submit(session.request("/companies").markup.form_for("/logout"))
     check(urlparse(session.request(f"/pos/receipt?id={document_id}").url).path == "/login", "Logged-out sessions cannot read the receipt")
-    return {"passed": len(checks), "failed": 0, "target": http.ORIGIN, "company_id": company_id, "book_id": int(values["book_id"]), "document_id": document_id, "data": "One synthetic posted POS sale retained; no other company's books changed."}
+    return {"passed": len(checks), "failed": 0, "target": http.ORIGIN, "company_id": company_id, "book_id": int(values["book_id"]), "document_id": document_id, "data": "One sample posted POS sale retained; no other company's books changed."}
 
 
 if __name__ == "__main__":

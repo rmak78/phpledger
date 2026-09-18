@@ -84,7 +84,7 @@ This is a reporting-quality gate, not a requirement to block every operational d
 
 ## Bounded next implementation sequence
 
-The original [two-year retail statement fixture](examples/retail-statements.md) provides a non-installed arithmetic acceptance reference for the proposed system. It is synthetic, expressed in PKR thousands, and is not a Pakistan compliance template or evidence that the current application implements these statements.
+The original [two-year retail statement fixture](examples/retail-statements.md) provides a non-installed arithmetic acceptance reference for the proposed system. It is sample, expressed in PKR thousands, and is not a Pakistan compliance template or evidence that the current application implements these statements.
 
 1. Combine the country/framework research with a small representative chart and worked examples. Choose the first accounting/reporting profile and confirm system policies, recognition/measurement boundaries, posting/closing controls, classifications, fiscal comparisons, earnings treatment, and note/approval scope. Do not claim generic ACCA/ACMA certification or implement only a cosmetic statement format.
 2. Prove a country-neutral **management statement** definition and account-mapping preview against the existing ledger before adding any country-specific release. Clearly label scope; do not imply filing readiness.

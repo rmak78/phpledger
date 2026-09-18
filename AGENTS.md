@@ -10,7 +10,7 @@ Read `README.md`, `docs/ARCHITECTURE.md`, and `docs/ROADMAP.md`, then the releva
 - Preserve unrelated work. The owner removed the legacy application from the current tree on 15 September 2026; refer to Git history for research and do not restore it into the runtime. Never run historical SQL dumps against the new database. Never serve the repository root.
 - The new application is `www/phpledger`; its only web document root is `www/phpledger/public`. Use the new shared bootstrap and existing helper interfaces. Do not load legacy root code into the new application.
 - Retain BixiSoft's modular PHP/MeekroDB architecture. Do not add an alternative framework, ORM, authentication stack, router, or second database connection layer without an explicit design decision.
-- Keep secrets and real customer data out of files, logs, fixtures, screenshots, commits, and responses. Use synthetic fixtures and local-only services for development.
+- Keep secrets and real customer data out of files, logs, fixtures, screenshots, commits, and responses. Use sample fixtures and local-only services for development.
 
 ## Accounting and security
 
@@ -32,7 +32,7 @@ Read `README.md`, `docs/ARCHITECTURE.md`, and `docs/ROADMAP.md`, then the releva
 ## Every release includes a media kit
 
 - Every release, including previews and patch releases, must ship a matching versioned media kit alongside the application archive and checksum. A release is incomplete without it.
-- Attach the kit to the GitHub release and include its download link in the release notes and owner handoff. Include factual announcement/press copy, social and email drafts, a guided demo, FAQs and verified screenshots from that release with captions and alt text. Use synthetic data and distinguish shipped capabilities from limitations or planned work.
+- Attach the kit to the GitHub release and include its download link in the release notes and owner handoff. Include factual announcement/press copy, social and email drafts, a guided demo, FAQs and verified screenshots from that release with captions and alt text. Use sample data and distinguish shipped capabilities from limitations or planned work.
 - Verify the public media-kit download and record its checksum in the publication receipt. Preparing or attaching the kit does not itself authorize sending campaigns to external recipients.
 
 ## Every release updates documentation and repository metadata

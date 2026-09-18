@@ -18,11 +18,11 @@ try {
     require dirname(__DIR__) . '/www/phpledger/includes/functions/install_functions.php';
     require dirname(__DIR__) . '/www/phpledger/includes/functions/update_database_functions.php';
     pl_migrate();
-    $actor = pl_create_user('update-review@example.invalid', 'Synthetic recovery reviewer', 'Synthetic-update-fixture-password');
-    $company = pl_create_company($actor, 'Synthetic recovery company', 'USD', '2026-01-01', '12-31');
+    $actor = pl_create_user('update-review@example.invalid', 'Sample recovery reviewer', 'Sample-update-fixture-password');
+    $company = pl_create_company($actor, 'Sample recovery company', 'USD', '2026-01-01', '12-31');
     pl_post_journal($actor, $company['company_id'], $company['book_id'], [
-        'date' => '2026-09-18', 'currency' => 'USD', 'source_type' => 'receipt', 'source_reference' => 'synthetic-recovery-receipt',
-        'description' => 'Synthetic immutable recovery fixture', 'idempotency_key' => 'synthetic-update-recovery-fixture',
+        'date' => '2026-09-18', 'currency' => 'USD', 'source_type' => 'receipt', 'source_reference' => 'sample-recovery-receipt',
+        'description' => 'Sample immutable recovery fixture', 'idempotency_key' => 'sample-update-recovery-fixture',
         'lines' => [['account_id' => $company['accounts']['1000'], 'debit' => '123.4567', 'credit' => '0'], ['account_id' => $company['accounts']['4000'], 'debit' => '0', 'credit' => '123.4567']],
     ]);
     $receipt = null; $backupSteps = 0;

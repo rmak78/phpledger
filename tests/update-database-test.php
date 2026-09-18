@@ -15,9 +15,9 @@ try {
     DB::query("CREATE TABLE pl_schema_migrations (version VARCHAR(100) PRIMARY KEY, checksum CHAR(64), status VARCHAR(10)) ENGINE=InnoDB");
     DB::insert('pl_schema_migrations', ['version' => '001_synthetic', 'checksum' => str_repeat('a', 64), 'status' => 'applied']);
     DB::query('CREATE TABLE pl_journal_lines (id BIGINT AUTO_INCREMENT PRIMARY KEY, journal_id BIGINT, company_id BIGINT, book_id BIGINT, debit DECIMAL(20,4), credit DECIMAL(20,4), memo VARBINARY(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, doubled DECIMAL(20,4) AS (debit*2) STORED) ENGINE=InnoDB');
-    for ($index = 1; $index <= 601; $index++) { DB::insert('pl_journal_lines', ['journal_id' => $index, 'company_id' => 1, 'book_id' => 1, 'debit' => '1.0000', 'credit' => '1.0000', 'memo' => "synthetic\0\xff:$index"]); }
+    for ($index = 1; $index <= 601; $index++) { DB::insert('pl_journal_lines', ['journal_id' => $index, 'company_id' => 1, 'book_id' => 1, 'debit' => '1.0000', 'credit' => '1.0000', 'memo' => "sample\0\xff:$index"]); }
     DB::query('CREATE VIEW pl_view AS SELECT id,debit,credit FROM pl_journal_lines');
-    DB::query("CREATE TRIGGER pl_guard BEFORE DELETE ON pl_journal_lines FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Immutable synthetic journal'");
+    DB::query("CREATE TRIGGER pl_guard BEFORE DELETE ON pl_journal_lines FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Immutable sample journal'");
     $receipt = null; $backupSteps = 0;
     while ($receipt === null && $backupSteps++ < 100) { $receipt = pl_update_database_backup($directory); }
     if ($receipt === null || $backupSteps < 6) { throw new RuntimeException('Backup was not chunked.'); }

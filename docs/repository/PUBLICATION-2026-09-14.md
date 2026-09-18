@@ -6,7 +6,7 @@ The owner explicitly requested replacement of the existing website, an updated d
 
 | Destination | Result |
 |---|---|
-| [Website](https://phpledger.com/) | Field Notes replacement, real illustrative workplace photography, actual synthetic product screens, walkthrough, partners and contact paths |
+| [Website](https://phpledger.com/) | Field Notes replacement, real illustrative workplace photography, actual sample product screens, walkthrough, partners and contact paths |
 | [Demo](https://phpledger.com/demo/) | Isolated visitor books, receipts/expenses, reports, cash POS and ten selectable base currencies |
 | [Repository](https://github.com/phpledger/phpledger) | Branded README, current product screens, feature boundaries and documentation links |
 | [Wiki](https://github.com/phpledger/phpledger/wiki) | Ten pages, sidebar/footer, product and installation guidance, accounting/POS boundaries, regional decisions and complete future path |
@@ -16,7 +16,7 @@ The owner explicitly requested replacement of the existing website, an updated d
 
 - Main repository commit [`250b27d`](https://github.com/phpledger/phpledger/commit/250b27d) published the README, six image/badge assets and the twelve Wiki source files. The original application/history and default branch `master` were preserved. A separate clean checkout was used; the unfinished local foundation was not staged wholesale.
 - Wiki commits `5454d1b` and `7d1dc84` created the Home page and remaining pages/navigation. Commit `9f5ac1a` updated the live-preview status and linked Sprint 03. Subsequent documentation commits may add publication evidence without changing the runtime.
-- GitHub Settings visibly displayed the new 1280×640 sharing image. API read-back confirmed `usesCustomOpenGraphImage: true`. It uses the preferred logo and an actual synthetic development screenshot.
+- GitHub Settings visibly displayed the new 1280×640 sharing image. API read-back confirmed `usesCustomOpenGraphImage: true`. It uses the preferred logo and an actual sample development screenshot.
 - The public README was inspected after push. The logo, heading, real screenshot, feature table, collapsible screenshot sections and development status rendered. Wiki Home showed ten pages, correct table links and sidebar/footer navigation.
 - Sprint 03 is milestone 4. Issues [#55](https://github.com/phpledger/phpledger/issues/55)–[#59](https://github.com/phpledger/phpledger/issues/59) define acceptance and dependencies; no release date or team assignment was invented.
 
@@ -28,7 +28,7 @@ Only the PHP Ledger virtual host was replaced. It now serves the standalone stat
 
 - Nginx configuration validation and reload passed. One immediate probe during the worker transition returned 404; a fresh probe returned 200. Persistent website and demo checks passed afterward.
 - Fresh external reads returned website HTTP 200 with title **PHP Ledger — A day's work. Clearer books.**, the Wiki links, and no previous enterprise-ready headline. `/demo/health` returned HTTP 200 with `working-accounting-preview`.
-- Hosted synthetic HTTP checks passed **68 checks, zero failures**: restricted demo baseline, secure scoped cookies, CSRF and access restrictions, and the five added currency journeys through cash sale, balanced reporting, repeated confirmation and retained currency. A first label assertion used a wrongly encoded dash in an ignored test copy; correcting that test encoding resolved it without an application change.
+- Hosted sample HTTP checks passed **68 checks, zero failures**: restricted demo baseline, secure scoped cookies, CSRF and access restrictions, and the five added currency journeys through cash sale, balanced reporting, repeated confirmation and retained currency. A first label assertion used a wrongly encoded dash in an ignored test copy; correcting that test encoding resolved it without an application change.
 - Additional hosted routing, headers and content checks passed **71 checks, zero failures**, including canonical redirects, preserved ACME handling, private-path rejection and the hashes of all reviewed website pages/assets.
 - The isolated hosted schema contained **15 tables, nine triggers and five matching migration receipts**. All ten supported currencies were present. The web user and reset scheduler use distinct restricted credentials.
 - Existing local foundation checks recorded **55 PHP files linted without failure, zero static-analysis errors and 56 passing integration tests**, plus sample validation and upgrade/restoration evidence. Those results are local evidence; the hosted checks above were run separately.
@@ -36,9 +36,9 @@ Only the PHP Ledger virtual host was replaced. It now serves the standalone stat
 
 Live browser QA found no blocking issue. Desktop, tablet, mobile and narrow layouts, walkthrough tab groups, keyboard image closing/focus restoration, the mobile menu, contact links and the exact published Wiki destinations passed. The README logo/screens fit the smaller tested layouts and the POS disclosure opened. The existing GitHub browser zoom was 90%; its measured CSS widths were 853 and 433 pixels, as recorded in the [live QA report](../design/website/qa/live-20260914/README.md). A normal reload cleared old site/demo content in the existing browser profile.
 
-The lead independently entered a fresh PKR sample and followed **reports → balance sheet → cash account activity → posted expense**, confirming 875 in the bank, the 1,000 receipt and 125 expense, and the linked balanced entry. This created only disposable synthetic sample data.
+The lead independently entered a fresh PKR sample and followed **reports → balance sheet → cash account activity → posted expense**, confirming 875 in the bank, the 1,000 receipt and 125 expense, and the linked balanced entry. This created only disposable sample data.
 
-The actual **18:00 UTC / 11:00 PM Pakistan** reset completed without manual triggering. The generation changed, all previous synthetic visitors/companies/documents/journals were cleared, and the next reset advanced to 19:00 UTC. The reset observer passed three checks: old-session expiry, a fresh GBP sample and restored 875 opening sample balance. The lead's pre-reset browser session also returned safely to the sample start screen. Health temporarily returned 503 during rebuilding and was ready by the 18:00:17 observer; the website stayed available. The same demo database container and unrelated host MySQL process remained running. No customer database was targeted.
+The actual **18:00 UTC / 11:00 PM Pakistan** reset completed without manual triggering. The generation changed, all previous sample visitors/companies/documents/journals were cleared, and the next reset advanced to 19:00 UTC. The reset observer passed three checks: old-session expiry, a fresh GBP sample and restored 875 opening sample balance. The lead's pre-reset browser session also returned safely to the sample start screen. Health temporarily returned 503 during rebuilding and was ready by the 18:00:17 observer; the website stayed available. The same demo database container and unrelated host MySQL process remained running. No customer database was targeted.
 
 The current demo uses a bounded global maintenance lock. One busy 503 was seen during simultaneous QA, outside the scheduled reset; a retry succeeded. The 68 scripted journeys passed, but they are not a concurrency/load certification. Improved availability under concurrent visitors remains release work.
 

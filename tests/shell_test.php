@@ -5,11 +5,11 @@ require_once dirname(__DIR__) . '/www/phpledger/includes/functions/web_functions
 test('workspace shell preserves view data while rendering navigation', function (): void {
     if (session_status() !== PHP_SESSION_ACTIVE) { pl_session_start(false); }
     $suffix = bin2hex(random_bytes(8));
-    $actor = pl_create_user('shell-' . $suffix . '@example.test', 'Synthetic shell owner', 'Synthetic-test-password-' . $suffix);
-    $fixture = pl_create_company($actor, 'Synthetic shell company', 'USD', '2026-01-01');
+    $actor = pl_create_user('shell-' . $suffix . '@example.test', 'Sample shell owner', 'Sample-test-password-' . $suffix);
+    $fixture = pl_create_company($actor, 'Sample shell company', 'USD', '2026-01-01');
     $company = pl_company_context($actor, $fixture['company_id']);
-    $user = ['id' => $actor, 'display_name' => 'Synthetic shell owner', 'email' => 'shell-' . $suffix . '@example.test'];
-    $view = 'error'; $title = 'Synthetic view title'; $message = 'Synthetic view message'; $notice = '';
+    $user = ['id' => $actor, 'display_name' => 'Sample shell owner', 'email' => 'shell-' . $suffix . '@example.test'];
+    $view = 'error'; $title = 'Sample view title'; $message = 'Sample view message'; $notice = '';
     $items = [['reference' => 'A real view row']]; $label = 'View label'; $views = ['view data'];
     ob_start();
     try { require dirname(__DIR__) . '/www/phpledger/templates/layout.php'; }
@@ -17,7 +17,7 @@ test('workspace shell preserves view data while rendering navigation', function 
     assert_same([['reference' => 'A real view row']], $items);
     assert_same('View label', $label);
     assert_same(['view data'], $views);
-    assert_same('Synthetic view title', $title);
+    assert_same('Sample view title', $title);
 });
 
     $layout = file_get_contents(dirname(__DIR__) . '/www/phpledger/templates/layout.php') . file_get_contents(dirname(__DIR__) . '/www/phpledger/templates/partials/ui/shell.php');

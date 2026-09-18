@@ -81,8 +81,8 @@ demo_check(pl_demo_begin_visit(pl_csrf_token(), 'PKR')['company_id'] === $first[
 $draft = pl_list_documents($f, $first['company_id'], $first['book_id'], ['status' => 'draft'])['documents'][0];
 $posted = pl_post_document($f, $first['company_id'], $first['book_id'], $draft['id'], $draft['revision']);
 demo_check($posted['status'] === 'posted', 'Demo posting did not work.');
-demo_check(pl_reverse_document($f, $first['company_id'], $first['book_id'], $draft['id'], $draft['date'], 'Synthetic demo correction')['status'] === 'reversed', 'Traceable demo correction did not work.');
-demo_denied(static fn () => pl_create_user('blocked@example.invalid', 'Blocked', 'Synthetic blocked password'));
+demo_check(pl_reverse_document($f, $first['company_id'], $first['book_id'], $draft['id'], $draft['date'], 'Sample demo correction')['status'] === 'reversed', 'Traceable demo correction did not work.');
+demo_denied(static fn () => pl_create_user('blocked@example.invalid', 'Blocked', 'Sample blocked password'));
 demo_denied(static fn () => pl_create_company($f, 'Blocked extra company', 'USD', gmdate('Y-m-d')));
 demo_denied(static fn () => pl_setup_company($f, [], 'blocked-setup'));
 demo_denied(static fn () => pl_confirm_existing_setup($f, $first['company_id'], $first['book_id'], [], true));
@@ -90,12 +90,12 @@ demo_denied(static fn () => DB::delete('pl_documents', 'id = %i', $draft['id']))
 demo_denied(static fn () => DB::update('pl_periods', ['status' => 'closed'], 'book_id = %i', $first['book_id']));
 demo_denied(static fn () => DB::update('pl_documents', ['amount' => '999'], 'id = %i', $draft['id']));
 $coreAccounts = array_column($company['accounts'], 'id', 'semantic_key');
-$general = pl_save_general_draft($f, $first['company_id'], $first['book_id'], ['date' => gmdate('Y-m-d'), 'reference' => 'DEMO-GENERAL', 'description' => 'Synthetic capital entry', 'creation_key' => 'demo-general', 'lines' => [
+$general = pl_save_general_draft($f, $first['company_id'], $first['book_id'], ['date' => gmdate('Y-m-d'), 'reference' => 'DEMO-GENERAL', 'description' => 'Sample capital entry', 'creation_key' => 'demo-general', 'lines' => [
     ['account_id' => $coreAccounts['core.cash_bank'], 'debit' => '25.0001', 'credit' => '0'],
     ['account_id' => $coreAccounts['core.equity.owner'], 'debit' => '0', 'credit' => '25.0001'],
 ]]);
 demo_check(pl_post_general_draft($f, $first['company_id'], $first['book_id'], $general['id'], 1)['status'] === 'posted', 'Demo general posting failed.');
-demo_check(pl_reverse_general_draft($f, $first['company_id'], $first['book_id'], $general['id'], gmdate('Y-m-d'), 'Synthetic general correction')['status'] === 'reversed', 'Demo general linked reversal failed.');
+demo_check(pl_reverse_general_draft($f, $first['company_id'], $first['book_id'], $general['id'], gmdate('Y-m-d'), 'Sample general correction')['status'] === 'reversed', 'Demo general linked reversal failed.');
 demo_denied(static fn () => pl_save_account($f, $first['company_id'], $first['book_id'], []));
 demo_denied(static fn () => DB::delete('pl_general_drafts', 'id = %i', $general['id']));
 demo_denied(static fn () => DB::update('pl_general_drafts', ['description' => 'Overwritten'], 'id = %i', $general['id']));
@@ -110,7 +110,7 @@ demo_denied(static fn () => pl_get_general_draft($second['user']['id'], $first['
 demo_check(pl_list_documents($second['user']['id'], $second['company_id'], $second['book_id'])['total'] === 6, 'The other visitor inherited edited records.');
 putenv('PL_DEMO_MAX_DOCUMENTS=10');
 $accounts = array_column($company['accounts'], 'id', 'semantic_key');
-$input = ['kind' => 'expense', 'date' => gmdate('Y-m-d'), 'amount' => '1', 'money_account_id' => $accounts['core.cash_bank'], 'category_account_id' => $accounts['core.expense.general'], 'counterparty' => 'Synthetic capacity test', 'memo' => '', 'reference' => ''];
+$input = ['kind' => 'expense', 'date' => gmdate('Y-m-d'), 'amount' => '1', 'money_account_id' => $accounts['core.cash_bank'], 'category_account_id' => $accounts['core.expense.general'], 'counterparty' => 'Sample capacity test', 'memo' => '', 'reference' => ''];
 for ($i = 0; $i < 3; $i++) {
     pl_save_document($f, $first['company_id'], $first['book_id'], $input + ['creation_key' => 'capacity:' . $i]);
 }
@@ -139,7 +139,7 @@ foreach (array_keys(pl_demo_pack_catalog()) as $packId) {
     if ($priorPack !== null) { demo_denied(static fn () => pl_company_demo_pack($actor, $priorPack['company_id'], $priorPack['book_id'])); }
     $context = pl_company_context($actor, $cid); $codes = array_column($context['accounts'], 'id', 'code');
     $capacityInput = ['kind' => 'expense', 'date' => '2026-02-05', 'amount' => '1.0000', 'money_account_id' => $codes['1000'],
-        'category_account_id' => $codes['5000'], 'counterparty' => 'Synthetic visitor practice', 'reference' => '', 'memo' => 'Capacity verification'];
+        'category_account_id' => $codes['5000'], 'counterparty' => 'Sample visitor practice', 'reference' => '', 'memo' => 'Capacity verification'];
     for ($i = 0; $i < 20; $i++) {
         $practice = pl_save_document($actor, $cid, $bid, $capacityInput + ['creation_key' => 'rich-capacity:' . $i]);
         pl_post_document($actor, $cid, $bid, $practice['id'], $practice['revision']);

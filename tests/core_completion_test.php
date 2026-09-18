@@ -5,17 +5,17 @@ test('core two-period business reconciles cutover journals bank balances earning
     $f = ledger_fixture('USD', '2024-01-01');
     DB::update('pl_companies', ['setup_status' => 'opening_required'], 'id = %i', $f['company_id']);
     $opening = pl_preview_opening($f['actor_id'], $f['company_id'], $f['book_id'], [
-        'cutover_date' => '2024-01-01', 'source' => 'Synthetic core-only opening',
+        'cutover_date' => '2024-01-01', 'source' => 'Sample core-only opening',
         'balances' => [['account_code' => '1000', 'debit' => '1000', 'credit' => '0'], ['account_code' => '3000', 'debit' => '0', 'credit' => '1000']], 'unpaid_documents' => [],
     ], 'two-period-opening');
     pl_confirm_opening($f['actor_id'], $f['company_id'], $f['book_id'], (int) $opening['id'], $opening['payload_hash'], true);
-    pl_create_period($f['actor_id'], $f['company_id'], $f['book_id'], ['start_date' => '2025-01-01', 'end_date' => '2025-12-31', 'reason' => 'Next synthetic year', 'request_key' => 'next-year']);
+    pl_create_period($f['actor_id'], $f['company_id'], $f['book_id'], ['start_date' => '2025-01-01', 'end_date' => '2025-12-31', 'reason' => 'Next sample year', 'request_key' => 'next-year']);
     $openingBalance = '1000.0000';
     foreach ([['2024', '100', '25', '1075.0000', '75.0000'], ['2025', '50', '5', '1120.0000', '45.0000']] as [$year, $income, $expense, $closing, $profit]) {
         $journals = [];
         foreach ([['09-10', $income, '0', '4000'], ['09-11', '0', $expense, '5000']] as [$day, $debit, $credit, $contra]) {
             $draft = pl_save_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], [
-                'date' => $year . '-' . $day, 'reference' => 'Two-period fixture', 'description' => 'Synthetic core activity', 'creation_key' => $year . '-' . $day,
+                'date' => $year . '-' . $day, 'reference' => 'Two-period fixture', 'description' => 'Sample core activity', 'creation_key' => $year . '-' . $day,
                 'lines' => [
                     ['account_id' => $f['accounts']['1000'], 'debit' => $debit, 'credit' => $credit],
                     ['account_id' => $f['accounts'][$contra], 'debit' => $credit, 'credit' => $debit],
@@ -39,7 +39,7 @@ test('core two-period business reconciles cutover journals bank balances earning
         assert_same($closing, $activity['closing_balance']);
         assert_same($profit, pl_profit_loss($f['actor_id'], $f['company_id'], $f['book_id'], $start, $year . '-12-31')['net_profit']);
         $period = DB::queryFirstRow('SELECT id, revision FROM pl_periods WHERE book_id = %i AND end_date = %s', $f['book_id'], $year . '-12-31');
-        pl_change_period_status($f['actor_id'], $f['company_id'], $f['book_id'], (int) $period['id'], 'closed', (int) $period['revision'], 'Synthetic balances reconciled', 'close-' . $year);
+        pl_change_period_status($f['actor_id'], $f['company_id'], $f['book_id'], (int) $period['id'], 'closed', (int) $period['revision'], 'Sample balances reconciled', 'close-' . $year);
         $openingBalance = $closing;
     }
     $sheet = pl_balance_sheet($f['actor_id'], $f['company_id'], $f['book_id'], '2025-12-31');

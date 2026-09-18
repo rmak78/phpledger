@@ -26,7 +26,7 @@ Before a distributable build, select and review a clean source revision containi
 | Listed `www/phpledger/templates/` PHP files | Current layouts, partials and screens, including shared demo-view dependencies. |
 | `www/phpledger/public/index.php` and listed public CSS/JS, logo, Inter font and icons/notices | The only web-accessible application tree and its current local assets. |
 | `resources/coa/core-starter-1.0.0.json` | Versioned preliminary account template used by setup. |
-| `resources/core-samples/core-accounting-1.0.0.json` | Explicit opt-in synthetic sample; never automatically applied to a real company. |
+| `resources/core-samples/core-accounting-1.0.0.json` | Explicit opt-in sample; never automatically applied to a real company. |
 | `resources/core/pos-catalog.json` | The illustrative cash-POS catalog used by the server. |
 | `resources/locale/country-defaults-cldr48.json`, `UNICODE-LICENSE.txt`, `README.md` | Runtime regional metadata with its upstream notice and provenance. |
 
@@ -101,7 +101,7 @@ The deployment archives/manifests and hosted system were not modified. The 78-fi
 
 ## 7. Next concrete implementation
 
-Implement a package-inventory checker under the existing `tools/` convention, consuming the explicit manifest. Its first mode should be read-only: report source-revision mismatch, changed/missing/extra inputs, path escapes/symlinks and required ungenerated outputs; never silently archive the dirty checkout. Test those rejection cases with synthetic fixtures.
+Implement a package-inventory checker under the existing `tools/` convention, consuming the explicit manifest. Its first mode should be read-only: report source-revision mismatch, changed/missing/extra inputs, path escapes/symlinks and required ungenerated outputs; never silently archive the dirty checkout. Test those rejection cases with sample fixtures.
 
 Then, from a reviewed clean runtime revision, add clean staging/production-vendor generation, candidate operator documents and deterministic archive creation with a full output manifest. Prove installation and recovery from that artifact. Publication remains gated by [#55 licensing/provenance](https://github.com/phpledger/phpledger/issues/55), the agreed supported scope and [#59 acceptance](https://github.com/phpledger/phpledger/issues/59). No licence choice, source commit or archive build is authorized or performed by this documentation subtask.
 

@@ -48,7 +48,7 @@ The browser/targeted tests used a dedicated temporary MySQL 8.4 container. Final
 | Sample data, both runtimes | Seven packs, 77 events, 42 documents and 16 items valid; all eight deliberately invalid in-memory packs rejected. |
 | New editor regressions, both runtimes | Both passed: actual rendered selection survives save/post; unavailable, foreign, wrong-purpose, missing and malformed selections cannot silently replace the account. |
 | Same editor tests against released template | Both regressions failed as expected: four valid cash choices collapsed to one; unavailable selection submitted the first bank. |
-| Browser flow, separate local PHP 8.5.10 instance | Sign in; select synthetic company; open petty-cash draft; save a memo-only edit; confirm account unchanged; deactivate that synthetic account; confirm visible warning, empty required choice and blocked Save; deliberately choose Reserve bank and save successfully. |
+| Browser flow, separate local PHP 8.5.10 instance | Sign in; select sample company; open petty-cash draft; save a memo-only edit; confirm account unchanged; deactivate that sample account; confirm visible warning, empty required choice and blocked Save; deliberately choose Reserve bank and save successfully. |
 | Responsive browser checks | 1440x1000, 768x1024 and 390x844 screenshots inspected. Mobile document width equaled viewport width. |
 | Diff whitespace | `git diff --check` passed. |
 
@@ -64,7 +64,7 @@ A separate AR/AP usability finding is unchanged: both settlement HTML and `pl_se
 
 Recommend a small maintenance release for the cash-account fix after integration review. The date-sensitive fixture failures are corrected and the local full-suite matrix is clean. Do not mix regional catalogue research into that release. Packaging, upgrade proof, hosted cutover and live verification have not been performed for this patch.
 
-References read: released AGENTS, README, architecture and roadmap; document, account and demo-pack services; receipt/expense and general-journal templates; existing demo-pack tests. No Google Drive references were used. Migrations: no. Schema changed: no. Raw secrets exposed: no. External/live application calls: no; browser and database checks used local synthetic services only. Live/production changed: no. Only synthetic local fixtures were changed. No commit, push, package or deployment was made.
+References read: released AGENTS, README, architecture and roadmap; document, account and demo-pack services; receipt/expense and general-journal templates; existing demo-pack tests. No Google Drive references were used. Migrations: no. Schema changed: no. Raw secrets exposed: no. External/live application calls: no; browser and database checks used local sample services only. Live/production changed: no. Only sample local fixtures were changed. No commit, push, package or deployment was made.
 
 
 ## Root integration review

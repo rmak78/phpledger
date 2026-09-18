@@ -24,10 +24,10 @@ class PackageTests(unittest.TestCase):
         self.source.mkdir()
         (self.vendor / "composer").mkdir(parents=True)
         self.package = {"name": "example/library", "version": "1.0.0", "source": {"reference": "fixture"}}
-        (self.vendor / "autoload.php").write_text("<?php // synthetic loader", encoding="utf-8")
+        (self.vendor / "autoload.php").write_text("<?php // sample loader", encoding="utf-8")
         (self.vendor / "composer/installed.json").write_text(json.dumps({"dev": False, "dev-package-names": [], "packages": [self.package]}), encoding="utf-8")
         files = {"composer.json": "{}", "composer.lock": json.dumps({"packages": [self.package]})}
-        files.update({name: "Synthetic test fixture {{VERSION}} {{SOURCE_COMMIT}}" for name in ("README.md", "INSTALL.md", "UPGRADE.md", "RELEASE-NOTES.md", "LICENSE", "THIRD-PARTY-NOTICES.md")})
+        files.update({name: "Sample test fixture {{VERSION}} {{SOURCE_COMMIT}}" for name in ("README.md", "INSTALL.md", "UPGRADE.md", "RELEASE-NOTES.md", "LICENSE", "THIRD-PARTY-NOTICES.md")})
         for name, content in files.items():
             (self.source / name).write_text(content, encoding="utf-8")
         self.policy = {"project_license": "MIT", "files": [{"source": name, "destination": name} for name in files]}
@@ -35,7 +35,7 @@ class PackageTests(unittest.TestCase):
         self.git("config", "user.name", "Package fixture")
         self.git("config", "user.email", "fixture@example.invalid")
         self.git("add", ".")
-        self.git("commit", "-qm", "Synthetic package fixture")
+        self.git("commit", "-qm", "Sample package fixture")
 
     def tearDown(self):
         if not self.root.resolve().is_relative_to(self.base.resolve()):
@@ -97,7 +97,7 @@ class PackageTests(unittest.TestCase):
     def test_untracked_release_input_requires_and_checks_sha256(self):
         local_doc = self.source / "docs/local-release.md"
         local_doc.parent.mkdir()
-        local_doc.write_text("Synthetic local release input", encoding="utf-8")
+        local_doc.write_text("Sample local release input", encoding="utf-8")
         (self.source / ".git/info/exclude").write_text("/docs/local-release.md\n", encoding="utf-8")
         self.policy["files"].append({"source": "docs/local-release.md", "destination": "docs/local-release.md"})
         with self.assertRaisesRegex(builder.PackageError, "SHA-256 pin"):
@@ -110,8 +110,8 @@ class PackageTests(unittest.TestCase):
     def test_upstream_test_dump_is_excluded_but_runtime_remains(self):
         library = self.vendor / "sergeytsalkov/meekrodb"
         (library / "simpletest").mkdir(parents=True)
-        (library / "simpletest/statements.sql").write_text("Synthetic upstream fixture")
-        (library / "db.class.php").write_text("<?php // synthetic library")
+        (library / "simpletest/statements.sql").write_text("Sample upstream fixture")
+        (library / "db.class.php").write_text("<?php // sample library")
         with zipfile.ZipFile(self.build()) as archive:
             names = archive.namelist()
             self.assertFalse(any(name.endswith("statements.sql") for name in names))

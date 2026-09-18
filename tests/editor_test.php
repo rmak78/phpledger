@@ -32,7 +32,7 @@ test('workflow recovery identifies rejected editor fields without coercing money
     $before=$input; $errors=pl_web_editor_errors($input,'transaction');
     assert_same(['date','counterparty','amount','money_account_id','category_account_id'],array_keys($errors));
     assert_same($before,$input);
-    assert_same([],pl_web_editor_errors(['date'=>'2026-09-18','amount'=>'0.0001','counterparty'=>'Synthetic party','money_account_id'=>'1','category_account_id'=>'2'],'transaction'));
+    assert_same([],pl_web_editor_errors(['date'=>'2026-09-18','amount'=>'0.0001','counterparty'=>'Sample party','money_account_id'=>'1','category_account_id'=>'2'],'transaction'));
     $journal=['date'=>'2026-09-18','description'=>'Preserved journal','lines'=>[['account_id'=>'1','debit'=>'5','credit'=>'5'],['account_id'=>'','debit'=>'2.12345','credit'=>'']]];
     $errors=pl_web_editor_errors($journal,'journal');
     assert_true(isset($errors['lines.0.debit'],$errors['lines.1.account_id'],$errors['lines.1.debit']));
@@ -79,7 +79,7 @@ test('workflow recovery renders linked field errors escaped values and unavailab
 });
 
 test('editor return state preserves validated filters and rejects malformed orders', function (): void {
-    $filters = ['page'=>2,'per_page'=>50,'q'=>'Synthetic preview','sort'=>'amount','dir'=>'asc','status'=>'draft','kind'=>'expense','from'=>'2026-09-01','to'=>'2026-09-30'];
+    $filters = ['page'=>2,'per_page'=>50,'q'=>'Sample preview','sort'=>'amount','dir'=>'asc','status'=>'draft','kind'=>'expense','from'=>'2026-09-01','to'=>'2026-09-30'];
     assert_same($filters, pl_return_list_filters(['return_filters'=>$filters], 'transactions'));
     assert_same($filters, pl_return_list_filters(['return_filters'=>$filters + ['redirect'=>'https://example.invalid']], 'transactions'));
     foreach (['invalid', ['sort'=>'amount DESC'], ['q'=>[]], ['page'=>[]], ['dir'=>[]]] as $invalid) {
@@ -90,7 +90,7 @@ test('editor return state preserves validated filters and rejects malformed orde
 test('transaction editor preview is read only and matches the posted service payload in both directions', function (): void {
     foreach (['receipt','expense'] as $kind) {
         $f=ledger_fixture();
-        $input=['kind'=>$kind,'date'=>'2026-09-17','amount'=>'12.3401','money_account_id'=>$f['accounts']['1000'],'category_account_id'=>$f['accounts'][$kind==='receipt'?'4000':'5000'],'counterparty'=>'Synthetic preview party','reference'=>'Preview proof','memo'=>'Exact service comparison','creation_key'=>bin2hex(random_bytes(16))];
+        $input=['kind'=>$kind,'date'=>'2026-09-17','amount'=>'12.3401','money_account_id'=>$f['accounts']['1000'],'category_account_id'=>$f['accounts'][$kind==='receipt'?'4000':'5000'],'counterparty'=>'Sample preview party','reference'=>'Preview proof','memo'=>'Exact service comparison','creation_key'=>bin2hex(random_bytes(16))];
         $preview=pl_preview_document($f['actor_id'],$f['company_id'],$f['book_id'],$input);
         assert_same(0,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_documents WHERE book_id=%i',$f['book_id']));
         assert_same(0,(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id=%i',$f['book_id']));

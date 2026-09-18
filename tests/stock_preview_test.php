@@ -4,7 +4,7 @@ declare(strict_types=1);
 test('purchase order editor confirms current values atomically and retries without a journal', function (): void {
     $f=purchasing_fixture();
     $input=['party_id'=>$f['party_id'],'date'=>'2026-01-05','currency'=>'USD','reference'=>'Editor proof','creation_key'=>bin2hex(random_bytes(16)),
-        'lines'=>[['product_id'=>$f['product_id'],'description'=>'Synthetic goods','quantity'=>'2','unit_price'=>'1.2345']]];
+        'lines'=>[['product_id'=>$f['product_id'],'description'=>'Sample goods','quantity'=>'2','unit_price'=>'1.2345']]];
     $order=pl_save_and_confirm_purchase_order($f['actor_id'],$f['company_id'],$f['book_id'],$input);
     assert_same('confirmed',$order['status']); assert_same('2.4690',$order['total']);
     assert_true($order==pl_save_and_confirm_purchase_order($f['actor_id'],$f['company_id'],$f['book_id'],$input));

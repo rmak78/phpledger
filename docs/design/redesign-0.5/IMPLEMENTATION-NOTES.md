@@ -62,7 +62,7 @@ See AUDIT-CLOSURE.md for unresolved findings and publication limits.
 - `composer check`: 176 PHP files linted; PHPStan no errors; sample validation and
   eight invalid-pack checks passed; 241 tests, zero failures. Targeted foundations:
   76 tests passed. Targeted lists: 19 tests passed.
-- Isolated synthetic browser fixture on localhost:18219. Shell captures at
+- Isolated sample browser fixture on localhost:18219. Shell captures at
   1366x768, 1024x768, 768x1024 and 390x844: no page-width overflow or console errors.
   Command palette filtering and Escape; drawer open/Escape/focus restoration checked.
   This is a foundation smoke check, not the required complete route/state evidence.
@@ -91,13 +91,13 @@ system change has been made.
   sample validation clean, 241 tests passed. Subsequent error/rendering changes:
   178 PHP files lint clean and all four shell tests passed. The next full check
   must include the added regression test and error-page adapter.
-- Local synthetic browser checks at both desktop folds, with JavaScript on and
+- Local sample browser checks at both desktop folds, with JavaScript on and
   off: setup review, opening balances and zero preview, opening-document mappings
   and reconciled preview, Help, 404 and 405. No horizontal overflow; marked actions
   within the viewport. Login, businesses, chooser and onboarding through preview
   also captured at both folds with no console errors. Confirmation was not
   submitted in these browser passes; service tests retain the accounting checks.
-- `tests/redesign_browser_fixture.php` provides isolated synthetic setup states
+- `tests/redesign_browser_fixture.php` provides isolated sample setup states
   and refuses any database except the dedicated test database. Browser evidence
   remains local under output/playwright; no real customer data was used.
 - Outstanding in this lane: complete demo/sample-guide port, OAuth browser
@@ -139,10 +139,10 @@ Home's use of that service needs review alongside list-performance work.
   the existing source identity and cannot post a duplicate.
 - Journal and POS behavior are folded into app.js; separate scripts and package
   entries removed. CSP unchanged. POS cart/exact-cash/checkout smoke passed in an
-  isolated synthetic company after consolidation.
+  isolated sample company after consolidation.
 - 32 targeted editor/core tests passed; full composer check passed with 247 tests,
   zero failures. Browser JS/no-JS flows both added a second line, preserved entered
-  values and posted a synthetic balanced 12.3401 journal. Both desktop folds were
+  values and posted a sample balanced 12.3401 journal. Both desktop folds were
   captured; table actions and totals are visible after compacting metadata.
 - The remaining daily-work record/list/editor states are not yet accepted.
 
@@ -197,7 +197,7 @@ Home's use of that service needs review alongside list-performance work.
   duplicating its financial calculations. Includes receivable/payable selection,
   as-of date, five overdue buckets, document/carrying amounts and per-account
   control reconciliation. Source-document return links preserve direction/date.
-- Browser fixture option --ageing creates five exact synthetic balances per
+- Browser fixture option --ageing creates five exact sample balances per
   direction. JS/no-JS browser checks passed for both populated directions and an
   empty historical state, both desktop folds, portrait tablet and phone overflow.
   Update action remained visible; source-return state was checked.
@@ -226,7 +226,7 @@ Home's use of that service needs review alongside list-performance work.
   passed, 252 tests with zero failures. Final template edits were linted again.
   JS/no-JS browser classification, P&L, period presets and statement return passed;
   P&L captured at both folds, portrait tablet and phone without page overflow.
-- Fresh install (31 migration files) and the synthetic 0.5 upgrade/replay passed.
+- Fresh install (31 migration files) and the sample 0.5 upgrade/replay passed.
   The upgrade verifier confirms old accounts remain unclassified and posted data
   unchanged. Complete historical starter/currency scenarios still remain pending.
 
@@ -242,7 +242,7 @@ Home's use of that service needs review alongside list-performance work.
   remaining balances and rate provenance under the book lock; stale reviews are
   rejected. Selecting the applicable FX account after preview is allowed. Durable
   command identity makes retries return the same journal, including after reversal.
-- Local synthetic browser checks passed with JavaScript and without it: domestic
+- Local sample browser checks passed with JavaScript and without it: domestic
   AR/AP allocations, preview and posting, both folds, portrait tablet and phone
   overflow. Foreign zero-net preview has no FX selector; a gain exposes only its
   gain account and posts after selection. Screenshots are local in output/playwright.
@@ -250,7 +250,7 @@ Home's use of that service needs review alongside list-performance work.
   settlement results now use the existing canonical result helper. Final full
   composer check passed: 187 PHP files linted, static analysis and sample validation
   passed, 259 tests with zero failures. Composer needed a 900-second process limit
-  for the expanded suite in the accumulated synthetic database; the prior run
+  for the expanded suite in the accumulated sample database; the prior run
   reached the default 300-second limit and was not counted as a pass.
 - Payment layout still needs the final prototype-fidelity sweep, along with the
   rest of the sales/purchases/inventory lane. Full route, scale, accessibility,
@@ -468,7 +468,7 @@ rates, or separately design code editing. The owner subsequently approved the re
   Product list/editor/count checks passed with JS on/off at both desktop folds,
   portrait and phone widths. Opening checks passed one-row defaults, add/remove,
   invalid-value retention, rejection of a value mismatch, preview, confirmation
-  and filter retention. Both synthetic conversions kept exactly one original
+  and filter retention. Both sample conversions kept exactly one original
   opening journal. Screenshots of the list/detail and editor were inspected.
 - No additional migration or hosted change. Full route/accessibility acceptance,
   remaining purchasing/report/admin ports and final release packaging are pending.
@@ -658,7 +658,7 @@ closed/partial/open disposition, including the remaining publication gates.
 - Removed legacy.css and its layer/import. Shared record/form/journal structure and POS are now expressed in the approved token component layer. CSS compiled successfully. The 33-state/132-capture sweep after initial retirement passed HTTP, error and page-overflow assertions. Follow-up shared journal, setup and POS style refinements still need the final consolidated sweep/index refresh.
 - Access/onboarding screenshots passed both fold sizes; setup/opening/recovery checks passed with JS on/off at both folds. POS cart, review, exact-cash checkout and receipt passed with JS on/off at four widths. Print-media testing found and fixed a cascade conflict: the receipt now measures 302.359375 CSS pixels (80 mm), with no internal overflow or navigation in print. Physical printer testing was not performed.
 - Additional evidence: evidence-0.6.0/completion-checkpoint. Prototype/state and keyboard acceptance remain open; these checks are not accounting sign-off or WCAG certification.
-- No migration or schema changes in this checkpoint. Local synthetic test writes only; no external publication/deployment or secrets exposure. Publication remains gated by remaining field-error/return-chain/audit acceptance and exact-package verification.
+- No migration or schema changes in this checkpoint. Local sample test writes only; no external publication/deployment or secrets exposure. Publication remains gated by remaining field-error/return-chain/audit acceptance and exact-package verification.
 
 ### Account register and current validation
 
@@ -672,7 +672,7 @@ closed/partial/open disposition, including the remaining publication gates.
 
 - Refreshed the 33-state / 132-capture browser sweep against committed runtime `c3a57e5`. HTTP responses, console errors, page overflow and marked primary-action bounds passed. The evidence index now records the current compiled CSS digest and capture time. This remains 33 states, not full acceptance of all 38 HTML routes or 75 prototype states.
 - The existing isolated browser container had no OAuth public URL. Created a separate local-only test instance on port 18220 with ephemeral local OAuth keys; no hosted configuration changed and no key material was emitted.
-- Registered a synthetic local client and completed valid consent and cancellation with JavaScript enabled and disabled at 1366x768 and 1024x768. Verified callback state, authorization code presence for approval, access_denied for cancellation, primary-action visibility and page overflow. The callback was intercepted in the browser, so there was no external client request. No code or token value was logged. Visually reviewed the 1024-pixel consent capture. Evidence: completion-checkpoint/oauth-consent-results.json and matching captures.
+- Registered a sample local client and completed valid consent and cancellation with JavaScript enabled and disabled at 1366x768 and 1024x768. Verified callback state, authorization code presence for approval, access_denied for cancellation, primary-action visibility and page overflow. The callback was intercepted in the browser, so there was no external client request. No code or token value was logged. Visually reviewed the 1024-pixel consent capture. Evidence: completion-checkpoint/oauth-consent-results.json and matching captures.
 - Checked that the explicit package inventory includes all current application PHP/CSS/JavaScript files; none were missing. This is an inventory check, not exact-archive installation or upgrade validation.
 - Release remains unpublished. Outstanding implementation/acceptance includes form field recovery, complete nested report/source/action returns, full route/state and accessibility review. Final distributable fresh/upgrade/restore/runtime checks and consistent release assets/publication still follow. No publication authorization is missing.
 

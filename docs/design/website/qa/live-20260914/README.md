@@ -32,7 +32,7 @@ The website's Documentation link opened the [published Wiki home](https://github
 
 ## Demo destination
 
-[The public demo](https://phpledger.com/demo/) resolved to the working application in the existing synthetic browser session. From Transactions, Reports opened `/demo/reports` with the preferred prefixed logo and the owner overview. It displayed the sample company's PKR 875 cash, PKR 1,000 income, PKR 125 expenses and PKR 875 profit, along with the public-demo isolation/destructive-action notice and the reset time in Asia/Karachi. At 1440px the document client/scroll widths were both 1425px. [Live reports capture](demo-reports.png).
+[The public demo](https://phpledger.com/demo/) resolved to the working application in the existing sample browser session. From Transactions, Reports opened `/demo/reports` with the preferred prefixed logo and the owner overview. It displayed the sample company's PKR 875 cash, PKR 1,000 income, PKR 125 expenses and PKR 875 profit, along with the public-demo isolation/destructive-action notice and the reset time in Asia/Karachi. At 1440px the document client/scroll widths were both 1425px. [Live reports capture](demo-reports.png).
 
 No financial record was edited or posted. This browser pass does not independently prove session isolation, destructive-action enforcement or the scheduled reset; those are owned by the deployment workstream's separate HTTP/reset checks.
 

@@ -55,10 +55,10 @@ if ($mode==='seed') {
         $paymentInput=preview_fixture('ar_ap_payment',$f,'10','2026-01-12'); $payment=pl_settle_ar_document(...array_merge($args,[$invoice['id'],$paymentInput]));
         $creditInput=preview_fixture('ar_ap_input',$f,'customer_credit','25'); $creditInput['date']='2026-01-13'; $creditInput['original_document_id']=$invoice['id']; $creditInput['lines'][0]['product_id']=$f['product_id'];
         $credit=pl_save_ar_document(...array_merge($args,[$creditInput])); pl_post_ar_document(...array_merge($args,[$credit['id'],$credit['revision']]));
-        pl_currency_rate_enter(...array_merge($args,[['from_currency'=>'EUR','to_currency'=>'USD','rate_date'=>'2026-01-14','rate'=>'1.234567890123','source'=>'manual','note'=>'Synthetic published FX evidence','idempotency_key'=>'preview-fx']]));
+        pl_currency_rate_enter(...array_merge($args,[['from_currency'=>'EUR','to_currency'=>'USD','rate_date'=>'2026-01-14','rate'=>'1.234567890123','source'=>'manual','note'=>'Sample published FX evidence','idempotency_key'=>'preview-fx']]));
         $fxInput=preview_fixture('ar_ap_input',$f,'invoice','100'); $fxInput['currency']='EUR'; $fxInput['date']='2026-01-14';
         $fxDraft=pl_save_ar_document(...array_merge($args,[$fxInput])); $fx=pl_post_ar_document(...array_merge($args,[$fxDraft['id'],$fxDraft['revision']]));
-        $fxPayment=preview_fixture('ar_ap_payment',$f,'25','2026-01-15'); $fxPayment['manual_rate']='1.25'; $fxPayment['manual_rate_reason']='Synthetic settlement difference';
+        $fxPayment=preview_fixture('ar_ap_payment',$f,'25','2026-01-15'); $fxPayment['manual_rate']='1.25'; $fxPayment['manual_rate_reason']='Sample settlement difference';
         pl_settle_ar_document(...array_merge($args,[$fx['id'],$fxPayment]));
         // Receipt readers include subsequently billed quantities; compare the final pre-upgrade view.
         $received=pl_receive_purchase_order(...array_merge($args,[$order['id'],$receiptInput]));
@@ -91,8 +91,8 @@ try {
         if ($table==='pl_schema_migrations') { continue; }
         preview_assert(preview_rows($table,$snapshot['columns'])===$snapshot['hash'],'A historical retry changed rows in '.$table);
     }
-    $new=pl_save_ar_document(...array_merge($args,[['kind'=>'invoice','party_id'=>$data['f']['party_id'],'date'=>'2026-02-01','due_date'=>'2026-03-01','currency'=>'USD','reference'=>'Synthetic post-upgrade invoice','creation_key'=>'preview-post-upgrade',
-        'lines'=>[['description'=>'Synthetic post-upgrade stock sale','product_id'=>$data['f']['product_id'],'account_id'=>$data['f']['accounts']['4000'],'quantity'=>'1','unit_price'=>'25']]]]));
+    $new=pl_save_ar_document(...array_merge($args,[['kind'=>'invoice','party_id'=>$data['f']['party_id'],'date'=>'2026-02-01','due_date'=>'2026-03-01','currency'=>'USD','reference'=>'Sample post-upgrade invoice','creation_key'=>'preview-post-upgrade',
+        'lines'=>[['description'=>'Sample post-upgrade stock sale','product_id'=>$data['f']['product_id'],'account_id'=>$data['f']['accounts']['4000'],'quantity'=>'1','unit_price'=>'25']]]]));
     pl_post_ar_document(...array_merge($args,[$new['id'],$new['revision']]));
     $after=preview_reports($data['f']);
     preview_assert($after['trial']['balanced'] && $after['ar_reconciled'] && $after['ap_reconciled'],'New posting after upgrade does not reconcile.');

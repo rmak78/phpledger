@@ -10,14 +10,14 @@ function opening_fixture(): array
 
 function opening_input(): array
 {
-    return ['cutover_date' => '2026-09-01', 'source' => 'Synthetic reviewed cutover', 'balances' => [
+    return ['cutover_date' => '2026-09-01', 'source' => 'Sample reviewed cutover', 'balances' => [
         ['account_code' => '1000', 'debit' => '1000', 'credit' => '0'],
         ['account_code' => '1100', 'debit' => '300', 'credit' => '0'],
         ['account_code' => '2000', 'debit' => '0', 'credit' => '200'],
         ['account_code' => '3000', 'debit' => '0', 'credit' => '1100'],
     ], 'unpaid_documents' => [
-        ['kind' => 'receivable', 'account_code' => '1100', 'party' => 'Synthetic customer', 'reference' => 'INV-01', 'document_date' => '2026-08-15', 'due_date' => '2026-09-15', 'outstanding' => '300'],
-        ['kind' => 'payable', 'account_code' => '2000', 'party' => 'Synthetic supplier', 'reference' => 'BILL-01', 'document_date' => '2026-08-20', 'due_date' => '2026-09-20', 'outstanding' => '200'],
+        ['kind' => 'receivable', 'account_code' => '1100', 'party' => 'Sample customer', 'reference' => 'INV-01', 'document_date' => '2026-08-15', 'due_date' => '2026-09-15', 'outstanding' => '300'],
+        ['kind' => 'payable', 'account_code' => '2000', 'party' => 'Sample supplier', 'reference' => 'BILL-01', 'document_date' => '2026-08-20', 'due_date' => '2026-09-20', 'outstanding' => '200'],
     ]];
 }
 
@@ -35,7 +35,7 @@ test('opening restart preserves saved general journals from the merged core work
     $f = opening_fixture();
     $cutover = opening_confirm($f, opening_preview($f));
     pl_save_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], [
-        'date' => '2026-09-02', 'reference' => 'Merged core draft', 'description' => 'Synthetic journal',
+        'date' => '2026-09-02', 'reference' => 'Merged core draft', 'description' => 'Sample journal',
         'creation_key' => bin2hex(random_bytes(16)),
         'lines' => [
             ['account_id' => $f['accounts']['1000'], 'debit' => '10', 'credit' => '0', 'description' => 'Cash'],
@@ -102,7 +102,7 @@ test('opening preview idempotency rejects changed data and competing confirmatio
 
 test('opening zero cutover has a durable receipt and requires an open period without a fake journal', function (): void {
     $f = opening_fixture();
-    $input = ['cutover_date' => '2026-09-01', 'source' => 'Synthetic zero confirmation', 'balances' => [], 'unpaid_documents' => []];
+    $input = ['cutover_date' => '2026-09-01', 'source' => 'Sample zero confirmation', 'balances' => [], 'unpaid_documents' => []];
     assert_throws(fn() => opening_preview($f, $input), DomainException::class, 'Explicitly confirm');
     $input['zero_confirmed'] = true;
     $p = opening_preview($f, $input);
@@ -112,7 +112,7 @@ test('opening zero cutover has a durable receipt and requires an open period wit
     $c = opening_confirm($f, $p);
     assert_same(null, $c['journal_id']);
     assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id = %i', $f['book_id']));
-    pl_reverse_opening($f['actor_id'], $f['company_id'], $f['book_id'], (int) $c['id'], 'Synthetic restart');
+    pl_reverse_opening($f['actor_id'], $f['company_id'], $f['book_id'], (int) $c['id'], 'Sample restart');
     assert_same('opening_required', pl_company_context($f['actor_id'], $f['company_id'])['setup_status']);
 });
 
@@ -129,10 +129,10 @@ test('opening forbids pre-cutover posting and generic opening reversal but suppo
     $f = opening_fixture(); $p = opening_preview($f); $c = opening_confirm($f, $p);
     $entry = ledger_payload($f); $entry['date'] = '2026-09-01';
     assert_throws(fn() => pl_post_journal($f['actor_id'], $f['company_id'], $f['book_id'], $entry), DomainException::class, 'after');
-    assert_throws(fn() => pl_reverse_journal($f['actor_id'], $f['company_id'], $f['book_id'], (int) $c['journal_id'], '2026-09-02', 'generic', 'Synthetic'), DomainException::class, 'cutover correction');
-    $reversed = pl_reverse_opening($f['actor_id'], $f['company_id'], $f['book_id'], (int) $c['id'], 'Correct synthetic source');
+    assert_throws(fn() => pl_reverse_journal($f['actor_id'], $f['company_id'], $f['book_id'], (int) $c['journal_id'], '2026-09-02', 'generic', 'Sample'), DomainException::class, 'cutover correction');
+    $reversed = pl_reverse_opening($f['actor_id'], $f['company_id'], $f['book_id'], (int) $c['id'], 'Correct sample source');
     assert_true($reversed['reversed_journal_id'] !== null);
-    assert_same($reversed['id'], pl_reverse_opening($f['actor_id'], $f['company_id'], $f['book_id'], (int) $c['id'], 'Correct synthetic source')['id']);
+    assert_same($reversed['id'], pl_reverse_opening($f['actor_id'], $f['company_id'], $f['book_id'], (int) $c['id'], 'Correct sample source')['id']);
     assert_same('0.0000', pl_trial_balance($f['actor_id'], $f['company_id'], $f['book_id'])['total_debit']);
     $new = opening_preview($f); opening_confirm($f, $new);
     assert_same('1300.0000', pl_trial_balance($f['actor_id'], $f['company_id'], $f['book_id'])['total_debit']);
@@ -143,7 +143,7 @@ test('opening forbids pre-cutover posting and generic opening reversal but suppo
 
 test('opening posting failure rolls back readiness, receipt, journal and unpaid register', function (): void {
     $f = opening_fixture(); $p = opening_preview($f);
-    DB::query("CREATE TRIGGER pl_opening_test_fail BEFORE INSERT ON pl_opening_documents FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Synthetic cutover failure'");
+    DB::query("CREATE TRIGGER pl_opening_test_fail BEFORE INSERT ON pl_opening_documents FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Sample cutover failure'");
     try {
         assert_throws(fn() => opening_confirm($f, $p));
     } finally {
@@ -165,8 +165,8 @@ test('opening immutable previews and document records cannot be overwritten', fu
 test('opening CSV handles quoted commas and refuses wrong headers, malformed widths and oversize input', function (): void {
     $rows = pl_opening_csv("account_code,debit,credit\r\n1000,1.2345,0\r\n3000,0,1.2345\r\n", ['account_code', 'debit', 'credit']);
     assert_same('1.2345', $rows[0]['debit']);
-    $rows = pl_opening_csv("party,reference\n\"Synthetic, Shop\",A1\n", ['party', 'reference']);
-    assert_same('Synthetic, Shop', $rows[0]['party']);
+    $rows = pl_opening_csv("party,reference\n\"Sample, Shop\",A1\n", ['party', 'reference']);
+    assert_same('Sample, Shop', $rows[0]['party']);
     assert_throws(fn() => pl_opening_csv("code,debit,credit\n1000,1,0", ['account_code', 'debit', 'credit']), DomainException::class, 'columns');
     assert_throws(fn() => pl_opening_csv("a,b\n1,2,3", ['a', 'b']), DomainException::class, 'same columns');
     assert_throws(fn() => pl_opening_csv(str_repeat('x', 524289), ['a']), DomainException::class, '512 KiB');
@@ -184,7 +184,7 @@ test('simultaneous opening confirmations share one durable journal and control r
 
 test('opening cutover date gate uses current state despite an older caller snapshot', function (): void {
     $f = opening_fixture();
-    $p = opening_preview($f, ['cutover_date' => '2026-09-01', 'source' => 'Synthetic old snapshot', 'balances' => [], 'zero_confirmed' => true]);
+    $p = opening_preview($f, ['cutover_date' => '2026-09-01', 'source' => 'Sample old snapshot', 'balances' => [], 'zero_confirmed' => true]);
     DB::startTransaction();
     try {
         assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_opening_cutovers WHERE book_id = %i', $f['book_id']));

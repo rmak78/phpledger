@@ -109,7 +109,7 @@ Read-only checks run in this lane:
 
 The PHP suites validate the seven authored packs and the successor importer’s current generic ledger path. The generated-candidate tests validate identity, date, balance, amount/control and stock-movement invariants. These checks do not establish that every vertical event contract is operationally imported or that monthly/annual statements are independently generated from source documents.
 
-## 3. Bounded realistic synthetic-data specification
+## 3. Bounded realistic sample-data specification
 
 The following specification is deliberately limited to workflows the current accounting services can represent. Specialist operational records should be added only after a separately accepted runtime contract.
 
@@ -117,7 +117,7 @@ The following specification is deliberately limited to workflows the current acc
 
 Each versioned pack should contain:
 
-1. A stable ID, semantic version, SHA-256 digest, synthetic marker, provenance status, and a visible capability boundary.
+1. A stable ID, semantic version, SHA-256 digest, sample marker, provenance status, and a visible capability boundary.
 2. A 36-month calendar from 2024-01 through 2026-12. 2024 and 2025 close only after independent reconciliation. 2026 remains open and includes real posted practice history plus editable drafts.
 3. Durable event identities: `source_id`, `source_reference`, `idempotency_key`, event date, document identity, related source identity where relevant, and expected journal effect.
 4. A deterministic master-data set sized for the demo allowance: 5–12 contacts, 4–20 items for stock businesses, 1–3 locations, and 10–20 semantic accounts. Use exact four-decimal strings for money and integer quantities; generate with `Decimal`, never floating point.
@@ -165,7 +165,7 @@ No source should be used to invent Pakistani tax rates, FBR/DRAP readiness, payr
 
 ### P1 — high-value realism and teaching quality
 
-1. Add 5–12 synthetic contacts and 4–20 meaningful products/locations per applicable pack, with stable IDs and non-deliverable addresses/emails.
+1. Add 5–12 sample contacts and 4–20 meaningful products/locations per applicable pack, with stable IDs and non-deliverable addresses/emails.
 2. Make each pack’s scenario visible as a short guided walkthrough tied to real source references, expected documents, monthly checkpoints, ageing, and stock movements.
 3. Add at least one partial settlement, one linked credit/return, one supplier-side settlement, one cross-year open item, and one correction where the business scenario warrants it.
 4. For stock packs, implement or explicitly stage receipts, issues, returns, counts, and moving weighted-average valuation through the existing inventory service. Do not post stock twice from a manual schedule and an operational event.

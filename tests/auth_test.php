@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 test('passwords are hashed and invalid credentials are rejected', function (): void {
-    $password = 'Synthetic test passphrase 471!';
+    $password = 'Sample test passphrase 471!';
     $hash = pl_hash_password($password);
     assert_true($hash !== $password);
     assert_true(pl_verify_password($password, $hash));
@@ -69,14 +69,14 @@ test('CSRF and session identities rotate at login, logout, and expiry', function
 
     test('real authentication uses persistent account throttling and expires the block', function (): void {
         $email = 'auth-' . bin2hex(random_bytes(6)) . '@example.invalid';
-        $password = 'Synthetic integration passphrase 471!';
+        $password = 'Sample integration passphrase 471!';
         $id = pl_create_user($email, 'Authentication fixture', $password);
         $ip = '198.51.100.' . random_int(1, 200);
         $actual = pl_authenticate(strtoupper($email), $password, $ip);
         assert_same($id, $actual['id']);
         assert_true(!array_key_exists('password_hash', $actual));
         for ($attempt = 0; $attempt < 5; $attempt++) {
-            assert_same(null, pl_authenticate($email, 'Incorrect synthetic password', $ip));
+            assert_same(null, pl_authenticate($email, 'Incorrect sample password', $ip));
         }
         // A different client/session cannot bypass the account limit.
         assert_same(null, pl_authenticate($email, $password, '203.0.113.250'));
@@ -93,7 +93,7 @@ test('CSRF and session identities rotate at login, logout, and expiry', function
 
     test('client limits, disabled accounts, and unknown accounts fail closed', function (): void {
         $email = 'access-' . bin2hex(random_bytes(6)) . '@example.invalid';
-        $password = 'Synthetic integration passphrase 582!';
+        $password = 'Sample integration passphrase 582!';
         $id = pl_create_user($email, 'Access fixture', $password);
         $ip = 'blocked-fixture-' . bin2hex(random_bytes(6));
         DB::insert('pl_login_attempts', [
@@ -116,7 +116,7 @@ test('CSRF and session identities rotate at login, logout, and expiry', function
 
 test('company access enforces membership, read-only roles, and active accounts', function (): void {
     $suffix = bin2hex(random_bytes(6));
-    $password = 'Synthetic membership passphrase 693!';
+    $password = 'Sample membership passphrase 693!';
     $owner = pl_create_user('owner-' . $suffix . '@example.invalid', 'Owner fixture', $password);
     $accountant = pl_create_user('accountant-' . $suffix . '@example.invalid', 'Accountant fixture', $password);
     $viewer = pl_create_user('viewer-' . $suffix . '@example.invalid', 'Viewer fixture', $password);

@@ -1,4 +1,4 @@
-"""Build original, synthetic demo histories with independent Decimal checkpoints.
+"""Build original, sample demo histories with independent Decimal checkpoints.
 
 No database access. --check verifies that the pinned fixtures are reproducible.
 Amounts are illustrative base-currency units, with no tax/payroll jurisdiction.
@@ -39,24 +39,24 @@ def line(code, signed, description=""):
 def scenario_for(slug):
     scenarios = {
         "service-agency": {"id": "agency-month-end", "title": "Review project income and operating costs", "goal": "Follow a professional-services month from client receipts and cash sales to staff, rent, insurance and a corrected expense.", "steps": ["Trace a monthly client receipt and separate cash activity in the bank and till accounts.", "Review recurring staff, rent, utilities and insurance entries in the month-end journal.", "Follow the year-end customer collection without recording income twice.", "Review the mistaken cost, linked reversal and corrected replacement."], "checks": ["Staff entries are illustrative support schedules, not payroll, withholding or employment compliance.", "Client work is represented by general-ledger examples, not project management or time billing.", "The open 2026 drafts are separate practice records and do not alter closed history."]},
-        "seasonal-business": {"id": "seasonal-cash-cycle", "title": "Compare a seasonal cash cycle", "goal": "Compare monthly receipts across a seasonal service year while keeping operating costs, prepayments and settlements traceable.", "steps": ["Compare low-season and peak-season monthly receipt summaries.", "Trace recurring operating costs and insurance release through the general ledger.", "Review the cross-year customer collection and supplier payment.", "Use the open 2026 drafts to test a new seasonal entry without changing history."], "checks": ["The receipt curve is a synthetic teaching pattern, not a forecast or business benchmark.", "No workforce scheduling, weather model, contract pipeline or seasonal tax treatment is implemented.", "Profit and cash are reviewed through the existing statements and account movements."]},
+        "seasonal-business": {"id": "seasonal-cash-cycle", "title": "Compare a seasonal cash cycle", "goal": "Compare monthly receipts across a seasonal service year while keeping operating costs, prepayments and settlements traceable.", "steps": ["Compare low-season and peak-season monthly receipt summaries.", "Trace recurring operating costs and insurance release through the general ledger.", "Review the cross-year customer collection and supplier payment.", "Use the open 2026 drafts to test a new seasonal entry without changing history."], "checks": ["The receipt curve is a sample teaching pattern, not a forecast or business benchmark.", "No workforce scheduling, weather model, contract pipeline or seasonal tax treatment is implemented.", "Profit and cash are reviewed through the existing statements and account movements."]},
         "trader": {"id": "trade-pricing", "title": "Review a trade sale and settlement", "goal": "Follow stock purchase, customer credit sale, partial collection, return and till-to-bank transfer.", "steps": ["Receive the boxed supply purchase at its recorded unit cost.", "Post the trade-customer invoice and inspect the stock issue and receivable.", "Apply the named customer receipt, then review the remaining balance and return credit.", "Compare the cash transfer with the cash-on-hand and bank accounts."], "checks": ["A return is linked to the source invoice and does not create a second sale.", "Customer and supplier balances remain in their respective control accounts.", "The pack uses one stock location and does not claim pricing-list or sales-order functionality."]},
-        "restaurant": {"id": "table-kot", "title": "Trace a table order through the books", "goal": "Use a restaurant bookkeeping example to compare a cash sale, stock movement, supplier bill and correction.", "steps": ["Review the food and beverage items and the opening stock position.", "Trace the table/KOT example to its cash sale and cost of goods sold.", "Review the supplier purchase, payment and returned goods as separate accounting events.", "Inspect the daily expense correction and its linked reversal."], "checks": ["The sample does not implement tables, kitchen production, recipes, modifiers or service workflow.", "Food and beverage labels are synthetic teaching data, not food-safety or tax guidance.", "Inventory and cash totals reconcile to the posted ledger events."]},
+        "restaurant": {"id": "table-kot", "title": "Trace a table order through the books", "goal": "Use a restaurant bookkeeping example to compare a cash sale, stock movement, supplier bill and correction.", "steps": ["Review the food and beverage items and the opening stock position.", "Trace the table/KOT example to its cash sale and cost of goods sold.", "Review the supplier purchase, payment and returned goods as separate accounting events.", "Inspect the daily expense correction and its linked reversal."], "checks": ["The sample does not implement tables, kitchen production, recipes, modifiers or service workflow.", "Food and beverage labels are sample teaching data, not food-safety or tax guidance.", "Inventory and cash totals reconcile to the posted ledger events."]},
         "membership-club": {"id": "membership-dues", "title": "Separate membership income from cash timing", "goal": "Follow a fictional club prepayment, recognition schedule, invoice, payment and expense bill.", "steps": ["Review the opening receivable and payable detail without reposting opening balances.", "Trace a membership prepayment into deferred revenue.", "Inspect the monthly recognition entry and compare it with the cash receipt.", "Review the supplier bill, payment and the club's period result."], "checks": ["Deferred revenue is not recognised before the stated coverage period.", "The club scenario does not claim charity, nonprofit, member administration or renewal compliance.", "Opening AR/AP detail remains evidence reconciled to the opening control journal."]},
-        "pharmacy": {"id": "lot-expiry", "title": "Review a lot-tracked training stock example", "goal": "Trace non-medicinal training stock through lot identity, expiry metadata, sale, return and supplier settlement.", "steps": ["Review the training items, lot identifiers and stated expiry dates.", "Trace the purchase and receipt into the stock and payable accounts.", "Review the sale, returned quantity and linked customer credit.", "Check the supplier payment and the remaining lot quantity/value."], "checks": ["All products are non-medicinal synthetic training items.", "No dispensing, patient, prescription, controlled-substance or pharmacy compliance workflow is implemented.", "Expiry metadata is illustrative fixture data, not a regulatory control."]},
+        "pharmacy": {"id": "lot-expiry", "title": "Review a lot-tracked training stock example", "goal": "Trace non-medicinal training stock through lot identity, expiry metadata, sale, return and supplier settlement.", "steps": ["Review the training items, lot identifiers and stated expiry dates.", "Trace the purchase and receipt into the stock and payable accounts.", "Review the sale, returned quantity and linked customer credit.", "Check the supplier payment and the remaining lot quantity/value."], "checks": ["All products are non-medicinal sample training items.", "No dispensing, patient, prescription, controlled-substance or pharmacy compliance workflow is implemented.", "Expiry metadata is illustrative fixture data, not a regulatory control."]},
         "service-workshop": {"id": "job-card", "title": "Keep customer property separate from workshop stock", "goal": "Follow parts, labour, customer-owned property and settlement examples without treating a job card as a posted module.", "steps": ["Review the opening workshop stock and the separate customer-owned bicycle reference.", "Trace a parts purchase and a labour/service sale through the ledger.", "Review the customer receipt, supplier payment and returned part.", "Confirm that customer-owned property does not enter the inventory valuation."], "checks": ["Customer-owned property is excluded from stock balances and valuation.", "The pack does not implement job cards, custody, scheduling or work-in-progress costing.", "Parts and service income remain distinguishable in the teaching scenario."]},
-        "jewelry-studio": {"id": "jewelry-materials", "title": "Separate studio sales from material costs", "goal": "Use a jewelry-studio bookkeeping example to distinguish finished-goods sales, material purchases, customer deposits and workshop costs.", "steps": ["Review the synthetic material and finished-piece accounts used by the example.", "Trace a purchase and sale through the inventory, revenue and cost accounts.", "Review a customer return or correction and its source link.", "Compare the month-end result with the remaining material value."], "checks": ["Metal, gemstone and finished-piece amounts are illustrative and do not claim commodity or fair-value accounting.", "Customer deposits, hallmarking, consignment, appraisal and workshop job costing are not implemented.", "The pack is a bookkeeping preview; specialist treatment and runtime replay are outside this candidate contract."]},
-        "light-manufacturing": {"id": "workshop-conversion", "title": "Review a simple materials-to-sales example", "goal": "Use a light-manufacturing bookkeeping example to inspect material purchases, finished-goods movement, sales and operating costs.", "steps": ["Review the synthetic material and finished-goods balances at the start of the example.", "Trace purchases and stock issues to their ledger accounts.", "Review the finished-goods sale, customer settlement and any returned quantity.", "Compare the period result and closing stock with the stated fixture checkpoints."], "checks": ["This does not implement bills of material, production orders, work-in-progress or overhead absorption.", "The conversion amounts are fixed teaching data, not a production-costing policy.", "The pack is a bookkeeping preview; production costing and conversion controls are outside the current module."]},
+        "jewelry-studio": {"id": "jewelry-materials", "title": "Separate studio sales from material costs", "goal": "Use a jewelry-studio bookkeeping example to distinguish finished-goods sales, material purchases, customer deposits and workshop costs.", "steps": ["Review the sample material and finished-piece accounts used by the example.", "Trace a purchase and sale through the inventory, revenue and cost accounts.", "Review a customer return or correction and its source link.", "Compare the month-end result with the remaining material value."], "checks": ["Metal, gemstone and finished-piece amounts are illustrative and do not claim commodity or fair-value accounting.", "Customer deposits, hallmarking, consignment, appraisal and workshop job costing are not implemented.", "The pack is a bookkeeping preview; specialist treatment and runtime replay are outside this candidate contract."]},
+        "light-manufacturing": {"id": "workshop-conversion", "title": "Review a simple materials-to-sales example", "goal": "Use a light-manufacturing bookkeeping example to inspect material purchases, finished-goods movement, sales and operating costs.", "steps": ["Review the sample material and finished-goods balances at the start of the example.", "Trace purchases and stock issues to their ledger accounts.", "Review the finished-goods sale, customer settlement and any returned quantity.", "Compare the period result and closing stock with the stated fixture checkpoints."], "checks": ["This does not implement bills of material, production orders, work-in-progress or overhead absorption.", "The conversion amounts are fixed teaching data, not a production-costing policy.", "The pack is a bookkeeping preview; production costing and conversion controls are outside the current module."]},
         "retail-shop": {"id": "register-close", "title": "Check a sale, return and counted till", "goal": "Compare a small retail sale, return, till deposit, stock balance and customer settlement.", "steps": ["Review the opening till, bank, receivable, payable and stock evidence.", "Trace the stationery cash sale and its cost of goods sold.", "Review the customer invoice, receipt and linked return credit.", "Compare the counted till transfer with the cash and bank account movements."], "checks": ["A credit-note return does not create a second sale or cash receipt.", "SKU identity survives the sale, return and stock reports.", "Barcode scanning and register sessions remain future UI features."]},
         "distributor": {"id": "route-settlement", "title": "Follow a distribution route settlement", "goal": "Review a distributor's stock, customer invoice, supplier bill, settlement and route-level bookkeeping evidence.", "steps": ["Review the opening stock, customer receivable and supplier payable evidence.", "Trace stock receipt and a credit sale through inventory, cost and control accounts.", "Apply the named customer and supplier settlements and inspect residuals.", "Review the route and cash-transfer notes as bookkeeping references only."], "checks": ["The distribution scenario does not implement route planning, dispatch, delivery proof or fleet accounting.", "Inventory uses one location and the shared moving-average service.", "Customer and supplier settlement remains separate from operational delivery status."]},
     }
-    return scenarios.get(slug, {"id": "bookkeeping-review", "title": "Review the monthly bookkeeping trail", "goal": "Follow fixed synthetic receipts, expenses, corrections and stock support schedules through the general ledger.", "steps": ["Inspect the monthly receipt and expense sources.", "Compare a closed-period report with its source journal.", "Review an open practice draft before posting.", "Follow a correction through its linked reversal."], "checks": ["This is a bookkeeping teaching example, not a complete industry operations module."]})
+    return scenarios.get(slug, {"id": "bookkeeping-review", "title": "Review the monthly bookkeeping trail", "goal": "Follow fixed sample receipts, expenses, corrections and stock support schedules through the general ledger.", "steps": ["Inspect the monthly receipt and expense sources.", "Compare a closed-period report with its source journal.", "Review an open practice draft before posting.", "Follow a correction through its linked reversal."], "checks": ["This is a bookkeeping teaching example, not a complete industry operations module."]})
 
 
 def generated_candidate_material(slug):
     """Provide a clearly generated candidate contract where no authored pack exists.
 
-    These are synthetic planning fixtures derived from the matrix family names.
+    These are sample planning fixtures derived from the matrix family names.
     They are intentionally not treated as published source data or runtime seed
     instructions until the service replay and release checks have completed.
     """
@@ -66,8 +66,8 @@ def generated_candidate_material(slug):
             "business_type": "professional-services-agency",
             "description": "Small design and web-services studio with retainers, milestone billing and subcontractor costs.",
             "contacts": [
-                {"id": "client-retainer", "name": "Northstar Foods (Sample)", "role": "customer", "email": "cedar-studio.client@example.invalid", "synthetic": True},
-                {"id": "contractor", "name": "Blue Kite Copywriting (Sample)", "role": "vendor", "email": "cedar-studio.vendor@example.invalid", "synthetic": True},
+                {"id": "client-retainer", "name": "Northstar Foods (Sample)", "role": "customer", "email": "cedar-studio.client@example.invalid", "sample": True},
+                {"id": "contractor", "name": "Blue Kite Copywriting (Sample)", "role": "vendor", "email": "cedar-studio.vendor@example.invalid", "sample": True},
             ],
             "products": [
                 {"id": "monthly-retainer", "name": "Monthly design retainer (Sample)", "kind": "service", "unit": "month", "sale_price": "1800.0000"},
@@ -92,8 +92,8 @@ def generated_candidate_material(slug):
             "business_type": "seasonal-landscape-services",
             "description": "Seasonal garden maintenance service with spring demand, recurring customers and a supplier payable.",
             "contacts": [
-                {"id": "garden-client", "name": "Greenbank Residence (Sample)", "role": "customer", "email": "sunrise-garden.client@example.invalid", "synthetic": True},
-                {"id": "nursery-vendor", "name": "Riverbend Nursery (Sample)", "role": "vendor", "email": "sunrise-garden.vendor@example.invalid", "synthetic": True},
+                {"id": "garden-client", "name": "Greenbank Residence (Sample)", "role": "customer", "email": "sunrise-garden.client@example.invalid", "sample": True},
+                {"id": "nursery-vendor", "name": "Riverbend Nursery (Sample)", "role": "vendor", "email": "sunrise-garden.vendor@example.invalid", "sample": True},
             ],
             "products": [
                 {"id": "maintenance-visit", "name": "Garden maintenance visit (Sample)", "kind": "service", "unit": "visit", "sale_price": "275.0000"},
@@ -115,10 +115,10 @@ def generated_candidate_material(slug):
         "jewelry-studio": {
             "display_name": "Lantern Finch Jewelry Studio (candidate)",
             "business_type": "jewelry-studio",
-            "description": "Small studio selling finished pieces while tracking synthetic metal, stone and workshop inputs by teaching quantity.",
+            "description": "Small studio selling finished pieces while tracking sample metal, stone and workshop inputs by teaching quantity.",
             "contacts": [
-                {"id": "jewelry-customer", "name": "Aster Gallery (Sample)", "role": "customer", "email": "lantern-finch.client@example.invalid", "synthetic": True},
-                {"id": "jewelry-supplier", "name": "North Loom Materials (Sample)", "role": "vendor", "email": "lantern-finch.vendor@example.invalid", "synthetic": True},
+                {"id": "jewelry-customer", "name": "Aster Gallery (Sample)", "role": "customer", "email": "lantern-finch.client@example.invalid", "sample": True},
+                {"id": "jewelry-supplier", "name": "North Loom Materials (Sample)", "role": "vendor", "email": "lantern-finch.vendor@example.invalid", "sample": True},
             ],
             "products": [
                 {"id": "silver-pendant", "name": "Sterling pendant teaching unit (Sample)", "kind": "stock", "unit": "piece", "sale_price": "900.0000", "fixture_unit_cost": "450.0000"},
@@ -143,8 +143,8 @@ def generated_candidate_material(slug):
             "business_type": "light-manufacturing",
             "description": "Small workshop buying timber and hardware, assembling simple benches and selling finished units.",
             "contacts": [
-                {"id": "manufacturing-customer", "name": "Civic Studio Interiors (Sample)", "role": "customer", "email": "maple-bench.client@example.invalid", "synthetic": True},
-                {"id": "manufacturing-supplier", "name": "Mill Road Timber (Sample)", "role": "vendor", "email": "maple-bench.vendor@example.invalid", "synthetic": True},
+                {"id": "manufacturing-customer", "name": "Civic Studio Interiors (Sample)", "role": "customer", "email": "maple-bench.client@example.invalid", "sample": True},
+                {"id": "manufacturing-supplier", "name": "Mill Road Timber (Sample)", "role": "vendor", "email": "maple-bench.vendor@example.invalid", "sample": True},
             ],
             "products": [
                 {"id": "bench-finished", "name": "Finished bench teaching unit (Sample)", "kind": "stock", "unit": "piece", "sale_price": "650.0000", "fixture_unit_cost": "300.0000"},
@@ -544,7 +544,7 @@ def enrich_authored_material(slug, source):
 
 
 def authored_material(slug):
-    """Copy authored synthetic research into the successor pack as research evidence.
+    """Copy authored sample research into the successor pack as research evidence.
 
     The runtime history remains the existing supported journal/document path. These
     fields preserve the deeper business scenario without silently pretending that
@@ -703,22 +703,22 @@ def build(slug, name, business, revenue, inventory, capability_note=None, status
     runtime_note = "The pinned ledger history below is reconciled through the current supported general-journal and cash-document services. On isolated sample creation, the operational contract is replayed through the existing AR/AP, Purchasing, Inventory and general-journal services; unsupported vertical operations remain explicitly staged."
     is_generated_candidate = authored is not None and authored.get("source_status") == "generated_candidate_not_runtime_seed"
     if authored and not is_generated_candidate:
-        runtime_note += " The authored contract is retained as the synthetic source record and its supported bookkeeping events are replayable; location transfers, advanced revenue timing and other specialist controls remain evidence-only."
+        runtime_note += " The authored contract is retained as the sample source record and its supported bookkeeping events are replayable; location transfers, advanced revenue timing and other specialist controls remain evidence-only."
     elif is_generated_candidate:
-        runtime_note += " This generated candidate contract is synthetic source material; specialist operational controls remain outside the accounting replay."
+        runtime_note += " This generated candidate contract is sample source material; specialist operational controls remain outside the accounting replay."
     else:
         runtime_note += " No operational source pack is currently available for this successor; the successor remains a generic history-only sample."
     return {"id": slug, "version": "1.0.0", "name": name, "business": business, "demo_only": True,
-            "status": status, "synthetic": True,
+            "status": status, "sample": True,
             "capability_note": capability_note or "This sample demonstrates bookkeeping examples only; it is not an implementation of the named industry's operational, regulatory or compliance systems.",
-            "source_material": {"description": "Reconciled successor of synthetic teaching material; no real customer data.",
+            "source_material": {"description": "Reconciled successor of sample teaching material; no real customer data.",
                                 "runtime_note": runtime_note,
                                 "industry_profile_id": profile["id"],
                                 "industry_profile": profile,
                                 "research_status": ("available" if authored.get("source_status") != "generated_candidate_not_runtime_seed" else "generated_candidate") if authored else "missing_authored_source_pack",
                                 "research_evidence": authored},
             "scenario": scenario_for(slug),
-            "notice": "Original synthetic general-ledger examples. Manual staff, loan, outstanding-item and stock schedules do not implement payroll, AR/AP, inventory or tax modules. Period closure blocks posting; it is not statutory financial-statement approval or an earnings-transfer journal.",
+            "notice": "Original sample general-ledger examples. Manual staff, loan, outstanding-item and stock schedules do not implement payroll, AR/AP, inventory or tax modules. Period closure blocks posting; it is not statutory financial-statement approval or an earnings-transfer journal.",
             "start_date": "2024-01-01", "history_end": "2025-12-31", "practice_end": "2026-12-31",
             "source_count": len(events) + len(drafts), "journal_count": len(postings), "draft_count": len(drafts),
             "accounts": definitions, "events": events, "drafts": drafts, "monthly_support": monthly_schedule,

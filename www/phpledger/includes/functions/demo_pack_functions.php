@@ -47,12 +47,12 @@ function pl_demo_starter_playground(?string $startDate = null): array
         'id' => 'accounting-starter', 'version' => '1.0.0', 'kind' => 'starter_playground',
         'name' => 'Accounting starter playground', 'business' => 'Invoices, bills, purchasing and stock',
         'start_date' => $startDate, 'demo_only' => true, 'source_count' => 0,
-        'notice' => 'Start with zero balances and no stock. The example tax is a manually configured synthetic 5 percent rate, not a country tax rule.',
+        'notice' => 'Start with zero balances and no stock. The example tax is a manually configured sample 5 percent rate, not a country tax rule.',
         'accounts' => [
             ['code' => '1300', 'name' => 'Stock on hand', 'type' => 'asset'],
-            ['code' => '1350', 'name' => 'Synthetic input tax', 'type' => 'asset'],
+            ['code' => '1350', 'name' => 'Sample input tax', 'type' => 'asset'],
             ['code' => '2100', 'name' => 'Goods received awaiting bills', 'type' => 'liability'],
-            ['code' => '2150', 'name' => 'Synthetic output tax', 'type' => 'liability'],
+            ['code' => '2150', 'name' => 'Sample output tax', 'type' => 'liability'],
             ['code' => '5100', 'name' => 'Cost of goods sold', 'type' => 'expense'],
             ['code' => '5200', 'name' => 'Purchase variance and rounding', 'type' => 'expense'],
         ],
@@ -61,7 +61,7 @@ function pl_demo_starter_playground(?string $startDate = null): array
             ['sku' => 'SAMPLE-GOODS', 'name' => 'Sample goods', 'kind' => 'stock', 'base_unit' => 'each', 'selling_price' => '25.0000'],
             ['sku' => 'SAMPLE-SERVICE', 'name' => 'Sample service', 'kind' => 'nonstock', 'base_unit' => 'service', 'selling_price' => '50.0000'],
         ],
-        'tax' => ['code' => 'DEMO5', 'name' => 'Synthetic example 5 percent', 'percentage' => '5'],
+        'tax' => ['code' => 'DEMO5', 'name' => 'Sample example 5 percent', 'percentage' => '5'],
     ];
     $pack['digest'] = hash('sha256', json_encode($pack, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
     return $pack;
@@ -97,7 +97,7 @@ function pl_seed_demo_starter_playground(int $actorId, int $companyId, int $book
             throw new DomainException('The starter playground requires a new empty unassigned sample. Existing books cannot be replaced.');
         }
         $mapping = array_column($company['accounts'], 'id', 'code');
-        $reason = 'Synthetic zero-balance starter playground, prepared before visitor assignment.';
+        $reason = 'Sample zero-balance starter playground, prepared before visitor assignment.';
         foreach ($pack['accounts'] as $definition) {
             $account = pl_save_account($actorId, $companyId, $bookId, $definition + [
                 'is_active' => true, 'reason' => $reason, 'creation_key' => 'starter-account:' . $definition['code'],
@@ -115,7 +115,7 @@ function pl_seed_demo_starter_playground(int $actorId, int $companyId, int $book
             'legal_name' => $pack['party_name'], 'entity_type' => 'private_company', 'country_code' => 'ZZ',
             'is_customer' => true, 'is_vendor' => true, 'currency' => $company['currency'],
             'ar_account_id' => $mapping['1100'], 'ap_account_id' => $mapping['2000'],
-            'notes' => 'Entirely fictional practice party. Country ZZ denotes this synthetic example.',
+            'notes' => 'Entirely fictional practice party. Country ZZ denotes this sample example.',
             'reason' => $reason, 'request_key' => 'starter-party',
         ]);
         $products = [];
@@ -283,7 +283,7 @@ function pl_demo_operational_master_data(int $actorId, int $companyId, int $book
             if ($prior === null || $prior['report_classification'] === 'cost_of_sales') { $classification = ['report_classification'=>'cost_of_sales']; }
         }
         $account = pl_save_account($actorId, $companyId, $bookId, ['code' => $code, 'name' => $accountLabel, 'type' => $type,
-            'role' => $accountRole, 'is_active' => true, 'reason' => 'Deterministic operational account for the isolated synthetic sample.',
+            'role' => $accountRole, 'is_active' => true, 'reason' => 'Deterministic operational account for the isolated sample.',
             'creation_key' => $prefix . 'operational-account:' . $role] + $classification);
         $mapping[$role] = (int) $account['id'];
     }
@@ -305,13 +305,13 @@ function pl_demo_operational_master_data(int $actorId, int $companyId, int $book
         $party = pl_save_party($actorId, $companyId, $bookId, ['legal_name' => $contact['name'], 'entity_type' => 'private_company', 'country_code' => 'ZZ',
             'is_customer' => $isCustomer, 'is_vendor' => $isVendor, 'currency' => pl_company_context($actorId, $companyId)['currency'],
             'ar_account_id' => $isCustomer ? ($mapping['accounts_receivable'] ?? null) : null, 'ap_account_id' => $isVendor ? ($mapping['accounts_payable'] ?? null) : null,
-            'notes' => 'Synthetic contact from the pinned sample research contract.', 'reason' => 'Create isolated sample operational master data.',
+            'notes' => 'Sample contact from the pinned sample research contract.', 'reason' => 'Create isolated sample operational master data.',
             'request_key' => $prefix . 'party:' . $contact['id']]);
         if ($isCustomer) { $partyIds['customer'][$contact['id']] = (int) $party['id']; }
         if ($isVendor) { $partyIds['vendor'][$contact['id']] = (int) $party['id']; }
     }
-    if ($partyIds['customer'] === []) { $partyIds['customer']['default'] = (int) pl_save_party($actorId, $companyId, $bookId, ['legal_name' => $pack['name'] . ' customer (Sample)', 'entity_type' => 'private_company', 'country_code' => 'ZZ', 'is_customer' => true, 'is_vendor' => false, 'currency' => pl_company_context($actorId, $companyId)['currency'], 'ar_account_id' => $mapping['accounts_receivable'], 'notes' => 'Synthetic fallback party.', 'reason' => 'Create isolated sample operational master data.', 'request_key' => $prefix . 'party:default-customer'])['id']; }
-    if ($partyIds['vendor'] === []) { $partyIds['vendor']['default'] = (int) pl_save_party($actorId, $companyId, $bookId, ['legal_name' => $pack['name'] . ' supplier (Sample)', 'entity_type' => 'private_company', 'country_code' => 'ZZ', 'is_customer' => false, 'is_vendor' => true, 'currency' => pl_company_context($actorId, $companyId)['currency'], 'ap_account_id' => $mapping['accounts_payable'], 'notes' => 'Synthetic fallback party.', 'reason' => 'Create isolated sample operational master data.', 'request_key' => $prefix . 'party:default-vendor'])['id']; }
+    if ($partyIds['customer'] === []) { $partyIds['customer']['default'] = (int) pl_save_party($actorId, $companyId, $bookId, ['legal_name' => $pack['name'] . ' customer (Sample)', 'entity_type' => 'private_company', 'country_code' => 'ZZ', 'is_customer' => true, 'is_vendor' => false, 'currency' => pl_company_context($actorId, $companyId)['currency'], 'ar_account_id' => $mapping['accounts_receivable'], 'notes' => 'Sample fallback party.', 'reason' => 'Create isolated sample operational master data.', 'request_key' => $prefix . 'party:default-customer'])['id']; }
+    if ($partyIds['vendor'] === []) { $partyIds['vendor']['default'] = (int) pl_save_party($actorId, $companyId, $bookId, ['legal_name' => $pack['name'] . ' supplier (Sample)', 'entity_type' => 'private_company', 'country_code' => 'ZZ', 'is_customer' => false, 'is_vendor' => true, 'currency' => pl_company_context($actorId, $companyId)['currency'], 'ap_account_id' => $mapping['accounts_payable'], 'notes' => 'Sample fallback party.', 'reason' => 'Create isolated sample operational master data.', 'request_key' => $prefix . 'party:default-vendor'])['id']; }
     $firstIncome = null; $firstExpense = null;
     foreach ($roles as $role) { [$type] = pl_demo_operational_role_type($role); if ($type === 'income' && $firstIncome === null) { $firstIncome = $role; } if ($type === 'expense' && $firstExpense === null) { $firstExpense = $role; } }
     $productIds = [];
@@ -502,7 +502,7 @@ function pl_demo_operational_replay(int $actorId, int $companyId, int $bookId, a
             $lines = pl_demo_operational_document_lines($event, $master, $evidence);
             $document = pl_save_ar_document($actorId, $companyId, $bookId, ['kind' => 'invoice', 'date' => $event['date'], 'due_date' => pl_demo_operational_due_date($event['date']),
                 'currency' => pl_company_context($actorId, $companyId)['currency'], 'party_id' => $party, 'reference' => $event['source_reference'] ?? $event['id'],
-                'notes' => 'Replayed from the pinned synthetic operational contract.', 'creation_key' => $key . ':document', 'price_mode' => 'exclusive', 'lines' => $lines]);
+                'notes' => 'Replayed from the pinned sample operational contract.', 'creation_key' => $key . ':document', 'price_mode' => 'exclusive', 'lines' => $lines]);
             $posted = pl_post_ar_document($actorId, $companyId, $bookId, (int) $document['id'], (int) $document['revision']);
             $documentIds[$event['id']] = (int) $posted['id']; if (isset($event['document_id'])) { $documentIds[$event['document_id']] = (int) $posted['id']; }
             $invoiceIds[] = (int) $posted['id']; $receipt['document_ids'][] = (int) $posted['id']; $receipt['journal_ids'][] = (int) $posted['journal_id'];
@@ -520,7 +520,7 @@ function pl_demo_operational_replay(int $actorId, int $companyId, int $bookId, a
             foreach ($lines as &$line) { if ($line['product_id'] !== null) { foreach ($original['lines'] as $originalLine) { if ((int) ($originalLine['product_id'] ?? 0) === (int) $line['product_id']) { $line['original_line_number'] = (int) $originalLine['line_number']; break; } } } } unset($line);
             $document = pl_save_ar_document($actorId, $companyId, $bookId, ['kind' => 'customer_credit', 'date' => $event['date'], 'due_date' => $event['date'],
                 'currency' => pl_company_context($actorId, $companyId)['currency'], 'party_id' => $party, 'original_document_id' => $originalId,
-                'reference' => $event['source_reference'] ?? $event['id'], 'notes' => 'Replayed synthetic customer return/credit.', 'creation_key' => $key . ':document', 'price_mode' => 'exclusive', 'lines' => $lines]);
+                'reference' => $event['source_reference'] ?? $event['id'], 'notes' => 'Replayed sample customer return/credit.', 'creation_key' => $key . ':document', 'price_mode' => 'exclusive', 'lines' => $lines]);
             $posted = pl_post_ar_document($actorId, $companyId, $bookId, (int) $document['id'], (int) $document['revision']);
             $documentIds[$event['id']] = (int) $posted['id']; if (isset($event['document_id'])) { $documentIds[$event['document_id']] = (int) $posted['id']; }
             $receipt['document_ids'][] = (int) $posted['id']; $receipt['journal_ids'][] = (int) $posted['journal_id'];
@@ -530,7 +530,7 @@ function pl_demo_operational_replay(int $actorId, int $companyId, int $bookId, a
             foreach ($event['expected_journal'] as $line) { $role = pl_demo_operational_role($line, $master['key_roles']); if (str_contains($role, 'expense') || str_contains($role, 'cost')) { $expense = $role; break; } }
             $document = pl_save_ar_document($actorId, $companyId, $bookId, ['kind' => 'bill', 'date' => $event['date'], 'due_date' => pl_demo_operational_due_date($event['date']),
                 'currency' => pl_company_context($actorId, $companyId)['currency'], 'party_id' => $party, 'reference' => $event['source_reference'] ?? $event['id'],
-                'notes' => 'Replayed from the pinned synthetic operational contract.', 'creation_key' => $key . ':document', 'price_mode' => 'exclusive',
+                'notes' => 'Replayed from the pinned sample operational contract.', 'creation_key' => $key . ':document', 'price_mode' => 'exclusive',
                 'lines' => [['account_id' => $master['accounts'][$expense], 'description' => $event['description'] ?? $event['id'], 'quantity' => '1.0000', 'unit_price' => pl_demo_operational_amount($event, $master)]]]);
             $posted = pl_post_ar_document($actorId, $companyId, $bookId, (int) $document['id'], (int) $document['revision']);
             $documentIds[$event['id']] = (int) $posted['id']; if (isset($event['document_id'])) { $documentIds[$event['document_id']] = (int) $posted['id']; }
@@ -562,7 +562,7 @@ function pl_demo_operational_replay(int $actorId, int $companyId, int $bookId, a
             foreach ($lines as $line) { $role = null; foreach ($event['expected_journal'] as $source) { $candidate = pl_demo_operational_role($source, $master['key_roles']); if ($master['accounts'][$candidate] === $line['account_id']) { $role = $candidate; break; } } if ($role !== null && !str_contains($role, 'inventory') && $role !== 'cost_of_goods_sold' && !str_contains($role, 'cost_')) { $financial[] = $line; } }
             $draft = pl_save_general_draft($actorId, $companyId, $bookId, ['date' => $event['date'], 'reference' => $event['source_reference'] ?? $event['id'], 'description' => $event['description'] ?? $event['id'], 'creation_key' => $key . ':cash-sale', 'lines' => $financial]);
             $posted = pl_post_general_draft($actorId, $companyId, $bookId, (int) $draft['id'], (int) $draft['revision']); $genericIds[$event['id']] = (int) $draft['id']; $receipt['journal_ids'][] = (int) $posted['journal_id'];
-            foreach (($event['stock_movements'] ?? []) as $index => $movement) { if (bccomp((string) $movement['quantity_delta'], '0', 4) < 0) { $stock = pl_inventory_issue($actorId, $companyId, $bookId, ['product_id' => $master['products'][$movement['item_id']], 'quantity' => ltrim((string) $movement['quantity_delta'], '-'), 'date' => $event['date'], 'source_type' => 'sample_cash_sale', 'source_reference' => $event['id'] . ':' . $index, 'source_journal_id' => (int) $posted['journal_id'], 'reason' => 'Stock issued for synthetic cash sale.', 'idempotency_key' => $key . ':stock:' . $index]); $receipt['movement_ids'][] = (int) $stock['movement_id']; $receipt['journal_ids'][] = (int) $stock['journal_id']; } }
+            foreach (($event['stock_movements'] ?? []) as $index => $movement) { if (bccomp((string) $movement['quantity_delta'], '0', 4) < 0) { $stock = pl_inventory_issue($actorId, $companyId, $bookId, ['product_id' => $master['products'][$movement['item_id']], 'quantity' => ltrim((string) $movement['quantity_delta'], '-'), 'date' => $event['date'], 'source_type' => 'sample_cash_sale', 'source_reference' => $event['id'] . ':' . $index, 'source_journal_id' => (int) $posted['journal_id'], 'reason' => 'Stock issued for sample cash sale.', 'idempotency_key' => $key . ':stock:' . $index]); $receipt['movement_ids'][] = (int) $stock['movement_id']; $receipt['journal_ids'][] = (int) $stock['journal_id']; } }
         } elseif ($kind === 'reversal') {
             $targetId = $event['reverses_event_id'] ?? null; if (!is_string($targetId) || !isset($genericIds[$targetId])) { $staged[] = ['event_id' => $event['id'], 'kind' => $kind, 'reason' => 'The source event is not a replayable general-journal correction.']; $receipt['status'] = 'staged'; $receipts[] = $receipt; continue; }
             $reversalDate = $event['date'];
@@ -570,7 +570,7 @@ function pl_demo_operational_replay(int $actorId, int $companyId, int $bookId, a
                 $reversalDate = (string) DB::queryFirstField('SELECT j.journal_date FROM pl_general_drafts d JOIN pl_journals j ON j.id = d.journal_id WHERE d.id=%i AND d.company_id=%i AND d.book_id=%i FOR SHARE', $genericIds[$targetId], $companyId, $bookId);
                 $receipt['effective_date'] = $reversalDate;
             }
-            $reversed = pl_reverse_general_draft($actorId, $companyId, $bookId, $genericIds[$targetId], $reversalDate, 'Synthetic operational correction linked to ' . $targetId); $receipt['journal_ids'][] = (int) $reversed['reversal_journal_id'];
+            $reversed = pl_reverse_general_draft($actorId, $companyId, $bookId, $genericIds[$targetId], $reversalDate, 'Sample operational correction linked to ' . $targetId); $receipt['journal_ids'][] = (int) $reversed['reversal_journal_id'];
         } elseif (in_array($kind, ['expense', 'expense_bill', 'cash_transfer'], true)) {
             $lines = pl_demo_operational_event_lines($event, $master); $draft = pl_save_general_draft($actorId, $companyId, $bookId, ['date' => $event['date'], 'reference' => $event['source_reference'] ?? $event['id'], 'description' => $event['description'] ?? $event['id'], 'creation_key' => $key . ':journal', 'lines' => $lines]);
             $posted = pl_post_general_draft($actorId, $companyId, $bookId, (int) $draft['id'], (int) $draft['revision']); $genericIds[$event['id']] = (int) $draft['id']; $receipt['journal_ids'][] = (int) $posted['journal_id'];
@@ -608,7 +608,7 @@ function pl_seed_demo_pack(int $actorId, int $companyId, int $bookId, string $id
         $mapping = array_column($company['accounts'], 'id', 'code');
         foreach ($pack['accounts'] as $definition) {
             $account = pl_save_account($actorId, $companyId, $bookId, $definition + [
-                'is_active' => true, 'reason' => 'Original synthetic sample chart and manual support schedules.',
+                'is_active' => true, 'reason' => 'Original sample chart and manual support schedules.',
                 'creation_key' => $prefix . 'account:' . $definition['code'],
             ]);
             $mapping[$definition['code']] = $account['id'];
@@ -620,7 +620,7 @@ function pl_seed_demo_pack(int $actorId, int $companyId, int $bookId, string $id
                 'reason' => 'Historical sample month, prepared before visitor assignment.', 'request_key' => $prefix . 'period:' . $month]);
         }
         pl_create_period($actorId, $companyId, $bookId, ['start_date' => '2026-01-01', 'end_date' => '2026-12-31',
-            'reason' => 'Open practice year for synthetic visitor actions.', 'request_key' => $prefix . 'practice']);
+            'reason' => 'Open practice year for sample visitor actions.', 'request_key' => $prefix . 'practice']);
         foreach ($pack['events'] as $event) {
             if ($event['kind'] === 'receipt') {
                 $source = pl_save_document($actorId, $companyId, $bookId, [
@@ -649,7 +649,7 @@ function pl_seed_demo_pack(int $actorId, int $companyId, int $bookId, string $id
         foreach (pl_list_periods($actorId, $companyId, $bookId) as $period) {
             if ($period['end_date'] <= $pack['history_end']) {
                 pl_change_period_status($actorId, $companyId, $bookId, (int) $period['id'], 'closed', (int) $period['revision'],
-                    'Synthetic history reconciled to pinned monthly checkpoints. Closure prevents backdated posting; it does not approve statutory statements.', $prefix . 'close:' . $period['start_date']);
+                    'Sample history reconciled to pinned monthly checkpoints. Closure prevents backdated posting; it does not approve statutory statements.', $prefix . 'close:' . $period['start_date']);
             }
         }
         $snapshot = json_encode(['sample_pack' => ['id' => $pack['id'], 'version' => $pack['version'], 'digest' => $pack['digest'],

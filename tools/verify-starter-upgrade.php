@@ -40,14 +40,14 @@ function starter_upgrade_rows(string $table, ?array $originalColumns = null): ar
 function starter_upgrade_seed_open_item(int $actor, array $fixture, int $party): array
 {
     $company = $fixture['company_id']; $book = $fixture['book_id']; $control = $fixture['accounts']['1100'];
-    pl_activate_open_item_account($actor, $company, $book, $control, 'Synthetic published foundation control');
+    pl_activate_open_item_account($actor, $company, $book, $control, 'Sample published foundation control');
     return pl_ledger_transaction(function () use ($actor, $fixture, $party, $company, $book, $control): array {
         pl_require_company_access($actor, $company, true); pl_ledger_book($company, $book, true);
         DB::insert('pl_open_items', ['company_id' => $company, 'book_id' => $book, 'party_id' => $party, 'control_account_id' => $control,
-            'direction' => 'receivable', 'currency' => 'USD', 'source_reference' => 'synthetic-0.3-open-item', 'created_by' => $actor]);
+            'direction' => 'receivable', 'currency' => 'USD', 'source_reference' => 'sample-0.3-open-item', 'created_by' => $actor]);
         $item = (int) DB::insertId();
         $payload = pl_normalize_journal(['date' => '2026-02-01', 'currency' => 'USD', 'source_type' => 'open_item_recognition',
-            'source_reference' => 'open-item:' . $item, 'idempotency_key' => 'synthetic-0.3-recognition', 'description' => 'Synthetic published foundation recognition',
+            'source_reference' => 'open-item:' . $item, 'idempotency_key' => 'sample-0.3-recognition', 'description' => 'Sample published foundation recognition',
             'lines' => [['account_id' => $control, 'debit' => '250.5001', 'credit' => '0'],
                 ['account_id' => $fixture['accounts']['4000'], 'debit' => '0', 'credit' => '250.5001']]]);
         $hash = hash('sha256', json_encode(['company_id' => $company, 'book_id' => $book, 'reversal_of_id' => null, 'payload' => $payload], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
@@ -91,27 +91,27 @@ try {
     }
     DB::queryFirstField('SELECT RELEASE_LOCK(%s)', $lock); $ownsLock = false;
 
-    $actor = pl_create_user('starter-upgrade@example.invalid', 'Synthetic starter upgrade owner', bin2hex(random_bytes(24)));
-    $fixture = pl_create_company($actor, 'Synthetic published 0.3 book', 'USD', '2026-01-01');
+    $actor = pl_create_user('starter-upgrade@example.invalid', 'Sample starter upgrade owner', bin2hex(random_bytes(24)));
+    $fixture = pl_create_company($actor, 'Sample published 0.3 book', 'USD', '2026-01-01');
     $company = $fixture['company_id']; $book = $fixture['book_id'];
     $cashInput = ['kind' => 'receipt', 'date' => '2026-01-10', 'amount' => '125.0001', 'money_account_id' => $fixture['accounts']['1000'],
-        'category_account_id' => $fixture['accounts']['4000'], 'counterparty' => 'Synthetic original payer', 'reference' => 'synthetic-original-cash', 'memo' => 'Preserve exact published history', 'creation_key' => 'synthetic-old-cash'];
+        'category_account_id' => $fixture['accounts']['4000'], 'counterparty' => 'Sample original payer', 'reference' => 'sample-original-cash', 'memo' => 'Preserve exact published history', 'creation_key' => 'sample-old-cash'];
     $cash = pl_save_document($actor, $company, $book, $cashInput);
     $cash = pl_post_document($actor, $company, $book, $cash['id'], 1);
-    $party = pl_save_party($actor, $company, $book, ['legal_name' => 'Synthetic retained party', 'entity_type' => 'private_company', 'country_code' => 'GB',
-        'is_customer' => true, 'is_vendor' => true, 'currency' => 'USD', 'request_key' => 'synthetic-old-party', 'reason' => 'Synthetic published party and profile']);
+    $party = pl_save_party($actor, $company, $book, ['legal_name' => 'Sample retained party', 'entity_type' => 'private_company', 'country_code' => 'GB',
+        'is_customer' => true, 'is_vendor' => true, 'currency' => 'USD', 'request_key' => 'sample-old-party', 'reason' => 'Sample published party and profile']);
     pl_currency_rate_enter($actor, $company, $book, ['from_currency' => 'EUR', 'to_currency' => 'USD', 'rate_date' => '2026-01-09', 'rate' => '1.234567890123',
-        'source' => 'manual', 'note' => 'Synthetic retained manual rate evidence', 'idempotency_key' => 'synthetic-old-rate']);
+        'source' => 'manual', 'note' => 'Sample retained manual rate evidence', 'idempotency_key' => 'sample-old-rate']);
     $oldItem = starter_upgrade_seed_open_item($actor, $fixture, (int) $party['id']);
 
-    $openingFixture = pl_create_company($actor, 'Synthetic retained opening book', 'USD', '2026-01-01');
+    $openingFixture = pl_create_company($actor, 'Sample retained opening book', 'USD', '2026-01-01');
     DB::update('pl_companies', ['setup_status' => 'opening_required'], 'id=%i', $openingFixture['company_id']);
-    $openingInput = ['cutover_date' => '2026-01-01', 'source' => 'Synthetic old opening evidence', 'balances' => [
+    $openingInput = ['cutover_date' => '2026-01-01', 'source' => 'Sample old opening evidence', 'balances' => [
         ['account_code' => '1000', 'debit' => '1000', 'credit' => '0'], ['account_code' => '1100', 'debit' => '75', 'credit' => '0'],
         ['account_code' => '2000', 'debit' => '0', 'credit' => '30'], ['account_code' => '3000', 'debit' => '0', 'credit' => '1045']],
-        'unpaid_documents' => [['kind' => 'receivable', 'account_code' => '1100', 'party' => 'Synthetic opening customer', 'reference' => 'synthetic-old-invoice', 'document_date' => '2025-12-20', 'due_date' => '2026-01-20', 'outstanding' => '75'],
-            ['kind' => 'payable', 'account_code' => '2000', 'party' => 'Synthetic opening supplier', 'reference' => 'synthetic-old-bill', 'document_date' => '2025-12-21', 'due_date' => '2026-01-21', 'outstanding' => '30']]];
-    $opening = pl_preview_opening($actor, $openingFixture['company_id'], $openingFixture['book_id'], $openingInput, 'synthetic-old-opening');
+        'unpaid_documents' => [['kind' => 'receivable', 'account_code' => '1100', 'party' => 'Sample opening customer', 'reference' => 'sample-old-invoice', 'document_date' => '2025-12-20', 'due_date' => '2026-01-20', 'outstanding' => '75'],
+            ['kind' => 'payable', 'account_code' => '2000', 'party' => 'Sample opening supplier', 'reference' => 'sample-old-bill', 'document_date' => '2025-12-21', 'due_date' => '2026-01-21', 'outstanding' => '30']]];
+    $opening = pl_preview_opening($actor, $openingFixture['company_id'], $openingFixture['book_id'], $openingInput, 'sample-old-opening');
     pl_confirm_opening($actor, $openingFixture['company_id'], $openingFixture['book_id'], (int) $opening['id'], $opening['payload_hash'], true);
 
     $tables = DB::queryFirstColumn("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=%s AND TABLE_TYPE='BASE TABLE' AND TABLE_NAME<>'pl_schema_migrations' ORDER BY TABLE_NAME", $database);
@@ -136,18 +136,18 @@ try {
     }
 
     $draft = pl_save_ar_document($actor, $company, $book, ['kind' => 'invoice', 'party_id' => (int) $party['id'], 'date' => '2026-02-02', 'due_date' => '2026-03-02', 'currency' => 'USD',
-        'reference' => 'synthetic-new-starter-invoice', 'creation_key' => 'synthetic-new-invoice', 'lines' => [['description' => 'Synthetic service', 'quantity' => '4', 'unit_price' => '25', 'account_id' => $fixture['accounts']['4000']]]]);
+        'reference' => 'sample-new-starter-invoice', 'creation_key' => 'sample-new-invoice', 'lines' => [['description' => 'Sample service', 'quantity' => '4', 'unit_price' => '25', 'account_id' => $fixture['accounts']['4000']]]]);
     $invoice = pl_post_ar_document($actor, $company, $book, $draft['id'], 1);
     starter_upgrade_assert($invoice['outstanding_fc'] === '100.0000', 'New starter invoice did not recognize its expected open item.');
     foreach (['40','60'] as $index => $amount) {
         $payment = ['bank_account_id' => $fixture['accounts']['1000'], 'gain_account_id' => $fixture['accounts']['4000'], 'loss_account_id' => $fixture['accounts']['5000'],
-            'amount_fc' => $amount, 'date' => '2026-02-03', 'description' => 'Synthetic upgraded invoice payment', 'idempotency_key' => 'synthetic-new-payment-' . $index];
+            'amount_fc' => $amount, 'date' => '2026-02-03', 'description' => 'Sample upgraded invoice payment', 'idempotency_key' => 'sample-new-payment-' . $index];
         $receipt = pl_settle_ar_document($actor, $company, $book, $invoice['id'], $payment);
         starter_upgrade_assert($receipt === pl_settle_ar_document($actor, $company, $book, $invoice['id'], $payment), 'New settlement retry did not return the same receipt.');
     }
     starter_upgrade_assert(pl_get_ar_document($actor, $company, $book, $invoice['id'])['outstanding_fc'] === '0.0000', 'New starter invoice failed to settle fully.');
     pl_settle_open_item($actor, $company, $book, ['item_id' => $oldItem['item_id'], 'bank_account_id' => $fixture['accounts']['1000'], 'gain_account_id' => $fixture['accounts']['4000'], 'loss_account_id' => $fixture['accounts']['5000'],
-        'amount_fc' => '250.5001', 'date' => '2026-02-04', 'description' => 'Synthetic settlement of preserved 0.3 item', 'idempotency_key' => 'synthetic-old-item-payment']);
+        'amount_fc' => '250.5001', 'date' => '2026-02-04', 'description' => 'Sample settlement of preserved 0.3 item', 'idempotency_key' => 'sample-old-item-payment']);
     starter_upgrade_assert(pl_get_open_item($actor, $company, $book, $oldItem['item_id'])['remaining_fc'] === '0.0000', 'Preserved open item was not usable after upgrade.');
     $report = pl_ar_ap_open_items($actor, $company, $book, 'receivable', '2026-02-04');
     starter_upgrade_assert($report['total_base'] === '0.0000' && $report['reconciled'], 'Upgraded AR and its general-ledger control did not reconcile.');
@@ -158,7 +158,7 @@ try {
         'baseline_tables_preserved' => count($tables), 'baseline_rows_preserved' => $rowCount, 'new_migrations' => $migration['applied'], 'total_migrations' => count($versions),
         'checks' => ['original-column values and rows unchanged', 'published checksums/status/timestamps unchanged', 'cash source and posting replay', 'party/profile and manual FX rate preserved',
             'opening journal and unpaid evidence preserved', '015 open-item basis preserved and settled', 'new AR invoice and partial/final settlement', 'settlement retry', 'AR-to-GL reconciliation', 'exact trial balance', 'optional modules remain disabled', 'empty migration replay'],
-        'fixture_boundary' => '015 recognition is a canonical persisted synthetic fixture; current readers require 020 columns.', 'final_trial_debit' => $trial['total_debit']], JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
+        'fixture_boundary' => '015 recognition is a canonical persisted sample fixture; current readers require 020 columns.', 'final_trial_debit' => $trial['total_debit']], JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
 } finally {
     if ($ownsLock) { DB::queryFirstField('SELECT RELEASE_LOCK(%s)', $lock); }
     DB::useDB('phpledger_test');

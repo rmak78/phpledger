@@ -36,7 +36,7 @@ Meanwhile the repository already contains **about 56,000 words of original, sour
 | `docs/strategy/COMPETITIVE-LANDSCAPE.md` | 859 | Five tiers of competitors, with licences, stacks and sourced notes |
 | `docs/tax/PAKISTAN.md`, `UK-UAE.md`, `ASIA.md` | 4,583 | Tax regime research |
 | `docs/accounting/CORE_RULE_REGISTER.md` | 1,277 | The accounting rules the system enforces |
-| `docs/accounting/examples/retail-statements.md` | — | A two-year synthetic statement fixture, arithmetic-checked |
+| `docs/accounting/examples/retail-statements.md` | — | A two-year sample statement fixture, arithmetic-checked |
 | `docs/wiki/*.md` | ~4,900 | Product and architecture documentation |
 
 Some of that is commercially sensitive and stays internal (§7). Most of it is **exactly the material that generative engines cite**: original figures, primary sources, dated verification, honest comparison, and specificity nobody else in this category has bothered to produce.
@@ -156,7 +156,7 @@ Top-of-funnel education, and the strongest AEO structure available. Source: `doc
 | `/learn/correcting-mistakes-reversal-vs-edit/` | 1,000 | Why an audit trail forbids editing a posted entry. **This is the project's philosophical wedge — give it the best writing on the site** |
 | `/learn/opening-balances-and-cutover/` | 1,100 | Moving from whatever you use now onto a ledger without losing history |
 
-Each page: define the term, explain it with the synthetic sample-company figures already on the site (1,000.00 in, 125.00 out, 875.00 balance), show it as a table or T-account, say what goes wrong in practice, then link to the relevant `/guides/` walkthrough and `/product/` section. Link every technical term to its `/glossary/` anchor on first use.
+Each page: define the term, explain it with the sample-company figures already on the site (1,000.00 in, 125.00 out, 875.00 balance), show it as a table or T-account, say what goes wrong in practice, then link to the relevant `/guides/` walkthrough and `/product/` section. Link every technical term to its `/glossary/` anchor on first use.
 
 **Diagrams.** T-accounts, the transaction lifecycle (draft → post → report → reversal) and the two-statement relationship deserve pictures. Author them as **inline `<svg>`** in the page HTML or as local `.svg` files under `/assets/diagrams/`. Either is CSP-safe (`img-src 'self'`), but **`check.mjs` errors on any `style=` attribute anywhere**, so SVG must use presentation attributes (`fill="currentColor"`, `stroke-width="2"`) or CSS classes defined in a new `src/css/22-diagram.css`. Never a `style=` attribute, never an inline `<style>` block inside the SVG. Give every diagram `role="img"` and a `<title>`, and wrap it in `<figure>` with a `<figcaption>` that explains what it shows. Local `.svg` files used via `<img>` still need `alt`, `width` and `height`.
 
@@ -200,7 +200,7 @@ Each research page carries a visible method block: research date, what was check
 
 The existing three walkthroughs are the best content on the site and `/guides/` still scores worst (AEO 56, GEO 55) because the index is 256 words. The other prompt fixes the index; this adds depth.
 
-New walkthroughs, from `docs/accounting/examples/retail-statements.md` and the four synthetic businesses in 0.2.1:
+New walkthroughs, from `docs/accounting/examples/retail-statements.md` and the four sample businesses in 0.2.1:
 
 - `/guides/retail-two-year-statements/` (1,400) — the two-year fixture: P&L, balance sheet, the depreciation add-back. Label it exactly as the source does: an original documentation fixture, arithmetic-checked, not loaded sample data, not a real business, not a tax calculation.
 - `/guides/first-week-on-the-books/` (1,200) — company setup to first trial balance.
@@ -208,7 +208,7 @@ New walkthroughs, from `docs/accounting/examples/retail-statements.md` and the f
 - `/guides/bank-reconciliation-walkthrough/` (1,200) — CSV matching to a reconciled statement.
 - `/guides/correcting-a-posted-entry/` (900) — a linked reversal, start to finish.
 
-Every guide keeps the existing synthetic-data label (`check.mjs` errors without it on any page showing `/assets/screens/`), keeps `srcset` and `sizes` on every capture, and wraps each in `<figure>` with a `<figcaption>`.
+Every guide keeps the existing sample-data label (`check.mjs` errors without it on any page showing `/assets/screens/`), keeps `srcset` and `sizes` on every capture, and wraps each in `<figure>` with a `<figcaption>`.
 
 ### 4.7 `/for/` — 3 audience pages
 

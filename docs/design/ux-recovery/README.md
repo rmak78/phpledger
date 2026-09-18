@@ -4,7 +4,7 @@
 
 ## Open the review
 
-- [Clickable workflow prototype](prototype/index.html) — static HTML/CSS/JavaScript, synthetic state in the current tab only.
+- [Clickable workflow prototype](prototype/index.html) — static HTML/CSS/JavaScript, sample state in the current tab only.
 - [Screenshot gallery](index.html) — current-run accepted screenshots, grouped with findings.
 - [Route and state inventory](ROUTE-COVERAGE.json) and [coverage gaps](COVERAGE-GAPS.md).
 - [Setup, daily work and sample audit](SETUP-DAILY-AUDIT.md).
@@ -18,7 +18,7 @@ Local review server: `http://127.0.0.1:18217/`; prototype: `http://127.0.0.1:182
 
 The registered application exposes 41 GET routes: 38 HTML surfaces, one redirect, one CSV download and one JSON table-data endpoint. Every HTML path has at least one captured current-run state. This does **not** mean every possible state or action was exercised. The inventory separately names pre-router health, API, MCP and metadata surfaces.
 
-Captures use the released application, isolated synthetic companies, and user-approved isolated Playwright at 1440, 768 and 390px widths. They cover ordinary/empty/error/validation/success views, draft and reversed records, historical reports, and the local public-demo chooser. Each accepted screenshot was inspected. Credentials and browser storage were kept in ignored private test files.
+Captures use the released application, isolated sample companies, and user-approved isolated Playwright at 1440, 768 and 390px widths. They cover ordinary/empty/error/validation/success views, draft and reversed records, historical reports, and the local public-demo chooser. Each accepted screenshot was inspected. Credentials and browser storage were kept in ignored private test files.
 
 ### Highest-impact findings
 
@@ -65,7 +65,7 @@ The prototype is a bounded interactive design document. Its examples are separat
 
 ## Validation and limits
 
-- Release checks remain in the [0.4.0 publication receipt](../../repository/sprint-06/PREVIEW-0.4.0-PUBLICATION.json): 225 tests on PHP 8.2/8.3, exact archive fresh/upgrade checks and live synthetic journey evidence.
+- Release checks remain in the [0.4.0 publication receipt](../../repository/sprint-06/PREVIEW-0.4.0-PUBLICATION.json): 225 tests on PHP 8.2/8.3, exact archive fresh/upgrade checks and live sample journey evidence.
 - Separate local integrity patch: 227 tests, zero failures on both PHP 8.2.33 and 8.3.33; 168-file lint and PHPStan passed. Two rendered-form regressions fail against the original editor. No patch package, upgrade or live cutover has been performed.
 - Prototype: JavaScript syntax check; desktop/tablet/mobile captures; setup walkthrough, saved draft, tax-mode default, visibility, cash receipt/change, receipt/credit/settlement, purchase/receipt/bill and source-link interactions. Independent operations replay completed 14 states with zero page errors.
 - Accessibility spot checks: visible skip-link focus and actual focus transfer to `main`; setup labels/landmarks; Inter loaded; reduced-motion emulation. Full screen-reader, browser-zoom, touch-device, keyboard journey and WCAG 2.2 AA review remain pending.

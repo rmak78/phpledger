@@ -11,7 +11,7 @@ Reviewed 14 September 2026. This is a local typography study and asset review, n
 | Amounts, prices, totals, percentages, quantities and numeric report columns | Inter 400–650 with tabular lining numerals | User requirement; apply to entry fields and POS as well as displayed reports |
 | Dense financial tables | Keep numerical content Inter; test readable labels at 14–16px | Preserve useful density and decimal alignment rather than applying spacious marketing typography everywhere |
 
-The specimen [index.html](index.html) demonstrates these roles with original synthetic content. Its two-year figures are a subset of the separate [retail arithmetic fixture](../../accounting/examples/retail-statements.md). It does not imply that the application implements those statement mappings.
+The specimen [index.html](index.html) demonstrates these roles with original sample content. Its two-year figures are a subset of the separate [retail arithmetic fixture](../../accounting/examples/retail-statements.md). It does not imply that the application implements those statement mappings.
 
 ## File and license checks
 
@@ -49,4 +49,4 @@ The pairing works for readable onboarding/owner screens. Use Poppins at 16px for
 
 ## Review limits
 
-An independent agent inspected the supplied layout, the six JPEGs, and the later Drive originals. Font metadata and official licenses were inspected directly. The typography study uses synthetic values and editable demonstration fields only; it neither saves nor posts anything. This does not change the earlier accounting/POS publication hold, establish final body-font approval, or demonstrate observed user task success.
+An independent agent inspected the supplied layout, the six JPEGs, and the later Drive originals. Font metadata and official licenses were inspected directly. The typography study uses sample values and editable demonstration fields only; it neither saves nor posts anything. This does not change the earlier accounting/POS publication hold, establish final body-font approval, or demonstrate observed user task success.

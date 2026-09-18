@@ -25,7 +25,7 @@ Validated 15 September 2026 (Asia/Karachi). This is an evaluation prerelease, no
 | Browser | Product click/add, cart +/-/remove, separate cash review, recovery, keyboard, reduced motion, no-JavaScript fallback, desktop/tablet/mobile and 720px reflow checked |
 | Print preview | Receipt PDF rendered and inspected: 14.75 total, 20.00 cash, 5.25 change; complete rows |
 
-Package acceptance used its unpacked read-only files, production vendor and a separate nonshipping harness in the isolated `phpledger-release-011` Compose project. Source development, live demo and customer databases were not used for package tests. Recovery HTTP testing injected a lost-response state only into its own synthetic session; this is not a real network interruption test.
+Package acceptance used its unpacked read-only files, production vendor and a separate nonshipping harness in the isolated `phpledger-release-011` Compose project. Source development, live demo and customer databases were not used for package tests. Recovery HTTP testing injected a lost-response state only into its own sample session; this is not a real network interruption test.
 
 ## Hosted verification
 

@@ -26,7 +26,7 @@ Please do not post exploit details, screenshots of real data or credentials anyw
 ## What to include
 
 - The affected component and the version, tag or commit (for example `0.1.0-preview`).
-- Steps to reproduce with synthetic data only.
+- Steps to reproduce with sample data only.
 - The impact you observed or expect, for example data exposure, unauthorized posting or reversal, privilege escalation, or bypass of company and book permissions.
 - Your environment: PHP and MySQL versions, web server, and browser if the problem is in the interface.
 - Sanitized logs or screenshots. Never send passwords, tokens, session cookies, real business records or database backups.
@@ -46,8 +46,8 @@ Please give the project a reasonable period to investigate and prepare a fix or 
 |---|---|
 | `0.1.0-preview` | Development preview. Fixes on a best-effort basis; no security-support guarantee. |
 
-There is no stable release yet. Evaluate the preview with synthetic data on your own installation.
+There is no stable release yet. Evaluate the preview with sample data on your own installation.
 
 ## Public demo
 
-The demo at https://phpledger.com/demo/ gives each visitor a private synthetic company, resets every hour and is capacity-limited. Do not test destructive actions, load or automated scanning against it, and never enter real records or credentials there. Use your own installation of the release package for security testing.
+The demo at https://phpledger.com/demo/ gives each visitor a private sample company, resets every hour and is capacity-limited. Do not test destructive actions, load or automated scanning against it, and never enter real records or credentials there. Use your own installation of the release package for security testing.

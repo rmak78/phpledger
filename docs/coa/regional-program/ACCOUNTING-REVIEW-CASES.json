@@ -5,7 +5,7 @@
   "runtime_importable": false,
   "purpose": "Independent accounting review oracles; not a runtime fixture schema, import file or new posting interface.",
   "prepared_on": "2026-09-16",
-  "synthetic": true,
+  "sample": true,
   "accountant_approval": null,
   "production_authorization": false,
   "industry_ids": [
@@ -44,7 +44,7 @@
     "country_package_approval_implied": false
   },
   "conventions": {
-    "money": "Exact four-place decimal strings; never binary floating point. USD is a synthetic base-currency label, not a country choice.",
+    "money": "Exact four-place decimal strings; never binary floating point. USD is a sample base-currency label, not a country choice.",
     "journal_sign": "Each expected line has nonnegative debit and credit, one side zero.",
     "case_isolation": "Each case starts from its own opening trial balance. Opening balances are already posted except AC09. Do not chain cases or post openings twice.",
     "opening_profit": "Prior-period earnings are included in opening equity. P&L covers this case entries only.",
@@ -199,7 +199,7 @@
   "cases": [
     {
       "id": "AC01",
-      "title": "Purchase order, two receipts and one supplier bill with synthetic input tax",
+      "title": "Purchase order, two receipts and one supplier bill with sample input tax",
       "status": "existing_mechanics_review_oracle",
       "independent_case": true,
       "opening_trial_balance": [
@@ -355,7 +355,7 @@
         "new_journal_count": 3
       },
       "review_notes": [
-        "PO for 10 units at 10 has no journal. Receipts of 6 and 4 units retain their original cost. Bill net 100 plus synthetic tax 5 matches both receipts; no duplicate inventory debit."
+        "PO for 10 units at 10 has no journal. Receipts of 6 and 4 units retain their original cost. Bill net 100 plus sample tax 5 matches both receipts; no duplicate inventory debit."
       ],
       "tax": {
         "code": "REVIEW5",
@@ -525,7 +525,7 @@
         "new_journal_count": 2
       },
       "review_notes": [
-        "Opening stock of 10 units carrying 100 is already activated. Sell 3 at 25 plus synthetic 5 percent tax. Financial and stock posting must commit together."
+        "Opening stock of 10 units carrying 100 is already activated. Sell 3 at 25 plus sample 5 percent tax. Financial and stock posting must commit together."
       ]
     },
     {
@@ -1087,7 +1087,7 @@
         "new_journal_count": 2
       },
       "review_notes": [
-        "Two units returned at original cost 10; supplier accepts net 20 plus original synthetic tax 1. The existing GRNI account clears the supplier credit against the physical return, leaving zero. Both effects commit together. No payment or refund is implied."
+        "Two units returned at original cost 10; supplier accepts net 20 plus original sample tax 1. The existing GRNI account clears the supplier credit against the physical return, leaving zero. Both effects commit together. No payment or refund is implied."
       ]
     },
     {
@@ -1933,7 +1933,7 @@
     },
     {
       "id": "AC12",
-      "title": "Synthetic manual output tax: exclusive",
+      "title": "Sample manual output tax: exclusive",
       "status": "existing_mechanics_review_oracle",
       "independent_case": true,
       "opening_trial_balance": [
@@ -2051,7 +2051,7 @@
         "new_journal_count": 1
       },
       "review_notes": [
-        "Synthetic 5 percent only; no national rate, tax eligibility or statutory invoice conclusion. Exclusive 100 and inclusive 105 must produce net 100, tax 5 and total 105. Later configuration changes do not rewrite the posted line snapshot."
+        "Sample 5 percent only; no national rate, tax eligibility or statutory invoice conclusion. Exclusive 100 and inclusive 105 must produce net 100, tax 5 and total 105. Later configuration changes do not rewrite the posted line snapshot."
       ],
       "tax": {
         "code": "REVIEW5",
@@ -2065,7 +2065,7 @@
     },
     {
       "id": "AC13",
-      "title": "Synthetic manual output tax: inclusive",
+      "title": "Sample manual output tax: inclusive",
       "status": "existing_mechanics_review_oracle",
       "independent_case": true,
       "opening_trial_balance": [
@@ -2183,7 +2183,7 @@
         "new_journal_count": 1
       },
       "review_notes": [
-        "Synthetic 5 percent only; no national rate, tax eligibility or statutory invoice conclusion. Exclusive 100 and inclusive 105 must produce net 100, tax 5 and total 105. Later configuration changes do not rewrite the posted line snapshot."
+        "Sample 5 percent only; no national rate, tax eligibility or statutory invoice conclusion. Exclusive 100 and inclusive 105 must produce net 100, tax 5 and total 105. Later configuration changes do not rewrite the posted line snapshot."
       ],
       "tax": {
         "code": "REVIEW5",
@@ -2555,7 +2555,7 @@
       "nonposting_steps": [
         {
           "action": "record_customer_owned_property_custody_worksheet",
-          "owner": "synthetic-customer",
+          "owner": "sample-customer",
           "item": "customer-bicycle",
           "quantity": "1.0000",
           "owned_by_company": false,

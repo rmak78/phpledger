@@ -1,6 +1,6 @@
 <?php declare(strict_types=1); ?>
 <?php if (pl_demo_enabled() && $view !== 'error'): $demoState = DB::queryFirstRow('SELECT next_reset_at FROM pl_demo_state WHERE id = 1'); ?>
-<div class="demo-banner"><span><strong>Public demo</strong> · Separate synthetic data for each visitor. Destructive actions are disabled.</span><span>Resets <time data-local-time datetime="<?= pl_e(str_replace(' ', 'T', $demoState['next_reset_at']) . 'Z') ?>"><?= pl_e($demoState['next_reset_at']) ?> UTC</time> · <span data-demo-expiry="<?= pl_e(str_replace(' ', 'T', $demoState['next_reset_at']) . 'Z') ?>"><?= max(0, (int) ceil((strtotime($demoState['next_reset_at'] . ' UTC') - time()) / 60)) ?> minutes remaining</span></span></div>
+<div class="demo-banner"><span><strong>Public demo</strong> · Separate sample data for each visitor. Destructive actions are disabled.</span><span>Resets <time data-local-time datetime="<?= pl_e(str_replace(' ', 'T', $demoState['next_reset_at']) . 'Z') ?>"><?= pl_e($demoState['next_reset_at']) ?> UTC</time> · <span data-demo-expiry="<?= pl_e(str_replace(' ', 'T', $demoState['next_reset_at']) . 'Z') ?>"><?= max(0, (int) ceil((strtotime($demoState['next_reset_at'] . ' UTC') - time()) / 60)) ?> minutes remaining</span></span></div>
 <?php endif; ?>
 <?php if ($company): ?>
 <?php if ($company['setup_status'] !== 'ready'): ?>

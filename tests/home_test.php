@@ -28,6 +28,6 @@ test('Home bank attention agrees with reconciliation and excludes cancelled stat
     $summary = pl_bank_reconciliation_summary($f['actor_id'], $f['company_id'], $f['book_id'], $statement['id']);
     assert_same($summary['unmatched_count'], pl_bank_pending_review_count($f['actor_id'], $f['company_id'], $f['book_id']));
     assert_same(1, pl_home_overview($f['actor_id'], $f['company_id'], $f['book_id'], '2026-09-17')['bank_lines']);
-    pl_bank_cancel_statement($f['actor_id'], $f['company_id'], $f['book_id'], $statement['id'], $statement['revision'], 'Synthetic cancelled statement', bin2hex(random_bytes(16)));
+    pl_bank_cancel_statement($f['actor_id'], $f['company_id'], $f['book_id'], $statement['id'], $statement['revision'], 'Sample cancelled statement', bin2hex(random_bytes(16)));
     assert_same(0, pl_bank_pending_review_count($f['actor_id'], $f['company_id'], $f['book_id']));
 });

@@ -52,13 +52,13 @@ Targets for this task: **SEO 98-100, AEO 92+, GEO 88+ on every indexable page.**
 
 These are non-negotiable and several of them directly contradict the scanner's own advice.
 
-1. **Never invent evidence.** The scanner asks for "reviews, certifications", "expert quotes", "original data" and "case studies". PHP Ledger is a development preview with no users to quote and no certifications. You may use only: figures that exist in `www/website/src/site.json` or the release manifest, statements the maintainer is on record as making, cited public sources with a URL, and the synthetic worked examples already published under `/guides/`. **No fabricated testimonials, no invented statistics, no made-up quotes, no fictional adoption numbers.**
+1. **Never invent evidence.** The scanner asks for "reviews, certifications", "expert quotes", "original data" and "case studies". PHP Ledger is a development preview with no users to quote and no certifications. You may use only: figures that exist in `www/website/src/site.json` or the release manifest, statements the maintainer is on record as making, cited public sources with a URL, and the sample worked examples already published under `/guides/`. **No fabricated testimonials, no invented statistics, no made-up quotes, no fictional adoption numbers.**
 2. **`check.mjs` errors on `aggregateRating`, `review` and interaction counts in JSON-LD.** Do not add them under any circumstance.
 3. **CSP is `default-src 'self'`.** No inline `<style>`, no `style=` attributes, no inline `<script>` except JSON-LD, no `on*=` handlers, no external stylesheets, scripts, images or preloads, no `@import`, no `url(http`, `url(//` or `url(data:` in CSS. `check.mjs` errors on every one of these.
 4. **No client-side network or storage.** `check.mjs` errors on `fetch(`, `XMLHttpRequest`, `localStorage`, `sessionStorage`, `sendBeacon` in any public JS. No analytics, no third-party fonts, no embeds.
 5. **Page byte budgets** are declared per page as `budgetEager` / `budgetTotal` in front matter and enforced as errors. Prose is cheap; new images are not. If a change genuinely needs more budget, raise the number in front matter in the same commit and say so in the summary.
 6. **Banned words** (warning): `empower`, `seamless`, `streamlin*`, `robust`, `effortless`, `unlock`, `elevat*`. **Forbidden strings** (error): phone numbers, the old address, "licensing review", "being prepared", "no download", "PLACEHOLDER", "lorem".
-7. **Truthful scope.** Nothing in this task ships a feature. Keep every capability claim bounded to what 0.2.1-preview actually does. Keep "technical checks passed" distinct from accounting review. Every page showing `/assets/screens/` must keep its synthetic-data label (`check.mjs` errors otherwise).
+7. **Truthful scope.** Nothing in this task ships a feature. Keep every capability claim bounded to what 0.2.1-preview actually does. Keep "technical checks passed" distinct from accounting review. Every page showing `/assets/screens/` must keep its sample-data label (`check.mjs` errors otherwise).
 8. **Meta description must stay 50-160 characters** (error) and **canonical must equal `baseUrl + path`** (error) and **exactly one `<h1>` per page** (error).
 9. **Do not change any published URL.** See §6.1.
 10. Where this prompt marks something **OWNER DECISION**, do not apply it. Implement everything else, then list those items in the final summary for the owner to rule on.
@@ -162,7 +162,7 @@ Style `.footer-meta` in `src/css/19-footer.css`. No inline styles.
 
 The published `llms.txt` describes **0.1.4-preview** while `site.json` declares **0.2.1-preview**. AI crawlers read this file preferentially, so it is currently feeding them a version-old picture of the product.
 
-Rewrite it from `site.json` and the current page set. It must state: the 0.2.1 version and date, the scoped read API/MCP connections, the four synthetic businesses and reporting walkthroughs, the reconciliation and period-close capabilities, and — unchanged in spirit — the honest "not yet" list (customer/vendor subledgers, inventory and cost of sales, tax, foreign-currency posting, offline use, card payments, document scanning). Add the `/guides/` pages to the Product section; they are missing. Keep the demo-is-synthetic warning.
+Rewrite it from `site.json` and the current page set. It must state: the 0.2.1 version and date, the scoped read API/MCP connections, the four sample businesses and reporting walkthroughs, the reconciliation and period-close capabilities, and — unchanged in spirit — the honest "not yet" list (customer/vendor subledgers, inventory and cost of sales, tax, foreign-currency posting, offline use, card payments, document scanning). Add the `/guides/` pages to the Product section; they are missing. Keep the demo-is-sample warning.
 
 **Better still: generate it.** Add an `llms.txt` emitter to `build.mjs` driven by `site.json` and page front matter, so it cannot drift again. Keep `src/static/llms.txt` only if you cannot generate it cleanly; if you do generate it, delete the static copy and say so.
 
@@ -173,7 +173,7 @@ Fails site-wide: `geo:geo_ai_discovery` ("No AI-discovery files (.well-known/ai.
 These are an emerging, not a settled, convention — the check is low-weight. They are cheap and they cost nothing in truthfulness, so generate all three from existing data in `build.mjs`:
 
 - `/.well-known/ai.txt` — plain text: project identity, licence position (AGPL-3.0-or-later core, commercial licence available, 0.1.x previews remain MIT), crawl posture matching `robots.txt`, contact email, and a pointer to `/llms.txt`.
-- `/ai/summary.json` — JSON: name, description (`site.entity`), version, releaseDate, licence, requirements, repository, demo URL and its synthetic/reset warning, capability list and explicit "not yet" list.
+- `/ai/summary.json` — JSON: name, description (`site.entity`), version, releaseDate, licence, requirements, repository, demo URL and its sample/reset warning, capability list and explicit "not yet" list.
 - `/ai/faq.json` — JSON: the union of every page's `faq` front-matter array, each entry carrying its source page URL.
 
 Add a `location ~ ^/(\.well-known/ai\.txt|ai/.*\.json)$` short-cache block to `docker/website.conf` with the full security-header set repeated, and note that `location ~ /\. { deny all; }` currently blocks `/.well-known/` — you must add an explicit `location ^~ /.well-known/` allow **before** it, or the file 403s. Verify with the local Compose service before claiming it works.
@@ -272,11 +272,11 @@ Answer the awkward ones honestly. "Is it ready for real books?" gets a real answ
 
 Closes: `geo:geo_statistics_density` ("Only 1 data point"), `geo:geo_numerical_density` ("Few data points with units"), `geo:geo_original` ("No original data signals"), `aeo:aeo_data_attribution` ("Statistics lack source references").
 
-Verifiable figures that already exist and are currently not on the page: PHP 8.2+ / 8.3 recommended, MySQL 8.4, package 3.05 MB (3,054,692 bytes), the full SHA-256, 10 base currencies, hourly demo reset, four synthetic businesses, the count of report types, the count of guide walkthroughs, the release date, the AGPL/MIT split by version.
+Verifiable figures that already exist and are currently not on the page: PHP 8.2+ / 8.3 recommended, MySQL 8.4, package 3.05 MB (3,054,692 bytes), the full SHA-256, 10 base currencies, hourly demo reset, four sample businesses, the count of report types, the count of guide walkthroughs, the release date, the AGPL/MIT split by version.
 
 Attribute each one in text — "3.05 MB, from the published release manifest", "SHA-256 `65eca3c…`, published with the 0.2.1-preview package" — and link to the GitHub release where one exists.
 
-**`geo_original` asks for "our research shows…" signals.** The only honest original data the project has is the synthetic worked examples under `/guides/` and the sample company figures. Present those as what they are: "a worked synthetic example, reconciled and published so you can check the arithmetic yourself" with a link. **Do not manufacture usage or adoption statistics.**
+**`geo_original` asks for "our research shows…" signals.** The only honest original data the project has is the sample worked examples under `/guides/` and the sample company figures. Present those as what they are: "a worked sample example, reconciled and published so you can check the arithmetic yourself" with a link. **Do not manufacture usage or adoption statistics.**
 
 ### 4.10 Voice: second person, first person, transitions
 
@@ -445,8 +445,8 @@ State these in the final summary so nobody chases them later.
 |---|---|
 | `geo_trust` (partial) | The scanner wants "reviews, certifications". The project has neither. §4.12 raises it as far as honest signals allow; the rest would require fabrication. |
 | `aeo_video` | No video exists. External hosting is impossible under `default-src 'self'`; a self-hosted clip would blow the page budgets. Deferrable to a later release with its own budget decision. |
-| `geo_case_study` (partial) | The synthetic `/guides/` walkthroughs are the only honest examples. No customer case studies exist. |
-| `geo_original` (partial) | Only the synthetic worked examples qualify. No usage or adoption data exists and none will be invented. |
+| `geo_case_study` (partial) | The sample `/guides/` walkthroughs are the only honest examples. No customer case studies exist. |
+| `geo_original` (partial) | Only the sample worked examples qualify. No usage or adoption data exists and none will be invented. |
 | `aeo_speakable`, `indexnow`, `geo_howto_schema`, `geo_faq_schema` | Implemented anyway because they are cheap and truthful, but note in the summary that Google retired FAQ rich results in May 2026 and deprecated HowTo rich results in 2023 — these are AI-context signals now, not search features. |
 | `keyword_in_url` | See §6.1. Owner decision. |
 

@@ -4,7 +4,7 @@
 
 ## Scope and evidence
 
-The task is to help an owner/bookkeeper find an accounting result, trace it to account activity, reconcile a bank, and understand period, tax, module and connection settings. Evidence comes from a new isolated Playwright session, `ux-reporting`, against the local application on port 18211. The synthetic historical company is Cedar Studio; the synthetic starter company is Starter Workshop. No real customer data, credentials or browser storage is included in this report.
+The task is to help an owner/bookkeeper find an accounting result, trace it to account activity, reconcile a bank, and understand period, tax, module and connection settings. Evidence comes from a new isolated Playwright session, `ux-reporting`, against the local application on port 18211. The sample historical company is Cedar Studio; the sample starter company is Starter Workshop. No real customer data, credentials or browser storage is included in this report.
 
 Each listed route was captured at **1440, 768 and 390 CSS pixels**, with a 1000-pixel viewport height and full-page capture. Every accepted original was opened and inspected before findings were written. The evidence copies are unchanged; original captures remain in `output/playwright/ux-audit`. Screenshots show one selected state per route and are not proof of financial correctness, successful mutation workflows or full accessibility compliance.
 
@@ -222,7 +222,7 @@ Product Design audit and Playwright skills guided this pass. Browser choice and 
 
 ### 10. Configure tax - honest country-neutral boundary, form-heavy administration
 
-**Route/context:** `/tax`, Starter Workshop, one synthetic DEMO5 rate and the default tax-exclusive price mode.
+**Route/context:** `/tax`, Starter Workshop, one sample DEMO5 rate and the default tax-exclusive price mode.
 
 **Strengths:** the screen states that codes/rates are manual and excludes country rules, filing and forms. It explains the saved document's frozen price mode, the effect of a dated rate and the distinction between input/output tax accounts. Current default and immutable rate history are visible.
 
@@ -335,7 +335,7 @@ Severity here describes observed task friction, not a security/accounting defect
 | **P1** | Offscreen date control (step6) and recovery button (step13) | At390px and at 200% browser zoom, every visible filter and primary recovery action has a nonnegative left edge and fits or intentionally wraps. Test element rectangles as well as document width. Keyboard focus must remain visible. |
 | **P1** | Mobile chart/statement/history data hard to reach (steps1,2,6,7,9-11) | A user can find the account, period, both sides of a balance and the relevant action without unexplained lateral scrolling. Where a table must scroll, provide a visible cue, keyboard access and preserved row/column context. Use shorter page sizes or compact rows on small screens. |
 | **P1** | Reporting context is spread across pages (steps3-6,14) | Choose a familiar period once; report heading, drill-down, export and return path retain that same company/book/currency/date context. Period movement and cumulative balance remain visibly distinct. |
-| **P1** | Reconciliation has no populated workflow evidence in this fixture (step8) | Before final UX acceptance, capture a prepared synthetic statement through preview, existing-AR/AP-payment matching, unmatched difference, completion and retained history. No action may post an already-recorded payment again. |
+| **P1** | Reconciliation has no populated workflow evidence in this fixture (step8) | Before final UX acceptance, capture a prepared sample statement through preview, existing-AR/AP-payment matching, unmatched difference, completion and retained history. No action may post an already-recorded payment again. |
 | **P1** | Tax/module/period changes need clearer impact review (steps9-11) | Show current state first, affected future operations and dependencies, then explicit confirmation/reason. Declined or stale changes preserve input and current state. Do not confuse AR/AP navigation visibility with service disablement. |
 | **P1** | Invalid OAuth recovery points to permissions (step13) | Distinguish malformed request, expired request and denied access with specific safe recovery. A malformed request never redirects to an untrusted client; technical detail can expand beneath the plain-language reason. |
 | **P2** | Reports and settings require long scrolling (steps2,3,9-11) | Put the primary answer/current configuration near the top; group advanced details, paginate/filter history and keep the next action discoverable. Preserve audit history instead of truncating it invisibly. |
@@ -368,7 +368,7 @@ The proposed visual changes must reuse the existing router, shared bootstrap, Me
 
 Source inspection, separate from this lane's visual evidence, found the current `/onboarding` preview/confirmation, existing/fresh/sample choice, `/opening-balances` and `/opening-conversion` paths. The following acceptance criteria should be combined with the root agent's setup captures:
 
-- **P1:** fresh, bring-past-records and isolated-sample choices are visibly distinct; fresh confirmation cannot bypass unresolved opening balances, and synthetic sample data never enters a real company.
+- **P1:** fresh, bring-past-records and isolated-sample choices are visibly distinct; fresh confirmation cannot bypass unresolved opening balances, and sample data never enters a real company.
 - **P1:** show exact company/book, functional currency, start date and pinned template before confirmation; preserve the existing digest check, durable setup identity and stale-preview recovery.
 - **P1:** ambiguous chart/party/product mappings and any control difference block confirmation with field/source-specific next actions. Do not silently guess an account or create a balancing plug.
 - **P1:** opening GL posts once; AR/AP and stock conversions explain and allocate that existing basis. The UI must distinguish opening confirmation from later operational activation, preserving source evidence and no-double-post guards.
@@ -380,7 +380,7 @@ Source inspection, separate from this lane's visual evidence, found the current 
 - **Accepted evidence:** 47 unchanged PNGs: 13 requested route states at three widths, one date-preserving report drill-down at three widths, and five readable viewport details for long pages. Every accepted image was opened and inspected. The rejected first statement capture is retained only in the original output directory and is not linked as evidence.
 - **Geometry:** all 42 full-route captures reported document width equal to viewport width and no page-JavaScript errors. This did not detect negative-left clipping; follow-up element measurements found the trial-balance date field at x=-85.08px and the OAuth recovery action at x=-41.47px on 390px screens. Trial-balance table scrolling is focusable (`tabindex=0`), a useful existing foundation.
 - **Errors:** the deliberately invalid OAuth request returned 403; its focused error panel has `role=alert` and `tabindex=-1`. An initial local favicon request returned 404. No PHP fatal/warning/stack-trace text appeared in the captured pages.
-- **Interaction exercised:** independent login/session initialization; explicit switching between two synthetic companies; direct report/settings navigation; read-only 2025 report filter URL and an actual P&L account-link click retaining both dates.
+- **Interaction exercised:** independent login/session initialization; explicit switching between two sample companies; direct report/settings navigation; read-only 2025 report filter URL and an actual P&L account-link click retaining both dates.
 - **Not exercised:** bank import/matching/completion, account creation/editing, period mutation, tax/module settings changes, credential creation/revocation, valid OAuth consent, exports, screen-reader use, full keyboard traversal, contrast measurement,200% zoom or observed uncoached user testing. These remain acceptance work; screenshots alone cannot close them.
 - **Scope:** documentation/evidence only. No migrations, schema changes, application changes, accounting mutations, raw secrets, external provider actions or production changes. Local HTTP/browser session writes are the only runtime interaction.
 - **References read:** current router and setup/account/reporting/period/reconciliation/tax/module services/templates; existing starter/COA design boundaries; Product Design audit and Playwright guidance. No Google Drive reference was used or edited.

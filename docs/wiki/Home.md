@@ -12,7 +12,7 @@
 
 PHP Ledger serves small-business owners, accountants and bookkeepers who want a useful workspace on hosting they control, installable from a browser without a terminal. The direction is a complete accounting core, followed by optional business modules.
 
-Explore [phpledger.com](https://phpledger.com/) and [your temporary sample company](https://phpledger.com/demo/). The [1.0.0 package](https://github.com/phpledger/phpledger/releases/tag/v1.0.0) includes universal account statements, chart management and saved general journals alongside the accounting starter. Evaluate it with synthetic data; independent review and pilot use remain in progress.
+Explore [phpledger.com](https://phpledger.com/) and [your temporary sample company](https://phpledger.com/demo/). The [1.0.0 package](https://github.com/phpledger/phpledger/releases/tag/v1.0.0) includes universal account statements, chart management and saved general journals alongside the accounting starter. Evaluate it with sample data; independent review and pilot use remain in progress.
 
 Modern application source is in `www/phpledger`; the historical application remains only in Git history. See [[Getting started|Getting-Started]] for the package, installation requirements and demonstration limits.
 
@@ -37,7 +37,7 @@ Follow any authorized account from its opening balance through period debits, cr
 
 Save a general-journal draft, return to edit it, review its lines and post when debits equal credits. Corrections use linked reversals that preserve the original entry. Receipts, expenses, owner reports and the sample cash POS use the same accounting services.
 
-The public demo provides temporary visitor books: accounts are read-only, while general-journal drafts, posting and linked reversals are available within capacity limits. Its synthetic data resets hourly. The shop showcase remains a six-product cash example, without stock, tax or payment processing.
+The public demo provides temporary visitor books: accounts are read-only, while general-journal drafts, posting and linked reversals are available within capacity limits. Its sample data resets hourly. The shop showcase remains a six-product cash example, without stock, tax or payment processing.
 
 ## The direction
 
@@ -59,7 +59,7 @@ The current release uses AGPL-3.0-or-later with a commercial licence available. 
 
 ## Historical note: 0.1.5 accessibility update (15 September 2026)
 
-[Nagulanvelu contributed PR #65](https://github.com/phpledger/phpledger/pull/65), giving each fallback POS quantity its product name. A maintainer correction keeps the fields visible with JavaScript disabled. The package passed fresh installation, upgrade from 0.1.4, 29 synthetic checkout checks and desktop/tablet/mobile browser checks. See the [release](https://github.com/phpledger/phpledger/releases/tag/v0.1.5-preview), [privacy notice](https://phpledger.com/privacy/) and [demo-use terms](https://phpledger.com/terms/).
+[Nagulanvelu contributed PR #65](https://github.com/phpledger/phpledger/pull/65), giving each fallback POS quantity its product name. A maintainer correction keeps the fields visible with JavaScript disabled. The package passed fresh installation, upgrade from 0.1.4, 29 sample checkout checks and desktop/tablet/mobile browser checks. See the [release](https://github.com/phpledger/phpledger/releases/tag/v0.1.5-preview), [privacy notice](https://phpledger.com/privacy/) and [demo-use terms](https://phpledger.com/terms/).
 
 ## Connected reporting and richer samples
 

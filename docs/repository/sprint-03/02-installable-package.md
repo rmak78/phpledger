@@ -3,7 +3,7 @@ The working development environment is not yet a downloadable product package. P
 ## Scope
 
 - Define the candidate contents and supported PHP 8.5/MySQL 8.4 environment, including required extensions, private configuration, writable paths and the single public document root.
-- Build a versioned archive with an inventory and checksums. Include the required new runtime, migrations, dependencies/notices and operator instructions; exclude secrets, local state, synthetic test credentials and unrelated legacy runtime files.
+- Build a versioned archive with an inventory and checksums. Include the required new runtime, migrations, dependencies/notices and operator instructions; exclude secrets, local state, sample test credentials and unrelated legacy runtime files.
 - Provide a clear requirements check, first-administrator setup and installation failure/recovery guidance using the existing bootstrap, configuration and migration conventions.
 - Document the supported upgrade starting points and prove backup restoration into an isolated environment.
 

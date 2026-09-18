@@ -67,12 +67,12 @@ Media kit: https://github.com/phpledger/phpledger/releases/download/v0.6.0-previ
 
 ## 0.5.0-preview: eleven isolated sample companies and shared UX candidate
 
-The release candidate extends the 0.4.0 accounting starter with eleven versioned, synthetic sample companies: Cedar Studio, Sunrise Garden Services, Willow Corner Shop, Harbour Trade, Harbor Supply Company, Cedar Table, Riverside Community Club, Meadow Training Pharmacy, Lantern Finch Jewelry Studio, Maple Bench Works and Wheel & Spoke Workshop.
+The release candidate extends the 0.4.0 accounting starter with eleven versioned, sample companies: Cedar Studio, Sunrise Garden Services, Willow Corner Shop, Harbour Trade, Harbor Supply Company, Cedar Table, Riverside Community Club, Meadow Training Pharmacy, Lantern Finch Jewelry Studio, Maple Bench Works and Wheel & Spoke Workshop.
 
 - Each selected historical pack contains fixed 2024-2025 bookkeeping history, an open 2026 practice year, 74 source/draft records, 36 month-end checkpoints, durable source references and a pinned SHA-256 digest.
 - The public chooser provisions only the company selected by the visitor. Existing isolation, hourly reset, capacity limits, CSRF/session boundaries and the existing posting/reporting services remain in force.
-- Pack metadata states synthetic provenance, demo-only release status and unsupported vertical boundaries. Pharmacy is non-medicinal training inventory only; workshop customer-owned property remains separate from stock; restaurant, club, jewelry and manufacturing operations are teaching scenarios, not compliance or operational modules.
-- Successor fixtures retain the authored or generated synthetic research contract in pinned JSON, including business profile, contacts, products or locations, opening evidence, operational event identities, expected reports and scenario acceptance checks. Isolated sample provisioning now replays supported operational events through the existing AR/AP, Purchasing, Inventory and general-journal services, while future vertical records remain visibly staged as research evidence.
+- Pack metadata states sample provenance, demo-only release status and unsupported vertical boundaries. Pharmacy is non-medicinal training inventory only; workshop customer-owned property remains separate from stock; restaurant, club, jewelry and manufacturing operations are teaching scenarios, not compliance or operational modules.
+- Successor fixtures retain the authored or generated sample research contract in pinned JSON, including business profile, contacts, products or locations, opening evidence, operational event identities, expected reports and scenario acceptance checks. Isolated sample provisioning now replays supported operational events through the existing AR/AP, Purchasing, Inventory and general-journal services, while future vertical records remain visibly staged as research evidence.
 - Chart installations and sample-import receipts are now recorded in append-only installation history. The original chart snapshot is never overwritten when a sample pack is attached; the guide reads the immutable, company/book-scoped sample receipt and rejects later changes.
 - The new `resources/coa/industry-profiles-0.5.0.json` catalogue maps all eleven samples to research-backed account vocabulary and role labels. It distinguishes, for example, food versus beverage, labor versus parts, raw material versus WIP versus finished goods, and earned versus unearned dues. Illustrative codes are not statutory numbers, and unsupported vertical controls remain outside the sample runtime.
 - Domestic customer receipts and supplier payments no longer require unused realised-FX accounts. The settlement service still requires a scoped gain/loss account when a genuine exchange difference is posted, and retains the existing foreign-bank and carrying-value safeguards.
@@ -91,7 +91,7 @@ AR and AP are now included in the base accounting core, with separate internal m
 - Tax codes and dated rate revisions are manually configured. Entry may include or exclude tax; documents show net/tax/total and retain their saved mode. Tax changes require draft re-review and never rewrite posted snapshots. Credits use their original document's tax basis. No country defaults or filing capability is asserted.
 - Opening debt and stock conversions require explicit mapping and exact reconciliation to existing opening GL amounts. Conversion does not create another opening journal. Converted opening bases cannot be reversed independently.
 - AR/AP navigation may be hidden. Required services, permissions and financial totals are unaffected. Optional module disabling preserves historical access.
-- The hosted demo adds a separate Accounting starter playground with synthetic parties, a stock product and illustrative tax configuration. Its four historical examples remain available. Demo administration remains restricted; removing lines from an existing demo invoice/order draft requires starting a new draft.
+- The hosted demo adds a separate Accounting starter playground with sample parties, a stock product and illustrative tax configuration. Its four historical examples remain available. Demo administration remains restricted; removing lines from an existing demo invoice/order draft requires starting a new draft.
 - Quotes are excluded and preserved on a separate plugin branch. Advanced stock features, LC flows, tax country packs, forms and e-filing remain outside this build.
 
 New migrations are additive to 0.3.0. Review the [starter record](https://github.com/phpledger/phpledger/blob/{{SOURCE_COMMIT}}/docs/repository/sprint-06/ACCOUNTING-STARTER.md) for exact migration and test evidence. Use a matched database/code backup and stop application/worker traffic for an upgrade. Package and hosted publication remain separate release gates.
@@ -113,7 +113,7 @@ These are backend foundations. Public API/MCP financial mutations, invoice/bill 
 ## Earlier 0.2.1-preview combined release
 
 - Retains company/book permissions, chart of accounts, receipt/expense and general-journal drafts, balanced posting, linked reversals, opening balances with an unpaid-document register, period controls, bank CSV reconciliation, financial reports, running account balances and CSV exports.
-- Adds four original synthetic companies: service agency, retail shop, seasonal business and distributor. Each has 74 source records, three editable drafts, closed 2024–2025 history, open 2026 practice and 36 reconciled month-end checkpoints. Private guides explain daily, monthly and quarterly/yearly reporting, with separate public illustrated walkthroughs.
+- Adds four original sample companies: service agency, retail shop, seasonal business and distributor. Each has 74 source records, three editable drafts, closed 2024–2025 history, open 2026 practice and 36 reconciled month-end checkpoints. Private guides explain daily, monthly and quarterly/yearly reporting, with separate public illustrated walkthroughs.
 - Ships read API/MCP, Connections/OAuth and server-side tables described below. Compatibility claims apply only to client versions actually tested; other named clients remain pending.
 - Thirteen migration receipts, 34 tables and 35 accounting guards. `012_demo_history_periods` replaces two demo period guards while web/scheduler services are stopped; it permits guarded sample preparation before assignment and continues to reject visitor period administration.
 - Manual support schedules explain payroll, stock and unpaid items; full payroll, inventory and AR/AP modules remain future work. Regional connectors, including Pakistan FBR, remain planned.
@@ -144,7 +144,7 @@ These are backend foundations. Public API/MCP financial mutations, invoice/bill 
 
 - Consolidates the released accounts/general-journals slice with reviewed opening/CSV cutover, reasoned period administration and bank reconciliation/cancellation.
 - Adds CSV exports for trial balance, account statements, profit and loss and balance sheet. Amounts remain exact, scope/dates/readiness are explicit, spreadsheet-formula text is escaped, and account exports reject more than 10,000 movements.
-- Adds the bundled core/POS manifest contract and owner-only **Modules** screen. Optional POS defaults off for ordinary new/upgraded companies. Explicit synthetic sample provisioning enables it. Service checks block new review/checkout/retry after disablement; old sources and receipts remain available.
+- Adds the bundled core/POS manifest contract and owner-only **Modules** screen. Optional POS defaults off for ordinary new/upgraded companies. Explicit sample provisioning enables it. Service checks block new review/checkout/retry after disablement; old sources and receipts remain available.
 - `010_module_lifecycle` adds two tables and two immutable-audit triggers. The complete supplied chain has eleven migration identities and 35 guard triggers. Both original `006_*` files retain their original checksums; numeric prefixes alone are not migration identities.
 - Repairs UTF-8 handling in the repository's Windows restore verifier. Technical completion does not establish accounting/pilot certification.
 
@@ -162,7 +162,7 @@ The 0.1.1-preview cash POS interactions remain included: click-to-add products, 
 
 - PHP 8.2+ (8.3 recommended), MySQL 8.4, pinned production dependencies and a versioned migration runner.
 - Command-line prerequisite checks, schema installation and initial-user creation; private database configuration and HTTPS sessions.
-- Company setup with an account template, new-business readiness rules and opt-in synthetic sample data.
+- Company setup with an account template, new-business readiness rules and opt-in sample data.
 - Company/book-scoped receipts and expenses, drafts, atomic balanced posting, fixed-precision amounts, duplicate protection, linked sources, period locking and reversals.
 - Company/book-scoped chart management, general-journal drafts and audit history, plus statements for asset, liability, equity, income and expense accounts.
 - Owner overview, trial balance, balance sheet, profit and loss, and an editable cash scenario. A scenario reflects entered assumptions; it is not a prediction or a statement of cash flows.
@@ -195,7 +195,7 @@ The package has no automatic upgrade from the historical PHP Ledger database. A 
 
 ## Feedback and next steps
 
-Use the [issue tracker](https://github.com/phpledger/phpledger/issues) for reproducible synthetic examples and the [public documentation](https://github.com/phpledger/phpledger/wiki) for current scope and roadmap. The [hosted demo](https://phpledger.com/demo/) is temporary and resets hourly. Do not submit real business data, credentials or private database exports with feedback.
+Use the [issue tracker](https://github.com/phpledger/phpledger/issues) for reproducible sample examples and the [public documentation](https://github.com/phpledger/phpledger/wiki) for current scope and roadmap. The [hosted demo](https://phpledger.com/demo/) is temporary and resets hourly. Do not submit real business data, credentials or private database exports with feedback.
 
 ### Earlier 0.2.1 client transport corrections
 
