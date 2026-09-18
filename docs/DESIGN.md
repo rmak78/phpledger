@@ -1,8 +1,8 @@
 # Experience and design direction
 
-## 0.6.0-preview status
+## 1.0.0 status
 
-The 0.6.0-preview interface implements the owner-approved Claude-calm direction: warm light canvas, navy #0C2052, blue #4656E8, local Inter and token-based components. It supersedes Review Console and the pending P0.4 shell alternatives. Desktop/tablet are primary; dark mode and mobile refinement are deferred. Full visual/accessibility acceptance remains open; see design/redesign-0.5/AUDIT-CLOSURE.md.
+The published 1.0.0 interface implements the owner-approved Claude-calm direction: warm light canvas, navy #0C2052, blue #4656E8, local Inter and token-based components. It supersedes Review Console and the pending P0.4 shell alternatives. Desktop/tablet are primary; dark mode and mobile refinement are deferred. Full visual/accessibility acceptance remains open; see design/redesign-0.5/AUDIT-CLOSURE.md.
 
 ## Latest brand revision
 

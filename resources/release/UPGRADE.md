@@ -1,8 +1,8 @@
 # Upgrade and recovery — PHP Ledger {{VERSION}}
 
-## Local automatic-update candidate
+## Operator-initiated automatic updates
 
-The approved 0.8 milestone adds `/maintenance.php`, an independent installation-operator interface for publisher-signed releases. It is local candidate code, not part of the published 0.6.0-preview and not a certified shared-host recovery service. The manual procedure below remains the expert recovery path.
+This release adds `/maintenance.php`, an independent installation-operator interface for publisher-signed releases. It is not a certified shared-host recovery service: automated and fault-injection tests, and exact-artifact installation/upgrade/recovery checks have passed, but independent security review and real restricted-host fault recovery have not been evidenced (see RELEASE-NOTES.md "Assurance status"). The manual procedure below remains the expert recovery path and is required for the first upgrade from a published 0.6.0-preview installation, which predates this updater.
 
 Provision a private installation directory (`PL_INSTALL_DIRECTORY`, default `www/phpledger/storage/installation`) and a strong random `operator.key` of at least 32 characters; browser setup creates a separate operator key. Pin the publisher's independently obtained RSA public key as `publisher.pem`, or set `PL_UPDATE_PUBLIC_KEY` to its private host-controlled location. No key supplied inside a release establishes trust. Never store the publisher private signing key on a customer installation. Company-owner access does not grant update authority.
 
@@ -10,9 +10,9 @@ The operator selects stable or preview, supplies signed metadata and a matching 
 
 PHP ZIP and OpenSSL, sufficient private disk space, the supported uncustomized MySQL 8.4 schema, complete schema/view/trigger recovery privileges and writable release destinations are required. Routines/events, custom databases and unknown migration states are rejected rather than silently omitted. Preserve private backups outside the public root and apply an operator-controlled retention policy. Broad hosting compatibility, independent security review and real restricted-host fault recovery must be evidenced before production recommendation. A host or disk that is unavailable cannot execute recovery until service resumes.
 
-The current candidate uses the configured database identity. It must own the supported view/trigger definers and have the required privileges scoped to that database; a separate runtime identity without DDL privileges is rejected before mutation. Supplying a separate temporary privileged update identity is not implemented. Do not grant server-wide privileges to bypass this boundary. Database snapshots and restores use resumable batches with durable progress; original records and financial totals are checked before reopening.
+The updater uses the configured database identity. It must own the supported view/trigger definers and have the required privileges scoped to that database; a separate runtime identity without DDL privileges is rejected before mutation. Supplying a separate temporary privileged update identity is not implemented. Do not grant server-wide privileges to bypass this boundary. Database snapshots and restores use resumable batches with durable progress; original records and financial totals are checked before reopening.
 
-The independent `public/maintenance.php` loader is pinned: automated packages must contain the same loader bytes. Changing this loader requires a separately reviewed hosting-panel procedure. The saved recovery worker remains outside the application being replaced. Final acceptance loads the replacement bootstrap in a fresh authenticated request; a broken or interrupted bootstrap triggers restoration. `php tools/resume-update.php --drain` can advance bounded recovery stages when shell access is available, but successful-update runtime acceptance still requires the authenticated maintenance page. A recurring scheduler is not installed.
+The independent `public/maintenance.php` loader is pinned: automated packages must contain the same loader bytes. Changing this loader requires a separately reviewed hosting-panel procedure. The saved recovery worker remains outside the application being replaced. Final acceptance loads the replacement bootstrap in a fresh authenticated request; a broken or interrupted bootstrap triggers restoration. `php tools/resume-update.php --drain` can advance bounded recovery stages when shell access is available, but successful-update runtime acceptance still requires the authenticated maintenance page. A recurring scheduler is not installed. The browser maintenance page refuses further operator-key attempts for 15 minutes after ten failures; `php tools/resume-update.php` reads the host-held key directly and is not subject to that limit, so a remote guesser cannot lock the host operator out of command-line recovery.
 
 Source revision: `{{SOURCE_COMMIT}}`.
 
@@ -22,9 +22,15 @@ This package adds the accounting starter to the modern foundation: required AR/A
 
 Keep the installed chain through 028 unchanged. This release adds 029-031 for cost-of-sales presentation, connection read scopes and list-source indexes. Existing chart classifications retain prior net-profit behavior; existing connections retain their previous access. The interface change does not require Node on the host. Use the backup/maintenance procedure below and run migrations before reopening traffic. Restore both matching code and database if rollback is needed; copying old PHP over an upgraded database is not a tested rollback.
 
+## From 0.6.0-preview to 1.0.0
+
+Keep the installed chain through 031 unchanged; 1.0.0 adds no new migration. This release adds browser installation at `/install` (new installations only; an existing 0.6.0-preview installation is already set up) and the signed-update/recovery path through `/maintenance.php`, `tools/resume-update.php` and the release/signing tools. A published 0.6.0-preview installation predates `/maintenance.php`, so its first upgrade to 1.0.0 must use the manual procedure below, not the new updater. After completing that manual upgrade, the operator may provision the private installation directory, `operator.key` and a pinned `publisher.pem` to use `/maintenance.php` for later updates.
+
+Use the backup/maintenance procedure below and run migrations before reopening traffic, exactly as for the 0.5.0-preview to 0.6.0-preview upgrade. Restore both matching code and database if rollback is needed; copying old PHP over an upgraded database is not a tested rollback.
+
 ## Manual procedure: before changing an installation
 
-Arrange a maintenance window at the web server or reverse proxy, blocking customer access and writes while keeping operator access. Published 0.6.0-preview has no customer maintenance-mode switch; the local automatic-update candidate above supplies its own application barrier. Stop any locally added workers or integrations, and prevent concurrent schema changes. Record the installed package version, manifest, PHP/MySQL versions and migration state.
+Arrange a maintenance window at the web server or reverse proxy, blocking customer access and writes while keeping operator access. A published 0.6.0-preview installation has no customer maintenance-mode switch; the `/maintenance.php` updater described above supplies its own application barrier for installations already on 1.0.0. Stop any locally added workers or integrations, and prevent concurrent schema changes. Record the installed package version, manifest, PHP/MySQL versions and migration state.
 
 Keep a private, recoverable copy of:
 
@@ -109,4 +115,4 @@ MySQL DDL is not automatically rolled back as one application transaction. An `a
 
 Keep maintenance active. Have the operator restore the last verified database backup into an isolated replacement database, restore its matching code/configuration, and rerun the restoration checks before switching back. Restore code and database as a compatible pair; reverting application files alone does not undo a schema change. Any writes made after the backup require a separate reconciliation plan.
 
-The published 0.6.0-preview provides no automatic rollback or backup scheduler. The local 0.8 candidate described above adds automatic pre-update matched backup and recovery, subject to its qualification gates; it does not add a recurring backup scheduler or historical application migration. Repository development/restore test tools are not shipped as customer commands.
+A published 0.6.0-preview installation has no automatic rollback or backup scheduler; use the manual procedure above. This release's `/maintenance.php` updater described above adds automatic pre-update matched backup and recovery, subject to its disclosed assurance limits; it does not add a recurring backup scheduler or historical application migration. Repository development/restore test tools are not shipped as customer commands.

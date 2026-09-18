@@ -4,16 +4,18 @@
 
 Owner approved on 18 September 2026. This section supersedes older forward sequences below; dated release records remain historical. Published baseline: **0.6.0-preview**. The working stable target is **18 December 2026**, with a provisional **11 December 2026–8 January 2027** planning window. Dates are estimates, not release commitments; re-estimate after installer acceptance and successful restricted-host update recovery.
 
+**Later on 18 September 2026**, the owner decided to consolidate the locally implemented 0.6.1 workflow-recovery closure, the 0.7 browser installer and the 0.8 signed update/automatic-backup/recovery work into a single release, version **1.0.0**, and publish it immediately from `codex/ui-redesign-0.6` as the supported production scope, rather than sequencing them through separate preview releases and the previously planned 0.9 supervised-beta and RC gates first. The independent accounting review, independent security review, supervised pilots with a real month-end close, and the 14-day release-candidate acceptance period below did **not** run before this publication; they continue afterward as post-release commitments. The owner disclosed these limits alongside the 1.0.0 publication rather than presenting it as having passed them. See [Validation](VALIDATION.md#100-publication--18-september-2026) for the evidence that does exist.
+
 **1.0 scope:** country-neutral accounting, English first, core AR/AP and manually configured tax, optional basic Purchasing/Inventory, essential phone/keyboard accessibility, browser installation, operator-initiated updates with automatic matched backups and automatic failure recovery. Regional certification/e-invoicing, production shop POS, advanced stock, partner profit-sharing, e-commerce, offline/native clients and specialists are outside this stable promise. Existing FX restrictions remain explicit. Accounting, security and observed use each require their own evidence.
 
 | Release | Deliverable | Exit evidence | Current status |
 |---|---|---|---|
-| 0.6.1-preview | Field-error recovery, nested report/source/action returns, responsive/keyboard financial review and coherent operator documentation | Supported routes/states exercised; no material accounting/access or essential-workflow defect | Local workflow fixes implemented and tested; full route/state and observed acceptance remain open; not released |
-| 0.7.0-preview | Ownership-protected browser setup using existing migration/auth/onboarding services | Unfamiliar operator installs without shell/Composer/Node; invalid hosts and takeover attempts rejected | Local installer implemented with automated and browser evidence; host/user acceptance pending |
-| 0.8.0-preview | Signed updates, installation-wide maintenance, automatic verified backups, resumable automatic matched recovery | Fault-injected update restores code, configuration, keys, database, guards and financial totals under restricted hosting permissions | Local update/recovery implementation and selected fault tests passed; independent/security/host qualification pending |
-| 0.9.0-beta | Frozen feature scope; 2–3 supervised pilots including core-only and basic stock/purchasing | Qualified accounting and independent security review before real-customer use; 30 consecutive days of observed use and an actual month-end close | Pending; no pilot clock started |
-| 1.0.0-rc.1 and subsequent RCs | Exact-artifact installation, declared upgrades, recovery and workflow acceptance | 14 consecutive days without a release blocker; material fixes restart affected acceptance | Pending; no RC clock started |
-| 1.0.0 | Supported production release and complete publication bundle | All independent gates below accepted; owner release approval | Pending; production readiness not claimed |
+| 0.6.1-preview | Field-error recovery, nested report/source/action returns, responsive/keyboard financial review and coherent operator documentation | Supported routes/states exercised; no material accounting/access or essential-workflow defect | Included in 1.0.0 |
+| 0.7.0-preview | Ownership-protected browser setup using existing migration/auth/onboarding services | Unfamiliar operator installs without shell/Composer/Node; invalid hosts and takeover attempts rejected | Included in 1.0.0 |
+| 0.8.0-preview | Signed updates, installation-wide maintenance, automatic verified backups, resumable automatic matched recovery | Fault-injected update restores code, configuration, keys, database, guards and financial totals under restricted hosting permissions | Included in 1.0.0 |
+| 0.9.0-beta | Frozen feature scope; 2–3 supervised pilots including core-only and basic stock/purchasing | Qualified accounting and independent security review before real-customer use; 30 consecutive days of observed use and an actual month-end close | Not run before 1.0.0; carried forward |
+| 1.0.0-rc.1 and subsequent RCs | Exact-artifact installation, declared upgrades, recovery and workflow acceptance | 14 consecutive days without a release blocker; material fixes restart affected acceptance | Not run before 1.0.0; carried forward |
+| 1.0.0 | Supported production release and complete publication bundle | All independent gates below accepted; owner release approval | Published 18 September 2026 by owner decision; independent review, pilot and RC-period evidence outstanding |
 
 ### Stable release checklist
 
@@ -27,6 +29,8 @@ Owner approved on 18 September 2026. This section supersedes older forward seque
 - [ ] ZIP, SHA-256, matching versioned media kit, README, Wiki, About, website/demo, support guidance and stable version/channel metadata agree and are verified after authorized publication.
 
 No reviewer, interview, pilot, host certification or time gate becomes complete from automated tests. The owner arranges reviewers and pilot businesses; engineering supplies the evidence and remediation. Live publication and external contact still require explicit authorization.
+
+These checklist items remain unchecked after the 1.0.0 publication on 18 September 2026: the owner chose to publish the consolidated 0.6.1/0.7/0.8 work as 1.0.0 before this evidence existed, so each item above stands as an open post-release commitment rather than a completed release gate.
 
 Reviewer coordination: the owner confirms their accountant and lawyer have agreed to help. Named scope/dates, an independent technical security reviewer and pilot businesses remain to be scheduled. The [reviewer/pilot brief and volunteer advert](strategy/STABLE-REVIEWER-PILOT-BRIEF.md) define the requested contribution and handoff; the advert has not been posted.
 

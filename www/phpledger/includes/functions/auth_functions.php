@@ -91,7 +91,8 @@ function pl_authenticate(string $email, string $password, string $clientIp): ?ar
             && $user !== null && (int) $user['is_active'] === 1;
 
         foreach ($buckets as $key => $bucket) {
-            $count = ($valid && $key === $accountKey) ? 0 : (int) $bucket['attempt_count'] + 1;
+            // Successful sign-ins reset the account bucket and never consume the shared client bucket.
+            $count = $valid ? ($key === $accountKey ? 0 : (int) $bucket['attempt_count']) : (int) $bucket['attempt_count'] + 1;
             $windowStart = ($valid && $key === $accountKey) ? gmdate('Y-m-d H:i:s', $now) : $bucket['window_started_at'];
             DB::update('pl_login_attempts', [
                 'window_started_at' => $windowStart,

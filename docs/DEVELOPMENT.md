@@ -2,7 +2,7 @@
 
 ## Stable-path installation and signed updates
 
-The current [roadmap](ROADMAP.md#current-delivery-contract-first-stable-10) and [validation receipt](VALIDATION.md#stable-path-local-implementation--18-september-2026) separate local implementation from release acceptance. Browser setup shares the CLI migration/preflight service; installation state lives in private files, without a new accounting schema. The independent maintenance loader and its copied recovery worker run without the application version being replaced. Tests use random disposable databases and synthetic signing material.
+Browser installation and signed updates are published in **1.0.0**. The current [roadmap](ROADMAP.md#current-delivery-contract-first-stable-10) and [validation receipt](VALIDATION.md#100-publication--18-september-2026) separate implemented/tested behavior from independent review and pilot acceptance, which remain open post-release commitments. Browser setup shares the CLI migration/preflight service; installation state lives in private files, without a new accounting schema. The independent maintenance loader and its copied recovery worker run without the application version being replaced. Tests use random disposable databases and synthetic signing material.
 
 `tools/build-package.py` accepts stable versions and explicit `--channel stable|preview`, retaining the clean committed-source and explicit file allowlist requirements. After building a reviewed package, a publisher can create the updater envelope with:
 

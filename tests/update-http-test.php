@@ -129,6 +129,11 @@ try {
     pl_update_write($private . '/operator.key', bin2hex(random_bytes(32)));
     [$status] = $request('/maintenance.php', http_build_query(['action' => 'continue', 'csrf' => $csrf]));
     $check($status === 422, 'rotating the host key revokes an authenticated operator session');
+    for ($attempt = 0; $attempt < 10; $attempt++) {
+        $request('/maintenance.php', http_build_query(['action' => 'authenticate', 'operator_key' => 'synthetic-guess-' . $attempt, 'csrf' => $csrf]));
+    }
+    [$status, $body] = $request('/maintenance.php', http_build_query(['action' => 'authenticate', 'operator_key' => 'synthetic-guess-final', 'csrf' => $csrf]));
+    $check($status === 422 && str_contains($body, 'Too many installation operator key attempts'), 'remote operator key guessing is bounded');
     echo "Installation update HTTP authority, CSRF, signed upload, maintenance barrier and independent recovery checks passed.\n";
 } finally {
     proc_terminate($server); proc_close($server);

@@ -1,12 +1,18 @@
+## Current package: 1.0.0
+
+**1.0.0**, published 18 September 2026, is PHP Ledger's first stable release. [Download 1.0.0](https://github.com/rmak78/phpledger/releases/tag/v1.0.0) and its [matching media kit](https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip). It consolidates the interface rebuild with a workspace sidebar, compact server-side lists, posting/correction previews, atomic multi-item allocation and gross-profit presentation, a guided browser installer, and publisher-signed automatic updates with automatic matched backup and recovery. Compiled CSS is included; no Node is needed on the host. The PHP/MeekroDB architecture and central immutable posting model remain.
+
+**Assurance status:** automated test suites, fault-injection update/recovery tests, exact-artifact install/upgrade/recovery checks and developer-operated browser checks back this release. Independent accounting review, independent security review, supervised pilots with a real month-end close, unfamiliar-operator installation observation and restricted shared-host recovery certification have **not** happened; the owner published 1.0.0 with these limits disclosed, as post-release commitments. See [[Release 1.0.0|Release-1.0.0]] and [[Getting started|Getting-Started]].
+
 <p><img src="https://raw.githubusercontent.com/rmak78/phpledger/master/docs/repository/assets/phpledger-logo.webp" alt="PHP Ledger" width="320"></p>
 
 # PHP Ledger
 
-**PHP Ledger is open-source, self-hosted double-entry accounting software with a simple cash point of sale for small businesses, built on PHP 8.2+ (8.3 recommended) and MySQL 8.4 and currently in development preview.**
+**PHP Ledger is open-source, self-hosted double-entry accounting software with a simple cash point of sale for small businesses, built on PHP 8.2+ (8.3 recommended) and MySQL 8.4. 1.0.0 is the first stable release.**
 
-PHP Ledger is being rebuilt for small-business owners, accountants and bookkeepers who want a useful workspace on hosting they control. The direction is a complete accounting core, followed by optional business modules.
+PHP Ledger serves small-business owners, accountants and bookkeepers who want a useful workspace on hosting they control, installable from a browser without a terminal. The direction is a complete accounting core, followed by optional business modules.
 
-Explore [phpledger.com](https://phpledger.com/) and [your temporary sample company](https://phpledger.com/demo/). The [0.1.6-preview package](https://github.com/rmak78/phpledger/releases/tag/v0.1.6-preview) adds universal account statements, chart management and saved general journals. It remains a development preview for evaluation with synthetic data.
+Explore [phpledger.com](https://phpledger.com/) and [your temporary sample company](https://phpledger.com/demo/). The [1.0.0 package](https://github.com/rmak78/phpledger/releases/tag/v1.0.0) includes universal account statements, chart management and saved general journals alongside the accounting starter. Evaluate it with synthetic data; independent review and pilot use remain in progress.
 
 Modern application source is in `www/phpledger`; the historical application remains only in Git history. See [[Getting started|Getting-Started]] for the package, installation requirements and demonstration limits.
 
@@ -43,7 +49,7 @@ New project-owned code and documentation use the [AGPL-3.0-or-later](https://git
 
 [[Package scope|First-Package]] · [[Module roadmap|Module-Roadmap]] · [[Full roadmap|Roadmap]]
 
-## 0.1.6 hosting, licensing and direction update
+## Hosting, licensing and direction
 
 PHP 8.2 is the minimum and PHP 8.3 is recommended for deployment. [[Hosting compatibility|PHP-Hosting]] explains the tested runtime and the remaining shared-hosting requirements.
 
@@ -54,3 +60,9 @@ The current release uses AGPL-3.0-or-later with a commercial licence available. 
 ## 0.1.5 accessibility update
 
 [Nagulanvelu contributed PR #65](https://github.com/rmak78/phpledger/pull/65), giving each fallback POS quantity its product name. A maintainer correction keeps the fields visible with JavaScript disabled. The package passed fresh installation, upgrade from 0.1.4, 29 synthetic checkout checks and desktop/tablet/mobile browser checks. See the [release](https://github.com/rmak78/phpledger/releases/tag/v0.1.5-preview), [privacy notice](https://phpledger.com/privacy/) and [demo-use terms](https://phpledger.com/terms/).
+
+## Connected reporting and richer samples
+
+This combined preview retains company/book permissions, chart management, receipt/expense/general-journal drafts, balanced posting, linked reversals, opening cutover with a reconciled unpaid-document register, period controls, bank CSV reconciliation, reports, running account balances and CSV exports.
+
+Scoped API/MCP reads and existing-user OAuth/Connections join four fictional businesses: service agency, retail shop, seasonal business and distributor. Each includes 74 sources, 2024–2025 history, an open 2026 practice period and three editable drafts. Follow [[Reporting walkthroughs|Reporting-Guides]] and [[Read integrations|Integrations]].

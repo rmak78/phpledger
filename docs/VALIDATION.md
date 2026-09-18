@@ -1,5 +1,11 @@
 # Foundation validation
 
+## 1.0.0 publication — 18 September 2026
+
+The owner published **1.0.0** on 18 September 2026 from `codex/ui-redesign-0.6` as PHP Ledger's first stable release, consolidating the 0.6.1 workflow-recovery closure, the 0.7 browser installer and the 0.8 signed update/automatic-backup/recovery work recorded in the checkpoint below into one supported production scope. This section records what the publication does and does not rest on. Evidence that exists: the automated test suites in the checkpoint below, the fault-injection update/recovery tests, the exact-artifact install/upgrade/recovery checks run against the built package, and developer-operated browser checks. Evidence that does **not** exist: independent accounting review, independent security review, supervised pilots with a real month-end close, unfamiliar-operator installation observation, and restricted shared-host recovery certification. The owner published 1.0.0 as the supported production scope with these limits disclosed, carrying the outstanding items forward as post-release commitments rather than presenting them as satisfied.
+
+{{PUBLICATION_1_0_0}}
+
 ## Stable-path local implementation — 18 September 2026
 
 This checkpoint implements the approved path toward stable 1.0 on `codex/ui-redesign-0.6`. The published release and main working-tree application version remain **0.6.0-preview**. No new release has been published. The [current roadmap](ROADMAP.md#current-delivery-contract-first-stable-10) is the authoritative release checklist; the [reviewer/pilot brief](strategy/STABLE-REVIEWER-PILOT-BRIEF.md) contains the requested volunteer advert and review responsibilities. The owner has offered their accountant and lawyer; technical security review, review dates and pilots remain unconfirmed.

@@ -102,6 +102,34 @@ function pl_update_operator(string $directory, string $key): void
     }
 }
 
+/**
+ * Bound remote operator-key guessing. Only browser entry points use this wrapper:
+ * host command-line recovery calls pl_update_operator directly, so remote guessing
+ * cannot lock an operator out of local recovery.
+ */
+function pl_update_operator_attempt(string $directory, string $key, int $now): void
+{
+    $path = $directory . '/operator-attempts.json';
+    $state = [];
+    if (is_file($path)) {
+        try { $state = pl_update_json($path); } catch (Throwable $unreadable) { $state = []; }
+    }
+    $started = (int) ($state['started'] ?? 0);
+    $count = $started <= $now && $now - $started < 900 ? (int) ($state['count'] ?? 0) : 0;
+    if ($count >= 10) {
+        throw new DomainException('Too many installation operator key attempts. Wait 15 minutes, or continue recovery from the host command line.');
+    }
+    try {
+        pl_update_operator($directory, $key);
+    } catch (Throwable $rejected) {
+        // Never replace an authentication failure with a private-storage error.
+        try { pl_update_checkpoint($path, ['started' => $count === 0 ? $now : $started, 'count' => $count + 1]); }
+        catch (Throwable $unwritable) { /* Bounded attempts are best effort. */ }
+        throw $rejected;
+    }
+    if ($count !== 0 || $started !== 0) { pl_update_checkpoint($path, ['started' => $now, 'count' => 0]); }
+}
+
 function pl_update_path(string $name): string
 {
     if (!preg_match('~^[A-Za-z0-9_.\-/]+$~D', $name) || strlen($name) > 230 || str_starts_with($name, '/')) {
@@ -137,6 +165,10 @@ function pl_update_target(string $root, string $relative): string
 function pl_update_verify_metadata(string $envelope, string $publicKey, string $channel, string $current): array
 {
     if (strlen($envelope) > 4000000 || !in_array($channel, ['stable', 'preview'], true)) { throw new DomainException('Invalid update metadata or channel.'); }
+    // Without a well-formed installed version there is no downgrade protection to compare against.
+    if (!preg_match('/^\d+\.\d+\.\d+(?:-(?:preview|beta|rc)(?:\.[0-9]+)?)?$/D', $current)) {
+        throw new DomainException('The installed release version could not be determined. Use the documented hosting-panel upgrade procedure.');
+    }
     $message = json_decode($envelope, true, 8, JSON_THROW_ON_ERROR);
     $payload = base64_decode((string) ($message['payload'] ?? ''), true);
     $signature = base64_decode((string) ($message['signature'] ?? ''), true);

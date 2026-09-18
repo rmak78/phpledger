@@ -29,7 +29,7 @@ function pl_update_web(string $root): never
         if ($method === 'POST') {
             if (!is_string($_POST['csrf'] ?? null) || !hash_equals($csrf, $_POST['csrf'])) { throw new DomainException('This form expired. Reload the installation page.'); }
             if (isset($_POST['operator_key']) && is_string($_POST['operator_key']) && $_POST['operator_key'] !== '') {
-                pl_update_operator($directory, $_POST['operator_key']);
+                pl_update_operator_attempt($directory, $_POST['operator_key'], time());
                 session_regenerate_id(true); $_SESSION['update_operator'] = $fingerprint; $_SESSION['update_until'] = time() + 900;
                 $authorized = true;
             }
@@ -37,7 +37,7 @@ function pl_update_web(string $root): never
             $action = $_POST['action'] ?? '';
             if ($action === 'begin') {
                 // Beginning a new operation always requires fresh proof, even with a session.
-                pl_update_operator($directory, (string) ($_POST['operator_key'] ?? ''));
+                pl_update_operator_attempt($directory, (string) ($_POST['operator_key'] ?? ''), time());
                 $archive = $_FILES['archive'] ?? []; $metadata = $_FILES['metadata'] ?? [];
                 $download = ($_POST['source'] ?? 'upload') === 'official';
                 foreach ($download ? [$metadata] : [$archive, $metadata] as $file) {
@@ -52,7 +52,7 @@ function pl_update_web(string $root): never
                         $installed = pl_update_json($root . '/PACKAGE-MANIFEST.json');
                         $keyPath = getenv('PL_UPDATE_PUBLIC_KEY') ?: $directory . '/publisher.pem';
                         if (!is_file($keyPath)) { throw new DomainException('Pin the publisher public key in private host configuration first.'); }
-                        $verified = pl_update_verify_metadata($envelope, (string) file_get_contents($keyPath), $channel, (string) $installed['version']);
+                        $verified = pl_update_verify_metadata($envelope, (string) file_get_contents($keyPath), $channel, (string) ($installed['version'] ?? ''));
                         $downloaded = pl_update_download_official($verified, $directory);
                     }
                     $state = pl_update_begin($root, $downloaded ?? $archive['tmp_name'], $envelope, $channel);

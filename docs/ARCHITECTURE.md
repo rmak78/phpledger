@@ -8,9 +8,9 @@ Installation authority belongs to a host-controlled operator, not an owner of on
 
 Update recovery is installation-wide: block/drain writes, preserve matched code/configuration/OAuth keys and the complete schema/data/views/triggers/receipts, then verify a new version or restore the matched backup. Recovery state must remain independent of newly installed application code. Interrupted infrastructure resumes safely when available; maintenance remains active until successful verification. MySQL DDL is not a rollbackable application transaction. A requirements-based hosting claim and representative restricted-host recovery evidence are separate from ordinary VPS operation. These contracts do not by themselves close implementation, independent review or production gates.
 
-## 0.6.0-preview status
+## 1.0.0 status
 
-The 0.6.0-preview UI remains PHP server-rendered with MeekroDB and the existing router/bootstrap/posting funnel. Compiled Tailwind CSS is shipped; no Node runtime or DataTables dependency is deployed. GET lists use page/per_page/q/sort/dir, fixed sort allow-lists and SQL LIMIT/OFFSET. The /tables JSON endpoint remains. Migration chain additions are 029-031; immutable correction previews share the accounting planner.
+The published 1.0.0 UI remains PHP server-rendered with MeekroDB and the existing router/bootstrap/posting funnel. Compiled Tailwind CSS is shipped; no Node runtime or DataTables dependency is deployed. GET lists use page/per_page/q/sort/dir, fixed sort allow-lists and SQL LIMIT/OFFSET. The /tables JSON endpoint remains. Migration chain additions are 029-031; immutable correction previews share the accounting planner. 1.0.0 adds the browser installer and the signed update/maintenance path described in [Installer](INSTALLER.md) and [Development](DEVELOPMENT.md).
 
 ## Accounting starter: published 0.4.0-preview (16 September 2026)
 

@@ -1,6 +1,6 @@
 # Browser installer
 
-Status: local implementation for the approved 0.7 milestone; not published or qualified for general hosting. The [stable release checklist](ROADMAP.md#current-delivery-contract-first-stable-10) now controls sequencing. The original WordPress-style request remains: hosting-panel preparation, then browser setup without Composer, Node or shell. Existing CLI installation remains available. The installer-created customer website remains parked. Independent review and unfamiliar-operator/host acceptance remain separate gates.
+Status: published in **1.0.0** (18 September 2026) as part of the consolidated 0.6.1/0.7/0.8 stable release; general shared-host qualification and unfamiliar-operator acceptance remain open post-release commitments. The [stable release checklist](ROADMAP.md#current-delivery-contract-first-stable-10) now controls sequencing. The original WordPress-style request remains: hosting-panel preparation, then browser setup without Composer, Node or shell. Existing CLI installation remains available. The installer-created customer website remains parked. Independent review and unfamiliar-operator/host acceptance remain separate gates.
 
 ## Local implementation contract
 

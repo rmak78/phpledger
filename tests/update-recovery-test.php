@@ -30,6 +30,18 @@ try {
     }
     update_reject(fn() => pl_update_operator($private, 'company-owner'), 'company ownership is not installation authority');
     pl_update_operator($private, str_repeat('test-only-', 5));
+    // Remote operator-key guessing is bounded; host command-line recovery stays available.
+    for ($attempt = 0; $attempt < 10; $attempt++) {
+        try { pl_update_operator_attempt($private, 'synthetic-operator-guess-' . $attempt, time()); throw new LogicException('guess accepted'); }
+        catch (DomainException $rejected) { /* expected */ }
+    }
+    update_reject(fn() => pl_update_operator_attempt($private, str_repeat('test-only-', 5), time()), 'bounded remote operator attempts refuse even a correct key');
+    pl_update_operator($private, str_repeat('test-only-', 5));
+    echo "PASS host command-line operator recovery is not locked out by remote guessing\n";
+    pl_update_checkpoint($private . '/operator-attempts.json', ['started' => time() - 901, 'count' => 10]);
+    pl_update_operator_attempt($private, str_repeat('test-only-', 5), time());
+    update_check((int) pl_update_json($private . '/operator-attempts.json')['count'] === 0, 'Successful operator proof did not reset bounded attempts.');
+    echo "PASS bounded operator attempts reset after their window\n";
     $root = $fixture . '/app'; mkdir($root, 0700);
     $loader = file_get_contents(dirname(__DIR__) . '/www/phpledger/public/maintenance.php');
     $files = [
@@ -67,6 +79,8 @@ try {
     update_check(count($verified['inventory']) === count($files), 'Signed inventory missing.');
     update_reject(fn() => pl_update_verify_metadata($envelope, $public, 'stable', '0.6.0-preview'), 'channel downgrade/crossover rejected');
     update_reject(fn() => pl_update_verify_metadata($envelope, $public, 'preview', '0.9.0-beta'), 'older signed release rejected');
+    update_reject(fn() => pl_update_verify_metadata($envelope, $public, 'preview', ''), 'signed release rejected when the installed version is unknown');
+    update_reject(fn() => pl_update_verify_metadata($envelope, $public, 'preview', 'not-a-version'), 'signed release rejected when the installed version is malformed');
     $tampered = json_decode($envelope, true); $tampered['payload'] = base64_encode(str_replace('0.8.0', '0.9.0', base64_decode($tampered['payload'])));
     update_reject(fn() => pl_update_verify_metadata(json_encode($tampered), $public, 'preview', '0.6.0-preview'), 'tampered metadata rejected');
     $expired = $metadata; $expired['expires_at'] = time() - 1;

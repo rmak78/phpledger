@@ -1,6 +1,10 @@
-# The complete future path
+## Current package: 1.0.0
 
-The current maintenance release is 0.1.6-preview: PHP 8.2 minimum, PHP 8.3 recommended, AGPL core licensing and corrected country-neutral positioning. The next sequence is read API/MCP acceptance, AR, AP, distribution/updater tooling, regional connectors, inventory, shop POS, e-commerce, controlled commands, then later restaurant/distribution/specialists. See [[Module roadmap|Module-Roadmap]] for current gates; older milestone snapshots below retain their historical scope.
+**1.0.0**, published 18 September 2026, is the first stable release, consolidating the 0.6.1 workflow-recovery closure, the 0.7 browser installer and the 0.8 signed update/automatic-backup/recovery work. [Download 1.0.0](https://github.com/rmak78/phpledger/releases/tag/v1.0.0) and its [matching media kit](https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip). Independent accounting review, independent security review, supervised pilots with a real month-end close and unfamiliar-operator installation observation have **not** happened; they continue as post-release commitments. See [[Release 1.0.0|Release-1.0.0]].
+
+# The path after 1.0.0
+
+With 1.0.0 published, next is **1.0.x** production fixes and compatibility improvements, **1.1** reviewed Urdu/RTL plus installer distribution channels (Softaculous/Installatron, published containers/packages), and **1.2** reviewed Arabic/RTL and demand-led reporting refinements. Independent accounting/security review and supervised pilots run in parallel as post-release commitments rather than as pre-publication gates. Later capability releases add reviewed regional connectors, stock/tax-integrated shop POS, e-commerce, controlled API/MCP writes and restaurant/distribution/specialist modules, each with its own independent acceptance. See [[Module roadmap|Module-Roadmap]] for current gates; older milestone snapshots below retain their historical scope.
 
 The direction confirmed on 15 September 2026 is **complete accounting core first, optional business modules next**, with a business API and MCP access over the same services. The current preview supplies working slices; it does not complete the accounting, user or release gates below.
 
@@ -50,8 +54,8 @@ Each release is scoped separately. Roadmap entries are not delivery dates, fundi
 
 [[Module roadmap|Module-Roadmap]] · [[First package|First-Package]] · [[Contributing and support|Contributing-and-Support]]
 
-## Staged releases
+## Combined 0.2.1 preview
 
-A, 0.1.6-preview, delivers contributor POS accessibility and website information/SEO. B, 0.2.0-preview, targets read API/MCP, OAuth and scoped connections, and server-side tables. C, 0.2.1-preview, targets four reconciled companies with 2024?2025 histories and an open 2026 practice period.
+The owner approved combining read API/MCP, OAuth/Connections and server-side tables with four reconciled businesses, 2024–2025 history, open 2026 practice and reporting guides. The prior staged sequence is superseded. Existing accounting and POS capabilities remain included.
 
-Native compatibility must be tested separately in Codex, Claude, ChatGPT, n8n, OpenClaw, Nous Research Hermes Agent, Open WebUI and the actual llm.bixisoft.com interface. Protocol support or an OpenAPI fallback does not close a client gate. Subdomain migration stays deferred. API/MCP reads precede controlled commands, the installer and optional AR/AP.
+Each named client's compatibility requires its own executed connection and report checks. The verified-client preview can ship with unavailable clients explicitly pending. Protocol support or an OpenAPI fallback does not close those gates. The product remains country-neutral; Pakistan FBR is one planned regional connector. Next: AR, AP, distribution/updater tooling, reviewed regional connectors, inventory, shop POS, e-commerce and controlled commands.

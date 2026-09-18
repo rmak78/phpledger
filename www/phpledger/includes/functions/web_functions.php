@@ -28,7 +28,7 @@ function pl_web_text(array $source, string $key, string $default = ''): string
 /** The application version is a shared presentation value, not a user-controlled setting. */
 function pl_app_version(): string
 {
-    return '0.6.0-preview';
+    return '1.0.0';
 }
 
 function pl_web_id(array $source, string $key, int $default = 0): int

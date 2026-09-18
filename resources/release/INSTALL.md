@@ -25,13 +25,13 @@ For the included read integrations, the browser wizard records the explicit publ
 
 ## 2. Unpack and configure privately
 
-### Browser setup in the local installer candidate
+### Browser setup at `/install`
 
-The published 0.6.0-preview uses the CLI steps below. The next installer candidate adds `/install`; it is local implementation until a later release publication receipt records acceptance.
+This release adds `/install`, a protected browser-based setup path, alongside the retained CLI steps in section 4. Automated and developer-operated browser checks have passed; broad shared-host qualification and unfamiliar-operator observation remain open evidence gates (see RELEASE-NOTES.md "Assurance status").
 
 After unpacking the complete package and setting HTTPS/public-root routing, create a private writable `www/phpledger/storage/installation` directory and place a strong random setup key (at least 32 characters, no whitespace) in `setup.key`. Use a password manager or hosting-panel generator. Do not expose this directory through the web server. Hosts may instead configure `PL_INSTALL_DIRECTORY` and `PL_SETUP_KEY`. Visit `/install`, enter the key, and supply a dedicated empty MySQL 8.4 database/account created through the hosting panel. Never use an existing business database or MySQL root.
 
-The wizard checks prerequisites, applies the unchanged migration chain, creates the initial account and continues to business onboarding. JavaScript is optional. Private configuration is written atomically or offered as a protected download for placement using the hosting panel. Preserve the separately generated private `operator.key` for future installation-wide update/recovery access. Setup locks after completion and cannot be reopened by deleting a marker from an installed database. Unfamiliar-user acceptance and general shared-host qualification remain pending.
+The wizard checks prerequisites, applies the unchanged migration chain, creates the initial account and continues to business onboarding. JavaScript is optional. Private configuration is written atomically or offered as a protected download for placement using the hosting panel. Preserve the separately generated private `operator.key` for future installation-wide update/recovery access. Setup locks after completion and cannot be reopened by deleting a marker from an installed database. Unfamiliar-user acceptance and general shared-host qualification remain pending; see RELEASE-NOTES.md.
 
 Automatic updates require PHP ZIP, a pinned publisher public key, private backup space, supported schema privileges and a writable update layout; ordinary application runtime requirements alone do not establish automatic recovery support. The current updater uses the configured schema-owning identity and rejects a narrower runtime identity without recovery privileges; temporary separate update credentials are not implemented. Follow [UPGRADE.md](UPGRADE.md) before enabling that capability.
 

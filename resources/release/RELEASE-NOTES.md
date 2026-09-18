@@ -2,7 +2,45 @@
 
 Source revision: `{{SOURCE_COMMIT}}`.
 
-This package is a development preview of the restarted PHP Ledger application. It preserves the lightweight BixiSoft PHP/MeekroDB structure while separating accounting functions, server permissions, templates and the public front controller. It is intended for evaluation and supported pilot preparation.
+This package is PHP Ledger {{VERSION}}, the first supported stable release of the restarted application. It preserves the lightweight BixiSoft PHP/MeekroDB structure while separating accounting functions, server permissions, templates and the public front controller. Read "Supported scope and limits" and "Assurance status" below before deployment; the dated preview sections further down record the historical, superseded scope of each earlier development release.
+
+## 1.0.0: first stable release
+
+This release consolidates the 0.6.1 workflow closure, 0.7 browser installer and 0.8 signed update/backup/recovery work into one supported stable release, in addition to everything listed under 0.6.0-preview below.
+
+- **Workflow recovery.** Save/post/reverse/source journeys preserve submitted values on a field error instead of discarding the draft, and errors are linked to their field. Report, source, action and return navigation is preserved through nested journeys (for example report → source document → correction action → back to the report). Financial tables and their dynamic rows are keyboard-focusable with unique row identities, so reviewing and correcting entries does not require a mouse.
+- **Browser installation.** A new `/install` entry lets an operator set up the application from a browser instead of the command line. It is protected by a private per-installation setup key (`setup.key` under the private installation directory, or `PL_SETUP_KEY`/`PL_INSTALL_DIRECTORY`), proves host ownership before touching the database, applies the existing migration chain, writes private configuration (or offers it as a protected download for hosting-panel placement), provisions OAuth keys, creates the first account and continues into business onboarding. Setup locks after completion and cannot be reopened by deleting a marker from an installed database.
+- **Operator-initiated signed updates and recovery.** An independent `public/maintenance.php` entry point, separate from the customer application, lets the installation operator apply publisher-signed releases using a private `operator.key` and a pinned publisher public key (`publisher.pem` or `PL_UPDATE_PUBLIC_KEY`). The operator chooses an explicit stable or preview channel and supplies either an uploaded release ZIP with its signed metadata or requests the official GitHub download. Before applying a release, the updater takes an automatic, complete, matched backup: application code, private configuration, keys and the complete database, including views, triggers and receipt tables. Progress is resumable across host interruptions, and a failed migration or mutation triggers automatic matched restoration of code, configuration and database together, with financial totals and prior migration receipts verified unchanged before the installation reopens.
+- **CLI recovery companion.** `tools/resume-update.php` advances a bounded number of pending recovery steps from the shell (`--drain` advances until the operation completes or blocks), for hosts where an operator has terminal access but the browser session was interrupted; final runtime acceptance still requires reopening the authenticated maintenance page.
+- **Release and channel tooling.** `tools/build-package.py` and `tools/package-files.json` build the versioned, allowlisted release archive with an authenticated exact-member manifest; `tools/sign-update.php` produces the signed release metadata an operator's update or the official download consumes. Version and channel identities are derived from the semantic version itself (a prerelease identifier such as `-preview` or `-rc.N` means the preview channel; a plain `MAJOR.MINOR.PATCH` such as `1.0.0` means stable) so a package cannot claim a channel its version does not support.
+
+### Supported scope and limits
+
+1.0.0 supports a country-neutral accounting core: chart of accounts, receipts/expenses, general journals with linked reversals, required AR/AP with manually configured tax, optional Purchasing and shared Inventory, opening conversion, bank reconciliation, core financial reports and English-language screens.
+
+1.0.0 does **not** include regional tax certification or e-invoicing, a production-ready shop POS (the bundled cash POS remains an illustrative demonstration), advanced stock (multiple locations, serials/batches/expiry, landed cost), partner/profit-sharing accounting, e-commerce or storefront integration, offline or native clients, or reviewed Urdu/Arabic/RTL screens (planned for 1.1 and 1.2). Each book keeps one immutable functional currency; presentation-currency reporting, period-end FX revaluation and multi-book consolidation remain future work, and the existing FX/settlement restrictions described in UPGRADE.md and INSTALL.md still apply.
+
+### Assurance status
+
+Before this release, the owner ran the full automated test suite, fault-injection tests against the update/recovery path (signature and channel tampering, unsafe paths, interrupted migrations and mutations, dependency loss and recovery resumption), exact-artifact installation/upgrade/recovery checks against a built package archive, and developer-operated browser checks of the installer and workflow journeys at desktop, tablet and phone widths. These checks are technical evidence, not accounting or usability sign-off.
+
+Independent accounting review, independent security review, supervised pilots including a real month-end close, installation observation by an unfamiliar operator, and recovery certification on a restricted shared-hosting account have **not** been performed. The owner is publishing 1.0.0 as the supported production scope with these limits disclosed, rather than waiting for those reviews. Operators who need one of these assurances before deploying should arrange it independently before going live. The updater also currently requires a schema-owning database identity with DDL privileges and matching view/trigger definers; a separate low-privilege runtime identity with temporary update credentials is not implemented, so hosts that only grant a restricted application account cannot yet use automatic updates or recovery.
+
+Exact-artifact results for this package (fresh browser installation from the ZIP, the manual upgrade from the published 0.6.0-preview package, signed-update fault recovery and backup restoration) are recorded in the repository publication receipt `docs/repository/PUBLICATION-2026-09-18-1.0.0.md`, which post-dates this archive. Do not infer those checks from the source-test counts above.
+
+### Upgrade from 0.6.0-preview
+
+The supplied migration chain is unchanged since 0.6.0-preview: it still ends at `031_posting_source_lookup`, with 32 total migration receipts. 1.0.0 adds no new migration. Upgrading is a manual, staged procedure:
+
+1. Back up the complete installed application, private configuration and a consistent database backup (data, views and triggers, including `pl_schema_migrations`), and rehearse restoring that backup into an isolated database before touching the live installation. See UPGRADE.md.
+2. Under a maintenance window, replace the application code with the 1.0.0 package while preserving existing private configuration, keys and the database.
+3. Run the CLI migration command once (`php www/phpledger/install/preflight.php`, then `php www/phpledger/install/migrate.php`, then `php www/phpledger/install/preflight.php` again); re-running it is a safe no-op once current.
+4. Provision the private installation directory and a strong random `operator.key` for update/recovery access, and pin the publisher's independently obtained public key as `publisher.pem` (or `PL_UPDATE_PUBLIC_KEY`). Neither is required to keep operating 1.0.0 without ever using the new updater, but both are required before its first signed update.
+5. Verify sign-in, existing totals, account statements and a general-journal post/reversal in an isolated sample company before reopening access.
+
+This procedure does not use the new `/maintenance.php` updater, because a published 0.6.0-preview installation predates it; the first update through `/maintenance.php` is only available after this manual upgrade to 1.0.0. See UPGRADE.md for the complete "From 0.6.0-preview to 1.0.0" section, including exact backup, restoration-rehearsal and verification steps.
+
+Media kit: https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip
 
 ## 0.6.0-preview: interface rebuild
 
