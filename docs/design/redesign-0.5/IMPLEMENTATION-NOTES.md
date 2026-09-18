@@ -675,3 +675,8 @@ closed/partial/open disposition, including the remaining publication gates.
 - Registered a synthetic local client and completed valid consent and cancellation with JavaScript enabled and disabled at 1366x768 and 1024x768. Verified callback state, authorization code presence for approval, access_denied for cancellation, primary-action visibility and page overflow. The callback was intercepted in the browser, so there was no external client request. No code or token value was logged. Visually reviewed the 1024-pixel consent capture. Evidence: completion-checkpoint/oauth-consent-results.json and matching captures.
 - Checked that the explicit package inventory includes all current application PHP/CSS/JavaScript files; none were missing. This is an inventory check, not exact-archive installation or upgrade validation.
 - Release remains unpublished. Outstanding implementation/acceptance includes form field recovery, complete nested report/source/action returns, full route/state and accessibility review. Final distributable fresh/upgrade/restore/runtime checks and consistent release assets/publication still follow. No publication authorization is missing.
+
+
+## Published checkpoint - 18 September 2026
+
+0.6.0-preview is public and live. PR #66 merged after all PHP CI and CLA checks passed. Exact-package fresh/upgrade checks passed on PHP 8.2/8.3/8.4; local and frozen hosted backup restoration passed. Public assets/checksums, hosted demo, website, Wiki and About verified. Remaining visual/accessibility, field-error and nested-return limits are disclosed in the preview. See ../../repository/PUBLICATION-2026-09-18.md for the complete receipt, backup details and limitations.

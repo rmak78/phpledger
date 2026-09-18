@@ -1,7 +1,7 @@
 # 0.6.0-preview audit closure checkpoint
 
 18 September 2026. Local implementation and synthetic browser evidence only.
-**Publication remains gated.** A closed defect below does not establish accounting
+**Published as 0.6.0-preview on 18 September after the owner instructed publication with the outstanding limitations disclosed.** See [publication receipt](../../repository/PUBLICATION-2026-09-18.md). Remaining findings below track follow-up acceptance, not an unpublished release. A closed defect below does not establish accounting
 sign-off, observed usability or WCAG conformance. Mobile refinement is deferred
 by the owner; page-overflow safety, keyboard access and readable controls are not.
 
@@ -86,14 +86,13 @@ digest-bound review, exact opening reconciliation and single posting. Their
 service checks pass in the full suite; this is not a substitute for the remaining
 setup browser-state/field-error/assistive-technology acceptance.
 
-## Release gates still open
+## Remaining acceptance and original release checklist
 
 - Complete prototype-to-runtime state coverage, visual review and all 38 route receipts.
 - Complete remaining field-error findings and final acceptance of correction-preview/purchasing-context changes.
 - Legacy CSS dependency removed; finish consolidated visual acceptance after token component retirement.
 - Finish representative keyboard/zoom/accessibility checks; record the approval-review rejection honestly.
-- Verify the final package on fresh/0.5 upgrade data, supported runtimes and restore path.
+- Completed for publication: exact package fresh/0.5 upgrade checks on PHP 8.2/8.3/8.4 and local/hosted restoration verification; see the publication receipt.
 - Align version, README, GitHub Wiki, repository About (description, website URL and topics), version/package manifests, website download/share metadata, help, demo, release notes, archive/checksum and media kit; publish only after verification. Record each published surface as updated or reviewed unchanged, with verification evidence, in the publication receipt and owner handoff.
 
-The owner has already authorized publication after the gates pass. No extra
-publication permission is being requested by this checkpoint.
+The original checkpoint above was followed by the owner instruction to publish the current preview with its limitations disclosed. Package/accounting/CI checks passed; the CLA was personally signed by the owner. GitHub, demo, website, Wiki and metadata are now published and verified.
