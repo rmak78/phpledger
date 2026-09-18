@@ -148,11 +148,13 @@ Release **0.2.1-preview** combines scoped read API/MCP, existing-user OAuth/Conn
 
 ## Where we go from here
 
+The owner-approved stable path is **0.6.1 workflow completion → 0.7 browser installation → 0.8 automatic backup/update/recovery → 0.9 supervised beta → 1.0 release candidates → 1.0 stable**. The provisional target is 18 December 2026 within an 11 December–8 January planning window, conditional on independent accounting/security review, verified recovery, a 30-day pilot including month-end close and 14 days of release-candidate acceptance. These are future gates, not production-readiness claims. English launches first; reviewed Urdu/RTL follows in 1.1 and Arabic/RTL in 1.2. Distribution-channel publication follows stable. Local work does not change the currently published 0.6.0-preview.
+
 | Next | Outcome |
 |---|---|
-| **Complete the accounting core** | Statements, chart management and general journals are in this preview. Opening cutover, period controls, bank CSV reconciliation and CSV exports are included. Supported statement packages and release validation remain open. |
-| **Extension and integration foundation** | Optional-module contracts and lifecycle are implemented. This preview adds read API/MCP using the same accounting services and permissions. Only tested client versions enter the verified matrix. |
-| **Optional business modules** | AR → AP → distribution/updater tooling → reviewed regional tax/e-invoicing connectors → purchasing/inventory → shop POS → e-commerce/storefront → controlled API/MCP commands → restaurant → distribution and specialists. Required tax support precedes affected production use. |
+| **Finish and qualify the existing accounting workflows** | Close field recovery, nested report/source returns and essential accessibility, then obtain independent accounting/security review and observed period-close acceptance. |
+| **Browser installation and safe updates** | Guarded setup, signed packages, automatic matched backups and recovery precede stable. Hosting compatibility follows checked runtime/database/permission requirements. |
+| **Stable, then broader adoption** | Supervised beta → release candidates → 1.0. Urdu/RTL and distribution channels follow in 1.1; Arabic/RTL in 1.2. Regional connectors, production shop POS, e-commerce, controlled writes and specialist modules follow separate gates. |
 
 The core must work independently of add-ons. Shop and restaurant interfaces will share checkout and accounting services while providing their own operational workflows. Observed usability, package validation and an explicit supported scope remain release gates. [Module build order and completion gates →](https://github.com/rmak78/phpledger/blob/8cf7386/docs/MODULE-ROADMAP.md)
 

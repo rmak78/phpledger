@@ -1,10 +1,51 @@
 # Revival roadmap
 
+## Current delivery contract: first stable 1.0
+
+Owner approved on 18 September 2026. This section supersedes older forward sequences below; dated release records remain historical. Published baseline: **0.6.0-preview**. The working stable target is **18 December 2026**, with a provisional **11 December 2026–8 January 2027** planning window. Dates are estimates, not release commitments; re-estimate after installer acceptance and successful restricted-host update recovery.
+
+**1.0 scope:** country-neutral accounting, English first, core AR/AP and manually configured tax, optional basic Purchasing/Inventory, essential phone/keyboard accessibility, browser installation, operator-initiated updates with automatic matched backups and automatic failure recovery. Regional certification/e-invoicing, production shop POS, advanced stock, partner profit-sharing, e-commerce, offline/native clients and specialists are outside this stable promise. Existing FX restrictions remain explicit. Accounting, security and observed use each require their own evidence.
+
+| Release | Deliverable | Exit evidence | Current status |
+|---|---|---|---|
+| 0.6.1-preview | Field-error recovery, nested report/source/action returns, responsive/keyboard financial review and coherent operator documentation | Supported routes/states exercised; no material accounting/access or essential-workflow defect | Local workflow fixes implemented and tested; full route/state and observed acceptance remain open; not released |
+| 0.7.0-preview | Ownership-protected browser setup using existing migration/auth/onboarding services | Unfamiliar operator installs without shell/Composer/Node; invalid hosts and takeover attempts rejected | Local installer implemented with automated and browser evidence; host/user acceptance pending |
+| 0.8.0-preview | Signed updates, installation-wide maintenance, automatic verified backups, resumable automatic matched recovery | Fault-injected update restores code, configuration, keys, database, guards and financial totals under restricted hosting permissions | Local update/recovery implementation and selected fault tests passed; independent/security/host qualification pending |
+| 0.9.0-beta | Frozen feature scope; 2–3 supervised pilots including core-only and basic stock/purchasing | Qualified accounting and independent security review before real-customer use; 30 consecutive days of observed use and an actual month-end close | Pending; no pilot clock started |
+| 1.0.0-rc.1 and subsequent RCs | Exact-artifact installation, declared upgrades, recovery and workflow acceptance | 14 consecutive days without a release blocker; material fixes restart affected acceptance | Pending; no RC clock started |
+| 1.0.0 | Supported production release and complete publication bundle | All independent gates below accepted; owner release approval | Pending; production readiness not claimed |
+
+### Stable release checklist
+
+- [ ] Qualified accounting reviewer accepts opening/cutover, allocations, credits/corrections, tax rounding, weighted-average valuation/returns, reports and supported closing/equity treatment.
+- [ ] Independent security reviewer accepts company isolation, installer ownership, installation-operator permissions, sessions, signed updates, backups and independent recovery access.
+- [ ] Tampering, concurrent updates, low space/permissions, database loss, request interruption, incomplete migration and failed health checks all fail safely; automatic matched restoration verified.
+- [ ] Supported current routes and states checked at desktop/tablet/phone, keyboard and zoom; unfamiliar users complete installation and daily work.
+- [ ] Fresh installation, every declared upgrade path, restricted database privileges, full restoration and representative sustained workload validated; measured limits published.
+- [ ] Two or three supervised pilots complete at least 30 consecutive days and an actual month-end close; material defects and discrepancies resolved.
+- [ ] Exact release candidate completes its 14-day acceptance period without release blockers.
+- [ ] ZIP, SHA-256, matching versioned media kit, README, Wiki, About, website/demo, support guidance and stable version/channel metadata agree and are verified after authorized publication.
+
+No reviewer, interview, pilot, host certification or time gate becomes complete from automated tests. The owner arranges reviewers and pilot businesses; engineering supplies the evidence and remediation. Live publication and external contact still require explicit authorization.
+
+Reviewer coordination: the owner confirms their accountant and lawyer have agreed to help. Named scope/dates, an independent technical security reviewer and pilot businesses remain to be scheduled. The [reviewer/pilot brief and volunteer advert](strategy/STABLE-REVIEWER-PILOT-BRIEF.md) define the requested contribution and handoff; the advert has not been posted.
+
+Default upgrade commitment: the latest published preview and subsequent release candidates; earlier previews use documented, tested staged upgrades. Legacy or customized schemas are excluded. Compatibility is requirements-based (currently MySQL 8.4), with verified host results and reported limits; a VPS demonstration alone is not arbitrary shared-host proof. Recovery must pass with representative restricted hosting permissions before that capability is advertised.
+
+### Following stable
+
+1. **1.0.x:** production fixes and compatibility improvements.
+2. **1.1:** reviewed Urdu/RTL plus installer distribution channels (Softaculous/Installatron, published containers/packages).
+3. **1.2:** reviewed Arabic/RTL and demand-led reporting refinements.
+4. **Later capability releases:** reviewed regional connectors → stock/tax-integrated shop POS → e-commerce → controlled API/MCP writes → restaurant/distribution/specialists, each with independent acceptance.
+
+English-first 1.0 and the named language releases explicitly supersede the earlier first-layer Urdu/Arabic commitment. Installer/updater development and workflow closure run in parallel; feature families are not added to the stable critical path. Technical checkpoints are recorded in [Validation](VALIDATION.md).
+
 ## 0.6.0-preview status
 
 0.6.0-preview packages the approved interface direction and service improvements. P0.4 shell selection is decided. Full state/accessibility acceptance, field-error consistency and nested source-action return preservation remain follow-up work; the preview does not claim those complete. Earlier dated release sections below are historical.
 
-## Current release: 0.4.0-preview accounting starter
+## Historical release: 0.4.0-preview accounting starter
 
 The owner's 16 September scope supersedes the separate AR, AP and later inventory sequencing below. AR and AP are required parts of the base accounting core, implemented as separate services. Purchasing and Inventory are separate bundled optional modules in the same next release. Keep Inventory basic: products, one stock location, immutable movements and weighted-average valuation. Quotes, advanced stock features, landed cost and LC workflows belong to separate plugins.
 
@@ -126,6 +167,8 @@ Branding setup is a proposed addition after essential business onboarding: an op
 
 Two parallel research tracks support the installation wizard: [business/country Chart of Accounts](coa/README.md) and [original business sample packs](sample-data/README.md). Their research and demonstration files are not active company templates or installed ERP modules. Review their provenance, accounting examples, and acceptance gates before connecting them to the installer.
 
+**Workstream — country packages from upstream charts (decision B8, 18 September 2026).** The complete Odoo 19.0 and ERPNext v16 country charts are mirrored at pinned commits in [resources/coa/upstream](../resources/coa/upstream/README.md) (260 charts, 122 countries, PHP Ledger root types, role defaults, provenance). All country packages are authored from that mirror, Pakistan first, then IN, AE, GB, US and the Middle East/Asia order, each passing the [catalogue contract](coa/regional-program/CATALOG-AND-INSTALLATION-CONTRACT.md) gates before release. The six-account starter, the industry-profile seed and the earlier candidate lists are retired for chart selection; existing companies keep their installed accounts. The mirror is LGPL/GPL-derived research and is not shipped in the release archive.
+
 Items 1–5 have foundation artifacts and technical evidence recorded in [Validation](VALIDATION.md). The historical receipt does not verify the new browser journey. Administrator/customer workflow completeness, public sample hosting, user research, accounting sign-off, and production readiness require their own evidence.
 
 ## Approved accounting and reporting priority
@@ -167,8 +210,6 @@ The current standalone PHP/InnoDB foundation already tests balanced atomic posti
 | Concurrent checkout and reporting | Agree realistic terminals, history size and latency/error targets; run mixed checkout/report load and a sustained soak in same-book and separate-business cases. Record lock waits, retries, latency, resource use and reconciled totals. Publish no capacity claim before this evidence. |
 | Measured report growth | Profile existing queries/indexes first. Introduce background reports or rebuildable summaries only where measured need justifies them, preserving source reconciliation, scope, dates and visible job status. |
 | Independent security and privacy | Review the deployed application and hosting against a recorded OWASP ASVS scope; assess authentication/access, dependencies, backups and relevant data flows/retention. Passing current automated checks does not close this gate. |
-**Workstream — country packages from upstream charts (decision B8, 18 September 2026).** The complete Odoo 19.0 and ERPNext v16 country charts are mirrored at pinned commits in [resources/coa/upstream](../resources/coa/upstream/README.md) (260 charts, 122 countries, PHP Ledger root types, role defaults, provenance). All country packages are authored from that mirror, Pakistan first, then IN, AE, GB, US and the Middle East/Asia order, each passing the [catalogue contract](coa/regional-program/CATALOG-AND-INSTALLATION-CONTRACT.md) gates before release. The six-account starter, the industry-profile seed and the earlier candidate lists are retired for chart selection; existing companies keep their installed accounts. The mirror is LGPL/GPL-derived research and is not shipped in the release archive.
-
 | Accounting and local obligations | Obtain accountant review and separate jurisdiction-specific tax review before enabling regional claims or adapters. AR/AP, inventory/COGS and stock reports still require their underlying modules and reconciliation. |
 | Customer LAN hosting | Validate an optional customer-owned local server profile, TLS, backups, power/server failure and internet-outage behavior. It may keep tills connected to the local server without providing disconnected-browser checkout. |
 | Queued offline entry | Design durable local operation IDs and pending/acknowledged/rejected states; server deduplication and linked receipts; stock/price/permission/period conflicts; lost acknowledgements, restart, storage loss and reconciliation. Posting, period control and reversal execute on the server. Test supported devices and security before release. No offline card-payment promise or current offline-support claim. |

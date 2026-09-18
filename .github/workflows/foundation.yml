@@ -11,7 +11,7 @@ permissions:
 jobs:
   php-mysql:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
@@ -32,6 +32,20 @@ jobs:
         run: docker compose --profile test run --rm test composer check-platform-reqs
       - name: Lint, static analysis, sample data, and isolated MySQL tests
         run: docker compose --profile test run --rm test
+      - name: Verify release channels and package boundaries
+        run: python3 tests/package-builder-test.py
+      - name: Verify publisher signatures and download restrictions
+        run: docker compose --profile test run --rm test php tests/release-signing-test.php
+      - name: Verify guarded browser installation in a disposable schema
+        run: docker compose --profile test run --rm test php tests/browser_installer_test.php
+      - name: Verify signed update failure and resumable recovery
+        run: docker compose --profile test run --rm test php tests/update-recovery-test.php
+      - name: Verify database restoration and interruption replay
+        run: docker compose --profile test run --rm test php tests/update-database-test.php
+      - name: Verify full application schema automatic recovery
+        run: docker compose --profile test run --rm test php tests/update-fullschema-test.php
+      - name: Verify maintenance authorization and replacement runtime recovery
+        run: docker compose --profile test run --rm test php tests/update-http-test.php
       - name: Verify a backup in an isolated restore database
         shell: pwsh
         run: ./tools/verify-backup-restore.ps1

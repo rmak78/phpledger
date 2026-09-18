@@ -23,15 +23,15 @@
 <meta property="og:title" content="Read a month-end close with traceable adjustments | PHP Ledger">
 <meta property="og:description" content="A synthetic December close with salaries, prepaid insurance, depreciation, loan interest and an unpaid bill that settles in January.">
 <meta property="og:url" content="https://phpledger.com/guides/monthly-closing/">
-<meta property="og:image" content="https://phpledger.com/assets/og/home.png">
-<meta property="og:image:width" content="1280">
-<meta property="og:image:height" content="640">
-<meta property="og:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
+<meta property="og:image" content="https://phpledger.com/assets/og/workspace-0.6.0-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PHP Ledger 0.6.0-preview Home using an isolated synthetic sample company.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Read a month-end close with traceable adjustments | PHP Ledger">
 <meta name="twitter:description" content="A synthetic December close with salaries, prepaid insurance, depreciation, loan interest and an unpaid bill that settles in January.">
-<meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
-<meta name="twitter:image:alt" content="PHP Ledger logo with a capture of the development preview showing synthetic sample data">
+<meta name="twitter:image" content="https://phpledger.com/assets/og/workspace-0.6.0-preview.png">
+<meta name="twitter:image:alt" content="PHP Ledger 0.6.0-preview Home using an isolated synthetic sample company.">
 <link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
 <script type="application/ld+json">
 {
@@ -92,8 +92,8 @@
       "isPartOf": {
         "@id": "https://phpledger.com/#website"
       },
-      "datePublished": "2026-09-16",
-      "dateModified": "2026-09-16",
+      "datePublished": "2026-09-18",
+      "dateModified": "2026-09-18",
       "author": {
         "@id": "https://phpledger.com/#maintainer"
       },
@@ -102,7 +102,7 @@
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
-        "url": "https://phpledger.com/assets/og/home.png"
+        "url": "https://phpledger.com/assets/og/workspace-0.6.0-preview.png"
       },
       "breadcrumb": {
         "@id": "https://phpledger.com/guides/monthly-closing/#breadcrumb"
@@ -173,17 +173,17 @@
 </header>
 <main id="main">
 <article class="container article section">
-<p><a href="/guides/">Reporting walkthroughs</a> · Local 0.2.1 candidate</p>
+<p><a href="/guides/">Reporting walkthroughs</a> · 0.6.0-preview interface</p>
 <h1>Read a month-end close with traceable adjustments</h1>
 <p class="lead">A monthly result includes the costs belonging to that month, including costs paid earlier or settled later.</p><p class="small">PHP Ledger guidance: use this page with the matching release notes and evaluate the workflow using synthetic records.</p>
-<p>This is an original synthetic Cedar Studio example prepared for the local 0.2.1 candidate. The public release remains 0.1.5-preview. Manual support schedules explain these sample accounting entries. They are separate from the new starter AR/AP, optional Inventory and manual tax workflows and do not implement payroll.</p>
+<p>This synthetic Cedar Studio example is shown in the 0.6.0-preview interface, using a fresh local sample. Manual support schedules explain these sample accounting entries. They are separate from the new starter AR/AP, optional Inventory and manual tax workflows and do not implement payroll.</p>
 <nav class="page-toc" aria-label="On this page"><p><strong>On this page</strong></p><ol><li><a href="#1-select-december-on-its-own">1. Select December on its own</a></li><li><a href="#2-check-the-recurring-support">2. Check the recurring support</a></li><li><a href="#3-separate-settlement-from-expense">3. Separate settlement from expense</a></li><li><a href="#4-understand-what-closed-means">4. Understand what “closed” means</a></li></ol></nav>
 <h2 id="1-select-december-on-its-own">1. Select December on its own</h2>
-<p>From Cedar Studio's sample guide, open <strong>December profit and loss</strong>. The inclusive dates are <strong>1–31 December 2025</strong>. Income is <strong>3,000.00</strong>, expenses are <strong>2,990.00</strong>, and net profit is <strong>10.00 USD</strong>.</p>
-<figure class="capture"><a href="/assets/screens/guides/monthly-profit.png"><img src="/assets/screens/guides/monthly-profit.png" alt="Cedar Studio December 2025 profit and loss: income 3,000, expenses 2,990 and profit 10, with the seven expense categories shown." width="1280" height="1486" loading="lazy" decoding="async"></a><figcaption>Actual synthetic report from the local candidate. The expense lines reconcile to the sources described below.</figcaption></figure>
+<p>From Cedar Studio's sample guide, open <strong>Profit &amp; loss</strong> and set a custom period. The inclusive dates are <strong>1–31 December 2025</strong>. Income is <strong>3,000.00</strong>, expenses are <strong>2,990.00</strong>, and net profit is <strong>10.00 USD</strong>.</p>
+<figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Review a monthly result" data-full="/assets/screens/v0.6.0-preview/monthly-profit.webp"><span class="capture-frame"><img src="/assets/screens/v0.6.0-preview/monthly-profit-720.webp" srcset="/assets/screens/v0.6.0-preview/monthly-profit-720.webp 720w, /assets/screens/v0.6.0-preview/monthly-profit.webp 1366w" sizes="(max-width: 900px) 100vw, 780px" width="1366" height="1100" alt="Cedar Studio: December 2025 income of USD 3,000.00 less expenses of USD 2,990.00 leaves USD 10.00 profit." loading="lazy"></span></button><figcaption>Cedar Studio: December 2025 income of USD 3,000.00 less expenses of USD 2,990.00 leaves USD 10.00 profit. · 0.6.0-preview · Synthetic data</figcaption></figure>
 <h2 id="2-check-the-recurring-support">2. Check the recurring support</h2>
 <ul><li><strong>Salaries: 1,500.00.</strong> The fictional staff schedule has Mira Vale at 600.00 and Noel Reed at 900.00. No payroll deductions or tax are calculated.</li><li><strong>Rent: 400.00; utilities: 100.00.</strong> Rent uses the reserve bank. Utilities use 90.00 from the primary bank and 10.00 from petty cash.</li><li><strong>Insurance: 100.00.</strong> January's 1,200.00 prepayment is released over twelve months. December's expense reduces the remaining prepayment to zero.</li><li><strong>Depreciation: 40.00.</strong> The illustrative equipment schedule uses a 2,400.00 cost, zero residual and a 60-month life starting February 2024. Accumulated depreciation is 920.00 at December 2025.</li></ul>
-<p>Open <strong>December's support journal</strong> in the guide to inspect these entries. Its durable reference is <code>service-agency/operations-2025-12</code>.</p>
+<p>Open <strong>Journals</strong> and find the December support entry to inspect these amounts. Its durable reference is <code>service-agency/operations-2025-12</code>.</p>
 <h2 id="3-separate-settlement-from-expense">3. Separate settlement from expense</h2>
 <p>The December loan payment contains <strong>1,200.00 principal</strong> and an illustrative <strong>300.00 interest</strong> component. Only the interest enters this P&amp;L. The principal reduces the loan liability.</p>
 <p>A fictional Harbor maintenance bill adds <strong>550.00</strong> to December expenses and accounts payable. It is paid on <strong>10 January 2026</strong>. Use the payable statement from December through January to follow the outstanding amount to settlement. January's payment reduces the bank and payable; it does not record the expense a second time.</p>
@@ -217,7 +217,7 @@
     </div>
     <nav class="trust-links" aria-label="Project policies"><a href="https://github.com/rmak78/phpledger/blob/master/LICENSE">Licence</a><a href="https://github.com/rmak78/phpledger/blob/master/SECURITY.md">Security contact</a><a href="https://github.com/rmak78/phpledger/blob/master/CODE_OF_CONDUCT.md">Code of conduct</a><a href="/privacy/">Privacy and data boundaries</a></nav>
     <p class="footer-legal">New project-owned code uses AGPL-3.0-or-later; a commercial licence is available. The pre-adoption 0.1.0 through 0.1.5 previews retain MIT; dependencies, fonts and the archived 2015 application keep their own terms. Photographs are illustrative and are not customer endorsements. Screens show synthetic sample data from the development preview.</p>
-    <p class="footer-meta">Maintained by <a href="/about/" rel="author">Rana Mansoor Akbar Khan</a>, PHP Ledger project maintainer. Last reviewed <time datetime="2026-09-16">2026-09-16</time>.</p>
+    <p class="footer-meta">Maintained by <a href="/about/" rel="author">Rana Mansoor Akbar Khan</a>, PHP Ledger project maintainer. Last reviewed <time datetime="2026-09-18">2026-09-18</time>.</p>
   </div>
 </footer>
 <dialog id="screen-dialog" aria-labelledby="screen-dialog-title"><div class="dialog-heading"><h2 id="screen-dialog-title">Product screen</h2><button type="button" class="dialog-close" aria-label="Close enlarged screen"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>Close</button></div><p id="screen-dialog-note">Development preview with synthetic sample data</p><p class="dialog-hint" id="dialog-hint">Scroll the image to explore it. With a keyboard, focus the image area and use the arrow keys.</p><div class="dialog-image-wrap" tabindex="0" role="region" aria-label="Enlarged product image" aria-describedby="dialog-hint"><img id="dialog-image" width="1440" height="1200" alt=""></div></dialog>

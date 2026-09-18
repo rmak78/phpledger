@@ -10,13 +10,13 @@ The interface uses compiled local CSS and server-side paged lists. No Node insta
 
 ## Start here
 
-1. Read [INSTALL.md](INSTALL.md) for hosting requirements, private configuration and the three setup commands.
+1. Read [INSTALL.md](INSTALL.md) for hosting requirements, protected browser setup in the local installer candidate, and the retained CLI setup path.
 2. Sign in and create an isolated sample company or a new business. In local development, the separate sample chooser provisions only the selected synthetic company. Review the chart and create a customer/vendor party before recording an invoice or bill.
 3. Review and post the document, record a partial payment, and follow the remaining balance into ageing, its journal and the account statement. Corrections retain the same document identity and preserve linked reversal history.
 4. For stock businesses, enable Inventory and then Purchasing in **Modules**. Create a stock product, confirm a purchase order, receive goods and match the later supplier bill. Review stock valuation and received-but-unbilled reconciliation.
 5. Configure any required tax codes, accounts and dated rates manually in **Tax**. Choose exclusive or inclusive price entry; documents show the separate net, tax and total. For existing businesses, review opening debt/stock conversion before using their imported balances operationally.
 
-The package needs PHP **8.2+ (8.3 recommended)**, MySQL **8.4**, HTTPS and command-line access. Production Composer dependencies are included. Keep the supplied directory layout: only `www/phpledger/public` is the web document root. Do not serve the package root.
+The package needs PHP **8.2+ (8.3 recommended)**, MySQL **8.4** and HTTPS. Production Composer dependencies are included. The published 0.6 preview uses CLI setup; the local next installer candidate uses hosting-panel preparation and guarded browser setup. Automatic updates additionally require PHP ZIP, private backup space and verified schema/file permissions. Keep the supplied directory layout: only `www/phpledger/public` is the web document root. Do not serve the package root.
 
 ## Included in 0.6.0-preview
 
@@ -53,7 +53,7 @@ Quotes are excluded from this starter and preserved separately for a future plug
 
 `PACKAGE-MANIFEST.json` identifies the packaged files and source. Preserve the package, its published checksum, configuration backup and database backup together. Project terms are in [LICENSE](LICENSE); dependency and asset notices are in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
-The supplied chain extends through `025_tax_price_mode`, with 26 migration receipts including both distinct `006_*` identities. Earlier migration names and checksums remain unchanged. Follow the upgrade guide before changing an existing database, and compare the installed receipts against every migration in the package manifest. Account IDs and posted history are retained, and existing-business opening reconciliation remains required. Installing optional modules does not activate them for existing companies; AR/AP and the manual tax engine belong to the required core. API/MCP financial mutations remain future work.
+The supplied chain extends through `031_posting_source_lookup`, with 32 migration receipts including both distinct `006_*` identities. Earlier migration names and checksums remain unchanged. Follow the upgrade guide before changing an existing database, and compare the installed receipts against every migration in the package manifest. Account IDs and posted history are retained, and existing-business opening reconciliation remains required. Installing optional modules does not activate them for existing companies; AR/AP and the manual tax engine belong to the required core. API/MCP financial mutations remain future work.
 
 The archive excludes the old application, marketing website, development Docker setup, development/test suite, private configuration and customer data. The standalone `tools/validate-tax-catalog.php` is an optional structural check; it does not activate or approve tax research. There is no requirement to run Composer development scripts on the customer server.
 

@@ -18,7 +18,7 @@ function pl_web_starter_ar(int $actorId,int $companyId,int $bookId,array $user,a
             if (in_array($action,['save','correct'],true)) {
                 $kind=pl_web_text($_POST,'kind',$normalKind);
                 if (!in_array($kind,[$normalKind,$creditKind],true)) { throw new DomainException('Invalid document type for this module.'); }
-                $return=pl_url($path,['id'=>$id?:null,'new'=>$id?null:'1','return_filters'=>$filters]);
+                $return=pl_workflow_url($path,['id'=>$id?:null,'new'=>$id?null:'1','return_filters'=>$filters]);
                 if (pl_web_text($_POST,'editor_action')==='add_line' || isset($_POST['remove_line'])) {
                     pl_require_company_access($actorId,$companyId,true);
                     pl_form_failure($return,pl_web_line_action($_POST),'',200);
@@ -63,18 +63,18 @@ function pl_web_starter_ar(int $actorId,int $companyId,int $bookId,array $user,a
                 pl_activate_open_item_account($actorId,$companyId,$bookId,pl_web_id($_POST,'account_id'),pl_web_text($_POST,'reason'));
             } else { throw new DomainException('Choose a document action.'); }
             pl_notice('Accounting action completed. Review the updated document and balances.');
-            pl_redirect(pl_url($path,['id'=>$id?:null,'return_filters'=>$filters]));
+            pl_redirect(pl_workflow_url($path,['id'=>$id?:null,'return_filters'=>$filters]));
         } catch (DomainException $error) {
             $input=array_filter($_POST,static fn(mixed $value):bool=>is_scalar($value));
             if (is_array($_POST['lines']??null)) { $input['lines']=array_values(array_map(static fn(array $line):array=>array_filter($line,static fn(mixed $value):bool=>is_scalar($value)),array_filter($_POST['lines'],'is_array'))); }
-            pl_form_failure(pl_url($path,['id'=>$id?:null,'new'=>!$id&&in_array(pl_web_text($_POST,'action'),['save','correct'],true)?'1':null,'return_filters'=>$filters]),$input,$error->getMessage());
+            pl_form_failure(pl_workflow_url($path,['id'=>$id?:null,'new'=>!$id&&in_array(pl_web_text($_POST,'action'),['save','correct'],true)?'1':null,'return_filters'=>$filters]),$input,$error->getMessage());
         }
     }
     $id=pl_web_id($_GET,'id'); $document=$id?pl_get_ar_document($actorId,$companyId,$bookId,$id):null;
     if ($document && !in_array($document['kind'],[$normalKind,$creditKind],true)) { throw new DomainException('Open this document in its owning module.'); }
     $creditFor=pl_web_id($_GET,'credit_for'); $original=$creditFor?pl_get_ar_document($actorId,$companyId,$bookId,$creditFor):null;
     if ($original && ($original['kind']!==$normalKind || $original['journal_id']===null || $original['payment_status']==='reversed' || bccomp($original['outstanding_fc'],'0',4)<=0)) { throw new DomainException('Choose a posted invoice or bill with an outstanding amount in this module.'); }
-    $form=pl_form_state(pl_url($path,['id'=>$id?:null,'new'=>$id?null:(pl_web_text($_GET,'new')?:null),'return_filters'=>isset($_GET['return_filters'])?$filters:null]));
+    $form=pl_form_state(pl_workflow_url($path,['id'=>$id?:null,'new'=>$id?null:(pl_web_text($_GET,'new')?:null),'return_filters'=>isset($_GET['return_filters'])?$filters:null]));
     $originalId=$document['original_document_id']??pl_web_id($form['input'],'original_document_id');
     if ($original===null && $originalId) { $original=pl_get_ar_document($actorId,$companyId,$bookId,(int)$originalId); }
     $editing=isset($_GET['new']) || isset($_GET['edit']) || isset($_GET['correct']) || $original!==null && !$document || in_array($form['input']['action']??'',['save','correct'],true);
@@ -143,7 +143,7 @@ function pl_web_settlement_input(array $input,string $direction): array
 function pl_web_settlement(int $actorId,int $companyId,int $bookId,array $user,array $company,string $path,string $method): never
 {
     $direction=$path==='/ar'?'receivable':'payable';
-    $return=pl_url($path,['settle'=>'1']);
+    $return=pl_workflow_url($path,['settle'=>'1']);
     if ($method==='POST') {
         try {
             $input=pl_web_settlement_input($_POST,$direction);
@@ -152,7 +152,7 @@ function pl_web_settlement(int $actorId,int $companyId,int $bookId,array $user,a
                 $hash=is_array($review) && ($review['company_id']??null)===$companyId && ($review['book_id']??null)===$bookId && ($review['key']??null)===$input['idempotency_key'] ? ($review['hash']??'') : '';
                 $result=pl_confirm_settlement($actorId,$companyId,$bookId,$input,is_string($hash)?$hash:'');
                 pl_notice('Payment posted across '.count($result['allocations']).' open items. No amount was left unallocated.');
-                pl_redirect(pl_url('/journals/detail',['id'=>$result['journal_id']]));
+                pl_redirect(pl_workflow_url('/journals/detail',['id'=>$result['journal_id']]));
             }
             $preview=pl_preview_settlement($actorId,$companyId,$bookId,$input);
             $_SESSION['settlement_review']=['company_id'=>$companyId,'book_id'=>$bookId,'key'=>$input['idempotency_key'],'hash'=>pl_settlement_review_hash($input,$preview)];

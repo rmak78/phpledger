@@ -225,6 +225,32 @@ document.querySelectorAll('[data-demo-expiry]').forEach((element) => {
 // After a rejected submission, move keyboard focus to the preserved error summary.
 document.querySelector('[data-form-error]')?.focus();
 
+// Error links work as ordinary anchors without JS; enhancement also opens folded fields.
+document.querySelectorAll('[data-field-errors] a').forEach(link => link.addEventListener('click', event => {
+    const control = document.getElementById(link.hash.slice(1));
+    if (!control) return;
+    event.preventDefault();
+    let parent = control.parentElement;
+    while (parent) { if (parent instanceof HTMLDetailsElement) parent.open = true; parent = parent.parentElement; }
+    control.focus();
+}));
+function clearServerFieldError(control) {
+    if (!control.id || !control.hasAttribute('aria-invalid')) return;
+    const errorId = control.id + '-error';
+    document.getElementById(errorId)?.remove();
+    control.removeAttribute('aria-invalid');
+    const descriptions = (control.getAttribute('aria-describedby') || '').split(' ').filter(id => id && id !== errorId);
+    if (descriptions.length) control.setAttribute('aria-describedby', descriptions.join(' '));
+    else control.removeAttribute('aria-describedby');
+    control.closest('.field-error')?.classList.remove('field-error');
+    document.querySelectorAll('[data-field-errors] a').forEach(link => {
+        if (link.hash === '#' + control.id) link.closest('li').remove();
+    });
+    document.querySelectorAll('[data-field-errors]').forEach(summary => { summary.hidden = !summary.querySelector('li'); });
+}
+document.addEventListener('input', event => { if (event.target instanceof HTMLElement) clearServerFieldError(event.target); });
+document.addEventListener('change', event => { if (event.target instanceof HTMLElement) clearServerFieldError(event.target); });
+
 document.querySelectorAll('[data-dismiss]').forEach(button => {
         button.addEventListener('click', () => button.closest('[data-dismissible], .notice')?.remove());
 });
@@ -410,6 +436,8 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
             row.querySelector('[data-line-number]').textContent = String(index + 1);
             row.querySelectorAll('[name]').forEach((field) => {
                 field.name = field.name.replace(/^lines\[[^\]]*\]/, 'lines[' + index + ']');
+                const name = /\[([a-z_]+)\]$/.exec(field.name)?.[1];
+                if (name) field.id = 'journal-line-' + index + '-' + name;
             });
             row.querySelectorAll('[data-line-label]').forEach((label) => {
                 label.textContent = label.dataset.lineLabel + ', line ' + (index + 1);
@@ -423,6 +451,8 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
         add.disabled = rows().length >= 100;
     };
     const clearRow = (row) => {
+        row.querySelectorAll('.field-error-text').forEach(error => error.remove());
+        row.querySelectorAll('[aria-invalid]').forEach(field => { field.removeAttribute('aria-invalid'); field.removeAttribute('aria-describedby'); });
         row.querySelectorAll('input').forEach((field) => {
             field.value = '';
             field.removeAttribute('value');
@@ -438,6 +468,7 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
     add.addEventListener('click', (event) => {
         event.preventDefault();
         if (rows().length >= 100) return;
+        body.querySelectorAll('[aria-invalid]').forEach(clearServerFieldError);
         dirty = true;
         const row = template.cloneNode(true);
         clearRow(row);
@@ -452,6 +483,7 @@ document.querySelectorAll('[data-forecast-chart]').forEach(canvas => {
         if (!remove) return;
         event.preventDefault();
         dirty = true;
+        body.querySelectorAll('[aria-invalid]').forEach(clearServerFieldError);
         const row = remove.closest('[data-journal-row]');
         const currentRows = rows();
         const index = currentRows.indexOf(row);
@@ -705,9 +737,12 @@ document.querySelectorAll('[data-commercial-form]').forEach(form => {
         if (!add && !remove) return;
         event.preventDefault();
         if (add && body.children.length >= 100) { form.querySelector('[data-commercial-total]').textContent = 'A document supports up to 100 lines.'; return; }
+        body.querySelectorAll('[aria-invalid]').forEach(clearServerFieldError);
         if (remove) remove.closest('[data-commercial-row]').remove();
         if (add || body.children.length === 0) {
             const row = template.cloneNode(true);
+            row.querySelectorAll('.field-error-text').forEach(error => error.remove());
+            row.querySelectorAll('[aria-invalid]').forEach(control => { control.removeAttribute('aria-invalid'); control.removeAttribute('aria-describedby'); });
             row.querySelectorAll('input,select').forEach(control => { control.value = ''; });
             body.append(row); update(); row.querySelector('input,select').focus();
         } else { update(); (body.children[Math.min(Number(remove.value), body.children.length - 1)].querySelector('input,select')).focus(); }

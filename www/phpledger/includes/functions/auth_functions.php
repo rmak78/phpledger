@@ -15,7 +15,7 @@ function pl_verify_password(string $password, string $hash): bool
     return strlen($password) <= 72 && !str_contains($password, "\0") && password_verify($password, $hash);
 }
 
-/** CLI setup entry point; there is no public user-creation route. */
+/** Internal account creation, used by guarded CLI and one-time browser setup. */
 function pl_create_user(string $email, string $displayName, string $password): int
 {
     pl_demo_require_setup_action();

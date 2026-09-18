@@ -1,0 +1,95 @@
+<?php
+declare(strict_types=1);
+
+require_once __DIR__ . '/update_probe_functions.php';
+
+/** Minimal independent operator interface. No financial actor/session is consulted. */
+function pl_update_web(string $root): never
+{
+    ignore_user_abort(true);
+    header('Cache-Control: no-store'); header('X-Content-Type-Options: nosniff'); header('Referrer-Policy: no-referrer');
+    $nonce = base64_encode(random_bytes(18));
+    header("Content-Security-Policy: default-src 'none'; script-src 'nonce-$nonce'; style-src 'nonce-$nonce'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'");
+    $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+    if (!in_array($method, ['GET', 'POST'], true)) { http_response_code(405); header('Allow: GET, POST'); exit; }
+    $local = in_array(getenv('PL_ENV'), ['local', 'test'], true) && in_array($_SERVER['REMOTE_ADDR'] ?? '', ['127.0.0.1', '::1'], true);
+    if (!$local && !pl_update_secure_request($_SERVER)) { http_response_code(403); echo 'Installation operations require HTTPS.'; exit; }
+    ini_set('session.use_strict_mode', '1'); ini_set('session.use_only_cookies', '1');
+    session_name('phpledger_install_operator');
+    session_set_cookie_params(['httponly' => true, 'secure' => !$local, 'samesite' => 'Strict', 'path' => '/']);
+    session_start();
+    $_SESSION['update_csrf'] ??= bin2hex(random_bytes(32));
+    $csrf = $_SESSION['update_csrf']; $error = ''; $state = null; $authorized = false;
+    try {
+        $directory = pl_update_directory($root);
+        $keyFile = $directory . '/operator.key';
+        $fingerprint = is_file($keyFile) ? hash_file('sha256', $keyFile) : '';
+        $authorized = $fingerprint !== '' && isset($_SESSION['update_operator'], $_SESSION['update_until'])
+            && hash_equals($fingerprint, $_SESSION['update_operator']) && $_SESSION['update_until'] > time();
+        if ($method === 'POST') {
+            if (!is_string($_POST['csrf'] ?? null) || !hash_equals($csrf, $_POST['csrf'])) { throw new DomainException('This form expired. Reload the installation page.'); }
+            if (isset($_POST['operator_key']) && is_string($_POST['operator_key']) && $_POST['operator_key'] !== '') {
+                pl_update_operator($directory, $_POST['operator_key']);
+                session_regenerate_id(true); $_SESSION['update_operator'] = $fingerprint; $_SESSION['update_until'] = time() + 900;
+                $authorized = true;
+            }
+            if (!$authorized) { throw new DomainException('Reauthenticate using the host installation operator key.'); }
+            $action = $_POST['action'] ?? '';
+            if ($action === 'begin') {
+                // Beginning a new operation always requires fresh proof, even with a session.
+                pl_update_operator($directory, (string) ($_POST['operator_key'] ?? ''));
+                $archive = $_FILES['archive'] ?? []; $metadata = $_FILES['metadata'] ?? [];
+                $download = ($_POST['source'] ?? 'upload') === 'official';
+                foreach ($download ? [$metadata] : [$archive, $metadata] as $file) {
+                    if (($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK || !is_string($file['tmp_name'] ?? null) || !is_uploaded_file($file['tmp_name'])) { throw new DomainException('Upload both the release ZIP and signed release metadata.'); }
+                }
+                if (filesize($metadata['tmp_name']) > 4000000) { throw new DomainException('Signed metadata is too large.'); }
+                $envelope = (string) file_get_contents($metadata['tmp_name']); $channel = (string) ($_POST['channel'] ?? 'stable');
+                $downloaded = null;
+                try {
+                    if ($download) {
+                        require_once __DIR__ . '/update_download_functions.php';
+                        $installed = pl_update_json($root . '/PACKAGE-MANIFEST.json');
+                        $keyPath = getenv('PL_UPDATE_PUBLIC_KEY') ?: $directory . '/publisher.pem';
+                        if (!is_file($keyPath)) { throw new DomainException('Pin the publisher public key in private host configuration first.'); }
+                        $verified = pl_update_verify_metadata($envelope, (string) file_get_contents($keyPath), $channel, (string) $installed['version']);
+                        $downloaded = pl_update_download_official($verified, $directory);
+                    }
+                    $state = pl_update_begin($root, $downloaded ?? $archive['tmp_name'], $envelope, $channel);
+                } finally { if ($downloaded !== null && is_file($downloaded)) { unlink($downloaded); } }
+            } elseif ($action === 'continue') {
+                session_write_close(); // Do not block status polling behind a database restore.
+                $state = pl_update_step($root);
+            } elseif ($action !== 'authenticate') { throw new DomainException('Unknown installation operation.'); }
+        }
+        if ($authorized && $state === null && is_file($directory . '/updates/active.json')) {
+            $id = pl_update_json($directory . '/updates/active.json')['id'] ?? '';
+            if (is_string($id) && preg_match('/^[a-f0-9]{32}$/D', $id)) { $state = pl_update_json($directory . '/updates/' . $id . '/state.json'); }
+        }
+        if ($authorized && $state === null && is_file($directory . '/updates/last.json')) { $state = pl_update_json($directory . '/updates/last.json'); }
+    } catch (Throwable $failure) {
+        http_response_code(422);
+        $error = $failure instanceof DomainException ? $failure->getMessage() : 'Installation operation is unavailable. Maintenance remains active if recovery is pending. Check private storage and database availability, then retry.';
+    }
+    $escape = static fn(string $value): string => htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    // A terminal checkpoint can precede marker removal if the worker is interrupted.
+    // Keep Continue available until the durable marker is actually finalized.
+    $active = $authorized && $state !== null && isset($directory) && is_file($directory . '/updates/active.json');
+    echo '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PHP Ledger installation maintenance</title>';
+    echo '<style nonce="' . $nonce . '">body{font:1rem system-ui;line-height:1.6;margin:2rem auto;padding:0 1rem;max-width:46rem;color:#172336}label{display:block;margin-top:1rem}input,select,button{font:inherit;max-width:100%;padding:.55rem}button{margin:1rem 0}input[type=password]{width:95%}[role=alert]{background:#fff1ed;padding:1rem}fieldset{margin:1rem 0}</style><body><main><h1>Installation maintenance</h1>';
+    echo '<p>This operation affects every business. Use the private host installation operator key and the publisher-signed release files.</p>';
+    if ($error !== '') { echo '<p role="alert">' . $escape($error) . '</p>'; }
+    if ($authorized && $state) {
+        echo '<p role="status">Release ' . $escape($state['version']) . ': <strong>' . $escape($state['phase']) . '</strong>.</p>';
+        if ($state['phase'] === 'restored') { echo '<p>The update failed. The previous code, private configuration, keys and database were automatically restored and verified.</p>'; }
+        if ($state['phase'] === 'recovering') { echo '<p>Recovery remains pending. Application access stays closed until the matched backup is restored and verified. Continue when storage and the database are reachable.</p>'; }
+    }
+    if ($active) {
+        echo '<form method="post" id="continue"><input type="hidden" name="csrf" value="' . $escape($csrf) . '"><input type="hidden" name="action" value="continue"><button>Continue update or recovery</button></form><p>Progress continues while this page is open. Reopen this page after a host interruption to resume safely.</p>';
+        if ($error === '') { echo '<script nonce="' . $nonce . '">setTimeout(()=>document.getElementById("continue").requestSubmit(),1200);</script>'; }
+    } else {
+        echo '<form method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="' . $escape($csrf) . '"><label>Host installation operator key<input type="password" name="operator_key" required autocomplete="off" maxlength="256"></label>';
+        echo '<button name="action" value="authenticate">Check update or recovery status</button><fieldset><legend>Start a signed update</legend><label>Release channel<select name="channel"><option value="stable">Stable</option><option value="preview">Preview, beta and release candidate</option></select></label><label>Package source<select name="source"><option value="upload">Upload ZIP</option><option value="official">Download official GitHub release</option></select></label><label>Release ZIP (upload source)<input type="file" name="archive" accept=".zip"></label><label>Signed metadata<input type="file" name="metadata" accept=".json"></label><button name="action" value="begin">Verify release and begin update</button></fieldset></form>';
+    }
+    echo '</main></body></html>'; exit;
+}

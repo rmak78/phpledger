@@ -40,6 +40,7 @@ $workspace = $user !== null && $company !== null && !in_array($view, ['oauth-con
 <?php endif; ?>
 <?php if ($notice): ?><div class="strip strip-info" role="status" data-dismissible><p><?= pl_e($notice) ?></p><button type="button" class="strip-dismiss" data-dismiss aria-label="Dismiss notification"><?= pl_icon('x') ?></button></div><?php endif; ?>
 <?php if (!empty($accountReturn)): ?><a class="btn btn-ghost my-3" href="<?= pl_e(pl_url('/reports/account',$accountReturn)) ?>"><?= pl_icon('arrow-left') ?> Back to account statement</a><?php endif; ?>
+<?php if (!empty($ageingReturn)): ?><a class="btn btn-ghost my-3" href="<?= pl_e(pl_url('/reports/ageing',$ageingReturn)) ?>"><?= pl_icon('arrow-left') ?> Back to ageing report</a><?php endif; ?>
 <?php require __DIR__ . '/views/' . $view . '.php'; ?>
 <?php if ($workspace): ?></div></main></div></div><?php elseif ($posLayout): ?></main><?php else: ?></main><p class="text-xs text-ink-muted">PHP Ledger <?= pl_e(pl_app_version()) ?> · Development preview</p></div></div><?php endif; ?>
 </body>

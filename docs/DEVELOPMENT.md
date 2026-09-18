@@ -1,5 +1,21 @@
 # Local revival development
 
+## Stable-path installation and signed updates
+
+The current [roadmap](ROADMAP.md#current-delivery-contract-first-stable-10) and [validation receipt](VALIDATION.md#stable-path-local-implementation--18-september-2026) separate local implementation from release acceptance. Browser setup shares the CLI migration/preflight service; installation state lives in private files, without a new accounting schema. The independent maintenance loader and its copied recovery worker run without the application version being replaced. Tests use random disposable databases and synthetic signing material.
+
+`tools/build-package.py` accepts stable versions and explicit `--channel stable|preview`, retaining the clean committed-source and explicit file allowlist requirements. After building a reviewed package, a publisher can create the updater envelope with:
+
+```sh
+php tools/sign-update.php --archive=/private/release/phpledger-VERSION.zip --key=/private/signing/publisher.pem --output=/private/release/phpledger-VERSION.update.json
+```
+
+This is a publisher command, not a customer installation step. It requires PHP ZIP/OpenSSL and an external RSA private key of at least 3072 bits, validates the complete package inventory, and refuses to overwrite an existing output. An encrypted key may use the host-provided `PL_RELEASE_KEY_PASSPHRASE`; never put a passphrase in arguments or commit a key. Tests generate temporary synthetic keys; no official release identity has been provisioned by this implementation.
+
+The operator pins the independently authenticated publisher public key outside the public root. A key inside a downloaded package cannot establish that trust. Production key custody, distribution of its fingerprint and an authenticated rotation/revocation procedure must be accepted before publishing signed updates. Publish the signed envelope alongside the ZIP, SHA-256 file and matching media kit under the normal explicit release authorization. A local package proof is not a published release.
+
+Standalone checks are `tests/browser_installer_test.php`, `tests/release-signing-test.php`, `tests/update-recovery-test.php`, `tests/update-database-test.php`, `tests/update-fullschema-test.php` and `tests/update-http-test.php`. The CI matrix runs these alongside the existing accounting suite on PHP 8.2/8.3/8.4. A configured workflow is not evidence of a completed remote CI run. Keep the package and updater limits in `resources/release/UPGRADE.md` visible, including the pinned maintenance loader and current schema-owning database identity requirement.
+
 ## 0.6 interface development
 
 The approved interface is maintained on `codex/ui-redesign-0.6` for the preview release. The source stylesheet is `resources/ui/app.css`; run

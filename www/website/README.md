@@ -2,9 +2,17 @@
 
 The deployable static document root is `www/website/public`. It is separate from the accounting application and never loads its bootstrap or serves the repository root.
 
-## Accounting starter 0.4.0 publication
+## Current local website refresh: 0.6.0-preview
 
-The current website presents core AR/AP, optional Purchasing/Inventory, manual inclusive/exclusive tax, and five demo choices (one focused playground plus four existing multi-year histories). The live release article is `/news/0-4-0-preview/`. The approved design and long-form library are preserved. Current product limitations are synchronized throughout the source; earlier release articles retain dated scope and earlier screenshots are labelled explicitly.
+The 18 September 2026 refresh updates the homepage, product and POS walkthroughs, download illustration, three reporting guides, news index and a new `/news/0-6-0-preview/` article. Shared capability/limitation metadata and social previews describe the rebuilt workspace. This website refresh is local and has not been published.
+
+Current screenshots live under `public/assets/screens/v0.6.0-preview/`. Its `manifest.json` records routes, sample identity, captions, alt text, dimensions and SHA-256 hashes for 18 actual application captures and their responsive WebP derivatives. They were captured from the local 0.6.0 runtime with fresh Willow Corner Shop and Cedar Studio samples; image pixels were not rewritten. The POS sequence uses a local synthetic USD 5.75 sale. The three Cedar Studio walkthroughs retain their worked figures with new interface captures. Historical release pages and their original screenshots remain intact.
+
+Desktop/tablet are the application design targets. Mobile refinement, dark mode, full visual/accessibility acceptance, field-error consistency and nested report/source/action return behavior remain unfinished. Website layout checks do not close those application acceptance gates. No application release archive, version, migration or published media kit changes as part of this refresh. See `design-qa.md` for local checks and publication boundaries.
+
+## Historical accounting starter 0.4.0 publication
+
+The 0.4.0 website presented core AR/AP, optional Purchasing/Inventory, manual inclusive/exclusive tax, and five demo choices (one focused playground plus four existing multi-year histories). Its release article remains at `/news/0-4-0-preview/`. The approved website design and long-form library are preserved; dated release articles retain their original scope and screenshots.
 
 Published as `website-redesign-20260915-233156` at **04:32 PKT on 16 September 2026** (23:32 UTC on 15 September). All 165 static files matched archive, host and public hashes. Demo identity, entry/health, noindex and existing headers were preserved. See [the static publication receipt](../../docs/design/website/qa/release040-live-publication.json). The separate application and media archives are published on [GitHub](https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview), with verified public downloads. The site builds 64 source pages into 65 HTML outputs and 63 sitemap URLs.
 
@@ -33,14 +41,15 @@ The existing website Compose service serves `public` at [http://127.0.0.1:18201/
 | `/` | Product introduction, real screen captures, reports and start paths |
 | `/product/` | Core invoices/bills/payments, optional purchasing/stock, manual tax and retained bookkeeping |
 | `/point-of-sale/` | Preview cash-sale journey and supported boundaries |
-| `/download/` | Verified 0.4.0-preview assets, checksum, installation requirements and FAQ |
+| `/download/` | 0.6.0-preview assets, checksum, installation requirements and FAQ |
 | `/about/` | Project, maintainer and current scope |
 | `/privacy/` | Sessions, country hints, sample reset and operational logs |
 | `/terms/` | Synthetic demo use and preview/license boundaries |
 | `/support/` | Setup/training/troubleshooting information and local email-draft form |
 | `/roadmap/` | Opening balances/cutover → period administration → bank reconciliation, then later gates |
 | `/news/` | Release index and RSS link |
-| `/news/0-4-0-preview/` | Current starter release article and exact fictional experiments |
+| `/news/0-6-0-preview/` | Current interface release, workflow changes and acceptance limits |
+| `/news/0-4-0-preview/` | Historical starter release and fictional experiments |
 | `/news/0-1-0-preview/` | Historical versioned release announcement |
 | `/credits/` | Photography, fonts, icons and company-mark provenance |
 | `/404.html` | Internal custom error page used for missing URLs |
