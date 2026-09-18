@@ -46,7 +46,7 @@ $request = static function (string $path, ?string $body = null, string $type = '
     preg_match('/\s(\d{3})\s/', $responseHeaders[0] ?? '', $status);
     return [(int) ($status[1] ?? 0), $response === false ? '' : $response];
 };
-$check = static function (bool $condition, string $label): void { if (!$condition) { throw new RuntimeException($label); } echo "PASS $label\n"; };
+$check = static function (bool $condition, string $label): void { clearstatcache(); if (!$condition) { throw new RuntimeException($label); } echo "PASS $label\n"; };
 try {
     $secureCases = [
         [['HTTPS' => 'on'], true], [['HTTPS' => 'ON'], true], [['HTTPS' => '1'], true], [['SERVER_PORT' => '443'], true],
@@ -101,7 +101,9 @@ try {
     $request('/maintenance.php', http_build_query(['action' => 'continue', 'csrf' => $csrf]));
     $state = pl_update_json($operation . '/state.json');
     $check($state['phase'] === 'recovering' && $state['error'] === 'runtime_probe_failed', 'fresh runtime probe detects a parse error and requests rollback');
-    for ($step = 0; is_file($private . '/updates/active.json') && $step < 60; $step++) { $request('/maintenance.php', http_build_query(['action' => 'continue', 'csrf' => $csrf])); }
+    // The marker is unlinked by another process; clear this process's stat cache before each poll.
+    for ($step = 0; (clearstatcache(true, $private . '/updates/active.json') || true) && is_file($private . '/updates/active.json') && $step < 60; $step++) { $request('/maintenance.php', http_build_query(['action' => 'continue', 'csrf' => $csrf])); }
+    clearstatcache(true, $private . '/updates/active.json');
     $state = pl_update_json($operation . '/state.json');
     $check($state['phase'] === 'restored' && !is_file($private . '/updates/active.json')
         && file_get_contents($root . '/www/phpledger/includes/bootstrap.php') === '<?php // original working fixture'

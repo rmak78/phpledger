@@ -8,7 +8,7 @@ Automated test suites, fault-injection update/recovery tests, exact-artifact ins
 
 Start at [the PHP Ledger website](https://phpledger.com/) or [open the demonstration](https://phpledger.com/demo/).
 
-**[Download the 1.0.0 package](https://github.com/rmak78/phpledger/releases/tag/v1.0.0).** Choose `phpledger-1.0.0.zip` and its SHA-256 file from the release assets; automatic source archives do not include installed dependencies. Follow the package's `INSTALL.md`, or `UPGRADE.md` when upgrading an existing installation. Verify the package signature against the publisher fingerprint in `RELEASE-SIGNING.md` before installing. Use synthetic data for evaluation.
+**[Download the 1.0.0 package](https://github.com/rmak78/phpledger/releases/tag/v1.0.0).** Choose `phpledger-1.0.0.zip` and its SHA-256 file from the release assets; automatic source archives do not include installed dependencies. Follow the package's `INSTALL.md`, or `UPGRADE.md` when upgrading an existing installation. Compare the ZIP with its SHA-256 file before installing; 1.0.0 carries no signed update metadata because the publisher key was not yet generated (see the repository `docs/RELEASE-SIGNING.md`). Use synthetic data for evaluation.
 
 This release adds universal account statements, chart management, saved general-journal draft/review/post/reverse workflows, the accounting starter (AR/AP, optional Purchasing/Inventory, core tax), browser installation and signed automatic updates. It retains receipts, expenses, owner reports and the sample cash POS. It is the first stable release, with the remaining independent-review and pilot gates described in [[First package|First-Package]].
 

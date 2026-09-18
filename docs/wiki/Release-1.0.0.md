@@ -28,6 +28,6 @@ The supplied migration chain is unchanged since 0.6.0-preview; 1.0.0 adds no new
 
 Media kit: https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip
 
-Archive: `phpledger-1.0.0.zip`, SHA-256 `{{ZIP_SHA256}}`, {{ZIP_SIZE_LABEL}} ({{ZIP_BYTES_LABEL}} bytes). Media kit SHA-256: `{{KIT_SHA256}}`. Source revision: `{{SOURCE_COMMIT}}`. Signed with publisher fingerprint `{{PUBLISHER_FINGERPRINT}}`; see `RELEASE-SIGNING.md`.
+Archive: `phpledger-1.0.0.zip`, SHA-256 `1c44e685b126352220c54d2ce13d575aaf2dfaf873d6b372a3a2b17189dcc63d`, 3.14 MB (3,137,991 bytes). Media kit SHA-256: `21cd6bda061794affbfaedee70ee0fb5b892133ef2dace009f4e68fb34a4df76`. Source revision: `1415ceb61cab2fe27be3947d611a16f4035e54c7`. No signed update metadata is attached to 1.0.0: the official publisher signing key had not been generated at publication, so verify the ZIP by its SHA-256 checksum; the key fingerprint will be published in the repository RELEASE-SIGNING document, the website and this Wiki once it exists.md`.
 
 Install the application ZIP below, not GitHub's automatic source archive. Compare its SHA-256 checksum before installation. This is the first stable release.
