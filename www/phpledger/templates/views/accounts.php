@@ -7,27 +7,36 @@ $hasFailure = pl_web_text($form, 'message') !== '';
 $isActive = $hasFailure ? pl_web_text($input, 'is_active') === '1' : (bool) ($input['is_active'] ?? true);
 ?>
 <div class="flex flex-col gap-4 py-5">
-<?php pl_ui_page_header('Chart of accounts',count($company['accounts']).' accounts · '.$company['currency'],static function () use ($canManage):void { if ($canManage): ?><a class="btn btn-primary" href="<?= pl_e(pl_url('/accounts',['new'=>'1'])) ?>"><?= pl_icon('plus') ?> New account</a><?php endif; },'accounts-title'); ?>
+<?php pl_ui_page_header('Chart of accounts',count($company['accounts']).' accounts · '.$company['currency'],static function () use ($canManage,$chartFilters):void { if ($canManage): ?><a class="btn btn-primary" href="<?= pl_e(pl_url('/accounts',['new'=>'1','return_filters'=>$chartFilters])) ?>"><?= pl_icon('plus') ?> New account</a><?php endif; },'accounts-title'); ?>
 <div class="split-view">
 <section class="split-view-list <?= $account || $isNew?'has-detail':'' ?>" aria-labelledby="accounts-title">
+<form class="filter-bar flex-wrap" method="get" action="<?= pl_e(pl_url('/accounts')) ?>">
+<label class="sr-only" for="chart-search">Search accounts</label><input class="input" id="chart-search" name="q" value="<?= pl_e($chartFilters['q']) ?>" placeholder="Code or account name" maxlength="160">
+<label class="sr-only" for="chart-type">Filter by classification</label><select class="select" id="chart-type" name="type"><option value="all">All classifications</option><?php foreach ($types as $value=>$label): ?><option value="<?= pl_e($value) ?>" <?= $chartFilters['type']===$value?'selected':'' ?>><?= pl_e($label) ?></option><?php endforeach; ?></select>
+<label class="sr-only" for="chart-status">Account status</label><select class="select" id="chart-status" name="status"><?php foreach (['all'=>'All statuses','active'=>'Active','inactive'=>'Inactive'] as $value=>$label): ?><option value="<?= pl_e($value) ?>" <?= $chartFilters['status']===$value?'selected':'' ?>><?= pl_e($label) ?></option><?php endforeach; ?></select>
+<label class="sr-only" for="chart-size">Accounts per page</label><select class="select" id="chart-size" name="per_page"><?php foreach ([25,50,100] as $size): ?><option value="<?= $size ?>" <?= $chartFilters['per_page']===$size?'selected':'' ?>><?= $size ?> per page</option><?php endforeach; ?></select>
+<input type="hidden" name="sort" value="<?= pl_e($chartFilters['sort']) ?>"><input type="hidden" name="dir" value="<?= pl_e($chartFilters['dir']) ?>"><button class="btn btn-secondary">Filter</button><a class="btn btn-ghost" href="<?= pl_e(pl_url('/accounts')) ?>">Clear</a>
+</form><p class="text-xs text-ink-muted mb-2"><?= (int)$accountList['total'] ?> matching accounts · Sort within classification: <?php pl_ui_sort('/accounts',$chartFilters,'code','Code'); ?> · <?php pl_ui_sort('/accounts',$chartFilters,'name','Name'); ?></p>
 <div class="table-wrap max-h-[560px] overflow-auto" tabindex="0" role="region" aria-label="Accounts">
 <table class="table"><caption class="sr-only">Chart of accounts and posted balances through <?= pl_e(pl_date_label($balanceDate)) ?>. Debit balances for assets and expenses; credit balances for other classifications.</caption><thead><tr><th scope="col">Code / account</th><th scope="col">Purpose</th><th scope="col">Status</th><th scope="col" class="num">Balance</th></tr></thead><tbody>
-<?php foreach ($types as $type=>$typeLabel): $group=array_filter($company['accounts'],static fn(array $row):bool=>$row['type']===$type); if (!$group) { continue; } ?>
+<?php foreach ($types as $type=>$typeLabel): $group=array_filter($accountList['rows'],static fn(array $row):bool=>$row['type']===$type); if (!$group) { continue; } ?>
 <tr class="bg-surface-subtle"><th scope="rowgroup" colspan="4" class="text-xs uppercase tracking-wide text-ink-muted"><?= pl_e($typeLabel) ?></th></tr>
 <?php foreach ($group as $row): $selected=$account && (int)$account['id']===(int)$row['id']; $balance=$balances[(int)$row['id']]??'0.0000'; ?>
-<tr<?= $selected?' aria-selected="true"':'' ?>><th scope="row"><a class="row-title link" href="<?= pl_e(pl_url('/accounts',['id'=>$row['id']])) ?>"<?= $selected?' aria-current="true"':'' ?>><?= pl_e($row['name']) ?></a><span class="row-sub"><?= pl_e($row['code']) ?></span></th><td class="text-xs text-ink-muted"><?= pl_e($row['role']?ucfirst(str_replace('_',' / ',$row['role'])):'—') ?></td><td><?php pl_ui_badge($row['is_active']?'active':'inactive'); ?></td><td class="num"><a class="link" href="<?= pl_e(pl_url('/reports/account',['id'=>$row['id'],'as_of'=>$balanceDate])) ?>" aria-label="<?= pl_e('Statement for '.$row['name'].': '.$company['currency'].' '.pl_money($balance)) ?>"><?= pl_e(pl_money($balance)) ?></a></td></tr>
+<tr<?= $selected?' aria-selected="true"':'' ?>><th scope="row"><a class="row-title link" href="<?= pl_e(pl_url('/accounts',['id'=>$row['id'],'return_filters'=>$chartFilters])) ?>"<?= $selected?' aria-current="true"':'' ?>><?= pl_e($row['name']) ?></a><span class="row-sub"><?= pl_e($row['code']) ?></span></th><td class="text-xs text-ink-muted"><?= pl_e($row['role']?ucfirst(str_replace('_',' / ',$row['role'])):'—') ?></td><td><?php pl_ui_badge($row['is_active']?'active':'inactive'); ?></td><td class="num"><a class="link" href="<?= pl_e(pl_url('/reports/account',['id'=>$row['id'],'as_of'=>$balanceDate])) ?>" aria-label="<?= pl_e('Statement for '.$row['name'].': '.$company['currency'].' '.pl_money($balance)) ?>"><?= pl_e(pl_money($balance)) ?></a></td></tr>
 <?php endforeach; endforeach; ?>
 </tbody></table></div>
-<?php if (!$company['accounts']) { pl_ui_empty('No accounts yet','Add the accounts your business needs before recording a journal.'); } ?>
+<?php if (!$accountList['total']) { pl_ui_empty('No matching accounts','Clear or change the filters to see other accounts.'); } ?>
+<?php pl_ui_pagination('/accounts',$chartFilters,$accountList['page'],$accountList['pages']); ?>
 <p class="text-xs text-ink-muted mt-3">Posted balances through <?= pl_e(pl_date_label($balanceDate)) ?>. Inactive accounts retain their balances and history.</p>
 </section>
 <section class="split-view-detail p-4 gap-3" aria-labelledby="account-detail-title">
-    <a class="btn btn-ghost self-start" href="<?= pl_e(pl_url('/accounts')) ?>"><?= pl_icon('arrow-left') ?> Back to accounts</a>
-    <?php if ($hasFailure): ?><div class="alert alert-danger" role="alert" tabindex="-1" data-form-error><strong>Your account was not saved.</strong><p><?= pl_e(pl_web_text($form, 'message')) ?></p><p>Your submitted values are retained.<?php if ($account): ?> <a href="<?= pl_e(pl_url('/accounts', ['id' => $account['id']])) ?>">Reload the latest saved version</a> before resolving a revision conflict.<?php endif; ?></p></div><?php endif; ?>
+    <a class="btn btn-ghost self-start" href="<?= pl_e(pl_url('/accounts',$chartFilters)) ?>"><?= pl_icon('arrow-left') ?> Back to accounts</a>
+    <?php if ($hasFailure): ?><div class="alert alert-danger" role="alert" tabindex="-1" data-form-error><strong>Your account was not saved.</strong><p><?= pl_e(pl_web_text($form, 'message')) ?></p><p>Your submitted values are retained.<?php if ($account): ?> <a href="<?= pl_e(pl_url('/accounts', ['id' => $account['id'],'return_filters'=>$chartFilters])) ?>">Reload the latest saved version</a> before resolving a revision conflict.<?php endif; ?></p></div><?php endif; ?>
     <?php if ($account || ($isNew && $canManage)): ?>
     <div class="section-heading"><h2 class="section-title" id="account-detail-title"><?= $account ? pl_e($account['name']) : 'New account' ?></h2><?php if ($canManage): ?><button class="btn btn-primary" type="submit" form="account-editor" data-fold="primary action"><?= $account ? 'Save account' : 'Create account' ?></button><?php elseif ($account): ?><span class="muted small">Revision <?= (int)$account['revision'] ?></span><?php endif; ?></div>
     <?php if ($canManage): ?>
     <form id="account-editor" method="post" action="<?= pl_e(pl_url('/accounts/save')) ?>" class="flex flex-col gap-3">
+        <?php pl_ui_return_filters($chartFilters); ?>
         <?= pl_csrf_field() ?><?= pl_scope_fields($company) ?>
         <input type="hidden" name="creation_key" value="<?= pl_e(pl_web_text($input, 'creation_key')) ?>">
         <?php if ($account): ?><input type="hidden" name="id" value="<?= (int) $account['id'] ?>"><input type="hidden" name="revision" value="<?= pl_web_id($input, 'revision') ?>">

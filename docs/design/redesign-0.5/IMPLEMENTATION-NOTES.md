@@ -648,7 +648,7 @@ of that state. AUDIT-CLOSURE.md records every original audit finding's current
 closed/partial/open disposition, including the remaining publication gates.
 
 
-## Completion checkpoint — 18 September 2026
+## Completion checkpoint â€” 18 September 2026
 
 - Owner added a permanent requirement to update/review GitHub Wiki, repository About (description, URL, topics), and release/package/website/share metadata for every release. Recorded in AGENTS.md, README and the implementation prompt; each surface needs an updated or reviewed-unchanged receipt.
 - Invoice, bill and credit corrections now have a read-only reversing-entry and replacement preview. Confirmation binds the reviewed basis on the server inside the existing correction transaction, and preserves stable retries. Stock reversal effects are simulated in memory before replacement costing; previews do not allocate journal, movement or command identities. Supplier-credit FX carrying allocations are restored in memory for the preview.
@@ -659,3 +659,11 @@ closed/partial/open disposition, including the remaining publication gates.
 - Access/onboarding screenshots passed both fold sizes; setup/opening/recovery checks passed with JS on/off at both folds. POS cart, review, exact-cash checkout and receipt passed with JS on/off at four widths. Print-media testing found and fixed a cascade conflict: the receipt now measures 302.359375 CSS pixels (80 mm), with no internal overflow or navigation in print. Physical printer testing was not performed.
 - Additional evidence: evidence-0.6.0/completion-checkpoint. Prototype/state and keyboard acceptance remain open; these checks are not accounting sign-off or WCAG certification.
 - No migration or schema changes in this checkpoint. Local synthetic test writes only; no external publication/deployment or secrets exposure. Publication remains gated by remaining field-error/return-chain/audit acceptance and exact-package verification.
+
+### Account register and current validation
+
+- Added scoped server-side account search, classification/status filters, allow-listed code/name ordering within classifications, and bounded pagination. Account detail, editing, validation recovery and return links preserve the filter URL. Financial balances still come from the complete scoped trial balance, independently of list filtering.
+- Added tests for pagination, literal search, invalid filters/order and cross-company denial. Fixed the targeted list-suite fixture dependencies and replaced an obsolete legacy setup CSS assertion with verification of the shared six-step component and its single current-step announcement.
+- Latest sequential `composer check`: **282 tests, zero failures**, PHP lint **209 files, zero failures**, PHPStan no errors, seven sample packs valid and eight invalid validator fixtures rejected. Targeted `--suite=lists`: **38 tests, zero failures**. An earlier overlapping run caused interference in a global company-count test; the final full and targeted runs were sequential.
+- Final account browser checks passed with JavaScript enabled and disabled: search/classification/status, detail/back preservation, no-results recovery, create, rejected edit retention, rename, immutable classification and operational-account guidance. Captured 1366, 1024, 768 and 390 pixel widths with no page overflow; visually inspected the final 1024 pixel filtered register. This does not close full route/state, keyboard or zoom acceptance.
+- The current release gate now explicitly includes Wiki, About and affected metadata verification, matching the permanent every-release requirement in AGENTS.md and README. These are repository policy changes; public GitHub metadata has not yet been updated for 0.6.

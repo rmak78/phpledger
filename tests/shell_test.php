@@ -52,7 +52,13 @@ test('setup shell exposes six focused decisions and an explicit chart choice', f
     assert_true(is_string($controller) && str_contains($controller, "'/sample-chooser' => ['GET', 'POST']"), 'Local sample chooser route is missing.');
     assert_true(is_string($controller) && str_contains($controller, "pl_demo_sample(\$sampleId)"), 'Sample selection does not resolve through the bundled catalogue.');
     assert_true(is_string($chooser) && str_contains($chooser, 'name="sample_pack"') && str_contains($chooser, 'pl_demo_sample_choices()'), 'Sample chooser does not expose the bundled selection contract.');
-    assert_true(is_string($styles) && str_contains($styles, '.setup-progress'), 'Setup progress styles are missing.');
+    assert_true(is_string($styles) && str_contains($styles, '.stepper-step') && str_contains($onboarding, 'pl_ui_stepper($steps, $activeStep)'), 'Setup does not use the styled shared progress component.');
+    ob_start();
+    pl_ui_stepper(['Starting point','Business identity','Period and profile','Chart choice','Preview','Confirm'],5);
+    $progress=(string)ob_get_clean();
+    assert_same(6,substr_count($progress,'<li '));
+    assert_same(1,substr_count($progress,'aria-current="step"'));
+    assert_true(str_contains($progress,'stepper-label">Preview</span>'));
 });
 
 test('sample import has a bounded operational replay path', function (): void {

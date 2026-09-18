@@ -93,7 +93,7 @@ setup browser-state/field-error/assistive-technology acceptance.
 - Legacy CSS dependency removed; finish consolidated visual acceptance after token component retirement.
 - Finish representative keyboard/zoom/accessibility checks; record the approval-review rejection honestly.
 - Verify the final package on fresh/0.5 upgrade data, supported runtimes and restore path.
-- Align version, README, Wiki, help, website, demo, release notes, archive/checksum and media kit; publish only after verification.
+- Align version, README, GitHub Wiki, repository About (description, website URL and topics), version/package manifests, website download/share metadata, help, demo, release notes, archive/checksum and media kit; publish only after verification. Record each published surface as updated or reviewed unchanged, with verification evidence, in the publication receipt and owner handoff.
 
 The owner has already authorized publication after the gates pass. No extra
 publication permission is being requested by this checkpoint.

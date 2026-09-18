@@ -380,7 +380,8 @@ try {
     }
     if ($path === '/accounts/save') {
         $id = pl_web_id($_POST, 'id');
-        $return = pl_url('/accounts', $id ? ['id' => $id] : ['new' => '1']);
+        $chartFilters=pl_return_list_filters($_POST,'accounts');
+        $return = pl_url('/accounts', ($id ? ['id' => $id] : ['new' => '1'])+['return_filters'=>$chartFilters]);
         try {
             pl_web_assert_scope($company, $_POST);
             $account = pl_save_account($actorId, $companyId, $bookId, [
@@ -391,23 +392,24 @@ try {
                 'creation_key' => pl_web_text($_POST, 'creation_key'),
             ], $id ?: null, $id ? pl_web_id($_POST, 'revision') : null);
             pl_notice('Account saved. Posted journal history is preserved.');
-            pl_redirect(pl_url('/accounts', ['id' => $account['id']]));
+            pl_redirect(pl_url('/accounts', ['id' => $account['id'],'return_filters'=>$chartFilters]));
         } catch (DomainException $error) { pl_form_failure($return, $_POST, $error->getMessage()); }
     }
     if ($path === '/accounts') {
+        $chartFilters=isset($_GET['return_filters'])?pl_return_list_filters($_GET,'accounts'):pl_list_filters($_GET,'accounts');
         $id = pl_web_id($_GET, 'id');
         $isNew = pl_web_text($_GET, 'new') === '1';
         $account = $id ? pl_get_account($actorId, $companyId, $bookId, $id) : null;
         $operationalWarning = $account !== null && (in_array($account['role'], ['cash_bank','receivables','payables'], true)
             || DB::queryFirstField('SELECT id FROM pl_tax_codes WHERE company_id=%i AND book_id=%i AND (sales_account_id=%i OR purchase_account_id=%i) LIMIT 1',$companyId,$bookId,$id,$id) !== null);
-        $form = pl_form_state(pl_url('/accounts', $id ? ['id' => $id] : ($isNew ? ['new' => '1'] : [])));
+        $form = pl_form_state(pl_url('/accounts', ($id ? ['id' => $id] : ($isNew ? ['new' => '1'] : []))+(isset($_GET['return_filters'])?['return_filters'=>$chartFilters]:[])));
         $input = $form['input'] ?: ($account ?? ['code' => '', 'name' => '', 'type' => 'expense', 'role' => 'expense', 'is_active' => true, 'creation_key' => bin2hex(random_bytes(24))]);
         $balanceDate = gmdate('Y-m-d'); $balances = [];
         foreach (pl_trial_balance($actorId, $companyId, $bookId, $balanceDate)['accounts'] as $balanceRow) {
             $balances[$balanceRow['id']] = in_array($balanceRow['type'], ['asset', 'expense'], true)
                 ? $balanceRow['balance'] : bcsub('0', $balanceRow['balance'], 4);
         }
-        pl_render('accounts', ['title' => 'Chart of accounts', 'user' => $user, 'company' => $company, 'account' => $account, 'isNew' => $isNew, 'input' => $input, 'form' => $form, 'balances' => $balances, 'balanceDate' => $balanceDate, 'operationalWarning'=>$operationalWarning, 'history' => $id ? pl_core_history($actorId, $companyId, $bookId, 'account', $id) : []]);
+        pl_render('accounts', ['title' => 'Chart of accounts', 'user' => $user, 'company' => $company, 'account' => $account, 'accountList'=>pl_list_query($actorId,$companyId,$bookId,'accounts',$chartFilters),'chartFilters'=>$chartFilters, 'isNew' => $isNew, 'input' => $input, 'form' => $form, 'balances' => $balances, 'balanceDate' => $balanceDate, 'operationalWarning'=>$operationalWarning, 'history' => $id ? pl_core_history($actorId, $companyId, $bookId, 'account', $id) : []]);
     }
     if (str_starts_with($path, '/general-journals')) {
         $id = pl_web_id($method === 'POST' ? $_POST : $_GET, 'id');

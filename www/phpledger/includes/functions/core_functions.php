@@ -18,6 +18,24 @@ function pl_core_history(int $actorId, int $companyId, int $bookId, string $enti
     return DB::query('SELECT a.id, a.action, a.reason, a.recorded_at, u.display_name FROM pl_core_audit a JOIN pl_users u ON u.id = a.actor_id WHERE a.company_id = %i AND a.book_id = %i AND a.entity_type = %s AND a.entity_id = %i ORDER BY a.id DESC LIMIT 50', $companyId, $bookId, $entity, $id);
 }
 
+/** Page the chart within fixed accounting groups; filtering never changes report balances. */
+function pl_page_accounts(int $actorId,int $companyId,int $bookId,array $filters): array
+{
+    $orders=['code'=>['asc'=>'code ASC,id ASC','desc'=>'code DESC,id DESC'],'name'=>['asc'=>'name ASC,id ASC','desc'=>'name DESC,id DESC']];
+    $sort=$filters['sort']??'code'; $dir=$filters['dir']??'asc'; $type=$filters['type']??'all'; $status=$filters['status']??'all';
+    if (!is_string($sort) || !is_string($dir) || !isset($orders[$sort][$dir]) || !in_array($type,['all','asset','liability','equity','income','expense'],true) || !in_array($status,['all','active','inactive'],true)) { throw new DomainException('Choose valid account filters.'); }
+    $order=$orders[$sort][$dir]; $q=pl_ledger_text($filters['q']??'','Search',160,false); $size=pl_table_size($filters['per_page']??25);
+    return pl_ledger_transaction(function () use ($actorId,$companyId,$bookId,$filters,$order,$type,$status,$q,$size):array {
+        pl_require_company_access($actorId,$companyId); pl_ledger_book($companyId,$bookId);
+        $where='company_id=%i AND book_id=%i AND (%s=%s OR type=%s) AND (%s=%s OR is_active=%i) AND (%s=%s OR LOCATE(%s,code)>0 OR LOCATE(%s,name)>0)';
+        $args=[$companyId,$bookId,$type,'all',$type,$status,'all',$status==='active'?1:0,$q,'',$q,$q];
+        $total=(int)DB::queryFirstField('SELECT COUNT(*) FROM pl_accounts WHERE '.$where,...$args);
+        $pages=max(1,(int)ceil($total/$size)); $page=min($pages,max(1,(int)($filters['page']??1)));
+        $rows=DB::query('SELECT id,code,name,type,role,is_active FROM pl_accounts WHERE '.$where." ORDER BY FIELD(type,'asset','liability','equity','income','expense'), ".$order.' LIMIT %i OFFSET %i',...array_merge($args,[$size,($page-1)*$size]));
+        return ['rows'=>$rows,'total'=>$total,'page'=>$page,'pages'=>$pages];
+    });
+}
+
 function pl_get_account(int $actorId, int $companyId, int $bookId, int $id): array
 {
     pl_require_company_access($actorId, $companyId);

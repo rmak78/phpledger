@@ -3,6 +3,23 @@ declare(strict_types=1);
 require_once dirname(__DIR__) . '/www/phpledger/includes/functions/web_functions.php';
 require_once dirname(__DIR__) . '/www/phpledger/templates/partials/ui/components.php';
 
+test('account chart filters page within classifications and reject unsafe or foreign queries',function():void {
+    $f=ledger_fixture(); $args=[$f['actor_id'],$f['company_id'],$f['book_id']];
+    for ($i=0;$i<26;$i++) {
+        pl_save_account(...array_merge($args,[['code'=>(string)(6000+$i),'name'=>'Synthetic paged chart '.str_pad((string)$i,2,'0',STR_PAD_LEFT),'type'=>'expense','role'=>null,'is_active'=>$i!==25,'reason'=>'Synthetic chart pagination','creation_key'=>bin2hex(random_bytes(16))]]));
+    }
+    $run=fn(array $q):array=>pl_list_query(...array_merge($args,['accounts',$q]));
+    $first=$run(['q'=>'Synthetic paged chart']); $last=$run(['q'=>'Synthetic paged chart','page'=>999]);
+    assert_same(26,$first['total']); assert_same(25,count($first['rows'])); assert_same(2,$last['page']); assert_same('6025',$last['rows'][0]['code']);
+    assert_same(25,$run(['q'=>'Synthetic paged chart','status'=>'active'])['total']);
+    assert_same(1,$run(['q'=>'Synthetic paged chart','status'=>'inactive'])['total']);
+    assert_same(0,$run(['q'=>'Synthetic paged chart','type'=>'asset'])['total']);
+    assert_same('6025',$run(['q'=>'Synthetic paged chart','sort'=>'name','dir'=>'desc'])['rows'][0]['code']);
+    assert_same(0,$run(['q'=>'%'])['total']);
+    foreach ([['sort'=>'code DESC'],['type'=>'malformed'],['status'=>[]],['q'=>[]]] as $invalid) { assert_throws(fn()=>$run($invalid),DomainException::class); }
+    $other=ledger_fixture(); assert_throws(fn()=>pl_list_query($other['actor_id'],$f['company_id'],$f['book_id'],'accounts',[]),DomainException::class);
+});
+
 test('list request rejects untrusted order identifiers malformed paging and array query input', function (): void {
     foreach (['transactions','general-journals','account','bank'] as $screen) {
         assert_throws(fn()=>pl_table_order(['sort'=>'date','direction'=>'DESC; SELECT 1'],$screen),DomainException::class);
