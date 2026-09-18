@@ -1,6 +1,6 @@
 # Accounting starter: facts, FAQ and guided experiment
 
-> **RELEASE VERIFIED - 16 September 2026.** The application and media kit are published as [0.4.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview), with public byte/checksum verification and live starter workflow evidence reported by the release lead. The static release article and guided experiment are also live, with [publication evidence](qa/release040-live-publication.json). The subsequently requested country-chart research, deeper example companies and UX review remain separate work and are not capabilities to announce as shipped.
+> **RELEASE VERIFIED - 16 September 2026.** The application and media kit are published as [0.4.0-preview](https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview), with public byte/checksum verification and live starter workflow evidence reported by the release lead. The static release article and guided experiment are also live, with [publication evidence](qa/release040-live-publication.json). The subsequently requested country-chart research, deeper example companies and UX review remain separate work and are not capabilities to announce as shipped.
 
 This sheet supports the [launch copy kit](ACCOUNTING-STARTER-LAUNCH-KIT.md). It provides a factual review boundary and a reproducible fictional experiment. Do not send or publish either artifact solely because the copy is complete.
 
@@ -99,7 +99,7 @@ No such claim is made. It is a development preview for synthetic experimentation
 
 ### Where should I download it or report feedback?
 
-Use the exact verified https://github.com/rmak78/phpledger/releases/tag/v0.4.0-preview from the [release listing](https://github.com/rmak78/phpledger/releases). Read the source in the [repository](https://github.com/rmak78/phpledger). Use [issues](https://github.com/rmak78/phpledger/issues) for reproducible bugs and [discussions](https://github.com/rmak78/phpledger/discussions) for workflow questions. Include synthetic examples only.
+Use the exact verified https://github.com/phpledger/phpledger/releases/tag/v0.4.0-preview from the [release listing](https://github.com/phpledger/phpledger/releases). Read the source in the [repository](https://github.com/phpledger/phpledger). Use [issues](https://github.com/phpledger/phpledger/issues) for reproducible bugs and [discussions](https://github.com/phpledger/phpledger/discussions) for workflow questions. Include synthetic examples only.
 
 ## 3. Guided experiment A — services and supplier costs
 

@@ -1,6 +1,6 @@
 # First-package contract
 
-Work item: [#56 — Build and verify the first installable preview package](https://github.com/rmak78/phpledger/issues/56).
+Work item: [#56 — Build and verify the first installable preview package](https://github.com/phpledger/phpledger/issues/56).
 
 **Status: local inventory and implementation contract only.** No archive, source tag, licence decision, installer change or candidate validation run is produced by this document. `0.1.0-preview` remains a proposed name. The [machine-readable candidate inventory](package-candidate.json) records **78 existing files / 1,392,413 bytes**, their exact paths and SHA-256 hashes, plus the required outputs that do not exist yet. It must be refreshed deliberately when the candidate changes; it is not a release manifest.
 
@@ -87,7 +87,7 @@ Existing source-side tools are references to reuse, not evidence that this unbui
 | Supported upgrade | Baseline 001 → current chain retains account IDs/custom names, posted headers/lines and review-required openings; replay and checksum/error paths pass. | [verify-upgrade.php](../../../tools/verify-upgrade.php) implements a disposable baseline proof. Supported package-to-package versions do not exist yet. |
 | Backup restoration | Isolated restoration preserves definitions/data, current migration receipts, guards, scoped source links and balanced journals; operator recovery steps are reproducible. | [verify-backup-restore.ps1](../../../tools/verify-backup-restore.ps1) currently targets only disposable `db_test`, expects five receipts and nine triggers. It is not a customer backup CLI. |
 | Upgrade failure and rollback | Interruptions preserve an actionable applying receipt; restore known-good database plus compatible code from backup; do not claim SQL DDL rollback. | Migration runner rejects interrupted receipts. Customer maintenance/backup/recovery orchestration remains to be specified and tested. |
-| Final acceptance | Syntax/static/dependency checks, current-scope accounting and usability review, release notes/known limits, public artifact checksum and independent quickstart installation. | [#59](https://github.com/rmak78/phpledger/issues/59) coordinates this evidence; no tag/download is created here. |
+| Final acceptance | Syntax/static/dependency checks, current-scope accounting and usability review, release notes/known limits, public artifact checksum and independent quickstart installation. | [#59](https://github.com/phpledger/phpledger/issues/59) coordinates this evidence; no tag/download is created here. |
 
 A validation harness must genuinely load the unpacked candidate. Existing test/tool files resolve paths relative to their parent, so running them from a different source checkout would test that checkout instead. Attach only a controlled, non-shipping test harness around an unpacked candidate and verify that all original candidate bytes remain unchanged. Run source static analysis with its development tooling separately from production dependency packaging; do not tell customers to run absent test scripts from a minimal archive.
 
@@ -103,7 +103,7 @@ The deployment archives/manifests and hosted system were not modified. The 78-fi
 
 Implement a package-inventory checker under the existing `tools/` convention, consuming the explicit manifest. Its first mode should be read-only: report source-revision mismatch, changed/missing/extra inputs, path escapes/symlinks and required ungenerated outputs; never silently archive the dirty checkout. Test those rejection cases with synthetic fixtures.
 
-Then, from a reviewed clean runtime revision, add clean staging/production-vendor generation, candidate operator documents and deterministic archive creation with a full output manifest. Prove installation and recovery from that artifact. Publication remains gated by [#55 licensing/provenance](https://github.com/rmak78/phpledger/issues/55), the agreed supported scope and [#59 acceptance](https://github.com/rmak78/phpledger/issues/59). No licence choice, source commit or archive build is authorized or performed by this documentation subtask.
+Then, from a reviewed clean runtime revision, add clean staging/production-vendor generation, candidate operator documents and deterministic archive creation with a full output manifest. Prove installation and recovery from that artifact. Publication remains gated by [#55 licensing/provenance](https://github.com/phpledger/phpledger/issues/55), the agreed supported scope and [#59 acceptance](https://github.com/phpledger/phpledger/issues/59). No licence choice, source commit or archive build is authorized or performed by this documentation subtask.
 
 ## Inspection receipt
 

@@ -28,7 +28,7 @@ The first navigation briefly showed the prior cached page; an ordinary reload re
 
 The initial launch check verified the requested email and contact paths without placing a call or sending a message. The owner subsequently removed the phone from publication and shortened the location to **Innovista Chenab**; those changes are tracked in the publication receipt. The original supporting partners were BixiTech, BixiSoft and Agency75; the owner's later request adds verified linked partner logos and BrownBag.
 
-The website's Documentation link opened the [published Wiki home](https://github.com/rmak78/phpledger/wiki). The exact [Getting Started page](https://github.com/rmak78/phpledger/wiki/Getting-Started) also loaded, showing the live preview announcement and the first installable package still being prepared. This was checked from actual browser responses, not search-engine cached content. The browser displayed 10 Wiki pages and the published sidebar/footer.
+The website's Documentation link opened the [published Wiki home](https://github.com/phpledger/phpledger/wiki). The exact [Getting Started page](https://github.com/phpledger/phpledger/wiki/Getting-Started) also loaded, showing the live preview announcement and the first installable package still being prepared. This was checked from actual browser responses, not search-engine cached content. The browser displayed 10 Wiki pages and the published sidebar/footer.
 
 ## Demo destination
 
@@ -38,7 +38,7 @@ No financial record was edited or posted. This browser pass does not independent
 
 ## Published README at smaller widths
 
-The [public repository README](https://github.com/rmak78/phpledger#readme), at commit `250b27d`, showed the preferred logo, development badge, owner overview, honest first-package note and Wiki links. The transaction and cash-POS sections were initially collapsed. Opening the POS section loaded its real preview image without widening the page, and it was collapsed again afterward.
+The [public repository README](https://github.com/phpledger/phpledger#readme), at commit `250b27d`, showed the preferred logo, development badge, owner overview, honest first-package note and Wiki links. The transaction and cash-POS sections were initially collapsed. Opening the POS section loaded its real preview image without widening the page, and it was collapsed again afterward.
 
 GitHub had a pre-existing 90% browser zoom. Requested 768px and 390px browser surfaces therefore reported approximately **853px and 433px CSS viewports**, with document client/scroll widths of **836/836px** and **416/416px**. These are tablet/mobile checks at those actual logical widths, not claims of exact 768px/390px CSS coverage. A normal zoom-reset shortcut did not change the measured zoom. The temporary viewport override was reset afterward.
 

@@ -119,7 +119,7 @@ When restoring to a different database or database account, verify that the effe
 
 Focused validation: `docker compose --profile test run --rm test php tests/run.php --suite=foundations`. The complete `composer check` includes these suites. Upgrade verification accepts `fresh`, `foundation`, `core-0.1.2`, `opening-local` and `preview-0.2.1`. Run `tools/verify-currency-upgrade.php` with the same disposable-test root invocation as the existing upgrade verifier to exercise interrupted backfill, second-connection guards, recovery and legacy request replay. Only randomly created databases in `db_test` are touched by those upgrade verifiers.
 
-These instructions apply to the modern source containing `compose.yaml`, `composer.json` and `www/phpledger`. The current source tree contains the modern application; historical code remains only in Git history. Use the public [Wiki](https://github.com/rmak78/phpledger/wiki) for visitor documentation and package availability. The published [0.3.0 foundation package](https://github.com/rmak78/phpledger/releases/tag/v0.3.0-preview) includes production dependencies; this page covers development from source.
+These instructions apply to the modern source containing `compose.yaml`, `composer.json` and `www/phpledger`. The current source tree contains the modern application; historical code remains only in Git history. Use the public [Wiki](https://github.com/phpledger/phpledger/wiki) for visitor documentation and package availability. The published [0.3.0 foundation package](https://github.com/phpledger/phpledger/releases/tag/v0.3.0-preview) includes production dependencies; this page covers development from source.
 
 ## Start the verified environment
 

@@ -6,14 +6,14 @@ PHP Ledger is open-source, self-hosted double-entry accounting software with a s
 
 | You want to | Go to |
 |---|---|
-| Ask how something works, or get help installing the 0.1.0-preview package | [Discussions: Q&A](https://github.com/rmak78/phpledger/discussions/categories/q-a) |
-| Report a reproducible bug | [Issues](https://github.com/rmak78/phpledger/issues), using the bug report template and synthetic data |
-| Propose a feature | [Issues](https://github.com/rmak78/phpledger/issues), using the feature request template |
+| Ask how something works, or get help installing the 0.1.0-preview package | [Discussions: Q&A](https://github.com/phpledger/phpledger/discussions/categories/q-a) |
+| Report a reproducible bug | [Issues](https://github.com/phpledger/phpledger/issues), using the bug report template and synthetic data |
+| Propose a feature | [Issues](https://github.com/phpledger/phpledger/issues), using the feature request template |
 | Report a security problem | Privately, as described in [SECURITY.md](SECURITY.md); never in a public issue or discussion |
 | Discuss a pilot, installation assistance, training or paid support | Email [rmak78@gmail.com](mailto:rmak78@gmail.com) |
 | Read the support offer on the website | [phpledger.com/support](https://phpledger.com/support/) |
 
-Before asking, read [Getting Started](https://github.com/rmak78/phpledger/wiki/Getting-Started) on the Wiki; it covers requirements, the download, demo guidance and known limits. `INSTALL.md` and `UPGRADE.md` inside the release ZIP cover installation and upgrades.
+Before asking, read [Getting Started](https://github.com/phpledger/phpledger/wiki/Getting-Started) on the Wiki; it covers requirements, the download, demo guidance and known limits. `INSTALL.md` and `UPGRADE.md` inside the release ZIP cover installation and upgrades.
 
 ## What to include in a report
 
@@ -29,7 +29,7 @@ Never include passwords, tokens, session cookies, real customer or supplier reco
 
 - PHP Ledger is a development preview, not a stable release. Evaluate it with synthetic data. There is no support for using it for live bookkeeping.
 - Questions and issues are answered as time allows. There is no response-time guarantee, on-call cover or service-level agreement.
-- Not included yet: receivables and payables, inventory and cost of sales, tax, historical imports, bank reconciliation, multi-book, foreign-currency posting, translations, offline use, card payments, document scanning. Requests for these belong in a feature request; the [Roadmap](https://github.com/rmak78/phpledger/wiki/Roadmap) shows where they sit.
+- Not included yet: receivables and payables, inventory and cost of sales, tax, historical imports, bank reconciliation, multi-book, foreign-currency posting, translations, offline use, card payments, document scanning. Requests for these belong in a feature request; the [Roadmap](https://github.com/phpledger/phpledger/wiki/Roadmap) shows where they sit.
 - Paid installation assistance, training, troubleshooting and support on customer-owned hosting are discussed by email. Scope, supported environments and response expectations are agreed before any commitment; nothing on this page is a quote.
 - `legacy/` is unmaintained and out of scope for support.
 

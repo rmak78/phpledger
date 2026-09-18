@@ -21,7 +21,7 @@ The recorded source check passed 282 tests with zero failures, PHP lint and PHPS
 
 Upgrade from 0.5.0-preview uses migrations 029-031. Back up and rehearse restoration first; preserve earlier migration files/checksums and run the included migration command once while writes are stopped. Re-running migrations must be a no-op. Never copy historical legacy SQL into the modern schema. See UPGRADE.md.
 
-Media kit: https://github.com/rmak78/phpledger/releases/download/v0.6.0-preview/phpledger-0.6.0-preview-media-kit.zip
+Media kit: https://github.com/phpledger/phpledger/releases/download/v0.6.0-preview/phpledger-0.6.0-preview-media-kit.zip
 
 
 Install the application ZIP below, not GitHub’s automatic source archive. Compare its SHA-256 checksum before installation. This is a prerelease.

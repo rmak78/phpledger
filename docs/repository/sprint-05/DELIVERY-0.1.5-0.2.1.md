@@ -41,7 +41,7 @@ No live change is established by this document's initial local entry. Record the
 
 ### Release A publication verified
 
-- GitHub release: [v0.1.5-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.5-preview). PR #65 is merged; contributor authorship is preserved in Git history.
+- GitHub release: [v0.1.5-preview](https://github.com/phpledger/phpledger/releases/tag/v0.1.5-preview). PR #65 is merged; contributor authorship is preserved in Git history.
 - Package and live app source: `ad6d618c5c9c9b64afc8315515f1a994a6e9a1f0`. Downloaded ZIP: 1,326,966 bytes; SHA-256 `2d8e60816f5c03a1d1e540beb48b4139b4e231c75c57b13acb3011e5eb23bd5b`, matching its downloaded checksum.
 - Exact package fresh installation and actual 0.1.4-to-0.1.5 upgrade passed. Backup restoration passed: 27 table definitions/data checksums, 17,409 synthetic rows, 35 guards and 11 receipts.
 - Live demo `core-0.1.5-preview-ad6d618c5c9c` changed only `pos.css` and `pos.php`; source-switch guards verified preserved schema, receipts, generation, session files, DB container/volume and app image. The first attempt encountered the scheduled reset before any cutover action and safely stopped; the post-reset retry passed.

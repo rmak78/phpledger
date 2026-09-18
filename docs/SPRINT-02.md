@@ -67,7 +67,7 @@ Record commands, exact results, changed routes, migration/schema effects, and kn
 
 ## Authorized publication and current status
 
-**Published development preview, 14 September 2026:** the user explicitly renewed the instruction to replace the existing website, update the demo, publish the README/logo and use GitHub Wiki. That instruction superseded the earlier publication hold. The website and restricted demo are now live; the README/assets and ten Wiki pages are published. Reports/POS refinement and independent accounting/usability review remain requirements for the first installable package, tracked in [Sprint 03](https://github.com/rmak78/phpledger/milestone/4). See the appended publication receipt for the checks and limits.
+**Published development preview, 14 September 2026:** the user explicitly renewed the instruction to replace the existing website, update the demo, publish the README/logo and use GitHub Wiki. That instruction superseded the earlier publication hold. The website and restricted demo are now live; the README/assets and ten Wiki pages are published. Reports/POS refinement and independent accounting/usability review remain requirements for the first installable package, tracked in [Sprint 03](https://github.com/phpledger/phpledger/milestone/4). See the appended publication receipt for the checks and limits.
 
 The inspected local branch is `revival/foundation`, based on legacy commit `fe528eb52a8be277f3b2806022d23a817c01bda8`. The foundation, research, and design work were still uncommitted at sprint start. Preserve that work and include untracked files in review. The technical lead owns the reviewed commits/remote actions necessary for the authorized GitHub information update and website publication; the documentation agent does not commit, push, deploy, or change the default branch independently.
 
@@ -85,7 +85,7 @@ The local publication-candidate review found two Python bytecode cache files; th
 
 ### GitHub About metadata applied — 14 September 2026
 
-The user subsequently asked why the repository metadata was unchanged. The lead applied the authorized metadata update and immediately read it back from GitHub for `rmak78/phpledger`:
+The user subsequently asked why the repository metadata was unchanged. The lead applied the authorized metadata update and immediately read it back from GitHub for `phpledger/phpledger`:
 
 - Description: **PHP Ledger revival: self-hosted accounting and POS for small businesses, targeting PHP 8.5 and MySQL 8.4. In development.**
 - Homepage: **https://phpledger.com/**. The existing HTTPS site returned HTTP 200 before the link was changed; this is not evidence that the new website was deployed.

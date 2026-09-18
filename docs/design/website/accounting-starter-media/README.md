@@ -6,7 +6,7 @@ The four playground images use a local instance of the restricted public-demo ru
 
 ## Download and use
 
-Use the full-resolution PNG links below. The verified [0.4.0-preview media ZIP](https://github.com/rmak78/phpledger/releases/download/v0.4.0-preview/phpledger-0.4.0-preview-media-kit.zip) contains these images, captions and separate press/SEO/social/email copy. The public archive is 715,562 bytes with SHA-256 `b71f59da80e0b1e0cda753a53d34f0e2e63023cb3996f1ae2637e4bbe05a19a6`. Preserve the synthetic-data qualification and the caption's limits. Do not imply a depicted organisation is a customer, use a fixture tax percentage as a country rate, or edit amounts/statuses to suggest an untested result. Keep product attribution and applicable repository licence/asset terms.
+Use the full-resolution PNG links below. The verified [0.4.0-preview media ZIP](https://github.com/phpledger/phpledger/releases/download/v0.4.0-preview/phpledger-0.4.0-preview-media-kit.zip) contains these images, captions and separate press/SEO/social/email copy. The public archive is 715,562 bytes with SHA-256 `b71f59da80e0b1e0cda753a53d34f0e2e63023cb3996f1ae2637e4bbe05a19a6`. Preserve the synthetic-data qualification and the caption's limits. Do not imply a depicted organisation is a customer, use a fixture tax percentage as a country rate, or edit amounts/statuses to suggest an untested result. Keep product attribution and applicable repository licence/asset terms.
 
 | Asset | Caption | Dimensions |
 |---|---|---|

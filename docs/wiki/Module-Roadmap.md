@@ -1,6 +1,6 @@
 ## Current package: 1.0.0
 
-**1.0.0**, published 18 September 2026, is the first stable release, consolidating the 0.6.1 workflow-recovery closure, the 0.7 browser installer and the 0.8 signed update/automatic-backup/recovery work. [Download 1.0.0](https://github.com/rmak78/phpledger/releases/tag/v1.0.0) and its [matching media kit](https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip). Independent accounting review, independent security review, supervised pilots with a real month-end close and unfamiliar-operator installation observation have **not** happened; they continue as post-release commitments. See [[Release 1.0.0|Release-1.0.0]].
+**1.0.0**, published 18 September 2026, is the first stable release, consolidating the 0.6.1 workflow-recovery closure, the 0.7 browser installer and the 0.8 signed update/automatic-backup/recovery work. [Download 1.0.0](https://github.com/phpledger/phpledger/releases/tag/v1.0.0) and its [matching media kit](https://github.com/phpledger/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip). Independent accounting review, independent security review, supervised pilots with a real month-end close and unfamiliar-operator installation observation have **not** happened; they continue as post-release commitments. See [[Release 1.0.0|Release-1.0.0]].
 
 # Core accounting and optional modules
 
@@ -23,4 +23,4 @@ Owner/partner equity reporting and phone-friendly entry remain planned cross-cut
 
 The installer-created customer website is parked. Khata is a reserved, optional unposted-subledger concept; formalisation uses normal accounting services. No module may hide posted entries or create a second ledger. [[Licensing]] requires advance declaration of future commercial modules; none is declared by 1.0.0.
 
-See the [detailed module roadmap](https://github.com/rmak78/phpledger/blob/master/docs/MODULE-ROADMAP.md), [installer plan](https://github.com/rmak78/phpledger/blob/master/docs/INSTALLER.md) and [[Roadmap]]. Accounting review, access isolation, exact reconciliation, installation/recovery and observed use remain acceptance gates for each future module.
+See the [detailed module roadmap](https://github.com/phpledger/phpledger/blob/master/docs/MODULE-ROADMAP.md), [installer plan](https://github.com/phpledger/phpledger/blob/master/docs/INSTALLER.md) and [[Roadmap]]. Accounting review, access isolation, exact reconciliation, installation/recovery and observed use remain acceptance gates for each future module.

@@ -122,8 +122,8 @@ Fails site-wide: `aeo:aeo_sameas_links` ("No sameAs links in schema"), `geo:geo_
 
 The `social` block is currently all empty strings and `twitterHandle` is empty. Populate `Organization.sameAs` in `build.mjs` from **real, resolving URLs only**:
 
-- `https://github.com/rmak78/phpledger` (already present)
-- `https://github.com/rmak78/phpledger/wiki`
+- `https://github.com/phpledger/phpledger` (already present)
+- `https://github.com/phpledger/phpledger/wiki`
 - `https://pk.linkedin.com/in/rmak78` (currently only on the `founder` node — promote it to the Organization graph too, correctly attributed as the maintainer's profile)
 - Any Packagist, Docker Hub or AlternativeTo listing **that already exists**. If it does not exist yet, leave the key empty and list it in the final summary as a follow-up. Do not invent URLs.
 

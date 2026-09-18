@@ -2,9 +2,9 @@
 
 **Published on 18 September 2026.** First stable release, by owner decision, consolidating the 0.6.1 workflow closure, the 0.7 browser installer and the 0.8 signed update/backup/recovery work.
 
-- GitHub release: https://github.com/rmak78/phpledger/releases/tag/v1.0.0 (published 14:25:35 UTC, marked latest, not a prerelease)
-- Media kit: https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip
-- Wiki: https://github.com/rmak78/phpledger/wiki/Release-1.0.0 (wiki commit `5f5f2e5`)
+- GitHub release: https://github.com/phpledger/phpledger/releases/tag/v1.0.0 (published 14:25:35 UTC, marked latest, not a prerelease)
+- Media kit: https://github.com/phpledger/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip
+- Wiki: https://github.com/phpledger/phpledger/wiki/Release-1.0.0 (wiki commit `5f5f2e5`)
 - Downloads page and hosted demo: **not yet updated on phpledger.com**; see "Pending owner actions" below.
 
 The owner instructed same-day publication of the consolidated work as 1.0.0 on 18 September 2026. Independent accounting review, independent security review, supervised pilots with a month-end close, unfamiliar-operator installation observation, the 14-day release-candidate period and restricted shared-host recovery certification did not run before publication. Every release surface says so; none claims otherwise.

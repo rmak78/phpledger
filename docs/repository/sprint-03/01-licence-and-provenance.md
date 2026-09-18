@@ -19,8 +19,8 @@ The revival has an open-source direction but no settled project licence or compl
 
 This issue produces a reviewed decision and release materials, not a legal certification. It does not authorize altering third-party licences or accepting terms on another person's behalf.
 
-Part of the [first package plan](https://github.com/rmak78/phpledger/wiki/First-Package).
+Part of the [first package plan](https://github.com/phpledger/phpledger/wiki/First-Package).
 
 ## Linked work
 
-This decision gates public distribution in [#56 the installable package](https://github.com/rmak78/phpledger/issues/56) and [#59 candidate acceptance](https://github.com/rmak78/phpledger/issues/59). Independent engineering preparation can continue while the decision is open.
+This decision gates public distribution in [#56 the installable package](https://github.com/phpledger/phpledger/issues/56) and [#59 candidate acceptance](https://github.com/phpledger/phpledger/issues/59). Independent engineering preparation can continue while the decision is open.

@@ -8,17 +8,17 @@ The owner explicitly requested replacement of the existing website, an updated d
 |---|---|
 | [Website](https://phpledger.com/) | Field Notes replacement, real illustrative workplace photography, actual synthetic product screens, walkthrough, partners and contact paths |
 | [Demo](https://phpledger.com/demo/) | Isolated visitor books, receipts/expenses, reports, cash POS and ten selectable base currencies |
-| [Repository](https://github.com/rmak78/phpledger) | Branded README, current product screens, feature boundaries and documentation links |
-| [Wiki](https://github.com/rmak78/phpledger/wiki) | Ten pages, sidebar/footer, product and installation guidance, accounting/POS boundaries, regional decisions and complete future path |
-| [Sprint 03](https://github.com/rmak78/phpledger/milestone/4) | First installable preview; five issues covering licence/provenance, packaging, Pakistan reports, POS experience and release acceptance |
+| [Repository](https://github.com/phpledger/phpledger) | Branded README, current product screens, feature boundaries and documentation links |
+| [Wiki](https://github.com/phpledger/phpledger/wiki) | Ten pages, sidebar/footer, product and installation guidance, accounting/POS boundaries, regional decisions and complete future path |
+| [Sprint 03](https://github.com/phpledger/phpledger/milestone/4) | First installable preview; five issues covering licence/provenance, packaging, Pakistan reports, POS experience and release acceptance |
 
 ## Repository evidence
 
-- Main repository commit [`250b27d`](https://github.com/rmak78/phpledger/commit/250b27d) published the README, six image/badge assets and the twelve Wiki source files. The original application/history and default branch `master` were preserved. A separate clean checkout was used; the unfinished local foundation was not staged wholesale.
+- Main repository commit [`250b27d`](https://github.com/phpledger/phpledger/commit/250b27d) published the README, six image/badge assets and the twelve Wiki source files. The original application/history and default branch `master` were preserved. A separate clean checkout was used; the unfinished local foundation was not staged wholesale.
 - Wiki commits `5454d1b` and `7d1dc84` created the Home page and remaining pages/navigation. Commit `9f5ac1a` updated the live-preview status and linked Sprint 03. Subsequent documentation commits may add publication evidence without changing the runtime.
 - GitHub Settings visibly displayed the new 1280×640 sharing image. API read-back confirmed `usesCustomOpenGraphImage: true`. It uses the preferred logo and an actual synthetic development screenshot.
 - The public README was inspected after push. The logo, heading, real screenshot, feature table, collapsible screenshot sections and development status rendered. Wiki Home showed ten pages, correct table links and sidebar/footer navigation.
-- Sprint 03 is milestone 4. Issues [#55](https://github.com/rmak78/phpledger/issues/55)–[#59](https://github.com/rmak78/phpledger/issues/59) define acceptance and dependencies; no release date or team assignment was invented.
+- Sprint 03 is milestone 4. Issues [#55](https://github.com/phpledger/phpledger/issues/55)–[#59](https://github.com/phpledger/phpledger/issues/59) define acceptance and dependencies; no release date or team assignment was invented.
 
 ## Deployment and checks
 
