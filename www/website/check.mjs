@@ -9,7 +9,7 @@
  *   links     local href/src/srcset/poster resolve to a file or dir/index.html (E); in-page and cross-page
  *             #anchors resolve to an id (E); id references in for/aria-* attributes resolve (E);
  *             directory links without a trailing slash (W); missing navigation destinations (E); /demo/ is served
- *             by another vhost and is skipped; mailto: only to site.email (E); no tel: (E)
+ *             by another vhost and is skipped; no mailto: (E); no tel: (E)
  *   document  <html lang> (E); exactly one <h1> (E); unique <title> across pages (E); description 50-160
  *             characters (E); canonical = baseUrl + path (E); exactly one aria-current="page" in the nav on
  *             nav pages and none elsewhere (E); duplicate ids (E); og:image exists and its PNG dimensions
@@ -19,7 +19,7 @@
  *             no @import, url(http, url(// or url(data: (E)
  *   images    alt present (E); width and height present (E); sizes when srcset (E); loading="lazy" after
  *             the first two images unless fetchpriority="high" (W)
- *   content   forbidden strings (E); a "synthetic" label on every page that shows /assets/screens/ (E);
+ *   content   forbidden strings (E); a "fictional sample" label on every page that shows /assets/screens/ (E);
  *             JSON-LD parses and has no aggregateRating/review/interaction counts (E); two-fragment
  *             headings and banned words (W)
  *   sitemap   every URL maps to a file (E); indexable pages missing from the sitemap (W)
@@ -53,6 +53,9 @@ const FORBIDDEN = [
   [/no download/i, '"no download"'],
   [/PLACEHOLDER/, '"PLACEHOLDER"'],
   [/\blorem\b/i, '"lorem"'],
+  [/rmak78@/i, 'personal email address'],
+  [/linkedin\.com\/in\//i, 'personal LinkedIn profile'],
+  [/mailto:/i, 'mailto link (contact runs through GitHub Discussions)'],
 ];
 const BANNED_WORDS = /\b(empower|seamless|streamlin|robust|effortless|unlock|elevat)\w*/gi;
 const TWO_FRAGMENTS = /^[^.!?]{2,40}\.\s+[^.!?]{2,40}\.$/;
@@ -267,7 +270,7 @@ function checkPage(doc) {
     if (/^(javascript|data):/i.test(url)) return null; // reported by the CSP rule
     if (/^mailto:/i.test(url)) {
       const address = url.slice(7).split('?')[0].trim();
-      if (address.toLowerCase() !== String(site.email).toLowerCase()) error(page, 'mailto', `mailto: to ${address}; only ${site.email} is allowed`);
+      error(page, 'mailto', `mailto: to ${address}; the site publishes no email address, contact runs through GitHub Discussions`);
       return null;
     }
     if (/^tel:/i.test(url)) { error(page, 'tel', 'tel: links are not allowed'); return null; }
@@ -437,7 +440,7 @@ function checkPage(doc) {
     const m = html.match(pattern);
     if (m) error(page, 'forbidden-string', `${label}: "${m[0]}" near "${html.slice(Math.max(0, m.index - 40), m.index + m[0].length + 40).replace(/\s+/g, ' ')}"`);
   }
-  if (html.includes('/assets/screens/') && !/synthetic/i.test(doc.text)) error(page, 'synthetic-label', 'page shows product captures but never says "synthetic"');
+  if (html.includes('/assets/screens/') && !/synthetic|sample business|fictional/i.test(doc.text)) error(page, 'synthetic-label', 'page shows product captures but never says the data is a fictional sample business');
 
   stats.title = title;
   if (!isStub) {

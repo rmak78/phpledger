@@ -1,31 +1,25 @@
-.site-header{min-height:84px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 max(32px,calc((100vw - var(--wide))/2));border-bottom:1px solid var(--line);background:var(--white);position:relative;z-index:5}
-.brand{display:block;width:214px;flex:none}
-.brand img{width:100%;height:auto}
-/* Same artwork as the application; crop only its surrounding white space. */
-.brand-frame{display:block;position:relative;width:100%;aspect-ratio:1620/475;overflow:hidden}
-.brand-frame>img{position:absolute;max-width:none;min-width:0;width:134.075%;height:auto;left:-17.593%;top:-26.316%}
-.site-header nav{display:flex;align-items:center;gap:30px}
-.site-header nav>a:not(.button){font-family:var(--font-heading);font-weight:600;font-size:15px;color:var(--navy);padding:6px 0;border-bottom:2px solid transparent}
-.site-header nav>a:not(.button):hover{color:var(--blue);text-decoration:none}
-.site-header nav>a[aria-current=page]{border-bottom-color:var(--blue)}
-.menu-toggle{display:none;align-items:center;gap:8px;border:1px solid var(--line);border-radius:var(--radius-s);background:var(--white);padding:9px 12px;color:var(--navy);font-family:var(--font-heading);font-weight:600;font-size:14px;min-height:44px}
-.menu-toggle svg{width:20px;height:20px}
-@media(max-width:1000px){
-  .site-header{min-height:72px;padding-inline:20px}
-  .brand{width:180px}
-  .menu-toggle{display:flex}
-  .site-header nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--white);box-shadow:0 10px 15px rgba(12,32,82,.08);padding:12px 20px 24px;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}
-  .site-header nav.is-open{display:flex}
-  .site-header nav>a:not(.button){font-size:16px;padding:12px 0;border-bottom:1px solid var(--line)}
-  .site-header nav>a[aria-current=page]{border-bottom-color:var(--line);color:var(--blue)}
-  .site-header nav .button{margin-top:14px;justify-content:center}
-}
-@media(max-width:400px){
-  .brand{width:160px}
-  .menu-toggle{padding:8px 10px}
-}
-@media(max-width:1000px){
-  html:not(.js-ready) .site-header{flex-wrap:wrap;padding-block:12px}
-  html:not(.js-ready) .menu-toggle{display:none}
-  html:not(.js-ready) .site-header nav{display:flex;position:static;width:100%;box-shadow:none;border:0;padding:0}
+.site-header{position:sticky;top:0;z-index:40;background:var(--white);border-bottom:1px solid var(--line)}
+.site-header-row{display:flex;align-items:center;gap:var(--space-4);min-height:80px}
+.brand{display:inline-flex;align-items:center;min-height:var(--touch);flex:none}
+.brand img{width:160px;height:auto}
+.site-nav{display:flex;align-items:center;gap:2px;margin-left:8px}
+.site-nav a{display:inline-flex;align-items:center;min-height:var(--touch);padding:0 10px;border-radius:var(--radius-s);font-size:var(--size-small);font-weight:500;color:var(--ink);text-decoration:none;white-space:nowrap}
+.site-nav a:hover{color:var(--blue)}
+.site-nav a[aria-current="page"]{color:var(--blue);background:var(--tint)}
+.site-nav-download{color:var(--blue)!important}
+.site-header-actions{margin-left:auto;display:flex;align-items:center;gap:8px;flex:none}
+.menu-toggle{display:none;align-items:center;justify-content:center;width:var(--touch);height:var(--touch);padding:0;border:1px solid var(--line);border-radius:var(--radius-s);background:var(--white);color:var(--navy);cursor:pointer}
+.menu-toggle svg{width:22px;height:22px}
+.menu-toggle svg:last-child{display:none}
+.menu-toggle[aria-expanded="true"] svg:first-child{display:none}
+.menu-toggle[aria-expanded="true"] svg:last-child{display:block}
+@media(min-width:1280px){.brand img{width:214px}.site-nav{margin-left:20px;gap:4px}.site-nav a{padding:0 12px}}
+@media(max-width:1179px){.site-nav-download{display:none!important}}
+@media(max-width:999px){
+  .site-nav{display:none;position:absolute;left:0;right:0;top:100%;margin:0;padding:12px 20px 16px;background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:4px;box-shadow:0 20px 40px -30px rgba(12,32,82,.35)}
+  .site-nav.is-open{display:flex}
+  .site-nav a{font-size:var(--size-body);padding:0 12px}
+  .site-nav-download{display:inline-flex!important}
+  .menu-toggle{display:inline-flex}
+  .site-header-actions .button--small{padding:0 12px;font-size:13px}
 }

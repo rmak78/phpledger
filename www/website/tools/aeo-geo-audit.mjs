@@ -21,6 +21,8 @@ for (const file of files) {
   const rel = path.relative(root,file).replaceAll(path.sep,'/');
   const row = { page: rel==='index.html'?'/':`/${rel.replace(/\/index\.html$/,'/')}`, words, h2, h3, figures, captions, brandMentions: brand, summary: /class="[^"]*\bsummary\b/.test(html), contents: /class="page-toc"/.test(html) };
   if (figures !== captions) console.error(`NOTE ${row.page}: figure/figcaption mismatch (${figures}/${captions}); existing capture markup needs editorial follow-up`);
+  const excluded = /<meta name="robots" content="[^"]*noindex/i.test(document) || /<meta http-equiv="refresh"/i.test(document);
+  if (excluded) { console.log(JSON.stringify({ ...row, skipped: 'noindex or redirect stub' })); continue; }
   if (row.page !== '/404.html' && brand < 1) { console.error(`FAIL ${row.page}: missing PHP Ledger mention`); failed=true; }
   console.log(JSON.stringify(row));
 }

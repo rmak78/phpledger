@@ -67,11 +67,12 @@ if (screenDialog) {
 }
 
 /* Email-draft enquiry form: prepares a message on the visitor's device, stores nothing, sends nothing. */
-const enquiryForm = document.querySelector('form[data-mail-to]');
+const enquiryForm = document.querySelector('form[data-mail-to], form[data-discussion-url]');
 
 if (enquiryForm) {
   enquiryForm.hidden = false;
-  const receiver = enquiryForm.dataset.mailTo;
+  const receiver = enquiryForm.dataset.mailTo || '';
+  const discussionUrl = enquiryForm.dataset.discussionUrl || '';
   const subject = enquiryForm.dataset.mailSubject || 'PHP Ledger enquiry';
   const intro = enquiryForm.dataset.mailIntro || 'Hello PHP Ledger team,';
   const fields = [...enquiryForm.querySelectorAll('[data-label]')];
@@ -134,30 +135,54 @@ if (enquiryForm) {
       return null;
     }
     const body = `${intro}\n\n${lines.join('\n\n')}\n\nPlease let me know how to proceed.\n`;
-    preview.value = `To: ${receiver}\nSubject: ${subject}\n\n${body}`;
+    const header = receiver ? `To: ${receiver}\nSubject: ${subject}` : `Post as a new GitHub discussion: ${discussionUrl}\nTitle: ${subject}`;
+    preview.value = `${header}\n\n${body}`;
     previewDetails.open = true;
     return { body, text: preview.value };
   }
 
-  enquiryForm.addEventListener('submit', event => {
+  async function copyText(text) {
+    if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+    await navigator.clipboard.writeText(text);
+  }
+
+  function selectPreview() {
+    preview.focus();
+    preview.select();
+  }
+
+  enquiryForm.addEventListener('submit', async event => {
     event.preventDefault();
     const message = prepareMessage();
     if (!message) return;
-    status.textContent = 'Opening your email application. Review and send the draft there. If no draft opens, use Copy message or email us directly.';
-    window.location.href = `mailto:${receiver}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message.body)}`;
+    if (receiver) {
+      status.textContent = 'Opening your email application. Review and send the draft there. If no draft opens, use Copy message.';
+      window.location.href = `mailto:${receiver}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message.body)}`;
+      return;
+    }
+    try {
+      await copyText(message.body);
+      status.textContent = 'Message copied. A new GitHub discussion is opening in another tab: choose a category, paste the message and post it.';
+      window.open(discussionUrl, '_blank', 'noopener');
+    } catch {
+      selectPreview();
+      status.textContent = 'Automatic copying is unavailable. Your message is selected below; copy it, then open a new GitHub discussion from the link above and paste it there.';
+    }
   });
 
   enquiryForm.querySelector('#copy-message').addEventListener('click', async () => {
     const message = prepareMessage();
     if (!message) return;
     try {
-      if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
-      await navigator.clipboard.writeText(message.text);
-      status.textContent = `Message copied. Paste it into your email application, review it, and send it to ${receiver}.`;
+      await copyText(message.text);
+      status.textContent = receiver
+        ? `Message copied. Paste it into your email application, review it, and send it to ${receiver}.`
+        : 'Message copied. Paste it into a new GitHub discussion, review it, and post it.';
     } catch {
-      preview.focus();
-      preview.select();
-      status.textContent = 'Automatic copying is unavailable. Your message is selected below; copy it and send it using your email application.';
+      selectPreview();
+      status.textContent = receiver
+        ? 'Automatic copying is unavailable. Your message is selected below; copy it and send it using your email application.'
+        : 'Automatic copying is unavailable. Your message is selected below; copy it and paste it into a new GitHub discussion.';
     }
   });
 }

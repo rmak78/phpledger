@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0c2052">
-<title>Accounting features in PHP Ledger 1.0.0</title>
-<meta name="description" content="Explore the 1.0.0 accounting workspace: focused Home, compact registers, invoices and bills, stock, source-linked reports, browser installation.">
+<title>PHP Ledger features: everything in 1.0, workflow by workflow</title>
+<meta name="description" content="A workflow-by-workflow tour of PHP Ledger 1.0: invoices, bills, purchase orders, stock, bank reconciliation, financial reports, setup and signed updates.">
 <link rel="canonical" href="https://phpledger.com/product/">
 <link rel="alternate" hreflang="en" href="https://phpledger.com/product/">
 <link rel="alternate" hreflang="x-default" href="https://phpledger.com/product/">
@@ -15,23 +15,24 @@
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="dns-prefetch" href="https://github.com">
-<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=43848de1a2">
+<link rel="preload" href="/assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v=885f76f175">
 <meta property="og:site_name" content="PHP Ledger">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
-<meta property="og:title" content="Accounting features in PHP Ledger 1.0.0">
-<meta property="og:description" content="Explore the 1.0.0 accounting workspace: focused Home, compact registers, invoices and bills, stock, source-linked reports, browser installation.">
+<meta property="og:title" content="PHP Ledger features: everything in 1.0, workflow by workflow">
+<meta property="og:description" content="A workflow-by-workflow tour of PHP Ledger 1.0: invoices, bills, purchase orders, stock, bank reconciliation, financial reports, setup and signed updates.">
 <meta property="og:url" content="https://phpledger.com/product/">
-<meta property="og:image" content="https://phpledger.com/assets/og/workspace-1.0.0.png">
+<meta property="og:image" content="https://phpledger.com/assets/og/product.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="PHP Ledger Home using an isolated synthetic sample company.">
+<meta property="og:image:alt" content="PHP Ledger product tour: every workflow in version 1.0.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Accounting features in PHP Ledger 1.0.0">
-<meta name="twitter:description" content="Explore the 1.0.0 accounting workspace: focused Home, compact registers, invoices and bills, stock, source-linked reports, browser installation.">
-<meta name="twitter:image" content="https://phpledger.com/assets/og/workspace-1.0.0.png">
-<meta name="twitter:image:alt" content="PHP Ledger Home using an isolated synthetic sample company.">
+<meta name="twitter:title" content="PHP Ledger features: everything in 1.0, workflow by workflow">
+<meta name="twitter:description" content="A workflow-by-workflow tour of PHP Ledger 1.0: invoices, bills, purchase orders, stock, bank reconciliation, financial reports, setup and signed updates.">
+<meta name="twitter:image" content="https://phpledger.com/assets/og/product.png">
+<meta name="twitter:image:alt" content="PHP Ledger product tour: every workflow in version 1.0.">
 <meta name="twitter:site" content="@LedgerPhp94831">
 <link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
 <script type="application/ld+json">
@@ -50,7 +51,6 @@
         "width": 600,
         "height": 200
       },
-      "email": "rmak78@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Innovista Chenab, Arcade Plaza, Sector C, DHA Multan",
@@ -61,14 +61,10 @@
       },
       "founder": {
         "@type": "Person",
-        "name": "Rana Mansoor Akbar Khan",
-        "url": "https://pk.linkedin.com/in/rmak78",
-        "sameAs": [
-          "https://pk.linkedin.com/in/rmak78"
-        ]
+        "name": "Rana Mansoor Akbar Khan"
       },
       "sameAs": [
-        "https://github.com/rmak78/phpledger",
+        "https://github.com/phpledger/phpledger",
         "https://www.linkedin.com/company/phpledger/",
         "https://x.com/LedgerPhp94831",
         "https://www.facebook.com/profile.php?id=61594129753409",
@@ -89,11 +85,51 @@
       }
     },
     {
+      "@type": "SoftwareApplication",
+      "@id": "https://phpledger.com/#software",
+      "name": "PHP Ledger",
+      "alternateName": "phpledger",
+      "description": "PHP Ledger is open-source, self-hosted double-entry accounting software with core invoices, bills and payments, optional purchasing and inventory, and a manually configured tax engine. Built on PHP 8.2+ and MySQL 8.4, 1.0.0 is the first stable release with browser installation and signed automatic updates; independent accounting and security review remain post-release commitments.",
+      "applicationCategory": [
+        "BusinessApplication",
+        "FinanceApplication"
+      ],
+      "operatingSystem": "Self-hosted web application; PHP 8.2 or newer and MySQL 8.4",
+      "softwareRequirements": "PHP 8.2+ (8.3 recommended), MySQL 8.4 (InnoDB), HTTPS; browser installation, no terminal required for setup; PHP zip extension for automatic updates",
+      "softwareVersion": "1.0.0",
+      "datePublished": "2026-09-18",
+      "releaseNotes": "https://github.com/phpledger/phpledger/releases/tag/v1.0.0",
+      "downloadUrl": "https://github.com/phpledger/phpledger/releases/download/v1.0.0/phpledger-1.0.0.zip",
+      "license": "https://github.com/phpledger/phpledger/blob/master/LICENSE",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "softwareHelp": {
+        "@type": "CreativeWork",
+        "url": "https://github.com/phpledger/phpledger/wiki"
+      },
+      "screenshot": "https://phpledger.com/assets/screens/v1.0.0/home-1440.webp",
+      "url": "https://phpledger.com/",
+      "sameAs": [
+        "https://github.com/phpledger/phpledger"
+      ],
+      "author": {
+        "@id": "https://phpledger.com/#organization"
+      },
+      "publisher": {
+        "@id": "https://phpledger.com/#organization"
+      },
+      "inLanguage": "en"
+    },
+    {
       "@type": "WebPage",
       "@id": "https://phpledger.com/product/#webpage",
       "url": "https://phpledger.com/product/",
-      "name": "Accounting features in PHP Ledger 1.0.0",
-      "description": "Explore the 1.0.0 accounting workspace: focused Home, compact registers, invoices and bills, stock, source-linked reports, browser installation.",
+      "name": "PHP Ledger features: everything in 1.0, workflow by workflow",
+      "description": "A workflow-by-workflow tour of PHP Ledger 1.0: invoices, bills, purchase orders, stock, bank reconciliation, financial reports, setup and signed updates.",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://phpledger.com/#website"
@@ -108,7 +144,7 @@
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
-        "url": "https://phpledger.com/assets/og/workspace-1.0.0.png"
+        "url": "https://phpledger.com/assets/og/product.png"
       },
       "breadcrumb": {
         "@id": "https://phpledger.com/product/#breadcrumb"
@@ -117,7 +153,7 @@
         "@type": "SpeakableSpecification",
         "cssSelector": [
           "h1",
-          ".summary"
+          ".lead"
         ]
       }
     },
@@ -125,10 +161,6 @@
       "@type": "Person",
       "@id": "https://phpledger.com/#maintainer",
       "name": "Rana Mansoor Akbar Khan",
-      "url": "https://pk.linkedin.com/in/rmak78",
-      "sameAs": [
-        "https://pk.linkedin.com/in/rmak78"
-      ],
       "jobTitle": "PHP Ledger project maintainer",
       "worksFor": {
         "@id": "https://phpledger.com/#organization"
@@ -152,7 +184,7 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Accounting features",
+          "name": "Product",
           "item": "https://phpledger.com/product/"
         }
       ]
@@ -163,50 +195,34 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Is PHP Ledger free and open source?",
+          "name": "Can I switch off the parts my business does not use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The project-owned core and current modules use AGPL-3.0-or-later; a commercial licence is available. Published 0.1.0 through 0.1.5 previews retain their MIT grants. You can inspect and host the software yourself; hosting, setup and optional support have their own costs and terms."
+            "text": "Yes. Inventory, Purchasing and the cash point of sale are modules that a company switches on or off under Setup, and accounts receivable and payable navigation can be hidden. Switching a module off does not delete its history."
           }
         },
         {
           "@type": "Question",
-          "name": "What can I do in 1.0.0?",
+          "name": "Do reports change when I enter a draft?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Create invoices and bills, record partial payments and credits, inspect ageing and reconcile controls. Optional Purchasing and Inventory cover orders, receipts, matched bills, stock cost and returns. Core manual tax supports inclusive/exclusive prices; existing cash, journal, opening, period, bank CSV and reporting workflows remain available, alongside browser installation and signed automatic updates."
+            "text": "No. A draft never touches the books. Reports use posted journals only, so a receipt or expense affects the profit and loss only after someone reviews and posts it."
           }
         },
         {
           "@type": "Question",
-          "name": "Can I try it without registering?",
+          "name": "How are mistakes corrected?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The public demo creates a private synthetic company for your visit. Its records and access expire at the next hourly reset. Enter only fictional information."
+            "text": "Posted entries are never edited. A correction records its reason and posts a linked reversal, so the original entry, the reversal and the replacement stay connected in the history and in the account statements."
           }
         },
         {
           "@type": "Question",
-          "name": "Does the POS process payments or manage stock?",
+          "name": "Which currencies does version 1.0 support?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It records an illustrative cash sale and its balanced journal, with a printable receipt. Card capture, stock deduction, cost of sales and tax calculations are not included."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can AI assistants connect to my books?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The current release includes scoped, revocable read API and MCP connections. Connect a private client with a dedicated token or use per-user OAuth. The published client matrix identifies tested versions and pending clients; financial writes are not exposed."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Are the reports approved for tax or statutory filing?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The reports are country-neutral management previews. Currency choice does not activate tax rules. Qualified regional accounting review and supported statement packages remain post-release commitments."
+            "text": "Ten base currencies: USD, EUR, GBP, PKR, INR, MYR, BDT, LKR, NPR and SGD, one per company. Multi-currency posting inside one company is not part of 1.0."
           }
         }
       ]
@@ -217,73 +233,289 @@
 </head>
 <body class="page-product">
 <a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
-  <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger"></span></a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0"/><path d="M4 12l16 0"/><path d="M4 18l16 0"/></svg>Menu</button>
-  <nav id="navigation" aria-label="Main navigation">
-    <a href="/product/" aria-current="page">Product</a><a href="/point-of-sale/">Point of sale</a><a href="/learn/">Learn</a><a href="/download/">Download</a><a href="/support/">Support</a><a href="/roadmap/">Roadmap</a>
-    <a class="button button--small" href="/demo/">Try the demo</a>
-  </nav>
+  <div class="container site-header-row">
+    <a class="brand" href="/" aria-label="PHP Ledger home"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger"></a>
+    <nav id="navigation" class="site-nav" aria-label="Main navigation">
+      <a href="/product/" aria-current="page">Product</a><a href="/point-of-sale/">Point of sale</a><a href="/pricing/">Pricing &amp; licence</a><a href="/community/">Community</a><a href="/learn/">Learn</a><a href="/download/">Download</a>
+      <a class="site-nav-download" href="/download/">Download 1.0.0</a>
+    </nav>
+    <div class="site-header-actions">
+      <a class="button button--small" href="/demo/">Try the live demo</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation" aria-label="Open menu"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l16 0"/><path d="M4 12l16 0"/><path d="M4 18l16 0"/></svg><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg></button>
+    </div>
+  </div>
 </header>
 <main id="main">
-<section class="container page-intro page-intro--simple"><h1>From the next task to the numbers behind it</h1><p class="lead">Work through invoices, bills, payments and reports in one accounting workspace. The 1.0.0 interface keeps company context, document status and review actions visible, and adds browser installation and signed automatic updates.</p><aside class="summary"><h2 id="what-is-included">What is included?</h2><ul><li>Core receipts, expenses, journals, customer invoices, supplier bills, allocated payments and linked credits.</li><li>Optional Purchasing and Inventory share the same accounting services.</li><li>A focused Home, searchable registers, one-line-first editors and source-linked reports.</li><li>Guided browser installation and publisher-signed automatic updates with backup/recovery.</li></ul></aside>
-<nav class="page-toc" aria-label="On this page"><p><strong>On this page</strong></p><ol><li><a href="#what-is-included">What is included?</a></li><li><a href="#start-with-what-needs-attention">Start with what needs attention</a></li><li><a href="#find-the-document-without-losing-the-register">Find the document without losing the register</a></li><li><a href="#build-one-line-then-review-the-posting">Build one line, then review the posting</a></li><li><a href="#keep-receipts-and-expenses-direct">Keep receipts and expenses direct</a></li><li><a href="#follow-orders-into-received-stock">Follow orders into received stock</a></li><li><a href="#see-stock-quantities-and-carrying-value">See stock quantities and carrying value</a></li><li><a href="#read-the-result-then-follow-its-sources">Read the result, then follow its sources</a></li><li><a href="#settle-open-items-together">Settle open items together</a></li><li><a href="#keep-tax-and-currency-choices-explicit">Keep tax and currency choices explicit</a></li><li><a href="#know-the-preview-boundaries">Know the preview boundaries</a></li><li><a href="#questions-about-php-ledger">Questions about PHP Ledger</a></li><li><a href="#what-do-the-reports-answer">What do the reports answer?</a></li><li><a href="#what-do-the-accounting-terms-mean">What do the accounting terms mean?</a></li><li><a href="#how-can-a-client-read-a-scoped-report">How can a client read a scoped report?</a></li><li><a href="#when-should-you-choose-another-accounting-product">When should you choose another accounting product?</a></li></ol></nav><p class="capture-label" data-capture-status>1.0.0 · Actual application captures · Synthetic sample data</p><div class="actions"><a class="button" href="/demo/">Try a sample company</a><a class="button button--secondary" href="/download/">Download 1.0.0</a></div></section>
-<section class="container section stack stack--loose" aria-label="The accounting journey">
-<div class="feature-block"><div class="text"><h2 id="start-with-what-needs-attention">Start with what needs attention</h2><p>Home brings drafts, overdue receivables and upcoming bills together with cash, amounts due and recent activity. Quick actions start an expense, receipt, invoice, bill or journal. The workspace sidebar and company switcher keep the current books visible.</p></div><figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Home: what needs attention" data-full="/assets/screens/v1.0.0/home-1440.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/home-720.webp" srcset="/assets/screens/v1.0.0/home-720.webp 720w, /assets/screens/v1.0.0/home-1440.webp 1440w" sizes="(max-width: 900px) 100vw, 780px" width="1440" height="900" alt="Home for a synthetic business, showing daily-work navigation, overdue receivables/payables and recent activity." loading="lazy"></span></button><figcaption>Home for a synthetic business, showing daily-work navigation, overdue receivables/payables and recent activity. · 1.0.0 · Synthetic data</figcaption></figure></div>
-<div class="feature-block feature-block--reverse"><div class="text"><h2 id="find-the-document-without-losing-the-register">Find the document without losing the register</h2><p>Search, filter and sort compact lists. Select 25, 50 or 100 rows per page; list filters remain in the URL. The invoice register shows status and outstanding amounts beside the selected document. Full nested report-to-source-to-action return behavior remains a preview limitation.</p></div><figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Review invoices and credits" data-full="/assets/screens/v0.6.0-preview/invoices.webp"><span class="capture-frame"><img src="/assets/screens/v0.6.0-preview/invoices-720.webp" srcset="/assets/screens/v0.6.0-preview/invoices-720.webp 720w, /assets/screens/v0.6.0-preview/invoices.webp 1366w" sizes="(max-width: 900px) 100vw, 780px" width="1366" height="900" alt="The invoice register keeps filters, statuses, outstanding amounts and selected-document details together." loading="lazy"></span></button><figcaption>The invoice register keeps filters, statuses, outstanding amounts and selected-document details together. · 0.6.0-preview · Synthetic data</figcaption></figure></div>
-<div class="feature-block"><div class="text"><h2 id="build-one-line-then-review-the-posting">Build one line, then review the posting</h2><p>Invoice and bill editors start with one line. Choose a customer or supplier, dates, currency and whether entered prices include tax. Add lines as needed and inspect net, tax and total. Save a draft or update the posting preview; a draft does not change the books.</p></div><figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Start a customer invoice" data-full="/assets/screens/v1.0.0/ar-invoice-new-1440.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/ar-invoice-new-720.webp" srcset="/assets/screens/v1.0.0/ar-invoice-new-720.webp 720w, /assets/screens/v1.0.0/ar-invoice-new-1440.webp 1440w" sizes="(max-width: 900px) 100vw, 780px" width="1440" height="900" alt="New Invoice form with customer and date fields, a line-item table and a running subtotal/tax/total, synthetic data." loading="lazy"></span></button><figcaption>A new invoice editor: customer, dates, currency, entered-price mode and one line, with totals recomputed on save or preview. · 1.0.0 · Synthetic data</figcaption></figure></div>
-<div class="feature-block feature-block--reverse"><div class="text"><h2 id="keep-receipts-and-expenses-direct">Keep receipts and expenses direct</h2><p>Enter the amount, counterparty, bank and category, then inspect the posting preview. Posted records retain their history. Corrections use reviewed reversal and replacement entries under the same document identity; closed periods reject new postings.</p></div><figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Start an expense" data-full="/assets/screens/v0.6.0-preview/expense.webp"><span class="capture-frame"><img src="/assets/screens/v0.6.0-preview/expense-720.webp" srcset="/assets/screens/v0.6.0-preview/expense-720.webp 720w, /assets/screens/v0.6.0-preview/expense.webp 1366w" sizes="(max-width: 900px) 100vw, 780px" width="1366" height="900" alt="Expense entry keeps the amount, counterparty, bank, category and posting-preview action in one form." loading="lazy"></span></button><figcaption>Expense entry keeps the amount, counterparty, bank, category and posting-preview action in one form. · 0.6.0-preview · Synthetic data</figcaption></figure></div>
-<div class="feature-block"><div class="text"><h2 id="follow-orders-into-received-stock">Follow orders into received stock</h2><p>Purchasing separates an order, a physical goods receipt and a later supplier bill. Review partial receipts, matched quantities and explicit price or rate variances. Receipt links and received-but-unbilled reconciliation keep the stages connected.</p></div><figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Purchase orders and receipts" data-full="/assets/screens/v0.6.0-preview/purchasing.webp"><span class="capture-frame"><img src="/assets/screens/v0.6.0-preview/purchasing-720.webp" srcset="/assets/screens/v0.6.0-preview/purchasing-720.webp 720w, /assets/screens/v0.6.0-preview/purchasing.webp 1366w" sizes="(max-width: 900px) 100vw, 780px" width="1366" height="900" alt="Purchase orders retain links to goods receipts and received-but-unbilled reconciliation." loading="lazy"></span></button><figcaption>Purchase orders retain links to goods receipts and received-but-unbilled reconciliation. · 0.6.0-preview · Synthetic data</figcaption></figure></div>
-<div class="feature-block feature-block--reverse"><div class="text"><h2 id="see-stock-quantities-and-carrying-value">See stock quantities and carrying value</h2><p>Optional Inventory maintains products, one stock location and moving weighted-average valuation. Stock invoices issue goods and record their cost; linked returns retain their original basis. Counts and value adjustments require review. Cash POS remains separate from stock deductions.</p></div><figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Products and stock" data-full="/assets/screens/v0.6.0-preview/inventory.webp"><span class="capture-frame"><img src="/assets/screens/v0.6.0-preview/inventory-720.webp" srcset="/assets/screens/v0.6.0-preview/inventory-720.webp 720w, /assets/screens/v0.6.0-preview/inventory.webp 1366w" sizes="(max-width: 900px) 100vw, 780px" width="1366" height="900" alt="The stock register shows product quantities and carrying values, with stock-to-ledger reconciliation below." loading="lazy"></span></button><figcaption>The stock register shows product quantities and carrying values, with stock-to-ledger reconciliation below. · 0.6.0-preview · Synthetic data</figcaption></figure></div>
-</section><section class="section section--paper" id="reports"><div class="container stack stack--loose"><h2 id="read-the-result-then-follow-its-sources">Read the result, then follow its sources</h2><p>Profit and loss separates cost of sales and gross profit when the chart has the required classifications. Use period presets or custom dates. The balance sheet, trial balance and account statement read the same posted books; account statements retain opening, debit, credit, running and closing balances.</p><div class="gallery grid-2"><figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Profit and loss" data-full="/assets/screens/v1.0.0/profit-loss-1440.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/profit-loss-720.webp" srcset="/assets/screens/v1.0.0/profit-loss-720.webp 720w, /assets/screens/v1.0.0/profit-loss-1440.webp 1440w" sizes="(max-width: 900px) 100vw, 780px" width="1440" height="900" alt="Profit and loss report with period controls and income/cost-of-sales/expense line items, synthetic data." loading="lazy"></span></button><figcaption>Profit and loss for a custom date range, showing income, cost of sales, gross profit, expenses and net profit. · 1.0.0 · Synthetic data</figcaption></figure><figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Balance sheet" data-full="/assets/screens/v0.6.0-preview/balance-sheet.webp"><span class="capture-frame"><img src="/assets/screens/v0.6.0-preview/balance-sheet-720.webp" srcset="/assets/screens/v0.6.0-preview/balance-sheet-720.webp 720w, /assets/screens/v0.6.0-preview/balance-sheet.webp 1366w" sizes="(max-width: 900px) 100vw, 780px" width="1366" height="900" alt="Willow Corner Shop: assets, liabilities and equity as of 31 December 2025." loading="lazy"></span></button><figcaption>Willow Corner Shop: assets, liabilities and equity as of 31 December 2025. · 0.6.0-preview · Synthetic data</figcaption></figure></div><p>The cash scenario applies weekly inflows and outflows you enter to recorded cash. It is an illustrative planning tool, not a bank feed or an automatic prediction.</p></div></section><section class="container section stack stack--loose"><h2 id="settle-open-items-together">Settle open items together</h2><p>Allocate one customer receipt or supplier payment across multiple open items and review the complete allocation. The settlement commits atomically. Supported foreign-currency settlements request gain/loss accounts when an exchange difference actually applies. Historical ageing and control-account reconciliation retain the accounting trail.</p><figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Receivables and payables ageing" data-full="/assets/screens/v1.0.0/ageing-1440.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/ageing-720.webp" srcset="/assets/screens/v1.0.0/ageing-720.webp 720w, /assets/screens/v1.0.0/ageing-1440.webp 1440w" sizes="(max-width: 900px) 100vw, 780px" width="1440" height="900" alt="Receivables and payables ageing report with five day-based buckets and an unpaid-documents table, synthetic data." loading="lazy"></span></button><figcaption>Receivables ageing for a synthetic business, showing five unpaid invoices split across not-overdue to over-90-day buckets. · 1.0.0 · Synthetic data</figcaption></figure><h2 id="keep-tax-and-currency-choices-explicit">Keep tax and currency choices explicit</h2><p>Manually configured tax codes and dated rates support inclusive or exclusive prices. Saved documents freeze their tax and rate snapshots. Existing tax-code definitions are read-only; dated rate changes remain available. Each book has one immutable functional currency. Country rules, automatic rate feeds, statutory filing, revaluation and consolidation remain outside the preview.</p><h2 id="know-the-preview-boundaries">Know the preview boundaries</h2><p>Desktop and tablet are the current design targets. Mobile refinement, dark mode, complete visual/accessibility acceptance, consistent field-level error recovery and the full nested report/source/action return journey remain unfinished.</p><p>Advances, unapplied credits, refunds, multiple warehouses, batches, serials, expiry and landed cost are not included. Quotes remains a separate future plugin. These management reports do not establish statutory compliance or accounting sign-off.</p><p><a href="/news/1-0-0/">Read the 1.0.0 release notes</a> or <a href="/roadmap/">review the roadmap</a>.</p></section><section class="container section stack stack--loose" id="faq"><h2 id="questions-about-php-ledger">Questions about PHP Ledger</h2>
-<details><summary>Is PHP Ledger free and open source?</summary><p>The project-owned core and current modules use AGPL-3.0-or-later; a commercial licence is available. Published 0.1.0 through 0.1.5 previews retain their MIT grants. You can inspect and host the software yourself; hosting, setup and optional support have their own costs and terms.</p></details>
-<details><summary>What can I do in the current preview?</summary><p>Create invoices and bills, record partial payments and credits, inspect ageing and reconcile controls. Optional Purchasing and Inventory cover orders, receipts, matched bills, stock cost and returns. Core manual tax supports inclusive/exclusive prices; existing cash, journal, opening, period, bank CSV and reporting workflows remain available.</p></details>
-<details><summary>Can I try it without registering?</summary><p>Yes. The public demo creates a private synthetic company for your visit. Its records and access expire at the next hourly reset. Enter only fictional information.</p></details>
-<details><summary>Does the POS process payments or manage stock?</summary><p>It records an illustrative cash sale and its balanced journal, with a printable receipt. Card capture, stock deduction, cost of sales and tax calculations are not included.</p></details>
-<details><summary>Can AI assistants connect to my books?</summary><p>The current release includes scoped, revocable read API and MCP connections. Connect a private client with a dedicated token or use per-user OAuth. The published client matrix identifies tested versions and pending clients; financial writes are not exposed.</p></details>
-<details><summary>Are the reports approved for tax or statutory filing?</summary><p>The reports are country-neutral management previews. Currency choice does not activate tax rules. Qualified regional accounting review and supported statement packages remain open gates.</p></details>
-</section><section class="container section stack stack--loose"><h2 id="what-do-the-reports-answer">What do the reports answer?</h2><p>A report is a scoped view of posted records. Choose the company, book and date before comparing figures.</p><table><caption>Report questions and evidence</caption><thead><tr><th scope="col">Report</th><th scope="col">Question</th><th scope="col">Evidence to inspect</th></tr></thead><tbody><tr><th scope="row">Trial balance</th><td>Do debit and credit totals agree?</td><td>Account balances and the underlying journal lines</td></tr><tr><th scope="row">Profit and loss</th><td>What income and expenses fell in the period?</td><td>Income/expense accounts and source postings</td></tr><tr><th scope="row">Balance sheet</th><td>What are assets, liabilities and equity at this date?</td><td>Closing account balances and classifications</td></tr><tr><th scope="row">Account ledger</th><td>How did this balance change?</td><td>Opening, movements, running balance and source links</td></tr></tbody></table><p>In the worked cash example, income of 1,000.00 less an expense of 125.00 gives profit of 875.00. Cash is also 875.00 only because this example has no opening balance, credit transactions, owner funding or other movements. <a href="/learn/profit-and-loss-vs-balance-sheet/">Learn why profit and cash usually differ</a>.</p></section><section class="container section stack stack--loose"><h2 id="what-do-the-accounting-terms-mean">What do the accounting terms mean?</h2><p>The same definitions guide entry, posting and review; a familiar label should never hide a different balance rule.</p><dl><dt>Double-entry</dt><dd>A method in which every posted journal has equal debit and credit totals.</dd><dt>Draft and posting</dt><dd>A draft is saved work. Posting validates and records its effect in the ledger.</dd><dt>Journal and linked reversal</dt><dd>A journal records the financial effect. Its reversal records the opposite effect on an explicit date and retains the original evidence.</dd><dt>Functional currency</dt><dd>The currency in which the book measures its accounts. It is immutable after creation; foreign lines also retain their original amount and rate snapshot.</dd><dt>Period close</dt><dd>A control that rejects new postings within a closed date range.</dd><dt>Bank reconciliation</dt><dd>The comparison of a bank statement with the book account, with unresolved differences investigated.</dd></dl><p>The <a href="/glossary/">full glossary</a> defines reports, control accounts, subledgers and cutover evidence.</p></section><section class="container section stack stack--loose"><h2 id="how-can-a-client-read-a-scoped-report">How can a client read a scoped report?</h2><p>Dedicated tokens or per-user OAuth grant bounded read access; connections do not expose a financial posting command.</p><pre><code>GET /api/v1/trial-balance?company_id=1&amp;book_id=1&amp;as_of=2025-12-31
-Authorization: Bearer YOUR_PRIVATE_TOKEN</code></pre><p>This is an illustrative request shape for your own installation. Replace identifiers with a company and book the connection is allowed to read, and keep the token private. The public demo uses the <code>/demo</code> prefix. A successful report read does not grant access to another company. See the <a href="https://github.com/rmak78/phpledger/blob/master/docs/INTEGRATIONS.md">API/MCP documentation and client matrix</a> before selecting a client.</p></section><section class="container section stack stack--loose"><h2 id="when-should-you-choose-another-accounting-product">When should you choose another accounting product?</h2><p>Choose a product with the required supported scope when you need statutory filing, advanced inventory, payroll or independently accepted reporting now.</p><p>PHP Ledger is useful for evaluating an inspectable PHP accounting starter with a thin document-to-payment and purchase-to-stock workflow. It has less operational coverage than established ERP and accounting products. Hosting simplicity does not remove the need for backups, upgrades, accounting decisions or staff training. The <a href="/compare/">sourced comparisons</a> describe where each alternative fits and where PHP Ledger loses.</p><p>Start with a <a href="/guides/">worked reporting guide</a>, then run the same fictional task on your intended host. Record the result and any missing workflow before deciding whether to continue.</p></section>
+<section class="container intro intro--center section--tight" aria-labelledby="product-heading">
+  <div class="page-intro">
+    <h1 id="product-heading">Everything in PHP Ledger 1.0, workflow by workflow</h1>
+    <p class="lead">The workspace keeps Home and the Daily work, Sales, Purchases, Inventory, Banking, Reports and Setup groups in one sidebar. Search and jump to any screen with Ctrl K, while the active company and book stay visible. This page walks through each group with real screens from a fictional sample business.</p>
+    <div class="actions"><a class="button" href="/demo/">Try the live demo</a><a class="button button--secondary" href="/download/">Download 1.0.0</a></div>
+    <p class="capture-label" data-capture-status>Screens show a fictional sample business, Willow Corner Shop, in version 1.0.0.</p>
+  </div>
+</section>
+
+<nav class="subnav" aria-label="Sections of this page"><div class="container"><ul>
+  <li><a href="#home">Home</a></li><li><a href="#daily-work">Daily work</a></li><li><a href="#sales">Sales</a></li><li><a href="#purchases">Purchases</a></li><li><a href="#inventory">Inventory</a></li><li><a href="#banking">Banking</a></li><li><a href="#reports">Reports</a></li><li><a href="#setup">Setup</a></li><li><a href="#install">Install and updates</a></li><li><a href="#not-yet">Not yet</a></li>
+</ul></div></nav>
+
+<section class="tour-section section--white" id="home" aria-labelledby="home-heading">
+  <div class="container">
+    <div class="section-heading"><h2 id="home-heading">Home</h2><p>See what needs attention before opening a register. Quick actions create the day's common documents, while cash, receivables, payables and recent activity stay together on one screen.</p></div>
+    <div class="feature-tour">
+      <div class="feature-block">
+        <div class="feature-text"><h3>Begin with the work that needs attention</h3><p>Home shows drafts waiting for review, the cash and bank position, overdue receivables and payables, and the most recent posted activity. Quick actions start an expense, a receipt, an invoice, a bill or a journal from the same place, so the morning starts with a decision rather than a search through menus.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Home" data-full="/assets/screens/v1.0.0/01b-home-full.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/01-home-720.webp" srcset="/assets/screens/v1.0.0/01-home-720.webp 720w, /assets/screens/v1.0.0/01-home.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Home screen showing three receipt and expense drafts, USD 57,659.00 cash and bank, USD 164.00 receivable, USD 100.00 payable and recent activity." loading="lazy"></span></button><figcaption><b>Home</b><span>Sample business</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tour-section section--paper" id="daily-work" aria-labelledby="daily-heading">
+  <div class="container">
+    <div class="section-heading"><h2 id="daily-heading">Daily work</h2><p>Record everyday money movements directly, or use a general journal when an entry needs several accounts. Every path ends in the same balanced posting service.</p></div>
+    <div class="feature-tour">
+      <div class="feature-block">
+        <div class="feature-text"><h3>Receipts and expenses start as drafts</h3><p>Record money in or money out against one category. Drafts stay outside the books until you post them, and the register keeps Draft, Posted and Reversed transactions apart, so a half-finished entry never distorts a report while it waits for the receipt to turn up.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Receipts and expenses" data-full="/assets/screens/v1.0.0/17-receipts-expenses.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/17-receipts-expenses-720.webp" srcset="/assets/screens/v1.0.0/17-receipts-expenses-720.webp 720w, /assets/screens/v1.0.0/17-receipts-expenses.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Receipts and expenses register showing three drafts totalling USD 302.50 and an expense detail for USD 12.50." loading="lazy"></span></button><figcaption><b>Receipts and expenses</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block feature-block--reverse">
+        <div class="feature-text"><h3>Preview the journal before an expense posts</h3><p>Enter the date, amount, counterparty, cash or bank account and category. The posting preview shows the exact journal lines before the transaction changes the books, which is how a bookkeeper checks that an electricity bill lands in the right expense account rather than discovering it at month end.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Expense editor" data-full="/assets/screens/v1.0.0/18-expense-editor.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/18-expense-editor-720.webp" srcset="/assets/screens/v1.0.0/18-expense-editor-720.webp 720w, /assets/screens/v1.0.0/18-expense-editor.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="New expense editor with fields for date, amount, counterparty, cash or bank account, category and a posting preview." loading="lazy"></span></button><figcaption><b>Expense editor</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block">
+        <div class="feature-text"><h3>General journals remain balanced and traceable</h3><p>Filter drafts, posted journals and reversals in one register. Each row shows equal debits and credits, and the detail panel preserves the reference, the date, the lines and the history of the entry, so an auditor can read a journal without opening the database.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="General journals" data-full="/assets/screens/v1.0.0/15-journals.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/15-journals-720.webp" srcset="/assets/screens/v1.0.0/15-journals-720.webp 720w, /assets/screens/v1.0.0/15-journals.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="General journals register showing posted and reversed entries with equal debit and credit amounts." loading="lazy"></span></button><figcaption><b>General journals</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block feature-block--reverse">
+        <div class="feature-text"><h3>Corrections use linked reversals</h3><p>Build a journal with up to 100 lines and inspect the balance before posting. Posted entries are never edited: a correction records its reason and links the reversal to the original entry, so the trail from the wrong figure to the right one stays readable in every account statement.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="General journal editor" data-full="/assets/screens/v1.0.0/16-journal-editor.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/16-journal-editor-720.webp" srcset="/assets/screens/v1.0.0/16-journal-editor-720.webp 720w, /assets/screens/v1.0.0/16-journal-editor.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="New general journal editor with debit and credit columns, a journal description and a balance preview." loading="lazy"></span></button><figcaption><b>General journal editor</b><span>Sample business</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tour-section section--white" id="sales" aria-labelledby="sales-heading">
+  <div class="container">
+    <div class="section-heading"><h2 id="sales-heading">Sales</h2><p>Create invoices and customer credits, then follow what has been paid and what remains open, all from one register.</p></div>
+    <div class="feature-tour">
+      <div class="feature-block">
+        <div class="feature-text"><h3>Enter an invoice one line at a time</h3><p>Choose the customer, the dates, the currency and whether entered prices include or exclude tax. Add a product, an account, a quantity, a unit price and a tax code on each line; totals are recomputed when you preview or save, so the figure on screen is always the figure that will post.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Invoice editor" data-full="/assets/screens/v1.0.0/03-invoice-editor.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/03-invoice-editor-720.webp" srcset="/assets/screens/v1.0.0/03-invoice-editor-720.webp 720w, /assets/screens/v1.0.0/03-invoice-editor.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="New invoice editor with customer, dates, entered-price mode and one-line invoice entry fields." loading="lazy"></span></button><figcaption><b>Invoice editor</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block feature-block--reverse">
+        <div class="feature-text"><h3>Keep invoice status and open amount together</h3><p>The register separates Draft, Unpaid, Overdue, Paid and Reversed documents. Open an invoice to see its due date, reference, entered-price mode and remaining balance, then record a receipt without leaving the list. Customer credits appear in the same place, so an allocation is one click rather than a hunt.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Invoices register" data-full="/assets/screens/v1.0.0/02-invoices.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/02-invoices-720.webp" srcset="/assets/screens/v1.0.0/02-invoices-720.webp 720w, /assets/screens/v1.0.0/02-invoices.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Invoices register showing USD 164.00 outstanding, one customer credit and a partly paid invoice." loading="lazy"></span></button><figcaption><b>Invoices register</b><span>Sample business</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tour-section section--paper" id="purchases" aria-labelledby="purchases-heading">
+  <div class="container">
+    <div class="section-heading"><h2 id="purchases-heading">Purchases</h2><p>Follow a supplier commitment from order and receipt to bill and payment, with the received-but-unbilled position always visible.</p></div>
+    <div class="feature-tour">
+      <div class="feature-block">
+        <div class="feature-text"><h3>Bills show what is due and what remains</h3><p>Filter bills by status and date, review the ageing, and open the selected supplier document beside the register. Supplier payments can be allocated across several open items in one go, and the remaining amount on each bill stays visible until it reaches zero.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Bills register" data-full="/assets/screens/v1.0.0/04-bills.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/04-bills-720.webp" srcset="/assets/screens/v1.0.0/04-bills-720.webp 720w, /assets/screens/v1.0.0/04-bills.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Bills register showing one partly paid USD 500.00 bill with USD 100.00 remaining." loading="lazy"></span></button><figcaption><b>Bills register</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block feature-block--reverse">
+        <div class="feature-text"><h3>Purchase orders track receipts and supplier billing</h3><p>Record ordered quantities, receive goods and record returns against the order. The workflow keeps received quantities visible and supports the reconciliation of goods received but not yet billed, which is where stock and accounts payable usually drift apart in a spreadsheet.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Purchase orders" data-full="/assets/screens/v1.0.0/07-purchase-orders.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/07-purchase-orders-720.webp" srcset="/assets/screens/v1.0.0/07-purchase-orders-720.webp 720w, /assets/screens/v1.0.0/07-purchase-orders.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Purchase orders register showing a received USD 500.00 order with ordered and received quantities." loading="lazy"></span></button><figcaption><b>Purchase orders</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block">
+        <div class="feature-text"><h3>One party can be a customer, a supplier or both</h3><p>Keep the legal name, country, contacts and activity in one shared record. Receivable and payable balances remain separate even when the same party has both roles, so the wholesaler who also buys from you never has the two sides netted off by accident.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Customers and suppliers" data-full="/assets/screens/v1.0.0/05-customers-suppliers.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/05-customers-suppliers-720.webp" srcset="/assets/screens/v1.0.0/05-customers-suppliers-720.webp 720w, /assets/screens/v1.0.0/05-customers-suppliers.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Customers and suppliers register showing four parties with separate receivable and payable balances." loading="lazy"></span></button><figcaption><b>Customers and suppliers</b><span>Sample business</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tour-section section--white" id="inventory" aria-labelledby="inventory-heading">
+  <div class="container">
+    <div class="section-heading"><h2 id="inventory-heading">Inventory</h2><p>Keep saleable stock and non-stock products in one register without turning stock into a separate set of books.</p></div>
+    <div class="feature-tour">
+      <div class="feature-block">
+        <div class="feature-text"><h3>Keep quantity and carrying value together</h3><p>Stock counts preview their accounting effect before posting. Weighted-average cost flows into cost of sales on the profit and loss, and non-stock products remain available for document lines without a quantity balance, so a service line and a stock line can share one invoice.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Products and stock" data-full="/assets/screens/v1.0.0/06-products-stock.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/06-products-stock-720.webp" srcset="/assets/screens/v1.0.0/06-products-stock-720.webp 720w, /assets/screens/v1.0.0/06-products-stock.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Products and stock register showing two active stock products with USD 340.00 total carrying value." loading="lazy"></span></button><figcaption><b>Products and stock</b><span>Sample business</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tour-section section--paper" id="banking" aria-labelledby="banking-heading">
+  <div class="container">
+    <div class="section-heading"><h2 id="banking-heading">Banking</h2><p>Reconcile imported statement lines against the transactions already in the books, and keep each completed statement with its account.</p></div>
+    <div class="feature-tour">
+      <div class="feature-block">
+        <div class="feature-text"><h3>Preview, match and retain the statement</h3><p>Preview a CSV statement import before anything posts. Matching suggestions require explicit confirmation, unexplained lines stay visible until someone deals with them, and the completed statement history remains with the bank account so next month starts from a reconciled opening balance.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Bank reconciliation" data-full="/assets/screens/v1.0.0/08-bank-reconciliation.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/08-bank-reconciliation-720.webp" srcset="/assets/screens/v1.0.0/08-bank-reconciliation-720.webp 720w, /assets/screens/v1.0.0/08-bank-reconciliation.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Bank reconciliation screen with statement import fields, opening and closing balances and the statement history." loading="lazy"></span></button><figcaption><b>Bank reconciliation</b><span>Sample business</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tour-section section--white" id="reports" aria-labelledby="reports-heading">
+  <div class="container">
+    <div class="section-heading"><h2 id="reports-heading">Reports</h2><p>Move from a financial total to the journals and source documents behind it. Choose a calendar preset or a custom period, then export the result to CSV.</p></div>
+    <div class="feature-tour">
+      <div class="feature-block">
+        <div class="feature-text"><h3>Open every financial report from one place</h3><p>Choose a report and a calendar preset or a custom period. Reports use posted journals only and export their result to CSV, and the reports screen itself summarises cash and bank, income year to date, costs and expenses and net profit before you open anything.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Reports" data-full="/assets/screens/v1.0.0/09-reports.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/09-reports-720.webp" srcset="/assets/screens/v1.0.0/09-reports-720.webp 720w, /assets/screens/v1.0.0/09-reports.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Reports screen showing cash and bank 57,659.00, income year to date 113,588.00, costs and expenses 80,335.00 and net profit 33,253.00, with the financial statements, ledgers and receivables and payables lists below." loading="lazy"></span></button><figcaption><b>Reports</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block feature-block--reverse">
+        <div class="feature-text"><h3>Read assets, liabilities and equity at a date</h3><p>The balance sheet groups account balances and keeps the accounting equation visible at the date you choose. Every account name opens the underlying statement, so the total for cash and bank can be followed to the bank accounts and from there to the journals that moved them.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Balance sheet" data-full="/assets/screens/v1.0.0/11-balance-sheet.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/11-balance-sheet-720.webp" srcset="/assets/screens/v1.0.0/11-balance-sheet-720.webp 720w, /assets/screens/v1.0.0/11-balance-sheet.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Balance sheet as of 18 September 2026 showing total assets 61,953.00, total liabilities 3,700.00 and equity including earned profit 58,253.00, with the account list below." loading="lazy"></span></button><figcaption><b>Balance sheet</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block">
+        <div class="feature-text"><h3>Check every account in the trial balance</h3><p>Compare debit and credit balances for the selected period, account by account, and drill down from any account to the entries behind the figure. The trial balance proves the arithmetic; the drill-down is how you check that the arithmetic describes what happened.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Trial balance" data-full="/assets/screens/v1.0.0/12-trial-balance.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/12-trial-balance-720.webp" srcset="/assets/screens/v1.0.0/12-trial-balance-720.webp 720w, /assets/screens/v1.0.0/12-trial-balance.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Trial balance through 18 September 2026 listing accounts with type, debit and credit columns, including cash and bank 49,435.00 debit and term loan 3,600.00 credit." loading="lazy"></span></button><figcaption><b>Trial balance</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block feature-block--reverse">
+        <div class="feature-text"><h3>Review receivables and payables by age</h3><p>Ageing separates current and overdue open items into time bands, for customers and for suppliers. Move from a band total to the customer, supplier or source document that makes it up, which is the list a small business actually needs on a Friday afternoon.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Ageing" data-full="/assets/screens/v1.0.0/13-ageing.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/13-ageing-720.webp" srcset="/assets/screens/v1.0.0/13-ageing-720.webp 720w, /assets/screens/v1.0.0/13-ageing.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Receivables and payables ageing report showing 164.00 not overdue and zero in the 1-30, 31-60, 61-90 and over-90-day bands, with one unpaid invoice INV-000005 due 6 October 2026." loading="lazy"></span></button><figcaption><b>Receivables and payables ageing</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block">
+        <div class="feature-text"><h3>Follow an account from opening to closing balance</h3><p>The account statement lists each posted movement in date order with its journal reference, so the opening balance, the debits, the credits and the closing balance reconcile on one page and each line can be opened to the document that caused it.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Account statement" data-full="/assets/screens/v1.0.0/14-account-statement.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/14-account-statement-720.webp" srcset="/assets/screens/v1.0.0/14-account-statement-720.webp 720w, /assets/screens/v1.0.0/14-account-statement.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Account statement for account 1000, Cash and bank, showing opening balance 0.00, total debits 138,575.00, total credits 89,140.00 and closing balance 49,435.00 Dr, with posted entries listed by date and journal." loading="lazy"></span></button><figcaption><b>Account statement</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block feature-block--reverse">
+        <div class="feature-text"><h3>Test a cash scenario from assumptions you enter</h3><p>Enter expected weekly receipts and payments to inspect a possible cash path over the coming weeks. The cash scenario uses your assumptions, not a prediction, and it does not change the books; it exists so that an owner can see whether next month's rent is covered before it is due.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Cash scenario" data-full="/assets/screens/v1.0.0/28-cash-forecast.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/28-cash-forecast-720.webp" srcset="/assets/screens/v1.0.0/28-cash-forecast-720.webp 720w, /assets/screens/v1.0.0/28-cash-forecast.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Cash forecast screen with weekly assumptions of 250.00 in and 175.00 out over 12 weeks, a projection of USD 58,559.00 after 12 weeks and a week-by-week cash plan table." loading="lazy"></span></button><figcaption><b>Cash scenario</b><span>Sample business</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tour-section section--paper" id="setup" aria-labelledby="setup-heading">
+  <div class="container">
+    <div class="section-heading"><h2 id="setup-heading">Setup</h2><p>Set the accounting structure before daily work begins, then control dates, modules and reporting access as the company changes.</p></div>
+    <div class="feature-tour">
+      <div class="feature-block">
+        <div class="feature-text"><h3>Start with a chart of accounts for the business</h3><p>Use a country package or build the account structure you need. Accounts carry their type and reporting position into journals and financial reports, so a new account appears in the right place on the balance sheet the moment it is created.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Chart of accounts" data-full="/assets/screens/v1.0.0/20-chart-of-accounts.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/20-chart-of-accounts-720.webp" srcset="/assets/screens/v1.0.0/20-chart-of-accounts-720.webp 720w, /assets/screens/v1.0.0/20-chart-of-accounts.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Chart of accounts listing 32 accounts in USD, including Cash and bank 1000, Reserve bank 1010, Cash till 1020 and Petty cash 1030, each with purpose, status and balance." loading="lazy"></span></button><figcaption><b>Chart of accounts</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block feature-block--reverse">
+        <div class="feature-text"><h3>Keep tax codes and rate history explicit</h3><p>Define tax codes and dated rates, then choose whether document prices include or exclude tax. Historical documents keep the rate that applied when they were posted, and no national tax rules are inferred: regional certification and e-invoicing are later releases, stated as such.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Tax codes" data-full="/assets/screens/v1.0.0/23-tax-codes.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/23-tax-codes-720.webp" srcset="/assets/screens/v1.0.0/23-tax-codes-720.webp 720w, /assets/screens/v1.0.0/23-tax-codes.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Tax codes screen showing the price entry default set to exclude tax, a note that no national tax rules are inferred, and empty code and rate history tables." loading="lazy"></span></button><figcaption><b>Tax codes</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block">
+        <div class="feature-text"><h3>Bring opening balances through a reviewed cutover</h3><p>Enter opening account balances and convert unpaid customer and supplier documents separately, then preview the result before the cutover posts. A business that starts from zero simply records that no cutover is needed, and the screen says so.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Opening balances" data-full="/assets/screens/v1.0.0/22-opening-balances.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/22-opening-balances-720.webp" srcset="/assets/screens/v1.0.0/22-opening-balances-720.webp 720w, /assets/screens/v1.0.0/22-opening-balances.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Opening balances and cutover screen recording balances at the close of 1 January 2024 and showing that this business does not need an opening cutover." loading="lazy"></span></button><figcaption><b>Opening balances and cutover</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block feature-block--reverse">
+        <div class="feature-text"><h3>Close accounting periods to stop late posting</h3><p>Set the dates available for posting and close a period when its work is complete. Later drafts cannot post into a closed date range, and a closed period can be reopened deliberately by someone with the right to do so, with the change recorded.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Accounting periods" data-full="/assets/screens/v1.0.0/21-periods.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/21-periods-720.webp" srcset="/assets/screens/v1.0.0/21-periods-720.webp 720w, /assets/screens/v1.0.0/21-periods.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Accounting periods screen listing a 2026 period marked open and earlier 2025 periods marked closed with reopen actions." loading="lazy"></span></button><figcaption><b>Accounting periods</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block">
+        <div class="feature-text"><h3>Switch optional workflows on or off</h3><p>Inventory, Purchasing and the illustrative cash point of sale are modules. A company can show only the work its people need, hide receivables and payables navigation it does not use, and record a reason for each change so the setup history explains itself later.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Modules" data-full="/assets/screens/v1.0.0/24-modules.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/24-modules-720.webp" srcset="/assets/screens/v1.0.0/24-modules-720.webp 720w, /assets/screens/v1.0.0/24-modules.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Modules screen for Willow Corner Shop showing the bundled accounting core, a hide receivables and payables option, and the Inventory and Purchasing modules enabled with a reason field for each change." loading="lazy"></span></button><figcaption><b>Modules</b><span>Sample business</span></figcaption></figure>
+      </div>
+      <div class="feature-block feature-block--reverse">
+        <div class="feature-text"><h3>Connect reporting without allowing writes</h3><p>Report-only OAuth connections and personal tokens expose approved reporting access to an accountant's tool or a dashboard, with tokens that expire after 30 days. API writes are not part of PHP Ledger 1.0, which keeps every posting inside the reviewed paths above.</p></div>
+        <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Connections" data-full="/assets/screens/v1.0.0/25-connections.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/25-connections-720.webp" srcset="/assets/screens/v1.0.0/25-connections-720.webp 720w, /assets/screens/v1.0.0/25-connections.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Connections and API screen showing a streamable HTTP endpoint, a report-only personal token form scoped to summary financial reports and an empty recent connections table." loading="lazy"></span></button><figcaption><b>Connections</b><span>Sample business</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tour-section section--white" id="install" aria-labelledby="install-heading">
+  <div class="container">
+    <div class="section-heading"><h2 id="install-heading">Install and updates</h2><p>Install from the browser, then keep each release and its matched recovery path together. No terminal, Composer, Node or Docker is needed for setup.</p></div>
+    <ol class="steps">
+      <li><h3>Install from /install</h3><p>Upload the ZIP, open /install and let the installer check PHP 8.2+, MySQL 8.4 and the required extensions and settings. Then connect the database, create the first account and set up the first company from the browser.</p></li>
+      <li><h3>Update from /maintenance.php</h3><p>Apply a signed release from the maintenance page. An automatic matched backup of the files and the database is taken before anything changes, and the signature is verified before the package is unpacked.</p></li>
+      <li><h3>Recover if the host interrupts the update</h3><p>Automatic recovery restores the matched state if a migration fails or the host cuts the request short. A CLI recovery companion is available for hosts that need it.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="tour-section section--paper" id="not-yet" aria-labelledby="not-yet-heading">
+  <div class="container">
+    <div class="section-heading"><h2 id="not-yet-heading">What is in 1.0 and what is not yet</h2><p>The first stable release covers the core accounting workflows below. The limits are published rather than implied, and the roadmap lists them as later releases with review gates instead of dates.</p></div>
+    <div class="facts">
+      <div class="card"><h3>In 1.0</h3><ul>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg><span>Home, receipts and expenses, and balanced general journals with linked reversals</span></li>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg><span>Invoices, customer credits, bills, supplier payments, purchase orders and goods receipts</span></li>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg><span>Customers, suppliers, products, stock counts and weighted-average cost of sales</span></li>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg><span>Bank statement import, explicit matching and reconciliation history</span></li>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg><span>Profit and loss, balance sheet, trial balance, ageing, account statements, cash scenario and CSV exports</span></li>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg><span>Accounting periods, opening balances, tax codes, country account packages and ten base currencies</span></li>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg><span>Switchable Inventory, Purchasing and cash point-of-sale modules</span></li>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg><span>Report-only OAuth, multi-company workspace, search and jump with Ctrl K</span></li>
+      </ul></div>
+      <div class="card facts--not"><h3>Not yet</h3><ul>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg><span>Regional tax certification and e-invoicing</span></li>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg><span>A production shop point of sale; the bundled cash counter is illustrative</span></li>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg><span>Multiple stock locations, serial numbers and batches</span></li>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg><span>Payroll and multi-currency posting</span></li>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg><span>Translations; Urdu and Arabic are planned releases</span></li>
+        <li><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg><span>Offline use, card payments and API writes</span></li>
+      </ul></div>
+    </div>
+    <p><a class="link-strong" href="/roadmap/">Read the roadmap <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></p>
+  </div>
+</section>
+
+<section class="section section--white" id="faq" aria-labelledby="faq-heading">
+  <div class="container">
+    <div class="section-heading faq-heading"><h2 id="faq-heading">Questions about the product</h2><p>Four questions that come up in the first demo, answered the way the software behaves.</p></div>
+    <div class="faq">
+      <details><summary>Can I switch off the parts my business does not use?</summary><p>Yes. Inventory, Purchasing and the cash point of sale are modules that a company switches on or off under Setup, and accounts receivable and payable navigation can be hidden. Switching a module off does not delete its history.</p></details>
+      <details><summary>Do reports change when I enter a draft?</summary><p>No. A draft never touches the books. Reports use posted journals only, so a receipt or expense affects the profit and loss only after someone reviews and posts it.</p></details>
+      <details><summary>How are mistakes corrected?</summary><p>Posted entries are never edited. A correction records its reason and posts a linked reversal, so the original entry, the reversal and the replacement stay connected in the history and in the account statements.</p></details>
+      <details><summary>Which currencies does version 1.0 support?</summary><p>Ten base currencies: USD, EUR, GBP, PKR, INR, MYR, BDT, LKR, NPR and SGD, one per company. Multi-currency posting inside one company is not part of 1.0.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper" aria-labelledby="start-heading">
+  <div class="container">
+    <div class="section-heading"><h2 id="start-heading">Three ways to start</h2></div>
+    <div class="start-grid">
+      <a class="start-card" href="/demo/"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9h8"/><path d="M8 13h6"/><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"/></svg><h3>Try it in the browser</h3><p>Open a private sample company. It resets every hour.</p><span class="link-strong">Try the live demo <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></span></a>
+      <a class="start-card" href="/download/"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9l-8 4.5l-8 -4.5v-9l8 -4.5"/><path d="M12 12l8 -4.5"/><path d="M12 12v9"/><path d="M12 12l-8 -4.5"/><path d="M16 5.25l-8 4.5"/></svg><h3>Install it on your server</h3><p>PHP 8.2+, MySQL 8.4 and a browser installer.</p><span class="link-strong">Download 1.0.0 <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></span></a>
+      <a class="start-card" href="/pricing/"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"/><path d="M3 7l9 6l9 -6"/></svg><h3>Get help or a licence</h3><p>Ask questions, discuss support, or request a commercial licence.</p><span class="link-strong">Pricing and licence <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></span></a>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <a class="brand" href="/" aria-label="PHP Ledger home"><span class="brand-frame"><img src="/assets/brand/phpledger-horizontal.webp" width="640" height="213" alt="PHP Ledger" loading="lazy"></span></a>
-        <p>Open-source, self-hosted accounting and cash POS for small businesses. PHP 8.2+ and MySQL 8.4. Development preview.</p>
+      <div class="footer-col"><h2>Product</h2><a href="/product/">Product tour</a><a href="/point-of-sale/">Point of sale</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing and licence</a><a href="/download/">Download</a><a href="/demo/">Live demo</a></div>
+      <div class="footer-col" id="docs"><h2>Learn</h2><a href="/learn/">Bookkeeping lessons</a><a href="/guides/">Guides</a><a href="/self-hosting/">Self-hosting</a><a href="/glossary/">Glossary</a><a href="/news/">News</a><a href="/roadmap/">Roadmap</a><a href="https://github.com/phpledger/phpledger/wiki" rel="noopener">Wiki</a></div>
+      <div class="footer-col"><h2>Compare</h2><a href="/compare/">Compare accounting software</a><a href="/compare/open-source-accounting-software/">Open-source options</a><a href="/compare/akaunting-alternative/">Akaunting alternative</a><a href="/compare/erpnext-alternative/">ERPNext alternative</a><a href="/research/">Research and sources</a></div>
+      <div class="footer-col"><h2>Project</h2><a href="/about/">About</a><a href="/community/">Community</a><a href="https://github.com/phpledger/phpledger" rel="noopener">GitHub</a><a href="/credits/">Credits</a><a href="/privacy/">Privacy</a><a href="/terms/">Demo use and terms</a></div>
+      <div class="footer-col"><h2>Contact</h2><a href="https://github.com/phpledger/phpledger/discussions" rel="noopener">Discussions</a><a href="/pricing/#enquiry">Enquiry form</a><a href="https://github.com/phpledger/phpledger/blob/master/SECURITY.md" rel="noopener">Security reports</a><address>Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan</address></div>
+      <div class="footer-col footer-community"><h2>Community</h2>
+        <ul class="social-row" aria-label="PHP Ledger on social networks">
+          <li><a href="https://github.com/phpledger/phpledger" aria-label="GitHub" rel="noopener"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"/></svg></a></li>
+          <li><a href="https://www.linkedin.com/company/phpledger/" aria-label="LinkedIn" rel="noopener"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11v5"/><path d="M8 8v.01"/><path d="M12 16v-5"/><path d="M16 16v-3a2 2 0 1 0 -4 0"/><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10"/></svg></a></li>
+          <li><a href="https://x.com/LedgerPhp94831" aria-label="X" rel="noopener"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16l-4.267 0"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg></a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61594129753409" aria-label="Facebook" rel="noopener"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"/></svg></a></li>
+          <li><a href="https://www.instagram.com/phpledgerapp/" aria-label="Instagram" rel="noopener"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8"/><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M16.5 7.5v.01"/></svg></a></li>
+          <li><a href="https://www.youtube.com/@PHPLedger" aria-label="YouTube" rel="noopener"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8"/><path d="M10 9l5 3l-5 3l0 -6"/></svg></a></li>
+        </ul>
       </div>
-      <div class="footer-col"><h2>Product</h2><a href="/product/">Accounting features</a><a href="/point-of-sale/">Point of sale</a><a href="/for/">Who it is for</a><a href="/demo/">Try the demo</a><a href="/download/">Download</a><a href="/roadmap/">Roadmap</a></div>
-      <div class="footer-col" id="docs"><h2>Learn</h2><a href="/learn/">Bookkeeping lessons</a><a href="/glossary/">Glossary</a><a href="/guides/">Reporting guides</a><a href="/self-hosting/">Self-hosting</a><a href="https://github.com/rmak78/phpledger/wiki/Getting-Started">Getting started guide</a><a href="https://github.com/rmak78/phpledger/wiki">Wiki</a></div>
-      <div class="footer-col"><h2>Compare</h2><a href="/compare/">Compare accounting software</a><a href="/compare/open-source-accounting-software/">Open-source options</a><a href="/research/">Research and sources</a></div>
-      <div class="footer-col"><h2>Project</h2><a href="/about/">About</a><a href="https://github.com/rmak78/phpledger">GitHub</a><a href="https://github.com/rmak78/phpledger/discussions">Discussions</a><a href="/news/">News</a><a href="/support/">Support</a><a href="/credits/">Credits</a><a href="/privacy/">Privacy</a><a href="/terms/">Demo use and terms</a></div>
-      <div class="footer-col"><h2>Contact</h2><a href="mailto:rmak78@gmail.com">rmak78@gmail.com</a><a href="https://pk.linkedin.com/in/rmak78">Rana Mansoor Akbar Khan on LinkedIn</a><address>Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan</address></div>
     </div>
-    <nav class="footer-social" aria-label="PHP Ledger on social networks">
-      <p>Follow the project</p>
-      <ul>
-        <li><a href="https://github.com/rmak78/phpledger"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"/></svg><span>GitHub</span></a></li>
-        <li><a href="https://www.linkedin.com/company/phpledger/"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11v5"/><path d="M8 8v.01"/><path d="M12 16v-5"/><path d="M16 16v-3a2 2 0 1 0 -4 0"/><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10"/></svg><span>LinkedIn</span></a></li>
-        <li><a href="https://x.com/LedgerPhp94831"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16l-4.267 0"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg><span>X</span></a></li>
-        <li><a href="https://www.facebook.com/profile.php?id=61594129753409"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"/></svg><span>Facebook</span></a></li>
-        <li><a href="https://www.instagram.com/phpledgerapp/"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8"/><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M16.5 7.5v.01"/></svg><span>Instagram</span></a></li>
-        <li><a href="https://www.youtube.com/@PHPLedger"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8"/><path d="M10 9l5 3l-5 3l0 -6"/></svg><span>YouTube</span></a></li>
-      </ul>
-    </nav>
     <div class="supporters">
       <p>Companies supporting the open-source initiative</p>
       <ul>
-        <li><a href="https://www.bixitech.com/"><img class="mark-square" src="/assets/partners/bixitech.webp" width="216" height="216" alt="BixiTech" loading="lazy"></a></li>
-        <li><a href="https://bixisoft.com/"><img class="mark-wide" src="/assets/partners/bixisoft.webp" width="300" height="105" alt="BixiSoft" loading="lazy"></a></li>
-        <li><a href="https://brownbag.pk/"><img class="mark-wide" src="/assets/partners/brownbag.webp" width="360" height="158" alt="BrownBag" loading="lazy"></a></li>
-        <li><a href="https://agency75.com/"><img class="mark-square" src="/assets/partners/agency75.webp" width="240" height="240" alt="Agency75" loading="lazy"></a></li>
+        <li><a href="https://www.bixitech.com/" rel="noopener"><img class="mark-square" src="/assets/partners/bixitech.webp" width="216" height="216" alt="BixiTech" loading="lazy"></a></li>
+        <li><a href="https://bixisoft.com/" rel="noopener"><img class="mark-wide" src="/assets/partners/bixisoft.webp" width="300" height="105" alt="BixiSoft" loading="lazy"></a></li>
+        <li><a href="https://brownbag.pk/" rel="noopener"><img class="mark-wide" src="/assets/partners/brownbag.webp" width="360" height="158" alt="BrownBag" loading="lazy"></a></li>
+        <li><a href="https://agency75.com/" rel="noopener"><img class="mark-square" src="/assets/partners/agency75.webp" width="240" height="240" alt="Agency75" loading="lazy"></a></li>
       </ul>
     </div>
-    <nav class="trust-links" aria-label="Project policies"><a href="https://github.com/rmak78/phpledger/blob/master/LICENSE">Licence</a><a href="https://github.com/rmak78/phpledger/blob/master/SECURITY.md">Security contact</a><a href="https://github.com/rmak78/phpledger/blob/master/CODE_OF_CONDUCT.md">Code of conduct</a><a href="/privacy/">Privacy and data boundaries</a></nav>
-    <p class="footer-legal">New project-owned code uses AGPL-3.0-or-later; a commercial licence is available. The pre-adoption 0.1.0 through 0.1.5 previews retain MIT; dependencies, fonts and the archived 2015 application keep their own terms. Photographs are illustrative and are not customer endorsements. Screens show synthetic sample data from the development preview.</p>
+    <nav class="trust-links" aria-label="Project policies"><a href="https://github.com/phpledger/phpledger/blob/master/LICENSE" rel="noopener">Licence</a><a href="https://github.com/phpledger/phpledger/blob/master/SECURITY.md" rel="noopener">Security contact</a><a href="https://github.com/phpledger/phpledger/blob/master/CODE_OF_CONDUCT.md" rel="noopener">Code of conduct</a><a href="/privacy/">Privacy and data boundaries</a></nav>
+    <p class="footer-legal">New project-owned code uses AGPL-3.0-or-later; a commercial licence is available. The pre-adoption 0.1.0 through 0.1.5 previews retain MIT; dependencies, fonts, photographs and the archived 2015 application keep their own terms. Screens show a fictional sample business.</p>
     <p class="footer-meta">Maintained by <a href="/about/" rel="author">Rana Mansoor Akbar Khan</a>, PHP Ledger project maintainer. Last reviewed <time datetime="2026-09-18">2026-09-18</time>.</p>
   </div>
 </footer>
-<dialog id="screen-dialog" aria-labelledby="screen-dialog-title"><div class="dialog-heading"><h2 id="screen-dialog-title">Product screen</h2><button type="button" class="dialog-close" aria-label="Close enlarged screen"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>Close</button></div><p id="screen-dialog-note">Development preview with synthetic sample data</p><p class="dialog-hint" id="dialog-hint">Scroll the image to explore it. With a keyboard, focus the image area and use the arrow keys.</p><div class="dialog-image-wrap" tabindex="0" role="region" aria-label="Enlarged product image" aria-describedby="dialog-hint"><img id="dialog-image" width="1440" height="1200" alt=""></div></dialog>
-<script src="/assets/site.js?v=e0d64eaf32" defer></script>
+<dialog id="screen-dialog" aria-labelledby="screen-dialog-title"><div class="dialog-heading"><h2 id="screen-dialog-title">Product screen</h2><button type="button" class="dialog-close" aria-label="Close enlarged screen"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>Close</button></div><p id="screen-dialog-note">Screens show a fictional sample business</p><p class="dialog-hint" id="dialog-hint">Scroll the image to explore it. With a keyboard, focus the image area and use the arrow keys.</p><div class="dialog-image-wrap" tabindex="0" role="region" aria-label="Enlarged product image" aria-describedby="dialog-hint"><img id="dialog-image" width="1440" height="1200" alt=""></div></dialog>
+<script src="/assets/site.js?v=89060d1057" defer></script>
 </body>
 </html>

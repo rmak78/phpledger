@@ -1,37 +1,37 @@
 [
   {
     "question": "Is PHP Ledger really free?",
-    "answer": "The project-owned core is free under AGPL-3.0-or-later. Hosting, setup, optional support and a separate commercial licence have their own terms. The 0.1.0 through 0.1.5 previews retain their earlier MIT grants.",
+    "answer": "Yes. The project-owned core is free under AGPL-3.0-or-later, and every module ships with it: invoices, bills, stock, bank reconciliation and reports. Hosting, setup help, optional support and a separate commercial licence have their own terms. The 0.1.0 through 0.1.5 previews retain their earlier MIT grants.",
     "source": "https://phpledger.com/"
   },
   {
     "question": "What do I need to run it?",
-    "answer": "Use PHP 8.2 or newer for both web and command-line requests, MySQL 8.4 and HTTPS. Installation is done in the browser at /install; no terminal access is required for setup. PHP 8.3 is recommended, and the PHP zip extension is needed for automatic updates.",
+    "answer": "PHP 8.2 or newer for both web and command-line requests, MySQL 8.4 and HTTPS. Installation happens in the browser at /install, so no terminal access, Composer, Node or Docker is needed for setup. PHP 8.3 is recommended, and the PHP zip extension is needed for signed automatic updates.",
     "source": "https://phpledger.com/"
   },
   {
     "question": "Does it work on shared cPanel hosting?",
-    "answer": "A panel alone does not prove compatibility. Your plan must provide the required PHP extensions, MySQL 8.4, private files and the correct public document root. Run the browser installer's checks, or CLI preflight, on the actual account.",
+    "answer": "Often, but a panel alone does not prove it. Your plan must provide the required PHP extensions, MySQL 8.4, private files and the correct public document root. Run the browser installer's checks on the actual account before you commit to it.",
     "source": "https://phpledger.com/"
   },
   {
     "question": "Does PHP Ledger send my data anywhere?",
-    "answer": "There are no licence-key or licensing-server calls. The static website has no analytics or form submission endpoint. The separate application has a documented optional country lookup; connections are explicit and scoped. Read the privacy page for the distinct website, demo and installed-application boundaries.",
+    "answer": "No. There are no licence-key or licensing-server calls, and this website has no analytics or form submission endpoint. The installed application has one documented optional country lookup; every connection is explicit and scoped. The privacy page explains the separate website, demo and installed-application boundaries.",
     "source": "https://phpledger.com/"
   },
   {
-    "question": "Can it invoice customers or settle bills yet?",
-    "answer": "Yes. The starter includes customer invoices, supplier bills, partial and final allocated payments, linked credits, ageing and control reconciliation. AR/AP belong to the core; owners can hide unused navigation. The separate cash POS remains a cash-sale showcase.",
+    "question": "Can it invoice customers and settle supplier bills?",
+    "answer": "Yes. Version 1.0 includes customer invoices, supplier bills, partial and final payments allocated across open items, linked credits, ageing and control-account reconciliation. Accounts receivable and payable belong to the core, and owners can hide navigation they do not use.",
     "source": "https://phpledger.com/"
   },
   {
     "question": "Is it ready for real books?",
-    "answer": "1.0.0 is the first stable release, backed by automated tests, fault-injection update/recovery tests and exact-artifact install/upgrade checks. Independent accounting review, independent security review and observed supervised-pilot use have not yet happened; the owner published with these limits disclosed as post-release commitments. Use synthetic records until you complete your own reviewed acceptance process.",
+    "answer": "1.0.0 is the first stable release, backed by automated tests, fault-injection tests of the update and recovery path, and exact-artifact installation and upgrade checks. Independent accounting review, independent security review and supervised pilots have not happened yet; they are open post-release commitments. Use a fictional company until you have completed your own reviewed acceptance.",
     "source": "https://phpledger.com/"
   },
   {
     "question": "What if the project stops?",
-    "answer": "You retain the source and your self-hosted database under the applicable licence. Continued maintenance, recovery and data extraction still need an operator. Keep tested backups and portable report exports rather than relying on the existence of a ZIP alone.",
+    "answer": "You keep the source and your self-hosted database under the applicable licence. Continued maintenance, recovery and data extraction still need an operator, so keep tested backups and portable report exports rather than relying on a ZIP alone.",
     "source": "https://phpledger.com/"
   },
   {
@@ -56,8 +56,23 @@
   },
   {
     "question": "How can I help?",
-    "answer": "Share a reproducible issue, a synthetic worked example, an installation report or a scoped review offer. Follow the contribution and security guidance before sharing anything sensitive.",
+    "answer": "Share a reproducible issue, a fictional worked example, an installation report or a scoped review offer. Follow the contribution and security guidance before sharing anything sensitive.",
     "source": "https://phpledger.com/about/"
+  },
+  {
+    "question": "Where do I ask a question?",
+    "answer": "GitHub Discussions is the place for questions, ideas and show-and-tell. It is public, so use made-up figures. The maintainer reads every thread, and answers that turn out to be generally useful become documentation.",
+    "source": "https://phpledger.com/community/"
+  },
+  {
+    "question": "Should I report a security problem in public?",
+    "answer": "No. Report it privately through the security policy first, so a fix can land before details are public. Credit in the release notes is yours to take or decline once the fix is out.",
+    "source": "https://phpledger.com/community/"
+  },
+  {
+    "question": "Do you accept pull requests?",
+    "answer": "Yes. Start with the contributing guide, pick a good first issue or open a discussion about a larger change, and send the pull request with a test. Accounting changes need a worked example with figures that can be checked by hand.",
+    "source": "https://phpledger.com/community/"
   },
   {
     "question": "Is there one best accounting application for every small business?",
@@ -130,28 +145,33 @@
     "source": "https://phpledger.com/compare/open-source-accounting-software/"
   },
   {
-    "question": "What hosting does this package need?",
-    "answer": "Use PHP 8.2 or newer (8.3 recommended) for both web and command-line requests, MySQL 8.4 with InnoDB, HTTPS and private writable PHP session storage. PHP needs BCMath, PDO, PDO MySQL, mbstring, cURL, OpenSSL and fileinfo. Installation is done in the browser at /install; no terminal access is required for setup, though CLI installation remains available. Serve only www/phpledger/public; MariaDB is not validated for this package.",
+    "question": "Can I use it for real books today?",
+    "answer": "Yes, with the published limits in mind. Version 1.0.0 is the first stable release, and the accounting core covers invoices, bills, stock, bank reconciliation and the standard reports. Independent accounting and security reviews, and supervised pilots, are still open commitments on the roadmap. Keep backups, and read the roadmap before you commit a live business to it.",
     "source": "https://phpledger.com/download/"
   },
   {
-    "question": "Do I need Composer to install the download?",
-    "answer": "No. The ZIP includes production dependencies and its installation guide. Keep vendor files, configuration and installation tools outside the web document root.",
+    "question": "How do I verify the download?",
+    "answer": "Each release page publishes a .sha256 file next to the ZIP. Compute the SHA-256 checksum of the ZIP you downloaded and compare it with the file before you unpack anything. If the checksums differ, do not install it; download the package again.",
     "source": "https://phpledger.com/download/"
   },
   {
-    "question": "How do I check that the ZIP is intact?",
-    "answer": "Download the ZIP and its SHA-256 file from the same GitHub release. Calculate the ZIP checksum using the command above and compare it with the published checksum before unpacking.",
+    "question": "Does shared hosting work?",
+    "answer": "Yes. PHP Ledger is built for ordinary shared hosting: PHP 8.2 or later with the required extensions, a MySQL 8.4 database, and HTTPS. Installation runs in the browser, with no terminal, Composer, Node or Docker needed for setup.",
     "source": "https://phpledger.com/download/"
   },
   {
-    "question": "Does downloading the ZIP upgrade my existing installation?",
-    "answer": "No. Read the included UPGRADE.md, which covers recognized prior modern installations. Back up the database and application, rehearse restoration, then follow its maintenance, preflight and migration steps, or use the signed in-browser updater at /maintenance.php. Historical installations and customized schemas need separate review.",
+    "question": "What about MariaDB?",
+    "answer": "MariaDB is not validated for version 1.0.0. The application targets MySQL 8.4 with InnoDB and the utf8mb4_0900_ai_ci collation, and the release tests are run against that. If your host offers MySQL 8.4, use it.",
     "source": "https://phpledger.com/download/"
   },
   {
-    "question": "Can I bring an existing business into 1.0.0?",
-    "answer": "1.0.0 supports opening trial-balance/CSV review, explicit cutover confirmation and an unpaid-document register reconciled to control accounts. Detailed historical imports and operator AR/AP settlement workflows are not included. Use synthetic data for evaluation, and obtain independent accounting review before a real business cutover.",
+    "question": "Which licence applies?",
+    "answer": "New project-owned code uses AGPL-3.0-or-later; a commercial licence is available on request. Dependencies, fonts, photographs and the archived 2015 application keep their own terms.",
+    "source": "https://phpledger.com/download/"
+  },
+  {
+    "question": "Where is the source?",
+    "answer": "The full source is on GitHub at github.com/phpledger/phpledger. The release tag v1.0.0 holds the package, the checksum file and the release notes, and the repository carries the development history.",
     "source": "https://phpledger.com/download/"
   },
   {
@@ -226,7 +246,7 @@
   },
   {
     "question": "Does the receipt send or collect money?",
-    "answer": "No. This synthetic exercise records a fictional event; it does not initiate a payment.",
+    "answer": "No. This fictional exercise records a fictional event; it does not initiate a payment.",
     "source": "https://phpledger.com/guides/first-week-on-the-books/"
   },
   {
@@ -251,7 +271,7 @@
   },
   {
     "question": "Are these lessons accountant-reviewed?",
-    "answer": "No. They are general bookkeeping education with original synthetic examples. They do not establish the treatment required for a particular business.",
+    "answer": "No. They are general bookkeeping education with original fictional examples. They do not establish the treatment required for a particular business.",
     "source": "https://phpledger.com/learn/"
   },
   {
@@ -336,7 +356,7 @@
   },
   {
     "question": "Can cash rise while profit stays the same?",
-    "answer": "Yes. The synthetic loan example increases cash and liabilities by 500.00 without changing the original income or expense.",
+    "answer": "Yes. The fictional loan example increases cash and liabilities by 500.00 without changing the original income or expense.",
     "source": "https://phpledger.com/learn/profit-and-loss-vs-balance-sheet/"
   },
   {
@@ -400,58 +420,63 @@
     "source": "https://phpledger.com/news/0-4-0-preview/"
   },
   {
-    "question": "Does the cash POS accept card payments?",
-    "answer": "No. It records cash tender and change without calling a payment provider.",
-    "source": "https://phpledger.com/point-of-sale/"
-  },
-  {
-    "question": "Does selling an item reduce stock?",
-    "answer": "The cash POS does not deduct stock. Optional Inventory now supports quantities, moving weighted-average valuation and stock invoice cost of sales through AR; integration with this cash counter remains future work.",
+    "question": "Does a cash sale update stock?",
+    "answer": "Not at the counter in version 1.0. The cash point of sale posts one journal, debit cash and credit sales. Stock movements and cost of sales at the counter are planned for a later release; today they are recorded through invoices and stock counts.",
     "source": "https://phpledger.com/point-of-sale/"
   },
   {
     "question": "Can I print a receipt?",
-    "answer": "Yes. A saved cash sale has a printable receipt and a linked journal. Check the layout on your intended browser and printer; this is not a certified hardware integration.",
+    "answer": "Yes. Every confirmed sale produces a printable receipt, and confirming the same sale twice returns the same receipt instead of posting twice.",
     "source": "https://phpledger.com/point-of-sale/"
   },
   {
-    "question": "Can I sell on credit or issue an invoice?",
-    "answer": "No. Customer credit, formal invoices and receivable workflows are not included in the current cash POS.",
+    "question": "Can I switch the module off?",
+    "answer": "Yes. The point of sale is a module that a company switches on or off under Setup, Modules. Businesses that sell through invoices only never see it.",
     "source": "https://phpledger.com/point-of-sale/"
   },
   {
-    "question": "How should I test the cash POS?",
-    "answer": "Use fictional items and amounts. Check the basket, tender, change, receipt, source link and balanced journal, then follow the daily cash-check guide.",
-    "source": "https://phpledger.com/point-of-sale/"
+    "question": "Is it really free?",
+    "answer": "Yes. PHP Ledger is open source under AGPL-3.0-or-later, and every module in version 1.0 is included. You can install it, use it for real books, modify it and share it without paying anyone. Paid work exists only where you ask for help or need a commercial licence.",
+    "source": "https://phpledger.com/pricing/"
   },
   {
-    "question": "Is PHP Ledger free and open source?",
-    "answer": "The project-owned core and current modules use AGPL-3.0-or-later; a commercial licence is available. Published 0.1.0 through 0.1.5 previews retain their MIT grants. You can inspect and host the software yourself; hosting, setup and optional support have their own costs and terms.",
+    "question": "What does AGPL require of me?",
+    "answer": "If you run PHP Ledger for your own business and keep it to yourself, your only obligation is to keep the licence and source available as you received them. If you modify it and offer the modified version to others over a network, you must share your changes under the same licence. New project-owned code uses AGPL-3.0-or-later; dependencies, fonts and photographs keep their own terms.",
+    "source": "https://phpledger.com/pricing/"
+  },
+  {
+    "question": "Can a software house resell hosting?",
+    "answer": "Yes, under the AGPL. If you host unmodified PHP Ledger for clients, the licence and source stay with the application. If you modify it and serve the modified version to clients over a network, you must offer those clients your changes under the same licence. If that does not suit your business model, ask about the commercial licence.",
+    "source": "https://phpledger.com/pricing/"
+  },
+  {
+    "question": "Do you offer support contracts?",
+    "answer": "Not as standing contracts. Work is agreed piece by piece: installation assistance, training, troubleshooting and supported pilots, each with its scope and response expectations agreed in writing before work starts. Send an enquiry describing what you need.",
+    "source": "https://phpledger.com/pricing/"
+  },
+  {
+    "question": "How are pilots run?",
+    "answer": "A pilot runs your books through PHP Ledger alongside your current process for an agreed period, with defined checkpoints and a written summary at the end. Supervised pilots with a real month-end close are still an open post-release commitment on the roadmap; if you want to run one now, get in touch and we will agree the scope first.",
+    "source": "https://phpledger.com/pricing/"
+  },
+  {
+    "question": "Can I switch off the parts my business does not use?",
+    "answer": "Yes. Inventory, Purchasing and the cash point of sale are modules that a company switches on or off under Setup, and accounts receivable and payable navigation can be hidden. Switching a module off does not delete its history.",
     "source": "https://phpledger.com/product/"
   },
   {
-    "question": "What can I do in 1.0.0?",
-    "answer": "Create invoices and bills, record partial payments and credits, inspect ageing and reconcile controls. Optional Purchasing and Inventory cover orders, receipts, matched bills, stock cost and returns. Core manual tax supports inclusive/exclusive prices; existing cash, journal, opening, period, bank CSV and reporting workflows remain available, alongside browser installation and signed automatic updates.",
+    "question": "Do reports change when I enter a draft?",
+    "answer": "No. A draft never touches the books. Reports use posted journals only, so a receipt or expense affects the profit and loss only after someone reviews and posts it.",
     "source": "https://phpledger.com/product/"
   },
   {
-    "question": "Can I try it without registering?",
-    "answer": "Yes. The public demo creates a private synthetic company for your visit. Its records and access expire at the next hourly reset. Enter only fictional information.",
+    "question": "How are mistakes corrected?",
+    "answer": "Posted entries are never edited. A correction records its reason and posts a linked reversal, so the original entry, the reversal and the replacement stay connected in the history and in the account statements.",
     "source": "https://phpledger.com/product/"
   },
   {
-    "question": "Does the POS process payments or manage stock?",
-    "answer": "It records an illustrative cash sale and its balanced journal, with a printable receipt. Card capture, stock deduction, cost of sales and tax calculations are not included.",
-    "source": "https://phpledger.com/product/"
-  },
-  {
-    "question": "Can AI assistants connect to my books?",
-    "answer": "The current release includes scoped, revocable read API and MCP connections. Connect a private client with a dedicated token or use per-user OAuth. The published client matrix identifies tested versions and pending clients; financial writes are not exposed.",
-    "source": "https://phpledger.com/product/"
-  },
-  {
-    "question": "Are the reports approved for tax or statutory filing?",
-    "answer": "The reports are country-neutral management previews. Currency choice does not activate tax rules. Qualified regional accounting review and supported statement packages remain post-release commitments.",
+    "question": "Which currencies does version 1.0 support?",
+    "answer": "Ten base currencies: USD, EUR, GBP, PKR, INR, MYR, BDT, LKR, NPR and SGD, one per company. Multi-currency posting inside one company is not part of 1.0.",
     "source": "https://phpledger.com/product/"
   },
   {
@@ -516,7 +541,7 @@
   },
   {
     "question": "How can I help shape the next release?",
-    "answer": "Share a synthetic workflow example, installation report or reproducible issue through the project repository. Accountants, business owners and contributors can also use the Support page to prepare an email about review or pilot participation.",
+    "answer": "Share a fictional workflow example, installation report or reproducible issue through the project repository. Accountants, business owners and contributors can also use the enquiry form on the pricing page to prepare a message about review or pilot participation.",
     "source": "https://phpledger.com/roadmap/"
   },
   {
@@ -526,7 +551,7 @@
   },
   {
     "question": "Is the hosted demo my own installation?",
-    "answer": "No. It is a separate temporary synthetic environment with hourly resets and restricted administration.",
+    "answer": "No. It is a separate temporary sample environment with hourly resets and restricted administration.",
     "source": "https://phpledger.com/self-hosting/"
   },
   {
@@ -588,30 +613,5 @@
     "question": "Can I roll back by changing the code directory?",
     "answer": "After a schema change, restore the matched database and release together. A code-only rollback can leave an incompatible state.",
     "source": "https://phpledger.com/self-hosting/vps-install/"
-  },
-  {
-    "question": "What does support cost?",
-    "answer": "There is no published universal support price. Agree the task, availability, fees and completion criteria in writing before work starts.",
-    "source": "https://phpledger.com/support/"
-  },
-  {
-    "question": "Does this form send my message?",
-    "answer": "No. It prepares a local email draft or copies a message. You choose whether to send it through your own email application.",
-    "source": "https://phpledger.com/support/"
-  },
-  {
-    "question": "Is a response time guaranteed?",
-    "answer": "No public response-time guarantee is stated. Availability and response expectations are agreed individually.",
-    "source": "https://phpledger.com/support/"
-  },
-  {
-    "question": "Can support certify my accounts or tax return?",
-    "answer": "Software installation and workflow support do not replace qualified accounting or tax review. Statutory reporting and regional adapters remain separate product gates.",
-    "source": "https://phpledger.com/support/"
-  },
-  {
-    "question": "Where should I report a security problem?",
-    "answer": "Follow SECURITY.md in the project repository and contact the maintainer privately. Do not post credentials, exploit details involving customer data or private records in a public issue.",
-    "source": "https://phpledger.com/support/"
   }
 ]

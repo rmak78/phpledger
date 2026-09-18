@@ -1,16 +1,11 @@
-.table-wrap{overflow-x:auto}
-.req-table{border-collapse:collapse;width:100%;font-size:15px}
-.req-table th,.req-table td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
-.req-table th{color:var(--navy);width:190px;font-size:15px}
-.req-table tr:first-child th,.req-table tr:first-child td{border-top:1px solid var(--line)}
-.data-table{border-collapse:collapse;width:100%;font-size:15px}
-.data-table th,.data-table td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-.data-table thead th{font-size:13px;color:var(--muted);font-weight:600}
-.data-table td.fig,.data-table th.fig{text-align:right;white-space:nowrap}
-@media(max-width:640px){
-  .req-table,.req-table tbody,.req-table tr,.req-table th,.req-table td{display:block;width:auto}
-  .req-table tr{border-top:1px solid var(--line);padding:12px 0}
-  .req-table tr:first-child th,.req-table tr:first-child td{border-top:0}
-  .req-table th,.req-table td{border:0;padding:4px 0}
-  .req-table th{font-size:13px;color:var(--muted)}
-}
+.table-wrap,.table-scroll{max-width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius-m);background:var(--white);box-shadow:var(--shadow-card)}
+.table-wrap table,.table-scroll table{margin:0;min-width:560px}
+.data-table,.req-table,main table{border-collapse:collapse;width:100%;font-family:var(--font-figures);font-size:var(--size-small);font-variant-numeric:tabular-nums}
+main caption{text-align:left;padding:14px 20px;color:var(--muted);font-family:var(--font-body);font-size:var(--size-small)}
+main thead{background:var(--tint);color:var(--navy)}
+main th{text-align:left;font-weight:600;padding:14px 20px;border-bottom:1px solid var(--line);vertical-align:top}
+main td{padding:14px 20px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted);overflow-wrap:anywhere}
+main td:first-child,main tbody th{color:var(--ink);font-family:var(--font-body)}
+main tbody tr:last-child td,main tbody tr:last-child th{border-bottom:0}
+main table:not(.table-wrap table):not(.table-scroll table){margin-block:var(--space-5)}
+@media(max-width:600px){main th,main td{padding:10px 12px}main caption{padding:12px}}

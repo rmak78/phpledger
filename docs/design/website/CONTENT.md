@@ -1,5 +1,11 @@
 # Website copy and interaction contract
 
+## Wording rule — 18 September 2026
+
+- Never write "synthetic" on the site. The first capture on a page carries "Screens show a fictional sample business, Willow Corner Shop." and captions say "Sample business"; elsewhere write "sample data", "sample records" or "fictional business". The older labels "Product design preview · Synthetic data" and "Development preview · Synthetic company data" below are superseded.
+- Version, date, size, checksum and URLs come from `src/site.json`; never type them into a page.
+- No prices, no phone number, no personal email address, no personal LinkedIn profile, no invented counts, testimonials or delivery dates. Contact runs through GitHub Discussions (the enquiry form prepares a message for a new discussion) and, for private security reports, SECURITY.md; the organization's no-reply address is not a contact route.
+- Headings are one idea each; no eyebrows, chapter numbers or two-fragment "X. Y." headings. Banned words: empower, seamless, streamline, robust, effortless, unlock, elevate.
 ## Current redesign completion: 15 September 2026
 
 The website-redesign homepage and shared static generator have product, cash POS, download, support, roadmap, news and credits destinations. The owner selected **A, Workbench, with B's photo treatment**, and the homepage headline is exactly **Double-entry accounting that runs on your own PHP and MySQL hosting**. The site was published on **15 September 2026 at 08:08 UTC (13:08 PKT)** as `website-redesign-20260915-080700`; 101 static files and 36 live route/width browser checks passed. See the [publication receipt](qa/live-20260915-publication.json) and [website QA](../../../www/website/design-qa.md#live-publication-15-september-2026).

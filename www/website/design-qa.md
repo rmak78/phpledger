@@ -1,5 +1,23 @@
 # Website design and publication QA
 
+## 1.0.0 product site rebuild — 18 September 2026
+
+Status: implemented and checked locally; not published. The owner publishes; the `/support` 301 rules in `docker/website.conf` ship with it. Application source, release archives and the demo were not changed.
+
+| Check | Result |
+|---|---|
+| `node www/website/build.mjs --check` | 70 pages, zero errors, zero warnings |
+| Rendered review at 1440 px | 19 routes (home, product, point of sale, download, pricing, community, roadmap, news index and 1.0.0 article, about, credits, the learn, guides, compare, for and self-hosting hubs, 404, the Akaunting comparison and the trial-balance lesson): no console errors, no failed requests, no horizontal overflow |
+| Rendered review at 390 px | Home, product, download, pricing, point of sale, roadmap, lesson and community: no console errors, no overflow |
+| Title and description lengths | All 70 pages: title 60 characters or fewer, description 50–160 |
+| Wording | "synthetic" no longer appears in page sources (203 replacements across 56 pages); captions and labels say "fictional sample business" or "sample data" |
+| Nginx configuration | `docker/website.conf` with the `/support` and `/support/` 301s passed `nginx -t` in a throwaway `nginx:alpine` container |
+| Interactive checks (puppeteer, 20 checks) | Mobile menu open/Escape/focus return and no overflow; capture dialog from the keyboard, title and note, Escape and focus return; skip link; enquiry form validation, copy, error clearing and `#enquiry-pilot` preselect; reduced motion disables smooth scrolling; product page requests stay on the local origin; no console errors |
+| Contact details | No email address, `mailto:` link or personal LinkedIn profile anywhere in the output (owner instruction); contact runs through GitHub Discussions and the security policy |
+
+Defects found in the renders and fixed before this record: roadmap phase labels rendered as cards over their headings; the release card's definition list inherited article `dt` margins; the second enquiry-form column inherited the stacked-field margin; the draft preview rendered in monospace; the generated contents list landed inside "Key takeaways" callouts and outside the container on `/credits/`; the `.page-404` layout rule leaked into the header and footer; heading links were underlined; the hero phone capture was too tall on phones (hidden under 640 px); the point-of-sale phone capture is now cropped with a fade; FAQ blocks on about, news and roadmap were restructured to the shared accordion markup; home pillars and feature blocks became `h3` under their group headings so every H2 section carries 50 words or more.
+
+Not done in this pass: interactive browser checks of the menu, capture dialog and enquiry form after the restyle (the JavaScript is unchanged); keyboard and reduced-motion re-verification; a live seoscore.tools run, which needs the published site. Full-page renders of `/product/` exceed Chrome's 16,384-pixel capture limit and show a stitched repeat in the screenshot only.
 ## Local 0.6.0 UI information and screenshot refresh — 18 September 2026
 
 Status: implemented and checked locally; not published. Application source, versioned application/media archives, deployment settings and historical release articles were not changed.

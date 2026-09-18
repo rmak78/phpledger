@@ -1,5 +1,11 @@
 # Website photography and visual provenance
 
+## 1.0.0 site assets — 18 September 2026
+
+- Product captures: the 66 WebP files under `www/website/public/assets/screens/v1.0.0/` (copied from `docs/design/website-1.0/web`) are unaltered derivatives of the 1.0.0 captures recorded in `docs/design/website-1.0/screens-manifest.json`, taken from the local application with the fictional Willow Corner Shop sample. Phone captures (`m1` to `m4`) were taken at 390 px.
+- Social preview cards: `www/website/tools/og-cards.py` (Pillow) draws each 1200 by 630 card from the supplied logo, a title and the canvas colour; no photographs or generated imagery. Output in `www/website/src/static/assets/og/`.
+- Icons: seven Tabler-style outline icons were added to `www/website/src/icons/` (check, x, mail, package, message, rss, clipboard) under the MIT licence noted in `src/icons/SOURCE.txt`, alongside the existing brand icons.
+- Photographs: none are displayed on the rebuilt pages. The eleven Pexels photographs below and their renditions remain in the repository with their provenance; a new photo pack from the owner will be recorded here before use.
 ## Current application captures — 18 September 2026
 
 The current product pages use fresh 0.6.0-preview captures from the local application at `127.0.0.1:18219`. Willow Corner Shop and Cedar Studio were created through the local synthetic sample chooser. Eighteen captures and 36 resized WebP assets are indexed, captioned and hashed in `www/website/public/assets/screens/v0.6.0-preview/manifest.json`. The source PNGs are in `output/playwright/website-060-*.png`. No interface elements or financial figures were composited or generated. The current social preview places the actual Home capture on a labelled background.

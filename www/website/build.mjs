@@ -30,7 +30,7 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.join(ROOT, 'src');
 const PUBLIC = path.join(ROOT, 'public');
 
-const PAGE_KEYS = new Set(['path', 'slug', 'nav', 'title', 'description', 'ogImage', 'ogImageAlt', 'ogType', 'bodyClass', 'jsonld', 'breadcrumb', 'faq', 'article', 'howto', 'itemlist', 'noindex', 'budgetEager', 'budgetTotal', 'headExtra', 'lastmod']);
+const PAGE_KEYS = new Set(['path', 'slug', 'nav', 'title', 'description', 'ogImage', 'ogImageAlt', 'ogType', 'bodyClass', 'jsonld', 'breadcrumb', 'faq', 'article', 'howto', 'itemlist', 'noindex', 'budgetEager', 'budgetTotal', 'headExtra', 'lastmod', 'toc']);
 const GRAPH_PARTS = ['organization', 'website', 'software', 'webpage', 'person', 'breadcrumb', 'faq', 'article', 'howto', 'itemlist'];
 const TEXT_EXTENSIONS = new Set(['.txt', '.html', '.xml', '.json', '.css', '.js', '.mjs', '.svg', '.md', '.webmanifest']);
 const FORBIDDEN_JSONLD_KEYS = /"(aggregateRating|review|reviews|userInteractionCount|interactionStatistic)"\s*:/;
@@ -55,7 +55,7 @@ const publicFile = (sitePath) => path.join(PUBLIC, ...sitePath.split('/').filter
 
 function loadSite() {
   const site = JSON.parse(readText(path.join(SRC, 'site.json')));
-  for (const key of ['name', 'alternateName', 'baseUrl', 'entity', 'locale', 'email', 'founder', 'address', 'repo', 'wiki', 'demo', 'social', 'release', 'requirements', 'nav', 'logo', 'screenshot', 'ogDefault']) {
+  for (const key of ['name', 'alternateName', 'baseUrl', 'entity', 'locale', 'founder', 'address', 'repo', 'wiki', 'demo', 'social', 'release', 'requirements', 'nav', 'logo', 'screenshot', 'ogDefault']) {
     if (site[key] === undefined) fail(`site.json: missing "${key}"`);
   }
   if (!/^https?:\/\/[^/]+$/.test(site.baseUrl)) fail('site.json: baseUrl must be an origin without a trailing slash');
@@ -208,7 +208,7 @@ function pngSize(file) {
 
 function seoMeta(page, canonical, ogImage, dims, hasFeed) {
   const meta = (attr, key, value) => `<meta ${attr}="${key}" content="${escapeHtml(value)}">`;
-  const alt = page.ogImageAlt || `${site.name} logo with a capture of the development preview showing synthetic sample data`;
+  const alt = page.ogImageAlt || `${site.name} logo with a capture of the application showing a fictional sample business`;
   const image = absolute(ogImage);
   const lines = [
     meta('property', 'og:site_name', site.name),
@@ -289,9 +289,8 @@ const builders = {
     alternateName: site.alternateName,
     url: `${site.baseUrl}/`,
     logo: logoImage(),
-    email: site.email,
     address: { '@type': 'PostalAddress', ...site.address },
-    founder: { '@type': 'Person', name: site.founder.name, url: site.founder.url, sameAs: site.founder.url ? [site.founder.url] : [] },
+    founder: { '@type': 'Person', name: site.founder.name, ...(site.founder.url ? { url: site.founder.url, sameAs: [site.founder.url] } : {}) },
     sameAs: [site.repo, ...Object.values(site.social || {}).filter(Boolean)],
   }),
   website: () => ({
@@ -329,8 +328,8 @@ const builders = {
     inLanguage: 'en',
   }),
   person: () => ({
-    '@type': 'Person', '@id': ids.person, name: site.founder.name, url: site.founder.url,
-    sameAs: site.founder.url ? [site.founder.url] : [], jobTitle: 'PHP Ledger project maintainer',
+    '@type': 'Person', '@id': ids.person, name: site.founder.name, ...(site.founder.url ? { url: site.founder.url, sameAs: [site.founder.url] } : {}),
+    jobTitle: 'PHP Ledger project maintainer',
     worksFor: { '@id': ids.organization }, knowsAbout: ['double-entry bookkeeping', 'PHP application architecture', 'self-hosted software'],
   }),
   webpage: (page, byPath) => ({
@@ -402,7 +401,7 @@ function jsonLd(page, byPath) {
 /* ---------- page assembly ---------- */
 
 function addContents(html, page) {
-  if (page.noindex || ['/404.html', '/privacy/', '/terms/'].includes(page.path)) return html;
+  if (page.toc === false || page.noindex || ['/404.html', '/privacy/', '/terms/'].includes(page.path)) return html;
   const headings = [...html.matchAll(/<h2\b[^>]*>[\s\S]*?<\/h2>/gi)];
   if (headings.length < 4) return html;
   const used = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]));
@@ -424,7 +423,7 @@ function addContents(html, page) {
   });
   const toc = `<nav class="page-toc" aria-label="On this page"><p><strong>On this page</strong></p><ol>${items.join('')}</ol></nav>`;
   // Authored summary blocks are simple section/aside/div elements; retain their complete contents.
-  const summary = /<(section|aside|div)\b[^>]*class="[^"]*\bsummary\b[^"]*"[^>]*>[\s\S]*?<\/\1>/i;
+  const summary = /<(section|aside|div|p)\b[^>]*class="[^"]*\b(?:summary|callout)\b[^"]*"[^>]*>[\s\S]*?<\/\1>/i;
   if (summary.test(html)) return html.replace(summary, (block) => `${block}\n${toc}`);
   if (/<article\b/i.test(html)) return html.replace(/<h2\b/i, `${toc}\n<h2`);
   const h1 = html.indexOf('</h1>');
@@ -544,16 +543,16 @@ function writeDiscovery(pages) {
     name: site.name, description: site.entity, version: site.release.version, releaseDate: site.release.date,
     license: licence, requirements: site.requirements, repository: site.repo,
     release: site.release.url, packageSha256: site.release.sha256,
-    demo: { url: absolute(site.demo), warning: 'Synthetic data only; private sample companies reset hourly.' },
+    demo: { url: absolute(site.demo), warning: 'Fictional sample data only; private sample companies reset hourly.' },
     capabilities: site.capabilities, notYet: site.limitations,
   };
   if (!Array.isArray(facts.capabilities) || !Array.isArray(facts.notYet)) fail('site.json needs capabilities and limitations arrays for generated discovery');
   const faqs = listed.flatMap((page) => (page.faq || []).map(({ q, a }) => ({ question: q, answer: a, source: absolute(page.path) })));
   writeText(path.join(PUBLIC, 'ai', 'summary.json'), `${JSON.stringify(facts, null, 2)}\n`);
   writeText(path.join(PUBLIC, 'ai', 'faq.json'), `${JSON.stringify(faqs, null, 2)}\n`);
-  writeText(path.join(PUBLIC, '.well-known', 'ai.txt'), `${site.name}\n\n${site.entity}\n\nCurrent development preview: ${site.release.version} (${site.release.date}).\n${licence}\n\nRead ${site.baseUrl}/llms.txt and ${site.baseUrl}/ai/summary.json.\nContact: ${site.email}. The public demo uses synthetic data and resets hourly.\nThe static website has no analytics; the separate application has a documented optional country lookup.\n`);
+  writeText(path.join(PUBLIC, '.well-known', 'ai.txt'), `${site.name}\n\n${site.entity}\n\nCurrent stable release: ${site.release.version} (${site.release.date}).\n${licence}\n\nRead ${site.baseUrl}/llms.txt and ${site.baseUrl}/ai/summary.json.\nContact: ${site.repo}/discussions (public); security reports: ${site.repo}/blob/master/SECURITY.md. The public demo holds fictional sample data and resets hourly.\nThe static website has no analytics; the separate application has a documented optional country lookup.\n`);
   const links = listed.map((page) => `- [${page.breadcrumb || page.title}](${absolute(page.path)}): ${page.description}`);
-  writeText(path.join(PUBLIC, 'llms.txt'), `# ${site.name}\n\n> ${site.entity}\n\nCurrent preview: ${site.release.version}. ${site.requirements}.\n\n${licence}\n\n## Implemented scope\n\n${site.capabilities.map((item) => `- ${item}`).join('\n')}\n\n## Outside the current workflows\n\n${site.limitations.map((item) => `- ${item}`).join('\n')}\n\n## Documentation and pages\n\n${links.join('\n')}\n\nThe public demo contains fictional records only. Technical validation is not professional accounting acceptance.\n`);
+  writeText(path.join(PUBLIC, 'llms.txt'), `# ${site.name}\n\n> ${site.entity}\n\nCurrent stable release: ${site.release.version}. ${site.requirements}.\n\n${licence}\n\n## Implemented scope\n\n${site.capabilities.map((item) => `- ${item}`).join('\n')}\n\n## Outside the current workflows\n\n${site.limitations.map((item) => `- ${item}`).join('\n')}\n\n## Documentation and pages\n\n${links.join('\n')}\n\nThe public demo contains fictional records only. Technical validation is not professional accounting acceptance.\n`);
 }
 
 /* ---------- main ---------- */

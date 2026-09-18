@@ -1,5 +1,15 @@
 # Website design decisions
 
+## 1.0.0 product-led redesign — 18 September 2026
+
+The site was rebuilt for the 1.0.0 stable release. Direction was explored in throwaway prototypes outside the repository and then implemented natively in `www/website` (see its README for routes and build notes). Decisions:
+
+- Information architecture: Product, Point of sale, Pricing & licence, Community, Learn, Download; a "Try the live demo" button and a "Download 1.0.0" link in the header; a six-column footer with community icons (GitHub, LinkedIn, X, Facebook, Instagram, YouTube), supporter marks and trust links. `/support/` became `/pricing/` with the enquiry form; no prices are published anywhere.
+- Visual system: navy `#0C2052`, blue `#4656E8`, canvas `#F7F5F0`, ink `#2A2F3A`, tint `#EEF0FF`; Manrope 700/800 headings, Poppins body, Inter figures; 6/10 px radii; product captures in a light window frame, phone captures in a navy bezel. No photography on the rebuilt pages yet: the owner is preparing a photo pack, and the photo, video and motion plan (Part 3 of the plan file) waits for it. The eleven documentary photographs from 15 September are not displayed on any page; their files and credits are retained.
+- Wording: screens show "a fictional sample business, Willow Corner Shop"; pages say "sample data" or "sample records"; "synthetic" is not used. Facts (version, date, checksum, size) come from `src/site.json`.
+- SEO: titles at most 60 characters, descriptions 50–160, one H1 sharing terms with the title, H2 sections of 50 words or more on the home page, FAQPage and HowTo data, `lastmod` no earlier than the release date, first-person maintainer note, IndexNow key served. Target after publication: 95 or higher on seoscore.tools.
+- Contact: the site publishes no email address and no personal LinkedIn profile (owner instruction, 18 September 2026). Questions, reviews, pilots and licence enquiries start in GitHub Discussions; the pricing-page form prepares the message and opens the discussion chooser; private security reports follow SECURITY.md. All GitHub links point at the `phpledger` organization.
+- Publication: not yet published. The owner publishes the static document root and the Nginx `/support` redirects together.
 ## Published accounting starter website - 16 September 2026
 
 The current website presents **0.4.0-preview**, with core AR/AP, optional Purchasing/Inventory and manually configured inclusive/exclusive tax. The [release article](https://phpledger.com/news/0-4-0-preview/) is live. Current capability assertions are synchronized throughout the existing long-form library; the seven earlier release articles retain historical scope. The approved homepage headline, typography, six-item navigation and visual style are unchanged.
