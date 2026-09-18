@@ -208,7 +208,7 @@ function pngSize(file) {
 
 function seoMeta(page, canonical, ogImage, dims, hasFeed) {
   const meta = (attr, key, value) => `<meta ${attr}="${key}" content="${escapeHtml(value)}">`;
-  const alt = page.ogImageAlt || `${site.name} logo with a capture of the development preview showing synthetic sample data`;
+  const alt = page.ogImageAlt || `${site.name} logo with a capture of the development preview showing sample data`;
   const image = absolute(ogImage);
   const lines = [
     meta('property', 'og:site_name', site.name),
@@ -544,14 +544,14 @@ function writeDiscovery(pages) {
     name: site.name, description: site.entity, version: site.release.version, releaseDate: site.release.date,
     license: licence, requirements: site.requirements, repository: site.repo,
     release: site.release.url, packageSha256: site.release.sha256,
-    demo: { url: absolute(site.demo), warning: 'Synthetic data only; private sample companies reset hourly.' },
+    demo: { url: absolute(site.demo), warning: 'Sample data only; private sample companies reset hourly.' },
     capabilities: site.capabilities, notYet: site.limitations,
   };
   if (!Array.isArray(facts.capabilities) || !Array.isArray(facts.notYet)) fail('site.json needs capabilities and limitations arrays for generated discovery');
   const faqs = listed.flatMap((page) => (page.faq || []).map(({ q, a }) => ({ question: q, answer: a, source: absolute(page.path) })));
   writeText(path.join(PUBLIC, 'ai', 'summary.json'), `${JSON.stringify(facts, null, 2)}\n`);
   writeText(path.join(PUBLIC, 'ai', 'faq.json'), `${JSON.stringify(faqs, null, 2)}\n`);
-  writeText(path.join(PUBLIC, '.well-known', 'ai.txt'), `${site.name}\n\n${site.entity}\n\nCurrent development preview: ${site.release.version} (${site.release.date}).\n${licence}\n\nRead ${site.baseUrl}/llms.txt and ${site.baseUrl}/ai/summary.json.\nContact: ${site.email}. The public demo uses synthetic data and resets hourly.\nThe static website has no analytics; the separate application has a documented optional country lookup.\n`);
+  writeText(path.join(PUBLIC, '.well-known', 'ai.txt'), `${site.name}\n\n${site.entity}\n\nCurrent development preview: ${site.release.version} (${site.release.date}).\n${licence}\n\nRead ${site.baseUrl}/llms.txt and ${site.baseUrl}/ai/summary.json.\nContact: ${site.email}. The public demo uses sample data and resets hourly.\nThe static website has no analytics; the separate application has a documented optional country lookup.\n`);
   const links = listed.map((page) => `- [${page.breadcrumb || page.title}](${absolute(page.path)}): ${page.description}`);
   writeText(path.join(PUBLIC, 'llms.txt'), `# ${site.name}\n\n> ${site.entity}\n\nCurrent preview: ${site.release.version}. ${site.requirements}.\n\n${licence}\n\n## Implemented scope\n\n${site.capabilities.map((item) => `- ${item}`).join('\n')}\n\n## Outside the current workflows\n\n${site.limitations.map((item) => `- ${item}`).join('\n')}\n\n## Documentation and pages\n\n${links.join('\n')}\n\nThe public demo contains fictional records only. Technical validation is not professional accounting acceptance.\n`);
 }

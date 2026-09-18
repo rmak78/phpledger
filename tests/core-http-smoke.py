@@ -1,12 +1,12 @@
-"""Exercise core browser workflows against a local synthetic PHP Ledger installation.
+"""Exercise core browser workflows against a local sample PHP Ledger installation.
 
 Uses the forms, parser and in-memory sessions from http-smoke.py. Configure
 --base-url, --email/PL_HTTP_EMAIL, --password/PL_HTTP_PASSWORD and optionally
---company-id. Without a company ID, creates an isolated synthetic company.
+--company-id. Without a company ID, creates an isolated sample company.
 Creates two accounts, one general journal plus its linked reversal, and one
 additional empty company for cross-company rejection checks; keeps all fixtures.
 A failed run can leave a partial fixture; emitted IDs identify it for inspection.
-The provided company must be synthetic, writable and have open test dates.
+The provided company must be sample, writable and have open test dates.
 
 Optional PL_HTTP_VIEWER_EMAIL/PL_HTTP_VIEWER_PASSWORD (or CLI equivalents) must
 identify a viewer of the selected company. Missing viewer credentials produce an
@@ -112,7 +112,7 @@ def run(options: argparse.Namespace) -> dict:
         client = http.Session()
         page = ok(client.request("/login"), "Login page")
         signed = ok(client.submit(form(page, "/login"), {"email": email, "password": password}), "Sign-in")
-        check(urlparse(signed.url).path == path("/companies"), "Synthetic login reaches business selection")
+        check(urlparse(signed.url).path == path("/companies"), "Sample login reaches business selection")
         return client
 
     def select_company(client, company_id: int):
@@ -121,8 +121,8 @@ def run(options: argparse.Namespace) -> dict:
                          if urlparse(f.action).path == path("/company/select")
                          and f.fields.get("company_id") == str(company_id)), None)
         if selected is None:
-            raise AssertionError("Requested synthetic company is unavailable to this login.")
-        return ok(client.submit(selected), "Select synthetic company")
+            raise AssertionError("Requested sample company is unavailable to this login.")
+        return ok(client.submit(selected), "Select sample company")
 
     def create_company(client, suffix: str) -> int:
         name = "Core HTTP Acceptance " + tag + " " + suffix
@@ -133,7 +133,7 @@ def run(options: argparse.Namespace) -> dict:
             "start_mode": "fresh", "zero_balances_confirmed": "1",
         }), "Setup preview")
         created = ok(client.submit(form(preview, "/onboarding")), "Setup confirmation")
-        check(name in created.body, "Onboarding creates a separate synthetic business")
+        check(name in created.body, "Onboarding creates a separate sample business")
         account_page = ok(client.request("/accounts?new=1"), "New account scope")
         return int(form(account_page, "/accounts/save").fields["company_id"])
 
@@ -174,7 +174,7 @@ def run(options: argparse.Namespace) -> dict:
     check(create_form.fields["company_id"] == str(company_id), "Account form uses the selected company/book")
     before = http.totals(report(client, post_date))
     before_reversal_date = http.totals(report(client, reverse_date))
-    created_reason = "Synthetic account creation " + tag
+    created_reason = "Sample account creation " + tag
     account_values = {
         "code": "HE" + tag, "name": "HTTP expense " + tag, "type": "expense", "role": "expense",
         "is_active": "1", "reason": created_reason,
@@ -190,7 +190,7 @@ def run(options: argparse.Namespace) -> dict:
     check(ident(duplicate) == account_id, "Identical account creation retry returns one durable account")
 
     changed_name = "HTTP revised expense " + tag
-    changed_reason = "Rename and deactivate synthetic account " + tag
+    changed_reason = "Rename and deactivate sample account " + tag
     deactivation = account_edit.fields | {"name": changed_name, "reason": changed_reason}
     deactivation.pop("is_active", None)
     updated = ok(client.request(account_edit.action, deactivation), "Rename and deactivate")
@@ -211,7 +211,7 @@ def run(options: argparse.Namespace) -> dict:
           and form(latest_account, "/accounts/save").fields["name"] == changed_name,
           "Rejected stale account edit leaves the saved version unchanged")
     reactivated = ok(client.submit(form(latest_account, "/accounts/save"), {
-        "is_active": "1", "reason": "Reactivate for synthetic journals " + tag,
+        "is_active": "1", "reason": "Reactivate for sample journals " + tag,
     }), "Reactivate account")
     account_edit = form(reactivated, "/accounts/save")
     check(account_edit.fields["revision"] == "3" and account_edit.fields.get("is_active") == "1",
@@ -231,13 +231,13 @@ def run(options: argparse.Namespace) -> dict:
     income_new = form(ok(client.request("/accounts?new=1"), "New income account"), "/accounts/save")
     income = ok(client.submit(income_new, {
         "code": "HI" + tag, "name": "HTTP income " + tag, "type": "income", "role": "income",
-        "is_active": "1", "reason": "Synthetic balancing account " + tag,
+        "is_active": "1", "reason": "Sample balancing account " + tag,
     }), "Create income account")
     income_id = ident(income)
     new_draft = form(ok(client.request("/general-journals/new"), "New journal"), "/general-journals/save")
     values = {
         "date": post_date.isoformat(), "reference": "HTTP-" + tag,
-        "description": "Synthetic <script>retained()</script> " + tag,
+        "description": "Sample <script>retained()</script> " + tag,
         "lines[0][account_id]": str(account_id), "lines[0][debit]": "37.1250",
         "lines[0][credit]": "", "lines[0][description]": "Expense line " + tag,
         "lines[1][account_id]": str(income_id), "lines[1][debit]": "",
@@ -339,7 +339,7 @@ def run(options: argparse.Namespace) -> dict:
           "Account statement links to both saved source and posted journal")
 
     reverse_form = form(posted, "/general-journals/reverse")
-    check(client.submit(reverse_form, {"date": reverse_date.isoformat(), "reason": "Synthetic correction",
+    check(client.submit(reverse_form, {"date": reverse_date.isoformat(), "reason": "Sample correction",
                                       "csrf": "invalid-local-csrf"}).status == 403,
           "General reversal rejects invalid CSRF")
     bad_reverse = client.submit(reverse_form, {"date": "2000-01-01", "reason": "Keep reversal reason " + tag})
@@ -347,7 +347,7 @@ def run(options: argparse.Namespace) -> dict:
     check(bad_reverse.status == 422 and retained_reverse.fields["date"] == "2000-01-01"
           and retained_reverse.fields["reason"] == "Keep reversal reason " + tag,
           "Rejected reversal preserves submitted date and reason")
-    reverse_values = {"date": reverse_date.isoformat(), "reason": "Dated synthetic correction " + tag}
+    reverse_values = {"date": reverse_date.isoformat(), "reason": "Dated sample correction " + tag}
     reversed_page = ok(client.submit(retained_reverse, reverse_values), "Post dated reversal")
     reversal_url = link(reversed_page, "/journals/detail", "Open linked reversal")
     reversal_id = int(parse_qs(urlparse(reversal_url).query)["id"][0])
@@ -407,7 +407,7 @@ def run(options: argparse.Namespace) -> dict:
     other_company_id = create_company(client, "scope-boundary")
     other_form = form(ok(client.request("/accounts?new=1"), "Other company scope"), "/accounts/save")
     other_book_id = int(other_form.fields["book_id"])
-    check(other_company_id != company_id, "Cross-company checks use a distinct synthetic company")
+    check(other_company_id != company_id, "Cross-company checks use a distinct sample company")
     for route in [f"/accounts?id={account_id}", f"/reports/account?id={account_id}",
                   f"/general-journals/detail?id={draft_id}", f"/general-journals/edit?id={draft_id}",
                   f"/journals/detail?id={journal_id}"]:
@@ -445,7 +445,7 @@ def run(options: argparse.Namespace) -> dict:
         "general_draft_id": draft_id, "journal_id": journal_id, "reversal_journal_id": reversal_id,
         "posting_date": post_date.isoformat(), "reversal_date": reverse_date.isoformat(),
         "cross_company_id": other_company_id,
-        "data": "Two synthetic accounts and a fully reversed journal retained; an empty scope-test company retained.",
+        "data": "Two sample accounts and a fully reversed journal retained; an empty scope-test company retained.",
     }
 
 
@@ -454,7 +454,7 @@ if __name__ == "__main__":
     parser.add_argument("--base-url", default="http://127.0.0.1:18205", help="Loopback HTTP(S) installation URL.")
     parser.add_argument("--email", default=os.environ.get("PL_HTTP_EMAIL", ""))
     parser.add_argument("--password", default=os.environ.get("PL_HTTP_PASSWORD", ""), help="Prefer PL_HTTP_PASSWORD.")
-    parser.add_argument("--company-id", type=int, help="Existing synthetic writable company; otherwise create one.")
+    parser.add_argument("--company-id", type=int, help="Existing sample writable company; otherwise create one.")
     parser.add_argument("--date", default=datetime.now(timezone.utc).date().isoformat(), help="Open posting date, ISO format.")
     parser.add_argument("--reversal-date", help="Later open date; defaults to posting date plus one day.")
     parser.add_argument("--viewer-email", default=os.environ.get("PL_HTTP_VIEWER_EMAIL", ""))

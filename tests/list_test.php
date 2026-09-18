@@ -6,15 +6,15 @@ require_once dirname(__DIR__) . '/www/phpledger/templates/partials/ui/components
 test('account chart filters page within classifications and reject unsafe or foreign queries',function():void {
     $f=ledger_fixture(); $args=[$f['actor_id'],$f['company_id'],$f['book_id']];
     for ($i=0;$i<26;$i++) {
-        pl_save_account(...array_merge($args,[['code'=>(string)(6000+$i),'name'=>'Synthetic paged chart '.str_pad((string)$i,2,'0',STR_PAD_LEFT),'type'=>'expense','role'=>null,'is_active'=>$i!==25,'reason'=>'Synthetic chart pagination','creation_key'=>bin2hex(random_bytes(16))]]));
+        pl_save_account(...array_merge($args,[['code'=>(string)(6000+$i),'name'=>'Sample paged chart '.str_pad((string)$i,2,'0',STR_PAD_LEFT),'type'=>'expense','role'=>null,'is_active'=>$i!==25,'reason'=>'Sample chart pagination','creation_key'=>bin2hex(random_bytes(16))]]));
     }
     $run=fn(array $q):array=>pl_list_query(...array_merge($args,['accounts',$q]));
-    $first=$run(['q'=>'Synthetic paged chart']); $last=$run(['q'=>'Synthetic paged chart','page'=>999]);
+    $first=$run(['q'=>'Sample paged chart']); $last=$run(['q'=>'Sample paged chart','page'=>999]);
     assert_same(26,$first['total']); assert_same(25,count($first['rows'])); assert_same(2,$last['page']); assert_same('6025',$last['rows'][0]['code']);
-    assert_same(25,$run(['q'=>'Synthetic paged chart','status'=>'active'])['total']);
-    assert_same(1,$run(['q'=>'Synthetic paged chart','status'=>'inactive'])['total']);
-    assert_same(0,$run(['q'=>'Synthetic paged chart','type'=>'asset'])['total']);
-    assert_same('6025',$run(['q'=>'Synthetic paged chart','sort'=>'name','dir'=>'desc'])['rows'][0]['code']);
+    assert_same(25,$run(['q'=>'Sample paged chart','status'=>'active'])['total']);
+    assert_same(1,$run(['q'=>'Sample paged chart','status'=>'inactive'])['total']);
+    assert_same(0,$run(['q'=>'Sample paged chart','type'=>'asset'])['total']);
+    assert_same('6025',$run(['q'=>'Sample paged chart','sort'=>'name','dir'=>'desc'])['rows'][0]['code']);
     assert_same(0,$run(['q'=>'%'])['total']);
     foreach ([['sort'=>'code DESC'],['type'=>'malformed'],['status'=>[]],['q'=>[]]] as $invalid) { assert_throws(fn()=>$run($invalid),DomainException::class); }
     $other=ledger_fixture(); assert_throws(fn()=>pl_list_query($other['actor_id'],$f['company_id'],$f['book_id'],'accounts',[]),DomainException::class);
@@ -43,7 +43,7 @@ test('server lists paginate without overlaps preserve filters and enforce compan
         pl_save_document($f['actor_id'], $f['company_id'], $f['book_id'], [
             'kind'=>'expense','date'=>'2026-09-14','amount'=>'10',
             'money_account_id'=>$f['accounts']['1000'],'category_account_id'=>$f['accounts']['5000'],
-            'counterparty'=>'List fixture','reference'=>'ROW-'.$i,'memo'=>'Synthetic paging', 'creation_key'=>bin2hex(random_bytes(16)),
+            'counterparty'=>'List fixture','reference'=>'ROW-'.$i,'memo'=>'Sample paging', 'creation_key'=>bin2hex(random_bytes(16)),
         ]);
     }
     $first=pl_list_query($f['actor_id'],$f['company_id'],$f['book_id'],'transactions',['per_page'=>'25','q'=>'List fixture']);
@@ -91,7 +91,7 @@ test('bank summary counts every row independently of paged or searched statement
     $matched=pl_bank_match_row($f['actor_id'],$f['company_id'],$f['book_id'],(int)$statement['id'],(int)$statement['rows'][0]['id'],(int)$candidates[0]['id'],1);
     $summary=pl_bank_reconciliation_summary($f['actor_id'],$f['company_id'],$f['book_id'],(int)$statement['id']);
     assert_same(26,$summary['row_count']); assert_same(25,$summary['unmatched_count']);
-    assert_throws(fn()=>pl_bank_cancel_statement($f['actor_id'],$f['company_id'],$f['book_id'],(int)$statement['id'],(int)$matched['revision'],'Synthetic correction','paged-cancel'),DomainException::class);
+    assert_throws(fn()=>pl_bank_cancel_statement($f['actor_id'],$f['company_id'],$f['book_id'],(int)$statement['id'],(int)$matched['revision'],'Sample correction','paged-cancel'),DomainException::class);
 });
 
 test('source return links retain account filters and cannot choose an external destination', function (): void {

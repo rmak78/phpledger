@@ -1,5 +1,5 @@
-"""Local synthetic recovery checks. Requires a test-database Compose web service.
-Uses the existing localhost-only HTTP smoke guard and caller-supplied synthetic login.
+"""Local sample recovery checks. Requires a test-database Compose web service.
+Uses the existing localhost-only HTTP smoke guard and caller-supplied sample login.
 Injects a lost-response recovery record into only this test session; no production hooks.
 """
 import argparse
@@ -30,7 +30,7 @@ def run(company_id, compose):
     companies = session.submit(login.markup.form_for("/login"), {"email": os.environ["PL_HTTP_EMAIL"], "password": os.environ["PL_HTTP_PASSWORD"]})
     select = next(f for f in companies.markup.forms if urlparse(f.action).path == "/company/select" and f.fields.get("company_id") == str(company_id))
     company = session.submit(select)
-    check("HTTP Acceptance " in company.body, "Selected synthetic HTTP company")
+    check("HTTP Acceptance " in company.body, "Selected sample HTTP company")
     shop = session.request("/pos")
     cart = shop.markup.form_for("/pos/review")
     cart_values = cart.fields | {"review_intent": "review_cart", "date": datetime.now(timezone.utc).date().isoformat()}
@@ -59,7 +59,7 @@ session_write_close();"""
     def inject(original):
         result = subprocess.run(["docker", "compose", "-f", str(compose), "exec", "-T", "web", "php", "-r", php], input=json.dumps({"session": cookie, "company_id": company_id, "request": original}), text=True, capture_output=True)
         if result.returncode:
-            raise RuntimeError("Synthetic recovery injection failed: " + result.stderr)
+            raise RuntimeError("Sample recovery injection failed: " + result.stderr)
     inject(request)
     pending = session.request("/pos/review")
     check(pending.status == 503 and "data-pos-recovery" in pending.body and "10.00" in pending.body, "Uncertain committed request retains original cash and warning")

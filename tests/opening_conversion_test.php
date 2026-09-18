@@ -5,9 +5,9 @@ function opening_conversion_fixture(): array
 {
     $f = opening_fixture(); $input = opening_input();
     $input['unpaid_documents'][0]['outstanding'] = '100';
-    $input['unpaid_documents'][] = ['kind' => 'receivable', 'account_code' => '1100', 'party' => 'Second synthetic customer', 'reference' => 'INV-02', 'document_date' => '2026-08-20', 'due_date' => '2026-10-10', 'outstanding' => '200'];
+    $input['unpaid_documents'][] = ['kind' => 'receivable', 'account_code' => '1100', 'party' => 'Second sample customer', 'reference' => 'INV-02', 'document_date' => '2026-08-20', 'due_date' => '2026-10-10', 'outstanding' => '200'];
     $cutover = opening_confirm($f, opening_preview($f, $input));
-    $party = pl_save_party($f['actor_id'], $f['company_id'], $f['book_id'], ['legal_name' => 'Synthetic mapped party', 'entity_type' => 'private_company', 'country_code' => 'GB', 'is_customer' => true, 'is_vendor' => true, 'currency' => 'USD', 'request_key' => bin2hex(random_bytes(16)), 'reason' => 'Synthetic explicit opening mapping']);
+    $party = pl_save_party($f['actor_id'], $f['company_id'], $f['book_id'], ['legal_name' => 'Sample mapped party', 'entity_type' => 'private_company', 'country_code' => 'GB', 'is_customer' => true, 'is_vendor' => true, 'currency' => 'USD', 'request_key' => bin2hex(random_bytes(16)), 'reason' => 'Sample explicit opening mapping']);
     $mappings = [];
     foreach (DB::query('SELECT id FROM pl_opening_documents WHERE cutover_id=%i ORDER BY id', $cutover['id']) as $document) { $mappings[] = ['opening_document_id' => (int) $document['id'], 'party_id' => $party['id']]; }
     return $f + ['cutover_id' => (int) $cutover['id'], 'mappings' => $mappings];
@@ -53,7 +53,7 @@ test('opening conversion requires complete explicit mapping fresh digest and own
 test('concurrent opening conversion retries allocate shared basis once and preserve the existing journal', function (): void {
     $f = opening_conversion_fixture();
     $preview = pl_preview_opening_conversion($f['actor_id'], $f['company_id'], $f['book_id'], $f['cutover_id'], $f['mappings']);
-    $job = ['mode' => 'opening_convert', 'fixture' => $f, 'cutover_id' => $f['cutover_id'], 'mappings' => $f['mappings'], 'expected_hash' => $preview['payload_hash'], 'key' => bin2hex(random_bytes(16)), 'reason' => 'Synthetic concurrent review'];
+    $job = ['mode' => 'opening_convert', 'fixture' => $f, 'cutover_id' => $f['cutover_id'], 'mappings' => $f['mappings'], 'expected_hash' => $preview['payload_hash'], 'key' => bin2hex(random_bytes(16)), 'reason' => 'Sample concurrent review'];
     $results = ledger_race([$job, $job]);
     assert_same($results[0]['id'], $results[1]['id']);
     assert_same(3, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_open_items WHERE book_id=%i', $f['book_id']));

@@ -1,7 +1,7 @@
 # Local list capacity evidence
 
 Run on the isolated Compose MySQL 8.4 test database, 18 September 2026.
-All records are synthetic. The normal source services and central posting funnel
+All records are sample. The normal source services and central posting funnel
 created 5,000 receipt drafts and 5,000 posted general journals (10,000 journal
 lines). No historical dumps or direct posted-row inserts were used.
 

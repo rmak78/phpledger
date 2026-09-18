@@ -1,4 +1,4 @@
-"""Synthetic HTTP checks restricted to the loopback /demo instance on port 18202."""
+"""Sample HTTP checks restricted to the loopback /demo instance on port 18202."""
 from __future__ import annotations
 import importlib.util
 from pathlib import Path
@@ -60,7 +60,7 @@ check('/demo/login' in request('/demo/reports').url,'Expired visitor cannot read
 
 if '--currencies' in sys.argv:
     for country,currency in [('Malaysia','MYR'),('Bangladesh','BDT'),('Sri Lanka','LKR'),('Nepal','NPR'),('Singapore','SGD')]:
-        # New isolated cookie jars create only this check's synthetic visitors; no database reset.
+        # New isolated cookie jars create only this check's sample visitors; no database reset.
         cookies=CookieJar()
         opener=build_opener(Redirects(),HTTPCookieProcessor(cookies))
         entry=request('/demo/')
@@ -94,4 +94,4 @@ if '--currencies' in sys.argv:
         logout=reused.markup.form_for('/demo/logout')
         check('/demo/login' in request(logout.action,logout.fields).url,currency+' visitor exits cleanly')
 
-print(json.dumps({'passed':len(passed),'failed':0,'target':origin+'/demo/','data':'Synthetic visitor retained until hourly reset.'},indent=2))
+print(json.dumps({'passed':len(passed),'failed':0,'target':origin+'/demo/','data':'Sample visitor retained until hourly reset.'},indent=2))

@@ -46,11 +46,11 @@ Every release also reviews and updates the GitHub Wiki, repository About descrip
 
 ## Current release: 1.0.0
 
-The accounting starter, eleven-pack chooser, responsive shell, catalogue-led setup, browser installation, and signed automatic updates with backup and recovery are included in the published 1.0.0 release. In local Docker, sign in, open **Your businesses**, and use **Try a sample company** to provision only the selected synthetic book.
+The accounting starter, eleven-pack chooser, responsive shell, catalogue-led setup, browser installation, and signed automatic updates with backup and recovery are included in the published 1.0.0 release. In local Docker, sign in, open **Your businesses**, and use **Try a sample company** to provision only the selected sample book.
 
 ### Local test login
 
-There is no shared development password. After the local database is healthy and migrated, create a synthetic owner account with the installer and keep the password in memory only:
+There is no shared development password. After the local database is healthy and migrated, create a sample owner account with the installer and keep the password in memory only:
 
 ```powershell
 $testPassword = Read-Host 'Choose a local test password (12-72 characters)'
@@ -75,7 +75,7 @@ Use that email and the password you entered at `http://127.0.0.1:18200/login`. T
 
 Owners can hide AR/AP navigation without disabling accounting services or changing reports. Purchasing and Inventory use the existing module activation controls; historical records remain readable after disabling new operations. Quotes are preserved separately on `codex/quotes-plugin` and are excluded from this starter.
 
-The 0.5.0-preview candidate adds eleven selectable synthetic businesses: Cedar Studio, Sunrise Garden Services, Willow Corner Shop, Harbour Trade, Harbor Supply Company, Cedar Table, Riverside Community Club, Meadow Training Pharmacy, Lantern Finch Jewelry Studio, Maple Bench Works and Wheel & Spoke Workshop. Each historical pack contains fixed 2024-2025 examples, an open 2026 practice year, durable source identities, a pinned digest and reconciled monthly checkpoints. Industry names describe teaching scenarios only; unsupported operational, regulatory and compliance features remain out of scope.
+The 0.5.0-preview candidate adds eleven selectable sample businesses: Cedar Studio, Sunrise Garden Services, Willow Corner Shop, Harbour Trade, Harbor Supply Company, Cedar Table, Riverside Community Club, Meadow Training Pharmacy, Lantern Finch Jewelry Studio, Maple Bench Works and Wheel & Spoke Workshop. Each historical pack contains fixed 2024-2025 examples, an open 2026 practice year, durable source identities, a pinned digest and reconciled monthly checkpoints. Industry names describe teaching scenarios only; unsupported operational, regulatory and compliance features remain out of scope.
 
 The candidate also carries `resources/coa/industry-profiles-0.5.0.json`, a research-backed vertical account vocabulary for all eleven samples. It improves the isolated sample chart labels and keeps distinctions such as food versus beverage, labor versus parts, raw material versus WIP versus finished goods, and earned versus unearned dues visible. Its illustrative codes are not statutory account numbers and it does not activate country tax rules.
 
@@ -85,7 +85,7 @@ See [starter implementation and validation](docs/repository/sprint-06/ACCOUNTING
 
 ## Who it is for
 
-The public demo has eleven multi-year synthetic businesses and a separate, empty Accounting starter playground with prepared accounts, parties, a product and illustrative tax configuration. A visitor selects one sample; only that isolated company is provisioned, and trusted seed history is separate from the visitor's practice-record allowance.
+The public demo has eleven multi-year sample businesses and a separate, empty Accounting starter playground with prepared accounts, parties, a product and illustrative tax configuration. A visitor selects one sample; only that isolated company is provisioned, and trusted seed history is separate from the visitor's practice-record allowance.
 
 PHP Ledger is country-neutral accounting software for small businesses, owners, bookkeepers, accountants and organisations managing multiple client companies. Pakistan is one intended regional direction, not the main market or the product's defining scope. Owner-equity reporting is a shared priority; partner capital, profit-sharing and drawings are planned examples that require the appropriate entity and accounting profile. Daily entry should work well on phones, with clear reporting and review on larger screens.
 
@@ -93,7 +93,7 @@ The application requires **PHP 8.2 or newer**; **PHP 8.3 is the recommended depl
 
 ## What the working preview shows
 
-[![PHP Ledger owner overview: synthetic cash, income, expenses and profit with linked reports.](docs/repository/assets/owner-overview-preview.webp)](docs/repository/assets/owner-overview-preview.webp)
+[![PHP Ledger owner overview: sample cash, income, expenses and profit with linked reports.](docs/repository/assets/owner-overview-preview.webp)](docs/repository/assets/owner-overview-preview.webp)
 
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS remain development previews.*
 
@@ -116,7 +116,7 @@ The application requires **PHP 8.2 or newer**; **PHP 8.3 is the recommended depl
 
 [![A posted sample expense beside its source record and balanced debit and credit entry.](docs/repository/assets/expense-to-journal-preview.webp)](docs/repository/assets/expense-to-journal-preview.webp)
 
-A saved draft has no effect on the books. Posting creates the balanced entry; a correction retains history through a linked reversal. This screenshot uses synthetic data from the working preview.
+A saved draft has no effect on the books. Posting creates the balanced entry; a correction retains history through a linked reversal. This screenshot uses sample data from the working preview.
 
 </details>
 
@@ -125,13 +125,13 @@ A saved draft has no effect on the books. Posting creates the balanced entry; a 
 
 [![PHP Ledger click-to-add POS with selected products, cart quantity controls and a separate review action.](docs/repository/assets/cash-pos-click-preview.png)](docs/repository/assets/cash-pos-click-preview.png)
 
-The owner-approved cash-sale layout: click a product to add one, adjust quantities in the cart, then review the sale before confirming cash. This actual capture contains an unposted synthetic cart. Stock deduction, COGS, tax, card processing and credit sales are not implemented by this showcase.
+The owner-approved cash-sale layout: click a product to add one, adjust quantities in the cart, then review the sale before confirming cash. This actual capture contains an unposted sample cart. Stock deduction, COGS, tax, card processing and credit sales are not implemented by this showcase.
 
 </details>
 
 [**Open your sample company →**](https://phpledger.com/demo/)
 
-No registration is needed. Each visitor gets separate synthetic books. Demo records reset hourly; destructive user actions are disabled. The [demo guide](https://github.com/phpledger/phpledger/wiki/Getting-Started) explains what to try and what is still in development.
+No registration is needed. Each visitor gets separate sample books. Demo records reset hourly; destructive user actions are disabled. The [demo guide](https://github.com/phpledger/phpledger/wiki/Getting-Started) explains what to try and what is still in development.
 
 ## How it is built
 
@@ -151,7 +151,7 @@ Early [tax research](docs/tax/README.md) covers eight countries and seven busine
 
 ## Read connections and richer samples
 
-Release **0.2.1-preview** combines scoped read API/MCP, existing-user OAuth/Connections and server-side tables with four synthetic businesses: service agency, retail shop, seasonal business and distributor. Each has 74 sources, closed 2024–2025 history, an open 2026 practice period and three editable drafts. [Reporting guides](https://phpledger.com/guides/) explain daily checks, monthly closing and quarterly/yearly review. [Setup recipes and client matrix](docs/INTEGRATIONS.md) distinguish actual native-client results from pending compatibility checks. Financial commands remain future work.
+Release **0.2.1-preview** combines scoped read API/MCP, existing-user OAuth/Connections and server-side tables with four sample businesses: service agency, retail shop, seasonal business and distributor. Each has 74 sources, closed 2024–2025 history, an open 2026 practice period and three editable drafts. [Reporting guides](https://phpledger.com/guides/) explain daily checks, monthly closing and quarterly/yearly review. [Setup recipes and client matrix](docs/INTEGRATIONS.md) distinguish actual native-client results from pending compatibility checks. Financial commands remain future work.
 
 ## Where we go from here
 
@@ -172,10 +172,10 @@ Restaurant, pharmacy, club, trader, distributor, shop and workshop scenarios inf
 
 ## How to get involved
 
-We welcome thoughtful feedback from business owners, bookkeepers, accountants, designers and developers. Describe the task you need to finish, show a synthetic example, and tell us where the flow gets in your way.
+We welcome thoughtful feedback from business owners, bookkeepers, accountants, designers and developers. Describe the task you need to finish, show a sample example, and tell us where the flow gets in your way.
 
 - **Ask a question:** [Discussions Q&A](https://github.com/phpledger/phpledger/discussions/categories/q-a) for usage and installation help.
-- **Report a bug:** [open an issue](https://github.com/phpledger/phpledger/issues) with synthetic data and sanitized logs; [SUPPORT.md](SUPPORT.md) explains what to include.
+- **Report a bug:** [open an issue](https://github.com/phpledger/phpledger/issues) with sample data and sanitized logs; [SUPPORT.md](SUPPORT.md) explains what to include.
 - **Review accounting or contribute:** start with the [contributor guide](https://github.com/phpledger/phpledger/wiki/Contributing-and-Support) or a [good first issue](https://github.com/phpledger/phpledger/issues?q=is%3Aopen+label%3A%22good+first+issue%22).
 - **Report a security problem privately:** see [SECURITY.md](SECURITY.md).
 - **Discuss a pilot or setup support:** [rmak78@gmail.com](mailto:rmak78@gmail.com).

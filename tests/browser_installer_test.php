@@ -16,10 +16,10 @@ $databasePassword = bin2hex(random_bytes(24));
 $setupKey = bin2hex(random_bytes(32));
 $serve = ($argv[1] ?? '') === '--serve';
 if ($serve) {
-    $databasePassword = 'Synthetic browser installer DB fixture 2026!';
-    $setupKey = 'synthetic-browser-installer-ui-fixture-key-2026';
+    $databasePassword = 'Sample browser installer DB fixture 2026!';
+    $setupKey = 'sample-browser-installer-ui-fixture-key-2026';
 }
-$ownerPassword = 'Synthetic installer owner passphrase 123!';
+$ownerPassword = 'Sample installer owner passphrase 123!';
 $rootConfig = ['host' => 'db_test', 'port' => 3306, 'database' => 'information_schema', 'user' => 'root', 'password' => 'local-test-root-only'];
 $config = ['host' => 'db_test', 'port' => 3306, 'database' => $fixture, 'user' => $fixture, 'password' => $databasePassword];
 $server = null;
@@ -143,7 +143,7 @@ try {
             clearstatcache();
             usleep(250000);
         }
-        echo "Synthetic installer UI fixture stopped; removing only its temporary schema/user/files.\n";
+        echo "Sample installer UI fixture stopped; removing only its temporary schema/user/files.\n";
     } else {
     $response = installer_http($url, null, $cookie);
     installer_assert($response['status'] === 200 && str_contains($response['body'], 'Private setup key'), 'Host-controlled setup entry was not available.');
@@ -177,7 +177,7 @@ try {
     $state = pl_install_read_state();
     installer_assert(!str_contains(json_encode($state), $databasePassword), 'Database password was saved in durable setup state.');
     $bad = $input;
-    $bad['password'] = 'Synthetic invalid database password';
+    $bad['password'] = 'Sample invalid database password';
     $denied = installer_http($url, $bad, $cookie);
     installer_assert($denied['status'] === 503 && !str_contains($denied['body'], $bad['password']) && !str_contains($denied['body'], 'Stack trace'), 'Connection failure leaked credentials or was accepted.');
     for ($batch = 0; $batch < 40; $batch++) {

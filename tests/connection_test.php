@@ -13,7 +13,7 @@ putenv('PL_ALLOWED_ORIGINS=https://llm.bixisoft.com');
 function connection_fixture(): array
 {
     $f = ledger_fixture();
-    $issued = pl_create_personal_token($f['actor_id'], 'Synthetic private agent', [['company_id' => $f['company_id'], 'book_id' => $f['book_id']]]);
+    $issued = pl_create_personal_token($f['actor_id'], 'Sample private agent', [['company_id' => $f['company_id'], 'book_id' => $f['book_id']]]);
     return $f + $issued;
 }
 
@@ -47,11 +47,11 @@ function connection_keys(): void
 function connection_oauth_code(array $f): array
 {
     connection_keys();
-    $client = pl_client_registration(['client_name' => 'Synthetic OAuth client', 'redirect_uris' => ['http://127.0.0.1:19999/callback']]);
+    $client = pl_client_registration(['client_name' => 'Sample OAuth client', 'redirect_uris' => ['http://127.0.0.1:19999/callback']]);
     $verifier = bin2hex(random_bytes(32));
     $query = ['client_id' => $client['client_id'], 'redirect_uri' => $client['redirect_uris'][0], 'response_type' => 'code', 'scope' => 'ledger.read offline_access', 'state' => bin2hex(random_bytes(16)), 'code_challenge' => rtrim(strtr(base64_encode(hash('sha256', $verifier, true)), '+/', '-_'), '='), 'code_challenge_method' => 'S256', 'resource' => pl_connection_resource()];
     $authorization = pl_oauth_authorize_validate($query);
-    $connection = pl_create_connection($f['actor_id'], $client['client_id'], 'Synthetic OAuth grant', [['company_id' => $f['company_id'], 'book_id' => $f['book_id']]], 'oauth', 'ledger.read offline_access');
+    $connection = pl_create_connection($f['actor_id'], $client['client_id'], 'Sample OAuth grant', [['company_id' => $f['company_id'], 'book_id' => $f['book_id']]], 'oauth', 'ledger.read offline_access');
     $repo = new PlOAuthRepositories();
     $repo->connectionId = $connection['id'];
     $authorization->setUser(new PlOAuthUser($f['actor_id']));
@@ -99,7 +99,7 @@ test('report-only personal and OAuth grants enforce the same API and MCP operati
         foreach (['accounts','transactions','general-journals'] as $operation) {
             assert_throws(fn()=>pl_integration_response('/api/v1/'.$operation, connection_request('/api/v1/'.$operation,'GET',$token,$scope)), DomainException::class, 'summary reports only');
         }
-        $meta = ['io.modelcontextprotocol/protocolVersion'=>'2026-07-28','io.modelcontextprotocol/clientCapabilities'=>new stdClass(),'io.modelcontextprotocol/clientInfo'=>['name'=>'Synthetic scope verifier','version'=>'1']];
+        $meta = ['io.modelcontextprotocol/protocolVersion'=>'2026-07-28','io.modelcontextprotocol/clientCapabilities'=>new stdClass(),'io.modelcontextprotocol/clientInfo'=>['name'=>'Sample scope verifier','version'=>'1']];
         $message = ['jsonrpc'=>'2.0','id'=>1,'method'=>'tools/call','params'=>['_meta'=>$meta,'name'=>'ledger_accounts','arguments'=>$scope]];
         $request = connection_request('/mcp','POST',$token,[],json_encode($message))->withHeader('MCP-Protocol-Version','2026-07-28')->withHeader('Mcp-Method','tools/call')->withHeader('Mcp-Name','ledger_accounts');
         $body = json_decode((string)pl_integration_response('/mcp',$request)->getBody(),true);
@@ -116,7 +116,7 @@ test('report-only personal and OAuth grants enforce the same API and MCP operati
 test('every advertised business operation returns an authorized source or report', function (): void {
     $f = connection_fixture();
     $scope = ['company_id' => $f['company_id'], 'book_id' => $f['book_id']];
-    $draft = pl_save_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], ['date' => '2026-09-14', 'reference' => 'CATALOG-SOURCE', 'description' => 'Synthetic catalog coverage', 'creation_key' => bin2hex(random_bytes(16)), 'lines' => [['account_id' => $f['accounts']['1000'], 'debit' => '12.3400', 'credit' => '0'], ['account_id' => $f['accounts']['4000'], 'debit' => '0', 'credit' => '12.3400']]]);
+    $draft = pl_save_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], ['date' => '2026-09-14', 'reference' => 'CATALOG-SOURCE', 'description' => 'Sample catalog coverage', 'creation_key' => bin2hex(random_bytes(16)), 'lines' => [['account_id' => $f['accounts']['1000'], 'debit' => '12.3400', 'credit' => '0'], ['account_id' => $f['accounts']['4000'], 'debit' => '0', 'credit' => '12.3400']]]);
     $posted = pl_post_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], $draft['revision']);
     foreach (pl_read_catalog() as $operation => $definition) {
         $args = $operation === 'companies' ? [] : $scope;
@@ -153,7 +153,7 @@ test('machine reads match browser money and continue exact running balances acro
     assert_same('0.0025', $second['page_opening_balance']);
     assert_same('0.0032', $second['closing_balance']);
     $journal = pl_read_operation($f['connection']['id'], 'journal', $scope + ['journal_id' => $first['movements'][0]['journal_id']]);
-    assert_same('synthetic-receipt', $journal['data']['source_reference']);
+    assert_same('sample-receipt', $journal['data']['source_reference']);
     assert_true(!str_contains(json_encode($journal), 'idempotency_key'));
     assert_throws(fn () => pl_read_operation($f['connection']['id'], 'execute_sql', $scope), DomainException::class);
     assert_throws(fn () => pl_read_operation($f['connection']['id'], 'trial_balance', $scope + ['as_of' => '2026-02-30']), DomainException::class);
@@ -211,7 +211,7 @@ test('metadata rejects private addresses and CORS allows only explicit origins a
 
 test('MCP handshake discovers read tools and session IDs cannot cross connections', function (): void {
     $f = connection_fixture();
-    $body = json_encode(['jsonrpc' => '2.0', 'id' => 1, 'method' => 'initialize', 'params' => ['protocolVersion' => '2025-11-25', 'capabilities' => new stdClass(), 'clientInfo' => ['name' => 'PHP Ledger synthetic protocol test', 'version' => '1']]]);
+    $body = json_encode(['jsonrpc' => '2.0', 'id' => 1, 'method' => 'initialize', 'params' => ['protocolVersion' => '2025-11-25', 'capabilities' => new stdClass(), 'clientInfo' => ['name' => 'PHP Ledger sample protocol test', 'version' => '1']]]);
     $response = pl_integration_response('/mcp', connection_request('/mcp', 'POST', $f['token'], [], $body));
     assert_same(200, $response->getStatusCode(), 'Handshake initialize: ' . substr((string) $response->getBody(), 0, 1200));
     $session = $response->getHeaderLine('Mcp-Session-Id');
@@ -230,7 +230,7 @@ test('MCP handshake discovers read tools and session IDs cannot cross connection
 test('MCP 2026 per-request discovery and tool reads agree with API and reject mixed versions', function (): void {
     $f = connection_fixture();
     pl_post_journal($f['actor_id'], $f['company_id'], $f['book_id'], ledger_payload($f, '123.4567'));
-    $meta = ['io.modelcontextprotocol/protocolVersion' => '2026-07-28', 'io.modelcontextprotocol/clientCapabilities' => new stdClass(), 'io.modelcontextprotocol/clientInfo' => ['name' => 'Synthetic modern MCP test', 'version' => '1']];
+    $meta = ['io.modelcontextprotocol/protocolVersion' => '2026-07-28', 'io.modelcontextprotocol/clientCapabilities' => new stdClass(), 'io.modelcontextprotocol/clientInfo' => ['name' => 'Sample modern MCP test', 'version' => '1']];
     $message = ['jsonrpc' => '2.0', 'id' => 10, 'method' => 'server/discover', 'params' => ['_meta' => $meta]];
     $request = connection_request('/mcp', 'POST', $f['token'], [], json_encode($message))->withHeader('MCP-Protocol-Version', '2026-07-28')->withHeader('Mcp-Method', 'server/discover');
     $response = pl_integration_response('/mcp', $request);
@@ -297,7 +297,7 @@ test('OAuth standard revocation binds the client and refresh scope can only narr
 test('client metadata renewal never revives old grants and expiry caps new grants', function (): void {
     $f = ledger_fixture();
     $id = 'https://client.example/' . bin2hex(random_bytes(16)) . '.json';
-    $metadata = ['client_id' => $id, 'client_name' => 'Synthetic metadata client', 'redirect_uris' => ['https://client.example/callback']];
+    $metadata = ['client_id' => $id, 'client_name' => 'Sample metadata client', 'redirect_uris' => ['https://client.example/callback']];
     pl_client_registration($metadata, $id);
     DB::update('pl_connection_clients', ['expires_at' => gmdate('Y-m-d H:i:s', time() + 60)], 'client_id = %s', $id);
     $grant = pl_create_connection($f['actor_id'], $id, 'Metadata grant', [['company_id' => $f['company_id'], 'book_id' => $f['book_id']]], 'oauth');
@@ -439,7 +439,7 @@ test('standalone STDIO bridge discovers tools reads both protocols and reports r
             assert_same($message['id'], $response['id']);
             return $response;
         };
-        $initialized = $call(['jsonrpc' => '2.0', 'id' => 1, 'method' => 'initialize', 'params' => ['protocolVersion' => '2025-11-25', 'capabilities' => new stdClass(), 'clientInfo' => ['name' => 'Synthetic bridge acceptance', 'version' => '1']]]);
+        $initialized = $call(['jsonrpc' => '2.0', 'id' => 1, 'method' => 'initialize', 'params' => ['protocolVersion' => '2025-11-25', 'capabilities' => new stdClass(), 'clientInfo' => ['name' => 'Sample bridge acceptance', 'version' => '1']]]);
         assert_same('2025-11-25', $initialized['result']['protocolVersion'] ?? null);
         fwrite($pipes[0], json_encode(['jsonrpc' => '2.0', 'method' => 'notifications/initialized']) . "\n");
         $listed = $call(['jsonrpc' => '2.0', 'id' => 2, 'method' => 'tools/list']);

@@ -1,7 +1,7 @@
-"""Exercise the local browser routes using an isolated synthetic company.
+"""Exercise the local browser routes using an isolated sample company.
 
 Requires PL_HTTP_EMAIL and PL_HTTP_PASSWORD in the caller's environment. Uses only
-http://127.0.0.1:18200, keeps cookies in memory, and leaves its synthetic company
+http://127.0.0.1:18200, keeps cookies in memory, and leaves its sample company
 for inspection. The optional period check changes only that company's period and
 reopens it in a finally block; it never resets or deletes any database.
 """
@@ -185,7 +185,7 @@ def totals(page: Page) -> tuple[Decimal, Decimal]:
 
 def set_own_period(company_id: int, book_id: int, company_name: str, date: str, status: str) -> None:
     if status not in {"open", "closed"} or not company_name.startswith("HTTP Acceptance "):
-        raise RuntimeError("Period check refused an unrecognized synthetic scope.")
+        raise RuntimeError("Period check refused an unrecognized sample scope.")
     name64 = base64.b64encode(company_name.encode()).decode("ascii")
     php = f'''<?php
 require 'www/phpledger/includes/bootstrap.php';
@@ -193,18 +193,18 @@ if (getenv('PL_ENV') !== 'local' || getenv('PL_DB_NAME') !== 'phpledger' || gete
 $companyId = {company_id}; $bookId = {book_id}; $expectedName = base64_decode('{name64}');
 pl_ledger_transaction(function () use ($companyId, $bookId, $expectedName): void {{
     $company = DB::queryFirstRow('SELECT id, name, created_by, is_sample FROM pl_companies WHERE id = %i', $companyId);
-    if (!$company || $company['name'] !== $expectedName || (int) $company['is_sample'] !== 0) {{ throw new RuntimeException('Synthetic company scope mismatch.'); }}
+    if (!$company || $company['name'] !== $expectedName || (int) $company['is_sample'] !== 0) {{ throw new RuntimeException('Sample company scope mismatch.'); }}
     pl_require_company_access((int) $company['created_by'], $companyId, true);
     pl_ledger_book($companyId, $bookId, true);
     $period = DB::queryFirstRow('SELECT id, status FROM pl_periods WHERE company_id = %i AND book_id = %i AND start_date <= %s AND end_date >= %s FOR UPDATE', $companyId, $bookId, '{date}', '{date}');
-    if (!$period) {{ throw new RuntimeException('Synthetic period not found.'); }}
+    if (!$period) {{ throw new RuntimeException('Sample period not found.'); }}
     DB::update('pl_periods', ['status' => '{status}'], 'id = %i AND company_id = %i AND book_id = %i', $period['id'], $companyId, $bookId);
 }});
-echo 'Scoped synthetic period {status}.';
+echo 'Scoped sample period {status}.';
 '''
     result = subprocess.run(["docker", "compose", "exec", "-T", "web", "php"], input=php, text=True, cwd=REPO, capture_output=True, timeout=30)
     if result.returncode != 0:
-        raise RuntimeError(f"Scoped synthetic period {status} command failed; review the local service logs.")
+        raise RuntimeError(f"Scoped sample period {status} command failed; review the local service logs.")
 
 
 def run(skip_period_lock: bool) -> dict:
@@ -256,12 +256,12 @@ def run(skip_period_lock: bool) -> dict:
     company_id = int(draft_form.fields["company_id"])
     book_id = int(draft_form.fields["book_id"])
     expense_account = next(option["value"] for option in draft_form.options["category_account_id"] if option.get("data-category-kind") == "expense")
-    injected_name = "HTTP <script>alert('synthetic')</script>"
-    values = {"kind": "expense", "date": date, "amount": "not-a-number", "category_account_id": expense_account, "counterparty": injected_name, "reference": "HTTP-" + uuid.uuid4().hex[:8], "memo": "Preserve this synthetic input after validation."}
+    injected_name = "HTTP <script>alert('sample')</script>"
+    values = {"kind": "expense", "date": date, "amount": "not-a-number", "category_account_id": expense_account, "counterparty": injected_name, "reference": "HTTP-" + uuid.uuid4().hex[:8], "memo": "Preserve this sample input after validation."}
     invalid = session.submit(draft_form, values)
     invalid_form = invalid.markup.form_for("/transactions/save")
     check(invalid.status == 422 and all(invalid_form.fields.get(key) == value for key, value in values.items()), "Invalid save preserves entered values")
-    check("<script>alert('synthetic')</script>" not in invalid.body, "Retained untrusted text is escaped")
+    check("<script>alert('sample')</script>" not in invalid.body, "Retained untrusted text is escaped")
     saved = session.submit(invalid_form, {"amount": "125.50"})
     require_ok(saved, "Save draft")
     post_form = saved.markup.form_for("/transactions/post")
@@ -295,7 +295,7 @@ def run(skip_period_lock: bool) -> dict:
     bad_reversal = session.submit(reversal_form, {"date": "2000-01-01", "reason": "Preserve this reversal explanation."})
     retry_reversal = bad_reversal.markup.form_for("/transactions/reverse")
     check(bad_reversal.status == 422 and retry_reversal.fields.get("date") == "2000-01-01" and retry_reversal.fields.get("reason") == "Preserve this reversal explanation.", "Invalid reversal retains its date and reason")
-    reversed_page = session.submit(retry_reversal, {"date": date, "reason": "Synthetic HTTP acceptance correction."})
+    reversed_page = session.submit(retry_reversal, {"date": date, "reason": "Sample HTTP acceptance correction."})
     require_ok(reversed_page, "Reversal")
     check("status=reversed" in reversed_page.url, "Linked reversal preserves the original transaction")
     reversal_journal = session.request(reversed_page.markup.link_for("/journals/detail", "linked reversal"))
@@ -327,7 +327,7 @@ def run(skip_period_lock: bool) -> dict:
     check(logout.status == 200 and urlparse(logout.url).path == "/login", "Logout returns to sign-in")
     protected = session.request("/transactions")
     check(urlparse(protected.url).path == "/login", "Logged-out session cannot read transactions")
-    return {"passed": len(checks), "failed": 0, "company_id": company_id, "book_id": book_id, "company_name": company_name, "document_id": document_id, "period_lock_checked": not skip_period_lock, "target": ORIGIN, "data": "Synthetic company retained; its tested period is open."}
+    return {"passed": len(checks), "failed": 0, "company_id": company_id, "book_id": book_id, "company_name": company_name, "document_id": document_id, "period_lock_checked": not skip_period_lock, "target": ORIGIN, "data": "Sample company retained; its tested period is open."}
 
 
 if __name__ == "__main__":

@@ -34,8 +34,8 @@ The package and checksum were downloaded again from the public release; their ha
 | Actual platform/dependencies | `composer check-platform-reqs` and manifest validation passed; deliberate exact-pin warnings retained; dependency audit reported no known advisories |
 | Final ZIP fresh install | Passed independently on PHP 8.2.33 and 8.3.33; eleven receipts; trial-balance debit/credit both `1000.0000` |
 | Final ZIP upgrades | Actual 0.1.4 and 0.1.5 packages upgraded to this ZIP on both runtimes; **four upgrade cases**, zero new migrations; exact trial balance and all prior receipts preserved |
-| Restoration | CI restored **27 tables, 35 guards and 11 receipts** with matching definitions/data checksums; 2,352 synthetic rows on 8.2/8.3 and 2,349 on 8.4 |
-| Restricted demo test | Synthetic isolation, concurrent reset lock, CSRF, posting/reversal, capacity, generation expiry and denied administrative/destructive actions passed on the separate local maintenance database |
+| Restoration | CI restored **27 tables, 35 guards and 11 receipts** with matching definitions/data checksums; 2,352 sample rows on 8.2/8.3 and 2,349 on 8.4 |
+| Restricted demo test | Sample isolation, concurrent reset lock, CSRF, posting/reversal, capacity, generation expiry and denied administrative/destructive actions passed on the separate local maintenance database |
 | Website build | **18 pages, zero errors, zero warnings** in the clean maintenance worktree |
 | Live website browser | Eight routes at **1440, 768 and 390px**: 24 layouts, HTTP 200, no horizontal overflow or JavaScript errors; current PHP/version/licence/direction copy asserted |
 | Live demo without JavaScript | Six named POS quantity inputs at all three widths; 9.00 sample sale, 10.00 illustrative cash and 1.00 change; posted journal drilldown; bank 875.00 + sale 9.00 = **884.00** |

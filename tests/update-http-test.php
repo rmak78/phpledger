@@ -29,13 +29,13 @@ pl_update_write($root . '/vendor/sergeytsalkov/meekrodb/db.class.php', (string) 
 pl_update_checkpoint($root . '/PACKAGE-MANIFEST.json', ['version' => '0.6.0-preview', 'files' => []]);
 $operator = bin2hex(random_bytes(32)); pl_update_write($private . '/operator.key', $operator);
 $key = openssl_pkey_new(['private_key_bits' => 3072, 'private_key_type' => OPENSSL_KEYTYPE_RSA]);
-if (!$key) { throw new RuntimeException('Synthetic signing fixture unavailable.'); }
+if (!$key) { throw new RuntimeException('Sample signing fixture unavailable.'); }
 pl_update_write($private . '/publisher.pem', openssl_pkey_get_details($key)['key']);
 $port = random_int(20000, 50000); $base = 'http://127.0.0.1:' . $port;
 $environment = array_replace(getenv(), ['PL_ENV' => 'test', 'PL_INSTALL_DIRECTORY' => $private, 'PL_INSTALL_CONFIG_PATH' => $root . '/www/phpledger/includes/config.local.php']);
 $log = $fixture . '/server.log';
 $server = proc_open([PHP_BINARY, '-S', '127.0.0.1:' . $port, '-t', $root . '/www/phpledger/public'], [0 => ['pipe', 'r'], 1 => ['file', $log, 'a'], 2 => ['file', $log, 'a']], $pipes, $root, $environment);
-if (!is_resource($server)) { throw new RuntimeException('Synthetic HTTP server unavailable.'); }
+if (!is_resource($server)) { throw new RuntimeException('Sample HTTP server unavailable.'); }
 fclose($pipes[0]); $cookie = '';
 $request = static function (string $path, ?string $body = null, string $type = 'application/x-www-form-urlencoded') use ($base, &$cookie): array {
     $headers = ['Connection: close']; if ($cookie !== '') { $headers[] = 'Cookie: ' . $cookie; }
@@ -68,14 +68,14 @@ try {
     $check($status === 422, 'company authority cannot authenticate as installation operator');
     [$status, $body] = $request('/maintenance.php', http_build_query(['action' => 'authenticate', 'operator_key' => $operator, 'csrf' => $csrf]));
     $check($status === 200 && !str_contains($body, $operator), 'host proof authenticates without reflecting its secret');
-    $files = ['www/phpledger/public/maintenance.php' => $loader, 'www/phpledger/public/index.php' => '<?php echo "updated";', 'www/phpledger/includes/bootstrap.php' => '<?php // synthetic', 'vendor/autoload.php' => '<?php // synthetic', 'PACKAGE-MANIFEST.json' => '{"version":"0.8.0-preview","files":[]}'];
+    $files = ['www/phpledger/public/maintenance.php' => $loader, 'www/phpledger/public/index.php' => '<?php echo "updated";', 'www/phpledger/includes/bootstrap.php' => '<?php // sample', 'vendor/autoload.php' => '<?php // sample', 'PACKAGE-MANIFEST.json' => '{"version":"0.8.0-preview","files":[]}'];
     $archive = $fixture . '/release.zip'; $zip = new ZipArchive(); $zip->open($archive, ZipArchive::CREATE); $inventory = [];
     foreach ($files as $path => $data) { $zip->addFromString('phpledger-0.8.0-preview/' . $path, $data); $inventory[] = ['path' => $path, 'bytes' => strlen($data), 'sha256' => hash('sha256', $data)]; }
     $zip->close();
     $payload = json_encode(['schema' => 1, 'version' => '0.8.0-preview', 'channel' => 'preview', 'min_php' => '8.2.0', 'archive_bytes' => filesize($archive), 'archive_sha256' => hash_file('sha256', $archive), 'files' => $inventory], JSON_THROW_ON_ERROR);
     openssl_sign($payload, $signature, $key, OPENSSL_ALGO_SHA256);
     $envelope = json_encode(['payload' => base64_encode($payload), 'signature' => base64_encode($signature)], JSON_THROW_ON_ERROR);
-    $boundary = 'synthetic-' . bin2hex(random_bytes(8)); $body = '';
+    $boundary = 'sample-' . bin2hex(random_bytes(8)); $body = '';
     foreach (['csrf' => $csrf, 'action' => 'begin', 'operator_key' => $operator, 'channel' => 'preview', 'source' => 'upload'] as $name => $value) {
         $body .= "--$boundary\r\nContent-Disposition: form-data; name=\"$name\"\r\n\r\n$value\r\n";
     }
@@ -108,7 +108,7 @@ try {
     $check($state['phase'] === 'restored' && !is_file($private . '/updates/active.json')
         && file_get_contents($root . '/www/phpledger/includes/bootstrap.php') === '<?php // original working fixture'
         && (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_schema_migrations') === 1, 'bad new bootstrap automatically restores matched code and real database before reopening');
-    // Run the real current bootstrap in a separate fresh HTTP probe, against only this synthetic DB.
+    // Run the real current bootstrap in a separate fresh HTTP probe, against only this sample DB.
     pl_update_write($root . '/www/phpledger/includes/bootstrap.php', '<?php require ' . var_export($repository . '/www/phpledger/includes/bootstrap.php', true) . ';');
     $state['phase'] = 'runtime'; $state['inflight'] = false; pl_update_checkpoint($operation . '/state.json', $state);
     pl_update_checkpoint($private . '/updates/active.json', ['id' => $id]);
@@ -132,9 +132,9 @@ try {
     [$status] = $request('/maintenance.php', http_build_query(['action' => 'continue', 'csrf' => $csrf]));
     $check($status === 422, 'rotating the host key revokes an authenticated operator session');
     for ($attempt = 0; $attempt < 10; $attempt++) {
-        $request('/maintenance.php', http_build_query(['action' => 'authenticate', 'operator_key' => 'synthetic-guess-' . $attempt, 'csrf' => $csrf]));
+        $request('/maintenance.php', http_build_query(['action' => 'authenticate', 'operator_key' => 'sample-guess-' . $attempt, 'csrf' => $csrf]));
     }
-    [$status, $body] = $request('/maintenance.php', http_build_query(['action' => 'authenticate', 'operator_key' => 'synthetic-guess-final', 'csrf' => $csrf]));
+    [$status, $body] = $request('/maintenance.php', http_build_query(['action' => 'authenticate', 'operator_key' => 'sample-guess-final', 'csrf' => $csrf]));
     $check($status === 422 && str_contains($body, 'Too many installation operator key attempts'), 'remote operator key guessing is bounded');
     echo "Installation update HTTP authority, CSRF, signed upload, maintenance barrier and independent recovery checks passed.\n";
 } finally {

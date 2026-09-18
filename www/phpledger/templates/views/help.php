@@ -27,7 +27,7 @@
     </div>
     <details class="rounded-panel border border-border bg-surface"><summary class="cursor-pointer px-4 py-3 text-sm font-semibold">What this release includes</summary><div class="border-t border-border p-4 text-sm">
         <p>Essential setup, a country-neutral account template, one functional currency per company, receipts and expenses, general journals, invoices and bills with settlement and ageing, purchase orders and receiving, inventory, cash POS, reports, linked reversals, opening cutover, period administration, and bank CSV reconciliation.</p>
-        <p>Detailed historical journal imports, XLSX import, foreign-currency revaluation, country-specific tax filing, and production retail or restaurant features remain future work. Sample histories are synthetic scenarios; they do not certify suitability for an industry or jurisdiction.</p>
+        <p>Detailed historical journal imports, XLSX import, foreign-currency revaluation, country-specific tax filing, and production retail or restaurant features remain future work. Sample histories are sample scenarios; they do not certify suitability for an industry or jurisdiction.</p>
         <p class="muted">If an installation already contains foundation records, an owner or accountant can review the existing account mappings and balances. That review preserves the old records and cannot be used to skip missing opening data.</p>
     </div></details>
     <details class="rounded-panel border border-border bg-surface"><summary class="cursor-pointer px-4 py-3 text-sm font-semibold">Choose the right starting point</summary><div class="border-t border-border p-4 text-sm">

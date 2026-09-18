@@ -120,7 +120,7 @@ test('closed periods and inactive accounts reject general posting and preserve t
 
 test('audit failure rolls back journal source linkage and all financial effects', function (): void {
     $f = ledger_fixture(); $draft = pl_save_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], core_general_input($f));
-    DB::query("CREATE TRIGGER pl_core_test_fail BEFORE INSERT ON pl_core_audit FOR EACH ROW BEGIN IF NEW.book_id = %i AND NEW.action = 'posted' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Synthetic audit failure'; END IF; END", $f['book_id']);
+    DB::query("CREATE TRIGGER pl_core_test_fail BEFORE INSERT ON pl_core_audit FOR EACH ROW BEGIN IF NEW.book_id = %i AND NEW.action = 'posted' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Sample audit failure'; END IF; END", $f['book_id']);
     try {
         assert_throws(fn () => pl_post_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], 1));
         assert_same(null, pl_get_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'])['journal_id']);

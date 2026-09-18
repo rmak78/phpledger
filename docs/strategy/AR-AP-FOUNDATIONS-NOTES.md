@@ -35,7 +35,7 @@ Concurrent website/content work occupies different files and remains outside the
 
 ## Authorized publication — 16 September 2026
 
-The 0.3.0-preview package is built from `2d8f4417229f8472b2112e941f9c5f439937eed4`. Its hosted synthetic demo upgrade rehearsed the actual frozen backup, preserved original fields/receipts and verified permanent-reset-user view definers with restricted web reads. The real 21:00 UTC reset recreated all 17 receipts and 62 guards. The observer's transient-database timing limit is retained in the publication record rather than described as a completed bearer-token replay test.
+The 0.3.0-preview package is built from `2d8f4417229f8472b2112e941f9c5f439937eed4`. Its hosted sample demo upgrade rehearsed the actual frozen backup, preserved original fields/receipts and verified permanent-reset-user view definers with restricted web reads. The real 21:00 UTC reset recreated all 17 receipts and 62 guards. The observer's transient-database timing limit is retained in the publication record rather than described as a completed bearer-token replay test.
 
 The separate website work was taken over with explicit owner authorization, completed by three parallel content workstreams, reviewed and published through the existing static lane. A separately active `codex/owner-questions-ar-ap` worktree is preserved during cleanup; it is not folded into the 0.3.0 package.
 

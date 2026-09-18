@@ -22,7 +22,7 @@ Ignored local browser evidence: `output/playwright/running-balances/before/` and
 
 ## Release preparation
 
-The existing public demo is a separate synthetic database and runtime. A fresh read-only SSH preflight verified live 0.1.2 at 17 tables, 13 guard triggers and six unchanged migration receipts. The additive upgrade installs the complete eleven-file chain, including both distinct 006 identities, without renumbering or changing applied checksums; expected totals are 27 tables and 35 guards.
+The existing public demo is a separate sample database and runtime. A fresh read-only SSH preflight verified live 0.1.2 at 17 tables, 13 guard triggers and six unchanged migration receipts. The additive upgrade installs the complete eleven-file chain, including both distinct 006 identities, without renumbering or changing applied checksums; expected totals are 27 tables and 35 guards.
 
 Deployment preparation preserves the database container/volume and exact compatible PHP image, stops web/scheduler writes for backup and migration, verifies preserved data, then uses the established isolated demo reset so new visitor samples receive their enabled POS module. Temporary demo sessions are invalidated by that normal sample refresh. Private backups and recovery helpers stay outside published source. The website is staged as a separate static release.
 

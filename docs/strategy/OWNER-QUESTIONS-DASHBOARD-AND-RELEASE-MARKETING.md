@@ -152,10 +152,10 @@ Before a capability is marked as available:
 - opening balances and imported history are reconciled;
 - figures drill down to immutable source and journal records;
 - browser checks cover desktop, tablet, and mobile layouts;
-- representative synthetic businesses exercise normal, empty, overdue, corrected, and failed states;
+- representative sample businesses exercise normal, empty, overdue, corrected, and failed states;
 - independent accounting/security review and supported-host checks are recorded where relevant;
 - documentation, demo scope, release notes, and marketing copy agree;
-- production status is reported separately from local and synthetic evidence.
+- production status is reported separately from local and sample evidence.
 
 Passing technical tests alone is not accounting sign-off or production readiness.
 
@@ -174,7 +174,7 @@ Every implementation release produces a marketing pack as part of release comple
 9. a call to action such as download, demo, guide, pilot, or support;
 10. owner approval before publication or sending.
 
-The press release must state what changed, why it matters, what users can do now, what remains in development, and where the release can be obtained. It must not convert a roadmap item, research note, synthetic demo, or technical test into a production capability claim.
+The press release must state what changed, why it matters, what users can do now, what remains in development, and where the release can be obtained. It must not convert a roadmap item, research note, sample demo, or technical test into a production capability claim.
 
 ## Campaign narrative
 

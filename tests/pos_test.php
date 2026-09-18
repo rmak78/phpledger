@@ -5,7 +5,7 @@ function pos_fixture(): array
 {
     $f = ledger_fixture();
     $manifest = pl_module_registry()['pos-showcase'];
-    pl_set_company_module($f['actor_id'], $f['company_id'], 'pos-showcase', true, 0, $manifest['digest'], 'Synthetic POS test', 'enable-pos');
+    pl_set_company_module($f['actor_id'], $f['company_id'], 'pos-showcase', true, 0, $manifest['digest'], 'Sample POS test', 'enable-pos');
     return $f;
 }
 
@@ -42,7 +42,7 @@ test('POS review prices the cart exactly without posting and matches the confirm
     assert_same($quote['catalog_id'], $sale['catalog_id']);
     assert_same($quote['catalog_version'], $sale['catalog_version']);
     assert_same($f['actor_id'], $sale['created_by']);
-    assert_same('Synthetic ledger tester', $sale['cashier_name']);
+    assert_same('Sample ledger tester', $sale['cashier_name']);
     assert_same('document:' . $sale['document_id'], $sale['document']['journal']['source_reference']);
     assert_same($f['actor_id'], (int) DB::queryFirstField('SELECT created_by FROM pl_documents WHERE id = %i', $sale['document_id']));
 });
@@ -168,7 +168,7 @@ test('POS enforces reader writer company book and opening-readiness boundaries',
     assert_throws(fn () => pl_checkout_pos($f['actor_id'], $f['company_id'], $other['book_id'], pos_input()), DomainException::class);
     DB::insert('pl_company_members', ['company_id' => $f['company_id'], 'user_id' => $other['actor_id'], 'role' => 'viewer']);
     DB::update('pl_users', ['display_name'=>'Another receipt viewer'], 'id = %i', $other['actor_id']);
-    assert_same('Synthetic ledger tester', pl_get_pos_receipt($other['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id'])['cashier_name']);
+    assert_same('Sample ledger tester', pl_get_pos_receipt($other['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id'])['cashier_name']);
     assert_same($sale['document_id'], pl_get_pos_receipt($other['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id'])['document_id']);
     assert_throws(fn () => pl_checkout_pos($other['actor_id'], $f['company_id'], $f['book_id'], $input), DomainException::class);
     DB::update('pl_companies', ['setup_status' => 'opening_required'], 'id = %i', $other['company_id']);
@@ -185,9 +185,9 @@ test('POS closed-period failure rolls back its newly created source', function (
 
 test('POS snapshot failure rolls back receipt journal and lines together', function (): void {
     $f = pos_fixture();
-    DB::query("CREATE TRIGGER pl_test_pos_failure BEFORE INSERT ON pl_pos_sales FOR EACH ROW BEGIN IF NEW.book_id = " . $f['book_id'] . " THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Synthetic POS snapshot failure'; END IF; END");
+    DB::query("CREATE TRIGGER pl_test_pos_failure BEFORE INSERT ON pl_pos_sales FOR EACH ROW BEGIN IF NEW.book_id = " . $f['book_id'] . " THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Sample POS snapshot failure'; END IF; END");
     try {
-        assert_throws(fn () => pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], pos_input()), MeekroDBException::class, 'Synthetic POS snapshot failure');
+        assert_throws(fn () => pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], pos_input()), MeekroDBException::class, 'Sample POS snapshot failure');
         foreach (['pl_documents', 'pl_journals', 'pl_journal_lines', 'pl_pos_sales'] as $table) {
             assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM %b WHERE book_id = %i', $table, $f['book_id']));
         }
@@ -206,7 +206,7 @@ test('POS concurrent duplicate checkouts create one receipt and journal', functi
 
 test('POS linked reversal preserves price snapshots while reversing the report effect', function (): void {
     $f = pos_fixture(); $sale = pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], pos_input());
-    pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id'], '2026-09-14', 'Synthetic shop correction');
+    pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id'], '2026-09-14', 'Sample shop correction');
     $preserved = pl_get_pos_receipt($f['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id']);
     assert_same('reversed', $preserved['document']['status']);
     assert_same($sale['items'], $preserved['items']);

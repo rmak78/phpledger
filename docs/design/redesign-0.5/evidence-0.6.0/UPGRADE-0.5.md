@@ -35,6 +35,6 @@ seed/check runs then passed. No application behavior was changed to satisfy it.
 
 The verifier uses only a random `phpledger_preview_verify_...` schema on `db_test`,
 checks the effective host/account, and removes that schema after the check. It
-never runs against the development or hosted database. These synthetic cases
+never runs against the development or hosted database. These sample cases
 provide upgrade evidence; they do not assert coverage of every possible customer
 dataset, every PHP version, package installation or browser acceptance.

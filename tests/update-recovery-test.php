@@ -32,7 +32,7 @@ try {
     pl_update_operator($private, str_repeat('test-only-', 5));
     // Remote operator-key guessing is bounded; host command-line recovery stays available.
     for ($attempt = 0; $attempt < 10; $attempt++) {
-        try { pl_update_operator_attempt($private, 'synthetic-operator-guess-' . $attempt, time()); throw new LogicException('guess accepted'); }
+        try { pl_update_operator_attempt($private, 'sample-operator-guess-' . $attempt, time()); throw new LogicException('guess accepted'); }
         catch (DomainException $rejected) { /* expected */ }
     }
     update_reject(fn() => pl_update_operator_attempt($private, str_repeat('test-only-', 5), time()), 'bounded remote operator attempts refuse even a correct key');
@@ -45,14 +45,14 @@ try {
     $root = $fixture . '/app'; mkdir($root, 0700);
     $loader = file_get_contents(dirname(__DIR__) . '/www/phpledger/public/maintenance.php');
     $files = [
-        'vendor/autoload.php' => "<?php // synthetic\n", 'www/phpledger/includes/bootstrap.php' => "<?php // updated\n",
+        'vendor/autoload.php' => "<?php // sample\n", 'www/phpledger/includes/bootstrap.php' => "<?php // updated\n",
         'www/phpledger/public/index.php' => "<?php // updated entry\n", 'www/phpledger/public/maintenance.php' => $loader,
         'new-file.txt' => 'new release file',
     ];
     pl_update_write($root . '/www/phpledger/public/maintenance.php', $loader);
     pl_update_write($root . '/www/phpledger/includes/bootstrap.php', 'original code');
-    pl_update_write($root . '/www/phpledger/includes/config.local.php', '<?php return ["synthetic"=>true];');
-    pl_update_write($root . '/www/phpledger/storage/oauth/private.key', 'synthetic-private-key');
+    pl_update_write($root . '/www/phpledger/includes/config.local.php', '<?php return ["sample"=>true];');
+    pl_update_write($root . '/www/phpledger/storage/oauth/private.key', 'sample-private-key');
     pl_update_write($root . '/old-file.txt', 'old file');
     chmod($root . '/old-file.txt', 0750);
     chmod($root . '/www/phpledger/includes/bootstrap.php', 0640);
@@ -99,8 +99,8 @@ try {
     $symlinkMetadata = $verified; $symlinkMetadata['archive_bytes'] = filesize($symlinkArchive); $symlinkMetadata['archive_sha256'] = hash_file('sha256', $symlinkArchive);
     update_reject(fn() => pl_update_stage($symlinkArchive, $symlinkMetadata, $stage), 'signed symlink archive member rejected');
     $connect = static fn(string $root) => null;
-    $callbacks = ['connect' => $connect, 'backup_database' => static fn(string $path): array => ['synthetic' => true],
-        'migrate' => static fn(string $root): bool => throw new RuntimeException('synthetic migration failure'),
+    $callbacks = ['connect' => $connect, 'backup_database' => static fn(string $path): array => ['sample' => true],
+        'migrate' => static fn(string $root): bool => throw new RuntimeException('sample migration failure'),
         'restore_database' => static fn(string $path, array $receipt): bool => true, 'health' => static fn() => null];
     $state = pl_update_begin($root, $archive, $envelope, 'preview');
     update_check($state['phase'] === 'backup', 'Update did not enter backup.');
@@ -114,7 +114,7 @@ try {
     update_check(pl_update_step($root, $callbacks)['phase'] === 'restored', 'Failed migration did not recover.');
     update_check(file_get_contents($root . '/www/phpledger/includes/bootstrap.php') === 'original code', 'Original code not restored.');
     update_check(file_get_contents($root . '/old-file.txt') === 'old file' && !is_file($root . '/new-file.txt'), 'Old/new file restoration mismatch.');
-    update_check(file_get_contents($root . '/www/phpledger/storage/oauth/private.key') === 'synthetic-private-key', 'Private key lost.');
+    update_check(file_get_contents($root . '/www/phpledger/storage/oauth/private.key') === 'sample-private-key', 'Private key lost.');
     clearstatcache();
     update_check((fileperms($root . '/old-file.txt') & 0777) === 0750 && (fileperms($root . '/www/phpledger/includes/bootstrap.php') & 0777) === 0640
         && (fileperms($root . '/www/phpledger/storage/oauth/private.key') & 0777) === 0600, 'Original code and private-key permissions were not restored.');
@@ -124,7 +124,7 @@ try {
     pl_update_step($root, $callbacks); pl_update_step($root, $callbacks);
     $operation = $private . '/updates/' . $state['id']; $state = pl_update_json($operation . '/state.json');
     $state['inflight'] = true; pl_update_checkpoint($operation . '/state.json', $state);
-    $unavailable = array_replace($callbacks, ['restore_database' => static fn(): bool => throw new RuntimeException('synthetic outage')]);
+    $unavailable = array_replace($callbacks, ['restore_database' => static fn(): bool => throw new RuntimeException('sample outage')]);
     update_check(pl_update_step($root, $unavailable)['phase'] === 'recovering', 'Interrupted update did not hold maintenance.');
     update_check(is_file($private . '/updates/active.json'), 'Recovery outage reopened application.');
     update_check(pl_update_step($root, $callbacks)['phase'] === 'restored', 'Recovery did not resume when database returned.');

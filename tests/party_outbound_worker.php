@@ -12,7 +12,7 @@ try{
         $value=match($job['mode']){
             'party'=>pl_save_party($f['actor_id'],$f['company_id'],$f['book_id'],$job['input']),
             'contact'=>pl_save_contact($f['actor_id'],$f['company_id'],$f['book_id'],$job['party_id'],$job['input']),
-            'claim'=>pl_outbound_claim('synthetic',$f['company_id'],$f['book_id']),
+            'claim'=>pl_outbound_claim('sample',$f['company_id'],$f['book_id']),
             default=>throw new LogicException('Unknown foundation worker operation.'),
         };
         // SKIP LOCKED may transiently skip an ordered scan's candidates, including the
@@ -21,7 +21,7 @@ try{
             $claimDeadline=microtime(true)+3;
             while($value===null && microtime(true)<$claimDeadline){
                 usleep(10000);
-                $value=pl_outbound_claim('synthetic',$f['company_id'],$f['book_id']);
+                $value=pl_outbound_claim('sample',$f['company_id'],$f['book_id']);
             }
         }
         echo json_encode(['ok'=>true,'value'=>$value],JSON_THROW_ON_ERROR);

@@ -32,7 +32,7 @@ if (($argv[1] ?? '') === '--period-worker') {
 
 function period_input(string $key = 'create-period'): array
 {
-    return ['start_date' => '2027-01-01', 'end_date' => '2027-12-31', 'reason' => 'Synthetic next reporting year', 'request_key' => $key];
+    return ['start_date' => '2027-01-01', 'end_date' => '2027-12-31', 'reason' => 'Sample next reporting year', 'request_key' => $key];
 }
 
 function period_race(array $jobs): array
@@ -184,9 +184,9 @@ test('period administration denies demo calls even from direct service callers',
 test('period history is immutable and failed audit persistence rolls back status and revision', function (): void {
     $f = ledger_fixture();
     $trigger = 'pl_test_period_audit_' . bin2hex(random_bytes(5));
-    DB::query("CREATE TRIGGER %b BEFORE INSERT ON pl_period_actions FOR EACH ROW BEGIN IF NEW.reason = 'Synthetic audit storage failure' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Synthetic audit storage failure'; END IF; END", $trigger);
+    DB::query("CREATE TRIGGER %b BEFORE INSERT ON pl_period_actions FOR EACH ROW BEGIN IF NEW.reason = 'Sample audit storage failure' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Sample audit storage failure'; END IF; END", $trigger);
     try {
-        assert_throws(fn() => pl_change_period_status($f['actor_id'], $f['company_id'], $f['book_id'], $f['period_id'], 'closed', 1, 'Synthetic audit storage failure', 'failed-audit'), Throwable::class, 'storage failure');
+        assert_throws(fn() => pl_change_period_status($f['actor_id'], $f['company_id'], $f['book_id'], $f['period_id'], 'closed', 1, 'Sample audit storage failure', 'failed-audit'), Throwable::class, 'storage failure');
         $period = pl_list_periods($f['actor_id'], $f['company_id'], $f['book_id'])[0];
         assert_same('open', $period['status']);
         assert_same(1, (int) $period['revision']);

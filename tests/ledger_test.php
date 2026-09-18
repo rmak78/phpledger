@@ -4,15 +4,15 @@ declare(strict_types=1);
 function ledger_fixture(string $currency = 'USD', string $date = '2026-01-01', string $fiscalEnd = '12-31'): array
 {
     $suffix = bin2hex(random_bytes(8));
-    $actorId = pl_create_user('ledger-' . $suffix . '@example.test', 'Synthetic ledger tester', 'Synthetic-test-password-' . $suffix);
-    return ['actor_id' => $actorId] + pl_create_company($actorId, 'Synthetic company ' . $suffix, $currency, $date, $fiscalEnd);
+    $actorId = pl_create_user('ledger-' . $suffix . '@example.test', 'Sample ledger tester', 'Sample-test-password-' . $suffix);
+    return ['actor_id' => $actorId] + pl_create_company($actorId, 'Sample company ' . $suffix, $currency, $date, $fiscalEnd);
 }
 
 function ledger_payload(array $fixture, string $amount = '12.3400', ?string $key = null): array
 {
     return [
         'date' => '2026-09-14', 'currency' => 'USD', 'source_type' => 'receipt',
-        'source_reference' => 'synthetic-receipt', 'description' => 'Synthetic service receipt',
+        'source_reference' => 'sample-receipt', 'description' => 'Sample service receipt',
         'idempotency_key' => $key ?? bin2hex(random_bytes(16)),
         'lines' => [
             ['account_id' => $fixture['accounts']['1000'], 'debit' => $amount, 'credit' => '0'],
@@ -59,7 +59,7 @@ test('balanced receipt posts and report figures drill down to exact source lines
     $payload = ledger_payload($fixture, '9999999999999999.9999');
     $journal = pl_post_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $payload);
     assert_same(2, count($journal['lines']));
-    assert_same('synthetic-receipt', $journal['source_reference']);
+    assert_same('sample-receipt', $journal['source_reference']);
     assert_same('9999999999999999.9999', $journal['lines'][0]['debit']);
     $report = pl_trial_balance($fixture['actor_id'], $fixture['company_id'], $fixture['book_id']);
     assert_true($report['balanced']);
@@ -185,13 +185,13 @@ test('database refuses edits and deletion of posted headers and lines', function
 
 test('a storage failure on the second line rolls back header and first line', function (): void {
     $fixture = ledger_fixture();
-    $failureMarker = 'synthetic-failure-' . bin2hex(random_bytes(8));
+    $failureMarker = 'sample-failure-' . bin2hex(random_bytes(8));
     $trigger = 'pl_test_reject_line_' . bin2hex(random_bytes(6));
-    DB::query("CREATE TRIGGER %b BEFORE INSERT ON pl_journal_lines FOR EACH ROW BEGIN IF NEW.description = %s THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Synthetic storage failure'; END IF; END", $trigger, $failureMarker);
+    DB::query("CREATE TRIGGER %b BEFORE INSERT ON pl_journal_lines FOR EACH ROW BEGIN IF NEW.description = %s THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Sample storage failure'; END IF; END", $trigger, $failureMarker);
     try {
         $payload = ledger_payload($fixture);
         $payload['lines'][1]['description'] = $failureMarker;
-        assert_throws(fn() => pl_post_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $payload), Throwable::class, 'Synthetic storage failure');
+        assert_throws(fn() => pl_post_journal($fixture['actor_id'], $fixture['company_id'], $fixture['book_id'], $payload), Throwable::class, 'Sample storage failure');
         assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journals WHERE book_id = %i', $fixture['book_id']));
         assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_journal_lines WHERE book_id = %i', $fixture['book_id']));
         $payload['lines'][1]['description'] = 'Corrected draft';
@@ -203,12 +203,12 @@ test('a storage failure on the second line rolls back header and first line', fu
 
 test('outer rollback includes company creation and nested posting transaction', function (): void {
     $fixture = ledger_fixture();
-    $companyName = 'Rolled back synthetic company ' . bin2hex(random_bytes(8));
+    $companyName = 'Rolled back sample company ' . bin2hex(random_bytes(8));
     assert_throws(function () use ($fixture, $companyName): void {
         pl_ledger_transaction(function () use ($fixture, $companyName): void {
             $company = pl_create_company($fixture['actor_id'], $companyName, 'USD', '2026-01-01');
             pl_post_journal($fixture['actor_id'], $company['company_id'], $company['book_id'], ledger_payload($company));
-            throw new DomainException('Synthetic outer rollback');
+            throw new DomainException('Sample outer rollback');
         });
     }, DomainException::class, 'outer rollback');
     assert_same(0, (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_companies WHERE name = %s', $companyName));

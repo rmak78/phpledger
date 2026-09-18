@@ -19,7 +19,7 @@
  *             no @import, url(http, url(// or url(data: (E)
  *   images    alt present (E); width and height present (E); sizes when srcset (E); loading="lazy" after
  *             the first two images unless fetchpriority="high" (W)
- *   content   forbidden strings (E); a "synthetic" label on every page that shows /assets/screens/ (E);
+ *   content   forbidden strings (E); a "sample" label on every page that shows /assets/screens/ (E);
  *             JSON-LD parses and has no aggregateRating/review/interaction counts (E); two-fragment
  *             headings and banned words (W)
  *   sitemap   every URL maps to a file (E); indexable pages missing from the sitemap (W)
@@ -437,7 +437,7 @@ function checkPage(doc) {
     const m = html.match(pattern);
     if (m) error(page, 'forbidden-string', `${label}: "${m[0]}" near "${html.slice(Math.max(0, m.index - 40), m.index + m[0].length + 40).replace(/\s+/g, ' ')}"`);
   }
-  if (html.includes('/assets/screens/') && !/synthetic/i.test(doc.text)) error(page, 'synthetic-label', 'page shows product captures but never says "synthetic"');
+  if (html.includes('/assets/screens/') && !/sample/i.test(doc.text)) error(page, 'sample-label', 'page shows product captures but never says "sample"');
 
   stats.title = title;
   if (!isStub) {

@@ -23,7 +23,7 @@ The service reads within a shared-book transaction so concurrent posting cannot 
 | Viewports and visual review | Screenshots at 1440×1000, 768×1024, 390×844 and 320×740; no page-level horizontal overflow. Desktop and mobile screenshots visually inspected; the narrow account table scrolls inside its labelled, focusable region. |
 | Repository whitespace | `git diff --check` passed. No runtime JavaScript changed. |
 
-The browser fixture is a separate synthetic Willow Studio company: opening 1,000, receipt 200 and expense 125 give closing 1,075. A later 51-line synthetic receipt proves page carry-forward and closing 1,126. No customer data was used.
+The browser fixture is a separate sample Willow Studio company: opening 1,000, receipt 200 and expense 125 give closing 1,075. A later 51-line sample receipt proves page carry-forward and closing 1,126. No customer data was used.
 
 Repeatable commands from the isolated worktree:
 
@@ -34,7 +34,7 @@ docker run --rm --entrypoint php -v C:/phpledger/.cache/sprint03-pos:/work -v C:
 npx --yes --package @playwright/cli playwright-cli -s=phpledger-pos run-code --filename=.cache/pos-runtime/account-statement-browser.js
 ```
 
-Local-only evidence is retained in `.cache/pos-runtime/account-statement-tests.log`, `account-statement-browser.log`, and `output/playwright/account-statement-{desktop,tablet,mobile,narrow,page-two}.png`. These ignored artifacts and the browser's synthetic IDs are not portable release fixtures; the committed PHP regression cases create their own fixtures.
+Local-only evidence is retained in `.cache/pos-runtime/account-statement-tests.log`, `account-statement-browser.log`, and `output/playwright/account-statement-{desktop,tablet,mobile,narrow,page-two}.png`. These ignored artifacts and the browser's sample IDs are not portable release fixtures; the committed PHP regression cases create their own fixtures.
 
 ## Files and decisions
 

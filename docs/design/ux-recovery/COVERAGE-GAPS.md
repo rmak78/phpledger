@@ -64,13 +64,13 @@ Evidence group IDs below expand to exact paths, dimensions, capture URLs, hashes
 | `/reports/cash-forecast` | `50-cash-forecast` | Default manual scenario; changed/invalid-input/result states missing |
 | `/bank-reconciliation` | `50-bank-reconciliation` | Empty import entry only; populated matching flow remains a major gap |
 | `/periods` | `50-periods`; viewport details | Closed/open periods and history; create/close/reopen interactions missing |
-| `/tax` | `50-tax` | Synthetic manual code and exclusive setting; inclusive/error/history variants missing |
+| `/tax` | `50-tax` | Sample manual code and exclusive setting; inclusive/error/history variants missing |
 | `/modules` | `50-modules` | Enabled/disabled configuration visible; dependency impact and toggle results missing |
 | `/connections` | `50-connections` | Empty connection history; consent, credential and revocation states missing |
 | `/oauth/authorize` | `50-oauth-invalid` | **Invalid request only**; valid consent is uncaptured |
 | `/pos` | `19-pos` | Empty sample cart; broader cart/keyboard/disabled cases missing |
 | `/pos/review` | `20-pos-review` | One-item cash review; retry/stale/invalid variants missing |
-| `/pos/receipt` | `21-pos-receipt` | Actual local synthetic sale; print not invoked |
+| `/pos/receipt` | `21-pos-receipt` | Actual local sample sale; print not invoked |
 | `/sample-guide` | `22-sample-guide`, `28-starter-guide`; `29-keyboard-skip` | One historical guide plus starter; other historical guides not separately captured |
 | `/help` | `23-help` | Current page; stale feature copy is documented, not silently corrected |
 
@@ -97,7 +97,7 @@ Shared permission/scope, stale revision, duplicate action, empty/large-volume an
 
 ## New read-only account captures
 
-The independent `ux-reporting` session was reopened against the synthetic Cedar Studio company on port 18211. Only session/company selection and read-only navigation changed. No Create account, Save account or deactivation action was submitted. The session was closed after capture.
+The independent `ux-reporting` session was reopened against the sample Cedar Studio company on port 18211. Only session/company selection and read-only navigation changed. No Create account, Save account or deactivation action was submitted. The session was closed after capture.
 
 ### New account: clear fields, accountant choices precede the business name
 
@@ -125,7 +125,7 @@ The independent `ux-reporting` session was reopened against the synthetic Cedar 
 
 ## Nonvisual GET evidence
 
-Fresh read-only HTTP checks used the same local synthetic browser session. Safe summaries are embedded directly in the JSON inventory; no cookies, tokens, CSRF values or full response bodies are included.
+Fresh read-only HTTP checks used the same local sample browser session. Safe summaries are embedded directly in the JSON inventory; no cookies, tokens, CSRF values or full response bodies are included.
 
 | Surface | Observed result | What remains unverified |
 |---|---|---|
@@ -144,7 +144,7 @@ The eleven API read paths are companies, capabilities, accounts, transactions, g
 - Resolved every referenced accepted image, read its PNG dimensions and verified byte equality to its original output file. The inventory includes all 186 accepted current-run images and excludes prototype/rejected images.
 - Inspected all six new account captures; the other accepted images retain the explicit visual-review ownership in their source audits.
 - Validated JSON syntax, route/evidence references, image hashes, full-width group counts and local Markdown links. No application tests or PHP lint were needed for these documentation/evidence-only changes.
-- Earlier source audits include a saved synthetic journal draft and local practice POS sale. This coverage pass added **no financial or settings mutation**. It did not repeat those actions or treat them as blanket workflow proof.
+- Earlier source audits include a saved sample journal draft and local practice POS sale. This coverage pass added **no financial or settings mutation**. It did not repeat those actions or treat them as blanket workflow proof.
 - No application, migration, schema or test file changed; no raw secrets were exposed; no live application/provider calls or production changes were made; no files were staged or committed.
 
 The next review should select the P1 state sequences above, then test the accepted prototype's proposed interactions against those cases. A complete route map is a useful baseline; it is not usability acceptance, financial correctness, accounting review or accessibility conformance.

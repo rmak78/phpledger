@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 function starter_demo_fixture(): array
 {
-    $actor = pl_create_user('starter-demo-' . bin2hex(random_bytes(8)) . '@example.invalid', 'Synthetic starter visitor', bin2hex(random_bytes(24)));
-    $input = ['name' => 'Synthetic zero-balance playground', 'currency' => 'USD', 'start_date' => gmdate('Y') . '-01-01',
+    $actor = pl_create_user('starter-demo-' . bin2hex(random_bytes(8)) . '@example.invalid', 'Sample starter visitor', bin2hex(random_bytes(24)));
+    $input = ['name' => 'Sample zero-balance playground', 'currency' => 'USD', 'start_date' => gmdate('Y') . '-01-01',
         'fiscal_year_end' => '12-31', 'start_mode' => 'sample', 'sample_pack' => 'accounting-starter',
         'template_digest' => pl_starter_template()['digest']];
     $key = 'starter-demo:' . bin2hex(random_bytes(8));

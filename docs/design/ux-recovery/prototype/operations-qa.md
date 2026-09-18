@@ -2,7 +2,7 @@
 
 **Status: reviewed local mock; no remaining broken interaction or page overflow found in the tested scope.**
 
-Reviewed on 16 September 2026 in isolated Playwright session `ux-prototype-ops` at `http://127.0.0.1:18216/`. The prototype explicitly labels its synthetic, tab-memory behavior. This review checks visible interactions and layout; it does not validate backend accounting, persistence or permissions.
+Reviewed on 16 September 2026 in isolated Playwright session `ux-prototype-ops` at `http://127.0.0.1:18216/`. The prototype explicitly labels its sample, tab-memory behavior. This review checks visible interactions and layout; it does not validate backend accounting, persistence or permissions.
 
 ## Coverage and results
 

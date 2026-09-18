@@ -51,7 +51,7 @@ Before the first posting, changing the selected template still requires a fresh 
 
 Proposed first-import method: **unpaid documents supply AR/AP opening balances; the remaining opening trial balance excludes those same control lines**. The input trial balance is retained as the comparison authority, with explicit per-control reconciliation. Cutover date, currency, source account codes, source document IDs, original dates/due dates, outstanding amounts, and counterparties remain traceable. This is an opening transfer, not re-posting old sales, purchases, or tax.
 
-Worked synthetic example, with debit-positive/credit-negative source balances:
+Worked sample example, with debit-positive/credit-negative source balances:
 
 | Source cutover trial balance | Debit | Credit |
 |---|---:|---:|

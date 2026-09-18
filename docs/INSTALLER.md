@@ -20,7 +20,7 @@ An operator downloads the complete release ZIP, unpacks it and points the HTTPS 
 | 2. Database connection | Enter a dedicated empty database's host, port, name and credentials. Test connectivity, MySQL version/collation and required privileges. Reject an existing/unrecognized database. Explain how to create the database/user in a hosting panel. |
 | 3. Install | Show the target and package version for review, then run the existing versioned migrations through a guarded installer service. Display progress and safe error messages. Preserve complete filenames, checksums, locks and migration receipts. |
 | 4. Owner account | Create the initial sign-in account through the existing auth service. Use its current password rules; this is not a new global administrator role. |
-| 5. First business | Continue into existing onboarding: new business, reviewed existing-business opening/cutover, or a separate synthetic sample. Reuse currency, date, account-template and membership rules. Optional modules retain their existing defaults. |
+| 5. First business | Continue into existing onboarding: new business, reviewed existing-business opening/cutover, or a separate sample. Reuse currency, date, account-template and membership rules. Optional modules retain their existing defaults. |
 | 6. Finish | Verify schema/current identity, write the private installation completion state, disable installation access and open the application. Give backup and next-step guidance. Do not post a transaction into a real company as a test. |
 
 ## Architecture and boundaries
@@ -38,7 +38,7 @@ An operator downloads the complete release ZIP, unpacks it and points the HTTPS 
 
 Start with the current package profile: PHP 8.2+ (8.3 recommended); BCMath, PDO/PDO MySQL, mbstring, JSON and sessions; MySQL 8.4/InnoDB with the required collation; HTTPS and the exact public document root. The [hosting/runtime record](strategy/HOSTING-PHP-COMPATIBILITY.md) records the compatible lock and tested environments. MariaDB and arbitrary shared-hosting configurations are not implicitly supported.
 
-Verify fresh installation on Apache/PHP-FPM and Nginx/PHP-FPM hosting profiles where available, including a representative hosting-panel setup. Test missing extensions, wrong credentials, insufficient grants, wrong/nonempty database, unwritable configuration, interrupted migration, concurrent installation, CSRF, ownership failure, duplicate submission and access after completion. Confirm no private files can be downloaded. Compare CLI and browser-installed schemas/receipts and run existing scoped posting, report, permission and recovery checks against synthetic data.
+Verify fresh installation on Apache/PHP-FPM and Nginx/PHP-FPM hosting profiles where available, including a representative hosting-panel setup. Test missing extensions, wrong credentials, insufficient grants, wrong/nonempty database, unwritable configuration, interrupted migration, concurrent installation, CSRF, ownership failure, duplicate submission and access after completion. Confirm no private files can be downloaded. Compare CLI and browser-installed schemas/receipts and run existing scoped posting, report, permission and recovery checks against sample data.
 
 Check the six-step experience on desktop, tablet and mobile. Have a person unfamiliar with the repository complete installation from the release ZIP and document where assistance was required. Technical test success does not establish easy installation on all hosts.
 

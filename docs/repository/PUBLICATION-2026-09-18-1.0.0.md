@@ -25,7 +25,7 @@ The owner instructed same-day publication of the consolidated work as 1.0.0 on 1
 
 All four assets (both archives and both `.sha256` files) were downloaded anonymously from their public URLs after publication and matched the local artifacts; `sha256sum -c` passed for both archives. The media-kit checksum asset was re-uploaded once to correct a Windows line ending; the corrected asset is the one verified.
 
-The media kit contains README, announcement, social and e-mail drafts, a guided demo, FAQ, checksums and eight screenshots captured from the local 1.0.0 runtime with a synthetic "Northbridge Bookkeeping Demo" company (Home at 1440 and 390, invoice editor, ageing, profit and loss, bank reconciliation, Modules, and the browser installer's database step from a disposable unconfigured instance). No campaign was sent.
+The media kit contains README, announcement, social and e-mail drafts, a guided demo, FAQ, checksums and eight screenshots captured from the local 1.0.0 runtime with a sample "Northbridge Bookkeeping Demo" company (Home at 1440 and 390, invoice editor, ageing, profit and loss, bank reconciliation, Modules, and the browser installer's database step from a disposable unconfigured instance). No campaign was sent.
 
 **No signed update metadata is attached.** The official publisher signing key did not exist at publication (generating a long-lived private key on this machine was refused by the tooling's permission policy and is an owner action). The procedure, fingerprint conventions and the owner's key-generation command are in [RELEASE-SIGNING.md](../RELEASE-SIGNING.md). 1.0.0 is verified by checksum; later releases ship `phpledger-<version>.update.json`.
 

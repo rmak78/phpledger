@@ -38,7 +38,7 @@ Browser installation at `/install` checks host and database prerequisites, appli
 
 ## Security and operational boundaries
 
-Browser writes require CSRF protection; rendered content uses contextual escaping. The demo uses separate synthetic storage, visitor-scoped companies, capacity limits and hourly reset/session expiry. Account administration stays blocked there; saved general journals, posting and linked reversals operate within the visitor's books.
+Browser writes require CSRF protection; rendered content uses contextual escaping. The demo uses separate sample storage, visitor-scoped companies, capacity limits and hourly reset/session expiry. Account administration stays blocked there; saved general journals, posting and linked reversals operate within the visitor's books.
 
 Automated tests, fault-injection tests and exact-artifact install/upgrade/recovery checks back 1.0.0. Independent security review, qualified accounting review, supported hosting and observed user acceptance have not happened; they remain post-release commitments, not completed gates. Test results do not establish professional certification.
 

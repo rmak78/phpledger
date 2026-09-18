@@ -68,7 +68,7 @@ Module-gated items (POS, purchasing, inventory) show only when enabled — in th
 8. **POS** (full-screen, touch): product grid + categories + search on the left, cart with qty steppers/remove, totals, cash tendered/change, Checkout — all visible at 1024×768 without scrolling.
 9. **Home** — daily start page (not a KPI wall): needs-attention list (drafts to post, overdue invoices, bills due, unreconciled bank lines, setup readiness), cash & bank balances, receivable/payable due summary, quick actions, recent activity; each item links to its source. Only data the app can already compute (see `reports.php` overview + AR/AP ageing).
 
-## Sample data (synthetic, clearly labelled)
+## Sample data (sample, clearly labelled)
 
 Main sample business: **"Ravi Textile Traders"** (Sample), Primary book, **PKR**, owner "Ayesha Khan". Customers e.g. Lahore Fabric House, Bismillah Garments, Karachi Linen Co.; suppliers e.g. Faisalabad Yarn Mills, Sialkot Packaging, K-Electric (utilities), PTCL (internet). Numbering style from the app: `INV-000194`, `BILL-000041`, `EXP-000590`, `REC-000588`, `JRN-000112`, `PO-000017`, `GRN-000009`. Tax code sample "GST 18% (sample, manual)". Amounts realistic for a small PKR trader (e.g. invoice PKR 185,400.00). Dates around Sep 2026. Keep all numbers internally consistent (lines sum to totals, debits = credits, ageing buckets sum).
 

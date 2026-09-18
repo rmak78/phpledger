@@ -1,6 +1,6 @@
 # Business sample data
 
-Seven original, synthetic demonstration packs have been authored for the planned **Explore a sample business** journey. They are versioned JSON fixtures with expected accounting results, not executable seeders or installed business modules. No records have been loaded into an application database by this work.
+Seven original, sample demonstration packs have been authored for the planned **Explore a sample business** journey. They are versioned JSON fixtures with expected accounting results, not executable seeders or installed business modules. No records have been loaded into an application database by this work.
 
 The user requested restaurants, clubs, pharmacy, traders, distributors, shops and workshops. Repeated mentions of clubs are represented by one membership-club pack. A club here is a member-funded recreation business; no charity, tax exemption or particular legal form is assumed.
 
@@ -16,7 +16,7 @@ The user requested restaurants, clubs, pharmacy, traders, distributors, shops an
 | Retail shop | [retail-shop.json](../../resources/sample-data/retail-shop.json) | Counter sales, customer credit, stock, a credit-note return and counted cash |
 | Service workshop | [service-workshop.json](../../resources/sample-data/service-workshop.json) | Separate labour/parts income, a linked estimate/job, and customer property held for repair |
 
-Across the packs there are **28 synthetic contacts, 16 products/services, 42 opening/current documents, and 77 events**. The workshop also contains one embedded nonposting estimate and a customer-owned bicycle reference. These latter scenario fixtures are not included in the document count. Financial and stock quantities are intentionally small enough to check by hand. They represent a teaching month, not forecasts or realistic revenue claims for any industry.
+Across the packs there are **28 sample contacts, 16 products/services, 42 opening/current documents, and 77 events**. The workshop also contains one embedded nonposting estimate and a customer-owned bicycle reference. These latter scenario fixtures are not included in the document count. Financial and stock quantities are intentionally small enough to check by hand. They represent a teaching month, not forecasts or realistic revenue claims for any industry.
 
 ## Installation and onboarding contract
 
@@ -25,7 +25,7 @@ An administrator first installs PHP Ledger. Business onboarding should then offe
 A future demo loader must:
 
 1. Create a new, explicitly isolated demo company/book. Reject an existing real-company target. Show a persistent sample banner and never send notifications, payments or provider requests from demo contacts.
-2. Let the user choose one pack and base currency before creation. The current files use USD merely as a demonstration label, with no country selected. Re-labeling the synthetic fixture before creation is not currency conversion and must never modify an existing book's currency or posted data.
+2. Let the user choose one pack and base currency before creation. The current files use USD merely as a demonstration label, with no country selected. Re-labeling the sample fixture before creation is not currency conversion and must never modify an existing book's currency or posted data.
 3. Pin the pack version and reviewed chart-template version. Resolve semantic keys to company-owned account IDs before using the one central posting interface. Review the mapping and all totals before applying it. These keys are currently research candidates, not the six-account runtime proof's installed catalog.
 4. Import opening information through one approved cutover strategy, then add the sample period's events in date order, keeping stable source references and a durable import receipt. Retry must not duplicate records or postings.
 5. Compare the resulting trial balance, open-document totals, stock and deferred-income balances with `expected_reports`. A partial loader must clearly disclose unsupported scenarios and cannot claim it loaded the complete pack.
@@ -40,11 +40,11 @@ Opening stock and prepaid contracts similarly explain their opening control bala
 | Field | Meaning |
 |---|---|
 | `schema_version`, `pack_version`, `pack_id` | Exact version and stable business identity; do not silently alter a loaded snapshot |
-| `demo_only`, `synthetic`, `status`, `isolation` | Explicit candidate/demo boundary and prohibition on merging into real companies |
+| `demo_only`, `sample`, `status`, `isolation` | Explicit candidate/demo boundary and prohibition on merging into real companies |
 | `business` | Display label, configurable starting currency, fixed cutover/report dates and fiscal-year end |
 | `accounting_assumptions`, `country_variations` | Omissions and review status, including no activated jurisdiction or tax regime |
 | `accounts` | Stable semantic `key`, canonical type, readable label and internal `fixture_role` used for reconciliation; mapping is subject to accountant review |
-| `contacts`, `items`, `locations` | Original synthetic references. Contact addresses end in reserved `example.invalid`; no phone numbers, real addresses or patient data are supplied |
+| `contacts`, `items`, `locations` | Original sample references. Contact addresses end in reserved `example.invalid`; no phone numbers, real addresses or patient data are supplied |
 | `opening` | Complete expected opening position plus explanatory unpaid-document, stock and prepaid-contract details |
 | `documents` | New sample-period invoices, bills, credit notes, cash sales and prepayments, with linked IDs and fixed-precision line totals |
 | `events` | Ordered business events, stable duplicate-prevention keys and expected journal lines; stock transfers have no financial journal |

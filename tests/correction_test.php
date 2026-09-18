@@ -54,12 +54,12 @@ test('receipt correction keeps list filters totals API and account links on its 
     $input = document_input($f, 'receipt', '100'); $input['date'] = gmdate('Y-m-d');
     $draft = pl_save_document($f['actor_id'], $f['company_id'], $f['book_id'], $input);
     $source = pl_post_document($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], $draft['revision']);
-    $changed = $input; $changed['amount'] = '250'; $changed['counterparty'] = 'Corrected synthetic customer';
+    $changed = $input; $changed['amount'] = '250'; $changed['counterparty'] = 'Corrected sample customer';
     $result = pl_correct_source($f['actor_id'], $f['company_id'], $f['book_id'], 'receipt', $source['id'], $source['revision'], $changed, null, 'receipt-correct', 'Correct receipt');
     $view = pl_get_document($f['actor_id'], $f['company_id'], $f['book_id'], $source['id']);
     assert_same('250.0000', $view['amount']); assert_same('posted', $view['status']);
     assert_same($source['number'], $view['number']); assert_same($result['journal_id'], $view['journal']['id']);
-    $list = pl_list_documents($f['actor_id'], $f['company_id'], $f['book_id'], ['search' => 'Corrected synthetic', 'status' => 'posted']);
+    $list = pl_list_documents($f['actor_id'], $f['company_id'], $f['book_id'], ['search' => 'Corrected sample', 'status' => 'posted']);
     assert_same(1, $list['total']); assert_same('250.0000', $list['total_amount']);
     $api = pl_read_source($view, 'transaction', 1, 25);
     assert_same($result['journal_id'], $api['journal_id']); assert_same(2, $api['posting_history']['pagination']['total']);

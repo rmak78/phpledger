@@ -8,13 +8,13 @@ Recruit SME owners separately from accountants/bookkeepers; aim for five initial
 
 Ask participants to describe a recent bookkeeping day, their current tool and export formats, setup difficulties, the first report they need, common corrections, bank reconciliation, and how an accountant reviews the work. Ask what they would need to move a business mid-year and which records must be available on day one.
 
-Use synthetic tasks: create a simple company; choose an account template; record an expense/receipt; find its report effect; correct a mistaken draft; reverse a posted entry; explain an import error; compare opening AR/AP to unpaid documents. Begin each task without coaching. Record time, success, confusion, help needed, and whether the person can explain the outcome.
+Use sample tasks: create a simple company; choose an account template; record an expense/receipt; find its report effect; correct a mistaken draft; reverse a posted entry; explain an import error; compare opening AR/AP to unpaid documents. Begin each task without coaching. Record time, success, confusion, help needed, and whether the person can explain the outcome.
 
 For design comparison, use the same content and tasks across all candidates. Counterbalance presentation order and ask participants to explain choices using concrete work, not just color preference. Record the owner's selection separately from observed task performance.
 
 ## Accounting acceptance examples
 
-Amounts below are synthetic examples in one base currency; no tax treatment is assumed.
+Amounts below are sample examples in one base currency; no tax treatment is assumed.
 
 | Scenario | Expected accounting outcome |
 |---|---|

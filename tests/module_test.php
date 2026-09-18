@@ -4,7 +4,7 @@ declare(strict_types=1);
 function module_change(array $f, bool $enabled, int $revision, string $key = 'module-change'): array
 {
     return pl_set_company_module($f['actor_id'], $f['company_id'], 'pos-showcase', $enabled, $revision,
-        pl_module_registry()['pos-showcase']['digest'], 'Synthetic owner decision', $key);
+        pl_module_registry()['pos-showcase']['digest'], 'Sample owner decision', $key);
 }
 
 test('core-only companies post report export and reverse with every optional module disabled', function (): void {
@@ -17,7 +17,7 @@ test('core-only companies post report export and reverse with every optional mod
     $posted = pl_post_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], 1);
     assert_same('posted', $posted['status']);
     assert_true(str_contains(pl_export_report($f['actor_id'], $f['company_id'], $f['book_id'], 'trial-balance', '2026-12-31')['csv'], '1000.0001'));
-    pl_reverse_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], $today, 'Synthetic core-only correction');
+    pl_reverse_general_draft($f['actor_id'], $f['company_id'], $f['book_id'], $draft['id'], $today, 'Sample core-only correction');
     assert_same('0.0000', pl_trial_balance($f['actor_id'], $f['company_id'], $f['book_id'])['total_debit']);
 });
 
@@ -34,7 +34,7 @@ test('module enable disable and reenable retain POS sources exact receipts and a
     assert_same(false, pl_module_available($f['actor_id'], $f['company_id'], $f['book_id'], 'pos-showcase'));
     assert_throws(fn() => pl_checkout_pos($f['actor_id'], $f['company_id'], $f['book_id'], pos_input()), DomainException::class, 'disabled');
     assert_same('12.7500', pl_get_pos_receipt($f['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id'])['total']);
-    pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id'], $today, 'Synthetic full-sale correction');
+    pl_reverse_document($f['actor_id'], $f['company_id'], $f['book_id'], $sale['document_id'], $today, 'Sample full-sale correction');
     assert_same($original, DB::queryFirstRow('SELECT * FROM pl_pos_sales WHERE document_id = %i', $sale['document_id']));
     assert_same('0.0000', pl_trial_balance($f['actor_id'], $f['company_id'], $f['book_id'])['total_debit']);
     assert_same(3, module_change($f, true, 2, 'reenable')['revision']);
@@ -58,7 +58,7 @@ test('module changes enforce owner identity scope freshness compatible installat
         assert_throws(fn() => module_change($f, true, 0), DomainException::class, 'incomplete');
         assert_same(0, pl_module_state($f['company_id'], 'pos-showcase')['revision']);
     } finally { DB::rollback(); }
-    DB::query("CREATE TRIGGER pl_test_module_failure BEFORE INSERT ON pl_module_actions FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Synthetic module audit failure'");
+    DB::query("CREATE TRIGGER pl_test_module_failure BEFORE INSERT ON pl_module_actions FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Sample module audit failure'");
     try {
         assert_throws(fn() => module_change($f, true, 0), MeekroDBException::class);
         assert_same(0, pl_module_state($f['company_id'], 'pos-showcase')['revision']);

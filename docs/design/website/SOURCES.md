@@ -2,9 +2,9 @@
 
 ## Current application captures — 18 September 2026
 
-The current product pages use fresh 0.6.0-preview captures from the local application at `127.0.0.1:18219`. Willow Corner Shop and Cedar Studio were created through the local synthetic sample chooser. Eighteen captures and 36 resized WebP assets are indexed, captioned and hashed in `www/website/public/assets/screens/v0.6.0-preview/manifest.json`. The source PNGs are in `output/playwright/website-060-*.png`. No interface elements or financial figures were composited or generated. The current social preview places the actual Home capture on a labelled background.
+The current product pages use fresh 0.6.0-preview captures from the local application at `127.0.0.1:18219`. Willow Corner Shop and Cedar Studio were created through the local sample chooser. Eighteen captures and 36 resized WebP assets are indexed, captioned and hashed in `www/website/public/assets/screens/v0.6.0-preview/manifest.json`. The source PNGs are in `output/playwright/website-060-*.png`. No interface elements or financial figures were composited or generated. The current social preview places the actual Home capture on a labelled background.
 
-The POS screenshots show an isolated local synthetic notebook/pen sale, including cart, cash review and receipt. Cedar Studio guide figures were checked against the fresh sample. Historical release screenshots and photography retain their existing provenance. See `www/website/design-qa.md` for the local browser checks; this refresh has not been published.
+The POS screenshots show an isolated local sample notebook/pen sale, including cart, cash review and receipt. Cedar Studio guide figures were checked against the fresh sample. Historical release screenshots and photography retain their existing provenance. See `www/website/design-qa.md` for the local browser checks; this refresh has not been published.
 
 ## Redesign completion: 15 September 2026
 
@@ -37,7 +37,7 @@ Visual inspection confirmed natural photographic content and the expected people
 ## Other references
 
 - [Designer-supplied logo](../brand/logo-designer-reference.png): user-supplied reference, preserved elsewhere. Final vector variants remain pending; do not replace it with an invented symbol.
-- [Approved Review Console concept](../brand/06-review-console.png): generated application design reference containing synthetic company data. This is not a screenshot of completed product behavior.
+- [Approved Review Console concept](../brand/06-review-console.png): generated application design reference containing sample company data. This is not a screenshot of completed product behavior.
 - Exact implementation colors: navy `#0C2052`, charcoal `#424242`, proposed action blue `#4656E8`; Inter typography per [Brand](../../BRAND.md).
 
 Homepage compositions created from these references are generated design proposals. Production photography must use the preserved real source images, and product walkthroughs must use verified captures of the implemented sprint journey before they are described as working screens. Do not extract generated people or reconstructed interface pixels from a composition and pass them off as documentary evidence.
@@ -72,7 +72,7 @@ The user retained the existing horizontal mark with bold PHP and lighter Ledger.
 
 Evidence: [app desktop](qa/brand-framing/app-desktop.png), [app mobile](qa/brand-framing/app-mobile.png), [website desktop](qa/brand-framing/website-desktop.png), [website mobile](qa/brand-framing/website-mobile.png), [typography desktop](../typography-review/logo-framed-desktop.png), [typography mobile](../typography-review/logo-framed-mobile.png). These are local preview checks; publication remains held.
 
-The local website assets use actual application captures from 2026-09-14. All company/person/transaction data is synthetic. Original PNGs remain under `docs/design/product-screens`. The initial three captures use WebP quality 91; the owner overview uses quality 84 and the other expanded captures quality 88, retaining their actual dimensions. No reconstructed UI is used as a working product screenshot. Current captures are development baselines under review, not evidence that the user accepted the final reports/POS design.
+The local website assets use actual application captures from 2026-09-14. All company/person/transaction data is sample. Original PNGs remain under `docs/design/product-screens`. The initial three captures use WebP quality 91; the owner overview uses quality 84 and the other expanded captures quality 88, retaining their actual dimensions. No reconstructed UI is used as a working product screenshot. Current captures are development baselines under review, not evidence that the user accepted the final reports/POS design.
 
 | Website asset | Original capture | Dimensions | Bytes | Visible evidence |
 |---|---|---|---|---|
@@ -83,7 +83,7 @@ The local website assets use actual application captures from 2026-09-14. All co
 | `assets/screens/profit-loss.webp` | [05-profit-loss.png](../product-screens/05-profit-loss.png) | 1440 × 1200 | 54,788 | The same posted income/expense/profit with account detail |
 | `assets/screens/balance-sheet.webp` | [06-balance-sheet.png](../product-screens/06-balance-sheet.png) | 1440 × 1200 | 55,862 | Assets 875, liabilities 0 and equity including earnings 875 |
 | `assets/screens/cash-forecast.webp` | [07-cash-forecast.png](../product-screens/07-cash-forecast.png) | 1425 × 1188 | 58,422 | Editable scenario: 875 starting cash, 250 weekly inflow and 175 outflow over 12 weeks; not a prediction |
-| `assets/screens/point-of-sale.webp` | [08-point-of-sale.png](../product-screens/08-point-of-sale.png) | 1425 × 1188 | 74,268 | Unposted notebook/pen basket 5.75, tender 10, change 4.25; separate synthetic company remains unchanged |
+| `assets/screens/point-of-sale.webp` | [08-point-of-sale.png](../product-screens/08-point-of-sale.png) | 1425 × 1188 | 74,268 | Unposted notebook/pen basket 5.75, tender 10, change 4.25; separate sample company remains unchanged |
 
 The interim horizontal logo source is retained unchanged at `www/phpledger/public/assets/brand/phpledger-horizontal.png`. Its website rendition is `assets/brand/phpledger-horizontal.webp` (640 × 213, 5,720 bytes, SHA-256 `EE010E798706FF666E4503FFE8235EAFA12EC23CADEBFEAB6D51ED1A618F8F8A`), made by ordinary proportional resize and WebP compression. This does not replace the designer's pending production vector artwork. Unused concept-screen and oversized logo copies were removed from the public website folder after their source files were verified as preserved.
 

@@ -87,7 +87,7 @@ test('failed country lookup is cached and local addresses never call the provide
     $calls = 0;
     $failure = static function (string $ip) use (&$calls): never {
         $calls++;
-        throw new RuntimeException('Synthetic network failure');
+        throw new RuntimeException('Sample network failure');
     };
     assert_same('unavailable', pl_regional_suggestion(['REMOTE_ADDR' => '8.8.8.8'], $failure)['status']);
     assert_same('unavailable', pl_regional_suggestion(['REMOTE_ADDR' => '8.8.8.8'], $failure)['status']);
@@ -121,7 +121,7 @@ test('demo configuration and service guards refuse ordinary databases and normal
         assert_throws(fn () => pl_demo_validate_configuration(['database' => 'phpledger_test', 'user' => 'app']), RuntimeException::class);
         assert_throws(fn () => pl_demo_validate_configuration(['database' => 'phpledger_demo', 'user' => 'root']), RuntimeException::class);
         pl_demo_validate_configuration(['database' => 'phpledger_demo', 'user' => 'restricted-demo']);
-        assert_throws(fn () => pl_create_user('blocked@example.invalid', 'Blocked', 'Synthetic blocked passphrase'), DomainException::class);
+        assert_throws(fn () => pl_create_user('blocked@example.invalid', 'Blocked', 'Sample blocked passphrase'), DomainException::class);
         assert_throws(fn () => pl_create_company($f['actor_id'], 'Blocked', 'USD', '2026-09-14'), DomainException::class);
         assert_throws(fn () => pl_require_company_access($f['actor_id'], $f['company_id']), DomainException::class);
     } finally {

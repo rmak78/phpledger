@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-// Synthetic fixture for 1.0.0 route-state acceptance sweep (workflow-acceptance agent).
+// Sample fixture for 1.0.0 route-state acceptance sweep (workflow-acceptance agent).
 // Runs INSIDE the dev runtime container (phpledger-web-1: PL_ENV=local, PL_DB_NAME=phpledger).
 // Creates a brand-new throwaway user/company with a random suffix; never touches other agents' data.
 if (getenv('PL_ENV') !== 'local' || getenv('PL_DB_NAME') !== 'phpledger') {
@@ -12,7 +12,7 @@ require_once dirname(__DIR__) . '/www/phpledger/includes/bootstrap.php';
 
 $suffix = bin2hex(random_bytes(5));
 $email = 'route-sweep-' . $suffix . '@example.test';
-$password = 'Synthetic-browser-only-2026!';
+$password = 'Sample-browser-only-2026!';
 $actor = pl_create_user($email, 'Route Sweep Owner', $password);
 
 $f = pl_create_company($actor, 'Route Sweep Co ' . $suffix, 'USD', '2026-01-01');

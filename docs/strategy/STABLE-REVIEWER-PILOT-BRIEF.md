@@ -21,7 +21,7 @@ We would welcome:
 
 This is a volunteer collaboration. Reviewers should expect to document findings and revisit material fixes; pilot participants should keep their existing bookkeeping process available during evaluation. A preview is not yet a production-readiness claim. No purchase is required, and public acknowledgement is optional.
 
-We will provide a test package, source access, synthetic scenarios and an agreed review scope. Initial review does not require customer data or production credentials.
+We will provide a test package, source access, sample scenarios and an agreed review scope. Initial review does not require customer data or production credentials.
 
 Interested? Send a private message with your role, relevant experience, time zone, availability, and the area you would like to review. For a business pilot, add your business type, approximate monthly transaction volume, and whether you use inventory. Please do not send passwords, customer records or financial documents with your initial response.
 
@@ -42,7 +42,7 @@ Project: https://github.com/phpledger/phpledger
 ## What engineering supplies
 
 - A versioned package and checksum, a bounded supported-scope statement, installation/upgrade instructions, known limitations and the relevant source revision.
-- Synthetic accounting cases with expected balances and source links. The accountant confirms the expected accounting treatment; passing automated tests does not supply that decision.
+- Sample accounting cases with expected balances and source links. The accountant confirms the expected accounting treatment; passing automated tests does not supply that decision.
 - An isolated security-review installation with company/operator roles, documented trust boundaries, update signing/recovery design and reproducible failure scenarios. Access details are shared privately with named reviewers.
 - A findings register: reviewer, version/environment, scenario, expected/actual result, severity, evidence, owner, resolution and retest decision. Material unresolved findings block the affected release gate.
 - Pilot setup assistance, approved opening balances, an agreed hosting/backup plan, weekly reviews and reconciliation evidence. Real-customer pilots start only after the required accounting and independent security review.

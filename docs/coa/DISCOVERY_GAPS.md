@@ -46,4 +46,4 @@ All proposed templates remain unreviewed. No accountant or business user was con
 
 ## Promotion checklist
 
-A template can move from research into an installer release only when its provenance/license review, accountant approval, synthetic posting/reversal/report cases, company isolation, import reconciliation, and package-upgrade tests are complete. Record reviewer, date, scope, source revision, unresolved limitations and evidence. A business profile can be reviewed independently from its country tax adapter; a chart review cannot approve tax calculation, filing, payroll or inventory behavior that has not been implemented.
+A template can move from research into an installer release only when its provenance/license review, accountant approval, sample posting/reversal/report cases, company isolation, import reconciliation, and package-upgrade tests are complete. Record reviewer, date, scope, source revision, unresolved limitations and evidence. A business profile can be reviewed independently from its country tax adapter; a chart review cannot approve tax calculation, filing, payroll or inventory behavior that has not been implemented.

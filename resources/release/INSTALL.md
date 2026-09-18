@@ -117,7 +117,7 @@ Replace the example email and name. On another shell, use its secure input mecha
 
 ## 6. Verify the first journey
 
-Open the HTTPS hostname and sign in. Confirm that refresh and navigation retain the session. In a clearly isolated sample company, record a small synthetic receipt or expense and follow its journal into the reports. Open an account statement and check its opening, period and closing balances. Add an account, review a balanced general-journal draft, post it and verify a linked reversal with its own date and reason. Confirm that the chart and journals retain their history. Check that private file paths cannot be downloaded and that HTTPS/session cookies are configured correctly.
+Open the HTTPS hostname and sign in. Confirm that refresh and navigation retain the session. In a clearly isolated sample company, record a small sample receipt or expense and follow its journal into the reports. Open an account statement and check its opening, period and closing balances. Add an account, review a balanced general-journal draft, post it and verify a linked reversal with its own date and reason. Confirm that the chart and journals retain their history. Check that private file paths cannot be downloaded and that HTTPS/session cookies are configured correctly.
 
 `/health` checks database connectivity only; it does not prove that migrations, users or accounting workflows are ready. Run the journey above after the browser wizard or CLI checks succeed. Delete no real records to perform acceptance checks.
 

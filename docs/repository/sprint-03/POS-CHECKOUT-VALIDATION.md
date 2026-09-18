@@ -15,7 +15,7 @@ Validated 15 September 2026 (Asia/Karachi), against branch `sprint03/pos-checkou
 | Check | Result |
 |---|---|
 | Dedicated PHP 8.5.10 / MySQL 8.4 integration suite | 67 tests, 0 failures |
-| Recovery HTTP acceptance | 14 checks, 0 failures; own synthetic session injection, persistent warning, immutable retry, scope/CSRF and one accounting effect |
+| Recovery HTTP acceptance | 14 checks, 0 failures; own sample session injection, persistent warning, immutable retry, scope/CSRF and one accounting effect |
 | POS HTTP acceptance | 29 checks, 0 failures |
 | Core HTTP acceptance | 23 checks, 0 failures; HTTP period-lock step skipped because this isolated Compose project uses a separate runtime path |
 | Period rejection and rollback | Covered by integration suite, including same-key corrected checkout and late snapshot failure |
@@ -26,7 +26,7 @@ Validated 15 September 2026 (Asia/Karachi), against branch `sprint03/pos-checkou
 | Browser | Chrome at 1440, 768 and 390 pixels; product clicks, keyboard add, cart controls, search Enter, separate review, edit recovery, insufficient cash, exact cash, explicit posting and receipt checked |
 | Fallback / accessibility | No-JavaScript server review and cash-error recovery; actual Tab focus visibility; reduced motion; no horizontal overflow in cart/review; compact mobile quantity control |
 
-Browser example: three notebooks at 4.50 and one pen at 1.25 total **USD 14.75**. Confirming **20.00** cash produced **5.25** change and source receipt **126** in isolated synthetic company/book **128**. Review and edit did not create accounting entries; HTTP and integration assertions cover final journal/source linkage and duplicate behavior.
+Browser example: three notebooks at 4.50 and one pen at 1.25 total **USD 14.75**. Confirming **20.00** cash produced **5.25** change and source receipt **126** in isolated sample company/book **128**. Review and edit did not create accounting entries; HTTP and integration assertions cover final journal/source linkage and duplicate behavior.
 
 An initial browser assertion used programmatic focus after a mouse click; the corrected check used actual Tab navigation and confirmed the focus outline. A quantity-blur interaction that consumed the next cart button click was fixed and retested. No application JavaScript error was observed; a pre-existing missing favicon returned 404.
 
@@ -36,9 +36,9 @@ Local preview: `http://127.0.0.1:18205/pos`. Runtime and raw evidence live under
 
 An independent review found that re-quoting an uncertain sale against a changed catalog could destroy the original retry payload, and that its flash warning disappeared on refresh. The fix adds `POST /pos/retry`, an immutable company/book-scoped session request, and a persistent recovery screen. An unresolved request blocks stale-tab cart edits and new checkout attempts in that book. Committed retry lookup precedes catalog loading, so the original receipt can be recovered after a catalog change or outage. Writer access and readiness remain enforced. A definite rejection returns the original cart for editing; it creates no accounting effect.
 
-The dedicated POS runtime passed the updated **67-test integration suite** and **14 recovery HTTP checks**. New integration tests cover exact request/snapshot preservation and committed retry in a private runtime mirror with no catalog. The HTTP harness injects the already-committed request into its own synthetic session, then checks warning persistence, absent editing controls, stale-tab blocking, CSRF, company/book scope, forged financial fields, same receipt/report totals and recovery from definite insufficient-cash rejection. This proves the recovery workflow using controlled state injection; it is not a real dropped network/commit-response test. The state is session-bound, so after authentication/session expiry the operator must inspect posted transactions before replacing a sale.
+The dedicated POS runtime passed the updated **67-test integration suite** and **14 recovery HTTP checks**. New integration tests cover exact request/snapshot preservation and committed retry in a private runtime mirror with no catalog. The HTTP harness injects the already-committed request into its own sample session, then checks warning persistence, absent editing controls, stale-tab blocking, CSRF, company/book scope, forged financial fields, same receipt/report totals and recovery from definite insufficient-cash rejection. This proves the recovery workflow using controlled state injection; it is not a real dropped network/commit-response test. The state is session-bound, so after authentication/session expiry the operator must inspect posted transactions before replacing a sale.
 
-Commands: `docker compose -f .cache/pos-runtime/compose.yaml run --rm test php tests/run.php`; `python .cache/pos-runtime/pos-recovery-http-smoke.py --company-id 128 --compose .cache/pos-runtime/compose.yaml`, with private synthetic credentials. The local shared HTTP helper guards port **18205**; committed helpers keep **18200**. Additional checks: changed PHP files linted, Python compiled, PHPStan passed with no errors, and `git diff --check` passed. Runtime logs are `recovery-integration.log` and `recovery-http.log` under ignored `.cache/pos-runtime/`.
+Commands: `docker compose -f .cache/pos-runtime/compose.yaml run --rm test php tests/run.php`; `python .cache/pos-runtime/pos-recovery-http-smoke.py --company-id 128 --compose .cache/pos-runtime/compose.yaml`, with private sample credentials. The local shared HTTP helper guards port **18205**; committed helpers keep **18200**. Additional checks: changed PHP files linted, Python compiled, PHPStan passed with no errors, and `git diff --check` passed. Runtime logs are `recovery-integration.log` and `recovery-http.log` under ignored `.cache/pos-runtime/`.
 
 ## Remaining gates
 

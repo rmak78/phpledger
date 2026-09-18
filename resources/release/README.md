@@ -11,7 +11,7 @@ The interface uses compiled local CSS and server-side paged lists. No Node insta
 ## Start here
 
 1. Read [INSTALL.md](INSTALL.md) for hosting requirements, browser setup at `/install`, and the retained CLI setup path.
-2. Sign in and create an isolated sample company or a new business. In local development, the separate sample chooser provisions only the selected synthetic company. Review the chart and create a customer/vendor party before recording an invoice or bill.
+2. Sign in and create an isolated sample company or a new business. In local development, the separate sample chooser provisions only the selected sample company. Review the chart and create a customer/vendor party before recording an invoice or bill.
 3. Review and post the document, record a partial payment, and follow the remaining balance into ageing, its journal and the account statement. Corrections retain the same document identity and preserve linked reversal history.
 4. For stock businesses, enable Inventory and then Purchasing in **Modules**. Create a stock product, confirm a purchase order, receive goods and match the later supplier bill. Review stock valuation and received-but-unbilled reconciliation.
 5. Configure any required tax codes, accounts and dated rates manually in **Tax**. Choose exclusive or inclusive price entry; documents show the separate net, tax and total. For existing businesses, review opening debt/stock conversion before using their imported balances operationally.
@@ -22,9 +22,9 @@ The package needs PHP **8.2+ (8.3 recommended)**, MySQL **8.4** and HTTPS. Produ
 
 - Protected browser installation at `/install`: host ownership proof with a private setup key, the existing migration chain, private configuration and OAuth key provisioning, first-account creation and onboarding. Setup locks after completion.
 - Operator-initiated signed updates and recovery through the independent `/maintenance.php` entry: a private `operator.key`, a pinned publisher public key, explicit stable/preview channels, automatic complete matched backups (code, configuration, keys, database) and automatic matched restoration with financial-total verification on failure. `tools/resume-update.php` advances recovery from the CLI when shell access is available.
-- Eleven synthetic businesses with closed 2024–2025 histories, open 2026 practice, three editable drafts per company and private reporting walkthroughs. The public website carries three illustrated guide articles. Only the selected sample is provisioned for a visitor. See [demo packs](resources/demo-packs/README.md).
+- Eleven sample businesses with closed 2024–2025 histories, open 2026 practice, three editable drafts per company and private reporting walkthroughs. The public website carries three illustrated guide articles. Only the selected sample is provisioned for a visitor. See [demo packs](resources/demo-packs/README.md).
 
-- Sign-in, company setup, a preliminary account template and a clearly identified synthetic sample.
+- Sign-in, company setup, a preliminary account template and a clearly identified sample.
 - Seven newer vertical successors carry pinned research evidence and remain `preview_only` until their operational treatment is independently reviewed. The current importer posts the reconciled supported history; future specialist records remain review evidence.
 - Receipt/expense drafts, balanced posting, durable source references, duplicate protection, period controls and linked reversals.
 - Chart management with stable account IDs and audited name/status changes; general-journal drafts, review, posting and dated reversals.
@@ -63,4 +63,4 @@ The archive excludes the old application, marketing website, development Docker 
 
 [Project website](https://phpledger.com/) · [Hosted evaluation demo](https://phpledger.com/demo/) · [Documentation](https://github.com/phpledger/phpledger/wiki) · [Issue tracker](https://github.com/phpledger/phpledger/issues)
 
-The hosted demo uses temporary synthetic data and resets hourly; never enter customer information there. Report reproducible problems with the package version and a synthetic example, without passwords, database dumps or private records. Setup and pilot enquiries: [rmak78@gmail.com](mailto:rmak78@gmail.com).
+The hosted demo uses temporary sample data and resets hourly; never enter customer information there. Report reproducible problems with the package version and a sample example, without passwords, database dumps or private records. Setup and pilot enquiries: [rmak78@gmail.com](mailto:rmak78@gmail.com).

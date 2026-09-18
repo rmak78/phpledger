@@ -19,13 +19,13 @@ Use native repository-relative images, not external image hosting or third-party
 |---|---|---:|---|
 | [Preferred horizontal logo](assets/phpledger-logo.webp) | 640 × 213 | 5,720 | PHP Ledger |
 | [Development badge](assets/development-preview.svg) | 215 × 26 | 515 | Status: development preview |
-| [Owner overview](assets/owner-overview-preview.webp) | 1425 × 1188 | 63,500 | Local development preview with synthetic books: cash, income, expenses and profit, with links to the reports behind them. |
+| [Owner overview](assets/owner-overview-preview.webp) | 1425 × 1188 | 63,500 | Local development preview with sample books: cash, income, expenses and profit, with links to the reports behind them. |
 | [Expense and journal](assets/expense-to-journal-preview.webp) | 1425 × 1106 | 68,930 | Local development preview: a posted USD 125 sample expense and its balanced journal, shown together with the source record. |
 | [Cash POS](assets/cash-pos-preview.webp) | 1425 × 1188 | 74,268 | Early cash-POS preview with illustrative products and an unposted basket. Stock, tax, card processing and credit sales are not implemented in this screen. |
 
 The four WebPs and badge total **212,933 bytes**. These are file sizes, not a network performance measurement. The logo's white canvas is retained exactly; GitHub's simple image rendering should use the intact asset. The application uses separate CSS framing, which is not baked into this copy.
 
-The owner screen shows USD 1,000 income, USD 125 expense and USD 875 cash/profit. The POS basket shows a notebook and pen totaling USD 5.75, with USD 10 tender and USD 4.25 change. That screenshot was captured without posting the basket. All business names, people, transactions and figures are synthetic. The screenshots precede the latest narrow header-framing and country-selector changes; do not describe them as pixel-exact captures of the latest checkout. Reports/POS remain under design review.
+The owner screen shows USD 1,000 income, USD 125 expense and USD 875 cash/profit. The POS basket shows a notebook and pen totaling USD 5.75, with USD 10 tender and USD 4.25 change. That screenshot was captured without posting the basket. All business names, people, transactions and figures are sample. The screenshots precede the latest narrow header-framing and country-selector changes; do not describe them as pixel-exact captures of the latest checkout. Reports/POS remain under design review.
 
 Example logo block for the root README:
 
@@ -46,14 +46,14 @@ Keep the preview caption outside each image so it remains readable to assistive 
 The four image copies were compared byte-for-byte with their sources; all matched. [manifest.json](assets/manifest.json) records exact sources, dimensions, byte counts and SHA-256 digests. No raster modification, retouching, recoloring, logo replacement or newly generated product image was performed in this package.
 
 - Logo source: [existing website WebP](../../www/website/public/assets/brand/phpledger-horizontal.webp), derived earlier from the [preferred application PNG](../../www/phpledger/public/assets/brand/phpledger-horizontal.png). The bold PHP/lighter Ledger identity was retained by the user. [Brand guidance](../BRAND.md) records the interim identity and remaining master-artwork/provenance work; this package does not invent a separate license for the mark.
-- Screenshot sources: [website capture provenance](../design/website/SOURCES.md) and unchanged original PNGs under [product-screens](../design/product-screens). The earlier local WebP derivatives are copied intact here. These are PHP Ledger's synthetic local screens, not seller or competitor images.
+- Screenshot sources: [website capture provenance](../design/website/SOURCES.md) and unchanged original PNGs under [product-screens](../design/product-screens). The earlier local WebP derivatives are copied intact here. These are PHP Ledger's sample local screens, not seller or competitor images.
 - Visible interface typography is Inter; the existing [font license](../../www/phpledger/public/assets/fonts/LICENSE.txt) remains in the repository. UI icons retain the [Tabler source and MIT license](../../www/website/public/assets/icons/SOURCE.txt). No font or icon binaries were duplicated into this package.
 - The compact status badge is project-authored native SVG with system-font text and the existing navy/blue palette. It makes no build, security, jurisdiction or release certification claim.
 - No photographs, CodeCanyon/Shopify/Square/Odoo imagery, outside customer data or new external media were added. Existing photograph licenses do not need to be repackaged because no photos are included.
 
 ## Optional social-preview candidate
 
-[social-preview-candidate.svg](assets/social-preview-candidate.svg) is a self-contained **1280 × 640** native SVG composition. It embeds the identical preferred logo and owner-overview WebP bytes, places them on the existing navy palette and labels the content **Development preview** and **Synthetic data**. Text is native SVG using a system sans-serif fallback; this is not a new brand typography decision.
+[social-preview-candidate.svg](assets/social-preview-candidate.svg) is a self-contained **1280 × 640** native SVG composition. It embeds the identical preferred logo and owner-overview WebP bytes, places them on the existing navy palette and labels the content **Development preview** and **Sample data**. Text is native SVG using a system sans-serif fallback; this is not a new brand typography decision.
 
 The upload-ready [PNG render](assets/social-preview-candidate.png) is **1280 × 640**, **66,922 bytes**, captured directly from Chrome at the exact native viewport. Its SHA-256 digest is `08ee3aac12948ff51ac78f360835c1f4fca9b1038abab46d040d10db625b969f`. Visual inspection confirmed the whole composition, readable logo and purpose, intact product evidence and both preview labels, without browser chrome, clipping or scrollbars. No post-capture raster editing or resizing was performed.
 

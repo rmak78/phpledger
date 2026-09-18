@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-/** Separate connections share only synthetic input and a filesystem start barrier. */
+/** Separate connections share only sample input and a filesystem start barrier. */
 function pl_foundation_race(array $jobs): array
 {
     $directory=sys_get_temp_dir().'/pl-party-outbound-race-'.bin2hex(random_bytes(10));
