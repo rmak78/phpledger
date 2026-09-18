@@ -18,7 +18,7 @@ Date: 14 September 2026. This receipt covers an evaluation package, not completi
 |---|---|
 | Package builder guard/reproducibility tests | 5 passed; rejects dirty source, missing licence, development dependencies, private/escaping paths and overwrite; upstream test SQL excluded. |
 | Local PHP lint and static analysis | 58 PHP files passed; PHPStan zero errors. |
-| GitHub CI on artifact source | [Run 34880220133](https://github.com/rmak78/phpledger/actions/runs/34880220133) passed build, manifest/audit, lint/static, sample checks, full integration and restoration. |
+| GitHub CI on artifact source | [Run 34880220133](https://github.com/phpledger/phpledger/actions/runs/34880220133) passed build, manifest/audit, lint/static, sample checks, full integration and restoration. |
 | Actual unpacked artifact installation | Empty isolated MySQL 8.4 database: read-only preflight reports five pending migrations; all five applied; preflight reports current schema. |
 | Actual artifact integration | 62 tests passed, zero failures, using its production vendor and a separate nonshipping harness. |
 | Actual artifact upgrade | Baseline 001 to current 005 preserves six account identities and posted headers/lines, enforces setup review and mappings, reconciles reports and passes replay/UTC checks. |
@@ -44,6 +44,6 @@ Real-browser artifact checkpoint: initial-user sign-in, empty company list, onbo
 
 ## Published result
 
-[v0.1.0-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview) is a public prerelease targeting the exact source above, with the ZIP and its checksum. Both assets were downloaded again from GitHub and matched the recorded SHA-256. GitHub reports the expected ZIP digest and size.
+[v0.1.0-preview](https://github.com/phpledger/phpledger/releases/tag/v0.1.0-preview) is a public prerelease targeting the exact source above, with the ZIP and its checksum. Both assets were downloaded again from GitHub and matched the recorded SHA-256. GitHub reports the expected ZIP digest and size.
 
 Static website release `website-20260914-193424` was verified at 19:34:33 UTC on 14 September (00:34:33 Pakistan time on 15 September). The current homepage links the published package and states MIT terms. A fresh website/vhost backup was retained; Nginx validation and reload succeeded; exact public homepage hash matched. The full contact address and LinkedIn remain present, with no public phone. The demo runtime, proxy and database were unchanged.

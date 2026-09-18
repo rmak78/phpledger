@@ -8,13 +8,13 @@ The catalog is a starting point for an optional tax module. It is not a tax calc
 
 | Countries | Research |
 |---|---|
-| Pakistan | [Federal goods, provincial/ICT services and direct-tax research](https://github.com/rmak78/phpledger/blob/master/docs/tax/PAKISTAN.md) |
-| United Kingdom and United Arab Emirates | [UK/UAE research and unresolved scope](https://github.com/rmak78/phpledger/blob/master/docs/tax/UK-UAE.md) |
-| Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore | [Asian country research and scope gaps](https://github.com/rmak78/phpledger/blob/master/docs/tax/ASIA.md) |
+| Pakistan | [Federal goods, provincial/ICT services and direct-tax research](https://github.com/phpledger/phpledger/blob/master/docs/tax/PAKISTAN.md) |
+| United Kingdom and United Arab Emirates | [UK/UAE research and unresolved scope](https://github.com/phpledger/phpledger/blob/master/docs/tax/UK-UAE.md) |
+| Malaysia, Bangladesh, Sri Lanka, Nepal and Singapore | [Asian country research and scope gaps](https://github.com/phpledger/phpledger/blob/master/docs/tax/ASIA.md) |
 
 Industry profiles cover **restaurants, membership clubs, pharmacies, traders, distributors, retail shops and workshops**. They contain candidate regime references and classification questions. A profile does not mean every referenced regime applies to every business.
 
-The [JSON candidate files](https://github.com/rmak78/phpledger/tree/master/resources/tax) keep authorities, jurisdictions, source links, checked dates, rates where established, legal effective dates where evidenced, conditions and open questions.
+The [JSON candidate files](https://github.com/phpledger/phpledger/tree/master/resources/tax) keep authorities, jurisdictions, source links, checked dates, rates where established, legal effective dates where evidenced, conditions and open questions.
 
 ## How to interpret a candidate
 
@@ -33,7 +33,7 @@ Applicable law and adopted reporting standards determine a business's accounting
 
 Amounts collected for a tax authority, recoverable input taxes, non-recoverable purchase taxes and withholding settlements can have different accounting effects. Each adapter needs reviewed mappings and examples consistent with the selected reporting profile. Tax recognition must not be reduced to adding a percentage to every invoice.
 
-See the [Pakistan accounting-framework research](https://github.com/rmak78/phpledger/blob/master/docs/accounting/PAKISTAN_REPORTING_RESEARCH.md) and [[Accounting and reports|Accounting-and-Reports]].
+See the [Pakistan accounting-framework research](https://github.com/phpledger/phpledger/blob/master/docs/accounting/PAKISTAN_REPORTING_RESEARCH.md) and [[Accounting and reports|Accounting-and-Reports]].
 
 ## Before enabling a tax adapter
 

@@ -1,6 +1,6 @@
 # First-package licence decision
 
-Work item: [#55 — Licence and provenance](https://github.com/rmak78/phpledger/issues/55). Related: [package contract](PACKAGE-CONTRACT.md) and [exact candidate inventory](package-candidate.json).
+Work item: [#55 — Licence and provenance](https://github.com/phpledger/phpledger/issues/55). Related: [package contract](PACKAGE-CONTRACT.md) and [exact candidate inventory](package-candidate.json).
 
 **Decision pending: MIT or GNU AGPLv3 for PHP Ledger's new project-owned code.** Both are viable with the inspected dependencies when their separate terms and notices are preserved. No project licence has been selected, no `LICENSE` has been created, and this audit does not certify ownership. Package engineering can continue while the owner makes this one policy choice.
 
@@ -66,7 +66,7 @@ MIT's permissions and notice condition are set out in the [OSI MIT text](https:/
 2. Generate the clean production vendor tree. Add `THIRD-PARTY-NOTICES.md`, both LGPLv3 and GPLv3 texts for MeekroDB, and all existing font/icon/Unicode/Composer notices. Check the final archive, not just source paths.
 3. If AGPL is selected, make the exact source of the released/running version available, with necessary installation/build material and legal/source navigation. A link to the legacy default branch is insufficient. Keep credentials and customer data excluded.
 4. Record the candidate revision, build tools, dependency versions and final hashes. Provide contribution guidance under the selected inbound licence; do not silently adopt a CLA, copyright transfer or DCO policy.
-5. Recheck any new package file or dependency against this inventory before [#59 release acceptance](https://github.com/rmak78/phpledger/issues/59). Build preparation may continue; do not label an unlicensed candidate as an approved open-source release.
+5. Recheck any new package file or dependency against this inventory before [#59 release acceptance](https://github.com/phpledger/phpledger/issues/59). Build preparation may continue; do not label an unlicensed candidate as an approved open-source release.
 
 ## Audit receipt
 

@@ -25,7 +25,7 @@ We will provide a test package, source access, synthetic scenarios and an agreed
 
 Interested? Send a private message with your role, relevant experience, time zone, availability, and the area you would like to review. For a business pilot, add your business type, approximate monthly transaction volume, and whether you use inventory. Please do not send passwords, customer records or financial documents with your initial response.
 
-Project: https://github.com/rmak78/phpledger
+Project: https://github.com/phpledger/phpledger
 
 ## What each participant is needed for
 

@@ -21,8 +21,8 @@ The sample POS proves the cash-sale accounting path, but its layout and checkout
 
 Keep this candidate to a sample cash-sale showcase. Actual payment collection, stock/COGS, returns/refunds, tax, discounts, credit accounts, specialist-industry flows and till hardware remain outside this issue. A linked accounting reversal is not a retail return workflow.
 
-Part of the [first package plan](https://github.com/rmak78/phpledger/wiki/First-Package).
+Part of the [first package plan](https://github.com/phpledger/phpledger/wiki/First-Package).
 
 ## Linked work
 
-The completed checkout experience and its evidence feed [#59 candidate acceptance](https://github.com/rmak78/phpledger/issues/59) and the artifact assembled by [#56 the installable package](https://github.com/rmak78/phpledger/issues/56). Preserve the accounting boundaries described by [#57 the reporting workstream](https://github.com/rmak78/phpledger/issues/57).
+The completed checkout experience and its evidence feed [#59 candidate acceptance](https://github.com/phpledger/phpledger/issues/59) and the artifact assembled by [#56 the installable package](https://github.com/phpledger/phpledger/issues/56). Preserve the accounting boundaries described by [#57 the reporting workstream](https://github.com/phpledger/phpledger/issues/57).

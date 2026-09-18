@@ -61,6 +61,6 @@ The archive excludes the old application, marketing website, development Docker 
 
 ## Learn and contribute
 
-[Project website](https://phpledger.com/) · [Hosted evaluation demo](https://phpledger.com/demo/) · [Documentation](https://github.com/rmak78/phpledger/wiki) · [Issue tracker](https://github.com/rmak78/phpledger/issues)
+[Project website](https://phpledger.com/) · [Hosted evaluation demo](https://phpledger.com/demo/) · [Documentation](https://github.com/phpledger/phpledger/wiki) · [Issue tracker](https://github.com/phpledger/phpledger/issues)
 
 The hosted demo uses temporary synthetic data and resets hourly; never enter customer information there. Report reproducible problems with the package version and a synthetic example, without passwords, database dumps or private records. Setup and pilot enquiries: [rmak78@gmail.com](mailto:rmak78@gmail.com).

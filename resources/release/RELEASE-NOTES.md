@@ -40,7 +40,7 @@ The supplied migration chain is unchanged since 0.6.0-preview: it still ends at 
 
 This procedure does not use the new `/maintenance.php` updater, because a published 0.6.0-preview installation predates it; the first update through `/maintenance.php` is only available after this manual upgrade to 1.0.0. See UPGRADE.md for the complete "From 0.6.0-preview to 1.0.0" section, including exact backup, restoration-rehearsal and verification steps.
 
-Media kit: https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip
+Media kit: https://github.com/phpledger/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip
 
 ## 0.6.0-preview: interface rebuild
 
@@ -63,7 +63,7 @@ The recorded source check passed 282 tests with zero failures, PHP lint and PHPS
 
 Upgrade from 0.5.0-preview uses migrations 029-031. Back up and rehearse restoration first; preserve earlier migration files/checksums and run the included migration command once while writes are stopped. Re-running migrations must be a no-op. Never copy historical legacy SQL into the modern schema. See UPGRADE.md.
 
-Media kit: https://github.com/rmak78/phpledger/releases/download/v0.6.0-preview/phpledger-0.6.0-preview-media-kit.zip
+Media kit: https://github.com/phpledger/phpledger/releases/download/v0.6.0-preview/phpledger-0.6.0-preview-media-kit.zip
 
 ## 0.5.0-preview: eleven isolated sample companies and shared UX candidate
 
@@ -94,7 +94,7 @@ AR and AP are now included in the base accounting core, with separate internal m
 - The hosted demo adds a separate Accounting starter playground with synthetic parties, a stock product and illustrative tax configuration. Its four historical examples remain available. Demo administration remains restricted; removing lines from an existing demo invoice/order draft requires starting a new draft.
 - Quotes are excluded and preserved on a separate plugin branch. Advanced stock features, LC flows, tax country packs, forms and e-filing remain outside this build.
 
-New migrations are additive to 0.3.0. Review the [starter record](https://github.com/rmak78/phpledger/blob/{{SOURCE_COMMIT}}/docs/repository/sprint-06/ACCOUNTING-STARTER.md) for exact migration and test evidence. Use a matched database/code backup and stop application/worker traffic for an upgrade. Package and hosted publication remain separate release gates.
+New migrations are additive to 0.3.0. Review the [starter record](https://github.com/phpledger/phpledger/blob/{{SOURCE_COMMIT}}/docs/repository/sprint-06/ACCOUNTING-STARTER.md) for exact migration and test evidence. Use a matched database/code backup and stop application/worker traffic for an upgrade. Package and hosted publication remain separate release gates.
 
 ## Historical 0.3.0-preview: accounting foundations before AR/AP
 
@@ -135,7 +135,7 @@ These are backend foundations. Public API/MCP financial mutations, invoice/bill 
 
 ## Earlier 0.1.5-preview changes
 
-- Product-specific accessible names for the no-JavaScript POS quantity inputs, contributed by [Nagulanvelu in PR #65](https://github.com/rmak78/phpledger/pull/65).
+- Product-specific accessible names for the no-JavaScript POS quantity inputs, contributed by [Nagulanvelu in PR #65](https://github.com/phpledger/phpledger/pull/65).
 - A maintainer follow-up preserves the final newline and prevents product cards from clipping the fallback quantity fields at desktop, tablet and mobile widths.
 - The accounting services, migration chain and stored amounts retain the 0.1.4-preview behavior. The website adds About, Privacy, demo-use terms and product FAQs; website content is deployed separately and is not part of this ZIP.
 - API/MCP read access and richer multi-year samples are subsequent releases with separate acceptance gates.
@@ -195,7 +195,7 @@ The package has no automatic upgrade from the historical PHP Ledger database. A 
 
 ## Feedback and next steps
 
-Use the [issue tracker](https://github.com/rmak78/phpledger/issues) for reproducible synthetic examples and the [public documentation](https://github.com/rmak78/phpledger/wiki) for current scope and roadmap. The [hosted demo](https://phpledger.com/demo/) is temporary and resets hourly. Do not submit real business data, credentials or private database exports with feedback.
+Use the [issue tracker](https://github.com/phpledger/phpledger/issues) for reproducible synthetic examples and the [public documentation](https://github.com/phpledger/phpledger/wiki) for current scope and roadmap. The [hosted demo](https://phpledger.com/demo/) is temporary and resets hourly. Do not submit real business data, credentials or private database exports with feedback.
 
 ### Earlier 0.2.1 client transport corrections
 

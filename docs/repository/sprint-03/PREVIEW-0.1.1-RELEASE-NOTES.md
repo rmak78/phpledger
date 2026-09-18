@@ -1,6 +1,6 @@
 # 0.1.1-preview: click-to-add POS
 
-**Status: published.** [Download v0.1.1-preview](https://github.com/rmak78/phpledger/releases/tag/v0.1.1-preview); the hosted demo runs the same runtime source. This is a foundation evaluation preview, not a stable release or completion of the supported-pilot gates.
+**Status: published.** [Download v0.1.1-preview](https://github.com/phpledger/phpledger/releases/tag/v0.1.1-preview); the hosted demo runs the same runtime source. This is a foundation evaluation preview, not a stable release or completion of the supported-pilot gates.
 
 ## What changes
 

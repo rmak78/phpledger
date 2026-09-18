@@ -92,8 +92,8 @@ Keep the same factual entity description, official URL, repository and verified 
 | Feature walkthrough | `https://phpledger.com/product/` |
 | Evaluation download | `https://phpledger.com/download/` |
 | Synthetic hands-on demo | `https://phpledger.com/demo/` |
-| Version-specific release | `https://github.com/rmak78/phpledger/releases/tag/v0.1.3-preview` — publish first |
-| Technical conversation | `https://github.com/rmak78/phpledger/discussions` |
+| Version-specific release | `https://github.com/phpledger/phpledger/releases/tag/v0.1.3-preview` — publish first |
+| Technical conversation | `https://github.com/phpledger/phpledger/discussions` |
 
 Social links may use `utm_source=linkedin|x|facebook|instagram|youtube`, `utm_medium=social`, `utm_campaign=preview-0-1-3`, and a descriptive `utm_content` such as `expense-to-journal`. Use clean canonical URLs for directory entries and HN. UTM parameters are labels, not an installed analytics system; no client tracking or conversion attribution is claimed.
 
@@ -137,7 +137,7 @@ All version-specific text below is a **draft for the verified 0.1.3 publication*
 >
 > We are looking for concrete feedback on installation, access isolation, report reconciliation and the clarity of the UI. Please use synthetic examples and sanitized logs.
 >
-> Source and contributor guidance: https://github.com/rmak78/phpledger
+> Source and contributor guidance: https://github.com/phpledger/phpledger
 
 ### X: short post and five-part thread
 
@@ -147,7 +147,7 @@ All version-specific text below is a **draft for the verified 0.1.3 publication*
 2. Follow an account from its opening balance through each movement to the closing balance. Source links help explain the numbers; journal review shows cumulative debits and credits.
 3. Opening cutover, period administration, bank reconciliation and CSV reports now sit alongside the central posting and linked-reversal workflow.
 4. Optional cash POS is enabled per company. Existing receipts remain readable after disablement. Tax, inventory/COGS, credit sales and card processing are outside this showcase.
-5. Next: API/MCP reads, controlled commands, then AR/AP. Accountant and user review remain open. Try it and share a concrete workflow problem: https://github.com/rmak78/phpledger/discussions
+5. Next: API/MCP reads, controlled commands, then AR/AP. Accountant and user review remain open. Try it and share a concrete workflow problem: https://github.com/phpledger/phpledger/discussions
 
 ### Facebook
 
@@ -184,7 +184,7 @@ Use actual release captures, the supplied logo and the existing brand colors. Ke
 
 **Shot order:** 0–8s identity/preview label; 8–23s account statement and source; 23–36s journal and reconciliation; 36–46s report export; 46–54s optional POS boundary; 54–60s demo/download. Capture the deployed version after release; keep identifiers synthetic and leave the actual version label visible. Add captions and a transcript.
 
-**Description:** PHP Ledger 0.1.3-preview walkthrough using fictional books. Download, requirements and limitations: https://phpledger.com/download/ · Demo: https://phpledger.com/demo/ · Source: https://github.com/rmak78/phpledger. This is a development preview, with country-neutral reporting and later API/MCP and AR/AP work.
+**Description:** PHP Ledger 0.1.3-preview walkthrough using fictional books. Download, requirements and limitations: https://phpledger.com/download/ · Demo: https://phpledger.com/demo/ · Source: https://github.com/phpledger/phpledger. This is a development preview, with country-neutral reporting and later API/MCP and AR/AP work.
 
 ## Community and directory kit
 
@@ -210,7 +210,7 @@ Use actual release captures, the supplied logo and the existing brand colors. Ke
 
 Check whether a prior Show HN exists and whether the current work meets the [Show HN guidelines](https://news.ycombinator.com/showhn.html): a usable project, maker available for discussion, no coordinated upvotes, and no routine point-release announcement presented as a new project. Verify demo capacity before choosing a time; publication popularity and uptime are not guaranteed.
 
-**Reddit/community draft:** I maintain PHP Ledger, a PHP/MySQL accounting development preview. I am sharing it for feedback on [installation and code structure / self-hosting and backups / contributing to an accounting core]. It has a synthetic demo and downloadable package. The current scope includes journals, running account balances, opening cutover, bank reconciliation and CSV reports. API/MCP reads are next; customer/vendor subledgers, tax and stock remain future work. Source and limitations: https://github.com/rmak78/phpledger. What would make this evaluation more useful in your workflow?
+**Reddit/community draft:** I maintain PHP Ledger, a PHP/MySQL accounting development preview. I am sharing it for feedback on [installation and code structure / self-hosting and backups / contributing to an accounting core]. It has a synthetic demo and downloadable package. The current scope includes journals, running account balances, opening cutover, bank reconciliation and CSV reports. API/MCP reads are next; customer/vendor subledgers, tax and stock remain future work. Source and limitations: https://github.com/phpledger/phpledger. What would make this evaluation more useful in your workflow?
 
 Adapt the bracketed topic to each community and check its rules, promotion frequency and megathread requirements on the actual day. Do not cross-post identical text on a timer. No posts or moderator messages were sent.
 

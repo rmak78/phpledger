@@ -2,11 +2,11 @@
 
 **Published and live on 18 September 2026.**
 
-- GitHub prerelease: https://github.com/rmak78/phpledger/releases/tag/v0.6.0-preview
+- GitHub prerelease: https://github.com/phpledger/phpledger/releases/tag/v0.6.0-preview
 - Live demo: https://phpledger.com/demo/
 - Downloads: https://phpledger.com/download/
-- Wiki: https://github.com/rmak78/phpledger/wiki/Release-0.6.0-preview
-- Media kit: https://github.com/rmak78/phpledger/releases/download/v0.6.0-preview/phpledger-0.6.0-preview-media-kit.zip
+- Wiki: https://github.com/phpledger/phpledger/wiki/Release-0.6.0-preview
+- Media kit: https://github.com/phpledger/phpledger/releases/download/v0.6.0-preview/phpledger-0.6.0-preview-media-kit.zip
 
 The owner instructed publication of the current preview after the remaining interface/acceptance gaps were described. Those gaps are disclosed in the release notes, package README, media kit and public documentation. No stable-release, accounting sign-off or complete visual/accessibility acceptance claim is made.
 

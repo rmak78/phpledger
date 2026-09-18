@@ -1,6 +1,6 @@
 ## Current package: 1.0.0
 
-**1.0.0**, published 18 September 2026, is the first stable release. [Download 1.0.0](https://github.com/rmak78/phpledger/releases/tag/v1.0.0) and its [matching media kit](https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip). Automated test suites, fault-injection update/recovery tests, exact-artifact install/upgrade/recovery checks and developer-operated browser checks back this release. Independent accounting review, independent security review, supervised pilots with a real month-end close, unfamiliar-operator installation observation and restricted shared-host recovery certification have **not** happened; these continue as post-release commitments. See [[Release 1.0.0|Release-1.0.0]].
+**1.0.0**, published 18 September 2026, is the first stable release. [Download 1.0.0](https://github.com/phpledger/phpledger/releases/tag/v1.0.0) and its [matching media kit](https://github.com/phpledger/phpledger/releases/download/v1.0.0/phpledger-1.0.0-media-kit.zip). Automated test suites, fault-injection update/recovery tests, exact-artifact install/upgrade/recovery checks and developer-operated browser checks back this release. Independent accounting review, independent security review, supervised pilots with a real month-end close, unfamiliar-operator installation observation and restricted shared-host recovery certification have **not** happened; these continue as post-release commitments. See [[Release 1.0.0|Release-1.0.0]].
 
 # From a transaction to an explainable balance
 

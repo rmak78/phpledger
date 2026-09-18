@@ -7,7 +7,7 @@ PHP Ledger is open-source, self-hosted double-entry accounting software with a s
 In scope:
 
 - The modern application in `www/phpledger`.
-- The release package from the [v0.1.0-preview release](https://github.com/rmak78/phpledger/releases/tag/v0.1.0-preview): `phpledger-0.1.0-preview.zip` and its `.sha256` file.
+- The release package from the [v0.1.0-preview release](https://github.com/phpledger/phpledger/releases/tag/v0.1.0-preview): `phpledger-0.1.0-preview.zip` and its `.sha256` file.
 - The website at https://phpledger.com/ and the public demo at https://phpledger.com/demo/.
 
 Out of scope:
@@ -18,7 +18,7 @@ Out of scope:
 
 ## How to report
 
-- Preferred: [open a private vulnerability report on GitHub](https://github.com/rmak78/phpledger/security/advisories/new).
+- Preferred: [open a private vulnerability report on GitHub](https://github.com/phpledger/phpledger/security/advisories/new).
 - Alternatively, email [rmak78@gmail.com](mailto:rmak78@gmail.com) with the subject "PHP Ledger security".
 
 Please do not post exploit details, screenshots of real data or credentials anywhere public.

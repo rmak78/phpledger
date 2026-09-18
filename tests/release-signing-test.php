@@ -26,7 +26,7 @@ function signing_zip(string $path, array $files): void {
     $zip->close();
 }
 try {
-    signing_assert(pl_update_download_url_allowed('https://github.com/rmak78/phpledger/releases/download/v1.0.0/phpledger-1.0.0.zip'));
+    signing_assert(pl_update_download_url_allowed('https://github.com/phpledger/phpledger/releases/download/v1.0.0/phpledger-1.0.0.zip'));
     signing_assert(pl_update_download_url_allowed('https://release-assets.githubusercontent.com/example.zip?token=synthetic'));
     foreach (['http://github.com/release.zip', 'https://127.0.0.1/release.zip', 'https://github.com.evil.invalid/file', 'https://user:pass@github.com/file', 'https://github.com:8443/file', 'https://github.com/file#fragment'] as $unsafeUrl) {
         signing_assert(!pl_update_download_url_allowed($unsafeUrl));
