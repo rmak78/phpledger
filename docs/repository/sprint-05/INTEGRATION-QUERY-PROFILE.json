@@ -1,0 +1,104 @@
+{
+  "mysql": "8.4.9",
+  "fixture": {
+    "company": 54,
+    "book": 54,
+    "actor": 48,
+    "name": "Integration Acceptance 1789484963296",
+    "bank": 323,
+    "statement": 18
+  },
+  "cases": {
+    "transactions": {
+      "service_ms": 1.446145,
+      "query_count": 5,
+      "plans": [
+        {
+          "query": "SELECT COUNT(*) FROM pl_documents WHERE company_id = ? AND book_id = ?",
+          "runtime_ms": 0.40102,
+          "plan": "-> Aggregate: count(0)  (cost=1.45 rows=1) (actual time=0.0135..0.0136 rows=1 loops=1)\n    -> Covering index lookup on pl_documents using fk_document_book (book_id=54, company_id=54)  (cost=0.854 rows=6) (actual time=0.011..0.012 rows=6 loops=1)\n"
+        },
+        {
+          "query": "SELECT COUNT(*) AS total, COALESCE(SUM(d.amount), 0) AS total_amount FROM pl_documents d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = ? AND d.book_id = ?",
+          "runtime_ms": 0.30303,
+          "plan": "-> Aggregate: sum(d.amount), count(0)  (cost=1.83 rows=1) (actual time=0.0223..0.0224 rows=1 loops=1)\n    -> Nested loop left join  (cost=1.77 rows=0.6) (actual time=0.0106..0.0186 rows=6 loops=1)\n        -> Filter: (d.company_id = 54)  (cost=1.56 rows=0.6) (actual time=0.00847..0.0128 rows=6 loops=1)\n            -> Index lookup on d using uq_documents_creation (book_id=54)  (cost=1.56 rows=6) (actual time=0.00803..0.012 rows=6 loops=1)\n        -> Single-row covering index lookup on r using uq_journals_reversal (reversal_of_id=d.journal_id)  (cost=0.417 rows=1) (actual time=645e-6..645e-6 rows=0 loops=6)\n"
+        },
+        {
+          "query": "SELECT d.*, r.id AS reversal_journal_id FROM pl_documents d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = ? AND d.book_id = ? ORDER BY d.document_date DESC, d.id ASC LIMIT ? OFFSET ?",
+          "runtime_ms": 0.242949,
+          "plan": "-> Limit: 25 row(s)  (cost=2.31 rows=6) (actual time=0.0244..0.0271 rows=6 loops=1)\n    -> Nested loop left join  (cost=2.31 rows=6) (actual time=0.0241..0.0265 rows=6 loops=1)\n        -> Sort: d.document_date DESC, d.id, limit input to 25 row(s) per chunk  (cost=1.56 rows=6) (actual time=0.0207..0.0216 rows=6 loops=1)\n            -> Filter: (d.company_id = 54)  (cost=1.56 rows=6) (actual time=0.00874..0.0138 rows=6 loops=1)\n                -> Index lookup on d using uq_documents_creation (book_id=54)  (cost=1.56 rows=6) (actual time=0.00836..0.0131 rows=6 loops=1)\n        -> Single-row covering index lookup on r using uq_journals_reversal (reversal_of_id=d.journal_id)  (cost=0.417 rows=1) (actual time=608e-6..608e-6 rows=0 loops=6)\n"
+        }
+      ]
+    },
+    "general_journals": {
+      "service_ms": 1.527262,
+      "query_count": 5,
+      "plans": [
+        {
+          "query": "SELECT COUNT(*) FROM pl_general_drafts WHERE company_id = ? AND book_id = ?",
+          "runtime_ms": 0.221968,
+          "plan": "-> Aggregate: count(0)  (cost=6.67 rows=1) (actual time=0.00826..0.0083 rows=1 loops=1)\n    -> Covering index lookup on pl_general_drafts using fk_general_book (book_id=54, company_id=54)  (cost=3.47 rows=32) (actual time=0.00477..0.00665 rows=32 loops=1)\n"
+        },
+        {
+          "query": "SELECT COUNT(*) FROM pl_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = ? AND d.book_id = ? AND (LOCATE(?, d.description) > 0 OR LOCATE(?, d.reference) > 0 OR LOCATE(?, CONCAT('GJ-', LPAD(d.id, 6, '0'))) > 0)",
+          "runtime_ms": 0.303984,
+          "plan": "-> Aggregate: count(0)  (cost=9.76 rows=1) (actual time=0.0534..0.0535 rows=1 loops=1)\n    -> Nested loop left join  (cost=9.44 rows=3.2) (actual time=0.012..0.0516 rows=16 loops=1)\n        -> Filter: ((d.company_id = 54) and ((locate('Visible',d.`description`) > 0) or (locate('Visible',d.`reference`) > 0) or (locate('VISIBLE',concat('GJ-',lpad(d.id,6,'0'))) > 0)))  (cost=8.32 rows=3.2) (actual time=0.00948..0.0408 rows=16 loops=1)\n            -> Index lookup on d using uq_general_creation (book_id=54)  (cost=8.32 rows=32) (actual time=0.00818..0.0278 rows=32 loops=1)\n        -> Single-row covering index lookup on r using uq_journals_reversal (reversal_of_id=d.journal_id)  (cost=0.281 rows=1) (actual time=548e-6..548e-6 rows=0 loops=16)\n"
+        },
+        {
+          "query": "SELECT d.*, r.id AS reversal_journal_id FROM pl_general_drafts d LEFT JOIN pl_journals r ON r.reversal_of_id = d.journal_id WHERE d.company_id = ? AND d.book_id = ? AND (LOCATE(?, d.description) > 0 OR LOCATE(?, d.reference) > 0 OR LOCATE(?, CONCAT('GJ-', LPAD(d.id, 6, '0'))) > 0) ORDER BY d.document_date DESC, d.id DESC LIMIT ? OFFSET ?",
+          "runtime_ms": 0.279188,
+          "plan": "-> Limit: 25 row(s)  (cost=9.44 rows=3.2) (actual time=0.0351..0.0815 rows=16 loops=1)\n    -> Nested loop left join  (cost=9.44 rows=3.2) (actual time=0.0348..0.0802 rows=16 loops=1)\n        -> Filter: ((d.company_id = 54) and ((locate('Visible',d.`description`) > 0) or (locate('Visible',d.`reference`) > 0) or (locate('VISIBLE',concat('GJ-',lpad(d.id,6,'0'))) > 0)))  (cost=8.32 rows=3.2) (actual time=0.0321..0.0689 rows=16 loops=1)\n            -> Index lookup on d using ix_general_list (book_id=54) (reverse)  (cost=8.32 rows=32) (actual time=0.00576..0.0346 rows=32 loops=1)\n        -> Single-row covering index lookup on r using uq_journals_reversal (reversal_of_id=d.journal_id)  (cost=0.281 rows=1) (actual time=570e-6..570e-6 rows=0 loops=16)\n"
+        }
+      ]
+    },
+    "account": {
+      "service_ms": 4.346825,
+      "query_count": 9,
+      "plans": [
+        {
+          "query": "SELECT COALESCE(SUM(l.debit - l.credit), 0) FROM pl_journal_lines l JOIN pl_journals j ON j.id = l.journal_id AND j.company_id = l.company_id AND j.book_id = l.book_id WHERE l.account_id = ? AND l.company_id = ? AND l.book_id = ? AND j.journal_date < ?",
+          "runtime_ms": 0.19908,
+          "plan": "-> Aggregate: sum((l.debit - l.credit))  (cost=0.795 rows=1) (actual time=0.0113..0.0115 rows=1 loops=1)\n    -> Nested loop inner join  (cost=0.794 rows=0.00883) (actual time=0.00959..0.00959 rows=0 loops=1)\n        -> Filter: (j.company_id = 54)  (cost=0.71 rows=0.1) (actual time=0.00832..0.00832 rows=0 loops=1)\n            -> Index range scan on j using ix_journals_report over (book_id = 54 AND journal_date < '2026-01-01'), with index condition: ((j.book_id = 54) and (j.journal_date < DATE'2026-01-01'))  (cost=0.71 rows=1) (actual time=0.00789..0.00789 rows=0 loops=1)\n        -> Filter: ((l.book_id = 54) and (l.company_id = 54) and (l.account_id = 323))  (cost=0.688 rows=0.0883) (never executed)\n            -> Index lookup on l using uq_lines_number (journal_id=j.id)  (cost=0.688 rows=2.4) (never executed)\n"
+        },
+        {
+          "query": "SELECT COUNT(*) AS total, COALESCE(SUM(l.debit), 0) AS debit_movement, COALESCE(SUM(l.credit), 0) AS credit_movement FROM pl_journal_lines l JOIN pl_journals j ON j.id = l.journal_id AND j.company_id = l.company_id AND j.book_id = l.book_id WHERE l.account_id = ? AND l.company_id = ? AND l.book_id = ? AND j.journal_date <= ? AND j.journal_date >= ?",
+          "runtime_ms": 0.275135,
+          "plan": "-> Aggregate: sum(l.credit), sum(l.debit), count(0)  (cost=6.36 rows=1) (actual time=0.122..0.122 rows=1 loops=1)\n    -> Nested loop inner join  (cost=6.36 rows=0.0334) (actual time=0.0351..0.115 rows=34 loops=1)\n        -> Filter: ((j.company_id = 54) and (j.journal_date <= DATE'2026-02-28') and (j.journal_date >= DATE'2026-01-01'))  (cost=6.04 rows=0.378) (actual time=0.0265..0.0326 rows=34 loops=1)\n            -> Index lookup on j using uq_journals_request (book_id=54)  (cost=6.04 rows=34) (actual time=0.0255..0.0284 rows=34 loops=1)\n        -> Filter: ((l.book_id = 54) and (l.company_id = 54) and (l.account_id = 323))  (cost=0.623 rows=0.0883) (actual time=0.00192..0.00226 rows=1 loops=34)\n            -> Index lookup on l using uq_lines_number (journal_id=j.id)  (cost=0.623 rows=2.4) (actual time=0.0018..0.00204 rows=2 loops=34)\n"
+        },
+        {
+          "query": "SELECT COUNT(*) FROM (SELECT j.id AS journal_id, j.journal_date AS date, j.description, j.source_type, j.source_reference, j.reversal_of_id, l.line_number, l.debit, l.credit, SUM(l.debit - l.credit) OVER (ORDER BY j.journal_date, j.id, l.line_number ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_movement FROM pl_journal_lines l JOIN pl_journals j ON j.id = l.journal_id AND j.company_id = l.company_id AND j.book_id = l.book_id WHERE l.account_id = ? AND l.company_id = ? AND l.book_id = ? AND j.journal_date <= ? AND j.journal_date >= ?) q WHERE LOCATE(?, q.description) > 0 OR LOCATE(?, q.source_reference) > 0 OR LOCATE(?, CONCAT('PL-', LPAD(q.journal_id, 8, '0'))) > 0",
+          "runtime_ms": 1.531124,
+          "plan": "-> Aggregate: count(0)  (cost=2.93..2.93 rows=1) (actual time=0.198..0.198 rows=1 loops=1)\n    -> Filter: ((locate('Visible',q.`description`) > 0) or (locate('Visible',q.source_reference) > 0) or (locate('VISIBLE',concat('PL-',lpad(q.journal_id,8,'0'))) > 0))  (cost=1.36..2.73 rows=2) (actual time=0.185..0.196 rows=16 loops=1)\n        -> Table scan on q  (cost=2.5..2.5 rows=0) (actual time=0.178..0.182 rows=34 loops=1)\n            -> Materialize  (cost=0..0 rows=0) (actual time=0.177..0.177 rows=34 loops=1)\n                -> Window aggregate: sum(`(l.debit - l.credit)`) OVER (ORDER BY j.journal_date,j.id,l.line_number ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)   (actual time=0.15..0.163 rows=34 loops=1)\n                    -> Sort: j.journal_date, j.id, l.line_number  (actual time=0.147..0.149 rows=34 loops=1)\n                        -> Stream results  (cost=6.36 rows=0.0334) (actual time=0.0212..0.137 rows=34 loops=1)\n                            -> Nested loop inner join  (cost=6.36 rows=0.0334) (actual time=0.0171..0.12 rows=34 loops=1)\n                                -> Filter: ((j.company_id = 54) and (j.journal_date <= DATE'2026-02-28') and (j.journal_date >= DATE'2026-01-01'))  (cost=6.04 rows=0.378) (actual time=0.0106..0.0367 rows=34 loops=1)\n                                    -> Index lookup on j using uq_journals_request (book_id=54)  (cost=6.04 rows=34) (actual time=0.0097..0.0321 rows=34 loops=1)\n                                -> Filter: ((l.book_id = 54) and (l.company_id = 54) and (l.account_id = 323))  (cost=0.623 rows=0.0883) (actual time=0.00195..0.0023 rows=1 loops=34)\n                                    -> Index lookup on l using uq_lines_number (journal_id=j.id)  (cost=0.623 rows=2.4) (actual time=0.00183..0.00207 rows=2 loops=34)\n"
+        },
+        {
+          "query": "SELECT q.* FROM (SELECT j.id AS journal_id, j.journal_date AS date, j.description, j.source_type, j.source_reference, j.reversal_of_id, l.line_number, l.debit, l.credit, SUM(l.debit - l.credit) OVER (ORDER BY j.journal_date, j.id, l.line_number ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_movement FROM pl_journal_lines l JOIN pl_journals j ON j.id = l.journal_id AND j.company_id = l.company_id AND j.book_id = l.book_id WHERE l.account_id = ? AND l.company_id = ? AND l.book_id = ? AND j.journal_date <= ? AND j.journal_date >= ?) q WHERE LOCATE(?, q.description) > 0 OR LOCATE(?, q.source_reference) > 0 OR LOCATE(?, CONCAT('PL-', LPAD(q.journal_id, 8, '0'))) > 0 ORDER BY q.running_movement DESC, q.date, q.journal_id, q.line_number LIMIT ? OFFSET ?",
+          "runtime_ms": 0.579834,
+          "plan": "-> Limit: 25 row(s)  (cost=2.6..2.6 rows=0) (actual time=0.201..0.202 rows=16 loops=1)\n    -> Sort: q.running_movement DESC, q.`date`, q.journal_id, q.line_number, limit input to 25 row(s) per chunk  (cost=2.6..2.6 rows=0) (actual time=0.201..0.202 rows=16 loops=1)\n        -> Filter: ((locate('Visible',q.`description`) > 0) or (locate('Visible',q.source_reference) > 0) or (locate('VISIBLE',concat('PL-',lpad(q.journal_id,8,'0'))) > 0))  (cost=2.5..2.5 rows=0) (actual time=0.175..0.186 rows=16 loops=1)\n            -> Table scan on q  (cost=2.5..2.5 rows=0) (actual time=0.17..0.174 rows=34 loops=1)\n                -> Materialize  (cost=0..0 rows=0) (actual time=0.17..0.17 rows=34 loops=1)\n                    -> Window aggregate: sum(`(l.debit - l.credit)`) OVER (ORDER BY j.journal_date,j.id,l.line_number ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)   (actual time=0.145..0.158 rows=34 loops=1)\n                        -> Sort: j.journal_date, j.id, l.line_number  (actual time=0.143..0.145 rows=34 loops=1)\n                            -> Stream results  (cost=6.36 rows=0.0334) (actual time=0.0202..0.134 rows=34 loops=1)\n                                -> Nested loop inner join  (cost=6.36 rows=0.0334) (actual time=0.0171..0.12 rows=34 loops=1)\n                                    -> Filter: ((j.company_id = 54) and (j.journal_date <= DATE'2026-02-28') and (j.journal_date >= DATE'2026-01-01'))  (cost=6.04 rows=0.378) (actual time=0.0107..0.0365 rows=34 loops=1)\n                                        -> Index lookup on j using uq_journals_request (book_id=54)  (cost=6.04 rows=34) (actual time=0.00968..0.0317 rows=34 loops=1)\n                                    -> Filter: ((l.book_id = 54) and (l.company_id = 54) and (l.account_id = 323))  (cost=0.623 rows=0.0883) (actual time=0.00194..0.00228 rows=1 loops=34)\n                                        -> Index lookup on l using uq_lines_number (journal_id=j.id)  (cost=0.623 rows=2.4) (actual time=0.00181..0.00206 rows=2 loops=34)\n"
+        }
+      ]
+    },
+    "bank": {
+      "service_ms": 1.413394,
+      "query_count": 5,
+      "plans": [
+        {
+          "query": "SELECT COUNT(*) FROM pl_bank_statement_rows r LEFT JOIN pl_bank_matches m ON m.row_id = r.id LEFT JOIN pl_journal_lines l ON l.id = m.journal_line_id LEFT JOIN pl_journals j ON j.id = l.journal_id WHERE r.statement_id = ? AND r.company_id = ? AND r.book_id = ?",
+          "runtime_ms": 0.241995,
+          "plan": "-> Aggregate: count(0)  (cost=40.3 rows=1) (actual time=0.0371..0.0371 rows=1 loops=1)\n    -> Nested loop left join  (cost=37.1 rows=32) (actual time=0.0102..0.0351 rows=32 loops=1)\n        -> Nested loop left join  (cost=25.9 rows=32) (actual time=0.00972..0.0302 rows=32 loops=1)\n            -> Nested loop left join  (cost=14.7 rows=32) (actual time=0.00917..0.0253 rows=32 loops=1)\n                -> Covering index lookup on r using fk_bank_row_statement (statement_id=18, company_id=54, book_id=54)  (cost=3.49 rows=32) (actual time=0.00641..0.00926 rows=32 loops=1)\n                -> Single-row index lookup on m using PRIMARY (row_id=r.id)  (cost=0.253 rows=1) (actual time=397e-6..397e-6 rows=0 loops=32)\n            -> Single-row index lookup on l using PRIMARY (id=m.journal_line_id)  (cost=0.253 rows=1) (actual time=61.8e-6..61.8e-6 rows=0 loops=32)\n        -> Single-row covering index lookup on j using PRIMARY (id=l.journal_id)  (cost=0.253 rows=1) (actual time=59.6e-6..59.6e-6 rows=0 loops=32)\n"
+        },
+        {
+          "query": "SELECT r.*, m.journal_line_id, m.matched_at, m.matched_by, l.journal_id, j.journal_date FROM pl_bank_statement_rows r LEFT JOIN pl_bank_matches m ON m.row_id = r.id LEFT JOIN pl_journal_lines l ON l.id = m.journal_line_id LEFT JOIN pl_journals j ON j.id = l.journal_id WHERE r.statement_id = ? AND r.company_id = ? AND r.book_id = ? ORDER BY r.transaction_date ASC, r.line_number LIMIT ? OFFSET ? FOR SHARE",
+          "runtime_ms": 0.267029,
+          "plan": "-> Limit: 25 row(s)  (cost=11.3 rows=25) (actual time=0.0436..0.0624 rows=25 loops=1)\n    -> Nested loop left join  (cost=11.3 rows=32) (actual time=0.0433..0.0612 rows=25 loops=1)\n        -> Nested loop left join  (cost=7.79 rows=32) (actual time=0.0426..0.0572 rows=25 loops=1)\n            -> Nested loop left join  (cost=4.32 rows=32) (actual time=0.042..0.0533 rows=25 loops=1)\n                -> Sort: r.transaction_date, r.line_number, limit input to 25 row(s) per chunk  (cost=0.857 rows=32) (actual time=0.0392..0.0406 rows=25 loops=1)\n                    -> Filter: ((r.book_id = 54) and (r.company_id = 54))  (cost=0.857 rows=32) (actual time=0.0102..0.0307 rows=32 loops=1)\n                        -> Index lookup on r using uq_bank_line_number (statement_id=18)  (cost=0.857 rows=32) (actual time=0.00978..0.0284 rows=32 loops=1)\n                -> Single-row index lookup on m using PRIMARY (row_id=r.id)  (cost=0.344 rows=1) (actual time=412e-6..412e-6 rows=0 loops=25)\n            -> Single-row index lookup on l using PRIMARY (id=m.journal_line_id)  (cost=0.344 rows=1) (actual time=69e-6..69e-6 rows=0 loops=25)\n        -> Single-row index lookup on j using PRIMARY (id=l.journal_id)  (cost=0.344 rows=1) (actual time=66.9e-6..66.9e-6 rows=0 loops=25)\n"
+        }
+      ]
+    }
+  },
+  "scope": "Local synthetic small fixture: 6 transactions, 32 general sources, 34 bank movements, 32 bank statement rows. Single-run profiling, not a capacity or production latency claim. No financial indexes added.",
+  "before_query_counts": {
+    "transactions": 5,
+    "general_journals": 53,
+    "account": 39,
+    "bank": 5
+  }
+}

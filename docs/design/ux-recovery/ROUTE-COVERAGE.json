@@ -1,0 +1,3469 @@
+{
+  "schema_version": "ux-route-coverage-1",
+  "review_date": "2026-09-16",
+  "status": "Local untracked review artifact; no implementation acceptance or production claim",
+  "source_commit": "45fbcd7014dd180a2aeb15093c1e1c573b0a7a9b",
+  "scope": "Current application GET dispatch and the three current UX audits, plus two read-only account-form captures. Static marketing pages, prototype pages, static assets, POST-only actions and past release screenshots are not counted as active GET screens.",
+  "count_rules": [
+    "HTML route coverage requires at least one accepted visual state, including invalid authorization for /oauth/authorize; it does not mean its successful workflow is audited.",
+    "Query variants share their registered path. Full-page and focused images are not extra routes.",
+    "The /tables handler is JSON, /reports/export is CSV and / is a redirect; none is an HTML product screen.",
+    "Pre-router canonical health/API/MCP/metadata GET endpoints are counted separately. Unknown wildcard URLs and metadata suffix aliases are not additional named endpoints.",
+    "Generic HTTP 404, POST-only GET 405 and expired demo 503 are supplemental global states, not extra HTML routes."
+  ],
+  "summary": {
+    "registered_web_routes_all_methods": 54,
+    "registered_web_get_routes": 41,
+    "html_get_routes": 38,
+    "html_routes_with_accepted_state": 38,
+    "wholly_uncaptured_html_routes": [],
+    "registered_non_html_get_routes": 3,
+    "additional_pre_router_canonical_get_endpoints": 16,
+    "total_canonical_get_surfaces": 57,
+    "api_read_operations": 11,
+    "accepted_images": 186,
+    "full_page_state_groups_at_three_widths": 59,
+    "focused_viewport_images": 9,
+    "coverage_claim": "All 38 HTML route paths have at least one accepted captured state at 1440/768/390. Workflow, successful OAuth, error, permission, accessibility and financial validation remain incomplete."
+  },
+  "sources": [
+    {
+      "path": "www/phpledger/public/index.php",
+      "sha256": "569c9525f54d59f0093d714982b90600379256d12a2060683a3660eff11c4ead"
+    },
+    {
+      "path": "www/phpledger/includes/functions/table_web_functions.php",
+      "sha256": "d99c64c95b968249a346f2c6da9f6041cc7f193cee8848cf64d69f59fe326b78"
+    },
+    {
+      "path": "www/phpledger/includes/functions/integration_http_functions.php",
+      "sha256": "d3d15d0aa4213d3ad104bf77a8a605fb35edb53191fcdaab8bb0df48a1c9ca24"
+    },
+    {
+      "path": "www/phpledger/includes/functions/read_functions.php",
+      "sha256": "bdad436b3760bcfa1f17347d9a712733f984e5bb9f679a7d8e93e75b903ec9cc"
+    },
+    {
+      "path": "www/phpledger/includes/functions/mcp_functions.php",
+      "sha256": "8d420ca3fa22a01b67506633649fe0f4a6b85ce3fa4edde4105f54e41d2887c4"
+    },
+    {
+      "path": "docs/design/ux-recovery/SETUP-DAILY-AUDIT.md",
+      "sha256": "e8189027638fa95dbf3312448e8a951c69505c88fa9a0f8839156795d537fa92"
+    },
+    {
+      "path": "docs/design/ux-recovery/OPERATIONS-AUDIT.md",
+      "sha256": "524ec1efaeaea2e41ae5e1b2bde53d85560990b46721e22f759bb3ef0b75d504"
+    },
+    {
+      "path": "docs/design/ux-recovery/REPORTING-ADMIN-AUDIT.md",
+      "sha256": "e25fa42a9f84a13fdf0c5ad34a568ed7b39d62caf59ecbb367bc2271d9e28538"
+    }
+  ],
+  "web_get_routes": [
+    {
+      "path": "/tax",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-tax"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Empty tax catalogue; inactive code and dated-rate history",
+        "Inclusive-price setting and sample calculation",
+        "Validation, stale revision and read-only permission states"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/ar",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "30-ar-list",
+        "30-ar-new",
+        "30-ar-draft",
+        "30-ar-posted",
+        "30-ar-product-selected",
+        "30-keyboard-skip"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Draft edit; linked customer credit; corrected and voided document histories",
+        "Successful partial/final receipt and reversed receipt UX",
+        "Foreign-currency/manual-rate, inclusive tax and print states",
+        "Empty register, read-only permission and failed/stale submission recovery"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/ap",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "30-ap-list",
+        "30-ap-bill"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "New bill and draft edit/review",
+        "Linked supplier credit and correction/void history",
+        "Successful payment, final settlement and reversed payment UX",
+        "Foreign-currency, tax-inclusive and print states; empty/read-only/error recovery"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/parties",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "30-parties",
+        "30-party-form"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Existing party detail/edit, customer/vendor/both roles and contacts",
+        "Duplicate identity/phone validation; empty and read-only states"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/inventory",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "30-inventory",
+        "30-inventory-product",
+        "30-inventory-count"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "New product and nonstock product variants",
+        "Manual receipt, value adjustment and opening-stock preview/confirmation",
+        "Stock count result, stale quantity conflict and shortage recovery",
+        "Disabled module with retained history; empty inventory"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/purchasing",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "30-purchasing-list",
+        "30-purchase-order",
+        "30-purchase-receipt",
+        "30-purchase-new"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Draft edit, confirm and cancelled-order views",
+        "Receive validation/result; receipt-to-bill preview including variance and tax",
+        "Unbilled return and billed return with supplier-credit results",
+        "Stale preview/duplicate action recovery and disabled history"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/opening-conversion",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "08-opening-conversion"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Populated unpaid documents with explicit party mapping",
+        "Balanced preview, mismatch and ambiguous-basis errors",
+        "Confirmed immutable allocations and duplicate/stale confirmation recovery"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/",
+      "methods": [
+        "GET"
+      ],
+      "surface": "redirect",
+      "coverage": "local-read-checked",
+      "evidence_group_ids": [
+        "26-public-demo"
+      ],
+      "local_read_checks": [
+        {
+          "path": "/",
+          "status": 303,
+          "content_type": "text/html; charset=utf-8",
+          "location": "/companies",
+          "content_disposition": null
+        }
+      ],
+      "missing_state_cases": [
+        "Anonymous and demo-authenticated redirect responses"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": []
+    },
+    {
+      "path": "/login",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "01-login",
+        "27-demo-chooser"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Invalid credentials, throttling and retained-input recovery",
+        "Expired authenticated session and valid OAuth resume"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/companies",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "02-companies"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "No companies, many companies and non-owner memberships",
+        "Keyboard selection and contextual return after switching companies"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/onboarding",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "03-onboarding",
+        "04-setup-validation",
+        "05-setup-preview"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Sample-business and Bring past records setup choices",
+        "Creation success, repeated/stale confirmation and permission failure",
+        "Invalid dates/currency and preserved field-level errors"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/setup/review",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "06-setup-review"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Zero-opening confirmation path and completed review",
+        "Non-owner and public-demo restrictions"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/transactions",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "09-transactions"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Posted/reversed filters, search, sorting and pagination interaction",
+        "Empty results; non-owner read-only state; retained selection/back navigation"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/transactions/detail",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "12-transaction-detail"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Draft and reversed detail in standalone context",
+        "Posting/reversal validation and final state; expanded correction history"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/opening-balances",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "07-opening-balances"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Expanded CSV/unpaid-document entry, valid balanced preview",
+        "Mismatch/duplicate/error recovery and confirmed/reversed cutover history",
+        "Stale preview and repeat confirmation UX"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/periods",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-periods",
+        "50-periods-viewport"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Expanded create/close/reopen forms and reason validation",
+        "Closed-period posting recovery and read-only history",
+        "Pagination/history discovery with keyboard and screen reader"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/bank-reconciliation",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-bank-reconciliation"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Populated import preview including mismatched and duplicate rows",
+        "Statement detail, candidate matches, match removal and outstanding items",
+        "Completed/reopened/cancelled history and stale revision recovery"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/transactions/new",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "10-expense-new"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Receipt-kind variant, required-input errors and saved draft result",
+        "Inactive/unavailable account choice and keyboard form completion"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/transactions/edit",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "11-expense-edit"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Receipt edit; retained valid bank account in historical expense edit",
+        "Stale revision, validation and save result"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/reports/trial-balance",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-trial-balance"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Alternative as-of dates and empty-period report",
+        "Invalid date, no permission and successful keyboard table scrolling"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/reports/account",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-account-statement-ready",
+        "50-period-drilldown",
+        "50-account-statement-viewport"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "No account selected, inactive account and empty activity",
+        "Search/order/pagination with preserved opening/running balances",
+        "Invalid period, wrong-company account and permission failure"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/journals/detail",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "13-journal-detail"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Reversing, AR/AP settlement, stock and opening journal sources",
+        "Wrong-company/missing journal recovery and long/foreign-currency lines"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/reports/export",
+      "methods": [
+        "GET"
+      ],
+      "surface": "csv-download",
+      "coverage": "local-read-checked",
+      "evidence_group_ids": [],
+      "local_read_checks": [
+        {
+          "path": "/reports/export?report=trial-balance&to=2025-12-31",
+          "status": 200,
+          "content_type": "text/csv; charset=utf-8",
+          "location": null,
+          "content_disposition": "attachment; filename=\"phpledger-trial-balance-book-821-2025-12-31.csv\"",
+          "characters": 1593,
+          "line_count": 32,
+          "first_line": "\"PHP Ledger report\",trial-balance"
+        }
+      ],
+      "missing_state_cases": [
+        "Account, profit-loss and balance-sheet download variants",
+        "CSV financial/content parity, spreadsheet formula-safety and unauthorized export recovery"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": []
+    },
+    {
+      "path": "/reports",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-reports"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Empty/unready company, read-only user and contextual date navigation"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/reports/balance-sheet",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-balance-sheet"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Alternative as-of dates, empty company and retained-earnings drill-down",
+        "Invalid date and permission failure"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/reports/profit-loss",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-profit-loss"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Empty and loss-making periods, custom-date validation",
+        "Report-to-account-to-source-to-report navigation retaining context"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/reports/cash-forecast",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-cash-forecast"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Changed scenario, invalid/negative input and submit result",
+        "Empty cash account and read-only behavior; keyboard/chart alternatives"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/pos",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "19-pos"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Populated cart, quantity edit/remove, search and keyboard product selection",
+        "Disabled/empty catalogue, quota/expiry and interrupted-session states"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/pos/review",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "20-pos-review"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Insufficient/exact cash, cart edit/back and invalid-input recovery",
+        "Duplicate checkout/stale cart and failure/retry states"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/pos/receipt",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "21-pos-receipt"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Actual browser print layout and keyboard print action",
+        "Retry/history context and missing/wrong-company receipt"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/sample-guide",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "22-sample-guide",
+        "28-starter-guide",
+        "29-keyboard-skip"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Other three historical pack guides",
+        "Unsampled company error, mobile exercise navigation and reset recovery"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/help",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "23-help"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Contextual return and keyboard use of help links",
+        "Current feature-copy correction verification after an approved implementation"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/modules",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-modules"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Change preview/confirmation, dependency conflict and disable/re-enable histories",
+        "Required AR/AP hide/show outcomes; read-only and demo restrictions"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/connections",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-connections"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Existing connection list with scopes/expiry/revocation history",
+        "Create consent/review, one-time credential presentation and revoke recovery",
+        "Expired/revoked/restricted-user/demo connection states"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/oauth/authorize",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-oauth-invalid"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Valid client consent with requested scopes and company selection",
+        "Decline, approved redirect and login/resume states",
+        "Client metadata/redirect/PKCE failures distinguished from ordinary access denial"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/tables",
+      "methods": [
+        "GET"
+      ],
+      "surface": "json-data",
+      "coverage": "local-read-checked",
+      "evidence_group_ids": [],
+      "local_read_checks": [
+        {
+          "path": "/tables",
+          "status": 400,
+          "content_type": "application/json; charset=utf-8",
+          "location": null,
+          "content_disposition": null,
+          "keys": [
+            "error"
+          ],
+          "row_count": null,
+          "error": "Your company changed in another tab. Reopen this record in the intended company.",
+          "status_field": null,
+          "records_total": null
+        },
+        {
+          "path": "/tables?table=transactions&company_id=821&book_id=821&length=25&start=0&draw=1&column=0",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8",
+          "location": null,
+          "content_disposition": null,
+          "keys": [
+            "draw",
+            "recordsTotal",
+            "recordsFiltered",
+            "data",
+            "summary"
+          ],
+          "row_count": 3,
+          "error": null,
+          "status_field": null,
+          "records_total": 29
+        },
+        {
+          "path": "/tables?table=account&company_id=821&book_id=821&account_id=5511&as_of=2026-09-15&from=2025-01-01&length=25&start=0&draw=1&column=0",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8",
+          "location": null,
+          "content_disposition": null,
+          "keys": [
+            "draw",
+            "recordsTotal",
+            "recordsFiltered",
+            "data",
+            "summary"
+          ],
+          "row_count": 25,
+          "error": null,
+          "status_field": null,
+          "records_total": 49
+        }
+      ],
+      "missing_state_cases": [
+        "General-journal and bank table JSON variants",
+        "Search/order/page bounds, empty page, stale company and unauthorized states"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": []
+    },
+    {
+      "path": "/accounts",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "50-accounts",
+        "60-account-new",
+        "60-account-detail"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Expanded change history and inactive-account detail",
+        "Duplicate code, purpose/classification mismatch and preserved error inputs",
+        "Successful create/edit, stale revision and read-only/demo restrictions"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/general-journals",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "14-general-journals"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Empty/filter/search/pagination and read-only register"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/general-journals/new",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "15-journal-new"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Add/remove line focus, balancing errors and saved values",
+        "Closed-period and unavailable-account recovery"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/general-journals/edit",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "17-journal-edit"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Validation/stale revision and successful resave",
+        "Posted-source edit redirect and read-only user"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    },
+    {
+      "path": "/general-journals/detail",
+      "methods": [
+        "GET"
+      ],
+      "surface": "html",
+      "coverage": "captured-state",
+      "evidence_group_ids": [
+        "16-journal-draft-success",
+        "18-reversed-journal"
+      ],
+      "local_read_checks": [],
+      "missing_state_cases": [
+        "Ordinary posted detail, full reversal timeline and replacement references",
+        "Posting/reversal action recovery and closed-period permission variants"
+      ],
+      "source": "www/phpledger/public/index.php",
+      "shared_gaps": [
+        "keyboard-screenreader-zoom",
+        "permission-and-scope",
+        "stale-and-error-recovery"
+      ]
+    }
+  ],
+  "pre_router_get_endpoints": [
+    {
+      "path": "/health",
+      "surface": "json-health",
+      "coverage": "local-read-checked",
+      "source": "www/phpledger/public/index.php",
+      "local_read_checks": [
+        {
+          "path": "/health",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8",
+          "location": null,
+          "content_disposition": null,
+          "keys": [
+            "status",
+            "stage"
+          ],
+          "row_count": null,
+          "error": null,
+          "status_field": "ok",
+          "records_total": null
+        }
+      ],
+      "missing_state_cases": [
+        "Dependency-unavailable HTTP 503 and non-GET HTTP 405"
+      ]
+    },
+    {
+      "path": "/.well-known/oauth-protected-resource",
+      "surface": "public-json-metadata",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/integration_http_functions.php",
+      "missing_state_cases": [
+        "Configured resource/issuer response and origin/host error"
+      ],
+      "matcher": "Prefix match; canonical path counted once. Suffix aliases are not extra product screens."
+    },
+    {
+      "path": "/.well-known/oauth-authorization-server",
+      "surface": "public-json-metadata",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/integration_http_functions.php",
+      "missing_state_cases": [
+        "Configured authorization metadata response and origin/host error"
+      ],
+      "matcher": "Prefix match; canonical path counted once. Suffix aliases are not extra product screens."
+    },
+    {
+      "path": "/api/v1/openapi.json",
+      "surface": "public-json-schema",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/integration_http_functions.php",
+      "missing_state_cases": [
+        "Generated schema parity and configured-host response"
+      ]
+    },
+    {
+      "path": "/mcp",
+      "surface": "authenticated-mcp-transport",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/mcp_functions.php",
+      "missing_state_cases": [
+        "GET transport/protocol negotiation, connection expiry, denied scope and demo reset"
+      ],
+      "note": "GET is accepted by HTTP boundary and delegated to the SDK; this does not assert a particular GET stream succeeds without protocol/session requirements."
+    },
+    {
+      "path": "/api/v1/companies",
+      "surface": "authenticated-json-read",
+      "operation": "companies",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/read_functions.php",
+      "missing_state_cases": [
+        "Authorized response and exact scoped arguments",
+        "Invalid/expired credential, denied company/book and invalid arguments",
+        "Pagination/empty response where operation supports paging"
+      ],
+      "note": "Current route catalogue only; earlier integration tests/releases are not current UX capture evidence."
+    },
+    {
+      "path": "/api/v1/capabilities",
+      "surface": "authenticated-json-read",
+      "operation": "capabilities",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/read_functions.php",
+      "missing_state_cases": [
+        "Authorized response and exact scoped arguments",
+        "Invalid/expired credential, denied company/book and invalid arguments",
+        "Pagination/empty response where operation supports paging"
+      ],
+      "note": "Current route catalogue only; earlier integration tests/releases are not current UX capture evidence."
+    },
+    {
+      "path": "/api/v1/accounts",
+      "surface": "authenticated-json-read",
+      "operation": "accounts",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/read_functions.php",
+      "missing_state_cases": [
+        "Authorized response and exact scoped arguments",
+        "Invalid/expired credential, denied company/book and invalid arguments",
+        "Pagination/empty response where operation supports paging"
+      ],
+      "note": "Current route catalogue only; earlier integration tests/releases are not current UX capture evidence."
+    },
+    {
+      "path": "/api/v1/transactions",
+      "surface": "authenticated-json-read",
+      "operation": "transactions",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/read_functions.php",
+      "missing_state_cases": [
+        "Authorized response and exact scoped arguments",
+        "Invalid/expired credential, denied company/book and invalid arguments",
+        "Pagination/empty response where operation supports paging"
+      ],
+      "note": "Current route catalogue only; earlier integration tests/releases are not current UX capture evidence."
+    },
+    {
+      "path": "/api/v1/general-journals",
+      "surface": "authenticated-json-read",
+      "operation": "general_journals",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/read_functions.php",
+      "missing_state_cases": [
+        "Authorized response and exact scoped arguments",
+        "Invalid/expired credential, denied company/book and invalid arguments",
+        "Pagination/empty response where operation supports paging"
+      ],
+      "note": "Current route catalogue only; earlier integration tests/releases are not current UX capture evidence."
+    },
+    {
+      "path": "/api/v1/journal",
+      "surface": "authenticated-json-read",
+      "operation": "journal",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/read_functions.php",
+      "missing_state_cases": [
+        "Authorized response and exact scoped arguments",
+        "Invalid/expired credential, denied company/book and invalid arguments",
+        "Pagination/empty response where operation supports paging"
+      ],
+      "note": "Current route catalogue only; earlier integration tests/releases are not current UX capture evidence."
+    },
+    {
+      "path": "/api/v1/source-detail",
+      "surface": "authenticated-json-read",
+      "operation": "source_detail",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/read_functions.php",
+      "missing_state_cases": [
+        "Authorized response and exact scoped arguments",
+        "Invalid/expired credential, denied company/book and invalid arguments",
+        "Pagination/empty response where operation supports paging"
+      ],
+      "note": "Current route catalogue only; earlier integration tests/releases are not current UX capture evidence."
+    },
+    {
+      "path": "/api/v1/trial-balance",
+      "surface": "authenticated-json-read",
+      "operation": "trial_balance",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/read_functions.php",
+      "missing_state_cases": [
+        "Authorized response and exact scoped arguments",
+        "Invalid/expired credential, denied company/book and invalid arguments",
+        "Pagination/empty response where operation supports paging"
+      ],
+      "note": "Current route catalogue only; earlier integration tests/releases are not current UX capture evidence."
+    },
+    {
+      "path": "/api/v1/profit-loss",
+      "surface": "authenticated-json-read",
+      "operation": "profit_loss",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/read_functions.php",
+      "missing_state_cases": [
+        "Authorized response and exact scoped arguments",
+        "Invalid/expired credential, denied company/book and invalid arguments",
+        "Pagination/empty response where operation supports paging"
+      ],
+      "note": "Current route catalogue only; earlier integration tests/releases are not current UX capture evidence."
+    },
+    {
+      "path": "/api/v1/balance-sheet",
+      "surface": "authenticated-json-read",
+      "operation": "balance_sheet",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/read_functions.php",
+      "missing_state_cases": [
+        "Authorized response and exact scoped arguments",
+        "Invalid/expired credential, denied company/book and invalid arguments",
+        "Pagination/empty response where operation supports paging"
+      ],
+      "note": "Current route catalogue only; earlier integration tests/releases are not current UX capture evidence."
+    },
+    {
+      "path": "/api/v1/account-statement",
+      "surface": "authenticated-json-read",
+      "operation": "account_statement",
+      "coverage": "source-only",
+      "source": "www/phpledger/includes/functions/read_functions.php",
+      "missing_state_cases": [
+        "Authorized response and exact scoped arguments",
+        "Invalid/expired credential, denied company/book and invalid arguments",
+        "Pagination/empty response where operation supports paging"
+      ],
+      "note": "Current route catalogue only; earlier integration tests/releases are not current UX capture evidence."
+    }
+  ],
+  "global_error_state_group_ids": [
+    "24-not-found",
+    "25-wrong-method",
+    "26-public-demo"
+  ],
+  "shared_missing_cases": [
+    {
+      "id": "keyboard-screenreader-zoom",
+      "cases": [
+        "Full task completion using keyboard, focus after validation/dynamic line changes",
+        "Screen-reader names/errors/status announcements",
+        "200% and 400% zoom, measured contrast, reduced motion and touch target review"
+      ]
+    },
+    {
+      "id": "permission-and-scope",
+      "cases": [
+        "Reader/non-owner, wrong-company object, stale selected company and expired session",
+        "Public-demo restricted grants, quota/refresh and recovery on every relevant lane"
+      ]
+    },
+    {
+      "id": "stale-and-error-recovery",
+      "cases": [
+        "Retained inputs and actionable field errors",
+        "Stale revisions/previews, idempotent repeat action and conflict recovery",
+        "Empty/large-volume states, pagination, offline/network interruption and safe retry"
+      ]
+    }
+  ],
+  "evidence_groups": [
+    {
+      "id": "01-login",
+      "state": "Anonymous sign-in form",
+      "route": "/login",
+      "captured_url": "http://127.0.0.1:18211/login",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/01-login-1440.png",
+          "width_px": 1440,
+          "height_px": 1000,
+          "sha256": "cba9e4a01099139f5fbe4beb72f3a267b36520e650c7e32042c64873a94359e0",
+          "original": "output/playwright/ux-audit/01-login-1440.png"
+        },
+        {
+          "file": "evidence/01-login-768.png",
+          "width_px": 768,
+          "height_px": 1000,
+          "sha256": "8d6aa8c8dc3eda8484461a6b204a20301e0ac2a6b81815332c1dacb57266af82",
+          "original": "output/playwright/ux-audit/01-login-768.png"
+        },
+        {
+          "file": "evidence/01-login-390.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "c6cc33a7c55ace6d791c18fb5ab83885cfd7308f6157ed9417aaf0006e496dd6",
+          "original": "output/playwright/ux-audit/01-login-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/01-login-capture.txt"
+    },
+    {
+      "id": "02-companies",
+      "state": "Owner company chooser with ordinary and sample companies",
+      "route": "/companies",
+      "captured_url": "http://127.0.0.1:18211/companies",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/02-companies-1440.png",
+          "width_px": 1440,
+          "height_px": 1039,
+          "sha256": "1f8965d74899864f1b3350b0f73aa4ee00e5b1061833a2b78f0dd7344ccc9564",
+          "original": "output/playwright/ux-audit/02-companies-1440.png"
+        },
+        {
+          "file": "evidence/02-companies-768.png",
+          "width_px": 768,
+          "height_px": 1216,
+          "sha256": "504acfa8fbfd9b6a6e320d2afc5d1ed2ac61ccf3bace864fad3cd8537c347880",
+          "original": "output/playwright/ux-audit/02-companies-768.png"
+        },
+        {
+          "file": "evidence/02-companies-390.png",
+          "width_px": 390,
+          "height_px": 1654,
+          "sha256": "385830a207188d619b769417499187c8759f5c52e5ff6814cd63adfea7fc181d",
+          "original": "output/playwright/ux-audit/02-companies-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/02-companies-capture.txt"
+    },
+    {
+      "id": "03-onboarding",
+      "state": "Initial business setup form",
+      "route": "/onboarding",
+      "captured_url": "http://127.0.0.1:18211/onboarding",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/03-onboarding-1440.png",
+          "width_px": 1440,
+          "height_px": 2219,
+          "sha256": "521a8a85e115e96c2e340aeb36950446a7a90df9b0fe5033f485d9877741c87f",
+          "original": "output/playwright/ux-audit/03-onboarding-1440.png"
+        },
+        {
+          "file": "evidence/03-onboarding-768.png",
+          "width_px": 768,
+          "height_px": 2347,
+          "sha256": "7be28a5e81847d6e2dd11d36d2707e01744aa228a1a343d35df255898d7496ff",
+          "original": "output/playwright/ux-audit/03-onboarding-768.png"
+        },
+        {
+          "file": "evidence/03-onboarding-390.png",
+          "width_px": 390,
+          "height_px": 3025,
+          "sha256": "718c93816d153c04948912135f8de57b0de915ff2c088c1f5d1ddf98122c0e55",
+          "original": "output/playwright/ux-audit/03-onboarding-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/03-onboarding-capture.txt"
+    },
+    {
+      "id": "04-setup-validation",
+      "state": "Required zero-balance confirmation missing; retained values and HTTP 422",
+      "route": "/onboarding",
+      "captured_url": "http://127.0.0.1:18211/onboarding",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/04-setup-validation-1440.png",
+          "width_px": 1440,
+          "height_px": 2367,
+          "sha256": "15852cbdf867ec72d86bd1cc939a43c1b7eae7f6973e9e088719c17f0f8e0bb0",
+          "original": "output/playwright/ux-audit/04-setup-validation-1440.png"
+        },
+        {
+          "file": "evidence/04-setup-validation-768.png",
+          "width_px": 768,
+          "height_px": 2494,
+          "sha256": "382678c4e3cb6df0faf711799f6fbb59cf940b13185a64d89702a601688ccf3e",
+          "original": "output/playwright/ux-audit/04-setup-validation-768.png"
+        },
+        {
+          "file": "evidence/04-setup-validation-390.png",
+          "width_px": 390,
+          "height_px": 3218,
+          "sha256": "e6200b52bdc13de833196b8baa23911f2c0cf482464044720c00be8fa1d4c9f3",
+          "original": "output/playwright/ux-audit/04-setup-validation-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/04-setup-validation-capture.txt"
+    },
+    {
+      "id": "05-setup-preview",
+      "state": "Review neutral starter chart before company creation",
+      "route": "/onboarding",
+      "captured_url": "http://127.0.0.1:18211/onboarding?step=preview",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/05-setup-preview-1440.png",
+          "width_px": 1440,
+          "height_px": 1344,
+          "sha256": "8ae42262e8f4eb2d639dca290273aece0dbfec63dd5309b6bc7fe3487959d4f7",
+          "original": "output/playwright/ux-audit/05-setup-preview-1440.png"
+        },
+        {
+          "file": "evidence/05-setup-preview-768.png",
+          "width_px": 768,
+          "height_px": 1368,
+          "sha256": "9575b5ae0f073497d9af9eb3332dc530ff5ccb1b1a0938cf535bc491872a41f7",
+          "original": "output/playwright/ux-audit/05-setup-preview-768.png"
+        },
+        {
+          "file": "evidence/05-setup-preview-390.png",
+          "width_px": 390,
+          "height_px": 1768,
+          "sha256": "d3199dcb9720e4b0da7f18d559056f5819bccb98e2c171038b3556e1bf79fffc",
+          "original": "output/playwright/ux-audit/05-setup-preview-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/05-setup-preview-capture.txt"
+    },
+    {
+      "id": "06-setup-review",
+      "state": "Existing company requires opening reconciliation",
+      "route": "/setup/review",
+      "captured_url": "http://127.0.0.1:18211/setup/review",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/06-setup-review-1440.png",
+          "width_px": 1440,
+          "height_px": 1090,
+          "sha256": "70731c1882803e6fdff8cd81daa08098463551ea65ebb494d3baf2737e839fdc",
+          "original": "output/playwright/ux-audit/06-setup-review-1440.png"
+        },
+        {
+          "file": "evidence/06-setup-review-768.png",
+          "width_px": 768,
+          "height_px": 1143,
+          "sha256": "560ab06f5a6a4c3edc678b621ed03ee6fa2c6893993027cc48f1bbeaab561d98",
+          "original": "output/playwright/ux-audit/06-setup-review-768.png"
+        },
+        {
+          "file": "evidence/06-setup-review-390.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "6f1339ce74228005ed4c512bc079af7afa85e9afac5bf1a479589d789341526f",
+          "original": "output/playwright/ux-audit/06-setup-review-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/06-setup-review-capture.txt"
+    },
+    {
+      "id": "07-opening-balances",
+      "state": "Initial account/debit/credit entry with CSV and unpaid-document disclosures collapsed",
+      "route": "/opening-balances",
+      "captured_url": "http://127.0.0.1:18211/opening-balances",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/07-opening-balances-1440.png",
+          "width_px": 1440,
+          "height_px": 1760,
+          "sha256": "ce1a5e36546e7d07e50666db97a4c5291df1f005fff24062b3f06561f39ea483",
+          "original": "output/playwright/ux-audit/07-opening-balances-1440.png"
+        },
+        {
+          "file": "evidence/07-opening-balances-768.png",
+          "width_px": 768,
+          "height_px": 1882,
+          "sha256": "91d88a6bec4158cb0f6192e420324135223871adbc1f4082c0e46e32cd20eaa0",
+          "original": "output/playwright/ux-audit/07-opening-balances-768.png"
+        },
+        {
+          "file": "evidence/07-opening-balances-390.png",
+          "width_px": 390,
+          "height_px": 2333,
+          "sha256": "d6414a87686594fb6b1be63b348f9e59f8f378b6d4fe3e31858dc60a540e23d3",
+          "original": "output/playwright/ux-audit/07-opening-balances-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/07-opening-balances-capture.txt"
+    },
+    {
+      "id": "08-opening-conversion",
+      "state": "No converted opening debts, before cutover",
+      "route": "/opening-conversion",
+      "captured_url": "http://127.0.0.1:18211/opening-conversion",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/08-opening-conversion-1440.png",
+          "width_px": 1440,
+          "height_px": 1090,
+          "sha256": "1f600adb29e2824c49e641c22a6a7e63bc6b1b3b0dc98f71a707233f7f240b06",
+          "original": "output/playwright/ux-audit/08-opening-conversion-1440.png"
+        },
+        {
+          "file": "evidence/08-opening-conversion-768.png",
+          "width_px": 768,
+          "height_px": 1143,
+          "sha256": "e4cef5c9246edd8ebbd6bd7adf9acbebe5a665c11705b451338e19d55211ec4a",
+          "original": "output/playwright/ux-audit/08-opening-conversion-768.png"
+        },
+        {
+          "file": "evidence/08-opening-conversion-390.png",
+          "width_px": 390,
+          "height_px": 1041,
+          "sha256": "2e6e5aaad471bdf15ce128f6f6f1bf56796fb9db3b36c313f97717fcc8c4a071",
+          "original": "output/playwright/ux-audit/08-opening-conversion-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/08-opening-conversion-capture.txt"
+    },
+    {
+      "id": "09-transactions",
+      "state": "Draft register with selected expense",
+      "route": "/transactions",
+      "captured_url": "http://127.0.0.1:18211/transactions",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/09-transactions-1440.png",
+          "width_px": 1440,
+          "height_px": 1337,
+          "sha256": "2092b79fb9588c62bdb46b5561f706aef414a53379c37d9515db9fddb293bf22",
+          "original": "output/playwright/ux-audit/09-transactions-1440.png"
+        },
+        {
+          "file": "evidence/09-transactions-768.png",
+          "width_px": 768,
+          "height_px": 1237,
+          "sha256": "bc04e1eb018019c3fd63a6029455b52ef68afc1704b9be66050787518a6ad3f0",
+          "original": "output/playwright/ux-audit/09-transactions-768.png"
+        },
+        {
+          "file": "evidence/09-transactions-390.png",
+          "width_px": 390,
+          "height_px": 1636,
+          "sha256": "8e7b60836be49e3c05a1d805d247022cd69da26690883f40c437ef24d6bafd25",
+          "original": "output/playwright/ux-audit/09-transactions-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/09-transactions-capture.txt"
+    },
+    {
+      "id": "10-expense-new",
+      "state": "Blank simple receipt/expense entry",
+      "route": "/transactions/new",
+      "captured_url": "http://127.0.0.1:18211/transactions/new",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/10-expense-new-1440.png",
+          "width_px": 1440,
+          "height_px": 1432,
+          "sha256": "c8d8cbc8d5d1127b80f9c3bd7d224a52392858f631b0d2f206e008df1e66142d",
+          "original": "output/playwright/ux-audit/10-expense-new-1440.png"
+        },
+        {
+          "file": "evidence/10-expense-new-768.png",
+          "width_px": 768,
+          "height_px": 1539,
+          "sha256": "6eb905e3683051a2938338419914e748b8585940d84ce7e52c0ec2dc90ca1a5d",
+          "original": "output/playwright/ux-audit/10-expense-new-768.png"
+        },
+        {
+          "file": "evidence/10-expense-new-390.png",
+          "width_px": 390,
+          "height_px": 2387,
+          "sha256": "1a48e2b03f5176a50a572240775c7c1ce861e29f746dbdc0ea0d7f9b59b08749",
+          "original": "output/playwright/ux-audit/10-expense-new-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/10-expense-new-capture.txt"
+    },
+    {
+      "id": "11-expense-edit",
+      "state": "Existing expense draft edit",
+      "route": "/transactions/edit",
+      "captured_url": "http://127.0.0.1:18211/transactions/edit?id=590",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/11-expense-edit-1440.png",
+          "width_px": 1440,
+          "height_px": 1432,
+          "sha256": "fda368ede7ae69b24b58ccd8226233075ae7318a33809e76eef61dc21ee213d0",
+          "original": "output/playwright/ux-audit/11-expense-edit-1440.png"
+        },
+        {
+          "file": "evidence/11-expense-edit-768.png",
+          "width_px": 768,
+          "height_px": 1539,
+          "sha256": "be22a24bcf89dd1cb9f13ec41f7d5551533bed230101c9a149750d0ee89c96d4",
+          "original": "output/playwright/ux-audit/11-expense-edit-768.png"
+        },
+        {
+          "file": "evidence/11-expense-edit-390.png",
+          "width_px": 390,
+          "height_px": 2387,
+          "sha256": "aeddd843195c32dfb0eae7dba416b468cee8be077ebe11ac3513c33aac9e5b0d",
+          "original": "output/playwright/ux-audit/11-expense-edit-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/11-expense-edit-capture.txt"
+    },
+    {
+      "id": "12-transaction-detail",
+      "state": "Posted simple receipt and journal context",
+      "route": "/transactions/detail",
+      "captured_url": "http://127.0.0.1:18211/transactions/detail?id=563",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/12-transaction-detail-1440.png",
+          "width_px": 1440,
+          "height_px": 1461,
+          "sha256": "29ed3a260282afa171ddbbd6daa4eefc19bac7db49aaaca9ce5e24dd08b97ead",
+          "original": "output/playwright/ux-audit/12-transaction-detail-1440.png"
+        },
+        {
+          "file": "evidence/12-transaction-detail-768.png",
+          "width_px": 768,
+          "height_px": 1483,
+          "sha256": "3547df22f2e61ddbd88ff3cecf2eb7ef66ebd08b7303f166050f85e10c386ab5",
+          "original": "output/playwright/ux-audit/12-transaction-detail-768.png"
+        },
+        {
+          "file": "evidence/12-transaction-detail-390.png",
+          "width_px": 390,
+          "height_px": 1735,
+          "sha256": "91998296fa7204daa2019a4e8c1d3c90fa389b4dccc9758bf8ca0836e67e8668",
+          "original": "output/playwright/ux-audit/12-transaction-detail-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/12-transaction-detail-capture.txt"
+    },
+    {
+      "id": "13-journal-detail",
+      "state": "Immutable posted journal with source links",
+      "route": "/journals/detail",
+      "captured_url": "http://127.0.0.1:18211/journals/detail?id=2352",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/13-journal-detail-1440.png",
+          "width_px": 1440,
+          "height_px": 1182,
+          "sha256": "f411e3b3e171dafc2add4edc8d769173ed23195f394dfa3cf6db6425c1b31c35",
+          "original": "output/playwright/ux-audit/13-journal-detail-1440.png"
+        },
+        {
+          "file": "evidence/13-journal-detail-768.png",
+          "width_px": 768,
+          "height_px": 1263,
+          "sha256": "1d85cd2083235c4ebda830cb252bffb776076e9655c79121cfa851f61fa120e0",
+          "original": "output/playwright/ux-audit/13-journal-detail-768.png"
+        },
+        {
+          "file": "evidence/13-journal-detail-390.png",
+          "width_px": 390,
+          "height_px": 1683,
+          "sha256": "41dd4852610975f3cf85bdadb4a70404ac7d897691087493cc6fb235018b4889",
+          "original": "output/playwright/ux-audit/13-journal-detail-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/13-journal-detail-capture.txt"
+    },
+    {
+      "id": "14-general-journals",
+      "state": "Populated journal register including a reversed example",
+      "route": "/general-journals",
+      "captured_url": "http://127.0.0.1:18211/general-journals",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/14-general-journals-1440.png",
+          "width_px": 1440,
+          "height_px": 2447,
+          "sha256": "658cca36f1a2a136a7322fbdf72c7d74a71130a1fa9de661dd4964f083fcf8cb",
+          "original": "output/playwright/ux-audit/14-general-journals-1440.png"
+        },
+        {
+          "file": "evidence/14-general-journals-768.png",
+          "width_px": 768,
+          "height_px": 2993,
+          "sha256": "694f76930370b62cb8f09281df5f945149a637c00cb90038ebd0060a16faf4ea",
+          "original": "output/playwright/ux-audit/14-general-journals-768.png"
+        },
+        {
+          "file": "evidence/14-general-journals-390.png",
+          "width_px": 390,
+          "height_px": 3206,
+          "sha256": "5a5887b8ba54dfa2eb4d40b4678afa5be73dfce40001034e2bb443736c0421ef",
+          "original": "output/playwright/ux-audit/14-general-journals-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/14-general-journals-capture.txt"
+    },
+    {
+      "id": "15-journal-new",
+      "state": "Blank general-journal line editor",
+      "route": "/general-journals/new",
+      "captured_url": "http://127.0.0.1:18211/general-journals/new",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/15-journal-new-1440.png",
+          "width_px": 1440,
+          "height_px": 1421,
+          "sha256": "476b76e5a5f1775f7cf87cbbb7902e8449cf3395483f82c63585934bf20d02f0",
+          "original": "output/playwright/ux-audit/15-journal-new-1440.png"
+        },
+        {
+          "file": "evidence/15-journal-new-768.png",
+          "width_px": 768,
+          "height_px": 1887,
+          "sha256": "b548a5e25c3a137c33a5256fc85a2d5e635222e59065775203d42ff1a3776e80",
+          "original": "output/playwright/ux-audit/15-journal-new-768.png"
+        },
+        {
+          "file": "evidence/15-journal-new-390.png",
+          "width_px": 390,
+          "height_px": 2170,
+          "sha256": "d58e991955aa664bb3a298d80ded2c7f6d29c2d0b9128ee031f48690c7f90fcd",
+          "original": "output/playwright/ux-audit/15-journal-new-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/15-journal-new-capture.txt"
+    },
+    {
+      "id": "16-journal-draft-success",
+      "state": "Saved synthetic 10.00 draft with review/post action, not posted",
+      "route": "/general-journals/detail",
+      "captured_url": "http://127.0.0.1:18211/general-journals/detail?id=706",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/16-journal-draft-success-1440.png",
+          "width_px": 1440,
+          "height_px": 1341,
+          "sha256": "b340e672f6d48bdf7a007d2256e0d34cad9c595cfc274f6a7b036aaa8e04f732",
+          "original": "output/playwright/ux-audit/16-journal-draft-success-1440.png"
+        },
+        {
+          "file": "evidence/16-journal-draft-success-768.png",
+          "width_px": 768,
+          "height_px": 1341,
+          "sha256": "d0c2e99c93fb0186999a250d00b66f30f4d9789ae3a6382b6541d49178d33804",
+          "original": "output/playwright/ux-audit/16-journal-draft-success-768.png"
+        },
+        {
+          "file": "evidence/16-journal-draft-success-390.png",
+          "width_px": 390,
+          "height_px": 1458,
+          "sha256": "d85c5123587f076afb84e818f0dfdc9678876868891c6199b47ee2747a076603",
+          "original": "output/playwright/ux-audit/16-journal-draft-success-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/16-journal-draft-success-capture.txt"
+    },
+    {
+      "id": "17-journal-edit",
+      "state": "Reopened saved general-journal draft",
+      "route": "/general-journals/edit",
+      "captured_url": "http://127.0.0.1:18211/general-journals/edit?id=706",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/17-journal-edit-1440.png",
+          "width_px": 1440,
+          "height_px": 1421,
+          "sha256": "4a4a5b3015d3918a5c387dd29f1d39becb063e152d5c86e98ee221f54da6b29e",
+          "original": "output/playwright/ux-audit/17-journal-edit-1440.png"
+        },
+        {
+          "file": "evidence/17-journal-edit-768.png",
+          "width_px": 768,
+          "height_px": 1887,
+          "sha256": "5f875b0b0cfc08d8ec31225c5bc1cb3bafc1351f4d220c242a17e40c4d51a7e5",
+          "original": "output/playwright/ux-audit/17-journal-edit-768.png"
+        },
+        {
+          "file": "evidence/17-journal-edit-390.png",
+          "width_px": 390,
+          "height_px": 2189,
+          "sha256": "e31222864ccf0c991cf50925145f87033237d0e3149d1f7bac0feb97cf6ca12a",
+          "original": "output/playwright/ux-audit/17-journal-edit-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/17-journal-edit-capture.txt"
+    },
+    {
+      "id": "18-reversed-journal",
+      "state": "Historical reversed general journal and linked reversal",
+      "route": "/general-journals/detail",
+      "captured_url": "http://127.0.0.1:18211/general-journals/detail?id=693",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/18-reversed-journal-1440.png",
+          "width_px": 1440,
+          "height_px": 1276,
+          "sha256": "5bff97e6a0d31a93aa9c286586d51080f4d41c90556495c1ecb6037850180ad7",
+          "original": "output/playwright/ux-audit/18-reversed-journal-1440.png"
+        },
+        {
+          "file": "evidence/18-reversed-journal-768.png",
+          "width_px": 768,
+          "height_px": 1276,
+          "sha256": "fe6d31a0f5c15bac5e6c8d335ab39d2b69555378040bb371b5e0014bc7d28fc6",
+          "original": "output/playwright/ux-audit/18-reversed-journal-768.png"
+        },
+        {
+          "file": "evidence/18-reversed-journal-390.png",
+          "width_px": 390,
+          "height_px": 1452,
+          "sha256": "cc30bb38ef90c8ea89a24b6cb64597563f456a096e772d7ce6e264f4643867fa",
+          "original": "output/playwright/ux-audit/18-reversed-journal-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/18-reversed-journal-capture.txt"
+    },
+    {
+      "id": "19-pos",
+      "state": "Sample POS empty cart",
+      "route": "/pos",
+      "captured_url": "http://127.0.0.1:18211/pos",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/19-pos-1440.png",
+          "width_px": 1440,
+          "height_px": 1191,
+          "sha256": "60d78b074e6036a20fd0a371616d7e348a461c345e1cb177847647dce59b6432",
+          "original": "output/playwright/ux-audit/19-pos-1440.png"
+        },
+        {
+          "file": "evidence/19-pos-768.png",
+          "width_px": 768,
+          "height_px": 1436,
+          "sha256": "f4e5722bdd449600697d1a4cfc20a15695d0832ec6a8e046846b805d2d08f5d5",
+          "original": "output/playwright/ux-audit/19-pos-768.png"
+        },
+        {
+          "file": "evidence/19-pos-390.png",
+          "width_px": 390,
+          "height_px": 2083,
+          "sha256": "f349f4019ee503cc7ea4241a90864912df446eec55d5cd7863987d914d2df9bb",
+          "original": "output/playwright/ux-audit/19-pos-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/19-pos-capture.txt"
+    },
+    {
+      "id": "20-pos-review",
+      "state": "One-item synthetic cash checkout review",
+      "route": "/pos/review",
+      "captured_url": "http://127.0.0.1:18211/pos/review",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/20-pos-review-1440.png",
+          "width_px": 1440,
+          "height_px": 1187,
+          "sha256": "797c3974d3b9650c5799a31144507c36f099d2667c52972a62c29d4716248a8c",
+          "original": "output/playwright/ux-audit/20-pos-review-1440.png"
+        },
+        {
+          "file": "evidence/20-pos-review-768.png",
+          "width_px": 768,
+          "height_px": 1199,
+          "sha256": "95b360391356047bf9e935be767276249038e6e1494f13a8a3f5c7f76f9cffdf",
+          "original": "output/playwright/ux-audit/20-pos-review-768.png"
+        },
+        {
+          "file": "evidence/20-pos-review-390.png",
+          "width_px": 390,
+          "height_px": 1660,
+          "sha256": "fdd8e21c2713fb0efc9bdce9b32ba9728ac214e78cff8dd1acb87e03931b24bf",
+          "original": "output/playwright/ux-audit/20-pos-review-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/20-pos-review-capture.txt"
+    },
+    {
+      "id": "21-pos-receipt",
+      "state": "Recorded local 4.50 cash sale with 0.50 change; print not invoked",
+      "route": "/pos/receipt",
+      "captured_url": "http://127.0.0.1:18211/pos/receipt?id=591",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/21-pos-receipt-1440.png",
+          "width_px": 1440,
+          "height_px": 1245,
+          "sha256": "fab6200ca14d46a7cc847c6e838ca09f0fdb6581a39fc5ec6a8c20a4d1bbe3fa",
+          "original": "output/playwright/ux-audit/21-pos-receipt-1440.png"
+        },
+        {
+          "file": "evidence/21-pos-receipt-768.png",
+          "width_px": 768,
+          "height_px": 1245,
+          "sha256": "b2749f8ecd3cea0ab1f04f5babeeb78785e0b7fa4e25c24a0275c51b95e07891",
+          "original": "output/playwright/ux-audit/21-pos-receipt-768.png"
+        },
+        {
+          "file": "evidence/21-pos-receipt-390.png",
+          "width_px": 390,
+          "height_px": 1391,
+          "sha256": "3b712417d764a1fe195b3362625b752da18a9f21988fb18652b2fe4848387d99",
+          "original": "output/playwright/ux-audit/21-pos-receipt-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/21-pos-receipt-capture.txt"
+    },
+    {
+      "id": "22-sample-guide",
+      "state": "Historical teaching pack guide",
+      "route": "/sample-guide",
+      "captured_url": "http://127.0.0.1:18211/sample-guide",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/22-sample-guide-1440.png",
+          "width_px": 1440,
+          "height_px": 2181,
+          "sha256": "af40e7eabfda296aaff08d7e8c7810e0d220f26f1e49dafd743ebb4090e9d297",
+          "original": "output/playwright/ux-audit/22-sample-guide-1440.png"
+        },
+        {
+          "file": "evidence/22-sample-guide-768.png",
+          "width_px": 768,
+          "height_px": 3065,
+          "sha256": "5308bb0cba1fb85d85447e2718897e7ac69f361794d40204845cb9320aa310a4",
+          "original": "output/playwright/ux-audit/22-sample-guide-768.png"
+        },
+        {
+          "file": "evidence/22-sample-guide-390.png",
+          "width_px": 390,
+          "height_px": 4511,
+          "sha256": "03f9eda88c85f40e823125970d342ef34f845e91d70b600fcb230ed13d95711d",
+          "original": "output/playwright/ux-audit/22-sample-guide-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/22-sample-guide-capture.txt"
+    },
+    {
+      "id": "23-help",
+      "state": "Current help page",
+      "route": "/help",
+      "captured_url": "http://127.0.0.1:18211/help",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/23-help-1440.png",
+          "width_px": 1440,
+          "height_px": 2089,
+          "sha256": "743b8d59ab46105050f53cd1f0d523cacb13a81ce29ef7b607497679c204a57b",
+          "original": "output/playwright/ux-audit/23-help-1440.png"
+        },
+        {
+          "file": "evidence/23-help-768.png",
+          "width_px": 768,
+          "height_px": 2536,
+          "sha256": "6897fdcd606e9a71d5370554f481ecfe46e5e40bf9243f71710ec55a7bba3dc9",
+          "original": "output/playwright/ux-audit/23-help-768.png"
+        },
+        {
+          "file": "evidence/23-help-390.png",
+          "width_px": 390,
+          "height_px": 3993,
+          "sha256": "fb9f89eaa28bfc3c0f332175e172984bf533beebea1e592535a8a195aa2ffbf0",
+          "original": "output/playwright/ux-audit/23-help-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/23-help-capture.txt"
+    },
+    {
+      "id": "24-not-found",
+      "state": "Unknown GET route HTTP 404",
+      "route": "/ux-audit-missing",
+      "captured_url": "http://127.0.0.1:18211/ux-audit-missing",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/24-not-found-1440.png",
+          "width_px": 1440,
+          "height_px": 1000,
+          "sha256": "70d12cd2d8bbafea7eab15350afb25bf7229bc8cc8b6b8b0f588f51836ec31cf",
+          "original": "output/playwright/ux-audit/24-not-found-1440.png"
+        },
+        {
+          "file": "evidence/24-not-found-768.png",
+          "width_px": 768,
+          "height_px": 1000,
+          "sha256": "f401a9a2756c509630fde948141a3fa0026ed59f1b22f53007b02689e2f29df4",
+          "original": "output/playwright/ux-audit/24-not-found-768.png"
+        },
+        {
+          "file": "evidence/24-not-found-390.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "030bf34c8a5da895ce3c57e57f87e23977959a4587aff8f7068bcdafa8397e20",
+          "original": "output/playwright/ux-audit/24-not-found-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/24-not-found-capture.txt"
+    },
+    {
+      "id": "25-wrong-method",
+      "state": "GET on POST-only save route HTTP 405",
+      "route": "/transactions/save",
+      "captured_url": "http://127.0.0.1:18211/transactions/save",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/25-wrong-method-1440.png",
+          "width_px": 1440,
+          "height_px": 1000,
+          "sha256": "d1e45043fd76a5e90add93085085a8276c00dd647acf5de49b73ddb26859fb24",
+          "original": "output/playwright/ux-audit/25-wrong-method-1440.png"
+        },
+        {
+          "file": "evidence/25-wrong-method-768.png",
+          "width_px": 768,
+          "height_px": 1000,
+          "sha256": "865c27a142ef1ab5d57b2f819547000c2440b040007719655a5f65be775e4682",
+          "original": "output/playwright/ux-audit/25-wrong-method-768.png"
+        },
+        {
+          "file": "evidence/25-wrong-method-390.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "2b62fe1030fc544236d2cf62acd213c7e22d5b4a0543e4cb2bc5016bd82f2020",
+          "original": "output/playwright/ux-audit/25-wrong-method-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/25-wrong-method-capture.txt"
+    },
+    {
+      "id": "26-public-demo",
+      "state": "Expired local public-demo generation HTTP 503",
+      "route": "/",
+      "captured_url": "http://127.0.0.1:18212/demo/",
+      "runtime": "local restricted demo",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/26-public-demo-1440.png",
+          "width_px": 1440,
+          "height_px": 1000,
+          "sha256": "fffa8d44a1577cf1a293dbb6040c48d857122b9b2edc4a4433cf60e4ca9a0cea",
+          "original": "output/playwright/ux-audit/26-public-demo-1440.png"
+        },
+        {
+          "file": "evidence/26-public-demo-768.png",
+          "width_px": 768,
+          "height_px": 1000,
+          "sha256": "363908c24293349859fd6e7287b8110b3ad208b7c0f2d3a591f290c36b193653",
+          "original": "output/playwright/ux-audit/26-public-demo-768.png"
+        },
+        {
+          "file": "evidence/26-public-demo-390.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "7e15ac453f6c833e5a0bfa72f0608177b0283877ce88e292ba2d58596dd71b7a",
+          "original": "output/playwright/ux-audit/26-public-demo-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/26-public-demo-capture.txt"
+    },
+    {
+      "id": "27-demo-chooser",
+      "state": "Anonymous public-demo chooser after guarded local reset",
+      "route": "/login",
+      "captured_url": "http://127.0.0.1:18212/demo/login",
+      "runtime": "local restricted demo",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/27-demo-chooser-1440.png",
+          "width_px": 1440,
+          "height_px": 1480,
+          "sha256": "ec2735a1061b55be1644df0d84a73c5846ab2845c12d8af471ba9ca41cd71cd4",
+          "original": "output/playwright/ux-audit/27-demo-chooser-1440.png"
+        },
+        {
+          "file": "evidence/27-demo-chooser-768.png",
+          "width_px": 768,
+          "height_px": 1891,
+          "sha256": "c50378ac201aa2af6594a4ef2cb7b87d1b20c7253626ef0b9787b373a39aabe2",
+          "original": "output/playwright/ux-audit/27-demo-chooser-768.png"
+        },
+        {
+          "file": "evidence/27-demo-chooser-390.png",
+          "width_px": 390,
+          "height_px": 2322,
+          "sha256": "54fbf0398d101b657a788a36bf237d7f6864c6a83a898a46a20ef0588bc1ccc9",
+          "original": "output/playwright/ux-audit/27-demo-chooser-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/27-demo-chooser-capture.txt"
+    },
+    {
+      "id": "28-starter-guide",
+      "state": "Fresh zero-balance starter playground guide",
+      "route": "/sample-guide",
+      "captured_url": "http://127.0.0.1:18212/demo/sample-guide",
+      "runtime": "local restricted demo",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/28-starter-guide-1440.png",
+          "width_px": 1440,
+          "height_px": 1580,
+          "sha256": "4f6be34b355b480aa5952b4d3fe44d58091ade3be6d89f73992a594f96c53d06",
+          "original": "output/playwright/ux-audit/28-starter-guide-1440.png"
+        },
+        {
+          "file": "evidence/28-starter-guide-768.png",
+          "width_px": 768,
+          "height_px": 2341,
+          "sha256": "db3b55787ce0a062814daac998ab0188e357922e3c29e16e6f273221713843c5",
+          "original": "output/playwright/ux-audit/28-starter-guide-768.png"
+        },
+        {
+          "file": "evidence/28-starter-guide-390.png",
+          "width_px": 390,
+          "height_px": 3272,
+          "sha256": "c600d17fee9837f869a7cc42f5338f7048cf9f481004221204d8733a9aecffa3",
+          "original": "output/playwright/ux-audit/28-starter-guide-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/28-starter-guide-capture.txt"
+    },
+    {
+      "id": "29-keyboard-skip",
+      "state": "First Tab visibly focuses skip link; subsequent Enter-to-main is documented interaction evidence",
+      "route": "/sample-guide",
+      "captured_url": "http://127.0.0.1:18212/demo/sample-guide",
+      "runtime": "local restricted demo",
+      "audit": "SETUP-DAILY-AUDIT.md",
+      "kind": "viewport",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/29-keyboard-skip-390.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "90872300d86fbcf6b98532b4d3c8120b7a5fcbd54d6c49e9c122a24c6a6dfe20",
+          "original": "output/playwright/ux-audit/29-keyboard-skip-390.png"
+        }
+      ],
+      "limit": "Route/context from the setup audit; no separate exact-URL capture receipt. Subsequent #main navigation is not represented as the screenshot URL. Narrow keyboard spot check, not full workflow accessibility."
+    },
+    {
+      "id": "30-ar-list",
+      "state": "AR register and ageing with partially settled invoice",
+      "route": "/ar",
+      "captured_url": "http://127.0.0.1:18211/ar",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-ar-list-1440.png",
+          "width_px": 1440,
+          "height_px": 1733,
+          "sha256": "eca6cb34add79deb108d63d19a01e37ce3b8343b640a1c1c34c83c7a98dfdbf2",
+          "original": "output/playwright/ux-audit/30-ar-list-1440.png"
+        },
+        {
+          "file": "evidence/30-ar-list-768.png",
+          "width_px": 768,
+          "height_px": 1808,
+          "sha256": "8cf2f219781e62b04ffa9e6f091ff53d233e8c776bf7d1bf41728ee45ad50cc2",
+          "original": "output/playwright/ux-audit/30-ar-list-768.png"
+        },
+        {
+          "file": "evidence/30-ar-list-390.png",
+          "width_px": 390,
+          "height_px": 2143,
+          "sha256": "d210cc12a235ed8c6d94ba3a36ecf33b0f7c71ae3c8be7122a21d9b88bfcb967",
+          "original": "output/playwright/ux-audit/30-ar-list-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-ar-new",
+      "state": "New invoice form",
+      "route": "/ar",
+      "captured_url": "http://127.0.0.1:18211/ar?new=1",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-ar-new-1440.png",
+          "width_px": 1440,
+          "height_px": 3456,
+          "sha256": "c3411ff8b679547bca09c9225d48a23c6ddad926d1f24aeffcf84ce62ddc7eb4",
+          "original": "output/playwright/ux-audit/31-ar-new-1440.png"
+        },
+        {
+          "file": "evidence/30-ar-new-768.png",
+          "width_px": 768,
+          "height_px": 3710,
+          "sha256": "8a9b9fcfea7607aa13c66e63efafbeafb63ee47f0f252ea5c12440fcf71017ae",
+          "original": "output/playwright/ux-audit/31-ar-new-768.png"
+        },
+        {
+          "file": "evidence/30-ar-new-390.png",
+          "width_px": 390,
+          "height_px": 6269,
+          "sha256": "5e9ac7c3dabd7dc1809fa3d833d74093fba4ba5767786e2efc4565495ce9a334",
+          "original": "output/playwright/ux-audit/31-ar-new-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-ar-draft",
+      "state": "Saved invoice draft review",
+      "route": "/ar",
+      "captured_url": "http://127.0.0.1:18211/ar?id=194",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-ar-draft-1440.png",
+          "width_px": 1440,
+          "height_px": 2373,
+          "sha256": "7032963ac4b0a9b25a18faf8b7746128de1178e0b2a8b9d37a4fa4184cd9cadb",
+          "original": "output/playwright/ux-audit/32-ar-draft-1440.png"
+        },
+        {
+          "file": "evidence/30-ar-draft-768.png",
+          "width_px": 768,
+          "height_px": 2448,
+          "sha256": "9d11e332a0ed3ff0381dcd339e1d66c8aa154b5f5864dc7e2c5f9ffb1b810640",
+          "original": "output/playwright/ux-audit/32-ar-draft-768.png"
+        },
+        {
+          "file": "evidence/30-ar-draft-390.png",
+          "width_px": 390,
+          "height_px": 2895,
+          "sha256": "236dffa5f7c2430edaeb457d462b7a3ccc1511c85abf6c7bfba368d5ec553c35",
+          "original": "output/playwright/ux-audit/32-ar-draft-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-ar-posted",
+      "state": "Partially settled posted invoice with receipt form",
+      "route": "/ar",
+      "captured_url": "http://127.0.0.1:18211/ar?id=193",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-ar-posted-1440.png",
+          "width_px": 1440,
+          "height_px": 2816,
+          "sha256": "5fb85a6252beafa534c63c4e06c4e6bfcc425d3d203c33193ae2fc9ce0897635",
+          "original": "output/playwright/ux-audit/33-ar-posted-1440.png"
+        },
+        {
+          "file": "evidence/30-ar-posted-768.png",
+          "width_px": 768,
+          "height_px": 2980,
+          "sha256": "225103b93ac3d5804ce06b8ff38c227abc4a749bee4adc413f8fe9fb9926e444",
+          "original": "output/playwright/ux-audit/33-ar-posted-768.png"
+        },
+        {
+          "file": "evidence/30-ar-posted-390.png",
+          "width_px": 390,
+          "height_px": 3675,
+          "sha256": "fa839a9f94f9f07038e49af0077ca20b3c54b178412319b9a1fe6915482ca797",
+          "original": "output/playwright/ux-audit/33-ar-posted-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-ap-list",
+      "state": "AP register and ageing",
+      "route": "/ap",
+      "captured_url": "http://127.0.0.1:18211/ap",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-ap-list-1440.png",
+          "width_px": 1440,
+          "height_px": 1660,
+          "sha256": "9d1735dadf1c7c881c6cc53c4629f6abd2dbc4b6239d9675416d6e27d9cf3170",
+          "original": "output/playwright/ux-audit/34-ap-list-1440.png"
+        },
+        {
+          "file": "evidence/30-ap-list-768.png",
+          "width_px": 768,
+          "height_px": 1735,
+          "sha256": "5d4794338d0463cc18d41a2aa53085add41eaf214b4e5fb1e6bcf75b9c37d65c",
+          "original": "output/playwright/ux-audit/34-ap-list-768.png"
+        },
+        {
+          "file": "evidence/30-ap-list-390.png",
+          "width_px": 390,
+          "height_px": 2072,
+          "sha256": "fcc9a7f2e7c7308cc8b77e6258eaf5c601bad0d708cb406aa35d62b0f6792a89",
+          "original": "output/playwright/ux-audit/34-ap-list-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-ap-bill",
+      "state": "Partially settled posted supplier bill with payment form",
+      "route": "/ap",
+      "captured_url": "http://127.0.0.1:18211/ap?id=192",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-ap-bill-1440.png",
+          "width_px": 1440,
+          "height_px": 2743,
+          "sha256": "812e8f5015aada49f35bdef1961bca0870de600305137c15a3a490fe3eb81b6d",
+          "original": "output/playwright/ux-audit/30-ap-bill-1440.png"
+        },
+        {
+          "file": "evidence/30-ap-bill-768.png",
+          "width_px": 768,
+          "height_px": 2907,
+          "sha256": "644992ff020688ab8feaac11c44f50378f90605ae5a7382e43960fb0fa02f185",
+          "original": "output/playwright/ux-audit/30-ap-bill-768.png"
+        },
+        {
+          "file": "evidence/30-ap-bill-390.png",
+          "width_px": 390,
+          "height_px": 3643,
+          "sha256": "8190c08d4863965cd65224bd546f5a9602edf0af8a67fa3d360600f5ccf1c6a5",
+          "original": "output/playwright/ux-audit/30-ap-bill-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-parties",
+      "state": "Shared customer/vendor register",
+      "route": "/parties",
+      "captured_url": "http://127.0.0.1:18211/parties",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-parties-1440.png",
+          "width_px": 1440,
+          "height_px": 1119,
+          "sha256": "84aac6892f5d7763a1bf7a19c43dab6906e0e7cb786653ee89d07b838ea440f3",
+          "original": "output/playwright/ux-audit/30-parties-1440.png"
+        },
+        {
+          "file": "evidence/30-parties-768.png",
+          "width_px": 768,
+          "height_px": 1119,
+          "sha256": "f0f36e0fc489df810a180aa5d010892af0bb4668f01d268e6e3e13e1ed837c41",
+          "original": "output/playwright/ux-audit/30-parties-768.png"
+        },
+        {
+          "file": "evidence/30-parties-390.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "629a88ad60d195423244728df2afb9450e4ec950f74ca759c3919f1eb16ec857",
+          "original": "output/playwright/ux-audit/30-parties-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-party-form",
+      "state": "New party form",
+      "route": "/parties",
+      "captured_url": "http://127.0.0.1:18211/parties?new=1",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-party-form-1440.png",
+          "width_px": 1440,
+          "height_px": 1370,
+          "sha256": "8ac3d2edfc8d3992a414a946b2b9f733a85d4ea75b61f73c9e2f25408fb03fe8",
+          "original": "output/playwright/ux-audit/30-party-form-1440.png"
+        },
+        {
+          "file": "evidence/30-party-form-768.png",
+          "width_px": 768,
+          "height_px": 1548,
+          "sha256": "b4b660925080b87c57692bdce32960e13a4bc758792f054db7d3c5026a9be5c1",
+          "original": "output/playwright/ux-audit/30-party-form-768.png"
+        },
+        {
+          "file": "evidence/30-party-form-390.png",
+          "width_px": 390,
+          "height_px": 1948,
+          "sha256": "c7d2bba7baa727157ef277e2b21604fe76214895ead6b60d37e813d28c82af7a",
+          "original": "output/playwright/ux-audit/30-party-form-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-purchasing-list",
+      "state": "Purchase order, receipts and reconciliation overview",
+      "route": "/purchasing",
+      "captured_url": "http://127.0.0.1:18211/purchasing",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-purchasing-list-1440.png",
+          "width_px": 1440,
+          "height_px": 1381,
+          "sha256": "2cd3e2c844a4f97f302fa705814b13fb1cbfbcefcf1fe7f5dcb0fbf2550ec852",
+          "original": "output/playwright/ux-audit/30-purchasing-list-1440.png"
+        },
+        {
+          "file": "evidence/30-purchasing-list-768.png",
+          "width_px": 768,
+          "height_px": 1425,
+          "sha256": "363dcb2f3ac45b8f86db78119dd1c52fa74aac5aba2198edd0fc4b0438b6d68c",
+          "original": "output/playwright/ux-audit/30-purchasing-list-768.png"
+        },
+        {
+          "file": "evidence/30-purchasing-list-390.png",
+          "width_px": 390,
+          "height_px": 1598,
+          "sha256": "6a699fad1f8327a852f009af02057daf9339366ede40234d207f4800fa0b7329",
+          "original": "output/playwright/ux-audit/30-purchasing-list-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-purchase-order",
+      "state": "Confirmed order with partially received quantities",
+      "route": "/purchasing",
+      "captured_url": "http://127.0.0.1:18211/purchasing?id=42",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-purchase-order-1440.png",
+          "width_px": 1440,
+          "height_px": 2148,
+          "sha256": "b2b98f29afec63a5f8adaf71812d35549c6f5921da8fb7b45c32048df3b531ff",
+          "original": "output/playwright/ux-audit/30-purchase-order-1440.png"
+        },
+        {
+          "file": "evidence/30-purchase-order-768.png",
+          "width_px": 768,
+          "height_px": 2281,
+          "sha256": "517b12e248907ec64df6d2bcca42bc6f52ddc1ecc079f58215dfb463a188ade4",
+          "original": "output/playwright/ux-audit/30-purchase-order-768.png"
+        },
+        {
+          "file": "evidence/30-purchase-order-390.png",
+          "width_px": 390,
+          "height_px": 2726,
+          "sha256": "79b0825d6c1600234fed53d17a624e211b34e0322f97a06883544ba6cf143100",
+          "original": "output/playwright/ux-audit/30-purchase-order-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-purchase-receipt",
+      "state": "Expanded receipt, matched bill and return form",
+      "route": "/purchasing",
+      "captured_url": "http://127.0.0.1:18211/purchasing?id=42",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-purchase-receipt-1440.png",
+          "width_px": 1440,
+          "height_px": 2504,
+          "sha256": "4734d01194b912a253115530a78523b5102c3b8b278b8d8a52f582c90cba7dcf",
+          "original": "output/playwright/ux-audit/30-purchase-receipt-1440.png"
+        },
+        {
+          "file": "evidence/30-purchase-receipt-768.png",
+          "width_px": 768,
+          "height_px": 2726,
+          "sha256": "72de4f08a0756b629a42de5e3c83a15d9ee572445e32ca9d3af232918030f655",
+          "original": "output/playwright/ux-audit/30-purchase-receipt-768.png"
+        },
+        {
+          "file": "evidence/30-purchase-receipt-390.png",
+          "width_px": 390,
+          "height_px": 3561,
+          "sha256": "339b227ccef9f370a0a533de10612efadc04a37060412c46207ea7a58792e364",
+          "original": "output/playwright/ux-audit/30-purchase-receipt-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-purchase-new",
+      "state": "New purchase order form",
+      "route": "/purchasing",
+      "captured_url": "http://127.0.0.1:18211/purchasing?new=1",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-purchase-new-1440.png",
+          "width_px": 1440,
+          "height_px": 2875,
+          "sha256": "6e2666fcca26cb037ba12e0d29ca0952203387ff2405f11a5242052de7e585eb",
+          "original": "output/playwright/ux-audit/30-purchase-new-1440.png"
+        },
+        {
+          "file": "evidence/30-purchase-new-768.png",
+          "width_px": 768,
+          "height_px": 3032,
+          "sha256": "dfdb9e70c612eae0584e8c3d45ad15ebd79526ae2cab9cde8d69e55d0c55ce12",
+          "original": "output/playwright/ux-audit/30-purchase-new-768.png"
+        },
+        {
+          "file": "evidence/30-purchase-new-390.png",
+          "width_px": 390,
+          "height_px": 4256,
+          "sha256": "8968ab3df4993ce01dd4373650b5e62044d91d733101d13ba06ce4bd338c138f",
+          "original": "output/playwright/ux-audit/30-purchase-new-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-inventory",
+      "state": "Populated valuation, movements and product list",
+      "route": "/inventory",
+      "captured_url": "http://127.0.0.1:18211/inventory",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-inventory-1440.png",
+          "width_px": 1440,
+          "height_px": 1732,
+          "sha256": "43f6350b5f507febeeb08ff85e32a86faad9edff8abf1a43fadb0dd791b1ec14",
+          "original": "output/playwright/ux-audit/30-inventory-1440.png"
+        },
+        {
+          "file": "evidence/30-inventory-768.png",
+          "width_px": 768,
+          "height_px": 1792,
+          "sha256": "3a064be04d6491aafc26e18770ed20abe9a95355e85d9e9de34d7a335be85c94",
+          "original": "output/playwright/ux-audit/30-inventory-768.png"
+        },
+        {
+          "file": "evidence/30-inventory-390.png",
+          "width_px": 390,
+          "height_px": 2005,
+          "sha256": "0a847e6449bf1fabbb0842a6b5b18d8b070d88eb48c03e6d60f62d767070d2be",
+          "original": "output/playwright/ux-audit/30-inventory-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-inventory-product",
+      "state": "Existing stock-product detail",
+      "route": "/inventory",
+      "captured_url": "http://127.0.0.1:18211/inventory?id=108",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-inventory-product-1440.png",
+          "width_px": 1440,
+          "height_px": 2617,
+          "sha256": "b24d212e5f8142c45c209e6cffd9f7916c7377358ad132bdb5af1d44a69788ea",
+          "original": "output/playwright/ux-audit/30-inventory-product-1440.png"
+        },
+        {
+          "file": "evidence/30-inventory-product-768.png",
+          "width_px": 768,
+          "height_px": 2841,
+          "sha256": "5dbec7bc083503c4010c392de518af5ce955d95b4e82023aa4b85ba98b18907c",
+          "original": "output/playwright/ux-audit/30-inventory-product-768.png"
+        },
+        {
+          "file": "evidence/30-inventory-product-390.png",
+          "width_px": 390,
+          "height_px": 3494,
+          "sha256": "837f11e00de68db4169d9db07d4c31453e3b8d7dd1a4d14323a7491697cab025",
+          "original": "output/playwright/ux-audit/30-inventory-product-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-inventory-count",
+      "state": "Expanded stock-count form",
+      "route": "/inventory",
+      "captured_url": "http://127.0.0.1:18211/inventory?id=108",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-inventory-count-1440.png",
+          "width_px": 1440,
+          "height_px": 2885,
+          "sha256": "976c48dc4425e853e3c5a13fa069d65e83ba5ae831f615b912135f865ab01c7c",
+          "original": "output/playwright/ux-audit/30-inventory-count-1440.png"
+        },
+        {
+          "file": "evidence/30-inventory-count-768.png",
+          "width_px": 768,
+          "height_px": 3222,
+          "sha256": "8fa6e3afea66bc2a345f88d199a338586051213f54c38b21d52fcf8fb6c40eb1",
+          "original": "output/playwright/ux-audit/30-inventory-count-768.png"
+        },
+        {
+          "file": "evidence/30-inventory-count-390.png",
+          "width_px": 390,
+          "height_px": 4217,
+          "sha256": "5b2dd5e7c463c46a3eb336f05c20ab02b6dff84f2ebe9eb0703a697a61795856",
+          "original": "output/playwright/ux-audit/30-inventory-count-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-ar-product-selected",
+      "state": "Product selected in unsaved invoice without default prices/accounts populated",
+      "route": "/ar",
+      "captured_url": "http://127.0.0.1:18211/ar?new=1",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "viewport",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-ar-product-selected-1440.png",
+          "width_px": 1440,
+          "height_px": 1000,
+          "sha256": "20e3cdf1b2842ed40245d008d6841c046586d92bd48d87278016c60dfcad9b21",
+          "original": "output/playwright/ux-audit/30-ar-product-selected-1440.png"
+        },
+        {
+          "file": "evidence/30-ar-product-selected-390.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "891f765a6ac76f9aa4a8c99f594e6470b8171441e7ad421db2fa23cba5d1e31d",
+          "original": "output/playwright/ux-audit/30-ar-product-selected-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "30-keyboard-skip",
+      "state": "Visible AR skip-link focus",
+      "route": "/ar",
+      "captured_url": "http://127.0.0.1:18211/ar",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "OPERATIONS-AUDIT.md",
+      "kind": "viewport",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/30-keyboard-skip-390.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "2e586fb5e8da8ea76428ae249a9c7acd427673b532dc3404441dc1e9c69c21d8",
+          "original": "output/playwright/ux-audit/30-keyboard-skip-390.png"
+        }
+      ],
+      "limit": "No financial POST submitted by this visual audit."
+    },
+    {
+      "id": "50-accounts",
+      "state": "Chart list with no account selected",
+      "route": "/accounts",
+      "captured_url": "http://127.0.0.1:18211/accounts",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-accounts-1440.png",
+          "width_px": 1440,
+          "height_px": 2070,
+          "sha256": "18c41160bf158190a3302c40e346f654e3001acc5ba67e62d50e6aa5d059f637",
+          "original": "output/playwright/ux-audit/50-accounts-1440.png"
+        },
+        {
+          "file": "evidence/50-accounts-768.png",
+          "width_px": 768,
+          "height_px": 2055,
+          "sha256": "1b5cb772482eff27f826237ebce3d3cb422def57581c3307025798b8c6ea1977",
+          "original": "output/playwright/ux-audit/50-accounts-768.png"
+        },
+        {
+          "file": "evidence/50-accounts-390.png",
+          "width_px": 390,
+          "height_px": 2134,
+          "sha256": "c52be2b1f7917570495224d91b82b29d37de9dbcad9d752819cbd14ad665ad9f",
+          "original": "output/playwright/ux-audit/50-accounts-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-accounts-capture.txt"
+    },
+    {
+      "id": "50-account-statement-ready",
+      "state": "Cash/bank statement; initialized table and full-history default",
+      "route": "/reports/account",
+      "captured_url": "http://127.0.0.1:18211/reports/account?id=5511",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-account-statement-ready-1440.png",
+          "width_px": 1440,
+          "height_px": 2508,
+          "sha256": "0488d666684dc58cc409a20c868d6be697e7a5b5579b71cfbde69fc799a15f14",
+          "original": "output/playwright/ux-audit/50-account-statement-ready-1440.png"
+        },
+        {
+          "file": "evidence/50-account-statement-ready-768.png",
+          "width_px": 768,
+          "height_px": 7348,
+          "sha256": "e09ee1751f68131dec47776041b9b43f7c4397e81908d6217bf3d38187202c7f",
+          "original": "output/playwright/ux-audit/50-account-statement-ready-768.png"
+        },
+        {
+          "file": "evidence/50-account-statement-ready-390.png",
+          "width_px": 390,
+          "height_px": 8539,
+          "sha256": "240b73839c97debc6f7cf94c4175051a932ff92bb57d8e4e7b1a08246048ef82",
+          "original": "output/playwright/ux-audit/50-account-statement-ready-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-account-statement-ready-capture.txt"
+    },
+    {
+      "id": "50-reports",
+      "state": "Reporting hub",
+      "route": "/reports",
+      "captured_url": "http://127.0.0.1:18211/reports",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-reports-1440.png",
+          "width_px": 1440,
+          "height_px": 1432,
+          "sha256": "f62a8904cd869a010abe5d88bcf2fbb0fef79576256d79cf23641cf9bf5fce41",
+          "original": "output/playwright/ux-audit/50-reports-1440.png"
+        },
+        {
+          "file": "evidence/50-reports-768.png",
+          "width_px": 768,
+          "height_px": 2141,
+          "sha256": "67460e8df34763b165c4c72b3e3b46052e8b61e84c3fd29e6033a63cb9bbbc82",
+          "original": "output/playwright/ux-audit/50-reports-768.png"
+        },
+        {
+          "file": "evidence/50-reports-390.png",
+          "width_px": 390,
+          "height_px": 2571,
+          "sha256": "c287f806350fe3488f563da0501c4e11d5811311286e5e021fc71cc3c888cfd2",
+          "original": "output/playwright/ux-audit/50-reports-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-reports-capture.txt"
+    },
+    {
+      "id": "50-profit-loss",
+      "state": "Default full-history P&L",
+      "route": "/reports/profit-loss",
+      "captured_url": "http://127.0.0.1:18211/reports/profit-loss",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-profit-loss-1440.png",
+          "width_px": 1440,
+          "height_px": 1496,
+          "sha256": "62f77149a5f9f563cea198931f7a740d2c7081de20b1314fb7291b768ff6173e",
+          "original": "output/playwright/ux-audit/50-profit-loss-1440.png"
+        },
+        {
+          "file": "evidence/50-profit-loss-768.png",
+          "width_px": 768,
+          "height_px": 1815,
+          "sha256": "02968af7939933313e52b192ff410b8cb170c967bcc44adadef871483c6e51d2",
+          "original": "output/playwright/ux-audit/50-profit-loss-768.png"
+        },
+        {
+          "file": "evidence/50-profit-loss-390.png",
+          "width_px": 390,
+          "height_px": 2187,
+          "sha256": "ea2cee3af5732170ab4160d79ad58b244acad253fc890f2c65ea5811db2ec9dc",
+          "original": "output/playwright/ux-audit/50-profit-loss-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-profit-loss-capture.txt"
+    },
+    {
+      "id": "50-balance-sheet",
+      "state": "Populated balance sheet",
+      "route": "/reports/balance-sheet",
+      "captured_url": "http://127.0.0.1:18211/reports/balance-sheet",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-balance-sheet-1440.png",
+          "width_px": 1440,
+          "height_px": 1546,
+          "sha256": "6d2f2ecf6b652d58216d5c943266ae8a5d8e0e98174259e8624e81cd910e9f5d",
+          "original": "output/playwright/ux-audit/50-balance-sheet-1440.png"
+        },
+        {
+          "file": "evidence/50-balance-sheet-768.png",
+          "width_px": 768,
+          "height_px": 2288,
+          "sha256": "af9267cb9b244812c8fc2513b50b713ae26563e530e22e7fac38b1bc37a64f00",
+          "original": "output/playwright/ux-audit/50-balance-sheet-768.png"
+        },
+        {
+          "file": "evidence/50-balance-sheet-390.png",
+          "width_px": 390,
+          "height_px": 2585,
+          "sha256": "9ea0832a2317e33c281997d067e6a44a175d6f897a9484f3e2295ec9b06c1612",
+          "original": "output/playwright/ux-audit/50-balance-sheet-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-balance-sheet-capture.txt"
+    },
+    {
+      "id": "50-trial-balance",
+      "state": "Populated trial balance",
+      "route": "/reports/trial-balance",
+      "captured_url": "http://127.0.0.1:18211/reports/trial-balance",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-trial-balance-1440.png",
+          "width_px": 1440,
+          "height_px": 2025,
+          "sha256": "0911f095f491e348ab4ce9697ef023bf8ca1277f3e6efc53ce9cecdf8cb54736",
+          "original": "output/playwright/ux-audit/50-trial-balance-1440.png"
+        },
+        {
+          "file": "evidence/50-trial-balance-768.png",
+          "width_px": 768,
+          "height_px": 2073,
+          "sha256": "54c210137b4a082123e7029e9a682eddd91ade240595cb251c3c9ff49d5f7967",
+          "original": "output/playwright/ux-audit/50-trial-balance-768.png"
+        },
+        {
+          "file": "evidence/50-trial-balance-390.png",
+          "width_px": 390,
+          "height_px": 2427,
+          "sha256": "b158f168e0f6558667132480855acba7d304dd5276f8e54ff7b987da18bd4d90",
+          "original": "output/playwright/ux-audit/50-trial-balance-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-trial-balance-capture.txt"
+    },
+    {
+      "id": "50-cash-forecast",
+      "state": "Default manual weekly cash scenario",
+      "route": "/reports/cash-forecast",
+      "captured_url": "http://127.0.0.1:18211/reports/cash-forecast",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-cash-forecast-1440.png",
+          "width_px": 1440,
+          "height_px": 1946,
+          "sha256": "9c27c6bc3539a1372a159b787625f4851ac574ac0f04106b1b5da78e0e3a6939",
+          "original": "output/playwright/ux-audit/50-cash-forecast-1440.png"
+        },
+        {
+          "file": "evidence/50-cash-forecast-768.png",
+          "width_px": 768,
+          "height_px": 2466,
+          "sha256": "e9a14c8717737fb4e9a70bef713338c3c2df313bf7baa101d3e124a0d85e4d81",
+          "original": "output/playwright/ux-audit/50-cash-forecast-768.png"
+        },
+        {
+          "file": "evidence/50-cash-forecast-390.png",
+          "width_px": 390,
+          "height_px": 2565,
+          "sha256": "acc99dd76b4d5b75b18adffe8515bb4c3cfd7c28370854910b2466cd6185e4c8",
+          "original": "output/playwright/ux-audit/50-cash-forecast-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-cash-forecast-capture.txt"
+    },
+    {
+      "id": "50-bank-reconciliation",
+      "state": "Empty bank-statement history and import form",
+      "route": "/bank-reconciliation",
+      "captured_url": "http://127.0.0.1:18211/bank-reconciliation",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-bank-reconciliation-1440.png",
+          "width_px": 1440,
+          "height_px": 1594,
+          "sha256": "2a744b9dddc6899734a517751f6ff27507c715a933da08963c9aab5c99956d87",
+          "original": "output/playwright/ux-audit/50-bank-reconciliation-1440.png"
+        },
+        {
+          "file": "evidence/50-bank-reconciliation-768.png",
+          "width_px": 768,
+          "height_px": 1686,
+          "sha256": "9b3cbe232195c63268e739aa26804a29fdcb553e9038e8bad95d317f63268eec",
+          "original": "output/playwright/ux-audit/50-bank-reconciliation-768.png"
+        },
+        {
+          "file": "evidence/50-bank-reconciliation-390.png",
+          "width_px": 390,
+          "height_px": 2215,
+          "sha256": "355b83ef84c6e4e182f9dbd2cecd1ea636e95e60d24353340b02a271146edbf4",
+          "original": "output/playwright/ux-audit/50-bank-reconciliation-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-bank-reconciliation-capture.txt"
+    },
+    {
+      "id": "50-periods",
+      "state": "Closed 2024/2025 and open 2026, populated period history",
+      "route": "/periods",
+      "captured_url": "http://127.0.0.1:18211/periods",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-periods-1440.png",
+          "width_px": 1440,
+          "height_px": 3916,
+          "sha256": "f6d569da20930ae8d209553fc11f2e71abad4cd8aed4cb24e926ef9613ab2eb5",
+          "original": "output/playwright/ux-audit/50-periods-1440.png"
+        },
+        {
+          "file": "evidence/50-periods-768.png",
+          "width_px": 768,
+          "height_px": 5347,
+          "sha256": "15d8b35acf470fa4c0c98604a98fdba5cf5c9a289d13cdcaf813a313e5853ad0",
+          "original": "output/playwright/ux-audit/50-periods-768.png"
+        },
+        {
+          "file": "evidence/50-periods-390.png",
+          "width_px": 390,
+          "height_px": 9295,
+          "sha256": "3c546607c7061a062a4a18f1b39517eb5371b50dd858c4e732c7f72e8cbe96e8",
+          "original": "output/playwright/ux-audit/50-periods-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-periods-capture.txt"
+    },
+    {
+      "id": "50-tax",
+      "state": "Synthetic manual 5% code and exclusive-price setting",
+      "route": "/tax",
+      "captured_url": "http://127.0.0.1:18211/tax",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-tax-1440.png",
+          "width_px": 1440,
+          "height_px": 1972,
+          "sha256": "1ca730df2180cc825ea6b7b550f937348003e740deb92e1c5520ff524c1bea04",
+          "original": "output/playwright/ux-audit/50-tax-1440.png"
+        },
+        {
+          "file": "evidence/50-tax-768.png",
+          "width_px": 768,
+          "height_px": 2193,
+          "sha256": "fd92005ee1f6017126ae61c67e2c5bee0ae7613b479f763bbb49d694994896ab",
+          "original": "output/playwright/ux-audit/50-tax-768.png"
+        },
+        {
+          "file": "evidence/50-tax-390.png",
+          "width_px": 390,
+          "height_px": 2848,
+          "sha256": "df9b3fa14325c5b048cc236abaa2393c2545a0ea15270586fdf8b30395e5231a",
+          "original": "output/playwright/ux-audit/50-tax-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-tax-capture.txt"
+    },
+    {
+      "id": "50-modules",
+      "state": "Inventory/Purchasing enabled and POS disabled; AR/AP visibility controls",
+      "route": "/modules",
+      "captured_url": "http://127.0.0.1:18211/modules",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-modules-1440.png",
+          "width_px": 1440,
+          "height_px": 2494,
+          "sha256": "a5c57600cbd9b88bbe16fb9c2de2cc6d00dba1e93f53e8bbce68bb0fd52e03cf",
+          "original": "output/playwright/ux-audit/50-modules-1440.png"
+        },
+        {
+          "file": "evidence/50-modules-768.png",
+          "width_px": 768,
+          "height_px": 2770,
+          "sha256": "d3454c130fbd99e2176ad1736d9bde50b1c55b07e2b59d5331eccbea4712b30c",
+          "original": "output/playwright/ux-audit/50-modules-768.png"
+        },
+        {
+          "file": "evidence/50-modules-390.png",
+          "width_px": 390,
+          "height_px": 3319,
+          "sha256": "39be0018951b50c4f8272781b382618fc0bca8e802a731bbcf614d80dd20fc06",
+          "original": "output/playwright/ux-audit/50-modules-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-modules-capture.txt"
+    },
+    {
+      "id": "50-connections",
+      "state": "Empty connection/token history",
+      "route": "/connections",
+      "captured_url": "http://127.0.0.1:18211/connections",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-connections-1440.png",
+          "width_px": 1440,
+          "height_px": 1140,
+          "sha256": "ef3cc3201ff108a62b8f77f12b9aeeb28470a5da199c5b681da0f792d53fc4ac",
+          "original": "output/playwright/ux-audit/50-connections-1440.png"
+        },
+        {
+          "file": "evidence/50-connections-768.png",
+          "width_px": 768,
+          "height_px": 1236,
+          "sha256": "29498b024a1a7462fa68648b559368949a42155bfc5bf994707d905020f7be03",
+          "original": "output/playwright/ux-audit/50-connections-768.png"
+        },
+        {
+          "file": "evidence/50-connections-390.png",
+          "width_px": 390,
+          "height_px": 1517,
+          "sha256": "49915832188a3dd925abfa03ec2c6744156c977625720e6f6fb3b8f789e51bcb",
+          "original": "output/playwright/ux-audit/50-connections-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-connections-capture.txt"
+    },
+    {
+      "id": "50-oauth-invalid",
+      "state": "Invalid OAuth request without parameters; HTTP 403",
+      "route": "/oauth/authorize",
+      "captured_url": "http://127.0.0.1:18211/oauth/authorize",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-oauth-invalid-1440.png",
+          "width_px": 1440,
+          "height_px": 1000,
+          "sha256": "24f6586d78ef23a5a96b15e0f262999685046fa8397bd8869fc0357e5c880bd4",
+          "original": "output/playwright/ux-audit/50-oauth-invalid-1440.png"
+        },
+        {
+          "file": "evidence/50-oauth-invalid-768.png",
+          "width_px": 768,
+          "height_px": 1000,
+          "sha256": "5a283b420f9016e41e7eb5ac27d7a3dc4a84c2bde5dc09c63f282b646dd5b89d",
+          "original": "output/playwright/ux-audit/50-oauth-invalid-768.png"
+        },
+        {
+          "file": "evidence/50-oauth-invalid-390.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "870bf6bb2f9959ba6887642c480c1aff652e6b4fd08e924e0e1d587737f5fe0b",
+          "original": "output/playwright/ux-audit/50-oauth-invalid-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-oauth-invalid-capture.txt"
+    },
+    {
+      "id": "50-period-drilldown",
+      "state": "Actual 2025 P&L income-link navigation preserving period on statement",
+      "route": "/reports/account",
+      "captured_url": "http://127.0.0.1:18211/reports/account?id=5515&as_of=2025-12-31&from=2025-01-01",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-period-drilldown-1440.png",
+          "width_px": 1440,
+          "height_px": 2407,
+          "sha256": "94c0658e5ca8606eb14c7322b8d56241e1f80bd925317be65b70a0deea355e71",
+          "original": "output/playwright/ux-audit/50-period-drilldown-1440.png"
+        },
+        {
+          "file": "evidence/50-period-drilldown-768.png",
+          "width_px": 768,
+          "height_px": 7111,
+          "sha256": "71619f8e8cf7208b5fd3597240db73943be8287fede49c5937e43fcb910f62c1",
+          "original": "output/playwright/ux-audit/50-period-drilldown-768.png"
+        },
+        {
+          "file": "evidence/50-period-drilldown-390.png",
+          "width_px": 390,
+          "height_px": 8323,
+          "sha256": "41e9c0d9ae652bc5846579faaf60fb2a5dc4f157359122c79019e93af37ca913",
+          "original": "output/playwright/ux-audit/50-period-drilldown-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/50-period-drilldown-capture.txt"
+    },
+    {
+      "id": "50-account-statement-viewport",
+      "state": "Statement first viewport and movement detail",
+      "route": "/reports/account",
+      "captured_url": "http://127.0.0.1:18211/reports/account?id=5511",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "viewport",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-account-statement-phone-top.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "3f80deeeaaa1c712922238e1857c76d0e3348322ebb546204fc57685636cfc6d",
+          "original": "output/playwright/ux-audit/50-account-statement-phone-top.png"
+        },
+        {
+          "file": "evidence/50-account-statement-phone-entries.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "cde588778cb63506f5ed6ae9b4fab781dd837366baa258fed1f58945fd0ce2de",
+          "original": "output/playwright/ux-audit/50-account-statement-phone-entries.png"
+        },
+        {
+          "file": "evidence/50-account-statement-tablet-entries.png",
+          "width_px": 768,
+          "height_px": 1000,
+          "sha256": "b9ddf8223bad84974145cf66ff0fd8b54c155307aa50442d87db476f82a3440b",
+          "original": "output/playwright/ux-audit/50-account-statement-tablet-entries.png"
+        }
+      ]
+    },
+    {
+      "id": "50-periods-viewport",
+      "state": "Phone period guidance and narrow history detail",
+      "route": "/periods",
+      "captured_url": "http://127.0.0.1:18211/periods",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "REPORTING-ADMIN-AUDIT.md",
+      "kind": "viewport",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/50-periods-phone-top.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "d0773c9a74bca35b6a93a8791b3c1a52687313e7a22ef46553562cee8766ff07",
+          "original": "output/playwright/ux-audit/50-periods-phone-top.png"
+        },
+        {
+          "file": "evidence/50-periods-phone-history.png",
+          "width_px": 390,
+          "height_px": 1000,
+          "sha256": "2178fb968ad76a38c1cbbc12be1b4f2fbda86b7b573c695d2e0acd36dee95087",
+          "original": "output/playwright/ux-audit/50-periods-phone-history.png"
+        }
+      ]
+    },
+    {
+      "id": "60-account-new",
+      "state": "Blank new-account form, no save",
+      "route": "/accounts",
+      "captured_url": "http://127.0.0.1:18211/accounts?new=1",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "COVERAGE-GAPS.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/60-account-new-1440.png",
+          "width_px": 1440,
+          "height_px": 2070,
+          "sha256": "a476675d53326808394b50889bc753fd59375f109ef0f3b8a24a310110885eaf",
+          "original": "output/playwright/ux-audit/60-account-new-1440.png"
+        },
+        {
+          "file": "evidence/60-account-new-768.png",
+          "width_px": 768,
+          "height_px": 1091,
+          "sha256": "217862a31b378012fad127fa0772f1fcaa58091fcb92c0601f5c25aadcad646a",
+          "original": "output/playwright/ux-audit/60-account-new-768.png"
+        },
+        {
+          "file": "evidence/60-account-new-390.png",
+          "width_px": 390,
+          "height_px": 1210,
+          "sha256": "84549bc19c79de730f58ea24b911ac9a332093032a1420993c3eab0620cca9ab",
+          "original": "output/playwright/ux-audit/60-account-new-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/60-account-new-capture.txt"
+    },
+    {
+      "id": "60-account-detail",
+      "state": "Existing cash/bank account with immutable classification and collapsed history, no save",
+      "route": "/accounts",
+      "captured_url": "http://127.0.0.1:18211/accounts?id=5511",
+      "runtime": "local installation with synthetic fixtures",
+      "audit": "COVERAGE-GAPS.md",
+      "kind": "full-page",
+      "accepted_visual_review": "inspected by the author of the linked audit before acceptance",
+      "images": [
+        {
+          "file": "evidence/60-account-detail-1440.png",
+          "width_px": 1440,
+          "height_px": 2070,
+          "sha256": "1c88f97f7d6aa8d14f3f822ef202ee51cbc11c91f342688cd24c757015cd1193",
+          "original": "output/playwright/ux-audit/60-account-detail-1440.png"
+        },
+        {
+          "file": "evidence/60-account-detail-768.png",
+          "width_px": 768,
+          "height_px": 1091,
+          "sha256": "521fb45cc51c7c5b2b484328d1c0b5e31686b26b500ad5697c445c97cae45752",
+          "original": "output/playwright/ux-audit/60-account-detail-768.png"
+        },
+        {
+          "file": "evidence/60-account-detail-390.png",
+          "width_px": 390,
+          "height_px": 1215,
+          "sha256": "075856e02ea0adcb331a0e6150f6180a06852ccc4aac8e68b4fc3b02c522a64b",
+          "original": "output/playwright/ux-audit/60-account-detail-390.png"
+        }
+      ],
+      "capture_receipt_local": "output/playwright/ux-audit/60-account-detail-capture.txt"
+    }
+  ],
+  "verification": {
+    "all_accepted_files_exist": true,
+    "all_original_copies_byte_equal": true,
+    "all_registered_get_routes_present_once": true,
+    "accepted_images_are_unedited": true,
+    "new_capture_financial_or_settings_mutations": false,
+    "new_capture_local_runtime": "http://127.0.0.1:18211",
+    "new_capture_session": "ux-reporting (closed after capture)",
+    "supplemental_read_check_scope": "Synthetic local read-only HTTP checks; no tokens or response bodies retained",
+    "no_credentials_or_tokens_in_this_artifact": true
+  },
+  "limits": [
+    "Meaningful missing-state cases are a prioritized inventory, not an exhaustive mathematical state space.",
+    "This cross-check trusts the accepted visual review recorded by each audit author; the six new account captures were additionally inspected in this coverage pass.",
+    "Source hashes identify inspected files; current branch may contain unrelated local work.",
+    "No API credential was created or used. API/MCP/metadata entries have source evidence only in this pass.",
+    "No release receipt is substituted for missing current screenshots. Financial test success is not usability or accounting sign-off."
+  ]
+}

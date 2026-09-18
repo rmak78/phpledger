@@ -1,0 +1,2998 @@
+{
+  "document_version": "0.1.0",
+  "status": "Research",
+  "review_status": "unreviewed",
+  "runtime_importable": false,
+  "purpose": "Independent accounting review oracles; not a runtime fixture schema, import file or new posting interface.",
+  "prepared_on": "2026-09-16",
+  "synthetic": true,
+  "accountant_approval": null,
+  "production_authorization": false,
+  "industry_ids": [
+    "professional-services",
+    "seasonal-services",
+    "retail-shop",
+    "wholesale-trader",
+    "distributor",
+    "restaurant-cafe",
+    "membership-club",
+    "pharmacy",
+    "jewelry",
+    "light-manufacturing",
+    "service-workshop"
+  ],
+  "calendar_contract": {
+    "historical_closed_years": [
+      2024,
+      2025
+    ],
+    "open_practice_year": 2026,
+    "posted_practice_month": "2026-01",
+    "draft_practice_month": "2026-02",
+    "current_date_does_not_shift_authored_dates": true
+  },
+  "first_review_wave": {
+    "status": "proposal_unapproved",
+    "countries": [
+      "PK",
+      "IN"
+    ],
+    "industries": [
+      "professional-services",
+      "retail-shop"
+    ],
+    "country_package_approval_implied": false
+  },
+  "conventions": {
+    "money": "Exact four-place decimal strings; never binary floating point. USD is a synthetic base-currency label, not a country choice.",
+    "journal_sign": "Each expected line has nonnegative debit and credit, one side zero.",
+    "case_isolation": "Each case starts from its own opening trial balance. Opening balances are already posted except AC09. Do not chain cases or post openings twice.",
+    "opening_profit": "Prior-period earnings are included in opening equity. P&L covers this case entries only.",
+    "control_totals": "AR/AP are positive outstanding amounts; credit adjustments reduce original open items. No independent unapplied credit/refund is assumed.",
+    "stock": "Existing-mechanics cases assume reviewed activated opening detail, one location, one base unit, no negative stock, and dated immutable movements.",
+    "manual_cases": "Manual policy cases give GL arithmetic but do not assert operational subledger support. Null stock delta is not a passed inventory reconciliation.",
+    "tax": "REVIEW5 is an invented 5 percent review rate. Eligibility, jurisdiction, recoverability and fiscal document requirements are not decided.",
+    "line_currency_snapshot": {
+      "currency": "USD",
+      "rate": "1.000000000000",
+      "rate_type": "spot",
+      "rate_source_id": null,
+      "rate_is_stale": false,
+      "ic_counterparty_entity_id": null,
+      "amount_fc_equals_amount_base": true
+    },
+    "roles": "Account aliases below are local oracle shorthand. Resolve semantic references through the approved installation contract; review.* and profile.* are not installed semantic keys or new runtime roles."
+  },
+  "accounts": {
+    "bank": {
+      "root_type": "asset",
+      "semantic_reference": "core.bank.operating",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "ar": {
+      "root_type": "asset",
+      "semantic_reference": "core.receivables.trade",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "stock": {
+      "root_type": "asset",
+      "semantic_reference": "profile.inventory",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "raw": {
+      "root_type": "asset",
+      "semantic_reference": "manufacturing.inventory.raw",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "wip": {
+      "root_type": "asset",
+      "semantic_reference": "manufacturing.inventory.work",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "finished": {
+      "root_type": "asset",
+      "semantic_reference": "manufacturing.inventory.finished",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "input_tax": {
+      "root_type": "asset",
+      "semantic_reference": "review.synthetic_tax.input",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "ap": {
+      "root_type": "liability",
+      "semantic_reference": "core.payables.trade",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "grni": {
+      "root_type": "liability",
+      "semantic_reference": "wholesale.liability.received_unbilled",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "output_tax": {
+      "root_type": "liability",
+      "semantic_reference": "review.synthetic_tax.output",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "prepaid_dues": {
+      "root_type": "liability",
+      "semantic_reference": "club.liability.prepaid_dues",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "capital": {
+      "root_type": "equity",
+      "semantic_reference": "core.equity.capital",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "sales": {
+      "root_type": "income",
+      "semantic_reference": "profile.earned_income",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "cogs": {
+      "root_type": "expense",
+      "semantic_reference": "profile.cost_of_goods",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "utilities": {
+      "root_type": "expense",
+      "semantic_reference": "core.expense.utilities",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "contractor": {
+      "root_type": "expense",
+      "semantic_reference": "service.cost.contractors",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "variance": {
+      "root_type": "expense",
+      "semantic_reference": "review.purchase_price_variance",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "write_down": {
+      "root_type": "expense",
+      "semantic_reference": "review.inventory_write_down",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "shrinkage": {
+      "root_type": "expense",
+      "semantic_reference": "retail.cost.shrinkage",
+      "reference_status": "proposal_requires_explicit_mapping"
+    },
+    "abnormal": {
+      "root_type": "expense",
+      "semantic_reference": "manufacturing.cost.abnormal",
+      "reference_status": "proposal_requires_explicit_mapping"
+    }
+  },
+  "required_failure_and_replay_checks": [
+    "Exact command replay returns same durable result with zero additional journals, allocations or stock movements.",
+    "Same request identity with changed payload rejects.",
+    "Unauthorized actor and wrong company/book reject before any effect.",
+    "Closed period rejects new posting/reversal; the permissioned exception for backdating within an open period is explicit.",
+    "Direct financial reversal cannot leave unreversed stock effects; adapter cost and financial effects are atomic.",
+    "Overpayment, excesscredit/return, overreceipt and duplicatebillallocation reject.",
+    "Stock issue beyond available quantity and date before latest movement reject.",
+    "Stale preview/count/value snapshots reject; the whole compound operation rolls back on a later failure.",
+    "Zero quantity cannot retain carrying value; the final exact cost residual is consumed without floats.",
+    "Disabled optional modules block new writes while authorized historical reads remain available.",
+    "Manual cases must not become claims of deposit, manufacturing, custody, batch or regional tax capability."
+  ],
+  "primary_references": [
+    {
+      "id": "IND-IFRS-IAS2",
+      "url": "https://www.ifrs.org/issued-standards/list-of-standards/ias-2-inventories/",
+      "publisher": "IFRS Foundation",
+      "accessed_on": "2026-09-16",
+      "scope": "Public overview only; cost/write-down/recognition questions where IAS2 applies. No complete standard reproduced.",
+      "raw_content_sha256": null
+    },
+    {
+      "id": "IND-IFRS-15",
+      "url": "https://www.ifrs.org/issued-standards/list-of-standards/ifrs-15-revenue-from-contracts-with-customers/",
+      "publisher": "IFRS Foundation",
+      "accessed_on": "2026-09-16",
+      "scope": "Public overview only; earned-service questions where IFRS15 applies. No framework applicability conclusion.",
+      "raw_content_sha256": null
+    }
+  ],
+  "cases": [
+    {
+      "id": "AC01",
+      "title": "Purchase order, two receipts and one supplier bill with synthetic input tax",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1000.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "receipt-a",
+          "date": "2026-01-03",
+          "expected_lines": [
+            {
+              "account": "stock",
+              "debit": "60.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "grni",
+              "debit": "0.0000",
+              "credit": "60.0000"
+            }
+          ]
+        },
+        {
+          "id": "receipt-b",
+          "date": "2026-01-04",
+          "expected_lines": [
+            {
+              "account": "stock",
+              "debit": "40.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "grni",
+              "debit": "0.0000",
+              "credit": "40.0000"
+            }
+          ]
+        },
+        {
+          "id": "bill-a",
+          "date": "2026-01-08",
+          "expected_lines": [
+            {
+              "account": "grni",
+              "debit": "100.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "input_tax",
+              "debit": "5.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "ap",
+              "debit": "0.0000",
+              "credit": "105.0000"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "stock",
+            "debit": "100.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "input_tax",
+            "debit": "5.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ap",
+            "debit": "0.0000",
+            "credit": "105.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1000.0000"
+          }
+        ],
+        "trial_balance_debit": "1105.0000",
+        "trial_balance_credit": "1105.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "0.0000",
+          "net_result": "0.0000"
+        },
+        "balance_sheet": {
+          "assets": "1105.0000",
+          "liabilities": "105.0000",
+          "opening_equity": "1000.0000",
+          "current_result": "0.0000",
+          "equity_including_current_result": "1000.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [
+            {
+              "source_reference": "bill-a",
+              "due_date": "2026-01-31",
+              "remaining_fc": "105.0000",
+              "remaining_base": "105.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "105.0000",
+          "control_balance": "105.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [
+            {
+              "product_reference": "owned-training-product",
+              "quantity": "10.0000",
+              "carrying_value_base": "100.0000"
+            }
+          ],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "100.0000",
+          "control_balance": "100.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 3
+      },
+      "review_notes": [
+        "PO for 10 units at 10 has no journal. Receipts of 6 and 4 units retain their original cost. Bill net 100 plus synthetic tax 5 matches both receipts; no duplicate inventory debit."
+      ],
+      "tax": {
+        "code": "REVIEW5",
+        "percentage": "5.000000",
+        "price_mode": "exclusive",
+        "net": "100.0000",
+        "tax": "5.0000",
+        "gross": "105.0000",
+        "input_recoverability": "assumed_only_for_this_oracle_requires_practitioner_review"
+      }
+    },
+    {
+      "id": "AC02",
+      "title": "Stock invoice and linked cost of goods sold",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "stock",
+          "debit": "100.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1100.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "invoice-a",
+          "date": "2026-01-10",
+          "expected_lines": [
+            {
+              "account": "ar",
+              "debit": "78.7500",
+              "credit": "0.0000"
+            },
+            {
+              "account": "sales",
+              "debit": "0.0000",
+              "credit": "75.0000"
+            },
+            {
+              "account": "output_tax",
+              "debit": "0.0000",
+              "credit": "3.7500"
+            }
+          ]
+        },
+        {
+          "id": "invoice-a-cost",
+          "date": "2026-01-10",
+          "expected_lines": [
+            {
+              "account": "cogs",
+              "debit": "30.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "stock",
+              "debit": "0.0000",
+              "credit": "30.0000"
+            }
+          ],
+          "source_document": "invoice-a"
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ar",
+            "debit": "78.7500",
+            "credit": "0.0000"
+          },
+          {
+            "account": "stock",
+            "debit": "70.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "output_tax",
+            "debit": "0.0000",
+            "credit": "3.7500"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1100.0000"
+          },
+          {
+            "account": "sales",
+            "debit": "0.0000",
+            "credit": "75.0000"
+          },
+          {
+            "account": "cogs",
+            "debit": "30.0000",
+            "credit": "0.0000"
+          }
+        ],
+        "trial_balance_debit": "1178.7500",
+        "trial_balance_credit": "1178.7500",
+        "profit_and_loss": {
+          "income": "75.0000",
+          "expenses": "30.0000",
+          "net_result": "45.0000"
+        },
+        "balance_sheet": {
+          "assets": "1148.7500",
+          "liabilities": "3.7500",
+          "opening_equity": "1100.0000",
+          "current_result": "45.0000",
+          "equity_including_current_result": "1145.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [
+            {
+              "source_reference": "invoice-a",
+              "due_date": "2026-01-31",
+              "remaining_fc": "78.7500",
+              "remaining_base": "78.7500",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "78.7500",
+          "control_balance": "78.7500",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [
+            {
+              "product_reference": "owned-training-product",
+              "quantity": "7.0000",
+              "carrying_value_base": "70.0000"
+            }
+          ],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "70.0000",
+          "control_balance": "70.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 2
+      },
+      "review_notes": [
+        "Opening stock of 10 units carrying 100 is already activated. Sell 3 at 25 plus synthetic 5 percent tax. Financial and stock posting must commit together."
+      ]
+    },
+    {
+      "id": "AC03",
+      "title": "Partial customer receipt preserves remaining open invoice",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "ar",
+          "debit": "100.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1100.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "receipt-a",
+          "date": "2026-01-12",
+          "expected_lines": [
+            {
+              "account": "bank",
+              "debit": "40.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "ar",
+              "debit": "0.0000",
+              "credit": "40.0000"
+            }
+          ],
+          "allocation_to": "prior-invoice"
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1040.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ar",
+            "debit": "60.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1100.0000"
+          }
+        ],
+        "trial_balance_debit": "1100.0000",
+        "trial_balance_credit": "1100.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "0.0000",
+          "net_result": "0.0000"
+        },
+        "balance_sheet": {
+          "assets": "1100.0000",
+          "liabilities": "0.0000",
+          "opening_equity": "1100.0000",
+          "current_result": "0.0000",
+          "equity_including_current_result": "1100.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [
+            {
+              "source_reference": "prior-invoice",
+              "due_date": "2026-01-20",
+              "remaining_fc": "60.0000",
+              "remaining_base": "60.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "60.0000",
+          "control_balance": "60.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 1
+      },
+      "review_notes": [
+        "Opening unpaid invoice 100 is already in AR. Receipt 40 is not new revenue. Remaining 60 must agree with aging and AR control."
+      ]
+    },
+    {
+      "id": "AC04",
+      "title": "Partial supplier payment preserves remaining payable",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "ap",
+          "debit": "0.0000",
+          "credit": "100.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "900.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "payment-a",
+          "date": "2026-01-14",
+          "expected_lines": [
+            {
+              "account": "ap",
+              "debit": "40.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "bank",
+              "debit": "0.0000",
+              "credit": "40.0000"
+            }
+          ],
+          "allocation_to": "prior-bill"
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "960.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ap",
+            "debit": "0.0000",
+            "credit": "60.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "900.0000"
+          }
+        ],
+        "trial_balance_debit": "960.0000",
+        "trial_balance_credit": "960.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "0.0000",
+          "net_result": "0.0000"
+        },
+        "balance_sheet": {
+          "assets": "960.0000",
+          "liabilities": "60.0000",
+          "opening_equity": "900.0000",
+          "current_result": "0.0000",
+          "equity_including_current_result": "900.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [
+            {
+              "source_reference": "prior-bill",
+              "due_date": "2026-01-20",
+              "remaining_fc": "60.0000",
+              "remaining_base": "60.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "60.0000",
+          "control_balance": "60.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 1
+      },
+      "review_notes": [
+        "Opening bill 100 is already in AP. Payment 40 is not a second expense."
+      ]
+    },
+    {
+      "id": "AC05",
+      "title": "Customer credit with original-cost stock return and original tax snapshot",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "stock",
+          "debit": "70.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "ar",
+          "debit": "78.7500",
+          "credit": "0.0000"
+        },
+        {
+          "account": "output_tax",
+          "debit": "0.0000",
+          "credit": "3.7500"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1145.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "credit-a",
+          "date": "2026-01-15",
+          "expected_lines": [
+            {
+              "account": "sales",
+              "debit": "25.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "output_tax",
+              "debit": "1.2500",
+              "credit": "0.0000"
+            },
+            {
+              "account": "ar",
+              "debit": "0.0000",
+              "credit": "26.2500"
+            }
+          ],
+          "original_document": "invoice-a"
+        },
+        {
+          "id": "credit-a-return",
+          "date": "2026-01-15",
+          "expected_lines": [
+            {
+              "account": "stock",
+              "debit": "10.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "cogs",
+              "debit": "0.0000",
+              "credit": "10.0000"
+            }
+          ],
+          "original_issue": "invoice-a-cost"
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ar",
+            "debit": "52.5000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "stock",
+            "debit": "80.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "output_tax",
+            "debit": "0.0000",
+            "credit": "2.5000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1145.0000"
+          },
+          {
+            "account": "sales",
+            "debit": "25.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "cogs",
+            "debit": "0.0000",
+            "credit": "10.0000"
+          }
+        ],
+        "trial_balance_debit": "1157.5000",
+        "trial_balance_credit": "1157.5000",
+        "profit_and_loss": {
+          "income": "-25.0000",
+          "expenses": "-10.0000",
+          "net_result": "-15.0000"
+        },
+        "balance_sheet": {
+          "assets": "1132.5000",
+          "liabilities": "2.5000",
+          "opening_equity": "1145.0000",
+          "current_result": "-15.0000",
+          "equity_including_current_result": "1130.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [
+            {
+              "source_reference": "invoice-a",
+              "due_date": "2026-01-31",
+              "remaining_fc": "52.5000",
+              "remaining_base": "52.5000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "52.5000",
+          "control_balance": "52.5000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [
+            {
+              "product_reference": "owned-training-product",
+              "quantity": "8.0000",
+              "carrying_value_base": "80.0000"
+            }
+          ],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "80.0000",
+          "control_balance": "80.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 2
+      },
+      "review_notes": [
+        "Opening position follows a completed earlier invoice; its profit is in opening equity. One of 3 sold units is returned intact at original cost 10. Credit net 25 plus original tax 1.25 reduces the unpaid invoice; no cash refund. A later configured tax rate must not change this credit."
+      ]
+    },
+    {
+      "id": "AC06",
+      "title": "Billed supplier return and linked supplier credit",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "stock",
+          "debit": "100.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "input_tax",
+          "debit": "5.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "ap",
+          "debit": "0.0000",
+          "credit": "105.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1000.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "supplier-credit",
+          "date": "2026-01-15",
+          "expected_lines": [
+            {
+              "account": "ap",
+              "debit": "21.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "input_tax",
+              "debit": "0.0000",
+              "credit": "1.0000"
+            },
+            {
+              "account": "grni",
+              "debit": "0.0000",
+              "credit": "20.0000"
+            }
+          ],
+          "original_document": "prior-bill"
+        },
+        {
+          "id": "physical-return",
+          "date": "2026-01-15",
+          "expected_lines": [
+            {
+              "account": "grni",
+              "debit": "20.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "stock",
+              "debit": "0.0000",
+              "credit": "20.0000"
+            }
+          ],
+          "original_receipt": "prior-receipt"
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "stock",
+            "debit": "80.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "input_tax",
+            "debit": "4.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ap",
+            "debit": "0.0000",
+            "credit": "84.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1000.0000"
+          }
+        ],
+        "trial_balance_debit": "1084.0000",
+        "trial_balance_credit": "1084.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "0.0000",
+          "net_result": "0.0000"
+        },
+        "balance_sheet": {
+          "assets": "1084.0000",
+          "liabilities": "84.0000",
+          "opening_equity": "1000.0000",
+          "current_result": "0.0000",
+          "equity_including_current_result": "1000.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [
+            {
+              "source_reference": "prior-bill",
+              "due_date": "2026-01-31",
+              "remaining_fc": "84.0000",
+              "remaining_base": "84.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "84.0000",
+          "control_balance": "84.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [
+            {
+              "product_reference": "owned-training-product",
+              "quantity": "8.0000",
+              "carrying_value_base": "80.0000"
+            }
+          ],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "80.0000",
+          "control_balance": "80.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 2
+      },
+      "review_notes": [
+        "Two units returned at original cost 10; supplier accepts net 20 plus original synthetic tax 1. The existing GRNI account clears the supplier credit against the physical return, leaving zero. Both effects commit together. No payment or refund is implied."
+      ]
+    },
+    {
+      "id": "AC07",
+      "title": "Unbilled supplier return reduces GRNI without creating AP",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "stock",
+          "debit": "100.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "grni",
+          "debit": "0.0000",
+          "credit": "100.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1000.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "return-unbilled",
+          "date": "2026-01-07",
+          "expected_lines": [
+            {
+              "account": "grni",
+              "debit": "20.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "stock",
+              "debit": "0.0000",
+              "credit": "20.0000"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "stock",
+            "debit": "80.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "grni",
+            "debit": "0.0000",
+            "credit": "80.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1000.0000"
+          }
+        ],
+        "trial_balance_debit": "1080.0000",
+        "trial_balance_credit": "1080.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "0.0000",
+          "net_result": "0.0000"
+        },
+        "balance_sheet": {
+          "assets": "1080.0000",
+          "liabilities": "80.0000",
+          "opening_equity": "1000.0000",
+          "current_result": "0.0000",
+          "equity_including_current_result": "1000.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [
+            {
+              "product_reference": "owned-training-product",
+              "quantity": "8.0000",
+              "carrying_value_base": "80.0000"
+            }
+          ],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "80.0000",
+          "control_balance": "80.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [
+            {
+              "source_reference": "prior-receipt",
+              "due_date": "2026-01-31",
+              "remaining_fc": "80.0000",
+              "remaining_base": "80.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "remaining_basis": "80.0000",
+          "control_balance": "80.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 1
+      },
+      "review_notes": [
+        "Return 2 of 10 received units before billing. No AP credit is created because no bill exists. Remaining billable receipt basis is 80."
+      ]
+    },
+    {
+      "id": "AC08",
+      "title": "Dated reversal and corrected repost under one document identity",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1000.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "utility-posting-v1",
+          "date": "2026-01-05",
+          "expected_lines": [
+            {
+              "account": "utilities",
+              "debit": "30.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "bank",
+              "debit": "0.0000",
+              "credit": "30.0000"
+            }
+          ],
+          "document_identity": "utility-001",
+          "posting_revision": 1
+        },
+        {
+          "id": "utility-reversal-v1",
+          "date": "2026-01-06",
+          "expected_lines": [
+            {
+              "account": "bank",
+              "debit": "30.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "utilities",
+              "debit": "0.0000",
+              "credit": "30.0000"
+            }
+          ],
+          "document_identity": "utility-001",
+          "reverses": "utility-posting-v1"
+        },
+        {
+          "id": "utility-posting-v2",
+          "date": "2026-01-06",
+          "expected_lines": [
+            {
+              "account": "utilities",
+              "debit": "25.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "bank",
+              "debit": "0.0000",
+              "credit": "25.0000"
+            }
+          ],
+          "document_identity": "utility-001",
+          "posting_revision": 2
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "975.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1000.0000"
+          },
+          {
+            "account": "utilities",
+            "debit": "25.0000",
+            "credit": "0.0000"
+          }
+        ],
+        "trial_balance_debit": "1000.0000",
+        "trial_balance_credit": "1000.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "25.0000",
+          "net_result": "-25.0000"
+        },
+        "balance_sheet": {
+          "assets": "975.0000",
+          "liabilities": "0.0000",
+          "opening_equity": "1000.0000",
+          "current_result": "-25.0000",
+          "equity_including_current_result": "975.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 3
+      },
+      "review_notes": [
+        "Cancellation date is 2026-01-06. Keep original 30, reversing 30, corrected 25 and document identity utility-001. Do not rename it utility-001-1. Backdating requires separate permission and an open period. A closed reversal date must reject atomically."
+      ]
+    },
+    {
+      "id": "AC09",
+      "title": "Opening TB once followed by unpaid and stock detail conversion",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [],
+      "expected_journals": [
+        {
+          "id": "opening-2026",
+          "date": "2026-01-01",
+          "expected_lines": [
+            {
+              "account": "bank",
+              "debit": "500.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "ar",
+              "debit": "300.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "stock",
+              "debit": "200.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "ap",
+              "debit": "0.0000",
+              "credit": "100.0000"
+            },
+            {
+              "account": "capital",
+              "debit": "0.0000",
+              "credit": "900.0000"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "500.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ar",
+            "debit": "300.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "stock",
+            "debit": "200.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ap",
+            "debit": "0.0000",
+            "credit": "100.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "900.0000"
+          }
+        ],
+        "trial_balance_debit": "1000.0000",
+        "trial_balance_credit": "1000.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "0.0000",
+          "net_result": "0.0000"
+        },
+        "balance_sheet": {
+          "assets": "1000.0000",
+          "liabilities": "100.0000",
+          "opening_equity": "900.0000",
+          "current_result": "0.0000",
+          "equity_including_current_result": "900.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [
+            {
+              "source_reference": "opening-customer-a",
+              "due_date": "2025-12-20",
+              "remaining_fc": "200.0000",
+              "remaining_base": "200.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            },
+            {
+              "source_reference": "opening-customer-b",
+              "due_date": "2026-01-15",
+              "remaining_fc": "100.0000",
+              "remaining_base": "100.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "300.0000",
+          "control_balance": "300.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [
+            {
+              "source_reference": "opening-supplier-a",
+              "due_date": "2026-01-10",
+              "remaining_fc": "100.0000",
+              "remaining_base": "100.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "100.0000",
+          "control_balance": "100.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [
+            {
+              "product_reference": "owned-training-product",
+              "quantity": "20.0000",
+              "carrying_value_base": "200.0000"
+            }
+          ],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "200.0000",
+          "control_balance": "200.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 1
+      },
+      "review_notes": [
+        "Source TB includes AR 300, AP 100 and stock 200. Confirm it once. Detail conversion links to these exact controls; no new revenue, purchases, tax or stock GL. Unpaid values are outstanding at cutover after any prior payments."
+      ],
+      "nonposting_steps": [
+        {
+          "action": "activate_open_items_from_reviewed_opening_detail",
+          "additional_journal_count": 0,
+          "additional_ar_gl": "0.0000",
+          "additional_ap_gl": "0.0000"
+        },
+        {
+          "action": "activate_stock_from_reviewed_opening_detail",
+          "quantity": "20.0000",
+          "value": "200.0000",
+          "additional_journal_count": 0,
+          "additional_stock_gl": "0.0000"
+        }
+      ],
+      "expected_aging_at": {
+        "as_of": "2026-01-01",
+        "ar_overdue_1_to_30": "200.0000",
+        "ar_not_due": "100.0000",
+        "ap_not_due": "100.0000"
+      },
+      "reject": [
+        "unpaid_detail_total_differs_from_control",
+        "stock_detail_differs_from_control",
+        "missing_party_mapping",
+        "second_conversion_changes_existing_basis",
+        "reverse_opening_after_dependent_use"
+      ]
+    },
+    {
+      "id": "AC10",
+      "title": "Weighted average and original-cost return after a later higher-cost receipt",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1000.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "receipt-3-at10",
+          "date": "2026-01-02",
+          "expected_lines": [
+            {
+              "account": "stock",
+              "debit": "30.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "grni",
+              "debit": "0.0000",
+              "credit": "30.0000"
+            }
+          ]
+        },
+        {
+          "id": "receipt-2-at15",
+          "date": "2026-01-03",
+          "expected_lines": [
+            {
+              "account": "stock",
+              "debit": "30.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "grni",
+              "debit": "0.0000",
+              "credit": "30.0000"
+            }
+          ]
+        },
+        {
+          "id": "invoice-3-at20",
+          "date": "2026-01-04",
+          "expected_lines": [
+            {
+              "account": "ar",
+              "debit": "60.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "sales",
+              "debit": "0.0000",
+              "credit": "60.0000"
+            }
+          ]
+        },
+        {
+          "id": "issue-3-at12",
+          "date": "2026-01-04",
+          "expected_lines": [
+            {
+              "account": "cogs",
+              "debit": "36.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "stock",
+              "debit": "0.0000",
+              "credit": "36.0000"
+            }
+          ]
+        },
+        {
+          "id": "receipt-1-at24",
+          "date": "2026-01-05",
+          "expected_lines": [
+            {
+              "account": "stock",
+              "debit": "24.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "grni",
+              "debit": "0.0000",
+              "credit": "24.0000"
+            }
+          ]
+        },
+        {
+          "id": "credit-1-at20",
+          "date": "2026-01-06",
+          "expected_lines": [
+            {
+              "account": "sales",
+              "debit": "20.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "ar",
+              "debit": "0.0000",
+              "credit": "20.0000"
+            }
+          ]
+        },
+        {
+          "id": "return-1-original12",
+          "date": "2026-01-06",
+          "expected_lines": [
+            {
+              "account": "stock",
+              "debit": "12.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "cogs",
+              "debit": "0.0000",
+              "credit": "12.0000"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ar",
+            "debit": "40.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "stock",
+            "debit": "60.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "grni",
+            "debit": "0.0000",
+            "credit": "84.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1000.0000"
+          },
+          {
+            "account": "sales",
+            "debit": "0.0000",
+            "credit": "40.0000"
+          },
+          {
+            "account": "cogs",
+            "debit": "24.0000",
+            "credit": "0.0000"
+          }
+        ],
+        "trial_balance_debit": "1124.0000",
+        "trial_balance_credit": "1124.0000",
+        "profit_and_loss": {
+          "income": "40.0000",
+          "expenses": "24.0000",
+          "net_result": "16.0000"
+        },
+        "balance_sheet": {
+          "assets": "1100.0000",
+          "liabilities": "84.0000",
+          "opening_equity": "1000.0000",
+          "current_result": "16.0000",
+          "equity_including_current_result": "1016.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [
+            {
+              "source_reference": "invoice-3-at20",
+              "due_date": "2026-01-31",
+              "remaining_fc": "40.0000",
+              "remaining_base": "40.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "40.0000",
+          "control_balance": "40.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [
+            {
+              "product_reference": "owned-training-product",
+              "quantity": "4.0000",
+              "carrying_value_base": "60.0000"
+            }
+          ],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "60.0000",
+          "control_balance": "60.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [
+            {
+              "source_reference": "receipt-3-at10",
+              "due_date": "2026-01-31",
+              "remaining_fc": "30.0000",
+              "remaining_base": "30.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            },
+            {
+              "source_reference": "receipt-2-at15",
+              "due_date": "2026-01-31",
+              "remaining_fc": "30.0000",
+              "remaining_base": "30.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            },
+            {
+              "source_reference": "receipt-1-at24",
+              "due_date": "2026-01-31",
+              "remaining_fc": "24.0000",
+              "remaining_base": "24.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "remaining_basis": "84.0000",
+          "control_balance": "84.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 7
+      },
+      "review_notes": [
+        "First two receipts give quantity 5, value 60, average 12. Issue 3 at cost 36 leaves quantity 2, value 24. Later receipt of 1 at cost 24 leaves quantity 3, value 48, average 16. Customer return restores original cost 12; final quantity 4, value 60, average 15. No negative stock or historical movement rewrite."
+      ],
+      "stock_checkpoints": [
+        {
+          "after": "receipt-2-at15",
+          "quantity": "5.0000",
+          "value": "60.0000",
+          "average": "12.0000"
+        },
+        {
+          "after": "issue-3-at12",
+          "quantity": "2.0000",
+          "value": "24.0000",
+          "average": "12.0000"
+        },
+        {
+          "after": "receipt-1-at24",
+          "quantity": "3.0000",
+          "value": "48.0000",
+          "average": "16.0000"
+        },
+        {
+          "after": "return-1-original12",
+          "quantity": "4.0000",
+          "value": "60.0000",
+          "average": "15.0000"
+        }
+      ]
+    },
+    {
+      "id": "AC11",
+      "title": "Reviewed inventory value write-down preserves counted quantity",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "stock",
+          "debit": "100.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1100.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "write-down",
+          "date": "2026-01-20",
+          "expected_lines": [
+            {
+              "account": "write_down",
+              "debit": "25.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "stock",
+              "debit": "0.0000",
+              "credit": "25.0000"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "stock",
+            "debit": "75.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1100.0000"
+          },
+          {
+            "account": "write_down",
+            "debit": "25.0000",
+            "credit": "0.0000"
+          }
+        ],
+        "trial_balance_debit": "1100.0000",
+        "trial_balance_credit": "1100.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "25.0000",
+          "net_result": "-25.0000"
+        },
+        "balance_sheet": {
+          "assets": "1075.0000",
+          "liabilities": "0.0000",
+          "opening_equity": "1100.0000",
+          "current_result": "-25.0000",
+          "equity_including_current_result": "1075.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [
+            {
+              "product_reference": "owned-training-product",
+              "quantity": "10.0000",
+              "carrying_value_base": "75.0000"
+            }
+          ],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "75.0000",
+          "control_balance": "75.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 1
+      },
+      "review_notes": [
+        "Reviewed net realisable value 75 is a scenario assumption, not calculated by the system. Expected current quantity 10 and value 100 must still match under the book lock. Adjust value by -25 with a reason; no fictitious unit issue or backdated rewrite."
+      ],
+      "reject": [
+        "stale_quantity_or_value_snapshot",
+        "unsupported_or_missing_offset",
+        "value_below_zero",
+        "negative_stock_backdating"
+      ]
+    },
+    {
+      "id": "AC12",
+      "title": "Synthetic manual output tax: exclusive",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1000.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "tax-invoice",
+          "date": "2026-01-10",
+          "expected_lines": [
+            {
+              "account": "ar",
+              "debit": "105.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "sales",
+              "debit": "0.0000",
+              "credit": "100.0000"
+            },
+            {
+              "account": "output_tax",
+              "debit": "0.0000",
+              "credit": "5.0000"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ar",
+            "debit": "105.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "output_tax",
+            "debit": "0.0000",
+            "credit": "5.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1000.0000"
+          },
+          {
+            "account": "sales",
+            "debit": "0.0000",
+            "credit": "100.0000"
+          }
+        ],
+        "trial_balance_debit": "1105.0000",
+        "trial_balance_credit": "1105.0000",
+        "profit_and_loss": {
+          "income": "100.0000",
+          "expenses": "0.0000",
+          "net_result": "100.0000"
+        },
+        "balance_sheet": {
+          "assets": "1105.0000",
+          "liabilities": "5.0000",
+          "opening_equity": "1000.0000",
+          "current_result": "100.0000",
+          "equity_including_current_result": "1100.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [
+            {
+              "source_reference": "tax-invoice",
+              "due_date": "2026-01-31",
+              "remaining_fc": "105.0000",
+              "remaining_base": "105.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "105.0000",
+          "control_balance": "105.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 1
+      },
+      "review_notes": [
+        "Synthetic 5 percent only; no national rate, tax eligibility or statutory invoice conclusion. Exclusive 100 and inclusive 105 must produce net 100, tax 5 and total 105. Later configuration changes do not rewrite the posted line snapshot."
+      ],
+      "tax": {
+        "code": "REVIEW5",
+        "percentage": "5.000000",
+        "price_mode": "exclusive",
+        "entered_price": "100.0000",
+        "net": "100.0000",
+        "tax": "5.0000",
+        "gross": "105.0000"
+      }
+    },
+    {
+      "id": "AC13",
+      "title": "Synthetic manual output tax: inclusive",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1000.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "tax-invoice",
+          "date": "2026-01-10",
+          "expected_lines": [
+            {
+              "account": "ar",
+              "debit": "105.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "sales",
+              "debit": "0.0000",
+              "credit": "100.0000"
+            },
+            {
+              "account": "output_tax",
+              "debit": "0.0000",
+              "credit": "5.0000"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ar",
+            "debit": "105.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "output_tax",
+            "debit": "0.0000",
+            "credit": "5.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1000.0000"
+          },
+          {
+            "account": "sales",
+            "debit": "0.0000",
+            "credit": "100.0000"
+          }
+        ],
+        "trial_balance_debit": "1105.0000",
+        "trial_balance_credit": "1105.0000",
+        "profit_and_loss": {
+          "income": "100.0000",
+          "expenses": "0.0000",
+          "net_result": "100.0000"
+        },
+        "balance_sheet": {
+          "assets": "1105.0000",
+          "liabilities": "5.0000",
+          "opening_equity": "1000.0000",
+          "current_result": "100.0000",
+          "equity_including_current_result": "1100.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [
+            {
+              "source_reference": "tax-invoice",
+              "due_date": "2026-01-31",
+              "remaining_fc": "105.0000",
+              "remaining_base": "105.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "105.0000",
+          "control_balance": "105.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 1
+      },
+      "review_notes": [
+        "Synthetic 5 percent only; no national rate, tax eligibility or statutory invoice conclusion. Exclusive 100 and inclusive 105 must produce net 100, tax 5 and total 105. Later configuration changes do not rewrite the posted line snapshot."
+      ],
+      "tax": {
+        "code": "REVIEW5",
+        "percentage": "5.000000",
+        "price_mode": "inclusive",
+        "entered_price": "105.0000",
+        "net": "100.0000",
+        "tax": "5.0000",
+        "gross": "105.0000"
+      }
+    },
+    {
+      "id": "AC14",
+      "title": "Explicit purchase-price variance preserves receipt cost",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1000.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "receipt",
+          "date": "2026-01-03",
+          "expected_lines": [
+            {
+              "account": "stock",
+              "debit": "100.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "grni",
+              "debit": "0.0000",
+              "credit": "100.0000"
+            }
+          ]
+        },
+        {
+          "id": "bill",
+          "date": "2026-01-08",
+          "expected_lines": [
+            {
+              "account": "grni",
+              "debit": "110.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "ap",
+              "debit": "0.0000",
+              "credit": "110.0000"
+            }
+          ]
+        },
+        {
+          "id": "reviewed-variance",
+          "date": "2026-01-08",
+          "expected_lines": [
+            {
+              "account": "variance",
+              "debit": "10.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "grni",
+              "debit": "0.0000",
+              "credit": "10.0000"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "stock",
+            "debit": "100.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ap",
+            "debit": "0.0000",
+            "credit": "110.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1000.0000"
+          },
+          {
+            "account": "variance",
+            "debit": "10.0000",
+            "credit": "0.0000"
+          }
+        ],
+        "trial_balance_debit": "1110.0000",
+        "trial_balance_credit": "1110.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "10.0000",
+          "net_result": "-10.0000"
+        },
+        "balance_sheet": {
+          "assets": "1100.0000",
+          "liabilities": "110.0000",
+          "opening_equity": "1000.0000",
+          "current_result": "-10.0000",
+          "equity_including_current_result": "990.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [
+            {
+              "source_reference": "bill",
+              "due_date": "2026-01-31",
+              "remaining_fc": "110.0000",
+              "remaining_base": "110.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "110.0000",
+          "control_balance": "110.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [
+            {
+              "product_reference": "owned-training-product",
+              "quantity": "10.0000",
+              "carrying_value_base": "100.0000"
+            }
+          ],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "100.0000",
+          "control_balance": "100.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 3
+      },
+      "review_notes": [
+        "Receipt of 10 units costs 100; supplier bill net is 110. An explicitly approved expense variance of 10 clears GRNI. Receipt carrying value 100 remains immutable. Expensing this variance is a technical fixture policy for review, not a universal capitalization policy. Eligible costs requiring capitalization need an approved stock value adjustment and policy."
+      ],
+      "reject": [
+        "variance_without_explicit_confirmation",
+        "stale_bill_preview",
+        "double_billing_receipt_quantity"
+      ]
+    },
+    {
+      "id": "AC15",
+      "title": "Prepaid dues or deposit recognition worksheet",
+      "status": "manual_policy_review_only",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1000.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "prepaid-contract-receipt",
+          "date": "2026-01-02",
+          "expected_lines": [
+            {
+              "account": "bank",
+              "debit": "120.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "prepaid_dues",
+              "debit": "0.0000",
+              "credit": "120.0000"
+            }
+          ]
+        },
+        {
+          "id": "one-month-earned",
+          "date": "2026-01-31",
+          "expected_lines": [
+            {
+              "account": "prepaid_dues",
+              "debit": "10.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "sales",
+              "debit": "0.0000",
+              "credit": "10.0000"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1120.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "prepaid_dues",
+            "debit": "0.0000",
+            "credit": "110.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1000.0000"
+          },
+          {
+            "account": "sales",
+            "debit": "0.0000",
+            "credit": "10.0000"
+          }
+        ],
+        "trial_balance_debit": "1120.0000",
+        "trial_balance_credit": "1120.0000",
+        "profit_and_loss": {
+          "income": "10.0000",
+          "expenses": "0.0000",
+          "net_result": "10.0000"
+        },
+        "balance_sheet": {
+          "assets": "1120.0000",
+          "liabilities": "110.0000",
+          "opening_equity": "1000.0000",
+          "current_result": "10.0000",
+          "equity_including_current_result": "1010.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [],
+          "subledger_applicability": "not_asserted_for_manual_policy_case",
+          "value": null,
+          "control_balance": "0.0000",
+          "difference": null
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 2
+      },
+      "review_notes": [
+        "Assume a twelve-month obligation earned evenly at 10 per month for this worksheet only. Receipt 120 is initially a liability; AR remains zero. Refund rights and tax timing need review. Generic manual GL can express the arithmetic; no deposit application, revenue scheduler or membership workflow is claimed."
+      ]
+    },
+    {
+      "id": "AC16",
+      "title": "Customer-owned bicycle custody has no company asset posting",
+      "status": "manual_policy_review_only",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1000.0000"
+        }
+      ],
+      "expected_journals": [],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1000.0000"
+          }
+        ],
+        "trial_balance_debit": "1000.0000",
+        "trial_balance_credit": "1000.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "0.0000",
+          "net_result": "0.0000"
+        },
+        "balance_sheet": {
+          "assets": "1000.0000",
+          "liabilities": "0.0000",
+          "opening_equity": "1000.0000",
+          "current_result": "0.0000",
+          "equity_including_current_result": "1000.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [],
+          "subledger_applicability": "not_asserted_for_manual_policy_case",
+          "value": null,
+          "control_balance": "0.0000",
+          "difference": null
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 0
+      },
+      "review_notes": [
+        "One customer-owned bicycle is left for repair. No transfer of ownership is assumed. The custody event has no journal, company stock, fixed asset, income or invented monetary value. A later parts and labour sale is a separate shared AR transaction."
+      ],
+      "nonposting_steps": [
+        {
+          "action": "record_customer_owned_property_custody_worksheet",
+          "owner": "synthetic-customer",
+          "item": "customer-bicycle",
+          "quantity": "1.0000",
+          "owned_by_company": false,
+          "assigned_company_inventory_value": null,
+          "additional_journal_count": 0
+        }
+      ]
+    },
+    {
+      "id": "AC17",
+      "title": "Manufacturing conversion worksheet with separate abnormal waste",
+      "status": "manual_policy_review_only",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "raw",
+          "debit": "60.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1060.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "materials-to-wip",
+          "date": "2026-01-05",
+          "expected_lines": [
+            {
+              "account": "wip",
+              "debit": "40.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "raw",
+              "debit": "0.0000",
+              "credit": "40.0000"
+            }
+          ]
+        },
+        {
+          "id": "reviewed-direct-labour",
+          "date": "2026-01-06",
+          "expected_lines": [
+            {
+              "account": "wip",
+              "debit": "20.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "bank",
+              "debit": "0.0000",
+              "credit": "20.0000"
+            }
+          ]
+        },
+        {
+          "id": "reviewed-normal-overhead",
+          "date": "2026-01-06",
+          "expected_lines": [
+            {
+              "account": "wip",
+              "debit": "10.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "bank",
+              "debit": "0.0000",
+              "credit": "10.0000"
+            }
+          ]
+        },
+        {
+          "id": "complete-reviewed-batch",
+          "date": "2026-01-07",
+          "expected_lines": [
+            {
+              "account": "finished",
+              "debit": "70.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "wip",
+              "debit": "0.0000",
+              "credit": "70.0000"
+            }
+          ]
+        },
+        {
+          "id": "abnormal-material-waste",
+          "date": "2026-01-08",
+          "expected_lines": [
+            {
+              "account": "abnormal",
+              "debit": "5.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "raw",
+              "debit": "0.0000",
+              "credit": "5.0000"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "970.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "raw",
+            "debit": "15.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "finished",
+            "debit": "70.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1060.0000"
+          },
+          {
+            "account": "abnormal",
+            "debit": "5.0000",
+            "credit": "0.0000"
+          }
+        ],
+        "trial_balance_debit": "1060.0000",
+        "trial_balance_credit": "1060.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "5.0000",
+          "net_result": "-5.0000"
+        },
+        "balance_sheet": {
+          "assets": "1055.0000",
+          "liabilities": "0.0000",
+          "opening_equity": "1060.0000",
+          "current_result": "-5.0000",
+          "equity_including_current_result": "1055.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [],
+          "subledger_applicability": "not_asserted_for_manual_policy_case",
+          "value": null,
+          "control_balance": "85.0000",
+          "difference": null
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 5
+      },
+      "review_notes": [
+        "Conditional policy exercise: the reviewer accepts materials 40, labour 20 and normal overhead 10 into finished cost 70. Abnormal waste 5 is a separate expense. Raw stock 15 plus finished stock 70 equals remaining value 85; WIP is zero. No runtime production, BOM, overhead allocation or inventory conversion adapter is asserted."
+      ],
+      "manual_inventory_schedule": {
+        "raw_value": "15.0000",
+        "work_in_progress_value": "0.0000",
+        "finished_value": "70.0000",
+        "total_value": "85.0000",
+        "difference_from_gl": "0.0000"
+      }
+    },
+    {
+      "id": "AC18",
+      "title": "Reviewed stock count shortage",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "stock",
+          "debit": "100.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1100.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "count-shortage",
+          "date": "2026-01-20",
+          "expected_lines": [
+            {
+              "account": "shrinkage",
+              "debit": "10.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "stock",
+              "debit": "0.0000",
+              "credit": "10.0000"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "stock",
+            "debit": "90.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1100.0000"
+          },
+          {
+            "account": "shrinkage",
+            "debit": "10.0000",
+            "credit": "0.0000"
+          }
+        ],
+        "trial_balance_debit": "1100.0000",
+        "trial_balance_credit": "1100.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "10.0000",
+          "net_result": "-10.0000"
+        },
+        "balance_sheet": {
+          "assets": "1090.0000",
+          "liabilities": "0.0000",
+          "opening_equity": "1100.0000",
+          "current_result": "-10.0000",
+          "equity_including_current_result": "1090.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [
+            {
+              "product_reference": "owned-training-product",
+              "quantity": "9.0000",
+              "carrying_value_base": "90.0000"
+            }
+          ],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "90.0000",
+          "control_balance": "90.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 1
+      },
+      "review_notes": [
+        "Fresh count 9 is compared with ledger quantity 10 and carrying value 100. One unit is short at cost 10. Reviewer supplies a reason and expense offset; no revenue or payable. Later count or value changes invalidate the preview."
+      ]
+    },
+    {
+      "id": "AC19",
+      "title": "Nonstock expense bill and source-linked supplier credit",
+      "status": "existing_mechanics_review_oracle",
+      "independent_case": true,
+      "opening_trial_balance": [
+        {
+          "account": "bank",
+          "debit": "1000.0000",
+          "credit": "0.0000"
+        },
+        {
+          "account": "capital",
+          "debit": "0.0000",
+          "credit": "1000.0000"
+        }
+      ],
+      "expected_journals": [
+        {
+          "id": "contractor-bill",
+          "date": "2026-01-08",
+          "expected_lines": [
+            {
+              "account": "contractor",
+              "debit": "220.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "ap",
+              "debit": "0.0000",
+              "credit": "220.0000"
+            }
+          ]
+        },
+        {
+          "id": "contractor-credit",
+          "date": "2026-01-09",
+          "expected_lines": [
+            {
+              "account": "ap",
+              "debit": "20.0000",
+              "credit": "0.0000"
+            },
+            {
+              "account": "contractor",
+              "debit": "0.0000",
+              "credit": "20.0000"
+            }
+          ],
+          "original_document": "contractor-bill"
+        }
+      ],
+      "expected": {
+        "trial_balance": [
+          {
+            "account": "bank",
+            "debit": "1000.0000",
+            "credit": "0.0000"
+          },
+          {
+            "account": "ap",
+            "debit": "0.0000",
+            "credit": "200.0000"
+          },
+          {
+            "account": "capital",
+            "debit": "0.0000",
+            "credit": "1000.0000"
+          },
+          {
+            "account": "contractor",
+            "debit": "200.0000",
+            "credit": "0.0000"
+          }
+        ],
+        "trial_balance_debit": "1200.0000",
+        "trial_balance_credit": "1200.0000",
+        "profit_and_loss": {
+          "income": "0.0000",
+          "expenses": "200.0000",
+          "net_result": "-200.0000"
+        },
+        "balance_sheet": {
+          "assets": "1000.0000",
+          "liabilities": "200.0000",
+          "opening_equity": "1000.0000",
+          "current_result": "-200.0000",
+          "equity_including_current_result": "800.0000",
+          "difference": "0.0000"
+        },
+        "ar": {
+          "open_items": [],
+          "open_item_total": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "ap": {
+          "open_items": [
+            {
+              "source_reference": "contractor-bill",
+              "due_date": "2026-01-31",
+              "remaining_fc": "200.0000",
+              "remaining_base": "200.0000",
+              "currency": "USD",
+              "rate": "1.000000000000"
+            }
+          ],
+          "open_item_total": "200.0000",
+          "control_balance": "200.0000",
+          "difference": "0.0000"
+        },
+        "stock": {
+          "holdings": [],
+          "subledger_applicability": "existing_inventory_mechanics",
+          "value": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "receipt_clearing": {
+          "remaining_receipts": [],
+          "remaining_basis": "0.0000",
+          "control_balance": "0.0000",
+          "difference": "0.0000"
+        },
+        "new_journal_count": 2
+      },
+      "review_notes": [
+        "Accepted reduction of 20 in contractor charge 220. Credit is linked to the original unpaid bill and reverses expense. It is not a supplier cash refund or a physical stock return."
+      ]
+    }
+  ]
+}
