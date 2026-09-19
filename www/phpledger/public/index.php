@@ -142,7 +142,7 @@ try {
         pl_render('companies', ['title' => 'Your businesses', 'user' => $user, 'companies' => pl_list_companies($actorId)]);
     }
     if ($path === '/sample-chooser') {
-        if (!in_array(getenv('PL_ENV'), ['local', 'test'], true)) {
+        if (!pl_sample_companies_allowed()) {
             throw new DomainException('The local sample chooser is unavailable in this environment.');
         }
         if ($method === 'POST') {
@@ -186,9 +186,7 @@ try {
                             throw new DomainException('Choose whether to start fresh, bring past records, or explore a sample.');
                         }
                         if ($startMode === 'sample') {
-                            if (!in_array(getenv('PL_ENV'), ['local', 'test'], true)) {
-                                throw new DomainException('Sample companies are available through the isolated demo or local development environment.');
-                            }
+                            pl_require_sample_companies_allowed();
                             pl_redirect('/sample-chooser');
                         }
                         $input['start_mode'] = $startMode;
@@ -238,54 +236,8 @@ try {
                 }
             }
             if ($action === 'preview') {
-                $input = [
-                    'name' => pl_web_text($_POST, 'name'), 'currency' => pl_web_text($_POST, 'currency'),
-                    'start_date' => pl_web_text($_POST, 'start_date'),
-                    'entity_type' => pl_web_text($_POST, 'entity_type', 'other'),
-                    'fiscal_year_end_choice' => pl_web_text($_POST, 'fiscal_year_end_choice'),
-                    'fiscal_year_end_custom' => pl_web_text($_POST, 'fiscal_year_end_custom'),
-                    'chart_choice' => pl_web_text($_POST, 'chart_choice', 'neutral'),
-                    'start_mode' => pl_web_text($_POST, 'start_mode', 'fresh'),
-                    'template_digest' => (string) $template['digest'],
-                    'zero_balances_confirmed' => pl_web_text($_POST, 'zero_balances_confirmed') === '1',
-                ];
                 try {
-                    if (!array_key_exists($input['entity_type'], pl_setup_entity_type_options())) {
-                        throw new DomainException('Choose the type of business or organisation you are setting up.');
-                    }
-                    $yearEndChoice = $input['fiscal_year_end_choice'];
-                    if ($yearEndChoice === 'custom') {
-                        $input['fiscal_year_end'] = $input['fiscal_year_end_custom'];
-                    } elseif ($yearEndChoice !== '') {
-                        if (!array_key_exists($yearEndChoice, pl_fiscal_year_end_options()) || $yearEndChoice === 'custom') {
-                            throw new DomainException('Choose a listed year-end option or enter a custom year end.');
-                        }
-                        $input['fiscal_year_end'] = $yearEndChoice;
-                    } else {
-                        // Preserve compatibility with existing non-browser callers using fiscal_year_end.
-                        $input['fiscal_year_end'] = pl_web_text($_POST, 'fiscal_year_end');
-                        $input['fiscal_year_end_choice'] = array_key_exists($input['fiscal_year_end'], pl_fiscal_year_end_options())
-                            ? $input['fiscal_year_end'] : 'custom';
-                        if ($input['fiscal_year_end_choice'] === 'custom') {
-                            $input['fiscal_year_end_custom'] = $input['fiscal_year_end'];
-                        }
-                    }
-                    if (!in_array($input['start_mode'], ['fresh', 'existing', 'sample'], true)) {
-                        throw new DomainException('Choose how you want to start.');
-                    }
-                    if ($input['start_mode'] === 'sample') {
-                        $input['name'] = 'Core accounting sample';
-                        $input['zero_balances_confirmed'] = true;
-                    }
-                    pl_ledger_text($input['name'], 'Business name', 160);
-                    pl_ledger_date($input['start_date']);
-                    if (!isset(pl_base_currency_options()[$input['currency']])) {
-                        throw new DomainException('Choose one of the supported base currencies.');
-                    }
-                    pl_ledger_date('2001-' . $input['fiscal_year_end']);
-                    if ($input['start_mode'] === 'fresh' && !$input['zero_balances_confirmed']) {
-                        throw new DomainException('Confirm that this business starts with no prior balances, or choose Bring past records.');
-                    }
+                    $input = pl_onboarding_preview_input($_POST, (string) $template['digest']);
                     $_SESSION['onboarding'] = ['input' => $input, 'request_key' => bin2hex(random_bytes(24))];
                     pl_redirect('/onboarding?step=preview');
                 } catch (DomainException $error) {

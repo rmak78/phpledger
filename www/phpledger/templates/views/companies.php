@@ -2,7 +2,7 @@
 <section class="auth-panel" aria-label="Your businesses">
 <?php pl_ui_page_header('Your businesses', 'Choose the books you want to work with, or set up a separate business.'); ?>
 <div class="flex flex-wrap gap-2 mb-4" data-fold="primary action">
-<?php if (in_array(getenv('PL_ENV'), ['local','test'], true)): ?><a class="btn btn-secondary btn-sm" href="<?= pl_e(pl_url('/sample-chooser')) ?>">Try a sample company</a><?php endif; ?>
+<?php if (pl_sample_companies_allowed()): ?><a class="btn btn-secondary btn-sm" href="<?= pl_e(pl_url('/sample-chooser')) ?>">Try a sample company</a><?php endif; ?>
 <a class="btn btn-primary btn-sm" href="<?= pl_e(pl_url('/onboarding')) ?>">Set up a business</a>
 </div>
 <?php if ($companies === []): ?>

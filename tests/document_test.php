@@ -171,6 +171,42 @@ test('core sample isolates two supported postings and four drafts and never repl
     assert_same(1, pl_list_documents($f['actor_id'], $sample['id'], $sample['book_id'], ['status' => 'draft', 'search' => 'Beacon'])['total']);
 });
 
+test('a sample start is refused in production through preview and confirm but allowed in local and test', function (): void {
+    require_once dirname(__DIR__) . '/www/phpledger/includes/functions/web_functions.php';
+    $f = ledger_fixture();
+    $digest = (string) pl_starter_template()['digest'];
+    $sample = ['start_mode' => 'sample', 'name' => 'Crafted sample request', 'currency' => 'USD', 'start_date' => '2026-09-14',
+        'entity_type' => 'other', 'fiscal_year_end_choice' => '12-31'];
+    $fresh = array_replace($sample, ['start_mode' => 'fresh', 'name' => 'Sample production business', 'zero_balances_confirmed' => '1']);
+    $created = static fn (): int => (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_companies WHERE created_by = %i', $f['actor_id']);
+    $previous = getenv('PL_ENV');
+    try {
+        foreach (['production', ''] as $environment) {
+            putenv($environment === '' ? 'PL_ENV' : 'PL_ENV=' . $environment);
+            assert_true(!pl_sample_companies_allowed(), 'Sample companies were allowed in ' . ($environment ?: 'an unset environment') . '.');
+            assert_throws(fn () => pl_onboarding_preview_input($sample, $digest), DomainException::class, 'isolated demo or local');
+            // A crafted draft that skips the preview is refused by the setup service, and nothing is created.
+            $before = $created();
+            assert_throws(fn () => pl_setup_company($f['actor_id'], setup_input('sample'), bin2hex(random_bytes(16))), DomainException::class, 'isolated demo or local');
+            assert_same($before, $created());
+            assert_same('fresh', pl_onboarding_preview_input($fresh, $digest)['start_mode'], 'A normal start must still preview in production.');
+        }
+        putenv('PL_ENV=demo');
+        assert_true(!pl_sample_companies_allowed(), 'A demo request outside visitor provisioning was allowed to create samples.');
+        assert_true(pl_demo_provisioning(static fn (): bool => pl_sample_companies_allowed()), 'The demo could not provision its own visitor sample.');
+        foreach (['local', 'test'] as $environment) {
+            putenv('PL_ENV=' . $environment);
+            assert_true(pl_sample_companies_allowed());
+            $input = pl_onboarding_preview_input($sample, $digest);
+            assert_same(['sample', 'Core accounting sample', true], [$input['start_mode'], $input['name'], $input['zero_balances_confirmed']]);
+        }
+        $company = pl_setup_company($f['actor_id'], $input, bin2hex(random_bytes(16)));
+        assert_same(true, $company['is_sample']);
+    } finally {
+        putenv($previous === false ? 'PL_ENV' : 'PL_ENV=' . $previous);
+    }
+});
+
 test('simultaneous document posts create one scoped source-linked journal', function (): void {
     $f = ledger_fixture();
     $draft = pl_save_document($f['actor_id'], $f['company_id'], $f['book_id'], document_input($f));

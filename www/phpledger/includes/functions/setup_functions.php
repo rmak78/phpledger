@@ -124,6 +124,10 @@ function pl_setup_company(int $actorId, array $input, string $requestKey): array
     if (!in_array($mode, ['fresh', 'existing', 'sample'], true)) {
         throw new DomainException('Choose a new business, existing business, or isolated sample.');
     }
+    if ($mode === 'sample') {
+        // Whatever form or request supplied the draft, production never creates sample books.
+        pl_require_sample_companies_allowed();
+    }
     if (!is_string($input['template_digest'] ?? null) || !hash_equals($template['digest'], $input['template_digest'])) {
         throw new DomainException('The starter chart changed. Review its latest preview before confirming.');
     }

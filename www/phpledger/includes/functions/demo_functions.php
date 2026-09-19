@@ -91,6 +91,23 @@ function pl_demo_require_setup_action(): void
     }
 }
 
+/**
+ * The one rule for creating fictional sample companies: only a local or test environment,
+ * or the isolated public demo while it provisions a visitor's own sample. A production
+ * installation never creates one, whichever form or request asks for it.
+ */
+function pl_sample_companies_allowed(): bool
+{
+    return in_array(getenv('PL_ENV'), ['local', 'test'], true) || (pl_demo_enabled() && pl_demo_provisioning());
+}
+
+function pl_require_sample_companies_allowed(): void
+{
+    if (!pl_sample_companies_allowed()) {
+        throw new DomainException('Sample companies are available through the isolated demo or local development environment.');
+    }
+}
+
 function pl_demo_require_company(int $actorId, int $companyId): void
 {
     if (!pl_demo_enabled() || pl_demo_provisioning()) {
