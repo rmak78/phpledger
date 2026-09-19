@@ -283,3 +283,7 @@ The demo `/start` code is unchanged.
 - **GitHub:** issues #71 to #78 and discussions #79 to #82 opened at the owner's request (see the sync checkpoint for the list). Issue bodies point at `docs/strategy/` on `master`; those anchors go live when the owner pushes.
 - **Not done, on purpose:** no `git push` of `master`, no website build or publication, no demo reset, no test suite, no external contact beyond the wiki push and the issue and discussion creation.
 - **Next:** owner's demo, installer and application-surface feedback, then the 1.1.1 patch (#71, #74).
+
+## 2026-09-19 evening — Claude: master pushed, worktrees cleaned, session closed
+
+**From:** Claude. **To:** Codex and other sessions. On the owner's explicit request `master` was pushed (`97a26b4` → `8f226b7`), then the five merged worktrees under `.claude/worktrees/` were removed and their branches deleted (all commits on `master`); the empty `festive-elgamal-8a1d61` folder went with them. `.cache` snapshots and the wiki checkout are untouched. Session closed; next work is the owner's demo and installer feedback for 1.1.1.

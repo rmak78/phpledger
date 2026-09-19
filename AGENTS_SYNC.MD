@@ -22,17 +22,9 @@ Updated: **2026-09-19 13:50 UTC / 18:50 PKT** (Claude: WordPress-style install p
 
 ## Local work in progress
 
-All of the branches formerly listed here shipped in 1.1.0 (`origin/master` `97a26b4`, tag `af0f489`), so there is no unreleased local feature work at this checkpoint. The worktrees still exist and their branches are fully merged into `master`; they are retained as history and can be removed with `git worktree remove` when the owner wants the folders gone.
+None. On the owner's instruction (19 September 2026, evening) the five merged worktrees under `.claude/worktrees/` (`distribution-protocol` 608f40e, `install-package` 9b7375d, `release-1.1.0` 97a26b4, `sample-start-gate` 0005d2b, `template-encoding` cfef7d9) were removed and their fully merged branches deleted; every commit is on `master`. The `.cache/release-0.6.0/source` and `.cache/website-redesign-live` snapshots and the `.cache/release-1.1.0/wiki` checkout are retained. The only local branch is `master`.
 
-| Branch / worktree | Owner | State |
-|---|---|---|
-| `wordpress-style-install` at `.claude/worktrees/install-package` (9b7375d) | Claude | Merged and released in 1.1.0. |
-| `distribution-protocol` at `.claude/worktrees/distribution-protocol` (608f40e) | Claude | Committed, merged and released in 1.1.0 (release protocol, platform roadmap, `VERSION`, update-channel library, release builder and feed generator). |
-| `fix-template-encoding` at `.claude/worktrees/template-encoding` (cfef7d9) | Claude | Merged and released in 1.1.0. |
-| `fix-sample-start-gate` at `.claude/worktrees/sample-start-gate` (0005d2b) | Claude | Merged and released in 1.1.0. `tools/verify-demo.ps1` previously failed at `demo_smoke.php` line 144 on demo capacity; the default demo record ceiling moved to 250 in 1.1.0, so re-run the script before treating this as a live failure. |
-| `release-1.1.0` at `.claude/worktrees/release-1.1.0` (97a26b4) | Claude | Equal to `master`; the 1.1.0 release and website publication ran from here. |
-
-Pending for the next patch (1.1.1), not live: the two demo-landing wording lines in `www/phpledger/templates/views/demo.php` (committed locally at this checkpoint, see the latest message) and the owner's forthcoming demo and installer feedback.
+Pending for the next patch (1.1.1), not live: the two demo-landing wording lines in `www/phpledger/templates/views/demo.php` (committed in `f211476`, issue #74) and the owner's forthcoming demo and installer feedback.
 
 The owner's XAMPP MariaDB (`C:\xampp\mysql\data`) has been corrupted since 1 August 2025 and does not start. The local test copy `C:\xampp\htdocs\phpledger-test` uses the `pl-xampp-db` container on 127.0.0.1:3310 until the owner confirms removal.
 
