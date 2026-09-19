@@ -1,5 +1,43 @@
 # Foundation validation
 
+## WordPress-style installation, MariaDB, username and logo — 19 September 2026 (local, unpublished)
+
+The work is on branch `wordpress-style-install` (worktree `.claude/worktrees/install-package`, from `master` 75f85f7). The implementation and rules are in [Installer](INSTALLER.md#wordpress-style-installation-next-release-implemented-locally-19-september-2026-not-yet-published). Nothing was released, pushed or deployed.
+
+| Check | Result and scope |
+|---|---|
+| MySQL 8.4 (PHP 8.3.33 test image) | `tests/run.php` **294 tests, 0 failures**; lint **235 files, 0 failures**; PHPStan no errors; release signing 20 checks; browser installer with an operator key **81 checks**; new keyless installer **103 checks**; update recovery, database recovery, full-schema recovery (81 tables, 2 views, 106 triggers) and maintenance HTTP tests passed. |
+| MariaDB 10.4, 10.6, 10.11 and 11.4 | The same battery except lint/PHPStan, which are database-independent, passed on each version: 294 tests, 0 failures; installer 81 and keyless installer 103 checks; all update and recovery tests. Before the dialect hook, MariaDB rejected `FOR SHARE` (132 queries) and `utf8mb4_0900_ai_ci` (before 11.4.5); both are now translated at execution time with unchanged migration files. |
+| Package builder | `python tests/package-builder-test.py`: **13 tests passed**. They cover the `phpledger/` root, the adapter files, deny files, vendor pruning, the minimal allowlist, runtime resource coverage and the pinned `maintenance.php` bytes. |
+| Local candidate | `phpledger-1.1.0-rc.1.zip` (not published), built from commit 01ebc1c: **2,922,930 bytes, 1,498 files**. The 1.0.0 archive had 1,583. The root holds `index.php`, `.htaccess`, `README.txt`, `LICENSE`, `PACKAGE-MANIFEST.json` and five folders. |
+| Apache web adapter | `python tests/package-web-adapter-test.py --zip …` in the PHP 8.3 Apache image: **30 of 30 checks**. See the detail below the table. |
+| Owner's XAMPP (Apache 2.4.58, PHP 8.2.12 mod_php, Windows) | The candidate was unzipped to `htdocs/phpledger-test`. See the detail below the table. |
+| Not verified | The GitHub Actions workflow changes (YAML not parsed locally); a real shared host (cPanel/LiteSpeed/Nginx front proxy); hosting-panel file upload; unfamiliar-user installation; a fresh CI run of the MariaDB matrix; website copy. |
+
+**Apache web adapter checks.** With `.htaccess` allowed:
+- a fresh upload at `/sub/` redirects to `/sub/install`
+- the installer opens without a key over same-computer HTTP, and the private-folder probe passes
+- assets are served, and a missing asset returns 404
+- direct `public/index.php` redirects back to the folder
+- 16 private paths are refused: vendor, configuration, storage, install, templates, tools, resources, licences, the manifest, README and `.htaccess`
+
+With `.htaccess` ignored, the package-root `index.php` refuses to start. The document-root-at-`public` layout also works.
+
+**Owner's XAMPP checks.**
+- **Why a container database:** XAMPP's own MariaDB has been crashing at startup since 1 August 2025, from InnoDB page corruption in `mysql/innodb_index_stats`. It crashed again at 15:38 and 15:42 PKT on 19 September during the owner's 1.0.0 attempt, so the test used a disposable MariaDB 10.4.34 container on 127.0.0.1:3310. Its default database character set was `latin1`.
+- **Installation:**
+  - `http://localhost/phpledger-test/` opened the installer without a key.
+  - All 34 migrations ran through the browser flow in 4.0 s.
+  - Configuration and OAuth keys were written through the bundled `openssl.cnf` fallback.
+  - The owner was created with username, email and logo, and signed in with the username.
+- **After installation:**
+  - `/logo` and the sign-in page show the logo.
+  - Setup closed.
+  - XAMPP refused 13 private paths, including the real `config.local.php`, `operator.key` and `oauth/private.key`.
+- **Accounting:** a new business was created in the in-app browser, and a sample receipt of 1,250.00 was posted (trial balance 1,250.00 = 1,250.00). A linked reversal returned it to 0.00 = 0.00.
+- **Layout:** no horizontal overflow at 375, 768 or 1280 px on the account step or Home.
+- **How it was driven:** passwords were sent by a local script rather than typed into the browser.
+
 ## 1.0.0 publication — 18 September 2026
 
 The owner published **1.0.0** on 18 September 2026 from `codex/ui-redesign-0.6` as PHP Ledger's first stable release, consolidating the 0.6.1 workflow-recovery closure, the 0.7 browser installer and the 0.8 signed update/automatic-backup/recovery work recorded in the checkpoint below into one supported production scope. This section records what the publication does and does not rest on. Evidence that exists: the automated test suites in the checkpoint below, the fault-injection update/recovery tests, the exact-artifact install/upgrade/recovery checks run against the built package, and developer-operated browser checks. Evidence that does **not** exist: independent accounting review, independent security review, supervised pilots with a real month-end close, unfamiliar-operator installation observation, and restricted shared-host recovery certification. The owner published 1.0.0 as the supported production scope with these limits disclosed, carrying the outstanding items forward as post-release commitments rather than presenting them as satisfied.
