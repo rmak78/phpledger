@@ -39,7 +39,8 @@ Default upgrade commitment: the latest published preview and subsequent release 
 ### Following stable
 
 1. **1.0.x:** production fixes and compatibility improvements.
-2. **1.1:** reviewed Urdu/RTL plus installer distribution channels (Softaculous/Installatron, published containers/packages).
+2. **1.1:** reviewed Urdu/RTL plus distribution channels (container image, Packagist, app catalogues, Softaculous/Installatron), each opened only with its upgrade path documented in the [release protocol](RELEASE-PROTOCOL.md).
+   - **Platform work alongside 1.1 (owner, 19 September 2026):** release feed and update modes; username and company logo in the installer; table prefix with portable SQL and MeekroORM models; installation notice; plugin platform with a verified marketplace and owner uploads; cloud-database support; then the Users module. Sequence and scope are in the [platform roadmap](strategy/PLATFORM-ROADMAP.md). PostgreSQL follows 1.1; SQLite ships with the Windows bundle. npm, Homebrew, Bitnami and DigitalOcean are on the [future registries roadmap](strategy/DISTRIBUTION-PLAN.md#future-registries-roadmap-tier-3b).
 3. **1.2:** reviewed Arabic/RTL and demand-led reporting refinements.
 4. **Later capability releases:** reviewed regional connectors → stock/tax-integrated shop POS → e-commerce → controlled API/MCP writes → restaurant/distribution/specialists, each with independent acceptance.
 

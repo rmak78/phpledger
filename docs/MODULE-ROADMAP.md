@@ -91,6 +91,8 @@ Core opening imports must not mark an existing business ready with unexplained A
 
 ## Versioned module contract
 
+**Amended 19 September 2026 (owner).** PHP Ledger will have a plugin platform: an official verified marketplace, and owner uploads of any plugin ZIP, including unsigned ones, behind explicit warnings and an audit record. "We should not take away people's freedom of what they do with their software." The sentence below that rules out arbitrary uploaded PHP is superseded for owner-initiated uploads; the manifest, dependency, permission, migration and correction rules in this section still apply to every plugin. Design and sequence: [platform roadmap](strategy/PLATFORM-ROADMAP.md#plugin-platform-and-marketplace). A Users module (profiles, user meta, roles and capabilities) is planned on the same platform.
+
 “Plug and play” means a compatible, reviewed package can be installed and enabled with declared dependencies and configuration; it does not mean arbitrary uploaded PHP can execute. Keep the existing application, bootstrap, router, MeekroDB connection and central posting interface. Start with project-owned modules in the same repository/package and a small explicit registry; a marketplace or remote installer is not required.
 
 - A manifest declares stable module ID/version, supported core-contract versions, dependencies/capabilities, owned migrations/data, routes/navigation, permissions, settings, reports and API/MCP operations. Validate compatibility before enabling it for a company.

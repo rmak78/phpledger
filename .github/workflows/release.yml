@@ -1,0 +1,74 @@
+name: Release build
+
+# Step 3 of docs/RELEASE-PROTOCOL.md. A v* tag builds the release archive twice,
+# requires both builds to be byte-identical, and creates a DRAFT GitHub Release
+# with the ZIP and its SHA-256. It never publishes the release, signs anything
+# or pushes images: the owner signs offline, attaches the signed update metadata
+# and media kit, and publishes the draft.
+#
+# A manual run builds and verifies without creating a release.
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    env:
+      PL_DB_PASSWORD: release-build-unused
+      PL_DB_ROOT_PASSWORD: release-build-unused
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Read the source version
+        id: version
+        run: |
+          version="$(tr -d '[:space:]' < www/phpledger/VERSION)"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if [ "$GITHUB_REF_TYPE" = "tag" ] && [ "$GITHUB_REF_NAME" != "v$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match www/phpledger/VERSION ($version)."
+            exit 1
+          fi
+      - name: Build the test image used for the production vendor tree
+        run: docker compose --profile test build test
+      - name: Build the release archive
+        run: python3 tools/build-release.py --commit "$GITHUB_SHA" --version "${{ steps.version.outputs.version }}" --out build/release
+      - name: Rebuild and require a byte-identical archive
+        run: python3 tools/build-release.py --commit "$GITHUB_SHA" --version "${{ steps.version.outputs.version }}" --out build/reproduce --compare "build/release/phpledger-${{ steps.version.outputs.version }}.zip"
+      - name: Keep the build receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-${{ steps.version.outputs.version }}
+          path: |
+            build/release/phpledger-*.zip
+            build/release/phpledger-*.zip.sha256
+            build/release/receipt.json
+            build/reproduce/receipt.json
+          if-no-files-found: error
+      - name: Create the draft release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            echo "::error::A release for v$VERSION already exists; this workflow never replaces release assets."
+            exit 1
+          fi
+          prerelease=""
+          case "$VERSION" in *-*) prerelease="--prerelease" ;; esac
+          gh release create "v$VERSION" --draft $prerelease --verify-tag \
+            --title "PHP Ledger $VERSION" \
+            --notes "Draft created by the release workflow from $GITHUB_SHA. Before publishing: reproduce the SHA-256 locally, sign the archive offline, attach phpledger-$VERSION.update.json and the media kit. See docs/RELEASE-PROTOCOL.md." \
+            "build/release/phpledger-$VERSION.zip" "build/release/phpledger-$VERSION.zip.sha256"

@@ -1,0 +1,106 @@
+# Release and distribution protocol
+
+Owner request, 19 September 2026: every release follows one distribution protocol, and every existing installation, whatever channel it came from, has a documented way to learn about the release and upgrade to it. This document is that protocol. It states which parts are live and which are planned; nothing here claims that a channel exists before its receipt says so.
+
+Related: [release signing](RELEASE-SIGNING.md), [installer](INSTALLER.md), [distribution plan](strategy/DISTRIBUTION-PLAN.md), [platform roadmap](strategy/PLATFORM-ROADMAP.md).
+
+## Status on 19 September 2026
+
+| Part | State |
+|---|---|
+| GitHub Release with ZIP, SHA-256 and media kit | Live since 1.0.0 |
+| Signed update metadata (`phpledger-<version>.update.json`) | **Blocked**: the official publisher key has not been generated. Until it exists, 1.0.0 installations cannot use the in-app updater and must upgrade by replacing files. |
+| Release feed on phpledger.com (`/releases/index.json`) | Source and generator added (`www/website/src/releases.json`, `www/website/releases-feed.mjs`) and tested against the application's reader. Not yet called from `build.mjs` (waiting for the uncommitted SEO patch to land) and not published. |
+| Version source of truth (`www/phpledger/VERSION`) | Added; `pl_app_version()` reads it |
+| Update-mode detection (managed, container, composer, panel) and feed reader | Added as a tested library (`update_channel_functions.php`). The maintenance page and the opt-in update check use it after the installer branch merges, because that branch is rewriting the updater files. |
+| Tracked release builder and tag workflow | Added (`tools/build-release.py`, `.github/workflows/release.yml`). Two local builds of the same snapshot were byte-identical on 19 September 2026. The workflow creates a **draft** GitHub Release only. |
+| Packaging from `master` | **Blocked by a stale pin**: `tools/package-files.json` pins `docs/repository/sprint-05/DELIVERY-0.1.5-0.2.1.md` to its old bytes. The installer branch removes that entry; until it merges, a release build from `master` fails at packaging. |
+| Container image, Packagist, catalogues, hosting panels | Planned; see the channel table below |
+
+## Principles
+
+1. **One version, one source.** The version lives in `www/phpledger/VERSION`. The application, `PACKAGE-MANIFEST.json`, the Git tag, the feed, the image tags and every catalogue manifest must carry the same string. The release builder refuses a tag or `--version` that differs from `VERSION`, and the feed generator refuses a stable entry that differs from the download page.
+2. **One archive, many wrappers.** The reproducible ZIP built by `tools/build-package.py` is the artifact. The container image, the Composer package and panel packages repackage that same file set; none of them builds application code a different way.
+3. **The signature travels, the key stays home.** CI never holds the private signing key. The owner signs offline. The signed payload commits to the ZIP's bytes and every file's hash, so the metadata can be mirrored on phpledger.com safely.
+4. **Every channel has an upgrade path, not just an install path.** A channel is not opened until its upgrade path is written below and tested once.
+5. **An installation never writes into code it does not own.** Only ZIP installations replace their own files. Container, Composer and panel installations are told how to upgrade on their channel and are never modified in place.
+6. **Outbound contact is documented and can be switched off.** The update check and the installation notice are the only outbound calls. Their exact fields are published on the website privacy page.
+
+## Channels and their upgrade paths
+
+| Channel | How it installs | How an existing installation learns of a release | How it upgrades | Update mode | Status |
+|---|---|---|---|---|---|
+| **ZIP** (GitHub Release, phpledger.com download) | Unzip into a web folder, open it, browser installer | Admin update check reads the feed; the maintenance page shows the new version | In-app updater: signed metadata, automatic backup, file replacement, migrations, health probe, automatic recovery | `managed` | Live for install; in-app upgrade blocked on the publisher key |
+| **Container image** (`ghcr.io/phpledger/phpledger`, mirrored to Docker Hub) | `compose.production.yaml` with MySQL 8.4 and a private-data volume | Same feed; the maintenance page shows "pull the new tag" | Pull the new tag and restart. The entrypoint runs migrations when `PL_AUTO_MIGRATE=1`. Back up the database volume first. | `container` | Planned (W1) |
+| **Composer** (`composer create-project phpledger/phpledger`) | Composer project in a folder; web root pointed at `www/phpledger/public` | Same feed | `composer update phpledger/phpledger` is not used for a project package. Upgrade by `composer create-project` of the new version into a new folder, copying private configuration and storage, then running `install/migrate.php`. A helper script is planned. | `composer` | Planned (W1) |
+| **Softaculous / Installatron** | Panel one-click installer calling the non-interactive install | Panel's own update notice, plus the feed | Panel runs `upgrade.php`: extract over the installation, then `install/migrate.php` | `panel` | Planned (W1, after the installer branch) |
+| **App catalogues** (Portainer, CapRover, Coolify, Unraid, CasaOS, Umbrel, TrueNAS, Cloudron, YunoHost) | Catalogue template wrapping the container image | Catalogue shows the new template version; the app shows the feed notice | Catalogue update = new image tag | `container` | Planned (W1) |
+| **Managed hosts** (Elestio, PikaPods, Hossted) | Host deploys the image | Host's own tooling | Host pulls the new tag | `container` | Planned (listing requests) |
+| **DigitalOcean 1-Click** | Droplet image with Docker and the production compose file | Feed notice | Same as container | `container` | Future (see distribution plan) |
+| **Homebrew** (tap) | Formula with a local launcher and SQLite | `brew outdated` | `brew upgrade phpledger`, then the launcher runs migrations | `composer`-like, package-managed | Future; needs the SQLite adapter |
+| **Windows desktop bundle** | Portable PHP with a local database | Feed notice | In-app updater (the bundle owns its files) | `managed` | Future |
+
+`npm` carries no application package. The planned npm packages are an API client and a scaffolder; they follow the same version but are not an installation channel. Bitnami is a request to a curated catalogue and follows the container path if accepted.
+
+## The per-release sequence
+
+Run in order. Each step names who does it and what evidence it leaves. The release is not complete until step 12.
+
+1. **Freeze and version.** Engineering sets `www/phpledger/VERSION`, updates `resources/release/RELEASE-NOTES.md` and `UPGRADE.md`, and runs the full check. The lint check refuses a malformed version; `tools/build-release.py` refuses to package when `--version` or the tag differs from `VERSION`.
+2. **Tag.** The owner (or engineering with owner approval) pushes the signed tag `v<version>` from the reviewed commit. Tagging is publication-adjacent and needs owner approval.
+3. **Build in CI.** The `release.yml` workflow builds production dependencies, runs `tools/build-release.py`, verifies the ZIP against a second local build, and creates a **draft** GitHub Release with the ZIP and its SHA-256. It publishes nothing else.
+4. **Reproduce locally.** Engineering runs `python tools/build-release.py --commit v<version> --out <empty folder> --compare <the draft's ZIP>`. It fails unless the archives are byte-identical. A mismatch stops the release.
+5. **Sign offline.** The owner runs `tools/sign-update.php` against the draft's ZIP on the offline signing machine and produces `phpledger-<version>.update.json`. See [release signing](RELEASE-SIGNING.md).
+6. **Media kit.** Build `phpledger-<version>-media-kit.zip` and its SHA-256. A release is incomplete without it.
+7. **Publish the release.** The owner attaches the metadata and media kit and publishes the draft. Record the asset hashes.
+8. **Feed.** Add the release at the top of `www/website/src/releases.json` and update `release` in `www/website/src/site.json` in the same change; the generator refuses to build if they disagree. Copy the signed metadata to `www/website/src/static/releases/<version>.update.json` and set `update_json` to `https://phpledger.com/releases/<version>.update.json`. Run `node www/website/releases-feed.mjs --check`, rebuild the site and deploy it through the operator runbook. The feed is what installations read.
+9. **Container image** (once W1 lands). CI pushes `<version>`, `<major>.<minor>`, `<major>` and `latest` for stable, or only `<version>` for previews, built from the same ZIP. Record the image digest.
+10. **Registries and catalogues.** Packagist updates from the tag automatically once the webhook exists. Bump the image tag in each catalogue manifest under `resources/distribution/` and open the catalogue update requests. Send the panel vendors the new package if they do not pull it themselves.
+11. **Upgrade proof.** On a disposable copy of the previous release, run the upgrade path for every open channel: in-app update for ZIP, tag pull for the container, `upgrade.php` for the panel package. Record each result.
+12. **Receipt.** Write `docs/repository/PUBLICATION-<date>-<version>.md` and the matching JSON receipt: source commit, asset hashes, image digest, feed URL, channels updated, upgrade proofs, and anything skipped with the reason.
+
+Previews follow the same sequence on the `preview` channel. They never move `latest` or the stable feed entry.
+
+## The release feed
+
+`https://phpledger.com/releases/index.json` is static and generated from `www/website/src/releases.json` by `www/website/releases-feed.mjs`. `generated_at` is the newest publication date, so rebuilding the site does not change the file. Shape, schema 1:
+
+```json
+{
+  "schema": 1,
+  "generated_at": "2026-09-19T00:00:00Z",
+  "channels": {
+    "stable": {
+      "version": "1.0.0",
+      "published_at": "2026-09-18",
+      "notes": "https://github.com/phpledger/phpledger/releases/tag/v1.0.0",
+      "zip": "https://github.com/phpledger/phpledger/releases/download/v1.0.0/phpledger-1.0.0.zip",
+      "sha256": "…",
+      "update_json": null,
+      "min_php": "8.2.0",
+      "databases": ["mysql:8.4"],
+      "image": null,
+      "min_client": null
+    },
+    "preview": null
+  },
+  "history": [ { "version": "1.0.0", "channel": "stable", "published_at": "2026-09-18" } ]
+}
+```
+
+`update_json` stays `null` until signed metadata exists for that version. `image` is filled once a container image is pushed. `min_client` is reserved for the planned Windows and Android clients. Installations treat unknown fields as ignorable and refuse an unknown `schema`.
+
+The feed is a notice, not a trust anchor. The in-app updater still verifies the signed metadata against the publisher key pinned on the host.
+
+## Update modes
+
+`pl_update_mode()` in `www/phpledger/includes/functions/update_channel_functions.php` decides how an installation upgrades. It reads `PL_UPDATE_MODE`, then `update_mode` from the private configuration, and defaults to `managed`.
+
+| Mode | Meaning | What the maintenance page offers |
+|---|---|---|
+| `managed` | This installation owns its files (ZIP, Windows bundle) | The signed in-app updater |
+| `container` | Files come from an image and are read-only | "Pull `<image>:<version>` and restart", with the backup reminder |
+| `composer` | Files are managed by Composer | The Composer upgrade steps |
+| `panel` | Files are managed by a hosting panel | "Use your panel's upgrade button" |
+
+Only `managed` can replace files. The other modes never attempt it, so a read-only container shows a clear instruction instead of a failed update.

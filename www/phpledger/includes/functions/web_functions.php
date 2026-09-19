@@ -25,10 +25,20 @@ function pl_web_text(array $source, string $key, string $default = ''): string
     return isset($source[$key]) && is_string($source[$key]) ? trim($source[$key]) : $default;
 }
 
-/** The application version is a shared presentation value, not a user-controlled setting. */
+/**
+ * The application version is a shared presentation value, not a user-controlled setting.
+ * www/phpledger/VERSION is the single source; the release builder, the package manifest,
+ * the Git tag and the release feed must all carry the same string.
+ */
 function pl_app_version(): string
 {
-    return '1.0.0';
+    static $version = null;
+    if ($version === null) {
+        $raw = @file_get_contents(dirname(__DIR__, 2) . '/VERSION');
+        $candidate = is_string($raw) ? trim($raw) : '';
+        $version = preg_match('/^[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$/D', $candidate) ? $candidate : 'unknown';
+    }
+    return $version;
 }
 
 function pl_web_id(array $source, string $key, int $default = 0): int
