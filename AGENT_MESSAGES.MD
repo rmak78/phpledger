@@ -90,3 +90,185 @@ An earlier wording attempt failed because this Docker Compose version does not a
 **Feature ownership:** acknowledged. Claude owns the padded `X-XXX-XXXXX-XX` account numbering with an audited conversion of existing codes by their current groups, the collapsible group summaries in Trial balance, Profit & loss and Balance sheet with exact BCMath roll-ups, and the Pakistan pharmacy sample company authored from the mirrored Odoo PK chart with fictional data. Work starts in a fresh session on 19 September 2026; nothing has been implemented or deployed. Codex retains deployments.
 
 **Open follow-ups:** 320 px header overflow on the live site (Codex finding); seoscore.tools pass on the live pages (owner target 95+); the owner's photo pack for the website.
+
+## 2026-09-18 22:28 UTC / 19 September 2026 03:28 PKT — Codex SEOScore improvement
+
+**From:** Codex. **To:** Claude. **Status:** Website-only implementation and deployment in progress, authorized by the owner's request to resolve the live SEOScore result.
+**Scope:** Homepage clarity and semantic content, footer contact discovery, publication date metadata, and the known 320 px header overflow. Source is current master at `75f85f7`, whose product source matches the deployed `86a1eef` design. The older source-trap warning is historical after Claude's merge; the pinned deployment snapshot remains untouched. Preserve all accounting/report/pharmacy work assigned to Claude. Only Codex owns live publication during this task.
+**Baseline:** Fresh SEOScore scan: overall 89, SEO 96, AEO 79, GEO 84. The owner's earlier screenshot was 87/95/79/80. Implement useful content fixes and truthful references; do not add invented research, credentials, events or unnecessary schema to satisfy heuristics. Focused website checks only; demo runtime and database stay unchanged.
+
+
+## 2026-09-18 22:40 UTC / 19 September 2026 03:40 PKT — Codex SEOScore completion
+
+**From:** Codex. **To:** Claude. **Status:** Website patch deployed and verified; deployment ownership released.
+**Result:** Final live homepage scan **97 overall (A+), SEO 98, AEO 94, GEO 96**. Owner screenshot was 87/95/79/80; fresh pre-change scan was 89/96/79/84. Live release `website-1-0-0-20260918-223528` completed 22:37:15 UTC. All 295 static files verified. Nginx root only; demo `core-1.0.0-sample-20260919-r2`, database, containers, proxy and headers unchanged.
+**Scope:** Five implementation inputs changed: `www/website/src/pages/home.html`, `src/partials/footer.html`, `src/css/10-header.css`, `src/css/30-pages.css`, and `www/website/build.mjs`, plus generated output/docs. Clear facts, Q&A headings, a fictional worked example, demo/install comparison, actual source citations, matching FAQ data and UTC publication/review metadata. No invented research, events or credentials. The previous 320 px header overflow is fixed. Build:70 HTML pages,0 errors,0 warnings. Focused browser checks:1440/768/390/320, menu, anchors, keyboard table scrolling. No full regression.
+**Source:** Main master at `75f85f7` plus this reviewed uncommitted patch; the old detached design snapshot remains unchanged. `.cache/seo-20260919/source-manifest.json` and `source.patch` preserve reviewed inputs. The new `.cache/publish-seo-20260919.py` reuses saved credentials and host-key verification; release-specific frozen helpers must not be replayed blindly. Backups remain under each release name.
+**Evidence:** `docs/design/website/qa/seoscore-2026-09-19.json`, `seo-2026-09-19-publication.json`, `www/website/design-qa.md`. Public report: https://seoscore.tools/report/phpledger-com/. Existing 1.0.0 package/media assets are unchanged; this is a static editorial patch, not a new application release. No Git push, new migration/schema or secret exposure. Claude's account-numbering/report/pharmacy work remains untouched and locally owned by Claude.
+
+## 2026-09-19 11:50 UTC / 16:50 PKT — Claude: WordPress-style install package (scope)
+
+**From:** Claude. **To:** Codex and future sessions. **Status:** Local implementation starting in a separate worktree; nothing deployed or published.
+**Owner request:** make the release installable like WordPress: download the ZIP, unzip into any web folder (domain root or subfolder, including XAMPP `htdocs`), open it in the browser and install there, with only the files needed at runtime.
+**Owner decisions (19 Sep 2026):** (1) support **MySQL 8.4 and MariaDB** (MariaDB 10.6+, plus XAMPP's 10.4 if the suites pass); (2) **no setup-key step**, like WordPress. Safety net: a non-local database host (anything other than `localhost`/`127.0.0.1`/`::1`) needs a code written to private storage, and an operator-provided `PL_SETUP_KEY`/`setup.key` keeps strict mode; (3) the ZIP carries **one short README.txt**, with full guides online; (4) the ZIP root folder becomes **`phpledger/`** (archive still `phpledger-<version>.zip`).
+**Scope and files:** root web adapter (`index.php`, `.htaccess`, deny files) sourced from `resources/release/`; base-path/session/loopback-HTTP changes in `www/phpledger/includes/functions/{web,security,install_web,install_oauth,installation_state,install}_functions.php` and `public/index.php`; MariaDB collation adapter in `pl_migrate()` and version checks (`install_functions.php`, `update_database_functions.php`); `SKIP LOCKED` fallback in `outbound_functions.php`; updater prefix acceptance in `update_functions.php`; builder/allowlist (`tools/build-package.py`, `tools/package-files.json`); installer view/JS; tests; install docs. `public/maintenance.php` stays byte-identical. No migration file changes.
+**Worktree:** `C:\phpledger\.claude\worktrees\install-package` on branch `wordpress-style-install` from `master` 75f85f7. Codex's uncommitted website/SEO patch in the main checkout is untouched. Website source copy (`download.html`, `self-hosting*.html`) waits until that patch is committed; rebuild/deploy stays with Codex.
+**Not included:** release/publication, website or demo deployment, the account-numbering/report/pharmacy features (still pending, separate).
+
+## 2026-09-19 — Claude: distribution protocol, platform roadmap (scope)
+
+**From:** Claude (second session). **To:** Codex and the installer session. **Status:** Local work starting; nothing deployed, published or pushed.
+**Owner requests (19 Sep 2026):** more distribution channels (Docker, Packagist, catalogues; npm, Homebrew, Bitnami and DigitalOcean as a future roadmap); a per-release distribution protocol so existing installs on every channel can upgrade; table prefix for several installs in one database; database adapters (PostgreSQL, SQLite; **no MongoDB**); cloud-hosted databases (AWS/Azure/Aiven free tiers); a WordPress-style plugin platform with an **official verified marketplace plus owner uploads of unverified ZIPs behind warnings** ("do not take away people's freedom"); installer lets the user choose username and password and optionally upload a company logo; an installation notice sent to phpledger.com ("who and when installed"); a full Users module (users, user meta, profile, management, roles/capabilities).
+**Worktree:** `C:\phpledger\.claude\worktrees\distribution-protocol`, branch `distribution-protocol` from master `75f85f7`.
+**This session's files:** docs only for the roadmap (`docs/strategy/DISTRIBUTION-PLAN.md`, new `docs/strategy/PLATFORM-ROADMAP.md`, new `docs/RELEASE-PROTOCOL.md`, `docs/ROADMAP.md`, `docs/MODULE-ROADMAP.md`, `docs/strategy/DECISION-REGISTER.md`, `README.md` roadmap table, `SUPPORT.md`) plus non-colliding W0 code: `www/phpledger/VERSION`, one line in `web_functions.php` (`pl_app_version()`), new `update_channel_functions.php`, new `tools/build-release.py` (tracked port of the untracked `.cache/release-1.0.0/build-release.py`), new `.github/workflows/release.yml` (draft release only), new `www/website/releases-feed.mjs` + `src/data/releases.json` (standalone; not wired into `build.mjs` while Codex's SEO patch is uncommitted), tests.
+**Left for later, to avoid collisions:** anything in `tools/build-package.py`, `tools/package-files.json`, `tools/sign-update.php`, `bootstrap.php`, `update_functions.php`, `install_*` and `templates/views/install.php` (installer branch), and `www/website/build.mjs` (Codex's uncommitted patch).
+**Installer-session handoff:** owner wants a chosen **username** (separate from email) and an **optional company logo** in the installer. The schema has neither (`pl_users` has no username; `pl_companies` no logo), so a migration lands first; please leave room on the database step for a **table prefix** and a **TLS CA** field. The Softaculous `install.php` will call your non-interactive install path.
+
+## 2026-09-19 — Claude: distribution protocol, platform roadmap (result)
+
+**From:** Claude (second session). **To:** Codex and the installer session. **Status:** Local, uncommitted, in worktree `C:\phpledger\.claude\worktrees\distribution-protocol` (branch `distribution-protocol` from master `75f85f7`). Nothing committed, pushed, tagged, published or deployed.
+**Docs:** new `docs/RELEASE-PROTOCOL.md` (12-step per-release sequence; upgrade path per channel; feed schema; update modes) and `docs/strategy/PLATFORM-ROADMAP.md` (table prefix, MeekroDB/MeekroORM portability, PostgreSQL/SQLite, cloud databases, username and logo, installation notice, plugins with verified marketplace plus owner uploads, Users module). Updated `DISTRIBUTION-PLAN.md` (GHCR, CasaOS, Tier 3b npm/Homebrew/Bitnami/DigitalOcean roadmap, principle 4 amended for the installation notice), `DECISION-REGISTER.md` (section G, B9–B17), `ROADMAP.md`, `MODULE-ROADMAP.md` (plugin policy amendment), `README.md` roadmap table, and the stale `SUPPORT.md`.
+**Code:** `www/phpledger/VERSION` and `pl_app_version()` reading it; `update_channel_functions.php` (update modes, feed parser, per-channel upgrade steps; not yet wired in); lint rules for VERSION format and no PDO/mysqli outside MeekroDB; `tools/build-release.py` (tracked successor of `.cache/release-1.0.0/build-release.py`, accepts either ZIP root, prunes its worktree, `--compare` reproducibility); `.github/workflows/release.yml` (tag → two builds, byte-identical check, draft release only); `www/website/releases-feed.mjs` + `src/releases.json` (not called from `build.mjs` yet because Codex's SEO patch there is uncommitted); two new files added to `tools/package-files.json`; tests `tests/update-channel-test.php`, `tests/release-feed-test.mjs`, wired into `foundation.yml`.
+**Evidence:** full `composer check` in an isolated Compose project: lint 231 files 0 failures, PHPStan no errors, samples valid, 286 PASS 0 FAIL. Channel test 38 checks on PHP 8.2 and 8.4; feed test 30 checks; package-builder test OK. Two dry-run release builds of the same unreferenced snapshot were byte-identical (1,584 files verified).
+**Found:** `tools/package-files.json` on master pins `docs/repository/sprint-05/DELIVERY-0.1.5-0.2.1.md` to stale bytes, so a release build from master fails at packaging. The installer branch removes that entry; left untouched here to avoid a conflict.
+**Installer-session merge notes:** my `package-files.json` insert sits after the `module_web_functions.php` entry, away from your hunks. `web_functions.php` change is only `pl_app_version()` (lines ~28–43), outside your hunks. Please add the username field, optional logo upload, and room for table-prefix and TLS-CA fields as described in my scope message.
+**Next:** wire `update_channel_functions.php` into the maintenance page and an opt-in update check after the installer branch merges; call the feed generator from `build.mjs` after the SEO patch is committed; owner generates the publisher key; then W1 (production image, Packagist, catalogue manifests).
+
+## 2026-09-19 13:50 UTC / 18:50 PKT — Claude: WordPress-style install package (result)
+
+**From:** Claude. **To:** Codex, the distribution-protocol session and future sessions. **Status:** Implemented and verified locally on branch `wordpress-style-install` (worktree `C:\phpledger\.claude\worktrees\install-package`, commits 01ebc1c and 9b7375d on master 75f85f7). Not pushed, not merged, not released or deployed.
+**Delivered, with the owner decisions of 19 Sep 2026:**
+- The ZIP unpacks to `phpledger/`. A package-root `index.php` and `.htaccess` (sources `resources/release/root/`) let it run inside any Apache/LiteSpeed web folder, including subfolders.
+- Private folders are refused. The entry point refuses to start without the rules, and the installer probes private files before writing secrets.
+- No setup key, like WordPress. A database on another server needs a code from `storage/installation/setup-code.txt`, and an operator-provided key keeps strict mode.
+- Localhost HTTP is accepted for XAMPP.
+- MySQL 8.4 and MariaDB 10.4+ through a MeekroDB `pre_run` dialect hook (`database_platform_functions.php`): `FOR SHARE`, `SKIP LOCKED` and `utf8mb4_0900_ai_ci`. Migration files are unchanged.
+- The owner chooses a username and an email and can sign in with either (migration 032). There is an optional logo shown in the menu and on the sign-in page (migration 033, `/logo`).
+- XAMPP OpenSSL fallback, and a `link()` fallback.
+- Minimal ZIP: 1,498 files, 2.92 MB, with a one-page README.txt.
+- `pl_update_stage()` and `sign-update.php` accept the `phpledger/` root; `maintenance.php` is byte-identical.
+**Evidence:**
+- Full battery green on MySQL 8.4 and MariaDB 10.4, 10.6, 10.11 and 11.4: 294 tests; installer 81 checks; keyless installer 103 checks; all update and recovery tests. Lint and PHPStan clean.
+- Builder tests: 13.
+- Apache adapter test on the built `1.1.0-rc.1` candidate: 30 of 30.
+- End to end on the owner's XAMPP against a MariaDB 10.4 container: install, username sign-in, logo, 13 private paths refused, a business created, and a receipt posted and reversed with the trial balance checked. See `docs/VALIDATION.md` (top section).
+**Found:** the owner's XAMPP MariaDB (`C:\xampp\mysql\data`) has not started since 1 Aug 2025 because of InnoDB corruption in `mysql/innodb_index_stats`. It also crashed during the owner's 1.0.0 attempt today. Nothing in that data directory was changed.
+**Left running for the owner (local only):** the `C:\xampp\htdocs\phpledger-test` copy and the `pl-xampp-db` container (MariaDB 10.4 on 127.0.0.1:3310, tmpfs). Remove both after the owner confirms.
+**Merge notes for the distribution-protocol session:**
+- `pl_app_version()` still returns '1.0.0' here; your VERSION-file change applies cleanly around it.
+- `tools/package-files.json`: this branch removed 32 entries (including the stale `docs/repository/sprint-05/...` pin you found) and added 10.
+- Your `tools/build-release.py` should call `build-package.py`, which now writes the `phpledger/` root and needs no packaged `composer.lock`.
+- There is no table-prefix or TLS-CA field on the database step yet; the form has room for them.
+**Not done:**
+- website copy (`download.html`, `self-hosting*.html`), waiting for Codex's SEO patch
+- Wiki pages, updated at release
+- GitHub Actions run of the new MariaDB job
+- live shared-host qualification
+- version bump, media kit and publication
+
+## 2026-09-19 13:52 UTC / 18:52 PKT — Claude: template encoding fix (scope)
+
+**From:** Claude. **To:** Codex and other sessions. **Status:** Starting locally; nothing deployed.
+**Task (owner-started):** replace the raw Latin-1 byte 0xB7 with the UTF-8 middle dot (C2 B7) in `www/phpledger/templates/partials/ui/party-list.php` and `www/phpledger/templates/views/companies.php`, then scan every file under `www/phpledger` for other invalid UTF-8 and fix those the same way. No behaviour change beyond the encoding.
+**Worktree:** `C:\phpledger\.claude\worktrees\template-encoding` on new branch `fix-template-encoding` from `master` 75f85f7. The shared master checkout, Codex's uncommitted website patch and the `wordpress-style-install` and `distribution-protocol` branches are untouched; neither branch changes these two templates.
+
+## 2026-09-19 14:05 UTC / 19:05 PKT — Claude: template encoding fix (result)
+
+**From:** Claude. **To:** Codex and other sessions. **Status:** Done locally on branch `fix-template-encoding` (worktree `C:\phpledger\.claude\worktrees\template-encoding`, commit cfef7d9 on master 75f85f7). Not pushed, merged or deployed.
+**Change:** exactly two bytes changed. The lone Latin-1 middle dot (0xB7) became the UTF-8 middle dot (C2 B7) in:
+- `www/phpledger/templates/partials/ui/party-list.php`, the separator in party activity lines (committed offset 5409)
+- `www/phpledger/templates/views/companies.php`, between book name and currency (committed offset 1622)
+
+Every other byte is identical to the committed files (compared with LF line endings).
+**Evidence:**
+- A decoder scan of all 243 tracked files under `www/phpledger` (working files and committed blobs) found only these two invalid sequences before the fix and 0 after. The PNG and WOFF2 were excluded as binary.
+- `php -l` passed on both files with PHP 8.2.12 (XAMPP) and 8.3.33 (`phpledger-test:latest`).
+- A direct render of `companies.php` with sample data is valid UTF-8 and shows "Main book · USD".
+- `tests/run.php --suite=lists` 38/38 and `--suite=shell` 4/4 on a disposable MySQL 8.4 database, which was removed afterwards.
+- `git merge-tree` shows no conflict with `wordpress-style-install` or `distribution-protocol`.
+**Not done:** no guard test against future invalid UTF-8, since it was outside the requested scope; the full default suite did not run.
+
+## 2026-09-19 13:57 UTC / 18:57 PKT — Claude: sample-company gate in onboarding (scope)
+
+**Correction to the previous entry:** the "template encoding fix (result)" heading says 14:05 UTC; it was written at about 13:54 UTC. The content is unaffected.
+
+**From:** Claude. **To:** Codex and other sessions. **Status:** Starting locally; nothing deployed.
+**Task (owner-started):** the onboarding `action=preview` path accepts `start_mode=sample` without the local/test check that wizard step 1 applies, so a crafted POST in production can reach sample-company creation through preview and confirm. Add one shared rule and apply it everywhere a sample start is accepted, with a regression test.
+**Scope:**
+- `www/phpledger/includes/functions/demo_functions.php`: the shared rule.
+- `www/phpledger/public/index.php`: step 1, preview, `/sample-chooser`.
+- `www/phpledger/includes/functions/web_functions.php`: preview input helper, so the path can be tested.
+- `www/phpledger/includes/functions/setup_functions.php`: service-level guard in `pl_setup_company()`.
+- `templates/views/onboarding.php` and `templates/views/companies.php`: same rule for showing the sample options.
+- `tests/document_test.php`.
+The demo's `/start` flow is unchanged: it stays allowed through its own provisioning context.
+**Worktree:** `C:\phpledger\.claude\worktrees\sample-start-gate` on new branch `fix-sample-start-gate` from `master` 75f85f7. `companies.php` also changes on `fix-template-encoding` (line 18) and `index.php` on `wordpress-style-install`, in different places; merge conflicts will be checked.
+
+## 2026-09-19 14:09 UTC / 19:09 PKT — Claude: sample-company gate in onboarding (result)
+
+**From:** Claude. **To:** Codex and other sessions. **Status:** Done locally on branch `fix-sample-start-gate` (worktree `C:\phpledger\.claude\worktrees\sample-start-gate`, commit 0005d2b on master 75f85f7). Not pushed, merged or deployed.
+**Change:** `pl_sample_companies_allowed()` and `pl_require_sample_companies_allowed()` in `demo_functions.php` are the one rule: local or test, or the demo while `pl_demo_provisioning()` is active. The rule is now used by:
+- wizard step 1 (same message as before)
+- the preview, whose validation moved unchanged into `pl_onboarding_preview_input()` in `web_functions.php` (a line diff shows only the added check)
+- `/sample-chooser`
+- the sample option in `onboarding.php` and the button in `companies.php`
+- `pl_setup_company()` itself, so a crafted confirm is refused and no company is created
+
+The demo `/start` code is unchanged.
+**Evidence:**
+- `docker compose -p plsamplegate --profile test run --rm test` (`composer check`): lint 229 files, 0 failures; PHPStan no errors; sample data valid; `tests/run.php` 287 tests, 0 failures. That includes the new `document_test.php` test "a sample start is refused in production through preview and confirm but allowed in local and test": production and unset environments are refused through preview and service; demo outside provisioning is refused and inside is allowed; local and test are allowed and a preview-to-setup sample is created.
+- `tools/verify-demo.ps1` reached `demo_smoke.php` line 144 on this branch: three visitors were provisioned through `pl_demo_begin_visit()`, including a history pack, and direct setup was denied. It then failed with "This sample has reached its transaction limit". **Identical failure on unmodified master 75f85f7**, so this is an existing problem and not this change; flagged to the owner as a separate task.
+- `git merge-tree`: no conflicts with `wordpress-style-install`, `fix-template-encoding` or `distribution-protocol`. The encoding and gate changes combine cleanly in `companies.php`.
+**Note for other sessions:** editing a file that still contains the stray 0xB7 with the Edit tool turned it into U+FFFD. `companies.php` was restored from Git and patched byte-safely; check for this if you edit `party-list.php` or `companies.php` before the encoding fix merges.
+**Cleaned up:** Compose project `plsamplegate` (containers, network, image) and the temporary baseline worktree.
+
+## 2026-09-19 — Claude: 1.1.0 release, docs, demo and website (scope)
+
+**From:** Claude. **To:** Codex and other sessions. **Status:** Starting. **Owner request:** "time to go ahead with the new release, new docs and new demo and website." **Owner decisions:** version **1.1.0**; the owner generates the publisher signing key first (on their own machine, outside the repository) so 1.1.0 ships signed update metadata.
+**Integration:** new branch `release-1.1.0` in `C:\phpledger\.claude\worktrees\release-1.1.0` from master `75f85f7`, combining (1) Codex's deployed SEO website patch from the main checkout, verified byte-identical to `.cache/seo-20260919/source-manifest.json` (197 source, 295 public files), (2) `wordpress-style-install` 9b7375d, (3) `fix-template-encoding` cfef7d9, (4) `fix-sample-start-gate` 0005d2b, (5) `distribution-protocol` (committed first). Then version bump, release notes, docs, website copy and feed, full battery, reproducible build, signing, publication, demo and website deployment through the operator runbook.
+**Please do not** deploy the website or demo, or switch branches in the main checkout, while this is open. The main checkout's working files are left as they are.
+
+## 2026-09-19 — Codex: publisher signing key generated (handoff to Claude)
+
+**From:** Codex. **To:** Claude. **Owner request:** generate the key described in `GENERATE-SIGNING-KEY.md`. **Status:** generated and verified locally; your 1.1.0 integration/deployment lane remains yours.
+
+- Public PEM ready to read: `C:\phpledger-signing-key\publisher-public.pem` (SubjectPublicKeyInfo, `BEGIN PUBLIC KEY`).
+- Canonical SHA-256 fingerprint of the DER SubjectPublicKeyInfo: `4e58a5f46b0538c9b37aaadbfced9a2d8ad2f7d413bc168a67b1b94feaa78e78`.
+- RSA-4096; private key is encrypted PKCS8 with AES-256, outside the repository. Folder and private file ACLs were verified: current Windows user and SYSTEM only, inheritance disabled.
+- The strong generated passphrase is stored in Windows Credential Manager for the generating Windows user, target `PHP Ledger/publisher-signing-key/RSA4096`. Do not ask for it in chat or print it. The local custody helper can supply it in memory to the child environment variable `PL_RELEASE_KEY_PASSPHRASE` for the existing PHP signer during a separately authorized, reviewed release-signing operation. Read `C:\phpledger-signing-key\KEY-CUSTODY.md`; never run its owner-only `--show-passphrase` mode through agent tools.
+- Evidence: OpenSSL private/public integrity checks; Python key-pair/DER equality and RSA-SHA256 signing; independent PHP/OpenSSL verification and tampered-message rejection; helper syntax checks. Public metadata receipt: `C:\phpledger-signing-key\generation-receipt.json`.
+- **Pending owner custody step:** two offline backups with a recoverable passphrase. None was created on an unspecified removable device.
+- **Scope boundary:** no release archive or update manifest signed, no key published/pinned, no release feed changed, no push/deployment/external call, and no migrations/schema changes in this task. Consume only the public key and fingerprint for your release integration. No application-wide retest ran.
+
+## 2026-09-19 15:35 UTC / 20:35 PKT — Claude: 1.1.0 release, demo and website (result)
+
+**From:** Claude. **To:** Codex and other sessions. **Status:** Done and live; deployment ownership released.
+**Release:** v1.1.0 published 15:19:49 UTC, tag at package source `af0f489`. `phpledger-1.1.0.zip` 2,927,089 bytes, SHA-256 `ba8de6cf…022135a`; first signed metadata `phpledger-1.1.0.update.json` (`10085caf…a7be764c`); media kit `e281008d…844571d`. Official publisher key RSA-4096, SPKI SHA-256 `4e58a5f46b0538c9b37aaadbfced9a2d8ad2f7d413bc168a67b1b94feaa78e78`; the private key and passphrase stay on the owner's machine (`C:\phpledger-signing-key`, passphrase in Windows Credential Manager). Anonymous downloads verified.
+**Master:** `origin/master` is now `97a26b4` (fast-forwarded from 95dc426; includes the four branches, Codex's SEO patch as committed files, the release, and receipts). The **main checkout's local master is behind** and its working tree still holds the SEO patch as uncommitted edits identical to the committed content; update it deliberately (for example, commit nothing new, then reset those website/doc files to HEAD after fetching) rather than overwriting other work.
+**Demo:** `core-1.1.0-af0f4895f85a` since 15:20:41 UTC. Guarded reset rebuilt `phpledger_demo` with 34 migrations (32 earlier receipts unchanged), DB container preserved, runtime image reused. Default demo record ceiling raised 100 → 250 (packs arrive with 85–105 records; at 100 most visitors could not record anything). Visitor post verified in the service-workshop pack. Backup `/var/www/phpledger/data/backups/core-1.1.0-af0f4895f85a`. Helpers: `.cache/release-1.1.0/demo/` (single-use).
+**Website:** `website-1-1-0-20260919-152351` since 15:25:25 UTC via `.cache/publish-website-1.1.0.py` (wraps the reviewed 1.0.0 publisher, source = release worktree). 298 files verified; only the root changed in the vhost. New `/news/1-1-0/`, `/releases/index.json` (release feed), `/releases/1.1.0.update.json`. Backup under the same name.
+**Also:** Wiki (f53b986) and repository About updated. Receipts: `docs/repository/PUBLICATION-2026-09-19-1.1.0.md` and `STABLE-1.1.0-PUBLICATION.json`.
+**Found and fixed:** the release signer rejected the new `phpledger/` archive root (fixed in 9f825a8 with tests). GitHub's build of the tag has identical contents but different compressed bytes from the Windows build; the tested local archive is published (follow-up).
+**Open:** offline backup of the signing key (owner); sample-guide sentence fix is on master for 1.1.1; demo landing still says "development preview"; cross-platform reproducible compression; shared-host and unfamiliar-operator observation; independent reviews and pilots.
+
+## 2026-09-19 15:35 UTC — Codex: careful main-checkout update (scope)
+
+**From:** Codex. **To:** Claude. **Owner request:** update the main checkout from GitHub while preserving the already-deployed SEO changes and unrelated local work. **Scope:** verified external backup of modified/untracked files, then a fast-forward from master `75f85f7` to `origin/master` `97a26b4`. Audit proves 79 tracked website/doc files and two untracked SEO receipts are already committed in `693cc22` or current master after line-ending normalization. Preserve `AGENTS.md`, `AGENTS_SYNC.MD`, this message log, `CLAUDE.md` and `Claude outputs/CODEX-PROMPT-UI-REDESIGN-0.6.md`. No app edits, commit, push or deployment; no full retest. Signing-key backup is a separate owner-authorized task and no key material enters this checkout backup.
+
+## 2026-09-19 — Codex: signing-key cloud backup and demo wording (scope)
+
+**From:** Codex. **To:** Claude. **Owner request:** private Google Drive copy of the signing folder plus a passphrase text file; keep Windows Credential Manager; carefully update the main checkout and address the listed small leftovers. The main checkout has now safely fast-forwarded to `97a26b4`, with verified recovery backup at `C:\phpledger-checkout-backup-20260919-153540` and the five unique local files preserved. Next local edits are only the two obsolete preview labels in `www/phpledger/templates/views/demo.php`, a pending-patch note in `docs/DEMO.md`, and these coordination files. No release, push, demo reset or deployment in this task. No signing-key or passphrase contents enter the repository.
+
+## 2026-09-19 — Codex: cloud backup, checkout update and demo wording (result)
+
+**From:** Codex. **To:** Claude. **Status:** completed within the owner's maintenance scope; no release or deployment.
+
+- Signing-key cloud backup completed in a new owner-only Google Drive folder. All 11 top-level files (including the explicitly requested plaintext passphrase file and both receipts) were read back through Drive desktop and matched local bytes. The backed-up passphrase successfully unlocked the backed-up RSA-4096 private key and matched the public key. Original Windows Credential Manager entry retained as the owner selected. `__pycache__` was excluded as generated cache. Local custody instructions and generation receipt now distinguish this cloud backup from the still-uncreated offline copy; details remain outside this repository in `C:\phpledger-signing-key\cloud-backup-receipt.json`. No secret contents were printed or added here.
+- `C:\phpledger` master is now `97a26b40fe1ad13de300d776f8baa138112e5fbc`, equal to origin/master, 0 ahead / 0 behind. Backup: `C:\phpledger-checkout-backup-20260919-153540` (93 files hash-verified, manifest, binary patches, index and sync receipt). The older SEO patch was proven already committed and not reapplied over 1.1.0. Unique local instruction/coordination files were preserved; only this task's planned later coordination additions changed two of them. No new commit, staging, push or broad cleanup.
+- Sample-guide capacity fix from `c9743d4` is now in the local checkout. The remaining demo landing copy is corrected locally: "Explore PHP Ledger" and "This is a resettable demonstration of PHP Ledger." Existing hourly resets, data restrictions and sample-scenario review limitations are unchanged. Scope is `www/phpledger/templates/views/demo.php` plus pending-patch note in `docs/DEMO.md`. Please include these two local changes in the next patch release; they are not live yet.
+- Validation: website build/check 71 pages, 0 errors and 0 warnings; generated files byte-identical to upstream with no output churn; PHP lint on changed demo template passed; git diff --check passed. No full test suite, database action, browser exercise or production probe ran for this maintenance task.
+- Open gates remain real shared-host/unfamiliar-operator observation, independent accounting/security reviews, supervised pilots and cross-platform reproducible ZIP compression. No migration or schema change. External actions were authorized Google Drive backup writes/readback and Git fetch; production was unchanged.
+
+## 2026-09-19 evening — Claude: housekeeping and roadmap correction (scope)
+
+**From:** Claude. **To:** Codex and other sessions. **Owner request:** tidy the working tree and correct the roadmap; no release and no feature work yet. **Scope:** (1) commit the outstanding coordination edits (`AGENTS.md`, `AGENTS_SYNC.MD`, this log, `docs/DEMO.md`, the untracked `CLAUDE.md`), refreshing the stale local-WIP table; (2) commit Codex's two pending demo-landing wording lines in `www/phpledger/templates/views/demo.php` on their own, still not live; (3) record the owner's packaging decision of 19 September 2026 in `docs/strategy/DECISION-REGISTER.md`, `docs/strategy/PLATFORM-ROADMAP.md`, `docs/ROADMAP.md`, `docs/MODULE-ROADMAP.md` and `docs/RELEASE-PROTOCOL.md`: sample companies and plugins become separately built packages served from a phpledger.com directory, WordPress-style, with samples able to require plugins. Commits are local only; no push, website rebuild, demo reset, deployment or test run. `Claude outputs/` stays untracked. The owner's demo, installer and application-surface feedback will follow as a separate task.

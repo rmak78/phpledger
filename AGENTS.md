@@ -2,6 +2,8 @@
 
 ## Read first
 
+Before each task, read [AGENTS_SYNC.MD](AGENTS_SYNC.MD) for shared state and ownership, then the latest entries in [AGENT_MESSAGES.MD](AGENT_MESSAGES.MD). Claude and Codex use these repository-only files to coordinate: record the intended scope before shared edits or deployment, preserve another agent's work, and append the outcome and evidence when handing off. These files are never web artifacts.
+
 Read `README.md`, `docs/ARCHITECTURE.md`, and `docs/ROADMAP.md`, then the relevant product/design documentation and current code. `docs/LEGACY.md` preserves historical context, not current installation guidance. The user-approved roadmap permits new foundation schemas and versioned migrations; do not add unrelated schema changes.
 
 ## Working boundaries

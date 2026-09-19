@@ -1,5 +1,9 @@
 # Restricted public demo operations
 
+## Pending demo wording patch — 19 September 2026
+
+The main checkout includes the sample-guide capacity correction from `c9743d4`: every sample leaves room for at least 100 new records. A local follow-up changes the demo landing eyebrow to "Explore PHP Ledger" and replaces the obsolete "development preview" label with "a resettable demonstration of PHP Ledger". It retains the hourly reset, fictional-data restrictions and the separate preview status of the seven newer sample scenarios. These wording changes require the next patch release/deployment; they were not published by this maintenance task. See the [1.1.0 publication receipt](repository/PUBLICATION-2026-09-19-1.1.0.md) for the last recorded deployed state; older release sections below are historical.
+
 ## Current accounting starter release - 0.4.0-preview
 
 The hosted demo runs source `680fa6fa3c7a35e6865207b52f38fbf9a9663947` on PHP 8.3.33 with 79 base tables, two effective-source views, 104 guard triggers and 26 migration receipts. The authorized cutover restored and upgraded its frozen backup before switching and preserved prior data/receipts. A real HTTPS visitor then completed the ten-action order/receipt/bill/invoice/payment example, with zero AR, AP and stock reconciliation differences. The existing reset schedule and restricted database grants remain. See the [publication receipt](repository/sprint-06/PREVIEW-0.4.0-PUBLICATION.json).
