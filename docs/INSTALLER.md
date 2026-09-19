@@ -2,7 +2,7 @@
 
 Status: published in **1.0.0** (18 September 2026) as part of the consolidated 0.6.1/0.7/0.8 stable release; general shared-host qualification and unfamiliar-operator acceptance remain open post-release commitments. The [stable release checklist](ROADMAP.md#current-delivery-contract-first-stable-10) now controls sequencing. The original WordPress-style request remains: hosting-panel preparation, then browser setup without Composer, Node or shell. Existing CLI installation remains available. The installer-created customer website remains parked. Independent review and unfamiliar-operator/host acceptance remain separate gates.
 
-## WordPress-style installation (next release; implemented locally 19 September 2026, not yet published)
+## WordPress-style installation (1.1.0, published 19 September 2026)
 
 The owner asked for the WordPress experience after installing 1.0.0 on XAMPP proved difficult. The branch `wordpress-style-install` implements the flow below. It changes the 1.0.0 contract described in the next section wherever the two differ.
 

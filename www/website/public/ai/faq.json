@@ -6,12 +6,12 @@
   },
   {
     "question": "What do I need to run it?",
-    "answer": "PHP Ledger requires PHP 8.2 or newer, MySQL 8.4, HTTPS and the documented PHP extensions. Installation runs in the browser at /install, without Composer, Node or Docker. PHP 8.3 is recommended; signed automatic updates require the PHP zip extension.",
+    "answer": "PHP Ledger requires PHP 8.2 or newer, MySQL 8.4 or MariaDB 10.4+, HTTPS and the documented PHP extensions. Upload the phpledger folder into your website and open its address; the installer runs in the browser, without Composer, Node or Docker. PHP 8.3 is recommended; signed automatic updates require the PHP zip extension.",
     "source": "https://phpledger.com/"
   },
   {
     "question": "Does it work on shared cPanel hosting?",
-    "answer": "It can, if the actual hosting account meets the requirements. A control panel alone does not prove compatibility. Check PHP extensions, MySQL 8.4, private files and the correct public document root, then run the browser installer checks before committing to a host.",
+    "answer": "It can, if the actual hosting account meets the requirements. A control panel alone does not prove compatibility. Check PHP extensions, MySQL 8.4 or MariaDB 10.4+, and Apache or LiteSpeed with .htaccess rules enabled so private files stay private, then run the browser installer checks before committing to a host.",
     "source": "https://phpledger.com/"
   },
   {
@@ -26,7 +26,7 @@
   },
   {
     "question": "Is it ready for real books?",
-    "answer": "Version 1.0.0 is the first stable release, with published technical validation for automated tests, update recovery and package installation. Independent accounting review, independent security review and supervised pilots remain open commitments. Complete your own reviewed acceptance with fictional records before using real books.",
+    "answer": "Version 1.1.0 is the current stable release. The first stable release, 1.0.0, has published technical validation for automated tests, update recovery and package installation. Independent accounting review, independent security review and supervised pilots remain open commitments. Complete your own reviewed acceptance with fictional records before using real books.",
     "source": "https://phpledger.com/"
   },
   {
@@ -146,7 +146,7 @@
   },
   {
     "question": "Can I use it for real books today?",
-    "answer": "Yes, with the published limits in mind. Version 1.0.0 is the first stable release, and the accounting core covers invoices, bills, stock, bank reconciliation and the standard reports. Independent accounting and security reviews, and supervised pilots, are still open commitments on the roadmap. Keep backups, and read the roadmap before you commit a live business to it.",
+    "answer": "Yes, with the published limits in mind. Version 1.1.0 is the current stable release, and the accounting core covers invoices, bills, stock, bank reconciliation and the standard reports. Independent accounting and security reviews, and supervised pilots, are still open commitments on the roadmap. Keep backups, and read the roadmap before you commit a live business to it.",
     "source": "https://phpledger.com/download/"
   },
   {
@@ -156,12 +156,17 @@
   },
   {
     "question": "Does shared hosting work?",
-    "answer": "Yes. PHP Ledger is built for ordinary shared hosting: PHP 8.2 or later with the required extensions, a MySQL 8.4 database, and HTTPS. Installation runs in the browser, with no terminal, Composer, Node or Docker needed for setup.",
+    "answer": "Yes. PHP Ledger is built for ordinary shared hosting: PHP 8.2 or later with the required extensions, a MySQL 8.4 or MariaDB 10.4+ database, and HTTPS. Upload the phpledger folder into your website and open its address; the installer runs in the browser, with no terminal, Composer, Node or Docker needed for setup. Uploading into any folder relies on .htaccess, so it needs Apache or LiteSpeed, which most shared hosts use.",
     "source": "https://phpledger.com/download/"
   },
   {
-    "question": "What about MariaDB?",
-    "answer": "MariaDB is not validated for version 1.0.0. The application targets MySQL 8.4 with InnoDB and the utf8mb4_0900_ai_ci collation, and the release tests are run against that. If your host offers MySQL 8.4, use it.",
+    "question": "Does it work with MariaDB?",
+    "answer": "Yes. Since version 1.1.0, MariaDB 10.4 or newer is supported alongside MySQL 8.4, both with InnoDB. The full test battery of 294 tests passed on MariaDB 10.4, 10.6, 10.11 and 11.4 and on MySQL 8.4. MySQL 8.0 is not supported yet.",
+    "source": "https://phpledger.com/download/"
+  },
+  {
+    "question": "Do I need a setup key?",
+    "answer": "Not for a normal install. When the database is on the same server (localhost), the installer opens without a key. A database on another server needs a one-time code that the installer writes to private storage; read it with your hosting file manager. An operator who wants a key for every installation can still require one.",
     "source": "https://phpledger.com/download/"
   },
   {
@@ -171,7 +176,7 @@
   },
   {
     "question": "Where is the source?",
-    "answer": "The full source is on GitHub at github.com/phpledger/phpledger. The release tag v1.0.0 holds the package, the checksum file and the release notes, and the repository carries the development history.",
+    "answer": "The full source is on GitHub at github.com/phpledger/phpledger. The release tag v1.1.0 holds the package, the checksum file and the release notes, and the repository carries the development history.",
     "source": "https://phpledger.com/download/"
   },
   {
@@ -436,7 +441,7 @@
   },
   {
     "question": "Is it really free?",
-    "answer": "Yes. PHP Ledger is open source under AGPL-3.0-or-later, and every module in version 1.0 is included. You can install it, use it for real books, modify it and share it without paying anyone. Paid work exists only where you ask for help or need a commercial licence.",
+    "answer": "Yes. PHP Ledger is open source under AGPL-3.0-or-later, and every module in the current release is included. You can install it, use it for real books, modify it and share it without paying anyone. Paid work exists only where you ask for help or need a commercial licence.",
     "source": "https://phpledger.com/pricing/"
   },
   {
@@ -531,7 +536,7 @@
   },
   {
     "question": "Is there a stable release?",
-    "answer": "Yes. PHP Ledger 1.0.0, published 18 September 2026, is the first stable release, consolidating browser installation and signed automatic updates with the existing accounting core. Independent accounting review, independent security review and supervised pilots have not yet happened; they continue as post-release commitments, disclosed alongside the release rather than presented as satisfied.",
+    "answer": "Yes. PHP Ledger 1.1.0, published 19 September 2026, is the current stable release. It follows 1.0.0, the first stable release of 18 September 2026, and adds installation from any web folder, MariaDB support, a chosen username, an optional logo and signed update metadata. Independent accounting review, independent security review and supervised pilots have not yet happened; they continue as post-release commitments, disclosed alongside the release rather than presented as satisfied.",
     "source": "https://phpledger.com/roadmap/"
   },
   {
@@ -586,7 +591,7 @@
   },
   {
     "question": "Will any PHP hosting plan work?",
-    "answer": "No. Check database version, terminal access, extensions, document-root control and migration privileges separately.",
+    "answer": "No. Check database version, extensions, .htaccess support or document-root control, and migration privileges separately.",
     "source": "https://phpledger.com/self-hosting/requirements/"
   },
   {
@@ -596,17 +601,17 @@
   },
   {
     "question": "Can I upload everything into public_html?",
-    "answer": "Only if the configured document root still exposes solely www/phpledger/public. Do not publish the complete package tree.",
+    "answer": "Yes. Upload the phpledger folder into public_html or a subfolder such as public_html/accounts. On Apache or LiteSpeed the package-root .htaccess keeps every folder except www/phpledger/public private. Do not move files out of the folder or change its layout.",
     "source": "https://phpledger.com/self-hosting/shared-hosting-cpanel/"
   },
   {
     "question": "What if my hosting plan has no terminal?",
-    "answer": "Ask whether the host provides operator-assisted CLI installation. The package does not supply a browser-based schema installer.",
+    "answer": "Setup runs in the browser, so no terminal is needed. Upload the folder, create the database in the panel and open the folder’s address. Terminal access only helps with the alternative CLI setup and expert recovery.",
     "source": "https://phpledger.com/self-hosting/shared-hosting-cpanel/"
   },
   {
     "question": "Does this install the whole operating system?",
-    "answer": "No. It starts with a maintained server, supported PHP and MySQL, HTTPS and an operator who manages them.",
+    "answer": "No. It starts with a maintained server, supported PHP and MySQL or MariaDB, HTTPS and an operator who manages them.",
     "source": "https://phpledger.com/self-hosting/vps-install/"
   },
   {

@@ -30,7 +30,7 @@ Nothing here is implemented unless its status says so. Distribution channels are
 | 6 | Plugin platform and marketplace | 1, 4 | Planned |
 | 7 | Cloud-database support and guides | 4 | Planned |
 | 8 | Users module | 3, 6 | Planned |
-| 9 | PostgreSQL migration sets and CI | 4 | After 1.1 |
+| 9 | PostgreSQL migration sets and CI | 4 | After 1.2 |
 | 10 | SQLite migration sets and locking overrides | 4 | With the Windows bundle |
 
 ## Table prefix: several installations in one database

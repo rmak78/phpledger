@@ -1,4 +1,4 @@
-# Upgrade and recovery — PHP Ledger {{VERSION}}
+# Upgrade and recovery — PHP Ledger
 
 ## Operator-initiated automatic updates
 
@@ -14,7 +14,7 @@ The updater uses the configured database identity. It must own the supported vie
 
 The independent `public/maintenance.php` loader is pinned: automated packages must contain the same loader bytes. Changing this loader requires a separately reviewed hosting-panel procedure. The saved recovery worker remains outside the application being replaced. Final acceptance loads the replacement bootstrap in a fresh authenticated request; a broken or interrupted bootstrap triggers restoration. `php tools/resume-update.php --drain` can advance bounded recovery stages when shell access is available, but successful-update runtime acceptance still requires the authenticated maintenance page. A recurring scheduler is not installed. The browser maintenance page refuses further operator-key attempts for 15 minutes after ten failures; `php tools/resume-update.php` reads the host-held key directly and is not subject to that limit, so a remote guesser cannot lock the host operator out of command-line recovery.
 
-Source revision: `{{SOURCE_COMMIT}}`.
+Each release's source revision is recorded in its `PACKAGE-MANIFEST.json`.
 
 This package adds the accounting starter to the modern foundation: required AR/AP workflows and manual core tax, optional Purchasing/Inventory, and reviewed opening conversions. Preserve the complete supplied migration chain and all existing checksums. Recognized older modern schemas apply their missing migrations in order. The repository includes disposable verification for the published 0.3.0 baseline through migration 016; your exact package and backup still require a restoration rehearsal. No automatic upgrade from the historical application, an unpublished quote worktree or a customized schema is supported.
 
@@ -28,9 +28,9 @@ Keep the installed chain through 031 unchanged; 1.0.0 adds no new migration. Thi
 
 Use the backup/maintenance procedure below and run migrations before reopening traffic, exactly as for the 0.5.0-preview to 0.6.0-preview upgrade. Restore both matching code and database if rollback is needed; copying old PHP over an upgraded database is not a tested rollback.
 
-## From 1.0.0 to {{VERSION}}
+## From 1.0.0 to 1.1.0
 
-Keep the installed chain through 031 unchanged. This release adds migration 032 (an optional username for each account) and 033 (the optional installation logo). Existing accounts keep signing in by email. Because 1.0.0 shipped no signed update metadata, use the manual procedure below.
+Keep the installed chain through 031 unchanged. This release adds migration 032 (an optional username for each account) and 033 (the optional installation logo). Existing accounts keep signing in by email. Because 1.0.0 shipped no signed update metadata, use the manual procedure below. 1.1.0 is the first release with official signed metadata: after this manual upgrade, pin the publisher key from the [release signing guide](https://github.com/phpledger/phpledger/blob/master/docs/RELEASE-SIGNING.md#official-publisher-key) as `publisher.pem` in the private installation directory, and later releases can be installed from `/maintenance.php`.
 
 The package layout changed only at its top:
 - It now unpacks to `phpledger/`, not `phpledger-<version>/`.

@@ -5,10 +5,10 @@ from PIL import Image, ImageDraw, ImageFont
 OUT = 'src/static/assets/og'
 LOGO = 'public/assets/brand/phpledger-logo-600.png'
 CARDS = {
-    'home': ('Complete double-entry accounting', 'that runs on your own PHP hosting', 'Open source under AGPL. PHP 8.2+ and MySQL 8.4. Version 1.0.0.'),
+    'home': ('Complete double-entry accounting', 'that runs on your own PHP hosting', 'Open source under AGPL. PHP 8.2+, MySQL or MariaDB. Version 1.1.0.'),
     'product': ('Everything in PHP Ledger 1.0,', 'workflow by workflow', 'Invoices, bills, purchase orders, stock, banking, reports, setup.'),
     'point-of-sale': ('A cash counter that posts', 'through the same books', 'Cart, cash and change, receipt, one balanced journal.'),
-    'download': ('Download PHP Ledger 1.0.0', 'and install it from your browser', 'PHP 8.2+, MySQL 8.4, signed updates with automatic backup.'),
+    'download': ('Download PHP Ledger 1.1.0', 'unzip it into any web folder', 'PHP 8.2+, MySQL 8.4 or MariaDB 10.4+, signed updates.'),
     'pricing': ('Free to run, with paid help', 'when you want it', 'AGPL-3.0-or-later. Commercial licence and services on request.'),
     'community': ('Built in the open, with people', 'who keep real books', 'Discussions, issues, reviews, pilots and the social channels.'),
     'learn': ('Learn the bookkeeping behind', 'an explainable business', 'Ten lessons, worked guides and a glossary with original examples.'),

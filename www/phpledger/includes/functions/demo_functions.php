@@ -129,9 +129,13 @@ function pl_demo_require_document_capacity(int $companyId, int $bookId): void
     }
 }
 
+/**
+ * The ceiling includes the sample pack's own history, which is already 85 to 105 records
+ * on arrival, so the default leaves each visitor well over 100 practice records.
+ */
 function pl_demo_document_limit(): int
 {
-    return min(500, max(10, (int) (getenv('PL_DEMO_MAX_DOCUMENTS') ?: 100)));
+    return min(500, max(10, (int) (getenv('PL_DEMO_MAX_DOCUMENTS') ?: 250)));
 }
 
 /** Count durable sources and operation receipts; compound actions can consume several records. */

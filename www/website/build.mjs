@@ -11,6 +11,7 @@
  *         src/static/**                     copied verbatim into public/
  * Writes  public/<path>index.html (or public/404.html), public/assets/site.css, public/assets/site.js,
  *         public/sitemap.xml, public/news/feed.xml (only when article pages exist),
+ *         public/releases/index.json (release feed read by installations; see releases-feed.mjs),
  *         public/<indexNowKey>.txt (only when site.indexNowKey is set)
  *
  * Tokens  {{site.a.b}} (HTML-escaped), {{{site.a.b}}} (raw), {{page.key}} / {{{page.key}}} (front matter),
@@ -25,6 +26,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
+import { writeReleaseFeed } from './releases-feed.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.join(ROOT, 'src');
@@ -575,7 +577,7 @@ function build() {
 
   const articles = pages.filter((page) => page.article && page.path.startsWith('/news/'));
   const assets = { cssHref: `/assets/site.css?v=${cssHash}`, jsHref: `/assets/site.js?v=${jsHash}`, hasFeed: articles.length > 0 };
-  const reserved = new Set([...pages.map((page) => page.outFile), 'sitemap.xml', 'assets/site.css', 'assets/site.js', 'news/feed.xml', 'llms.txt', 'ai/summary.json', 'ai/faq.json', '.well-known/ai.txt']);
+  const reserved = new Set([...pages.map((page) => page.outFile), 'sitemap.xml', 'assets/site.css', 'assets/site.js', 'news/feed.xml', 'llms.txt', 'ai/summary.json', 'ai/faq.json', '.well-known/ai.txt', 'releases/index.json']);
   const staticFiles = copyStatic(reserved);
   writeDiscovery(pages);
 
@@ -589,6 +591,7 @@ function build() {
   writeText(path.join(PUBLIC, 'sitemap.xml'), sitemap);
   if (assets.hasFeed) writeText(path.join(PUBLIC, 'news', 'feed.xml'), feedXml(articles));
   if (site.indexNowKey) writeText(path.join(PUBLIC, `${site.indexNowKey}.txt`), site.indexNowKey);
+  writeReleaseFeed(PUBLIC, ROOT);
 
   const sitemapCount = (sitemap.match(/<loc>/g) || []).length;
   console.log(`build: ${written.length} page(s), css v=${cssHash} (${css.length} bytes from ${cssNames.join(', ')}), js v=${jsHash} (${js.length} bytes)`);

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0c2052">
 <title>PHP Ledger: self-hosted double-entry accounting software</title>
-<meta name="description" content="Open-source double-entry accounting with invoices, bills, stock and bank reconciliation, self-hosted on PHP 8.2+ and MySQL 8.4. First stable release: 1.0.0.">
+<meta name="description" content="Open-source double-entry accounting with invoices, bills, stock and bank reconciliation, self-hosted on PHP 8.2+ with MySQL or MariaDB. Current release: 1.1.0.">
 <link rel="canonical" href="https://phpledger.com/">
 <link rel="alternate" hreflang="en" href="https://phpledger.com/">
 <link rel="alternate" hreflang="x-default" href="https://phpledger.com/">
@@ -22,7 +22,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
 <meta property="og:title" content="PHP Ledger: self-hosted double-entry accounting software">
-<meta property="og:description" content="Open-source double-entry accounting with invoices, bills, stock and bank reconciliation, self-hosted on PHP 8.2+ and MySQL 8.4. First stable release: 1.0.0.">
+<meta property="og:description" content="Open-source double-entry accounting with invoices, bills, stock and bank reconciliation, self-hosted on PHP 8.2+ with MySQL or MariaDB. Current release: 1.1.0.">
 <meta property="og:url" content="https://phpledger.com/">
 <meta property="og:image" content="https://phpledger.com/assets/og/home.png">
 <meta property="og:image:width" content="1200">
@@ -30,7 +30,7 @@
 <meta property="og:image:alt" content="PHP Ledger: self-hosted double-entry accounting software.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PHP Ledger: self-hosted double-entry accounting software">
-<meta name="twitter:description" content="Open-source double-entry accounting with invoices, bills, stock and bank reconciliation, self-hosted on PHP 8.2+ and MySQL 8.4. First stable release: 1.0.0.">
+<meta name="twitter:description" content="Open-source double-entry accounting with invoices, bills, stock and bank reconciliation, self-hosted on PHP 8.2+ with MySQL or MariaDB. Current release: 1.1.0.">
 <meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
 <meta name="twitter:image:alt" content="PHP Ledger: self-hosted double-entry accounting software.">
 <meta name="twitter:site" content="@LedgerPhp94831">
@@ -78,7 +78,7 @@
       "url": "https://phpledger.com/",
       "name": "PHP Ledger",
       "alternateName": "phpledger",
-      "description": "PHP Ledger is open-source, self-hosted double-entry accounting software with core invoices, bills and payments, optional purchasing and inventory, and a manually configured tax engine. Built on PHP 8.2+ and MySQL 8.4, 1.0.0 is the first stable release with browser installation and signed automatic updates; independent accounting and security review remain post-release commitments.",
+      "description": "PHP Ledger is open-source, self-hosted double-entry accounting software with core invoices, bills and payments, optional purchasing and inventory, and a manually configured tax engine. Built on PHP 8.2+ with MySQL 8.4 or MariaDB 10.4+, 1.1.0 is the current release: unzip it into any web folder, open it, and the browser installer starts; updates are publisher-signed. 1.0.0 was the first stable release; independent accounting and security review remain post-release commitments.",
       "inLanguage": "en",
       "publisher": {
         "@id": "https://phpledger.com/#organization"
@@ -89,13 +89,13 @@
       "@id": "https://phpledger.com/#software",
       "name": "PHP Ledger",
       "alternateName": "phpledger",
-      "description": "PHP Ledger is open-source, self-hosted double-entry accounting software with core invoices, bills and payments, optional purchasing and inventory, and a manually configured tax engine. Built on PHP 8.2+ and MySQL 8.4, 1.0.0 is the first stable release with browser installation and signed automatic updates; independent accounting and security review remain post-release commitments.",
+      "description": "PHP Ledger is open-source, self-hosted double-entry accounting software with core invoices, bills and payments, optional purchasing and inventory, and a manually configured tax engine. Built on PHP 8.2+ with MySQL 8.4 or MariaDB 10.4+, 1.1.0 is the current release: unzip it into any web folder, open it, and the browser installer starts; updates are publisher-signed. 1.0.0 was the first stable release; independent accounting and security review remain post-release commitments.",
       "applicationCategory": [
         "BusinessApplication",
         "FinanceApplication"
       ],
       "operatingSystem": "Self-hosted web application; PHP 8.2 or newer and MySQL 8.4",
-      "softwareRequirements": "PHP 8.2+ (8.3 recommended), MySQL 8.4 (InnoDB), HTTPS; browser installation, no terminal required for setup; PHP zip extension for automatic updates",
+      "softwareRequirements": "PHP 8.2+ (8.3 recommended), MySQL 8.4 or MariaDB 10.4+ (InnoDB), HTTPS; upload the phpledger folder and open it in a browser, no terminal required for setup; PHP zip extension for automatic updates",
       "softwareVersion": "1.0.0",
       "datePublished": "2026-09-18",
       "releaseNotes": "https://github.com/phpledger/phpledger/releases/tag/v1.0.0",
@@ -129,13 +129,13 @@
       "@id": "https://phpledger.com/#webpage",
       "url": "https://phpledger.com/",
       "name": "PHP Ledger: self-hosted double-entry accounting software",
-      "description": "Open-source double-entry accounting with invoices, bills, stock and bank reconciliation, self-hosted on PHP 8.2+ and MySQL 8.4. First stable release: 1.0.0.",
+      "description": "Open-source double-entry accounting with invoices, bills, stock and bank reconciliation, self-hosted on PHP 8.2+ with MySQL or MariaDB. Current release: 1.1.0.",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://phpledger.com/#website"
       },
       "datePublished": "2026-09-18",
-      "dateModified": "2026-09-18",
+      "dateModified": "2026-09-19",
       "author": {
         "@id": "https://phpledger.com/#maintainer"
       },
@@ -200,7 +200,7 @@
           "name": "What do I need to run it?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "PHP Ledger requires PHP 8.2 or newer, MySQL 8.4, HTTPS and the documented PHP extensions. Installation runs in the browser at /install, without Composer, Node or Docker. PHP 8.3 is recommended; signed automatic updates require the PHP zip extension."
+            "text": "PHP Ledger requires PHP 8.2 or newer, MySQL 8.4 or MariaDB 10.4+, HTTPS and the documented PHP extensions. Upload the phpledger folder into your website and open its address; the installer runs in the browser, without Composer, Node or Docker. PHP 8.3 is recommended; signed automatic updates require the PHP zip extension."
           }
         },
         {
@@ -208,7 +208,7 @@
           "name": "Does it work on shared cPanel hosting?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It can, if the actual hosting account meets the requirements. A control panel alone does not prove compatibility. Check PHP extensions, MySQL 8.4, private files and the correct public document root, then run the browser installer checks before committing to a host."
+            "text": "It can, if the actual hosting account meets the requirements. A control panel alone does not prove compatibility. Check PHP extensions, MySQL 8.4 or MariaDB 10.4+, and Apache or LiteSpeed with .htaccess rules enabled so private files stay private, then run the browser installer checks before committing to a host."
           }
         },
         {
@@ -232,7 +232,7 @@
           "name": "Is it ready for real books?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Version 1.0.0 is the first stable release, with published technical validation for automated tests, update recovery and package installation. Independent accounting review, independent security review and supervised pilots remain open commitments. Complete your own reviewed acceptance with fictional records before using real books."
+            "text": "Version 1.1.0 is the current stable release. The first stable release, 1.0.0, has published technical validation for automated tests, update recovery and package installation. Independent accounting review, independent security review and supervised pilots remain open commitments. Complete your own reviewed acceptance with fictional records before using real books."
           }
         },
         {
@@ -269,7 +269,7 @@
 <section class="container hero" aria-labelledby="hero-heading">
   <div class="hero-text">
     <h1 id="hero-heading">PHP Ledger: self-hosted double-entry accounting software</h1>
-    <p class="lead">PHP Ledger records invoices, bills, stock movements and bank transactions as balanced journals, then shows the profit and loss, balance sheet and cash position behind them. It is open source under AGPL, installed from your browser on PHP 8.2+ and MySQL 8.4. Version 1.0.0 is the first stable release.</p>
+    <p class="lead">PHP Ledger records invoices, bills, stock movements and bank transactions as balanced journals, then shows the profit and loss, balance sheet and cash position behind them. It is open source under AGPL and installs like WordPress on PHP 8.2+ with MySQL 8.4 or MariaDB 10.4+. The current stable release is version 1.0.0.</p>
     <div class="actions"><a class="button button--large" href="/demo/">Try the live demo</a><a class="button button--large button--secondary" href="/download/">Download 1.0.0</a></div>
     <p class="capture-label" data-capture-status>Screens show a fictional sample business, Willow Corner Shop.</p>
   </div>
@@ -285,7 +285,7 @@
     <p>PHP Ledger is open-source, self-hosted double-entry accounting software for small businesses. It records invoices, bills, payments and stock movements, reconciles bank statements and produces financial reports. You install it on your own PHP hosting and manage your own records and backups.</p>
     <dl class="home-facts">
       <div><dt><strong>Current release:</strong></dt><dd><a href="https://github.com/phpledger/phpledger/releases/tag/v1.0.0">1.0.0, published 18 September 2026</a></dd></div>
-      <div><dt><strong>Required hosting:</strong></dt><dd>PHP 8.2+, MySQL 8.4 and HTTPS; <a href="/download/">check the required extensions</a>.</dd></div>
+      <div><dt><strong>Required hosting:</strong></dt><dd>PHP 8.2+, MySQL 8.4 or MariaDB 10.4+ and HTTPS; <a href="/download/">check the required extensions</a>.</dd></div>
       <div><dt><strong>Core licence:</strong></dt><dd><a href="https://github.com/phpledger/phpledger/blob/v1.0.0/LICENSE">AGPL-3.0-or-later</a>; commercial licensing is available separately.</dd></div>
       <div><dt><strong>Public demo:</strong></dt><dd>Eleven fictional business histories and a blank playground; temporary companies reset hourly.</dd></div>
     </dl>
@@ -302,7 +302,7 @@
     <h2 id="pillars-heading" class="sr-only">Why small businesses choose PHP Ledger</h2>
     <div class="pillars">
       <div class="card"><h3>Is the whole accounting core open source?</h3><p>Yes. Invoices, bills, stock, bank reconciliation and reports ship together in the free core package. The <a href="https://github.com/phpledger/phpledger/blob/v1.0.0/LICENSE">AGPL-3.0-or-later licence</a> lets an accountant or software house inspect how a figure was posted. A separate commercial licence is available for organisations that need different distribution terms.</p></div>
-      <div class="card"><h3>Can I use my existing PHP hosting?</h3><p>Yes, if it meets the published requirements: PHP 8.2+, MySQL 8.4, HTTPS, the required extensions and a private application directory. Run the browser installer's checks on the actual host. Signed updates make a matched backup before changing the installation and recover automatically if a migration fails.</p></div>
+      <div class="card"><h3>Can I use my existing PHP hosting?</h3><p>Yes, if it meets the published requirements: PHP 8.2+, MySQL 8.4 or MariaDB 10.4+, HTTPS, the required extensions and Apache or LiteSpeed to keep the application folders private. Run the browser installer's checks on the actual host. Signed updates make a matched backup before changing the installation and recover automatically if a migration fails.</p></div>
       <div class="card"><h3>Every figure is traceable</h3><p>Reports drill down to journals and from journals to the source document, so a profit and loss line can be explained to the person who asks. Posted entries are never edited: a correction is a linked reversal with its reason recorded, and a draft never touches the books until someone reviews and posts it.</p></div>
       <div class="card"><h3>What is still outside this release?</h3><p>Regional tax certification, a production shop POS, payroll, automatic exchange rates, revaluation and consolidation are not included. Independent accounting and security reviews remain open commitments. The <a href="/roadmap/">roadmap</a> distinguishes released workflows from planned features and outstanding review.</p></div>
     </div>
@@ -364,7 +364,7 @@
         <tr><th scope="row">Records</th><td>Fictional data only; a separate temporary company for each visitor.</td><td>Your operator manages the database, users and retention. Complete reviewed acceptance before using real books.</td></tr>
         <tr><th scope="row">Reset and backups</th><td>Resets at the next scheduled UTC hour. Exporting a report does not preserve the demo company.</td><td>No hourly demo reset; you maintain tested backups and a recovery process.</td></tr>
         <tr><th scope="row">Cost and licence</th><td>Free to try, with limited capacity.</td><td>Core software is free under AGPL-3.0-or-later. Hosting, optional help and commercial licensing have separate costs or terms.</td></tr>
-        <tr><th scope="row">Setup</th><td>Open the demo in a browser.</td><td>Check PHP, MySQL and HTTPS requirements, verify the package and run the browser installer.</td></tr>
+        <tr><th scope="row">Setup</th><td>Open the demo in a browser.</td><td>Check PHP, database and HTTPS requirements, verify the package, upload the phpledger folder and open its address to run the browser installer.</td></tr>
       </tbody>
     </table>
   </div>
@@ -376,7 +376,7 @@
     <div class="section-heading"><h2 id="start-heading">How do I get started with PHP Ledger?</h2><p>Follow these three steps before relying on the software for your own books.</p></div>
     <ol class="start-grid start-steps">
       <li class="start-card"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9h8"/><path d="M8 13h6"/><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"/></svg><h3>1. Try a sample workflow</h3><p>Open a private sample company and follow a sale, a bill and a bank statement through the books. The demo resets every hour.</p><a class="link-strong" href="/demo/">Try the live demo <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></li>
-      <li class="start-card"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9l-8 4.5l-8 -4.5v-9l8 -4.5"/><path d="M12 12l8 -4.5"/><path d="M12 12v9"/><path d="M12 12l-8 -4.5"/><path d="M16 5.25l-8 4.5"/></svg><h3>2. Check your host and install</h3><p>Verify the release checksum and hosting requirements, upload the package, then open <code>/install</code> in your browser. Start with sample records.</p><a class="link-strong" href="/download/">Read the installation steps <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></li>
+      <li class="start-card"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9l-8 4.5l-8 -4.5v-9l8 -4.5"/><path d="M12 12l8 -4.5"/><path d="M12 12v9"/><path d="M12 12l-8 -4.5"/><path d="M16 5.25l-8 4.5"/></svg><h3>2. Check your host and install</h3><p>Verify the release checksum and hosting requirements, upload the phpledger folder anywhere inside your website, then open its address; the installer starts by itself. Start with sample records.</p><a class="link-strong" href="/download/">Read the installation steps <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></li>
       <li id="enterprise" class="start-card"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"/><path d="M3 7l9 6l9 -6"/></svg><h3>3. Review before real use</h3><p>Check your accounting workflows, access controls and backup recovery with the people responsible for them. Arrange help or a commercial licence if needed.</p><a class="link-strong" href="/pricing/">Discuss help and licensing <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></li>
     </ol>
   </div>
@@ -413,11 +413,11 @@
     <div class="section-heading faq-heading"><h2 id="faq-heading">Questions before you start</h2><p>Short answers to the questions owners and accountants ask first. Each one links to the page with the detail.</p></div>
     <div class="faq">
       <details><summary>Is PHP Ledger really free?</summary><p>Yes. The project-owned core is free under <a href="/pricing/">AGPL-3.0-or-later</a>, including invoices, bills, stock, bank reconciliation and reports. Hosting, setup help, optional support and a separate commercial licence have their own terms. The 0.1.0 through 0.1.5 previews retain their earlier MIT grants.</p></details>
-      <details><summary>What do I need to run it?</summary><p>PHP Ledger requires PHP 8.2 or newer, MySQL 8.4, HTTPS and the <a href="/download/">documented PHP extensions</a>. Installation runs in the browser at /install, without Composer, Node or Docker. PHP 8.3 is recommended; signed automatic updates require the PHP zip extension.</p></details>
-      <details><summary>Does it work on shared cPanel hosting?</summary><p>It can, if the actual <a href="/download/">hosting account meets the requirements</a>. A control panel alone does not prove compatibility. Check PHP extensions, MySQL 8.4, private files and the correct public document root, then run the browser installer checks before committing to a host.</p></details>
+      <details><summary>What do I need to run it?</summary><p>PHP Ledger requires PHP 8.2 or newer, MySQL 8.4 or MariaDB 10.4+, HTTPS and the <a href="/download/">documented PHP extensions</a>. Upload the phpledger folder into your website and open its address; the installer runs in the browser, without Composer, Node or Docker. PHP 8.3 is recommended; signed automatic updates require the PHP zip extension.</p></details>
+      <details><summary>Does it work on shared cPanel hosting?</summary><p>It can, if the actual <a href="/download/">hosting account meets the requirements</a>. A control panel alone does not prove compatibility. Check PHP extensions, MySQL 8.4 or MariaDB 10.4+, and Apache or LiteSpeed with .htaccess rules enabled so private files stay private, then run the browser installer checks before committing to a host.</p></details>
       <details><summary>Does PHP Ledger send my data anywhere?</summary><p>Self-hosted records stay on your operator's infrastructure. This website has no analytics or form submission endpoint. The demo's optional country lookup may send your public IP address to country.is. Following external links or downloading releases contacts those providers. The <a href="/privacy/">privacy notice</a> explains the separate website, demo and installation boundaries.</p></details>
       <details><summary>Can it invoice customers and settle supplier bills?</summary><p>Yes. PHP Ledger 1.0 includes <a href="/product/#sales">customer invoices</a>, supplier bills, partial and final payments allocated across open items, linked credits, ageing and control-account reconciliation. Accounts receivable and payable are in the core; owners can hide their navigation without disabling the services.</p></details>
-      <details><summary>Is it ready for real books?</summary><p>Version 1.0.0 is the first stable release, with <a href="https://github.com/phpledger/phpledger/blob/v1.0.0/docs/VALIDATION.md">published technical validation</a> for automated tests, update recovery and package installation. Independent accounting review, independent security review and supervised pilots remain open commitments. Complete your own reviewed acceptance with fictional records before using real books.</p></details>
+      <details><summary>Is it ready for real books?</summary><p>Version 1.1.0 is the current stable release. The first stable release, 1.0.0, has <a href="https://github.com/phpledger/phpledger/blob/v1.0.0/docs/VALIDATION.md">published technical validation</a> for automated tests, update recovery and package installation. Independent accounting review, independent security review and supervised pilots remain open commitments. Complete your own reviewed acceptance with fictional records before using real books.</p></details>
       <details><summary>What if the project stops?</summary><p>You keep the source and your self-hosted database under the applicable licence. Continued maintenance, recovery and data extraction still need an operator. Keep tested backups and <a href="/product/#reports">portable report exports</a>; possession of the release ZIP alone does not establish a recovery process.</p></details>
     </div>
   </div>
@@ -453,7 +453,7 @@
     </div>
     <nav class="trust-links" aria-label="Project policies"><a href="https://github.com/phpledger/phpledger/blob/master/LICENSE" rel="noopener">Licence</a><a href="https://github.com/phpledger/phpledger/blob/master/SECURITY.md" rel="noopener">Security contact</a><a href="https://github.com/phpledger/phpledger/blob/master/CODE_OF_CONDUCT.md" rel="noopener">Code of conduct</a><a href="/privacy/">Privacy and data boundaries</a></nav>
     <p class="footer-legal">New project-owned code uses AGPL-3.0-or-later; a commercial licence is available. The pre-adoption 0.1.0 through 0.1.5 previews retain MIT; dependencies, fonts, photographs and the archived 2015 application keep their own terms. Screens show a fictional sample business.</p>
-    <p class="footer-meta">Maintained by <a href="/about/" rel="author">Rana Mansoor Akbar Khan</a>, PHP Ledger project maintainer. Last reviewed <time datetime="2026-09-18">2026-09-18</time>.</p>
+    <p class="footer-meta">Maintained by <a href="/about/" rel="author">Rana Mansoor Akbar Khan</a>, PHP Ledger project maintainer. Last reviewed <time datetime="2026-09-19">2026-09-19</time>.</p>
   </div>
 </footer>
 <dialog id="screen-dialog" aria-labelledby="screen-dialog-title"><div class="dialog-heading"><h2 id="screen-dialog-title">Product screen</h2><button type="button" class="dialog-close" aria-label="Close enlarged screen"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>Close</button></div><p id="screen-dialog-note">Screens show a fictional sample business</p><p class="dialog-hint" id="dialog-hint">Scroll the image to explore it. With a keyboard, focus the image area and use the arrow keys.</p><div class="dialog-image-wrap" tabindex="0" role="region" aria-label="Enlarged product image" aria-describedby="dialog-hint"><img id="dialog-image" width="1440" height="1200" alt=""></div></dialog>

@@ -1,8 +1,8 @@
-# Install PHP Ledger {{VERSION}}
+# Install PHP Ledger
 
 > Minimum PHP 8.2; PHP 8.3 is recommended for deployment. Use a current security patch and run preflight with the same PHP version/extensions as web requests. The package includes compatible production dependencies; do not bypass Composer platform checks.
 
-Source revision: `{{SOURCE_COMMIT}}`. This guide installs the new preview into an **empty, dedicated database**. For any existing database, first read [UPGRADE.md](UPGRADE.md). Never run SQL dumps from the historical application against this database.
+This guide installs PHP Ledger into an **empty, dedicated database**. The short `README.txt` inside the package covers the usual upload-and-open installation; this guide adds the details. For any existing database, first read [UPGRADE.md](UPGRADE.md). Never run SQL dumps from the historical application against this database.
 
 ## 1. Prepare the host
 
@@ -12,7 +12,7 @@ Arrange the following with your hosting administrator:
 |---|---|
 | PHP | 8.2 or newer for command-line and web requests; 8.3 recommended. The tested matrix is 8.2/8.3/8.4; other branches require validation. |
 | Extensions | BCMath, PDO, PDO MySQL, mbstring, curl, OpenSSL, fileinfo and working PHP sessions; standard JSON support must be available. |
-| Database | MySQL 8.4 LTS or MariaDB 10.4 or newer (10.6 or newer recommended), InnoDB. The automated suites run on MySQL 8.4 and MariaDB 10.6, 10.11 and 11.4. |
+| Database | MySQL 8.4 LTS or MariaDB 10.4 or newer (10.6 or newer recommended), InnoDB. The automated suites run on MySQL 8.4 and MariaDB 10.4, 10.6, 10.11 and 11.4. |
 | Web server | Apache or LiteSpeed reading the package's `.htaccess` files, for an upload into any website folder. Or any web server whose document root is `www/phpledger/public` with a front-controller fallback. HTTPS with a valid certificate; plain `http://localhost` is accepted only for a trial on the same computer. |
 | Operator access | A hosting file manager or FTP to upload the package, and a hosting panel to create the database. Terminal access remains available for CLI setup and expert recovery. |
 | Session storage | A private writable PHP session directory, usable by the web PHP process. Match CLI and web configuration when checking it. |

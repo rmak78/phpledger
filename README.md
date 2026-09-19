@@ -7,11 +7,11 @@
 <h1 align="center">Open-source, self-hosted accounting and cash POS for small businesses</h1>
 
 <p align="center">
-  Built on PHP 8.2+ and MySQL 8.4. New code is AGPL-3.0-or-later licensed; a commercial licence is available. First stable release: 1.0.0.
+  Built on PHP 8.2+ with MySQL 8.4 or MariaDB 10.4+. New code is AGPL-3.0-or-later licensed; a commercial licence is available. Current release: 1.1.0.
 </p>
 
 <p align="center">
-  <img src="docs/repository/assets/release-1-0-0.svg" width="190" height="26" alt="Release: 1.0.0 stable">
+  <img src="docs/repository/assets/release-1-1-0.svg" width="190" height="26" alt="Release: 1.1.0 stable">
 </p>
 
 <p align="center">
@@ -28,15 +28,15 @@
 
 The `docs/` folder is tracked in the repository. Documentation links below point to files under `docs/`; new local research and design reviews are not release claims. Package builds still require the explicitly listed documentation inputs in `tools/package-files.json`.
 
-PHP Ledger is open-source, self-hosted double-entry accounting software with a simple cash point of sale for small businesses, built on PHP 8.2+ and MySQL 8.4. **1.0.0** is the first stable release.
+PHP Ledger is open-source, self-hosted double-entry accounting software with a simple cash point of sale for small businesses, built on PHP 8.2+ with MySQL 8.4 or MariaDB 10.4+. **1.1.0** is the current release; **1.0.0** was the first stable release.
 
 It records receipts and expenses as balanced double-entry journals, keeps posted entries immutable with linked reversals, and shows a trial balance, profit and loss, balance sheet and an entered cash scenario. A small cash point of sale posts sales through the same service and prints a receipt. Modern source lives in `www/phpledger`; the historical application is available only in Git history under its original terms.
 
-**Requirements:** PHP 8.2+ (8.3 recommended) with BCMath, PDO, PDO MySQL, mbstring, sessions, cURL, OpenSSL and fileinfo, MySQL 8.4 with InnoDB, and HTTPS. Serve only `www/phpledger/public`. Installation is done in the browser at `/install`; no terminal access is required for setup. The PHP zip extension is required to use automatic in-browser updates; CLI installation and recovery remain available for operators who prefer them.
+**Requirements:** PHP 8.2+ (8.3 recommended) with BCMath, PDO, PDO MySQL, mbstring, sessions, cURL, OpenSSL and fileinfo, MySQL 8.4 or MariaDB 10.4+ with InnoDB, and HTTPS (plain `http://localhost` is accepted on your own computer). Unzip the package into any web folder and open its address; the installer starts by itself, and no terminal access is required. Pointing the document root at `www/phpledger/public` remains the most secure layout. The PHP zip extension is required to use automatic in-browser updates; CLI installation and recovery remain available for operators who prefer them.
 
 The accounting starter adds customer invoices, supplier bills, partial payments, credits and ageing to the base accounting core. Purchasing and shared Inventory are bundled optional modules. A manually configurable core tax engine supports inclusive or exclusive entered prices. All financial activity uses the same posting and reporting services.
 
-**Release status:** **1.0.0**, published 18 September 2026, is the first stable release. The owner consolidated the locally implemented 0.6.1 workflow-recovery closure, the 0.7 browser installer and the 0.8 signed update/automatic-backup/recovery work into this single release and published it as the supported production scope. Automated test suites, fault-injection update/recovery tests, exact-artifact install/upgrade/recovery checks against the built package, and developer-operated browser checks back this release. Independent accounting review, independent security review, supervised pilots with a real month-end close, unfamiliar-operator installation observation, and restricted shared-host recovery certification have **not** happened; the owner published with these limits disclosed as post-release commitments, not as claims of completed review. See [Validation](docs/VALIDATION.md#100-publication--18-september-2026) and [Roadmap](docs/ROADMAP.md#current-delivery-contract-first-stable-10) for the exact evidence and open gates.
+**Release status:** **1.1.0**, published 19 September 2026, makes installation work like WordPress (unzip into any web folder and open it), adds MariaDB 10.4+, a chosen username and an optional logo, and is the first release with signed update metadata. See the [release notes](resources/release/RELEASE-NOTES.md). **1.0.0**, published 18 September 2026, was the first stable release. The owner consolidated the locally implemented 0.6.1 workflow-recovery closure, the 0.7 browser installer and the 0.8 signed update/automatic-backup/recovery work into this single release and published it as the supported production scope. Automated test suites, fault-injection update/recovery tests, exact-artifact install/upgrade/recovery checks against the built package, and developer-operated browser checks back this release. Independent accounting review, independent security review, supervised pilots with a real month-end close, unfamiliar-operator installation observation, and restricted shared-host recovery certification have **not** happened; the owner published with these limits disclosed as post-release commitments, not as claims of completed review. See [Validation](docs/VALIDATION.md#100-publication--18-september-2026) and [Roadmap](docs/ROADMAP.md#current-delivery-contract-first-stable-10) for the exact evidence and open gates.
 
 **Release signing:** the updater verifies publisher-signed release metadata against a key the operator pins out of band. The official publisher key had not been generated when 1.0.0 was published, so the 1.0.0 release carries a SHA-256 checksum but no signed update metadata; its fingerprint will be published in [docs/RELEASE-SIGNING.md](docs/RELEASE-SIGNING.md), the website and the Wiki once it exists, and later releases will ship signed metadata.
 
@@ -44,11 +44,9 @@ Every release, including previews and patch releases, must publish the applicati
 
 Every release also reviews and updates the GitHub Wiki, repository About description, website URL and topics, README, release notes, version/package manifests, and affected website download and social/share metadata. Verify the public results and record each surface as updated or reviewed unchanged in the publication receipt and owner handoff. All surfaces must agree on shipped capabilities, version, download links and preview limitations.
 
-## Current release: 1.0.0
+## Current release: 1.1.0
 
-The accounting starter, eleven-pack chooser, responsive shell, catalogue-led setup, browser installation, and signed automatic updates with backup and recovery are included in the published 1.0.0 release. In local Docker, sign in, open **Your businesses**, and use **Try a sample company** to provision only the selected sample book.
-
-**In development for the next release (not in 1.0.0):** WordPress-style installation. You unzip the package (one `phpledger/` folder) into any web folder, whether a domain root, a subfolder or XAMPP's `htdocs`, and open it in the browser. The installer then starts without a setup key. The same release adds MariaDB 10.4+ alongside MySQL 8.4, a username the owner can sign in with as well as the email, and an optional logo. See the [installer contract](docs/INSTALLER.md) and [validation](docs/VALIDATION.md).
+The accounting starter, eleven-pack chooser, responsive shell, catalogue-led setup, browser installation, and signed automatic updates with backup and recovery shipped in 1.0.0. 1.1.0 adds WordPress-style installation from any web folder, MariaDB 10.4+, a username the owner can sign in with as well as the email, and an optional logo. In local Docker, sign in, open **Your businesses**, and use **Try a sample company** to provision only the selected sample book. See the [installer contract](docs/INSTALLER.md) and [validation](docs/VALIDATION.md).
 
 ### Local test login
 
@@ -100,7 +98,7 @@ The application requires **PHP 8.2 or newer**; **PHP 8.3 is the recommended depl
 *Actual development capture with fictional books. The sample records 1,000 in receipts and 125 in expenses, leaving 875 in the bank. Reports and POS remain development previews.*
 
 > [!NOTE]
-> **Evaluate the accounting core.** [Download 1.0.0](https://github.com/phpledger/phpledger/releases/tag/v1.0.0) with production dependencies and installation instructions. Install in the browser at `/install`, or follow the CLI steps. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Independent regional package validation and pilot usability review remain open post-release commitments.
+> **Evaluate the accounting core.** [Download 1.1.0](https://github.com/phpledger/phpledger/releases/tag/v1.1.0) with production dependencies. Unzip it into a web folder and open its address, or follow the CLI steps. Follow opening, running and closing account balances; manage accounts; save, review, post and reverse general journals. Modern source lives in `www/phpledger`; historical code is retained only in Git history. Independent regional package validation and pilot usability review remain open post-release commitments.
 
 ## Explore the working preview
 
@@ -157,15 +155,15 @@ Release **0.2.1-preview** combines scoped read API/MCP, existing-user OAuth/Conn
 
 ## Where we go from here
 
-**1.0.0 is published as the first stable release.** The owner consolidated 0.6.1 workflow recovery, 0.7 browser installation and 0.8 signed automatic backup/update/recovery into this release rather than sequencing them as separate previews. Independent accounting review, independent security review, supervised pilots with a real month-end close and the previously planned release-candidate acceptance period continue as post-release commitments, not as claims already satisfied. Next: **1.0.x** production fixes and compatibility improvements, **1.1** reviewed Urdu/RTL plus installer distribution channels (Softaculous/Installatron, published containers/packages), and **1.2** reviewed Arabic/RTL and demand-led reporting refinements.
+**1.1.0 is the current release; 1.0.0 was the first stable release.** For 1.0.0 the owner consolidated 0.6.1 workflow recovery, 0.7 browser installation and 0.8 signed automatic backup/update/recovery into this release rather than sequencing them as separate previews. Independent accounting review, independent security review, supervised pilots with a real month-end close and the previously planned release-candidate acceptance period continue as post-release commitments, not as claims already satisfied. 1.1.0 delivered WordPress-style installation, MariaDB, a chosen username and a logo. Next: **1.1.x** fixes, **1.2** reviewed Urdu/RTL plus distribution channels, and **1.3** reviewed Arabic/RTL and demand-led reporting refinements.
 
 | Next | Outcome |
 |---|---|
 | **Independent review and pilots (post-release)** | Independent accounting review, independent security review, and 2–3 supervised pilots with a 30-day, month-end-close cycle, continue after publication rather than gating it. |
-| **1.0.x** | Production fixes and compatibility improvements based on real-world use of 1.0.0. |
-| **1.1: Urdu/RTL and distribution channels** | Reviewed Urdu/RTL translation, plus distribution channels: a container image, Packagist, app catalogues and Softaculous/Installatron, each with a documented upgrade path. [Release protocol →](docs/RELEASE-PROTOCOL.md) |
+| **1.1.x** | Production fixes and compatibility improvements based on real-world use. |
+| **1.2: Urdu/RTL and distribution channels** | Reviewed Urdu/RTL translation, plus distribution channels: a container image, Packagist, app catalogues and Softaculous/Installatron, each with a documented upgrade path. [Release protocol →](docs/RELEASE-PROTOCOL.md) |
 | **Platform** | Table prefix for several installations in one database, portable SQL and MeekroORM models (PostgreSQL and SQLite later), cloud-hosted databases, a plugin platform with a verified marketplace and owner uploads, and a Users module with profiles, roles and permissions. [Platform roadmap →](docs/strategy/PLATFORM-ROADMAP.md) |
-| **1.2: Arabic/RTL** | Reviewed Arabic/RTL translation and demand-led reporting refinements. |
+| **1.3: Arabic/RTL** | Reviewed Arabic/RTL translation and demand-led reporting refinements. |
 
 The core must work independently of add-ons. Shop and restaurant interfaces will share checkout and accounting services while providing their own operational workflows. Observed usability, package validation and an explicit supported scope remain release gates. [Module build order and completion gates →](docs/MODULE-ROADMAP.md)
 

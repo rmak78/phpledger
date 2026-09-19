@@ -121,7 +121,7 @@ demo_denied(static fn () => pl_demo_begin_visit(pl_csrf_token()));
 demo_check((int) DB::queryFirstField('SELECT COUNT(*) FROM pl_demo_visitors') === 2, 'Visitor capacity was bypassed.');
 demo_check(is_string($oldGeneration) && strlen($oldGeneration) === 64, 'A generation marker was not recorded.');
 putenv('PL_DEMO_MAX_VISITORS=100');
-putenv('PL_DEMO_MAX_DOCUMENTS=100');
+putenv('PL_DEMO_MAX_DOCUMENTS');
 $priorPack = null;
 foreach (array_keys(pl_demo_pack_catalog()) as $packId) {
     pl_logout_session();
@@ -137,6 +137,7 @@ foreach (array_keys(pl_demo_pack_catalog()) as $packId) {
     demo_denied(static fn () => pl_demo_provisioning(static fn () => pl_create_period($actor, $cid, $bid, ['start_date' => '2027-01-01', 'end_date' => '2027-12-31', 'reason' => 'Forbidden assigned sample action', 'request_key' => 'forbidden-create'])));
     demo_check(count(pl_list_periods($actor, $cid, $bid)) === 14, 'Rejected period action left a partial period.');
     if ($priorPack !== null) { demo_denied(static fn () => pl_company_demo_pack($actor, $priorPack['company_id'], $priorPack['book_id'])); }
+    demo_check(pl_demo_document_limit() - pl_demo_document_count($cid, $bid) >= 100, 'The default sample capacity leaves fewer than 100 practice records for ' . $packId . '.');
     $context = pl_company_context($actor, $cid); $codes = array_column($context['accounts'], 'id', 'code');
     $capacityInput = ['kind' => 'expense', 'date' => '2026-02-05', 'amount' => '1.0000', 'money_account_id' => $codes['1000'],
         'category_account_id' => $codes['5000'], 'counterparty' => 'Sample visitor practice', 'reference' => '', 'memo' => 'Capacity verification'];

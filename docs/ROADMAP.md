@@ -38,10 +38,10 @@ Default upgrade commitment: the latest published preview and subsequent release 
 
 ### Following stable
 
-1. **1.0.x:** production fixes and compatibility improvements.
-2. **1.1:** reviewed Urdu/RTL plus distribution channels (container image, Packagist, app catalogues, Softaculous/Installatron), each opened only with its upgrade path documented in the [release protocol](RELEASE-PROTOCOL.md).
-   - **Platform work alongside 1.1 (owner, 19 September 2026):** release feed and update modes; username and company logo in the installer; table prefix with portable SQL and MeekroORM models; installation notice; plugin platform with a verified marketplace and owner uploads; cloud-database support; then the Users module. Sequence and scope are in the [platform roadmap](strategy/PLATFORM-ROADMAP.md). PostgreSQL follows 1.1; SQLite ships with the Windows bundle. npm, Homebrew, Bitnami and DigitalOcean are on the [future registries roadmap](strategy/DISTRIBUTION-PLAN.md#future-registries-roadmap-tier-3b).
-3. **1.2:** reviewed Arabic/RTL and demand-led reporting refinements.
+1. **1.1.0 (published 19 September 2026, owner decision):** WordPress-style installation from any web folder, MariaDB 10.4+, a chosen username and an optional logo, and the first signed update metadata. The owner chose the 1.1.0 number for this release, so the language releases below move up by one.
+2. **1.2:** reviewed Urdu/RTL plus distribution channels (container image, Packagist, app catalogues, Softaculous/Installatron), each opened only with its upgrade path documented in the [release protocol](RELEASE-PROTOCOL.md).
+   - **Platform work alongside 1.2 (owner, 19 September 2026):** release feed and update modes; username and company logo in the installer; table prefix with portable SQL and MeekroORM models; installation notice; plugin platform with a verified marketplace and owner uploads; cloud-database support; then the Users module. Sequence and scope are in the [platform roadmap](strategy/PLATFORM-ROADMAP.md). PostgreSQL follows 1.2; SQLite ships with the Windows bundle. npm, Homebrew, Bitnami and DigitalOcean are on the [future registries roadmap](strategy/DISTRIBUTION-PLAN.md#future-registries-roadmap-tier-3b).
+3. **1.3:** reviewed Arabic/RTL and demand-led reporting refinements.
 4. **Later capability releases:** reviewed regional connectors → stock/tax-integrated shop POS → e-commerce → controlled API/MCP writes → restaurant/distribution/specialists, each with independent acceptance.
 
 English-first 1.0 and the named language releases explicitly supersede the earlier first-layer Urdu/Arabic commitment. Installer/updater development and workflow closure run in parallel; feature families are not added to the stable critical path. Technical checkpoints are recorded in [Validation](VALIDATION.md).

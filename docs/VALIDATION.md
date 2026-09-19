@@ -1,6 +1,6 @@
 # Foundation validation
 
-## WordPress-style installation, MariaDB, username and logo — 19 September 2026 (local, unpublished)
+## WordPress-style installation, MariaDB, username and logo — 19 September 2026 (released as 1.1.0)
 
 The work is on branch `wordpress-style-install` (worktree `.claude/worktrees/install-package`, from `master` 75f85f7). The implementation and rules are in [Installer](INSTALLER.md#wordpress-style-installation-next-release-implemented-locally-19-september-2026-not-yet-published). Nothing was released, pushed or deployed.
 
