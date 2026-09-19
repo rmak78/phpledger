@@ -163,7 +163,8 @@ Release **0.2.1-preview** combines scoped read API/MCP, existing-user OAuth/Conn
 |---|---|
 | **Independent review and pilots (post-release)** | Independent accounting review, independent security review, and 2–3 supervised pilots with a 30-day, month-end-close cycle, continue after publication rather than gating it. |
 | **1.0.x** | Production fixes and compatibility improvements based on real-world use of 1.0.0. |
-| **1.1: Urdu/RTL and distribution channels** | Reviewed Urdu/RTL translation, plus installer distribution channels (Softaculous/Installatron, published containers/packages). |
+| **1.1: Urdu/RTL and distribution channels** | Reviewed Urdu/RTL translation, plus distribution channels: a container image, Packagist, app catalogues and Softaculous/Installatron, each with a documented upgrade path. [Release protocol →](docs/RELEASE-PROTOCOL.md) |
+| **Platform** | Table prefix for several installations in one database, portable SQL and MeekroORM models (PostgreSQL and SQLite later), cloud-hosted databases, a plugin platform with a verified marketplace and owner uploads, and a Users module with profiles, roles and permissions. [Platform roadmap →](docs/strategy/PLATFORM-ROADMAP.md) |
 | **1.2: Arabic/RTL** | Reviewed Arabic/RTL translation and demand-led reporting refinements. |
 
 The core must work independently of add-ons. Shop and restaurant interfaces will share checkout and accounting services while providing their own operational workflows. Observed usability, package validation and an explicit supported scope remain release gates. [Module build order and completion gates →](docs/MODULE-ROADMAP.md)
