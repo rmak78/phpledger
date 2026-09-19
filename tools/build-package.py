@@ -16,6 +16,27 @@ class PackageError(Exception):
     pass
 
 
+# The archive unpacks to one folder, like WordPress's "wordpress/"; the file name keeps the version.
+PACKAGE_ROOT = "phpledger"
+# Files the release must contain so it installs by "unzip and open in the browser".
+REQUIRED_FILES = {"LICENSE", "README.txt", "index.php", ".htaccess", "licenses/THIRD-PARTY-NOTICES.md", "www/phpledger/public/.htaccess"}
+# Folders the web adapter keeps private; each also gets a deny-all .htaccess as a second layer.
+PRIVATE_FOLDERS = ("vendor", "resources", "tools", "licenses", "www/phpledger/includes", "www/phpledger/install", "www/phpledger/templates")
+DENY_SOURCE = "resources/release/deny.htaccess"
+# Documentation-only files inside dependencies; licence and NOTICE files always stay.
+VENDOR_DOCUMENT = re.compile(r"(?:^|/)(?:README|CHANGELOG|CONTRIBUTING|SECURITY|ROADMAP|UPGRADE|UPGRADING|CODE_OF_CONDUCT)[^/]*\.(?:md|rst|txt)$|(?:^|/)[^/]*\.md$"
+                             r"|(?:^|/)(?:\.gitattributes|\.gitignore|\.editorconfig|phpdoc\.dist\.xml|phpunit\.xml(?:\.dist)?|phpstan\.neon(?:\.dist)?|psalm\.xml(?:\.dist)?)$"
+                             r"|(?:^|/)(?:adr|\.github)/", re.IGNORECASE)
+VENDOR_KEEP = re.compile(r"(?:^|/)(?:LICEN[CS]E|COPYING|NOTICE)[^/]*$", re.IGNORECASE)
+
+
+def vendor_runtime_file(relative: str) -> bool:
+    """Keep code and legal notices; drop upstream fixtures, command-line helpers and documentation."""
+    if relative.startswith("sergeytsalkov/meekrodb/simpletest/") or relative.startswith("bin/"):
+        return False
+    return bool(VENDOR_KEEP.search(relative)) or not VENDOR_DOCUMENT.search(relative)
+
+
 def safe_path(value: str) -> str:
     if not isinstance(value, str) or not re.fullmatch(r"[A-Za-z0-9_.\-/]+", value):
         raise PackageError("Invalid package path")
@@ -120,15 +141,16 @@ def gather(source: Path, vendor: Path, specification: dict, version: str, channe
         if destination in payload or destination.startswith("vendor/"):
             raise PackageError("Duplicate or reserved package destination")
         data = release_input(source, entry, tracked)
-        if destination in {"README.md", "INSTALL.md", "UPGRADE.md", "RELEASE-NOTES.md"}:
+        if destination in {"README.txt", "README.md", "INSTALL.md", "UPGRADE.md", "RELEASE-NOTES.md"}:
             data = data.replace(b"{{VERSION}}", version.encode()).replace(b"{{SOURCE_COMMIT}}", revision.encode())
             if b"{{" in data:
                 raise PackageError("Unresolved operator-document placeholder")
         payload[destination] = data
-    required = {"composer.json", "composer.lock", "LICENSE", "THIRD-PARTY-NOTICES.md", "README.md", "INSTALL.md", "UPGRADE.md", "RELEASE-NOTES.md"}
-    if not required.issubset(payload):
-        raise PackageError("Required operator documents or notices are missing")
-    lock = json.loads(payload["composer.lock"])
+    if not REQUIRED_FILES.issubset(payload):
+        raise PackageError("Required entry points, instructions or notices are missing: " + ", ".join(sorted(REQUIRED_FILES - set(payload))))
+    # The lockfile verifies the bundled dependencies; the package itself does not need Composer.
+    lock_bytes = committed_file(source, "composer.lock")
+    lock = json.loads(lock_bytes)
     installed = json.loads(read_file(vendor, "composer/installed.json"))
     if not isinstance(installed, dict) or installed.get("dev") is not False or installed.get("dev-package-names"):
         raise PackageError("Generate production-only vendor from the lockfile")
@@ -141,19 +163,23 @@ def gather(source: Path, vendor: Path, specification: dict, version: str, channe
             raise PackageError("Vendor contains a symlink or junction")
         if path.is_file():
             relative = path.relative_to(vendor).as_posix()
-            # Upstream ships development fixtures, including an SQL dump. The
-            # runtime classmap uses only db.class.php and orm.class.php.
-            if relative.startswith("sergeytsalkov/meekrodb/simpletest/"):
+            # Upstream ships development fixtures (including an SQL dump), command-line
+            # helpers and documentation; the runtime needs only code and licence notices.
+            if not vendor_runtime_file(relative):
                 continue
             payload["vendor/" + safe_path(relative)] = read_file(vendor, relative)
     if "vendor/autoload.php" not in payload:
         raise PackageError("Production autoload is missing")
+    deny = committed_file(source, DENY_SOURCE)
+    for folder in PRIVATE_FOLDERS:
+        if any(name.startswith(folder + "/") for name in payload):
+            payload.setdefault(folder + "/.htaccess", deny)
     if sum(map(len, payload.values())) > 100_000_000:
         raise PackageError("Unexpectedly large package")
     manifest = {
         **identity, "source_commit": revision,
         "project_license": specification["project_license"],
-        "composer_lock_sha256": hashlib.sha256(payload["composer.lock"]).hexdigest(),
+        "composer_lock_sha256": hashlib.sha256(lock_bytes).hexdigest(),
         "files": [{"path": name, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()} for name, data in sorted(payload.items())],
     }
     payload["PACKAGE-MANIFEST.json"] = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
@@ -172,7 +198,7 @@ def build(source: Path, vendor: Path, specification: dict, output: Path, version
     with archive.open("xb") as stream:
         with zipfile.ZipFile(stream, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as result:
             for name, data in sorted(payload.items()):
-                info = zipfile.ZipInfo(f"phpledger-{version}/{name}", date_time=(1980, 1, 1, 0, 0, 0))
+                info = zipfile.ZipInfo(f"{PACKAGE_ROOT}/{name}", date_time=(1980, 1, 1, 0, 0, 0))
                 info.create_system = 3
                 info.external_attr = (stat.S_IFREG | 0o644) << 16
                 info.compress_type = zipfile.ZIP_DEFLATED
@@ -181,7 +207,7 @@ def build(source: Path, vendor: Path, specification: dict, output: Path, version
         if result.testzip() is not None:
             raise PackageError("Archive integrity check failed; do not distribute it")
         for name, data in payload.items():
-            if result.read(f"phpledger-{version}/{name}") != data:
+            if result.read(f"{PACKAGE_ROOT}/{name}") != data:
                 raise PackageError("Archive content differs from inventory")
     digest = hashlib.sha256(archive.read_bytes()).hexdigest()
     with checksum.open("x", encoding="ascii", newline="\n") as stream:

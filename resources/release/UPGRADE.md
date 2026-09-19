@@ -8,7 +8,7 @@ Provision a private installation directory (`PL_INSTALL_DIRECTORY`, default `www
 
 The operator selects stable or preview, supplies signed metadata and a matching ZIP (or explicitly requests the official download), then confirms the operation. Signed metadata binds version, channel, archive size/hash and every file. The updater stages privately, blocks/drains application writes, takes matched code/config/key/database backups, applies the release, runs migrations and verifies the result. Failed mutations automatically restore the matched backup. Keep the browser open for bounded continuation requests; after a host interruption reopen the independent maintenance page to resume. Maintenance stays active until verification succeeds. CLI/external database writers must respect the same maintenance boundary.
 
-PHP ZIP and OpenSSL, sufficient private disk space, the supported uncustomized MySQL 8.4 schema, complete schema/view/trigger recovery privileges and writable release destinations are required. Routines/events, custom databases and unknown migration states are rejected rather than silently omitted. Preserve private backups outside the public root and apply an operator-controlled retention policy. Broad hosting compatibility, independent security review and real restricted-host fault recovery must be evidenced before production recommendation. A host or disk that is unavailable cannot execute recovery until service resumes.
+PHP ZIP and OpenSSL, sufficient private disk space, the supported uncustomized schema on MySQL 8.4 or MariaDB 10.4+, complete schema/view/trigger recovery privileges and writable release destinations are required. Routines/events, custom databases and unknown migration states are rejected rather than silently omitted. Preserve private backups outside the public root and apply an operator-controlled retention policy. Broad hosting compatibility, independent security review and real restricted-host fault recovery must be evidenced before production recommendation. A host or disk that is unavailable cannot execute recovery until service resumes.
 
 The updater uses the configured database identity. It must own the supported view/trigger definers and have the required privileges scoped to that database; a separate runtime identity without DDL privileges is rejected before mutation. Supplying a separate temporary privileged update identity is not implemented. Do not grant server-wide privileges to bypass this boundary. Database snapshots and restores use resumable batches with durable progress; original records and financial totals are checked before reopening.
 
@@ -27,6 +27,19 @@ Keep the installed chain through 028 unchanged. This release adds 029-031 for co
 Keep the installed chain through 031 unchanged; 1.0.0 adds no new migration. This release adds browser installation at `/install` (new installations only; an existing 0.6.0-preview installation is already set up) and the signed-update/recovery path through `/maintenance.php`, `tools/resume-update.php` and the release/signing tools. A published 0.6.0-preview installation predates `/maintenance.php`, so its first upgrade to 1.0.0 must use the manual procedure below, not the new updater. After completing that manual upgrade, the operator may provision the private installation directory, `operator.key` and a pinned `publisher.pem` to use `/maintenance.php` for later updates.
 
 Use the backup/maintenance procedure below and run migrations before reopening traffic, exactly as for the 0.5.0-preview to 0.6.0-preview upgrade. Restore both matching code and database if rollback is needed; copying old PHP over an upgraded database is not a tested rollback.
+
+## From 1.0.0 to {{VERSION}}
+
+Keep the installed chain through 031 unchanged. This release adds migration 032 (an optional username for each account) and 033 (the optional installation logo). Existing accounts keep signing in by email. Because 1.0.0 shipped no signed update metadata, use the manual procedure below.
+
+The package layout changed only at its top:
+- It now unpacks to `phpledger/`, not `phpledger-<version>/`.
+- It adds a package-root `index.php` and `.htaccess` for uploads inside a website. An installation whose document root is `www/phpledger/public` does not use them.
+- It no longer carries these files: CLA.md, composer files, INSTALL/UPGRADE/RELEASE-NOTES/README.md, `docs/`, `resources/tax/`, `resources/integrations/`, `resources/coa/industry-profiles-0.5.0.json`, `tools/validate-tax-catalog.php`, `tools/export-openapi.php` and `tools/dispatch-outbound-events.php`. They remain in the source repository.
+
+Unpack the new package beside the installation as usual. Leaving older copies of those files in a retired directory is harmless.
+
+MariaDB support is new in this release. An installation stays on its existing database server; moving between MySQL and MariaDB is a separate backup/restore project and is not an upgrade step.
 
 ## Manual procedure: before changing an installation
 

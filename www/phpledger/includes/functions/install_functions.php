@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 // Internal services shared by the separately guarded CLI and browser installers.
 require_once __DIR__ . '/runtime_functions.php';
+require_once __DIR__ . '/database_platform_functions.php';
 
 /** Report prerequisites before loading configuration or attempting a database connection. */
 function pl_install_runtime_issues(int $version, array $extensions, bool $autoloadExists): array
@@ -105,9 +106,7 @@ function pl_install_schema_state(?array $receipts, array $checksums, int $tableC
 
 function pl_install_database_check(): array
 {
-    if (!preg_match('/^8\.4\.\d+(?:\D|$)/D', (string) DB::queryFirstField('SELECT VERSION()'))) {
-        throw new DomainException('This package supports MySQL 8.4 LTS. Check the selected database server before installing.');
-    }
+    pl_database_require_supported();
     $checksums = [];
     foreach (glob(dirname(__DIR__, 2) . '/install/migrations/[0-9]*.php') ?: [] as $file) {
         $checksum = hash_file('sha256', $file);
@@ -136,6 +135,12 @@ function pl_migrate(?int $limit = null): array
         throw new DomainException('Another installer is running. Try again after it finishes.');
     }
     try {
+        if (pl_database_require_supported()['engine'] === 'mariadb') {
+            // Trigger variables take the database default collation; match the tables' collation so
+            // comparisons inside triggers never mix collations. Hosting panels often default to another one.
+            // The dialect hook translates the collation name for this server.
+            DB::query('ALTER DATABASE %b CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci', (string) DB::queryFirstField('SELECT DATABASE()'));
+        }
         DB::query("CREATE TABLE IF NOT EXISTS pl_schema_migrations (
             version VARCHAR(100) CHARACTER SET ascii COLLATE ascii_bin NOT NULL PRIMARY KEY,
             checksum CHAR(64) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,

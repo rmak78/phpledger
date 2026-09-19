@@ -47,13 +47,60 @@ function pl_url(string $path, array $query = []): string
     return $path . ($query === [] ? '' : '?' . http_build_query($query));
 }
 
+/**
+ * A host-provided PL_BASE_PATH wins. Otherwise the package-root entry point
+ * supplies the folder it was uploaded to, such as /accounts or /phpledger-1.1.0.
+ */
 function pl_base_path(): string
 {
-    $base = rtrim((string) (getenv('PL_BASE_PATH') ?: ''), '/');
-    if ($base !== '' && !preg_match('~^/[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*$~D', $base)) {
+    $base = (string) (getenv('PL_BASE_PATH') ?: (defined('PL_WEB_BASE_PATH') ? PL_WEB_BASE_PATH : ''));
+    $base = rtrim($base, '/');
+    if ($base !== '' && !preg_match('#^(?:/[a-zA-Z0-9_~-][a-zA-Z0-9._~-]*)+$#D', $base)) {
         throw new RuntimeException('Invalid application base path.');
     }
     return $base;
+}
+
+/**
+ * Plain HTTP from a browser on this same computer, as with XAMPP at
+ * http://localhost/. Proxied, LAN and public requests never qualify.
+ */
+function pl_web_local_http(array $server): bool
+{
+    if ((!empty($server['HTTPS']) && strtolower((string) $server['HTTPS']) !== 'off') || (int) ($server['SERVER_PORT'] ?? 0) === 443) {
+        return false;
+    }
+    foreach (['HTTP_FORWARDED', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED_HOST', 'HTTP_X_FORWARDED_PROTO', 'HTTP_X_REAL_IP', 'HTTP_CLIENT_IP'] as $header) {
+        if (isset($server[$header])) {
+            return false;
+        }
+    }
+    $host = strtolower((string) parse_url('http://' . (string) ($server['HTTP_HOST'] ?? ''), PHP_URL_HOST));
+    if (!in_array($host, ['localhost', '127.0.0.1', '[::1]'], true) && !preg_match('/^[a-z0-9-]+(?:\.[a-z0-9-]+)*\.localhost$/D', $host)) {
+        return false;
+    }
+    $peer = @inet_pton((string) ($server['REMOTE_ADDR'] ?? ''));
+    if ($peer === false) {
+        return false;
+    }
+    if (strlen($peer) === 16 && substr($peer, 0, 12) === str_repeat("\0", 10) . "\xff\xff") {
+        $peer = substr($peer, 12);
+    }
+    return strlen($peer) === 4 ? ord($peer[0]) === 127 : $peer === str_repeat("\0", 15) . "\1";
+}
+
+/** A copy without database settings belongs in the browser installer. */
+function pl_web_needs_installation(): bool
+{
+    if (getenv('PL_ENV') === 'demo' || (string) getenv('PL_DB_PASSWORD') !== '') {
+        return false;
+    }
+    require_once __DIR__ . '/installation_state_functions.php';
+    try {
+        return !is_file(pl_install_config_path()) && !is_file(pl_install_directory() . '/installed.json');
+    } catch (Throwable $error) {
+        return false;
+    }
 }
 
 /** The insecure cookie exception is limited to an explicitly enabled, local demo. */

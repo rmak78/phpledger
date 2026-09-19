@@ -1,5 +1,7 @@
 # First-package contract
 
+> **Historical (sprint 03).** The current package contract is `tools/build-package.py` with `tools/package-files.json`. From the next release, the archive unpacks to `phpledger/` with a package-root `index.php`/`.htaccess` web adapter, as described in [Installer](../../INSTALLER.md#wordpress-style-installation-next-release-implemented-locally-19-september-2026-not-yet-published). The internal layout described below, including the three-level `PL_ROOT`, is still preserved.
+
 Work item: [#56 — Build and verify the first installable preview package](https://github.com/phpledger/phpledger/issues/56).
 
 **Status: local inventory and implementation contract only.** No archive, source tag, licence decision, installer change or candidate validation run is produced by this document. `0.1.0-preview` remains a proposed name. The [machine-readable candidate inventory](package-candidate.json) records **78 existing files / 1,392,413 bytes**, their exact paths and SHA-256 hashes, plus the required outputs that do not exist yet. It must be refreshed deliberately when the candidate changes; it is not a release manifest.

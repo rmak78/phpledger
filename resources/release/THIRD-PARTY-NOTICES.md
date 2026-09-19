@@ -1,6 +1,6 @@
 # Third-party notices
 
-PHP Ledger's project-owned code is AGPL-3.0-or-later; a commercial licence is available. Published pre-adoption 0.1.0 through 0.1.5 previews retain their MIT grants. See LICENSE, LICENSE-SCOPE.md and docs/LICENSING-POLICY.md. Every dependency, font, icon and dataset below retains its separate terms and notices.
+PHP Ledger's project-owned code is AGPL-3.0-or-later; a commercial licence is available. Published pre-adoption 0.1.0 through 0.1.5 previews retain their MIT grants. See the LICENSE file in the main folder, the licence scope (https://github.com/phpledger/phpledger/blob/master/LICENSE-SCOPE.md) and the licensing policy (https://github.com/phpledger/phpledger/blob/master/docs/LICENSING-POLICY.md). Every dependency, font, icon and dataset below retains its separate terms and notices.
 
 | Component | Version / source | Licence and included notice |
 |---|---|---|
@@ -18,7 +18,7 @@ The archive contains PHP source and browser assets, not PHP/MySQL/Apache/Docker 
 
 ## Integration candidate dependencies
 
-The 0.2.0 candidate retains every production dependency license file in `vendor`; exact versions and source revisions are pinned in `composer.lock`. PHPStan remains excluded.
+Every production dependency keeps its licence file (and any NOTICE file) in `vendor`; exact versions and source revisions are recorded in `vendor/composer/installed.json`. PHPStan remains excluded.
 
 | Package | Version | Declared license |
 |---|---|---|

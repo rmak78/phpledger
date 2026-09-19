@@ -2,7 +2,51 @@
 
 Status: published in **1.0.0** (18 September 2026) as part of the consolidated 0.6.1/0.7/0.8 stable release; general shared-host qualification and unfamiliar-operator acceptance remain open post-release commitments. The [stable release checklist](ROADMAP.md#current-delivery-contract-first-stable-10) now controls sequencing. The original WordPress-style request remains: hosting-panel preparation, then browser setup without Composer, Node or shell. Existing CLI installation remains available. The installer-created customer website remains parked. Independent review and unfamiliar-operator/host acceptance remain separate gates.
 
-## Local implementation contract
+## WordPress-style installation (next release; implemented locally 19 September 2026, not yet published)
+
+The owner asked for the WordPress experience after installing 1.0.0 on XAMPP proved difficult. The branch `wordpress-style-install` implements the flow below. It changes the 1.0.0 contract described in the next section wherever the two differ.
+
+1. **Unzip anywhere.** The release ZIP unpacks to one `phpledger/` folder; the archive name keeps its version. It can sit at a domain root, in a subfolder such as `public_html/accounts`, or in XAMPP's `htdocs`.
+   - The internal layout is unchanged (`vendor/`, `resources/`, `tools/`, `www/phpledger/`).
+   - A package-root `index.php` and `.htaccess` (sources in `resources/release/root/`) route pages to the front controller and serve `www/phpledger/public/` files.
+   - They return 403 for every other folder and for the root documents. Each private folder also carries a deny-all `.htaccess`, and the installer adds one to its private storage.
+   - Pointing a (sub)domain's document root at `www/phpledger/public` remains the most secure setup. The package's `public/.htaccess` makes that work without editing a virtual host.
+2. **Refusal on unsafe servers.** The package-root `index.php` refuses to start unless the `.htaccess` marker (`PL_HTACCESS`) shows that the rules are active; Nginx, for example, ignores them.
+   - Before setup writes any secret, it fetches harmless probe files in private storage and `vendor/composer/installed.json` through the site's own address. The checks are bounded GETs with no redirects.
+   - Confirmed exposure stops setup. An inconclusive result shows a manual check link.
+3. **Subfolders.** The base path comes from `PL_BASE_PATH` or from the package-root entry point, and dotted folder names are accepted.
+   - A copy in a subfolder gets its own session cookie name and path. Sessions are also bound to the copy that created them.
+   - The installer's public URL may include that folder. API/MCP OAuth discovery still needs a (sub)domain root.
+4. **No setup key (owner decision, 19 September 2026).** An unconfigured copy sends visitors to `/install`, which opens at the requirements and database step.
+   - **Database on another server:** any host other than literally `localhost`, `127.0.0.1` or `::1` requires a one-time code. Setup writes it to private `setup-code.txt`, the owner reads it with the hosting file manager, and it is deleted when setup completes.
+   - **Strict mode:** an operator-provided `PL_SETUP_KEY` or `setup.key` keeps the original unlock step.
+   - **Residual risk:** whoever reaches a fresh upload first with a database on the same server can claim it. On shared hosting that includes another account on the same server. README.txt tells owners to run setup right after uploading.
+   - **Existing protections are unchanged:**
+     - CSRF protection
+     - bounded attempts
+     - locks
+     - binding to the first database
+     - refusal to claim non-empty databases, users or existing configuration
+     - no reopening after completion
+5. **Local HTTP.** Plain HTTP is accepted only when the peer is 127.0.0.1 or ::1, the host is a loopback name or `*.localhost`, and no forwarded headers are present. Every other HTTP request is still refused with hosting-panel SSL guidance.
+6. **MariaDB.** MySQL 8.4 LTS and MariaDB 10.4 or newer are accepted. The shared MeekroDB `pre_run` hook in `database_platform_functions.php` translates three MySQL-only spellings on MariaDB:
+   - `FOR SHARE` becomes `LOCK IN SHARE MODE`.
+   - `SKIP LOCKED` is dropped before MariaDB 10.6.
+   - `utf8mb4_0900_ai_ci` becomes `utf8mb4_uca1400_nopad_ai_ci` or `utf8mb4_unicode_520_nopad_ci` where the server lacks it. Both are NO PAD, like MySQL's collation.
+
+   Migration files and checksums never change. On MariaDB, `pl_migrate()` also sets the database default collation, so trigger variables compare cleanly.
+7. **Owner account.** The owner chooses a username, an email address and a password, typed twice. They can sign in with either name.
+   - Usernames are 3–60 lowercase letters, digits, dots, dashes or underscores (migration `032_user_names`).
+   - Both names count against one attempt limit.
+   - `create-admin.php --username=` offers the same choice on the command line.
+8. **Optional logo.** A PNG, JPEG or WebP image of at most 1 MB and at most six times wider than tall. Its type is checked from the bytes, and SVG is refused.
+   - It is stored in the database (migration `033_installation_logo`) and served by `/logo` without a session.
+   - It is shown in the menu and on the sign-in page instead of the PHP Ledger logo.
+9. **XAMPP fixes.** When the host's OpenSSL configuration file is missing, key generation retries with the bundled `install/openssl.cnf`. Private files fall back to exclusive creation where `link()` is disabled.
+
+The package keeps runtime files, legal notices and recovery tools only. Guides moved online, and the ZIP carries a one-page `README.txt`. See `tools/package-files.json`, `tools/build-package.py` and [Validation](VALIDATION.md) for the tests and what remains unverified.
+
+## Local implementation contract (1.0.0)
 
 `GET/POST /install` runs before the configured application bootstrap. It requires HTTPS except explicit local/test loopback use, and is disabled for the hosted demo. The host provisions a random setup key of at least 32 characters in private `www/phpledger/storage/installation/setup.key`, or `PL_SETUP_KEY`. `PL_INSTALL_DIRECTORY` may point to a private directory outside the application; `PL_INSTALL_CONFIG_PATH` optionally selects a private configuration path. Neither may resolve into the public document root. Setup credentials never belong in a URL.
 
@@ -28,7 +72,7 @@ An operator downloads the complete release ZIP, unpacks it and points the HTTPS 
 - Extend the shared bootstrap/configuration lifecycle to show a safe unconfigured state before attempting a normal database connection. Reuse the existing MeekroDB configuration and services; do not introduce another framework, router, auth stack or database abstraction.
 - Refactor the existing CLI-only migration implementation into a shared internal service with separately guarded CLI and one-time installer entry points. Do not simply remove its CLI guard or expose migration scripts directly under the document root.
 - Keep configuration in the current `includes/config.local.php` location outside `public/`, or retain operator-provided environment settings. Write configuration atomically with restrictive permissions when explicitly writable; otherwise provide a protected one-time download/copy fallback for the operator. Never make the entire application writable.
-- Require explicit one-time installer enablement and proof of control through the hosting environment, such as a temporary private setup key. A publicly reachable empty installation must not let an arbitrary visitor claim the first account. Use CSRF, secure sessions, no-store responses, bounded attempts and one installation lock. Detailed credentials/errors stay out of URLs, logs and diagnostics.
+- Require explicit one-time installer enablement and proof of control through the hosting environment, such as a temporary private setup key. A publicly reachable empty installation must not let an arbitrary visitor claim the first account. *Amended by the owner on 19 September 2026 for the next release: setup opens without a key, as WordPress does. Proof is still required for a database on another server, and an operator-provided key keeps strict mode. The residual same-server risk is described above.* Use CSRF, secure sessions, no-store responses, bounded attempts and one installation lock. Detailed credentials/errors stay out of URLs, logs and diagnostics.
 - The current candidate retains a dedicated identity scoped to the application database, with installation/recovery DDL privileges. Separate temporary installation and narrower runtime identities remain a qualification gap: the updater currently rejects insufficient grants or a different view/trigger definer before mutation. Do not describe this candidate as supporting automatic recovery with every existing restricted runtime account. A portable split-credential contract and representative hosting-panel evidence remain required before that claim.
 - Refuse overwriting private configuration, existing users or unknown database objects. Repeated requests must not create duplicate accounts or migrations. Reuse matching applied receipts; an interrupted `applying` migration stops for operator review because MySQL DDL is not one rollbackable transaction.
 - Fresh installation only in version 1. Existing installations show their status and the current upgrade guidance. Automatic updates, schema rollback, hosting-account provisioning, email delivery, payments, tax activation and historical import execution are separate capabilities.

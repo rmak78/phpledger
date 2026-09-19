@@ -3,17 +3,24 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/installation_state_functions.php';
 
-/** Validate an explicit public origin; never infer it from an untrusted Host header. */
+/**
+ * Validate the explicit public address the owner confirms; never infer it from an
+ * untrusted Host header. Its only allowed path is the folder this copy runs in.
+ */
 function pl_install_public_url(string $input): string
 {
     $url = rtrim(trim($input), '/');
     $parts = parse_url($url);
-    $local = in_array(getenv('PL_ENV'), ['local', 'test'], true) && getenv('PL_INSTALL_ALLOW_HTTP') === '1';
+    $local = (in_array(getenv('PL_ENV'), ['local', 'test'], true) && getenv('PL_INSTALL_ALLOW_HTTP') === '1')
+        || (function_exists('pl_web_local_http') && pl_web_local_http($_SERVER));
+    $base = function_exists('pl_base_path') ? pl_base_path() : '';
+    $host = is_array($parts) ? strtolower((string) ($parts['host'] ?? '')) : '';
+    $localHost = in_array($host, ['127.0.0.1', 'localhost', '[::1]'], true) || str_ends_with($host, '.localhost');
     if (!is_array($parts) || !isset($parts['scheme'], $parts['host'])
         || isset($parts['user']) || isset($parts['pass']) || isset($parts['query']) || isset($parts['fragment'])
-        || (($parts['path'] ?? '') !== '') || strlen($url) > 480 || preg_match('/[\x00-\x20\x7f]/', $url)
-        || ($parts['scheme'] !== 'https' && !($local && $parts['scheme'] === 'http' && in_array($parts['host'], ['127.0.0.1', 'localhost'], true)))) {
-        throw new InvalidArgumentException('Enter the public HTTPS application URL, such as https://books.example.com, without a path, query or sign-in details.');
+        || ($parts['path'] ?? '') !== $base || strlen($url) > 480 || preg_match('/[\x00-\x20\x7f]/', $url)
+        || ($parts['scheme'] !== 'https' && !($local && $parts['scheme'] === 'http' && $localHost))) {
+        throw new InvalidArgumentException('Enter this site\'s public HTTPS address, such as https://books.example.com' . ($base === '' ? '' : ' or https://example.com' . $base) . ', without a query or sign-in details.');
     }
     return $url;
 }
@@ -55,9 +62,21 @@ function pl_install_oauth_keys(string $directory): bool
         if (!mkdir($staging, 0700)) {
             throw new RuntimeException('Private OAuth staging could not be created.');
         }
-        $key = openssl_pkey_new(['private_key_bits' => 3072, 'private_key_type' => OPENSSL_KEYTYPE_RSA]);
-        if (!$key || !openssl_pkey_export($key, $private)) {
+        $options = ['private_key_bits' => 3072, 'private_key_type' => OPENSSL_KEYTYPE_RSA];
+        $key = @openssl_pkey_new($options);
+        if ($key === false) {
+            // Some Windows stacks (XAMPP) point OpenSSL at a missing configuration file. Key generation
+            // needs no settings from it, so retry with the minimal file shipped with the installer.
+            while (openssl_error_string() !== false) {
+            }
+            $options['config'] = dirname(__DIR__, 2) . '/install/openssl.cnf';
+            $key = openssl_pkey_new($options);
+        }
+        $exportOptions = isset($options['config']) ? ['config' => $options['config']] : [];
+        if (!$key || !openssl_pkey_export($key, $private, null, $exportOptions)) {
             throw new RuntimeException('Could not create the private OAuth signing key.');
+        }
+        while (openssl_error_string() !== false) {
         }
         $details = openssl_pkey_get_details($key);
         if (!$details) {

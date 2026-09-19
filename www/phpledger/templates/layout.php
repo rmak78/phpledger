@@ -35,7 +35,8 @@ $workspace = $user !== null && $company !== null && !in_array($view, ['oauth-con
 <main id="main" tabindex="-1">
 <?php else: ?>
 <div class="auth-shell"><div class="auth-card<?= in_array($view, ['login','oauth-consent','error'], true) ? '' : ' auth-card-wide' ?>">
-<a href="<?= pl_e(pl_url('/')) ?>" aria-label="PHP Ledger home"><img class="auth-logo" src="<?= pl_e(pl_url('/assets/brand/phpledger-horizontal.png')) ?>" alt="PHP Ledger" width="2172" height="724"></a>
+<?php $customLogo = function_exists('pl_logo_current') ? pl_logo_current() : null; ?>
+<a href="<?= pl_e(pl_url('/')) ?>" aria-label="PHP Ledger home"><?php if ($customLogo !== null): ?><img class="auth-logo" src="<?= pl_e(pl_logo_url($customLogo)) ?>" alt="Business logo" width="<?= $customLogo['width'] ?>" height="<?= $customLogo['height'] ?>"><?php else: ?><img class="auth-logo" src="<?= pl_e(pl_url('/assets/brand/phpledger-horizontal.png')) ?>" alt="PHP Ledger" width="2172" height="724"><?php endif; ?></a>
 <main id="main" tabindex="-1">
 <?php endif; ?>
 <?php if ($notice): ?><div class="strip strip-info" role="status" data-dismissible><p><?= pl_e($notice) ?></p><button type="button" class="strip-dismiss" data-dismiss aria-label="Dismiss notification"><?= pl_icon('x') ?></button></div><?php endif; ?>

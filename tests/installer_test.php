@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 require_once dirname(__DIR__) . '/www/phpledger/install/preflight.php';
+require_once dirname(__DIR__) . '/www/phpledger/includes/functions/web_functions.php';
+require_once dirname(__DIR__) . '/www/phpledger/includes/functions/install_web_functions.php';
 
 function installer_process(string $script, array $arguments = [], string $input = '', array $overrides = []): array
 {
@@ -86,6 +88,7 @@ test('missing autoload and invalid local configuration produce safe installer fa
         $includes . '/bootstrap.php' => dirname(__DIR__) . '/www/phpledger/includes/bootstrap.php',
         $includes . '/functions/runtime_functions.php' => dirname(__DIR__) . '/www/phpledger/includes/functions/runtime_functions.php',
         $includes . '/functions/install_functions.php' => dirname(__DIR__) . '/www/phpledger/includes/functions/install_functions.php',
+        $includes . '/functions/database_platform_functions.php' => dirname(__DIR__) . '/www/phpledger/includes/functions/database_platform_functions.php',
         $includes . '/functions/installation_state_functions.php' => dirname(__DIR__) . '/www/phpledger/includes/functions/installation_state_functions.php',
         $includes . '/functions/update_functions.php' => dirname(__DIR__) . '/www/phpledger/includes/functions/update_functions.php',
     ];
@@ -123,6 +126,106 @@ test('missing autoload and invalid local configuration produce safe installer fa
         foreach ([$install, $includes . '/functions', $includes, $root . '/www/phpledger/public', $root . '/www/phpledger', $root . '/www', $root . '/vendor', $root] as $directory) {
             rmdir($directory);
         }
+    }
+});
+
+test('database platforms: MySQL 8.4 and MariaDB are accepted, other servers refused', function (): void {
+    foreach (['8.4.0', '8.4.6-log', '10.4.32-MariaDB', '5.5.5-10.6.25-MariaDB-ubu2204', '10.11.18-MariaDB-ubu2204', '11.4.10-MariaDB-ubu2404'] as $version) {
+        assert_true(pl_database_platform($version)['supported'], $version);
+    }
+    foreach (['8.0.39', '9.1.0', '10.3.39-MariaDB', '5.7.44', 'unknown'] as $version) {
+        assert_true(!pl_database_platform($version)['supported'], $version);
+    }
+    assert_same(['engine' => 'mariadb', 'version' => '10.6.25', 'supported' => true], pl_database_platform('5.5.5-10.6.25-MariaDB'));
+    assert_true(pl_database_platform(pl_database_server_version())['supported'], 'The test database server itself must be supported.');
+});
+
+test('MariaDB translation rewrites only MySQL-only spellings; MySQL statements stay unchanged', function (): void {
+    $locking = 'SELECT id FROM pl_accounts WHERE code = ? FOR SHARE';
+    assert_same($locking, pl_database_translate($locking, ['mariadb' => false, 'skip_locked' => true, 'collation' => null]));
+    $older = ['mariadb' => true, 'skip_locked' => false, 'collation' => 'utf8mb4_unicode_520_nopad_ci'];
+    assert_same('SELECT id FROM pl_accounts WHERE code = ? LOCK IN SHARE MODE', pl_database_translate($locking, $older));
+    assert_same('SELECT 1 FOR UPDATE', pl_database_translate('SELECT 1 FOR UPDATE SKIP LOCKED', $older));
+    assert_same('CREATE TABLE t (a INT) COLLATE=utf8mb4_unicode_520_nopad_ci', pl_database_translate('CREATE TABLE t (a INT) COLLATE=utf8mb4_0900_ai_ci', $older));
+    $current = ['mariadb' => true, 'skip_locked' => true, 'collation' => null];
+    assert_same('SELECT 1 FOR UPDATE SKIP LOCKED', pl_database_translate('SELECT 1 FOR UPDATE SKIP LOCKED', $current));
+    assert_same("SELECT 'for share' FROM t", pl_database_translate("SELECT 'for share' FROM t", $current));
+});
+
+test('plain HTTP is accepted only from a browser on the same computer', function (): void {
+    $local = ['REMOTE_ADDR' => '127.0.0.1', 'HTTP_HOST' => 'localhost', 'SERVER_PORT' => '80'];
+    assert_true(pl_web_local_http($local));
+    assert_true(pl_web_local_http(['REMOTE_ADDR' => '::1', 'HTTP_HOST' => '[::1]:8080']));
+    assert_true(pl_web_local_http(['REMOTE_ADDR' => '::ffff:127.0.0.1', 'HTTP_HOST' => 'ledger.localhost']));
+    assert_true(!pl_web_local_http(array_replace($local, ['HTTPS' => 'on'])));
+    assert_true(!pl_web_local_http(array_replace($local, ['REMOTE_ADDR' => '192.168.1.20'])));
+    assert_true(!pl_web_local_http(array_replace($local, ['HTTP_HOST' => 'books.example.com'])));
+    assert_true(!pl_web_local_http(array_replace($local, ['HTTP_HOST' => 'localhost.example.com'])));
+    assert_true(!pl_web_local_http(array_replace($local, ['HTTP_X_FORWARDED_FOR' => '203.0.113.9'])));
+});
+
+test('uploaded folders may use dotted names but never escape the site', function (): void {
+    $previous = getenv('PL_BASE_PATH');
+    try {
+        foreach (['/phpledger-1.1.0', '/accounts', '/~owner/books.v2'] as $base) {
+            putenv('PL_BASE_PATH=' . $base);
+            assert_same($base, pl_base_path());
+            assert_same($base . '/install', pl_url('/install'));
+        }
+        foreach (['/..', '/a/../b', '/.hidden', '/a b', 'relative'] as $base) {
+            putenv('PL_BASE_PATH=' . $base);
+            assert_throws(fn () => pl_base_path(), RuntimeException::class, 'base path');
+        }
+        putenv('PL_BASE_PATH=/accounts');
+        assert_same('https://books.example.com/accounts', pl_install_public_url('https://books.example.com/accounts/'));
+        assert_throws(fn () => pl_install_public_url('https://books.example.com/elsewhere'), InvalidArgumentException::class);
+        assert_throws(fn () => pl_install_public_url('https://books.example.com'), InvalidArgumentException::class);
+    } finally {
+        putenv($previous === false ? 'PL_BASE_PATH' : 'PL_BASE_PATH=' . $previous);
+    }
+});
+
+test('only a database on this server skips the one-time setup code', function (): void {
+    foreach (['localhost', '127.0.0.1', '::1', '[::1]', ' LOCALHOST '] as $host) {
+        assert_true(pl_install_local_database_host($host), $host);
+    }
+    foreach (['db.example.com', '10.0.0.5', '127.0.0.2', 'localhost.example.com', 'db_test'] as $host) {
+        assert_true(!pl_install_local_database_host($host), $host);
+    }
+});
+
+test('private-folder probes stay inside the uploaded folder and are skipped for a public document root', function (): void {
+    assert_same('https://books.example.com/accounts/www/phpledger/storage/installation/exposure-probe.txt',
+        pl_install_probe_url('https://books.example.com/accounts', '/srv/site/accounts', '/srv/site/accounts/www/phpledger/storage/installation/exposure-probe.txt'));
+    assert_same(null, pl_install_probe_url('https://books.example.com', '/srv/site/accounts', '/srv/private/installation/exposure-probe.txt'));
+    assert_same(null, pl_install_probe_origin(['HTTP_HOST' => 'books.example.com/elsewhere']));
+    assert_same('http://localhost:8080', pl_install_probe_origin(['HTTP_HOST' => 'LocalHost:8080']));
+    assert_same('not-needed', pl_install_exposure_status(['HTTP_HOST' => 'localhost']));
+});
+
+test('the optional logo accepts real PNG, JPEG or WebP images only and is stored byte for byte', function (): void {
+    require_once dirname(__DIR__) . '/www/phpledger/includes/functions/branding_functions.php';
+    $png = base64_decode('iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAGUlEQVR42u3BAQEAAACCIP+vbkhAAQAArwYMEAAB9jm1kQAAAABJRU5ErkJggg==', true);
+    $wide = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAMgAAAAQCAYAAABTNTDcAAAAI0lEQVR42u3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAAAAAHgyMhAAAefnqjEAAAAASUVORK5CYII=', true);
+    $logo = pl_logo_validate((string) $png);
+    assert_same(['media_type' => 'image/png', 'width' => 48, 'height' => 16], array_diff_key($logo, ['bytes' => true]));
+    assert_throws(fn () => pl_logo_validate((string) $wide), InvalidArgumentException::class, 'six times wider');
+    assert_throws(fn () => pl_logo_validate('<svg xmlns="http://www.w3.org/2000/svg" onload="alert(1)"/>'), InvalidArgumentException::class, 'SVG');
+    assert_throws(fn () => pl_logo_validate('GIF89a' . substr((string) $png, 6)), InvalidArgumentException::class);
+    assert_throws(fn () => pl_logo_validate(str_repeat('x', PL_LOGO_MAX_BYTES + 1)), InvalidArgumentException::class, '1 MB');
+    assert_same(null, pl_logo_from_upload(['error' => UPLOAD_ERR_NO_FILE]));
+    assert_throws(fn () => pl_logo_from_upload(['error' => UPLOAD_ERR_OK, 'tmp_name' => __FILE__]), InvalidArgumentException::class, 'could not be uploaded');
+    DB::startTransaction();
+    try {
+        $owner = (int) DB::queryFirstField('SELECT id FROM pl_users ORDER BY id LIMIT 1');
+        if ($owner === 0) {
+            $owner = pl_create_user('logo-' . bin2hex(random_bytes(6)) . '@example.invalid', 'Logo fixture', 'Sample logo passphrase 551!');
+        }
+        pl_logo_save($logo, $owner);
+        assert_same((string) $png, DB::queryFirstField("SELECT content FROM pl_installation_assets WHERE name = 'logo'"));
+        assert_same(hash('sha256', (string) $png), DB::queryFirstField("SELECT sha256 FROM pl_installation_assets WHERE name = 'logo'"));
+    } finally {
+        DB::rollback();
     }
 });
 

@@ -15,8 +15,22 @@ function pl_verify_password(string $password, string $hash): bool
     return strlen($password) <= 72 && !str_contains($password, "\0") && password_verify($password, $hash);
 }
 
+/**
+ * Usernames are an optional second sign-in name: 3-60 lowercase letters, digits, dots,
+ * dashes or underscores, starting and ending with a letter or digit. They never contain
+ * "@", so a sign-in name is unambiguously either an email address or a username.
+ */
+function pl_normalize_username(string $username): string
+{
+    $username = strtolower(trim($username));
+    if (!preg_match('/^[a-z0-9](?:[a-z0-9._-]{1,58})[a-z0-9]$/D', $username)) {
+        throw new InvalidArgumentException('Choose a username of 3 to 60 characters using letters, numbers, dots, dashes or underscores. It must start and end with a letter or number.');
+    }
+    return $username;
+}
+
 /** Internal account creation, used by guarded CLI and one-time browser setup. */
-function pl_create_user(string $email, string $displayName, string $password): int
+function pl_create_user(string $email, string $displayName, string $password, ?string $username = null): int
 {
     pl_demo_require_setup_action();
     $email = strtolower(trim($email));
@@ -27,9 +41,14 @@ function pl_create_user(string $email, string $displayName, string $password): i
     if ($displayName === '' || !mb_check_encoding($displayName, 'UTF-8') || mb_strlen($displayName, 'UTF-8') > 120) {
         throw new InvalidArgumentException('Enter a name up to 120 characters.');
     }
+    $username = $username === null || trim($username) === '' ? null : pl_normalize_username($username);
     $hash = pl_hash_password($password);
+    if ($username !== null && DB::queryFirstField('SELECT id FROM pl_users WHERE username = %s', $username) !== null) {
+        throw new InvalidArgumentException('That username is already taken. Choose another one.');
+    }
     DB::insert('pl_users', [
         'email' => $email,
+        'username' => $username,
         'display_name' => $displayName,
         'password_hash' => $hash,
         'is_active' => 1,
@@ -41,18 +60,29 @@ function pl_create_user(string $email, string $displayName, string $password): i
  * Count login attempts in durable server-side buckets, locked in stable order.
  * No email address, password, or client address is stored in the limiter.
  * A failed/disabled/unknown/throttled login always returns the same null result.
+ * The sign-in name is an email address or, when it has no "@", a username.
  */
-function pl_authenticate(string $email, string $password, string $clientIp): ?array
+function pl_authenticate(string $signInName, string $password, string $clientIp): ?array
 {
-    $email = strtolower(trim($email));
+    $signInName = strtolower(trim($signInName));
     $now = time();
-    $accountKey = hash('sha256', 'account:' . $email);
-    $clientKey = hash('sha256', 'client:' . $clientIp);
-    $limits = [$accountKey => 5, $clientKey => 30];
-    ksort($limits, SORT_STRING);
 
     DB::startTransaction();
     try {
+        if (str_contains($signInName, '@')) {
+            $user = strlen($signInName) <= 254 && filter_var($signInName, FILTER_VALIDATE_EMAIL) !== false
+                ? DB::queryFirstRow('SELECT id, email, display_name, password_hash, is_active FROM pl_users WHERE email = %s', $signInName)
+                : null;
+        } else {
+            $user = preg_match('/^[a-z0-9][a-z0-9._-]{1,58}[a-z0-9]$/D', $signInName)
+                ? DB::queryFirstRow('SELECT id, email, display_name, password_hash, is_active FROM pl_users WHERE username = %s', $signInName)
+                : null;
+        }
+        // Email and username share one account limit, so switching names does not add guesses.
+        $accountKey = hash('sha256', 'account:' . ($user['email'] ?? $signInName));
+        $clientKey = hash('sha256', 'client:' . $clientIp);
+        $limits = [$accountKey => 5, $clientKey => 30];
+        ksort($limits, SORT_STRING);
         $buckets = [];
         $blocked = false;
         foreach ($limits as $key => $limit) {
@@ -82,9 +112,6 @@ function pl_authenticate(string $email, string $password, string $clientIp): ?ar
             return null;
         }
 
-        $user = strlen($email) <= 254 && filter_var($email, FILTER_VALIDATE_EMAIL) !== false
-            ? DB::queryFirstRow('SELECT id, email, display_name, password_hash, is_active FROM pl_users WHERE email = %s', $email)
-            : null;
         // Public dummy bcrypt hash keeps unknown-user verification on the same code path.
         $dummyHash = '$2y$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi.';
         $valid = pl_verify_password($password, $user['password_hash'] ?? $dummyHash)

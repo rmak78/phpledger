@@ -75,8 +75,16 @@ function pl_install_write_private(string $path, string $contents, bool $replace 
             fclose($handle);
         }
         @chmod($temporary, 0600);
-        // Hard-link publication is atomic and cannot replace an operator-created file.
-        $published = $replace ? @rename($temporary, $path) : @link($temporary, $path);
+        if ($replace) {
+            $published = @rename($temporary, $path);
+        } else {
+            // Hard-link publication is atomic and cannot replace an operator-created file.
+            $published = function_exists('link') && @link($temporary, $path);
+            if (!$published && !file_exists($path)) {
+                // Some shared hosts disable link(); exclusive creation keeps the no-replace guarantee.
+                $published = pl_install_create_exclusive($path, $contents);
+            }
+        }
         if (!$published) {
             throw new DomainException('Private installation state could not be published. The existing file was preserved.');
         }
@@ -86,6 +94,26 @@ function pl_install_write_private(string $path, string $contents, bool $replace 
         }
         umask($mask);
     }
+}
+
+/** Create a new private file, failing if any file already exists at the path. */
+function pl_install_create_exclusive(string $path, string $contents): bool
+{
+    $handle = @fopen($path, 'xb');
+    if ($handle === false) {
+        return false;
+    }
+    $written = false;
+    try {
+        $written = fwrite($handle, $contents) === strlen($contents) && fflush($handle);
+    } finally {
+        fclose($handle);
+        if (!$written) {
+            @unlink($path);
+        }
+    }
+    @chmod($path, 0600);
+    return $written;
 }
 
 /** @return array<string, mixed> */

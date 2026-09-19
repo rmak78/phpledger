@@ -114,6 +114,29 @@ test('CSRF and session identities rotate at login, logout, and expiry', function
         assert_true(!isset($_SESSION['user_id']));
     });
 
+test('owners sign in with a username or an email, and both share one attempt limit', function (): void {
+    $suffix = bin2hex(random_bytes(5));
+    $email = 'names-' . $suffix . '@example.invalid';
+    $username = 'Owner.' . $suffix;
+    $password = 'Sample username passphrase 739!';
+    $id = pl_create_user($email, 'Username fixture', $password, $username);
+    assert_same(strtolower($username), DB::queryFirstField('SELECT username FROM pl_users WHERE id = %i', $id));
+    $ip = 'names-' . $suffix;
+    assert_same($id, pl_authenticate(strtoupper($username), $password, $ip)['id']);
+    assert_same($id, pl_authenticate($email, $password, $ip)['id']);
+    assert_throws(fn () => pl_create_user('other-' . $email, 'Duplicate name fixture', $password, strtolower($username)), InvalidArgumentException::class, 'already taken');
+    foreach (['ab', 'has space', 'name@example', '-leading', 'trailing.', str_repeat('a', 61)] as $invalid) {
+        assert_throws(fn () => pl_normalize_username($invalid), InvalidArgumentException::class);
+    }
+    assert_same(null, DB::queryFirstField('SELECT username FROM pl_users WHERE email = %s', 'other-' . $email));
+    // Switching between the two names does not add guesses: both count against one account limit.
+    for ($attempt = 0; $attempt < 5; $attempt++) {
+        assert_same(null, pl_authenticate($attempt % 2 === 0 ? $username : $email, 'Incorrect sample password', $ip . '-' . $attempt));
+    }
+    assert_same(null, pl_authenticate($username, $password, $ip . '-after'));
+    assert_same(5, (int) DB::queryFirstField('SELECT attempt_count FROM pl_login_attempts WHERE subject_hash = %s', hash('sha256', 'account:' . $email)));
+});
+
 test('company access enforces membership, read-only roles, and active accounts', function (): void {
     $suffix = bin2hex(random_bytes(6));
     $password = 'Sample membership passphrase 693!';

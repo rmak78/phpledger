@@ -58,8 +58,8 @@ function pl_release_update_payload(string $archivePath): array
         $manifest = json_decode($manifestBytes ?? '', true, 32, JSON_THROW_ON_ERROR);
         $version = $manifest['version'] ?? '';
         if (!is_string($version) || !preg_match('/^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-[0-9a-z-]+(?:\.[0-9a-z-]+)*)?$/D', $version)
-            || $prefix !== 'phpledger-' . $version) {
-            throw new RuntimeException('Release version and archive root must agree.');
+            || !in_array($prefix, ['phpledger', 'phpledger-' . $version], true)) {
+            throw new RuntimeException('Release archive root must be phpledger/ (or phpledger-<version>/ for earlier releases).');
         }
         $channel = str_contains($version, '-') ? 'preview' : 'stable';
         if (($manifest['channel'] ?? $channel) !== $channel || !is_array($manifest['files'] ?? null)) {

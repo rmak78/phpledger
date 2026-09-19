@@ -3,6 +3,9 @@ declare(strict_types=1);
 if (getenv('PL_ENV') !== 'test' || getenv('PL_DB_HOST') !== 'db_test') { fwrite(STDERR, "Use the isolated Docker test service.\n"); exit(2); }
 require dirname(__DIR__) . '/vendor/autoload.php';
 DB::$host = 'db_test'; DB::$user = 'root'; DB::$password = 'local-test-root-only'; DB::$dbName = 'information_schema'; DB::$encoding = 'utf8mb4';
+// MariaDB runs the same fixtures through the shared dialect translation.
+require_once dirname(__DIR__) . '/www/phpledger/includes/functions/database_platform_functions.php';
+pl_database_use_dialect();
 $database = 'phpledger_update_full_' . bin2hex(random_bytes(8));
 $directory = sys_get_temp_dir() . '/' . $database;
 mkdir($directory, 0700);
