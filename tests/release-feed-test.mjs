@@ -14,6 +14,7 @@ let checks = 0;
 function fixture(mutate) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'pl-feed-'));
   fs.mkdirSync(path.join(root, 'src', 'static', 'releases'), { recursive: true });
+  fs.cpSync(path.join(website, 'src', 'static', 'releases'), path.join(root, 'src', 'static', 'releases'), { recursive: true });
   const releases = structuredClone(source);
   const siteCopy = structuredClone(site);
   mutate?.(releases, siteCopy, root);
@@ -21,6 +22,9 @@ function fixture(mutate) {
   fs.writeFileSync(path.join(root, 'src', 'site.json'), JSON.stringify(siteCopy));
   return root;
 }
+const [major, minor] = site.release.version.split('.').map(Number);
+const nextPreview = `${major}.${minor + 1}.0-rc.1`;
+const stablePreview = `${site.release.version}-rc.1`;
 const rejects = (mutate, pattern) => { assert.throws(() => buildReleaseFeed(fixture(mutate)), pattern); checks += 1; };
 const preview = (version, date = '2026-10-01') => ({
   version, published_at: date,
@@ -43,10 +47,10 @@ assert.deepEqual(buildReleaseFeed(website), feed); checks += 1;
 assert.match(feed.generated_at, /^\d{4}-\d{2}-\d{2}T00:00:00Z$/); checks += 1;
 
 // A preview newer than stable is offered; an older one is dropped.
-const withPreview = buildReleaseFeed(fixture((r) => r.releases.unshift(preview('1.1.0-rc.1'))));
-assert.equal(withPreview.channels.preview.version, '1.1.0-rc.1'); checks += 1;
-assert.equal(withPreview.history.length, 2); checks += 1;
-const stalePreview = buildReleaseFeed(fixture((r) => r.releases.push(preview('1.0.0-rc.1', '2026-09-10'))));
+const withPreview = buildReleaseFeed(fixture((r) => r.releases.unshift(preview(nextPreview))));
+assert.equal(withPreview.channels.preview.version, nextPreview); checks += 1;
+assert.equal(withPreview.history.length, source.releases.length + 1); checks += 1;
+const stalePreview = buildReleaseFeed(fixture((r) => r.releases.splice(1, 0, preview(stablePreview, '2026-09-10'))));
 assert.equal(stalePreview.channels.preview, null); checks += 1;
 
 // Refusals.
@@ -56,17 +60,17 @@ rejects((r) => { r.releases[0].zip = 'https://github.com/phpledger/phpledger/rel
 rejects((r) => { r.releases[0].sha256 = 'ABC'; }, /sha256/);
 rejects((r) => { r.releases[0].version = '1.0'; }, /invalid version/);
 rejects((r) => { r.releases.push(structuredClone(r.releases[0])); }, /listed twice/);
-rejects((r) => { r.releases.push(preview('1.1.0-rc.1')); }, /newest first/);
-rejects((r) => { r.releases[0].update_json = 'https://phpledger.com/releases/1.0.0.update.json'; }, /not in src\/static/);
+rejects((r) => { r.releases.push(preview(nextPreview)); }, /newest first/);
+rejects((r) => { r.releases[0].update_json = 'https://phpledger.com/releases/0.0.1.update.json'; }, /not in src\/static/);
 rejects((r) => { r.releases[0].image = 'ghcr.io/phpledger/phpledger; rm -rf /'; }, /image/);
 rejects((r) => { r.schema = 2; }, /schema 1/);
 
 // Mirrored signed metadata is accepted once the file exists.
 const mirrored = fixture((r, s, root) => {
-  r.releases[0].update_json = 'https://phpledger.com/releases/1.0.0.update.json';
-  fs.writeFileSync(path.join(root, 'src', 'static', 'releases', '1.0.0.update.json'), '{}');
+  r.releases[0].update_json = 'https://phpledger.com/releases/0.0.2.update.json';
+  fs.writeFileSync(path.join(root, 'src', 'static', 'releases', '0.0.2.update.json'), '{}');
 });
-assert.equal(buildReleaseFeed(mirrored).channels.stable.update_json, 'https://phpledger.com/releases/1.0.0.update.json'); checks += 1;
+assert.equal(buildReleaseFeed(mirrored).channels.stable.update_json, 'https://phpledger.com/releases/0.0.2.update.json'); checks += 1;
 const written = writeReleaseFeed(path.join(mirrored, 'out'), mirrored);
 assert.equal(JSON.parse(fs.readFileSync(written, 'utf8')).schema, 1); checks += 1;
 
