@@ -14,7 +14,7 @@ Published 19 September 2026.
 - **Choose your username.** The first account chooses a username as well as an email and password, and can sign in with either (migration 032). Existing accounts keep signing in by email.
 - **Your logo.** An optional installation logo appears in the menu and on the sign-in page (migration 033).
 - **Local computers.** Plain `http://localhost` is accepted for trying PHP Ledger on your own computer, with an OpenSSL fallback for XAMPP.
-- **Smaller package.** 1,498 files instead of 1,583, with one short `README.txt`. The full install and upgrade guides are online.
+- **Smaller package.** 1,500 files instead of 1,583, with one short `README.txt`. The full install and upgrade guides are online.
 - **Signed updates from here on.** This is the first release with official signed update metadata (`phpledger-1.1.0.update.json`). Pin the publisher key listed in the [release signing guide](https://github.com/phpledger/phpledger/blob/master/docs/RELEASE-SIGNING.md#official-publisher-key) to use `/maintenance.php` for later updates.
 - **Fixes.** Sample companies can no longer be started in production through the onboarding preview (only local, test and demo provisioning may create them). Two templates that showed a replacement character instead of a middle dot are fixed.
 - **Release tooling.** `www/phpledger/VERSION` is the single version source, a reproducible release builder and a draft-only release workflow were added, and the [release protocol](https://github.com/phpledger/phpledger/blob/master/docs/RELEASE-PROTOCOL.md) documents each channel's upgrade path.
