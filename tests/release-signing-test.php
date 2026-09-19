@@ -16,12 +16,12 @@ function signing_reject(callable $operation): void {
     try { $operation(); } catch (Throwable) { signing_assert(true); return; }
     throw new RuntimeException('Unsafe signing operation was accepted.');
 }
-function signing_zip(string $path, array $files): void {
+function signing_zip(string $path, array $files, string $root = 'phpledger-1.0.0'): void {
     $zip = new ZipArchive();
     if ($zip->open($path, ZipArchive::CREATE | ZipArchive::EXCL) !== true) { throw new RuntimeException('Cannot create fixture.'); }
     foreach ($files as $name => $bytes) {
-        $zip->addFromString('phpledger-1.0.0/' . $name, $bytes);
-        $zip->setExternalAttributesName('phpledger-1.0.0/' . $name, ZipArchive::OPSYS_UNIX, 0100644 << 16);
+        $zip->addFromString($root . '/' . $name, $bytes);
+        $zip->setExternalAttributesName($root . '/' . $name, ZipArchive::OPSYS_UNIX, 0100644 << 16);
     }
     $zip->close();
 }
@@ -66,6 +66,15 @@ try {
     $wrongChannel['channel'] = 'preview';
     signing_zip($directory . '/channel.zip', array_replace($files, ['PACKAGE-MANIFEST.json' => json_encode($wrongChannel, JSON_THROW_ON_ERROR)]));
     signing_reject(fn () => pl_release_update_payload($directory . '/channel.zip'));
+    // 1.1.0 and later archives unpack to phpledger/; earlier ones used phpledger-<version>/.
+    signing_zip($directory . '/plain-root.zip', $files, 'phpledger');
+    signing_assert(pl_release_update_payload($directory . '/plain-root.zip')['version'] === '1.0.0');
+    pl_release_sign_update($directory . '/plain-root.zip', $directory . '/sample.pem', $directory . '/plain-root.update.json');
+    signing_assert(is_file($directory . '/plain-root.update.json'));
+    foreach (['phpledgerx', 'phpledger-9.9.9', 'other'] as $wrongRoot) {
+        signing_zip($directory . '/root-' . $wrongRoot . '.zip', $files, $wrongRoot);
+        signing_reject(fn () => pl_release_update_payload($directory . '/root-' . $wrongRoot . '.zip'));
+    }
     fwrite(STDOUT, "Release signing: {$checks} checks passed; sample keys only.\n");
 } finally {
     // Only our flat random directory is ever cleaned up.

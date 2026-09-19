@@ -26,11 +26,11 @@ function pl_release_update_payload(string $archivePath): array
         $casePaths = [];
         for ($i = 0; $i < $zip->numFiles; $i++) {
             $info = $zip->statIndex($i);
-            if ($info === false || !preg_match('~^(phpledger-([^/]+))/([A-Za-z0-9_.\-/]+)$~D', $info['name'], $match)) {
+            if ($info === false || !preg_match('~^(phpledger(?:-[^/]+)?)/([A-Za-z0-9_.\-/]+)$~D', $info['name'], $match)) {
                 throw new RuntimeException('Release ZIP has an invalid path.');
             }
             $prefix ??= $match[1];
-            $path = $match[3];
+            $path = $match[2];
             if ($prefix !== $match[1] || preg_match('~(^|/)(\.|\.\.|\.git|\.env|storage|uploads)(/|$)~i', $path)
                 || str_contains($path, '//') || str_ends_with($path, '/')
                 || preg_match('~(^|/)config\.local\.php$|\.(pem|key|sql|log)$~i', $path)
