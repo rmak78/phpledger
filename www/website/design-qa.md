@@ -1,5 +1,16 @@
 # Website design and publication QA
 
+## Live homepage SEOScore improvement — 19 September 2026
+
+Published as `website-1-0-0-20260918-223528` at **22:37:15 UTC on 18 September / 03:37:15 PKT on 19 September**. The scanner's fresh baseline was **89 overall / SEO 96 / AEO 79 / GEO 84**; the owner's earlier screenshot was **87 / 95 / 79 / 80**. Final live rescan: **97 overall (A+) / SEO 98 / AEO 94 / GEO 96**. Intermediate scan and final remaining notices are in [SEOScore evidence](../../docs/design/website/qa/seoscore-2026-09-19.json); [publication receipt](../../docs/design/website/qa/seo-2026-09-19-publication.json) records the deployment.
+
+Changed only the homepage, shared contact link and small-screen header, plus the builder's publication-date metadata. Rebuilt generated output; **70 HTML checks, zero errors/warnings**, JavaScript syntax, seven exact FAQ/visible-answer pairs and UTC metadata passed. Browser checks covered 1440/768/390/320 px, no page overflow or broken source images, mobile menu opening/closing, contents jump clearance and keyboard horizontal scrolling of the comparison table. The previous 320 px header overflow is resolved. The first UTC-day mismatch detected by the scanner was corrected without inventing a date.
+
+All **295 static files** passed archive/host/public verification. Only the Nginx static root changed. Existing canonical/support redirects, custom 404, private-path rejection, security headers, demo container identities and demo entry/health passed. The demo application and database were unchanged. No full regression or accounting suite was rerun, as requested. No migrations, schema changes, Git push or new application release occurred; the existing 1.0.0 application/media archives remain unchanged.
+
+The remaining scanner notices include contact-route/event heuristics, short footer heading sections, video/research/statistics and professional credentials. Keep the actual contact destination and named maintainer; do not invent content to satisfy these signals. The live report is https://seoscore.tools/report/phpledger-com/. These scores do not measure actual search rankings or AI recommendations. Google references checked: [AI features guidance](https://developers.google.com/search/docs/appearance/ai-features) and [structured-data policies](https://developers.google.com/search/docs/appearance/structured-data/sd-policies). No Google Drive reference was required.
+
+
 ## Live 1.0.0 product-site redesign — 19 September 2026
 
 The intended new design is live from `master` `86a1eef` (rebuild `ac8fca3`), published at 21:02:58 UTC on 18 September / 02:02:58 PKT on 19 September as `website-1-0-0-20260918-210112`. The main `record-demo-cutover` checkout contains an older site with the same version label; deployment used `.cache/website-redesign-live` and verified all 295 files against the prepared design artifact. The [publication receipt](../../docs/design/website/qa/live-1.0.0-product-publication.json) records all public-file results, source commit, backup, archive and vhost hashes.

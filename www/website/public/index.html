@@ -17,7 +17,7 @@
 <link rel="dns-prefetch" href="https://github.com">
 <link rel="preload" href="/assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=885f76f175">
+<link rel="stylesheet" href="/assets/site.css?v=6db883b8c3">
 <meta property="og:site_name" content="PHP Ledger">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
@@ -27,12 +27,12 @@
 <meta property="og:image" content="https://phpledger.com/assets/og/home.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="PHP Ledger: complete double-entry accounting that runs on your own PHP hosting.">
+<meta property="og:image:alt" content="PHP Ledger: self-hosted double-entry accounting software.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PHP Ledger: self-hosted double-entry accounting software">
 <meta name="twitter:description" content="Open-source double-entry accounting with invoices, bills, stock and bank reconciliation, self-hosted on PHP 8.2+ and MySQL 8.4. First stable release: 1.0.0.">
 <meta name="twitter:image" content="https://phpledger.com/assets/og/home.png">
-<meta name="twitter:image:alt" content="PHP Ledger: complete double-entry accounting that runs on your own PHP hosting.">
+<meta name="twitter:image:alt" content="PHP Ledger: self-hosted double-entry accounting software.">
 <meta name="twitter:site" content="@LedgerPhp94831">
 <link rel="alternate" type="application/rss+xml" title="PHP Ledger news" href="/news/feed.xml">
 <script type="application/ld+json">
@@ -192,7 +192,7 @@
           "name": "Is PHP Ledger really free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The project-owned core is free under AGPL-3.0-or-later, and every module ships with it: invoices, bills, stock, bank reconciliation and reports. Hosting, setup help, optional support and a separate commercial licence have their own terms. The 0.1.0 through 0.1.5 previews retain their earlier MIT grants."
+            "text": "Yes. The project-owned core is free under AGPL-3.0-or-later, including invoices, bills, stock, bank reconciliation and reports. Hosting, setup help, optional support and a separate commercial licence have their own terms. The 0.1.0 through 0.1.5 previews retain their earlier MIT grants."
           }
         },
         {
@@ -200,7 +200,7 @@
           "name": "What do I need to run it?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "PHP 8.2 or newer for both web and command-line requests, MySQL 8.4 and HTTPS. Installation happens in the browser at /install, so no terminal access, Composer, Node or Docker is needed for setup. PHP 8.3 is recommended, and the PHP zip extension is needed for signed automatic updates."
+            "text": "PHP Ledger requires PHP 8.2 or newer, MySQL 8.4, HTTPS and the documented PHP extensions. Installation runs in the browser at /install, without Composer, Node or Docker. PHP 8.3 is recommended; signed automatic updates require the PHP zip extension."
           }
         },
         {
@@ -208,7 +208,7 @@
           "name": "Does it work on shared cPanel hosting?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Often, but a panel alone does not prove it. Your plan must provide the required PHP extensions, MySQL 8.4, private files and the correct public document root. Run the browser installer's checks on the actual account before you commit to it."
+            "text": "It can, if the actual hosting account meets the requirements. A control panel alone does not prove compatibility. Check PHP extensions, MySQL 8.4, private files and the correct public document root, then run the browser installer checks before committing to a host."
           }
         },
         {
@@ -216,7 +216,7 @@
           "name": "Does PHP Ledger send my data anywhere?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. There are no licence-key or licensing-server calls, and this website has no analytics or form submission endpoint. The installed application has one documented optional country lookup; every connection is explicit and scoped. The privacy page explains the separate website, demo and installed-application boundaries."
+            "text": "Self-hosted records stay on your operator's infrastructure. This website has no analytics or form submission endpoint. The demo's optional country lookup may send your public IP address to country.is. Following external links or downloading releases contacts those providers. The privacy notice explains the separate website, demo and installation boundaries."
           }
         },
         {
@@ -224,7 +224,7 @@
           "name": "Can it invoice customers and settle supplier bills?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Version 1.0 includes customer invoices, supplier bills, partial and final payments allocated across open items, linked credits, ageing and control-account reconciliation. Accounts receivable and payable belong to the core, and owners can hide navigation they do not use."
+            "text": "Yes. PHP Ledger 1.0 includes customer invoices, supplier bills, partial and final payments allocated across open items, linked credits, ageing and control-account reconciliation. Accounts receivable and payable are in the core; owners can hide their navigation without disabling the services."
           }
         },
         {
@@ -232,7 +232,7 @@
           "name": "Is it ready for real books?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "1.0.0 is the first stable release, backed by automated tests, fault-injection tests of the update and recovery path, and exact-artifact installation and upgrade checks. Independent accounting review, independent security review and supervised pilots have not happened yet; they are open post-release commitments. Use a fictional company until you have completed your own reviewed acceptance."
+            "text": "Version 1.0.0 is the first stable release, with published technical validation for automated tests, update recovery and package installation. Independent accounting review, independent security review and supervised pilots remain open commitments. Complete your own reviewed acceptance with fictional records before using real books."
           }
         },
         {
@@ -240,7 +240,7 @@
           "name": "What if the project stops?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You keep the source and your self-hosted database under the applicable licence. Continued maintenance, recovery and data extraction still need an operator, so keep tested backups and portable report exports rather than relying on a ZIP alone."
+            "text": "You keep the source and your self-hosted database under the applicable licence. Continued maintenance, recovery and data extraction still need an operator. Keep tested backups and portable report exports; possession of the release ZIP alone does not establish a recovery process."
           }
         }
       ]
@@ -268,29 +268,43 @@
 <main id="main">
 <section class="container hero" aria-labelledby="hero-heading">
   <div class="hero-text">
-    <h1 id="hero-heading">Complete double-entry accounting that runs on your own PHP hosting</h1>
+    <h1 id="hero-heading">PHP Ledger: self-hosted double-entry accounting software</h1>
     <p class="lead">PHP Ledger records invoices, bills, stock movements and bank transactions as balanced journals, then shows the profit and loss, balance sheet and cash position behind them. It is open source under AGPL, installed from your browser on PHP 8.2+ and MySQL 8.4. Version 1.0.0 is the first stable release.</p>
     <div class="actions"><a class="button button--large" href="/demo/">Try the live demo</a><a class="button button--large button--secondary" href="/download/">Download 1.0.0</a></div>
     <p class="capture-label" data-capture-status>Screens show a fictional sample business, Willow Corner Shop.</p>
   </div>
   <div class="hero-visual">
-    <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Home: what needs attention" data-full="/assets/screens/v1.0.0/01-home.webp"><span class="capture-frame capture-frame--crop"><img src="/assets/screens/v1.0.0/01-home.webp" srcset="/assets/screens/v1.0.0/01-home-720.webp 720w, /assets/screens/v1.0.0/01-home.webp 1440w" sizes="(max-width: 1220px) 100vw, 1180px" width="1440" height="900" alt="Home screen of the sample business showing three receipt and expense drafts of USD 302.50, cash and bank of USD 57,659.00, receivable of USD 164.00, payable of USD 100.00 and recent activity." fetchpriority="high"></span></button></figure>
+    <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Home: what needs attention" data-full="/assets/screens/v1.0.0/01-home.webp"><span class="capture-frame capture-frame--crop"><img src="/assets/screens/v1.0.0/01-home.webp" srcset="/assets/screens/v1.0.0/01-home-720.webp 720w, /assets/screens/v1.0.0/01-home.webp 1440w" sizes="(max-width: 1220px) 100vw, 1180px" width="1440" height="900" alt="Home screen of the sample business showing three receipt and expense drafts of USD 302.50, cash and bank of USD 57,659.00, receivable of USD 164.00, payable of USD 100.00 and recent activity." fetchpriority="high"></span></button><figcaption><b>Home: what needs attention</b><span>Willow Corner Shop · Sample business</span></figcaption></figure>
     <div class="phone"><img src="/assets/screens/v1.0.0/m1-home-390.webp" width="390" height="954" alt="The same Home screen on a phone: drafts to review, USD 57,659.00 in cash and bank, USD 164.00 receivable and USD 100.00 payable." loading="lazy"></div>
   </div>
 </section>
 
 <section class="container section--tight" aria-labelledby="in-short">
-  <aside class="summary"><h2 id="in-short">In short</h2><p>PHP Ledger is open-source, self-hosted double-entry accounting software for small businesses, built on PHP and MySQL, with a cash point of sale that can be switched on when a counter needs it.</p><ul><li>Version 1.0.0 includes invoices, bills, allocated payments, credits, ageing, weighted-average stock, bank reconciliation and financial reports on PHP 8.2+ and MySQL 8.4 hosting.</li><li>Installation runs in the browser at /install; signed automatic updates make a matched backup first and recover automatically if a migration fails.</li><li>The public demo gives each visitor a private company from eleven fictional business histories or a blank playground, reset every hour.</li><li>Regional tax certification, e-invoicing, a production shop POS, payroll, multi-currency posting and translations are not in 1.0; the roadmap lists them as later releases.</li></ul></aside>
+  <aside class="summary">
+    <h2 id="in-short">Summary: what is PHP Ledger?</h2>
+    <p>PHP Ledger is open-source, self-hosted double-entry accounting software for small businesses. It records invoices, bills, payments and stock movements, reconciles bank statements and produces financial reports. You install it on your own PHP hosting and manage your own records and backups.</p>
+    <dl class="home-facts">
+      <div><dt><strong>Current release:</strong></dt><dd><a href="https://github.com/phpledger/phpledger/releases/tag/v1.0.0">1.0.0, published 18 September 2026</a></dd></div>
+      <div><dt><strong>Required hosting:</strong></dt><dd>PHP 8.2+, MySQL 8.4 and HTTPS; <a href="/download/">check the required extensions</a>.</dd></div>
+      <div><dt><strong>Core licence:</strong></dt><dd><a href="https://github.com/phpledger/phpledger/blob/v1.0.0/LICENSE">AGPL-3.0-or-later</a>; commercial licensing is available separately.</dd></div>
+      <div><dt><strong>Public demo:</strong></dt><dd>Eleven fictional business histories and a blank playground; temporary companies reset hourly.</dd></div>
+    </dl>
+    <p>Manual document and settlement exchange rates are supported. Automated rates, outgoing foreign-bank payments, period-end revaluation and consolidation remain outside the current workflows. Regional tax certification, e-invoicing, payroll and a production shop POS are also not included. <a href="/roadmap/">Read the release boundaries</a>.</p>
+  </aside>
+  <nav class="page-toc" aria-label="On this page">
+    <p>On this page</p>
+    <ol><li><a href="#features">Accounting workflows</a></li><li><a href="#sample-example">Worked sample</a></li><li><a href="#demo">Try a sample company</a></li><li><a href="#hosting-choice">Demo or your own installation</a></li><li><a href="#start">Steps to get started</a></li><li><a href="#assurance">Evidence and limitations</a></li><li><a href="#faq">Frequently asked questions</a></li></ol>
+  </nav>
 </section>
 
 <section class="section section--paper" aria-labelledby="pillars-heading">
   <div class="container">
     <h2 id="pillars-heading" class="sr-only">Why small businesses choose PHP Ledger</h2>
     <div class="pillars">
-      <div class="card"><h3>The whole accounting core is open source</h3><p>Invoices, bills, stock, bank reconciliation and reports work without a paid app to open any of them. The AGPL keeps every module in the open, so an accountant or a software house can read exactly how a figure was posted. A commercial licence is available for organisations that need to embed or distribute the code without AGPL obligations.</p></div>
-      <div class="card"><h3>It runs on the hosting you already have</h3><p>PHP 8.2+ and MySQL 8.4 run on shared hosting or a small server that a shop in Multan or Manchester can rent for a few dollars a month. Install from the browser in minutes, then update with signed releases that make an automatic backup before they touch a file, and recover automatically if a migration fails.</p></div>
+      <div class="card"><h3>Is the whole accounting core open source?</h3><p>Yes. Invoices, bills, stock, bank reconciliation and reports ship together in the free core package. The <a href="https://github.com/phpledger/phpledger/blob/v1.0.0/LICENSE">AGPL-3.0-or-later licence</a> lets an accountant or software house inspect how a figure was posted. A separate commercial licence is available for organisations that need different distribution terms.</p></div>
+      <div class="card"><h3>Can I use my existing PHP hosting?</h3><p>Yes, if it meets the published requirements: PHP 8.2+, MySQL 8.4, HTTPS, the required extensions and a private application directory. Run the browser installer's checks on the actual host. Signed updates make a matched backup before changing the installation and recover automatically if a migration fails.</p></div>
       <div class="card"><h3>Every figure is traceable</h3><p>Reports drill down to journals and from journals to the source document, so a profit and loss line can be explained to the person who asks. Posted entries are never edited: a correction is a linked reversal with its reason recorded, and a draft never touches the books until someone reviews and posts it.</p></div>
-      <div class="card"><h3>It says what it has not done yet</h3><p>Published limits, published test results and a roadmap with review gates instead of dates. Regional tax certification, a production shop POS, payroll and multi-currency posting are listed as not yet done, and independent accounting and security reviews are open commitments, so you can see what is ready and what still needs review.</p></div>
+      <div class="card"><h3>What is still outside this release?</h3><p>Regional tax certification, a production shop POS, payroll, automatic exchange rates, revaluation and consolidation are not included. Independent accounting and security reviews remain open commitments. The <a href="/roadmap/">roadmap</a> distinguishes released workflows from planned features and outstanding review.</p></div>
     </div>
   </div>
 </section>
@@ -299,26 +313,32 @@
   <div id="features" class="container feature-tour">
     <h2 id="tour-heading" class="sr-only">A tour of the main screens</h2>
     <div class="feature-block">
-      <div class="feature-text"><h3>Invoices and credits keep the register, the status and the open amount in view</h3><p>Use the Draft, Unpaid, Overdue, Paid and Reversed filters in the register to see who owes what. The selected invoice shows its due date, whether prices were entered with or without tax, the reference and the remaining balance, and a receipt can be recorded without leaving the list. Customer credits sit in the same register, so a partly paid invoice and the credit that settles it are never far apart.</p><a class="link-strong" href="/product/#sales">See sales in the product tour <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></div>
+      <div class="feature-text"><h3>How does PHP Ledger track unpaid invoices?</h3><p>The invoice register shows each invoice's status, due date and remaining balance. Filter by Draft, Unpaid, Overdue, Paid or Reversed, then record a receipt from the list. Customer credits appear in the same register, so you can follow a partly paid invoice and the credit that settles it.</p><a class="link-strong" href="/product/#sales">See sales in the product tour <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></div>
       <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Invoices" data-full="/assets/screens/v1.0.0/02-invoices.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/02-invoices-720.webp" srcset="/assets/screens/v1.0.0/02-invoices-720.webp 720w, /assets/screens/v1.0.0/02-invoices.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Invoices screen showing USD 164.00 outstanding, no overdue amount, one customer credit for USD 16.00 and one partly paid invoice for USD 180.00." loading="lazy"></span></button><figcaption><b>Invoices</b><span>Sample business</span></figcaption></figure>
     </div>
     <div class="feature-block feature-block--reverse">
-      <div class="feature-text"><h3>Profit and loss with gross profit, on the period you choose</h3><p>Choose a calendar preset or your own dates. Income, cost of sales, gross profit and expenses appear in one report, and every account name opens its statement so a surprising total can be traced to the entries behind it. The report exports to CSV for your accountant, and the balance sheet, trial balance and ageing reports follow the same period controls.</p><a class="link-strong" href="/product/#reports">See the reports <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></div>
+      <div class="feature-text"><h3>How can I trace a profit and loss figure?</h3><p>Choose the reporting period, then open an account name to see the entries behind its total. Income, cost of sales, gross profit and expenses appear in one report, with a CSV export for review. The balance sheet, trial balance and ageing reports provide their own dated views.</p><a class="link-strong" href="/product/#reports">See the reports <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></div>
       <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Profit and loss" data-full="/assets/screens/v1.0.0/10-profit-loss.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/10-profit-loss-720.webp" srcset="/assets/screens/v1.0.0/10-profit-loss-720.webp 720w, /assets/screens/v1.0.0/10-profit-loss.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Profit and loss screen showing total income of USD 4,788.00, cost of sales of USD 160.00 and gross profit of USD 4,628.00." loading="lazy"></span></button><figcaption><b>Profit and loss</b><span>Sample business</span></figcaption></figure>
     </div>
     <div class="feature-block">
-      <div class="feature-text"><h3>Import a bank statement, match it, keep the history</h3><p>Paste or upload a CSV statement and preview it before anything posts. Matching suggestions are confirmed explicitly, one line at a time, so an unexplained bank movement is investigated rather than absorbed. Each completed statement stays with the account, which makes the next reconciliation start from a known opening balance instead of a guess.</p><a class="link-strong" href="/product/#banking">See banking in the product tour <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></div>
+      <div class="feature-text"><h3>How do I reconcile a bank statement?</h3><p>Upload or paste a CSV statement, preview its rows, then confirm matching suggestions one line at a time. Investigate unexplained movements before completing the reconciliation. Each completed statement stays with the account, preserving the history for the next reconciliation.</p><a class="link-strong" href="/product/#banking">See banking in the product tour <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></div>
       <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Bank reconciliation" data-full="/assets/screens/v1.0.0/08-bank-reconciliation.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/08-bank-reconciliation-720.webp" srcset="/assets/screens/v1.0.0/08-bank-reconciliation-720.webp 720w, /assets/screens/v1.0.0/08-bank-reconciliation.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Bank reconciliation screen with the statement import fields, opening and closing balance inputs and the statement history." loading="lazy"></span></button><figcaption><b>Bank reconciliation</b><span>Sample business</span></figcaption></figure>
     </div>
     <div class="feature-block feature-block--reverse">
-      <div class="feature-text"><h3>Products and stock with weighted-average cost of sales</h3><p>Keep stock and non-stock products in one register with the quantity on hand and the carrying value side by side. Stock counts preview their accounting effect before they post, goods receipts and returns move quantities through the same books, and the cost of sales appears on the profit and loss without a separate spreadsheet.</p><a class="link-strong" href="/product/#inventory">See inventory in the product tour <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></div>
+      <div class="feature-text"><h3>How does PHP Ledger value stock?</h3><p>Optional Inventory uses moving weighted-average cost, showing quantity on hand and carrying value together. Stock counts preview their accounting effect before posting. Supported goods receipts, issues and returns flow through the same books, and cost of sales appears on the profit and loss.</p><a class="link-strong" href="/product/#inventory">See inventory in the product tour <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></div>
       <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Products and stock" data-full="/assets/screens/v1.0.0/06-products-stock.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/06-products-stock-720.webp" srcset="/assets/screens/v1.0.0/06-products-stock-720.webp 720w, /assets/screens/v1.0.0/06-products-stock.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Products and stock screen showing two active stock products with a total carrying value of USD 340.00." loading="lazy"></span></button><figcaption><b>Products and stock</b><span>Sample business</span></figcaption></figure>
     </div>
     <div id="point-of-sale" class="feature-block">
-      <div class="feature-text"><h3>A cash counter that posts through the same books</h3><p>Build the cart, review the cash and change, print the receipt. A confirmed sale records one balanced journal through the central posting service, so the day's takings appear in the reports without re-keying. The module is optional and can be switched off for businesses that sell through invoices alone; stock, tax and card payments at the counter are planned for a later release.</p><a class="link-strong" href="/point-of-sale/">See the point of sale <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></div>
+      <div class="feature-text"><h3>What does the cash point of sale include?</h3><p>The optional cash counter lets you build a cart, review cash and change, and print a receipt. Each confirmed sale records one balanced journal through the central posting service. Shared stock deductions, tax integration and card payments at the counter are planned for a later release.</p><a class="link-strong" href="/point-of-sale/">See the point of sale <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></div>
       <figure class="capture"><button type="button" class="capture-enlarge" data-enlarge data-title="Point of sale" data-full="/assets/screens/v1.0.0/19-point-of-sale.webp"><span class="capture-frame"><img src="/assets/screens/v1.0.0/19-point-of-sale-720.webp" srcset="/assets/screens/v1.0.0/19-point-of-sale-720.webp 720w, /assets/screens/v1.0.0/19-point-of-sale.webp 1440w" sizes="(max-width: 900px) 100vw, 580px" width="1440" height="900" alt="Point of sale screen showing six sample products, an empty current sale and a review sale button." loading="lazy"></span></button><figcaption><b>Point of sale</b><span>Sample business</span></figcaption></figure>
     </div>
   </div>
+</section>
+
+<section class="container section stack stack--loose" id="sample-example" aria-labelledby="sample-example-heading">
+  <h2 id="sample-example-heading">What does a worked profit and loss example look like?</h2>
+  <p>The Willow Corner Shop capture above shows <strong>USD 4,788.00 income − USD 160.00 cost of sales = USD 4,628.00 gross profit</strong>. Gross profit is before the period's other expenses; it is not the cash balance. Open the account statement to trace a reported amount to its posted entries.</p>
+  <p>Source: <a href="/assets/screens/v1.0.0/10-profit-loss.webp">PHP Ledger version 1.0.0 sample report capture</a>. These fictional figures illustrate the report; they are not customer results or a claim of business performance. The <a href="/product/#reports">report walkthrough</a> explains how to explore the same workflow with a sample company.</p>
 </section>
 
 <section class="section section--navy" id="demo" aria-labelledby="demo-heading">
@@ -332,14 +352,33 @@
   </div>
 </section>
 
+<section class="container section stack stack--loose" id="hosting-choice" aria-labelledby="hosting-choice-heading">
+  <h2 id="hosting-choice-heading">Public demo vs. self-hosted PHP Ledger: which should I use?</h2>
+  <p>The demo is quicker to start, but it discards temporary records at each reset. In contrast, a self-hosted installation preserves your records and gives you control over users and recovery. It also makes you responsible for hosting, updates and tested backups.</p>
+  <div class="table-wrap" role="region" aria-label="Public demo and self-hosted installation comparison" tabindex="0">
+    <table>
+      <caption>Public demo compared with your own PHP Ledger installation</caption>
+      <thead><tr><th scope="col">Decision</th><th scope="col">Public demo</th><th scope="col">Your own installation</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Purpose</th><td>Try the accounting workflows with sample data.</td><td>Evaluate and operate the supported workflows on infrastructure you control.</td></tr>
+        <tr><th scope="row">Records</th><td>Fictional data only; a separate temporary company for each visitor.</td><td>Your operator manages the database, users and retention. Complete reviewed acceptance before using real books.</td></tr>
+        <tr><th scope="row">Reset and backups</th><td>Resets at the next scheduled UTC hour. Exporting a report does not preserve the demo company.</td><td>No hourly demo reset; you maintain tested backups and a recovery process.</td></tr>
+        <tr><th scope="row">Cost and licence</th><td>Free to try, with limited capacity.</td><td>Core software is free under AGPL-3.0-or-later. Hosting, optional help and commercial licensing have separate costs or terms.</td></tr>
+        <tr><th scope="row">Setup</th><td>Open the demo in a browser.</td><td>Check PHP, MySQL and HTTPS requirements, verify the package and run the browser installer.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Sources: <a href="/privacy/">demo reset and data boundaries</a>, <a href="/download/">installation requirements</a> and <a href="/pricing/">licensing and assistance</a>.</p>
+</section>
+
 <section class="section section--paper" id="start" aria-labelledby="start-heading">
   <div class="container">
-    <div class="section-heading"><h2 id="start-heading">Three ways to start</h2><p>Look before you install, install when the checks pass, and ask when something is unclear.</p></div>
-    <div class="start-grid">
-      <a class="start-card" href="/demo/"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9h8"/><path d="M8 13h6"/><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"/></svg><h3>Try it in the browser</h3><p>Open a private sample company and follow a sale, a bill and a bank statement through the books. It resets every hour.</p><span class="link-strong">Try the live demo <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></span></a>
-      <a class="start-card" href="/download/"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9l-8 4.5l-8 -4.5v-9l8 -4.5"/><path d="M12 12l8 -4.5"/><path d="M12 12v9"/><path d="M12 12l-8 -4.5"/><path d="M16 5.25l-8 4.5"/></svg><h3>Install it on your server</h3><p>PHP 8.2+, MySQL 8.4 and a browser installer. Signed updates make a backup before they change anything.</p><span class="link-strong">Download 1.0.0 <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></span></a>
-      <a id="enterprise" class="start-card" href="/pricing/"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"/><path d="M3 7l9 6l9 -6"/></svg><h3>Get help or a licence</h3><p>Ask questions, discuss installation help or a supported pilot, or request a commercial licence. No prices are hidden behind a form.</p><span class="link-strong">Pricing and licence <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></span></a>
-    </div>
+    <div class="section-heading"><h2 id="start-heading">How do I get started with PHP Ledger?</h2><p>Follow these three steps before relying on the software for your own books.</p></div>
+    <ol class="start-grid start-steps">
+      <li class="start-card"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9h8"/><path d="M8 13h6"/><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"/></svg><h3>1. Try a sample workflow</h3><p>Open a private sample company and follow a sale, a bill and a bank statement through the books. The demo resets every hour.</p><a class="link-strong" href="/demo/">Try the live demo <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></li>
+      <li class="start-card"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9l-8 4.5l-8 -4.5v-9l8 -4.5"/><path d="M12 12l8 -4.5"/><path d="M12 12v9"/><path d="M12 12l-8 -4.5"/><path d="M16 5.25l-8 4.5"/></svg><h3>2. Check your host and install</h3><p>Verify the release checksum and hosting requirements, upload the package, then open <code>/install</code> in your browser. Start with sample records.</p><a class="link-strong" href="/download/">Read the installation steps <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></li>
+      <li id="enterprise" class="start-card"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"/><path d="M3 7l9 6l9 -6"/></svg><h3>3. Review before real use</h3><p>Check your accounting workflows, access controls and backup recovery with the people responsible for them. Arrange help or a commercial licence if needed.</p><a class="link-strong" href="/pricing/">Discuss help and licensing <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg></a></li>
+    </ol>
   </div>
 </section>
 
@@ -362,10 +401,10 @@
 <section class="section section--paper" id="assurance" aria-labelledby="assurance-heading">
   <div id="roadmap" class="container stack stack--loose">
     <div class="maintainer-note">
-      <h2 id="assurance-heading">What we have tested, and what we have not</h2>
-      <p>I maintain PHP Ledger from Multan, and we publish the state of the project rather than a promise. Before 1.0.0 we ran the automated test suites, fault-injection tests of the update and recovery path, and exact-artifact installation, upgrade and recovery checks against the packaged release, and all of them passed. What we have not done yet is just as important to say out loud.</p>
+      <h2 id="assurance-heading">What has PHP Ledger tested, and what remains unreviewed?</h2>
+      <p>I am <a href="/about/" rel="author">Rana Mansoor Akbar Khan</a>, PHP Ledger's project maintainer in Multan. According to the <a href="https://github.com/phpledger/phpledger/blob/v1.0.0/docs/VALIDATION.md">PHP Ledger 1.0.0 validation record</a>, the completed checks cover automated suites, update and recovery fault tests, and exact-package installation and upgrades. The <a href="https://github.com/phpledger/phpledger/releases/tag/v1.0.0">release notes and downloadable package</a> identify the version those checks cover.</p>
     </div>
-    <p class="assurance">Automated test suites, fault-injection tests of the update and recovery path, exact-artifact installation, upgrade and recovery checks all passed. Independent accounting review, independent security review, supervised pilots with a real month-end close and a release-candidate period have not been performed yet; they are open post-release commitments listed on the roadmap. <a href="/roadmap/">Read the roadmap</a>.</p>
+    <p class="assurance">Technical validation is not independent accounting or security acceptance. Independent reviews, supervised pilots with a real month-end close and a release-candidate period have not been performed yet. They remain open post-release commitments on the <a href="/roadmap/">roadmap</a>. Complete your own reviewed acceptance with sample data before relying on the software for a live business.</p>
   </div>
 </section>
 
@@ -373,13 +412,13 @@
   <div class="container">
     <div class="section-heading faq-heading"><h2 id="faq-heading">Questions before you start</h2><p>Short answers to the questions owners and accountants ask first. Each one links to the page with the detail.</p></div>
     <div class="faq">
-      <details><summary>Is PHP Ledger really free?</summary><p>Yes. The project-owned core is free under AGPL-3.0-or-later, and every module ships with it: invoices, bills, stock, bank reconciliation and reports. Hosting, setup help, optional support and a separate commercial licence have their own terms. The 0.1.0 through 0.1.5 previews retain their earlier MIT grants.</p></details>
-      <details><summary>What do I need to run it?</summary><p>PHP 8.2 or newer for both web and command-line requests, MySQL 8.4 and HTTPS. Installation happens in the browser at /install, so no terminal access, Composer, Node or Docker is needed for setup. PHP 8.3 is recommended, and the PHP zip extension is needed for signed automatic updates.</p></details>
-      <details><summary>Does it work on shared cPanel hosting?</summary><p>Often, but a panel alone does not prove it. Your plan must provide the required PHP extensions, MySQL 8.4, private files and the correct public document root. Run the browser installer's checks on the actual account before you commit to it.</p></details>
-      <details><summary>Does PHP Ledger send my data anywhere?</summary><p>No. There are no licence-key or licensing-server calls, and this website has no analytics or form submission endpoint. The installed application has one documented optional country lookup; every connection is explicit and scoped. The privacy page explains the separate website, demo and installed-application boundaries.</p></details>
-      <details><summary>Can it invoice customers and settle supplier bills?</summary><p>Yes. Version 1.0 includes customer invoices, supplier bills, partial and final payments allocated across open items, linked credits, ageing and control-account reconciliation. Accounts receivable and payable belong to the core, and owners can hide navigation they do not use.</p></details>
-      <details><summary>Is it ready for real books?</summary><p>1.0.0 is the first stable release, backed by automated tests, fault-injection tests of the update and recovery path, and exact-artifact installation and upgrade checks. Independent accounting review, independent security review and supervised pilots have not happened yet; they are open post-release commitments. Use a fictional company until you have completed your own reviewed acceptance.</p></details>
-      <details><summary>What if the project stops?</summary><p>You keep the source and your self-hosted database under the applicable licence. Continued maintenance, recovery and data extraction still need an operator, so keep tested backups and portable report exports rather than relying on a ZIP alone.</p></details>
+      <details><summary>Is PHP Ledger really free?</summary><p>Yes. The project-owned core is free under <a href="/pricing/">AGPL-3.0-or-later</a>, including invoices, bills, stock, bank reconciliation and reports. Hosting, setup help, optional support and a separate commercial licence have their own terms. The 0.1.0 through 0.1.5 previews retain their earlier MIT grants.</p></details>
+      <details><summary>What do I need to run it?</summary><p>PHP Ledger requires PHP 8.2 or newer, MySQL 8.4, HTTPS and the <a href="/download/">documented PHP extensions</a>. Installation runs in the browser at /install, without Composer, Node or Docker. PHP 8.3 is recommended; signed automatic updates require the PHP zip extension.</p></details>
+      <details><summary>Does it work on shared cPanel hosting?</summary><p>It can, if the actual <a href="/download/">hosting account meets the requirements</a>. A control panel alone does not prove compatibility. Check PHP extensions, MySQL 8.4, private files and the correct public document root, then run the browser installer checks before committing to a host.</p></details>
+      <details><summary>Does PHP Ledger send my data anywhere?</summary><p>Self-hosted records stay on your operator's infrastructure. This website has no analytics or form submission endpoint. The demo's optional country lookup may send your public IP address to country.is. Following external links or downloading releases contacts those providers. The <a href="/privacy/">privacy notice</a> explains the separate website, demo and installation boundaries.</p></details>
+      <details><summary>Can it invoice customers and settle supplier bills?</summary><p>Yes. PHP Ledger 1.0 includes <a href="/product/#sales">customer invoices</a>, supplier bills, partial and final payments allocated across open items, linked credits, ageing and control-account reconciliation. Accounts receivable and payable are in the core; owners can hide their navigation without disabling the services.</p></details>
+      <details><summary>Is it ready for real books?</summary><p>Version 1.0.0 is the first stable release, with <a href="https://github.com/phpledger/phpledger/blob/v1.0.0/docs/VALIDATION.md">published technical validation</a> for automated tests, update recovery and package installation. Independent accounting review, independent security review and supervised pilots remain open commitments. Complete your own reviewed acceptance with fictional records before using real books.</p></details>
+      <details><summary>What if the project stops?</summary><p>You keep the source and your self-hosted database under the applicable licence. Continued maintenance, recovery and data extraction still need an operator. Keep tested backups and <a href="/product/#reports">portable report exports</a>; possession of the release ZIP alone does not establish a recovery process.</p></details>
     </div>
   </div>
 </section>
@@ -391,7 +430,7 @@
       <div class="footer-col" id="docs"><h2>Learn</h2><a href="/learn/">Bookkeeping lessons</a><a href="/guides/">Guides</a><a href="/self-hosting/">Self-hosting</a><a href="/glossary/">Glossary</a><a href="/news/">News</a><a href="/roadmap/">Roadmap</a><a href="https://github.com/phpledger/phpledger/wiki" rel="noopener">Wiki</a></div>
       <div class="footer-col"><h2>Compare</h2><a href="/compare/">Compare accounting software</a><a href="/compare/open-source-accounting-software/">Open-source options</a><a href="/compare/akaunting-alternative/">Akaunting alternative</a><a href="/compare/erpnext-alternative/">ERPNext alternative</a><a href="/research/">Research and sources</a></div>
       <div class="footer-col"><h2>Project</h2><a href="/about/">About</a><a href="/community/">Community</a><a href="https://github.com/phpledger/phpledger" rel="noopener">GitHub</a><a href="/credits/">Credits</a><a href="/privacy/">Privacy</a><a href="/terms/">Demo use and terms</a></div>
-      <div class="footer-col"><h2>Contact</h2><a href="https://github.com/phpledger/phpledger/discussions" rel="noopener">Discussions</a><a href="/pricing/#enquiry">Enquiry form</a><a href="https://github.com/phpledger/phpledger/blob/master/SECURITY.md" rel="noopener">Security reports</a><address>Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan</address></div>
+      <div class="footer-col"><h2>Contact</h2><a href="https://github.com/phpledger/phpledger/discussions" rel="noopener">Discussions</a><a href="/pricing/#enquiry">Contact PHP Ledger</a><a href="https://github.com/phpledger/phpledger/blob/master/SECURITY.md" rel="noopener">Security reports</a><address>Innovista Chenab, Arcade Plaza, Sector C, DHA Multan, Punjab 60000, Pakistan</address></div>
       <div class="footer-col footer-community"><h2>Community</h2>
         <ul class="social-row" aria-label="PHP Ledger on social networks">
           <li><a href="https://github.com/phpledger/phpledger" aria-label="GitHub" rel="noopener"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"/></svg></a></li>

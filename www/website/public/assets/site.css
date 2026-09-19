@@ -126,6 +126,12 @@ a.card .link-strong{margin-top:var(--space-4)}
   .menu-toggle{display:inline-flex}
   .site-header-actions .button--small{padding:0 12px;font-size:13px}
 }
+@media(max-width:420px){
+  .site-header-row{gap:8px;min-height:68px}
+  .brand img{width:112px}
+  .site-header-actions{gap:4px}
+  .site-header-actions .button--small{padding:0 8px;font-size:12px}
+}
 .button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border:1px solid var(--navy);border-radius:var(--radius-s);background:var(--navy);color:var(--white);font-family:var(--font-heading);font-weight:700;font-size:16px;line-height:1.2;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
 .button:hover{background:var(--navy-hover);border-color:var(--navy-hover);color:var(--white)}
 .button svg{width:18px;height:18px}
@@ -397,6 +403,11 @@ main h2,main h3{scroll-margin-top:100px}
 .community-strip .social-row{justify-content:center;margin-top:var(--space-6)}
 .community-strip .link-strong{margin-top:var(--space-5)}
 .maintainer-note{max-width:var(--text)}
+.home-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px;margin:var(--space-4) 0}
+.home-facts dt{margin:0;font-weight:600;color:var(--navy)}
+.home-facts dd{margin:6px 0 0;overflow-wrap:anywhere}
+.start-steps{list-style:none;padding:0;margin:0}
+.page-home main section[id],.page-home #features{scroll-margin-top:100px}
 /* Product tour */
 .tour-section{padding-block:clamp(56px,7vw,80px);border-top:1px solid var(--line)}
 .tour-section:first-of-type{border-top:0}
@@ -448,6 +459,7 @@ main .social-row{margin-top:var(--space-5)}
   .preview-split{grid-template-columns:1fr}
 }
 @media(max-width:640px){
+  .home-facts{grid-template-columns:1fr}
   .hero{text-align:left}
   .hero .actions,.hero .capture-label{justify-content:flex-start}
   .hero-visual .phone{display:none}

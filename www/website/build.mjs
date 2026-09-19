@@ -30,7 +30,7 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.join(ROOT, 'src');
 const PUBLIC = path.join(ROOT, 'public');
 
-const PAGE_KEYS = new Set(['path', 'slug', 'nav', 'title', 'description', 'ogImage', 'ogImageAlt', 'ogType', 'bodyClass', 'jsonld', 'breadcrumb', 'faq', 'article', 'howto', 'itemlist', 'noindex', 'budgetEager', 'budgetTotal', 'headExtra', 'lastmod', 'toc']);
+const PAGE_KEYS = new Set(['path', 'slug', 'nav', 'title', 'description', 'ogImage', 'ogImageAlt', 'ogType', 'bodyClass', 'jsonld', 'breadcrumb', 'faq', 'article', 'howto', 'itemlist', 'noindex', 'budgetEager', 'budgetTotal', 'headExtra', 'datePublished', 'lastmod', 'toc']);
 const GRAPH_PARTS = ['organization', 'website', 'software', 'webpage', 'person', 'breadcrumb', 'faq', 'article', 'howto', 'itemlist'];
 const TEXT_EXTENSIONS = new Set(['.txt', '.html', '.xml', '.json', '.css', '.js', '.mjs', '.svg', '.md', '.webmanifest']);
 const FORBIDDEN_JSONLD_KEYS = /"(aggregateRating|review|reviews|userInteractionCount|interactionStatistic)"\s*:/;
@@ -115,6 +115,9 @@ function parsePage(file, id) {
   }
   if (typeof meta.lastmod !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(meta.lastmod)
       || Number.isNaN(Date.parse(meta.lastmod)) || new Date(meta.lastmod).toISOString().slice(0, 10) !== meta.lastmod) fail(`${id}: lastmod is required and must be a valid YYYY-MM-DD date`);
+  if (meta.datePublished !== undefined && (typeof meta.datePublished !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(meta.datePublished)
+      || Number.isNaN(Date.parse(meta.datePublished)) || new Date(meta.datePublished).toISOString().slice(0, 10) !== meta.datePublished
+      || meta.datePublished > meta.lastmod)) fail(`${id}: datePublished must be a valid YYYY-MM-DD date no later than lastmod`);
   if (meta.headExtra !== undefined && typeof meta.headExtra !== 'string') fail(`${id}: headExtra must be a string`);
   const outFile = meta.path === '/' ? 'index.html' : meta.path.endsWith('/') ? `${meta.path.slice(1)}index.html` : meta.path.slice(1);
   const slug = meta.slug || (meta.path === '/' ? 'index' : meta.path.replace(/^\/|\/$/g, '').replace(/\.html$/, ''));
@@ -335,7 +338,7 @@ const builders = {
   webpage: (page, byPath) => ({
     '@type': 'WebPage', '@id': `${absolute(page.path)}#webpage`, url: absolute(page.path), name: page.title,
     description: page.description, inLanguage: 'en', isPartOf: { '@id': ids.website },
-    datePublished: page.lastmod, dateModified: page.lastmod, author: { '@id': ids.person }, publisher: { '@id': ids.organization },
+    datePublished: page.datePublished || page.article?.datePublished, dateModified: page.lastmod, author: { '@id': ids.person }, publisher: { '@id': ids.organization },
     primaryImageOfPage: { '@type': 'ImageObject', url: absolute(page.ogImage || site.ogDefault) },
     breadcrumb: { '@id': `${absolute(page.path)}#breadcrumb` },
     speakable: { '@type': 'SpeakableSpecification', cssSelector: /class="[^"]*\bsummary\b/.test(page.content) ? ['h1', '.summary'] : ['h1', '.lead'] },
