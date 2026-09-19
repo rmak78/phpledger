@@ -1,6 +1,11 @@
 # Shared Claude and Codex state
 
-**Current scope (Claude, 19 September 2026, evening):** housekeeping and roadmap correction only. Commits the outstanding coordination edits, the pending demo-wording lines and the roadmap documents that now describe sample companies and plugins as separately built directory packages. No application code beyond those two demo-wording lines, no release, no push, no website rebuild, no deployment. The owner's demo, installer and application-surface feedback is still to come and is not part of this scope.
+## Latest checkpoint, 19 September 2026 evening (Claude): housekeeping, roadmap correction, wiki, issues and discussions
+
+- Local `master` commits (not pushed): `aa4a4bf` coordination files and `CLAUDE.md`; `f211476` Codex's two demo-landing wording lines (still not live, ships in 1.1.1); `c07ed46` the packaging decision in `docs/strategy/DECISION-REGISTER.md` (B18, B19), `docs/strategy/PLATFORM-ROADMAP.md` (new "Package directory: plugins and sample companies" section, sequence rows 5a and 5b), `docs/ROADMAP.md` (1.1.1 line, demonstration path), `docs/MODULE-ROADMAP.md` (directory packages row, items 10 and 12) and `docs/RELEASE-PROTOCOL.md` (principle 7). Only `Claude outputs/` remains untracked.
+- Wiki pushed: `b2c08a9` on `phpledger.wiki` updates Roadmap, Module-Roadmap and Architecture with the package decision and brings two headers to 1.1.0. Accounting-and-Reports and First-Package still carry 1.0.0 headers; untouched.
+- GitHub issues #71 to #78 (unbundle demo packs; manifest, directory and installer; plugin runtime; demo labels in 1.1.1; reproducible ZIP; account codes and hierarchy; collapsible reports; Pakistan pharmacy sample package) and discussions #79 to #82 (package RFC; first vertical plugin; reviewers and pilots wanted; account numbering design) were created at the owner's request.
+- Deliberately not done: no push of `master`, so the roadmap links in the issues resolve only after the owner pushes; no website rebuild, so the public roadmap page drifts until the next website publication; no release, demo reset, deployment or test run. The owner's demo, installer and application-surface feedback is still pending.
 
 ## Latest maintenance checkpoint — 19 September 2026 (Codex)
 

@@ -272,3 +272,14 @@ The demo `/start` code is unchanged.
 ## 2026-09-19 evening — Claude: housekeeping and roadmap correction (scope)
 
 **From:** Claude. **To:** Codex and other sessions. **Owner request:** tidy the working tree and correct the roadmap; no release and no feature work yet. **Scope:** (1) commit the outstanding coordination edits (`AGENTS.md`, `AGENTS_SYNC.MD`, this log, `docs/DEMO.md`, the untracked `CLAUDE.md`), refreshing the stale local-WIP table; (2) commit Codex's two pending demo-landing wording lines in `www/phpledger/templates/views/demo.php` on their own, still not live; (3) record the owner's packaging decision of 19 September 2026 in `docs/strategy/DECISION-REGISTER.md`, `docs/strategy/PLATFORM-ROADMAP.md`, `docs/ROADMAP.md`, `docs/MODULE-ROADMAP.md` and `docs/RELEASE-PROTOCOL.md`: sample companies and plugins become separately built packages served from a phpledger.com directory, WordPress-style, with samples able to require plugins. Commits are local only; no push, website rebuild, demo reset, deployment or test run. `Claude outputs/` stays untracked. The owner's demo, installer and application-surface feedback will follow as a separate task.
+
+## 2026-09-19 evening — Claude: housekeeping, roadmap correction, wiki, issues and discussions (result)
+
+**From:** Claude. **To:** Codex and other sessions. **Status:** done within scope; nothing released or deployed.
+
+- **Commits on local `master`, not pushed:** `aa4a4bf` (coordination files, `docs/DEMO.md` note, `CLAUDE.md`, refreshed WIP table), `f211476` (the two demo-landing wording lines from Codex, still not live), `c07ed46` (packaging decision across the five roadmap documents), plus this handoff commit. `git diff --check` clean on each.
+- **Decision recorded:** B18 and B19 in the decision register and P10 in the platform roadmap. Sample companies and plugins are separately built packages from a phpledger.com directory; core keeps only the core-accounting sample; samples are data only and may `require` plugins; restaurant, pharmacy, exporter and freelancer verticals become directory plugins with paired samples. Sequence: unbundle in 1.1.1 (row 5a), manifest/feed/installer (5b), then plugin runtime (6).
+- **Wiki:** `b2c08a9` pushed to `phpledger.wiki` (Roadmap, Module-Roadmap, Architecture). Two other pages still say "Current package: 1.0.0"; left for a later sweep.
+- **GitHub:** issues #71 to #78 and discussions #79 to #82 opened at the owner's request (see the sync checkpoint for the list). Issue bodies point at `docs/strategy/` on `master`; those anchors go live when the owner pushes.
+- **Not done, on purpose:** no `git push` of `master`, no website build or publication, no demo reset, no test suite, no external contact beyond the wiki push and the issue and discussion creation.
+- **Next:** owner's demo, installer and application-surface feedback, then the 1.1.1 patch (#71, #74).
