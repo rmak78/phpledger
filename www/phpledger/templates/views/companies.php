@@ -15,7 +15,7 @@
 <span class="biz-row-mark" aria-hidden="true"><?= pl_e(mb_strtoupper(mb_substr($business['name'],0,1))) ?></span>
 <div class="min-w-0 flex-1">
 <div class="flex flex-wrap items-center gap-1.5"><h2 class="text-sm font-semibold" id="company-<?= (int)$business['id'] ?>"><?= pl_e($business['name']) ?></h2><?php pl_ui_badge($business['is_sample'] ? 'sample' : 'draft', $business['is_sample'] ? 'Sample company' : 'Business'); pl_ui_badge('draft', ucfirst($business['role'])); ?></div>
-<p class="mt-0.5 text-xs text-ink-muted"><?= pl_e($business['book_name']) ?> · <?= pl_e($business['currency']) ?></p>
+<p class="mt-0.5 text-xs text-ink-muted"><?= pl_e($business['book_name']) ?> Â· <?= pl_e($business['currency']) ?></p>
 <?php if ($business['setup_status'] === 'opening_required'): ?><p class="mt-1 text-xs text-warning">Opening balances need reconciliation. Preview and confirm the opening cutover before posting.</p>
 <?php elseif ($business['setup_status'] === 'review_required'): ?><p class="mt-1 text-xs text-warning">Review your existing accounts and opening balances before recording more transactions.</p>
 <?php else: ?><p class="mt-1 text-xs text-ink-muted"><?= $business['is_sample'] ? 'Fictional records for exploring the accounting journey.' : 'Ready for receipt and expense entry.' ?></p><?php endif; ?>
