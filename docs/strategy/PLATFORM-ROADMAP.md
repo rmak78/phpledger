@@ -1,6 +1,6 @@
 # Platform roadmap
 
-Drafted 19 September 2026 from owner requests in a planning session. It covers the platform work that sits under distribution: several installations in one database, database engines, cloud-hosted databases, installer identity, the installation notice, a plugin platform with a marketplace, and a full Users module. WordPress is the reference architecture the owner named; each section says what is copied from it and where PHP Ledger differs.
+Drafted 19 September 2026 from owner requests in a planning session. It covers the platform work that sits under distribution: several installations in one database, database engines, cloud-hosted databases, installer identity, the installation notice, a package directory for plugins and sample companies, and a full Users module. WordPress is the reference architecture the owner named; each section says what is copied from it and where PHP Ledger differs.
 
 Nothing here is implemented unless its status says so. Distribution channels are in the [distribution plan](DISTRIBUTION-PLAN.md) and the per-release sequence is in the [release protocol](../RELEASE-PROTOCOL.md).
 
@@ -17,6 +17,7 @@ Nothing here is implemented unless its status says so. Distribution channels are
 | P7 | **A proper Users module**: users, user meta, profile, user management, roles and permissions, like standard software. | Designed now so earlier work does not block it. |
 | P8 | **npm, Homebrew, Bitnami and DigitalOcean stay on the roadmap** as future channels. | Recorded in the distribution plan. |
 | P9 | Windows and Android clients are planned. | Feeds carry a `min_client` field; TLS work covers clients. |
+| P10 | **Sample companies and plugins ship as separate packages from a phpledger.com directory, never inside the core package** (19 September 2026, evening). Samples may require plugins. | Package directory section below; decisions B18 and B19 in the [decision register](DECISION-REGISTER.md#g-decisions-taken-by-the-owner-19-september-2026). |
 
 ## Sequence
 
@@ -27,7 +28,9 @@ Nothing here is implemented unless its status says so. Distribution channels are
 | 3 | Username and company logo (schema, login, installer fields) | Installer branch merge for the form | Planned |
 | 4 | Table prefix and portable SQL through MeekroDB, in one pass | Installer branch merge | Planned |
 | 5 | Installation notice and the phpledger.com endpoint | 1; endpoint deployment is a separate owner-requested action | Planned |
-| 6 | Plugin platform and marketplace | 1, 4 | Planned |
+| 5a | Unbundle the demo packs and add the package directory resolver | none; data-file change plus a path resolver | Planned for 1.1.1 |
+| 5b | Package manifest, directory feed and in-app package installer (samples first, plugins second) | 1, 5a | Planned |
+| 6 | Plugin runtime: hooks, loader, activation | 4, 5b | Planned |
 | 7 | Cloud-database support and guides | 4 | Planned |
 | 8 | Users module | 3, 6 | Planned |
 | 9 | PostgreSQL migration sets and CI | 4 | After 1.2 |
@@ -135,25 +138,36 @@ The same installation ID accompanies the update check, so active installations c
 
 The phpledger.com endpoint is a small PHP script that validates, rate-limits and stores notices, with an owner-only summary. Deploying it changes the website host and is a separate owner-requested action under the operator runbook.
 
-## Plugin platform and marketplace
+## Package directory: plugins and sample companies
 
-**Today.** A manifest-driven bundled-module system exists: a fixed list of manifests in `resources/modules/`, per-company enablement with an audit trail, and a Modules page. Routes, navigation and templates are hard-coded, there are no hooks, migrations are one global chain, and roles are fixed.
+**Decision (P10, 19 September 2026).** The core package carries the accounting application and its bundled modules only. Everything a user adds afterwards, whether code (a plugin) or data (a sample company), is a separately built, separately versioned package downloaded from a directory on phpledger.com or uploaded by the owner. This is the WordPress split between core and its plugin and theme directories.
+
+**Why.** Eleven demo packs (1.9 MB, close to half the packaged source bytes) ship in every 1.1.0 ZIP and cannot be started in production since the sample gate landed. Sample companies for restaurant, pharmacy, export and freelancer work only make sense alongside the plugin that renders them, and that pairing cannot be expressed inside one core package. Keeping vertical work out of the core release gate lets each vertical move at its own pace.
+
+**Today.** A manifest-driven bundled-module system exists: a fixed list of manifests in `resources/modules/`, per-company enablement with an audit trail, and a Modules page. The demo packs are read from `resources/demo-packs/` by `pl_demo_pack_catalog()`; only `resources/core-samples/core-accounting-1.0.0.json` is needed for first-run onboarding. Signed release metadata, a pinned publisher key, `pl_update_verify_metadata()` and an allowlisted downloader already exist for core updates and are reused here. No plugin code exists.
 
 **Copied from WordPress.** Actions and filters with priorities; a plugin folder with a manifest; activation, deactivation and uninstall; a plugin screen with upload, update and delete; a directory served from the project website; plugin data in prefixed tables and in user and option meta.
 
-**Different from WordPress.** Plugins declare their capabilities, migrations, routes and menus in the manifest, and the core validates them before activation. Plugin migrations live in their own receipt table, so removing a plugin can never break the core migration chain. Posting to the ledger still goes through the core posting service.
+**Different from WordPress.** Plugins declare their capabilities, migrations, routes and menus in the manifest, and the core validates them before activation. Plugin migrations live in their own receipt table, so removing a plugin can never break the core migration chain. Posting to the ledger still goes through the core posting service. Sample companies are a second package type that WordPress does not have: pure data, installed at a lower trust tier, never containing PHP.
+
+**Package manifest.** Every package carries `package.json` with: `type` (`plugin` or `sample`), `slug`, `version`, `contract` (the schema contract the payload was written against), `requires` (a core version range, plugin slugs with version ranges, bundled module ids), `files` with a SHA-256 per file, `licence`, `homepage`. The core refuses a package whose `contract` it does not support or whose `requires` are not satisfied, and says which requirement is missing.
 
 **Plan.**
-1. Hooks API: `pl_add_action`, `pl_do_action`, `pl_add_filter` and `pl_apply_filters`, with hook points at document posting, period close, reports, navigation, routes, templates, settings and the read API.
-2. Plugin format: `www/phpledger/plugins/<slug>/` with `plugin.json` (the module manifest, contract 2) and `plugin.php`. Tables use the installation prefix plus the slug. Migrations sit in the plugin's own folder and receipt table.
-3. Loader: plugin manifests are discovered from the folder; code loads only for activated plugins whose files still match the digest recorded at installation.
-4. **Two trust tiers (P1).**
-   - **Verified.** Packages from the official marketplace are signed by the project key, or by a marketplace review key after review. They show a Verified badge and can update automatically.
-   - **Uploaded by the owner.** The owner can upload any plugin ZIP. An unsigned or unknown package installs only after a confirmation page stating that it has not been reviewed, runs with full access to the application and database, may break upgrades or damage records, that backups are the owner's responsibility, and that support covers verified plugins only. The plugin keeps an Unverified badge, the audit trail records who accepted the warning and the package digest, and it never updates automatically.
+1. **Unbundle (1.1.1).** A package directory resolver, default `storage/packages/samples/` and `storage/packages/plugins/`, with local, test and demo environments falling back to the repository copies. The eleven demo packs and `catalog.json` leave `tools/package-files.json`; the core-accounting sample stays. The public demo mounts the packs into the package directory and becomes the first consumer of sample packages. Pack sources stay in the repository as build inputs for `tools/build-demo-packs.py`.
+2. **Directory feed.** A static `/directory/index.json` on phpledger.com plus one page per package, generated by the website build from a data file in the same way as the release feed. Packages are published as GitHub release assets in one repository per package under the phpledger organisation (`phpledger/sample-<slug>`, `phpledger/plugin-<slug>`), which the existing download allowlist already trusts. Submissions are pull requests reviewed against a published checklist.
+3. **Package installer in the application.** Browse the directory, install, update and uninstall. Verified packages are checked against the project key before anything is written; owner uploads follow the two-tier rule below. Sample installs appear in the onboarding chooser; the chooser links to the directory for more.
+4. **Hooks API**: `pl_add_action`, `pl_do_action`, `pl_add_filter` and `pl_apply_filters`, with hook points at document posting, period close, reports, navigation, routes, templates, settings and the read API.
+5. **Plugin format**: `www/phpledger/plugins/<slug>/` with `plugin.json` (the package manifest, module contract 2) and `plugin.php`. Tables use the installation prefix plus the slug. Migrations sit in the plugin's own folder and receipt table.
+6. **Loader**: plugin manifests are discovered from the folder; code loads only for activated plugins whose files still match the digest recorded at installation.
+7. **Two trust tiers (P1).**
+   - **Verified.** Packages from the official directory are signed by the project key, or by a directory review key after review. They show a Verified badge and can update automatically.
+   - **Uploaded by the owner.** The owner can upload any package ZIP. An unsigned or unknown plugin installs only after a confirmation page stating that it has not been reviewed, runs with full access to the application and database, may break upgrades or damage records, that backups are the owner's responsibility, and that support covers verified packages only. The plugin keeps an Unverified badge, the audit trail records who accepted the warning and the package digest, and it never updates automatically.
+   - **Samples are data.** A sample package contains no code, so an uploaded sample needs only the archive checks. But a sample whose `requires` names an unverified plugin surfaces that plugin's confirmation page first; a sample never installs a plugin quietly.
    - Both tiers pass the same archive checks, so a malformed archive is rejected before anything is written.
-5. **Admin › Plugins**, next to Modules: installed plugins, activate, deactivate, update, uninstall (with a choice to keep or delete the plugin's data), upload, and a Marketplace tab.
-6. **Marketplace on phpledger.com**: a static feed at `/releases/plugins/index.json` and a page per plugin, generated from a data file. Submissions are pull requests reviewed against a published checklist.
-7. **Licensing.** Plugins run inside the application and are treated as combined works under the AGPL. Marketplace listing requires an AGPL-compatible licence; other terms use the existing commercial-licence route. The owner's freedom principle applies to what users install on their own copy, not to what the marketplace lists.
+8. **Admin > Packages**, next to Modules: installed plugins and samples, activate, deactivate, update, uninstall (with a choice to keep or delete a plugin's data), upload, and a Directory tab.
+9. **Licensing.** Plugins run inside the application and are treated as combined works under the AGPL. Directory listing requires an AGPL-compatible licence; other terms use the existing commercial-licence route. Sample data packages are published under CC0 so training institutes can redistribute them. The owner's freedom principle applies to what users install on their own copy, not to what the directory lists.
+
+**Verticals.** Restaurant POS, pharmacy POS, exporter and freelancer invoicing are the first plugins, each with a paired sample package (B19). The Pakistan pharmacy sample becomes the pharmacy sample package. Core, AR, AP, Inventory and Purchasing stay bundled.
 
 ## Users module
 

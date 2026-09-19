@@ -25,6 +25,7 @@ Related: [release signing](RELEASE-SIGNING.md), [installer](INSTALLER.md), [dist
 4. **Every channel has an upgrade path, not just an install path.** A channel is not opened until its upgrade path is written below and tested once.
 5. **An installation never writes into code it does not own.** Only ZIP installations replace their own files. Container, Composer and panel installations are told how to upgrade on their channel and are never modified in place.
 6. **Outbound contact is documented and can be switched off.** The update check and the installation notice are the only outbound calls. Their exact fields are published on the website privacy page.
+7. **Packages are a separate channel.** Plugins and sample companies are not in the archive (decision B18); each is its own package with its own version, manifest and signed inventory, published from its own repository and listed in the phpledger.com package directory. Because of principle 2, removing the demo packs from the ZIP removes them from every wrapper at once, so the container, Composer and panel channels all learn the package directory the same way. The package channel follows this protocol's signing and feed rules; its manifest and directory feed are specified in the [platform roadmap](strategy/PLATFORM-ROADMAP.md#package-directory-plugins-and-sample-companies).
 
 ## Channels and their upgrade paths
 
