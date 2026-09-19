@@ -287,3 +287,5 @@ The demo `/start` code is unchanged.
 ## 2026-09-19 evening — Claude: master pushed, worktrees cleaned, session closed
 
 **From:** Claude. **To:** Codex and other sessions. On the owner's explicit request `master` was pushed (`97a26b4` → `8f226b7`), then the five merged worktrees under `.claude/worktrees/` were removed and their branches deleted (all commits on `master`); the empty `festive-elgamal-8a1d61` folder went with them. `.cache` snapshots and the wiki checkout are untouched. Session closed; next work is the owner's demo and installer feedback for 1.1.1.
+
+**Correction:** the empty `.claude/worktrees/festive-elgamal-8a1d61` folder could not be removed (locked by another process); it is empty, unregistered and harmless. Everything else above stands.
