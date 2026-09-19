@@ -1,0 +1,10 @@
+# PHP Ledger public files. If your host lets you choose the document root,
+# point it at this folder; these rules then send page requests to index.php.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Only direct requests reach the front controller here; requests passed on by
+    # the package folder's .htaccess are for files, and a missing file stays missing.
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>

@@ -33,16 +33,29 @@ function pl_session_start(bool $secure): void
     ini_set('session.use_only_cookies', '1');
     ini_set('session.use_trans_sid', '0');
     ini_set('session.gc_maxlifetime', '1800');
-    session_name(pl_demo_enabled() ? 'phpledger_demo_session' : 'phpledger_session');
+    // A copy uploaded into a subfolder keeps its own cookie, so two copies on one host never share a sign-in.
+    $base = pl_demo_enabled() || !function_exists('pl_base_path') ? '' : pl_base_path();
+    session_name(pl_demo_enabled() ? 'phpledger_demo_session' : ($base === '' ? 'phpledger_session' : 'phpledger_session_' . substr(hash('sha256', $base), 0, 12)));
     session_set_cookie_params([
         'lifetime' => 0,
-        'path' => pl_demo_enabled() ? '/demo/' : '/',
+        'path' => pl_demo_enabled() ? '/demo/' : $base . '/',
         'secure' => $secure,
         'httponly' => true,
         'samesite' => 'Lax',
     ]);
     if (!session_start()) {
         throw new RuntimeException('The session could not be started.');
+    }
+    // Copies on one host may share PHP's session directory; a session belongs to the copy that created it.
+    $installation = hash('sha256', str_replace('\\', '/', (string) (realpath(dirname(__DIR__, 2)) ?: dirname(__DIR__, 2))));
+    if (!isset($_SESSION['pl_installation'])) {
+        $_SESSION['pl_installation'] = $installation;
+    } elseif (!is_string($_SESSION['pl_installation']) || !hash_equals($_SESSION['pl_installation'], $installation)) {
+        $_SESSION = [];
+        if (!session_regenerate_id(true)) {
+            throw new RuntimeException('The session could not be renewed.');
+        }
+        $_SESSION['pl_installation'] = $installation;
     }
 }
 

@@ -1,0 +1,28 @@
+# PHP Ledger rules for a copy uploaded inside a website (Apache or LiteSpeed).
+# They send page requests to index.php, serve the public files from
+# www/phpledger/public and keep every other folder private. If your host lets
+# you choose the document root, point it at www/phpledger/public instead.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # index.php refuses to start unless these rules are active.
+    RewriteRule ^ - [E=PL_HTACCESS:1]
+
+    # Public files.
+    RewriteRule ^assets/(.+)$ www/phpledger/public/assets/$1 [L]
+    RewriteRule ^maintenance\.php$ www/phpledger/public/maintenance.php [L]
+
+    # Everything else in this folder stays private. Hosting certificates
+    # still work because /.well-known/ is left alone.
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteRule ^(?:vendor|resources|tools|www|licenses)(?:/|$) - [F]
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteCond %{REQUEST_URI} !/\.well-known/
+    RewriteRule (?:^|/)\. - [F]
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteRule ^(?:README\.txt|LICENSE|LICENSE-SCOPE\.md|PACKAGE-MANIFEST\.json|composer\.(?:json|lock))$ - [F]
+
+    # Pages go to the front controller.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>

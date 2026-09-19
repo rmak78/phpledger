@@ -7,10 +7,10 @@ if (PHP_SAPI !== 'cli') {
     exit;
 }
 
-$options = getopt('', ['email:', 'name:', 'password-stdin']);
+$options = getopt('', ['email:', 'name:', 'username:', 'password-stdin']);
 if (!is_array($options) || !isset($options['email'], $options['name'])
-    || !is_string($options['email']) || !is_string($options['name'])) {
-    fwrite(STDERR, "Usage: php install/create-admin.php --email=you@example.com --name=Owner [--password-stdin]\n");
+    || !is_string($options['email']) || !is_string($options['name']) || (isset($options['username']) && !is_string($options['username']))) {
+    fwrite(STDERR, "Usage: php install/create-admin.php --email=you@example.com --name=Owner [--username=owner] [--password-stdin]\n");
     fwrite(STDERR, "Provide the password with PL_ADMIN_PASSWORD or --password-stdin. Never pass it as an argument.\n");
     exit(1);
 }
@@ -36,7 +36,7 @@ try {
     if (pl_install_database_check()['status'] !== 'current') {
         throw new DomainException('Run the package migrations before creating an administrator account.');
     }
-    $id = pl_create_user($options['email'], $options['name'], $password);
+    $id = pl_create_user($options['email'], $options['name'], $password, $options['username'] ?? null);
     unset($password);
     fwrite(STDOUT, "Administrator account created (user {$id}). Create a company to become its owner.\n");
 } catch (InvalidArgumentException | DomainException $error) {

@@ -10,7 +10,7 @@ $fixture = sys_get_temp_dir() . '/phpledger-update-http-' . bin2hex(random_bytes
 $root = $fixture . '/app'; $private = $fixture . '/private';
 mkdir($root . '/www/phpledger/public', 0700, true); mkdir($private, 0700, true);
 $repository = dirname(__DIR__);
-foreach (['update_functions.php', 'update_database_functions.php', 'update_web_functions.php', 'update_probe_functions.php'] as $name) {
+foreach (['update_functions.php', 'update_database_functions.php', 'update_web_functions.php', 'update_probe_functions.php', 'database_platform_functions.php'] as $name) {
     pl_update_write($root . '/www/phpledger/includes/functions/' . $name, (string) file_get_contents($repository . '/www/phpledger/includes/functions/' . $name));
 }
 $loader = (string) file_get_contents($repository . '/www/phpledger/public/maintenance.php');
@@ -18,6 +18,9 @@ pl_update_write($root . '/www/phpledger/public/maintenance.php', $loader);
 pl_update_write($root . '/www/phpledger/public/index.php', '<?php require dirname(__DIR__)."/includes/functions/update_functions.php"; try {pl_update_application_guard(dirname(__DIR__,3)); echo "application-open";} catch(Throwable $e) {http_response_code(503); echo "maintenance-closed";}');
 $database = 'phpledger_update_http_' . bin2hex(random_bytes(8));
 DB::$host = 'db_test'; DB::$user = 'root'; DB::$password = 'local-test-root-only'; DB::$dbName = 'information_schema'; DB::$encoding = 'utf8mb4';
+// MariaDB runs the same fixtures through the shared dialect translation.
+require_once dirname(__DIR__) . '/www/phpledger/includes/functions/database_platform_functions.php';
+pl_database_use_dialect();
 DB::query('CREATE DATABASE %b CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci', $database); DB::query('USE %b', $database);
 DB::query('CREATE TABLE pl_schema_migrations (version VARCHAR(100) PRIMARY KEY, status VARCHAR(10)) ENGINE=InnoDB');
 DB::insert('pl_schema_migrations', ['version' => '001_sample', 'status' => 'applied']);

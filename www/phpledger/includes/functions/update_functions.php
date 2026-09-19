@@ -217,7 +217,12 @@ function pl_update_stage(string $archive, array $metadata, string $stage): void
     $zip = new ZipArchive();
     if ($zip->open($archive, ZipArchive::RDONLY) !== true) { throw new DomainException('The release archive cannot be read.'); }
     try {
-        $prefix = 'phpledger-' . $metadata['version'] . '/'; $found = [];
+        // Releases unpack to "phpledger/"; earlier ones used "phpledger-<version>/". Every member shares one root.
+        $first = $zip->numFiles > 0 ? $zip->statIndex(0) : false; $prefix = null; $found = [];
+        foreach (['phpledger/', 'phpledger-' . $metadata['version'] . '/'] as $candidate) {
+            if ($first && str_starts_with($first['name'], $candidate)) { $prefix = $candidate; }
+        }
+        if ($prefix === null) { throw new DomainException('Invalid package root.'); }
         if ($zip->numFiles !== count($metadata['inventory'])) { throw new DomainException('Archive inventory differs from the signed release.'); }
         for ($i = 0; $i < $zip->numFiles; $i++) {
             $entry = $zip->statIndex($i);
@@ -386,7 +391,7 @@ function pl_update_begin(string $root, string $archive, string $envelope, string
         if ($space === false || $space < $metadata['archive_bytes'] * 6 + 100000000) { throw new DomainException('Insufficient private disk space for staging and matched backups.'); }
         pl_update_stage($archive, $metadata, $operation . '/stage');
         // Stable recovery dependencies are copied before replacing any application file.
-        foreach (['update_functions.php', 'update_database_functions.php', 'update_web_functions.php', 'update_probe_functions.php'] as $name) {
+        foreach (['update_functions.php', 'update_database_functions.php', 'update_web_functions.php', 'update_probe_functions.php', 'database_platform_functions.php'] as $name) {
             pl_update_write($operation . '/runtime/' . $name, (string) file_get_contents(__DIR__ . '/' . $name));
         }
         pl_update_write($operation . '/runtime/meekrodb.php', (string) file_get_contents($root . '/vendor/sergeytsalkov/meekrodb/db.class.php'));

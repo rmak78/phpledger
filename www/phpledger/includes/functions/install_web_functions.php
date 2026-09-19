@@ -4,12 +4,24 @@ declare(strict_types=1);
 require_once __DIR__ . '/installation_state_functions.php';
 require_once __DIR__ . '/install_functions.php';
 require_once __DIR__ . '/install_oauth_functions.php';
+require_once __DIR__ . '/install_exposure_functions.php';
 require_once __DIR__ . '/security_functions.php';
 require_once __DIR__ . '/demo_functions.php';
 
+/** Browser setup is open until installation completes; the hosted demo never offers it. */
+function pl_install_available(): bool
+{
+    return getenv('PL_ENV') !== 'demo' && !is_file(pl_install_directory() . '/installed.json');
+}
+
+/**
+ * An operator may still require a private setup key (PL_SETUP_KEY or setup.key),
+ * for example on a VPS or through an auto-installer. Without one, setup opens
+ * directly, as WordPress does (owner decision, 19 September 2026).
+ */
 function pl_install_setup_key(): ?string
 {
-    if (getenv('PL_ENV') === 'demo' || is_file(pl_install_directory() . '/installed.json')) {
+    if (!pl_install_available()) {
         return null;
     }
     $key = getenv('PL_SETUP_KEY');
@@ -44,9 +56,67 @@ function pl_install_verify_key(string $expected, string $provided, int $now): vo
     }
     if (!hash_equals($expected, $provided)) {
         pl_install_save_state(['started' => $count === 0 ? $now : $started, 'count' => $count + 1], 'attempts.json');
-        throw new DomainException('The private setup key was not accepted.');
+        throw new DomainException('That setup key or code was not accepted. Copy it again from the private file.');
     }
     pl_install_save_state(['started' => $now, 'count' => 0], 'attempts.json');
+}
+
+/**
+ * Shared hosting and XAMPP keep the database on the same server. A database
+ * elsewhere could belong to whoever reached a fresh upload first, so it needs
+ * proof of file access (Joomla uses the same rule).
+ */
+function pl_install_local_database_host(string $host): bool
+{
+    $host = strtolower(trim($host));
+    if (in_array($host, ['localhost', '127.0.0.1', '::1', '[::1]'], true)) {
+        return true;
+    }
+    // Test containers name their database service; production never reads this setting.
+    $testHosts = getenv('PL_ENV') === 'test' ? (string) getenv('PL_INSTALL_TEST_LOCAL_DB_HOSTS') : '';
+    return $testHosts !== '' && in_array($host, array_map('strtolower', array_map('trim', explode(',', $testHosts))), true);
+}
+
+/** The code is created in private storage on first use and is never shown by the web page. */
+function pl_install_remote_code(): string
+{
+    $path = pl_install_directory(true) . '/setup-code.txt';
+    if (!is_file($path)) {
+        try {
+            pl_install_write_private($path, bin2hex(random_bytes(16)) . "\n", false);
+        } catch (DomainException $error) {
+            if (!is_file($path)) {
+                throw $error;
+            }
+        }
+    }
+    $code = trim((string) file_get_contents($path));
+    if (!preg_match('/^[a-f0-9]{32}$/D', $code)) {
+        throw new DomainException('The private setup code file needs review. Delete setup-code.txt in the installation folder and try again.');
+    }
+    return $code;
+}
+
+/** Name private files relative to the uploaded folder, without revealing other server paths. */
+function pl_install_display_path(string $path): string
+{
+    $root = realpath(dirname(__DIR__, 4));
+    $path = str_replace('\\', '/', $path);
+    $root = $root === false ? '' : rtrim(str_replace('\\', '/', $root), '/');
+    if ($root !== '' && str_starts_with(strtolower($path), strtolower($root) . '/')) {
+        return substr($path, strlen($root) + 1);
+    }
+    return basename($path) . ' in the private installation folder';
+}
+
+/** Suggest this site's own address for the owner to confirm; it is validated like typed input. */
+function pl_install_suggested_public_url(array $server): string
+{
+    $host = (string) ($server['HTTP_HOST'] ?? '');
+    if (!preg_match('/^(?:[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*|\[[0-9A-Fa-f:.]+\])(?::[0-9]{1,5})?$/D', $host)) {
+        return '';
+    }
+    return (pl_install_secure_request($server) ? 'https://' : 'http://') . strtolower($host) . pl_base_path();
 }
 
 /** @return array{host:string,port:int,database:string,user:string,password:string} */
@@ -92,6 +162,7 @@ function pl_install_connect(array $config): void
     DB::$password = $config['password'];
     DB::$encoding = 'utf8mb4';
     DB::$nested_transactions = true;
+    pl_database_use_dialect();
     DB::query("SET time_zone = '+00:00'");
 }
 
@@ -199,8 +270,11 @@ function pl_install_verify_runtime(array $config): void
     }
 }
 
-/** Complete setup through the existing account service; retries cannot replace an account. */
-function pl_install_finish(array $schemaConfig, array $runtimeConfig, string $email, string $name, string $password, array $state): array
+/**
+ * Complete setup through the existing account service; retries cannot replace an account.
+ * The owner chooses a username as well as an email address and may sign in with either.
+ */
+function pl_install_finish(array $schemaConfig, array $runtimeConfig, string $email, string $name, string $password, array $state, string $username = '', ?array $logo = null): array
 {
     require_once __DIR__ . '/auth_functions.php';
     pl_install_check_target($schemaConfig, $state);
@@ -220,18 +294,27 @@ function pl_install_finish(array $schemaConfig, array $runtimeConfig, string $em
         || !mb_check_encoding($name, 'UTF-8') || mb_strlen($name, 'UTF-8') > 120) {
         throw new InvalidArgumentException('Enter a valid email address and a name up to 120 characters.');
     }
+    $username = pl_normalize_username($username);
+    if (isset($state['owner_username']) && (!is_string($state['owner_username']) || !hash_equals($state['owner_username'], $username))) {
+        throw new DomainException('Resume with the original installation account. Its identity cannot be replaced.');
+    }
     pl_hash_password($password);
     $state['owner_email'] = $email;
+    $state['owner_username'] = $username;
     $state['phase'] = 'account';
     pl_install_save_state($state);
-    $users = DB::query('SELECT id, email, password_hash, is_active FROM pl_users');
+    $users = DB::query('SELECT id, email, username, password_hash, is_active FROM pl_users');
     if ($users === []) {
-        $id = pl_create_user($email, $name, $password);
-    } elseif (count($users) === 1 && $users[0]['email'] === $email && (int) $users[0]['is_active'] === 1
+        $id = pl_create_user($email, $name, $password, $username);
+    } elseif (count($users) === 1 && $users[0]['email'] === $email && $users[0]['username'] === $username && (int) $users[0]['is_active'] === 1
         && pl_verify_password($password, $users[0]['password_hash'])) {
         $id = (int) $users[0]['id'];
     } else {
         throw new DomainException('The existing account was preserved. Resume with its original credentials or ask the installation operator.');
+    }
+    if ($logo !== null) {
+        require_once __DIR__ . '/branding_functions.php';
+        pl_logo_save($logo, $id);
     }
     $operatorKey = pl_install_directory() . '/operator.key';
     if (!is_file($operatorKey)) {
@@ -242,10 +325,16 @@ function pl_install_finish(array $schemaConfig, array $runtimeConfig, string $em
     pl_install_save_state($receipt, 'installed.json');
     $state['phase'] = 'complete';
     pl_install_save_state($state);
+    // Setup is closed now; the one-time remote-database code and probe files are no longer needed.
+    foreach (['setup-code.txt', 'exposure-probe.txt', 'exposure-probe.key', 'exposure.json'] as $leftover) {
+        if (is_file(pl_install_directory() . '/' . $leftover)) {
+            @unlink(pl_install_directory() . '/' . $leftover);
+        }
+    }
     return ['id' => $id, 'email' => $email, 'display_name' => $name];
 }
 
-/** Local-only HTTP is an explicit development opt-in, never a production fallback. */
+/** HTTPS as PHP sees it. Plain HTTP is accepted only from this same computer (pl_web_local_http). */
 function pl_install_secure_request(array $server): bool
 {
     return (!empty($server['HTTPS']) && strtolower((string) $server['HTTPS']) !== 'off') || (int) ($server['SERVER_PORT'] ?? 0) === 443;
@@ -265,30 +354,43 @@ function pl_install_http(): never
     $schema = null;
     $lock = null;
     $applicationLock = null;
+    $localHttp = false;
+    $exposureWarning = false;
+    $remoteProof = false;
+    $setupCodePath = '';
     try {
         if (!in_array($_SERVER['REQUEST_METHOD'] ?? '', ['GET', 'POST'], true)) {
             http_response_code(405);
             header('Allow: GET, POST');
             throw new DomainException('Use the installation form to continue.');
         }
-        $key = pl_install_setup_key();
-        if ($key === null) {
+        if (!pl_install_available()) {
             http_response_code(404);
         } else {
+            $view = 'blocked';
             $secure = pl_install_secure_request($_SERVER);
-            if (!$secure && !(in_array(getenv('PL_ENV'), ['local', 'test'], true) && getenv('PL_INSTALL_ALLOW_HTTP') === '1')) {
+            $localHttp = !$secure && pl_web_local_http($_SERVER);
+            if (!$secure && !$localHttp && !(in_array(getenv('PL_ENV'), ['local', 'test'], true) && getenv('PL_INSTALL_ALLOW_HTTP') === '1')) {
                 http_response_code(400);
-                throw new DomainException('Configure HTTPS in your hosting panel before entering setup credentials.');
+                throw new DomainException('Open this address with https:// before entering database details. Most hosts include a free certificate: turn on SSL (for example AutoSSL or Let\'s Encrypt) in your hosting panel. To try PHP Ledger on your own computer, use http://localhost/.');
             }
+            // Before any secret exists, confirm that private folders cannot be downloaded from this website.
+            $exposure = pl_install_exposure_status($_SERVER);
+            if ($exposure === 'exposed') {
+                http_response_code(503);
+                throw new DomainException('This web server lets visitors download files from PHP Ledger\'s private folders, so setup has stopped. It usually means .htaccess files are ignored (for example on Nginx). Point the website\'s document root at the www/phpledger/public folder, or ask your host to enable .htaccess rules, then reload this page.');
+            }
+            $exposureWarning = $exposure === 'unknown';
             pl_session_start($secure);
-            $view = 'key';
+            $key = pl_install_setup_key();
+            $view = $key === null ? 'database' : 'key';
             $lock = pl_install_operation_lock();
             $state = pl_install_read_state();
-            $authorized = pl_install_authorized($key, $_SESSION, time());
+            $authorized = $key === null || pl_install_authorized($key, $_SESSION, time());
             if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
                 pl_require_csrf(is_string($_POST['csrf_token'] ?? null) ? $_POST['csrf_token'] : null);
                 $action = pl_web_text($_POST, 'action');
-                if ($action === 'unlock') {
+                if ($action === 'unlock' && $key !== null) {
                     pl_install_verify_key($key, pl_web_text($_POST, 'setup_key'), time());
                     if (!session_regenerate_id(true)) {
                         throw new RuntimeException('Setup session could not be renewed.');
@@ -316,6 +418,24 @@ function pl_install_http(): never
                     if ($action === 'database') {
                         $view = 'database';
                         $candidate = pl_install_database_input($_POST);
+                        if ($key === null && !pl_install_local_database_host($candidate['host'])) {
+                            $code = pl_install_remote_code();
+                            $setupCodePath = pl_install_display_path(pl_install_directory() . '/setup-code.txt');
+                            if (!pl_install_authorized($code, $_SESSION, time())) {
+                                $remoteProof = true;
+                                $provided = pl_web_text($_POST, 'setup_code');
+                                if ($provided === '') {
+                                    throw new DomainException('This database is on another server, so setup needs one more check. Open ' . $setupCodePath . ' with your hosting file manager, copy the code inside and paste it below, together with the database password.');
+                                }
+                                pl_install_verify_key($code, $provided, time());
+                                if (!session_regenerate_id(true)) {
+                                    throw new RuntimeException('Setup session could not be renewed.');
+                                }
+                                $_SESSION['install_proof'] = ['key_hash' => hash('sha256', $code), 'at' => time()];
+                                pl_csrf_rotate();
+                                $remoteProof = false;
+                            }
+                        }
                         $runtime = pl_web_text($_POST, 'separate_runtime') === '1'
                             ? pl_install_database_input(array_merge($_POST, ['runtime_host' => $candidate['host'], 'runtime_port' => (string) $candidate['port'], 'runtime_database' => $candidate['database']]), 'runtime_')
                             : $candidate;
@@ -327,6 +447,10 @@ function pl_install_http(): never
                         if ($schema['status'] === 'empty' && $state === []) {
                             $state = ['format' => 1, 'database_id' => pl_install_database_identity($candidate), 'phase' => 'review', 'created_at' => gmdate('c')];
                             pl_install_save_state($state);
+                            // This browser now owns the setup: renew its session identifier, as a sign-in would.
+                            if ($key === null && !session_regenerate_id(true)) {
+                                throw new RuntimeException('Setup session could not be renewed.');
+                            }
                         }
                         $_SESSION['install_database'] = $sessionConfig = $candidate;
                         $_SESSION['install_runtime'] = $runtimeConfig = $runtime;
@@ -368,7 +492,13 @@ function pl_install_http(): never
                             $state['phase'] = 'account';
                             pl_install_save_state($state);
                         } else {
-                            $user = pl_install_finish($sessionConfig, $runtimeConfig, pl_web_text($_POST, 'email'), pl_web_text($_POST, 'name'), is_string($_POST['password'] ?? null) ? $_POST['password'] : '', $state);
+                            $password = is_string($_POST['password'] ?? null) ? $_POST['password'] : '';
+                            if (!hash_equals($password, is_string($_POST['password_confirm'] ?? null) ? $_POST['password_confirm'] : '')) {
+                                throw new InvalidArgumentException('The two passwords do not match. Type the same password in both fields.');
+                            }
+                            require_once __DIR__ . '/branding_functions.php';
+                            $logo = pl_logo_from_upload($_FILES['logo'] ?? null);
+                            $user = pl_install_finish($sessionConfig, $runtimeConfig, pl_web_text($_POST, 'email'), pl_web_text($_POST, 'name'), $password, $state, pl_web_text($_POST, 'username'), $logo);
                             pl_login_session($user); // Clears temporary schema/runtime credentials and setup proof.
                             header('Location: ' . pl_url('/onboarding'), true, 303);
                             exit;

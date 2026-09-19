@@ -47,6 +47,8 @@ DB::$user = $plConfig['user'];
 DB::$password = $plConfig['password'];
 DB::$encoding = 'utf8mb4';
 DB::$nested_transactions = true;
+require_once __DIR__ . '/functions/database_platform_functions.php';
+pl_database_use_dialect();
 // Persist DATETIME/TIMESTAMP events in UTC; business accounting DATE values stay unchanged.
 DB::query("SET time_zone = '+00:00'");
 pl_demo_acquire_maintenance_lock();
@@ -80,3 +82,4 @@ require_once __DIR__ . '/functions/tax_functions.php';
 require_once __DIR__ . '/functions/ar_ap_functions.php';
 require_once __DIR__ . '/functions/purchasing_functions.php';
 require_once __DIR__ . '/functions/opening_conversion_functions.php';
+require_once __DIR__ . '/functions/branding_functions.php';

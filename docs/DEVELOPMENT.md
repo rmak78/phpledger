@@ -153,6 +153,24 @@ docker compose --profile test run --rm test composer audit --no-interaction
 
 The test profile uses `phpledger_test` in its separate `db_test` service. The restore check creates and removes only its own isolated test database. See [validation receipts](VALIDATION.md) for exact executed checks and remaining limits.
 
+**MariaDB.** The same suites run on MariaDB by choosing the test database image, for example:
+
+```powershell
+$env:PL_TEST_DB_IMAGE = 'mariadb:10.11'
+docker compose --profile test run --rm test php tests/run.php
+docker compose --profile test run --rm test php tests/browser_installer_keyless_test.php
+```
+
+CI runs MariaDB 10.6, 10.11 and 11.4. Write SQL for MySQL 8.4 as before. The MeekroDB `pre_run` hook in `database_platform_functions.php` translates `FOR SHARE`, `SKIP LOCKED` and `utf8mb4_0900_ai_ci` on MariaDB. Test fixtures that configure `DB::` themselves must call `pl_database_use_dialect()`, as the update tests do.
+
+**Release vendor.** Build the production `vendor/` for a package from the release commit's lockfile in the PHP test image, then pass it to `tools/build-package.py --vendor`:
+
+```sh
+composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction --no-scripts
+```
+
+The builder drops dependency documentation, fixtures and `vendor/bin` while keeping every licence and NOTICE file. It adds deny-all `.htaccess` files to the private folders and writes the archive with a single `phpledger/` root.
+
 Optional browser-facing acceptance scripts are [core HTTP](../tests/http-smoke.py), [POS HTTP](../tests/pos-http-smoke.py) and [demo HTTP](../tests/demo-http-smoke.py). They use local sample records; read each script's scope and required private inputs before running it. Do not broaden their targets to production or real customer books.
 
 ## Opening cutover, periods and bank reconciliation

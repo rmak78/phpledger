@@ -51,7 +51,8 @@ $quickCreate = [
 ?>
 <div data-shell>
 <aside class="shell-sidebar" id="workspace-navigation" data-sidebar aria-label="Main navigation">
-    <div class="shell-brand"><a class="shell-brand-link" href="<?= pl_e(pl_url('/companies')) ?>" aria-label="PHP Ledger businesses"><img class="shell-logo" src="<?= pl_e(pl_url('/assets/brand/phpledger-horizontal.png')) ?>" alt="PHP Ledger" width="2172" height="724"><span class="shell-logo-compact" aria-hidden="true">P</span></a></div>
+    <?php $customLogo = function_exists('pl_logo_current') ? pl_logo_current() : null; ?>
+    <div class="shell-brand"><a class="shell-brand-link" href="<?= pl_e(pl_url('/companies')) ?>" aria-label="PHP Ledger businesses"><?php if ($customLogo !== null): ?><img class="shell-logo" src="<?= pl_e(pl_logo_url($customLogo)) ?>" alt="Business logo" width="<?= $customLogo['width'] ?>" height="<?= $customLogo['height'] ?>"><?php else: ?><img class="shell-logo" src="<?= pl_e(pl_url('/assets/brand/phpledger-horizontal.png')) ?>" alt="PHP Ledger" width="2172" height="724"><?php endif; ?><span class="shell-logo-compact" aria-hidden="true">P</span></a></div>
     <details class="company-switcher">
         <summary class="company-switcher-trigger" aria-label="Current business: <?= pl_e($company['name']) ?>. Switch business">
             <span class="company-switcher-mark" aria-hidden="true"><?= pl_e(mb_strtoupper(mb_substr($company['name'], 0, 1))) ?></span>

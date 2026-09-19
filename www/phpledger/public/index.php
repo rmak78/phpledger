@@ -2,6 +2,13 @@
 declare(strict_types=1);
 require_once dirname(__DIR__) . '/includes/functions/web_functions.php';
 
+// In an uploaded package the entry point is the package folder's index.php; send direct visits there.
+if (!defined('PL_WEB_ADAPTER') && is_file(dirname(__DIR__, 3) . '/index.php') && is_file(dirname(__DIR__, 3) . '/PACKAGE-MANIFEST.json')
+    && preg_match('~^(/[^?#]*?)?/www/phpledger/public/index\.php$~D', str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? '')), $plPackageEntry)) {
+    header('Location: ' . ($plPackageEntry[1] ?? '') . '/', true, 302);
+    exit;
+}
+
 header('Cache-Control: no-store');
 header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: no-referrer');
@@ -55,7 +62,7 @@ $routes = [
     '/reports/ageing' => ['GET'],
     '/pos' => ['GET'], '/pos/review' => ['GET', 'POST'], '/pos/edit' => ['POST'], '/pos/checkout' => ['POST'], '/pos/retry' => ['POST'], '/pos/receipt' => ['GET'],
     '/sample-guide' => ['GET'], '/help' => ['GET'], '/modules' => ['GET', 'POST'], '/connections' => ['GET','POST'], '/oauth/authorize' => ['GET','POST'], '/tables' => ['GET'],
-    '/accounts' => ['GET'], '/accounts/save' => ['POST'],
+    '/accounts' => ['GET'], '/accounts/save' => ['POST'], '/logo' => ['GET'],
     '/general-journals' => ['GET'], '/general-journals/new' => ['GET'], '/general-journals/edit' => ['GET'],
     '/general-journals/detail' => ['GET'], '/general-journals/save' => ['POST'], '/general-journals/post' => ['POST'], '/general-journals/reverse' => ['POST'],
 ];
@@ -67,6 +74,22 @@ if (!isset($routes[$path]) || !in_array($method, $routes[$path], true)) {
     pl_web_unavailable_page(isset($routes[$path]) ? 405 : 404);
     exit;
 }
+// A freshly uploaded copy has no database settings yet: start the browser installer, as WordPress does.
+if (pl_web_needs_installation()) {
+    header('Location: ' . pl_url('/install'), true, 303);
+    exit;
+}
+// The optional installation logo appears on the sign-in page, so it is served without a session.
+if ($path === '/logo') {
+    try {
+        require_once dirname(__DIR__) . '/includes/bootstrap.php';
+        pl_logo_http();
+    } catch (Throwable $error) {
+        error_log('PHP Ledger logo unavailable (' . get_class($error) . ').');
+        http_response_code(404);
+        exit;
+    }
+}
 
 try {
     // Resolve the once-per-session country hint before acquiring the demo database lock.
@@ -74,7 +97,7 @@ try {
     require_once dirname(__DIR__) . '/includes/functions/security_functions.php';
     require_once dirname(__DIR__) . '/includes/functions/regional_functions.php';
     $localDemoHttp = pl_web_local_demo_http($_SERVER);
-    pl_session_start(!in_array(getenv('PL_ENV') ?: 'production', ['local', 'test'], true) && !$localDemoHttp);
+    pl_session_start(!in_array(getenv('PL_ENV') ?: 'production', ['local', 'test'], true) && !$localDemoHttp && !pl_web_local_http($_SERVER));
     pl_regional_suggestion();
     require_once dirname(__DIR__) . '/includes/bootstrap.php';
     $actorId = pl_current_user_id();

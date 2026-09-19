@@ -48,6 +48,8 @@ Every release also reviews and updates the GitHub Wiki, repository About descrip
 
 The accounting starter, eleven-pack chooser, responsive shell, catalogue-led setup, browser installation, and signed automatic updates with backup and recovery are included in the published 1.0.0 release. In local Docker, sign in, open **Your businesses**, and use **Try a sample company** to provision only the selected sample book.
 
+**In development for the next release (not in 1.0.0):** WordPress-style installation. You unzip the package (one `phpledger/` folder) into any web folder, whether a domain root, a subfolder or XAMPP's `htdocs`, and open it in the browser. The installer then starts without a setup key. The same release adds MariaDB 10.4+ alongside MySQL 8.4, a username the owner can sign in with as well as the email, and an optional logo. See the [installer contract](docs/INSTALLER.md) and [validation](docs/VALIDATION.md).
+
 ### Local test login
 
 There is no shared development password. After the local database is healthy and migrated, create a sample owner account with the installer and keep the password in memory only:

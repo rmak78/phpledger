@@ -6,7 +6,8 @@ if (PHP_SAPI !== 'cli') {
     exit;
 }
 $plInstallServices = dirname(__DIR__) . '/includes/functions/install_functions.php';
-if (!is_file($plInstallServices) || !is_file(dirname(__DIR__) . '/includes/functions/runtime_functions.php')) {
+if (!is_file($plInstallServices) || !is_file(dirname(__DIR__) . '/includes/functions/runtime_functions.php')
+    || !is_file(dirname(__DIR__) . '/includes/functions/database_platform_functions.php')) {
     fwrite(STDERR, "Installation service files are missing. Verify the complete release package.\n");
     exit(1);
 }
@@ -28,7 +29,8 @@ if (realpath($_SERVER['SCRIPT_FILENAME'] ?? '') === __FILE__) {
             throw new RuntimeException('Application configuration could not be loaded.');
         }
         $state = pl_install_database_check();
-        fwrite(STDOUT, "Database: MySQL 8.4 connection available. No schema or account writes were performed.\n");
+        $platform = pl_database_platform(pl_database_server_version());
+        fwrite(STDOUT, 'Database: ' . ($platform['engine'] === 'mariadb' ? 'MariaDB ' : 'MySQL ') . $platform['version'] . " connection available. No schema or account writes were performed.\n");
         fwrite(STDOUT, $state['status'] === 'current'
             ? "Database schema is current; all migration checksums match.\n"
             : "Ready to run migrations: {$state['pending']} pending. Back up an existing installation first.\n");

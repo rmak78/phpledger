@@ -52,7 +52,8 @@ services:
       timeout: 5s
       retries: 30
   db_test:
-    image: mysql:8.4
+    # MySQL 8.4 by default; set PL_TEST_DB_IMAGE=mariadb:10.11 (for example) to run the same tests on MariaDB.
+    image: ${PL_TEST_DB_IMAGE:-mysql:8.4}
     command: ["--log-bin-trust-function-creators=1"]
     profiles: ["test"]
     environment:
@@ -60,10 +61,14 @@ services:
       MYSQL_USER: ledger_test
       MYSQL_PASSWORD: local-test-only
       MYSQL_ROOT_PASSWORD: local-test-root-only
+      MARIADB_DATABASE: phpledger_test
+      MARIADB_USER: ledger_test
+      MARIADB_PASSWORD: local-test-only
+      MARIADB_ROOT_PASSWORD: local-test-root-only
     tmpfs:
       - /var/lib/mysql
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root --password=\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root --password=\"$$MYSQL_ROOT_PASSWORD\" --silent || mariadb-admin ping -h 127.0.0.1 -u root --password=\"$$MYSQL_ROOT_PASSWORD\" --silent"]
       interval: 5s
       timeout: 5s
       retries: 30

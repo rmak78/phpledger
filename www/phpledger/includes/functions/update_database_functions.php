@@ -18,8 +18,10 @@ function pl_update_database_connect(string $root): void
     if ($config['password'] === '') { throw new RuntimeException('Database credentials are unavailable.'); }
     DB::$host = $config['host']; DB::$port = (int) $config['port']; DB::$dbName = $config['database'];
     DB::$user = $config['user']; DB::$password = $config['password']; DB::$encoding = 'utf8mb4'; DB::$nested_transactions = true;
+    require_once __DIR__ . '/database_platform_functions.php';
+    pl_database_use_dialect();
     DB::query("SET time_zone = '+00:00'");
-    if (!preg_match('/^8\.4\.\d+(?:\D|$)/D', (string) DB::queryFirstField('SELECT VERSION()'))) { throw new DomainException('Automatic updates require the supported MySQL 8.4 database.'); }
+    if (!pl_database_platform(pl_database_server_version())['supported']) { throw new DomainException('Automatic updates require ' . pl_database_requirement() . '.'); }
 }
 
 function pl_update_database_inventory(bool $requireInstalled = true): array

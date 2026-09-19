@@ -9,6 +9,7 @@ if (PHP_SAPI !== 'cli' || getenv('PL_ENV') !== 'test' || getenv('PL_DB_HOST') !=
 $packageRoot = (string) (getenv('PL_INSTALL_TEST_PACKAGE_ROOT') ?: dirname(__DIR__));
 require $packageRoot . '/vendor/autoload.php';
 require $packageRoot . '/www/phpledger/includes/functions/install_web_functions.php';
+require_once $packageRoot . '/www/phpledger/includes/functions/auth_functions.php';
 
 $fixture = 'pl_install_' . bin2hex(random_bytes(6));
 $temporary = sys_get_temp_dir() . '/' . $fixture;
@@ -224,10 +225,18 @@ try {
     $response = installer_http($url, ['action' => 'save_config', 'csrf_token' => $csrf], $cookie);
     installer_assert($response['status'] === 200 && str_contains($response['body'], 'Create your sign-in account'), 'Private configuration could not be saved.');
     installer_assert((require pl_install_config_path()) === $runtimeConfig, 'Private configuration differs from reviewed settings.');
-    $denied = installer_http($url, ['action' => 'finish', 'csrf_token' => $csrf, 'email' => 'installer@example.invalid', 'name' => 'Installer Fixture', 'password' => 'short'], $cookie);
+    $owner = ['action' => 'finish', 'csrf_token' => $csrf, 'email' => 'installer@example.invalid', 'username' => 'Installer.Owner', 'name' => 'Installer Fixture', 'password' => $ownerPassword, 'password_confirm' => $ownerPassword];
+    $denied = installer_http($url, array_replace($owner, ['password' => 'short', 'password_confirm' => 'short']), $cookie);
     installer_assert($denied['status'] === 400 && (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_users') === 0, 'Invalid account input created a user.');
-    $response = installer_http($url, ['action' => 'finish', 'csrf_token' => $csrf, 'email' => 'installer@example.invalid', 'name' => 'Installer Fixture', 'password' => $ownerPassword], $cookie);
+    $denied = installer_http($url, array_replace($owner, ['password_confirm' => $ownerPassword . ' typo']), $cookie);
+    installer_assert($denied['status'] === 400 && str_contains($denied['body'], 'do not match') && (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_users') === 0, 'Mismatched password confirmation created a user.');
+    $denied = installer_http($url, array_replace($owner, ['username' => 'no spaces allowed']), $cookie);
+    installer_assert($denied['status'] === 400 && str_contains($denied['body'], 'username') && (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_users') === 0, 'Invalid username created a user.');
+    $response = installer_http($url, $owner, $cookie);
     installer_assert($response['status'] === 303 && str_contains($response['headers'], 'Location: /onboarding'), 'Valid account did not finish setup and continue to onboarding.');
+    installer_assert(DB::queryFirstField('SELECT username FROM pl_users') === 'installer.owner', 'The chosen username was not saved in lowercase.');
+    installer_assert(pl_authenticate('installer.owner', $ownerPassword, 'installer-fixture')['email'] === 'installer@example.invalid'
+        && pl_authenticate('INSTALLER@example.invalid', $ownerPassword, 'installer-fixture')['email'] === 'installer@example.invalid', 'The owner cannot sign in with both the username and the email.');
     $discovery = installer_http(str_replace('/install', '/.well-known/oauth-authorization-server', $url), null, $cookie);
     installer_assert($discovery['status'] === 403, 'OAuth discovery accepted an unconfigured Host header.');
     $discovery = installer_http(str_replace('/install', '/.well-known/oauth-authorization-server', $url), null, $cookie, ['Host: books.example.invalid']);
@@ -238,7 +247,7 @@ try {
     installer_assert(!str_contains($response['body'], $ownerPassword), 'Owner password leaked in response.');
     $closed = installer_http($url, null, $cookie);
     installer_assert($closed['status'] === 404 && str_contains($closed['body'], 'Installation is locked'), 'Completed installer reopened.');
-    $closed = installer_http($url, ['action' => 'finish', 'csrf_token' => $csrf, 'email' => 'attacker@example.invalid', 'name' => 'Second', 'password' => $ownerPassword], $cookie);
+    $closed = installer_http($url, array_replace($owner, ['email' => 'attacker@example.invalid', 'username' => 'second', 'name' => 'Second']), $cookie);
     installer_assert($closed['status'] === 404 && (int) DB::queryFirstField('SELECT COUNT(*) FROM pl_users') === 1, 'Repeat completion changed the initial account.');
     // Deleting the finish marker alone must still fail closed against an existing account.
     unlink(pl_install_directory() . '/installed.json');

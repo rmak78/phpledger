@@ -1,5 +1,25 @@
 # Hosting and PHP compatibility — 15 September 2026
 
+## Shared hosting, XAMPP and MariaDB — 19 September 2026 (next release, local evidence)
+
+The owner asked for WordPress-style installation and support for both MySQL 8.4 and MariaDB. In the next release, the package can be uploaded inside any Apache or LiteSpeed website folder, and the installer accepts MariaDB 10.4 or newer.
+
+**Evidence:**
+- The full automated battery passed on MySQL 8.4 and MariaDB 10.4, 10.6, 10.11 and 11.4.
+- A local candidate installed end to end on XAMPP (Apache 2.4.58, PHP 8.2.12) against MariaDB 10.4.
+- See the [validation receipt](../VALIDATION.md#wordpress-style-installation-mariadb-username-and-logo--19-september-2026-local-unpublished).
+
+**Found on the owner's XAMPP:**
+- PHP 8.2.12 has every required extension. zip, intl, gd and sodium are off; only zip matters, and only for browser updates.
+- The `OPENSSL_CONF` path is missing, which the installer now handles.
+- The bundled MariaDB 10.4.32 data directory is corrupted and does not start. That is an environment fault, not a product limitation.
+
+**Still unqualified:**
+- real cPanel/Plesk/LiteSpeed hosts
+- Nginx front proxies serving static files: the installer probe is designed to catch them, but this is untested on a live host
+- hosts that disable `link()` or `curl`
+- restricted-privilege recovery
+
 ## Browser installation and recovery candidate — 18 September 2026
 
 The local 0.7/0.8 implementation removes shell/Composer/Node from the browser installation journey after hosting-panel preparation. The older CLI requirement below describes the published baseline. Updates additionally require PHP ZIP, private storage, writable release paths and enough disk space for a complete matched backup. Current checks run on local Linux containers with PHP 8.3.33/MySQL 8.4; they do not qualify Plesk, cPanel or arbitrary shared hosts.

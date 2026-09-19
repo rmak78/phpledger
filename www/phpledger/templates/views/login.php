@@ -10,8 +10,8 @@
     <?php endif; ?>
     <form action="<?= pl_e(pl_url('/login')) ?>" method="post" class="mt-5 flex flex-col gap-4">
         <?= pl_csrf_field() ?>
-        <?php pl_ui_field('login-email', 'Email address', static function () use ($form): void { ?>
-            <input class="input" id="login-email" name="email" type="email" autocomplete="username" required maxlength="254" value="<?= pl_e(pl_web_text($form['input'], 'email')) ?>">
+        <?php pl_ui_field('login-email', 'Email or username', static function () use ($form): void { ?>
+            <input class="input" id="login-email" name="email" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required maxlength="254" value="<?= pl_e(pl_web_text($form['input'], 'email')) ?>">
         <?php }); ?>
         <?php pl_ui_field('login-password', 'Password', static function (): void { ?>
             <input class="input" id="login-password" name="password" type="password" autocomplete="current-password" required>

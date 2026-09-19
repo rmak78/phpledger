@@ -90,6 +90,21 @@ try {
     $stage = $fixture . '/stage'; mkdir($stage);
     pl_update_stage($archive, $verified, $stage);
     update_check(file_get_contents($stage . '/new-file.txt') === 'new release file', 'Signed archive staging failed.');
+    // Current releases unpack to phpledger/; the versioned root above stays accepted, any other root is refused.
+    foreach (['phpledger/' => true, 'other/' => false] as $rootName => $accepted) {
+        $rootArchive = $fixture . '/root-' . trim($rootName, '/') . '.zip';
+        $rootZip = new ZipArchive(); $rootZip->open($rootArchive, ZipArchive::CREATE | ZipArchive::EXCL);
+        foreach ($files as $path => $contents) { $rootZip->addFromString($rootName . $path, $contents); }
+        $rootZip->close();
+        $rootMetadata = $verified; $rootMetadata['archive_bytes'] = filesize($rootArchive); $rootMetadata['archive_sha256'] = hash_file('sha256', $rootArchive);
+        $rootStage = $fixture . '/stage-' . trim($rootName, '/'); mkdir($rootStage);
+        if ($accepted) {
+            pl_update_stage($rootArchive, $rootMetadata, $rootStage);
+            update_check(file_get_contents($rootStage . '/new-file.txt') === 'new release file', 'The phpledger/ archive root was not staged.');
+        } else {
+            update_reject(fn() => pl_update_stage($rootArchive, $rootMetadata, $rootStage), 'foreign archive root rejected');
+        }
+    }
     $badArchive = $fixture . '/bad.zip'; copy($archive, $badArchive); file_put_contents($badArchive, 'extra', FILE_APPEND);
     update_reject(fn() => pl_update_stage($badArchive, $verified, $stage), 'tampered archive rejected');
     $symlinkArchive = $fixture . '/symlink.zip'; copy($archive, $symlinkArchive);
