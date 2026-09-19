@@ -39,26 +39,38 @@ and what an operator must check before trusting a signature.
 ## Official publisher key
 
 ```
-{{PUBLISHER_PUBLIC_KEY_PEM}}
+-----BEGIN PUBLIC KEY-----
+MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA4Jfmz2dc6O6sPjF/Tp+O
+5yzba40ebGovHNtabVlhJMG7a8QA8oOz0FyEaUtElY1wxBAIqWwWLCJyFgW10k8m
+O7IiI74KPYzGLHQlrFkLuG5CkXvpUowX3bUQcHjV+QBjn3DW3NRsNK1SHu6DViHG
+o+6DlLU4eAR/fsY+otvWt9u48JJtjKGKRQB5/Ky1K+ZZV26Bfjap3kGcJdRPD8jt
+J9jSECjk4C+JyHhjIofp/pfz37tDvyjSzu0ApY+mwl90KkOwIvCaXdfhrNNxPwWm
+VKB4yzL77Kebq/eYvrEF0jvWNzOeXdg0xXvY6ZKqV3nlSR7L36YdqAZOXmGgiM/L
+gfmhnzAGVdf/wHzjY9dFJAkvnShD4vXjrbndEe05sFxowNswpDKg9HZiE/TTKq5p
+HsOgJlaN66qFLRMawGYYE5fz436f+GgFu9C9tNUMleGQkHLA1mgXidu98kIiF2NK
+tFv6Wn8WXu35UD7OOw6l+boOx8/tK6MT9xJ9DNWrybYvsL8GThz8qryKz/v4x5Zr
+a61RL0Lr03lbbK/+7JBOalATIXtYYA7OmotpaLL4oKLkpV5djfe8YJDIgo34OCa3
+oGd4rnZrcZ63y+DffYN+/5XiN4X07FUSCtD7vsPX3blTIVhfwpgM2M6+25yU0Jw0
+WpR95oV9TCcPCP2aRVB1A7cCAwEAAQ==
+-----END PUBLIC KEY-----
 ```
 
 SHA-256 fingerprint (of the DER-encoded SubjectPublicKeyInfo — see
 "Computing the fingerprint" below):
 
 ```
-{{PUBLISHER_FINGERPRINT}}
+4e58a5f46b0538c9b37aaadbfced9a2d8ad2f7d413bc168a67b1b94feaa78e78
 ```
 
-**Until these placeholders are replaced with the owner's actual official key
-and fingerprint, no 1.0.0 (or later) release carries a trustworthy signed
-update.** Operators upgrading to or past 1.0.0 must use the manual staged
-upgrade procedure in `resources/release/UPGRADE.md` ("Manual procedure" /
-"Apply a reviewed update") instead of `/maintenance.php`, exactly as required
-for the first upgrade from a published 0.6.0-preview installation. Publishing
-a ZIP with an empty or placeholder signature would be worse than publishing no
-signature at all, so release automation must refuse to publish
-`phpledger-<version>.update.json` until this file's placeholders are filled in
-with the real key.
+RSA-4096, generated 19 September 2026 on the owner's machine. The private key and its passphrase stay
+there; this repository holds only the public key, also at
+[`resources/release/publisher-public.pem`](../resources/release/publisher-public.pem). SHA-256 of that PEM file:
+`85ad4ac665961fbf290067edf0d010145310e8c07d05097626e285a4cba4a257`.
+
+Confirm the fingerprint from a second place before pinning it: the GitHub release notes for
+v1.1.0 and <https://phpledger.com/download/> publish the same value. Then save the PEM as
+`publisher.pem` in the private installation directory (or point `PL_UPDATE_PUBLIC_KEY` at it).
+1.1.0 is the first release signed with this key; 1.0.0 carries no signed metadata.
 
 ## Signing a release (publisher only)
 
@@ -200,13 +212,9 @@ phpledger-<version>-media-kit.zip
 phpledger-<version>-media-kit.zip.sha256
 ```
 
-## Current status for 1.0.0
+## Current status
 
-No official publisher key has been generated or published as of this writing.
-1.0.0 ships **without** a `phpledger-1.0.0.update.json` signed metadata file.
-Operators installing or upgrading to 1.0.0 must use the manual staged upgrade
-procedure documented in `resources/release/UPGRADE.md`; `/maintenance.php`
-automatic updates cannot be used for this release until the owner completes
-key generation (`.cache/release-1.0.0/signing/gen-publisher-key.md`), signs the
-published archive, and this file's placeholders are replaced with the real
-public key and fingerprint.
+1.1.0 (19 September 2026) is the first release with official signed metadata,
+`phpledger-1.1.0.update.json`, signed with the key above. 1.0.0 shipped without it, so an installation
+on 1.0.0 upgrades to 1.1.0 manually (see `resources/release/UPGRADE.md`) and can use `/maintenance.php`
+for later releases after pinning the key.
