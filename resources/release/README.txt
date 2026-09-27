@@ -1,4 +1,6 @@
 PHP Ledger {{VERSION}}
+Maintenance of PHP Ledger has stopped for lack of funds, so no further updates are planned. To help restart it, see https://phpledger.com/funding/.
+
 Self-hosted double-entry accounting for PHP hosting.
 https://phpledger.com/
 
