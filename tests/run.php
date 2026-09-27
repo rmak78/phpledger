@@ -125,6 +125,7 @@ $suites[] = 'plugin_surface_test.php';
 $suites[] = 'asset_test.php';
 $suites[] = 'year_end_test.php';
 $suites[] = 'installation_notice_test.php';
+$suites[] = 'maintenance_notice_test.php';
 $suites[] = 'database_namespace_test.php';
 $suites[] = 'period_close_test.php';
 $suites[] = 'cash_count_test.php';

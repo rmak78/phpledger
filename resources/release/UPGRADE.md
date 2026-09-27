@@ -1,5 +1,13 @@
 # Upgrade and recovery — PHP Ledger
 
+Maintenance of PHP Ledger has stopped for lack of funds, so no further updates are planned. To help restart it, see https://phpledger.com/funding/.
+
+## From 1.4.6 to 1.4.7
+
+1.4.7 changes no schema and adds no migration; the chain installed by 1.4.6 is unchanged. It adds the maintenance notice to the Updates and privacy screen and to the package's README.txt, and changes nothing else in the application. Use the signed release assets from the official release channel and verify the downloaded archive and checksum before applying it.
+
+The in-app updater or the manual file replacement both apply this patch: either path only replaces files, and an installation that upgrades by hand needs no `install/migrate.php` run. Before upgrading, back up matching application files, private configuration and database together. After upgrading, open Updates and privacy: it shows the installed version 1.4.7 and the maintenance notice.
+
 ## From 1.4.5 to 1.4.6
 
 This patch changes no schema and adds no migration; the chain installed by 1.4.5 is unchanged. Use the signed release assets from the official release channel and verify the downloaded archive and checksum before applying it.

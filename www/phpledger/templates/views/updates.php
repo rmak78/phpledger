@@ -5,6 +5,7 @@ $registration=$state['registration']??['name'=>'','email'=>'','site'=>'','compan
 <section class="flex flex-col gap-4 py-5">
 <div class="page-header"><div><h1 class="page-title"><?= pl_e(pl_t('Updates and privacy')) ?></h1><p class="muted"><?= pl_e(pl_t('Check for releases and decide whether to register this installation with the project.')) ?></p></div></div>
 <p><?= pl_e(pl_t('Installed version')) ?>: <strong><?= pl_e(pl_app_version()) ?></strong> · <?= pl_e(pl_t('Installation mode')) ?>: <?= pl_e($mode) ?></p>
+<p><?= pl_e(pl_t('Maintenance of PHP Ledger has stopped for lack of funds, so no further updates are planned. To help restart it, see https://phpledger.com/funding/.')) ?></p>
 <?php if ($disabled): ?><p class="alert alert-info"><?= pl_e(pl_t('Project contact is disabled in the shared demo.')) ?></p><?php endif; ?>
 <form method="post"><?= pl_csrf_field() ?><button class="btn btn-primary" name="action" value="check" <?= $disabled?'disabled':'' ?>><?= pl_e(pl_t('Check for updates')) ?></button></form>
 <?php if (is_array($available)): ?><p><?= pl_e(pl_t('Available version')) ?>: <?= pl_e((string)$available['version']) ?>. <a href="https://phpledger.com/download/"><?= pl_e(pl_t('Download and upgrade instructions')) ?></a></p><?php endif; ?>

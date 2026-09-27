@@ -4,6 +4,15 @@ Each release's exact source revision is recorded in its `PACKAGE-MANIFEST.json` 
 
 PHP Ledger 1.0.0 was the first supported stable release of the restarted application. It preserves the lightweight BixiSoft PHP/MeekroDB structure while separating accounting functions, server permissions, templates and the public front controller. Read "Supported scope and limits" and "Assurance status" below before deployment; the dated preview sections further down record the historical, superseded scope of each earlier development release.
 
+## 1.4.7: maintenance has stopped
+
+Maintenance of PHP Ledger has stopped for lack of funds, so no further updates are planned. To help restart it, see https://phpledger.com/funding/.
+
+- **Maintenance notice:** the Updates and privacy screen, which shows the installed version and checks for releases, says so in plain text, and so do the package's `README.txt` and the INSTALL and UPGRADE guides.
+- **Nothing else changes.** The accounting, the in-app updater, the release feed address, the sample directory, the installation notice and every feature are as in 1.4.6.
+
+No migration; upgrade from 1.4.6 by replacing the files as usual. This patch carries **no media kit**, in accordance with the patch-release policy. Decision register row B101 records the decision.
+
 ## 1.4.6: the sample gallery, partner capital and readable statements
 
 A patch release from the owner's review of the live 1.4.5 business setup and statements (26 September 2026), correcting three things rejected on that walk-through: the sample gallery, partner capital and the standard statement layout.
