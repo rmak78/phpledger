@@ -18,7 +18,6 @@
   <a href="https://github.com/phpledger/phpledger/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/phpledger/phpledger?style=for-the-badge&label=release&labelColor=0c2052&color=4656e8"></a>
   <a href="https://packagist.org/packages/phpledger/phpledger"><img alt="Packagist version" src="https://img.shields.io/packagist/v/phpledger/phpledger?style=for-the-badge&label=packagist&labelColor=0c2052&color=f28d1a&logo=packagist&logoColor=white"></a>
   <a href="https://github.com/phpledger/phpledger/pkgs/container/phpledger"><img alt="Container image on GitHub Container Registry" src="https://img.shields.io/badge/ghcr.io-phpledger%2Fphpledger-2496ed?style=for-the-badge&labelColor=0c2052&logo=docker&logoColor=white"></a>
-  <a href="https://github.com/phpledger/phpledger/actions/workflows/foundation.yml"><img alt="Foundation checks" src="https://img.shields.io/github/actions/workflow/status/phpledger/phpledger/foundation.yml?branch=master&style=for-the-badge&label=checks&labelColor=0c2052&logo=githubactions&logoColor=white"></a>
 </p>
 
 <p align="center">
@@ -60,7 +59,7 @@ PHP Ledger helps small businesses keep their books, follow money owed by custome
 
 **Start here:** [Try the demo](https://phpledger.com/demo/) · [Download v1.4.7](https://github.com/phpledger/phpledger/releases/tag/v1.4.7) · [Installation guide](resources/release/INSTALL.md) · [Wiki](https://github.com/phpledger/phpledger/wiki)
 
-**PHP Ledger 1.4.7** (27 September 2026) is the final published release. Maintenance has stopped for lack of funds, so no further updates are planned; the notice now appears on the Updates screen and throughout the packaged documentation. It carries forward everything in 1.4.6 unchanged, with no migration or schema change.
+**PHP Ledger 1.4.7** (27 September 2026) is the latest release. Maintenance has stopped for lack of funds, so no further updates are planned; the notice now appears on the Updates screen and throughout the packaged documentation. It carries forward everything in 1.4.6 unchanged, with no migration or schema change.
 
 **1.4.6** refined the sample company gallery shown at Start and in Packages, added a per-partner capital and drawings account for partnerships (posting opening capital split by each partner's share), and cleaned up statement layout: the trial balance, balance sheet and profit and loss now prune zero lines and show one total per group.
 
@@ -106,7 +105,7 @@ For a first exercise, create a small business or import a fictional sample, reco
 
 The upload-anywhere package layout requires Apache or LiteSpeed with the supplied access rules. A dedicated document root at `www/phpledger/public` is the preferred layout; never serve the repository root. Follow the documented Nginx configuration when using Nginx.
 
-Prefer a container? Official images use **ghcr.io/phpledger/phpledger** and **phpledger/phpledger** on Docker Hub, built from the same verified release ZIP. Pin a released version and follow the [container guide](docs/CONTAINER.md). A registry tag is usable only after its release publication checks pass.
+Prefer a container? Official images (published up to 1.4.6) use **ghcr.io/phpledger/phpledger** and **phpledger/phpledger** on Docker Hub, built from the verified release ZIPs. Pin a released version and follow the [container guide](docs/CONTAINER.md). A registry tag is usable only after its release publication checks pass.
 
 Optional multi-year sample histories are separate data-only packages. The neutral starter remains in the core; use **Packages** to review and install a sample, then choose its structure or an isolated practice company during onboarding.
 
