@@ -154,4 +154,6 @@ Everything built with this funding is released under the same [AGPL-3.0-or-later
 
 Third-party components keep their own licences (see [resources/release/THIRD-PARTY-NOTICES.md](resources/release/THIRD-PARTY-NOTICES.md)). [Licence scope](LICENSE-SCOPE.md) records further boundaries, including dependencies, fonts, datasets and company marks. Modern application source is in `www/phpledger`; the historical application remains in Git history. The PHP Ledger name and logos are trademarks of Bixisoft and are not licensed.
 
+Made by [Bixisoft](https://bixisoft.com/), with BixiTech, BrownBag and Agency75.
+
 [Website](https://phpledger.com/) · [Demo](https://phpledger.com/demo/) · [Wiki](https://github.com/phpledger/phpledger/wiki) · [Releases](https://github.com/phpledger/phpledger/releases)
