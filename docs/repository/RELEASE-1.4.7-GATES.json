@@ -1,0 +1,88 @@
+{
+  "status": "local_candidate_gates_complete",
+  "baseline": "1.4.6 (published archive dadc2758d9c50fff109e79f8448c4cb8010d4a9d51a458ce190d4512cf7765f1)",
+  "application_source": "29b7d62243dd23d7a98ce3b10e46c6c7b4d36391",
+  "archive": {
+    "path": ".cache/release-1.4.7/phpledger-1.4.7.zip",
+    "sha256": "d52e3dc7966774d228410db6af5c47eb264a53ec467193beb3745bb5620cc236",
+    "bytes": 3643594,
+    "members": 1729
+  },
+  "members_changed_from_1_4_6": [
+    "PACKAGE-MANIFEST.json",
+    "README.txt",
+    "www/phpledger/VERSION",
+    "www/phpledger/templates/views/updates.php"
+  ],
+  "migrations_added": [],
+  "schema_changed": false,
+  "secrets_exposed": false,
+  "production_changed": false,
+  "publication_authorized": false,
+  "full_checks": {
+    "mysql": {
+      "tests": 714,
+      "failures": 0,
+      "php_lint_files": 422,
+      "php_lint_failures": 0
+    },
+    "maria": {
+      "tests": 714,
+      "failures": 0,
+      "phpstan": "pass",
+      "php_lint_files": 422,
+      "php_lint_failures": 0
+    },
+    "samples": "valid"
+  },
+  "exact_package_gates": {
+    "baseline_version": "1.4.6",
+    "candidate_version": "1.4.7",
+    "baseline_sha256": "dadc2758d9c50fff109e79f8448c4cb8010d4a9d51a458ce190d4512cf7765f1",
+    "candidate_sha256": "d52e3dc7966774d228410db6af5c47eb264a53ec467193beb3745bb5620cc236",
+    "candidate_source_commit": "29b7d62243dd23d7a98ce3b10e46c6c7b4d36391",
+    "migration_files": 62,
+    "migrations_added": [],
+    "candidate_members": 1729,
+    "results": [
+      {
+        "engine": "mysql",
+        "host": "pl147-mysql",
+        "steps": [
+          "fresh_62_migrations_first_post",
+          "populated_1_4_6_seed",
+          "packaged_upgrade_1_no_op",
+          "packaged_upgrade_2_no_op",
+          "historical_rows_and_balances_unchanged"
+        ]
+      },
+      {
+        "engine": "maria",
+        "host": "pl147-maria",
+        "steps": [
+          "fresh_62_migrations_first_post",
+          "populated_1_4_6_seed",
+          "packaged_upgrade_1_no_op",
+          "packaged_upgrade_2_no_op",
+          "historical_rows_and_balances_unchanged"
+        ]
+      }
+    ],
+    "production_changed": false
+  },
+  "reproduction": "bytes",
+  "production_walk": {
+    "mode": "PL_ENV=production, exact archive, no repository fallback",
+    "project_hosts_blocked": true,
+    "maintenance_notice_on_updates": true,
+    "screenshots": [
+      "1-setup-start-fold.png",
+      "1b-setup-start-gallery-fold.png",
+      "1b-setup-start-gallery-full.png",
+      "2-updates-full.png",
+      "2-updates-notice-fold.png",
+      "3-updates-privacy-text.png"
+    ]
+  },
+  "decision": "B101 maintenance stopped for lack of funds"
+}
